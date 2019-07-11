@@ -19,7 +19,7 @@ define( require => {
 
   const simOptions = {
     credits: {
-      //TODO fill in credits, all of these fields are optional, see joist.CreditsNode
+      //TODO #2 fill in credits
       leadDesign: '',
       softwareDevelopment: '',
       team: '',
