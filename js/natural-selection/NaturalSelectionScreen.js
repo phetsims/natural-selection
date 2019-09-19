@@ -27,7 +27,7 @@ define( require => {
 
       super(
         () => new NaturalSelectionModel( tandem.createTandem( 'model' ) ),
-        ( model ) => new NaturalSelectionScreenView( model, tandem.createTandem( 'view' ) ),
+        model => new NaturalSelectionScreenView( model, tandem.createTandem( 'view' ) ),
         options
       );
     }
