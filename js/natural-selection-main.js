@@ -9,9 +9,10 @@ define( require => {
   'use strict';
 
   // modules
+  const IntroScreen = require( 'NATURAL_SELECTION/intro/IntroScreen' );
+  const LabScreen = require( 'NATURAL_SELECTION/lab/LabScreen' );
   const Sim = require( 'JOIST/Sim' );
   const SimLauncher = require( 'JOIST/SimLauncher' );
-  const NaturalSelectionScreen = require( 'NATURAL_SELECTION/natural-selection/NaturalSelectionScreen' );
   const Tandem = require( 'TANDEM/Tandem' );
 
   // strings
@@ -30,12 +31,15 @@ define( require => {
     }
   };
 
-  // launch the sim - beware that scenery Image nodes created outside of SimLauncher.launch() will have zero bounds
-  // until the images are fully loaded, see https://github.com/phetsims/coulombs-law/issues/70
   SimLauncher.launch( () => {
+
+    // create the sim
     const sim = new Sim( naturalSelectionTitleString, [
-      new NaturalSelectionScreen( Tandem.rootTandem.createTandem( 'naturalSelectionScreen' ) )
+      new IntroScreen( Tandem.rootTandem.createTandem( 'intro' ) ),
+      new LabScreen( Tandem.rootTandem.createTandem( 'lab' ) )
     ], simOptions );
+
+    // start the sim
     sim.start();
   } );
 } );

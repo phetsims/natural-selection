@@ -1,6 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
+ * IntroModel is the model for the 'Intro' screen.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
@@ -12,7 +14,7 @@ define( require => {
   /**
    * @constructor
    */
-  class NaturalSelectionModel  {
+  class IntroModel  {
 
     /**
      * @param {Tandem} tandem
@@ -21,16 +23,21 @@ define( require => {
       //TODO
     }
 
-    // @public resets the model
+    /**
+     * @public
+     */
     reset() {
       //TODO Reset things here.
     }
 
-    // @public
+    /**
+     * @param {number} dt - time step, in seconds
+     * @public
+     */
     step( dt ) {
       //TODO Handle model animation here.
     }
   }
 
-  return naturalSelection.register( 'NaturalSelectionModel', NaturalSelectionModel );
+  return naturalSelection.register( 'IntroModel', IntroModel );
 } );

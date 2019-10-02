@@ -1,5 +1,11 @@
 {
   "natural-selection.title": {
     "value": "Natural Selection"
+  },
+  "screen.intro": {
+    "value": "Intro"
+  },
+  "screen.lab": {
+    "value": "Lab"
   }
 }
