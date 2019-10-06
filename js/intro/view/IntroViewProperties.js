@@ -34,6 +34,7 @@ define( require => {
       super.reset();
       this.populationWhiteFurVisibleProperty.reset();
       this.populationBrownFurVisibleProperty.reset();
+      this.furAllelesVisibleProperty.reset();
     }
   }
 

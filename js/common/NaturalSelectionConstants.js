@@ -45,7 +45,8 @@ define( require => {
 
     // Fonts
     CHECKBOX_FONT: new PhetFont( 14 ),
-    PUSH_BUTTON_FONT: new PhetFont( 14 )
+    PUSH_BUTTON_FONT: new PhetFont( 14 ),
+    TITLE_FONT: new PhetFont( 14 )
   };
 
   return naturalSelection.register( 'NaturalSelectionConstants', NaturalSelectionConstants );

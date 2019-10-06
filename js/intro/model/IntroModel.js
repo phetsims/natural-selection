@@ -11,6 +11,7 @@ define( require => {
   // modules
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionModel = require( 'NATURAL_SELECTION/common/model/NaturalSelectionModel' );
+  const Wolves = require( 'NATURAL_SELECTION/common/model/Wolves' );
 
   /**
    * @constructor
@@ -21,8 +22,10 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
-      super();
-      //TODO
+
+      const selectionAgents = [ new Wolves() ];
+
+      super(selectionAgents);
     }
 
     /**

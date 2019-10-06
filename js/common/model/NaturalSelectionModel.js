@@ -16,7 +16,13 @@ define( require => {
 
   class NaturalSelectionModel {
 
-    constructor() {
+    /**
+     * @param {SelectionAgent[]} selectionAgents
+     */
+    constructor( selectionAgents ) {
+
+      // @public (read-only) {SelectionAgent[]}
+      this.selectionAgents = selectionAgents;
 
       // @public whether the sim is playing
       this.isPlayingProperty = new BooleanProperty( true );
@@ -32,6 +38,7 @@ define( require => {
      * @public
      */
     reset() {
+      this.selectionAgents.forEach( selectionAgent => selectionAgent.reset() );
       this.isPlayingProperty.reset();
       this.limitFoodProperty.reset();
       this.climateProperty.reset();

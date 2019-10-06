@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
+  const AddMutationPanel = require( 'NATURAL_SELECTION/common/view/AddMutationPanel' );
   const ClimateRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/ClimateRadioButtonGroup' );
   const GraphRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/GraphRadioButtonGroup' );
   const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
@@ -25,6 +26,7 @@ define( require => {
   const ProportionControlPanel = require( 'NATURAL_SELECTION/common/view/ProportionControlPanel' );
   const ProportionGraphNode = require( 'NATURAL_SELECTION/common/view/ProportionGraphNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  const SelectionAgentsPanel = require( 'NATURAL_SELECTION/common/view/SelectionAgentsPanel' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const WorldNode = require( 'NATURAL_SELECTION/common/view/WorldNode' );
 
@@ -65,6 +67,16 @@ define( require => {
         },
         centerX: worldNode.centerX,
         bottom: worldNode.bottom - NaturalSelectionConstants.WORLD_NODE_Y_MARGIN
+      } );
+
+      const addMutationPanel = new AddMutationPanel( {
+        left: worldNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        top: worldNode.top
+      } );
+
+      const selectionAgentsPanel = new SelectionAgentsPanel( model.selectionAgents, {
+        left: worldNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        bottom: worldNode.bottom
       } );
 
       const timeControlNode = new NaturalSelectionTimeControlNode( model.isPlayingProperty, {
@@ -146,6 +158,8 @@ define( require => {
         limitedFoodCheckbox,
         climateRadioButtonGroup,
         addAMateButton,
+        addMutationPanel,
+        selectionAgentsPanel,
         timeControlNode,
         populationParent,
         proportionParent,

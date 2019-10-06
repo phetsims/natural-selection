@@ -17,7 +17,7 @@ define( require => {
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  const valuesString = require( 'string!NATURAL_SELECTION/total' );
+  const valuesString = require( 'string!NATURAL_SELECTION/values' );
 
   class ProportionControlPanel extends Panel {
 

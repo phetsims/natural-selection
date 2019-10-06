@@ -58,5 +58,20 @@
   },
   "teethAlleles": {
     "value": "Teeth Alleles"
+  },
+  "selectionAgent": {
+    "value": "Selection Agent"
+  },
+  "selectionAgents": {
+    "value": "Selection Agents"
+  },
+  "wolves": {
+    "value": "Wolves"
+  },
+  "toughFood": {
+    "value": "Tough Food"
+  },
+  "addMutation": {
+    "value": "Add Mutation"
   }
 }
