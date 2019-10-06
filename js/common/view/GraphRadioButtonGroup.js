@@ -9,7 +9,7 @@ define( require => {
   'use strict';
 
   // modules
-  const Graphs = require( 'NATURAL_SELECTION/common/model/Graphs' );
+  const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );

@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionViewProperties = require( 'NATURAL_SELECTION/common/view/NaturalSelectionViewProperties' );
 
@@ -16,6 +17,10 @@ define( require => {
 
     constructor() {
       super();
+
+      // @public visibility of traits on the Population graph
+      this.populationWhiteFurVisibleProperty = new BooleanProperty( false );
+      this.populationBrownFurVisibleProperty = new BooleanProperty( false );
     }
 
     /**
@@ -24,7 +29,8 @@ define( require => {
      */
     reset() {
       super.reset();
-      //TODO
+      this.populationWhiteFurVisibleProperty.reset();
+      this.populationBrownFurVisibleProperty.reset();
     }
   }
 

@@ -22,5 +22,29 @@
   },
   "pedigree": {
     "value": "Pedigree"
+  },
+  "total": {
+    "value": "Total"
+  },
+  "valuesMarker": {
+    "value": "Values Marker"
+  },
+  "whiteFur": {
+    "value": "White Fur"
+  },
+  "brownFur": {
+    "value": "Brown Fur"
+  },
+  "tallEars": {
+    "value": "Tall Ears"
+  },
+  "flatEars": {
+    "value": "Flat Ears"
+  },
+  "shortTeeth": {
+    "value": "Short Teeth"
+  },
+  "longTeeth": {
+    "value": "Long Teeth"
   }
 }

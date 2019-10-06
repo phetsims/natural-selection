@@ -13,6 +13,10 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionScreenView = require( 'NATURAL_SELECTION/common/view/NaturalSelectionScreenView' );
 
+  // strings
+  const brownFurString = require( 'string!NATURAL_SELECTION/brownFur' );
+  const whiteFurString = require( 'string!NATURAL_SELECTION/whiteFur' );
+
   class IntroScreenView extends NaturalSelectionScreenView {
 
     /**
@@ -23,7 +27,12 @@ define( require => {
 
       const viewProperties = new IntroViewProperties();
 
-      super( model, viewProperties, tandem );
+      const traits = [
+        { label: whiteFurString, property: viewProperties.populationWhiteFurVisibleProperty },
+        { label: brownFurString, property: viewProperties.populationBrownFurVisibleProperty }
+      ];
+
+      super( model, viewProperties, traits, tandem );
 
       //TODO
 

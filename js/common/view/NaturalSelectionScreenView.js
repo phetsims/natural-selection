@@ -12,10 +12,14 @@ define( require => {
   const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
   const ClimateRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/ClimateRadioButtonGroup' );
   const GraphRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/GraphRadioButtonGroup' );
+  const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
   const LimitedFoodCheckbox = require( 'NATURAL_SELECTION/common/view/LimitedFoodCheckbox' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionTimeControlNode = require( 'NATURAL_SELECTION/common/view/NaturalSelectionTimeControlNode' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PopulationControlPanel = require( 'NATURAL_SELECTION/common/view/PopulationControlPanel' );
+  const PopulationGraphNode = require( 'NATURAL_SELECTION/common/view/PopulationGraphNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const WorldNode = require( 'NATURAL_SELECTION/common/view/WorldNode' );
@@ -25,9 +29,10 @@ define( require => {
     /**
      * @param {NaturalSelectionModel} model
      * @param {NaturalSelectionViewProperties} viewProperties
+     * @param {{label:string, property:Property.<Boolean>}[]}
      * @param {Tandem} tandem
      */
-    constructor( model, viewProperties, tandem ) {
+    constructor( model, viewProperties, traits, tandem ) {
 
       super( {
         tandem: tandem
@@ -58,13 +63,34 @@ define( require => {
       } );
 
       const timeControlNode = new NaturalSelectionTimeControlNode( model.isPlayingProperty, {
-        centerX: worldNode.right + ( this.layoutBounds.right - worldNode.right ) / 2, // TODO
-        centerY: worldNode.bottom + ( this.layoutBounds.bottom - worldNode.bottom ) / 2 //TODO
+        centerX: worldNode.right + ( this.layoutBounds.right - worldNode.right ) / 2,
+        centerY: worldNode.bottom + ( this.layoutBounds.bottom - worldNode.bottom ) / 2
       } );
 
       const graphRadioButtonGroup = new GraphRadioButtonGroup( viewProperties.graphProperty, {
-        left: worldNode.right, //TODO
+        left: worldNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
+      } );
+
+      const graphWidth = 0.75 * worldNode.width;
+      const graphHeight = this.layoutBounds.height - ( 2 * NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN ) -
+                          worldNode.height - NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING;
+
+      const populationControlPanel = new PopulationControlPanel(
+        viewProperties.populationTotalVisibleProperty,
+        viewProperties.populationValuesMarkerVisibleProperty,
+        traits, {
+          left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
+          top: worldNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
+        } );
+
+      const populationGraphNode = new PopulationGraphNode( graphWidth, graphHeight, {
+        right: worldNode.right,
+        top: populationControlPanel.top
+      } );
+
+      const populationParent = new Node( {
+        children: [ populationControlPanel, populationGraphNode ]
       } );
 
       const resetAllButton = new ResetAllButton( {
@@ -85,12 +111,17 @@ define( require => {
         climateRadioButtonGroup,
         addAMateButton,
         timeControlNode,
+        populationParent,
         graphRadioButtonGroup,
         resetAllButton
       ];
 
       // @private
       this.addAMateButton = addAMateButton;
+
+      viewProperties.graphProperty.link( graph => {
+        populationParent.visible = ( graph === Graphs.POPULATION );
+      } );
     }
 
     /**
