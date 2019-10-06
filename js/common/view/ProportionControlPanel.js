@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const Checkbox = require( 'SUN/Checkbox' );
+  const HSeparator = require( 'SUN/HSeparator' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Panel = require( 'SUN/Panel' );
@@ -44,8 +45,12 @@ define( require => {
         traitLegends.push( new Text( trait.label, textOptions ) );
       } );
 
+      const separatorWidth = _.maxBy( [ valuesCheckbox, ...traitLegends ],
+        node => node.width ).width;
+      const separator = new HSeparator( separatorWidth );
+
       const content = new VBox( _.extend( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-        children: [ valuesCheckbox, ...traitLegends ]
+        children: [ valuesCheckbox, separator, ...traitLegends ]
       } ) );
 
       super( content, options );
