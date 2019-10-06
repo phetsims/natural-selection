@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Climates = require( 'NATURAL_SELECTION/common/model/Climates' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -16,6 +17,9 @@ define( require => {
   class NaturalSelectionModel {
 
     constructor() {
+
+      // @public when true, the food supply is limited
+      this.limitFoodProperty = new BooleanProperty( false );
 
       // @public the climate where the simulation is taking place
       this.climateProperty = new EnumerationProperty( Climates, Climates.EQUATOR );
@@ -25,6 +29,7 @@ define( require => {
      * @public
      */
     reset() {
+      this.limitFoodProperty.reset();
       this.climateProperty.reset();
     }
 

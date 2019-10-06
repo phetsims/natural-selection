@@ -10,13 +10,19 @@ define( require => {
 
   // modules
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   const NaturalSelectionConstants = {
 
     SCREEN_VIEW_X_MARGIN: 15,
-    SCREEN_VIEW_Y_MARGIN: 15
+    SCREEN_VIEW_Y_MARGIN: 15,
 
-    //TODO
+    CHECKBOX_OPTIONS: {
+      //TODO
+    },
+
+    // Fonts
+    CHECKBOX_FONT: new PhetFont( 14 )
   };
 
   return naturalSelection.register( 'NaturalSelectionConstants', NaturalSelectionConstants );

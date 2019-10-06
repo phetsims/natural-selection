@@ -12,6 +12,7 @@ define( require => {
   const LabModel = require( 'NATURAL_SELECTION/lab/model/LabModel' );
   const LabScreenView = require( 'NATURAL_SELECTION/lab/view/LabScreenView' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const Property = require( 'AXON/Property' );
   const Screen = require( 'JOIST/Screen' );
 
@@ -27,7 +28,7 @@ define( require => {
 
       const options = {
         name: screenLabString,
-        backgroundColorProperty: new Property( 'white' ),
+        backgroundColorProperty: new Property( NaturalSelectionColors.SCREEN_VIEW_BACKGROUND ),
         tandem: tandem
       };
 

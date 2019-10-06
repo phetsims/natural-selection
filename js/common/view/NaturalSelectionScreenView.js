@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const ClimateRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/ClimateRadioButtonGroup' );
+  const LimitedFoodCheckbox = require( 'NATURAL_SELECTION/common/view/LimitedFoodCheckbox' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -26,6 +27,12 @@ define( require => {
       super( {
         tandem: tandem
       } );
+
+      const limitedFoodCheckbox = new LimitedFoodCheckbox( model.limitFoodProperty, {
+        left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN, //TODO
+        top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN //TODO
+      } );
+      this.addChild( limitedFoodCheckbox );
 
       const climateRadioButtonGroup = new ClimateRadioButtonGroup( model.climateProperty, {
         centerX: this.layoutBounds.centerX, //TODO

@@ -12,6 +12,7 @@ define( require => {
   const IntroModel = require( 'NATURAL_SELECTION/intro/model/IntroModel' );
   const IntroScreenView = require( 'NATURAL_SELECTION/intro/view/IntroScreenView' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const Property = require( 'AXON/Property' );
   const Screen = require( 'JOIST/Screen' );
 
@@ -27,7 +28,7 @@ define( require => {
 
       const options = {
         name: screenIntroString,
-        backgroundColorProperty: new Property( 'white' ),
+        backgroundColorProperty: new Property( NaturalSelectionColors.SCREEN_VIEW_BACKGROUND ),
         tandem: tandem
       };
 
