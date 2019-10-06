@@ -21,8 +21,13 @@ define( require => {
       //TODO
     },
 
+    PUSH_BUTTON_OPTIONS: {
+      //TODO
+    },
+
     // Fonts
-    CHECKBOX_FONT: new PhetFont( 14 )
+    CHECKBOX_FONT: new PhetFont( 14 ),
+    PUSH_BUTTON_FONT: new PhetFont( 14 )
   };
 
   return naturalSelection.register( 'NaturalSelectionConstants', NaturalSelectionConstants );

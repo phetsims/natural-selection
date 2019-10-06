@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
   const ClimateRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/ClimateRadioButtonGroup' );
   const LimitedFoodCheckbox = require( 'NATURAL_SELECTION/common/view/LimitedFoodCheckbox' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -40,6 +41,16 @@ define( require => {
       } );
       this.addChild( climateRadioButtonGroup );
 
+      const addAMateButton = new AddAMateButton( {
+        listener: () => {
+          this.addAMateButton.visible = false;
+          //TODO
+        },
+        centerX: this.layoutBounds.centerX, //TODO
+        bottom: this.layoutBounds.centerY //TODO
+      } );
+      this.addChild( addAMateButton );
+
       const resetAllButton = new ResetAllButton( {
         listener: () => {
           this.interruptSubtreeInput();
@@ -51,12 +62,16 @@ define( require => {
         tandem: tandem.createTandem( 'resetAllButton' )
       } );
       this.addChild( resetAllButton );
+
+      // @private
+      this.addAMateButton = addAMateButton;
     }
 
     /**
      * @public
      */
     reset() {
+      this.addAMateButton.visible = true;
       //TODO
     }
 
