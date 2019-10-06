@@ -15,6 +15,7 @@ define( require => {
 
   // strings
   const brownFurString = require( 'string!NATURAL_SELECTION/brownFur' );
+  const furAllelesString = require( 'string!NATURAL_SELECTION/furAlleles' );
   const whiteFurString = require( 'string!NATURAL_SELECTION/whiteFur' );
 
   class IntroScreenView extends NaturalSelectionScreenView {
@@ -32,7 +33,11 @@ define( require => {
         { label: brownFurString, property: viewProperties.populationBrownFurVisibleProperty }
       ];
 
-      super( model, viewProperties, traits, tandem );
+      const alleles = [
+        { label: furAllelesString, property: viewProperties.furAllelesVisibleProperty }
+      ];
+
+      super( model, viewProperties, traits, alleles, tandem );
 
       //TODO
 

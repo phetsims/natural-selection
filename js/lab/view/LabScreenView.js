@@ -15,10 +15,13 @@ define( require => {
 
   // strings
   const brownFurString = require( 'string!NATURAL_SELECTION/brownFur' );
+  const earAllelesString = require( 'string!NATURAL_SELECTION/earAlleles' );
   const flatEarsString = require( 'string!NATURAL_SELECTION/flatEars' );
+  const furAllelesString = require( 'string!NATURAL_SELECTION/furAlleles' );
   const longTeethString = require( 'string!NATURAL_SELECTION/longTeeth' );
   const shortTeethString = require( 'string!NATURAL_SELECTION/shortTeeth' );
   const tallEarsString = require( 'string!NATURAL_SELECTION/tallEars' );
+  const teethAllelesString = require( 'string!NATURAL_SELECTION/teethAlleles' );
   const whiteFurString = require( 'string!NATURAL_SELECTION/whiteFur' );
 
   class LabScreenView extends NaturalSelectionScreenView {
@@ -40,7 +43,13 @@ define( require => {
         { label: longTeethString, property: viewProperties.populationLongTeethVisibleProperty }
       ];
 
-      super( model, viewProperties, traits, tandem );
+      const alleles = [
+        { label: furAllelesString, property: viewProperties.furAllelesVisibleProperty },
+        { label: earAllelesString, property: viewProperties.earAllelesVisibleProperty },
+        { label: teethAllelesString, property: viewProperties.teethAllelesVisibleProperty }
+      ];
+
+      super( model, viewProperties, traits, alleles, tandem );
 
       //TODO
 

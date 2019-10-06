@@ -21,6 +21,9 @@ define( require => {
       // @public visibility of traits on the Population graph
       this.populationWhiteFurVisibleProperty = new BooleanProperty( false );
       this.populationBrownFurVisibleProperty = new BooleanProperty( false );
+
+      // @public visibility of alleles on the Pedigree graph
+      this.furAllelesVisibleProperty = new BooleanProperty( false );
     }
 
     /**

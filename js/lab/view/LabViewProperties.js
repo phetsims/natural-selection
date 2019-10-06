@@ -25,6 +25,11 @@ define( require => {
       this.populationFlatEarsVisibleProperty = new BooleanProperty( false );
       this.populationShortTeethVisibleProperty = new BooleanProperty( false );
       this.populationLongTeethVisibleProperty = new BooleanProperty( false );
+
+      // @public visibility of alleles on the Pedigree graph
+      this.furAllelesVisibleProperty = new BooleanProperty( false );
+      this.earAllelesVisibleProperty = new BooleanProperty( false );
+      this.teethAllelesVisibleProperty = new BooleanProperty( false );
     }
 
     /**
@@ -39,6 +44,9 @@ define( require => {
       this.populationFlatEarsVisibleProperty.reset();
       this.populationShortTeethVisibleProperty.reset();
       this.populationLongTeethVisibleProperty.reset();
+      this.furAllelesVisibleProperty.reset();
+      this.earAllelesVisibleProperty.reset();
+      this.teethAllelesVisibleProperty.reset();
     }
   }
 

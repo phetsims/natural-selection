@@ -49,5 +49,14 @@
   },
   "values": {
     "value": "Values"
+  },
+  "furAlleles": {
+    "value": "Fur Alleles"
+  },
+  "earAlleles": {
+    "value": "Ear Alleles"
+  },
+  "teethAlleles": {
+    "value": "Teeth Alleles"
   }
 }

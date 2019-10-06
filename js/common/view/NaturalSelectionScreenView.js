@@ -18,6 +18,7 @@ define( require => {
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionTimeControlNode = require( 'NATURAL_SELECTION/common/view/NaturalSelectionTimeControlNode' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const PedigreeControlPanel = require( 'NATURAL_SELECTION/common/view/PedigreeControlPanel' );
   const PedigreeGraphNode = require( 'NATURAL_SELECTION/common/view/PedigreeGraphNode' );
   const PopulationControlPanel = require( 'NATURAL_SELECTION/common/view/PopulationControlPanel' );
   const PopulationGraphNode = require( 'NATURAL_SELECTION/common/view/PopulationGraphNode' );
@@ -33,9 +34,10 @@ define( require => {
      * @param {NaturalSelectionModel} model
      * @param {NaturalSelectionViewProperties} viewProperties
      * @param {{label:string, property:Property.<Boolean>}[]} traits
+     * @param {{label:string, property:Property.<Boolean>}[]} alleles
      * @param {Tandem} tandem
      */
-    constructor( model, viewProperties, traits, tandem ) {
+    constructor( model, viewProperties, traits, alleles, tandem ) {
 
       super( {
         tandem: tandem
@@ -112,13 +114,19 @@ define( require => {
         children: [ proportionControlPanel, proportionGraphNode ]
       } );
 
+      const pedigreeControlPanel = new PedigreeControlPanel(
+        alleles, {
+          left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
+          top: worldNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
+        } );
+
       const pedigreeGraphNode = new PedigreeGraphNode( graphWidth, graphHeight, {
         right: worldNode.right,
         top: populationControlPanel.top
       } );
 
       const pedigreeParent = new Node( {
-        children: [ pedigreeGraphNode ]
+        children: [ pedigreeControlPanel, pedigreeGraphNode ]
       } );
 
       const resetAllButton = new ResetAllButton( {
