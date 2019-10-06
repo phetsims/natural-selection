@@ -11,6 +11,7 @@ define( require => {
   // modules
   const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
   const ClimateRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/ClimateRadioButtonGroup' );
+  const GraphRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/GraphRadioButtonGroup' );
   const LimitedFoodCheckbox = require( 'NATURAL_SELECTION/common/view/LimitedFoodCheckbox' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
@@ -22,9 +23,10 @@ define( require => {
 
     /**
      * @param {NaturalSelectionModel} model
+     * @param {NaturalSelectionViewProperties} viewProperties
      * @param {Tandem} tandem
      */
-    constructor( model, tandem ) {
+    constructor( model, viewProperties, tandem ) {
 
       super( {
         tandem: tandem
@@ -54,14 +56,19 @@ define( require => {
         bottom: worldNode.bottom - NaturalSelectionConstants.WORLD_NODE_Y_MARGIN
       } );
 
+      const graphRadioButtonGroup = new GraphRadioButtonGroup( viewProperties.graphProperty, {
+        left: worldNode.right, //TODO
+        bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
+      } );
+
       const resetAllButton = new ResetAllButton( {
         listener: () => {
           this.interruptSubtreeInput();
           model.reset();
           this.reset();
         },
-        right: this.layoutBounds.maxX - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
-        bottom: this.layoutBounds.maxY - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
+        right: this.layoutBounds.right - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
+        bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
         tandem: tandem.createTandem( 'resetAllButton' )
       } );
 
@@ -71,6 +78,7 @@ define( require => {
         limitedFoodCheckbox,
         climateRadioButtonGroup,
         addAMateButton,
+        graphRadioButtonGroup,
         resetAllButton
       ];
 

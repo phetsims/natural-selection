@@ -13,5 +13,14 @@
   },
   "limitedFood": {
     "value": "Limited Food"
+  },
+  "population": {
+    "value": "Population"
+  },
+  "proportion": {
+    "value": "Proportion"
+  },
+  "pedigree": {
+    "value": "Pedigree"
   }
 }

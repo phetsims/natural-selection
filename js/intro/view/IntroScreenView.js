@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const IntroViewProperties = require( 'NATURAL_SELECTION/intro/view/IntroViewProperties' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionScreenView = require( 'NATURAL_SELECTION/common/view/NaturalSelectionScreenView' );
 
@@ -20,9 +21,14 @@ define( require => {
      */
     constructor( model, tandem ) {
 
-      super( model, tandem );
+      const viewProperties = new IntroViewProperties();
+
+      super( model, viewProperties, tandem );
 
       //TODO
+
+      // @private
+      this.viewProperties = viewProperties;
     }
 
     /**
@@ -31,7 +37,7 @@ define( require => {
      */
     reset() {
       super.reset();
-      //TODO
+      this.viewProperties.reset();
     }
 
     /**

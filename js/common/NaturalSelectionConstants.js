@@ -28,6 +28,10 @@ define( require => {
       //TODO
     },
 
+    RADIO_BUTTON_GROUP_OPTIONS: {
+      //TODO
+    },
+
     // Fonts
     CHECKBOX_FONT: new PhetFont( 14 ),
     PUSH_BUTTON_FONT: new PhetFont( 14 )

@@ -11,6 +11,7 @@ define( require => {
   // modules
   const Climates = require( 'NATURAL_SELECTION/common/model/Climates' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -26,7 +27,7 @@ define( require => {
      */
     constructor( climateProperty, options ) {
 
-      options = _.extend( {
+      options = _.extend( {}, NaturalSelectionConstants.RADIO_BUTTON_GROUP_OPTIONS, {
         orientation: 'horizontal'
       }, options );
 

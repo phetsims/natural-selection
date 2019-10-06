@@ -1,0 +1,33 @@
+// Copyright 2019, University of Colorado Boulder
+
+/**
+ * NaturalSelectionViewProperties contains view-specific Properties that are common to all screens.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */
+define( require => {
+  'use strict';
+
+  // modules
+  const Graphs = require( 'NATURAL_SELECTION/common/model/Graphs' );
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
+  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+
+  class NaturalSelectionViewProperties {
+
+    constructor() {
+
+      // @public
+      this.graphProperty = new EnumerationProperty( Graphs, Graphs.POPULATION );
+    }
+
+    /**
+     * @public
+     */
+    reset() {
+      this.graphProperty.reset();
+    }
+  }
+
+  return naturalSelection.register( 'NaturalSelectionViewProperties', NaturalSelectionViewProperties );
+} );
