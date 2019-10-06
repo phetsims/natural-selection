@@ -46,5 +46,8 @@
   },
   "longTeeth": {
     "value": "Long Teeth"
+  },
+  "values": {
+    "value": "Values"
   }
 }

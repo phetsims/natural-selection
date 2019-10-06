@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * WorldNode is our viewport in the world of bunnies.
+ * PedigreeGraphNode displays the pedigree graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,11 +10,12 @@ define( require => {
 
   // modules
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
-  class WorldNode extends Node {
+  class PedigreeGraphNode extends Node {
 
     /**
      * @param {number} width
@@ -26,15 +27,21 @@ define( require => {
       //TODO placeholder
       const rectangle = new Rectangle( 0, 0, width, height, {
         fill: 'white',
-        stroke: NaturalSelectionColors.WORLD_NODE_STROKE
+        stroke: 'black'
       } );
 
-      assert && assert( !options.children, 'WorldNode sets children' );
-      options.children = [ rectangle ];
+      //TODO placeholder
+      const text = new Text( 'Pedigree', {
+        font: new PhetFont( 14 ),
+        center: rectangle.center
+      } );
+
+      assert && assert( !options.children, 'PedigreeGraphNode sets children' );
+      options.children = [ rectangle, text ];
 
       super( options );
     }
   }
 
-  return naturalSelection.register( 'WorldNode', WorldNode );
+  return naturalSelection.register( 'PedigreeGraphNode', PedigreeGraphNode );
 } );

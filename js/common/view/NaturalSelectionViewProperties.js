@@ -21,10 +21,12 @@ define( require => {
       // @public
       this.graphProperty = new EnumerationProperty( Graphs, Graphs.POPULATION );
 
-      // @public
+      // @public Population graph
       this.populationTotalVisibleProperty = new BooleanProperty( false );
       this.populationValuesMarkerVisibleProperty = new BooleanProperty( false );
 
+      // @public Proportion graph
+      this.proportionValuesVisibleProperty = new BooleanProperty( false );
     }
 
     /**
@@ -36,6 +38,7 @@ define( require => {
       this.populationValuesMarkerVisibleProperty.reset();
       this.populationWhiteFurVisibleProperty.reset();
       this.populationBrownFurVisibleProperty.reset();
+      this.proportionValuesVisibleProperty.reset();
     }
   }
 

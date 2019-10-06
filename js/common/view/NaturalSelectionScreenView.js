@@ -18,8 +18,11 @@ define( require => {
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionTimeControlNode = require( 'NATURAL_SELECTION/common/view/NaturalSelectionTimeControlNode' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const PedigreeGraphNode = require( 'NATURAL_SELECTION/common/view/PedigreeGraphNode' );
   const PopulationControlPanel = require( 'NATURAL_SELECTION/common/view/PopulationControlPanel' );
   const PopulationGraphNode = require( 'NATURAL_SELECTION/common/view/PopulationGraphNode' );
+  const ProportionControlPanel = require( 'NATURAL_SELECTION/common/view/ProportionControlPanel' );
+  const ProportionGraphNode = require( 'NATURAL_SELECTION/common/view/ProportionGraphNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const WorldNode = require( 'NATURAL_SELECTION/common/view/WorldNode' );
@@ -29,7 +32,7 @@ define( require => {
     /**
      * @param {NaturalSelectionModel} model
      * @param {NaturalSelectionViewProperties} viewProperties
-     * @param {{label:string, property:Property.<Boolean>}[]}
+     * @param {{label:string, property:Property.<Boolean>}[]} traits
      * @param {Tandem} tandem
      */
     constructor( model, viewProperties, traits, tandem ) {
@@ -93,6 +96,31 @@ define( require => {
         children: [ populationControlPanel, populationGraphNode ]
       } );
 
+      const proportionControlPanel = new ProportionControlPanel(
+        viewProperties.proportionValuesVisibleProperty,
+        traits, {
+          left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
+          top: worldNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
+        } );
+
+      const proportionGraphNode = new ProportionGraphNode( graphWidth, graphHeight, {
+        right: worldNode.right,
+        top: populationControlPanel.top
+      } );
+
+      const proportionParent = new Node( {
+        children: [ proportionControlPanel, proportionGraphNode ]
+      } );
+
+      const pedigreeGraphNode = new PedigreeGraphNode( graphWidth, graphHeight, {
+        right: worldNode.right,
+        top: populationControlPanel.top
+      } );
+
+      const pedigreeParent = new Node( {
+        children: [ pedigreeGraphNode ]
+      } );
+
       const resetAllButton = new ResetAllButton( {
         listener: () => {
           this.interruptSubtreeInput();
@@ -112,6 +140,8 @@ define( require => {
         addAMateButton,
         timeControlNode,
         populationParent,
+        proportionParent,
+        pedigreeParent,
         graphRadioButtonGroup,
         resetAllButton
       ];
@@ -121,6 +151,8 @@ define( require => {
 
       viewProperties.graphProperty.link( graph => {
         populationParent.visible = ( graph === Graphs.POPULATION );
+        proportionParent.visible = ( graph === Graphs.PROPORTION );
+        pedigreeParent.visible = ( graph === Graphs.PEDIGREE );
       } );
     }
 

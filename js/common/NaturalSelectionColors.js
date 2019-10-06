@@ -12,7 +12,9 @@ define( require => {
 
   const NaturalSelectionColors = {
 
-    SCREEN_VIEW_BACKGROUND: 'rgb( 220, 231, 184 )'
+    SCREEN_VIEW_BACKGROUND: 'rgb( 220, 231, 184 )',
+
+    WORLD_NODE_STROKE: 'rgb( 190, 200, 150 )' // darker version of SCREEN_VIEW_BACKGROUND
   };
 
   return naturalSelection.register( 'NaturalSelectionColors', NaturalSelectionColors );

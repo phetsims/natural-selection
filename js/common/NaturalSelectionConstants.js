@@ -34,6 +34,15 @@ define( require => {
       //TODO
     },
 
+    PANEL_OPTIONS: {
+      //TODO
+    },
+
+    VBOX_OPTIONS: {
+      spacing: 8,
+      align: 'left'
+    },
+
     // Fonts
     CHECKBOX_FONT: new PhetFont( 14 ),
     PUSH_BUTTON_FONT: new PhetFont( 14 )
