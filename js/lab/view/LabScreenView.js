@@ -15,7 +15,7 @@ define( require => {
 
   // strings
   const brownFurString = require( 'string!NATURAL_SELECTION/brownFur' );
-  const earAllelesString = require( 'string!NATURAL_SELECTION/earAlleles' );
+  const earsAllelesString = require( 'string!NATURAL_SELECTION/earsAlleles' );
   const flatEarsString = require( 'string!NATURAL_SELECTION/flatEars' );
   const furAllelesString = require( 'string!NATURAL_SELECTION/furAlleles' );
   const longTeethString = require( 'string!NATURAL_SELECTION/longTeeth' );
@@ -45,7 +45,7 @@ define( require => {
 
       const alleles = [
         { label: furAllelesString, property: viewProperties.furAllelesVisibleProperty },
-        { label: earAllelesString, property: viewProperties.earAllelesVisibleProperty },
+        { label: earsAllelesString, property: viewProperties.earAllelesVisibleProperty },
         { label: teethAllelesString, property: viewProperties.teethAllelesVisibleProperty }
       ];
 
