@@ -15,6 +15,7 @@ define( require => {
   const LimitedFoodCheckbox = require( 'NATURAL_SELECTION/common/view/LimitedFoodCheckbox' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
+  const NaturalSelectionTimeControlNode = require( 'NATURAL_SELECTION/common/view/NaturalSelectionTimeControlNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const WorldNode = require( 'NATURAL_SELECTION/common/view/WorldNode' );
@@ -56,6 +57,11 @@ define( require => {
         bottom: worldNode.bottom - NaturalSelectionConstants.WORLD_NODE_Y_MARGIN
       } );
 
+      const timeControlNode = new NaturalSelectionTimeControlNode( model.isPlayingProperty, {
+        centerX: worldNode.right + ( this.layoutBounds.right - worldNode.right ) / 2, // TODO
+        centerY: worldNode.bottom + ( this.layoutBounds.bottom - worldNode.bottom ) / 2 //TODO
+      } );
+
       const graphRadioButtonGroup = new GraphRadioButtonGroup( viewProperties.graphProperty, {
         left: worldNode.right, //TODO
         bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
@@ -78,6 +84,7 @@ define( require => {
         limitedFoodCheckbox,
         climateRadioButtonGroup,
         addAMateButton,
+        timeControlNode,
         graphRadioButtonGroup,
         resetAllButton
       ];

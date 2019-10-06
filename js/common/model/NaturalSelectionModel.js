@@ -18,6 +18,9 @@ define( require => {
 
     constructor() {
 
+      // @public whether the sim is playing
+      this.isPlayingProperty = new BooleanProperty( true );
+
       // @public when true, the food supply is limited
       this.limitFoodProperty = new BooleanProperty( false );
 
@@ -29,6 +32,7 @@ define( require => {
      * @public
      */
     reset() {
+      this.isPlayingProperty.reset();
       this.limitFoodProperty.reset();
       this.climateProperty.reset();
     }
@@ -39,7 +43,9 @@ define( require => {
      * @override
      */
     step( dt ) {
-      //TODO
+      if ( this.isPlayingProperty.value ) {
+        //TODO
+      }
     }
   }
 
