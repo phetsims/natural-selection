@@ -16,6 +16,7 @@ define( require => {
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
+  const WorldNode = require( 'NATURAL_SELECTION/common/view/WorldNode' );
 
   class NaturalSelectionScreenView extends ScreenView {
 
@@ -29,27 +30,29 @@ define( require => {
         tandem: tandem
       } );
 
-      const limitedFoodCheckbox = new LimitedFoodCheckbox( model.limitFoodProperty, {
-        left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN, //TODO
-        top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN //TODO
+      const worldNode = new WorldNode( 0.75 * this.layoutBounds.width, 0.5 * this.layoutBounds.height, {
+        left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
+        top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
       } );
-      this.addChild( limitedFoodCheckbox );
+
+      const limitedFoodCheckbox = new LimitedFoodCheckbox( model.limitFoodProperty, {
+        left: worldNode.left + NaturalSelectionConstants.WORLD_NODE_X_MARGIN,
+        top: worldNode.top + NaturalSelectionConstants.WORLD_NODE_Y_MARGIN
+      } );
 
       const climateRadioButtonGroup = new ClimateRadioButtonGroup( model.climateProperty, {
-        centerX: this.layoutBounds.centerX, //TODO
-        top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN //TODO
+        right: worldNode.right - NaturalSelectionConstants.WORLD_NODE_X_MARGIN,
+        top: worldNode.top + NaturalSelectionConstants.WORLD_NODE_Y_MARGIN
       } );
-      this.addChild( climateRadioButtonGroup );
 
       const addAMateButton = new AddAMateButton( {
         listener: () => {
           this.addAMateButton.visible = false;
           //TODO
         },
-        centerX: this.layoutBounds.centerX, //TODO
-        bottom: this.layoutBounds.centerY //TODO
+        centerX: worldNode.centerX,
+        bottom: worldNode.bottom - NaturalSelectionConstants.WORLD_NODE_Y_MARGIN
       } );
-      this.addChild( addAMateButton );
 
       const resetAllButton = new ResetAllButton( {
         listener: () => {
@@ -61,7 +64,15 @@ define( require => {
         bottom: this.layoutBounds.maxY - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
         tandem: tandem.createTandem( 'resetAllButton' )
       } );
-      this.addChild( resetAllButton );
+
+      // layering
+      this.children = [
+        worldNode,
+        limitedFoodCheckbox,
+        climateRadioButtonGroup,
+        addAMateButton,
+        resetAllButton
+      ];
 
       // @private
       this.addAMateButton = addAMateButton;

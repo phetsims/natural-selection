@@ -17,6 +17,9 @@ define( require => {
     SCREEN_VIEW_X_MARGIN: 15,
     SCREEN_VIEW_Y_MARGIN: 15,
 
+    WORLD_NODE_X_MARGIN: 8,
+    WORLD_NODE_Y_MARGIN: 8,
+
     CHECKBOX_OPTIONS: {
       //TODO
     },
