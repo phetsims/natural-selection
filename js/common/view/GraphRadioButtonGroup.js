@@ -31,7 +31,7 @@ define( require => {
      */
     constructor( graphProperty, options ) {
 
-      options = _.extend( {}, NaturalSelectionConstants.AQUA_RADIO_BUTTON_OPTIONS, options );
+      options = _.extend( {}, NaturalSelectionConstants.VERTICAL_AQUA_RADIO_BUTTON_GROUP_OPTIONS, options );
 
       // Create the description of the buttons
       const items = [

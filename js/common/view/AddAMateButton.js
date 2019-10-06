@@ -27,7 +27,7 @@ define( require => {
 
       options = _.extend( {
         baseColor: NaturalSelectionColors.ADD_A_MATE_BUTTON
-      }, NaturalSelectionConstants.PUSH_BUTTON_OPTIONS, options );
+      }, NaturalSelectionConstants.RECTANGULAR_PUSH_BUTTON_OPTIONS, options );
 
       assert && assert( !options.content, 'AddAMateButton sets content' );
       options.content = new Text( addAMateString, {
