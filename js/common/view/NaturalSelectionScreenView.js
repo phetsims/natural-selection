@@ -79,16 +79,6 @@ define( require => {
         bottom: worldNode.bottom
       } );
 
-      const timeControlNode = new NaturalSelectionTimeControlNode( model.isPlayingProperty, {
-        centerX: worldNode.right + ( this.layoutBounds.right - worldNode.right ) / 2,
-        centerY: worldNode.bottom + ( this.layoutBounds.bottom - worldNode.bottom ) / 2
-      } );
-
-      const graphRadioButtonGroup = new GraphRadioButtonGroup( viewProperties.graphProperty, {
-        left: worldNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
-      } );
-
       const graphWidth = 0.75 * worldNode.width;
       const graphHeight = this.layoutBounds.height - ( 2 * NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN ) -
                           worldNode.height - NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING;
@@ -139,6 +129,16 @@ define( require => {
 
       const pedigreeParent = new Node( {
         children: [ pedigreeControlPanel, pedigreeGraphNode ]
+      } );
+
+      const graphRadioButtonGroup = new GraphRadioButtonGroup( viewProperties.graphProperty, {
+        left: proportionGraphNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        centerY: proportionGraphNode.centerY
+      } );
+
+      const timeControlNode = new NaturalSelectionTimeControlNode( model.isPlayingProperty, {
+        left: proportionGraphNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
       } );
 
       const resetAllButton = new ResetAllButton( {
