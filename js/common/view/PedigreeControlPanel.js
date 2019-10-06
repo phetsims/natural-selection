@@ -16,6 +16,9 @@ define( require => {
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
+  // strings
+  const allelesString = require( 'string!NATURAL_SELECTION/alleles' );
+
   class PedigreeControlPanel extends Panel {
 
     /**
@@ -25,6 +28,10 @@ define( require => {
     constructor( alleles, options ) {
 
       options = _.extend( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
+
+      const titleNode = new Text( allelesString, {
+        font: NaturalSelectionConstants.TITLE_FONT
+      } );
 
       const textOptions = {
         font: NaturalSelectionConstants.CHECKBOX_FONT
@@ -39,7 +46,7 @@ define( require => {
       } );
 
       const content = new VBox( _.extend( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-        children: checkboxes
+        children: [ titleNode, ...checkboxes ]
       } ) );
 
       super( content, options );

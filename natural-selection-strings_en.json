@@ -50,14 +50,14 @@
   "values": {
     "value": "Values"
   },
-  "furAlleles": {
-    "value": "Fur Alleles"
+  "fur": {
+    "value": "Fur"
   },
-  "earsAlleles": {
-    "value": "Ears Alleles"
+  "ears": {
+    "value": "Ears"
   },
-  "teethAlleles": {
-    "value": "Teeth Alleles"
+  "teeth": {
+    "value": "Teeth"
   },
   "selectionAgent": {
     "value": "Selection Agent"
@@ -73,5 +73,8 @@
   },
   "addMutation": {
     "value": "Add Mutation"
+  },
+  "alleles": {
+    "value": "Alleles"
   }
 }
