@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -24,7 +25,9 @@ define( require => {
      */
     constructor( options ) {
 
-      options = _.extend( {}, NaturalSelectionConstants.PUSH_BUTTON_OPTIONS, options );
+      options = _.extend( {
+        baseColor: NaturalSelectionColors.ADD_A_MATE_BUTTON
+      }, NaturalSelectionConstants.PUSH_BUTTON_OPTIONS, options );
 
       assert && assert( !options.content, 'AddAMateButton sets content' );
       options.content = new Text( addAMateString, {

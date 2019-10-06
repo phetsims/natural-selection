@@ -10,8 +10,8 @@ define( require => {
 
   // modules
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
 
@@ -32,7 +32,7 @@ define( require => {
 
       //TODO placeholder
       const text = new Text( 'Pedigree', {
-        font: new PhetFont( 14 ),
+        font: NaturalSelectionConstants.TITLE_FONT,
         center: rectangle.center
       } );
 

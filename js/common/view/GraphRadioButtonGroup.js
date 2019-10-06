@@ -11,7 +11,7 @@ define( require => {
   // modules
   const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
 
@@ -21,7 +21,7 @@ define( require => {
   const pedigreeString = require( 'string!NATURAL_SELECTION/pedigree' );
 
   // constants
-  const TEXT_OPTIONS = { font: new PhetFont( 14 ) };
+  const TEXT_OPTIONS = { font: NaturalSelectionConstants.RADIO_BUTTON_FONT };
 
   class GraphRadioButtonGroup extends VerticalAquaRadioButtonGroup {
 
@@ -31,9 +31,7 @@ define( require => {
      */
     constructor( graphProperty, options ) {
 
-      options = _.extend( {
-        spacing: 12
-      }, options );
+      options = _.extend( {}, NaturalSelectionConstants.AQUA_RADIO_BUTTON_OPTIONS, options );
 
       // Create the description of the buttons
       const items = [

@@ -12,41 +12,80 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
+  // constants
+
+  // For things with a corner radius
+  const CORNER_RADIUS = 5;
+
+  // for all panel-like containers
+  const PANEL_X_MARGIN = 15;
+  const PANEL_Y_MARGIN = 10;
+
   const NaturalSelectionConstants = {
 
-    SCREEN_VIEW_X_MARGIN: 15,
-    SCREEN_VIEW_Y_MARGIN: 15,
-    SCREEN_VIEW_X_SPACING: 15,
-    SCREEN_VIEW_Y_SPACING: 15,
+    // ScreenView
+    SCREEN_VIEW_X_MARGIN: 15, // margins at left and right edges of the ScreenView
+    SCREEN_VIEW_Y_MARGIN: 15, // margins at top and bottom edges of the ScreenView
+    SCREEN_VIEW_X_SPACING: 15, // horizontal spacing between UI components in the ScreenView
+    SCREEN_VIEW_Y_SPACING: 15, // vertical spacing between UI components in the ScreenView
 
-    WORLD_NODE_X_MARGIN: 8,
-    WORLD_NODE_Y_MARGIN: 8,
+    // WorldNode
+    WORLD_NODE_X_MARGIN: 8, // margins at left and right edges of the WorldNode
+    WORLD_NODE_Y_MARGIN: 8, // margins at top and bottom edges of the WorldNode
 
+    // VerticalAquaRadioButtonGroup
+    AQUA_RADIO_BUTTON_OPTIONS: {
+      radius: 8,
+      xSpacing: 10,
+      spacing: 12
+    },
+
+    // Checkbox
     CHECKBOX_OPTIONS: {
-      //TODO
+      spacing: 4,
+      boxWidth: 16
     },
 
-    PUSH_BUTTON_OPTIONS: {
-      //TODO
-    },
-
-    RADIO_BUTTON_GROUP_OPTIONS: {
-      //TODO
-    },
-
+    // Panel
     PANEL_OPTIONS: {
-      //TODO
+      align: 'left',
+      cornerRadius: CORNER_RADIUS,
+      xMargin: PANEL_X_MARGIN,
+      yMargin: PANEL_Y_MARGIN,
+      fill: 'white',
+      stroke: 'black'
     },
 
+    // RectangularPushButton
+    PUSH_BUTTON_OPTIONS: {
+      cornerRadius: CORNER_RADIUS,
+      xMargin: 8,
+      yMargin: 4
+    },
+
+    // RadioButtonGroup
+    RADIO_BUTTON_GROUP_OPTIONS: {
+      orientation: 'horizontal',
+      spacing: 8,
+      cornerRadius: CORNER_RADIUS,
+      selectedLineWidth: 1.5,
+      deselectedLineWidth: 1,
+      deselectedButtonOpacity: 0.35,
+      buttonContentXMargin: 8,
+      buttonContentYMargin: 8
+    },
+
+    // VBox
     VBOX_OPTIONS: {
       spacing: 8,
       align: 'left'
     },
 
     // Fonts
-    CHECKBOX_FONT: new PhetFont( 14 ),
-    PUSH_BUTTON_FONT: new PhetFont( 14 ),
-    TITLE_FONT: new PhetFont( 14 )
+    CHECKBOX_FONT: new PhetFont( 16 ),
+    PUSH_BUTTON_FONT: new PhetFont( 16 ),
+    RADIO_BUTTON_FONT: new PhetFont( 16 ),
+    TITLE_FONT: new PhetFont( { size: 16, weight: 'bold' } )
   };
 
   return naturalSelection.register( 'NaturalSelectionConstants', NaturalSelectionConstants );
