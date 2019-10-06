@@ -10,32 +10,38 @@ define( require => {
 
   // modules
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionModel = require( 'NATURAL_SELECTION/common/model/NaturalSelectionModel' );
 
   /**
    * @constructor
    */
-  class IntroModel  {
+  class IntroModel extends NaturalSelectionModel {
 
     /**
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
+      super();
       //TODO
     }
 
     /**
      * @public
+     * @override
      */
     reset() {
-      //TODO Reset things here.
+      super.reset();
+      //TODO
     }
 
     /**
      * @param {number} dt - time step, in seconds
      * @public
+     * @override
      */
     step( dt ) {
-      //TODO Handle model animation here.
+      super.step( dt );
+      //TODO
     }
   }
 

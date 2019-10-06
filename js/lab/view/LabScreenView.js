@@ -10,11 +10,9 @@ define( require => {
 
   // modules
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  const ScreenView = require( 'JOIST/ScreenView' );
+  const NaturalSelectionScreenView = require( 'NATURAL_SELECTION/common/view/NaturalSelectionScreenView' );
 
-  class LabScreenView extends ScreenView {
+  class LabScreenView extends NaturalSelectionScreenView {
 
     /**
      * @param {LabModel} model
@@ -22,33 +20,27 @@ define( require => {
      */
     constructor( model, tandem ) {
 
-      super();
+      super( model, tandem );
 
-      const resetAllButton = new ResetAllButton( {
-        listener: () => {
-          this.interruptSubtreeInput();
-          model.reset();
-          this.reset();
-        },
-        right: this.layoutBounds.maxX - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
-        bottom: this.layoutBounds.maxY - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
-        tandem: tandem.createTandem( 'resetAllButton' )
-      } );
-      this.addChild( resetAllButton );
+      //TODO
     }
 
     /**
      * @public
+     * @override
      */
     reset() {
+      super.reset();
       //TODO
     }
 
     /**
      * @param {number} dt - time step, in seconds
      * @public
+     * @override
      */
     step( dt ) {
+      super.step( dt );
       //TODO
     }
   }
