@@ -14,6 +14,7 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
+  const ProportionLegendNode = require( 'NATURAL_SELECTION/common/view/ProportionLegendNode' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -42,12 +43,12 @@ define( require => {
         valuesVisibleProperty ,
         NaturalSelectionConstants.CHECKBOX_OPTIONS );
 
+      const separator = new HSeparator( options.fixedWidth );
+
       const traitLegends = [];
       traits.forEach( trait => {
-        traitLegends.push( new Text( trait.label, textOptions ) );
+        traitLegends.push( new ProportionLegendNode( trait.label ) );
       } );
-
-      const separator = new HSeparator( options.fixedWidth );
 
       const content = new VBox( _.extend( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         children: [ valuesCheckbox, separator, ...traitLegends ]
