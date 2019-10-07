@@ -25,9 +25,11 @@ define( require => {
      */
     constructor( options ) {
 
-      options = _.extend( {
-        baseColor: NaturalSelectionColors.ADD_A_MATE_BUTTON
-      }, NaturalSelectionConstants.RECTANGULAR_PUSH_BUTTON_OPTIONS, options );
+      options = _.extend( {}, NaturalSelectionConstants.RECTANGULAR_PUSH_BUTTON_OPTIONS, {
+        baseColor: NaturalSelectionColors.ADD_A_MATE_BUTTON,
+        xMargin: 12,
+        yMargin: 8
+      }, options );
 
       assert && assert( !options.content, 'AddAMateButton sets content' );
       options.content = new Text( addAMateString, {

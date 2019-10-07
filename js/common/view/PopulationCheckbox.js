@@ -13,6 +13,7 @@ define( require => {
   const Checkbox = require( 'SUN/Checkbox' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const Line = require( 'SCENERY/nodes/Line' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -29,7 +30,7 @@ define( require => {
      */
     constructor( property, textString, options ) {
 
-      options = _.extend( {}, NaturalSelectionConstants.CHECK_BOX_OPTIONS, {
+      options = merge( {}, NaturalSelectionConstants.CHECK_BOX_OPTIONS, {
 
         // options passed to Line
         lineOptions: {

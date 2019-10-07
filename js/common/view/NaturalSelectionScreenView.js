@@ -66,7 +66,7 @@ define( require => {
           //TODO
         },
         centerX: worldNode.centerX,
-        bottom: worldNode.bottom - NaturalSelectionConstants.WORLD_NODE_Y_MARGIN
+        bottom: worldNode.bottom - 30 // determined empirically
       } );
 
       const rightOfWorldWidth = this.layoutBounds.width - worldNode.width -

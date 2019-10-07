@@ -11,6 +11,7 @@ define( require => {
 
   // modules
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -27,7 +28,7 @@ define( require => {
      */
     constructor( textString, options ) {
 
-      options = _.extend( {
+      options = merge( {
 
         // options passed to Rectangle
         rectangleOptions: {

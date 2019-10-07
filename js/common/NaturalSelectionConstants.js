@@ -54,9 +54,7 @@ define( require => {
 
     // RectangularPushButton
     RECTANGULAR_PUSH_BUTTON_OPTIONS: {
-      cornerRadius: CORNER_RADIUS,
-      xMargin: 8,
-      yMargin: 4
+      cornerRadius: CORNER_RADIUS
     },
 
     // VBox
