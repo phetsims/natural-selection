@@ -1,7 +1,3 @@
 
-Need artwork asap
-
-Design document is sparse
-
 Add Mutation UX needs work
 
