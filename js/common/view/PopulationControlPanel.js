@@ -11,6 +11,7 @@ define( require => {
   // modules
   const Checkbox = require( 'SUN/Checkbox' );
   const HSeparator = require( 'SUN/HSeparator' );
+  const LegendCheckbox = require( 'NATURAL_SELECTION/common/view/LegendCheckbox' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Panel = require( 'SUN/Panel' );
@@ -37,17 +38,11 @@ define( require => {
         font: NaturalSelectionConstants.CHECKBOX_FONT
       };
 
-      const totalCheckbox = new Checkbox(
-        new Text( totalString, textOptions ),
-        totalVisibleProperty,
-        NaturalSelectionConstants.CHECKBOX_OPTIONS );
+      const totalCheckbox = new LegendCheckbox( totalVisibleProperty, totalString );
 
       const traitCheckboxes = [];
       traits.forEach( trait => {
-        traitCheckboxes.push( new Checkbox(
-          new Text( trait.label, textOptions ),
-          trait.property,
-          NaturalSelectionConstants.CHECKBOX_OPTIONS ) );
+        traitCheckboxes.push( new LegendCheckbox( trait.property, trait.label ) );
       } );
 
       const valuesMarkerCheckbox = new Checkbox(
