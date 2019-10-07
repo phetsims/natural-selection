@@ -11,10 +11,10 @@ define( require => {
   // modules
   const Checkbox = require( 'SUN/Checkbox' );
   const HSeparator = require( 'SUN/HSeparator' );
-  const LegendCheckbox = require( 'NATURAL_SELECTION/common/view/LegendCheckbox' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
+  const PopulationCheckbox = require( 'NATURAL_SELECTION/common/view/PopulationCheckbox' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -40,11 +40,11 @@ define( require => {
         font: NaturalSelectionConstants.CHECKBOX_FONT
       };
 
-      const totalCheckbox = new LegendCheckbox( totalVisibleProperty, totalString );
+      const totalCheckbox = new PopulationCheckbox( totalVisibleProperty, totalString );
 
       const traitCheckboxes = [];
       traits.forEach( trait => {
-        traitCheckboxes.push( new LegendCheckbox( trait.property, trait.label ) );
+        traitCheckboxes.push( new PopulationCheckbox( trait.property, trait.label ) );
       } );
 
       const valuesMarkerCheckbox = new Checkbox(
