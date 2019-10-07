@@ -29,6 +29,8 @@ define( require => {
     constructor( property, textString, options ) {
 
       options = _.extend( {}, NaturalSelectionConstants.CHECK_BOX_OPTIONS, {
+
+        // options passed to Line
         lineOptions: {
           stroke: 'black',
           lineWidth: 3,
