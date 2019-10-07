@@ -17,6 +17,11 @@ define( require => {
 
     WORLD_NODE_STROKE: 'rgb( 190, 200, 150 )', // darker version of SCREEN_VIEW_BACKGROUND
 
+    GRAPHS_STROKE: 'rgb( 190, 200, 150 )', // darker version of SCREEN_VIEW_BACKGROUND
+
+    PANEL_FILL: 'white',
+    PANEL_STROKE: 'rgb( 150, 160, 110 )', // much darker version of SCREEN_VIEW_BACKGROUND
+
     ADD_A_MATE_BUTTON: PhetColorScheme.BUTTON_YELLOW,
 
     TOTAL_GRAPH_COLOR: 'black',

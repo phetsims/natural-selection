@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   // constants
@@ -47,8 +48,8 @@ define( require => {
       cornerRadius: CORNER_RADIUS,
       xMargin: PANEL_X_MARGIN,
       yMargin: PANEL_Y_MARGIN,
-      fill: 'white',
-      stroke: 'black'
+      fill: NaturalSelectionColors.PANEL_FILL,
+      stroke: NaturalSelectionColors.PANEL_STROKE
     },
 
     // RectangularPushButton

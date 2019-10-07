@@ -11,6 +11,7 @@ define( require => {
   // modules
   const HBox = require( 'SCENERY/nodes/HBox' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -36,7 +37,7 @@ define( require => {
       //TODO placeholder
       const rectangle = new Rectangle( 0, 0, width, height, {
         fill: 'white',
-        stroke: 'black'
+        stroke: NaturalSelectionColors.GRAPHS_STROKE
       } );
 
       //TODO placeholder
