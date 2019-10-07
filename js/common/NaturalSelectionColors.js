@@ -19,6 +19,7 @@ define( require => {
 
     ADD_A_MATE_BUTTON: PhetColorScheme.BUTTON_YELLOW,
 
+    TOTAL_GRAPH_COLOR: 'black',
     FUR_GRAPH_COLOR: '#1b9e77', // green
     EARS_GRAPH_COLOR: '#d95f02', // red
     TEETH_GRAPH_COLOR: '#7570b3' // purple
