@@ -70,7 +70,7 @@ define( require => {
 
     // VBox
     VBOX_OPTIONS: {
-      spacing: 8,
+      spacing: 10,
       align: 'left'
     },
 
