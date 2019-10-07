@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- *
+ * SelectionAgentsPanel is the panel that contains controls for selection agents.
+ * 
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
@@ -9,6 +10,8 @@ define( require => {
 
   // modules
   const Checkbox = require( 'SUN/Checkbox' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const Image = require( 'SCENERY/nodes/Image' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Panel = require( 'SUN/Panel' );
@@ -42,10 +45,18 @@ define( require => {
 
       const checkboxes = [];
       selectionAgents.forEach( selectionAgent => {
-        checkboxes.push( new Checkbox(
-          new Text( selectionAgent.displayName, textOptions ),
-          selectionAgent.enabledProperty,
-          NaturalSelectionConstants.CHECKBOX_OPTIONS ) );
+
+        const label = new HBox( {
+          spacing: 6,
+          children: [
+            new Text( selectionAgent.displayName, textOptions ),
+            new Image( selectionAgent.icon, { scale: 0.4 } )
+          ]
+        });
+
+        const checkbox = new Checkbox( label, selectionAgent.enabledProperty, NaturalSelectionConstants.CHECKBOX_OPTIONS );
+
+        checkboxes.push( checkbox );
       } );
 
       const content = new VBox( _.extend( {}, NaturalSelectionConstants.VBOX_OPTIONS, {

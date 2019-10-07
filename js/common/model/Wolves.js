@@ -11,13 +11,16 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const SelectionAgent = require( 'NATURAL_SELECTION/common/model/SelectionAgent' );
 
+  // images
+  const wolvesIcon = require( 'image!NATURAL_SELECTION/wolvesIcon.png' );
+
   // strings
   const wolvesString = require( 'string!NATURAL_SELECTION/wolves' );
 
   class Wolves extends SelectionAgent {
 
     constructor() {
-      super( wolvesString );
+      super( wolvesString, wolvesIcon );
     }
   }
 

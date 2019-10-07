@@ -16,11 +16,15 @@ define( require => {
 
     /**
      * @param {string} displayName - translated name, visible to the user
+     * @param {HTMLImageElement} icon - icons used to represent the selection element on UI controls
      */
-    constructor( displayName ) {
+    constructor( displayName, icon ) {
 
       // @public (read-only)
       this.displayName = displayName;
+
+      // @public (read-only)
+     this.icon = icon;
 
       // @public
       this.enabledProperty = new BooleanProperty( false );
