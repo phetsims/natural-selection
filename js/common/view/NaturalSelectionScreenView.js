@@ -69,12 +69,18 @@ define( require => {
         bottom: worldNode.bottom - NaturalSelectionConstants.WORLD_NODE_Y_MARGIN
       } );
 
+      const rightOfWorldWidth = this.layoutBounds.width - worldNode.width -
+                                 ( 2 * NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN ) -
+                                 NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
+
       const addMutationPanel = new AddMutationPanel( {
+        fixedWidth: rightOfWorldWidth,
         left: worldNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         top: worldNode.top
       } );
 
       const selectionAgentsPanel = new SelectionAgentsPanel( model.selectionAgents, {
+        fixedWidth: rightOfWorldWidth,
         left: worldNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         bottom: worldNode.bottom
       } );
@@ -82,6 +88,8 @@ define( require => {
       const graphWidth = 0.75 * worldNode.width;
       const graphHeight = this.layoutBounds.height - ( 2 * NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN ) -
                           worldNode.height - NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING;
+
+      const leftOfGraphWidth = worldNode.width - graphWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
       const populationGraphNode = new PopulationGraphNode( graphWidth, graphHeight, {
         right: worldNode.right,
@@ -92,7 +100,7 @@ define( require => {
         viewProperties.populationTotalVisibleProperty,
         viewProperties.populationValuesMarkerVisibleProperty,
         traits, {
-          //TODO maxWidth
+          fixedWidth: leftOfGraphWidth,
           maxHeight: graphHeight,
           right: populationGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
           centerY: populationGraphNode.centerY
@@ -110,7 +118,7 @@ define( require => {
       const proportionControlPanel = new ProportionControlPanel(
         viewProperties.proportionValuesVisibleProperty,
         traits, {
-          //TODO maxWidth
+          fixedWidth: leftOfGraphWidth,
           maxHeight: graphHeight,
           right: proportionGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
           centerY: proportionGraphNode.centerY
@@ -127,7 +135,7 @@ define( require => {
 
       const pedigreeControlPanel = new PedigreeControlPanel(
         alleles, {
-          //TODO maxWidth
+          fixedWidth: leftOfGraphWidth,
           maxHeight: graphHeight,
           right: pedigreeGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
           centerY: pedigreeGraphNode.centerY
@@ -138,6 +146,7 @@ define( require => {
       } );
 
       const graphRadioButtonGroup = new GraphRadioButtonGroup( viewProperties.graphProperty, {
+        maxWidth: rightOfWorldWidth,
         left: populationGraphNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         centerY: populationGraphNode.centerY
       } );

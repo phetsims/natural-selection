@@ -13,14 +13,14 @@ define( require => {
   const HSeparator = require( 'SUN/HSeparator' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const Panel = require( 'SUN/Panel' );
+  const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
   const valuesString = require( 'string!NATURAL_SELECTION/values' );
 
-  class ProportionControlPanel extends Panel {
+  class ProportionControlPanel extends NaturalSelectionPanel {
 
     /**
      * @param {Property.<boolean>} valuesVisibleProperty

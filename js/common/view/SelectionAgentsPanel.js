@@ -14,7 +14,7 @@ define( require => {
   const Image = require( 'SCENERY/nodes/Image' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const Panel = require( 'SUN/Panel' );
+  const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -22,7 +22,7 @@ define( require => {
   const selectionAgentString = require( 'string!NATURAL_SELECTION/selectionAgent' );
   const selectionAgentsString = require( 'string!NATURAL_SELECTION/selectionAgents' );
 
-  class SelectionAgentsPanel extends Panel {
+  class SelectionAgentsPanel extends NaturalSelectionPanel {
 
     /**
      * @param {SelectionAgent[]} selectionAgents

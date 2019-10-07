@@ -12,14 +12,14 @@ define( require => {
   const Checkbox = require( 'SUN/Checkbox' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const Panel = require( 'SUN/Panel' );
+  const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
   const allelesString = require( 'string!NATURAL_SELECTION/alleles' );
 
-  class PedigreeControlPanel extends Panel {
+  class PedigreeControlPanel extends NaturalSelectionPanel {
 
     /**
      * @param {{label: string, property: Property.<Boolean>}[]} alleles

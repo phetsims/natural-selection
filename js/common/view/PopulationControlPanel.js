@@ -14,7 +14,7 @@ define( require => {
   const LegendCheckbox = require( 'NATURAL_SELECTION/common/view/LegendCheckbox' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const Panel = require( 'SUN/Panel' );
+  const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -22,7 +22,7 @@ define( require => {
   const totalString = require( 'string!NATURAL_SELECTION/total' );
   const valuesMarkerString = require( 'string!NATURAL_SELECTION/valuesMarker' );
 
-  class PopulationControlPanel extends Panel {
+  class PopulationControlPanel extends NaturalSelectionPanel {
 
     /**
      * @param {Property.<boolean>} totalVisibleProperty

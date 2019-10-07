@@ -11,7 +11,7 @@ define( require => {
   // modules
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const Panel = require( 'SUN/Panel' );
+  const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -19,7 +19,7 @@ define( require => {
   // strings
   const addMutationString = require( 'string!NATURAL_SELECTION/addMutation' );
 
-  class AddMutationPanel extends Panel {
+  class AddMutationPanel extends NaturalSelectionPanel {
 
     /**
      * @param {Object} [options]
