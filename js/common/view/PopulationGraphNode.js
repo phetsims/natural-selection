@@ -9,11 +9,20 @@ define( require => {
   'use strict';
 
   // modules
+  const HBox = require( 'SCENERY/nodes/HBox' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
+  const ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
+
+  // const
+  const X_MARGIN = 5;
+  const Y_MARGIN = 5;
+  const ZOOM_BUTTON_OPTIONS = {
+    radius: 6
+  };
 
   class PopulationGraphNode extends Node {
 
@@ -36,8 +45,29 @@ define( require => {
         center: rectangle.center
       } );
 
+      const zoomInButton = new ZoomButton( _.extend( {}, ZOOM_BUTTON_OPTIONS, {
+        in: true,
+        listener: () => {
+          //TODO
+        }
+      } ) );
+
+      const zoomOutButton = new ZoomButton( _.extend( {}, ZOOM_BUTTON_OPTIONS, {
+        in: false,
+        listener: () => {
+          //TODO
+        }
+      } ) );
+
+      const zoomButtonsParent = new HBox( {
+        children: [ zoomInButton, zoomOutButton ],
+        spacing: 5,
+        left: rectangle.left + X_MARGIN,
+        top: rectangle.top + Y_MARGIN
+      } );
+
       assert && assert( !options.children, 'PopulationGraphNode sets children' );
-      options.children = [ rectangle, text ];
+      options.children = [ rectangle, zoomButtonsParent, text ];
 
       super( options );
     }

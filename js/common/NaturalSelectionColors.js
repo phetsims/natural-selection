@@ -17,7 +17,11 @@ define( require => {
 
     WORLD_NODE_STROKE: 'rgb( 190, 200, 150 )', // darker version of SCREEN_VIEW_BACKGROUND
 
-    ADD_A_MATE_BUTTON: PhetColorScheme.BUTTON_YELLOW
+    ADD_A_MATE_BUTTON: PhetColorScheme.BUTTON_YELLOW,
+
+    FUR_GRAPH_COLOR: '#1b9e77', // green
+    EARS_GRAPH_COLOR: '#d95f02', // red
+    TEETH_GRAPH_COLOR: '#7570b3' // purple
   };
 
   return naturalSelection.register( 'NaturalSelectionColors', NaturalSelectionColors );
