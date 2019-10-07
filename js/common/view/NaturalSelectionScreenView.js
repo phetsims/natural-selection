@@ -83,57 +83,63 @@ define( require => {
       const graphHeight = this.layoutBounds.height - ( 2 * NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN ) -
                           worldNode.height - NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING;
 
+      const populationGraphNode = new PopulationGraphNode( graphWidth, graphHeight, {
+        right: worldNode.right,
+        top: worldNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
+      } );
+
       const populationControlPanel = new PopulationControlPanel(
         viewProperties.populationTotalVisibleProperty,
         viewProperties.populationValuesMarkerVisibleProperty,
         traits, {
-          left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
-          top: worldNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
+          //TODO maxWidth
+          maxHeight: graphHeight,
+          right: populationGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
+          centerY: populationGraphNode.centerY
         } );
-
-      const populationGraphNode = new PopulationGraphNode( graphWidth, graphHeight, {
-        right: worldNode.right,
-        top: populationControlPanel.top
-      } );
 
       const populationParent = new Node( {
         children: [ populationControlPanel, populationGraphNode ]
       } );
 
+      const proportionGraphNode = new ProportionGraphNode( graphWidth, graphHeight, {
+        right: worldNode.right,
+        top: worldNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
+      } );
+
       const proportionControlPanel = new ProportionControlPanel(
         viewProperties.proportionValuesVisibleProperty,
         traits, {
-          left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
-          top: worldNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
+          //TODO maxWidth
+          maxHeight: graphHeight,
+          right: proportionGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
+          centerY: proportionGraphNode.centerY
         } );
-
-      const proportionGraphNode = new ProportionGraphNode( graphWidth, graphHeight, {
-        right: worldNode.right,
-        top: populationControlPanel.top
-      } );
 
       const proportionParent = new Node( {
         children: [ proportionControlPanel, proportionGraphNode ]
       } );
 
-      const pedigreeControlPanel = new PedigreeControlPanel(
-        alleles, {
-          left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
-          top: worldNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
-        } );
-
       const pedigreeGraphNode = new PedigreeGraphNode( graphWidth, graphHeight, {
         right: worldNode.right,
-        top: populationControlPanel.top
+        top: worldNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
       } );
+
+      const pedigreeControlPanel = new PedigreeControlPanel(
+        alleles, {
+          //TODO maxWidth
+          maxHeight: graphHeight,
+          right: pedigreeGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
+          centerY: pedigreeGraphNode.centerY
+        } );
 
       const pedigreeParent = new Node( {
         children: [ pedigreeControlPanel, pedigreeGraphNode ]
       } );
 
       const graphRadioButtonGroup = new GraphRadioButtonGroup( viewProperties.graphProperty, {
-        left: proportionGraphNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        centerY: proportionGraphNode.centerY
+        left: populationGraphNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        centerY: populationGraphNode.centerY
       } );
 
       const timeControlNode = new NaturalSelectionTimeControlNode( model.isPlayingProperty, {
