@@ -1,4 +1,68 @@
 {
+  "bunny-brownFur-flatEars-longTeeth.png": {
+    "text": [
+      "Copyright 2019 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Megan Lai"
+  },
+  "bunny-brownFur-flatEars-shortTeeth.png": {
+    "text": [
+      "Copyright 2019 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Megan Lai"
+  },
+  "bunny-brownFur-tallEars-longTeeth.png": {
+    "text": [
+      "Copyright 2019 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Megan Lai"
+  },
+  "bunny-brownFur-tallEars-shortTeeth.png": {
+    "text": [
+      "Copyright 2019 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Megan Lai"
+  },
+  "bunny-whiteFur-flatEars-longTeeth.png": {
+    "text": [
+      "Copyright 2019 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Megan Lai"
+  },
+  "bunny-whiteFur-flatEars-shortTeeth.png": {
+    "text": [
+      "Copyright 2019 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Megan Lai"
+  },
+  "bunny-whiteFur-tallEars-longTeeth.png": {
+    "text": [
+      "Copyright 2019 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Megan Lai"
+  },
+  "bunny-whiteFur-tallEars-shortTeeth.png": {
+    "text": [
+      "Copyright 2019 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Megan Lai"
+  },
   "toughFoodIcon.png": {
     "text": [
       "Copyright 2019 University of Colorado Boulder"
@@ -16,7 +80,7 @@
     "notes": "created by Megan Lai"
   },
   "wolvesIcon.png": {
-    "text": [
+    "text": [                                                 
       "Copyright 2019 University of Colorado Boulder"
     ],
     "projectURL": "http://phet.colorado.edu",
