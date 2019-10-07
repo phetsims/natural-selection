@@ -31,7 +31,8 @@ define( require => {
     constructor( valuesVisibleProperty, traits, options ) {
 
       options = _.extend( {
-        fixedWidth: 100
+        fixedWidth: 100,
+        xMargin: 0
       }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
       const textOptions = {
@@ -43,7 +44,7 @@ define( require => {
         valuesVisibleProperty ,
         NaturalSelectionConstants.CHECKBOX_OPTIONS );
 
-      const separator = new HSeparator( options.fixedWidth );
+      const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin );
 
       const traitLegends = [];
       traits.forEach( trait => {
