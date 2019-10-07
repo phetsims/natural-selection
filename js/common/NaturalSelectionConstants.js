@@ -33,6 +33,8 @@ define( require => {
     WORLD_NODE_X_MARGIN: 8, // margins at left and right edges of the WorldNode
     WORLD_NODE_Y_MARGIN: 8, // margins at top and bottom edges of the WorldNode
 
+    CORNER_RADIUS: CORNER_RADIUS,
+
     // Checkbox
     CHECKBOX_OPTIONS: {
       spacing: 4,
@@ -49,18 +51,6 @@ define( require => {
       stroke: 'black'
     },
 
-    // RadioButtonGroup
-    RADIO_BUTTON_GROUP_OPTIONS: {
-      orientation: 'horizontal',
-      spacing: 8,
-      cornerRadius: CORNER_RADIUS,
-      selectedLineWidth: 1.5,
-      deselectedLineWidth: 1,
-      deselectedButtonOpacity: 0.35,
-      buttonContentXMargin: 8,
-      buttonContentYMargin: 8
-    },
-
     // RectangularPushButton
     RECTANGULAR_PUSH_BUTTON_OPTIONS: {
       cornerRadius: CORNER_RADIUS,
@@ -72,13 +62,6 @@ define( require => {
     VBOX_OPTIONS: {
       spacing: 9,
       align: 'left'
-    },
-
-    // VerticalAquaRadioButtonGroup
-    VERTICAL_AQUA_RADIO_BUTTON_GROUP_OPTIONS: {
-      radius: 8,
-      xSpacing: 10,
-      spacing: 12
     },
 
     // Fonts
