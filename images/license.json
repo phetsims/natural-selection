@@ -5,7 +5,15 @@
     ],
     "projectURL": "http://phet.colorado.edu",
     "license": "contact phethelp@colorado.edu",
-    "notes": "TODO"
+    "notes": "created by Megan Lai"
+  },
+  "wolf.png": {
+    "text": [
+      "Copyright 2019 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Megan Lai"
   },
   "wolvesIcon.png": {
     "text": [
@@ -13,6 +21,6 @@
     ],
     "projectURL": "http://phet.colorado.edu",
     "license": "contact phethelp@colorado.edu",
-    "notes": "TODO"
+    "notes": "created by Megan Lai"
   }
 }
