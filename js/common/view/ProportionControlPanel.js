@@ -29,7 +29,9 @@ define( require => {
      */
     constructor( valuesVisibleProperty, traits, options ) {
 
-      options = _.extend( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
+      options = _.extend( {
+        fixedWidth: 100
+      }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
       const textOptions = {
         font: NaturalSelectionConstants.CHECKBOX_FONT
@@ -45,9 +47,7 @@ define( require => {
         traitLegends.push( new Text( trait.label, textOptions ) );
       } );
 
-      const separatorWidth = _.maxBy( [ valuesCheckbox, ...traitLegends ],
-        node => node.width ).width;
-      const separator = new HSeparator( separatorWidth );
+      const separator = new HSeparator( options.fixedWidth );
 
       const content = new VBox( _.extend( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         children: [ valuesCheckbox, separator, ...traitLegends ]

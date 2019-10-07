@@ -32,7 +32,9 @@ define( require => {
      */
     constructor( totalVisibleProperty, valuesMarkerVisibleProperty, traits, options ) {
 
-      options = _.extend( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
+      options = _.extend( {
+        fixedWidth: 100
+      }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
       const textOptions = {
         font: NaturalSelectionConstants.CHECKBOX_FONT
@@ -50,9 +52,7 @@ define( require => {
         valuesMarkerVisibleProperty,
         NaturalSelectionConstants.CHECKBOX_OPTIONS );
 
-      const separatorWidth = _.maxBy( [ totalCheckbox, ...traitCheckboxes, valuesMarkerCheckbox ],
-        node => node.width ).width;
-      const separator = new HSeparator( separatorWidth );
+      const separator = new HSeparator( options.fixedWidth );
 
       const content = new VBox( _.extend( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         children: [ totalCheckbox, ...traitCheckboxes, separator, valuesMarkerCheckbox ]
