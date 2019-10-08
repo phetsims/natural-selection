@@ -19,7 +19,7 @@ define( require => {
   const Text = require( 'SCENERY/nodes/Text' );
 
   // constants
-  const LINE_LENGTH = 25;
+  const LINE_LENGTH = 28;
 
   class PopulationCheckbox extends Checkbox {
 

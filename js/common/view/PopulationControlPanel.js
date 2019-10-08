@@ -12,6 +12,7 @@ define( require => {
   const Checkbox = require( 'SUN/Checkbox' );
   const HSeparator = require( 'SUN/HSeparator' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
   const PopulationCheckbox = require( 'NATURAL_SELECTION/common/view/PopulationCheckbox' );
@@ -38,12 +39,21 @@ define( require => {
       }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
       // Total
-      const totalCheckbox = new PopulationCheckbox( totalVisibleProperty, totalString );
+      const totalCheckbox = new PopulationCheckbox( totalVisibleProperty, totalString, {
+        lineOptions: {
+          stroke: NaturalSelectionColors.TOTAL_GRAPH_COLOR
+        }
+      } );
 
       // Checkbox for each trait
       const traitCheckboxes = [];
       traits.forEach( trait => {
-        traitCheckboxes.push( new PopulationCheckbox( trait.property, trait.label ) );
+        traitCheckboxes.push( new PopulationCheckbox( trait.property, trait.label, {
+          lineOptions: {
+            stroke: trait.color,
+            lineDash: ( trait.lineStyle === 'solid' ) ? [] : [ 3, 3 ]
+          }
+        } ) );
       } );
 
       // ------

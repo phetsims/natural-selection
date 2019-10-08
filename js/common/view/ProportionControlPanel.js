@@ -51,7 +51,12 @@ define( require => {
       // Legend for each trait
       const traitLegends = [];
       traits.forEach( trait => {
-        traitLegends.push( new ProportionLegendNode( trait.label ) );
+        traitLegends.push( new ProportionLegendNode( trait.label, {
+          rectangleOptions: {
+            fill: ( trait.lineStyle === 'solid' ) ? trait.color : null,
+            stroke: ( trait.lineStyle === 'solid' ) ? null : trait.color
+          }
+        } ) );
       } );
 
       // Arranged vertically

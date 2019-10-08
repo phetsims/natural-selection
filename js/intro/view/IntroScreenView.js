@@ -11,6 +11,7 @@ define( require => {
   // modules
   const IntroViewProperties = require( 'NATURAL_SELECTION/intro/view/IntroViewProperties' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionScreenView = require( 'NATURAL_SELECTION/common/view/NaturalSelectionScreenView' );
 
   // strings
@@ -29,8 +30,8 @@ define( require => {
       const viewProperties = new IntroViewProperties();
 
       const traits = [
-        { label: whiteFurString, property: viewProperties.populationWhiteFurVisibleProperty },
-        { label: brownFurString, property: viewProperties.populationBrownFurVisibleProperty }
+        { label: whiteFurString, property: viewProperties.populationWhiteFurVisibleProperty, color: NaturalSelectionColors.FUR_GRAPH_COLOR, lineStyle: 'solid' },
+        { label: brownFurString, property: viewProperties.populationBrownFurVisibleProperty, color: NaturalSelectionColors.FUR_GRAPH_COLOR, lineStyle: 'dashed' }
       ];
 
       const alleles = [

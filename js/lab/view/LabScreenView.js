@@ -11,6 +11,7 @@ define( require => {
   // modules
   const LabViewProperties = require( 'NATURAL_SELECTION/lab/view/LabViewProperties' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionScreenView = require( 'NATURAL_SELECTION/common/view/NaturalSelectionScreenView' );
 
   // strings
@@ -35,12 +36,12 @@ define( require => {
       const viewProperties = new LabViewProperties();
 
       const traits = [
-        { label: whiteFurString, property: viewProperties.populationWhiteFurVisibleProperty },
-        { label: brownFurString, property: viewProperties.populationBrownFurVisibleProperty },
-        { label: tallEarsString, property: viewProperties.populationTallEarsVisibleProperty },
-        { label: flatEarsString, property: viewProperties.populationFlatEarsVisibleProperty },
-        { label: shortTeethString, property: viewProperties.populationShortTeethVisibleProperty },
-        { label: longTeethString, property: viewProperties.populationLongTeethVisibleProperty }
+        { label: whiteFurString, property: viewProperties.populationWhiteFurVisibleProperty, color: NaturalSelectionColors.FUR_GRAPH_COLOR, lineStyle: 'solid' },
+        { label: brownFurString, property: viewProperties.populationBrownFurVisibleProperty, color: NaturalSelectionColors.FUR_GRAPH_COLOR, lineStyle: 'dashed' },
+        { label: tallEarsString, property: viewProperties.populationTallEarsVisibleProperty, color: NaturalSelectionColors.EARS_GRAPH_COLOR, lineStyle: 'solid' },
+        { label: flatEarsString, property: viewProperties.populationFlatEarsVisibleProperty, color: NaturalSelectionColors.EARS_GRAPH_COLOR, lineStyle: 'dashed' },
+        { label: shortTeethString, property: viewProperties.populationShortTeethVisibleProperty, color: NaturalSelectionColors.TEETH_GRAPH_COLOR, lineStyle: 'solid' },
+        { label: longTeethString, property: viewProperties.populationLongTeethVisibleProperty, color: NaturalSelectionColors.TEETH_GRAPH_COLOR, lineStyle: 'dashed' }
       ];
 
       const alleles = [
