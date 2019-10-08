@@ -7,7 +7,7 @@ This document is a high-level description of the model used in PhET's _Natural S
 
 * genotype
 * gene
-* trait
+* phenotype (observable trait)
 * mutation
 * dominant
 * recessive
