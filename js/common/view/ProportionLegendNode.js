@@ -40,7 +40,7 @@ define( require => {
       const rectangleNode = new Rectangle( 0, 0, 25, 15, options.rectangleOptions );
 
       const textNode = new Text( textString, {
-        font: NaturalSelectionConstants.CHECKBOX_FONT //TODO
+        font: NaturalSelectionConstants.CHECKBOX_FONT // use the same font that as checkbox labels
       } );
 
       assert && assert( !options.children, 'ProportionLegendNode sets children' );
