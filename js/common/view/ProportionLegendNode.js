@@ -17,9 +17,6 @@ define( require => {
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
 
-  // constants
-  const SQUARE_LENGTH = 20;
-
   class ProportionLegendNode extends HBox {
 
     /**
@@ -40,7 +37,7 @@ define( require => {
         spacing: 5
       }, options );
 
-      const rectangleNode = new Rectangle( 0, 0, SQUARE_LENGTH, SQUARE_LENGTH, options.rectangleOptions );
+      const rectangleNode = new Rectangle( 0, 0, 25, 15, options.rectangleOptions );
 
       const textNode = new Text( textString, {
         font: NaturalSelectionConstants.CHECKBOX_FONT //TODO
