@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * WorldNode is our viewport in the world of bunnies.
+ * WorldNode is our viewport into the world of bunnies.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -47,6 +47,9 @@ define( require => {
         fill: equatorGroundGradient
       } );
 
+      // Equator sky & ground
+      const equatorNode = new Node( { children: [ equatorSkyNode, equatorGroundNode ] } );
+
       // Arctic sky
       const arcticSkyGradient = new LinearGradient( 0, 0, 0, height );
       arcticSkyGradient.addColorStop( 0, 'rgb( 144, 185, 195 )' );
@@ -63,9 +66,12 @@ define( require => {
         fill: arcticGroundGradient
       } );
 
+      // Arctic sky & ground
+      const arcticNode = new Node( { children: [ arcticSkyNode, arcticGroundNode ] } );
+
       // Everything in the world, clipped to the viewport
       const worldContents = new Node( {
-        children: [ equatorSkyNode, equatorGroundNode, arcticSkyNode, arcticGroundNode ],
+        children: [ equatorNode, arcticNode ],
         clipArea: Shape.rect( 0, 0, width, height )
       } );
 
@@ -80,12 +86,8 @@ define( require => {
       super( options );
 
       climateProperty.link( climate => {
-
-        equatorSkyNode.visible = ( climate === Climates.EQUATOR );
-        equatorGroundNode.visible = ( climate === Climates.EQUATOR );
-
-        arcticSkyNode.visible = ( climate === Climates.ARCTIC );
-        arcticGroundNode.visible = ( climate === Climates.ARCTIC );
+        equatorNode.visible = ( climate === Climates.EQUATOR );
+        arcticNode.visible = ( climate === Climates.ARCTIC );
       } );
     }
   }
