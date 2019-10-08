@@ -30,7 +30,7 @@ define( require => {
      */
     constructor( property, textString, options ) {
 
-      options = merge( {}, NaturalSelectionConstants.CHECK_BOX_OPTIONS, {
+      options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
 
         // options passed to Line
         lineOptions: {
