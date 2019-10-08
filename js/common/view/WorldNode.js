@@ -15,6 +15,7 @@ define( require => {
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Shape = require( 'KITE/Shape' );
 
   class WorldNode extends Node {
 
@@ -61,13 +62,19 @@ define( require => {
         fill: arcticGroundGradient
       } );
 
-      // Frame around everything
+      // Everything in the world, clipped to the viewport
+      const worldContents = new Node( {
+        children: [ equatorSkyNode, equatorGroundNode, arcticSkyNode, arcticGroundNode ],
+        clipArea: Shape.rect( 0, 0, width, height )
+      } );
+
+      // Frame around the viewport
       const frameNode = new Rectangle( 0, 0, width, height, {
         stroke: NaturalSelectionColors.WORLD_NODE_STROKE
       } );
 
       assert && assert( !options.children, 'WorldNode sets children' );
-      options.children = [ equatorSkyNode, equatorGroundNode, arcticSkyNode, arcticGroundNode, frameNode ];
+      options.children = [ worldContents, frameNode ];
 
       super( options );
 
