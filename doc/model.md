@@ -5,6 +5,7 @@ This document is a high-level description of the model used in PhET's _Natural S
 
 ## Terminology
 
+* Mendelian Genetics
 * genotype
 * gene
 * phenotype (observable trait)
