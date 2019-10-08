@@ -17,5 +17,5 @@ This document is a high-level description of the model used in PhET's _Natural S
 * When an organism has two different copies, we can say it is heterozygous.
 
 * mutation
-* Mendelian Genetics
+* Mendelian Genetics (Gregor Mendel), https://en.wikipedia.org/wiki/Mendelian_inheritance
 
