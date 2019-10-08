@@ -26,7 +26,7 @@ define( require => {
   class GraphRadioButtonGroup extends VerticalAquaRadioButtonGroup {
 
     /**
-     * @param {EnumerationProperty} graphProperty
+     * @param {EnumerationProperty.<Graphs>} graphProperty
      * @param {Object} [options]
      */
     constructor( graphProperty, options ) {

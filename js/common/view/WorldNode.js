@@ -20,7 +20,7 @@ define( require => {
   class WorldNode extends Node {
 
     /**
-     * @param {Enumeration.<Climates>} climateProperty
+     * @param {EnumerationProperty.<Climates>} climateProperty
      * @param {number} height
      * @param {number} width
      * @param {Object} [options]

@@ -24,7 +24,7 @@ define( require => {
   class ClimateRadioButtonGroup extends RadioButtonGroup {
 
     /**
-     * @param {EnumerationProperty} climateProperty
+     * @param {EnumerationProperty.<Climates>} climateProperty
      * @param {Object} [options]
      */
     constructor( climateProperty, options ) {
