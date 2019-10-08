@@ -16,6 +16,7 @@ define( require => {
   const GraphRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/GraphRadioButtonGroup' );
   const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
   const LimitedFoodCheckbox = require( 'NATURAL_SELECTION/common/view/LimitedFoodCheckbox' );
+  const MutationComingNode = require( 'NATURAL_SELECTION/common/view/MutationComingNode' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionTimeControlNode = require( 'NATURAL_SELECTION/common/view/NaturalSelectionTimeControlNode' );
@@ -69,13 +70,16 @@ define( require => {
       } );
 
       const addAMateButton = new AddAMateButton( {
-        listener: () => {
-          this.addAMateButton.visible = false;
-          this.generationClockNode.visible = true;
-          //TODO
-        },
+        listener: () => this.addAMate(),
         centerX: viewportNode.centerX,
-        bottom: viewportNode.bottom - 30 // determined empirically
+        bottom: viewportNode.bottom - NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
+      } );
+
+      const mutationComingNode = new MutationComingNode( {
+        cancelButtonListener: () => this.cancelMutation(),
+        visible: false,
+        centerX: viewportNode.centerX,
+        bottom: viewportNode.bottom - NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
 
       const rightOfWorldWidth = this.layoutBounds.width - viewportNode.width -
@@ -183,6 +187,7 @@ define( require => {
         generationClockNode,
         climateRadioButtonGroup,
         addAMateButton,
+        mutationComingNode,
         addMutationPanel,
         selectionAgentsPanel,
         timeControlNode,
@@ -194,8 +199,9 @@ define( require => {
       ];
 
       // @private
-      this.addAMateButton = addAMateButton;
       this.generationClockNode = generationClockNode;
+      this.addAMateButton = addAMateButton;
+      this.mutationComingNode = mutationComingNode;
 
       viewProperties.graphProperty.link( graph => {
         populationParent.visible = ( graph === Graphs.POPULATION );
@@ -208,8 +214,9 @@ define( require => {
      * @public
      */
     reset() {
-      this.addAMateButton.visible = true;
       this.generationClockNode.visible = false;
+      this.addAMateButton.visible = true;
+      this.mutationComingNode.visible = false;
       //TODO
     }
 
@@ -218,6 +225,26 @@ define( require => {
      * @public
      */
     step( dt ) {
+      //TODO
+    }
+
+    /**
+     * Adds a mate.
+     * @private
+     */
+    addAMate() {
+      this.addAMateButton.visible = false;
+      this.generationClockNode.visible = true;
+      this.mutationComingNode.visible = true; //TODO not correct, just for testing
+      //TODO
+    }
+
+    /**
+     * Cancels a scheduled mutation.
+     * @private
+     */
+    cancelMutation() {
+      this.mutationComingNode.visible = false;
       //TODO
     }
   }

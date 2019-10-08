@@ -82,5 +82,11 @@
   },
   "recessive": {
     "value": "Recessive"
+  },
+  "mutationComing": {
+    "value": "Mutation Coming ..."
+  },
+  "cancel": {
+    "value": "Cancel"
   }
 }
