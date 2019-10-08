@@ -30,9 +30,9 @@ define( require => {
     SCREEN_VIEW_X_SPACING: 15, // horizontal spacing between UI components in the ScreenView
     SCREEN_VIEW_Y_SPACING: 15, // vertical spacing between UI components in the ScreenView
 
-    // WorldNode
-    WORLD_NODE_X_MARGIN: 8, // margins at left and right edges of the WorldNode
-    WORLD_NODE_Y_MARGIN: 8, // margins at top and bottom edges of the WorldNode
+    // ViewportNode
+    VIEWPORT_NODE_X_MARGIN: 8, // margins at left and right edges of the viewport
+    VIEWPORT_NODE_Y_MARGIN: 8, // margins at top and bottom edges of the viewport
 
     CORNER_RADIUS: CORNER_RADIUS,
 

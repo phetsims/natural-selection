@@ -28,7 +28,7 @@ define( require => {
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const SelectionAgentsPanel = require( 'NATURAL_SELECTION/common/view/SelectionAgentsPanel' );
   const ScreenView = require( 'JOIST/ScreenView' );
-  const WorldNode = require( 'NATURAL_SELECTION/common/view/WorldNode' );
+  const ViewportNode = require( 'NATURAL_SELECTION/common/view/ViewportNode' );
 
   class NaturalSelectionScreenView extends ScreenView {
 
@@ -45,20 +45,20 @@ define( require => {
         tandem: tandem
       } );
 
-      const worldNode = new WorldNode( model.climateProperty,
+      const viewportNode = new ViewportNode( model.climateProperty,
         0.75 * this.layoutBounds.width, 0.5 * this.layoutBounds.height, {
           left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
         } );
 
       const limitedFoodCheckbox = new LimitedFoodCheckbox( model.limitFoodProperty, {
-        left: worldNode.left + NaturalSelectionConstants.WORLD_NODE_X_MARGIN,
-        top: worldNode.top + NaturalSelectionConstants.WORLD_NODE_Y_MARGIN
+        left: viewportNode.left + NaturalSelectionConstants.VIEWPORT_NODE_X_MARGIN,
+        top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
 
       const climateRadioButtonGroup = new ClimateRadioButtonGroup( model.climateProperty, {
-        right: worldNode.right - NaturalSelectionConstants.WORLD_NODE_X_MARGIN,
-        top: worldNode.top + NaturalSelectionConstants.WORLD_NODE_Y_MARGIN
+        right: viewportNode.right - NaturalSelectionConstants.VIEWPORT_NODE_X_MARGIN,
+        top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
 
       const addAMateButton = new AddAMateButton( {
@@ -66,35 +66,35 @@ define( require => {
           this.addAMateButton.visible = false;
           //TODO
         },
-        centerX: worldNode.centerX,
-        bottom: worldNode.bottom - 30 // determined empirically
+        centerX: viewportNode.centerX,
+        bottom: viewportNode.bottom - 30 // determined empirically
       } );
 
-      const rightOfWorldWidth = this.layoutBounds.width - worldNode.width -
+      const rightOfWorldWidth = this.layoutBounds.width - viewportNode.width -
                                  ( 2 * NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN ) -
                                  NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
       const addMutationPanel = new AddMutationPanel( {
         fixedWidth: rightOfWorldWidth,
-        left: worldNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        top: worldNode.top
+        left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        top: viewportNode.top
       } );
 
       const selectionAgentsPanel = new SelectionAgentsPanel( model.selectionAgents, {
         fixedWidth: rightOfWorldWidth,
-        left: worldNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        bottom: worldNode.bottom
+        left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        bottom: viewportNode.bottom
       } );
 
-      const graphWidth = 0.75 * worldNode.width;
+      const graphWidth = 0.75 * viewportNode.width;
       const graphHeight = this.layoutBounds.height - ( 2 * NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN ) -
-                          worldNode.height - NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING;
+                          viewportNode.height - NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING;
 
-      const leftOfGraphWidth = worldNode.width - graphWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
+      const leftOfGraphWidth = viewportNode.width - graphWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
       const populationGraphNode = new PopulationGraphNode( graphWidth, graphHeight, {
-        right: worldNode.right,
-        top: worldNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
+        right: viewportNode.right,
+        top: viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
       } );
 
       const populationControlPanel = new PopulationControlPanel(
@@ -112,8 +112,8 @@ define( require => {
       } );
 
       const proportionGraphNode = new ProportionGraphNode( graphWidth, graphHeight, {
-        right: worldNode.right,
-        top: worldNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
+        right: viewportNode.right,
+        top: viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
       } );
 
       const proportionControlPanel = new ProportionControlPanel(
@@ -130,8 +130,8 @@ define( require => {
       } );
 
       const pedigreeGraphNode = new PedigreeGraphNode( graphWidth, graphHeight, {
-        right: worldNode.right,
-        top: worldNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
+        right: viewportNode.right,
+        top: viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
       } );
 
       const pedigreeControlPanel = new PedigreeControlPanel(
@@ -170,7 +170,7 @@ define( require => {
 
       // layering
       this.children = [
-        worldNode,
+        viewportNode,
         limitedFoodCheckbox,
         climateRadioButtonGroup,
         addAMateButton,

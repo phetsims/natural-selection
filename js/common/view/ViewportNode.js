@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * WorldNode is our viewport into the world of bunnies.
+ * ViewportNode is our viewport into the world of bunnies.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -17,7 +17,7 @@ define( require => {
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
 
-  class WorldNode extends Node {
+  class ViewportNode extends Node {
 
     /**
      * @param {EnumerationProperty.<Climates>} climateProperty
@@ -80,7 +80,7 @@ define( require => {
         stroke: NaturalSelectionColors.WORLD_NODE_STROKE
       } );
 
-      assert && assert( !options.children, 'WorldNode sets children' );
+      assert && assert( !options.children, 'ViewportNode sets children' );
       options.children = [ worldContents, frameNode ];
 
       super( options );
@@ -92,5 +92,5 @@ define( require => {
     }
   }
 
-  return naturalSelection.register( 'WorldNode', WorldNode );
+  return naturalSelection.register( 'ViewportNode', ViewportNode );
 } );
