@@ -25,7 +25,7 @@ define( require => {
 
       const selectionAgents = [ new Wolves() ];
 
-      super(selectionAgents);
+      super( selectionAgents );
     }
 
     /**
