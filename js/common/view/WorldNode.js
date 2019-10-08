@@ -9,6 +9,8 @@ define( require => {
   'use strict';
 
   // modules
+  const Climates = require( 'NATURAL_SELECTION/common/model/Climates' );
+  const LinearGradient = require( 'SCENERY/util/LinearGradient' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -17,22 +19,66 @@ define( require => {
   class WorldNode extends Node {
 
     /**
-     * @param {number} width
+     * @param {Enumeration.<Climates>} climateProperty
      * @param {number} height
+     * @param {number} width
      * @param {Object} [options]
      */
-    constructor( width, height, options ) {
+    constructor( climateProperty, width, height, options ) {
 
-      //TODO placeholder
-      const rectangle = new Rectangle( 0, 0, width, height, {
-        fill: 'white',
+      const skyLineRatio = 0.25;
+      const groundHeight = ( 1 - skyLineRatio ) * height;
+
+      // Equator sky
+      const equatorSkyGradient = new LinearGradient( 0, 0, 0, height );
+      equatorSkyGradient.addColorStop( 0, 'rgb( 174, 224, 234 )' );
+      equatorSkyGradient.addColorStop( skyLineRatio, 'rgb( 133, 190, 210 )' );
+      const equatorSkyNode = new Rectangle( 0, 0, width, height, {
+        fill: equatorSkyGradient
+      } );
+
+      // Equator ground
+      const equatorGroundGradient = new LinearGradient( 0, height - groundHeight, 0, groundHeight );
+      equatorGroundGradient.addColorStop( 0, 'rgb( 140, 105, 65 )' );
+      equatorGroundGradient.addColorStop( 1, 'rgb( 195, 148, 98 )' );
+      const equatorGroundNode = new Rectangle( 0, height - groundHeight, width, groundHeight, {
+        fill: equatorGroundGradient
+      } );
+
+      // Arctic sky
+      const arcticSkyGradient = new LinearGradient( 0, 0, 0, height );
+      arcticSkyGradient.addColorStop( 0, 'rgb( 144, 185, 195 )' );
+      arcticSkyGradient.addColorStop( 0.3, 'rgb( 102, 150, 175 )' );
+      const arcticSkyNode = new Rectangle( 0, 0, width, height, {
+        fill: arcticSkyGradient
+      } );
+
+      // Arctic ground
+      const arcticGroundGradient = new LinearGradient( 0, height - groundHeight, 0, groundHeight );
+      arcticGroundGradient.addColorStop( 0, 'rgb( 192, 215, 226 )' );
+      arcticGroundGradient.addColorStop( 1, 'rgb( 238, 249, 254 )' );
+      const arcticGroundNode = new Rectangle( 0, height - groundHeight, width, groundHeight, {
+        fill: arcticGroundGradient
+      } );
+
+      // Frame around everything
+      const frameNode = new Rectangle( 0, 0, width, height, {
         stroke: NaturalSelectionColors.WORLD_NODE_STROKE
       } );
 
       assert && assert( !options.children, 'WorldNode sets children' );
-      options.children = [ rectangle ];
+      options.children = [ equatorSkyNode, equatorGroundNode, arcticSkyNode, arcticGroundNode, frameNode ];
 
       super( options );
+
+      climateProperty.link( climate => {
+
+        equatorSkyNode.visible = ( climate === Climates.EQUATOR );
+        equatorGroundNode.visible = ( climate === Climates.EQUATOR );
+
+        arcticSkyNode.visible = ( climate === Climates.ARCTIC );
+        arcticGroundNode.visible = ( climate === Climates.ARCTIC );
+      } );
     }
   }
 

@@ -33,7 +33,8 @@ define( require => {
         orientation: 'horizontal',
         spacing: 8,
         cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
-        selectedLineWidth: 2,
+        selectedStroke: 'rgb( 254, 225, 5 )',
+        selectedLineWidth: 5,
         deselectedLineWidth: 1,
         deselectedButtonOpacity: 0.2,
 

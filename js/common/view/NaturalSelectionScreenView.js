@@ -45,10 +45,11 @@ define( require => {
         tandem: tandem
       } );
 
-      const worldNode = new WorldNode( 0.75 * this.layoutBounds.width, 0.5 * this.layoutBounds.height, {
-        left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
-        top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
-      } );
+      const worldNode = new WorldNode( model.climateProperty,
+        0.75 * this.layoutBounds.width, 0.5 * this.layoutBounds.height, {
+          left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
+          top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
+        } );
 
       const limitedFoodCheckbox = new LimitedFoodCheckbox( model.limitFoodProperty, {
         left: worldNode.left + NaturalSelectionConstants.WORLD_NODE_X_MARGIN,
