@@ -12,6 +12,7 @@ define( require => {
   const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
   const AddMutationPanel = require( 'NATURAL_SELECTION/common/view/AddMutationPanel' );
   const ClimateRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/ClimateRadioButtonGroup' );
+  const GenerationClockNode = require( 'NATURAL_SELECTION/common/view/GenerationClockNode' );
   const GraphRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/GraphRadioButtonGroup' );
   const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
   const LimitedFoodCheckbox = require( 'NATURAL_SELECTION/common/view/LimitedFoodCheckbox' );
@@ -56,6 +57,12 @@ define( require => {
         top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
 
+      const generationClockNode = new GenerationClockNode( {
+        visible: false, // invisible until 'Add a Mate' button is pressed
+        centerX: viewportNode.centerX,
+        top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
+      } );
+
       const climateRadioButtonGroup = new ClimateRadioButtonGroup( model.climateProperty, {
         right: viewportNode.right - NaturalSelectionConstants.VIEWPORT_NODE_X_MARGIN,
         top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
@@ -64,6 +71,7 @@ define( require => {
       const addAMateButton = new AddAMateButton( {
         listener: () => {
           this.addAMateButton.visible = false;
+          this.generationClockNode.visible = true;
           //TODO
         },
         centerX: viewportNode.centerX,
@@ -172,6 +180,7 @@ define( require => {
       this.children = [
         viewportNode,
         limitedFoodCheckbox,
+        generationClockNode,
         climateRadioButtonGroup,
         addAMateButton,
         addMutationPanel,
@@ -186,6 +195,7 @@ define( require => {
 
       // @private
       this.addAMateButton = addAMateButton;
+      this.generationClockNode = generationClockNode;
 
       viewProperties.graphProperty.link( graph => {
         populationParent.visible = ( graph === Graphs.POPULATION );
@@ -199,6 +209,7 @@ define( require => {
      */
     reset() {
       this.addAMateButton.visible = true;
+      this.generationClockNode.visible = false;
       //TODO
     }
 
