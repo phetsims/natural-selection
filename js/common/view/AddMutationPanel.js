@@ -9,12 +9,17 @@ define( require => {
   'use strict';
 
   // modules
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const Image = require( 'SCENERY/nodes/Image' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
+
+  // images
+  const mutationIcon = require( 'image!NATURAL_SELECTION/mutationIcon.png' );
 
   // strings
   const addMutationString = require( 'string!NATURAL_SELECTION/addMutation' );
@@ -27,9 +32,15 @@ define( require => {
     constructor( options ) {
 
       options = _.extend( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
-
-      const titleNode = new Text( addMutationString, {
-        font: NaturalSelectionConstants.TITLE_FONT
+      
+      // title is text + icon
+      const titleNode = new HBox( {
+        spacing: 4,
+        align: 'center',
+        children: [
+          new Text( addMutationString, { font: NaturalSelectionConstants.TITLE_FONT } ),
+          new Image( mutationIcon, { scale: 0.75 } )
+        ]
       } );
 
       //TODO placeholder
