@@ -9,12 +9,26 @@ define( require => {
   'use strict';
 
   // modules
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const Image = require( 'SCENERY/nodes/Image' );
   const LabModel = require( 'NATURAL_SELECTION/lab/model/LabModel' );
   const LabScreenView = require( 'NATURAL_SELECTION/lab/view/LabScreenView' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const Property = require( 'AXON/Property' );
   const Screen = require( 'JOIST/Screen' );
+  const ScreenIcon = require( 'JOIST/ScreenIcon' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
+
+  // images
+  const brownBunnyImage1 = require( 'image!NATURAL_SELECTION/bunny-brownFur-tallEars-shortTeeth.png' );
+  const brownBunnyImage2 = require( 'image!NATURAL_SELECTION/bunny-brownFur-flatEars-shortTeeth.png' );
+  const brownBunnyImage3 = require( 'image!NATURAL_SELECTION/bunny-brownFur-tallEars-longTeeth.png' );
+  const brownBunnyImage4 = require( 'image!NATURAL_SELECTION/bunny-brownFur-flatEars-longTeeth.png' );
+  const whiteBunnyImage1 = require( 'image!NATURAL_SELECTION/bunny-whiteFur-tallEars-shortTeeth.png' );
+  const whiteBunnyImage2 = require( 'image!NATURAL_SELECTION/bunny-whiteFur-flatEars-shortTeeth.png' );
+  const whiteBunnyImage3 = require( 'image!NATURAL_SELECTION/bunny-whiteFur-tallEars-longTeeth.png' );
+  const whiteBunnyImage4 = require( 'image!NATURAL_SELECTION/bunny-whiteFur-flatEars-longTeeth.png' );
 
   // strings
   const screenLabString = require( 'string!NATURAL_SELECTION/screen.lab' );
@@ -29,6 +43,7 @@ define( require => {
       const options = {
         name: screenLabString,
         backgroundColorProperty: new Property( NaturalSelectionColors.SCREEN_VIEW_BACKGROUND ),
+        homeScreenIcon: createScreenIcon(),
         tandem: tandem
       };
 
@@ -38,6 +53,41 @@ define( require => {
         options
       );
     }
+  }
+
+  /**
+   * Creates the icon for this screen.
+   * @returns {ScreenIcon}
+   */
+  function createScreenIcon() {
+
+    const SPACING = 20;
+
+    return new ScreenIcon( new VBox( {
+      spacing: SPACING,
+      children: [
+        
+        // row 1
+        new HBox( {
+          spacing: SPACING,
+          children: [
+            new Image( brownBunnyImage1 ), new Image( whiteBunnyImage1 ),
+            new Image( brownBunnyImage2 ), new Image( whiteBunnyImage2 )
+          ]
+        } ),
+
+        // row 2
+        new HBox( {
+          spacing: SPACING,
+          children: [
+            new Image( whiteBunnyImage3 ), new Image( brownBunnyImage3 ),
+            new Image( whiteBunnyImage4 ), new Image( brownBunnyImage4 )
+          ]
+        } )
+      ]
+    } ), {
+      fill: NaturalSelectionColors.SCREEN_VIEW_BACKGROUND
+    } );
   }
 
   return naturalSelection.register( 'LabScreen', LabScreen );
