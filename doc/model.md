@@ -12,6 +12,10 @@ This document is a high-level description of the model used in PhET's _Natural S
 * dominant trait - With dominant traits, an individual carries either two dominant genes or one dominant and one recessive gene. A dominant gene can be expressed even if only one copy of the gene is present.
 * recessive trait - A recessive trait will only be expressed if an individual has two recessive alleles.
 
+* A dominant allele hides a recessive allele and determines the organism's appearance.
+* When an organism has two copies of the same allele, it is said to be homozygous for that gene. 
+* When an organism has two different copies, we can say it is heterozygous.
+
 * mutation
 * Mendelian Genetics
 
