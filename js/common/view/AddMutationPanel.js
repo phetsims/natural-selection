@@ -10,10 +10,12 @@ define( require => {
 
   // modules
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const HStrut = require( 'SCENERY/nodes/HStrut' );
   const Image = require( 'SCENERY/nodes/Image' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -23,6 +25,11 @@ define( require => {
 
   // strings
   const addMutationString = require( 'string!NATURAL_SELECTION/addMutation' );
+  const dominantString = require( 'string!NATURAL_SELECTION/dominant' );
+  const recessiveString = require( 'string!NATURAL_SELECTION/recessive' );
+
+  // constants
+  const COLUMN_HEADING_FONT = new PhetFont( 12 );
 
   class AddMutationPanel extends NaturalSelectionPanel {
 
@@ -43,11 +50,21 @@ define( require => {
         ]
       } );
 
+      // Column headings
+      const columnHeadingsNode = new HBox( {
+        spacing: 6,
+        children: [
+          new HStrut( 50 ),
+          new Text( dominantString, { font: COLUMN_HEADING_FONT } ),
+          new Text( recessiveString, { font: COLUMN_HEADING_FONT } )
+        ]
+      } );
+
       //TODO placeholder
-      const rectangle = new Rectangle( 0, 0, 175, 100 );
+      const rectangle = new Rectangle( 0, 0, 175, 75 );
 
       const content = new VBox( _.extend( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-        children: [ titleNode, rectangle ]
+        children: [ titleNode, columnHeadingsNode, rectangle ]
       } ) );
 
       super( content, options );

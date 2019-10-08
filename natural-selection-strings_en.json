@@ -76,5 +76,11 @@
   },
   "alleles": {
     "value": "Alleles"
+  },
+  "dominant": {
+    "value": "Dominant"
+  },
+  "recessive": {
+    "value": "Recessive"
   }
 }
