@@ -29,22 +29,21 @@ define( require => {
 
       options = _.extend( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
+      // Alleles title
       const titleNode = new Text( allelesString, {
         font: NaturalSelectionConstants.TITLE_FONT
       } );
 
-      const textOptions = {
-        font: NaturalSelectionConstants.CHECKBOX_FONT
-      };
-
+      // Checkbox for each pair of alleles
       const checkboxes = [];
       alleles.forEach( allele => {
         checkboxes.push( new Checkbox(
-          new Text( allele.label, textOptions ),
+          new Text( allele.label, { font: NaturalSelectionConstants.CHECKBOX_FONT } ),
           allele.property,
           NaturalSelectionConstants.CHECKBOX_OPTIONS ) );
       } );
 
+      // Arranged vertically
       const content = new VBox( _.extend( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         children: [ titleNode, ...checkboxes ]
       } ) );

@@ -37,24 +37,25 @@ define( require => {
         xMargin: 0
       }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
-      const textOptions = {
-        font: NaturalSelectionConstants.CHECKBOX_FONT
-      };
-
+      // Total
       const totalCheckbox = new PopulationCheckbox( totalVisibleProperty, totalString );
 
+      // Checkbox for each trait
       const traitCheckboxes = [];
       traits.forEach( trait => {
         traitCheckboxes.push( new PopulationCheckbox( trait.property, trait.label ) );
       } );
 
+      // ------
+      const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin );
+
+      // Values Marker
       const valuesMarkerCheckbox = new Checkbox(
-        new Text( valuesMarkerString, textOptions ),
+        new Text( valuesMarkerString, { font: NaturalSelectionConstants.CHECKBOX_FONT } ),
         valuesMarkerVisibleProperty,
         NaturalSelectionConstants.CHECKBOX_OPTIONS );
 
-      const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin );
-
+      // Arranged vertically
       const content = new VBox( _.extend( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         children: [ totalCheckbox, ...traitCheckboxes, separator, valuesMarkerCheckbox ]
       } ) );

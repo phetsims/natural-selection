@@ -39,18 +39,22 @@ define( require => {
         font: NaturalSelectionConstants.CHECKBOX_FONT
       };
 
+      // Values
       const valuesCheckbox = new Checkbox(
         new Text( valuesString, textOptions ),
         valuesVisibleProperty ,
         NaturalSelectionConstants.CHECKBOX_OPTIONS );
 
+      // ------
       const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin );
 
+      // Legend for each trait
       const traitLegends = [];
       traits.forEach( trait => {
         traitLegends.push( new ProportionLegendNode( trait.label ) );
       } );
 
+      // Arranged vertically
       const content = new VBox( _.extend( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         children: [ valuesCheckbox, separator, ...traitLegends ]
       } ) );
