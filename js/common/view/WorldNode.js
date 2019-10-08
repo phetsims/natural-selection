@@ -27,13 +27,14 @@ define( require => {
      */
     constructor( climateProperty, width, height, options ) {
 
-      const skyLineRatio = 0.25;
-      const groundHeight = ( 1 - skyLineRatio ) * height;
+      const skyPercentage = 0.25; // what percentage of the viewport is sky
+      
+      const groundHeight = ( 1 - skyPercentage ) * height;
 
       // Equator sky
       const equatorSkyGradient = new LinearGradient( 0, 0, 0, height );
       equatorSkyGradient.addColorStop( 0, 'rgb( 174, 224, 234 )' );
-      equatorSkyGradient.addColorStop( skyLineRatio, 'rgb( 133, 190, 210 )' );
+      equatorSkyGradient.addColorStop( skyPercentage, 'rgb( 133, 190, 210 )' );
       const equatorSkyNode = new Rectangle( 0, 0, width, height, {
         fill: equatorSkyGradient
       } );
