@@ -11,6 +11,7 @@ define( require => {
   // modules
   const Checkbox = require( 'SUN/Checkbox' );
   const HSeparator = require( 'SUN/HSeparator' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
@@ -30,7 +31,7 @@ define( require => {
      */
     constructor( valuesVisibleProperty, traits, options ) {
 
-      options = _.extend( {
+      options = merge( {
         fixedWidth: 100,
         xMargin: 0
       }, NaturalSelectionConstants.PANEL_OPTIONS, options );
@@ -60,7 +61,7 @@ define( require => {
       } );
 
       // Arranged vertically
-      const content = new VBox( _.extend( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+      const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         children: [ valuesCheckbox, separator, ...traitLegends ]
       } ) );
 

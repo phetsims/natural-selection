@@ -12,6 +12,7 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const Image = require( 'SCENERY/nodes/Image' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
@@ -38,7 +39,7 @@ define( require => {
      */
     constructor( options ) {
 
-      options = _.extend( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
+      options = merge( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
       
       // title is text + icon
       const titleNode = new HBox( {
@@ -63,7 +64,7 @@ define( require => {
       //TODO placeholder
       const rectangle = new Rectangle( 0, 0, 175, 75 );
 
-      const content = new VBox( _.extend( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+      const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         children: [ titleNode, columnHeadingsNode, rectangle ]
       } ) );
 

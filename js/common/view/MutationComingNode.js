@@ -12,6 +12,7 @@ define( require => {
   // modules
   const HBox = require( 'SCENERY/nodes/HBox' );
   const Image = require( 'SCENERY/nodes/Image' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
@@ -38,7 +39,7 @@ define( require => {
      */
     constructor( options ) {
 
-      options = _.extend( {
+      options = merge( {
         cancelButtonListener: null
       }, options );
 
@@ -46,7 +47,7 @@ define( require => {
 
       const textNode = new Text( mutationComingString, { font: NaturalSelectionConstants.TEXT_FONT } );
 
-      const cancelButton = new RectangularPushButton( _.extend( {},
+      const cancelButton = new RectangularPushButton( merge( {},
         NaturalSelectionConstants.RECTANGULAR_PUSH_BUTTON_OPTIONS, {
           baseColor: NaturalSelectionColors.CANCEL_BUTTON,
           content: new Text( cancelString, { font: NaturalSelectionConstants.PUSH_BUTTON_FONT } ),

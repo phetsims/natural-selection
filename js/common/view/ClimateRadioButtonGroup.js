@@ -11,6 +11,7 @@ define( require => {
   // modules
   const Climates = require( 'NATURAL_SELECTION/common/model/Climates' );
   const FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -29,7 +30,7 @@ define( require => {
      */
     constructor( climateProperty, options ) {
 
-      options = _.extend( {
+      options = merge( {
         orientation: 'horizontal',
         spacing: 8,
         cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,

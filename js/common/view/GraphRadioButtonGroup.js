@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -31,7 +32,7 @@ define( require => {
      */
     constructor( graphProperty, options ) {
 
-      options = _.extend( {
+      options = merge( {
         radius: 8,
         xSpacing: 10,
         spacing: 12

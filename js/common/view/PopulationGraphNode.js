@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
@@ -46,14 +47,14 @@ define( require => {
         center: rectangle.center
       } );
 
-      const zoomInButton = new ZoomButton( _.extend( {}, ZOOM_BUTTON_OPTIONS, {
+      const zoomInButton = new ZoomButton( merge( {}, ZOOM_BUTTON_OPTIONS, {
         in: true,
         listener: () => {
           //TODO
         }
       } ) );
 
-      const zoomOutButton = new ZoomButton( _.extend( {}, ZOOM_BUTTON_OPTIONS, {
+      const zoomOutButton = new ZoomButton( merge( {}, ZOOM_BUTTON_OPTIONS, {
         in: false,
         listener: () => {
           //TODO

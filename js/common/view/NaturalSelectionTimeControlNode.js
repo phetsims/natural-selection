@@ -10,6 +10,7 @@ define( require => {
   'use strict';
 
   // modules
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
 
@@ -21,7 +22,7 @@ define( require => {
      */
     constructor( isPlayingProperty, options ) {
 
-      options = _.extend( {
+      options = merge( {
         //TODO
       }, options );
 

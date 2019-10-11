@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const Checkbox = require( 'SUN/Checkbox' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -25,7 +26,7 @@ define( require => {
      */
     constructor( limitedFoodProperty, options ) {
 
-      options = _.extend( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
+      options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 
       const content = new Text( limitedFoodString, {
         font: NaturalSelectionConstants.CHECKBOX_FONT

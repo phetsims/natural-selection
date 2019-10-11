@@ -10,6 +10,7 @@ define( require => {
   'use strict';
 
   // modules
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const Panel = require( 'SUN/Panel' );
 
@@ -21,7 +22,7 @@ define( require => {
      */
     constructor( content, options ) {
 
-      options = _.extend( {
+      options = merge( {
         fixedWidth: null // {number|null} optional fixed width
       }, options );
 

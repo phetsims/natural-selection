@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const Checkbox = require( 'SUN/Checkbox' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
@@ -27,7 +28,7 @@ define( require => {
      */
     constructor( alleles, options ) {
 
-      options = _.extend( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
+      options = merge( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
       // Alleles title
       const titleNode = new Text( allelesString, {
@@ -44,7 +45,7 @@ define( require => {
       } );
 
       // Arranged vertically
-      const content = new VBox( _.extend( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+      const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         children: [ titleNode, ...checkboxes ]
       } ) );
 
