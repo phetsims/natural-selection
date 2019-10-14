@@ -9,7 +9,7 @@ define( require => {
   'use strict';
 
   // modules
-  const Climates = require( 'NATURAL_SELECTION/common/model/Climates' );
+  const AbioticEnvironments = require( 'NATURAL_SELECTION/common/model/AbioticEnvironments' );
   const LinearGradient = require( 'SCENERY/util/LinearGradient' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
@@ -20,12 +20,12 @@ define( require => {
   class ViewportNode extends Node {
 
     /**
-     * @param {EnumerationProperty.<Climates>} climateProperty
+     * @param {EnumerationProperty.<AbioticEnvironments>} environmentProperty
      * @param {number} height
      * @param {number} width
      * @param {Object} [options]
      */
-    constructor( climateProperty, width, height, options ) {
+    constructor( environmentProperty, width, height, options ) {
 
       const skyPercentage = 0.25; // what percentage of the viewport is sky
       
@@ -85,9 +85,9 @@ define( require => {
 
       super( options );
 
-      climateProperty.link( climate => {
-        equatorNode.visible = ( climate === Climates.EQUATOR );
-        arcticNode.visible = ( climate === Climates.ARCTIC );
+      environmentProperty.link( climate => {
+        equatorNode.visible = ( climate === AbioticEnvironments.EQUATOR );
+        arcticNode.visible = ( climate === AbioticEnvironments.ARCTIC );
       } );
     }
   }

@@ -9,8 +9,8 @@ define( require => {
   'use strict';
 
   // modules
+  const AbioticEnvironments = require( 'NATURAL_SELECTION/common/model/AbioticEnvironments' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const Climates = require( 'NATURAL_SELECTION/common/model/Climates' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
 
@@ -30,8 +30,8 @@ define( require => {
       // @public when true, the food supply is limited
       this.limitFoodProperty = new BooleanProperty( false );
 
-      // @public the climate where the simulation is taking place
-      this.climateProperty = new EnumerationProperty( Climates, Climates.EQUATOR );
+      // @public the abiotic environment where the simulation is taking place
+      this.abioticEnvironmentProperty = new EnumerationProperty( AbioticEnvironments, AbioticEnvironments.EQUATOR );
     }
 
     /**
@@ -41,7 +41,7 @@ define( require => {
       this.selectionAgents.forEach( selectionAgent => selectionAgent.reset() );
       this.isPlayingProperty.reset();
       this.limitFoodProperty.reset();
-      this.climateProperty.reset();
+      this.abioticEnvironmentProperty.reset();
     }
 
     /**

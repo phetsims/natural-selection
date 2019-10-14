@@ -9,9 +9,9 @@ define( require => {
   'use strict';
 
   // modules
+  const AbioticEnvironmentRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/AbioticEnvironmentRadioButtonGroup' );
   const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
   const AddMutationPanel = require( 'NATURAL_SELECTION/common/view/AddMutationPanel' );
-  const ClimateRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/ClimateRadioButtonGroup' );
   const GenerationClockNode = require( 'NATURAL_SELECTION/common/view/GenerationClockNode' );
   const GraphRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/GraphRadioButtonGroup' );
   const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
@@ -47,7 +47,7 @@ define( require => {
         tandem: tandem
       } );
 
-      const viewportNode = new ViewportNode( model.climateProperty,
+      const viewportNode = new ViewportNode( model.abioticEnvironmentProperty,
         0.75 * this.layoutBounds.width, 0.5 * this.layoutBounds.height, {
           left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
@@ -64,7 +64,7 @@ define( require => {
         top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
 
-      const climateRadioButtonGroup = new ClimateRadioButtonGroup( model.climateProperty, {
+      const abioticEnvironmentRadioButtonGroup = new AbioticEnvironmentRadioButtonGroup( model.abioticEnvironmentProperty, {
         right: viewportNode.right - NaturalSelectionConstants.VIEWPORT_NODE_X_MARGIN,
         top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
@@ -185,7 +185,7 @@ define( require => {
         viewportNode,
         limitedFoodCheckbox,
         generationClockNode,
-        climateRadioButtonGroup,
+        abioticEnvironmentRadioButtonGroup,
         addAMateButton,
         mutationComingNode,
         addMutationPanel,

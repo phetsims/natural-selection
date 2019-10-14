@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ClimateRadioButtonGroup is the radio button group for choosing a climate.
+ * AbioticEnvironmentRadioButtonGroup is the radio button group for choosing the abiotic component of the
+ * enviroment. See AbioticEnvironments.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,7 +10,7 @@ define( require => {
   'use strict';
 
   // modules
-  const Climates = require( 'NATURAL_SELECTION/common/model/Climates' );
+  const AbioticEnvironments = require( 'NATURAL_SELECTION/common/model/AbioticEnvironments' );
   const FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -22,13 +23,13 @@ define( require => {
   const ICON_X_MARGIN = 8;
   const ICON_Y_MARGIN = 6;
 
-  class ClimateRadioButtonGroup extends RadioButtonGroup {
+  class AbioticEnvironmentRadioButtonGroup extends RadioButtonGroup {
 
     /**
-     * @param {EnumerationProperty.<Climates>} climateProperty
+     * @param {EnumerationProperty.<AbioticEnvironments>} environmentProperty
      * @param {Object} [options]
      */
-    constructor( climateProperty, options ) {
+    constructor( environmentProperty, options ) {
 
       options = merge( {
         orientation: 'horizontal',
@@ -71,13 +72,13 @@ define( require => {
       
       // Create the description of the buttons
       const content = [
-        { value: Climates.EQUATOR, node: sunParent },
-        { value: Climates.ARCTIC, node: snowflakeParent }
+        { value: AbioticEnvironments.EQUATOR, node: sunParent },
+        { value: AbioticEnvironments.ARCTIC, node: snowflakeParent }
       ];
 
-      super( climateProperty, content, options );
+      super( environmentProperty, content, options );
     }
   }
 
-  return naturalSelection.register( 'ClimateRadioButtonGroup', ClimateRadioButtonGroup );
+  return naturalSelection.register( 'AbioticEnvironmentRadioButtonGroup', AbioticEnvironmentRadioButtonGroup );
 } );
