@@ -58,7 +58,7 @@ define( require => {
         top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
 
-      const generationClockNode = new GenerationClockNode( {
+      const generationClockNode = new GenerationClockNode( model.generationClock, {
         visible: false, // invisible until 'Add a Mate' button is pressed
         centerX: viewportNode.centerX,
         top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN

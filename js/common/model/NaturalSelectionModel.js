@@ -12,6 +12,7 @@ define( require => {
   const AbioticEnvironments = require( 'NATURAL_SELECTION/common/model/AbioticEnvironments' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
+  const GenerationClock = require( 'NATURAL_SELECTION/common/model/GenerationClock' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
 
   class NaturalSelectionModel {
@@ -32,6 +33,9 @@ define( require => {
 
       // @public the abiotic environment where the simulation is taking place
       this.abioticEnvironmentProperty = new EnumerationProperty( AbioticEnvironments, AbioticEnvironments.EQUATOR );
+
+      // @public (read-only)
+      this.generationClock = new GenerationClock();
     }
 
     /**
@@ -42,6 +46,7 @@ define( require => {
       this.isPlayingProperty.reset();
       this.limitFoodProperty.reset();
       this.abioticEnvironmentProperty.reset();
+      this.generationClock.reset();
     }
 
     /**
@@ -51,7 +56,7 @@ define( require => {
      */
     step( dt ) {
       if ( this.isPlayingProperty.value ) {
-        //TODO
+        this.generationClock.step( dt ); //TODO only if we've added a mate
       }
     }
   }

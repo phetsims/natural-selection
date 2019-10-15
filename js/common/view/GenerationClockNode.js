@@ -20,23 +20,29 @@ define( require => {
   class GenerationClockNode extends Node {
 
     /**
+     * @param {GenerationClock} generationClock
      * @param {Object} [options]
      */
-    constructor( options ) {
+    constructor( generationClock, options ) {
 
       const backgroundCircle = new Circle( RADIUS, {
         stroke: 'black',
-        fill: 'rgb( 231, 200, 217 )' // pink
+        fill: 'rgb( 231, 200, 217 )'
       } );
 
       const lineNode = new Line( 0, 0, 0, -RADIUS, {
-        stroke: 'black'
+        stroke: 'black',
+        lineWidth: 2
       } );
 
       assert && assert( !options.children, 'GenerationClockNode sets children' );
       options.children = [ backgroundCircle, lineNode ];
       
       super( options );
+
+      generationClock.percentTimeProperty.link( percentTime => {
+        lineNode.rotation = percentTime * 2 * Math.PI;
+      } );
     }
   }
 
