@@ -199,6 +199,7 @@ define( require => {
       ];
 
       // @private
+      this.model = model;
       this.generationClockNode = generationClockNode;
       this.addAMateButton = addAMateButton;
       this.mutationComingNode = mutationComingNode;
@@ -233,10 +234,14 @@ define( require => {
      * @private
      */
     addAMate() {
+
+      // model
+      this.model.mateWasAddedProperty.value = true;
+
+      // view
       this.addAMateButton.visible = false;
       this.generationClockNode.visible = true;
       this.mutationComingNode.visible = true; //TODO not correct, just for testing
-      //TODO
     }
 
     /**

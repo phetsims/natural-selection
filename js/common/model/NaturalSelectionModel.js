@@ -34,6 +34,9 @@ define( require => {
       // @public the abiotic environment where the simulation is taking place
       this.abioticEnvironmentProperty = new EnumerationProperty( AbioticEnvironments, AbioticEnvironments.EQUATOR );
 
+      // @public whether a mate was added to the lone bunny that appears at startup
+      this.mateWasAddedProperty = new BooleanProperty( false );
+
       // @public (read-only)
       this.generationClock = new GenerationClock();
     }
@@ -46,6 +49,7 @@ define( require => {
       this.isPlayingProperty.reset();
       this.limitFoodProperty.reset();
       this.abioticEnvironmentProperty.reset();
+      this.mateWasAddedProperty.reset();
       this.generationClock.reset();
     }
 
@@ -55,8 +59,10 @@ define( require => {
      * @override
      */
     step( dt ) {
-      if ( this.isPlayingProperty.value ) {
-        this.generationClock.step( dt ); //TODO only if we've added a mate
+
+      // advance the generation clock
+      if ( this.isPlayingProperty.value && this.mateWasAddedProperty.value ) {
+        this.generationClock.step( dt );
       }
     }
   }
