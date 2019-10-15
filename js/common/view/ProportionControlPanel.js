@@ -26,7 +26,7 @@ define( require => {
 
     /**
      * @param {Property.<boolean>} valuesVisibleProperty
-     * @param {{label: string, property: Property.<Boolean>}[]} traits
+     * @param {{label:string, property:Property.<Boolean>, color:Color|string, lineStyle:string}[]} traits
      * @param {Object} [options]
      */
     constructor( valuesVisibleProperty, traits, options ) {
@@ -52,12 +52,7 @@ define( require => {
       // Legend for each trait
       const traitLegends = [];
       traits.forEach( trait => {
-        traitLegends.push( new ProportionLegendNode( trait.label, {
-          rectangleOptions: {
-            fill: ( trait.lineStyle === 'solid' ) ? trait.color : null,
-            stroke: ( trait.lineStyle === 'solid' ) ? null : trait.color
-          }
-        } ) );
+        traitLegends.push( new ProportionLegendNode( trait ) );
       } );
 
       // Arranged vertically

@@ -29,7 +29,7 @@ define( require => {
     /**
      * @param {Property.<boolean>} totalVisibleProperty
      * @param {Property.<boolean>} valuesMarkerVisibleProperty
-     * @param {{label: string, property: Property.<Boolean>}[]} traits
+     * @param {{label: string, property: Property.<Boolean>, color:Color|string, lineStyle:string}[]} traits
      * @param {Object} [options]
      */
     constructor( totalVisibleProperty, valuesMarkerVisibleProperty, traits, options ) {
@@ -38,7 +38,7 @@ define( require => {
         fixedWidth: 100,
         xMargin: 0
       }, NaturalSelectionConstants.PANEL_OPTIONS, options );
-
+                    
       // Total
       const totalCheckbox = new PopulationCheckbox( totalVisibleProperty, totalString, {
         lineOptions: {

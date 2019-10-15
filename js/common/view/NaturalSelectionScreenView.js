@@ -37,7 +37,7 @@ define( require => {
     /**
      * @param {NaturalSelectionModel} model
      * @param {NaturalSelectionViewProperties} viewProperties
-     * @param {{label:string, property:Property.<Boolean>}[]} traits
+     * @param {{label:string, property:Property.<Boolean>, color:Color|string, lineStyle:string}[]} traits
      * @param {{label:string, property:Property.<Boolean>}[]} alleles
      * @param {Tandem} tandem
      */
