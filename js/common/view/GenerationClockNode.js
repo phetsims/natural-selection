@@ -18,12 +18,11 @@ define( require => {
 
   // constants
   const RADIUS = 18;
+  const CLOCK_START_ANGLE = -Math.PI / 2;
   const LINE_NODE_OPTIONS = {
     stroke: 'black',
     lineWidth: 1
   };
-  const GRAY_START = 0.25;
-  const GRAY_END = 0.75;
 
   class GenerationClockNode extends Node {
 
@@ -80,16 +79,16 @@ define( require => {
           darkPinkArc.visible = false;
         }
         else {
-          const darkPinkStartAngle = -Math.PI / 2;
-          const darkPinkAngle = darkPinkStartAngle + percentTime * 2 * Math.PI;
+          const darkPinkAngle = CLOCK_START_ANGLE + ( percentTime * 2 * Math.PI );
           darkPinkArc.shape = new Shape().moveTo( 0, 0 ).arc( 0, 0, RADIUS, -Math.PI / 2, darkPinkAngle ).close();
           darkPinkArc.visible = true;
         }
 
         // Update the part of the clock that corresponds to the selection agent period.
-        if ( percentTime >= GRAY_START && percentTime <= GRAY_END ) {
+        if ( generationClock.selectionAgentPercentRange.contains( percentTime ) ) {
           grayHalfCircle.visible = true;
-          const darkGrayAngle = ( percentTime - GRAY_START ) * Math.PI / ( GRAY_END - GRAY_START );
+          const darkGrayAngle = ( percentTime - generationClock.selectionAgentPercentRange.min ) * Math.PI /
+                                generationClock.selectionAgentPercentRange.getLength();
           darkGrayElapseArc.shape = new Shape().moveTo( 0, 0 ).arc( 0, 0, RADIUS, 0, darkGrayAngle ).close();
           darkGrayElapseArc.visible = true;
         }

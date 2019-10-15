@@ -12,6 +12,7 @@ define( require => {
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Range = require( 'DOT/Range' );
 
   // constant
   const SECONDS_PER_GENERATION = 10;
@@ -30,6 +31,9 @@ define( require => {
         [ this.timeProperty ], time => time / SECONDS_PER_GENERATION, {
           isValidValue: value => ( value >= 0 && value <= 1 )
         } );
+
+      // @public (read-only) the portion of the cycle when selection agents are active
+      this.selectionAgentPercentRange = new Range( 0.25, 0.75 );
     }
 
     /**
