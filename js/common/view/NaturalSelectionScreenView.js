@@ -22,7 +22,7 @@ define( require => {
   const NaturalSelectionTimeControlNode = require( 'NATURAL_SELECTION/common/view/NaturalSelectionTimeControlNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PedigreeControlPanel = require( 'NATURAL_SELECTION/common/view/PedigreeControlPanel' );
-  const PedigreeGraphNode = require( 'NATURAL_SELECTION/common/view/PedigreeGraphNode' );
+  const PedigreeNode = require( 'NATURAL_SELECTION/common/view/PedigreeNode' );
   const PopulationControlPanel = require( 'NATURAL_SELECTION/common/view/PopulationControlPanel' );
   const PopulationGraphNode = require( 'NATURAL_SELECTION/common/view/PopulationGraphNode' );
   const ProportionControlPanel = require( 'NATURAL_SELECTION/common/view/ProportionControlPanel' );
@@ -141,7 +141,7 @@ define( require => {
         children: [ proportionControlPanel, proportionGraphNode ]
       } );
 
-      const pedigreeGraphNode = new PedigreeGraphNode( graphWidth, graphHeight, {
+      const pedigreeNode = new PedigreeNode( graphWidth, graphHeight, {
         right: viewportNode.right,
         top: viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
       } );
@@ -150,12 +150,12 @@ define( require => {
         alleles, {
           fixedWidth: leftOfGraphWidth,
           maxHeight: graphHeight,
-          right: pedigreeGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
-          centerY: pedigreeGraphNode.centerY
+          right: pedigreeNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
+          centerY: pedigreeNode.centerY
         } );
 
       const pedigreeParent = new Node( {
-        children: [ pedigreeControlPanel, pedigreeGraphNode ]
+        children: [ pedigreeControlPanel, pedigreeNode ]
       } );
 
       const graphRadioButtonGroup = new GraphRadioButtonGroup( viewProperties.graphProperty, {
