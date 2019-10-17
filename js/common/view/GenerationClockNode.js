@@ -60,17 +60,14 @@ define( require => {
       } );
 
       // The 'zero hand' on the clock is stationary, and denotes the time as which bunnies will mate.  
-      const zeroHandNode = new Line( 0, 0, 0, -RADIUS, _.extend( {}, LINE_NODE_OPTIONS, {
-        lineDash: [ 3, 3 ]
-      } ) );
+      const zeroHandNode = new Line( 0, 0, 0, -RADIUS, LINE_NODE_OPTIONS );
 
       // The 'current hand' moves a time elapses, and denotes the current time.
       const currentHandNode = new Line( 0, 0, 0, -RADIUS, LINE_NODE_OPTIONS );
 
       // Order here is very important!
       assert && assert( !options.children, 'GenerationClockNode sets children' );
-      // options.children = [ pinkCircle, darkPinkArc, grayHalfCircle, darkGrayElapseArc, zeroHandNode, currentHandNode, rimCircle ];
-      options.children = [ pinkCircle, grayHalfCircle, zeroHandNode, currentHandNode, rimCircle ];
+      options.children = [ pinkCircle, darkPinkArc, grayHalfCircle, darkGrayElapseArc, zeroHandNode, currentHandNode, rimCircle ];
 
       super( options );
 
@@ -88,15 +85,13 @@ define( require => {
         }
 
         // Update the part of the clock that corresponds to the selection agent period.
-        if ( generationClock.selectionAgentPercentRange.contains( percentTime ) ) {
-          // grayHalfCircle.visible = true;
-          const darkGrayAngle = ( percentTime - generationClock.selectionAgentPercentRange.min ) * Math.PI /
+        if ( percentTime > generationClock.selectionAgentPercentRange.min ) {
+          const darkGrayAngle = ( Math.min( generationClock.selectionAgentPercentRange.max, percentTime ) - generationClock.selectionAgentPercentRange.min ) * Math.PI /
                                 generationClock.selectionAgentPercentRange.getLength();
           darkGrayElapseArc.shape = new Shape().moveTo( 0, 0 ).arc( 0, 0, RADIUS, 0, darkGrayAngle ).close();
           darkGrayElapseArc.visible = true;
         }
         else {
-          // grayHalfCircle.visible = false;
           darkGrayElapseArc.visible = false;
         }
       } );

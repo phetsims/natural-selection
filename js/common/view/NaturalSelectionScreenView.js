@@ -59,7 +59,6 @@ define( require => {
       } );
 
       const generationClockNode = new GenerationClockNode( model.generationClock, {
-        visible: false, // invisible until 'Add a Mate' button is pressed
         centerX: viewportNode.centerX,
         top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
@@ -215,7 +214,6 @@ define( require => {
      * @public
      */
     reset() {
-      this.generationClockNode.visible = false;
       this.addAMateButton.visible = true;
       this.mutationComingNode.visible = false;
       //TODO
@@ -240,7 +238,6 @@ define( require => {
 
       // view
       this.addAMateButton.visible = false;
-      this.generationClockNode.visible = true;
       this.mutationComingNode.visible = true; //TODO not correct, just for testing
     }
 
