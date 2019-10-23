@@ -58,10 +58,11 @@ define( require => {
         top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
 
-      const generationClockNode = new GenerationClockNode( model.generationClock, model.selectionAgentsEnabledProperty, {
-        centerX: viewportNode.centerX,
-        top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
-      } );
+      const generationClockNode = new GenerationClockNode(
+        model.generationClock.percentTimeProperty, model.selectionAgentsEnabledProperty, {
+          centerX: viewportNode.centerX,
+          top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
+        } );
 
       const abioticEnvironmentRadioButtonGroup = new AbioticEnvironmentRadioButtonGroup( model.abioticEnvironmentProperty, {
         right: viewportNode.right - NaturalSelectionConstants.VIEWPORT_NODE_X_MARGIN,

@@ -18,89 +18,90 @@ define( require => {
 
   // constants
   const RADIUS = 18;
-  const CLOCK_START_ANGLE = -Math.PI / 2;
-  const LINE_NODE_OPTIONS = {
-    stroke: 'black',
-    lineWidth: 1
-  };
+  const START_ANGLE = -Math.PI / 2;
 
   class GenerationClockNode extends Node {
 
     /**
-     * @param {GenerationClock} generationClock
+     * @param {Property.<number>} percentTimeProperty
      * @param {Property.<boolean>} selectionAgentsEnabledProperty
      * @param {Object} [options]
      */
-    constructor( generationClock, selectionAgentsEnabledProperty, options ) {
+    constructor( percentTimeProperty, selectionAgentsEnabledProperty, options ) {
 
-      // The center of the clock is pink, other colors are put on top of this. 
-      const pinkCircle = new Circle( RADIUS, {
+      // The full center of the clock.
+      const fullCircle = new Circle( RADIUS, {
         stroke: 'black',
-        fill: 'rgb( 231, 200, 217 )'
-      } );
-
-      // The dark pink arc denotes the portion of a full revolution that has elapsed.
-      const darkPinkArc = new Path( new Shape(), {
         fill: 'rgb( 203, 120, 162 )'
       } );
 
-      // The gray (bottom) half of the circle denotes the selection agent period. This is the time during which 
-      // selection agents are active, and bunnies may die.
-      const grayHalfCircle = new Path( new Shape().moveTo( 0, 0 ).arc( 0, 0, RADIUS, 0, Math.PI ).close(), {
-        fill: 'rgb( 193, 193, 193 )'
-      } );
-
-      // The dark gray arc denotes the portion of the selection agent period that has elapsed. 
-      const darkGrayElapseArc = new Path( new Shape(), {
+      // The bottom half of the circle denotes the selection agent period. 
+      // This is the time during which selection agents are active, and bunnies may die.
+      const bottomHalfCircle = new Path( new Shape().moveTo( 0, 0 ).arc( 0, 0, RADIUS, 0, Math.PI ).close(), {
         fill: 'rgb( 102, 102, 102 )'
       } );
 
-      // This is the rim around the outside edge of the clock.
+      // Overlay on the clock, sweeps out an arc to reveal what's under it.
+      const revealArc = new Path( new Shape(), {
+        fill: 'rgba( 255, 255, 255, 0.6 )' // transparent, to show colors underneath
+      } );
+
+      // The rim around the outside edge of the clock.
       const rimCircle = new Circle( RADIUS, {
         stroke: 'black'
       } );
 
       // The 'zero hand' on the clock is stationary, and denotes the time as which bunnies will mate.  
-      const zeroHandNode = new Line( 0, 0, 0, -RADIUS, LINE_NODE_OPTIONS );
+      const zeroHandNode = new Line( 0, 0, RADIUS, 0, {
+        stroke: 'black',
+        lineWidth: 1,
+        rotation: START_ANGLE
+      } );
 
       // The 'current hand' moves a time elapses, and denotes the current time.
-      const currentHandNode = new Line( 0, 0, 0, -RADIUS, LINE_NODE_OPTIONS );
+      const currentHandNode = new Line( 0, 0, RADIUS, 0, {
+        stroke: 'black',
+        lineWidth: 1
+      } );
 
       // Order here is very important!
       assert && assert( !options.children, 'GenerationClockNode sets children' );
-      options.children = [ pinkCircle, darkPinkArc, grayHalfCircle, darkGrayElapseArc, zeroHandNode, currentHandNode, rimCircle ];
+      options.children = [ fullCircle, bottomHalfCircle, revealArc, zeroHandNode, currentHandNode, rimCircle ];
 
       super( options );
 
-      // Fill in the clock to correspond to how much of a revolution has elapsed.
-      generationClock.percentTimeProperty.link( percentTime => {
+      // Reveal the part of the clock that corresponds to the percentage of a revolution that has elapsed.
+      // unlink is unnecessary, exists for the lifetime of the sim.
+      percentTimeProperty.link( percentTime => {
 
-        // Update the part of the clock that corresponds to elapsed time.
-        currentHandNode.rotation = percentTime * 2 * Math.PI;
-        if ( percentTime === 0 ) {
-          darkPinkArc.shape = null;
+        // Position the rotating clock hand.
+        currentHandNode.rotation = START_ANGLE + ( percentTime * 2 * Math.PI );
+
+        // Draw the arc
+        if ( percentTime === 0 || percentTime === 1 ) {
+          revealArc.shape = Shape.circle( 0, 0, RADIUS );
         }
         else {
-          const darkPinkAngle = CLOCK_START_ANGLE + ( percentTime * 2 * Math.PI );
-          darkPinkArc.shape = new Shape().moveTo( 0, 0 ).arc( 0, 0, RADIUS, -Math.PI / 2, darkPinkAngle ).close();
-        }
-
-        // Update the part of the clock that corresponds to the selection agent period.
-        if ( percentTime > generationClock.selectionAgentPercentRange.min ) {
-          const darkGrayAngle = ( Math.min( generationClock.selectionAgentPercentRange.max, percentTime ) - generationClock.selectionAgentPercentRange.min ) * Math.PI /
-                                generationClock.selectionAgentPercentRange.getLength();
-          darkGrayElapseArc.shape = new Shape().moveTo( 0, 0 ).arc( 0, 0, RADIUS, 0, darkGrayAngle ).close();
-        }
-        else {
-          darkGrayElapseArc.shape = null;
+          revealArc.shape = new Shape()
+            .moveTo( 0, 0 )
+            .arc( 0, 0, RADIUS, START_ANGLE + ( percentTime * 2 * Math.PI ), START_ANGLE )
+            .close();
         }
       } );
 
       // Show the bottom (gray) part of the clock only if some selection agent is enabled.
+      // unlink is unnecessary, exists for the lifetime of the sim.
       selectionAgentsEnabledProperty.link( selectionAgentsEnabled => {
-        grayHalfCircle.visible = selectionAgentsEnabled;
-        darkGrayElapseArc.visible = selectionAgentsEnabled;
+        bottomHalfCircle.visible = selectionAgentsEnabled;
       } );
+    }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'GenerationClockNode is not intended to be disposed' );
     }
   }
 

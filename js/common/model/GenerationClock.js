@@ -32,8 +32,15 @@ define( require => {
           isValidValue: value => ( value >= 0 && value <= 1 )
         } );
 
-      // @public (read-only) the portion of the cycle when selection agents are active
+      // @public (read-only) the portion of the clock cycle when selection agents are active
       this.selectionAgentPercentRange = new Range( 0.25, 0.75 );
+    }
+
+    /**
+     * @public
+     */
+    dispose() {
+      assert && assert( false, 'Generation is not intended to be disposed' );
     }
 
     /**
