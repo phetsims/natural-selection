@@ -37,27 +37,33 @@ define( require => {
         lineWidth: LINE_WIDTH
       } );
 
-      // The bottom half of the circle denotes the selection agent period. 
-      // This is the time during which selection agents are active, and bunnies may die.
-      const bottomHalfCircle = new Path( new Shape().moveTo( 0, 0 ).arc( 0, 0, RADIUS, 0, Math.PI ).close(), {
+      // The part of the circle that denotes when the selection agents are active, and bunnies may die.
+      // Visible only when some selection agent is enabled.
+      const selectionAgentStartAngle = START_ANGLE + generationClock.selectionAgentPercentRange.min * 2 * Math.PI;
+      const selectionAgentEndAngle = START_ANGLE + generationClock.selectionAgentPercentRange.max * 2 * Math.PI;
+      const selectionAgentShape = new Shape()
+        .moveTo( 0, 0 )
+        .arc( 0, 0, RADIUS, selectionAgentStartAngle, selectionAgentEndAngle )
+        .close();
+      const selectionAgentPath = new Path( selectionAgentShape, {
         fill: 'rgb( 102, 102, 102 )' // dark gray
       } );
 
       // Overlay on the clock, sweeps out an arc to reveal what's under it.
+      // The portion reveals corresponds to the percentage of a revolution that has elapsed.
       const revealArc = new Path( new Shape(), {
         fill: 'rgba( 255, 255, 255, 0.6 )', // transparent white
         stroke: STROKE,
         lineWidth: LINE_WIDTH
       } );
 
-      // Order here is very important!
+      // Layering order here is important!
       assert && assert( !options.children, 'GenerationClockNode sets children' );
-      options.children = [ fullCircle, bottomHalfCircle, revealArc ];
+      options.children = [ fullCircle, selectionAgentPath, revealArc ];
 
       super( options );
 
-      // Reveal the part of the clock that corresponds to the percentage of a revolution that has elapsed.
-      // unlink is unnecessary, exists for the lifetime of the sim.
+      // Reveal part of the clock. unlink is unnecessary, exists for the lifetime of the sim.
       generationClock.percentTimeProperty.link( percentTime => {
         revealArc.shape = new Shape()
           .moveTo( 0, 0 )
@@ -65,10 +71,10 @@ define( require => {
           .close();
       } );
 
-      // Show the bottom (gray) part of the clock only if some selection agent is enabled.
+      // Show selectionAgentPath if some selection agent is enabled.
       // unlink is unnecessary, exists for the lifetime of the sim.
       selectionAgentsEnabledProperty.link( selectionAgentsEnabled => {
-        bottomHalfCircle.visible = selectionAgentsEnabled;
+        selectionAgentPath.visible = selectionAgentsEnabled;
       } );
     }
 
