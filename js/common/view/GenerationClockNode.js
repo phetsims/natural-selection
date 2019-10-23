@@ -28,9 +28,10 @@ define( require => {
 
     /**
      * @param {GenerationClock} generationClock
+     * @param {Property.<boolean>} selectionAgentsEnabledProperty
      * @param {Object} [options]
      */
-    constructor( generationClock, options ) {
+    constructor( generationClock, selectionAgentsEnabledProperty, options ) {
 
       // The center of the clock is pink, other colors are put on top of this. 
       const pinkCircle = new Circle( RADIUS, {
@@ -71,17 +72,17 @@ define( require => {
 
       super( options );
 
+      // Fill in the clock to correspond to how much of a revolution has elapsed.
       generationClock.percentTimeProperty.link( percentTime => {
 
         // Update the part of the clock that corresponds to elapsed time.
         currentHandNode.rotation = percentTime * 2 * Math.PI;
         if ( percentTime === 0 ) {
-          darkPinkArc.visible = false;
+          darkPinkArc.shape = null;
         }
         else {
           const darkPinkAngle = CLOCK_START_ANGLE + ( percentTime * 2 * Math.PI );
           darkPinkArc.shape = new Shape().moveTo( 0, 0 ).arc( 0, 0, RADIUS, -Math.PI / 2, darkPinkAngle ).close();
-          darkPinkArc.visible = true;
         }
 
         // Update the part of the clock that corresponds to the selection agent period.
@@ -89,11 +90,16 @@ define( require => {
           const darkGrayAngle = ( Math.min( generationClock.selectionAgentPercentRange.max, percentTime ) - generationClock.selectionAgentPercentRange.min ) * Math.PI /
                                 generationClock.selectionAgentPercentRange.getLength();
           darkGrayElapseArc.shape = new Shape().moveTo( 0, 0 ).arc( 0, 0, RADIUS, 0, darkGrayAngle ).close();
-          darkGrayElapseArc.visible = true;
         }
         else {
-          darkGrayElapseArc.visible = false;
+          darkGrayElapseArc.shape = null;
         }
+      } );
+
+      // Show the bottom (gray) part of the clock only if some selection agent is enabled.
+      selectionAgentsEnabledProperty.link( selectionAgentsEnabled => {
+        grayHalfCircle.visible = selectionAgentsEnabled;
+        darkGrayElapseArc.visible = selectionAgentsEnabled;
       } );
     }
   }

@@ -11,6 +11,7 @@ define( require => {
   // modules
   const AbioticEnvironments = require( 'NATURAL_SELECTION/common/model/AbioticEnvironments' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const GenerationClock = require( 'NATURAL_SELECTION/common/model/GenerationClock' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -39,6 +40,13 @@ define( require => {
 
       // @public (read-only)
       this.generationClock = new GenerationClock();
+
+      // @public whether anything that affects the lifespan of bunnies is enabled
+      const dependencies = [ this.limitFoodProperty ];
+      selectionAgents.forEach( selectionAgent => dependencies.push( selectionAgent.enabledProperty ) );
+      this.selectionAgentsEnabledProperty = new DerivedProperty( dependencies,
+        () => _.some( dependencies, booleanProperty => booleanProperty.value )
+      );
     }
 
     /**
