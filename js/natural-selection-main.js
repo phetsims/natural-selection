@@ -19,15 +19,13 @@ define( require => {
   const naturalSelectionTitleString = require( 'string!NATURAL_SELECTION/natural-selection.title' );
 
   const simOptions = {
+    //TODO #2 complete the credits
     credits: {
-      //TODO #2 fill in credits
-      leadDesign: '',
-      softwareDevelopment: '',
-      team: '',
-      qualityAssurance: '',
-      graphicArts: '',
-      soundDesign: '',
-      thanks: ''
+      leadDesign: 'Amanda McGarry',
+      softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
+      team: 'Wendy Adams, Megan Hoffman, Oliver Nix, Jonathan Olson, Ariel Paul, Kathy Perkins, Noah Podolefsky, Carl Wieman',
+      qualityAssurance: 'Katie Woessner',
+      graphicArts: 'Megan Lai'
     }
   };
 
