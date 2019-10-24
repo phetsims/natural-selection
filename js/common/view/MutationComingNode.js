@@ -55,7 +55,7 @@ define( require => {
       const background = new Rectangle( 0, 0, hBox.width + 2 * X_MARGIN, hBox.height + 2 * Y_MARGIN, {
         cornerRadius: 2,
         stroke: 'black',
-        fill: 'rgba( 255, 255, 255, 0.6 )',
+        fill: 'rgba( 255, 255, 255, 0.75 )',
         center: hBox.center
       } );
 
