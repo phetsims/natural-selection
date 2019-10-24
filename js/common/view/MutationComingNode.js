@@ -13,19 +13,17 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const Image = require( 'SCENERY/nodes/Image' );
   const merge = require( 'PHET_CORE/merge' );
+  const CancelMutationButton = require( 'NATURAL_SELECTION/common/view/CancelMutationButton' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   // images
   const mutationIcon = require( 'image!NATURAL_SELECTION/mutationIcon.png' );
 
   // strings
-  const cancelString = require( 'string!NATURAL_SELECTION/cancel' );
   const mutationComingString = require( 'string!NATURAL_SELECTION/mutationComing' );
 
   // constants
@@ -43,27 +41,21 @@ define( require => {
         cancelButtonListener: null
       }, options );
 
+      const cancelButton = new CancelMutationButton();
+
       const iconNode = new Image( mutationIcon, { scale: 0.75 } );
 
       const textNode = new Text( mutationComingString, { font: NaturalSelectionConstants.TEXT_FONT } );
 
-      const cancelButton = new RectangularPushButton( merge( {},
-        NaturalSelectionConstants.RECTANGULAR_PUSH_BUTTON_OPTIONS, {
-          baseColor: NaturalSelectionColors.CANCEL_BUTTON,
-          content: new Text( cancelString, { font: NaturalSelectionConstants.PUSH_BUTTON_FONT } ),
-          listener: options.cancelButtonListener
-        } ) );
-
       const hBox = new HBox( {
-        spacing: 15,
-        children: [ iconNode, textNode, cancelButton ]
+        spacing: 12,
+        children: [ cancelButton, iconNode, textNode ]
       } );
 
       const background = new Rectangle( 0, 0, hBox.width + 2 * X_MARGIN, hBox.height + 2 * Y_MARGIN, {
         cornerRadius: 2,
         stroke: 'black',
-        fill: 'rgb( 200, 200, 200 )',
-        opacity: 0.5,
+        fill: 'rgba( 255, 255, 255, 0.6 )',
         center: hBox.center
       } );
 
