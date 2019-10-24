@@ -14,17 +14,7 @@ define( require => {
 
   class SelectionAgent {
 
-    /**
-     * @param {string} displayName - translated name, visible to the user
-     * @param {HTMLImageElement} icon - icons used to represent the selection element on UI controls
-     */
-    constructor( displayName, icon ) {
-
-      // @public (read-only)
-      this.displayName = displayName;
-
-      // @public (read-only)
-     this.icon = icon;
+    constructor() {
 
       // @public
       this.enabledProperty = new BooleanProperty( false );

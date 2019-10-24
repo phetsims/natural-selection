@@ -11,12 +11,12 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const SelectionAgent = require( 'NATURAL_SELECTION/common/model/SelectionAgent' );
 
-  class ToughFood extends SelectionAgent {
+  class LimitedFood extends SelectionAgent {
 
     constructor() {
       super();
     }
   }
 
-  return naturalSelection.register( 'ToughFood', ToughFood );
+  return naturalSelection.register( 'LimitedFood', LimitedFood );
 } );
