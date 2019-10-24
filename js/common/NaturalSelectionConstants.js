@@ -41,6 +41,7 @@ define( require => {
       spacing: 4,
       boxWidth: 16
     },
+    CHECKBOX_X_SPACING: 6,
 
     // Panel
     PANEL_OPTIONS: {

@@ -14,26 +14,20 @@ define( require => {
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const GenerationClock = require( 'NATURAL_SELECTION/common/model/GenerationClock' );
+  const LimitedFood = require( 'NATURAL_SELECTION/common/model/LimitedFood' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const ToughFood = require( 'NATURAL_SELECTION/common/model/ToughFood' );
+  const Wolves = require( 'NATURAL_SELECTION/common/model/Wolves' );
 
   class NaturalSelectionModel {
 
     /**
-     * @param {SelectionAgent[]} selectionAgents
+     * @param {Tandem} tandem
      */
-    constructor( selectionAgents ) {
-
-      // @public (read-only) {SelectionAgent[]}
-      this.selectionAgents = selectionAgents;
+    constructor( tandem ) {
 
       // @public whether the sim is playing
       this.isPlayingProperty = new BooleanProperty( true );
-
-      // @public when true, the food supply is limited
-      this.limitFoodProperty = new BooleanProperty( false );
-
-      // @public the abiotic environment where the simulation is taking place
-      this.abioticEnvironmentProperty = new EnumerationProperty( AbioticEnvironments, AbioticEnvironments.EQUATOR );
 
       // @public whether a mate was added to the lone bunny that appears at startup
       this.mateWasAddedProperty = new BooleanProperty( false );
@@ -41,11 +35,17 @@ define( require => {
       // @public (read-only)
       this.generationClock = new GenerationClock();
 
-      // @public whether anything that affects the lifespan of bunnies is enabled
-      const dependencies = [ this.limitFoodProperty ];
-      selectionAgents.forEach( selectionAgent => dependencies.push( selectionAgent.enabledProperty ) );
-      this.selectionAgentsEnabledProperty = new DerivedProperty( dependencies,
-        () => _.some( dependencies, booleanProperty => booleanProperty.value )
+      // @public (read-only) selection agents
+      this.wolves = new Wolves();
+      this.toughFood = new ToughFood();
+      this.limitedFood = new LimitedFood();
+      this.abioticEnvironmentProperty = new EnumerationProperty( AbioticEnvironments, AbioticEnvironments.EQUATOR );
+
+      // @public whether any selection agent is enabled
+      this.selectionAgentsEnabledProperty = new DerivedProperty(
+        [ this.wolves.enabledProperty, this.toughFood.enabledProperty, this.limitedFood.enabledProperty ],
+        ( wolvesEnabled, touchFooEnabled, limitedFoodEnabled ) =>
+          ( wolvesEnabled || touchFooEnabled || limitedFoodEnabled )
       );
     }
 
@@ -53,12 +53,13 @@ define( require => {
      * @public
      */
     reset() {
-      this.selectionAgents.forEach( selectionAgent => selectionAgent.reset() );
       this.isPlayingProperty.reset();
-      this.limitFoodProperty.reset();
-      this.abioticEnvironmentProperty.reset();
       this.mateWasAddedProperty.reset();
       this.generationClock.reset();
+      this.wolves.reset();
+      this.toughFood.reset();
+      this.limitedFood.reset();
+      this.abioticEnvironmentProperty.reset();
     }
 
     /**

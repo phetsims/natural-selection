@@ -53,7 +53,7 @@ define( require => {
           top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
         } );
 
-      const limitedFoodCheckbox = new LimitedFoodCheckbox( model.limitFoodProperty, {
+      const limitedFoodCheckbox = new LimitedFoodCheckbox( model.limitedFood.enabledProperty, {
         left: viewportNode.left + NaturalSelectionConstants.VIEWPORT_NODE_X_MARGIN,
         top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
@@ -91,7 +91,7 @@ define( require => {
         top: viewportNode.top
       } );
 
-      const selectionAgentsPanel = new SelectionAgentsPanel( model.selectionAgents, {
+      const selectionAgentsPanel = new SelectionAgentsPanel( model.wolves.enabledProperty, model.toughFood.enabledProperty, {
         fixedWidth: rightOfWorldWidth,
         left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         bottom: viewportNode.bottom
