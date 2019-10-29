@@ -30,5 +30,5 @@ In the context of this sim:
 * The alleles for ears are 'tall ears' and 'flat ears'.
 * The alleles for teeth are 'short teeth' and 'long teeth'.
 * A bunny has 3 pairs of genes - 1 gene of each pair is inherited from each parent.
-* A bunny's *genotype* is its complete set of 6 genes (3 pairs).
-* A bunny's *phenotype* is how the bunny appears and function due to its genotype.
+* A bunny's genotype is its complete set of 6 genes (3 pairs).
+* A bunny's phenotype is how the bunny appears (fur, ears, and teeth) and functions due to its genotype.
