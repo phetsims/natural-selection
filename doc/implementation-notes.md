@@ -19,16 +19,15 @@ Hypothetical model class hierarchy:
 
 // our bunnies have 3 gene types, each with 2 variations (alleles)
 abstract Gene
-  abstract Allele
-    abstract FurAllele
-      WhiteFurAllele
-      BrownFurAllele  
-    abstract EarsAllele
-      TallEarsAllele
-      FlatEarsAllele
-    abstract TeethAllele
-      ShortTeethAllele
-      LongTeethAllele
+  abstract FurGene
+    WhiteFurAllele
+    BrownFurAllele  
+  abstract EarsGene
+    TallEarsAllele
+    FlatEarsAllele
+  abstract TeethGene
+    ShortTeethAllele
+    LongTeethAllele
         
 // bunnies are diploids, so they have pairs of genes, 1 each from father and mother
 abstract GenePair { 
