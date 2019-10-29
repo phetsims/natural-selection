@@ -19,11 +19,13 @@ Hypothetical model class hierarchy:
 
 // our bunnies have 3 gene types, each with 2 variations (alleles)
 abstract Gene
-  abstract Allele
+  abstract FurGene
       WhiteFurAllele
-      BrownFurAllele  
+      BrownFurAllele
+  abstract EarsGene
       TallEarsAllele
       FlatEarsAllele
+  abstract TeethGene
       ShortTeethAllele
       LongTeethAllele
         
