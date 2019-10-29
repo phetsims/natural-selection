@@ -54,6 +54,7 @@ define( require => {
     }
 
     /**
+     * Resets the entire model.
      * @public
      */
     reset() {
@@ -65,8 +66,25 @@ define( require => {
       this.limitedFood.reset();
       this.abioticEnvironmentProperty.reset();
 
-      //TODO dispose of all bunnies
-      //TODO create lone default bunny
+      this.playAgain();
+    }
+
+    /**
+     * Starts over with a brand new bunny. Other settings are preserved.
+     * @public
+     */
+    playAgain() {
+
+      // dispose of all bunnies
+      for ( let i = 0; i < this.bunnies.length; i++ ) {
+        this.bunnies[ i ].dispose();
+      }
+
+      // create a lone bunny
+      this.bunnies = [ Bunny.createDefault() ];
+
+      // note that a mate has not been added
+      this.mateWasAddedProperty.value = false;
     }
 
     /**
@@ -75,10 +93,17 @@ define( require => {
      * @override
      */
     step( dt ) {
+      if ( this.isPlayingProperty.value ) {
 
-      // advance the generation clock
-      if ( this.isPlayingProperty.value && this.mateWasAddedProperty.value ) {
-        this.generationClock.step( dt );
+        // advance the generation clock
+        if ( this.mateWasAddedProperty.value ) {
+          this.generationClock.step( dt );
+        }
+
+        // step the bunnies
+        for ( let i = 0; i < this.bunnies.length; i++ ) {
+          this.bunnies[ i ].step( dt );
+        }
       }
     }
   }

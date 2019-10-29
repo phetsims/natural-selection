@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const BunnyGenotype = require( 'NATURAL_SELECTION/common/model/BunnyGenotype' );
+  const Emitter = require( 'AXON/Emitter' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
 
   class Bunny {
@@ -22,6 +23,42 @@ define( require => {
 
       // @public (read-only)
       this.genotype = genotype;
+
+      // @public (read-only)
+      this.deathEmitter = new Emitter();
+      this.isAlive = true;
+      this.isDisposed = false;
+    }
+
+    /**
+     * @param {number} dt - time step, in seconds
+     * @public
+     */
+    step( dt ) {
+      assert && assert( !this.isDisposed, 'attempted to step a disposed bunny' );
+      if ( this.isAlive ) {
+        //TODO
+      }
+    }
+
+    /**
+     * Kills this bunny, forever and ever. (This sim does not support reincarnation or other forms of 'pooling' :)
+     * @public
+     */
+    kill() {
+      assert && assert( this.isAlive, 'bunny is already dead' );
+      assert && assert( !this.isDisposed, 'attempted to kill a disposed bunny' );
+      this.isAlive = false;
+      this.deathEmitter.emit();
+    }
+
+    /**
+     * @public
+     */
+    dispose() {
+      assert && assert( !this.isDisposed, 'bunny is already disposed' );
+      //TODO
+      this.isDisposed = true;
     }
 
     /**
