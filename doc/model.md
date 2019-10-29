@@ -13,6 +13,7 @@ This document is a high-level description of the model used in PhET's _Natural S
 * recessive trait - A recessive trait will only be expressed if an individual has two recessive alleles.
 * selecting agent = any factor, environmental or otherwise, that affects fertility or mortality
 * chromosomes - contain genes for certain traits
+* diploid - having 2 sets of chromosomes
 
 * A dominant allele hides a recessive allele and determines the organism's appearance.
 * When an organism has two copies of the same allele, it is said to be homozygous for that gene. 
@@ -25,10 +26,10 @@ This document is a high-level description of the model used in PhET's _Natural S
 In the context of this sim:
 
 * A bunny has 3 traits, and 3 corresponding gene types: fur, ears, teeth.
+* A bunny has 6 genes, 2 of each gene type.  One of each type is inherited from each parent.
 * Each gene type has 2 variations, known as alleles.
 * The alleles for fur are 'white fur' and 'brown fur'.
 * The alleles for ears are 'tall ears' and 'flat ears'.
 * The alleles for teeth are 'short teeth' and 'long teeth'.
-* A bunny has 3 pairs of genes - 1 gene of each pair is inherited from each parent.
 * A bunny's genotype is its complete set of 6 genes (3 pairs).
 * A bunny's phenotype is how the bunny appears (fur, ears, and teeth) and functions due to its genotype.
