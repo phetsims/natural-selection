@@ -11,6 +11,7 @@ define( require => {
   // modules
   const AbioticEnvironments = require( 'NATURAL_SELECTION/common/model/AbioticEnvironments' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const Bunny = require( 'NATURAL_SELECTION/common/model/Bunny' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const GenerationClock = require( 'NATURAL_SELECTION/common/model/GenerationClock' );
@@ -47,6 +48,9 @@ define( require => {
         ( wolvesEnabled, touchFooEnabled, limitedFoodEnabled ) =>
           ( wolvesEnabled || touchFooEnabled || limitedFoodEnabled )
       );
+
+      // @public {Bunny[]}
+      this.bunnies = [ Bunny.createDefault() ];
     }
 
     /**
@@ -60,6 +64,9 @@ define( require => {
       this.toughFood.reset();
       this.limitedFood.reset();
       this.abioticEnvironmentProperty.reset();
+
+      //TODO dispose of all bunnies
+      //TODO create lone default bunny
     }
 
     /**
