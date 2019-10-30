@@ -22,7 +22,7 @@ define( require => {
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // images
-  const mutationIcon = require( 'image!NATURAL_SELECTION/mutationIcon.png' );
+  const mutationIconImage = require( 'image!NATURAL_SELECTION/mutationIcon.png' );
 
   // strings
   const addMutationString = require( 'string!NATURAL_SELECTION/addMutation' );
@@ -47,7 +47,7 @@ define( require => {
         align: 'center',
         children: [
           new Text( addMutationString, { font: NaturalSelectionConstants.TITLE_FONT } ),
-          new Image( mutationIcon, { scale: 0.75 } )
+          new Image( mutationIconImage, { scale: 0.15 } )
         ]
       } );
 

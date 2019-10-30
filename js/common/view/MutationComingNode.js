@@ -21,7 +21,7 @@ define( require => {
   const Text = require( 'SCENERY/nodes/Text' );
 
   // images
-  const mutationIcon = require( 'image!NATURAL_SELECTION/mutationIcon.png' );
+  const mutationIconImage = require( 'image!NATURAL_SELECTION/mutationIcon.png' );
 
   // strings
   const mutationComingString = require( 'string!NATURAL_SELECTION/mutationComing' );
@@ -43,7 +43,7 @@ define( require => {
 
       const cancelButton = new CancelMutationButton();
 
-      const iconNode = new Image( mutationIcon, { scale: 0.75 } );
+      const iconNode = new Image( mutationIconImage, { scale: 0.2 } );
 
       const textNode = new Text( mutationComingString, { font: NaturalSelectionConstants.TEXT_FONT } );
 
