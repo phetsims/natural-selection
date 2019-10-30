@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.0.0-dev.5 Tue Oct 29 2019 17:40:41 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.0.0-dev.6 Wed Oct 30 2019 13:53:46 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "a99a9ce9ee0774bf3ef509bf3e31ca7383f67478",
     "branch": "master"
@@ -25,11 +25,11 @@
     "branch": "master"
   },
   "kite": {
-    "sha": "6e16d0aca6ae6d2f70fccbd012b103df9376aa8b",
+    "sha": "f2a44d834638ec6c0705150f82f69dab2db4434b",
     "branch": "master"
   },
   "natural-selection": {
-    "sha": "d8847aa7964ad5dd8ae7dc8ebb878e882ff603ab",
+    "sha": "c430a89453cd4f9cfc8298c3a5feed0f3eee508f",
     "branch": "master"
   },
   "phet-core": {
@@ -41,7 +41,7 @@
     "branch": "master"
   },
   "phet-io-wrappers": {
-    "sha": "7cd3f4287a95d15fb31027743297bec24ffa3997",
+    "sha": "8b9a18ba8756f0653b83b6d4c90465e021fc0bdd",
     "branch": "master"
   },
   "phetcommon": {
@@ -61,7 +61,7 @@
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "86cfed8f49ede4b16f4930a53be1fb8b76cfd165",
+    "sha": "f18357ab8d6c13db4e52c1d9ccd9807e6684b26e",
     "branch": "master"
   },
   "sherpa": {
