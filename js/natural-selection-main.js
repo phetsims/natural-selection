@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const IntroScreen = require( 'NATURAL_SELECTION/intro/IntroScreen' );
   const LabScreen = require( 'NATURAL_SELECTION/lab/LabScreen' );
   const Sim = require( 'JOIST/Sim' );
   const SimLauncher = require( 'JOIST/SimLauncher' );
@@ -30,6 +31,7 @@ define( require => {
 
   SimLauncher.launch( () => {
     const screens = [
+      new IntroScreen( Tandem.rootTandem.createTandem( 'intro' ) ),
       new LabScreen( Tandem.rootTandem.createTandem( 'lab' ) )
     ];
     const sim = new Sim( naturalSelectionTitleString, screens, simOptions );
