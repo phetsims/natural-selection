@@ -10,12 +10,17 @@ define( require => {
 
   // modules
   const AbioticEnvironments = require( 'NATURAL_SELECTION/common/model/AbioticEnvironments' );
-  const LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const Line = require( 'SCENERY/nodes/Line' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
+
+  // images
+  const arcticBackgroundImage = require( 'image!NATURAL_SELECTION/arcticBackground.png' );
+  const equatorBackgroundImage = require( 'image!NATURAL_SELECTION/equatorBackground.png' );
 
   class ViewportNode extends Node {
 
@@ -27,51 +32,24 @@ define( require => {
      */
     constructor( environmentProperty, width, height, options ) {
 
-      const skyPercentage = 0.25; // what percentage of the viewport is sky
-      
-      const groundHeight = ( 1 - skyPercentage ) * height;
+      // Equator background
+      const equatorBackground = new Image( equatorBackgroundImage );
+      equatorBackground.setScaleMagnitude( height / equatorBackground.height );
 
-      // Equator sky
-      const equatorSkyGradient = new LinearGradient( 0, 0, 0, height );
-      equatorSkyGradient.addColorStop( 0, 'rgb( 174, 224, 234 )' );
-      equatorSkyGradient.addColorStop( skyPercentage, 'rgb( 133, 190, 210 )' );
-      const equatorSkyNode = new Rectangle( 0, 0, width, height, {
-        fill: equatorSkyGradient
+      // Arctic background
+      const arcticBackground = new Image( arcticBackgroundImage );
+      arcticBackground.setScaleMagnitude( height / arcticBackground.height );
+
+      // Horizon line, for debugging. Bunnies cannot go further back than this line.
+      const horizonY = 115;
+      const horizonLine = new Line( 0, horizonY, width, horizonY, {
+        stroke: phet.chipper.queryParameters.dev ? 'red' : null,
+        lineWidth: 1
       } );
-
-      // Equator ground
-      const equatorGroundGradient = new LinearGradient( 0, height - groundHeight, 0, groundHeight );
-      equatorGroundGradient.addColorStop( 0, 'rgb( 140, 105, 65 )' );
-      equatorGroundGradient.addColorStop( 1, 'rgb( 195, 148, 98 )' );
-      const equatorGroundNode = new Rectangle( 0, height - groundHeight, width, groundHeight, {
-        fill: equatorGroundGradient
-      } );
-
-      // Equator sky & ground
-      const equatorNode = new Node( { children: [ equatorSkyNode, equatorGroundNode ] } );
-
-      // Arctic sky
-      const arcticSkyGradient = new LinearGradient( 0, 0, 0, height );
-      arcticSkyGradient.addColorStop( 0, 'rgb( 144, 185, 195 )' );
-      arcticSkyGradient.addColorStop( 0.3, 'rgb( 102, 150, 175 )' );
-      const arcticSkyNode = new Rectangle( 0, 0, width, height, {
-        fill: arcticSkyGradient
-      } );
-
-      // Arctic ground
-      const arcticGroundGradient = new LinearGradient( 0, height - groundHeight, 0, groundHeight );
-      arcticGroundGradient.addColorStop( 0, 'rgb( 192, 215, 226 )' );
-      arcticGroundGradient.addColorStop( 1, 'rgb( 238, 249, 254 )' );
-      const arcticGroundNode = new Rectangle( 0, height - groundHeight, width, groundHeight, {
-        fill: arcticGroundGradient
-      } );
-
-      // Arctic sky & ground
-      const arcticNode = new Node( { children: [ arcticSkyNode, arcticGroundNode ] } );
 
       // Everything in the world, clipped to the viewport
       const worldContents = new Node( {
-        children: [ equatorNode, arcticNode ],
+        children: [ equatorBackground, arcticBackground, horizonLine ],
         clipArea: Shape.rect( 0, 0, width, height )
       } );
 
@@ -86,8 +64,8 @@ define( require => {
       super( options );
 
       environmentProperty.link( climate => {
-        equatorNode.visible = ( climate === AbioticEnvironments.EQUATOR );
-        arcticNode.visible = ( climate === AbioticEnvironments.ARCTIC );
+        equatorBackground.visible = ( climate === AbioticEnvironments.EQUATOR );
+        arcticBackground.visible = ( climate === AbioticEnvironments.ARCTIC );
       } );
     }
   }
