@@ -58,7 +58,9 @@ define( require => {
       } );
 
       // ------
-      const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin );
+      const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin, {
+        stroke: NaturalSelectionColors.SEPARATOR_STROKE
+      } );
 
       // Values Marker
       const valuesMarkerCheckbox = new Checkbox(

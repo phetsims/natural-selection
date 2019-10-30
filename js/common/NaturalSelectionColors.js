@@ -22,6 +22,8 @@ define( require => {
     PANEL_FILL: 'white',
     PANEL_STROKE: 'rgb( 150, 160, 110 )', // much darker version of SCREEN_VIEW_BACKGROUND
 
+    SEPARATOR_STROKE: 'rgb( 200, 200, 200 )',
+
     ADD_A_MATE_BUTTON: PhetColorScheme.BUTTON_YELLOW,
     CANCEL_BUTTON: PhetColorScheme.BUTTON_YELLOW,
 

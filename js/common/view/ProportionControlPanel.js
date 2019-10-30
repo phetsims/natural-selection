@@ -13,6 +13,7 @@ define( require => {
   const HSeparator = require( 'SUN/HSeparator' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
   const ProportionLegendNode = require( 'NATURAL_SELECTION/common/view/ProportionLegendNode' );
@@ -43,11 +44,13 @@ define( require => {
       // Values
       const valuesCheckbox = new Checkbox(
         new Text( valuesString, textOptions ),
-        valuesVisibleProperty ,
+        valuesVisibleProperty,
         NaturalSelectionConstants.CHECKBOX_OPTIONS );
 
       // ------
-      const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin );
+      const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin, {
+        stroke: NaturalSelectionColors.SEPARATOR_STROKE
+      } );
 
       // Legend for each trait
       const traitLegends = [];
