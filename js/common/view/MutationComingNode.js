@@ -28,8 +28,9 @@ define( require => {
   const mutationComingString = require( 'string!NATURAL_SELECTION/mutationComing' );
 
   // constants
-  const X_MARGIN = 10;
-  const Y_MARGIN = 10;
+  const X_MARGIN = 8;
+  const Y_MARGIN = 8;
+  const X_SPACING = 10;
 
   class MutationComingNode extends Node {
 
@@ -49,7 +50,7 @@ define( require => {
       const textNode = new Text( mutationComingString, { font: NaturalSelectionConstants.TEXT_FONT } );
 
       const hBox = new HBox( {
-        spacing: 12,
+        spacing: X_SPACING,
         children: [ cancelButton, iconNode, textNode ]
       } );
 
