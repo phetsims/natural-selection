@@ -1,4 +1,4 @@
-// Copyright 2014-2019, University of Colorado Boulder
+// Copyright 2019, University of Colorado Boulder
 
 /**
  * IntroModel is the model for the 'Intro' screen.
