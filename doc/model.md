@@ -22,6 +22,9 @@ This document is a high-level description of the model used in PhET's _Natural S
 * mutation
 * Mendelian Genetics (Gregor Mendel), https://en.wikipedia.org/wiki/Mendelian_inheritance
 
+* FF - homozygous dominant
+* ff - homozygous recessive
+* Ff, fF - heterozygous
 
 In the context of this sim:
 
