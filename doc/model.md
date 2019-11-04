@@ -14,6 +14,7 @@ This document is a high-level description of the model used in PhET's _Natural S
 * selecting agent = any factor, environmental or otherwise, that affects fertility or mortality
 * chromosomes - contain genes for certain traits
 * diploid - having 2 sets of chromosomes
+* gene pool - the collection of all the genes and the various allelic forms of those genes within a population
 
 * A dominant allele hides a recessive allele and determines the organism's appearance.
 * When an organism has two copies of the same allele, it is said to be homozygous for that gene. 
