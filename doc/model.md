@@ -34,9 +34,12 @@ In the context of this sim:
 
 * A bunny has 3 traits, and 3 corresponding gene types: fur, ears, teeth.
 * A bunny has 6 genes, 2 of each gene type.  One of each type is inherited from each parent.
-* Each gene type has 2 variations, known as alleles.
-* The alleles for fur are 'white fur' and 'brown fur'.
-* The alleles for ears are 'tall ears' and 'flat ears'.
-* The alleles for teeth are 'short teeth' and 'long teeth'.
+* Prior to mutation, each gene type has 1 allele type.
+* After mutation, each gene type has 2 alleles type, with an establish dominance relationship. 
+* The alleles for fur are 'white fur' (default) and 'brown fur' (mutation).
+* The alleles for ears are 'tall ears' (default) and 'flat ears' (mutation).
+* The alleles for teeth are 'short teeth' (default) and 'long teeth' (mutation).
 * A bunny's genotype is its complete set of 6 genes (3 pairs).
 * A bunny's phenotype is how the bunny appears (fur, ears, and teeth) and functions due to its genotype.
+
+The sim does not support genes with more than 2 allele types.
