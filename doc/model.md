@@ -9,12 +9,15 @@ This document is a high-level description of the model used in PhET's _Natural S
 * alleles - the different variations of a gene
 * genotype - the total of all the genetic messages in an organism; the total blueprint for the organism
 * phenotype - the way the organism appears and functions because of its genes; what is built from the genotype
-* dominant trait - With dominant traits, an individual carries either two dominant alleles or one dominant and one recessive allele. A dominant allele can be expressed even if only one copy of the allele is present.
-* recessive trait - A recessive trait will only be expressed if an individual has two recessive alleles.
-* selecting agent = any factor, environmental or otherwise, that affects fertility or mortality
+* selection agent - any factor, environmental or otherwise, that affects fertility or mortality
 * chromosomes - contain genes for certain traits
+* locus - a specific, fixed position on a chromosome where a particular gene is located
 * diploid - having 2 sets of chromosomes
-* gene pool - the collection of all the genes and the various allelic forms of those genes within a population
+* gene pool - the collection of all the genes (and various allelic forms of those genes) within a population
+* Dominance is the phenomenon of one allele of a gene on a chromosome masking or overriding the effect of a 
+different allele on the other copy of the chromosome. The first allele is termed dominant and the second 
+recessive. Dominance is not inherent to either an allele or its phenotype. Dominance is a relationship between 
+two alleles and their associated phenotypes. 
 
 * A dominant allele hides a recessive allele and determines the organism's appearance.
 * When an organism has two copies of the same allele, it is said to be homozygous for that gene. 
