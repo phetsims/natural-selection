@@ -23,7 +23,7 @@ two alleles and their associated phenotypes.
 * When an organism has two copies of the same allele, it is said to be homozygous for that gene. 
 * When an organism has two different alleles, we can say it is heterozygous for that gene.
 
-* mutation
+* mutation - changes in traits resulting from changes in DNA
 * Mendelian Genetics (Gregor Mendel), https://en.wikipedia.org/wiki/Mendelian_inheritance
 
 * FF - homozygous dominant
