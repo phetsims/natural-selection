@@ -37,7 +37,7 @@ define( require => {
 
     /**
      * Creates the default genotype for a bunny.
-     * This genotype is used for the bunnies that have no ancestors, the long bunny and its mate.
+     * This genotype is used for the bunnies that have no ancestors, the lone bunny and its mate.
      * @returns {BunnyGenotype}
      * @public
      */

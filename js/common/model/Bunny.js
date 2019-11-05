@@ -63,7 +63,7 @@ define( require => {
 
     /**
      * Creates a bunny with the default genotype.
-     * This is used for bunnies that have no ancestors, the long bunny and its mate.
+     * This is used for bunnies that have no ancestors, the lone bunny and its mate.
      * @returns {Bunny}
      * @public
      */
