@@ -99,9 +99,9 @@ define( require => {
       } );
 
       // Rows below the column headings
-      const furRow = createRow( furString, mutationBrownFurImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
-      const earsRow = createRow( earsString, mutationFlatEarsImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
-      const teethRow = createRow( teethString, mutationLongTeethImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
+      const furRow = new AddMutationRow( furString, mutationBrownFurImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
+      const earsRow = new AddMutationRow( earsString, mutationFlatEarsImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
+      const teethRow = new AddMutationRow( teethString, mutationLongTeethImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
 
       const content = new VBox( {
         align: 'left',
@@ -114,41 +114,47 @@ define( require => {
   }
 
   /**
-   * Creates a row in this control panel.
-   * @param {string} traitName
-   * @param {HTMLImageElement} icon
-   * @param {AlignGroup} iconAlignGroup
-   * @param {AlignGroup} labelColumnAlignGroup
-   * @param {AlignGroup} buttonColumnsAlignGroup
+   * AddMutationRow is a row in the 'Add Mutations' panel.
+   * TODO describe behavior
    */
-  function createRow( traitName, icon, iconAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup ) {
+  class AddMutationRow extends HBox {
 
-    // label that indicates the trait name, to the left of buttons
-    const labelNode = new Text( traitName, {
-      font: LABEL_FONT
-    } );
+    /**
+     * @param {string} traitName
+     * @param {HTMLImageElement} icon
+     * @param {AlignGroup} iconAlignGroup
+     * @param {AlignGroup} labelColumnAlignGroup
+     * @param {AlignGroup} buttonColumnsAlignGroup
+     */
+    constructor( traitName, icon, iconAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup ) {
 
-    // icon, the same on both buttons
-    const iconNode = new Image( icon, {
-      scale: BUTTON_ICON_SCALE
-    } );
+      // label that indicates the trait name, to the left of buttons
+      const labelNode = new Text( traitName, {
+        font: LABEL_FONT
+      } );
 
-    // buttons
-    const buttonOptions = {
-      content: new AlignBox( iconNode, { group: iconAlignGroup } ),
-      baseColor: BUTTON_BASE_COLOR
-    };
-    const dominantButton = new RectangularPushButton( buttonOptions );
-    const recessiveButton = new RectangularPushButton( buttonOptions );
+      // icon, the same on both buttons
+      const iconNode = new Image( icon, {
+        scale: BUTTON_ICON_SCALE
+      } );
 
-    return new HBox( {
-      spacing: COLUMN_SPACING,
-      children: [
-        new AlignBox( labelNode, { group: labelColumnAlignGroup, xAlign: LABEL_COLUMN_X_ALIGN } ),
-        new AlignBox( dominantButton, { group: buttonColumnsAlignGroup, xAlign: BUTTON_COLUMNS_X_ALIGN } ),
-        new AlignBox( recessiveButton, { group: buttonColumnsAlignGroup, xAlign: BUTTON_COLUMNS_X_ALIGN } )
-      ]
-    } );
+      // buttons
+      const buttonOptions = {
+        content: new AlignBox( iconNode, { group: iconAlignGroup } ),
+        baseColor: BUTTON_BASE_COLOR
+      };
+      const dominantButton = new RectangularPushButton( buttonOptions );
+      const recessiveButton = new RectangularPushButton( buttonOptions );
+
+      super( {
+        spacing: COLUMN_SPACING,
+        children: [
+          new AlignBox( labelNode, { group: labelColumnAlignGroup, xAlign: LABEL_COLUMN_X_ALIGN } ),
+          new AlignBox( dominantButton, { group: buttonColumnsAlignGroup, xAlign: BUTTON_COLUMNS_X_ALIGN } ),
+          new AlignBox( recessiveButton, { group: buttonColumnsAlignGroup, xAlign: BUTTON_COLUMNS_X_ALIGN } )
+        ]
+      } );
+    }
   }
 
   return naturalSelection.register( 'AddMutationPanel', AddMutationPanel );
