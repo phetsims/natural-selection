@@ -6,6 +6,7 @@
 //TODO ensure that reset doesn't change visibility of rows for PhET-iO
 /**
  * AddMutationPanel is the panel that contains controls used to add mutations.
+ * TODO describe behavior
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -47,6 +48,8 @@ define( require => {
   const LABEL_FONT = new PhetFont( 16 );
   const BUTTON_ICON_SCALE = 0.5;
   const BUTTON_BASE_COLOR = 'rgb( 203, 203, 203 )';
+  const LABEL_COLUMN_X_ALIGN = 'left';
+  const BUTTON_COLUMNS_X_ALIGN = 'center';
 
   class AddMutationPanel extends NaturalSelectionPanel {
 
@@ -63,7 +66,7 @@ define( require => {
       // All elements in the label column have the same effective width.
       const labelColumnAlignGroup = new AlignGroup( { matchVertical: false } );
 
-      // All elements in the button columns have the same effective width.
+      // All elements in the button columns (including column headings) have the same effective width.
       const buttonColumnsAlignGroup = new AlignGroup( { matchVertical: false } );
 
       // title is text + icon
@@ -76,20 +79,26 @@ define( require => {
         ]
       } );
 
-      // Column headings
+      // Individual column headings
       const geneNameColumnLabel = new Text( '' ); // to facilitate alignment
-      const dominantColumnLabel = new Text( dominantString, { font: COLUMN_HEADING_FONT } );
-      const recessiveColumnLabel = new Text( recessiveString, { font: COLUMN_HEADING_FONT } );
+      const dominantColumnLabel = new Text( dominantString, {
+        font: COLUMN_HEADING_FONT
+      } );
+      const recessiveColumnLabel = new Text( recessiveString, {
+        font: COLUMN_HEADING_FONT
+      } );
 
+      // Layout of column headings 
       const columnHeadingsNode = new HBox( {
         spacing: COLUMN_SPACING,
         children: [
-          new AlignBox( geneNameColumnLabel, { group: labelColumnAlignGroup } ),
-          new AlignBox( dominantColumnLabel, { group: buttonColumnsAlignGroup } ),
-          new AlignBox( recessiveColumnLabel, { group: buttonColumnsAlignGroup } )
+          new AlignBox( geneNameColumnLabel, { group: labelColumnAlignGroup, xAlign: LABEL_COLUMN_X_ALIGN } ),
+          new AlignBox( dominantColumnLabel, { group: buttonColumnsAlignGroup, xAlign: BUTTON_COLUMNS_X_ALIGN } ),
+          new AlignBox( recessiveColumnLabel, { group: buttonColumnsAlignGroup, xAlign: BUTTON_COLUMNS_X_ALIGN } )
         ]
       } );
 
+      // Rows below the column headings
       const furRow = createRow( furString, mutationBrownFurImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
       const earsRow = createRow( earsString, mutationFlatEarsImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
       const teethRow = createRow( teethString, mutationLongTeethImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
@@ -106,19 +115,23 @@ define( require => {
 
   /**
    * Creates a row in this control panel.
-   * @param {string} labelString
+   * @param {string} traitName
    * @param {HTMLImageElement} icon
    * @param {AlignGroup} iconAlignGroup
    * @param {AlignGroup} labelColumnAlignGroup
    * @param {AlignGroup} buttonColumnsAlignGroup
    */
-  function createRow( labelString, icon, iconAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup ) {
+  function createRow( traitName, icon, iconAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup ) {
 
-    // label to the left of buttons
-    const labelNode = new Text( labelString, { font: LABEL_FONT } );
+    // label that indicates the trait name, to the left of buttons
+    const labelNode = new Text( traitName, {
+      font: LABEL_FONT
+    } );
 
     // icon, the same on both buttons
-    const iconNode = new Image( icon, { scale: BUTTON_ICON_SCALE } );
+    const iconNode = new Image( icon, {
+      scale: BUTTON_ICON_SCALE
+    } );
 
     // buttons
     const buttonOptions = {
@@ -131,9 +144,9 @@ define( require => {
     return new HBox( {
       spacing: COLUMN_SPACING,
       children: [
-        new AlignBox( labelNode, { group: labelColumnAlignGroup, xAlign: 'left' } ),
-        new AlignBox( dominantButton, { group: buttonColumnsAlignGroup } ),
-        new AlignBox( recessiveButton, { group: buttonColumnsAlignGroup } )
+        new AlignBox( labelNode, { group: labelColumnAlignGroup, xAlign: LABEL_COLUMN_X_ALIGN } ),
+        new AlignBox( dominantButton, { group: buttonColumnsAlignGroup, xAlign: BUTTON_COLUMNS_X_ALIGN } ),
+        new AlignBox( recessiveButton, { group: buttonColumnsAlignGroup, xAlign: BUTTON_COLUMNS_X_ALIGN } )
       ]
     } );
   }
