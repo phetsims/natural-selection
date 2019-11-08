@@ -87,6 +87,14 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "TODO copied from Java version"
   },
+  "whiteFur.png": {
+    "text": [
+      "Copyright 2019 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Megan Lai"
+  },
   "brownFur.png": {
     "text": [
       "Copyright 2019 University of Colorado Boulder"
@@ -95,7 +103,23 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Megan Lai"
   },
+  "tallEars.png": {
+    "text": [
+      "Copyright 2019 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Megan Lai"
+  },
   "flatEars.png": {
+    "text": [
+      "Copyright 2019 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Megan Lai"
+  },
+  "shortTeeth.png": {
     "text": [
       "Copyright 2019 University of Colorado Boulder"
     ],
