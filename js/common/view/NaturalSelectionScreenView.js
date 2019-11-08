@@ -89,7 +89,7 @@ define( require => {
         model.wolves.enabledProperty, model.toughFood.enabledProperty, model.limitedFood.enabledProperty, {
           fixedWidth: rightOfWorldWidth,
           left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-          bottom: viewportNode.bottom
+          top: addMutationPanel.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
         } );
 
       const graphWidth = 0.75 * viewportNode.width;
