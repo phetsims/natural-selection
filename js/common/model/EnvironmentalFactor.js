@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * SelectionAgent is the base class for all selection agents.
+ * EnvironmentalFactor is the base class for all environmental factors. These are things that affect the fertility
+ * or mortality of bunnies, and are also known as 'selection agents' or 'selecting agents'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -12,7 +13,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
 
-  class SelectionAgent {
+  class EnvironmentalFactor {
 
     constructor() {
 
@@ -28,5 +29,5 @@ define( require => {
     }
   }
 
-  return naturalSelection.register( 'SelectionAgent', SelectionAgent );
+  return naturalSelection.register( 'EnvironmentalFactor', EnvironmentalFactor );
 } );

@@ -11,9 +11,6 @@
   "addAMate": {
     "value": "Add a Mate"
   },
-  "limitedFood": {
-    "value": "Limited Food"
-  },
   "population": {
     "value": "Population"
   },
@@ -59,14 +56,17 @@
   "teeth": {
     "value": "Teeth"
   },
-  "selectionAgents": {
-    "value": "Selection Agents"
+  "environmentalFactors": {
+    "value": "Environmental Factors"
   },
   "wolves": {
     "value": "Wolves"
   },
   "toughFood": {
     "value": "Tough Food"
+  },
+  "limitedFood": {
+    "value": "Limited Food"
   },
   "addMutation": {
     "value": "Add Mutation"

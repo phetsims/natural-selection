@@ -8,10 +8,10 @@ define( require => {
   'use strict';
 
   // modules
+  const EnvironmentalFactor = require( 'NATURAL_SELECTION/common/model/EnvironmentalFactor' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const SelectionAgent = require( 'NATURAL_SELECTION/common/model/SelectionAgent' );
 
-  class ToughFood extends SelectionAgent {
+  class ToughFood extends EnvironmentalFactor {
 
     constructor() {
       super();

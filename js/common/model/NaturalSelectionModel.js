@@ -36,11 +36,13 @@ define( require => {
       // @public (read-only)
       this.generationClock = new GenerationClock();
 
-      // @public (read-only) selection agents
+      // @public the abiotic (physical, rather than biological) environment
+      this.abioticEnvironmentProperty = new EnumerationProperty( AbioticEnvironments, AbioticEnvironments.EQUATOR );
+
+      // @public (read-only) the biotic (biological, rather than physical) environmental factors
       this.wolves = new Wolves();
       this.toughFood = new ToughFood();
       this.limitedFood = new LimitedFood();
-      this.abioticEnvironmentProperty = new EnumerationProperty( AbioticEnvironments, AbioticEnvironments.EQUATOR );
 
       // @public whether any selection agent is enabled
       this.selectionAgentsEnabledProperty = new DerivedProperty(

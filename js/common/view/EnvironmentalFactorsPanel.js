@@ -1,14 +1,16 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * SelectionAgentsPanel is the panel that contains controls for selection agents.
- * 
+ * EnvironmentalFactorsPanel is the panel that contains controls for environmental factors that affect
+ * the fertility and mortality of bunnies.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
   'use strict';
 
   // modules
+  const LimitedFoodCheckbox = require( 'NATURAL_SELECTION/common/view/LimitedFoodCheckbox' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
@@ -19,32 +21,36 @@ define( require => {
   const WolvesCheckbox = require( 'NATURAL_SELECTION/common/view/WolvesCheckbox' );
 
   // strings
-  const selectionAgentsString = require( 'string!NATURAL_SELECTION/selectionAgents' );
+  const environmentalFactorsString = require( 'string!NATURAL_SELECTION/environmentalFactors' );
 
-  class SelectionAgentsPanel extends NaturalSelectionPanel {
+  class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
 
     /**
      * @param {Property.<boolean>} wolvesEnabledProperty
      * @param {Property.<boolean>} toughFoodEnabledProperty
+     * @param {Property.<boolean>} limitedFoodEnabledProperty
      * @param {Object} [options]
      */
-    constructor( wolvesEnabledProperty, toughFoodEnabledProperty, options ) {
+    constructor( wolvesEnabledProperty, toughFoodEnabledProperty, limitedFoodEnabledProperty, options ) {
 
       options = merge( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         children: [
 
-          // Selection Agents
-          new Text( selectionAgentsString, {
-                 font: NaturalSelectionConstants.TITLE_FONT
-                } ),
+          // title
+          new Text( environmentalFactorsString, {
+            font: NaturalSelectionConstants.TITLE_FONT
+          } ),
 
           // Wolves
           new WolvesCheckbox( wolvesEnabledProperty ),
 
           // Tough Food
-          new ToughFoodCheckbox( toughFoodEnabledProperty )
+          new ToughFoodCheckbox( toughFoodEnabledProperty ),
+
+          // Limited Food
+          new LimitedFoodCheckbox( limitedFoodEnabledProperty )
         ]
       } ) );
 
@@ -52,5 +58,5 @@ define( require => {
     }
   }
 
-  return naturalSelection.register( 'SelectionAgentsPanel', SelectionAgentsPanel );
+  return naturalSelection.register( 'EnvironmentalFactorsPanel', EnvironmentalFactorsPanel );
 } );

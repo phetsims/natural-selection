@@ -12,10 +12,10 @@ define( require => {
   const AbioticEnvironmentRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/AbioticEnvironmentRadioButtonGroup' );
   const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
   const AddMutationPanel = require( 'NATURAL_SELECTION/common/view/AddMutationPanel' );
+  const EnvironmentalFactorsPanel = require( 'NATURAL_SELECTION/common/view/EnvironmentalFactorsPanel' );
   const GenerationClockNode = require( 'NATURAL_SELECTION/common/view/GenerationClockNode' );
   const GraphRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/GraphRadioButtonGroup' );
   const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
-  const LimitedFoodCheckbox = require( 'NATURAL_SELECTION/common/view/LimitedFoodCheckbox' );
   const MutationComingNode = require( 'NATURAL_SELECTION/common/view/MutationComingNode' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
@@ -28,7 +28,6 @@ define( require => {
   const ProportionControlPanel = require( 'NATURAL_SELECTION/common/view/ProportionControlPanel' );
   const ProportionGraphNode = require( 'NATURAL_SELECTION/common/view/ProportionGraphNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  const SelectionAgentsPanel = require( 'NATURAL_SELECTION/common/view/SelectionAgentsPanel' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const ViewportNode = require( 'NATURAL_SELECTION/common/view/ViewportNode' );
 
@@ -52,11 +51,6 @@ define( require => {
           left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
         } );
-
-      const limitedFoodCheckbox = new LimitedFoodCheckbox( model.limitedFood.enabledProperty, {
-        left: viewportNode.left + NaturalSelectionConstants.VIEWPORT_NODE_X_MARGIN,
-        top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
-      } );
 
       const generationClockNode = new GenerationClockNode( model.generationClock, model.selectionAgentsEnabledProperty, {
         centerX: viewportNode.centerX,
@@ -91,11 +85,12 @@ define( require => {
         top: viewportNode.top
       } );
 
-      const selectionAgentsPanel = new SelectionAgentsPanel( model.wolves.enabledProperty, model.toughFood.enabledProperty, {
-        fixedWidth: rightOfWorldWidth,
-        left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        bottom: viewportNode.bottom
-      } );
+      const environmentalFactorsPanel = new EnvironmentalFactorsPanel(
+        model.wolves.enabledProperty, model.toughFood.enabledProperty, model.limitedFood.enabledProperty, {
+          fixedWidth: rightOfWorldWidth,
+          left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+          bottom: viewportNode.bottom
+        } );
 
       const graphWidth = 0.75 * viewportNode.width;
       const graphHeight = this.layoutBounds.height - ( 2 * NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN ) -
@@ -182,13 +177,12 @@ define( require => {
       // layering
       this.children = [
         viewportNode,
-        limitedFoodCheckbox,
         generationClockNode,
         abioticEnvironmentRadioButtonGroup,
         addAMateButton,
         mutationComingNode,
         addMutationPanel,
-        selectionAgentsPanel,
+        environmentalFactorsPanel,
         timeControlNode,
         populationParent,
         proportionParent,
