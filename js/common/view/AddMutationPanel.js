@@ -45,7 +45,7 @@ define( require => {
   const COLUMN_SPACING = 8;
   const ROW_SPACING = 8;
   const LABEL_FONT = new PhetFont( 16 );
-  const ICON_SCALE = 0.5;
+  const BUTTON_ICON_SCALE = 0.5;
   const BUTTON_BASE_COLOR = 'rgb( 203, 203, 203 )';
 
   class AddMutationPanel extends NaturalSelectionPanel {
@@ -118,7 +118,7 @@ define( require => {
     const labelNode = new Text( labelString, { font: LABEL_FONT } );
 
     // icon, the same on both buttons
-    const iconNode = new Image( icon, { scale: ICON_SCALE } );
+    const iconNode = new Image( icon, { scale: BUTTON_ICON_SCALE } );
 
     // buttons
     const buttonOptions = {
