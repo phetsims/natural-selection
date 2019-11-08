@@ -1,5 +1,9 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO when a button is pressed, replace both buttons with the appropriate icons
+//TODO when a button is pressed, emit 'mutation coming' with row.centerY (in global frame) and cancelCallback
+//TODO reset
+//TODO ensure that reset doesn't change visibility of rows for PhET-iO
 /**
  * AddMutationPanel is the panel that contains controls used to add mutations.
  *
