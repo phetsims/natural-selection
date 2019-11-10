@@ -29,6 +29,7 @@ define( require => {
   const ProportionGraphNode = require( 'NATURAL_SELECTION/common/view/ProportionGraphNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
   const ViewportNode = require( 'NATURAL_SELECTION/common/view/ViewportNode' );
 
   class NaturalSelectionScreenView extends ScreenView {
@@ -68,11 +69,12 @@ define( require => {
         bottom: viewportNode.bottom - NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
 
-      const mutationComingNode = new MutationComingNode( {
-        cancelButtonListener: () => this.cancelMutation(),
-        visible: false,
+      //TODO for demo purposes only, these need to be placed based on rows in AddMutationsPanel
+      const mutationComingParent = new VBox( {
+        spacing: 15,
+        children: [ new MutationComingNode(), new MutationComingNode(), new MutationComingNode() ],
         right: abioticEnvironmentRadioButtonGroup.right,
-        top: abioticEnvironmentRadioButtonGroup.bottom + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
+        top: abioticEnvironmentRadioButtonGroup.bottom + 15
       } );
 
       const rightOfWorldWidth = this.layoutBounds.width - viewportNode.width -
@@ -180,7 +182,7 @@ define( require => {
         generationClockNode,
         abioticEnvironmentRadioButtonGroup,
         addAMateButton,
-        mutationComingNode,
+        mutationComingParent,
         addMutationPanel,
         environmentalFactorsPanel,
         timeControlNode,
@@ -195,7 +197,6 @@ define( require => {
       this.model = model;
       this.generationClockNode = generationClockNode;
       this.addAMateButton = addAMateButton;
-      this.mutationComingNode = mutationComingNode;
 
       viewProperties.graphProperty.link( graph => {
         populationParent.visible = ( graph === Graphs.POPULATION );
@@ -209,7 +210,6 @@ define( require => {
      */
     reset() {
       this.addAMateButton.visible = true;
-      this.mutationComingNode.visible = false;
       //TODO
     }
 
@@ -232,7 +232,6 @@ define( require => {
 
       // view
       this.addAMateButton.visible = false;
-      this.mutationComingNode.visible = true; //TODO not correct, just for testing
     }
 
     /**
@@ -240,7 +239,6 @@ define( require => {
      * @private
      */
     cancelMutation() {
-      this.mutationComingNode.visible = false;
       //TODO
     }
   }
