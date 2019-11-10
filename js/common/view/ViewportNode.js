@@ -35,12 +35,14 @@ define( require => {
       // Equator background, image is scaled to fit height
       const equatorBackground = new Image( equatorBackgroundImage );
       equatorBackground.setScaleMagnitude( height / equatorBackground.height );
-      //TODO #6 assert && assert( equatorBackground.width >= width, 'equatorBackground does not fill viewport' );
+      //TODO https://github.com/phetsims/natural-selection/issues/6
+      //assert && assert( equatorBackground.width >= width, 'equatorBackground does not fill viewport' );
 
       // Arctic background, image is scaled to fit height
       const arcticBackground = new Image( arcticBackgroundImage );
       arcticBackground.setScaleMagnitude( height / arcticBackground.height );
-      //TODO #6 assert && assert( arcticBackground.width >= width, 'arcticBackground does not fill viewport' );
+      //TODO https://github.com/phetsims/natural-selection/issues/6
+      //assert && assert( arcticBackground.width >= width, 'arcticBackground does not fill viewport' );
 
       // Horizon line, for debugging. Bunnies cannot go further back than this line.
       const horizonY = 115;

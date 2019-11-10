@@ -19,7 +19,7 @@ define( require => {
   const naturalSelectionTitleString = require( 'string!NATURAL_SELECTION/natural-selection.title' );
 
   const simOptions = {
-    //TODO #2 complete the credits
+    //TODO https://github.com/phetsims/natural-selection/issues/2 complete the credits
     credits: {
       leadDesign: 'Amanda McGarry',
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
