@@ -12,10 +12,11 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const Path = require( 'SCENERY/nodes/Path' );
+  const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
 
-  class HatchingRectangle extends Rectangle {
+  class HatchingRectangle extends Node {
 
     /**
      * @param {number} x
@@ -29,30 +30,36 @@ define( require => {
       options = merge( {
         fill: 'black',
         hatchStroke: 'white',
-        hatchLineWidth: 5,
+        hatchLineWidth: 2,
         hatchAngle: -Math.PI / 4
       }, options );
 
-      super( x, y, width, height, options );
+      const rectangle = new Rectangle( 0, 0, width, height, {
+        fill: options.fill
+      } );
 
       let lineY = 0;
       const linesShape = new Shape();
-      while ( lineY <= height ) {
-        linesShape.moveTo( 0, lineY )
-          .lineTo( width, lineY )
-          .moveTo( width, lineY + options.hatchLineWidth )
-          .lineTo( 0, lineY + options.hatchLineWidth );
+      while ( lineY <= 2 * height ) {
+        linesShape.moveTo( 0, lineY ).lineTo( 2 * width, lineY );
         lineY = lineY + 2 * options.hatchLineWidth;
       }
 
-      this.linesPath = new Path( linesShape, {
+      const linesPath = new Path( linesShape, {
         stroke: options.hatchStroke,
-        lineWidth: options.hatchLineWidth
-        // clipArea: this.shape
-        // center: this.center,
-        // rotation: options.hatchAngle
+        lineWidth: options.hatchLineWidth,
+        //TODO clipArea
+        center: rectangle.center,
+        rotation: options.hatchAngle
       } );
-      this.addChild( this.linesPath );
+
+      assert && assert( !options.children, 'HatchingRectangle sets children' );
+      options.children = [ rectangle, linesPath ];
+
+      assert && assert( !options.clipArea, 'HatchingRectangle sets clipArea' );
+      options.clipArea = Shape.rectangle( 0, 0, width, height );
+
+      super( options );
     }
   }
 

@@ -10,7 +10,7 @@ define( require => {
   'use strict';
 
   // modules
-  // const HatchingRectangle = require( 'NATURAL_SELECTION/common/view/HatchingRectangle' );
+  const HatchingRectangle = require( 'NATURAL_SELECTION/common/view/HatchingRectangle' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -45,12 +45,8 @@ define( require => {
         } );
       }
       else {
-        // rectangleNode = new HatchingRectangle( 0, 0, 25, 15, {
-        //   fill: trait.color,
-        //   stroke: 'white'
-        // } );
-        rectangleNode = new Rectangle( 0, 0, 25, 15, {
-          stroke: trait.color
+        rectangleNode = new HatchingRectangle( 0, 0, 25, 15, {
+          fill: trait.color
         } );
       }
 
