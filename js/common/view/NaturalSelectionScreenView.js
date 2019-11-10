@@ -71,8 +71,8 @@ define( require => {
       const mutationComingNode = new MutationComingNode( {
         cancelButtonListener: () => this.cancelMutation(),
         visible: false,
-        centerX: viewportNode.centerX,
-        bottom: viewportNode.bottom - NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
+        right: abioticEnvironmentRadioButtonGroup.right,
+        top: abioticEnvironmentRadioButtonGroup.bottom + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
 
       const rightOfWorldWidth = this.layoutBounds.width - viewportNode.width -
