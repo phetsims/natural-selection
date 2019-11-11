@@ -12,11 +12,10 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const Path = require( 'SCENERY/nodes/Path' );
-  const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
 
-  class HatchingRectangle extends Node {
+  class HatchingRectangle extends Rectangle {
 
     /**
      * @param {number} x
@@ -28,38 +27,40 @@ define( require => {
     constructor( x, y, width, height, options ) {
 
       options = merge( {
+
+        // options for the hatching lines
+        hatchOptions: {
+          stroke: 'white',
+          lineWidth: 2,
+          rotation: -Math.PI / 4
+        },
+
+        // Rectangle options
         fill: 'black',
-        hatchStroke: 'white',
-        hatchLineWidth: 2,
-        hatchAngle: -Math.PI / 4
+        stroke: null
+
       }, options );
 
-      const rectangle = new Rectangle( 0, 0, width, height, {
-        fill: options.fill
-      } );
+      assert && assert( !options.children, 'HatchingRectangle sets children' );
+      assert && assert( !options.clipArea, 'HatchingRectangle sets clipArea' );
 
+      super( 0, 0, width, height, options );
+
+      // Clip to the shape of the rectangle
+      this.clipArea = this.shape;
+
+      // Draw equally-spaces lines on top of the rectangle to create a hatching pattern. The lines are drawn
+      // horizontally as a single Shape, then rotated to the desired angle. The bounds of the lines is 2x the
+      // dimensions of the rectangle, so that the hatching pattern can be rotated arbitrarily.
       let lineY = 0;
       const linesShape = new Shape();
       while ( lineY <= 2 * height ) {
         linesShape.moveTo( 0, lineY ).lineTo( 2 * width, lineY );
-        lineY = lineY + 2 * options.hatchLineWidth;
+        lineY = lineY + 2 * options.hatchOptions.lineWidth;
       }
-
-      const linesPath = new Path( linesShape, {
-        stroke: options.hatchStroke,
-        lineWidth: options.hatchLineWidth,
-        //TODO clipArea
-        center: rectangle.center,
-        rotation: options.hatchAngle
-      } );
-
-      assert && assert( !options.children, 'HatchingRectangle sets children' );
-      options.children = [ rectangle, linesPath ];
-
-      assert && assert( !options.clipArea, 'HatchingRectangle sets clipArea' );
-      options.clipArea = Shape.rectangle( 0, 0, width, height );
-
-      super( options );
+      const linesPath = new Path( linesShape, options.hatchOptions );
+      linesPath.center = this.center;
+      this.addChild( linesPath );
     }
   }
 
