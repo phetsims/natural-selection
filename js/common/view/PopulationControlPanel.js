@@ -42,7 +42,7 @@ define( require => {
       // Total
       const totalCheckbox = new PopulationCheckbox( totalVisibleProperty, totalString, {
         lineOptions: {
-          stroke: NaturalSelectionColors.TOTAL_GRAPH_COLOR
+          stroke: NaturalSelectionColors.TOTAL_POPULATION
         }
       } );
 

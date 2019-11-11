@@ -17,6 +17,11 @@ define( require => {
 
     WORLD_NODE_STROKE: 'rgb( 190, 200, 150 )', // darker version of SCREEN_VIEW_BACKGROUND
 
+    // traits
+    FUR: '#1b9e77', // green
+    EARS: '#d95f02', // red
+    TEETH: '#7570b3', // purple
+
     // Panels
     PANEL_FILL: 'white',
     PANEL_STROKE: 'rgb( 150, 160, 110 )', // much darker version of SCREEN_VIEW_BACKGROUND
@@ -30,10 +35,7 @@ define( require => {
 
     // Graphs
     GRAPHS_STROKE: 'rgb( 190, 200, 150 )', // darker version of SCREEN_VIEW_BACKGROUND
-    TOTAL_GRAPH_COLOR: 'black',
-    FUR_GRAPH_COLOR: '#1b9e77', // green
-    EARS_GRAPH_COLOR: '#d95f02', // red
-    TEETH_GRAPH_COLOR: '#7570b3' // purple
+    TOTAL_POPULATION: 'black'
   };
 
   return naturalSelection.register( 'NaturalSelectionColors', NaturalSelectionColors );
