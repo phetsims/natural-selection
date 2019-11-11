@@ -23,7 +23,8 @@ define( require => {
   const X_MARGIN = 5;
   const Y_MARGIN = 5;
   const ZOOM_BUTTON_OPTIONS = {
-    radius: 6
+    radius: 6,
+    baseColor: 'rgb( 203, 203, 203 )'
   };
 
   class PopulationGraphNode extends Node {
