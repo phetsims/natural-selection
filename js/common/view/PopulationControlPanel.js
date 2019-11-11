@@ -38,7 +38,18 @@ define( require => {
         fixedWidth: 100,
         xMargin: 0
       }, NaturalSelectionConstants.PANEL_OPTIONS, options );
-                    
+
+      // Values Marker
+      const valuesMarkerCheckbox = new Checkbox(
+        new Text( valuesMarkerString, { font: NaturalSelectionConstants.CHECKBOX_FONT } ),
+        valuesMarkerVisibleProperty,
+        NaturalSelectionConstants.CHECKBOX_OPTIONS );
+
+      // ------
+      const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin, {
+        stroke: NaturalSelectionColors.SEPARATOR_STROKE
+      } );
+
       // Total
       const totalCheckbox = new PopulationCheckbox( totalVisibleProperty, totalString, {
         lineOptions: {
@@ -57,20 +68,9 @@ define( require => {
         } ) );
       } );
 
-      // ------
-      const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin, {
-        stroke: NaturalSelectionColors.SEPARATOR_STROKE
-      } );
-
-      // Values Marker
-      const valuesMarkerCheckbox = new Checkbox(
-        new Text( valuesMarkerString, { font: NaturalSelectionConstants.CHECKBOX_FONT } ),
-        valuesMarkerVisibleProperty,
-        NaturalSelectionConstants.CHECKBOX_OPTIONS );
-
       // Arranged vertically
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-        children: [ totalCheckbox, ...traitCheckboxes, separator, valuesMarkerCheckbox ]
+        children: [ valuesMarkerCheckbox, separator, totalCheckbox, ...traitCheckboxes ]
       } ) );
 
       super( content, options );
