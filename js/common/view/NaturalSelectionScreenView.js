@@ -19,7 +19,6 @@ define( require => {
   const MutationComingNode = require( 'NATURAL_SELECTION/common/view/MutationComingNode' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const NaturalSelectionTimeControlNode = require( 'NATURAL_SELECTION/common/view/NaturalSelectionTimeControlNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PedigreeControlPanel = require( 'NATURAL_SELECTION/common/view/PedigreeControlPanel' );
   const PedigreeNode = require( 'NATURAL_SELECTION/common/view/PedigreeNode' );
@@ -29,6 +28,7 @@ define( require => {
   const ProportionGraphNode = require( 'NATURAL_SELECTION/common/view/ProportionGraphNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
+  const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const ViewportNode = require( 'NATURAL_SELECTION/common/view/ViewportNode' );
 
@@ -160,7 +160,10 @@ define( require => {
         centerY: populationGraphNode.centerY
       } );
 
-      const timeControlNode = new NaturalSelectionTimeControlNode( model.isPlayingProperty, {
+      const timeControlNode = new TimeControlNode( model.isPlayingProperty, {
+        stepOptions: {
+          listener: () => model.stepOnce( NaturalSelectionConstants.SECONDS_PER_STEP )
+        },
         left: proportionGraphNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
       } );

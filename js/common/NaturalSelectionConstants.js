@@ -30,6 +30,10 @@ define( require => {
     SCREEN_VIEW_X_SPACING: 15, // horizontal spacing between UI components in the ScreenView
     SCREEN_VIEW_Y_SPACING: 15, // vertical spacing between UI components in the ScreenView
 
+    // clock
+    SECONDS_PER_GENERATION: 10,
+    SECONDS_PER_STEP: 0.1, // dt for when the Step button is pressed, in seconds
+
     // ViewportNode
     VIEWPORT_NODE_X_MARGIN: 8, // margins at left and right edges of the viewport
     VIEWPORT_NODE_Y_MARGIN: 8, // margins at top and bottom edges of the viewport

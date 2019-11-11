@@ -90,22 +90,31 @@ define( require => {
     }
 
     /**
+     * Steps the model.
      * @param {number} dt - time step, in seconds
      * @public
      * @override
      */
     step( dt ) {
       if ( this.isPlayingProperty.value ) {
+        this.stepOnce( dt );
+      }
+    }
 
-        // advance the generation clock
-        if ( this.mateWasAddedProperty.value ) {
-          this.generationClock.step( dt );
-        }
+    /**
+     * Steps the model one time step.
+     * @public
+     */
+    stepOnce( dt ) {
 
-        // step the bunnies
-        for ( let i = 0; i < this.bunnies.length; i++ ) {
-          this.bunnies[ i ].step( dt );
-        }
+      // advance the generation clock
+      if ( this.mateWasAddedProperty.value ) {
+        this.generationClock.step( dt );
+      }
+
+      // step the bunnies
+      for ( let i = 0; i < this.bunnies.length; i++ ) {
+        this.bunnies[ i ].step( dt );
       }
     }
   }
