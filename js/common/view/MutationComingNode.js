@@ -18,7 +18,8 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const Shape = require( 'KITE/Shape' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   // images
@@ -30,6 +31,7 @@ define( require => {
   // constants
   const X_MARGIN = 8;
   const Y_MARGIN = 4;
+  const POINTER_WIDTH = 15;
 
   class MutationComingNode extends Node {
 
@@ -59,15 +61,26 @@ define( require => {
         ]
       } );
 
-      const background = new Rectangle( 0, 0, hBox.width + 2 * X_MARGIN, hBox.height + 2 * Y_MARGIN, {
-        cornerRadius: 2,
+      const backgroundWidth = hBox.width + 2 * X_MARGIN;
+      const backgroundHeight = hBox.height + 2 * Y_MARGIN;
+      const backgroundShape = new Shape()
+        .moveTo( 0, 0 )
+        .lineTo( backgroundWidth, 0 )
+        .lineTo( backgroundWidth + POINTER_WIDTH, backgroundHeight / 2 )
+        .lineTo( backgroundWidth, backgroundHeight )
+        .lineTo( 0, backgroundHeight )
+        .close();
+      const backgroundPath = new Path( backgroundShape, {
         stroke: 'black',
-        fill: 'rgba( 255, 255, 255, 0.75 )',
-        center: hBox.center
+        fill: 'rgba( 255, 255, 255, 0.75 )'
       } );
+      
+      // Center content in the background
+      hBox.left = backgroundPath.left + X_MARGIN;
+      hBox.centerY = backgroundPath.centerY;
 
       assert && assert( !options.children, 'MutationComingNode sets children' );
-      options.children = [ background, hBox ];
+      options.children = [ backgroundPath, hBox ];
 
       super( options );
     }

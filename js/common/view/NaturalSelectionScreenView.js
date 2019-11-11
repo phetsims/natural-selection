@@ -69,14 +69,6 @@ define( require => {
         bottom: viewportNode.bottom - NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
 
-      //TODO for demo purposes only, these need to be placed based on rows in AddMutationsPanel
-      const mutationComingParent = new VBox( {
-        spacing: 15,
-        children: [ new MutationComingNode(), new MutationComingNode(), new MutationComingNode() ],
-        right: abioticEnvironmentRadioButtonGroup.right,
-        top: abioticEnvironmentRadioButtonGroup.bottom + 15
-      } );
-
       const rightOfWorldWidth = this.layoutBounds.width - viewportNode.width -
                                 ( 2 * NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN ) -
                                 NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
@@ -85,6 +77,14 @@ define( require => {
         fixedWidth: rightOfWorldWidth,
         left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         top: viewportNode.top
+      } );
+
+      //TODO for demo purposes only, these need to be placed based on rows in AddMutationsPanel
+      const mutationComingParent = new VBox( {
+        spacing: 16,
+        children: [ new MutationComingNode(), new MutationComingNode(), new MutationComingNode() ],
+        right: addMutationPanel.left + 10,
+        top: addMutationPanel.top + 62
       } );
 
       const environmentalFactorsPanel = new EnvironmentalFactorsPanel(
@@ -182,8 +182,8 @@ define( require => {
         generationClockNode,
         abioticEnvironmentRadioButtonGroup,
         addAMateButton,
-        mutationComingParent,
         addMutationPanel,
+        mutationComingParent,
         environmentalFactorsPanel,
         timeControlNode,
         populationParent,
