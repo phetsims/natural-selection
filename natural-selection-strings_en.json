@@ -82,5 +82,23 @@
   },
   "mutationComing": {
     "value": "Mutation Coming..."
+  },
+  "F": {
+    "value": "F"
+  },
+  "f": {
+    "value": "f"
+  },
+  "E": {
+    "value": "E"
+  },
+  "e": {
+    "value": "e"
+  },
+  "T": {
+    "value": "T"
+  },
+  "t": {
+    "value": "t"
   }
 }
