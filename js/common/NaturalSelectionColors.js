@@ -13,9 +13,11 @@ define( require => {
 
   const NaturalSelectionColors = {
 
+    // ScreenView
     SCREEN_VIEW_BACKGROUND: 'rgb( 220, 231, 184 )',
 
-    WORLD_NODE_STROKE: 'rgb( 190, 200, 150 )', // darker version of SCREEN_VIEW_BACKGROUND
+    // ViewportNode
+    VIEWPORT_NODE_STROKE: 'rgb( 190, 200, 150 )', // darker version of SCREEN_VIEW_BACKGROUND
 
     // traits
     FUR: '#1b9e77', // green
@@ -33,7 +35,7 @@ define( require => {
     ZOOM_BUTTONS: 'rgb( 203, 203, 203 )',
     MUTATION_BUTTONS: 'rgb( 203, 203, 203 )',
 
-    // Graphs
+    // graphs
     GRAPHS_STROKE: 'rgb( 190, 200, 150 )', // darker version of SCREEN_VIEW_BACKGROUND
     TOTAL_POPULATION: 'black'
   };
