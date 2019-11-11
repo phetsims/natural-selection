@@ -2,7 +2,7 @@
 
 /**
  * AbioticEnvironmentRadioButtonGroup is the radio button group for choosing the abiotic component of the
- * enviroment. See AbioticEnvironments.
+ * environment. See AbioticEnvironments.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -31,12 +31,12 @@ define( require => {
      */
     constructor( environmentProperty, options ) {
 
-      options = merge( {
+      options = merge( {}, {
         orientation: 'horizontal',
         spacing: 8,
-        cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
+        cornerRadius: 5,
         selectedStroke: 'rgb( 254, 225, 5 )',
-        selectedLineWidth: 5,
+        selectedLineWidth: NaturalSelectionConstants.CORNER_RADIUS,
         deselectedLineWidth: 1,
         deselectedButtonOpacity: 0.2,
 
@@ -56,12 +56,12 @@ define( require => {
       const buttonWidth = _.maxBy( [ sunIcon, snowflakeIcon ], icon => icon.width ).width + ( 2 * ICON_X_MARGIN );
       const buttonHeight = _.maxBy( [ sunIcon, snowflakeIcon ], icon => icon.height ).height + ( 2 * ICON_Y_MARGIN );
       const sunBackground = new Rectangle( 0, 0, buttonWidth, buttonHeight, {
-        cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
+        cornerRadius: options.cornerRadius,
         fill: 'rgb( 207, 125, 66 )',
         center: sunIcon.center
       } );
       const snowflakeBackground = new Rectangle( 0, 0, buttonWidth, buttonHeight, {
-        cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
+        cornerRadius: options.cornerRadius,
         fill: 'rgb( 54, 137, 239 )',
         center: snowflakeIcon.center
       } );

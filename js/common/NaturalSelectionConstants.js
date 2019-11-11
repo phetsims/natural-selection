@@ -18,10 +18,6 @@ define( require => {
   // For things with a corner radius
   const CORNER_RADIUS = 5;
 
-  // for all panel-like containers
-  const PANEL_X_MARGIN = 15;
-  const PANEL_Y_MARGIN = 10;
-
   const NaturalSelectionConstants = {
 
     // ScreenView
@@ -51,8 +47,8 @@ define( require => {
     PANEL_OPTIONS: {
       align: 'left',
       cornerRadius: CORNER_RADIUS,
-      xMargin: PANEL_X_MARGIN,
-      yMargin: PANEL_Y_MARGIN,
+      xMargin: 15,
+      yMargin: 10,
       fill: NaturalSelectionColors.PANEL_FILL,
       stroke: NaturalSelectionColors.PANEL_STROKE
     },
