@@ -113,6 +113,9 @@
   "current": {
     "value": "Current"
   },
+  "nEqualsValue": {
+    "value": "N = {{value}}"
+  },
   "Close": {
     "value": "Close"
   },
