@@ -200,6 +200,7 @@ define( require => {
       this.model = model;
       this.generationClockNode = generationClockNode;
       this.addAMateButton = addAMateButton;
+      this.proportionGraphNode = proportionGraphNode;
 
       viewProperties.graphProperty.link( graph => {
         populationParent.visible = ( graph === Graphs.POPULATION );
@@ -213,6 +214,7 @@ define( require => {
      */
     reset() {
       this.addAMateButton.visible = true;
+      this.proportionGraphNode.reset();
       //TODO
     }
 
