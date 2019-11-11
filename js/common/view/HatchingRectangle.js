@@ -28,8 +28,8 @@ define( require => {
 
       options = merge( {
 
-        // options for the hatching lines
-        hatchOptions: {
+        // options for the hatching pattern
+        hatchingOptions: {
           stroke: 'white',
           lineWidth: 2,
           rotation: -Math.PI / 4
@@ -56,9 +56,9 @@ define( require => {
       const linesShape = new Shape();
       while ( lineY <= 2 * height ) {
         linesShape.moveTo( 0, lineY ).lineTo( 2 * width, lineY );
-        lineY = lineY + 2 * options.hatchOptions.lineWidth;
+        lineY = lineY + 2 * options.hatchingOptions.lineWidth;
       }
-      const linesPath = new Path( linesShape, options.hatchOptions );
+      const linesPath = new Path( linesShape, options.hatchingOptions );
       linesPath.center = this.center;
       this.addChild( linesPath );
     }
