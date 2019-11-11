@@ -14,7 +14,11 @@ define( require => {
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
+
+  // strings
+  const generationNumberString = require( 'string!NATURAL_SELECTION/generationNumber' );
 
   class ProportionGraphNode extends Node {
 
@@ -32,9 +36,10 @@ define( require => {
       } );
 
       //TODO placeholder
-      const text = new Text( 'Proportion', {
+      const text = new Text( StringUtils.fillIn( generationNumberString, { number: 0 } ), {
         font: NaturalSelectionConstants.TITLE_FONT,
-        center: rectangle.center
+        centerX: rectangle.centerX,
+        top: rectangle.top + 8
       } );
 
       assert && assert( !options.children, 'ProportionGraphNode sets children' );

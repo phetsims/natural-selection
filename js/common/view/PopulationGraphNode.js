@@ -19,6 +19,10 @@ define( require => {
   const Text = require( 'SCENERY/nodes/Text' );
   const ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
 
+  // strings
+  const generationString = require( 'string!NATURAL_SELECTION/generation' );
+  const populationString = require( 'string!NATURAL_SELECTION/population' );
+  
   // const
   const X_MARGIN = 5;
   const Y_MARGIN = 5;
@@ -42,10 +46,19 @@ define( require => {
         stroke: NaturalSelectionColors.GRAPHS_STROKE
       } );
 
-      //TODO placeholder
-      const text = new Text( 'Population', {
+      // x-axis label
+      const xAxisLabelNode = new Text( generationString, {
         font: NaturalSelectionConstants.TITLE_FONT,
-        center: rectangle.center
+        centerX: rectangle.centerX,
+        bottom: rectangle.bottom - 8
+      } );
+
+      // y-axis label
+      const yAxisLabelNode = new Text( populationString, {
+        font: NaturalSelectionConstants.TITLE_FONT,
+        rotation: -Math.PI / 2,
+        left: rectangle.left + 8,
+        centerY: rectangle.centerY
       } );
 
       const zoomInButton = new ZoomButton( merge( {}, ZOOM_BUTTON_OPTIONS, {
@@ -70,7 +83,7 @@ define( require => {
       } );
 
       assert && assert( !options.children, 'PopulationGraphNode sets children' );
-      options.children = [ rectangle, zoomButtonsParent, text ];
+      options.children = [ rectangle, zoomButtonsParent, xAxisLabelNode, yAxisLabelNode ];
 
       super( options );
     }
