@@ -41,26 +41,26 @@ define( require => {
         font: NaturalSelectionConstants.CHECKBOX_FONT
       };
 
-      // Legend for each trait
-      const traitLegends = [];
-      traits.forEach( trait => {
-        traitLegends.push( new ProportionLegendNode( trait ) );
-      } );
-
-      // ------
-      const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin, {
-        stroke: NaturalSelectionColors.SEPARATOR_STROKE
-      } );
-
       // Values
       const valuesCheckbox = new Checkbox(
         new Text( valuesString, textOptions ),
         valuesVisibleProperty,
         NaturalSelectionConstants.CHECKBOX_OPTIONS );
 
+      // ------
+      const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin, {
+        stroke: NaturalSelectionColors.SEPARATOR_STROKE
+      } );
+
+      // Legend for each trait
+      const traitLegends = [];
+      traits.forEach( trait => {
+        traitLegends.push( new ProportionLegendNode( trait ) );
+      } );
+
       // Arranged vertically
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-        children: [ ...traitLegends, separator, valuesCheckbox ]
+        children: [ valuesCheckbox, separator, ...traitLegends ]
       } ) );
 
       super( content, options );
