@@ -100,5 +100,29 @@
   },
   "t": {
     "value": "t"
+  },
+  "generation": {
+    "value": "Generation"
+  },
+  "generationNumber": {
+    "value": "Generation {{number}}"
+  },
+  "startOfGeneration": {
+    "value": "Start of Generation"
+  },
+  "current": {
+    "value": "Current"
+  },
+  "Close": {
+    "value": "Close"
+  },
+  "playAgain": {
+    "value": "Play Again"
+  },
+  "bunniesHaveTakenOverTheWorld": {
+    "value": "Bunnies have taken over the world!"
+  },
+  "allOfTheBunniesHaveDied": {
+    "value": "All of the bunnies have died."
   }
 }
