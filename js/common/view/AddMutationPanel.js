@@ -20,6 +20,7 @@ define( require => {
   const Image = require( 'SCENERY/nodes/Image' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -47,7 +48,6 @@ define( require => {
   const ROW_SPACING = 8;
   const LABEL_FONT = new PhetFont( 16 );
   const BUTTON_ICON_SCALE = 0.5;
-  const BUTTON_BASE_COLOR = 'rgb( 203, 203, 203 )';
   const LABEL_COLUMN_X_ALIGN = 'left';
   const BUTTON_COLUMNS_X_ALIGN = 'center';
 
@@ -141,7 +141,7 @@ define( require => {
       // buttons
       const buttonOptions = {
         content: new AlignBox( iconNode, { group: iconAlignGroup } ),
-        baseColor: BUTTON_BASE_COLOR
+        baseColor: NaturalSelectionColors.MUTATION_BUTTONS
       };
       const dominantButton = new RectangularPushButton( buttonOptions );
       const recessiveButton = new RectangularPushButton( buttonOptions );

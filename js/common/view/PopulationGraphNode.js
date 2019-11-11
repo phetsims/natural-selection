@@ -24,7 +24,7 @@ define( require => {
   const Y_MARGIN = 5;
   const ZOOM_BUTTON_OPTIONS = {
     radius: 6,
-    baseColor: 'rgb( 203, 203, 203 )'
+    baseColor: NaturalSelectionColors.ZOOM_BUTTONS
   };
 
   class PopulationGraphNode extends Node {
