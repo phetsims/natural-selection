@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-  const HBox = require( 'SCENERY/nodes/HBox' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
@@ -17,6 +16,7 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
   const ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
 
   // strings
@@ -80,7 +80,7 @@ define( require => {
         }
       } ) );
 
-      const zoomButtonsParent = new HBox( {
+      const zoomButtonsParent = new VBox( {
         children: [ zoomInButton, zoomOutButton ],
         spacing: 5,
         left: rectangle.left + X_MARGIN,
