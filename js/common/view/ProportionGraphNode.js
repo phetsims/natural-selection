@@ -34,7 +34,6 @@ define( require => {
   const teethString = require( 'string!NATURAL_SELECTION/teeth' );
 
   // constants
-  const X_MARGIN = 15;
   const COLUMNS_SPACING = 20;
   const LABEL_FONT = new PhetFont( 14 );
   const VALUE_FONT = new PhetFont( 14 );
@@ -68,30 +67,38 @@ define( require => {
       const labelColumnAlignGroup = new AlignGroup();
       const barColumnsAlignGroup = new AlignGroup( { matchVertical: false } );
 
-      const startRow = new ProportionGraphRow( startOfGenerationString, startCountProperty, labelColumnAlignGroup, barColumnsAlignGroup );
-      const currentRow = new ProportionGraphRow( currentlyString, currentCountProperty, labelColumnAlignGroup, barColumnsAlignGroup );
-
-      const labelOptions = { font: LABEL_FONT };
-      const labelsRow = new HBox( {
+      // Column labels
+      const columnLabelOptions = { font: LABEL_FONT };
+      const columnLabels = new HBox( {
         spacing: COLUMNS_SPACING,
         children: [
-          new AlignBox( new Text( '', labelOptions ), { group: barColumnsAlignGroup } ),
-          new AlignBox( new Text( furString, labelOptions ), { group: barColumnsAlignGroup } ),
-          new AlignBox( new Text( earsString, labelOptions ), { group: barColumnsAlignGroup } ),
-          new AlignBox( new Text( teethString, labelOptions ), { group: barColumnsAlignGroup } )
+          new AlignBox( new Text( '', columnLabelOptions ), { group: barColumnsAlignGroup } ),
+          new AlignBox( new Text( furString, columnLabelOptions ), { group: barColumnsAlignGroup } ),
+          new AlignBox( new Text( earsString, columnLabelOptions ), { group: barColumnsAlignGroup } ),
+          new AlignBox( new Text( teethString, columnLabelOptions ), { group: barColumnsAlignGroup } )
         ]
       } );
 
+      // Rows
+      const startRow = new ProportionGraphRow( startOfGenerationString, startCountProperty, labelColumnAlignGroup, barColumnsAlignGroup );
+      const currentRow = new ProportionGraphRow( currentlyString, currentCountProperty, labelColumnAlignGroup, barColumnsAlignGroup );
       const rows = new VBox( {
         spacing: 30,
         align: 'left',
-        children: [ startRow, currentRow, labelsRow ],
-        left: backgroundNode.left + X_MARGIN,
-        centerY: generationControl.bottom + ( backgroundNode.bottom - generationControl.bottom ) / 2
+        children: [ startRow, currentRow ]
+      } );
+
+      // Column labels above rows
+      const graph = new VBox( {
+        spacing: 20,
+        align: 'left',
+        children: [ columnLabels, rows ],
+        centerX: backgroundNode.centerX,
+        centerY: backgroundNode.centerY
       } );
 
       assert && assert( !options.children, 'ProportionGraphNode sets children' );
-      options.children = [ backgroundNode, generationControl, rows ];
+      options.children = [ backgroundNode, generationControl, graph ];
 
       super( options );
 
