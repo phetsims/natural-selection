@@ -23,18 +23,19 @@ define( require => {
     /**
      * @param {Property.<boolean>} property
      * @param {string} labelString
-     * @param {Color|string} color
-     * @param {boolean} isMutation
      * @param {Object} [options]
      */
-    constructor( property, labelString, color, isMutation, options ) {
+    constructor( property, labelString, options ) {
 
-      options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
+      options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+        color: 'white',
+        isMutation: false
+      }, options );
 
       const lineNode = new Line( 0, 0, 28, 0, {
-        stroke: color,
+        stroke: options.color,
         lineWidth: 3,
-        lineDash: isMutation ? [ 3, 3 ] : []  // mutations use a dashed line
+        lineDash: options.isMutation ? [ 3, 3 ] : []  // mutations use a dashed line
       } );
 
       const textNode = new Text( labelString, {

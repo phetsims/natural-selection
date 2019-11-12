@@ -35,14 +35,18 @@ define( require => {
   class PopulationGraphNode extends Node {
 
     /**
-     * @param {number} width
-     * @param {number} height
+     * @param {PopulationModel} populationModel
      * @param {Object} [options]
      */
-    constructor( width, height, options ) {
+    constructor( populationModel, options ) {
+
+      options = merge( {
+        graphWidth: 100,
+        graphHeight: 100
+      }, options );
 
       //TODO placeholder
-      const rectangle = new Rectangle( 0, 0, width, height, {
+      const rectangle = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
         fill: 'white',
         stroke: NaturalSelectionColors.GRAPHS_STROKE
       } );

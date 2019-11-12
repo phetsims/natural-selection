@@ -98,19 +98,19 @@ define( require => {
 
       const leftOfGraphWidth = viewportNode.width - graphWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
-      const populationGraphNode = new PopulationGraphNode( graphWidth, graphHeight, {
+      const populationGraphNode = new PopulationGraphNode( model.populationModel, {
+        graphWidth: graphWidth,
+        graphHeight: graphHeight,
         right: viewportNode.right,
         top: viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
       } );
 
-      const populationControlPanel = new PopulationControlPanel(
-        viewProperties.populationTotalVisibleProperty,
-        viewProperties.populationValuesMarkerVisibleProperty, {
-          fixedWidth: leftOfGraphWidth,
-          maxHeight: graphHeight,
-          right: populationGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
-          centerY: populationGraphNode.centerY
-        } );
+      const populationControlPanel = new PopulationControlPanel( model.populationModel, {
+        fixedWidth: leftOfGraphWidth,
+        maxHeight: graphHeight,
+        right: populationGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
+        centerY: populationGraphNode.centerY
+      } );
 
       const populationParent = new Node( {
         children: [ populationControlPanel, populationGraphNode ]

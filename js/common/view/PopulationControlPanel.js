@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Checkbox = require( 'SUN/Checkbox' );
   const HSeparator = require( 'SUN/HSeparator' );
   const merge = require( 'PHET_CORE/merge' );
@@ -34,11 +33,10 @@ define( require => {
   class PopulationControlPanel extends NaturalSelectionPanel {
 
     /**
-     * @param {Property.<boolean>} totalVisibleProperty
-     * @param {Property.<boolean>} valuesMarkerVisibleProperty
+     * @param {PopulationModel} populationModel
      * @param {Object} [options]
      */
-    constructor( totalVisibleProperty, valuesMarkerVisibleProperty, options ) {
+    constructor( populationModel, options ) {
 
       options = merge( {
         fixedWidth: 100,
@@ -48,7 +46,7 @@ define( require => {
       // Values Marker
       const valuesMarkerCheckbox = new Checkbox(
         new Text( valuesMarkerString, { font: NaturalSelectionConstants.CHECKBOX_FONT } ),
-        valuesMarkerVisibleProperty,
+        populationModel.valuesMarkerVisibleProperty,
         NaturalSelectionConstants.CHECKBOX_OPTIONS );
 
       // ------
@@ -57,17 +55,51 @@ define( require => {
       } );
 
       // Total
-      const totalCheckbox = new PopulationCheckbox( totalVisibleProperty, totalString, NaturalSelectionColors.TOTAL_POPULATION, false );
+      const totalCheckbox = new PopulationCheckbox( populationModel.totalVisibleProperty, totalString, {
+        color: NaturalSelectionColors.TOTAL_POPULATION
+      } );
 
-      //TODO temporary BooleanProperty for each checkbox
       // Checkbox for each allele
       const alleleCheckboxes = [
-        new PopulationCheckbox( new BooleanProperty( false ), whiteFurString, NaturalSelectionColors.FUR, false ),
-        new PopulationCheckbox( new BooleanProperty( false ), brownFurString, NaturalSelectionColors.FUR, true ),
-        new PopulationCheckbox( new BooleanProperty( false ), tallEarsString, NaturalSelectionColors.EARS, false ),
-        new PopulationCheckbox( new BooleanProperty( false ), flatEarsString, NaturalSelectionColors.EARS, true ),
-        new PopulationCheckbox( new BooleanProperty( false ), shortTeethString, NaturalSelectionColors.TEETH, false ),
-        new PopulationCheckbox( new BooleanProperty( false ), longTeethString, NaturalSelectionColors.TEETH, true )
+
+        // White Fur
+        new PopulationCheckbox( populationModel.whiteFurVisibleProperty, whiteFurString, {
+          color: NaturalSelectionColors.FUR,
+          enabledProperty: populationModel.whiteFurEnabledProperty
+        } ),
+
+        // Brown Fur
+        new PopulationCheckbox( populationModel.brownFurVisibleProperty, brownFurString, {
+          color: NaturalSelectionColors.FUR,
+          isMutation: true,
+          enabledProperty: populationModel.brownFurEnabledProperty
+        } ),
+
+        // Tall Ears
+        new PopulationCheckbox( populationModel.tallEarsVisibleProperty, tallEarsString, {
+          color: NaturalSelectionColors.EARS,
+          enabledProperty: populationModel.tallEarsEnabledProperty
+        } ),
+
+        // Flat Ears
+        new PopulationCheckbox( populationModel.flatEarsVisibleProperty, flatEarsString, {
+          color: NaturalSelectionColors.EARS,
+          isMutation: true,
+          enabledProperty: populationModel.flatEarsEnabledProperty
+        } ),
+
+        // Short Teeth
+        new PopulationCheckbox( populationModel.shortTeethVisibleProperty, shortTeethString, {
+          color: NaturalSelectionColors.TEETH,
+          enabledProperty: populationModel.shortTeethEnabledProperty
+        } ),
+
+        // Long Teeth
+        new PopulationCheckbox( populationModel.longTeethVisibleProperty, longTeethString, {
+          color: NaturalSelectionColors.TEETH,
+          isMutation: true,
+          enabledProperty: populationModel.longTeethEnabledProperty
+        } )
       ];
 
       // Arranged vertically

@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -20,13 +19,6 @@ define( require => {
 
       // @public
       this.graphProperty = new EnumerationProperty( Graphs, Graphs.POPULATION );
-
-      // @public Population graph
-      this.populationTotalVisibleProperty = new BooleanProperty( false );
-      this.populationValuesMarkerVisibleProperty = new BooleanProperty( false );
-
-      // @public Proportion graph
-      this.proportionValuesVisibleProperty = new BooleanProperty( false );
     }
 
     /**
@@ -34,11 +26,6 @@ define( require => {
      */
     reset() {
       this.graphProperty.reset();
-      this.populationTotalVisibleProperty.reset();
-      this.populationValuesMarkerVisibleProperty.reset();
-      this.populationWhiteFurVisibleProperty.reset();
-      this.populationBrownFurVisibleProperty.reset();
-      this.proportionValuesVisibleProperty.reset();
     }
   }
 
