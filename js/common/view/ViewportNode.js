@@ -41,7 +41,7 @@ define( require => {
       arcticBackground.setScaleMagnitude( width / arcticBackground.width, height / arcticBackground.height );
 
       // Horizon line, for debugging. Bunnies cannot go further back than this line.
-      const horizonY = 115;
+      const horizonY = 110;
       const horizonLine = new Line( 0, horizonY, width, horizonY, {
         stroke: phet.chipper.queryParameters.dev ? 'red' : null,
         lineWidth: 1
