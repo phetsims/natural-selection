@@ -33,6 +33,9 @@ define( require => {
   const flatEarsImage = require( 'image!NATURAL_SELECTION/flatEars.png' );
   const mutationIconImage = require( 'image!NATURAL_SELECTION/mutationIcon.png' );
   const longTeethImage = require( 'image!NATURAL_SELECTION/longTeeth.png' );
+  const shortTeethImage = require( 'image!NATURAL_SELECTION/shortTeeth.png' );
+  const tallEarsImage = require( 'image!NATURAL_SELECTION/tallEars.png' );
+  const whiteFurImage = require( 'image!NATURAL_SELECTION/whiteFur.png' );
 
   // strings
   const addMutationString = require( 'string!NATURAL_SELECTION/addMutation' );
@@ -99,9 +102,9 @@ define( require => {
       } );
 
       // Rows below the column headings
-      const furRow = new AddMutationRow( furString, brownFurIcon, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
-      const earsRow = new AddMutationRow( earsString, flatEarsImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
-      const teethRow = new AddMutationRow( teethString, longTeethImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
+      const furRow = new AddMutationRow( furString, brownFurIcon, whiteFurImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
+      const earsRow = new AddMutationRow( earsString, flatEarsImage, tallEarsImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
+      const teethRow = new AddMutationRow( teethString, longTeethImage, shortTeethImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
 
       const content = new VBox( {
         align: 'left',
@@ -121,26 +124,27 @@ define( require => {
 
     /**
      * @param {string} traitName
-     * @param {HTMLImageElement} icon
+     * @param {HTMLImageElement} mutationIcon
+     * @param {HTMLImageElement} nonMutationIcon
      * @param {AlignGroup} iconAlignGroup
      * @param {AlignGroup} labelColumnAlignGroup
      * @param {AlignGroup} buttonColumnsAlignGroup
      */
-    constructor( traitName, icon, iconAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup ) {
+    constructor( traitName, mutationIcon, nonMutationIcon, iconAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup ) {
 
       // label that indicates the trait name, to the left of buttons
       const labelNode = new Text( traitName, {
         font: LABEL_FONT
       } );
 
-      // icon, the same on both buttons
-      const iconNode = new Image( icon, {
+      // mutation icon, the same on both buttons
+      const mutationIconNode = new Image( mutationIcon, {
         scale: BUTTON_ICON_SCALE
       } );
 
       // buttons
       const buttonOptions = {
-        content: new AlignBox( iconNode, { group: iconAlignGroup } ),
+        content: new AlignBox( mutationIconNode, { group: iconAlignGroup } ),
         baseColor: NaturalSelectionColors.MUTATION_BUTTONS
       };
       const dominantButton = new RectangularPushButton( buttonOptions );
