@@ -1,6 +1,4 @@
-
-wolf.ai
-bunnies.ai
+Consider a more modern-looking zoom control, like Google Maps.
 
 Add Mutation UX needs work
 
