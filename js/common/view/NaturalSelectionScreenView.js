@@ -137,7 +137,7 @@ define( require => {
         top: viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
       } );
 
-      const pedigreeControlPanel = new PedigreeControlPanel( {
+      const pedigreeControlPanel = new PedigreeControlPanel( model.pedigreeModel, {
         fixedWidth: leftOfGraphWidth,
         maxHeight: graphHeight,
         right: pedigreeNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,

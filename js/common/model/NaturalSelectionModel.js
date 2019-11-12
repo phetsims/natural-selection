@@ -17,6 +17,7 @@ define( require => {
   const GenerationClock = require( 'NATURAL_SELECTION/common/model/GenerationClock' );
   const LimitedFood = require( 'NATURAL_SELECTION/common/model/LimitedFood' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const PedigreeModel = require( 'NATURAL_SELECTION/common/model/PedigreeModel' );
   const ToughFood = require( 'NATURAL_SELECTION/common/model/ToughFood' );
   const Wolves = require( 'NATURAL_SELECTION/common/model/Wolves' );
 
@@ -51,8 +52,11 @@ define( require => {
           ( wolvesEnabled || touchFooEnabled || limitedFoodEnabled )
       );
 
-      // @public {Bunny[]}
+      // @public (read-only) {Bunny[]}
       this.bunnies = [ Bunny.createDefault() ];
+
+      // @public (read-only)
+      this.pedigreeModel = new PedigreeModel();
     }
 
     /**
@@ -60,13 +64,18 @@ define( require => {
      * @public
      */
     reset() {
+
+      // Properties
       this.isPlayingProperty.reset();
       this.mateWasAddedProperty.reset();
       this.generationClock.reset();
+      this.abioticEnvironmentProperty.reset();
+
+      // subcomponents
       this.wolves.reset();
       this.toughFood.reset();
       this.limitedFood.reset();
-      this.abioticEnvironmentProperty.reset();
+      this.pedigreeModel.reset();
 
       this.playAgain();
     }

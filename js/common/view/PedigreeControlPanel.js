@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Checkbox = require( 'SUN/Checkbox' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -27,9 +26,10 @@ define( require => {
   class PedigreeControlPanel extends NaturalSelectionPanel {
 
     /**
+     * @param {PedigreeModel} pedigreeModel
      * @param {Object} [options]
      */
-    constructor( options ) {
+    constructor( pedigreeModel, options ) {
 
       options = merge( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
@@ -38,13 +38,21 @@ define( require => {
         font: NaturalSelectionConstants.TITLE_FONT
       } );
 
-      //TODO temporary BooleanProperty for each checkbox
       // Checkbox for each gene
       const textOptions = { font: NaturalSelectionConstants.CHECKBOX_FONT };
       const checkboxes = [
-        new Checkbox( new Text( furString, textOptions ), new BooleanProperty( false ), NaturalSelectionConstants.CHECKBOX_OPTIONS ),
-        new Checkbox( new Text( earsString, textOptions ), new BooleanProperty( false ), NaturalSelectionConstants.CHECKBOX_OPTIONS ),
-        new Checkbox( new Text( teethString, textOptions ), new BooleanProperty( false ), NaturalSelectionConstants.CHECKBOX_OPTIONS )
+
+        // Fur
+        new Checkbox( new Text( furString, textOptions ), pedigreeModel.furVisibleProperty,
+          merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, { enabledProperty: pedigreeModel.furEnabledProperty } ) ),
+
+        // Ears
+        new Checkbox( new Text( earsString, textOptions ), pedigreeModel.earsVisibleProperty,
+          merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, { enabledProperty: pedigreeModel.earsEnabledProperty } ) ),
+
+        // Teeth
+        new Checkbox( new Text( teethString, textOptions ), pedigreeModel.teethVisibleProperty,
+          merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, { enabledProperty: pedigreeModel.teethEnabledProperty } ) )
       ];
 
       // Arranged vertically
