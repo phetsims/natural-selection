@@ -1,4 +1,5 @@
 Consider a more modern-looking zoom control, like Google Maps.
+Animate contents of Proportions view when switching generations.
 
 Add Mutation UX needs work
 
