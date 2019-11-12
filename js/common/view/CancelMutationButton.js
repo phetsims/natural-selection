@@ -10,15 +10,16 @@ define( require => {
 
   // modules
   const FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   const RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
 
   class CancelMutationButton extends RoundPushButton {
 
-    constructor() {
+    constructor( options ) {
 
-      super( {
+      options = merge( {
 
         // so we see only the icon
         minXMargin: 0,
@@ -30,12 +31,10 @@ define( require => {
           fill: PhetColorScheme.RED_COLORBLIND,
           scale: 1.4,
           cursor: 'pointer'
-        } ),
+        } )
+      }, options );
 
-        listener: () => {
-          //TODO cancel mutation
-        }
-      } );
+      super( options );
     }
   }
 
