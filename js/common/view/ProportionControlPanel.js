@@ -57,7 +57,7 @@ define( require => {
         stroke: NaturalSelectionColors.SEPARATOR_STROKE
       } );
 
-      // Legend for each allele
+      // Legend for alleles
       const allelesLegend = [
         new ProportionLegendNode( whiteFurString, NaturalSelectionColors.FUR, false ),
         new ProportionLegendNode( brownFurString, NaturalSelectionColors.FUR, true ),
