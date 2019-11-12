@@ -17,6 +17,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const ProportionBarNode = require( 'NATURAL_SELECTION/common/view/ProportionBarNode' );
   const ProportionGenerationControl = require( 'NATURAL_SELECTION/common/view/ProportionGenerationControl' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -63,7 +64,7 @@ define( require => {
       const currentRow = new ProportionGraphRow( currentString, currentCountProperty, labelAlignGroup );
 
       const rows = new VBox( {
-        spacing: 20,
+        spacing: 50,
         align: 'left',
         children: [ startRow, currentRow ],
         left: backgroundNode.left + X_MARGIN,
@@ -87,6 +88,9 @@ define( require => {
     }
   }
 
+  /**
+   * ProportionGraphRow is a row in the Proportion graph.
+   */
   class ProportionGraphRow extends HBox {
 
     /**
@@ -94,7 +98,7 @@ define( require => {
      * @param {Property.<number>} countProperty
      * @param {AlignGroup} valueAlignGroup
      */
-    constructor( labelString, countProperty, valueAlignGroup ) {
+    constructor( labelString, countProperty, valueAlignGroup, ) {
 
       const labelNode = new Text( labelString, {
         font: LABEL_FONT
@@ -120,10 +124,15 @@ define( require => {
         xAlign: 'left'
       } );
 
+      //TODO temporary Properties
+      const furBarNode = new ProportionBarNode( NaturalSelectionColors.FUR, new NumberProperty( 70 ), new NumberProperty( 30 ) );
+      const earsBarNode = new ProportionBarNode( NaturalSelectionColors.EARS, new NumberProperty( 40 ), new NumberProperty( 60 ) );
+      const teethBarNode = new ProportionBarNode( NaturalSelectionColors.TEETH, new NumberProperty( 100 ), new NumberProperty( 0 ) );
+
       super( {
-        spacing: 8,
+        spacing: 20,
         align: 'left',
-        children: [ valueAlignBox ]
+        children: [ valueAlignBox, furBarNode, earsBarNode, teethBarNode ]
       } );
     }
   }
