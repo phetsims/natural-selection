@@ -110,6 +110,9 @@
   "startOfGeneration": {
     "value": "Start of Generation"
   },
+  "endOfGeneration": {
+    "value": "End of Generation"
+  },
   "currently": {
     "value": "Currently"
   },

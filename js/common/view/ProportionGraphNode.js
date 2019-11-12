@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO change "Currently" to "End of Generation" after selection agents have been applied
 /**
  * ProportionGraphNode displays the proportion graph.
  *
