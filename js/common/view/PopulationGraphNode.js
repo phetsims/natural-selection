@@ -16,8 +16,7 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
-  const ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
+  const ZoomControl = require( 'NATURAL_SELECTION/common/view/ZoomControl' );
 
   // strings
   const generationString = require( 'string!NATURAL_SELECTION/generation' );
@@ -26,10 +25,6 @@ define( require => {
   // const
   const X_MARGIN = 5;
   const Y_MARGIN = 5;
-  const ZOOM_BUTTON_OPTIONS = {
-    radius: 6,
-    baseColor: NaturalSelectionColors.ZOOM_BUTTONS
-  };
   const AXIS_LABEL_FONT = new PhetFont( 14 );
 
   class PopulationGraphNode extends Node {
@@ -66,29 +61,17 @@ define( require => {
         centerY: rectangle.centerY
       } );
 
-      const zoomInButton = new ZoomButton( merge( {}, ZOOM_BUTTON_OPTIONS, {
-        in: true,
-        listener: () => {
-          //TODO
-        }
-      } ) );
-
-      const zoomOutButton = new ZoomButton( merge( {}, ZOOM_BUTTON_OPTIONS, {
-        in: false,
-        listener: () => {
-          //TODO
-        }
-      } ) );
-
-      const zoomButtonsParent = new VBox( {
-        children: [ zoomInButton, zoomOutButton ],
-        spacing: 5,
+      // zoom control
+      const zoomControl = new ZoomControl( populationModel.yZoomLevelProperty, {
+        orientation: 'vertical',
+        zoomLevelMax: 10,
+        zoomLevelMin: 1,
         left: rectangle.left + X_MARGIN,
         top: rectangle.top + Y_MARGIN
       } );
 
       assert && assert( !options.children, 'PopulationGraphNode sets children' );
-      options.children = [ rectangle, zoomButtonsParent, xAxisLabelNode, yAxisLabelNode ];
+      options.children = [ rectangle, zoomControl, xAxisLabelNode, yAxisLabelNode ];
 
       super( options );
     }

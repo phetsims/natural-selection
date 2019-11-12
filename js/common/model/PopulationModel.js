@@ -11,6 +11,7 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
 
   class PopulationModel {
 
@@ -21,6 +22,9 @@ define( require => {
 
       // @public visibility of the total population plot on the graph
       this.totalVisibleProperty = new BooleanProperty( true );
+
+      // @public zoom level of the graph's y axis
+      this.yZoomLevelProperty = new NumberProperty( 1 );
 
       // @public visibility of the plot for each allele on the graph
       this.whiteFurVisibleProperty = new BooleanProperty( false );
@@ -45,8 +49,8 @@ define( require => {
      */
     reset() {
       this.valuesMarkerVisibleProperty.reset();
-
       this.totalVisibleProperty.reset();
+      this.yZoomLevelProperty.reset();
 
       this.whiteFurVisibleProperty.reset();
       this.brownFurVisibleProperty.reset();
