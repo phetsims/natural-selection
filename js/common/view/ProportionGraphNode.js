@@ -55,8 +55,10 @@ define( require => {
       } );
 
       const generationControl = new ProportionGenerationControl( generationProperty, {
-        centerX: backgroundNode.centerX,
         top: backgroundNode.top + 8
+      } );
+      generationControl.on( 'bounds', () => {
+        generationControl.centerX = backgroundNode.centerX;
       } );
 
       const labelAlignGroup = new AlignGroup();
