@@ -13,6 +13,7 @@ define( require => {
   const AlignBox = require( 'SCENERY/nodes/AlignBox' );
   const AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -26,9 +27,9 @@ define( require => {
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  const currentlyString = require( 'string!NATURAL_SELECTION/currently' );
   const countBunniesString = require( 'string!NATURAL_SELECTION/countBunnies' );
   const earsString = require( 'string!NATURAL_SELECTION/ears' );
+  const endOfGenerationString = require( 'string!NATURAL_SELECTION/endOfGeneration' );
   const furString = require( 'string!NATURAL_SELECTION/fur' );
   const oneBunnyString = require( 'string!NATURAL_SELECTION/oneBunny' );
   const startOfGenerationString = require( 'string!NATURAL_SELECTION/startOfGeneration' );
@@ -42,23 +43,22 @@ define( require => {
   class ProportionGraphNode extends Node {
 
     /**
-     * @param {number} width
-     * @param {number} height
+     * @param {ProportionModel} proportionModel
      * @param {Object} [options]
      */
-    constructor( width, height, options ) {
+    constructor( proportionModel, options ) {
 
-      // TODO temporary Properties
-      const generationProperty = new NumberProperty( 0 );
-      const startCountProperty = new NumberProperty( 1 );
-      const currentCountProperty = new NumberProperty( 50 );
+      options = merge( {
+        graphWidth: 100,
+        graphHeight: 100
+      }, options );
 
-      const backgroundNode = new Rectangle( 0, 0, width, height, {
+      const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
         fill: 'white',
         stroke: NaturalSelectionColors.GRAPHS_STROKE
       } );
 
-      const generationControl = new ProportionGenerationControl( generationProperty, {
+      const generationControl = new ProportionGenerationControl( proportionModel.generationProperty, {
         top: backgroundNode.top + 8
       } );
       generationControl.on( 'bounds', () => {
@@ -81,8 +81,10 @@ define( require => {
       } );
 
       // Rows
-      const startRow = new ProportionGraphRow( startOfGenerationString, startCountProperty, labelColumnAlignGroup, barColumnsAlignGroup );
-      const currentRow = new ProportionGraphRow( currentlyString, currentCountProperty, labelColumnAlignGroup, barColumnsAlignGroup );
+      const startRow = new ProportionGraphRow( startOfGenerationString, proportionModel.startCountProperty,
+        labelColumnAlignGroup, barColumnsAlignGroup );
+      const currentRow = new ProportionGraphRow( endOfGenerationString, proportionModel.endCountProperty,
+        labelColumnAlignGroup, barColumnsAlignGroup );
       const rows = new VBox( {
         spacing: 30,
         align: 'left',
@@ -102,16 +104,6 @@ define( require => {
       options.children = [ backgroundNode, generationControl, graph ];
 
       super( options );
-
-      // @private
-      this.generationProperty = generationProperty;
-    }
-
-    /**
-     * @public
-     */
-    reset() {
-      this.generationProperty.reset();
     }
   }
 

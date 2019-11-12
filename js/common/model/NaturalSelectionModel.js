@@ -18,6 +18,7 @@ define( require => {
   const LimitedFood = require( 'NATURAL_SELECTION/common/model/LimitedFood' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const PedigreeModel = require( 'NATURAL_SELECTION/common/model/PedigreeModel' );
+  const ProportionModel = require( 'NATURAL_SELECTION/common/model/ProportionModel' );
   const ToughFood = require( 'NATURAL_SELECTION/common/model/ToughFood' );
   const Wolves = require( 'NATURAL_SELECTION/common/model/Wolves' );
 
@@ -56,6 +57,7 @@ define( require => {
       this.bunnies = [ Bunny.createDefault() ];
 
       // @public (read-only)
+      this.proportionModel = new ProportionModel();
       this.pedigreeModel = new PedigreeModel();
     }
 
@@ -75,6 +77,7 @@ define( require => {
       this.wolves.reset();
       this.toughFood.reset();
       this.limitedFood.reset();
+      this.proportionModel.reset();
       this.pedigreeModel.reset();
 
       this.playAgain();

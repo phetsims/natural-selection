@@ -116,12 +116,14 @@ define( require => {
         children: [ populationControlPanel, populationGraphNode ]
       } );
 
-      const proportionGraphNode = new ProportionGraphNode( graphWidth, graphHeight, {
+      const proportionGraphNode = new ProportionGraphNode( model.proportionModel, {
+        graphWidth: graphWidth,
+        graphHeight: graphHeight,
         right: viewportNode.right,
         top: viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
       } );
 
-      const proportionControlPanel = new ProportionControlPanel( viewProperties.proportionValuesVisibleProperty, {
+      const proportionControlPanel = new ProportionControlPanel( model.proportionModel.valuesVisibleProperty, {
         fixedWidth: leftOfGraphWidth,
         maxHeight: graphHeight,
         right: proportionGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
@@ -192,7 +194,6 @@ define( require => {
 
       // @private
       this.model = model;
-      this.generationClockNode = generationClockNode;
       this.addAMateButton = addAMateButton;
       this.proportionGraphNode = proportionGraphNode;
 
@@ -208,7 +209,6 @@ define( require => {
      */
     reset() {
       this.addAMateButton.visible = true;
-      this.proportionGraphNode.reset();
       //TODO
     }
 
