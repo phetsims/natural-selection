@@ -13,8 +13,8 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
+  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
   const ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
@@ -22,7 +22,7 @@ define( require => {
   // strings
   const generationString = require( 'string!NATURAL_SELECTION/generation' );
   const populationString = require( 'string!NATURAL_SELECTION/population' );
-  
+
   // const
   const X_MARGIN = 5;
   const Y_MARGIN = 5;
@@ -30,7 +30,6 @@ define( require => {
     radius: 6,
     baseColor: NaturalSelectionColors.ZOOM_BUTTONS
   };
-  const AXIS_LABEL_FONT = new PhetFont( 14 );
 
   class PopulationGraphNode extends Node {
 
@@ -49,14 +48,14 @@ define( require => {
 
       // x-axis label
       const xAxisLabelNode = new Text( generationString, {
-        font: AXIS_LABEL_FONT,
+        font: NaturalSelectionConstants.AXIS_LABEL_FONT,
         centerX: rectangle.centerX,
         bottom: rectangle.bottom - 8
       } );
 
       // y-axis label
       const yAxisLabelNode = new Text( populationString, {
-        font: AXIS_LABEL_FONT,
+        font: NaturalSelectionConstants.AXIS_LABEL_FONT,
         rotation: -Math.PI / 2,
         left: rectangle.left + 8,
         centerY: rectangle.centerY
