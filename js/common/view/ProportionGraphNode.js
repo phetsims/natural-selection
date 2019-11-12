@@ -27,11 +27,15 @@ define( require => {
   // strings
   const currentlyString = require( 'string!NATURAL_SELECTION/currently' );
   const countBunniesString = require( 'string!NATURAL_SELECTION/countBunnies' );
+  const earsString = require( 'string!NATURAL_SELECTION/ears' );
+  const furString = require( 'string!NATURAL_SELECTION/fur' );
   const oneBunnyString = require( 'string!NATURAL_SELECTION/oneBunny' );
   const startOfGenerationString = require( 'string!NATURAL_SELECTION/startOfGeneration' );
+  const teethString = require( 'string!NATURAL_SELECTION/teeth' );
 
   // constants
   const X_MARGIN = 15;
+  const COLUMNS_SPACING = 20;
   const LABEL_FONT = new PhetFont( 14 );
   const VALUE_FONT = new PhetFont( 14 );
 
@@ -61,17 +65,29 @@ define( require => {
         generationControl.centerX = backgroundNode.centerX;
       } );
 
-      const labelAlignGroup = new AlignGroup();
+      const labelColumnAlignGroup = new AlignGroup();
+      const barColumnsAlignGroup = new AlignGroup( { matchVertical: false } );
 
-      const startRow = new ProportionGraphRow( startOfGenerationString, startCountProperty, labelAlignGroup );
-      const currentRow = new ProportionGraphRow( currentlyString, currentCountProperty, labelAlignGroup );
+      const startRow = new ProportionGraphRow( startOfGenerationString, startCountProperty, labelColumnAlignGroup, barColumnsAlignGroup );
+      const currentRow = new ProportionGraphRow( currentlyString, currentCountProperty, labelColumnAlignGroup, barColumnsAlignGroup );
+
+      const labelOptions = { font: LABEL_FONT };
+      const labelsRow = new HBox( {
+        spacing: COLUMNS_SPACING,
+        children: [
+          new AlignBox( new Text( '', labelOptions ), { group: barColumnsAlignGroup } ),
+          new AlignBox( new Text( furString, labelOptions ), { group: barColumnsAlignGroup } ),
+          new AlignBox( new Text( earsString, labelOptions ), { group: barColumnsAlignGroup } ),
+          new AlignBox( new Text( teethString, labelOptions ), { group: barColumnsAlignGroup } )
+        ]
+      } );
 
       const rows = new VBox( {
-        spacing: 50,
+        spacing: 30,
         align: 'left',
-        children: [ startRow, currentRow ],
+        children: [ startRow, currentRow, labelsRow ],
         left: backgroundNode.left + X_MARGIN,
-        centerY: backgroundNode.centerY
+        centerY: generationControl.bottom + ( backgroundNode.bottom - generationControl.bottom ) / 2
       } );
 
       assert && assert( !options.children, 'ProportionGraphNode sets children' );
@@ -100,8 +116,9 @@ define( require => {
      * @param {string} labelString
      * @param {Property.<number>} countProperty
      * @param {AlignGroup} valueAlignGroup
+     * @param {AlignGroup} barColumnsAlignGroup
      */
-    constructor( labelString, countProperty, valueAlignGroup, ) {
+    constructor( labelString, countProperty, valueAlignGroup, barColumnsAlignGroup ) {
 
       const labelNode = new Text( labelString, {
         font: LABEL_FONT
@@ -120,10 +137,6 @@ define( require => {
           countNode
         ]
       } );
-      const valueAlignBox = new AlignBox( valueVBox, {
-        group: valueAlignGroup,
-        xAlign: 'left'
-      } );
 
       //TODO temporary Properties
       const furBarNode = new ProportionBarNode( NaturalSelectionColors.FUR, new NumberProperty( 70 ), new NumberProperty( 30 ) );
@@ -131,9 +144,14 @@ define( require => {
       const teethBarNode = new ProportionBarNode( NaturalSelectionColors.TEETH, new NumberProperty( 100 ), new NumberProperty( 0 ) );
 
       super( {
-        spacing: 20,
-        align: 'left',
-        children: [ valueAlignBox, furBarNode, earsBarNode, teethBarNode ]
+        spacing: COLUMNS_SPACING,
+        align: 'bottom',
+        children: [
+          new AlignBox( valueVBox, { group: valueAlignGroup, xAlign: 'left' } ),
+          new AlignBox( furBarNode, { group: barColumnsAlignGroup, xAlign: 'center' } ),
+          new AlignBox( earsBarNode, { group: barColumnsAlignGroup, xAlign: 'center' } ),
+          new AlignBox( teethBarNode, { group: barColumnsAlignGroup, xAlign: 'center' } )
+        ]
       } );
 
       countProperty.link( count => {
