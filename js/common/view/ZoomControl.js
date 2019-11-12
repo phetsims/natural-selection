@@ -13,6 +13,7 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
+  const NaturalSelectionQueryParameters = require( 'NATURAL_SELECTION/common/NaturalSelectionQueryParameters' );
   const ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
 
   class ZoomControl extends LayoutBox {
@@ -26,7 +27,7 @@ define( require => {
       options = merge( {
 
         // {number} the amount to change zoomLevelProperty each time a button is pressed
-        step: 1,
+        step: NaturalSelectionQueryParameters.zoomStep,
 
         // {number|null} the range of zoom, affects whether buttons are disabled. null means no range.
         zoomLevelMax: null,
@@ -63,7 +64,6 @@ define( require => {
       }, options.zoomButtonOptions ) );
 
       const zoomLevelListener = zoomLevel => {
-        phet.log && phet.log( `zoomLevel=${zoomLevel}` );
         if ( options.zoomLevelMax !== null ) {
           zoomInButton.enabled = ( zoomLevel < options.zoomLevelMax );
         }
