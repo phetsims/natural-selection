@@ -110,11 +110,14 @@
   "startOfGeneration": {
     "value": "Start of Generation"
   },
-  "current": {
-    "value": "Current"
+  "currently": {
+    "value": "Currently"
   },
-  "nEqualsValue": {
-    "value": "N = {{value}}"
+  "countBunnies": {
+    "value": "{{count}} bunnies"
+  },
+  "oneBunny": {
+    "value": "1 bunny"
   },
   "Close": {
     "value": "Close"

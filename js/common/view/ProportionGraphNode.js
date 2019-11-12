@@ -25,8 +25,9 @@ define( require => {
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  const currentString = require( 'string!NATURAL_SELECTION/current' );
-  const nEqualsValueString = require( 'string!NATURAL_SELECTION/nEqualsValue' );
+  const currentlyString = require( 'string!NATURAL_SELECTION/currently' );
+  const countBunniesString = require( 'string!NATURAL_SELECTION/countBunnies' );
+  const oneBunnyString = require( 'string!NATURAL_SELECTION/oneBunny' );
   const startOfGenerationString = require( 'string!NATURAL_SELECTION/startOfGeneration' );
 
   // constants
@@ -45,8 +46,8 @@ define( require => {
 
       // TODO temporary Properties
       const generationProperty = new NumberProperty( 0 );
-      const startCountProperty = new NumberProperty( 0 );
-      const currentCountProperty = new NumberProperty( 0 );
+      const startCountProperty = new NumberProperty( 1 );
+      const currentCountProperty = new NumberProperty( 50 );
 
       const backgroundNode = new Rectangle( 0, 0, width, height, {
         fill: 'white',
@@ -61,7 +62,7 @@ define( require => {
       const labelAlignGroup = new AlignGroup();
 
       const startRow = new ProportionGraphRow( startOfGenerationString, startCountProperty, labelAlignGroup );
-      const currentRow = new ProportionGraphRow( currentString, currentCountProperty, labelAlignGroup );
+      const currentRow = new ProportionGraphRow( currentlyString, currentCountProperty, labelAlignGroup );
 
       const rows = new VBox( {
         spacing: 50,
@@ -104,10 +105,8 @@ define( require => {
         font: LABEL_FONT
       } );
 
-      // N = {{value}}
-      const valueNode = new Text( StringUtils.fillIn( nEqualsValueString, {
-        value: 0
-      } ), {
+      // {{count}} bunnies
+      const countNode = new Text( '', {
         font: VALUE_FONT
       } );
 
@@ -116,7 +115,7 @@ define( require => {
         align: 'left',
         children: [
           labelNode,
-          valueNode
+          countNode
         ]
       } );
       const valueAlignBox = new AlignBox( valueVBox, {
@@ -133,6 +132,15 @@ define( require => {
         spacing: 20,
         align: 'left',
         children: [ valueAlignBox, furBarNode, earsBarNode, teethBarNode ]
+      } );
+
+      countProperty.link( count => {
+        if ( count === 1 ) {
+          countNode.text = oneBunnyString;
+        }
+        else {
+          countNode.text = StringUtils.fillIn( countBunniesString, { count: count } );
+        }
       } );
     }
   }
