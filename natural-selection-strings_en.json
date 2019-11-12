@@ -130,5 +130,8 @@
   },
   "allOfTheBunniesHaveDied": {
     "value": "All of the bunnies have died."
+  },
+  "valuePercent": {
+    "value": "{{value}}%"
   }
 }
