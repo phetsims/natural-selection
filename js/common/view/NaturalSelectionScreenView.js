@@ -37,11 +37,9 @@ define( require => {
     /**
      * @param {NaturalSelectionModel} model
      * @param {NaturalSelectionViewProperties} viewProperties
-     * @param {{label:string, property:Property.<Boolean>, color:Color|string, lineStyle:string}[]} traits
-     * @param {{label:string, property:Property.<Boolean>}[]} alleles
      * @param {Tandem} tandem
      */
-    constructor( model, viewProperties, traits, alleles, tandem ) {
+    constructor( model, viewProperties, tandem ) {
 
       super( {
         tandem: tandem
@@ -107,8 +105,7 @@ define( require => {
 
       const populationControlPanel = new PopulationControlPanel(
         viewProperties.populationTotalVisibleProperty,
-        viewProperties.populationValuesMarkerVisibleProperty,
-        traits, {
+        viewProperties.populationValuesMarkerVisibleProperty, {
           fixedWidth: leftOfGraphWidth,
           maxHeight: graphHeight,
           right: populationGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
@@ -124,14 +121,12 @@ define( require => {
         top: viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
       } );
 
-      const proportionControlPanel = new ProportionControlPanel(
-        viewProperties.proportionValuesVisibleProperty,
-        traits, {
-          fixedWidth: leftOfGraphWidth,
-          maxHeight: graphHeight,
-          right: proportionGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
-          centerY: proportionGraphNode.centerY
-        } );
+      const proportionControlPanel = new ProportionControlPanel( viewProperties.proportionValuesVisibleProperty, {
+        fixedWidth: leftOfGraphWidth,
+        maxHeight: graphHeight,
+        right: proportionGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
+        centerY: proportionGraphNode.centerY
+      } );
 
       const proportionParent = new Node( {
         children: [ proportionControlPanel, proportionGraphNode ]
@@ -142,13 +137,12 @@ define( require => {
         top: viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
       } );
 
-      const pedigreeControlPanel = new PedigreeControlPanel(
-        alleles, {
-          fixedWidth: leftOfGraphWidth,
-          maxHeight: graphHeight,
-          right: pedigreeNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
-          centerY: pedigreeNode.centerY
-        } );
+      const pedigreeControlPanel = new PedigreeControlPanel( {
+        fixedWidth: leftOfGraphWidth,
+        maxHeight: graphHeight,
+        right: pedigreeNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
+        centerY: pedigreeNode.centerY
+      } );
 
       const pedigreeParent = new Node( {
         children: [ pedigreeControlPanel, pedigreeNode ]

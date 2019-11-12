@@ -18,31 +18,26 @@ define( require => {
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Text = require( 'SCENERY/nodes/Text' );
 
-  // constants
-  const LINE_LENGTH = 28;
-
   class PopulationCheckbox extends Checkbox {
 
     /**
      * @param {Property.<boolean>} property
-     * @param {string} textString
+     * @param {string} labelString
+     * @param {Color|string} color
+     * @param {boolean} isMutation
      * @param {Object} [options]
      */
-    constructor( property, textString, options ) {
+    constructor( property, labelString, color, isMutation, options ) {
 
-      options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+      options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 
-        // options passed to Line
-        lineOptions: {
-          stroke: 'black',
-          lineWidth: 3,
-          lineDash: []
-        }
-      }, options );
+      const lineNode = new Line( 0, 0, 28, 0, {
+        stroke: color,
+        lineWidth: 3,
+        lineDash: isMutation ? [ 3, 3 ] : []  // mutations use a dashed line
+      } );
 
-      const lineNode = new Line( 0, 0, LINE_LENGTH, 0, options.lineOptions );
-
-      const textNode = new Text( textString, {
+      const textNode = new Text( labelString, {
         font: NaturalSelectionConstants.CHECKBOX_FONT
       } );
 

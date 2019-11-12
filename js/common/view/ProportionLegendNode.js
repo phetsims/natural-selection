@@ -2,7 +2,7 @@
 
 /**
  * ProportionLegendNode is a legend item in the control panel for the Proportion graph.
- * It showings the color and fill style used.
+ * It showings the fill style used for an allele.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -18,39 +18,32 @@ define( require => {
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
 
+  // constants
+  const RECTANGLE_WIDTH = 25;
+  const RECTANGLE_HEIGHT = 15;
+
   class ProportionLegendNode extends HBox {
 
     /**
-     * @param {label:string, property:Property.<Boolean>, color:Color|string, lineStyle:string} trait
+     * @param {string} labelString
+     * @param {Color|string} color
+     * @param {boolean} isMutation
      * @param {Object} [options]
      */
-    constructor( trait, options ) {
+    constructor( labelString, color, isMutation, options ) {
 
       options = merge( {
-
-        // options passed to Rectangle
-        rectangleOptions: {
-          fill: 'black',
-          stroke: null
-        },
 
         // HBox options
         spacing: 5
       }, options );
 
-      let rectangleNode = null;
-      if ( trait.lineStyle === 'solid' ) {
-        rectangleNode = new Rectangle( 0, 0, 25, 15, {
-          fill: trait.color
-        } );
-      }
-      else {
-        rectangleNode = new HatchingRectangle( 0, 0, 25, 15, {
-          fill: trait.color
-        } );
-      }
+      const rectangleNode = isMutation ?
+                            new HatchingRectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, { fill: color } ) :
+                            new Rectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, { fill: color } );
 
-      const textNode = new Text( trait.label, {
+
+      const textNode = new Text( labelString, {
         font: NaturalSelectionConstants.TEXT_FONT
       } );
 

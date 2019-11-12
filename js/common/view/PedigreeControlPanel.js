@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Checkbox = require( 'SUN/Checkbox' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -19,14 +20,16 @@ define( require => {
 
   // strings
   const allelesString = require( 'string!NATURAL_SELECTION/alleles' );
+  const earsString = require( 'string!NATURAL_SELECTION/ears' );
+  const furString = require( 'string!NATURAL_SELECTION/fur' );
+  const teethString = require( 'string!NATURAL_SELECTION/teeth' );
 
   class PedigreeControlPanel extends NaturalSelectionPanel {
 
     /**
-     * @param {{label: string, property: Property.<Boolean>}[]} alleles
      * @param {Object} [options]
      */
-    constructor( alleles, options ) {
+    constructor( options ) {
 
       options = merge( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
@@ -35,14 +38,14 @@ define( require => {
         font: NaturalSelectionConstants.TITLE_FONT
       } );
 
-      // Checkbox for each pair of alleles
-      const checkboxes = [];
-      alleles.forEach( allele => {
-        checkboxes.push( new Checkbox(
-          new Text( allele.label, { font: NaturalSelectionConstants.CHECKBOX_FONT } ),
-          allele.property,
-          NaturalSelectionConstants.CHECKBOX_OPTIONS ) );
-      } );
+      //TODO temporary BooleanProperty for each checkbox
+      // Checkbox for each gene
+      const textOptions = { font: NaturalSelectionConstants.CHECKBOX_FONT };
+      const checkboxes = [
+        new Checkbox( new Text( furString, textOptions ), new BooleanProperty( false ), NaturalSelectionConstants.CHECKBOX_OPTIONS ),
+        new Checkbox( new Text( earsString, textOptions ), new BooleanProperty( false ), NaturalSelectionConstants.CHECKBOX_OPTIONS ),
+        new Checkbox( new Text( teethString, textOptions ), new BooleanProperty( false ), NaturalSelectionConstants.CHECKBOX_OPTIONS )
+      ];
 
       // Arranged vertically
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {

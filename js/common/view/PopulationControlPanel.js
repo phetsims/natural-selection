@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Checkbox = require( 'SUN/Checkbox' );
   const HSeparator = require( 'SUN/HSeparator' );
   const merge = require( 'PHET_CORE/merge' );
@@ -21,18 +22,23 @@ define( require => {
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
+  const brownFurString = require( 'string!NATURAL_SELECTION/brownFur' );
+  const flatEarsString = require( 'string!NATURAL_SELECTION/flatEars' );
+  const longTeethString = require( 'string!NATURAL_SELECTION/longTeeth' );
+  const shortTeethString = require( 'string!NATURAL_SELECTION/shortTeeth' );
+  const tallEarsString = require( 'string!NATURAL_SELECTION/tallEars' );
   const totalString = require( 'string!NATURAL_SELECTION/total' );
   const valuesMarkerString = require( 'string!NATURAL_SELECTION/valuesMarker' );
+  const whiteFurString = require( 'string!NATURAL_SELECTION/whiteFur' );
 
   class PopulationControlPanel extends NaturalSelectionPanel {
 
     /**
      * @param {Property.<boolean>} totalVisibleProperty
      * @param {Property.<boolean>} valuesMarkerVisibleProperty
-     * @param {{label: string, property: Property.<Boolean>, color:Color|string, lineStyle:string}[]} traits
      * @param {Object} [options]
      */
-    constructor( totalVisibleProperty, valuesMarkerVisibleProperty, traits, options ) {
+    constructor( totalVisibleProperty, valuesMarkerVisibleProperty, options ) {
 
       options = merge( {
         fixedWidth: 100,
@@ -51,26 +57,22 @@ define( require => {
       } );
 
       // Total
-      const totalCheckbox = new PopulationCheckbox( totalVisibleProperty, totalString, {
-        lineOptions: {
-          stroke: NaturalSelectionColors.TOTAL_POPULATION
-        }
-      } );
+      const totalCheckbox = new PopulationCheckbox( totalVisibleProperty, totalString, NaturalSelectionColors.TOTAL_POPULATION, false );
 
-      // Checkbox for each trait
-      const traitCheckboxes = [];
-      traits.forEach( trait => {
-        traitCheckboxes.push( new PopulationCheckbox( trait.property, trait.label, {
-          lineOptions: {
-            stroke: trait.color,
-            lineDash: ( trait.lineStyle === 'solid' ) ? [] : [ 3, 3 ]
-          }
-        } ) );
-      } );
+      //TODO temporary BooleanProperty for each checkbox
+      // Checkbox for each allele
+      const alleleCheckboxes = [
+        new PopulationCheckbox( new BooleanProperty( false ), whiteFurString, NaturalSelectionColors.FUR, false ),
+        new PopulationCheckbox( new BooleanProperty( false ), brownFurString, NaturalSelectionColors.FUR, true ),
+        new PopulationCheckbox( new BooleanProperty( false ), tallEarsString, NaturalSelectionColors.EARS, false ),
+        new PopulationCheckbox( new BooleanProperty( false ), flatEarsString, NaturalSelectionColors.EARS, true ),
+        new PopulationCheckbox( new BooleanProperty( false ), shortTeethString, NaturalSelectionColors.TEETH, false ),
+        new PopulationCheckbox( new BooleanProperty( false ), longTeethString, NaturalSelectionColors.TEETH, true )
+      ];
 
       // Arranged vertically
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-        children: [ valuesMarkerCheckbox, separator, totalCheckbox, ...traitCheckboxes ]
+        children: [ valuesMarkerCheckbox, separator, totalCheckbox, ...alleleCheckboxes ]
       } ) );
 
       super( content, options );

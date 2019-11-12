@@ -21,16 +21,21 @@ define( require => {
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
+  const brownFurString = require( 'string!NATURAL_SELECTION/brownFur' );
+  const flatEarsString = require( 'string!NATURAL_SELECTION/flatEars' );
+  const longTeethString = require( 'string!NATURAL_SELECTION/longTeeth' );
+  const shortTeethString = require( 'string!NATURAL_SELECTION/shortTeeth' );
+  const tallEarsString = require( 'string!NATURAL_SELECTION/tallEars' );
   const valuesString = require( 'string!NATURAL_SELECTION/values' );
+  const whiteFurString = require( 'string!NATURAL_SELECTION/whiteFur' );
 
   class ProportionControlPanel extends NaturalSelectionPanel {
 
     /**
      * @param {Property.<boolean>} valuesVisibleProperty
-     * @param {{label:string, property:Property.<Boolean>, color:Color|string, lineStyle:string}[]} traits
      * @param {Object} [options]
      */
-    constructor( valuesVisibleProperty, traits, options ) {
+    constructor( valuesVisibleProperty, options ) {
 
       options = merge( {
         fixedWidth: 100,
@@ -52,15 +57,19 @@ define( require => {
         stroke: NaturalSelectionColors.SEPARATOR_STROKE
       } );
 
-      // Legend for each trait
-      const traitLegends = [];
-      traits.forEach( trait => {
-        traitLegends.push( new ProportionLegendNode( trait ) );
-      } );
+      // Legend for each allele
+      const allelesLegend = [
+        new ProportionLegendNode( whiteFurString, NaturalSelectionColors.FUR, false ),
+        new ProportionLegendNode( brownFurString, NaturalSelectionColors.FUR, true ),
+        new ProportionLegendNode( tallEarsString, NaturalSelectionColors.EARS, false ),
+        new ProportionLegendNode( flatEarsString, NaturalSelectionColors.EARS, true ),
+        new ProportionLegendNode( shortTeethString, NaturalSelectionColors.TEETH, false ),
+        new ProportionLegendNode( longTeethString, NaturalSelectionColors.TEETH, true )
+      ];
 
       // Arranged vertically
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-        children: [ valuesCheckbox, separator, ...traitLegends ]
+        children: [ valuesCheckbox, separator, ...allelesLegend ]
       } ) );
 
       super( content, options );
