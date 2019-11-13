@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * FlatEarsAllele is the variation of the ears gene that results in flat (full lop) ears.
+ * ErectEarsAllele is the variation of the ears gene that results in erect ears.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -13,14 +13,14 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
 
   // strings
-  const flatEarsString = require( 'string!NATURAL_SELECTION/flatEars' );
+  const erectEarsString = require( 'string!NATURAL_SELECTION/erectEars' );
 
-  class FlatEarsAllele extends EarsGene {
+  class ErectEarsAllele extends EarsGene {
 
     constructor() {
-      super( flatEarsString );
+      super( erectEarsString );
     }
   }
 
-  return naturalSelection.register( 'FlatEarsAllele', FlatEarsAllele );
+  return naturalSelection.register( 'ErectEarsAllele', ErectEarsAllele );
 } );

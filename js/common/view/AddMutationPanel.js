@@ -30,11 +30,11 @@ define( require => {
 
   // images
   const brownFurIcon = require( 'image!NATURAL_SELECTION/brownFur.png' );
-  const flatEarsImage = require( 'image!NATURAL_SELECTION/flatEars.png' );
+  const erectEarsImage = require( 'image!NATURAL_SELECTION/erectEars.png' );
+  const floppyEarsImage = require( 'image!NATURAL_SELECTION/floppyEars.png' );
   const mutationIconImage = require( 'image!NATURAL_SELECTION/mutationIcon.png' );
   const longTeethImage = require( 'image!NATURAL_SELECTION/longTeeth.png' );
   const shortTeethImage = require( 'image!NATURAL_SELECTION/shortTeeth.png' );
-  const tallEarsImage = require( 'image!NATURAL_SELECTION/tallEars.png' );
   const whiteFurImage = require( 'image!NATURAL_SELECTION/whiteFur.png' );
 
   // strings
@@ -103,7 +103,7 @@ define( require => {
 
       // Rows below the column headings
       const furRow = new AddMutationRow( furString, brownFurIcon, whiteFurImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
-      const earsRow = new AddMutationRow( earsString, flatEarsImage, tallEarsImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
+      const earsRow = new AddMutationRow( earsString, floppyEarsImage, erectEarsImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
       const teethRow = new AddMutationRow( teethString, longTeethImage, shortTeethImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
 
       const content = new VBox( {

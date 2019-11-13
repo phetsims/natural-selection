@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * TallEarsAllele is the variation of the ears gene that results in tall (erect) ears.
+ * FloppyEarsAllele is the variation of the ears gene that results in floppy (lop) ears.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -13,14 +13,14 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
 
   // strings
-  const tallEarsString = require( 'string!NATURAL_SELECTION/tallEars' );
+  const floppyEarsString = require( 'string!NATURAL_SELECTION/floppyEars' );
 
-  class TallEarsAllele extends EarsGene {
+  class FloppyEarsAllele extends EarsGene {
 
     constructor() {
-      super( tallEarsString );
+      super( floppyEarsString );
     }
   }
 
-  return naturalSelection.register( 'TallEarsAllele', TallEarsAllele );
+  return naturalSelection.register( 'FloppyEarsAllele', FloppyEarsAllele );
 } );

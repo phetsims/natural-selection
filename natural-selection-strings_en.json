@@ -32,11 +32,11 @@
   "brownFur": {
     "value": "Brown Fur"
   },
-  "tallEars": {
-    "value": "Tall Ears"
+  "erectEars": {
+    "value": "Erect Ears"
   },
-  "flatEars": {
-    "value": "Flat Ears"
+  "floppyEars": {
+    "value": "Floppy Ears"
   },
   "shortTeeth": {
     "value": "Short Teeth"

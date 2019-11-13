@@ -7,7 +7,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Megan Lai"
   },
-  "bunny-brownFur-flatEars-longTeeth.png": {
+  "bunny-brownFur-floppyEars-longTeeth.png": {
     "text": [
       "Copyright 2019 University of Colorado Boulder"
     ],
@@ -15,7 +15,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Megan Lai"
   },
-  "bunny-brownFur-flatEars-shortTeeth.png": {
+  "bunny-brownFur-floppyEars-shortTeeth.png": {
     "text": [
       "Copyright 2019 University of Colorado Boulder"
     ],
@@ -23,7 +23,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Megan Lai"
   },
-  "bunny-brownFur-tallEars-longTeeth.png": {
+  "bunny-brownFur-erectEars-longTeeth.png": {
     "text": [
       "Copyright 2019 University of Colorado Boulder"
     ],
@@ -31,7 +31,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Megan Lai"
   },
-  "bunny-brownFur-tallEars-shortTeeth.png": {
+  "bunny-brownFur-erectEars-shortTeeth.png": {
     "text": [
       "Copyright 2019 University of Colorado Boulder"
     ],
@@ -39,7 +39,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Megan Lai"
   },
-  "bunny-whiteFur-flatEars-longTeeth.png": {
+  "bunny-whiteFur-floppyEars-longTeeth.png": {
     "text": [
       "Copyright 2019 University of Colorado Boulder"
     ],
@@ -47,7 +47,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Megan Lai"
   },
-  "bunny-whiteFur-flatEars-shortTeeth.png": {
+  "bunny-whiteFur-floppyEars-shortTeeth.png": {
     "text": [
       "Copyright 2019 University of Colorado Boulder"
     ],
@@ -55,7 +55,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Megan Lai"
   },
-  "bunny-whiteFur-tallEars-longTeeth.png": {
+  "bunny-whiteFur-erectEars-longTeeth.png": {
     "text": [
       "Copyright 2019 University of Colorado Boulder"
     ],
@@ -63,7 +63,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Megan Lai"
   },
-  "bunny-whiteFur-tallEars-shortTeeth.png": {
+  "bunny-whiteFur-erectEars-shortTeeth.png": {
     "text": [
       "Copyright 2019 University of Colorado Boulder"
     ],
@@ -103,7 +103,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Megan Lai"
   },
-  "tallEars.png": {
+  "erectEars.png": {
     "text": [
       "Copyright 2019 University of Colorado Boulder"
     ],
@@ -111,7 +111,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Megan Lai"
   },
-  "flatEars.png": {
+  "floppyEars.png": {
     "text": [
       "Copyright 2019 University of Colorado Boulder"
     ],

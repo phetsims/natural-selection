@@ -20,8 +20,8 @@ define( require => {
   const ScreenIcon = require( 'JOIST/ScreenIcon' );
 
   // images
-  const brownBunnyImage = require( 'image!NATURAL_SELECTION/bunny-brownFur-tallEars-shortTeeth.png' );
-  const whiteBunnyImage = require( 'image!NATURAL_SELECTION/bunny-whiteFur-tallEars-shortTeeth.png' );
+  const brownBunnyImage = require( 'image!NATURAL_SELECTION/bunny-brownFur-erectEars-shortTeeth.png' );
+  const whiteBunnyImage = require( 'image!NATURAL_SELECTION/bunny-whiteFur-erectEars-shortTeeth.png' );
 
   // strings
   const screenIntroString = require( 'string!NATURAL_SELECTION/screen.intro' );
