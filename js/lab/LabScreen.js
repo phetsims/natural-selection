@@ -21,13 +21,13 @@ define( require => {
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // images
-  const brownBunnyImage1 = require( 'image!NATURAL_SELECTION/bunny-brownFur-erectEars-shortTeeth.png' );
+  const brownBunnyImage1 = require( 'image!NATURAL_SELECTION/bunny-brownFur-straightEars-shortTeeth.png' );
   const brownBunnyImage2 = require( 'image!NATURAL_SELECTION/bunny-brownFur-floppyEars-shortTeeth.png' );
-  const brownBunnyImage3 = require( 'image!NATURAL_SELECTION/bunny-brownFur-erectEars-longTeeth.png' );
+  const brownBunnyImage3 = require( 'image!NATURAL_SELECTION/bunny-brownFur-straightEars-longTeeth.png' );
   const brownBunnyImage4 = require( 'image!NATURAL_SELECTION/bunny-brownFur-floppyEars-longTeeth.png' );
-  const whiteBunnyImage1 = require( 'image!NATURAL_SELECTION/bunny-whiteFur-erectEars-shortTeeth.png' );
+  const whiteBunnyImage1 = require( 'image!NATURAL_SELECTION/bunny-whiteFur-straightEars-shortTeeth.png' );
   const whiteBunnyImage2 = require( 'image!NATURAL_SELECTION/bunny-whiteFur-floppyEars-shortTeeth.png' );
-  const whiteBunnyImage3 = require( 'image!NATURAL_SELECTION/bunny-whiteFur-erectEars-longTeeth.png' );
+  const whiteBunnyImage3 = require( 'image!NATURAL_SELECTION/bunny-whiteFur-straightEars-longTeeth.png' );
   const whiteBunnyImage4 = require( 'image!NATURAL_SELECTION/bunny-whiteFur-floppyEars-longTeeth.png' );
 
   // strings

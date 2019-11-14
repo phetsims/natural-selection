@@ -22,7 +22,7 @@ define( require => {
 
   // strings
   const brownFurString = require( 'string!NATURAL_SELECTION/brownFur' );
-  const erectEarsString = require( 'string!NATURAL_SELECTION/erectEars' );
+  const straightEarsString = require( 'string!NATURAL_SELECTION/straightEars' );
   const floppyEarsString = require( 'string!NATURAL_SELECTION/floppyEars' );
   const longTeethString = require( 'string!NATURAL_SELECTION/longTeeth' );
   const shortTeethString = require( 'string!NATURAL_SELECTION/shortTeeth' );
@@ -75,10 +75,10 @@ define( require => {
           enabledProperty: populationModel.brownFurEnabledProperty
         } ),
 
-        // Erect Ears
-        new PopulationCheckbox( populationModel.erectEarsVisibleProperty, erectEarsString, {
+        // Straight Ears
+        new PopulationCheckbox( populationModel.straightEarsVisibleProperty, straightEarsString, {
           color: NaturalSelectionColors.EARS,
-          enabledProperty: populationModel.erectEarsEnabledProperty
+          enabledProperty: populationModel.straightEarsEnabledProperty
         } ),
 
         // Floppy Ears

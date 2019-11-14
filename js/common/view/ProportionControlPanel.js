@@ -22,7 +22,7 @@ define( require => {
 
   // strings
   const brownFurString = require( 'string!NATURAL_SELECTION/brownFur' );
-  const erectEarsString = require( 'string!NATURAL_SELECTION/erectEars' );
+  const straightEarsString = require( 'string!NATURAL_SELECTION/straightEars' );
   const floppyEarsString = require( 'string!NATURAL_SELECTION/floppyEars' );
   const longTeethString = require( 'string!NATURAL_SELECTION/longTeeth' );
   const shortTeethString = require( 'string!NATURAL_SELECTION/shortTeeth' );
@@ -61,7 +61,7 @@ define( require => {
       const allelesLegend = [
         new ProportionLegendNode( whiteFurString, NaturalSelectionColors.FUR, false ),
         new ProportionLegendNode( brownFurString, NaturalSelectionColors.FUR, true ),
-        new ProportionLegendNode( erectEarsString, NaturalSelectionColors.EARS, false ),
+        new ProportionLegendNode( straightEarsString, NaturalSelectionColors.EARS, false ),
         new ProportionLegendNode( floppyEarsString, NaturalSelectionColors.EARS, true ),
         new ProportionLegendNode( shortTeethString, NaturalSelectionColors.TEETH, false ),
         new ProportionLegendNode( longTeethString, NaturalSelectionColors.TEETH, true )

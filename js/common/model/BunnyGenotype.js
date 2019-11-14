@@ -10,10 +10,10 @@ define( require => {
 
   // modules
   const EarsGenePair = require( 'NATURAL_SELECTION/common/model/EarsGenePair' );
-  const ErectEarsAllele = require( 'NATURAL_SELECTION/common/model/ErectEarsAllele' );
   const FurGenePair = require( 'NATURAL_SELECTION/common/model/FurGenePair' );
   const LongTeethAllele = require( 'NATURAL_SELECTION/common/model/LongTeethAllele' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const StraightEarsAllele = require( 'NATURAL_SELECTION/common/model/StraightEarsAllele' );
   const TeethGenePair = require( 'NATURAL_SELECTION/common/model/TeethGenePair' );
   const WhiteFurAllele = require( 'NATURAL_SELECTION/common/model/WhiteFurAllele' );
 
@@ -44,7 +44,7 @@ define( require => {
     static createDefault() {
 
       const furGenePair = new FurGenePair( new WhiteFurAllele(), new WhiteFurAllele() );
-      const earsGenePair = new EarsGenePair( new ErectEarsAllele(), new ErectEarsAllele() );
+      const earsGenePair = new EarsGenePair( new StraightEarsAllele(), new StraightEarsAllele() );
       const teethGenePair = new TeethGenePair( new LongTeethAllele(), new LongTeethAllele() );
 
       return new BunnyGenotype( furGenePair, earsGenePair, teethGenePair );

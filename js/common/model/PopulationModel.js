@@ -29,7 +29,7 @@ define( require => {
       // @public visibility of the plot for each allele on the graph
       this.whiteFurVisibleProperty = new BooleanProperty( false );
       this.brownFurVisibleProperty = new BooleanProperty( false );
-      this.erectEarsVisibleProperty = new BooleanProperty( false );
+      this.straightEarsVisibleProperty = new BooleanProperty( false );
       this.floppyEarsVisibleProperty = new BooleanProperty( false );
       this.shortTeethVisibleProperty = new BooleanProperty( false );
       this.longTeethVisibleProperty = new BooleanProperty( false );
@@ -38,7 +38,7 @@ define( require => {
       // Checkboxes are disabled until an associated mutation is applied.
       this.whiteFurEnabledProperty = new BooleanProperty( false );
       this.brownFurEnabledProperty = new BooleanProperty( false );
-      this.erectEarsEnabledProperty = new BooleanProperty( false );
+      this.straightEarsEnabledProperty = new BooleanProperty( false );
       this.floppyEarsEnabledProperty = new BooleanProperty( false );
       this.shortTeethEnabledProperty = new BooleanProperty( false );
       this.longTeethEnabledProperty = new BooleanProperty( false );
@@ -54,14 +54,14 @@ define( require => {
 
       this.whiteFurVisibleProperty.reset();
       this.brownFurVisibleProperty.reset();
-      this.erectEarsVisibleProperty.reset();
+      this.straightEarsVisibleProperty.reset();
       this.floppyEarsVisibleProperty.reset();
       this.shortTeethVisibleProperty.reset();
       this.longTeethVisibleProperty.reset();
 
       this.whiteFurEnabledProperty.reset();
       this.brownFurEnabledProperty.reset();
-      this.erectEarsEnabledProperty.reset();
+      this.straightEarsEnabledProperty.reset();
       this.floppyEarsEnabledProperty.reset();
       this.shortTeethEnabledProperty.reset();
       this.longTeethEnabledProperty.reset();

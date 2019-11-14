@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ErectEarsAllele is the variation of the ears gene that results in erect ears.
+ * StraightEarsAllele is the variation of the ears gene that results in straight ears.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -13,14 +13,14 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
 
   // strings
-  const erectEarsString = require( 'string!NATURAL_SELECTION/erectEars' );
+  const straightEarsString = require( 'string!NATURAL_SELECTION/straightEars' );
 
-  class ErectEarsAllele extends EarsGene {
+  class StraightEarsAllele extends EarsGene {
 
     constructor() {
-      super( erectEarsString );
+      super( straightEarsString );
     }
   }
 
-  return naturalSelection.register( 'ErectEarsAllele', ErectEarsAllele );
+  return naturalSelection.register( 'StraightEarsAllele', StraightEarsAllele );
 } );
