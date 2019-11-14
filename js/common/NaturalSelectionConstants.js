@@ -40,6 +40,7 @@ define( require => {
     // ArrowButton
     ARROW_BUTTON_OPTIONS: {
       baseColor: NaturalSelectionColors.ARROW_BUTTONS,
+      stroke: 'black',
       buttonAppearanceStrategy: RectangularButtonView.FlatAppearanceStrategy,
       cornerRadius: 0,
       lineWidth: 0.5,
