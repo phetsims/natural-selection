@@ -12,6 +12,7 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const RectangularButtonView = require( 'SUN/buttons/RectangularButtonView' );
 
   // constants
 
@@ -35,6 +36,18 @@ define( require => {
     VIEWPORT_NODE_Y_MARGIN: 8, // margins at top and bottom edges of the viewport
 
     CORNER_RADIUS: CORNER_RADIUS,
+
+    // ArrowButton
+    ARROW_BUTTON_OPTIONS: {
+      baseColor: NaturalSelectionColors.ARROW_BUTTONS,
+      buttonAppearanceStrategy: RectangularButtonView.FlatAppearanceStrategy,
+      cornerRadius: 0,
+      lineWidth: 0.5,
+      arrowWidth: 8, // width of base
+      arrowHeight: 10, // from tip to base
+      xMargin: 6,
+      yMargin: 4
+    },
 
     // Checkbox
     CHECKBOX_OPTIONS: {

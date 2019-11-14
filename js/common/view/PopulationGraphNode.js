@@ -9,9 +9,11 @@ define( require => {
   'use strict';
 
   // modules
+  const ArrowButton = require( 'SUN/buttons/ArrowButton' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
+  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -23,10 +25,11 @@ define( require => {
   const populationString = require( 'string!NATURAL_SELECTION/population' );
 
   // const
-  const ZOOM_CONTROL_X_OFFSET = 0;
+  const ZOOM_CONTROL_X_OFFSET = 5;
   const X_AXIS_LABEL_OFFSET = 5;
   const Y_AXIS_LABEL_OFFSET = 7;
   const AXIS_LABEL_FONT = new PhetFont( 14 );
+  const ARROW_BUTTONS_X_SPACING = 10;
 
   class PopulationGraphNode extends Node {
 
@@ -53,20 +56,29 @@ define( require => {
         top: boundsRectangle.top
       } );
 
-      // x-axis label
+      // x-axis (Generation) label
       const xAxisLabelNode = new Text( generationString, {
         font: AXIS_LABEL_FONT,
         centerX: boundsRectangle.centerX,
         bottom: boundsRectangle.bottom
       } );
 
-      // y-axis label
+      // y-axis (Population) label
       const yAxisLabelNode = new Text( populationString, {
         font: AXIS_LABEL_FONT,
         rotation: -Math.PI / 2,
         right: zoomControl.right + ZOOM_CONTROL_X_OFFSET - Y_AXIS_LABEL_OFFSET,
         centerY: boundsRectangle.centerY
       } );
+
+      // x-axis scroll buttons, on either side of the x-axis (Generation) label
+      const previous = () => {}; //TODO
+      const next = () => {}; //TODO
+      const previousButton = new ArrowButton( 'left', previous, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS );
+      const nextButton = new ArrowButton( 'right', next, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS );
+      previousButton.right = xAxisLabelNode.left - ARROW_BUTTONS_X_SPACING;
+      nextButton.left = xAxisLabelNode.right + ARROW_BUTTONS_X_SPACING;
+      previousButton.centerY = nextButton.centerY = xAxisLabelNode.centerY;
 
       const width = options.graphWidth - zoomControl.width - ZOOM_CONTROL_X_OFFSET;
       const height = options.graphHeight - xAxisLabelNode.height - X_AXIS_LABEL_OFFSET;
@@ -78,7 +90,7 @@ define( require => {
       } );
 
       assert && assert( !options.children, 'PopulationGraphNode sets children' );
-      options.children = [ boundsRectangle, graphNode, zoomControl, xAxisLabelNode, yAxisLabelNode ];
+      options.children = [ boundsRectangle, graphNode, zoomControl, xAxisLabelNode, yAxisLabelNode, previousButton, nextButton ];
 
       super( options );
     }
