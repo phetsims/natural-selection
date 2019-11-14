@@ -80,6 +80,8 @@ define( require => {
       nextButton.left = xAxisLabelNode.right + ARROW_BUTTONS_X_SPACING;
       previousButton.centerY = nextButton.centerY = xAxisLabelNode.centerY;
 
+      //TODO placeholder
+      // graph
       const width = options.graphWidth - zoomControl.width - ZOOM_CONTROL_X_OFFSET;
       const height = options.graphHeight - xAxisLabelNode.height - X_AXIS_LABEL_OFFSET;
       const graphNode = new Rectangle( 0, 0, width, height, {
