@@ -23,8 +23,9 @@ define( require => {
   const populationString = require( 'string!NATURAL_SELECTION/population' );
 
   // const
-  const X_MARGIN = 5;
-  const Y_MARGIN = 5;
+  const ZOOM_CONTROL_X_OFFSET = 0;
+  const X_AXIS_LABEL_OFFSET = 5;
+  const Y_AXIS_LABEL_OFFSET = 7;
   const AXIS_LABEL_FONT = new PhetFont( 14 );
 
   class PopulationGraphNode extends Node {
@@ -40,38 +41,44 @@ define( require => {
         graphHeight: 100
       }, options );
 
-      //TODO placeholder
-      const rectangle = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
-        fill: 'white',
-        stroke: NaturalSelectionColors.GRAPHS_STROKE
-      } );
-
-      // x-axis label
-      const xAxisLabelNode = new Text( generationString, {
-        font: AXIS_LABEL_FONT,
-        centerX: rectangle.centerX,
-        bottom: rectangle.bottom - 8
-      } );
-
-      // y-axis label
-      const yAxisLabelNode = new Text( populationString, {
-        font: AXIS_LABEL_FONT,
-        rotation: -Math.PI / 2,
-        left: rectangle.left + 8,
-        centerY: rectangle.centerY
-      } );
+      // invisible rectangle that defines the bounds of this Node
+      const boundsRectangle = new Rectangle( 0, 0, options.graphWidth, options.graphHeight );
 
       // zoom control
       const zoomControl = new ZoomControl( populationModel.yZoomLevelProperty, {
         orientation: 'vertical',
         zoomLevelMax: 10,
         zoomLevelMin: 1,
-        left: rectangle.left + X_MARGIN,
-        top: rectangle.top + Y_MARGIN
+        left: boundsRectangle.left,
+        top: boundsRectangle.top
+      } );
+
+      // x-axis label
+      const xAxisLabelNode = new Text( generationString, {
+        font: AXIS_LABEL_FONT,
+        centerX: boundsRectangle.centerX,
+        bottom: boundsRectangle.bottom
+      } );
+
+      // y-axis label
+      const yAxisLabelNode = new Text( populationString, {
+        font: AXIS_LABEL_FONT,
+        rotation: -Math.PI / 2,
+        right: zoomControl.right + ZOOM_CONTROL_X_OFFSET - Y_AXIS_LABEL_OFFSET,
+        centerY: boundsRectangle.centerY
+      } );
+
+      const width = options.graphWidth - zoomControl.width - ZOOM_CONTROL_X_OFFSET;
+      const height = options.graphHeight - xAxisLabelNode.height - X_AXIS_LABEL_OFFSET;
+      const graphNode = new Rectangle( 0, 0, width, height, {
+        fill: 'white',
+        stroke: NaturalSelectionColors.GRAPHS_STROKE,
+        left: zoomControl.right + ZOOM_CONTROL_X_OFFSET,
+        top: boundsRectangle.top
       } );
 
       assert && assert( !options.children, 'PopulationGraphNode sets children' );
-      options.children = [ rectangle, zoomControl, xAxisLabelNode, yAxisLabelNode ];
+      options.children = [ boundsRectangle, graphNode, zoomControl, xAxisLabelNode, yAxisLabelNode ];
 
       super( options );
     }

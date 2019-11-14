@@ -13,7 +13,9 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
+  const RectangularButtonView = require( 'SUN/buttons/RectangularButtonView' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
   
@@ -22,9 +24,14 @@ define( require => {
   
   // constants
   const ARROW_BUTTON_OPTIONS = {
+    baseColor: NaturalSelectionColors.ARROW_BUTTONS,
+    buttonAppearanceStrategy: RectangularButtonView.FlatAppearanceStrategy,
+    cornerRadius: 0,
     lineWidth: 0.5,
     arrowWidth: 8, // width of base
-    arrowHeight: 10 // from tip to base
+    arrowHeight: 10, // from tip to base
+    xMargin: 6,
+    yMargin: 4
   };
   
   class ProportionGenerationControl extends HBox {

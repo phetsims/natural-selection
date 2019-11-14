@@ -32,7 +32,8 @@ define( require => {
     // buttons
     ADD_A_MATE_BUTTON: PhetColorScheme.BUTTON_YELLOW,
     CANCEL_BUTTON: PhetColorScheme.BUTTON_YELLOW,
-    ZOOM_BUTTONS: 'rgb( 240, 240, 240 )',
+    ZOOM_BUTTONS: 'white',
+    ARROW_BUTTONS: 'white',
     MUTATION_BUTTONS: 'rgb( 203, 203, 203 )',
 
     // graphs
