@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO delete if not used
 /**
- * ZoomControl is a general 'modern' control for zooming in and out.
+ * ZoomControl is a general control for zooming in and out.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,18 +11,11 @@ define( require => {
 
   // modules
   const LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
-  const MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionQueryParameters = require( 'NATURAL_SELECTION/common/NaturalSelectionQueryParameters' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const RectangularButtonView = require( 'SUN/buttons/RectangularButtonView' );
-  const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
-  const Text = require( 'SCENERY/nodes/Text' );
-
-  // constants
-  const FONT = new PhetFont( 16 );
+  const ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
 
   class ZoomControl extends LayoutBox {
 
@@ -36,46 +30,40 @@ define( require => {
         // {number} the amount to change zoomLevelProperty each time a button is pressed
         step: NaturalSelectionQueryParameters.zoomStep,
 
-        // {number|null} the range of zoomLevelProperty, affects whether buttons are disabled. null means no range.
+        // {number|null} the range of zoom, affects whether buttons are disabled. null means no range.
         zoomLevelMax: null,
         zoomLevelMin: null,
 
         // ZoomButton options
         zoomButtonOptions: {
-          baseColor: NaturalSelectionColors.ZOOM_BUTTONS,
-          buttonAppearanceStrategy: RectangularButtonView.FlatAppearanceStrategy,
-          cornerRadius: 0,
-          xMargin: 8,
-          yMargin: 5
+          radius: 6,
+          baseColor: NaturalSelectionColors.ZOOM_BUTTONS
         },
 
         // LayoutBox options
-        spacing: 0,
+        spacing: 5,
         orientation: 'horizontal',
         align: 'center'
 
       }, options );
 
-      assert && assert( !options.zoomButtonOptions.content, 'ZoomControl sets zoomButtonOptions.content' );
-      assert && assert( !options.zoomButtonOptions.listener, 'ZoomControl sets zoomButtonOptions.listener' );
+      assert && assert( options.zoomButtonOptions.in === undefined, 'ZoomControl sets zoomButtonOptions.in' );
+      assert && assert( options.zoomButtonOptions.listener === undefined, 'ZoomControl sets zoomButtonOptions.listener' );
 
-      // zoom in
-      const zoomInButton = new RectangularPushButton( merge( {}, options.zoomButtonOptions, {
-        content: new Text( MathSymbols.PLUS, { font: FONT } ),
+      const zoomInButton = new ZoomButton( merge( {
+        in: true,
         listener: () => {
           zoomLevelProperty.value += options.step;
         }
-      } ) );
+      }, options.zoomButtonOptions ) );
 
-      // zoom out
-      const zoomOutButton = new RectangularPushButton( merge( {}, options.zoomButtonOptions, {
-        content: new Text( MathSymbols.MINUS, { font: FONT } ),
+      const zoomOutButton = new ZoomButton( merge( {
+        in: false,
         listener: () => {
           zoomLevelProperty.value -= options.step;
         }
-      } ) );
+      }, options.zoomButtonOptions ) );
 
-      // disable a button if we reach the min or max
       const zoomLevelListener = zoomLevel => {
         if ( options.zoomLevelMax !== null ) {
           zoomInButton.enabled = ( zoomLevel < options.zoomLevelMax );
