@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO add icons and allele abbreviations
 /**
  * PedigreeControlPanel is the panel that contains controls for the 'Pedigree' graph.
  *
@@ -10,6 +11,7 @@ define( require => {
 
   // modules
   const Checkbox = require( 'SUN/Checkbox' );
+  // const Image = require( 'SCENERY/nodes/Image' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
@@ -17,10 +19,25 @@ define( require => {
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
+  // images
+  // const brownFurIcon = require( 'image!NATURAL_SELECTION/brownFur.png' );
+  // const straightEarsImage = require( 'image!NATURAL_SELECTION/straightEars.png' );
+  // const floppyEarsImage = require( 'image!NATURAL_SELECTION/floppyEars.png' );
+  // const mutationIconImage = require( 'image!NATURAL_SELECTION/mutationIcon.png' );
+  // const longTeethImage = require( 'image!NATURAL_SELECTION/longTeeth.png' );
+  // const shortTeethImage = require( 'image!NATURAL_SELECTION/shortTeeth.png' );
+  // const whiteFurImage = require( 'image!NATURAL_SELECTION/whiteFur.png' );
+
   // strings
   const allelesString = require( 'string!NATURAL_SELECTION/alleles' );
+  // const earsDominantString = require( 'string!NATURAL_SELECTION/earsDominant' );
+  // const earsRecessiveString = require( 'string!NATURAL_SELECTION/earsRecessive' );
   const earsString = require( 'string!NATURAL_SELECTION/ears' );
+  // const furDominantString = require( 'string!NATURAL_SELECTION/furDominant' );
+  // const furRecessiveString = require( 'string!NATURAL_SELECTION/furRecessive' );
   const furString = require( 'string!NATURAL_SELECTION/fur' );
+  // const teethDominantString = require( 'string!NATURAL_SELECTION/teethDominant' );
+  // const teethRecessiveString = require( 'string!NATURAL_SELECTION/teethRecessive' );
   const teethString = require( 'string!NATURAL_SELECTION/teeth' );
 
   class PedigreeControlPanel extends NaturalSelectionPanel {
