@@ -83,22 +83,22 @@
   "mutationComing": {
     "value": "Mutation Coming..."
   },
-  "F": {
+  "furDominant": {
     "value": "F"
   },
-  "f": {
+  "furRecessive": {
     "value": "f"
   },
-  "E": {
+  "earsDominant": {
     "value": "E"
   },
-  "e": {
+  "earsRecessive": {
     "value": "e"
   },
-  "T": {
+  "teethDominant": {
     "value": "T"
   },
-  "t": {
+  "teethRecessive": {
     "value": "t"
   },
   "generation": {
