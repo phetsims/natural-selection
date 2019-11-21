@@ -12,7 +12,6 @@ define( require => {
 
   // modules
   const HBox = require( 'SCENERY/nodes/HBox' );
-  const Image = require( 'SCENERY/nodes/Image' );
   const merge = require( 'PHET_CORE/merge' );
   const CancelMutationButton = require( 'NATURAL_SELECTION/common/view/CancelMutationButton' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -21,9 +20,6 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Shape = require( 'KITE/Shape' );
   const Text = require( 'SCENERY/nodes/Text' );
-
-  // images
-  const mutationIconImage = require( 'image!NATURAL_SELECTION/mutationIcon.png' );
 
   // strings
   const mutationComingString = require( 'string!NATURAL_SELECTION/mutationComing' );
@@ -45,10 +41,11 @@ define( require => {
         cancelButtonListener: null
       }, options );
 
-      const cancelButton = new CancelMutationButton();
-
-      const iconNode = new Image( mutationIconImage, {
-        scale: 0.2
+      const cancelButton = new CancelMutationButton( {
+        listener: () => {
+          //TODO
+          this.visible = false;
+        }
       } );
 
       const textNode = new Text( mutationComingString, {
@@ -56,14 +53,8 @@ define( require => {
       } );
 
       const hBox = new HBox( {
-        spacing: 12,
-        children: [
-          cancelButton,
-          new HBox( {
-            spacing: 4,
-            children: [ iconNode, textNode ]
-          } )
-        ]
+        spacing: 6,
+        children: [ cancelButton, textNode ]
       } );
 
       const backgroundWidth = hBox.width + 2 * X_MARGIN;
