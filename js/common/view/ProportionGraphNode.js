@@ -83,9 +83,9 @@ define( require => {
 
       // Rows
       const startRow = new ProportionGraphRow( startOfGenerationString, proportionModel.startCountProperty,
-        labelColumnAlignGroup, barColumnsAlignGroup );
+        labelColumnAlignGroup, barColumnsAlignGroup, proportionModel.valuesVisibleProperty );
       const currentRow = new ProportionGraphRow( endOfGenerationString, proportionModel.endCountProperty,
-        labelColumnAlignGroup, barColumnsAlignGroup );
+        labelColumnAlignGroup, barColumnsAlignGroup, proportionModel.valuesVisibleProperty );
       const rows = new VBox( {
         spacing: 30,
         align: 'left',
@@ -118,8 +118,9 @@ define( require => {
      * @param {Property.<number>} countProperty
      * @param {AlignGroup} valueAlignGroup
      * @param {AlignGroup} barColumnsAlignGroup
+     * @param {Property.<boolean>} valuesVisibleProperty
      */
-    constructor( labelString, countProperty, valueAlignGroup, barColumnsAlignGroup ) {
+    constructor( labelString, countProperty, valueAlignGroup, barColumnsAlignGroup, valuesVisibleProperty ) {
 
       const labelNode = new Text( labelString, {
         font: LABEL_FONT
@@ -140,9 +141,9 @@ define( require => {
       } );
 
       //TODO temporary Properties
-      const furBarNode = new ProportionBarNode( NaturalSelectionColors.FUR, new NumberProperty( 70 ), new NumberProperty( 30 ) );
-      const earsBarNode = new ProportionBarNode( NaturalSelectionColors.EARS, new NumberProperty( 40 ), new NumberProperty( 60 ) );
-      const teethBarNode = new ProportionBarNode( NaturalSelectionColors.TEETH, new NumberProperty( 100 ), new NumberProperty( 0 ) );
+      const furBarNode = new ProportionBarNode( NaturalSelectionColors.FUR, new NumberProperty( 70 ), new NumberProperty( 30 ), valuesVisibleProperty );
+      const earsBarNode = new ProportionBarNode( NaturalSelectionColors.EARS, new NumberProperty( 40 ), new NumberProperty( 60 ), valuesVisibleProperty );
+      const teethBarNode = new ProportionBarNode( NaturalSelectionColors.TEETH, new NumberProperty( 100 ), new NumberProperty( 0 ), valuesVisibleProperty );
 
       super( {
         spacing: COLUMNS_SPACING,

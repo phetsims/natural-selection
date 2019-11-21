@@ -33,9 +33,10 @@ define( require => {
      * @param {Color|string} color
      * @param {Property.<number>} nonMutantCountCountProperty
      * @param {Property.<number>} mutantCountProperty
+     * @param {Property.<boolean>} valuesVisibleProperty
      * @param {Object} [options]
      */
-    constructor( color, nonMutantCountCountProperty, mutantCountProperty, options ) {
+    constructor( color, nonMutantCountCountProperty, mutantCountProperty, valuesVisibleProperty, options ) {
 
       options = merge( {
         barWidth: 120,
@@ -73,6 +74,11 @@ define( require => {
       Property.multilink( [ nonMutantCountCountProperty, mutantCountProperty ],
         ( nonMutantCountCount, mutantCount ) => this.update( nonMutantCountCount, mutantCount )
       );
+
+      valuesVisibleProperty.link( valuesVisible => {
+        nonMutantPercentageNode.visible = valuesVisible;
+        mutantPercentageNode.visible = valuesVisible;
+      } );
     }
 
     /**
