@@ -41,7 +41,12 @@ define( require => {
         cancelButtonListener: null
       }, options );
 
-      const cancelButton = new CancelMutationButton();
+      const cancelButton = new CancelMutationButton( {
+        listener: () => {
+          //TODO
+          this.visible = false;
+        }
+      } );
 
       const textNode = new Text( mutationComingString, {
         font: FONT
