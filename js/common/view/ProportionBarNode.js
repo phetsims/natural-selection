@@ -71,23 +71,20 @@ define( require => {
       this.mutantPercentageNode = mutantPercentageNode;
       this.barWidth = options.barWidth;
 
-      Property.multilink( [ nonMutantCountCountProperty, mutantCountProperty ],
-        ( nonMutantCountCount, mutantCount ) => this.update( nonMutantCountCount, mutantCount )
+      Property.multilink( [ nonMutantCountCountProperty, mutantCountProperty, valuesVisibleProperty ],
+        ( nonMutantCountCount, mutantCount, valuesVisible ) =>
+          this.update( nonMutantCountCount, mutantCount, valuesVisible )
       );
-
-      valuesVisibleProperty.link( valuesVisible => {
-        nonMutantPercentageNode.visible = valuesVisible;
-        mutantPercentageNode.visible = valuesVisible;
-      } );
     }
 
     /**
      * Updates this node.
      * @param {number} nonMutantCountCount
      * @param {number} mutantCount
+     * @param {boolean} valuesVisible
      * @private
      */
-    update( nonMutantCountCount, mutantCount ) {
+    update( nonMutantCountCount, mutantCount, valuesVisible ) {
 
       const total = nonMutantCountCount + mutantCount;
 
@@ -100,7 +97,7 @@ define( require => {
         value: Util.roundSymmetric( 100 * nonMutantPercentage )
       } );
       this.mutantPercentageNode.text = StringUtils.fillIn( valuePercentString, {
-        value: Util.roundSymmetric( 100 *  mutantPercentage )
+        value: Util.roundSymmetric( 100 * mutantPercentage )
       } );
 
       // center % in its portion of the bar
@@ -111,9 +108,13 @@ define( require => {
         this.mutantPercentageNode.centerX = this.barWidth - ( mutantPercentage * this.barWidth / 2 );
       }
 
-      // if either count is zero, hide its bar and %
-      this.nonMutantRectangle.visible = this.nonMutantPercentageNode.visible = ( nonMutantPercentage > 0 );
-      this.mutantRectangle.visible = this.mutantPercentageNode.visible = ( mutantPercentage > 0 );
+      // hide zero-length bars
+      this.nonMutantRectangle.visible = ( nonMutantPercentage > 0 );
+      this.mutantRectangle.visible = ( mutantPercentage > 0 );
+
+      // hide values
+      this.nonMutantPercentageNode.visible = ( nonMutantPercentage > 0 && valuesVisible );
+      this.mutantPercentageNode.visible = ( mutantPercentage > 0 && valuesVisible );
 
       // update the mutant portion of the bar
       if ( mutantPercentage > 0 ) {
