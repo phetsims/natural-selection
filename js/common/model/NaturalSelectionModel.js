@@ -9,11 +9,11 @@ define( require => {
   'use strict';
 
   // modules
-  const AbioticEnvironments = require( 'NATURAL_SELECTION/common/model/AbioticEnvironments' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bunny = require( 'NATURAL_SELECTION/common/model/Bunny' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
+  const Environments = require( 'NATURAL_SELECTION/common/model/Environments' );
   const GenerationClock = require( 'NATURAL_SELECTION/common/model/GenerationClock' );
   const LimitedFood = require( 'NATURAL_SELECTION/common/model/LimitedFood' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -40,7 +40,7 @@ define( require => {
       this.generationClock = new GenerationClock();
 
       // @public the abiotic (physical, rather than biological) environment
-      this.abioticEnvironmentProperty = new EnumerationProperty( AbioticEnvironments, AbioticEnvironments.EQUATOR );
+      this.environmentProperty = new EnumerationProperty( Environments, Environments.EQUATOR );
 
       // @public (read-only) the biotic (biological, rather than physical) environmental factors
       this.wolves = new Wolves();
@@ -73,7 +73,7 @@ define( require => {
       this.isPlayingProperty.reset();
       this.mateWasAddedProperty.reset();
       this.generationClock.reset();
-      this.abioticEnvironmentProperty.reset();
+      this.environmentProperty.reset();
 
       // subcomponents
       this.wolves.reset();

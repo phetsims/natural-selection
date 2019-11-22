@@ -9,10 +9,10 @@ define( require => {
   'use strict';
 
   // modules
-  const AbioticEnvironmentRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/AbioticEnvironmentRadioButtonGroup' );
   const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
   const AddMutationPanel = require( 'NATURAL_SELECTION/common/view/AddMutationPanel' );
   const EnvironmentalFactorsPanel = require( 'NATURAL_SELECTION/common/view/EnvironmentalFactorsPanel' );
+  const EnvironmentRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/EnvironmentRadioButtonGroup' );
   const GenerationClockNode = require( 'NATURAL_SELECTION/common/view/GenerationClockNode' );
   const GraphRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/GraphRadioButtonGroup' );
   const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
@@ -45,7 +45,7 @@ define( require => {
         tandem: tandem
       } );
 
-      const viewportNode = new ViewportNode( model.abioticEnvironmentProperty,
+      const viewportNode = new ViewportNode( model.environmentProperty,
         0.75 * this.layoutBounds.width, 0.5 * this.layoutBounds.height, {
           left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
           top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
@@ -56,7 +56,7 @@ define( require => {
         top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
 
-      const abioticEnvironmentRadioButtonGroup = new AbioticEnvironmentRadioButtonGroup( model.abioticEnvironmentProperty, {
+      const environmentRadioButtonGroup = new EnvironmentRadioButtonGroup( model.environmentProperty, {
         right: viewportNode.right - NaturalSelectionConstants.VIEWPORT_NODE_X_MARGIN,
         top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
@@ -179,7 +179,7 @@ define( require => {
       this.children = [
         viewportNode,
         generationClockNode,
-        abioticEnvironmentRadioButtonGroup,
+        environmentRadioButtonGroup,
         addAMateButton,
         addMutationPanel,
         mutationComingParent,

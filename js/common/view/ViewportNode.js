@@ -9,7 +9,7 @@ define( require => {
   'use strict';
 
   // modules
-  const AbioticEnvironments = require( 'NATURAL_SELECTION/common/model/AbioticEnvironments' );
+  const Environments = require( 'NATURAL_SELECTION/common/model/Environments' );
   const Image = require( 'SCENERY/nodes/Image' );
   const Line = require( 'SCENERY/nodes/Line' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -25,7 +25,7 @@ define( require => {
   class ViewportNode extends Node {
 
     /**
-     * @param {EnumerationProperty.<AbioticEnvironments>} environmentProperty
+     * @param {EnumerationProperty.<Environments>} environmentProperty
      * @param {number} height
      * @param {number} width
      * @param {Object} [options]
@@ -64,8 +64,8 @@ define( require => {
       super( options );
 
       environmentProperty.link( climate => {
-        equatorBackground.visible = ( climate === AbioticEnvironments.EQUATOR );
-        arcticBackground.visible = ( climate === AbioticEnvironments.ARCTIC );
+        equatorBackground.visible = ( climate === Environments.EQUATOR );
+        arcticBackground.visible = ( climate === Environments.ARCTIC );
       } );
     }
   }

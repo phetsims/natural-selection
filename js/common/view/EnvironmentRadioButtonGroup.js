@@ -1,8 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * AbioticEnvironmentRadioButtonGroup is the radio button group for choosing the abiotic component of the
- * environment. See AbioticEnvironments.
+ * EnvironmentRadioButtonGroup is the radio button group for choosing the abiotic component of the environment.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,7 +9,7 @@ define( require => {
   'use strict';
 
   // modules
-  const AbioticEnvironments = require( 'NATURAL_SELECTION/common/model/AbioticEnvironments' );
+  const Environments = require( 'NATURAL_SELECTION/common/model/Environments' );
   const FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -23,10 +22,10 @@ define( require => {
   const ICON_X_MARGIN = 8;
   const ICON_Y_MARGIN = 6;
 
-  class AbioticEnvironmentRadioButtonGroup extends RadioButtonGroup {
+  class EnvironmentRadioButtonGroup extends RadioButtonGroup {
 
     /**
-     * @param {EnumerationProperty.<AbioticEnvironments>} environmentProperty
+     * @param {EnumerationProperty.<Environments>} environmentProperty
      * @param {Object} [options]
      */
     constructor( environmentProperty, options ) {
@@ -72,13 +71,13 @@ define( require => {
       
       // Create the description of the buttons
       const content = [
-        { value: AbioticEnvironments.EQUATOR, node: sunParent },
-        { value: AbioticEnvironments.ARCTIC, node: snowflakeParent }
+        { value: Environments.EQUATOR, node: sunParent },
+        { value: Environments.ARCTIC, node: snowflakeParent }
       ];
 
       super( environmentProperty, content, options );
     }
   }
 
-  return naturalSelection.register( 'AbioticEnvironmentRadioButtonGroup', AbioticEnvironmentRadioButtonGroup );
+  return naturalSelection.register( 'EnvironmentRadioButtonGroup', EnvironmentRadioButtonGroup );
 } );
