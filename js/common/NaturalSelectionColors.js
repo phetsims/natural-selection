@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- *
+ * Colors used in this sim.
+ * 
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
