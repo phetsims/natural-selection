@@ -29,12 +29,17 @@ define( require => {
     PANEL_STROKE: 'rgb( 150, 160, 110 )', // much darker version of SCREEN_VIEW_BACKGROUND
     SEPARATOR_STROKE: 'rgb( 200, 200, 200 )',
 
-    // buttons
+    // Push buttons
     ADD_A_MATE_BUTTON: PhetColorScheme.BUTTON_YELLOW,
     CANCEL_BUTTON: PhetColorScheme.BUTTON_YELLOW,
     ZOOM_BUTTONS: 'white',
     ARROW_BUTTONS: 'white',
     MUTATION_BUTTONS: 'rgb( 203, 203, 203 )',
+
+    // Radio buttons
+    RADIO_BUTTON_SELECTED_STROKE: 'rgb( 254, 225, 5 )',
+    EQUATOR_BUTTON_FILL: 'rgb( 207, 125, 66 )',
+    ARCTIC_BUTTON_FILL: 'rgb( 54, 137, 239 )',
 
     // graphs
     GRAPHS_STROKE: 'rgb( 190, 200, 150 )', // darker version of SCREEN_VIEW_BACKGROUND

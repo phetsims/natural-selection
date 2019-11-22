@@ -13,6 +13,7 @@ define( require => {
   const FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
   const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
@@ -34,7 +35,7 @@ define( require => {
         orientation: 'horizontal',
         spacing: 8,
         cornerRadius: 5,
-        selectedStroke: 'rgb( 254, 225, 5 )',
+        selectedStroke: NaturalSelectionColors.RADIO_BUTTON_SELECTED_STROKE,
         selectedLineWidth: NaturalSelectionConstants.CORNER_RADIUS,
         deselectedLineWidth: 1,
         deselectedButtonOpacity: 0.2,
@@ -44,35 +45,34 @@ define( require => {
         buttonContentYMargin: 0
       }, options );
 
-      const fontAwesomeOptions = { scale: 2, fill: 'white' };
-
       // icons
-      const sunIcon = new FontAwesomeNode( 'sun_solid', fontAwesomeOptions );
-      const snowflakeIcon = new FontAwesomeNode( 'snowflake', fontAwesomeOptions );
+      const iconOptions = { scale: 2, fill: 'white' };
+      const sunIcon = new FontAwesomeNode( 'sun_solid', iconOptions );
+      const snowflakeIcon = new FontAwesomeNode( 'snowflake', iconOptions );
 
-      // RadioButtonGroup does not support different colors for radio buttons in the same group. So here we
-      // create our own backgrounds, with a cornerRadius that matches options.cornerRadius.
+      // RadioButtonGroup does not support different colors for radio buttons in the same group.
+      // So we create our own backgrounds, with a cornerRadius that matches options.cornerRadius.
       const buttonWidth = _.maxBy( [ sunIcon, snowflakeIcon ], icon => icon.width ).width + ( 2 * ICON_X_MARGIN );
       const buttonHeight = _.maxBy( [ sunIcon, snowflakeIcon ], icon => icon.height ).height + ( 2 * ICON_Y_MARGIN );
-      const sunBackground = new Rectangle( 0, 0, buttonWidth, buttonHeight, {
+      const equatorButtonBackground = new Rectangle( 0, 0, buttonWidth, buttonHeight, {
         cornerRadius: options.cornerRadius,
-        fill: 'rgb( 207, 125, 66 )',
+        fill: NaturalSelectionColors.EQUATOR_BUTTON_FILL,
         center: sunIcon.center
       } );
-      const snowflakeBackground = new Rectangle( 0, 0, buttonWidth, buttonHeight, {
+      const arcticButtonBackground = new Rectangle( 0, 0, buttonWidth, buttonHeight, {
         cornerRadius: options.cornerRadius,
-        fill: 'rgb( 54, 137, 239 )',
+        fill: NaturalSelectionColors.ARCTIC_BUTTON_FILL,
         center: snowflakeIcon.center
       } );
 
       // icons on backgrounds
-      const sunParent = new Node( { children: [ sunBackground, sunIcon ] } );
-      const snowflakeParent = new Node( { children: [ snowflakeBackground, snowflakeIcon ] } );
+      const equatorButtonContent = new Node( { children: [ equatorButtonBackground, sunIcon ] } );
+      const arcticButtonContent = new Node( { children: [ arcticButtonBackground, snowflakeIcon ] } );
       
-      // Create the description of the buttons
+      // description of the buttons
       const content = [
-        { value: Environments.EQUATOR, node: sunParent },
-        { value: Environments.ARCTIC, node: snowflakeParent }
+        { value: Environments.EQUATOR, node: equatorButtonContent },
+        { value: Environments.ARCTIC, node: arcticButtonContent }
       ];
 
       super( environmentProperty, content, options );
