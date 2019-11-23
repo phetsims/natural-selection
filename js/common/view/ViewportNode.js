@@ -9,9 +9,7 @@ define( require => {
   'use strict';
 
   // modules
-  const Environments = require( 'NATURAL_SELECTION/common/model/Environments' );
-  const Image = require( 'SCENERY/nodes/Image' );
-  const Line = require( 'SCENERY/nodes/Line' );
+  const EnvironmentNode = require( 'NATURAL_SELECTION/common/view/EnvironmentNode' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
@@ -19,10 +17,6 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
-
-  // images
-  const arcticBackgroundImage = require( 'image!NATURAL_SELECTION/arcticBackground.png' );
-  const equatorBackgroundImage = require( 'image!NATURAL_SELECTION/equatorBackground.png' );
 
   class ViewportNode extends Node {
 
@@ -37,31 +31,16 @@ define( require => {
         viewportHorizonY: NaturalSelectionConstants.VIEWPORT_HORIZON_Y
       }, options );
 
-      const width = options.viewportSize.width;
-      const height = options.viewportSize.height;
-
-      // Equator background, scaled to fit
-      const equatorBackground = new Image( equatorBackgroundImage );
-      equatorBackground.setScaleMagnitude( width / equatorBackground.width, height / equatorBackground.height );
-
-      // Arctic background, scaled to fit
-      const arcticBackground = new Image( arcticBackgroundImage );
-      arcticBackground.setScaleMagnitude( width / arcticBackground.width, height / arcticBackground.height );
-
-      // Horizon line, for debugging. Bunnies cannot go further from the viewer than this line.
-      const horizonLine = new Line( 0, options.viewportHorizonY, width, options.viewportHorizonY, {
-        stroke: phet.chipper.queryParameters.dev ? 'red' : null,
-        lineWidth: 1
-      } );
+      const environmentNode = new EnvironmentNode( environmentProperty, options.viewportSize, options.viewportHorizonY );
 
       // Everything in the world, clipped to the viewport
       const worldContents = new Node( {
-        children: [ equatorBackground, arcticBackground, horizonLine ],
-        clipArea: Shape.rect( 0, 0, width, height )
+        children: [ environmentNode ],
+        clipArea: Shape.rect( 0, 0, options.viewportSize.width, options.viewportSize.height )
       } );
 
       // Frame around the viewport
-      const frameNode = new Rectangle( 0, 0, width, height, {
+      const frameNode = new Rectangle( 0, 0, options.viewportSize.width, options.viewportSize.height, {
         stroke: NaturalSelectionColors.VIEWPORT_NODE_STROKE
       } );
 
@@ -69,11 +48,6 @@ define( require => {
       options.children = [ worldContents, frameNode ];
 
       super( options );
-
-      environmentProperty.link( climate => {
-        equatorBackground.visible = ( climate === Environments.EQUATOR );
-        arcticBackground.visible = ( climate === Environments.ARCTIC );
-      } );
     }
   }
 
