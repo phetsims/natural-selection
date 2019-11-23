@@ -45,11 +45,10 @@ define( require => {
         tandem: tandem
       } );
 
-      const viewportNode = new ViewportNode( model.environmentProperty,
-        0.75 * this.layoutBounds.width, 0.5 * this.layoutBounds.height, {
-          left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
-          top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
-        } );
+      const viewportNode = new ViewportNode( model.environmentProperty, {
+        left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
+        top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
+      } );
 
       const generationClockNode = new GenerationClockNode( model.generationClock, model.selectionAgentsEnabledProperty, {
         centerX: viewportNode.centerX,

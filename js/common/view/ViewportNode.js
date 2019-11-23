@@ -12,8 +12,10 @@ define( require => {
   const Environments = require( 'NATURAL_SELECTION/common/model/Environments' );
   const Image = require( 'SCENERY/nodes/Image' );
   const Line = require( 'SCENERY/nodes/Line' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
+  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
@@ -26,11 +28,17 @@ define( require => {
 
     /**
      * @param {EnumerationProperty.<Environments>} environmentProperty
-     * @param {number} height
-     * @param {number} width
      * @param {Object} [options]
      */
-    constructor( environmentProperty, width, height, options ) {
+    constructor( environmentProperty, options ) {
+
+      options = merge( {
+        viewportSize: NaturalSelectionConstants.VIEWPORT_NODE_SIZE,
+        viewportHorizonY: NaturalSelectionConstants.VIEWPORT_HORIZON_Y
+      }, options );
+
+      const width = options.viewportSize.width;
+      const height = options.viewportSize.height;
 
       // Equator background, scaled to fit
       const equatorBackground = new Image( equatorBackgroundImage );
@@ -40,9 +48,8 @@ define( require => {
       const arcticBackground = new Image( arcticBackgroundImage );
       arcticBackground.setScaleMagnitude( width / arcticBackground.width, height / arcticBackground.height );
 
-      // Horizon line, for debugging. Bunnies cannot go further back than this line.
-      const horizonY = 95; // determined empirically, based on background PNG files
-      const horizonLine = new Line( 0, horizonY, width, horizonY, {
+      // Horizon line, for debugging. Bunnies cannot go further from the viewer than this line.
+      const horizonLine = new Line( 0, options.viewportHorizonY, width, options.viewportHorizonY, {
         stroke: phet.chipper.queryParameters.dev ? 'red' : null,
         lineWidth: 1
       } );
