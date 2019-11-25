@@ -52,11 +52,15 @@ define( require => {
 
       // Alleles title
       const titleNode = new Text( allelesString, {
-        font: NaturalSelectionConstants.TITLE_FONT
+        font: NaturalSelectionConstants.TITLE_FONT,
+        maxWidth: 150 // determined empirically
       } );
 
       // Checkbox for each gene
-      const textOptions = { font: NaturalSelectionConstants.CHECKBOX_FONT };
+      const textOptions = {
+        font: NaturalSelectionConstants.CHECKBOX_FONT,
+        maxWidth: 120 // determined empirically
+      };
       const checkboxes = [
 
         // Fur

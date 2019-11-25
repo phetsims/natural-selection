@@ -29,7 +29,8 @@ define( require => {
       options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 
       const content = new Text( limitedFoodString, {
-        font: NaturalSelectionConstants.CHECKBOX_FONT
+        font: NaturalSelectionConstants.CHECKBOX_FONT,
+        maxWidth: 150 // determined empirically
       } );
 
       super( content, limitedFoodProperty, options );

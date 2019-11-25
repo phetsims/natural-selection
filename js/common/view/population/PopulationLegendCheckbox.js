@@ -39,7 +39,8 @@ define( require => {
       } );
 
       const textNode = new Text( labelString, {
-        font: NaturalSelectionConstants.CHECKBOX_FONT
+        font: NaturalSelectionConstants.CHECKBOX_FONT,
+        maxWidth: 80 // determined empirically
       } );
 
       const content = new HBox( {

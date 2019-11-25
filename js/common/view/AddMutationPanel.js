@@ -76,7 +76,10 @@ define( require => {
         spacing: 4,
         align: 'center',
         children: [
-          new Text( addMutationString, { font: NaturalSelectionConstants.TITLE_FONT } ),
+          new Text( addMutationString, {
+            font: NaturalSelectionConstants.TITLE_FONT,
+            maxWidth: 160 // determined empirically
+          } ),
           new Image( mutationIconImage, { scale: 0.15 } )
         ]
       } );
@@ -84,10 +87,12 @@ define( require => {
       // Individual column headings
       const geneNameColumnLabel = new Text( '' ); // to facilitate alignment
       const dominantColumnLabel = new Text( dominantString, {
-        font: COLUMN_HEADING_FONT
+        font: COLUMN_HEADING_FONT,
+        maxWidth: 60 // determined empirically
       } );
       const recessiveColumnLabel = new Text( recessiveString, {
-        font: COLUMN_HEADING_FONT
+        font: COLUMN_HEADING_FONT,
+        maxWidth: 60 // determined empirically
       } );
 
       // Layout of column headings 
@@ -131,7 +136,8 @@ define( require => {
 
       // label that indicates the trait name, to the left of buttons
       const labelNode = new Text( traitName, {
-        font: LABEL_FONT
+        font: LABEL_FONT,
+        maxWidth: 50 // determined empirically
       } );
 
       // mutation icon, the same on both buttons

@@ -33,7 +33,8 @@ define( require => {
       }, options );
 
       const generationNode = new Text( '', {
-        font: NaturalSelectionConstants.TEXT_FONT
+        font: NaturalSelectionConstants.TEXT_FONT,
+        maxWidth: 150 // determined empirically
       } );
 
       const previous = () => generationProperty.value--;

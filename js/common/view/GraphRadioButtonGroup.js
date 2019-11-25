@@ -22,7 +22,10 @@ define( require => {
   const pedigreeString = require( 'string!NATURAL_SELECTION/pedigree' );
 
   // constants
-  const TEXT_OPTIONS = { font: NaturalSelectionConstants.RADIO_BUTTON_FONT };
+  const TEXT_OPTIONS = {
+    font: NaturalSelectionConstants.RADIO_BUTTON_FONT,
+    maxWidth: 175 // determined empirically
+  };
 
   class GraphRadioButtonGroup extends VerticalAquaRadioButtonGroup {
 

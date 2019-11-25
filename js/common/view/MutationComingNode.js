@@ -49,7 +49,8 @@ define( require => {
       } );
 
       const textNode = new Text( mutationComingString, {
-        font: FONT
+        font: FONT,
+        maxWidth: 200 // determined empirically
       } );
 
       const hBox = new HBox( {

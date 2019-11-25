@@ -34,7 +34,8 @@ define( require => {
 
       assert && assert( !options.content, 'AddAMateButton sets content' );
       options.content = new Text( addAMateString, {
-        font: NaturalSelectionConstants.PUSH_BUTTON_FONT
+        font: NaturalSelectionConstants.PUSH_BUTTON_FONT,
+        maxWidth: 150 // determined empirically
       } );
 
       super( options );

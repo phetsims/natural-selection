@@ -40,7 +40,8 @@ define( require => {
 
           // title
           new Text( environmentalFactorsString, {
-            font: NaturalSelectionConstants.TITLE_FONT
+            font: NaturalSelectionConstants.TITLE_FONT,
+            maxWidth: 175 // determined empirically
           } ),
 
           // Wolves

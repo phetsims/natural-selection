@@ -42,13 +42,12 @@ define( require => {
         xMargin: 0
       }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
-      const textOptions = {
-        font: NaturalSelectionConstants.CHECKBOX_FONT
-      };
-
       // Values
       const valuesCheckbox = new Checkbox(
-        new Text( valuesString, textOptions ),
+        new Text( valuesString, {
+          font: NaturalSelectionConstants.CHECKBOX_FONT,
+          maxWidth: 120 // determined empirically
+        } ),
         proportionModel.valuesVisibleProperty,
         NaturalSelectionConstants.CHECKBOX_OPTIONS );
 

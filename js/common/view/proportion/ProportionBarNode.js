@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO layout problems when percentage values extend past left or right ends of bar
 /**
  * ProportionBarNode is a bar in the Proportion graph, showing the percentage of mutant vs non-mutant genes for
  * a trait in the population.
@@ -54,7 +55,8 @@ define( require => {
       // Percentages for non-mutant and mutant counts
       const percentageOptions = {
         font: PERCENTAGE_FONT,
-        bottom: -4
+        bottom: -4,
+        maxWidth: 30 // determined empirically
       };
       const nonMutantPercentageNode = new Text( '', percentageOptions );
       const mutantPercentageNode = new Text( '', percentageOptions );

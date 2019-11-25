@@ -139,14 +139,14 @@ define( require => {
         environmentRadioButtonGroup,
         addAMateButton,
         addMutationPanel,
-        mutationComingParent,
         environmentalFactorsPanel,
         timeControlNode,
         populationNode,
         proportionNode,
         pedigreeNode,
         graphRadioButtonGroup,
-        resetAllButton
+        resetAllButton,
+        mutationComingParent
       ];
 
       // @private

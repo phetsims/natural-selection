@@ -36,7 +36,10 @@ define( require => {
       const content = new HBox( {
         spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING,
         children: [
-          new Text( toughFoodString, { font: NaturalSelectionConstants.CHECKBOX_FONT } ),
+          new Text( toughFoodString, {
+            font: NaturalSelectionConstants.CHECKBOX_FONT,
+            maxWidth: 110 // determined empirically
+          } ),
           new Image( toughFoodIcon, { scale: 0.4 } )
         ]
       });

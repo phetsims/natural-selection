@@ -70,7 +70,10 @@ define( require => {
       const barColumnsAlignGroup = new AlignGroup( { matchVertical: false } );
 
       // Column labels
-      const columnLabelOptions = { font: LABEL_FONT };
+      const columnLabelOptions = {
+        font: LABEL_FONT,
+        maxWidth: 120 // determined empirically
+      };
       const columnLabels = new HBox( {
         spacing: COLUMNS_SPACING,
         children: [
@@ -123,12 +126,14 @@ define( require => {
     constructor( labelString, countProperty, valueAlignGroup, barColumnsAlignGroup, valuesVisibleProperty ) {
 
       const labelNode = new Text( labelString, {
-        font: LABEL_FONT
+        font: LABEL_FONT,
+        maxWidth: 120 // determined empirically
       } );
 
       // {{count}} bunnies
       const countNode = new Text( '', {
-        font: VALUE_FONT
+        font: VALUE_FONT,
+        maxWidth: 120 // determined empirically
       } );
 
       const valueVBox = new VBox( {
@@ -147,7 +152,7 @@ define( require => {
 
       super( {
         spacing: COLUMNS_SPACING,
-        align: 'bottom',
+        align: 'bottom', //TODO this looks lousy for ?stringTest=long
         children: [
           new AlignBox( valueVBox, { group: valueAlignGroup, xAlign: 'left' } ),
           new AlignBox( furBarNode, { group: barColumnsAlignGroup, xAlign: 'center' } ),
