@@ -32,7 +32,8 @@ define( require => {
         graphHeight: 100,
 
         // HBox options
-        spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING
+        spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        align: 'top'
       }, options );
 
       const controlPanel = new PopulationControlPanel( populationModel, {
