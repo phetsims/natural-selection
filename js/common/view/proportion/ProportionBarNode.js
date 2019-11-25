@@ -90,7 +90,7 @@ define( require => {
 
       const total = nonMutantCountCount + mutantCount;
 
-      //TODO display 1 > value > 0 as 1%
+      //TODO what to do about values that are > 0 and < 1 ?
       const nonMutantPercentage = nonMutantCountCount / total;
       const mutantPercentage = mutantCount / total;
 
