@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * PopulationCheckbox is a checkbox in the control panel for the Population graph.
+ * PopulationLegendCheckbox is a checkbox in the control panel for the Population graph.
  * It serves as a legend (showing the color and line style) and a means of controlling visibility (checkbox).
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -18,7 +18,7 @@ define( require => {
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Text = require( 'SCENERY/nodes/Text' );
 
-  class PopulationCheckbox extends Checkbox {
+  class PopulationLegendCheckbox extends Checkbox {
 
     /**
      * @param {Property.<boolean>} property
@@ -51,5 +51,5 @@ define( require => {
     }
   }
 
-  return naturalSelection.register( 'PopulationCheckbox', PopulationCheckbox );
+  return naturalSelection.register( 'PopulationLegendCheckbox', PopulationLegendCheckbox );
 } );

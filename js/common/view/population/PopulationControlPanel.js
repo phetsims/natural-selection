@@ -16,7 +16,7 @@ define( require => {
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
-  const PopulationCheckbox = require( 'NATURAL_SELECTION/common/view/population/PopulationCheckbox' );
+  const PopulationLegendCheckbox = require( 'NATURAL_SELECTION/common/view/population/PopulationLegendCheckbox' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -55,7 +55,7 @@ define( require => {
       } );
 
       // Total
-      const totalCheckbox = new PopulationCheckbox( populationModel.totalVisibleProperty, totalString, {
+      const totalCheckbox = new PopulationLegendCheckbox( populationModel.totalVisibleProperty, totalString, {
         color: NaturalSelectionColors.TOTAL_POPULATION
       } );
 
@@ -63,39 +63,39 @@ define( require => {
       const alleleCheckboxes = [
 
         // White Fur
-        new PopulationCheckbox( populationModel.whiteFurVisibleProperty, whiteFurString, {
+        new PopulationLegendCheckbox( populationModel.whiteFurVisibleProperty, whiteFurString, {
           color: NaturalSelectionColors.FUR,
           enabledProperty: populationModel.whiteFurEnabledProperty
         } ),
 
         // Brown Fur
-        new PopulationCheckbox( populationModel.brownFurVisibleProperty, brownFurString, {
+        new PopulationLegendCheckbox( populationModel.brownFurVisibleProperty, brownFurString, {
           color: NaturalSelectionColors.FUR,
           isMutation: true,
           enabledProperty: populationModel.brownFurEnabledProperty
         } ),
 
         // Straight Ears
-        new PopulationCheckbox( populationModel.straightEarsVisibleProperty, straightEarsString, {
+        new PopulationLegendCheckbox( populationModel.straightEarsVisibleProperty, straightEarsString, {
           color: NaturalSelectionColors.EARS,
           enabledProperty: populationModel.straightEarsEnabledProperty
         } ),
 
         // Floppy Ears
-        new PopulationCheckbox( populationModel.floppyEarsVisibleProperty, floppyEarsString, {
+        new PopulationLegendCheckbox( populationModel.floppyEarsVisibleProperty, floppyEarsString, {
           color: NaturalSelectionColors.EARS,
           isMutation: true,
           enabledProperty: populationModel.floppyEarsEnabledProperty
         } ),
 
         // Short Teeth
-        new PopulationCheckbox( populationModel.shortTeethVisibleProperty, shortTeethString, {
+        new PopulationLegendCheckbox( populationModel.shortTeethVisibleProperty, shortTeethString, {
           color: NaturalSelectionColors.TEETH,
           enabledProperty: populationModel.shortTeethEnabledProperty
         } ),
 
         // Long Teeth
-        new PopulationCheckbox( populationModel.longTeethVisibleProperty, longTeethString, {
+        new PopulationLegendCheckbox( populationModel.longTeethVisibleProperty, longTeethString, {
           color: NaturalSelectionColors.TEETH,
           isMutation: true,
           enabledProperty: populationModel.longTeethEnabledProperty

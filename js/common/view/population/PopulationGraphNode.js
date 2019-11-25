@@ -18,7 +18,7 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const ZoomControl = require( 'NATURAL_SELECTION/common/view/ZoomControl' );
+  const ZoomControl = require( 'NATURAL_SELECTION/common/view/population/ZoomControl' );
 
   // strings
   const generationString = require( 'string!NATURAL_SELECTION/generation' );
