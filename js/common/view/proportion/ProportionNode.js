@@ -32,7 +32,8 @@ define( require => {
         graphHeight: 100,
 
         // HBox options
-        spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING
+        spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        align: 'center'
       }, options );
 
       const controlPanel = new ProportionControlPanel( proportionModel, {
