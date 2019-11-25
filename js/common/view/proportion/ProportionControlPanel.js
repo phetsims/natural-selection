@@ -32,10 +32,10 @@ define( require => {
   class ProportionControlPanel extends NaturalSelectionPanel {
 
     /**
-     * @param {Property.<boolean>} valuesVisibleProperty
+     * @param {ProportionModel} proportionModel
      * @param {Object} [options]
      */
-    constructor( valuesVisibleProperty, options ) {
+    constructor( proportionModel, options ) {
 
       options = merge( {
         fixedWidth: 100,
@@ -49,7 +49,7 @@ define( require => {
       // Values
       const valuesCheckbox = new Checkbox(
         new Text( valuesString, textOptions ),
-        valuesVisibleProperty,
+        proportionModel.valuesVisibleProperty,
         NaturalSelectionConstants.CHECKBOX_OPTIONS );
 
       // ------

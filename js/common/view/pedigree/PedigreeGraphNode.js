@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -17,14 +18,18 @@ define( require => {
   class PedigreeGraphNode extends Node {
 
     /**
-     * @param {number} width
-     * @param {number} height
+     * @param {PedigreeModel} pedigreeModel
      * @param {Object} [options]
      */
-    constructor( width, height, options ) {
+    constructor( pedigreeModel, options ) {
+
+      options = merge( {
+        graphWidth: 100,
+        graphHeight: 100
+      }, options );
 
       //TODO placeholder
-      const rectangle = new Rectangle( 0, 0, width, height, {
+      const rectangle = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
         fill: 'white',
         stroke: NaturalSelectionColors.GRAPHS_STROKE
       } );

@@ -19,13 +19,9 @@ define( require => {
   const MutationComingNode = require( 'NATURAL_SELECTION/common/view/MutationComingNode' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const PedigreeControlPanel = require( 'NATURAL_SELECTION/common/view/pedigree/PedigreeControlPanel' );
-  const PedigreeGraphNode = require( 'NATURAL_SELECTION/common/view/pedigree/PedigreeGraphNode' );
-  const PopulationControlPanel = require( 'NATURAL_SELECTION/common/view/population/PopulationControlPanel' );
-  const PopulationGraphNode = require( 'NATURAL_SELECTION/common/view/population/PopulationGraphNode' );
-  const ProportionControlPanel = require( 'NATURAL_SELECTION/common/view/proportion/ProportionControlPanel' );
-  const ProportionGraphNode = require( 'NATURAL_SELECTION/common/view/proportion/ProportionGraphNode' );
+  const PedigreeNode = require( 'NATURAL_SELECTION/common/view/pedigree/PedigreeNode' );
+  const PopulationNode = require( 'NATURAL_SELECTION/common/view/population/PopulationNode' );
+  const ProportionNode = require( 'NATURAL_SELECTION/common/view/proportion/ProportionNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
@@ -95,71 +91,33 @@ define( require => {
       const graphHeight = this.layoutBounds.height - ( 2 * NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN ) -
                           viewportNode.height - NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING;
 
-      const leftOfGraphWidth = viewportNode.width - graphWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
+      // Options common to the Population, Proportion, and Pedigree views
+      const viewOptions = {
 
-      const populationGraphNode = new PopulationGraphNode( model.populationModel, {
+        // Control panels occupy the space to the left of graphs
+        controlPanelWidth: viewportNode.width - graphWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        controlPanelHeight: graphHeight,
         graphWidth: graphWidth,
         graphHeight: graphHeight,
         right: viewportNode.right,
         top: viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
-      } );
+      };
 
-      const populationControlPanel = new PopulationControlPanel( model.populationModel, {
-        fixedWidth: leftOfGraphWidth,
-        maxHeight: graphHeight,
-        right: populationGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
-        centerY: populationGraphNode.centerY
-      } );
-
-      const populationParent = new Node( {
-        children: [ populationControlPanel, populationGraphNode ]
-      } );
-
-      const proportionGraphNode = new ProportionGraphNode( model.proportionModel, {
-        graphWidth: graphWidth,
-        graphHeight: graphHeight,
-        right: viewportNode.right,
-        top: viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
-      } );
-
-      const proportionControlPanel = new ProportionControlPanel( model.proportionModel.valuesVisibleProperty, {
-        fixedWidth: leftOfGraphWidth,
-        maxHeight: graphHeight,
-        right: proportionGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
-        centerY: proportionGraphNode.centerY
-      } );
-
-      const proportionParent = new Node( {
-        children: [ proportionControlPanel, proportionGraphNode ]
-      } );
-
-      const pedigreeGraphNode = new PedigreeGraphNode( graphWidth, graphHeight, {
-        right: viewportNode.right,
-        top: viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
-      } );
-
-      const pedigreeControlPanel = new PedigreeControlPanel( model.pedigreeModel, {
-        fixedWidth: leftOfGraphWidth,
-        maxHeight: graphHeight,
-        right: pedigreeGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
-        centerY: pedigreeGraphNode.centerY
-      } );
-
-      const pedigreeParent = new Node( {
-        children: [ pedigreeControlPanel, pedigreeGraphNode ]
-      } );
+      const populationNode = new PopulationNode( model.populationModel, viewOptions );
+      const proportionNode = new ProportionNode( model.proportionModel, viewOptions );
+      const pedigreeNode = new PedigreeNode( model.pedigreeModel, viewOptions );
 
       const graphRadioButtonGroup = new GraphRadioButtonGroup( viewProperties.graphProperty, {
         maxWidth: rightOfWorldWidth,
-        left: populationGraphNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        centerY: populationGraphNode.centerY
+        left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        centerY: populationNode.centerY
       } );
 
       const timeControlNode = new TimeControlNode( model.isPlayingProperty, {
         stepOptions: {
           listener: () => model.stepOnce( NaturalSelectionConstants.SECONDS_PER_STEP )
         },
-        left: proportionGraphNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
       } );
 
@@ -184,9 +142,9 @@ define( require => {
         mutationComingParent,
         environmentalFactorsPanel,
         timeControlNode,
-        populationParent,
-        proportionParent,
-        pedigreeParent,
+        populationNode,
+        proportionNode,
+        pedigreeNode,
         graphRadioButtonGroup,
         resetAllButton
       ];
@@ -196,9 +154,9 @@ define( require => {
       this.addAMateButton = addAMateButton;
 
       viewProperties.graphProperty.link( graph => {
-        populationParent.visible = ( graph === Graphs.POPULATION );
-        proportionParent.visible = ( graph === Graphs.PROPORTION );
-        pedigreeParent.visible = ( graph === Graphs.PEDIGREE );
+        populationNode.visible = ( graph === Graphs.POPULATION );
+        proportionNode.visible = ( graph === Graphs.PROPORTION );
+        pedigreeNode.visible = ( graph === Graphs.PEDIGREE );
       } );
     }
 
