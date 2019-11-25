@@ -21,7 +21,7 @@ define( require => {
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PedigreeControlPanel = require( 'NATURAL_SELECTION/common/view/PedigreeControlPanel' );
-  const PedigreeNode = require( 'NATURAL_SELECTION/common/view/PedigreeNode' );
+  const PedigreeGraphNode = require( 'NATURAL_SELECTION/common/view/PedigreeGraphNode' );
   const PopulationControlPanel = require( 'NATURAL_SELECTION/common/view/PopulationControlPanel' );
   const PopulationGraphNode = require( 'NATURAL_SELECTION/common/view/PopulationGraphNode' );
   const ProportionControlPanel = require( 'NATURAL_SELECTION/common/view/ProportionControlPanel' );
@@ -133,7 +133,7 @@ define( require => {
         children: [ proportionControlPanel, proportionGraphNode ]
       } );
 
-      const pedigreeNode = new PedigreeNode( graphWidth, graphHeight, {
+      const pedigreeGraphNode = new PedigreeGraphNode( graphWidth, graphHeight, {
         right: viewportNode.right,
         top: viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
       } );
@@ -141,12 +141,12 @@ define( require => {
       const pedigreeControlPanel = new PedigreeControlPanel( model.pedigreeModel, {
         fixedWidth: leftOfGraphWidth,
         maxHeight: graphHeight,
-        right: pedigreeNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
-        centerY: pedigreeNode.centerY
+        right: pedigreeGraphNode.left - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
+        centerY: pedigreeGraphNode.centerY
       } );
 
       const pedigreeParent = new Node( {
-        children: [ pedigreeControlPanel, pedigreeNode ]
+        children: [ pedigreeControlPanel, pedigreeGraphNode ]
       } );
 
       const graphRadioButtonGroup = new GraphRadioButtonGroup( viewProperties.graphProperty, {
@@ -194,7 +194,6 @@ define( require => {
       // @private
       this.model = model;
       this.addAMateButton = addAMateButton;
-      this.proportionGraphNode = proportionGraphNode;
 
       viewProperties.graphProperty.link( graph => {
         populationParent.visible = ( graph === Graphs.POPULATION );

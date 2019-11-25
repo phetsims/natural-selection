@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * PedigreeNode displays the pedigree for an individual.
+ * PedigreeGraphNode displays the pedigree for an individual.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -14,7 +14,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
-  class PedigreeNode extends Node {
+  class PedigreeGraphNode extends Node {
 
     /**
      * @param {number} width
@@ -29,12 +29,12 @@ define( require => {
         stroke: NaturalSelectionColors.GRAPHS_STROKE
       } );
 
-      assert && assert( !options.children, 'PedigreeNode sets children' );
+      assert && assert( !options.children, 'PedigreeGraphNode sets children' );
       options.children = [ rectangle ];
 
       super( options );
     }
   }
 
-  return naturalSelection.register( 'PedigreeNode', PedigreeNode );
+  return naturalSelection.register( 'PedigreeGraphNode', PedigreeGraphNode );
 } );
