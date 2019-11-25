@@ -16,7 +16,7 @@ define( require => {
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
-  const PopulationCheckbox = require( 'NATURAL_SELECTION/common/view/PopulationCheckbox' );
+  const PopulationCheckbox = require( 'NATURAL_SELECTION/common/view/population/PopulationCheckbox' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 

@@ -16,7 +16,7 @@ define( require => {
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
-  const ProportionLegendNode = require( 'NATURAL_SELECTION/common/view/ProportionLegendNode' );
+  const ProportionLegendNode = require( 'NATURAL_SELECTION/common/view/proportion/ProportionLegendNode' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
