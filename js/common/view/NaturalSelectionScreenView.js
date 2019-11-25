@@ -74,10 +74,10 @@ define( require => {
 
       //TODO for demo purposes only, these need to be placed based on rows in AddMutationsPanel
       const mutationComingParent = new VBox( {
-        spacing: 16,
+        spacing: 19,
         children: [ new MutationComingNode(), new MutationComingNode(), new MutationComingNode() ],
         right: addMutationPanel.left + 10,
-        top: addMutationPanel.top + 62
+        top: addMutationPanel.top + 67
       } );
 
       const environmentalFactorsPanel = new EnvironmentalFactorsPanel(

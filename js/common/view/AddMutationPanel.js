@@ -48,7 +48,6 @@ define( require => {
   // constants
   const COLUMN_HEADING_FONT = new PhetFont( 14 );
   const COLUMN_SPACING = 8;
-  const ROW_SPACING = 8;
   const LABEL_FONT = new PhetFont( 16 );
   const BUTTON_ICON_SCALE = 0.5;
   const LABEL_COLUMN_X_ALIGN = 'left';
@@ -106,11 +105,9 @@ define( require => {
       const earsRow = new AddMutationRow( earsString, floppyEarsImage, straightEarsImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
       const teethRow = new AddMutationRow( teethString, longTeethImage, shortTeethImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup );
 
-      const content = new VBox( {
-        align: 'left',
-        spacing: ROW_SPACING,
+      const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         children: [ titleNode, columnHeadingsNode, furRow, earsRow, teethRow ]
-      } );
+      } ) );
 
       super( content, options );
     }
