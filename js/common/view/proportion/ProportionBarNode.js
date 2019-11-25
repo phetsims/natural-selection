@@ -1,6 +1,5 @@
 // Copyright 2019, University of Colorado Boulder
 
-//TODO layout problems when percentage values extend past left or right ends of bar
 /**
  * ProportionBarNode is a bar in the Proportion graph, showing the percentage of mutant vs non-mutant genes for
  * a trait in the population.
@@ -44,7 +43,7 @@ define( require => {
         barHeight: 30
       }, options );
 
-      // Portions of the bar for non-mutant and mutant counts
+      // Portions of the bar for non-mutant and mutant counts. Only the mutantRectangle will be resized.
       const nonMutantRectangle = new Rectangle( 0, 0, options.barWidth, options.barHeight, {
         fill: color
       } );
@@ -108,6 +107,21 @@ define( require => {
       }
       if ( mutantPercentage > 0 ) {
         this.mutantPercentageNode.centerX = this.barWidth - ( mutantPercentage * this.barWidth / 2 );
+      }
+
+      // constrain percentages to left and right edges of bars
+      if ( this.nonMutantPercentageNode.left < this.nonMutantRectangle.left ) {
+        this.nonMutantPercentageNode.left = this.nonMutantRectangle.left;
+      }
+      else if ( this.nonMutantPercentageNode.right > this.nonMutantRectangle.right ) {
+        this.nonMutantPercentageNode.right = this.nonMutantRectangle.right;
+      }
+
+      if ( this.mutantPercentageNode.left < this.nonMutantRectangle.left ) {
+        this.mutantPercentageNode.left = this.nonMutantRectangle.left;
+      }
+      else if ( this.mutantPercentageNode.right > this.nonMutantRectangle.right ) {
+        this.mutantPercentageNode.right = this.nonMutantRectangle.right;
       }
 
       // hide zero-length bars
