@@ -13,12 +13,12 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
 
-  const SCREEN_VIEW_BACKGROUND = new Color( 220, 231, 184 );
+  const SCREEN_VIEW_BACKGROUND = new Color( 229, 225, 204 );
 
   // Panel-like things are stroked with a darker version of SCREEN_VIEW_BACKGROUND. This provides a clear, but
   // subtle, border around the panels, and avoids the rectangles-inside-of-rectangles look that is typical of
   // the default 'black' stroke.
-  const PANEL_STROKE = SCREEN_VIEW_BACKGROUND.darkerColor( 0.82 );
+  const PANEL_STROKE = SCREEN_VIEW_BACKGROUND.darkerColor( 0.7);
 
   const NaturalSelectionColors = {
 
