@@ -81,7 +81,7 @@ define( require => {
     }
 
     /**
-     * Updates this node.
+     * Updates this node. Note that only mutantRectangle is resized.
      * @param {number} nonMutantCountCount
      * @param {number} mutantCount
      * @param {boolean} valuesVisible
@@ -94,44 +94,37 @@ define( require => {
       const nonMutantPercentage = 100 * nonMutantCountCount / total;
       const mutantPercentage = 100 * mutantCount / total;
 
-      // hide zero-length bars
-      this.nonMutantRectangle.visible = ( nonMutantPercentage > 0 );
+      // hide zero-length bar
       this.mutantRectangle.visible = ( mutantPercentage > 0 );
 
+      // hide N% values
+      this.nonMutantPercentageNode.visible = ( valuesVisible && nonMutantPercentage > 0 );
+      this.mutantPercentageNode.visible = ( valuesVisible && mutantPercentage > 0 );
+
       // update the mutant portion of the bar, showing at least 1%
-      if ( mutantPercentage > 0 ) {
-        this.mutantRectangle.rectWidth = ( Math.max( 1, mutantPercentage ) / 100 ) * this.barWidth;
-        this.mutantRectangle.right = this.nonMutantRectangle.right;
+      if ( mutantPercentage > 0 && mutantPercentage < 1 ) {
+
+        // 1% mutant
+        this.mutantRectangle.rectWidth = 0.01 * this.barWidth;
+
+        // > 99% non-mutant, < 1% mutant
+        this.nonMutantPercentageNode.text = StringUtils.fillIn( greaterThanValuePercentString, { value: 99 } );
+        this.mutantPercentageNode.text = StringUtils.fillIn( lessThanValuePercentString, { value: 1 } );
       }
+      else if ( nonMutantPercentage > 0 && nonMutantPercentage < 1 ) {
 
-      // hide % values
-      this.nonMutantPercentageNode.visible = ( nonMutantPercentage > 0 && valuesVisible );
-      this.mutantPercentageNode.visible = ( mutantPercentage > 0 && valuesVisible );
-      
-      // update %
-      if ( nonMutantPercentage > 0 && nonMutantPercentage < 1 ) {
+        // 99% mutant
+        this.mutantRectangle.rectWidth = 0.99 * this.barWidth;
 
-        // < 1% and > 99%
-        this.nonMutantPercentageNode.text = StringUtils.fillIn( lessThanValuePercentString, {
-          value: 1
-        } );
-        this.mutantPercentageNode.text = StringUtils.fillIn( greaterThanValuePercentString, {
-          value: 99
-        } );
-      }
-      else if ( mutantPercentage > 0 && mutantPercentage < 1 ) {
-
-        // > 99% and < 1%
-        this.nonMutantPercentageNode.text = StringUtils.fillIn( greaterThanValuePercentString, {
-          value: 99
-        } );
-        this.mutantPercentageNode.text = StringUtils.fillIn( lessThanValuePercentString, {
-          value: 1
-        } );
+        // < 1% non-mutant, > 99% mutant
+        this.nonMutantPercentageNode.text = StringUtils.fillIn( lessThanValuePercentString, { value: 1 } );
+        this.mutantPercentageNode.text = StringUtils.fillIn( greaterThanValuePercentString, { value: 99 } );
       }
       else {
 
         // Round both percentages to the nearest integer
+        this.mutantRectangle.rectWidth = ( Util.roundSymmetric( mutantPercentage ) / 100 ) * this.barWidth;
+
         this.nonMutantPercentageNode.text = StringUtils.fillIn( valuePercentString, {
           value: Util.roundSymmetric( nonMutantPercentage )
         } );
@@ -139,8 +132,9 @@ define( require => {
           value: Util.roundSymmetric( mutantPercentage )
         } );
       }
+      this.mutantRectangle.right = this.nonMutantRectangle.right;
 
-      // center % in its portion of the bar
+      // center N% in its portion of the bar
       if ( nonMutantPercentage > 0 ) {
         this.nonMutantPercentageNode.centerX = ( nonMutantPercentage / 100 ) * ( this.barWidth / 2 );
       }
@@ -148,7 +142,7 @@ define( require => {
         this.mutantPercentageNode.centerX = this.barWidth - ( ( mutantPercentage / 100 ) * ( this.barWidth / 2 ) );
       }
 
-      // constrain percentages to left and right edges of bars
+      // constrain N% to left and right edges of bars
       if ( this.nonMutantPercentageNode.left < this.nonMutantRectangle.left ) {
         this.nonMutantPercentageNode.left = this.nonMutantRectangle.left;
       }
