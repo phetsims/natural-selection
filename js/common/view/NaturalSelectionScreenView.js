@@ -101,16 +101,19 @@ define( require => {
           top: addMutationPanel.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
         } );
 
+      // The graphs are 75% of the viewport width, and fill the vertical space below the viewport.
       const graphWidth = 0.75 * viewportNode.width;
       const graphHeight = this.layoutBounds.height - ( 2 * NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN ) -
                           viewportNode.height - NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING;
 
+      // The control panels occupy the space to the left of the graphs.
+      const controlPanelWidth = viewportNode.width - graphWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
+      const controlPanelHeight = graphHeight;
+
       // Options common to the Population, Proportions, and Pedigree views
       const viewOptions = {
-
-        // Control panels occupy the space to the left of graphs
-        controlPanelWidth: viewportNode.width - graphWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        controlPanelHeight: graphHeight,
+        controlPanelWidth: controlPanelWidth,
+        controlPanelHeight: controlPanelHeight,
         graphWidth: graphWidth,
         graphHeight: graphHeight,
         right: viewportNode.right,
