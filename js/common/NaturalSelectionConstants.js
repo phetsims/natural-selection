@@ -39,8 +39,8 @@ define( require => {
     // ViewportNode
     VIEWPORT_NODE_SIZE: new Dimension2( 770, 310 ),
     VIEWPORT_HORIZON_Y: 95, // where the horizon is, determined empirically from background PNG files
-    VIEWPORT_NODE_X_MARGIN: 8, // margins at left and right edges of the viewport
-    VIEWPORT_NODE_Y_MARGIN: 8, // margins at top and bottom edges of the viewport
+    VIEWPORT_NODE_X_MARGIN: 15, // margins at left and right edges of the viewport
+    VIEWPORT_NODE_Y_MARGIN: 15, // margins at top and bottom edges of the viewport
 
     CORNER_RADIUS: CORNER_RADIUS,
 
