@@ -73,20 +73,13 @@ define( require => {
       const buttonColumnsAlignGroup = new AlignGroup( { matchVertical: false } );
 
       // title is text + icon
-      const titleNode = new HBox( {
-        spacing: 4,
-        align: 'center',
-        children: [
-          new Text( addMutationString, {
-            font: NaturalSelectionConstants.TITLE_FONT,
-            maxWidth: 160 // determined empirically
-          } ),
-          new Image( mutationIconImage, { scale: 0.15 } )
-        ]
+      const titleNode = new Text( addMutationString, {
+        font: NaturalSelectionConstants.TITLE_FONT,
+        maxWidth: 180 // determined empirically
       } );
 
       // Individual column headings
-      const geneNameColumnLabel = new Text( '' ); // to facilitate alignment
+      const mutationIconNode = new Image( mutationIconImage, { scale: 0.25 } );
       const dominantColumnLabel = new Text( dominantString, {
         font: COLUMN_HEADING_FONT,
         maxWidth: 60 // determined empirically
@@ -100,7 +93,7 @@ define( require => {
       const columnHeadingsNode = new HBox( {
         spacing: COLUMN_SPACING,
         children: [
-          new AlignBox( geneNameColumnLabel, { group: labelColumnAlignGroup, xAlign: LABEL_COLUMN_X_ALIGN } ),
+          new AlignBox( mutationIconNode, { group: labelColumnAlignGroup, xAlign: LABEL_COLUMN_X_ALIGN } ),
           new AlignBox( dominantColumnLabel, { group: buttonColumnsAlignGroup, xAlign: BUTTON_COLUMNS_X_ALIGN } ),
           new AlignBox( recessiveColumnLabel, { group: buttonColumnsAlignGroup, xAlign: BUTTON_COLUMNS_X_ALIGN } )
         ]
