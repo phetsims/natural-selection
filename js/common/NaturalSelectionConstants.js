@@ -49,7 +49,7 @@ define( require => {
       baseColor: NaturalSelectionColors.ARROW_BUTTONS,
       stroke: 'black',
       buttonAppearanceStrategy: RectangularButtonView.FlatAppearanceStrategy,
-      cornerRadius: 0,
+      cornerRadius: 2,
       lineWidth: 0.5,
       arrowWidth: 8, // width of base
       arrowHeight: 10, // from tip to base
