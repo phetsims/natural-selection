@@ -48,7 +48,10 @@ define( require => {
     ARCTIC_BUTTON_FILL: 'rgb( 54, 137, 239 )',
 
     // graphs
-    TOTAL_POPULATION: 'black'
+    TOTAL_POPULATION: 'black',
+    POPULATION_GRAPH_FILL: 'white',
+    PROPORTIONS_GRAPH_FILL: 'white',
+    PEDIGREE_GRAPH_FILL: 'white'
   };
 
   return naturalSelection.register( 'NaturalSelectionColors', NaturalSelectionColors );

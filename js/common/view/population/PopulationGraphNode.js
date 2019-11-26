@@ -71,7 +71,7 @@ define( require => {
       const width = options.graphWidth - yZoomControl.width - ZOOM_CONTROL_X_OFFSET;
       const height = options.graphHeight - xPanControl.height - X_AXIS_LABEL_OFFSET;
       const graphNode = new Rectangle( 0, 0, width, height, {
-        fill: 'white',
+        fill: NaturalSelectionColors.POPULATION_GRAPH_FILL,
         stroke: NaturalSelectionColors.PANEL_STROKE,
         left: yZoomControl.right + ZOOM_CONTROL_X_OFFSET,
         top: boundsRectangle.top

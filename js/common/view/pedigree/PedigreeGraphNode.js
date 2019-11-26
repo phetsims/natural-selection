@@ -30,7 +30,7 @@ define( require => {
 
       //TODO placeholder
       const rectangle = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
-        fill: 'white',
+        fill: NaturalSelectionColors.PEDIGREE_GRAPH_FILL,
         stroke: NaturalSelectionColors.PANEL_STROKE
       } );
 

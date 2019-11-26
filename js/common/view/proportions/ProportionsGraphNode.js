@@ -55,7 +55,7 @@ define( require => {
       }, options );
 
       const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
-        fill: 'white',
+        fill: NaturalSelectionColors.PROPORTIONS_GRAPH_FILL,
         stroke: NaturalSelectionColors.PANEL_STROKE
       } );
 
