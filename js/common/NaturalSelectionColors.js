@@ -12,13 +12,15 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
 
+  const PANEL_STROKE = 'rgb( 180, 190, 140 )'; // darker version of SCREEN_VIEW_BACKGROUND
+
   const NaturalSelectionColors = {
 
     // ScreenView
     SCREEN_VIEW_BACKGROUND: 'rgb( 220, 231, 184 )',
 
     // ViewportNode
-    VIEWPORT_NODE_STROKE: 'rgb( 190, 200, 150 )', // darker version of SCREEN_VIEW_BACKGROUND
+    VIEWPORT_NODE_STROKE: PANEL_STROKE,
 
     // traits
     FUR: '#1b9e77', // green
@@ -27,7 +29,7 @@ define( require => {
 
     // Panels
     PANEL_FILL: 'white',
-    PANEL_STROKE: 'rgb( 150, 160, 110 )', // much darker version of SCREEN_VIEW_BACKGROUND
+    PANEL_STROKE: PANEL_STROKE,
     SEPARATOR_STROKE: 'rgb( 200, 200, 200 )',
 
     // Push buttons
@@ -43,7 +45,7 @@ define( require => {
     ARCTIC_BUTTON_FILL: 'rgb( 54, 137, 239 )',
 
     // graphs
-    GRAPHS_STROKE: 'rgb( 190, 200, 150 )', // darker version of SCREEN_VIEW_BACKGROUND
+    GRAPHS_STROKE: PANEL_STROKE,
     TOTAL_POPULATION: 'black'
   };
 
