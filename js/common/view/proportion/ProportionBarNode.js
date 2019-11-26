@@ -102,7 +102,7 @@ define( require => {
       this.nonMutantPercentageNode.visible = ( valuesVisible && nonMutantPercentage > 0 );
       this.mutantPercentageNode.visible = ( valuesVisible && mutantPercentage > 0 );
 
-      // update the mutant portion of the bar, showing at least 1%
+      // update the mutant portion of the bar and the N% values
       if ( mutantPercentage > 0 && mutantPercentage < 1 ) {
 
         // 1% mutant
@@ -135,7 +135,7 @@ define( require => {
       }
       this.mutantRectangle.right = this.nonMutantRectangle.right;
 
-      // center N% in its portion of the bar
+      // center N% above its portion of the bar
       if ( nonMutantPercentage > 0 ) {
         this.nonMutantPercentageNode.centerX = ( nonMutantPercentage / 100 ) * ( this.barWidth / 2 );
       }
@@ -143,7 +143,7 @@ define( require => {
         this.mutantPercentageNode.centerX = this.barWidth - ( ( mutantPercentage / 100 ) * ( this.barWidth / 2 ) );
       }
 
-      // constrain N% to left and right edges of bars
+      // horizontally constrain N% to left and right edges of bars
       if ( this.nonMutantPercentageNode.left < this.nonMutantRectangle.left ) {
         this.nonMutantPercentageNode.left = this.nonMutantRectangle.left;
       }
