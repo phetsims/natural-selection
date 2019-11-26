@@ -123,7 +123,7 @@ define( require => {
       }
       else {
 
-        // Round both percentages to the nearest integer
+        // round both percentages to the nearest integer
         this.mutantRectangle.rectWidth = ( Util.roundSymmetric( mutantPercentage ) / 100 ) * this.barWidth;
 
         this.nonMutantPercentageNode.text = StringUtils.fillIn( valuePercentString, {
