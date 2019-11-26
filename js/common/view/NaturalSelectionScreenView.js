@@ -19,13 +19,13 @@ define( require => {
   const MutationComingNode = require( 'NATURAL_SELECTION/common/view/MutationComingNode' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
+  const Node = require( 'SCENERY/nodes/Node' );
   const PedigreeNode = require( 'NATURAL_SELECTION/common/view/pedigree/PedigreeNode' );
   const PopulationNode = require( 'NATURAL_SELECTION/common/view/population/PopulationNode' );
   const ProportionNode = require( 'NATURAL_SELECTION/common/view/proportion/ProportionNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
   const ViewportNode = require( 'NATURAL_SELECTION/common/view/ViewportNode' );
 
   class NaturalSelectionScreenView extends ScreenView {
@@ -72,12 +72,26 @@ define( require => {
         top: viewportNode.top
       } );
 
-      //TODO for demo purposes only, these need to be placed based on rows in AddMutationsPanel
-      const mutationComingParent = new VBox( {
-        spacing: 19,
-        children: [ new MutationComingNode(), new MutationComingNode(), new MutationComingNode() ],
-        right: addMutationPanel.left + 10,
-        top: addMutationPanel.top + 67
+      //TODO for demo purposes only
+      const mutationComingXOffset = -5;
+      const mutationComingParent = new Node( {
+        children: [
+
+          // Fur
+          new MutationComingNode( {
+            rightCenter: addMutationPanel.getFurRowGlobalLeftCenter().addXY( mutationComingXOffset, 0 )
+          } ),
+
+          // Ears
+          new MutationComingNode( {
+            rightCenter: addMutationPanel.getEarsRowGlobalLeftCenter().addXY( mutationComingXOffset, 0 )
+          } ),
+
+          // Teeth
+          new MutationComingNode( {
+            rightCenter: addMutationPanel.getTeethRowGlobalLeftCenter().addXY( mutationComingXOffset, 0 )
+          } )
+        ]
       } );
 
       const environmentalFactorsPanel = new EnvironmentalFactorsPanel(

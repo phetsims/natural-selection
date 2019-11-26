@@ -27,6 +27,7 @@ define( require => {
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // images
   const brownFurIcon = require( 'image!NATURAL_SELECTION/brownFur.png' );
@@ -115,6 +116,48 @@ define( require => {
       } ) );
 
       super( content, options );
+
+      // @private
+      this.furRow = furRow;
+      this.earsRow = earsRow;
+      this.teethRow = teethRow;
+    }
+
+    /**
+     * Gets the left center of the 'Fur' row in the global coordinate frame.
+     * @returns {Vector2}
+     * @public
+     */
+    getFurRowGlobalLeftCenter() {
+      return this.getRowGlobalLeftCenter( this.furRow );
+    }
+
+    /**
+     * Gets the left center of the 'Ears' row in the global coordinate frame.
+     * @returns {Vector2}
+     * @public
+     */
+    getEarsRowGlobalLeftCenter() {
+      return this.getRowGlobalLeftCenter( this.earsRow );
+    }
+
+    /**
+     * Gets the left center of the 'Teeth' row in the global coordinate frame.
+     * @returns {Vector2}
+     * @public
+     */
+    getTeethRowGlobalLeftCenter() {
+      return this.getRowGlobalLeftCenter( this.teethRow );
+    }
+
+    /**
+     * Gets the left center of a row in the global coordinate frame.
+     * @param {Node} row
+     * @returns {Vector2}
+     * @private
+     */
+    getRowGlobalLeftCenter( row ) {
+      return row.parentToGlobalPoint( new Vector2( row.left, row.centerY ) );
     }
   }
 
