@@ -46,7 +46,7 @@ define( require => {
     MUTATION_BUTTONS: 'rgb( 203, 203, 203 )',
 
     // Radio buttons
-    RADIO_BUTTON_SELECTED_STROKE: 'rgb( 254, 225, 5 )',
+    RADIO_BUTTON_SELECTED_STROKE: PhetColorScheme.BUTTON_YELLOW,
     EQUATOR_BUTTON_FILL: 'rgb( 207, 125, 66 )',
     ARCTIC_BUTTON_FILL: 'rgb( 54, 137, 239 )',
 

@@ -34,11 +34,11 @@ define( require => {
       options = merge( {}, {
         orientation: 'horizontal',
         spacing: 8,
-        cornerRadius: 5,
+        cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
         selectedStroke: NaturalSelectionColors.RADIO_BUTTON_SELECTED_STROKE,
-        selectedLineWidth: NaturalSelectionConstants.CORNER_RADIUS,
-        deselectedLineWidth: 1,
-        deselectedButtonOpacity: 0.2,
+        selectedLineWidth: 5,
+        deselectedLineWidth: 1.5,
+        deselectedButtonOpacity: 0.6,
 
         // Set to 0 because we will create our own backgrounds, see below.
         buttonContentXMargin: 0,
