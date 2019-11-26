@@ -9,13 +9,11 @@ define( require => {
   'use strict';
 
   // modules
-  const ArrowButton = require( 'SUN/buttons/ArrowButton' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
-  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const PanControl = require( 'NATURAL_SELECTION/common/view/population/PanControl' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -56,14 +54,6 @@ define( require => {
         top: boundsRectangle.top
       } );
 
-      // x-axis (Generation) label
-      const xAxisLabelNode = new Text( generationString, {
-        font: AXIS_LABEL_FONT,
-        centerX: boundsRectangle.centerX,
-        bottom: boundsRectangle.bottom,
-        maxWidth: 120 // determined empirically
-      } );
-
       // y-axis (Population) label
       const yAxisLabelNode = new Text( populationString, {
         font: AXIS_LABEL_FONT,
@@ -72,21 +62,14 @@ define( require => {
         centerY: boundsRectangle.centerY,
         maxWidth: 120 // determined empirically
       } );
-
-      // x-axis scroll buttons, on either side of the x-axis (Generation) label
-      const previous = () => {}; //TODO
-      const next = () => {}; //TODO
-      const previousButton = new ArrowButton( 'left', previous, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS );
-      const nextButton = new ArrowButton( 'right', next, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS );
-      const xScrollControl = new HBox( {
-        spacing: 10,
-        children: [ previousButton, xAxisLabelNode, nextButton ]
-      } );
+      
+      // x-axis pan control
+      const xPanControl = new PanControl( generationString );
 
       //TODO placeholder
       // graph
       const width = options.graphWidth - yZoomControl.width - ZOOM_CONTROL_X_OFFSET;
-      const height = options.graphHeight - xScrollControl.height - X_AXIS_LABEL_OFFSET;
+      const height = options.graphHeight - xPanControl.height - X_AXIS_LABEL_OFFSET;
       const graphNode = new Rectangle( 0, 0, width, height, {
         fill: 'white',
         stroke: NaturalSelectionColors.GRAPHS_STROKE,
@@ -95,11 +78,11 @@ define( require => {
       } );
 
       // center x-axis control under the graph
-      xScrollControl.centerX = graphNode.centerX;
-      xScrollControl.top = graphNode.bottom + X_AXIS_LABEL_OFFSET;
+      xPanControl.centerX = graphNode.centerX;
+      xPanControl.top = graphNode.bottom + X_AXIS_LABEL_OFFSET;
 
       assert && assert( !options.children, 'PopulationGraphNode sets children' );
-      options.children = [ boundsRectangle, graphNode, xScrollControl, yZoomControl, yAxisLabelNode ];
+      options.children = [ boundsRectangle, graphNode, xPanControl, yZoomControl, yAxisLabelNode ];
 
       super( options );
     }

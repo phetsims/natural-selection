@@ -2,6 +2,7 @@
 
 /**
  * ZoomControl is a general 'modern' control for zooming in and out.
+ * In this sim, it's used for scaling the y axis of the Population graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
