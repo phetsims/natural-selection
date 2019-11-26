@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ProportionsNode is the parent for all parts of the 'Proportion' view.
+ * ProportionsNode is the parent for all parts of the Proportions view.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -19,10 +19,10 @@ define( require => {
   class ProportionsNode extends HBox {
 
     /**
-     * @param {ProportionModel} proportionModel
+     * @param {ProportionsModel} proportionsModel
      * @param {Object} [options]
      */
-    constructor( proportionModel, options ) {
+    constructor( proportionsModel, options ) {
 
       options = merge( {
 
@@ -36,12 +36,12 @@ define( require => {
         align: 'center'
       }, options );
 
-      const controlPanel = new ProportionsControlPanel( proportionModel, {
+      const controlPanel = new ProportionsControlPanel( proportionsModel, {
         fixedWidth: options.controlPanelWidth,
         maxHeight: options.controlPanelHeight
       } );
 
-      const graphNode = new ProportionsGraphNode( proportionModel, {
+      const graphNode = new ProportionsGraphNode( proportionsModel, {
         graphWidth: options.graphWidth,
         graphHeight: options.graphHeight
       } );

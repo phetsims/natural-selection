@@ -105,7 +105,7 @@ define( require => {
       const graphHeight = this.layoutBounds.height - ( 2 * NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN ) -
                           viewportNode.height - NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING;
 
-      // Options common to the Population, Proportion, and Pedigree views
+      // Options common to the Population, Proportions, and Pedigree views
       const viewOptions = {
 
         // Control panels occupy the space to the left of graphs
@@ -118,7 +118,7 @@ define( require => {
       };
 
       const populationNode = new PopulationNode( model.populationModel, viewOptions );
-      const proportionsNode = new ProportionsNode( model.proportionModel, viewOptions );
+      const proportionsNode = new ProportionsNode( model.proportionsModel, viewOptions );
       const pedigreeNode = new PedigreeNode( model.pedigreeModel, viewOptions );
 
       const graphRadioButtonGroup = new GraphRadioButtonGroup( viewProperties.graphProperty, {

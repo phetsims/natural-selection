@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ProportionsBarNode is a bar in the Proportion graph, showing the percentage of mutant vs non-mutant genes for
+ * ProportionsBarNode is a bar in the Proportions graph, showing the percentage of mutant vs non-mutant genes for
  * a trait in the population.
  *
  * @author Chris Malley (PixelZoom, Inc.)

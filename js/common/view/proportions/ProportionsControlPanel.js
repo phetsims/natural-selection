@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ProportionsControlPanel is the panel that contains controls for the 'Proportion' graph.
+ * ProportionsControlPanel is the panel that contains controls for the Proportions graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -32,10 +32,10 @@ define( require => {
   class ProportionsControlPanel extends NaturalSelectionPanel {
 
     /**
-     * @param {ProportionModel} proportionModel
+     * @param {ProportionsModel} proportionsModel
      * @param {Object} [options]
      */
-    constructor( proportionModel, options ) {
+    constructor( proportionsModel, options ) {
 
       options = merge( {
         fixedWidth: 100,
@@ -48,7 +48,7 @@ define( require => {
           font: NaturalSelectionConstants.CHECKBOX_FONT,
           maxWidth: 120 // determined empirically
         } ),
-        proportionModel.valuesVisibleProperty,
+        proportionsModel.valuesVisibleProperty,
         NaturalSelectionConstants.CHECKBOX_OPTIONS );
 
       // ------

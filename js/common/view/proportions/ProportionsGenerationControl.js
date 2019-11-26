@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ProportionsGenerationControl is used to choose the generation number displayed in the Proportion graph.
+ * ProportionsGenerationControl is used to choose the generation number displayed in the Proportions graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -3,7 +3,7 @@
 //TODO create a UI per generation, so that we can 'wipe' between them
 //TODO change "Currently" to "End of Generation" after selection agents have been applied
 /**
- * ProportionGraphNode displays the proportion graph.
+ * ProportionGraphNode displays the Proportions graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -44,10 +44,10 @@ define( require => {
   class ProportionsGraphNode extends Node {
 
     /**
-     * @param {ProportionModel} proportionModel
+     * @param {ProportionsModel} proportionsModel
      * @param {Object} [options]
      */
-    constructor( proportionModel, options ) {
+    constructor( proportionsModel, options ) {
 
       options = merge( {
         graphWidth: 100,
@@ -59,7 +59,7 @@ define( require => {
         stroke: NaturalSelectionColors.GRAPHS_STROKE
       } );
 
-      const generationControl = new ProportionsGenerationControl( proportionModel.generationProperty, {
+      const generationControl = new ProportionsGenerationControl( proportionsModel.generationProperty, {
         top: backgroundNode.top + 8
       } );
       generationControl.on( 'bounds', () => {
@@ -85,10 +85,10 @@ define( require => {
       } );
 
       // Rows
-      const startRow = new ProportionsGraphRow( startOfGenerationString, proportionModel.startCountProperty,
-        labelColumnAlignGroup, barColumnsAlignGroup, proportionModel.valuesVisibleProperty );
-      const currentRow = new ProportionsGraphRow( endOfGenerationString, proportionModel.endCountProperty,
-        labelColumnAlignGroup, barColumnsAlignGroup, proportionModel.valuesVisibleProperty );
+      const startRow = new ProportionsGraphRow( startOfGenerationString, proportionsModel.startCountProperty,
+        labelColumnAlignGroup, barColumnsAlignGroup, proportionsModel.valuesVisibleProperty );
+      const currentRow = new ProportionsGraphRow( endOfGenerationString, proportionsModel.endCountProperty,
+        labelColumnAlignGroup, barColumnsAlignGroup, proportionsModel.valuesVisibleProperty );
       const rows = new VBox( {
         spacing: 30,
         align: 'left',

@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ProportionModel is the model used by the Proportion view.
+ * ProportionsModel is the model used by the Proportion view.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -13,7 +13,7 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NumberProperty = require( 'AXON/NumberProperty' );
 
-  class ProportionModel {
+  class ProportionsModel {
 
     constructor() {
 
@@ -42,5 +42,5 @@ define( require => {
     }
   }
 
-  return naturalSelection.register( 'ProportionModel', ProportionModel );
+  return naturalSelection.register( 'ProportionsModel', ProportionsModel );
 } );
