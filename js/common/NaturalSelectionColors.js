@@ -18,7 +18,7 @@ define( require => {
   // Panel-like things are stroked with a darker version of SCREEN_VIEW_BACKGROUND. This provides a clear, but
   // subtle, border around the panels, and avoids the rectangles-inside-of-rectangles look that is typical of
   // the default 'black' stroke.
-  const PANEL_STROKE = SCREEN_VIEW_BACKGROUND.darkerColor( 0.7);
+  const PANEL_STROKE = SCREEN_VIEW_BACKGROUND.darkerColor( 0.7 );
 
   const NaturalSelectionColors = {
 
