@@ -130,6 +130,12 @@ define( require => {
         centerY: populationNode.centerY
       } );
 
+      viewProperties.graphProperty.link( graph => {
+        populationNode.visible = ( graph === Graphs.POPULATION );
+        proportionsNode.visible = ( graph === Graphs.PROPORTIONS );
+        pedigreeNode.visible = ( graph === Graphs.PEDIGREE );
+      } );
+
       const timeControlNode = new TimeControlNode( model.isPlayingProperty, {
         stepOptions: {
           listener: () => model.stepOnce( NaturalSelectionConstants.SECONDS_PER_STEP )
@@ -169,12 +175,6 @@ define( require => {
       // @private
       this.model = model;
       this.addAMateButton = addAMateButton;
-
-      viewProperties.graphProperty.link( graph => {
-        populationNode.visible = ( graph === Graphs.POPULATION );
-        proportionsNode.visible = ( graph === Graphs.PROPORTIONS );
-        pedigreeNode.visible = ( graph === Graphs.PEDIGREE );
-      } );
     }
 
     /**
