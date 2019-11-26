@@ -18,7 +18,9 @@ define( require => {
     constructor() {
 
       // @public
-      this.valuesVisibleProperty = new BooleanProperty( false );
+      this.valuesVisibleProperty = new BooleanProperty( true ); //TODO default false
+
+      // @public
       this.generationProperty = new NumberProperty( 0, {
         numberType: 'Integer'
       } );
