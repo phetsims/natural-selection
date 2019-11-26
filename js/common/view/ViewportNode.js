@@ -41,7 +41,7 @@ define( require => {
 
       // Frame around the viewport
       const frameNode = new Rectangle( 0, 0, options.viewportSize.width, options.viewportSize.height, {
-        stroke: NaturalSelectionColors.VIEWPORT_NODE_STROKE
+        stroke: NaturalSelectionColors.PANEL_STROKE
       } );
 
       assert && assert( !options.children, 'ViewportNode sets children' );

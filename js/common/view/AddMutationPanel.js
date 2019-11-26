@@ -184,7 +184,7 @@ define( require => {
       // buttons
       const buttonOptions = {
         content: new AlignBox( mutationIconNode, { group: iconAlignGroup } ),
-        baseColor: NaturalSelectionColors.MUTATION_BUTTONS
+        baseColor: NaturalSelectionColors.ADD_MUTATION_BUTTONS
       };
       const dominantButton = new RectangularPushButton( buttonOptions );
       const recessiveButton = new RectangularPushButton( buttonOptions );

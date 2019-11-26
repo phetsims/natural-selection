@@ -31,7 +31,7 @@ define( require => {
       //TODO placeholder
       const rectangle = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
         fill: 'white',
-        stroke: NaturalSelectionColors.GRAPHS_STROKE
+        stroke: NaturalSelectionColors.PANEL_STROKE
       } );
 
       assert && assert( !options.children, 'PedigreeGraphNode sets children' );

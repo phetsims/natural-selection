@@ -56,7 +56,7 @@ define( require => {
 
       const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
         fill: 'white',
-        stroke: NaturalSelectionColors.GRAPHS_STROKE
+        stroke: NaturalSelectionColors.PANEL_STROKE
       } );
 
       const generationControl = new ProportionsGenerationControl( proportionsModel.generationProperty, {

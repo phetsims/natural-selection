@@ -32,17 +32,17 @@ define( require => {
     constructor( environmentProperty, options ) {
 
       options = merge( {}, {
+
+        // RadioButtonGroup options
         orientation: 'horizontal',
         spacing: 8,
         cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
         selectedStroke: NaturalSelectionColors.RADIO_BUTTON_SELECTED_STROKE,
+        deselectedStroke: NaturalSelectionColors.RADIO_BUTTON_DESELECTED_STROKE,
         selectedLineWidth: 5,
         deselectedLineWidth: 1.5,
-        deselectedButtonOpacity: 0.6,
-
-        // Set to 0 because we will create our own backgrounds, see below.
-        buttonContentXMargin: 0,
-        buttonContentYMargin: 0
+        buttonContentXMargin: 0, // Set to 0 because we will create our own backgrounds, see below.
+        buttonContentYMargin: 0  // Set to 0 because we will create our own backgrounds, see below.
       }, options );
 
       // icons

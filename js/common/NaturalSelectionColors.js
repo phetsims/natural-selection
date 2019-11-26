@@ -25,13 +25,10 @@ define( require => {
     // ScreenView
     SCREEN_VIEW_BACKGROUND: SCREEN_VIEW_BACKGROUND,
 
-    // ViewportNode
-    VIEWPORT_NODE_STROKE: PANEL_STROKE,
-
     // traits
-    FUR: '#1b9e77', // green
-    EARS: '#d95f02', // red
-    TEETH: '#7570b3', // purple
+    FUR: 'rgb( 27, 158, 119 )',
+    EARS: 'rgb( 217, 95, 2 )',
+    TEETH: 'rgb( 117, 112, 179 )',
 
     // Panels
     PANEL_FILL: 'white',
@@ -40,18 +37,17 @@ define( require => {
 
     // Push buttons
     ADD_A_MATE_BUTTON: PhetColorScheme.BUTTON_YELLOW,
-    CANCEL_BUTTON: PhetColorScheme.BUTTON_YELLOW,
-    ZOOM_BUTTONS: 'white',
+    ADD_MUTATION_BUTTONS: 'rgb( 203, 203, 203 )',
     ARROW_BUTTONS: 'white',
-    MUTATION_BUTTONS: 'rgb( 203, 203, 203 )',
+    ZOOM_BUTTONS: 'white',
 
     // Radio buttons
     RADIO_BUTTON_SELECTED_STROKE: PhetColorScheme.BUTTON_YELLOW,
+    RADIO_BUTTON_DESELECTED_STROKE: 'rgb( 50, 50, 50 )',
     EQUATOR_BUTTON_FILL: 'rgb( 207, 125, 66 )',
     ARCTIC_BUTTON_FILL: 'rgb( 54, 137, 239 )',
 
     // graphs
-    GRAPHS_STROKE: PANEL_STROKE,
     TOTAL_POPULATION: 'black'
   };
 
