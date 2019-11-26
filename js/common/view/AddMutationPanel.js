@@ -128,7 +128,7 @@ define( require => {
      * @returns {Vector2}
      * @public
      */
-    getFurRowGlobalLeftCenter() {
+    getFurLeftCenter() {
       return this.getRowGlobalLeftCenter( this.furRow );
     }
 
@@ -137,7 +137,7 @@ define( require => {
      * @returns {Vector2}
      * @public
      */
-    getEarsRowGlobalLeftCenter() {
+    getEarsLeftCenter() {
       return this.getRowGlobalLeftCenter( this.earsRow );
     }
 
@@ -146,7 +146,7 @@ define( require => {
      * @returns {Vector2}
      * @public
      */
-    getTeethRowGlobalLeftCenter() {
+    getTeethLeftCenter() {
       return this.getRowGlobalLeftCenter( this.teethRow );
     }
 

@@ -79,17 +79,17 @@ define( require => {
 
           // Fur
           new MutationComingNode( {
-            rightCenter: addMutationPanel.getFurRowGlobalLeftCenter().addXY( mutationComingXOffset, 0 )
+            rightCenter: addMutationPanel.getFurLeftCenter().addXY( mutationComingXOffset, 0 )
           } ),
 
           // Ears
           new MutationComingNode( {
-            rightCenter: addMutationPanel.getEarsRowGlobalLeftCenter().addXY( mutationComingXOffset, 0 )
+            rightCenter: addMutationPanel.getEarsLeftCenter().addXY( mutationComingXOffset, 0 )
           } ),
 
           // Teeth
           new MutationComingNode( {
-            rightCenter: addMutationPanel.getTeethRowGlobalLeftCenter().addXY( mutationComingXOffset, 0 )
+            rightCenter: addMutationPanel.getTeethLeftCenter().addXY( mutationComingXOffset, 0 )
           } )
         ]
       } );
