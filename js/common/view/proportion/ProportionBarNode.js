@@ -74,6 +74,7 @@ define( require => {
       this.mutantPercentageNode = mutantPercentageNode;
       this.barWidth = options.barWidth;
 
+      //TODO this will result in bogus intermediate states
       Property.multilink( [ nonMutantCountCountProperty, mutantCountProperty, valuesVisibleProperty ],
         ( nonMutantCountCount, mutantCount, valuesVisible ) =>
           this.update( nonMutantCountCount, mutantCount, valuesVisible )
