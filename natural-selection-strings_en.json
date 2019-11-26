@@ -14,8 +14,8 @@
   "population": {
     "value": "Population"
   },
-  "proportion": {
-    "value": "Proportion"
+  "proportions": {
+    "value": "Proportions"
   },
   "pedigree": {
     "value": "Pedigree"

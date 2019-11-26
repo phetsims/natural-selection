@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ProportionControlPanel is the panel that contains controls for the 'Proportion' graph.
+ * ProportionsControlPanel is the panel that contains controls for the 'Proportion' graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -16,7 +16,7 @@ define( require => {
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
-  const ProportionLegendNode = require( 'NATURAL_SELECTION/common/view/proportion/ProportionLegendNode' );
+  const ProportionsLegendNode = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsLegendNode' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -29,7 +29,7 @@ define( require => {
   const valuesString = require( 'string!NATURAL_SELECTION/values' );
   const whiteFurString = require( 'string!NATURAL_SELECTION/whiteFur' );
 
-  class ProportionControlPanel extends NaturalSelectionPanel {
+  class ProportionsControlPanel extends NaturalSelectionPanel {
 
     /**
      * @param {ProportionModel} proportionModel
@@ -57,23 +57,23 @@ define( require => {
       } );
 
       // Legend for alleles
-      const allelesLegend = [
-        new ProportionLegendNode( whiteFurString, NaturalSelectionColors.FUR, false ),
-        new ProportionLegendNode( brownFurString, NaturalSelectionColors.FUR, true ),
-        new ProportionLegendNode( straightEarsString, NaturalSelectionColors.EARS, false ),
-        new ProportionLegendNode( floppyEarsString, NaturalSelectionColors.EARS, true ),
-        new ProportionLegendNode( shortTeethString, NaturalSelectionColors.TEETH, false ),
-        new ProportionLegendNode( longTeethString, NaturalSelectionColors.TEETH, true )
+      const legendNodes = [
+        new ProportionsLegendNode( whiteFurString, NaturalSelectionColors.FUR, false ),
+        new ProportionsLegendNode( brownFurString, NaturalSelectionColors.FUR, true ),
+        new ProportionsLegendNode( straightEarsString, NaturalSelectionColors.EARS, false ),
+        new ProportionsLegendNode( floppyEarsString, NaturalSelectionColors.EARS, true ),
+        new ProportionsLegendNode( shortTeethString, NaturalSelectionColors.TEETH, false ),
+        new ProportionsLegendNode( longTeethString, NaturalSelectionColors.TEETH, true )
       ];
 
       // Arranged vertically
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-        children: [ valuesCheckbox, separator, ...allelesLegend ]
+        children: [ valuesCheckbox, separator, ...legendNodes ]
       } ) );
 
       super( content, options );
     }
   }
 
-  return naturalSelection.register( 'ProportionControlPanel', ProportionControlPanel );
+  return naturalSelection.register( 'ProportionsControlPanel', ProportionsControlPanel );
 } );

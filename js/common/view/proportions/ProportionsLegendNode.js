@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ProportionLegendNode is a legend item in the control panel for the Proportion graph.
+ * ProportionsLegendNode is a legend item in the control panel for the Proportions graph.
  * It showings the fill style used for an allele.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -22,7 +22,7 @@ define( require => {
   const RECTANGLE_WIDTH = 25;
   const RECTANGLE_HEIGHT = 15;
 
-  class ProportionLegendNode extends HBox {
+  class ProportionsLegendNode extends HBox {
 
     /**
      * @param {string} labelString
@@ -48,12 +48,12 @@ define( require => {
         maxWidth: 110 // determined empirically
       } );
 
-      assert && assert( !options.children, 'ProportionLegendNode sets children' );
+      assert && assert( !options.children, 'ProportionsLegendNode sets children' );
       options.children = [ rectangleNode, textNode ];
 
       super( options );
     }
   }
 
-  return naturalSelection.register( 'ProportionLegendNode', ProportionLegendNode );
+  return naturalSelection.register( 'ProportionsLegendNode', ProportionsLegendNode );
 } );

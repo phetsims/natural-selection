@@ -20,8 +20,8 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const ProportionBarNode = require( 'NATURAL_SELECTION/common/view/proportion/ProportionBarNode' );
-  const ProportionGenerationControl = require( 'NATURAL_SELECTION/common/view/proportion/ProportionGenerationControl' );
+  const ProportionsBarNode = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsBarNode' );
+  const ProportionsGenerationControl = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsGenerationControl' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -41,7 +41,7 @@ define( require => {
   const LABEL_FONT = new PhetFont( 14 );
   const VALUE_FONT = new PhetFont( 14 );
 
-  class ProportionGraphNode extends Node {
+  class ProportionsGraphNode extends Node {
 
     /**
      * @param {ProportionModel} proportionModel
@@ -59,7 +59,7 @@ define( require => {
         stroke: NaturalSelectionColors.GRAPHS_STROKE
       } );
 
-      const generationControl = new ProportionGenerationControl( proportionModel.generationProperty, {
+      const generationControl = new ProportionsGenerationControl( proportionModel.generationProperty, {
         top: backgroundNode.top + 8
       } );
       generationControl.on( 'bounds', () => {
@@ -85,9 +85,9 @@ define( require => {
       } );
 
       // Rows
-      const startRow = new ProportionGraphRow( startOfGenerationString, proportionModel.startCountProperty,
+      const startRow = new ProportionsGraphRow( startOfGenerationString, proportionModel.startCountProperty,
         labelColumnAlignGroup, barColumnsAlignGroup, proportionModel.valuesVisibleProperty );
-      const currentRow = new ProportionGraphRow( endOfGenerationString, proportionModel.endCountProperty,
+      const currentRow = new ProportionsGraphRow( endOfGenerationString, proportionModel.endCountProperty,
         labelColumnAlignGroup, barColumnsAlignGroup, proportionModel.valuesVisibleProperty );
       const rows = new VBox( {
         spacing: 30,
@@ -112,9 +112,9 @@ define( require => {
   }
 
   /**
-   * ProportionGraphRow is a row in the Proportion graph.
+   * ProportionsGraphRow is a row in the Proportions graph.
    */
-  class ProportionGraphRow extends HBox {
+  class ProportionsGraphRow extends HBox {
 
     /**
      * @param {string} labelString
@@ -146,9 +146,9 @@ define( require => {
       } );
 
       //TODO temporary Properties
-      const furBarNode = new ProportionBarNode( NaturalSelectionColors.FUR, new NumberProperty( 990 ), new NumberProperty( 1 ), valuesVisibleProperty );
-      const earsBarNode = new ProportionBarNode( NaturalSelectionColors.EARS, new NumberProperty( 40 ), new NumberProperty( 60 ), valuesVisibleProperty );
-      const teethBarNode = new ProportionBarNode( NaturalSelectionColors.TEETH, new NumberProperty( 100 ), new NumberProperty( 0 ), valuesVisibleProperty );
+      const furBarNode = new ProportionsBarNode( NaturalSelectionColors.FUR, new NumberProperty( 990 ), new NumberProperty( 1 ), valuesVisibleProperty );
+      const earsBarNode = new ProportionsBarNode( NaturalSelectionColors.EARS, new NumberProperty( 40 ), new NumberProperty( 60 ), valuesVisibleProperty );
+      const teethBarNode = new ProportionsBarNode( NaturalSelectionColors.TEETH, new NumberProperty( 100 ), new NumberProperty( 0 ), valuesVisibleProperty );
 
       super( {
         spacing: COLUMNS_SPACING,
@@ -172,5 +172,5 @@ define( require => {
     }
   }
 
-  return naturalSelection.register( 'ProportionGraphNode', ProportionGraphNode );
+  return naturalSelection.register( 'ProportionsGraphNode', ProportionsGraphNode );
 } );

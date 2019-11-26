@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ProportionBarNode is a bar in the Proportion graph, showing the percentage of mutant vs non-mutant genes for
+ * ProportionsBarNode is a bar in the Proportion graph, showing the percentage of mutant vs non-mutant genes for
  * a trait in the population.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -29,7 +29,7 @@ define( require => {
   // constants
   const PERCENTAGE_FONT = new PhetFont( 12 );
 
-  class ProportionBarNode extends Node {
+  class ProportionsBarNode extends Node {
 
     /**
      * @param {Color|string} color
@@ -62,7 +62,7 @@ define( require => {
       const nonMutantPercentageNode = new Text( '', percentageOptions );
       const mutantPercentageNode = new Text( '', percentageOptions );
 
-      assert && assert( !options.children, 'ProportionBarNode sets children' );
+      assert && assert( !options.children, 'ProportionsBarNode sets children' );
       options.children = [ nonMutantRectangle, mutantRectangle, nonMutantPercentageNode, mutantPercentageNode ];
 
       super( options );
@@ -160,5 +160,5 @@ define( require => {
     }
   }
 
-  return naturalSelection.register( 'ProportionBarNode', ProportionBarNode );
+  return naturalSelection.register( 'ProportionsBarNode', ProportionsBarNode );
 } );

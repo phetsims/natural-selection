@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ProportionGenerationControl is used to choose the generation number displayed in the Proportion graph.
+ * ProportionsGenerationControl is used to choose the generation number displayed in the Proportion graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -20,7 +20,7 @@ define( require => {
   // strings
   const generationNumberString = require( 'string!NATURAL_SELECTION/generationNumber' );
   
-  class ProportionGenerationControl extends HBox {
+  class ProportionsGenerationControl extends HBox {
 
     /**
      * @param {Property.<number>} generationProperty
@@ -43,7 +43,7 @@ define( require => {
       const next = () => generationProperty.value++;
       const nextButton = new ArrowButton( 'right', next, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS );
 
-      assert && assert( !options.children, 'ProportionGenerationControl sets children' );
+      assert && assert( !options.children, 'ProportionsGenerationControl sets children' );
       options.children = [ previousButton, generationNode, nextButton ];
 
       super( options );
@@ -55,5 +55,5 @@ define( require => {
     }
   }
 
-  return naturalSelection.register( 'ProportionGenerationControl', ProportionGenerationControl );
+  return naturalSelection.register( 'ProportionsGenerationControl', ProportionsGenerationControl );
 } );

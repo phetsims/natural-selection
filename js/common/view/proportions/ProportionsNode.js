@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ProportionNode is the parent for all parts of the 'Proportion' view.
+ * ProportionsNode is the parent for all parts of the 'Proportion' view.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -13,10 +13,10 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const ProportionControlPanel = require( 'NATURAL_SELECTION/common/view/proportion/ProportionControlPanel' );
-  const ProportionGraphNode = require( 'NATURAL_SELECTION/common/view/proportion/ProportionGraphNode' );
+  const ProportionsControlPanel = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsControlPanel' );
+  const ProportionsGraphNode = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsGraphNode' );
 
-  class ProportionNode extends HBox {
+  class ProportionsNode extends HBox {
 
     /**
      * @param {ProportionModel} proportionModel
@@ -36,22 +36,22 @@ define( require => {
         align: 'center'
       }, options );
 
-      const controlPanel = new ProportionControlPanel( proportionModel, {
+      const controlPanel = new ProportionsControlPanel( proportionModel, {
         fixedWidth: options.controlPanelWidth,
         maxHeight: options.controlPanelHeight
       } );
 
-      const graphNode = new ProportionGraphNode( proportionModel, {
+      const graphNode = new ProportionsGraphNode( proportionModel, {
         graphWidth: options.graphWidth,
         graphHeight: options.graphHeight
       } );
 
-      assert && assert( !options.children, 'ProportionNode sets children' );
+      assert && assert( !options.children, 'ProportionsNode sets children' );
       options.children = [ controlPanel, graphNode ];
 
       super( options );
     }
   }
 
-  return naturalSelection.register( 'ProportionNode', ProportionNode );
+  return naturalSelection.register( 'ProportionsNode', ProportionsNode );
 } );

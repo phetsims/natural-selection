@@ -18,7 +18,7 @@ define( require => {
 
   // strings
   const populationString = require( 'string!NATURAL_SELECTION/population' );
-  const proportionString = require( 'string!NATURAL_SELECTION/proportion' );
+  const proportionsString = require( 'string!NATURAL_SELECTION/proportions' );
   const pedigreeString = require( 'string!NATURAL_SELECTION/pedigree' );
 
   // constants
@@ -44,7 +44,7 @@ define( require => {
       // Create the description of the buttons
       const items = [
         { value: Graphs.POPULATION, node: new Text( populationString, TEXT_OPTIONS ) },
-        { value: Graphs.PROPORTION, node: new Text( proportionString, TEXT_OPTIONS ) },
+        { value: Graphs.PROPORTIONS, node: new Text( proportionsString, TEXT_OPTIONS ) },
         { value: Graphs.PEDIGREE, node: new Text( pedigreeString, TEXT_OPTIONS ) }
       ];
 

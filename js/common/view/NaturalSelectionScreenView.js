@@ -22,7 +22,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const PedigreeNode = require( 'NATURAL_SELECTION/common/view/pedigree/PedigreeNode' );
   const PopulationNode = require( 'NATURAL_SELECTION/common/view/population/PopulationNode' );
-  const ProportionNode = require( 'NATURAL_SELECTION/common/view/proportion/ProportionNode' );
+  const ProportionsNode = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
@@ -118,7 +118,7 @@ define( require => {
       };
 
       const populationNode = new PopulationNode( model.populationModel, viewOptions );
-      const proportionNode = new ProportionNode( model.proportionModel, viewOptions );
+      const proportionsNode = new ProportionsNode( model.proportionModel, viewOptions );
       const pedigreeNode = new PedigreeNode( model.pedigreeModel, viewOptions );
 
       const graphRadioButtonGroup = new GraphRadioButtonGroup( viewProperties.graphProperty, {
@@ -156,7 +156,7 @@ define( require => {
         environmentalFactorsPanel,
         timeControlNode,
         populationNode,
-        proportionNode,
+        proportionsNode,
         pedigreeNode,
         graphRadioButtonGroup,
         resetAllButton,
@@ -169,7 +169,7 @@ define( require => {
 
       viewProperties.graphProperty.link( graph => {
         populationNode.visible = ( graph === Graphs.POPULATION );
-        proportionNode.visible = ( graph === Graphs.PROPORTION );
+        proportionsNode.visible = ( graph === Graphs.PROPORTIONS );
         pedigreeNode.visible = ( graph === Graphs.PEDIGREE );
       } );
     }
