@@ -167,7 +167,7 @@ define( require => {
         children: [
           new HStrut( 25 ),
           new HBox( {
-            spacing: 20,
+            spacing: 15,
             children: [ mutationAlignBox, nonMutationAlignBox ]
           } )
         ]
