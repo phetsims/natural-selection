@@ -12,6 +12,11 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Property = require( 'AXON/Property' );
+  const Range = require( 'DOT/Range' );
+
+  // constants
+  const CHECKBOXES_ENABLED = true; //TODO for debugging, delete this, should be false
 
   class PopulationModel {
 
@@ -33,12 +38,12 @@ define( require => {
 
       // @public enabled state of the checkbox for each allele in the Population control panel
       // Checkboxes are disabled until an associated mutation is applied.
-      this.whiteFurEnabledProperty = new BooleanProperty( false );
-      this.brownFurEnabledProperty = new BooleanProperty( false );
-      this.straightEarsEnabledProperty = new BooleanProperty( false );
-      this.floppyEarsEnabledProperty = new BooleanProperty( false );
-      this.shortTeethEnabledProperty = new BooleanProperty( false );
-      this.longTeethEnabledProperty = new BooleanProperty( false );
+      this.whiteFurEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
+      this.brownFurEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
+      this.straightEarsEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
+      this.floppyEarsEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
+      this.shortTeethEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
+      this.longTeethEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
 
       //TODO bogus values, for demo purposes
       // @public
@@ -50,6 +55,12 @@ define( require => {
       this.shortTeethCountProperty = new NumberProperty( 500 );
       this.longTeethCountProperty = new NumberProperty( 500 );
 
+      // @public range of the graph's x axis, in generations
+      this.xRangeProperty = new Property( new Range( 0, 6 ), {
+        valueType: Range,
+        isValueValue: value => ( value.min && value.max )
+      } );
+
       // @public zoom level of the graph's y axis
       this.yZoomLevelProperty = new NumberProperty( 1 );
     }
@@ -59,8 +70,8 @@ define( require => {
      */
     reset() {
       this.valuesMarkerVisibleProperty.reset();
+
       this.totalVisibleProperty.reset();
-      this.yZoomLevelProperty.reset();
 
       this.whiteFurVisibleProperty.reset();
       this.brownFurVisibleProperty.reset();
@@ -75,6 +86,9 @@ define( require => {
       this.floppyEarsEnabledProperty.reset();
       this.shortTeethEnabledProperty.reset();
       this.longTeethEnabledProperty.reset();
+
+      this.xRangeProperty.reset();
+      this.yZoomLevelProperty.reset();
     }
   }
 

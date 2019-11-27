@@ -12,6 +12,9 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
 
+  // constants
+  const CHECKBOXES_ENABLED = true; //TODO for debugging, delete this, should be false
+
   class PedigreeModel {
 
     constructor() {
@@ -23,9 +26,9 @@ define( require => {
 
       // @public enabled state of the checkbox for each gene in the pedigree's control panel
       // Checkboxes are disabled until an associated mutation is applied.
-      this.furEnabledProperty = new BooleanProperty( false );
-      this.earsEnabledProperty = new BooleanProperty( false );
-      this.teethEnabledProperty = new BooleanProperty( false );
+      this.furEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
+      this.earsEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
+      this.teethEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
     }
 
     /**
