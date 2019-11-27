@@ -15,6 +15,7 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
+  const NaturalSelectionUtils = require( 'NATURAL_SELECTION/common/NaturalSelectionUtils' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -107,7 +108,7 @@ define( require => {
   function createSolidNumberDisplay( numberProperty, color ) {
     return new NumberDisplay( numberProperty, NUMBER_DISPLAY_RANGE, {
       font: NUMBER_DISPLAY_FONT,
-      numberFill: 'white', //TODO assumes that @param color is a dark color
+      numberFill: NaturalSelectionUtils.isDarkColor( color ) ? 'white' : 'black',
       backgroundFill: color,
       backgroundStroke: color,
       backgroundLineWidth: NUMBER_DISPLAY_LINE_WIDTH
