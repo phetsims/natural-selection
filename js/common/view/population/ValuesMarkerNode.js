@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ValuesMarkerNode displays y-axis values at an x-axis positions.  It can be dragged along the x axis.
+ * ValuesMarkerNode displays y-axis values at an x-axis position.  It can be dragged along the x axis.
  * Historical information and requirements can be found in https://github.com/phetsims/natural-selection/issues/14.
  *
  * @author Chris Malley (PixelZoom, Inc.)
