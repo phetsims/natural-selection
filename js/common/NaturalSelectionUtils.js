@@ -23,7 +23,7 @@ define( require => {
      * @public
      */
     colorToGrayscale( color ) {
-      const sceneryColor = new Color( color );
+      const sceneryColor = Color.toColor( color );
 
       // per ITU-R BT.709
       const luminance = ( sceneryColor.red * 0.2126 + sceneryColor.green * 0.7152 + sceneryColor.blue * 0.0722 );
@@ -36,7 +36,7 @@ define( require => {
     /**
      * Determines whether a color is 'dark'.
      * @param {Color|string} color
-     * @param {number} [luminance] - luminance or 'gray' value equivalent, range [0,255]
+     * @param {number} [luminance] - colors with luminance (grayscale value) < this value are dark, range [0,255], default 186
      * @returns {boolean}
      */
     isDarkColor( color, luminance ) {
@@ -47,7 +47,7 @@ define( require => {
     /**
      * Determines whether a color is 'light'.
      * @param {Color|string} color
-     * @param {number} [luminance] - luminance or 'gray' value equivalent, range [0,255]
+     * @param {number} [luminance] - colors with luminance (grayscale value) >= this value are light, range [0,255], default 186
      * @returns {boolean}
      */
     isLightColor( color, luminance ) {
