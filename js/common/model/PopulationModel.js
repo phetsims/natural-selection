@@ -40,6 +40,7 @@ define( require => {
       this.shortTeethEnabledProperty = new BooleanProperty( false );
       this.longTeethEnabledProperty = new BooleanProperty( false );
 
+      //TODO bogus values, for demo purposes
       // @public
       this.totalCountProperty = new NumberProperty( 1000 );
       this.whiteFurCountProperty = new NumberProperty( 500 );
