@@ -24,6 +24,9 @@ define( require => {
 
     // Model ===========================================================================================================
 
+    // number of bunnies required to 'take over the world'
+    MAX_BUNNIES: 1000,
+
     // clock
     SECONDS_PER_GENERATION: 10,
     SECONDS_PER_STEP: 0.1, // dt for when the Step button is pressed, in seconds

@@ -17,6 +17,7 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
+  const ValuesMarkerNode = require( 'NATURAL_SELECTION/common/view/population/ValuesMarkerNode' );
   const ZoomControl = require( 'NATURAL_SELECTION/common/view/population/ZoomControl' );
 
   // strings
@@ -68,9 +69,9 @@ define( require => {
 
       //TODO placeholder
       // graph
-      const width = options.graphWidth - yZoomControl.width - ZOOM_CONTROL_X_OFFSET;
-      const height = options.graphHeight - xPanControl.height - X_AXIS_LABEL_OFFSET;
-      const graphNode = new Rectangle( 0, 0, width, height, {
+      const graphWidth = options.graphWidth - yZoomControl.width - ZOOM_CONTROL_X_OFFSET;
+      const graphHeight = options.graphHeight - xPanControl.height - X_AXIS_LABEL_OFFSET;
+      const graphNode = new Rectangle( 0, 0, graphWidth, graphHeight, {
         fill: NaturalSelectionColors.POPULATION_GRAPH_FILL,
         stroke: NaturalSelectionColors.PANEL_STROKE,
         left: yZoomControl.right + ZOOM_CONTROL_X_OFFSET,
@@ -81,8 +82,13 @@ define( require => {
       xPanControl.centerX = graphNode.centerX;
       xPanControl.top = graphNode.bottom + X_AXIS_LABEL_OFFSET;
 
+      const valuesMarkerNode = new ValuesMarkerNode( populationModel, graphHeight, {
+        left: graphNode.left + 20, //TODO
+        top: graphNode.top
+      } );
+
       assert && assert( !options.children, 'PopulationGraphNode sets children' );
-      options.children = [ boundsRectangle, graphNode, xPanControl, yZoomControl, yAxisLabelNode ];
+      options.children = [ boundsRectangle, graphNode, xPanControl, yZoomControl, yAxisLabelNode, valuesMarkerNode ];
 
       super( options );
     }

@@ -42,6 +42,15 @@ define( require => {
       this.floppyEarsEnabledProperty = new BooleanProperty( false );
       this.shortTeethEnabledProperty = new BooleanProperty( false );
       this.longTeethEnabledProperty = new BooleanProperty( false );
+
+      // @public
+      this.totalCountProperty = new NumberProperty( 1000 );
+      this.whiteFurCountProperty = new NumberProperty( 500 );
+      this.brownFurCountProperty = new NumberProperty( 500 );
+      this.straightEarsCountProperty = new NumberProperty( 500 );
+      this.floppyEarsCountProperty = new NumberProperty( 500 );
+      this.shortTeethCountProperty = new NumberProperty( 500 );
+      this.longTeethCountProperty = new NumberProperty( 500 );
     }
 
     /**
