@@ -21,6 +21,7 @@ define( require => {
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PedigreeNode = require( 'NATURAL_SELECTION/common/view/pedigree/PedigreeNode' );
+  const PlayAgainButton = require( 'NATURAL_SELECTION/common/view/PlayAgainButton' );
   const PopulationNode = require( 'NATURAL_SELECTION/common/view/population/PopulationNode' );
   const ProportionsNode = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -60,6 +61,10 @@ define( require => {
         listener: () => this.addAMate(),
         centerX: viewportNode.centerX,
         bottom: viewportNode.bottom - NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
+      } );
+
+      const playAgainButton = new PlayAgainButton( {
+        center: viewportNode.center
       } );
 
       const rightOfWorldWidth = this.layoutBounds.width - viewportNode.width -
@@ -161,6 +166,7 @@ define( require => {
         generationClockNode,
         environmentRadioButtonGroup,
         addAMateButton,
+        playAgainButton,
         addMutationPanel,
         environmentalFactorsPanel,
         timeControlNode,
