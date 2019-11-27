@@ -130,7 +130,7 @@ define( require => {
         ) => {
           const children = [ vStrut ];
 
-          // Order is important here, and should match the vertical order of the legend in PopulationControlPanel.
+          // Order is important here. It should match the vertical order of the legend in PopulationControlPanel.
           totalVisible && children.push( totalDisplay );
           whiteFurVisible && children.push( whiteFurDisplay );
           brownFurVisible && children.push( brownFurDisplay );
