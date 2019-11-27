@@ -23,11 +23,7 @@ define( require => {
       // @public visibility of the total population plot on the graph
       this.totalVisibleProperty = new BooleanProperty( true );
 
-      // @public zoom level of the graph's y axis
-      this.yZoomLevelProperty = new NumberProperty( 1 );
-
       // @public visibility of the plot for each allele on the graph
-      this.totalVisibleProperty = new BooleanProperty( true );
       this.whiteFurVisibleProperty = new BooleanProperty( false );
       this.brownFurVisibleProperty = new BooleanProperty( false );
       this.straightEarsVisibleProperty = new BooleanProperty( false );
@@ -52,6 +48,9 @@ define( require => {
       this.floppyEarsCountProperty = new NumberProperty( 500 );
       this.shortTeethCountProperty = new NumberProperty( 500 );
       this.longTeethCountProperty = new NumberProperty( 500 );
+
+      // @public zoom level of the graph's y axis
+      this.yZoomLevelProperty = new NumberProperty( 1 );
     }
 
     /**
