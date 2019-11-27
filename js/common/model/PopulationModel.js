@@ -53,12 +53,12 @@ define( require => {
       //TODO bogus values, for demo purposes
       // @public counts displayed by the Values Marker. null means that there is no data.
       this.totalCountProperty = new Property( 1000, countPropertyOptions );
-      this.whiteFurCountProperty = new Property( 500, countPropertyOptions );
-      this.brownFurCountProperty = new Property( 500, countPropertyOptions );
-      this.straightEarsCountProperty = new Property( 500, countPropertyOptions );
-      this.floppyEarsCountProperty = new Property( 500, countPropertyOptions );
-      this.shortTeethCountProperty = new Property( 500, countPropertyOptions );
-      this.longTeethCountProperty = new Property( null, countPropertyOptions );
+      this.whiteFurCountProperty = new Property( 600, countPropertyOptions );
+      this.brownFurCountProperty = new Property( 400, countPropertyOptions );
+      this.straightEarsCountProperty = new Property( 988, countPropertyOptions );
+      this.floppyEarsCountProperty = new Property( 12, countPropertyOptions );
+      this.shortTeethCountProperty = new Property( 1000, countPropertyOptions );
+      this.longTeethCountProperty = new Property( 0, countPropertyOptions );
 
       // @public range of the graph's x axis, in generations
       this.xRangeProperty = new Property( new Range( 0, 6 ), {
