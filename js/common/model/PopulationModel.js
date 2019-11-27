@@ -27,6 +27,7 @@ define( require => {
       this.yZoomLevelProperty = new NumberProperty( 1 );
 
       // @public visibility of the plot for each allele on the graph
+      this.totalVisibleProperty = new BooleanProperty( true );
       this.whiteFurVisibleProperty = new BooleanProperty( false );
       this.brownFurVisibleProperty = new BooleanProperty( false );
       this.straightEarsVisibleProperty = new BooleanProperty( false );

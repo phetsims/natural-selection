@@ -19,14 +19,17 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
   const Shape = require( 'KITE/Shape' );
+  const ValuesMarkerDragListener = require( 'NATURAL_SELECTION/common/view/population/ValuesMarkerDragListener' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // constants
+  const BAR_COLOR = 'rgb( 120, 120, 120 )';
   const NUMBER_DISPLAY_RANGE = new Range( 0, NaturalSelectionConstants.MAX_BUNNIES );
   const NUMBER_DISPLAY_FONT = new PhetFont( 12 );
   const NUMBER_DISPLAY_LINE_WIDTH = 2;
@@ -46,11 +49,19 @@ define( require => {
         cursor: 'ew-resize' // <->
       }, options );
 
-      const shaftNode = new Rectangle( 0, 0, 3, graphHeight, {
-        fill: 'rgb( 120, 120, 120 )'
+      // Vertical bar
+      const barNode = new Rectangle( 0, 0, 3, graphHeight, {
+        fill: BAR_COLOR
       } );
-      shaftNode.mouseArea = shaftNode.localBounds.dilatedXY( 5, 0 );
-      shaftNode.touchArea = shaftNode.localBounds.dilatedXY( 10, 0 );
+      barNode.mouseArea = barNode.localBounds.dilatedXY( 5, 0 );
+      barNode.touchArea = barNode.localBounds.dilatedXY( 10, 0 );
+
+      // Manipulator at bottom of bar
+      const manipulator = new ShadedSphereNode( 2 * MANIPULATOR_RADIUS, {
+        mouseArea: Shape.circle( 0, 0, 2 * MANIPULATOR_RADIUS ),
+        touchArea: Shape.circle( 0, 0, 2 * MANIPULATOR_RADIUS ),
+        center: barNode.centerBottom
+      } );
 
       // NumberDisplay instances
       const totalDisplay = createSolidNumberDisplay( populationModel.totalCountProperty, NaturalSelectionColors.TOTAL_POPULATION );
@@ -61,31 +72,21 @@ define( require => {
       const shortTeethDisplay = createSolidNumberDisplay( populationModel.shortTeethCountProperty, NaturalSelectionColors.TEETH );
       const longTeethDisplay = createDashedNumberDisplay( populationModel.longTeethCountProperty, NaturalSelectionColors.TEETH );
 
+      // vertical layout of NumberDisplays 
       const numberDisplays = new VBox( {
         spacing: 2,
-        align: 'left',
-        children: [
-          new VStrut( 5 ), // to add a bit of space at the top
-          totalDisplay,
-          whiteFurDisplay,
-          brownFurDisplay,
-          straightEarsDisplay,
-          floppyEarsDisplay,
-          shortTeethDisplay,
-          longTeethDisplay
-        ]
+        align: 'left'
+        // children set in multilink below
       } );
+      
+      // for adding a bit of space above the NumberDisplays
+      const vStrut = new VStrut( 5 );
 
+      // horizontal layout of bar and NumberDisplays
       const hBox = new HBox( {
         spacing: 0,
         align: 'top',
-        children: [ shaftNode, numberDisplays ]
-      } );
-
-      const manipulator = new ShadedSphereNode( 2 * MANIPULATOR_RADIUS, {
-        mouseArea: Shape.circle( 0, 0, 2 * MANIPULATOR_RADIUS ),
-        touchArea: Shape.circle( 0, 0, 2 * MANIPULATOR_RADIUS ),
-        center: shaftNode.centerBottom
+        children: [ barNode, numberDisplays ]
       } );
 
       assert && assert( !options.children, 'ValuesMarkerNode sets children' );
@@ -93,9 +94,47 @@ define( require => {
 
       super( options );
 
-      this.addInputListener( {
+      this.addInputListener( new ValuesMarkerDragListener( {
+        pressCursor: options.cursor
         //TODO
+      }) );
+
+      // visibility of Values Marker
+      populationModel.valuesMarkerVisibleProperty.link( valuesMarkerVisible => {
+        this.interruptSubtreeInput(); // cancel interactions
+        this.visible = valuesMarkerVisible;
       } );
+
+      // When visibility of some quantity changes, change which NumberDisplays are children of numberDisplays.
+      // Order is important here, and should match the vertical order of the legend in PopulationControlPanel.
+      Property.multilink( [
+          populationModel.totalVisibleProperty,
+          populationModel.whiteFurVisibleProperty,
+          populationModel.brownFurVisibleProperty,
+          populationModel.straightEarsVisibleProperty,
+          populationModel.floppyEarsVisibleProperty,
+          populationModel.shortTeethVisibleProperty,
+          populationModel.longTeethVisibleProperty
+        ],
+        (
+          totalVisible,
+          whiteFurVisible,
+          brownFurVisible,
+          straightEarsVisible,
+          floppyEarsVisible,
+          shortTeethVisible,
+          longTeethVisible
+        ) => {
+          const children = [ vStrut ];
+          totalVisible && children.push( totalDisplay );
+          whiteFurVisible && children.push( whiteFurDisplay );
+          brownFurVisible && children.push( brownFurDisplay );
+          straightEarsVisible && children.push( straightEarsDisplay );
+          floppyEarsVisible && children.push( floppyEarsDisplay );
+          shortTeethVisible && children.push( shortTeethDisplay );
+          longTeethVisible && children.push( longTeethDisplay );
+          numberDisplays.children = children;
+        } );
     }
   }
 
