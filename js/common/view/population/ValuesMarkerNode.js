@@ -78,7 +78,7 @@ define( require => {
 
       // vertical layout of NumberDisplays 
       const numberDisplays = new VBox( {
-        spacing: 2,
+        spacing: 3,
         align: 'left'
         // children set in multilink below
       } );
