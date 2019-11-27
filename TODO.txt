@@ -1,4 +1,9 @@
 Make graphs wider by making control panels narrower.
 Animate contents of Proportions view when switching generations.
 
+About viewport transform, JO said in Slack developer channel on 11/22/19:
+> It's possible to do that with Matrix4s and homogeneous coordinates, but that wouldn't be a standard type
+> or what I would name ModelViewTransform3
+> You can just have X' = scale * x / z, Y' = scale * y / z
+
 
