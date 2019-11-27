@@ -34,6 +34,7 @@ define( require => {
   const NUMBER_DISPLAY_FONT = new PhetFont( 12 );
   const NUMBER_DISPLAY_LINE_WIDTH = 2;
   const NUMBER_DISPLAY_LINE_DASH = [ 3, 3 ];
+  const NUMBER_DISPLAY_NO_VALUE_STRING = '?'; //TODO what to display when there is no data
   const MANIPULATOR_RADIUS = 5;
 
   class ValuesMarkerNode extends Node {
@@ -150,7 +151,8 @@ define( require => {
       numberFill: NaturalSelectionUtils.isDarkColor( color ) ? 'white' : 'black',
       backgroundFill: color,
       backgroundStroke: color,
-      backgroundLineWidth: NUMBER_DISPLAY_LINE_WIDTH
+      backgroundLineWidth: NUMBER_DISPLAY_LINE_WIDTH,
+      noValueString: NUMBER_DISPLAY_NO_VALUE_STRING
     } );
   }
 
@@ -167,7 +169,8 @@ define( require => {
       backgroundFill: 'white',
       backgroundStroke: color,
       backgroundLineDash: NUMBER_DISPLAY_LINE_DASH,
-      backgroundLineWidth: NUMBER_DISPLAY_LINE_WIDTH
+      backgroundLineWidth: NUMBER_DISPLAY_LINE_WIDTH,
+      noValueString: NUMBER_DISPLAY_NO_VALUE_STRING
     } );
   }
 

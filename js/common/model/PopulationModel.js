@@ -14,6 +14,7 @@ define( require => {
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
+  const Util = require( 'DOT/Util' );
 
   // constants
   const CHECKBOXES_ENABLED = true; //TODO for debugging, delete this, should be false
@@ -45,15 +46,19 @@ define( require => {
       this.shortTeethEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
       this.longTeethEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
 
+      const countPropertyOptions = {
+        isValidValue: value => ( value === null ) || ( typeof value === 'number' && Util.isInteger( value ) )
+      };
+
       //TODO bogus values, for demo purposes
-      // @public
-      this.totalCountProperty = new NumberProperty( 1000 );
-      this.whiteFurCountProperty = new NumberProperty( 500 );
-      this.brownFurCountProperty = new NumberProperty( 500 );
-      this.straightEarsCountProperty = new NumberProperty( 500 );
-      this.floppyEarsCountProperty = new NumberProperty( 500 );
-      this.shortTeethCountProperty = new NumberProperty( 500 );
-      this.longTeethCountProperty = new NumberProperty( 500 );
+      // @public counts displayed by the Values Marker. null means that there is no data.
+      this.totalCountProperty = new Property( 1000, countPropertyOptions );
+      this.whiteFurCountProperty = new Property( 500, countPropertyOptions );
+      this.brownFurCountProperty = new Property( 500, countPropertyOptions );
+      this.straightEarsCountProperty = new Property( 500, countPropertyOptions );
+      this.floppyEarsCountProperty = new Property( 500, countPropertyOptions );
+      this.shortTeethCountProperty = new Property( 500, countPropertyOptions );
+      this.longTeethCountProperty = new Property( null, countPropertyOptions );
 
       // @public range of the graph's x axis, in generations
       this.xRangeProperty = new Property( new Range( 0, 6 ), {
