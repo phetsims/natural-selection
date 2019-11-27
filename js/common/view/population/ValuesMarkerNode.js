@@ -110,7 +110,6 @@ define( require => {
       } );
 
       // When visibility of some quantity changes, change which NumberDisplays are children of numberDisplays.
-      // Order is important here, and should match the vertical order of the legend in PopulationControlPanel.
       Property.multilink( [
           populationModel.totalVisibleProperty,
           populationModel.whiteFurVisibleProperty,
@@ -130,6 +129,8 @@ define( require => {
           longTeethVisible
         ) => {
           const children = [ vStrut ];
+
+          // Order is important here, and should match the vertical order of the legend in PopulationControlPanel.
           totalVisible && children.push( totalDisplay );
           whiteFurVisible && children.push( whiteFurDisplay );
           brownFurVisible && children.push( brownFurDisplay );
