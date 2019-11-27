@@ -17,7 +17,7 @@ define( require => {
 
     constructor() {
 
-      // @public visibility of the values marker on the graph
+      // @public visibility of the Values Marker on the graph
       this.valuesMarkerVisibleProperty = new BooleanProperty( false );
 
       // @public visibility of the total population plot on the graph
