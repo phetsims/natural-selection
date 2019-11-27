@@ -10,6 +10,7 @@ define( require => {
   'use strict';
 
   // modules
+  const Color = require( 'SCENERY/util/Color' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -35,6 +36,8 @@ define( require => {
   const NUMBER_DISPLAY_LINE_WIDTH = 2;
   const NUMBER_DISPLAY_LINE_DASH = [ 3, 3 ];
   const NUMBER_DISPLAY_NO_VALUE_STRING = '?'; //TODO what to display when there is no data
+  const NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY = 0.7;
+  const NUMBER_DISPLAY_DASHED_BACKGROUND_FILL = new Color( 255, 255, 255, NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY );
   const MANIPULATOR_RADIUS = 5;
 
   class ValuesMarkerNode extends Node {
@@ -146,11 +149,12 @@ define( require => {
    * @returns {NumberDisplay}
    */
   function createSolidNumberDisplay( numberProperty, color ) {
+    const colorWithAlpha = Color.toColor( color ).withAlpha( NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY );
     return new NumberDisplay( numberProperty, NUMBER_DISPLAY_RANGE, {
       font: NUMBER_DISPLAY_FONT,
-      numberFill: NaturalSelectionUtils.isDarkColor( color ) ? 'white' : 'black',
-      backgroundFill: color,
-      backgroundStroke: color,
+      numberFill: NaturalSelectionUtils.isDarkColor( colorWithAlpha ) ? 'white' : 'black',
+      backgroundFill: colorWithAlpha,
+      backgroundStroke: colorWithAlpha,  // also set stroke, so all NumberDisplay have same dimensions
       backgroundLineWidth: NUMBER_DISPLAY_LINE_WIDTH,
       noValueString: NUMBER_DISPLAY_NO_VALUE_STRING
     } );
@@ -165,8 +169,8 @@ define( require => {
   function createDashedNumberDisplay( numberProperty, color ) {
     return new NumberDisplay( numberProperty, NUMBER_DISPLAY_RANGE, {
       font: NUMBER_DISPLAY_FONT,
-      numberFill: 'black',
-      backgroundFill: 'white',
+      numberFill: NaturalSelectionUtils.isDarkColor( NUMBER_DISPLAY_DASHED_BACKGROUND_FILL ) ? 'white' : 'black',
+      backgroundFill: NUMBER_DISPLAY_DASHED_BACKGROUND_FILL,
       backgroundStroke: color,
       backgroundLineDash: NUMBER_DISPLAY_LINE_DASH,
       backgroundLineWidth: NUMBER_DISPLAY_LINE_WIDTH,
