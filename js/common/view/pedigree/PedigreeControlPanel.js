@@ -21,7 +21,6 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const SunConstants = require( 'SUN/SunConstants' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -48,7 +47,6 @@ define( require => {
 
   // constants
   const ICON_SCALE = 0.5;
-  const ALLELE_TEXT_FONT = new PhetFont( 14 );
 
   class PedigreeControlPanel extends NaturalSelectionPanel {
 
@@ -131,7 +129,7 @@ define( require => {
 
       // common options
       const textOptions = {
-        font: ALLELE_TEXT_FONT,
+        font: NaturalSelectionConstants.CHECKBOX_FONT,
         maxWidth: 12 // determined empirically
       };
       const imageOptions = {

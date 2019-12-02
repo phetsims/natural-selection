@@ -15,9 +15,9 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const CancelMutationButton = require( 'NATURAL_SELECTION/common/view/CancelMutationButton' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Shape = require( 'KITE/Shape' );
   const Text = require( 'SCENERY/nodes/Text' );
 
@@ -28,7 +28,6 @@ define( require => {
   const X_MARGIN = 8;
   const Y_MARGIN = 4;
   const POINTER_WIDTH = 15;
-  const FONT = new PhetFont( 16 );
 
   class MutationComingNode extends Node {
 
@@ -49,7 +48,7 @@ define( require => {
       } );
 
       const textNode = new Text( mutationComingString, {
-        font: FONT,
+        font: NaturalSelectionConstants.MUTATION_COMING_FONT,
         maxWidth: 200 // determined empirically
       } );
 

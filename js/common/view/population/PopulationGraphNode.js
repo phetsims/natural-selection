@@ -12,9 +12,9 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
+  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PanControl = require( 'NATURAL_SELECTION/common/view/population/PanControl' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
   const ValuesMarkerNode = require( 'NATURAL_SELECTION/common/view/population/ValuesMarkerNode' );
@@ -28,7 +28,6 @@ define( require => {
   const ZOOM_CONTROL_X_OFFSET = 5;
   const X_AXIS_LABEL_OFFSET = 5;
   const Y_AXIS_LABEL_OFFSET = 7;
-  const AXIS_LABEL_FONT = new PhetFont( 14 );
 
   class PopulationGraphNode extends Node {
 
@@ -57,7 +56,7 @@ define( require => {
 
       // y-axis (Population) label
       const yAxisLabelNode = new Text( populationString, {
-        font: AXIS_LABEL_FONT,
+        font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
         rotation: -Math.PI / 2,
         right: yZoomControl.right + ZOOM_CONTROL_X_OFFSET - Y_AXIS_LABEL_OFFSET,
         centerY: boundsRectangle.centerY,

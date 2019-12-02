@@ -23,7 +23,6 @@ define( require => {
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -47,9 +46,7 @@ define( require => {
   const recessiveString = require( 'string!NATURAL_SELECTION/recessive' );
 
   // constants
-  const COLUMN_HEADING_FONT = new PhetFont( 14 );
   const COLUMN_SPACING = 8;
-  const LABEL_FONT = new PhetFont( 16 );
   const BUTTON_ICON_SCALE = 0.5;
   const LABEL_COLUMN_X_ALIGN = 'left';
   const BUTTON_COLUMNS_X_ALIGN = 'center';
@@ -81,11 +78,11 @@ define( require => {
       // Individual column headings
       const mutationIconNode = new Image( mutationIconImage, { scale: 0.25 } );
       const dominantColumnLabel = new Text( dominantString, {
-        font: COLUMN_HEADING_FONT,
+        font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
         maxWidth: 60 // determined empirically
       } );
       const recessiveColumnLabel = new Text( recessiveString, {
-        font: COLUMN_HEADING_FONT,
+        font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
         maxWidth: 60 // determined empirically
       } );
 
@@ -172,7 +169,7 @@ define( require => {
 
       // label that indicates the trait name, to the left of buttons
       const labelNode = new Text( traitName, {
-        font: LABEL_FONT,
+        font: NaturalSelectionConstants.ADD_MUTATION_TRAIT_FONT,
         maxWidth: 50 // determined empirically
       } );
 

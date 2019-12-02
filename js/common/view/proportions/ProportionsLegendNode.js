@@ -44,7 +44,7 @@ define( require => {
 
 
       const textNode = new Text( labelString, {
-        font: NaturalSelectionConstants.TEXT_FONT,
+        font: NaturalSelectionConstants.PROPORTIONS_LEGEND_FONT,
         maxWidth: 110 // determined empirically
       } );
 

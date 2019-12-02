@@ -15,7 +15,6 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   class PanControl extends HBox {
@@ -27,7 +26,7 @@ define( require => {
     constructor( labelString, options ) {
 
       options = merge( {
-        font: new PhetFont( 14 ),
+        font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
         previous: () => {},
         next: () => {},
 

@@ -92,8 +92,12 @@ define( require => {
     CHECKBOX_FONT: new PhetFont( 16 ),
     PUSH_BUTTON_FONT: new PhetFont( 16 ),
     RADIO_BUTTON_FONT: new PhetFont( 16 ),
-    TEXT_FONT: new PhetFont( 16 ),
-    TITLE_FONT: new PhetFont( { size: 16, weight: 'bold' } )
+    TITLE_FONT: new PhetFont( { size: 16, weight: 'bold' } ),
+    ADD_MUTATION_TRAIT_FONT: new PhetFont( 16 ),
+    ADD_MUTATION_COLUMN_HEADING_FONT: new PhetFont( 14 ),
+    MUTATION_COMING_FONT: new PhetFont( 16 ),
+    POPULATION_AXIS_FONT: new PhetFont( 14 ),
+    PROPORTIONS_LEGEND_FONT: new PhetFont( 16 )
   };
 
   return naturalSelection.register( 'NaturalSelectionConstants', NaturalSelectionConstants );
