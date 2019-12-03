@@ -98,7 +98,8 @@ define( require => {
     MUTATION_COMING_FONT: new PhetFont( 16 ),
     POPULATION_AXIS_FONT: new PhetFont( 14 ),
     PROPORTIONS_GENERATION_CONTROL_FONT: new PhetFont( 16 ),
-    PROPORTIONS_LEGEND_FONT: new PhetFont( 16 )
+    PROPORTIONS_LEGEND_FONT: new PhetFont( 16 ),
+    DIALOG_FONT: new PhetFont( 13 ) //TODO smaller font to compensate for https://github.com/phetsims/joist/issues/586
   };
 
   return naturalSelection.register( 'NaturalSelectionConstants', NaturalSelectionConstants );

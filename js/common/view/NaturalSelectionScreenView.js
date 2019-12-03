@@ -11,6 +11,7 @@ define( require => {
   // modules
   const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
   const AddMutationsPanel = require( 'NATURAL_SELECTION/common/view/AddMutationsPanel' );
+  const AllDeadDialog = require( 'NATURAL_SELECTION/common/view/AllDeadDialog' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const EnvironmentalFactorsPanel = require( 'NATURAL_SELECTION/common/view/EnvironmentalFactorsPanel' );
   const EnvironmentRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/EnvironmentRadioButtonGroup' );
@@ -63,8 +64,14 @@ define( require => {
         bottom: viewportNode.bottom - NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
 
+      const allDeadDialog = new AllDeadDialog();
+
       const playAgainButton = new PlayAgainButton( {
-        center: viewportNode.center
+        center: viewportNode.center,
+        listener: () => {
+          //TODO this is a temporary test for dialogs
+          allDeadDialog.show();
+        }
       } );
 
       const rightOfWorldWidth = this.layoutBounds.width - viewportNode.width -
