@@ -102,17 +102,17 @@ define( require => {
       } );
 
       // Rows below the column headings
-      const furRow = new AddMutationRow( furString, NaturalSelectionColors.FUR,
+      const furRow = new Row( furString, NaturalSelectionColors.FUR,
         brownFurImage, whiteFurImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
         () => furMutationEmitter.emit(), //TODO args
         () => furMutationEmitter.emit() //TODO args
       );
-      const earsRow = new AddMutationRow( earsString, NaturalSelectionColors.EARS,
+      const earsRow = new Row( earsString, NaturalSelectionColors.EARS,
         floppyEarsImage, straightEarsImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
         () => earsMutationEmitter.emit(), //TODO args
         () => earsMutationEmitter.emit() //TODO args
       );
-      const teethRow = new AddMutationRow( teethString, NaturalSelectionColors.TEETH,
+      const teethRow = new Row( teethString, NaturalSelectionColors.TEETH,
         longTeethImage, shortTeethImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
         () => teethMutationEmitter.emit(), //TODO args
         () => teethMutationEmitter.emit() //TODO args
@@ -207,10 +207,10 @@ define( require => {
   }
 
   /**
-   * AddMutationRow is a row in the 'Add Mutations' panel.
+   * Row is a row in the 'Add Mutations' panel.
    * TODO describe behavior
    */
-  class AddMutationRow extends HBox {
+  class Row extends HBox {
 
     /**
      * @param {string} traitName
@@ -332,7 +332,7 @@ define( require => {
       } );
 
       // @private
-      this.resetAddMutationRow = () => {
+      this.resetRow = () => {
         dominantButton.visible = recessiveButton.visible = true;
         this.children = [ labelNodeWrapper, dominantButtonWrapper, recessiveButtonWrapper ];
       };
@@ -342,7 +342,7 @@ define( require => {
      * @public
      */
     reset() {
-      this.resetAddMutationRow();
+      this.resetRow();
     }
   }
 
