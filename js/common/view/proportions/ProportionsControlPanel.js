@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ProportionsControlPanel is the panel that contains controls for the Proportions graph.
+ * ProportionsControlPanel is the panel that contains controls for the 'Proportions' graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
