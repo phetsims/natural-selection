@@ -62,8 +62,7 @@ define( require => {
         color: NaturalSelectionColors.TOTAL_POPULATION
       } );
 
-      // Checkbox for each allele.
-      // Order is important here. It should match the vertical order of NumberDisplays in ValuesMarkerNode.
+      // Checkbox for each allele. Order is important here. It should match the vertical order in ValuesMarkerNode.
       const alleleCheckboxes = [
 
         // White Fur
