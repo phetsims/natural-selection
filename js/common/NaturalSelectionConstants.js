@@ -88,6 +88,9 @@ define( require => {
       align: 'left'
     },
 
+    // Dialog
+    DIALOG_CONTENT_SCALE: 0.75, //TODO to compensate for https://github.com/phetsims/joist/issues/586
+
     // Fonts
     CHECKBOX_FONT: new PhetFont( 16 ),
     PUSH_BUTTON_FONT: new PhetFont( 16 ),
@@ -99,7 +102,7 @@ define( require => {
     POPULATION_AXIS_FONT: new PhetFont( 14 ),
     PROPORTIONS_GENERATION_CONTROL_FONT: new PhetFont( 16 ),
     PROPORTIONS_LEGEND_FONT: new PhetFont( 16 ),
-    DIALOG_FONT: new PhetFont( 13 ) //TODO smaller font to compensate for https://github.com/phetsims/joist/issues/586
+    DIALOG_FONT: new PhetFont( 16 )
   };
 
   return naturalSelection.register( 'NaturalSelectionConstants', NaturalSelectionConstants );

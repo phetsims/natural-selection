@@ -11,7 +11,7 @@ define( require => {
   // modules
   const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
   const AddMutationsPanel = require( 'NATURAL_SELECTION/common/view/AddMutationsPanel' );
-  const AllDeadDialog = require( 'NATURAL_SELECTION/common/view/AllDeadDialog' );
+  const DeadDialog = require( 'NATURAL_SELECTION/common/view/DeadDialog' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const EnvironmentalFactorsPanel = require( 'NATURAL_SELECTION/common/view/EnvironmentalFactorsPanel' );
   const EnvironmentRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/EnvironmentRadioButtonGroup' );
@@ -29,6 +29,7 @@ define( require => {
   const ScreenView = require( 'JOIST/ScreenView' );
   const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
   const ViewportNode = require( 'NATURAL_SELECTION/common/view/ViewportNode' );
+  const WorldDialog = require( 'NATURAL_SELECTION/common/view/WorldDialog' );
 
   class NaturalSelectionScreenView extends ScreenView {
 
@@ -64,13 +65,15 @@ define( require => {
         bottom: viewportNode.bottom - NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
 
-      const allDeadDialog = new AllDeadDialog();
+      const deadDialog = new DeadDialog();
+      const worldDialog = new WorldDialog();
 
       const playAgainButton = new PlayAgainButton( {
         center: viewportNode.center,
         listener: () => {
           //TODO this is a temporary test for dialogs
-          allDeadDialog.show();
+          worldDialog.show();
+          deadDialog.show();
         }
       } );
 

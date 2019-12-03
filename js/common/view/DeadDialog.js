@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * AllDeadDialog is displayed when all of the bunnies have died.
+ * DeadDialog is displayed when all of the bunnies have died.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,8 +9,8 @@ define( require => {
   'use strict';
 
   // modules
-  const merge = require( 'PHET_CORE/merge' );
   const Dialog = require( 'SUN/Dialog' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -18,7 +18,7 @@ define( require => {
   // strings
   const allOfTheBunniesHaveDiedString = require( 'string!NATURAL_SELECTION/allOfTheBunniesHaveDied' );
 
-  class AllDeadDialog extends Dialog {
+  class DeadDialog extends Dialog {
 
     /**
      * @param {Object} [options]
@@ -31,14 +31,13 @@ define( require => {
       }, options );
 
       const messageText = new Text( allOfTheBunniesHaveDiedString, {
-        font: NaturalSelectionConstants.DIALOG_FONT
+        font: NaturalSelectionConstants.DIALOG_FONT,
+        scale: NaturalSelectionConstants.DIALOG_CONTENT_SCALE
       } );
 
       super( messageText, options );
-
-      this.messageText = messageText; //TODO delete
     }
   }
 
-  return naturalSelection.register( 'AllDeadDialog', AllDeadDialog );
+  return naturalSelection.register( 'DeadDialog', DeadDialog );
 } );
