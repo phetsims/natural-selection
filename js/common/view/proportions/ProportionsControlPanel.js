@@ -46,7 +46,7 @@ define( require => {
       const valuesCheckbox = new Checkbox(
         new Text( valuesString, {
           font: NaturalSelectionConstants.CHECKBOX_FONT,
-          maxWidth: 120 // determined empirically
+          maxWidth: 100 // determined empirically
         } ),
         proportionsModel.valuesVisibleProperty,
         NaturalSelectionConstants.CHECKBOX_OPTIONS );

@@ -45,7 +45,7 @@ define( require => {
 
       const textNode = new Text( labelString, {
         font: NaturalSelectionConstants.PROPORTIONS_LEGEND_FONT,
-        maxWidth: 110 // determined empirically
+        maxWidth: 85 // determined empirically
       } );
 
       assert && assert( !options.children, 'ProportionsLegendNode sets children' );

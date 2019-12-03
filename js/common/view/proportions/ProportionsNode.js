@@ -33,7 +33,7 @@ define( require => {
       }, options );
 
       // Divy up the width
-      const controlPanelWidth = 0.25 * size.width;
+      const controlPanelWidth = 0.2 * size.width;
       const graphWidth = size.width - controlPanelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
       const controlPanel = new ProportionsControlPanel( proportionsModel, {
