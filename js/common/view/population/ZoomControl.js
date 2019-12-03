@@ -41,8 +41,8 @@ define( require => {
         zoomLevelMax: null,
         zoomLevelMin: null,
 
-        // ZoomButton options
-        zoomButtonOptions: {
+        // RectangularPushButton options
+        buttonOptions: {
           baseColor: NaturalSelectionColors.ZOOM_BUTTONS,
           buttonAppearanceStrategy: RectangularButtonView.FlatAppearanceStrategy,
           cornerRadius: 0,
@@ -57,11 +57,11 @@ define( require => {
 
       }, options );
 
-      assert && assert( !options.zoomButtonOptions.content, 'ZoomControl sets zoomButtonOptions.content' );
-      assert && assert( !options.zoomButtonOptions.listener, 'ZoomControl sets zoomButtonOptions.listener' );
+      assert && assert( !options.buttonOptions.content, 'ZoomControl sets buttonOptions.content' );
+      assert && assert( !options.buttonOptions.listener, 'ZoomControl sets buttonOptions.listener' );
 
       // zoom in
-      const zoomInButton = new RectangularPushButton( merge( {}, options.zoomButtonOptions, {
+      const zoomInButton = new RectangularPushButton( merge( {}, options.buttonOptions, {
         content: new Text( MathSymbols.PLUS, { font: FONT } ),
         listener: () => {
           zoomLevelProperty.value += options.step;
@@ -69,7 +69,7 @@ define( require => {
       } ) );
 
       // zoom out
-      const zoomOutButton = new RectangularPushButton( merge( {}, options.zoomButtonOptions, {
+      const zoomOutButton = new RectangularPushButton( merge( {}, options.buttonOptions, {
         content: new Text( MathSymbols.MINUS, { font: FONT } ),
         listener: () => {
           zoomLevelProperty.value -= options.step;
