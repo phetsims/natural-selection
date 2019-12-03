@@ -68,8 +68,8 @@
   "limitedFood": {
     "value": "Limited Food"
   },
-  "addMutation": {
-    "value": "Add Mutation"
+  "addMutations": {
+    "value": "Add Mutations"
   },
   "alleles": {
     "value": "Alleles"

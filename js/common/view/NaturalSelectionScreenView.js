@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
-  const AddMutationPanel = require( 'NATURAL_SELECTION/common/view/AddMutationPanel' );
+  const AddMutationsPanel = require( 'NATURAL_SELECTION/common/view/AddMutationsPanel' );
   const EnvironmentalFactorsPanel = require( 'NATURAL_SELECTION/common/view/EnvironmentalFactorsPanel' );
   const EnvironmentRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/EnvironmentRadioButtonGroup' );
   const GenerationClockNode = require( 'NATURAL_SELECTION/common/view/GenerationClockNode' );
@@ -70,19 +70,19 @@ define( require => {
                                 ( 2 * NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN ) -
                                 NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
-      const addMutationPanel = new AddMutationPanel( {
+      const addMutationsPanel = new AddMutationsPanel( {
         fixedWidth: rightOfWorldWidth,
         left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         top: viewportNode.top
       } );
 
-      const mutationAlertsNode = new MutationAlertsNode( addMutationPanel );
+      const mutationAlertsNode = new MutationAlertsNode( addMutationsPanel );
 
       const environmentalFactorsPanel = new EnvironmentalFactorsPanel(
         model.wolves.enabledProperty, model.toughFood.enabledProperty, model.limitedFood.enabledProperty, {
           fixedWidth: rightOfWorldWidth,
           left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-          top: addMutationPanel.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
+          top: addMutationsPanel.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
         } );
 
       // The graphs are 75% of the viewport width, and fill the vertical space below the viewport.
@@ -146,7 +146,7 @@ define( require => {
         environmentRadioButtonGroup,
         addAMateButton,
         playAgainButton,
-        addMutationPanel,
+        addMutationsPanel,
         environmentalFactorsPanel,
         timeControlNode,
         populationNode,
@@ -160,7 +160,7 @@ define( require => {
       // @private
       this.model = model;
       this.addAMateButton = addAMateButton;
-      this.addMutationPanel = addMutationPanel;
+      this.addMutationsPanel = addMutationsPanel;
       this.mutationAlertsNode = mutationAlertsNode;
     }
 
@@ -169,7 +169,7 @@ define( require => {
      */
     reset() {
       this.addAMateButton.visible = true;
-      this.addMutationPanel.reset();
+      this.addMutationsPanel.reset();
       this.mutationAlertsNode.reset();
       //TODO
     }

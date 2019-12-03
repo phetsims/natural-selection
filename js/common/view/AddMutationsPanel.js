@@ -5,7 +5,7 @@
 //TODO reset
 //TODO ensure that reset doesn't change visibility of rows for PhET-iO
 /**
- * AddMutationPanel is the panel that contains controls used to add mutations.
+ * AddMutationsPanel is the panel that contains controls used to add mutations.
  * TODO describe behavior
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -41,7 +41,7 @@ define( require => {
   const whiteFurImage = require( 'image!NATURAL_SELECTION/whiteFur.png' );
 
   // strings
-  const addMutationString = require( 'string!NATURAL_SELECTION/addMutation' );
+  const addMutationsString = require( 'string!NATURAL_SELECTION/addMutations' );
   const dominantString = require( 'string!NATURAL_SELECTION/dominant' );
   const earsString = require( 'string!NATURAL_SELECTION/ears' );
   const furString = require( 'string!NATURAL_SELECTION/fur' );
@@ -55,7 +55,7 @@ define( require => {
   const BUTTON_COLUMNS_X_ALIGN = 'center';
   const BUTTON_CORNER_RADIUS = 4;
 
-  class AddMutationPanel extends NaturalSelectionPanel {
+  class AddMutationsPanel extends NaturalSelectionPanel {
 
     /**
      * @param {Object} [options]
@@ -79,7 +79,7 @@ define( require => {
       const buttonColumnsAlignGroup = new AlignGroup();
 
       // title is text + icon
-      const titleNode = new Text( addMutationString, {
+      const titleNode = new Text( addMutationsString, {
         font: NaturalSelectionConstants.TITLE_FONT,
         maxWidth: 180 // determined empirically
       } );
@@ -350,5 +350,5 @@ define( require => {
     }
   }
 
-  return naturalSelection.register( 'AddMutationPanel', AddMutationPanel );
+  return naturalSelection.register( 'AddMutationsPanel', AddMutationsPanel );
 } );

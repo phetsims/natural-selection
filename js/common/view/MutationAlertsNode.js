@@ -19,39 +19,39 @@ define( require => {
   class MutationAlertsNode extends Node {
 
     /**
-     * @param {AddMutationPanel} addMutationPanel
+     * @param {AddMutationsPanel} addMutationsPanel
      * @param {Object} [options]
      */
-    constructor( addMutationPanel, options ) {
+    constructor( addMutationsPanel, options ) {
 
       options = merge( {}, options );
 
       // Fur
       const furAlert = new MutationComingNode( {
-        rightCenter: addMutationPanel.getFurLeftCenter().addXY( X_OFFSET, 0 ),
+        rightCenter: addMutationsPanel.getFurLeftCenter().addXY( X_OFFSET, 0 ),
         visible: false,
         cancelButtonListener: () => {
-          addMutationPanel.resetFur();
+          addMutationsPanel.resetFur();
           furAlert.visible = false;
         }
       } );
 
       // Ears
       const earsAlert = new MutationComingNode( {
-        rightCenter: addMutationPanel.getEarsLeftCenter().addXY( X_OFFSET, 0 ),
+        rightCenter: addMutationsPanel.getEarsLeftCenter().addXY( X_OFFSET, 0 ),
         visible: false,
         cancelButtonListener: () => {
-          addMutationPanel.resetEars();
+          addMutationsPanel.resetEars();
           earsAlert.visible = false;
         }
       } );
 
       // Teeth
       const teethAlert = new MutationComingNode( {
-        rightCenter: addMutationPanel.getTeethLeftCenter().addXY( X_OFFSET, 0 ),
+        rightCenter: addMutationsPanel.getTeethLeftCenter().addXY( X_OFFSET, 0 ),
         visible: false,
         cancelButtonListener: () => {
-          addMutationPanel.resetTeeth();
+          addMutationsPanel.resetTeeth();
           teethAlert.visible = false;
         }
       } );
@@ -66,15 +66,15 @@ define( require => {
       this.earsAlert = earsAlert;
       this.teethAlert = teethAlert;
 
-      addMutationPanel.furMutationEmitter.addListener( () => {
+      addMutationsPanel.furMutationEmitter.addListener( () => {
         furAlert.visible = true;
       } );
 
-      addMutationPanel.earsMutationEmitter.addListener( () => {
+      addMutationsPanel.earsMutationEmitter.addListener( () => {
         earsAlert.visible = true;
       } );
 
-      addMutationPanel.teethMutationEmitter.addListener( () => {
+      addMutationsPanel.teethMutationEmitter.addListener( () => {
         teethAlert.visible = true;
       } );
     }
