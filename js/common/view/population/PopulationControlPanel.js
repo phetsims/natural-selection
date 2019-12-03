@@ -47,7 +47,7 @@ define( require => {
       const valuesMarkerCheckbox = new Checkbox(
         new Text( valuesMarkerString, {
           font: NaturalSelectionConstants.CHECKBOX_FONT,
-          maxWidth: 120 // determined empirically
+          maxWidth: 135 // determined empirically
         } ),
         populationModel.valuesMarkerVisibleProperty,
         NaturalSelectionConstants.CHECKBOX_OPTIONS );
