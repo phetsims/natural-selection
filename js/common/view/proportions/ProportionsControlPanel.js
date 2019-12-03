@@ -19,6 +19,7 @@ define( require => {
   const ProportionsLegendNode = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsLegendNode' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
+  const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
   const brownFurString = require( 'string!NATURAL_SELECTION/brownFur' );
@@ -60,8 +61,10 @@ define( require => {
       const legendNodes = [
         new ProportionsLegendNode( whiteFurString, NaturalSelectionColors.FUR, false ),
         new ProportionsLegendNode( brownFurString, NaturalSelectionColors.FUR, true ),
+        new VStrut( 1 ),
         new ProportionsLegendNode( straightEarsString, NaturalSelectionColors.EARS, false ),
         new ProportionsLegendNode( floppyEarsString, NaturalSelectionColors.EARS, true ),
+        new VStrut( 1 ),
         new ProportionsLegendNode( shortTeethString, NaturalSelectionColors.TEETH, false ),
         new ProportionsLegendNode( longTeethString, NaturalSelectionColors.TEETH, true )
       ];
