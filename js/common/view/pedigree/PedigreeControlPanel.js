@@ -59,7 +59,7 @@ define( require => {
       // Alleles title
       const titleNode = new Text( allelesString, {
         font: NaturalSelectionConstants.TITLE_FONT,
-        maxWidth: 120 // determined empirically
+        maxWidth: 125 // determined empirically
       } );
 
       // To make the abbreviation + icon for all alleles the same effective size
