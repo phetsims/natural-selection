@@ -43,9 +43,6 @@ define( require => {
   const teethRecessiveString = require( 'string!NATURAL_SELECTION/teethRecessive' );
   const teethString = require( 'string!NATURAL_SELECTION/teeth' );
 
-  // constants
-  const ICON_SCALE = 0.5;
-
   class PedigreeControlPanel extends NaturalSelectionPanel {
 
     /**
@@ -56,46 +53,43 @@ define( require => {
 
       options = merge( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
-      // Alleles title
-      const titleNode = new Text( allelesString, {
-        font: NaturalSelectionConstants.TITLE_FONT,
-        maxWidth: 125 // determined empirically
-      } );
-
       // To make the abbreviation + icon for all alleles the same effective size
       const alleleAlignGroup = new AlignGroup();
 
-      const rows = [
-
-        // Fur
-        new Row(
-          furString, furDominantString, furRecessiveString,
-          brownFurImage, whiteFurImage,
-          pedigreeModel.furVisibleProperty, pedigreeModel.furEnabledProperty,
-          alleleAlignGroup
-        ),
-
-        // Ears
-        new Row(
-          earsString, earsDominantString, earsRecessiveString,
-          straightEarsImage, floppyEarsImage,
-          pedigreeModel.earsVisibleProperty, pedigreeModel.earsEnabledProperty,
-          alleleAlignGroup
-        ),
-
-        // Teeth
-        new Row(
-          teethString, teethDominantString, teethRecessiveString,
-          longTeethImage, shortTeethImage,
-          pedigreeModel.teethVisibleProperty, pedigreeModel.teethEnabledProperty,
-          alleleAlignGroup
-        )
-      ];
-
-      // Arranged vertically
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         spacing: 25,
-        children: [ titleNode, ...rows ]
+        children: [
+
+          // Alleles
+          new Text( allelesString, {
+            font: NaturalSelectionConstants.TITLE_FONT,
+            maxWidth: 125 // determined empirically
+          } ),
+
+          // Fur
+          new Row(
+            furString, furDominantString, furRecessiveString,
+            brownFurImage, whiteFurImage,
+            pedigreeModel.furVisibleProperty, pedigreeModel.furEnabledProperty,
+            alleleAlignGroup
+          ),
+
+          // Ears
+          new Row(
+            earsString, earsDominantString, earsRecessiveString,
+            straightEarsImage, floppyEarsImage,
+            pedigreeModel.earsVisibleProperty, pedigreeModel.earsEnabledProperty,
+            alleleAlignGroup
+          ),
+
+          // Teeth
+          new Row(
+            teethString, teethDominantString, teethRecessiveString,
+            longTeethImage, shortTeethImage,
+            pedigreeModel.teethVisibleProperty, pedigreeModel.teethEnabledProperty,
+            alleleAlignGroup
+          )
+        ]
       } ) );
 
       super( content, options );
@@ -136,7 +130,7 @@ define( require => {
         maxWidth: 12 // determined empirically
       };
       const imageOptions = {
-        scale: ICON_SCALE
+        scale: 0.5 // determined empirically
       };
       const alignBoxOptions = {
         group: alignGroup,
@@ -181,11 +175,11 @@ define( require => {
       } );
 
       enabledProperty.link( enabled => {
-        
+
         // Disable this row
         this.opacity = enabled ? 1 : SunConstants.DISABLED_OPACITY;
         checkbox.pickable = enabled;
-        
+
         //TODO don't show allele abbreviation and icon when disabled
         // hBox.visible = enabled;
 
