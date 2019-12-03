@@ -35,7 +35,7 @@ define( require => {
 
       // Divy up the width
       // If ?allelesVisible=false, the control panel is omitted, and the graph fills the width.
-      const controlPanelWidth = 0.25 * size.width;
+      const controlPanelWidth = 0.2 * size.width;
       const graphWidth = NaturalSelectionQueryParameters.allelesVisible ?
                          size.width - controlPanelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING :
                          size.width;

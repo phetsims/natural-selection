@@ -61,7 +61,7 @@ define( require => {
       // Alleles title
       const titleNode = new Text( allelesString, {
         font: NaturalSelectionConstants.TITLE_FONT,
-        maxWidth: 150 // determined empirically
+        maxWidth: 120 // determined empirically
       } );
 
       // To make the abbreviation + icon for all alleles the same effective size
@@ -96,6 +96,7 @@ define( require => {
 
       // Arranged vertically
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+        spacing: 25,
         children: [ titleNode, ...rows ]
       } ) );
 
@@ -123,7 +124,7 @@ define( require => {
 
       const labelNode = new Text( labelString, {
         font: NaturalSelectionConstants.CHECKBOX_FONT,
-        maxWidth: 120 // determined empirically
+        maxWidth: 100 // determined empirically
       } );
       const checkbox = new Checkbox( labelNode, visibleProperty, NaturalSelectionConstants.CHECKBOX_OPTIONS );
 
@@ -163,9 +164,9 @@ define( require => {
       const hBox = new HBox( {
         spacing: 0,
         children: [
-          new HStrut( 25 ),
+          new HStrut( 8 ),
           new HBox( {
-            spacing: 15,
+            spacing: 12,
             children: [ mutationAlignBox, nonMutationAlignBox ]
           } )
         ]
@@ -173,7 +174,7 @@ define( require => {
 
       super( {
         align: 'left',
-        spacing: 5,
+        spacing: 8,
         children: [ checkbox, hBox ]
       } );
 
