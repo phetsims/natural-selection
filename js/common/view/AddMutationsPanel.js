@@ -74,6 +74,7 @@ define( require => {
       // All elements in the button columns (including column headings) have the same effective width.
       const buttonColumnsAlignGroup = new AlignGroup();
 
+      //TODO title should be singular 'Add Mutation' when there is only 1 mutation in the panel
       // title is text + icon
       const titleNode = new Text( addMutationsString, {
         font: NaturalSelectionConstants.TITLE_FONT,
