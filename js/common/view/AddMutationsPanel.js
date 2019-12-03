@@ -101,7 +101,7 @@ define( require => {
         ]
       } );
 
-      // Rows below the column headings
+      // A row for each trait
       const furRow = new Row( furString, NaturalSelectionColors.FUR,
         brownFurImage, whiteFurImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
         () => furMutationEmitter.emit(), //TODO args
@@ -117,9 +117,13 @@ define( require => {
         () => teethMutationEmitter.emit(), //TODO args
         () => teethMutationEmitter.emit() //TODO args
       );
+      const rows = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+        children: [ furRow, earsRow, teethRow ]
+      } ) );
 
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-        children: [ titleNode, columnHeadingsNode, furRow, earsRow, teethRow ]
+        spacing: 2,
+        children: [ titleNode, columnHeadingsNode, rows ]
       } ) );
 
       super( content, options );
