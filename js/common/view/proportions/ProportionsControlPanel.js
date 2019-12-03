@@ -43,35 +43,34 @@ define( require => {
         xMargin: 0
       }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
-      // Values
-      const valuesCheckbox = new Checkbox(
-        new Text( valuesString, {
-          font: NaturalSelectionConstants.CHECKBOX_FONT,
-          maxWidth: 100 // determined empirically
-        } ),
-        proportionsModel.valuesVisibleProperty,
-        NaturalSelectionConstants.CHECKBOX_OPTIONS );
-
-      // ------
-      const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin, {
-        stroke: NaturalSelectionColors.SEPARATOR_STROKE
-      } );
-
-      // Legend for alleles
-      const legendNodes = [
-        new ProportionsLegendNode( whiteFurString, NaturalSelectionColors.FUR, false ),
-        new ProportionsLegendNode( brownFurString, NaturalSelectionColors.FUR, true ),
-        new VStrut( 1 ),
-        new ProportionsLegendNode( straightEarsString, NaturalSelectionColors.EARS, false ),
-        new ProportionsLegendNode( floppyEarsString, NaturalSelectionColors.EARS, true ),
-        new VStrut( 1 ),
-        new ProportionsLegendNode( shortTeethString, NaturalSelectionColors.TEETH, false ),
-        new ProportionsLegendNode( longTeethString, NaturalSelectionColors.TEETH, true )
-      ];
-
-      // Arranged vertically
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-        children: [ valuesCheckbox, separator, ...legendNodes ]
+        children: [
+
+          // Values checkbox
+          new Checkbox(
+            new Text( valuesString, {
+              font: NaturalSelectionConstants.CHECKBOX_FONT,
+              maxWidth: 100 // determined empirically
+            } ),
+            proportionsModel.valuesVisibleProperty,
+            NaturalSelectionConstants.CHECKBOX_OPTIONS
+          ),
+
+          // ---------
+          new HSeparator( options.fixedWidth - 2 * options.xMargin, {
+            stroke: NaturalSelectionColors.SEPARATOR_STROKE
+          } ),
+
+          // Legend for alleles, with struts to visually group alleles for each trait
+          new ProportionsLegendNode( whiteFurString, NaturalSelectionColors.FUR, false /* isMutation */ ),
+          new ProportionsLegendNode( brownFurString, NaturalSelectionColors.FUR, true ),
+          new VStrut( 1 ),
+          new ProportionsLegendNode( straightEarsString, NaturalSelectionColors.EARS, false ),
+          new ProportionsLegendNode( floppyEarsString, NaturalSelectionColors.EARS, true ),
+          new VStrut( 1 ),
+          new ProportionsLegendNode( shortTeethString, NaturalSelectionColors.TEETH, false ),
+          new ProportionsLegendNode( longTeethString, NaturalSelectionColors.TEETH, true )
+        ]
       } ) );
 
       super( content, options );
