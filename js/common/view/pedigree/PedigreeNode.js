@@ -13,7 +13,7 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  // const NaturalSelectionQueryParameters = require( 'NATURAL_SELECTION/common/NaturalSelectionQueryParameters' );
+  const NaturalSelectionQueryParameters = require( 'NATURAL_SELECTION/common/NaturalSelectionQueryParameters' );
   const PedigreeControlPanel = require( 'NATURAL_SELECTION/common/view/pedigree/PedigreeControlPanel' );
   const PedigreeGraphNode = require( 'NATURAL_SELECTION/common/view/pedigree/PedigreeGraphNode' );
 
@@ -34,9 +34,15 @@ define( require => {
       }, options );
 
       // Divy up the width
+      // If ?allelesVisible=false, the control panel is omitted, and the graph fills the width.
       const controlPanelWidth = 0.25 * size.width;
-      const graphWidth = size.width - controlPanelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
+      const graphWidth = NaturalSelectionQueryParameters.allelesVisible ?
+                         size.width - controlPanelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING :
+                         size.width;
 
+      // Because it's instrumented for PhET-iO, the control panel must be created regardless of the value
+      // of ?allelesVisible. If ?allelesVisible=false, it will not be added to the scenegraph, but will
+      // still appear in the Studio element tree.
       const controlPanel = new PedigreeControlPanel( pedigreeModel, {
         fixedWidth: controlPanelWidth,
         maxHeight: size.height
@@ -48,7 +54,9 @@ define( require => {
       } );
 
       assert && assert( !options.children, 'PedigreeNode sets children' );
-      options.children = [ controlPanel, graphNode ];
+      options.children = NaturalSelectionQueryParameters.allelesVisible ?
+        [ controlPanel, graphNode ] :
+        [ graphNode ];
 
       super( options );
     }
