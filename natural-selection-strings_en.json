@@ -104,8 +104,8 @@
   "generation": {
     "value": "Generation"
   },
-  "generationNumber": {
-    "value": "Generation {{number}}"
+  "generationValue": {
+    "value": "Generation {{value}}"
   },
   "startOfGeneration": {
     "value": "Start of Generation"
