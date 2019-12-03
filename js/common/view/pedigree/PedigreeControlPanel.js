@@ -1,7 +1,5 @@
 // Copyright 2019, University of Colorado Boulder
 
-//TODO show allele icons and abbreviations only when checkbox is enabled
-//TODO when enabled, set mutationText and nonMutationText to the correct abbreviations
 /**
  * PedigreeControlPanel is the panel that contains controls for the 'Pedigree' graph.
  *
@@ -70,7 +68,7 @@ define( require => {
       const rows = [
 
         // Fur
-        new PedigreeControlPanelRow(
+        new Row(
           furString, furDominantString, furRecessiveString,
           brownFurImage, whiteFurImage,
           pedigreeModel.furVisibleProperty, pedigreeModel.furEnabledProperty,
@@ -78,7 +76,7 @@ define( require => {
         ),
 
         // Ears
-        new PedigreeControlPanelRow(
+        new Row(
           earsString, earsDominantString, earsRecessiveString,
           straightEarsImage, floppyEarsImage,
           pedigreeModel.earsVisibleProperty, pedigreeModel.earsEnabledProperty,
@@ -86,7 +84,7 @@ define( require => {
         ),
 
         // Teeth
-        new PedigreeControlPanelRow(
+        new Row(
           teethString, teethDominantString, teethRecessiveString,
           longTeethImage, shortTeethImage,
           pedigreeModel.teethVisibleProperty, pedigreeModel.teethEnabledProperty,
@@ -105,9 +103,9 @@ define( require => {
   }
 
   /**
-   * PedigreeControlPanelRow is a row in PedigreeControlPanel.
+   * Row is a row in PedigreeControlPanel.
    */
-  class PedigreeControlPanelRow extends VBox {
+  class Row extends VBox {
 
     /**
      * @param {string} labelString
@@ -179,10 +177,15 @@ define( require => {
       } );
 
       enabledProperty.link( enabled => {
+        
+        // Disable this row
+        this.opacity = enabled ? 1 : SunConstants.DISABLED_OPACITY;
         checkbox.pickable = enabled;
+        
         //TODO don't show allele abbreviation and icon when disabled
         // hBox.visible = enabled;
-        this.opacity = enabled ? 1 : SunConstants.DISABLED_OPACITY;
+
+        //TODO when enabled, set mutationText and nonMutationText to the correct allele abbreviations 
       } );
     }
   }
