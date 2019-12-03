@@ -60,7 +60,7 @@ define( require => {
 
       options = merge( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
-      //TODO args
+      //TODO options.parameters
       const furMutationEmitter = new Emitter();
       const earsMutationEmitter = new Emitter();
       const teethMutationEmitter = new Emitter();
@@ -104,18 +104,18 @@ define( require => {
       // Rows below the column headings
       const furRow = new AddMutationRow( furString, NaturalSelectionColors.FUR,
         brownFurImage, whiteFurImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
-        () => furMutationEmitter.emit(),
-        () => furMutationEmitter.emit()
+        () => furMutationEmitter.emit(), //TODO args
+        () => furMutationEmitter.emit() //TODO args
       );
       const earsRow = new AddMutationRow( earsString, NaturalSelectionColors.EARS,
         floppyEarsImage, straightEarsImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
-        () => earsMutationEmitter.emit(),
-        () => earsMutationEmitter.emit()
+        () => earsMutationEmitter.emit(), //TODO args
+        () => earsMutationEmitter.emit() //TODO args
       );
       const teethRow = new AddMutationRow( teethString, NaturalSelectionColors.TEETH,
         longTeethImage, shortTeethImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
-        () => teethMutationEmitter.emit(),
-        () => teethMutationEmitter.emit()
+        () => teethMutationEmitter.emit(), //TODO args
+        () => teethMutationEmitter.emit() //TODO args
       );
 
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
