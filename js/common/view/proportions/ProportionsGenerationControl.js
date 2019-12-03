@@ -33,7 +33,7 @@ define( require => {
       }, options );
 
       const generationNode = new Text( '', {
-        font: NaturalSelectionConstants.TEXT_FONT,
+        font: NaturalSelectionConstants.PROPORTIONS_GENERATION_CONTROL_FONT,
         maxWidth: 150 // determined empirically
       } );
 

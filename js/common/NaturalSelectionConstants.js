@@ -97,6 +97,7 @@ define( require => {
     ADD_MUTATION_COLUMN_HEADING_FONT: new PhetFont( 14 ),
     MUTATION_COMING_FONT: new PhetFont( 16 ),
     POPULATION_AXIS_FONT: new PhetFont( 14 ),
+    PROPORTIONS_GENERATION_CONTROL_FONT: new PhetFont( 16 ),
     PROPORTIONS_LEGEND_FONT: new PhetFont( 16 )
   };
 
