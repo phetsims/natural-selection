@@ -16,10 +16,9 @@ define( require => {
   const GenerationClockNode = require( 'NATURAL_SELECTION/common/view/GenerationClockNode' );
   const GraphRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/GraphRadioButtonGroup' );
   const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
-  const MutationComingNode = require( 'NATURAL_SELECTION/common/view/MutationComingNode' );
+  const MutationAlertsNode = require( 'NATURAL_SELECTION/common/view/MutationAlertsNode' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const Node = require( 'SCENERY/nodes/Node' );
   const PedigreeNode = require( 'NATURAL_SELECTION/common/view/pedigree/PedigreeNode' );
   const PlayAgainButton = require( 'NATURAL_SELECTION/common/view/PlayAgainButton' );
   const PopulationNode = require( 'NATURAL_SELECTION/common/view/population/PopulationNode' );
@@ -77,27 +76,7 @@ define( require => {
         top: viewportNode.top
       } );
 
-      //TODO for demo purposes only
-      const mutationComingXOffset = -5;
-      const mutationComingParent = new Node( {
-        children: [
-
-          // Fur
-          new MutationComingNode( {
-            rightCenter: addMutationPanel.getFurLeftCenter().addXY( mutationComingXOffset, 0 )
-          } ),
-
-          // Ears
-          new MutationComingNode( {
-            rightCenter: addMutationPanel.getEarsLeftCenter().addXY( mutationComingXOffset, 0 )
-          } ),
-
-          // Teeth
-          new MutationComingNode( {
-            rightCenter: addMutationPanel.getTeethLeftCenter().addXY( mutationComingXOffset, 0 )
-          } )
-        ]
-      } );
+      const mutationAlertsNode = new MutationAlertsNode( addMutationPanel );
 
       const environmentalFactorsPanel = new EnvironmentalFactorsPanel(
         model.wolves.enabledProperty, model.toughFood.enabledProperty, model.limitedFood.enabledProperty, {
@@ -175,12 +154,14 @@ define( require => {
         pedigreeNode,
         graphRadioButtonGroup,
         resetAllButton,
-        mutationComingParent
+        mutationAlertsNode
       ];
 
       // @private
       this.model = model;
       this.addAMateButton = addAMateButton;
+      this.addMutationPanel = addMutationPanel;
+      this.mutationAlertsNode = mutationAlertsNode;
     }
 
     /**
@@ -188,6 +169,8 @@ define( require => {
      */
     reset() {
       this.addAMateButton.visible = true;
+      this.addMutationPanel.reset();
+      this.mutationAlertsNode.reset();
       //TODO
     }
 

@@ -37,14 +37,11 @@ define( require => {
     constructor( options ) {
 
       options = merge( {
-        cancelButtonListener: null
+        cancelButtonListener: () => {}
       }, options );
 
       const cancelButton = new CancelMutationButton( {
-        listener: () => {
-          //TODO
-          this.visible = false;
-        }
+        listener: options.cancelButtonListener
       } );
 
       const textNode = new Text( mutationComingString, {
