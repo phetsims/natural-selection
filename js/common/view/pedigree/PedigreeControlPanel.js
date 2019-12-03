@@ -104,6 +104,10 @@ define( require => {
 
   /**
    * Row is a row in PedigreeControlPanel.
+   *
+   * Each row has a checkbox for showing allele abbreviations in the Pedigree graph, and icons that indicate the
+   * phenotype for each abbreviation (e.g. 'F' <white fur icon>  'f' <brown fur icon>).  A row is hidden until
+   * its corresponding mutation has been applied.
    */
   class Row extends VBox {
 
