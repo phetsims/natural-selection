@@ -11,6 +11,7 @@ define( require => {
   // modules
   const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
   const AddMutationsPanel = require( 'NATURAL_SELECTION/common/view/AddMutationsPanel' );
+  const Dimension2 = require( 'DOT/Dimension2' );
   const EnvironmentalFactorsPanel = require( 'NATURAL_SELECTION/common/view/EnvironmentalFactorsPanel' );
   const EnvironmentRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/EnvironmentRadioButtonGroup' );
   const GenerationClockNode = require( 'NATURAL_SELECTION/common/view/GenerationClockNode' );
@@ -85,28 +86,22 @@ define( require => {
           top: addMutationsPanel.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
         } );
 
-      // The graphs are 75% of the viewport width, and fill the vertical space below the viewport.
-      const graphWidth = 0.75 * viewportNode.width;
-      const graphHeight = this.layoutBounds.height - ( 2 * NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN ) -
-                          viewportNode.height - NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING;
-
-      // The control panels occupy the space to the left of the graphs.
-      const controlPanelWidth = viewportNode.width - graphWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
-      const controlPanelHeight = graphHeight;
+      // The graphs and their related controls fill the space below the viewport.
+      const graphAreaSize = new Dimension2(
+        viewportNode.width,
+        this.layoutBounds.height - ( 2 * NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN ) -
+        viewportNode.height - NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
+      );
 
       // Options common to the Population, Proportions, and Pedigree views
       const viewOptions = {
-        controlPanelWidth: controlPanelWidth,
-        controlPanelHeight: controlPanelHeight,
-        graphWidth: graphWidth,
-        graphHeight: graphHeight,
         right: viewportNode.right,
         top: viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
       };
 
-      const populationNode = new PopulationNode( model.populationModel, viewOptions );
-      const proportionsNode = new ProportionsNode( model.proportionsModel, viewOptions );
-      const pedigreeNode = new PedigreeNode( model.pedigreeModel, viewOptions );
+      const populationNode = new PopulationNode( model.populationModel, graphAreaSize, viewOptions );
+      const proportionsNode = new ProportionsNode( model.proportionsModel, graphAreaSize, viewOptions );
+      const pedigreeNode = new PedigreeNode( model.pedigreeModel, graphAreaSize, viewOptions );
 
       const graphRadioButtonGroup = new GraphRadioButtonGroup( viewProperties.graphProperty, {
         maxWidth: rightOfWorldWidth,

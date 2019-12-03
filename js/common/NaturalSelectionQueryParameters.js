@@ -14,6 +14,14 @@ define( require => {
 
   const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
 
+    // Determines whether allele abbreviations are visible in the UI. Setting this to false hides the Pedigree 'Alleles'
+    // panel, makes the Pedigree graph wider, and allele abbreviations will not be shown in the Pedigree graph.
+    // Public facing.
+    allelesVisible: {
+      type: 'boolean',
+      defaultValue: true
+    },
+
     // Step for zoom buttons on Population graph.
     // For internal use only.
     zoomStep: {

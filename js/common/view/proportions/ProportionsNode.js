@@ -20,30 +20,30 @@ define( require => {
 
     /**
      * @param {ProportionsModel} proportionsModel
+     * @param {Dimension2} size
      * @param {Object} [options]
      */
-    constructor( proportionsModel, options ) {
+    constructor( proportionsModel, size, options ) {
 
       options = merge( {
-
-        controlPanelWidth: 100,
-        controlPanelHeight: 100,
-        graphWidth: 100,
-        graphHeight: 100,
 
         // HBox options
         spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         align: 'center'
       }, options );
 
+      // Divy up the width
+      const controlPanelWidth = 0.25 * size.width;
+      const graphWidth = size.width - controlPanelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
+
       const controlPanel = new ProportionsControlPanel( proportionsModel, {
-        fixedWidth: options.controlPanelWidth,
-        maxHeight: options.controlPanelHeight
+        fixedWidth: controlPanelWidth,
+        maxHeight: size.height
       } );
 
       const graphNode = new ProportionsGraphNode( proportionsModel, {
-        graphWidth: options.graphWidth,
-        graphHeight: options.graphHeight
+        graphWidth: graphWidth,
+        graphHeight: size.height
       } );
 
       assert && assert( !options.children, 'ProportionsNode sets children' );

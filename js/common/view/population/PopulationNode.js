@@ -20,30 +20,30 @@ define( require => {
 
     /**
      * @param {PopulationModel} populationModel
+     * @param {Dimension2} size
      * @param {Object} [options]
      */
-    constructor( populationModel, options ) {
+    constructor( populationModel, size, options ) {
 
       options = merge( {
-
-        controlPanelWidth: 100,
-        controlPanelHeight: 100,
-        graphWidth: 100,
-        graphHeight: 100,
 
         // HBox options
         spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         align: 'top'
       }, options );
 
+      // Divy up the width
+      const controlPanelWidth = 0.25 * size.width;
+      const graphWidth = size.width - controlPanelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
+
       const controlPanel = new PopulationControlPanel( populationModel, {
-        fixedWidth: options.controlPanelWidth,
-        maxHeight: options.controlPanelHeight
+        fixedWidth: controlPanelWidth,
+        maxHeight: size.height
       } );
 
       const graphNode = new PopulationGraphNode( populationModel, {
-        graphWidth: options.graphWidth,
-        graphHeight: options.graphHeight
+        graphWidth: graphWidth,
+        graphHeight: size.height
       } );
 
       assert && assert( !options.children, 'PopulationNode sets children' );
