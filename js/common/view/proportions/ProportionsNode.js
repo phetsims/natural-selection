@@ -20,7 +20,7 @@ define( require => {
 
     /**
      * @param {ProportionsModel} proportionsModel
-     * @param {Dimension2} size
+     * @param {Dimension2} size - dimensions of the rectangle available for this Node and its children
      * @param {Object} [options]
      */
     constructor( proportionsModel, size, options ) {
