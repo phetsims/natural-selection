@@ -44,6 +44,10 @@ define( require => {
         tandem: tandem
       } );
 
+      // Dialogs, displayed when the 'game' ends because bunnies have taken over the world, or all bunnies have died.
+      const diedDialog = new DiedDialog();
+      const worldDialog = new WorldDialog();
+
       const viewportNode = new ViewportNode( model.environmentProperty, {
         left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
         top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
@@ -65,25 +69,22 @@ define( require => {
         bottom: viewportNode.bottom - NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
 
-      // Dialogs, displayed when the 'game' ends because bunnies have taken over the world, or all bunnies have died.
-      const worldDialog = new WorldDialog();
-      const diedDialog = new DiedDialog();
-
       const playAgainButton = new PlayAgainButton( {
         center: viewportNode.center,
         listener: () => {
           //TODO this is a temporary test for dialogs
-          worldDialog.show();
           diedDialog.show();
+          worldDialog.show();
         }
       } );
 
-      const rightOfWorldWidth = this.layoutBounds.width - viewportNode.width -
-                                ( 2 * NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN ) -
-                                NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
+      // Available width to the right of viewportNode, used to size control panels
+      const rightOfViewportWidth = this.layoutBounds.width - viewportNode.width -
+                                   ( 2 * NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN ) -
+                                   NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
       const addMutationsPanel = new AddMutationsPanel( {
-        fixedWidth: rightOfWorldWidth,
+        fixedWidth: rightOfViewportWidth,
         left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         top: viewportNode.top
       } );
@@ -92,7 +93,7 @@ define( require => {
 
       const environmentalFactorsPanel = new EnvironmentalFactorsPanel(
         model.wolves.enabledProperty, model.toughFood.enabledProperty, model.limitedFood.enabledProperty, {
-          fixedWidth: rightOfWorldWidth,
+          fixedWidth: rightOfViewportWidth,
           left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
           top: addMutationsPanel.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
         } );
@@ -106,7 +107,7 @@ define( require => {
 
       // Options common to the Population, Proportions, and Pedigree views
       const viewOptions = {
-        right: viewportNode.right,
+        left: viewportNode.left,
         top: viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
       };
 
@@ -115,7 +116,7 @@ define( require => {
       const pedigreeNode = new PedigreeNode( model.pedigreeModel, graphAreaSize, viewOptions );
 
       const graphRadioButtonGroup = new GraphRadioButtonGroup( viewProperties.graphProperty, {
-        maxWidth: rightOfWorldWidth,
+        maxWidth: rightOfViewportWidth,
         left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         centerY: populationNode.centerY
       } );
