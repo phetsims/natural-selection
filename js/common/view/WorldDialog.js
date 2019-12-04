@@ -31,11 +31,13 @@ define( require => {
     constructor( options ) {
 
       options = merge( {
-        //TODO
+        fill: 'black',
+        closeButtonColor: 'white'
       }, options );
 
       const messageText = new Text( bunniesHaveTakenOverTheWorldString, {
-        font: NaturalSelectionConstants.DIALOG_FONT
+        font: NaturalSelectionConstants.DIALOG_FONT,
+        fill: 'white'
       } );
 
       const worldNode = new Image( worldImage );
