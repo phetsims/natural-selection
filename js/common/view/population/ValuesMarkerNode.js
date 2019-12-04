@@ -160,7 +160,7 @@ define( require => {
      * @public
      */
     reset() {
-      this.xProperty.reset();
+      this.locationProperty.reset();
     }
   }
 
