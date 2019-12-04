@@ -86,7 +86,7 @@ define( require => {
       const numberDisplays = new VBox( {
         spacing: 3,
         align: 'left'
-        // children set in multilink below
+        // children are set in multilink below
       } );
 
       // for adding a bit of space above the NumberDisplays
