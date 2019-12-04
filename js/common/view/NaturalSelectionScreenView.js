@@ -155,11 +155,11 @@ define( require => {
         playAgainButton,
         addMutationsPanel,
         environmentalFactorsPanel,
+        graphRadioButtonGroup,
         timeControlNode,
         populationNode,
         proportionsNode,
         pedigreeNode,
-        graphRadioButtonGroup,
         resetAllButton,
         mutationAlertsNode
       ];
