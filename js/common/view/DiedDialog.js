@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * DeadDialog is displayed when all of the bunnies have died.
+ * DiedDialog is displayed when all of the bunnies have died.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -18,7 +18,7 @@ define( require => {
   // strings
   const allOfTheBunniesHaveDiedString = require( 'string!NATURAL_SELECTION/allOfTheBunniesHaveDied' );
 
-  class DeadDialog extends Dialog {
+  class DiedDialog extends Dialog {
 
     /**
      * @param {Object} [options]
@@ -39,5 +39,5 @@ define( require => {
     }
   }
 
-  return naturalSelection.register( 'DeadDialog', DeadDialog );
+  return naturalSelection.register( 'DiedDialog', DiedDialog );
 } );

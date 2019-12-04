@@ -11,7 +11,7 @@ define( require => {
   // modules
   const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
   const AddMutationsPanel = require( 'NATURAL_SELECTION/common/view/AddMutationsPanel' );
-  const DeadDialog = require( 'NATURAL_SELECTION/common/view/DeadDialog' );
+  const DiedDialog = require( 'NATURAL_SELECTION/common/view/DiedDialog' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const EnvironmentalFactorsPanel = require( 'NATURAL_SELECTION/common/view/EnvironmentalFactorsPanel' );
   const EnvironmentRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/EnvironmentRadioButtonGroup' );
@@ -65,15 +65,16 @@ define( require => {
         bottom: viewportNode.bottom - NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
       } );
 
-      const deadDialog = new DeadDialog();
+      // Dialogs, displayed when the 'game' ends because bunnies have taken over the world, or all bunnies have died.
       const worldDialog = new WorldDialog();
+      const diedDialog = new DiedDialog();
 
       const playAgainButton = new PlayAgainButton( {
         center: viewportNode.center,
         listener: () => {
           //TODO this is a temporary test for dialogs
           worldDialog.show();
-          deadDialog.show();
+          diedDialog.show();
         }
       } );
 
