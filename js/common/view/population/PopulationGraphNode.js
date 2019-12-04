@@ -81,8 +81,8 @@ define( require => {
       xPanControl.centerX = graphNode.centerX;
       xPanControl.top = graphNode.bottom + X_AXIS_LABEL_OFFSET;
 
-      const valuesMarkerNode = new ValuesMarkerNode( populationModel, graphHeight, {
-        left: graphNode.left + 20, //TODO
+      const valuesMarkerNode = new ValuesMarkerNode( populationModel, graphNode.x, graphWidth, graphHeight, {
+        x: graphNode.x,
         top: graphNode.top
       } );
 
@@ -90,6 +90,16 @@ define( require => {
       options.children = [ boundsRectangle, graphNode, xPanControl, yZoomControl, yAxisLabelNode, valuesMarkerNode ];
 
       super( options );
+
+      // @private
+      this.valuesMarkerNode = valuesMarkerNode;
+    }
+
+    /**
+     * @public
+     */
+    reset() {
+      this.valuesMarkerNode.reset();
     }
   }
 

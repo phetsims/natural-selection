@@ -50,6 +50,16 @@ define( require => {
       options.children = [ controlPanel, graphNode ];
 
       super( options );
+
+      // @private
+      this.graphNode = graphNode;
+    }
+
+    /**
+     * @public
+     */
+    reset() {
+      this.graphNode.reset();
     }
   }
 

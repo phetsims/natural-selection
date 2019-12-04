@@ -2,6 +2,7 @@
 
 /**
  * ValuesMarkerNode displays y-axis values at an x-axis position.  It can be dragged along the x axis.
+ * The origin is at the top center of barNode.
  * Historical information and requirements can be found in https://github.com/phetsims/natural-selection/issues/14.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -27,6 +28,7 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
   const ValuesMarkerDragListener = require( 'NATURAL_SELECTION/common/view/population/ValuesMarkerDragListener' );
   const VBox = require( 'SCENERY/nodes/VBox' );
+  const Vector2 = require( 'DOT/Vector2' );
   const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // constants
@@ -44,10 +46,12 @@ define( require => {
 
     /**
      * @param {populationModel} populationModel
+     * @param {number} originX TODO make this go away
+     * @param {number} graphWidth
      * @param {number} graphHeight
      * @param {Object} [options]
      */
-    constructor( populationModel, graphHeight, options ) {
+    constructor( populationModel, originX, graphWidth, graphHeight, options ) {
 
       options = merge( {
         cursor: 'ew-resize' // <->
@@ -55,7 +59,9 @@ define( require => {
 
       // Vertical bar
       const barNode = new Rectangle( 0, 0, 3, graphHeight, {
-        fill: BAR_COLOR
+        fill: BAR_COLOR,
+        centerX: 0,
+        y: 0
       } );
       barNode.mouseArea = barNode.localBounds.dilatedXY( 5, 0 );
       barNode.touchArea = barNode.localBounds.dilatedXY( 10, 0 );
@@ -82,7 +88,7 @@ define( require => {
         align: 'left'
         // children set in multilink below
       } );
-      
+
       // for adding a bit of space above the NumberDisplays
       const vStrut = new VStrut( 5 );
 
@@ -98,15 +104,23 @@ define( require => {
 
       super( options );
 
-      this.addInputListener( new ValuesMarkerDragListener( {
+      // @private location in view coordinate frame, relative to the left edge of the graph
+      this.locationProperty = new Property( new Vector2( originX, 0 ) );
+
+      this.addInputListener( new ValuesMarkerDragListener( this.locationProperty, new Range( originX, originX + graphWidth ), {
         pressCursor: options.cursor
-        //TODO
-      }) );
+      } ) );
 
       // visibility of Values Marker
       populationModel.valuesMarkerVisibleProperty.link( valuesMarkerVisible => {
         this.interruptSubtreeInput(); // cancel interactions
         this.visible = valuesMarkerVisible;
+      } );
+
+      this.locationProperty.link( location => {
+        this.x = location.x;
+        //TODO update display
+        //TODO flip flags around y axis at edges of graph
       } );
 
       // When visibility of some quantity changes, change which NumberDisplays are children of numberDisplays.
@@ -140,6 +154,13 @@ define( require => {
           longTeethVisible && children.push( longTeethDisplay );
           numberDisplays.children = children;
         } );
+    }
+
+    /**
+     * @public
+     */
+    reset() {
+      this.xProperty.reset();
     }
   }
 

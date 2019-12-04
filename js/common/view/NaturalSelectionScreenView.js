@@ -169,6 +169,7 @@ define( require => {
       this.addAMateButton = addAMateButton;
       this.addMutationsPanel = addMutationsPanel;
       this.mutationAlertsNode = mutationAlertsNode;
+      this.populationNode = populationNode;
     }
 
     /**
@@ -178,6 +179,7 @@ define( require => {
       this.addAMateButton.visible = true;
       this.addMutationsPanel.reset();
       this.mutationAlertsNode.reset();
+      this.populationNode.reset();
       //TODO
     }
 
