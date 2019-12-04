@@ -120,7 +120,7 @@ define( require => {
       this.locationProperty.link( location => {
         this.x = location.x;
         //TODO update display
-        //TODO flip flags around y axis at edges of graph
+        //TODO flip NumberDisplays around y axis at edges of graph
       } );
 
       // When visibility of some quantity changes, change which NumberDisplays are children of numberDisplays.
