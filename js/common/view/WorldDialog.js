@@ -37,7 +37,8 @@ define( require => {
 
       const messageText = new Text( bunniesHaveTakenOverTheWorldString, {
         font: NaturalSelectionConstants.DIALOG_FONT,
-        fill: 'white'
+        fill: 'white',
+        maxWidth: 450 // determined empirically
       } );
 
       const worldNode = new Image( worldImage );

@@ -32,7 +32,8 @@ define( require => {
 
       const messageText = new Text( allOfTheBunniesHaveDiedString, {
         font: NaturalSelectionConstants.DIALOG_FONT,
-        scale: NaturalSelectionConstants.DIALOG_CONTENT_SCALE
+        scale: NaturalSelectionConstants.DIALOG_CONTENT_SCALE,
+        maxWidth: 450 // determined empirically
       } );
 
       super( messageText, options );
