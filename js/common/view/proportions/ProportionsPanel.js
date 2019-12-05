@@ -19,16 +19,9 @@ define( require => {
   const ProportionsLegendNode = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsLegendNode' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
-  const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
-  const brownFurString = require( 'string!NATURAL_SELECTION/brownFur' );
-  const straightEarsString = require( 'string!NATURAL_SELECTION/straightEars' );
-  const floppyEarsString = require( 'string!NATURAL_SELECTION/floppyEars' );
-  const longTeethString = require( 'string!NATURAL_SELECTION/longTeeth' );
-  const shortTeethString = require( 'string!NATURAL_SELECTION/shortTeeth' );
   const valuesString = require( 'string!NATURAL_SELECTION/values' );
-  const whiteFurString = require( 'string!NATURAL_SELECTION/whiteFur' );
 
   class ProportionsPanel extends NaturalSelectionPanel {
 
@@ -61,15 +54,8 @@ define( require => {
             stroke: NaturalSelectionColors.SEPARATOR_STROKE
           } ),
 
-          // Legend for alleles, with struts to visually group alleles for each trait
-          new ProportionsLegendNode( whiteFurString, NaturalSelectionColors.FUR, false /* isMutation */ ),
-          new ProportionsLegendNode( brownFurString, NaturalSelectionColors.FUR, true ),
-          new VStrut( 1 ),
-          new ProportionsLegendNode( straightEarsString, NaturalSelectionColors.EARS, false ),
-          new ProportionsLegendNode( floppyEarsString, NaturalSelectionColors.EARS, true ),
-          new VStrut( 1 ),
-          new ProportionsLegendNode( shortTeethString, NaturalSelectionColors.TEETH, false ),
-          new ProportionsLegendNode( longTeethString, NaturalSelectionColors.TEETH, true )
+          // Legend for alleles
+          new ProportionsLegendNode()
         ]
       } ) );
 
