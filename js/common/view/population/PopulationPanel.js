@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * PopulationControlPanel is the panel that contains controls for the 'Population' graph.
+ * PopulationPanel is the panel that contains controls for the 'Population' graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -30,7 +30,7 @@ define( require => {
   const valuesMarkerString = require( 'string!NATURAL_SELECTION/valuesMarker' );
   const whiteFurString = require( 'string!NATURAL_SELECTION/whiteFur' );
 
-  class PopulationControlPanel extends NaturalSelectionPanel {
+  class PopulationPanel extends NaturalSelectionPanel {
 
     /**
      * @param {PopulationModel} populationModel
@@ -111,5 +111,5 @@ define( require => {
     }
   }
 
-  return naturalSelection.register( 'PopulationControlPanel', PopulationControlPanel );
+  return naturalSelection.register( 'PopulationPanel', PopulationPanel );
 } );

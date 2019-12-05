@@ -13,8 +13,8 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const PopulationControlPanel = require( 'NATURAL_SELECTION/common/view/population/PopulationControlPanel' );
   const PopulationGraphNode = require( 'NATURAL_SELECTION/common/view/population/PopulationGraphNode' );
+  const PopulationPanel = require( 'NATURAL_SELECTION/common/view/population/PopulationPanel' );
 
   class PopulationNode extends HBox {
 
@@ -33,11 +33,11 @@ define( require => {
       }, options );
 
       // Divy up the width
-      const controlPanelWidth = 0.25 * size.width;
-      const graphWidth = size.width - controlPanelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
+      const panelWidth = 0.25 * size.width;
+      const graphWidth = size.width - panelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
-      const controlPanel = new PopulationControlPanel( populationModel, {
-        fixedWidth: controlPanelWidth,
+      const panel = new PopulationPanel( populationModel, {
+        fixedWidth: panelWidth,
         maxHeight: size.height
       } );
 
@@ -47,7 +47,7 @@ define( require => {
       } );
 
       assert && assert( !options.children, 'PopulationNode sets children' );
-      options.children = [ controlPanel, graphNode ];
+      options.children = [ panel, graphNode ];
 
       super( options );
 

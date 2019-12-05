@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ProportionsControlPanel is the panel that contains controls for the 'Proportions' graph.
+ * ProportionsPanel is the panel that contains controls for the 'Proportions' graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -30,7 +30,7 @@ define( require => {
   const valuesString = require( 'string!NATURAL_SELECTION/values' );
   const whiteFurString = require( 'string!NATURAL_SELECTION/whiteFur' );
 
-  class ProportionsControlPanel extends NaturalSelectionPanel {
+  class ProportionsPanel extends NaturalSelectionPanel {
 
     /**
      * @param {ProportionsModel} proportionsModel
@@ -77,5 +77,5 @@ define( require => {
     }
   }
 
-  return naturalSelection.register( 'ProportionsControlPanel', ProportionsControlPanel );
+  return naturalSelection.register( 'ProportionsPanel', ProportionsPanel );
 } );
