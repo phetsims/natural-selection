@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO adjust margins, spacing, and maxWidth after integration final artwork
 /**
  * WorldDialog is displayed when all the bunnies have taken over the world.
  *
@@ -32,19 +33,22 @@ define( require => {
 
       options = merge( {
         fill: 'black',
-        closeButtonColor: 'white'
+        closeButtonColor: 'white',
+        topMargin: 25
       }, options );
+
+      const worldNode = new Image( worldImage, {
+        scale: 0.8 // determined empirically
+      } );
 
       const messageText = new Text( bunniesHaveTakenOverTheWorldString, {
         font: NaturalSelectionConstants.DIALOG_FONT,
         fill: 'white',
-        maxWidth: 450 // determined empirically
+        maxWidth: worldNode.width
       } );
 
-      const worldNode = new Image( worldImage );
-
       const content = new VBox( {
-        spacing: 10,
+        spacing: 25,
         align: 'center',
         children: [ messageText, worldNode ],
         scale: NaturalSelectionConstants.DIALOG_CONTENT_SCALE
