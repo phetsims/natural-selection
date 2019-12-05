@@ -9,12 +9,12 @@ define( require => {
   'use strict';
 
   // modules
+  const AllelesPanel = require( 'NATURAL_SELECTION/common/view/pedigree/AllelesPanel' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionQueryParameters = require( 'NATURAL_SELECTION/common/NaturalSelectionQueryParameters' );
-  const PedigreeControlPanel = require( 'NATURAL_SELECTION/common/view/pedigree/PedigreeControlPanel' );
   const PedigreeGraphNode = require( 'NATURAL_SELECTION/common/view/pedigree/PedigreeGraphNode' );
 
   class PedigreeNode extends HBox {
@@ -43,7 +43,7 @@ define( require => {
       // Because it's instrumented for PhET-iO, the control panel must be created regardless of the value
       // of ?allelesVisible. If ?allelesVisible=false, it will not be added to the scenegraph, but will
       // still appear in the Studio element tree.
-      const controlPanel = new PedigreeControlPanel( pedigreeModel, {
+      const controlPanel = new AllelesPanel( pedigreeModel, {
         fixedWidth: controlPanelWidth,
         maxHeight: size.height
       } );

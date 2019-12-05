@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * PedigreeControlPanel is the panel that contains controls for the 'Pedigree' graph.
+ * AllelesPanel is the panel that contains controls for showing alleles in the 'Pedigree' graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -43,7 +43,7 @@ define( require => {
   const teethRecessiveString = require( 'string!NATURAL_SELECTION/teethRecessive' );
   const teethString = require( 'string!NATURAL_SELECTION/teeth' );
 
-  class PedigreeControlPanel extends NaturalSelectionPanel {
+  class AllelesPanel extends NaturalSelectionPanel {
 
     /**
      * @param {PedigreeModel} pedigreeModel
@@ -97,7 +97,7 @@ define( require => {
   }
 
   /**
-   * Row is a row in PedigreeControlPanel.
+   * Row is a row in AllelesPanel.
    *
    * Each row has a checkbox for showing allele abbreviations in the Pedigree graph, and icons that indicate the
    * phenotype for each abbreviation (e.g. 'F' <white fur icon>  'f' <brown fur icon>).  A row is hidden until
@@ -183,10 +183,10 @@ define( require => {
         //TODO don't show allele abbreviation and icon when disabled
         // hBox.visible = enabled;
 
-        //TODO when enabled, set mutationText and nonMutationText to the correct allele abbreviations 
+        //TODO when enabled, set order of icons so that dominant is on the left
       } );
     }
   }
 
-  return naturalSelection.register( 'PedigreeControlPanel', PedigreeControlPanel );
+  return naturalSelection.register( 'AllelesPanel', AllelesPanel );
 } );
