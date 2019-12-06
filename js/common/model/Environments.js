@@ -14,7 +14,7 @@ define( require => {
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
 
-  const Environments = new Enumeration( [ 'EQUATOR', 'ARCTIC' ] );
+  const Environments = Enumeration.byKeys( [ 'EQUATOR', 'ARCTIC' ] );
 
   return naturalSelection.register( 'Environments', Environments );
 } );

@@ -12,7 +12,7 @@ define( require => {
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
 
-  const Graphs = new Enumeration( [ 'POPULATION', 'PROPORTIONS', 'PEDIGREE' ] );
+  const Graphs = Enumeration.byKeys( [ 'POPULATION', 'PROPORTIONS', 'PEDIGREE' ] );
 
   return naturalSelection.register( 'Graphs', Graphs );
 } );
