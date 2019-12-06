@@ -15,6 +15,7 @@ define( require => {
   const EnvironmentalFactorsPanel = require( 'NATURAL_SELECTION/common/view/EnvironmentalFactorsPanel' );
   const GraphRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/GraphRadioButtonGroup' );
   const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
+  const merge = require( 'PHET_CORE/merge' );
   const MutationAlertsNode = require( 'NATURAL_SELECTION/common/view/MutationAlertsNode' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
@@ -23,8 +24,10 @@ define( require => {
   const ProportionsNode = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
   const ViewportNode = require( 'NATURAL_SELECTION/common/view/ViewportNode' );
+
   // const WorldDialog = require( 'NATURAL_SELECTION/common/view/WorldDialog' );
 
   class NaturalSelectionScreenView extends ScreenView {
@@ -32,13 +35,17 @@ define( require => {
     /**
      * @param {NaturalSelectionModel} model
      * @param {NaturalSelectionViewProperties} viewProperties
-     * @param {Tandem} tandem
+     * @param {Object} [options]
      */
-    constructor( model, viewProperties, tandem ) {
+    constructor( model, viewProperties, options ) {
 
-      super( {
-        tandem: tandem
-      } );
+      options = merge( {
+
+        // phet-io
+        tandem: Tandem.required
+      }, options );
+
+      super( options );
 
       //TODO
       // Dialogs, displayed when the 'game' ends because bunnies have taken over the world, or all bunnies have died.
@@ -48,7 +55,7 @@ define( require => {
       const viewportNode = new ViewportNode( model, {
         left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
         top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
-        tandem: tandem.createTandem( 'viewportNode' )
+        tandem: options.tandem.createTandem( 'viewportNode' )
       } );
 
       // Available width to the right of viewportNode, used to size control panels
@@ -59,7 +66,8 @@ define( require => {
       const addMutationsPanel = new AddMutationsPanel( {
         fixedWidth: rightOfViewportWidth,
         left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        top: viewportNode.top
+        top: viewportNode.top,
+        tandem: options.tandem.createTandem( 'addMutationsPanel' )
       } );
 
       const mutationAlertsNode = new MutationAlertsNode( addMutationsPanel );
@@ -68,7 +76,8 @@ define( require => {
         model.wolves.enabledProperty, model.toughFood.enabledProperty, model.limitedFood.enabledProperty, {
           fixedWidth: rightOfViewportWidth,
           left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-          top: addMutationsPanel.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
+          top: addMutationsPanel.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING,
+          tandem: options.tandem.createTandem( 'environmentalFactorsPanel' )
         } );
 
       // The graphs and their related controls fill the space below the viewport.
@@ -77,37 +86,56 @@ define( require => {
         this.layoutBounds.height - ( 2 * NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN ) -
         viewportNode.height - NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
       );
+      const graphAreaLeft = viewportNode.left;
+      const graphAreaTop = viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING;
 
-      // Options common to the Population, Proportions, and Pedigree views
-      const viewOptions = {
-        left: viewportNode.left,
-        top: viewportNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
-      };
+      // Population
+      const populationNode = new PopulationNode( model.populationModel, graphAreaSize, {
+        left: graphAreaLeft,
+        top: graphAreaTop,
+        tandem: options.tandem.createTandem( 'populationNode' )
+      } );
 
-      const populationNode = new PopulationNode( model.populationModel, graphAreaSize, viewOptions );
-      const proportionsNode = new ProportionsNode( model.proportionsModel, graphAreaSize, viewOptions );
-      const pedigreeNode = new PedigreeNode( model.pedigreeModel, graphAreaSize, viewOptions );
+      // Proportions
+      const proportionsNode = new ProportionsNode( model.proportionsModel, graphAreaSize, {
+        left: graphAreaLeft,
+        top: graphAreaTop,
+        tandem: options.tandem.createTandem( 'proportionsNode' )
+      } );
 
+      // Pedigree
+      const pedigreeNode = new PedigreeNode( model.pedigreeModel, graphAreaSize, {
+        left: graphAreaLeft,
+        top: graphAreaTop,
+        tandem: options.tandem.createTandem( 'pedigreeNode' )
+      } );
+
+      // Population, Proportions, Pedigree radio buttons
       const graphRadioButtonGroup = new GraphRadioButtonGroup( viewProperties.graphProperty, {
         maxWidth: rightOfViewportWidth,
         left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        centerY: populationNode.centerY
+        centerY: populationNode.centerY,
+        tandem: options.tandem.createTandem( 'graphRadioButtonGroup' )
       } );
 
+      // Visibility of graphs is mutually exclusive
       viewProperties.graphProperty.link( graph => {
         populationNode.visible = ( graph === Graphs.POPULATION );
         proportionsNode.visible = ( graph === Graphs.PROPORTIONS );
         pedigreeNode.visible = ( graph === Graphs.PEDIGREE );
       } );
 
+      // Play/pause/step time controls
       const timeControlNode = new TimeControlNode( model.isPlayingProperty, {
         stepOptions: {
           listener: () => model.stepOnce( NaturalSelectionConstants.SECONDS_PER_STEP )
         },
         left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
+        bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
+        tandem: options.tandem.createTandem( 'timeControlNode' )
       } );
 
+      // Reset All push button
       const resetAllButton = new ResetAllButton( {
         listener: () => {
           this.interruptSubtreeInput();
@@ -116,7 +144,7 @@ define( require => {
         },
         right: this.layoutBounds.right - NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
         bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
-        tandem: tandem.createTandem( 'resetAllButton' )
+        tandem: options.tandem.createTandem( 'resetAllButton' )
       } );
 
       // layering

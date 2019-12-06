@@ -17,6 +17,7 @@ define( require => {
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
   const PopulationLegendCheckbox = require( 'NATURAL_SELECTION/common/view/population/PopulationLegendCheckbox' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -40,7 +41,10 @@ define( require => {
 
       options = merge( {
         fixedWidth: 100,
-        xMargin: 0
+        xMargin: 0,
+
+        // phet-io
+        tandem: Tandem.required
       }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
@@ -53,56 +57,66 @@ define( require => {
               maxWidth: 135 // determined empirically
             } ),
             populationModel.valuesMarkerVisibleProperty,
-            NaturalSelectionConstants.CHECKBOX_OPTIONS
+            merge( {
+              tandem: options.tandem.createTandem( 'valuesMarkerCheckbox' )
+            }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
           ),
 
           // ------
           new HSeparator( options.fixedWidth - 2 * options.xMargin, {
-            stroke: NaturalSelectionColors.SEPARATOR_STROKE
+            stroke: NaturalSelectionColors.SEPARATOR_STROKE,
+            tandem: options.tandem.createTandem( 'separator' )
           } ),
 
           // Total
           new PopulationLegendCheckbox( populationModel.totalVisibleProperty, totalString, {
-            color: NaturalSelectionColors.TOTAL_POPULATION
+            color: NaturalSelectionColors.TOTAL_POPULATION,
+            tandem: options.tandem.createTandem( 'totalCheckbox' )
           } ),
 
           // White Fur
           new PopulationLegendCheckbox( populationModel.whiteFurVisibleProperty, whiteFurString, {
             color: NaturalSelectionColors.FUR,
-            enabledProperty: populationModel.whiteFurEnabledProperty
+            enabledProperty: populationModel.whiteFurEnabledProperty,
+            tandem: options.tandem.createTandem( 'whiteFurCheckbox' )
           } ),
 
           // Brown Fur
           new PopulationLegendCheckbox( populationModel.brownFurVisibleProperty, brownFurString, {
             color: NaturalSelectionColors.FUR,
             isMutation: true,
-            enabledProperty: populationModel.brownFurEnabledProperty
+            enabledProperty: populationModel.brownFurEnabledProperty,
+            tandem: options.tandem.createTandem( 'brownFurCheckbox' )
           } ),
 
           // Straight Ears
           new PopulationLegendCheckbox( populationModel.straightEarsVisibleProperty, straightEarsString, {
             color: NaturalSelectionColors.EARS,
-            enabledProperty: populationModel.straightEarsEnabledProperty
+            enabledProperty: populationModel.straightEarsEnabledProperty,
+            tandem: options.tandem.createTandem( 'straightEarsCheckbox' )
           } ),
 
           // Floppy Ears
           new PopulationLegendCheckbox( populationModel.floppyEarsVisibleProperty, floppyEarsString, {
             color: NaturalSelectionColors.EARS,
             isMutation: true,
-            enabledProperty: populationModel.floppyEarsEnabledProperty
+            enabledProperty: populationModel.floppyEarsEnabledProperty,
+            tandem: options.tandem.createTandem( 'floppyEarsCheckbox' )
           } ),
 
           // Short Teeth
           new PopulationLegendCheckbox( populationModel.shortTeethVisibleProperty, shortTeethString, {
             color: NaturalSelectionColors.TEETH,
-            enabledProperty: populationModel.shortTeethEnabledProperty
+            enabledProperty: populationModel.shortTeethEnabledProperty,
+            tandem: options.tandem.createTandem( 'shortTeethCheckbox' )
           } ),
 
           // Long Teeth
           new PopulationLegendCheckbox( populationModel.longTeethVisibleProperty, longTeethString, {
             color: NaturalSelectionColors.TEETH,
             isMutation: true,
-            enabledProperty: populationModel.longTeethEnabledProperty
+            enabledProperty: populationModel.longTeethEnabledProperty,
+            tandem: options.tandem.createTandem( 'longTeethCheckbox' )
           } )
         ]
       } ) );

@@ -15,6 +15,7 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const ToughFoodCheckbox = require( 'NATURAL_SELECTION/common/view/ToughFoodCheckbox' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -33,7 +34,11 @@ define( require => {
      */
     constructor( wolvesEnabledProperty, toughFoodEnabledProperty, limitedFoodEnabledProperty, options ) {
 
-      options = merge( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
+      options = merge( {
+
+        // phet-io
+        tandem: Tandem.required
+      }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         children: [
@@ -41,17 +46,24 @@ define( require => {
           // title
           new Text( environmentalFactorsString, {
             font: NaturalSelectionConstants.TITLE_FONT,
-            maxWidth: 175 // determined empirically
+            maxWidth: 175, // determined empirically,
+            tandem: options.tandem.createTandem( 'environmentalFactorsText' )
           } ),
 
           // Wolves
-          new WolvesCheckbox( wolvesEnabledProperty ),
+          new WolvesCheckbox( wolvesEnabledProperty, {
+            tandem: options.tandem.createTandem( 'wolvesCheckbox' )
+          } ),
 
           // Tough Food
-          new ToughFoodCheckbox( toughFoodEnabledProperty ),
+          new ToughFoodCheckbox( toughFoodEnabledProperty, {
+            tandem: options.tandem.createTandem( 'toughFoodCheckbox' )
+          } ),
 
           // Limited Food
-          new LimitedFoodCheckbox( limitedFoodEnabledProperty )
+          new LimitedFoodCheckbox( limitedFoodEnabledProperty, {
+            tandem: options.tandem.createTandem( 'limitedFoodCheckbox' )
+          } )
         ]
       } ) );
 

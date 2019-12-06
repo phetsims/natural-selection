@@ -23,7 +23,9 @@ define( require => {
 
       const viewProperties = new LabViewProperties();
 
-      super( model, viewProperties, tandem );
+      super( model, viewProperties, {
+        tandem: tandem
+      } );
 
       //TODO
 

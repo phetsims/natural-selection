@@ -21,6 +21,7 @@ define( require => {
   const PlayAgainButton = require( 'NATURAL_SELECTION/common/view/PlayAgainButton' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class ViewportNode extends Node {
 
@@ -32,7 +33,10 @@ define( require => {
 
       options = merge( {
         viewportSize: NaturalSelectionConstants.VIEWPORT_NODE_SIZE,
-        viewportHorizonY: NaturalSelectionConstants.VIEWPORT_HORIZON_Y
+        viewportHorizonY: NaturalSelectionConstants.VIEWPORT_HORIZON_Y,
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       const environmentNode = new EnvironmentNode( model.environmentProperty, options.viewportSize, options.viewportHorizonY );
@@ -51,13 +55,15 @@ define( require => {
       // Generation clock
       const generationClockNode = new GenerationClockNode( model.generationClock, model.selectionAgentsEnabledProperty, {
         centerX: frameNode.centerX,
-        top: frameNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
+        top: frameNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN,
+        tandem: options.tandem.createTandem( 'generationClockNode' )
       } );
 
       // Environment radio buttons
       const environmentRadioButtonGroup = new EnvironmentRadioButtonGroup( model.environmentProperty, {
         right: frameNode.right - NaturalSelectionConstants.VIEWPORT_NODE_X_MARGIN,
-        top: frameNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
+        top: frameNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN,
+        tandem: options.tandem.createTandem( 'environmentRadioButtonGroup' )
       } );
 
       // 'Add a Mate' push button
@@ -68,7 +74,8 @@ define( require => {
           //TODO
         },
         centerX: frameNode.centerX,
-        bottom: frameNode.bottom - NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
+        bottom: frameNode.bottom - NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN,
+        tandem: options.tandem.createTandem( 'addAMateButton' )
       } );
 
       // 'Play Again' push button
@@ -77,7 +84,8 @@ define( require => {
         // visible: false, //TODO
         listener: () => {
           //TODO
-        }
+        },
+        tandem: options.tandem.createTandem( 'playAgainButton' )
       } );
 
       // layering

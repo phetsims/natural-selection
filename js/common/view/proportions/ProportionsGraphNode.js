@@ -24,6 +24,7 @@ define( require => {
   const ProportionsGenerationControl = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsGenerationControl' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -51,7 +52,10 @@ define( require => {
 
       options = merge( {
         graphWidth: 100,
-        graphHeight: 100
+        graphHeight: 100,
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
@@ -60,7 +64,8 @@ define( require => {
       } );
 
       const generationControl = new ProportionsGenerationControl( proportionsModel.generationProperty, {
-        top: backgroundNode.top + 8
+        top: backgroundNode.top + 8,
+        tandem: options.tandem.createTandem( 'generationControl' )
       } );
       generationControl.on( 'bounds', () => {
         generationControl.centerX = backgroundNode.centerX;

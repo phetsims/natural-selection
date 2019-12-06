@@ -23,6 +23,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -58,7 +59,11 @@ define( require => {
      */
     constructor( options ) {
 
-      options = merge( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
+      options = merge( {
+
+        // phet-io
+        tandem: Tandem.required
+      }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
       //TODO options.parameters
       const furMutationEmitter = new Emitter();
@@ -102,6 +107,7 @@ define( require => {
         ]
       } );
 
+      //TODO #26 PhET-iO instrumentation for rows
       // A row for each trait
       const furRow = new Row( furString, NaturalSelectionColors.FUR,
         brownFurImage, whiteFurImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,

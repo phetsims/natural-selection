@@ -14,6 +14,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
   const Shape = require( 'KITE/Shape' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // constants
   const START_ANGLE = -Math.PI / 2; // 12:00
@@ -34,7 +35,10 @@ define( require => {
       const fullCircle = new Circle( RADIUS, {
         fill: 'rgb( 203, 120, 162 )', // pink
         stroke: STROKE,
-        lineWidth: LINE_WIDTH
+        lineWidth: LINE_WIDTH,
+
+        // phet-io
+        tandem: Tandem.required
       } );
 
       // The part of the circle that denotes when the selection agents are active, and bunnies may die.

@@ -13,6 +13,7 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
 
@@ -38,14 +39,35 @@ define( require => {
       options = merge( {
         radius: 8,
         xSpacing: 10,
-        spacing: 12
+        spacing: 12,
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       // Create the description of the buttons
       const items = [
-        { value: Graphs.POPULATION, node: new Text( populationString, TEXT_OPTIONS ) },
-        { value: Graphs.PROPORTIONS, node: new Text( proportionsString, TEXT_OPTIONS ) },
-        { value: Graphs.PEDIGREE, node: new Text( pedigreeString, TEXT_OPTIONS ) }
+
+        // Population
+        {
+          value: Graphs.POPULATION,
+          node: new Text( populationString, TEXT_OPTIONS ),
+          tandem: options.tandem.createTandem( 'populationRadioButton' )
+        },
+
+        // Proportions
+        {
+          value: Graphs.PROPORTIONS,
+          node: new Text( proportionsString, TEXT_OPTIONS ),
+          tandem: options.tandem.createTandem( 'proportionsRadioButton' )
+        },
+
+        // Pedigree
+        {
+          value: Graphs.PEDIGREE,
+          node: new Text( pedigreeString, TEXT_OPTIONS ),
+          tandem: options.tandem.createTandem( 'pedigreeRadioButton' )
+        }
       ];
 
       super( graphProperty, items, options );

@@ -16,6 +16,7 @@ define( require => {
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionQueryParameters = require( 'NATURAL_SELECTION/common/NaturalSelectionQueryParameters' );
   const PedigreeGraphNode = require( 'NATURAL_SELECTION/common/view/pedigree/PedigreeGraphNode' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class PedigreeNode extends HBox {
 
@@ -30,7 +31,10 @@ define( require => {
 
         // HBox options
         spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        align: 'center'
+        align: 'center',
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       // Divy up the width
@@ -43,19 +47,21 @@ define( require => {
       // Because it's instrumented for PhET-iO, the control panel must be created regardless of the value
       // of ?allelesVisible. If ?allelesVisible=false, it will not be added to the scenegraph, but will
       // still appear in the Studio element tree.
-      const controlPanel = new AllelesPanel( pedigreeModel, {
+      const panel = new AllelesPanel( pedigreeModel, {
         fixedWidth: controlPanelWidth,
-        maxHeight: size.height
+        maxHeight: size.height,
+        tandem: options.tandem.createTandem( 'panel' )
       } );
 
       const graphNode = new PedigreeGraphNode( pedigreeModel, {
         graphWidth: graphWidth,
-        graphHeight: size.height
+        graphHeight: size.height,
+        tandem: options.tandem.createTandem( 'graphNode' )
       } );
 
       assert && assert( !options.children, 'PedigreeNode sets children' );
       options.children = NaturalSelectionQueryParameters.allelesVisible ?
-        [ controlPanel, graphNode ] :
+        [ panel, graphNode ] :
         [ graphNode ];
 
       super( options );

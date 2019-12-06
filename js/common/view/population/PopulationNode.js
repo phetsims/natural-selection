@@ -15,6 +15,7 @@ define( require => {
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const PopulationGraphNode = require( 'NATURAL_SELECTION/common/view/population/PopulationGraphNode' );
   const PopulationPanel = require( 'NATURAL_SELECTION/common/view/population/PopulationPanel' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class PopulationNode extends HBox {
 
@@ -29,7 +30,10 @@ define( require => {
 
         // HBox options
         spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        align: 'top'
+        align: 'top',
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       // Divy up the width
@@ -38,12 +42,14 @@ define( require => {
 
       const panel = new PopulationPanel( populationModel, {
         fixedWidth: panelWidth,
-        maxHeight: size.height
+        maxHeight: size.height,
+        tandem: options.tandem.createTandem( 'panel' )
       } );
 
       const graphNode = new PopulationGraphNode( populationModel, {
         graphWidth: graphWidth,
-        graphHeight: size.height
+        graphHeight: size.height,
+        tandem: options.tandem.createTandem( 'graphNode' )
       } );
 
       assert && assert( !options.children, 'PopulationNode sets children' );

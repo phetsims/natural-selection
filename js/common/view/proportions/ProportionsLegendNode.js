@@ -17,6 +17,7 @@ define( require => {
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const VStrut = require( 'SCENERY/nodes/VStrut' );
@@ -40,20 +41,43 @@ define( require => {
      */
     constructor( options ) {
 
-      options = merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, options );
+      options = merge( {
+
+        // phet-io
+        tandem: Tandem.required
+      }, NaturalSelectionConstants.VBOX_OPTIONS, options );
 
       assert && assert( !options.children, 'ProportionsLegendNode sets children' );
       options.children = [
 
+        // Fur
+        new Row( whiteFurString, NaturalSelectionColors.FUR, false /* isMutation */, {
+          tandem: options.tandem.createTandem( 'whiteFurNode' )
+        } ),
+        new Row( brownFurString, NaturalSelectionColors.FUR, true, {
+          tandem: options.tandem.createTandem( 'brownFurNode' )
+        } ),
+
         // ... with struts to visually group alleles for each trait
-        new Row( whiteFurString, NaturalSelectionColors.FUR, false /* isMutation */ ),
-        new Row( brownFurString, NaturalSelectionColors.FUR, true ),
         new VStrut( 1 ),
-        new Row( straightEarsString, NaturalSelectionColors.EARS, false ),
-        new Row( floppyEarsString, NaturalSelectionColors.EARS, true ),
+
+        // Ears
+        new Row( straightEarsString, NaturalSelectionColors.EARS, false, {
+          tandem: options.tandem.createTandem( 'straightEarsNode' )
+        } ),
+        new Row( floppyEarsString, NaturalSelectionColors.EARS, true, {
+          tandem: options.tandem.createTandem( 'floppyEarsNode' )
+        } ),
+
         new VStrut( 1 ),
-        new Row( shortTeethString, NaturalSelectionColors.TEETH, false ),
-        new Row( longTeethString, NaturalSelectionColors.TEETH, true )
+
+        // Teeth
+        new Row( shortTeethString, NaturalSelectionColors.TEETH, false, {
+          tandem: options.tandem.createTandem( 'shortTeethNode' )
+        } ),
+        new Row( longTeethString, NaturalSelectionColors.TEETH, true, {
+          tandem: options.tandem.createTandem( 'longTeethNode' )
+        } )
       ];
 
       super( options );

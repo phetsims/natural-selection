@@ -15,6 +15,7 @@ define( require => {
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const ProportionsGraphNode = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsGraphNode' );
   const ProportionsPanel = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsPanel' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class ProportionsNode extends HBox {
 
@@ -29,7 +30,10 @@ define( require => {
 
         // HBox options
         spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        align: 'center'
+        align: 'center',
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       // Divy up the width
@@ -38,12 +42,14 @@ define( require => {
 
       const panel = new ProportionsPanel( proportionsModel, {
         fixedWidth: panelWidth,
-        maxHeight: size.height
+        maxHeight: size.height,
+        tandem: options.tandem.createTandem( 'panel' )
       } );
 
       const graphNode = new ProportionsGraphNode( proportionsModel, {
         graphWidth: graphWidth,
-        graphHeight: size.height
+        graphHeight: size.height,
+        tandem: options.tandem.createTandem( 'graphNode' )
       } );
 
       assert && assert( !options.children, 'ProportionsNode sets children' );
