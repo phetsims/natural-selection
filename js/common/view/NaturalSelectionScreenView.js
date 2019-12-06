@@ -9,27 +9,23 @@ define( require => {
   'use strict';
 
   // modules
-  const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
   const AddMutationsPanel = require( 'NATURAL_SELECTION/common/view/AddMutationsPanel' );
-  const DiedDialog = require( 'NATURAL_SELECTION/common/view/DiedDialog' );
+  // const DiedDialog = require( 'NATURAL_SELECTION/common/view/DiedDialog' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const EnvironmentalFactorsPanel = require( 'NATURAL_SELECTION/common/view/EnvironmentalFactorsPanel' );
-  const EnvironmentRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/EnvironmentRadioButtonGroup' );
-  const GenerationClockNode = require( 'NATURAL_SELECTION/common/view/GenerationClockNode' );
   const GraphRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/GraphRadioButtonGroup' );
   const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
   const MutationAlertsNode = require( 'NATURAL_SELECTION/common/view/MutationAlertsNode' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const PedigreeNode = require( 'NATURAL_SELECTION/common/view/pedigree/PedigreeNode' );
-  const PlayAgainButton = require( 'NATURAL_SELECTION/common/view/PlayAgainButton' );
   const PopulationNode = require( 'NATURAL_SELECTION/common/view/population/PopulationNode' );
   const ProportionsNode = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsNode' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
   const ViewportNode = require( 'NATURAL_SELECTION/common/view/ViewportNode' );
-  const WorldDialog = require( 'NATURAL_SELECTION/common/view/WorldDialog' );
+  // const WorldDialog = require( 'NATURAL_SELECTION/common/view/WorldDialog' );
 
   class NaturalSelectionScreenView extends ScreenView {
 
@@ -44,38 +40,15 @@ define( require => {
         tandem: tandem
       } );
 
+      //TODO
       // Dialogs, displayed when the 'game' ends because bunnies have taken over the world, or all bunnies have died.
-      const diedDialog = new DiedDialog();
-      const worldDialog = new WorldDialog();
+      // const diedDialog = new DiedDialog();
+      // const worldDialog = new WorldDialog();
 
-      const viewportNode = new ViewportNode( model.environmentProperty, {
+      const viewportNode = new ViewportNode( model, {
         left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
-        top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN
-      } );
-
-      const generationClockNode = new GenerationClockNode( model.generationClock, model.selectionAgentsEnabledProperty, {
-        centerX: viewportNode.centerX,
-        top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
-      } );
-
-      const environmentRadioButtonGroup = new EnvironmentRadioButtonGroup( model.environmentProperty, {
-        right: viewportNode.right - NaturalSelectionConstants.VIEWPORT_NODE_X_MARGIN,
-        top: viewportNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
-      } );
-
-      const addAMateButton = new AddAMateButton( {
-        listener: () => this.addAMate(),
-        centerX: viewportNode.centerX,
-        bottom: viewportNode.bottom - NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN
-      } );
-
-      const playAgainButton = new PlayAgainButton( {
-        center: viewportNode.center,
-        listener: () => {
-          //TODO this is a temporary test for dialogs
-          diedDialog.show();
-          worldDialog.show();
-        }
+        top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
+        tandem: tandem.createTandem( 'viewportNode' )
       } );
 
       // Available width to the right of viewportNode, used to size control panels
@@ -149,10 +122,6 @@ define( require => {
       // layering
       this.children = [
         viewportNode,
-        generationClockNode,
-        environmentRadioButtonGroup,
-        addAMateButton,
-        playAgainButton,
         addMutationsPanel,
         environmentalFactorsPanel,
         graphRadioButtonGroup,
@@ -165,22 +134,20 @@ define( require => {
       ];
 
       // @private
-      this.model = model;
-      this.addAMateButton = addAMateButton;
-      this.addMutationsPanel = addMutationsPanel;
-      this.mutationAlertsNode = mutationAlertsNode;
-      this.populationNode = populationNode;
+      this.resetNaturalSelectionScreenView = () => {
+        viewportNode.reset();
+        addMutationsPanel.reset();
+        mutationAlertsNode.reset();
+        populationNode.reset();
+        //TODO
+      };
     }
 
     /**
      * @public
      */
     reset() {
-      this.addAMateButton.visible = true;
-      this.addMutationsPanel.reset();
-      this.mutationAlertsNode.reset();
-      this.populationNode.reset();
-      //TODO
+      this.resetNaturalSelectionScreenView();
     }
 
     /**
@@ -189,19 +156,6 @@ define( require => {
      */
     step( dt ) {
       //TODO
-    }
-
-    /**
-     * Adds a mate.
-     * @private
-     */
-    addAMate() {
-
-      // model
-      this.model.mateWasAddedProperty.value = true;
-
-      // view
-      this.addAMateButton.visible = false;
     }
 
     /**
