@@ -10,7 +10,7 @@ define( require => {
 
   // modules
   const AddMutationsPanel = require( 'NATURAL_SELECTION/common/view/AddMutationsPanel' );
-  // const DiedDialog = require( 'NATURAL_SELECTION/common/view/DiedDialog' );
+  //TODO const DiedDialog = require( 'NATURAL_SELECTION/common/view/DiedDialog' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const EnvironmentalFactorsPanel = require( 'NATURAL_SELECTION/common/view/EnvironmentalFactorsPanel' );
   const GraphRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/GraphRadioButtonGroup' );
@@ -27,8 +27,7 @@ define( require => {
   const Tandem = require( 'TANDEM/Tandem' );
   const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
   const ViewportNode = require( 'NATURAL_SELECTION/common/view/ViewportNode' );
-
-  // const WorldDialog = require( 'NATURAL_SELECTION/common/view/WorldDialog' );
+  //TODO const WorldDialog = require( 'NATURAL_SELECTION/common/view/WorldDialog' );
 
   class NaturalSelectionScreenView extends ScreenView {
 
