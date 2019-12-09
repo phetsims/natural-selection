@@ -76,7 +76,7 @@ define( require => {
           new Row(
             furString, furDominantString, furRecessiveString,
             brownFurImage, whiteFurImage,
-            pedigreeModel.furVisibleProperty, pedigreeModel.furEnabledProperty,
+            pedigreeModel.furAllelesVisibleProperty, pedigreeModel.furEnabledProperty,
             alleleAlignGroup, {
               tandem: options.tandem.createTandem( 'furRow' )
             }
@@ -86,7 +86,7 @@ define( require => {
           new Row(
             earsString, earsDominantString, earsRecessiveString,
             straightEarsImage, floppyEarsImage,
-            pedigreeModel.earsVisibleProperty, pedigreeModel.earsEnabledProperty,
+            pedigreeModel.earsAllelesVisibleProperty, pedigreeModel.earsEnabledProperty,
             alleleAlignGroup, {
               tandem: options.tandem.createTandem( 'earsRow' )
             }
@@ -96,7 +96,7 @@ define( require => {
           new Row(
             teethString, teethDominantString, teethRecessiveString,
             longTeethImage, shortTeethImage,
-            pedigreeModel.teethVisibleProperty, pedigreeModel.teethEnabledProperty,
+            pedigreeModel.teethAllelesVisibleProperty, pedigreeModel.teethEnabledProperty,
             alleleAlignGroup, {
               tandem: options.tandem.createTandem( 'teethRow' )
             }

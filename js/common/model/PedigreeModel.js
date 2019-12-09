@@ -17,27 +17,42 @@ define( require => {
 
   class PedigreeModel {
 
-    constructor() {
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
-      // @public visibility of each gene in the pedigree's genotype expression
-      this.furVisibleProperty = new BooleanProperty( false );
-      this.earsVisibleProperty = new BooleanProperty( false );
-      this.teethVisibleProperty = new BooleanProperty( false );
+      // @public visibility of the alleles for each gene in the Pedigree tree
+      this.furAllelesVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'furAllelesVisibleProperty' )
+      } );
+      this.earsAllelesVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'earsAllelesVisibleProperty' )
+      } );
+      this.teethAllelesVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'teethAllelesVisibleProperty' )
+      } );
 
-      // @public enabled state of the checkbox for each gene in the pedigree's control panel
+      // @public enabled state of each row in the Alleles panel
       // Checkboxes are disabled until an associated mutation is applied.
-      this.furEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
-      this.earsEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
-      this.teethEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
+      this.furEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
+        tandem: tandem.createTandem( 'furEnabledProperty' )
+      } );
+      this.earsEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
+        tandem: tandem.createTandem( 'earsEnabledProperty' )
+      } );
+      this.teethEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
+        tandem: tandem.createTandem( 'teethEnabledProperty' )
+      } );
     }
 
     /**
      * @public
      */
     reset() {
-      this.furVisibleProperty.reset();
-      this.earsVisibleProperty.reset();
-      this.teethVisibleProperty.reset();
+      this.furAllelesVisibleProperty.reset();
+      this.earsAllelesVisibleProperty.reset();
+      this.teethAllelesVisibleProperty.reset();
 
       this.furEnabledProperty.reset();
       this.earsEnabledProperty.reset();

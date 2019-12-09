@@ -15,14 +15,21 @@ define( require => {
 
   class ProportionsModel {
 
-    constructor() {
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
       // @public
-      this.valuesVisibleProperty = new BooleanProperty( true ); //TODO default false
+      this.valuesVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'valuesVisibleProperty' )
+      } );
 
       // @public
       this.generationProperty = new NumberProperty( 0, {
-        numberType: 'Integer'
+        numberType: 'Integer',
+        tandem: tandem.createTandem( 'generationProperty' ),
+        phetioStudioControl: false //TODO range is dynamic, add range: new Property( Range(...) )
       } );
 
       //TODO these should be derived from other model state

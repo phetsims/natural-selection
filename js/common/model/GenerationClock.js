@@ -19,11 +19,16 @@ define( require => {
 
   class GenerationClock {
 
-    constructor() {
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
       // @public (read-only)
       this.timeProperty = new NumberProperty( 0, {
-        isValidValue: value => ( value >= 0 && value <= SECONDS_PER_GENERATION )
+        isValidValue: value => ( value >= 0 && value <= SECONDS_PER_GENERATION ),
+        tandem: tandem.createTandem( 'timeProperty' ),
+        phetioReadOnly: true
       } );
 
       // @public

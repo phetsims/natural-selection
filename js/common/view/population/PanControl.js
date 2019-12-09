@@ -15,6 +15,7 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   class PanControl extends HBox {
@@ -31,7 +32,10 @@ define( require => {
         next: () => {},
 
         // HBox options
-        spacing: 10
+        spacing: 10,
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       // label
@@ -40,9 +44,19 @@ define( require => {
         maxWidth: 120 // determined empirically
       } );
 
-      // buttons
-      const previousButton = new ArrowButton( 'left', options.previous, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS );
-      const nextButton = new ArrowButton( 'right', options.next, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS );
+      // previous button
+      const previousButton = new ArrowButton( 'left', options.previous,
+        merge( {
+          tandem: options.tandem.createTandem( 'previousButton' )
+        }, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS )
+      );
+
+      // next button
+      const nextButton = new ArrowButton( 'right', options.next,
+        merge( {
+          tandem: options.tandem.createTandem( 'nextButton' )
+        }, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS )
+      );
 
       assert && assert( !options.children, 'PanControl sets children' );
       options.children = [ previousButton, xAxisLabelNode, nextButton ];

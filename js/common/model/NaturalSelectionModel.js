@@ -31,16 +31,21 @@ define( require => {
     constructor( tandem ) {
 
       // @public whether the sim is playing
-      this.isPlayingProperty = new BooleanProperty( true );
+      this.isPlayingProperty = new BooleanProperty( true, {
+        tandem: tandem.createTandem( 'isPlayingProperty' )
+      } );
 
+      //TODO this should be an Emitter
       // @public whether a mate was added to the lone bunny that appears at startup
       this.mateWasAddedProperty = new BooleanProperty( false );
 
       // @public (read-only)
-      this.generationClock = new GenerationClock();
+      this.generationClock = new GenerationClock( tandem.createTandem( 'generationClock' ) );
 
       // @public the abiotic (physical, rather than biological) environment
-      this.environmentProperty = new EnumerationProperty( Environments, Environments.EQUATOR );
+      this.environmentProperty = new EnumerationProperty( Environments, Environments.EQUATOR, {
+        tandem: tandem.createTandem( 'environmentProperty' )
+      } );
 
       // @public (read-only) the biotic (biological, rather than physical) environmental factors
       this.wolves = new Wolves();
@@ -58,9 +63,9 @@ define( require => {
       this.bunnies = [ Bunny.createDefault() ];
 
       // @public (read-only)
-      this.populationModel = new PopulationModel();
-      this.proportionsModel = new ProportionsModel();
-      this.pedigreeModel = new PedigreeModel();
+      this.populationModel = new PopulationModel( tandem.createTandem( 'populationModel' ) );
+      this.proportionsModel = new ProportionsModel( tandem.createTandem( 'proportionsModel' ) );
+      this.pedigreeModel = new PedigreeModel( tandem.createTandem( 'pedigreeModel' ) );
     }
 
     /**

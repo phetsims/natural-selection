@@ -311,6 +311,14 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ActionIO<NullableIO<EventIO>>",
       "typeName": "EmitterIO<NullableIO<EventIO>>"
     },
+    "EnumerationIO(EQUATOR|ARCTIC)": {
+      "documentation": "Possible values: EQUATOR,ARCTIC.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ObjectIO",
+      "typeName": "EnumerationIO(EQUATOR|ARCTIC)"
+    },
     "EnumerationIO(POPULATION|PROPORTIONS|PEDIGREE)": {
       "documentation": "Possible values: POPULATION,PROPORTIONS,PEDIGREE.",
       "events": [],
@@ -366,6 +374,19 @@ window.phet.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "FunctionIO(BooleanIO,NullableIO<BooleanIO>)=>VoidIO"
+    },
+    "FunctionIO(EnumerationIO(EQUATOR|ARCTIC),NullableIO<EnumerationIO(EQUATOR|ARCTIC)>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(EQUATOR|ARCTIC), NullableIO<EnumerationIO(EQUATOR|ARCTIC)><br><strong>Return Type:</strong> VoidIO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EnumerationIO(EQUATOR|ARCTIC)",
+        "NullableIO<EnumerationIO(EQUATOR|ARCTIC)>",
+        "VoidIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "FunctionIO(EnumerationIO(EQUATOR|ARCTIC),NullableIO<EnumerationIO(EQUATOR|ARCTIC)>)=>VoidIO"
     },
     "FunctionIO(EnumerationIO(POPULATION|PROPORTIONS|PEDIGREE),NullableIO<EnumerationIO(POPULATION|PROPORTIONS|PEDIGREE)>)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(POPULATION|PROPORTIONS|PEDIGREE), NullableIO<EnumerationIO(POPULATION|PROPORTIONS|PEDIGREE)><br><strong>Return Type:</strong> VoidIO",
@@ -509,6 +530,17 @@ window.phet.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "NullableIO<BooleanIO>"
+    },
+    "NullableIO<EnumerationIO(EQUATOR|ARCTIC)>": {
+      "documentation": "A wrapper to wrap another IOType, adding support for null.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EnumerationIO(EQUATOR|ARCTIC)"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "NullableIO<EnumerationIO(EQUATOR|ARCTIC)>"
     },
     "NullableIO<EnumerationIO(POPULATION|PROPORTIONS|PEDIGREE)>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
@@ -937,6 +969,50 @@ window.phet.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "PropertyIO<BooleanIO>"
+    },
+    "PropertyIO<EnumerationIO(EQUATOR|ARCTIC)>": {
+      "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
+      "events": [
+        "changed"
+      ],
+      "methodOrder": [
+        "link",
+        "lazyLink"
+      ],
+      "methods": {
+        "getValue": {
+          "documentation": "Gets the current value.",
+          "parameterTypes": [],
+          "returnType": "EnumerationIO(EQUATOR|ARCTIC)"
+        },
+        "lazyLink": {
+          "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO(EnumerationIO(EQUATOR|ARCTIC),NullableIO<EnumerationIO(EQUATOR|ARCTIC)>)=>VoidIO"
+          ],
+          "returnType": "VoidIO"
+        },
+        "link": {
+          "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO(EnumerationIO(EQUATOR|ARCTIC),NullableIO<EnumerationIO(EQUATOR|ARCTIC)>)=>VoidIO"
+          ],
+          "returnType": "VoidIO"
+        },
+        "setValue": {
+          "documentation": "Sets the value of the Property. If the value differs from the previous value, listeners are notified with the new value.",
+          "invocableForReadOnlyElements": false,
+          "parameterTypes": [
+            "EnumerationIO(EQUATOR|ARCTIC)"
+          ],
+          "returnType": "VoidIO"
+        }
+      },
+      "parameterTypes": [
+        "EnumerationIO(EQUATOR|ARCTIC)"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "PropertyIO<EnumerationIO(EQUATOR|ARCTIC)>"
     },
     "PropertyIO<EnumerationIO(POPULATION|PROPORTIONS|PEDIGREE)>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",

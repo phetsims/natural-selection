@@ -21,30 +21,61 @@ define( require => {
 
   class PopulationModel {
 
-    constructor() {
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
       // @public visibility of the Values Marker on the graph
-      this.valuesMarkerVisibleProperty = new BooleanProperty( false );
+      this.valuesMarkerVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'valuesMarkerVisibleProperty' )
+      } );
 
       // @public visibility of the total population plot on the graph
-      this.totalVisibleProperty = new BooleanProperty( true );
+      this.totalVisibleProperty = new BooleanProperty( true, {
+        tandem: tandem.createTandem( 'totalVisibleProperty' )
+      } );
 
       // @public visibility of the plot for each allele on the graph
-      this.whiteFurVisibleProperty = new BooleanProperty( false );
-      this.brownFurVisibleProperty = new BooleanProperty( false );
-      this.straightEarsVisibleProperty = new BooleanProperty( false );
-      this.floppyEarsVisibleProperty = new BooleanProperty( false );
-      this.shortTeethVisibleProperty = new BooleanProperty( false );
-      this.longTeethVisibleProperty = new BooleanProperty( false );
+      this.whiteFurVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'whiteFurVisibleProperty' )
+      } );
+      this.brownFurVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'brownFurVisibleProperty' )
+      } );
+      this.straightEarsVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'straightEarsVisibleProperty' )
+      } );
+      this.floppyEarsVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'floppyEarsVisibleProperty' )
+      } );
+      this.shortTeethVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'shortTeethVisibleProperty' )
+      } );
+      this.longTeethVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'longTeethVisibleProperty' )
+      } );
 
       // @public enabled state of the checkbox for each allele in the Population control panel
       // Checkboxes are disabled until an associated mutation is applied.
-      this.whiteFurEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
-      this.brownFurEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
-      this.straightEarsEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
-      this.floppyEarsEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
-      this.shortTeethEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
-      this.longTeethEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED );
+      this.whiteFurEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
+        tandem: tandem.createTandem( 'whiteFurEnabledProperty' )
+      } );
+      this.brownFurEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
+        tandem: tandem.createTandem( 'brownFurEnabledProperty' )
+      } );
+      this.straightEarsEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
+        tandem: tandem.createTandem( 'straightEarsEnabledProperty' )
+      } );
+      this.floppyEarsEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
+        tandem: tandem.createTandem( 'floppyEarsEnabledProperty' )
+      } );
+      this.shortTeethEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
+        tandem: tandem.createTandem( 'shortTeethEnabledProperty' )
+      } );
+      this.longTeethEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
+        tandem: tandem.createTandem( 'longTeethEnabledProperty' )
+      } );
 
       const countPropertyOptions = {
         isValidValue: value => ( value === null ) || ( typeof value === 'number' && Util.isInteger( value ) )

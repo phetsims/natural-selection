@@ -19,6 +19,7 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RectangularButtonView = require( 'SUN/buttons/RectangularButtonView' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   // constants
@@ -53,7 +54,10 @@ define( require => {
         // LayoutBox options
         spacing: 0,
         orientation: 'horizontal',
-        align: 'center'
+        align: 'center',
+
+        // phet-io
+        tandem: Tandem.required
 
       }, options );
 
@@ -65,7 +69,8 @@ define( require => {
         content: new Text( MathSymbols.PLUS, { font: FONT } ),
         listener: () => {
           zoomLevelProperty.value += options.step;
-        }
+        },
+        tandem: options.tandem.createTandem( 'zoomInButton' )
       } ) );
 
       // zoom out
@@ -73,7 +78,8 @@ define( require => {
         content: new Text( MathSymbols.MINUS, { font: FONT } ),
         listener: () => {
           zoomLevelProperty.value -= options.step;
-        }
+        },
+        tandem: options.tandem.createTandem( 'zoomOutButton' )
       } ) );
 
       // disable a button if we reach the min or max
