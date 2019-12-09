@@ -18,6 +18,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // constants
   const ICON_X_MARGIN = 8;
@@ -42,7 +43,10 @@ define( require => {
         selectedLineWidth: 5,
         deselectedLineWidth: 1.5,
         buttonContentXMargin: 0, // Set to 0 because we will create our own backgrounds, see below.
-        buttonContentYMargin: 0  // Set to 0 because we will create our own backgrounds, see below.
+        buttonContentYMargin: 0,  // Set to 0 because we will create our own backgrounds, see below.
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       // icons
@@ -71,8 +75,8 @@ define( require => {
       
       // description of the buttons
       const content = [
-        { value: Environments.EQUATOR, node: equatorButtonContent },
-        { value: Environments.ARCTIC, node: arcticButtonContent }
+        { value: Environments.EQUATOR, node: equatorButtonContent, tandemName: 'equatorRadioButton' },
+        { value: Environments.ARCTIC, node: arcticButtonContent, tandemName: 'arcticRadioButton' }
       ];
 
       super( environmentProperty, content, options );

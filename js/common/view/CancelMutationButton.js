@@ -14,6 +14,7 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   const RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class CancelMutationButton extends RoundPushButton {
 
@@ -31,7 +32,10 @@ define( require => {
           fill: PhetColorScheme.RED_COLORBLIND,
           scale: 1.4,
           cursor: 'pointer'
-        } )
+        } ),
+
+        // phet-io
+        tandem: Tandem.optional // because we don't want to instrument this button
       }, options );
 
       super( options );
