@@ -44,7 +44,7 @@ define( require => {
                          size.width - controlPanelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING :
                          size.width;
 
-      // Because it's instrumented for PhET-iO, the control panel must be created regardless of the value
+      // Because it's instrumented for PhET-iO, the AllelesPanel must be instantiated regardless of the value
       // of ?allelesVisible. If ?allelesVisible=false, it will not be added to the scenegraph, but will
       // still appear in the Studio element tree.
       const allelesPanel = new AllelesPanel( pedigreeModel, {
