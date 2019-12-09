@@ -15,10 +15,15 @@ define( require => {
 
   class NaturalSelectionViewProperties {
 
-    constructor() {
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
       // @public
-      this.graphProperty = new EnumerationProperty( Graphs, Graphs.POPULATION );
+      this.graphProperty = new EnumerationProperty( Graphs, Graphs.POPULATION, {
+        tandem: tandem.createTandem( 'graphProperty' )
+      } );
     }
 
     /**

@@ -14,8 +14,11 @@ define( require => {
 
   class LabViewProperties extends NaturalSelectionViewProperties {
 
-    constructor() {
-      super();
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
+      super( tandem );
       //TODO
     }
 

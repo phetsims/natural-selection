@@ -21,7 +21,7 @@ define( require => {
      */
     constructor( model, tandem ) {
 
-      const viewProperties = new LabViewProperties();
+      const viewProperties = new LabViewProperties( tandem.createTandem( 'viewProperties') );
 
       super( model, viewProperties, {
         tandem: tandem
