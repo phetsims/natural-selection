@@ -31,8 +31,8 @@ define( require => {
 
   SimLauncher.launch( () => {
     const screens = [
-      new IntroScreen( Tandem.rootTandem.createTandem( 'intro' ) ),
-      new LabScreen( Tandem.rootTandem.createTandem( 'lab' ) )
+      new IntroScreen( Tandem.rootTandem.createTandem( 'introScreen' ) ),
+      new LabScreen( Tandem.rootTandem.createTandem( 'labScreen' ) )
     ];
     const sim = new Sim( naturalSelectionTitleString, screens, simOptions );
     sim.start();

@@ -430,8 +430,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.general.navigationBar.introButton": {
-      "phetioDocumentation": "Button in the navigation bar that selects the 'intro' screen",
+    "naturalSelection.general.navigationBar.introScreenButton": {
+      "phetioDocumentation": "Button in the navigation bar that selects the 'introScreen' screen",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
       "phetioEventType": "MODEL",
@@ -443,7 +443,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.general.navigationBar.introButton.enabledProperty": {
+    "naturalSelection.general.navigationBar.introScreenButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -456,7 +456,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.general.navigationBar.introButton.firedEmitter": {
+    "naturalSelection.general.navigationBar.introScreenButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -469,7 +469,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.general.navigationBar.introButton.icon": {
+    "naturalSelection.general.navigationBar.introScreenButton.icon": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -482,7 +482,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.general.navigationBar.introButton.icon.opacityProperty": {
+    "naturalSelection.general.navigationBar.introScreenButton.icon.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -495,7 +495,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.general.navigationBar.introButton.icon.pickableProperty": {
+    "naturalSelection.general.navigationBar.introScreenButton.icon.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -508,7 +508,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.general.navigationBar.introButton.icon.visibleProperty": {
+    "naturalSelection.general.navigationBar.introScreenButton.icon.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -521,7 +521,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.general.navigationBar.introButton.opacityProperty": {
+    "naturalSelection.general.navigationBar.introScreenButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -534,7 +534,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.general.navigationBar.introButton.pickableProperty": {
+    "naturalSelection.general.navigationBar.introScreenButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -547,7 +547,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.general.navigationBar.introButton.pressListener.pressAction": {
+    "naturalSelection.general.navigationBar.introScreenButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -560,7 +560,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.general.navigationBar.introButton.pressListener.releaseAction": {
+    "naturalSelection.general.navigationBar.introScreenButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -573,7 +573,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.general.navigationBar.introButton.text": {
+    "naturalSelection.general.navigationBar.introScreenButton.text": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -586,7 +586,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "naturalSelection.general.navigationBar.introButton.text.opacityProperty": {
+    "naturalSelection.general.navigationBar.introScreenButton.text.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -599,7 +599,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.general.navigationBar.introButton.text.pickableProperty": {
+    "naturalSelection.general.navigationBar.introScreenButton.text.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -612,7 +612,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.general.navigationBar.introButton.text.textProperty": {
+    "naturalSelection.general.navigationBar.introScreenButton.text.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -625,7 +625,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "naturalSelection.general.navigationBar.introButton.text.visibleProperty": {
+    "naturalSelection.general.navigationBar.introScreenButton.text.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -638,7 +638,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.general.navigationBar.introButton.visibleProperty": {
+    "naturalSelection.general.navigationBar.introScreenButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -651,8 +651,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.general.navigationBar.labButton": {
-      "phetioDocumentation": "Button in the navigation bar that selects the 'lab' screen",
+    "naturalSelection.general.navigationBar.labScreenButton": {
+      "phetioDocumentation": "Button in the navigation bar that selects the 'labScreen' screen",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
       "phetioEventType": "MODEL",
@@ -664,7 +664,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.general.navigationBar.labButton.enabledProperty": {
+    "naturalSelection.general.navigationBar.labScreenButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -677,7 +677,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.general.navigationBar.labButton.firedEmitter": {
+    "naturalSelection.general.navigationBar.labScreenButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -690,7 +690,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.general.navigationBar.labButton.icon": {
+    "naturalSelection.general.navigationBar.labScreenButton.icon": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -703,7 +703,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.general.navigationBar.labButton.icon.opacityProperty": {
+    "naturalSelection.general.navigationBar.labScreenButton.icon.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -716,7 +716,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.general.navigationBar.labButton.icon.pickableProperty": {
+    "naturalSelection.general.navigationBar.labScreenButton.icon.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -729,7 +729,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.general.navigationBar.labButton.icon.visibleProperty": {
+    "naturalSelection.general.navigationBar.labScreenButton.icon.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -742,7 +742,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.general.navigationBar.labButton.opacityProperty": {
+    "naturalSelection.general.navigationBar.labScreenButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -755,7 +755,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.general.navigationBar.labButton.pickableProperty": {
+    "naturalSelection.general.navigationBar.labScreenButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -768,7 +768,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.general.navigationBar.labButton.pressListener.pressAction": {
+    "naturalSelection.general.navigationBar.labScreenButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -781,7 +781,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.general.navigationBar.labButton.pressListener.releaseAction": {
+    "naturalSelection.general.navigationBar.labScreenButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -794,7 +794,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.general.navigationBar.labButton.text": {
+    "naturalSelection.general.navigationBar.labScreenButton.text": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -807,7 +807,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "naturalSelection.general.navigationBar.labButton.text.opacityProperty": {
+    "naturalSelection.general.navigationBar.labScreenButton.text.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -820,7 +820,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.general.navigationBar.labButton.text.pickableProperty": {
+    "naturalSelection.general.navigationBar.labScreenButton.text.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -833,7 +833,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.general.navigationBar.labButton.text.textProperty": {
+    "naturalSelection.general.navigationBar.labScreenButton.text.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -846,7 +846,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "naturalSelection.general.navigationBar.labButton.text.visibleProperty": {
+    "naturalSelection.general.navigationBar.labScreenButton.text.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -859,7 +859,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.general.navigationBar.labButton.visibleProperty": {
+    "naturalSelection.general.navigationBar.labScreenButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1691,7 +1691,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.homeScreen.view.introLargeButton": {
+    "naturalSelection.homeScreen.view.introScreenLargeButton": {
       "phetioDocumentation": "A pressable button in the simulation, in the home screen",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1704,7 +1704,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.homeScreen.view.introLargeButton.inputListener.firedEmitter": {
+    "naturalSelection.homeScreen.view.introScreenLargeButton.inputListener.firedEmitter": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1717,7 +1717,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.homeScreen.view.introLargeButton.inputListener.pressAction": {
+    "naturalSelection.homeScreen.view.introScreenLargeButton.inputListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1730,7 +1730,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.homeScreen.view.introLargeButton.inputListener.releaseAction": {
+    "naturalSelection.homeScreen.view.introScreenLargeButton.inputListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1743,7 +1743,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.homeScreen.view.introLargeButton.opacityProperty": {
+    "naturalSelection.homeScreen.view.introScreenLargeButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1756,7 +1756,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.homeScreen.view.introLargeButton.pickableProperty": {
+    "naturalSelection.homeScreen.view.introScreenLargeButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1769,7 +1769,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.homeScreen.view.introLargeButton.text": {
+    "naturalSelection.homeScreen.view.introScreenLargeButton.text": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1782,7 +1782,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "naturalSelection.homeScreen.view.introLargeButton.text.opacityProperty": {
+    "naturalSelection.homeScreen.view.introScreenLargeButton.text.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1795,7 +1795,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.homeScreen.view.introLargeButton.text.pickableProperty": {
+    "naturalSelection.homeScreen.view.introScreenLargeButton.text.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1808,7 +1808,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.homeScreen.view.introLargeButton.text.textProperty": {
+    "naturalSelection.homeScreen.view.introScreenLargeButton.text.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1821,7 +1821,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "naturalSelection.homeScreen.view.introLargeButton.text.visibleProperty": {
+    "naturalSelection.homeScreen.view.introScreenLargeButton.text.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1834,7 +1834,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.homeScreen.view.introLargeButton.visibleProperty": {
+    "naturalSelection.homeScreen.view.introScreenLargeButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1847,7 +1847,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.homeScreen.view.introSmallButton": {
+    "naturalSelection.homeScreen.view.introScreenSmallButton": {
       "phetioDocumentation": "A pressable button in the simulation, in the home screen",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1860,7 +1860,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.homeScreen.view.introSmallButton.inputListener.firedEmitter": {
+    "naturalSelection.homeScreen.view.introScreenSmallButton.inputListener.firedEmitter": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1873,7 +1873,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.homeScreen.view.introSmallButton.inputListener.pressAction": {
+    "naturalSelection.homeScreen.view.introScreenSmallButton.inputListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1886,7 +1886,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.homeScreen.view.introSmallButton.inputListener.releaseAction": {
+    "naturalSelection.homeScreen.view.introScreenSmallButton.inputListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1899,7 +1899,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.homeScreen.view.introSmallButton.opacityProperty": {
+    "naturalSelection.homeScreen.view.introScreenSmallButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1912,7 +1912,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.homeScreen.view.introSmallButton.pickableProperty": {
+    "naturalSelection.homeScreen.view.introScreenSmallButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1925,7 +1925,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.homeScreen.view.introSmallButton.text": {
+    "naturalSelection.homeScreen.view.introScreenSmallButton.text": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1938,7 +1938,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "naturalSelection.homeScreen.view.introSmallButton.text.opacityProperty": {
+    "naturalSelection.homeScreen.view.introScreenSmallButton.text.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1951,7 +1951,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.homeScreen.view.introSmallButton.text.pickableProperty": {
+    "naturalSelection.homeScreen.view.introScreenSmallButton.text.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1964,7 +1964,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.homeScreen.view.introSmallButton.text.textProperty": {
+    "naturalSelection.homeScreen.view.introScreenSmallButton.text.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1977,7 +1977,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "naturalSelection.homeScreen.view.introSmallButton.text.visibleProperty": {
+    "naturalSelection.homeScreen.view.introScreenSmallButton.text.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -1990,7 +1990,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.homeScreen.view.introSmallButton.visibleProperty": {
+    "naturalSelection.homeScreen.view.introScreenSmallButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2003,7 +2003,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.homeScreen.view.labLargeButton": {
+    "naturalSelection.homeScreen.view.labScreenLargeButton": {
       "phetioDocumentation": "A pressable button in the simulation, in the home screen",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2016,7 +2016,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.homeScreen.view.labLargeButton.inputListener.firedEmitter": {
+    "naturalSelection.homeScreen.view.labScreenLargeButton.inputListener.firedEmitter": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2029,7 +2029,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.homeScreen.view.labLargeButton.inputListener.pressAction": {
+    "naturalSelection.homeScreen.view.labScreenLargeButton.inputListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2042,7 +2042,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.homeScreen.view.labLargeButton.inputListener.releaseAction": {
+    "naturalSelection.homeScreen.view.labScreenLargeButton.inputListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2055,7 +2055,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.homeScreen.view.labLargeButton.opacityProperty": {
+    "naturalSelection.homeScreen.view.labScreenLargeButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2068,7 +2068,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.homeScreen.view.labLargeButton.pickableProperty": {
+    "naturalSelection.homeScreen.view.labScreenLargeButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2081,7 +2081,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.homeScreen.view.labLargeButton.text": {
+    "naturalSelection.homeScreen.view.labScreenLargeButton.text": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2094,7 +2094,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "naturalSelection.homeScreen.view.labLargeButton.text.opacityProperty": {
+    "naturalSelection.homeScreen.view.labScreenLargeButton.text.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2107,7 +2107,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.homeScreen.view.labLargeButton.text.pickableProperty": {
+    "naturalSelection.homeScreen.view.labScreenLargeButton.text.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2120,7 +2120,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.homeScreen.view.labLargeButton.text.textProperty": {
+    "naturalSelection.homeScreen.view.labScreenLargeButton.text.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2133,7 +2133,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "naturalSelection.homeScreen.view.labLargeButton.text.visibleProperty": {
+    "naturalSelection.homeScreen.view.labScreenLargeButton.text.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2146,7 +2146,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.homeScreen.view.labLargeButton.visibleProperty": {
+    "naturalSelection.homeScreen.view.labScreenLargeButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2159,7 +2159,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.homeScreen.view.labSmallButton": {
+    "naturalSelection.homeScreen.view.labScreenSmallButton": {
       "phetioDocumentation": "A pressable button in the simulation, in the home screen",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2172,7 +2172,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.homeScreen.view.labSmallButton.inputListener.firedEmitter": {
+    "naturalSelection.homeScreen.view.labScreenSmallButton.inputListener.firedEmitter": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2185,7 +2185,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.homeScreen.view.labSmallButton.inputListener.pressAction": {
+    "naturalSelection.homeScreen.view.labScreenSmallButton.inputListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2198,7 +2198,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.homeScreen.view.labSmallButton.inputListener.releaseAction": {
+    "naturalSelection.homeScreen.view.labScreenSmallButton.inputListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2211,7 +2211,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.homeScreen.view.labSmallButton.opacityProperty": {
+    "naturalSelection.homeScreen.view.labScreenSmallButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2224,7 +2224,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.homeScreen.view.labSmallButton.pickableProperty": {
+    "naturalSelection.homeScreen.view.labScreenSmallButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2237,7 +2237,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.homeScreen.view.labSmallButton.text": {
+    "naturalSelection.homeScreen.view.labScreenSmallButton.text": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2250,7 +2250,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "naturalSelection.homeScreen.view.labSmallButton.text.opacityProperty": {
+    "naturalSelection.homeScreen.view.labScreenSmallButton.text.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2263,7 +2263,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.homeScreen.view.labSmallButton.text.pickableProperty": {
+    "naturalSelection.homeScreen.view.labScreenSmallButton.text.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2276,7 +2276,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.homeScreen.view.labSmallButton.text.textProperty": {
+    "naturalSelection.homeScreen.view.labScreenSmallButton.text.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2289,7 +2289,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "naturalSelection.homeScreen.view.labSmallButton.text.visibleProperty": {
+    "naturalSelection.homeScreen.view.labScreenSmallButton.text.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2302,7 +2302,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.homeScreen.view.labSmallButton.visibleProperty": {
+    "naturalSelection.homeScreen.view.labScreenSmallButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2419,7 +2419,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.intro.activeProperty": {
+    "naturalSelection.introScreen.activeProperty": {
       "phetioDocumentation": "Indicates whether the screen is active.  For single-screen simulations, the screen is always active.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2432,7 +2432,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.intro.view": {
+    "naturalSelection.introScreen.view": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2445,7 +2445,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.intro.view.opacityProperty": {
+    "naturalSelection.introScreen.view.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2458,7 +2458,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.intro.view.pickableProperty": {
+    "naturalSelection.introScreen.view.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2471,7 +2471,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.intro.view.resetAllButton": {
+    "naturalSelection.introScreen.view.resetAllButton": {
       "phetioDocumentation": "The orange, round button that can be used to restore the initial state",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2484,7 +2484,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ResetAllButtonIO"
     },
-    "naturalSelection.intro.view.resetAllButton.enabledProperty": {
+    "naturalSelection.introScreen.view.resetAllButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2497,7 +2497,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.intro.view.resetAllButton.firedEmitter": {
+    "naturalSelection.introScreen.view.resetAllButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2510,7 +2510,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.intro.view.resetAllButton.isFiringProperty": {
+    "naturalSelection.introScreen.view.resetAllButton.isFiringProperty": {
       "phetioDocumentation": "Temporarily becomes true while the Reset All button is firing.  Commonly used to disable audio effects during reset.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2523,7 +2523,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "DerivedPropertyIO<BooleanIO>"
     },
-    "naturalSelection.intro.view.resetAllButton.opacityProperty": {
+    "naturalSelection.introScreen.view.resetAllButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2536,7 +2536,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.intro.view.resetAllButton.pickableProperty": {
+    "naturalSelection.introScreen.view.resetAllButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2549,7 +2549,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.intro.view.resetAllButton.pressListener.pressAction": {
+    "naturalSelection.introScreen.view.resetAllButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2562,7 +2562,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.intro.view.resetAllButton.pressListener.releaseAction": {
+    "naturalSelection.introScreen.view.resetAllButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2575,7 +2575,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.intro.view.resetAllButton.visibleProperty": {
+    "naturalSelection.introScreen.view.resetAllButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2588,7 +2588,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.intro.view.visibleProperty": {
+    "naturalSelection.introScreen.view.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2601,7 +2601,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.activeProperty": {
+    "naturalSelection.labScreen.activeProperty": {
       "phetioDocumentation": "Indicates whether the screen is active.  For single-screen simulations, the screen is always active.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2614,7 +2614,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.environmentProperty": {
+    "naturalSelection.labScreen.model.environmentProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2627,7 +2627,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<EnumerationIO(EQUATOR|ARCTIC)>"
     },
-    "naturalSelection.lab.model.generationClock.timeProperty": {
+    "naturalSelection.labScreen.model.generationClock.timeProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2640,7 +2640,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.model.isPlayingProperty": {
+    "naturalSelection.labScreen.model.isPlayingProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2653,7 +2653,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.pedigreeModel.earsAllelesVisibleProperty": {
+    "naturalSelection.labScreen.model.pedigreeModel.earsAllelesVisibleProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2666,7 +2666,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.pedigreeModel.earsEnabledProperty": {
+    "naturalSelection.labScreen.model.pedigreeModel.earsEnabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2679,7 +2679,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.pedigreeModel.furAllelesVisibleProperty": {
+    "naturalSelection.labScreen.model.pedigreeModel.furAllelesVisibleProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2692,7 +2692,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.pedigreeModel.furEnabledProperty": {
+    "naturalSelection.labScreen.model.pedigreeModel.furEnabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2705,7 +2705,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.pedigreeModel.teethAllelesVisibleProperty": {
+    "naturalSelection.labScreen.model.pedigreeModel.teethAllelesVisibleProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2718,7 +2718,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.pedigreeModel.teethEnabledProperty": {
+    "naturalSelection.labScreen.model.pedigreeModel.teethEnabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2731,7 +2731,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.populationModel.brownFurEnabledProperty": {
+    "naturalSelection.labScreen.model.populationModel.brownFurEnabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2744,7 +2744,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.populationModel.brownFurVisibleProperty": {
+    "naturalSelection.labScreen.model.populationModel.brownFurVisibleProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2757,7 +2757,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.populationModel.floppyEarsEnabledProperty": {
+    "naturalSelection.labScreen.model.populationModel.floppyEarsEnabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2770,7 +2770,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.populationModel.floppyEarsVisibleProperty": {
+    "naturalSelection.labScreen.model.populationModel.floppyEarsVisibleProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2783,7 +2783,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.populationModel.longTeethEnabledProperty": {
+    "naturalSelection.labScreen.model.populationModel.longTeethEnabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2796,7 +2796,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.populationModel.longTeethVisibleProperty": {
+    "naturalSelection.labScreen.model.populationModel.longTeethVisibleProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2809,7 +2809,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.populationModel.shortTeethEnabledProperty": {
+    "naturalSelection.labScreen.model.populationModel.shortTeethEnabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2822,7 +2822,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.populationModel.shortTeethVisibleProperty": {
+    "naturalSelection.labScreen.model.populationModel.shortTeethVisibleProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2835,7 +2835,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.populationModel.straightEarsEnabledProperty": {
+    "naturalSelection.labScreen.model.populationModel.straightEarsEnabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2848,7 +2848,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.populationModel.straightEarsVisibleProperty": {
+    "naturalSelection.labScreen.model.populationModel.straightEarsVisibleProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2861,7 +2861,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.populationModel.totalVisibleProperty": {
+    "naturalSelection.labScreen.model.populationModel.totalVisibleProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2874,7 +2874,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.populationModel.valuesMarkerVisibleProperty": {
+    "naturalSelection.labScreen.model.populationModel.valuesMarkerVisibleProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2887,7 +2887,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.populationModel.whiteFurEnabledProperty": {
+    "naturalSelection.labScreen.model.populationModel.whiteFurEnabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2900,7 +2900,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.populationModel.whiteFurVisibleProperty": {
+    "naturalSelection.labScreen.model.populationModel.whiteFurVisibleProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2913,7 +2913,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.model.proportionsModel.generationProperty": {
+    "naturalSelection.labScreen.model.proportionsModel.generationProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2926,7 +2926,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": false,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.model.proportionsModel.valuesVisibleProperty": {
+    "naturalSelection.labScreen.model.proportionsModel.valuesVisibleProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2939,7 +2939,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view": {
+    "naturalSelection.labScreen.view": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2952,7 +2952,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.addMutationsPanel": {
+    "naturalSelection.labScreen.view.addMutationsPanel": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2965,7 +2965,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.addMutationsPanel.earsRow.dominantButton": {
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.dominantButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2978,7 +2978,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.addMutationsPanel.earsRow.dominantButton.enabledProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.dominantButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -2991,7 +2991,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.earsRow.dominantButton.firedEmitter": {
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.dominantButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3004,7 +3004,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.earsRow.dominantButton.opacityProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.dominantButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3017,7 +3017,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.addMutationsPanel.earsRow.dominantButton.pickableProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.dominantButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3030,7 +3030,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.earsRow.dominantButton.pressListener.pressAction": {
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.dominantButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3043,7 +3043,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.earsRow.dominantButton.pressListener.releaseAction": {
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.dominantButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3056,7 +3056,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.earsRow.dominantButton.visibleProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.dominantButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3069,7 +3069,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.earsRow.recessiveButton": {
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.recessiveButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3082,7 +3082,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.addMutationsPanel.earsRow.recessiveButton.enabledProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.recessiveButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3095,7 +3095,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.earsRow.recessiveButton.firedEmitter": {
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.recessiveButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3108,7 +3108,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.earsRow.recessiveButton.opacityProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.recessiveButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3121,7 +3121,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.addMutationsPanel.earsRow.recessiveButton.pickableProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.recessiveButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3134,7 +3134,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.earsRow.recessiveButton.pressListener.pressAction": {
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.recessiveButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3147,7 +3147,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.earsRow.recessiveButton.pressListener.releaseAction": {
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.recessiveButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3160,7 +3160,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.earsRow.recessiveButton.visibleProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.recessiveButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3173,7 +3173,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.furRow.dominantButton": {
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.dominantButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3186,7 +3186,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.addMutationsPanel.furRow.dominantButton.enabledProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.dominantButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3199,7 +3199,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.furRow.dominantButton.firedEmitter": {
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.dominantButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3212,7 +3212,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.furRow.dominantButton.opacityProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.dominantButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3225,7 +3225,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.addMutationsPanel.furRow.dominantButton.pickableProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.dominantButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3238,7 +3238,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.furRow.dominantButton.pressListener.pressAction": {
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.dominantButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3251,7 +3251,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.furRow.dominantButton.pressListener.releaseAction": {
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.dominantButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3264,7 +3264,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.furRow.dominantButton.visibleProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.dominantButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3277,7 +3277,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.furRow.recessiveButton": {
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.recessiveButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3290,7 +3290,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.addMutationsPanel.furRow.recessiveButton.enabledProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.recessiveButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3303,7 +3303,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.furRow.recessiveButton.firedEmitter": {
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.recessiveButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3316,7 +3316,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.furRow.recessiveButton.opacityProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.recessiveButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3329,7 +3329,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.addMutationsPanel.furRow.recessiveButton.pickableProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.recessiveButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3342,7 +3342,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.furRow.recessiveButton.pressListener.pressAction": {
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.recessiveButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3355,7 +3355,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.furRow.recessiveButton.pressListener.releaseAction": {
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.recessiveButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3368,7 +3368,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.furRow.recessiveButton.visibleProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.recessiveButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3381,7 +3381,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.opacityProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3394,7 +3394,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.addMutationsPanel.pickableProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3407,7 +3407,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.teethRow.dominantButton": {
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.dominantButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3420,7 +3420,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.addMutationsPanel.teethRow.dominantButton.enabledProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.dominantButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3433,7 +3433,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.teethRow.dominantButton.firedEmitter": {
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.dominantButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3446,7 +3446,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.teethRow.dominantButton.opacityProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.dominantButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3459,7 +3459,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.addMutationsPanel.teethRow.dominantButton.pickableProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.dominantButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3472,7 +3472,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.teethRow.dominantButton.pressListener.pressAction": {
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.dominantButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3485,7 +3485,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.teethRow.dominantButton.pressListener.releaseAction": {
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.dominantButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3498,7 +3498,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.teethRow.dominantButton.visibleProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.dominantButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3511,7 +3511,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.teethRow.recessiveButton": {
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.recessiveButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3524,7 +3524,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.addMutationsPanel.teethRow.recessiveButton.enabledProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.recessiveButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3537,7 +3537,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.teethRow.recessiveButton.firedEmitter": {
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.recessiveButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3550,7 +3550,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.teethRow.recessiveButton.opacityProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.recessiveButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3563,7 +3563,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.addMutationsPanel.teethRow.recessiveButton.pickableProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.recessiveButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3576,7 +3576,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.teethRow.recessiveButton.pressListener.pressAction": {
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.recessiveButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3589,7 +3589,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.teethRow.recessiveButton.pressListener.releaseAction": {
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.recessiveButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3602,7 +3602,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.teethRow.recessiveButton.visibleProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.recessiveButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3615,7 +3615,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.addMutationsPanel.visibleProperty": {
+    "naturalSelection.labScreen.view.addMutationsPanel.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3628,7 +3628,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3641,7 +3641,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.environmentalFactorsText": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.environmentalFactorsText": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3654,7 +3654,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.environmentalFactorsText.opacityProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.environmentalFactorsText.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3667,7 +3667,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.environmentalFactorsText.pickableProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.environmentalFactorsText.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3680,7 +3680,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.environmentalFactorsText.textProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.environmentalFactorsText.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3693,7 +3693,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.environmentalFactorsText.visibleProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.environmentalFactorsText.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3706,7 +3706,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.limitedFoodCheckbox": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.limitedFoodCheckbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3719,7 +3719,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.limitedFoodCheckbox.enabledProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.limitedFoodCheckbox.enabledProperty": {
       "phetioDocumentation": "When disabled, the checkbox is grayed out and cannot be pressed.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3732,7 +3732,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.limitedFoodCheckbox.opacityProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.limitedFoodCheckbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3745,7 +3745,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.limitedFoodCheckbox.pickableProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.limitedFoodCheckbox.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3758,7 +3758,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.limitedFoodCheckbox.property": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.limitedFoodCheckbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3771,7 +3771,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.limitedFoodCheckbox.toggleAction": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.limitedFoodCheckbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3784,7 +3784,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.limitedFoodCheckbox.visibleProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.limitedFoodCheckbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3797,7 +3797,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.opacityProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3810,7 +3810,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.pickableProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3823,7 +3823,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.toughFoodCheckbox": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.toughFoodCheckbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3836,7 +3836,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.toughFoodCheckbox.enabledProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.toughFoodCheckbox.enabledProperty": {
       "phetioDocumentation": "When disabled, the checkbox is grayed out and cannot be pressed.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3849,7 +3849,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.toughFoodCheckbox.opacityProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.toughFoodCheckbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3862,7 +3862,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.toughFoodCheckbox.pickableProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.toughFoodCheckbox.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3875,7 +3875,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.toughFoodCheckbox.property": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.toughFoodCheckbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3888,7 +3888,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.toughFoodCheckbox.toggleAction": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.toughFoodCheckbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3901,7 +3901,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.toughFoodCheckbox.visibleProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.toughFoodCheckbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3914,7 +3914,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.visibleProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3927,7 +3927,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.wolvesCheckbox": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.wolvesCheckbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3940,7 +3940,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.wolvesCheckbox.enabledProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.wolvesCheckbox.enabledProperty": {
       "phetioDocumentation": "When disabled, the checkbox is grayed out and cannot be pressed.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3953,7 +3953,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.wolvesCheckbox.opacityProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.wolvesCheckbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3966,7 +3966,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.wolvesCheckbox.pickableProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.wolvesCheckbox.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3979,7 +3979,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.wolvesCheckbox.property": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.wolvesCheckbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3992,7 +3992,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.wolvesCheckbox.toggleAction": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.wolvesCheckbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4005,7 +4005,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.environmentalFactorsPanel.wolvesCheckbox.visibleProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.wolvesCheckbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4018,7 +4018,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.graphRadioButtonGroup": {
+    "naturalSelection.labScreen.view.graphRadioButtonGroup": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4031,7 +4031,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.graphRadioButtonGroup.opacityProperty": {
+    "naturalSelection.labScreen.view.graphRadioButtonGroup.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4044,7 +4044,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.graphRadioButtonGroup.pickableProperty": {
+    "naturalSelection.labScreen.view.graphRadioButtonGroup.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4057,7 +4057,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.graphRadioButtonGroup.visibleProperty": {
+    "naturalSelection.labScreen.view.graphRadioButtonGroup.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4070,7 +4070,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.opacityProperty": {
+    "naturalSelection.labScreen.view.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4083,7 +4083,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.pedigreeNode": {
+    "naturalSelection.labScreen.view.pedigreeNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4096,7 +4096,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4109,7 +4109,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.earsRow.checkbox": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.earsRow.checkbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4122,7 +4122,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.earsRow.checkbox.enabledProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.earsRow.checkbox.enabledProperty": {
       "phetioDocumentation": "When disabled, the checkbox is grayed out and cannot be pressed.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4135,7 +4135,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.earsRow.checkbox.opacityProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.earsRow.checkbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4148,7 +4148,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.earsRow.checkbox.pickableProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.earsRow.checkbox.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4161,7 +4161,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.earsRow.checkbox.property": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.earsRow.checkbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4174,7 +4174,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.earsRow.checkbox.toggleAction": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.earsRow.checkbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4187,7 +4187,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.earsRow.checkbox.visibleProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.earsRow.checkbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4200,7 +4200,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.furRow.checkbox": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.furRow.checkbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4213,7 +4213,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.furRow.checkbox.enabledProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.furRow.checkbox.enabledProperty": {
       "phetioDocumentation": "When disabled, the checkbox is grayed out and cannot be pressed.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4226,7 +4226,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.furRow.checkbox.opacityProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.furRow.checkbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4239,7 +4239,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.furRow.checkbox.pickableProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.furRow.checkbox.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4252,7 +4252,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.furRow.checkbox.property": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.furRow.checkbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4265,7 +4265,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.furRow.checkbox.toggleAction": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.furRow.checkbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4278,7 +4278,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.furRow.checkbox.visibleProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.furRow.checkbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4291,7 +4291,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.opacityProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4304,7 +4304,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.pickableProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4317,7 +4317,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.teethRow.checkbox": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.teethRow.checkbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4330,7 +4330,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.teethRow.checkbox.enabledProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.teethRow.checkbox.enabledProperty": {
       "phetioDocumentation": "When disabled, the checkbox is grayed out and cannot be pressed.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4343,7 +4343,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.teethRow.checkbox.opacityProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.teethRow.checkbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4356,7 +4356,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.teethRow.checkbox.pickableProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.teethRow.checkbox.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4369,7 +4369,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.teethRow.checkbox.property": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.teethRow.checkbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4382,7 +4382,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.teethRow.checkbox.toggleAction": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.teethRow.checkbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4395,7 +4395,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.teethRow.checkbox.visibleProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.teethRow.checkbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4408,7 +4408,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.title": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.title": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4421,7 +4421,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.title.opacityProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.title.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4434,7 +4434,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.title.pickableProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.title.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4447,7 +4447,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.title.textProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.title.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4460,7 +4460,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.title.visibleProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.title.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4473,7 +4473,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.pedigreeNode.allelesPanel.visibleProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.allelesPanel.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4486,7 +4486,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.pedigreeNode.graphNode": {
+    "naturalSelection.labScreen.view.pedigreeNode.graphNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4499,7 +4499,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.graphNode.opacityProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.graphNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4512,7 +4512,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.graphNode.pickableProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.graphNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4525,7 +4525,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.pedigreeNode.graphNode.visibleProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.graphNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4538,7 +4538,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.pedigreeNode.opacityProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4551,7 +4551,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.pedigreeNode.pickableProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4564,7 +4564,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.pedigreeNode.visibleProperty": {
+    "naturalSelection.labScreen.view.pedigreeNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4577,7 +4577,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.pickableProperty": {
+    "naturalSelection.labScreen.view.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4590,7 +4590,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode": {
+    "naturalSelection.labScreen.view.populationNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4603,7 +4603,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode": {
+    "naturalSelection.labScreen.view.populationNode.graphNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4616,7 +4616,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4629,7 +4629,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4642,7 +4642,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.plotNode": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.plotNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4655,7 +4655,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.plotNode.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.plotNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4668,7 +4668,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.plotNode.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.plotNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4681,7 +4681,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.plotNode.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.plotNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4694,7 +4694,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.valuesMarkerNode": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.valuesMarkerNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4707,7 +4707,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.valuesMarkerNode.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.valuesMarkerNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4720,7 +4720,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.valuesMarkerNode.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.valuesMarkerNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4733,7 +4733,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.valuesMarkerNode.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.valuesMarkerNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4746,7 +4746,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4759,7 +4759,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4772,7 +4772,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.nextButton": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.nextButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4785,7 +4785,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.nextButton.enabledProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.nextButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4798,7 +4798,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.nextButton.firedEmitter": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.nextButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4811,7 +4811,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.nextButton.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.nextButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4824,7 +4824,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.nextButton.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.nextButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4837,7 +4837,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.nextButton.pressListener.pressAction": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.nextButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4850,7 +4850,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.nextButton.pressListener.releaseAction": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.nextButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4863,7 +4863,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.nextButton.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.nextButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4876,7 +4876,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4889,7 +4889,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4902,7 +4902,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.previousButton": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.previousButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4915,7 +4915,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.previousButton.enabledProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.previousButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4928,7 +4928,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.previousButton.firedEmitter": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.previousButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4941,7 +4941,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.previousButton.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.previousButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4954,7 +4954,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.previousButton.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.previousButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4967,7 +4967,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.previousButton.pressListener.pressAction": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.previousButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4980,7 +4980,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.previousButton.pressListener.releaseAction": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.previousButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -4993,7 +4993,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.previousButton.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.previousButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5006,7 +5006,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.xPanControl.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.xPanControl.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5019,7 +5019,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5032,7 +5032,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5045,7 +5045,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5058,7 +5058,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5071,7 +5071,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.zoomInButton": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.zoomInButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5084,7 +5084,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.zoomInButton.enabledProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.zoomInButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5097,7 +5097,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.zoomInButton.firedEmitter": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.zoomInButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5110,7 +5110,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.zoomInButton.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.zoomInButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5123,7 +5123,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.zoomInButton.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.zoomInButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5136,7 +5136,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.zoomInButton.pressListener.pressAction": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.zoomInButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5149,7 +5149,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.zoomInButton.pressListener.releaseAction": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.zoomInButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5162,7 +5162,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.zoomInButton.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.zoomInButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5175,7 +5175,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.zoomOutButton": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.zoomOutButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5188,7 +5188,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.zoomOutButton.enabledProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.zoomOutButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5201,7 +5201,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.zoomOutButton.firedEmitter": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.zoomOutButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5214,7 +5214,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.zoomOutButton.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.zoomOutButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5227,7 +5227,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.zoomOutButton.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.zoomOutButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5240,7 +5240,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.zoomOutButton.pressListener.pressAction": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.zoomOutButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5253,7 +5253,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.zoomOutButton.pressListener.releaseAction": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.zoomOutButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5266,7 +5266,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.lab.view.populationNode.graphNode.yZoomControl.zoomOutButton.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.graphNode.yZoomControl.zoomOutButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5279,7 +5279,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5292,7 +5292,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.panel": {
+    "naturalSelection.labScreen.view.populationNode.panel": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5305,7 +5305,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.brownFurCheckbox": {
+    "naturalSelection.labScreen.view.populationNode.panel.brownFurCheckbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5318,7 +5318,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.brownFurCheckbox.enabledProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.brownFurCheckbox.enabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5331,7 +5331,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.brownFurCheckbox.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.brownFurCheckbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5344,7 +5344,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.brownFurCheckbox.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.brownFurCheckbox.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5357,7 +5357,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.panel.brownFurCheckbox.property": {
+    "naturalSelection.labScreen.view.populationNode.panel.brownFurCheckbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5370,7 +5370,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.brownFurCheckbox.toggleAction": {
+    "naturalSelection.labScreen.view.populationNode.panel.brownFurCheckbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5383,7 +5383,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.brownFurCheckbox.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.brownFurCheckbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5396,7 +5396,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.floppyEarsCheckbox": {
+    "naturalSelection.labScreen.view.populationNode.panel.floppyEarsCheckbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5409,7 +5409,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.floppyEarsCheckbox.enabledProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.floppyEarsCheckbox.enabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5422,7 +5422,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.floppyEarsCheckbox.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.floppyEarsCheckbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5435,7 +5435,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.floppyEarsCheckbox.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.floppyEarsCheckbox.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5448,7 +5448,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.panel.floppyEarsCheckbox.property": {
+    "naturalSelection.labScreen.view.populationNode.panel.floppyEarsCheckbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5461,7 +5461,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.floppyEarsCheckbox.toggleAction": {
+    "naturalSelection.labScreen.view.populationNode.panel.floppyEarsCheckbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5474,7 +5474,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.floppyEarsCheckbox.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.floppyEarsCheckbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5487,7 +5487,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.longTeethCheckbox": {
+    "naturalSelection.labScreen.view.populationNode.panel.longTeethCheckbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5500,7 +5500,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.longTeethCheckbox.enabledProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.longTeethCheckbox.enabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5513,7 +5513,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.longTeethCheckbox.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.longTeethCheckbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5526,7 +5526,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.longTeethCheckbox.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.longTeethCheckbox.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5539,7 +5539,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.panel.longTeethCheckbox.property": {
+    "naturalSelection.labScreen.view.populationNode.panel.longTeethCheckbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5552,7 +5552,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.longTeethCheckbox.toggleAction": {
+    "naturalSelection.labScreen.view.populationNode.panel.longTeethCheckbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5565,7 +5565,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.longTeethCheckbox.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.longTeethCheckbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5578,7 +5578,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5591,7 +5591,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5604,7 +5604,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.panel.separator": {
+    "naturalSelection.labScreen.view.populationNode.panel.separator": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5617,7 +5617,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.separator.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.separator.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5630,7 +5630,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.separator.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.separator.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5643,7 +5643,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.panel.separator.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.separator.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5656,7 +5656,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.shortTeethCheckbox": {
+    "naturalSelection.labScreen.view.populationNode.panel.shortTeethCheckbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5669,7 +5669,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.shortTeethCheckbox.enabledProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.shortTeethCheckbox.enabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5682,7 +5682,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.shortTeethCheckbox.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.shortTeethCheckbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5695,7 +5695,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.shortTeethCheckbox.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.shortTeethCheckbox.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5708,7 +5708,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.panel.shortTeethCheckbox.property": {
+    "naturalSelection.labScreen.view.populationNode.panel.shortTeethCheckbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5721,7 +5721,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.shortTeethCheckbox.toggleAction": {
+    "naturalSelection.labScreen.view.populationNode.panel.shortTeethCheckbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5734,7 +5734,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.shortTeethCheckbox.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.shortTeethCheckbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5747,7 +5747,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.straightEarsCheckbox": {
+    "naturalSelection.labScreen.view.populationNode.panel.straightEarsCheckbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5760,7 +5760,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.straightEarsCheckbox.enabledProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.straightEarsCheckbox.enabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5773,7 +5773,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.straightEarsCheckbox.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.straightEarsCheckbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5786,7 +5786,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.straightEarsCheckbox.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.straightEarsCheckbox.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5799,7 +5799,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.panel.straightEarsCheckbox.property": {
+    "naturalSelection.labScreen.view.populationNode.panel.straightEarsCheckbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5812,7 +5812,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.straightEarsCheckbox.toggleAction": {
+    "naturalSelection.labScreen.view.populationNode.panel.straightEarsCheckbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5825,7 +5825,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.straightEarsCheckbox.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.straightEarsCheckbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5838,7 +5838,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.totalCheckbox": {
+    "naturalSelection.labScreen.view.populationNode.panel.totalCheckbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5851,7 +5851,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.totalCheckbox.enabledProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.totalCheckbox.enabledProperty": {
       "phetioDocumentation": "When disabled, the checkbox is grayed out and cannot be pressed.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5864,7 +5864,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.totalCheckbox.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.totalCheckbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5877,7 +5877,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.totalCheckbox.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.totalCheckbox.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5890,7 +5890,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.panel.totalCheckbox.property": {
+    "naturalSelection.labScreen.view.populationNode.panel.totalCheckbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5903,7 +5903,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.totalCheckbox.toggleAction": {
+    "naturalSelection.labScreen.view.populationNode.panel.totalCheckbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5916,7 +5916,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.totalCheckbox.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.totalCheckbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5929,7 +5929,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.valuesMarkerCheckbox": {
+    "naturalSelection.labScreen.view.populationNode.panel.valuesMarkerCheckbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5942,7 +5942,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.valuesMarkerCheckbox.enabledProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.valuesMarkerCheckbox.enabledProperty": {
       "phetioDocumentation": "When disabled, the checkbox is grayed out and cannot be pressed.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5955,7 +5955,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.valuesMarkerCheckbox.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.valuesMarkerCheckbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5968,7 +5968,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.valuesMarkerCheckbox.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.valuesMarkerCheckbox.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5981,7 +5981,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.panel.valuesMarkerCheckbox.property": {
+    "naturalSelection.labScreen.view.populationNode.panel.valuesMarkerCheckbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -5994,7 +5994,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.valuesMarkerCheckbox.toggleAction": {
+    "naturalSelection.labScreen.view.populationNode.panel.valuesMarkerCheckbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6007,7 +6007,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.valuesMarkerCheckbox.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.valuesMarkerCheckbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6020,7 +6020,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6033,7 +6033,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.whiteFurCheckbox": {
+    "naturalSelection.labScreen.view.populationNode.panel.whiteFurCheckbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6046,7 +6046,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.whiteFurCheckbox.enabledProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.whiteFurCheckbox.enabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6059,7 +6059,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.whiteFurCheckbox.opacityProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.whiteFurCheckbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6072,7 +6072,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.whiteFurCheckbox.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.whiteFurCheckbox.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6085,7 +6085,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.panel.whiteFurCheckbox.property": {
+    "naturalSelection.labScreen.view.populationNode.panel.whiteFurCheckbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6098,7 +6098,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.populationNode.panel.whiteFurCheckbox.toggleAction": {
+    "naturalSelection.labScreen.view.populationNode.panel.whiteFurCheckbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6111,7 +6111,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.panel.whiteFurCheckbox.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.panel.whiteFurCheckbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6124,7 +6124,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.populationNode.pickableProperty": {
+    "naturalSelection.labScreen.view.populationNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6137,7 +6137,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.populationNode.visibleProperty": {
+    "naturalSelection.labScreen.view.populationNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6150,7 +6150,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.proportionsNode": {
+    "naturalSelection.labScreen.view.proportionsNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6163,7 +6163,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.proportionsNode.graphNode": {
+    "naturalSelection.labScreen.view.proportionsNode.graphNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6176,7 +6176,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.proportionsNode.graphNode.generationControl": {
+    "naturalSelection.labScreen.view.proportionsNode.graphNode.generationControl": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6189,7 +6189,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.proportionsNode.graphNode.generationControl.opacityProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.graphNode.generationControl.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6202,7 +6202,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.proportionsNode.graphNode.generationControl.pickableProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.graphNode.generationControl.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6215,7 +6215,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.proportionsNode.graphNode.generationControl.visibleProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.graphNode.generationControl.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6228,7 +6228,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.proportionsNode.graphNode.opacityProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.graphNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6241,7 +6241,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.proportionsNode.graphNode.pickableProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.graphNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6254,7 +6254,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.proportionsNode.graphNode.visibleProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.graphNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6267,7 +6267,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.proportionsNode.opacityProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6280,7 +6280,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel": {
+    "naturalSelection.labScreen.view.proportionsNode.panel": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6293,7 +6293,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6306,7 +6306,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.brownFurNode": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.brownFurNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6319,7 +6319,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.brownFurNode.opacityProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.brownFurNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6332,7 +6332,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.brownFurNode.pickableProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.brownFurNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6345,7 +6345,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.brownFurNode.visibleProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.brownFurNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6358,7 +6358,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.floppyEarsNode": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.floppyEarsNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6371,7 +6371,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.floppyEarsNode.opacityProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.floppyEarsNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6384,7 +6384,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.floppyEarsNode.pickableProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.floppyEarsNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6397,7 +6397,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.floppyEarsNode.visibleProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.floppyEarsNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6410,7 +6410,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.longTeethNode": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.longTeethNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6423,7 +6423,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.longTeethNode.opacityProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.longTeethNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6436,7 +6436,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.longTeethNode.pickableProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.longTeethNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6449,7 +6449,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.longTeethNode.visibleProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.longTeethNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6462,7 +6462,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.opacityProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6475,7 +6475,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.pickableProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6488,7 +6488,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.shortTeethNode": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.shortTeethNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6501,7 +6501,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.shortTeethNode.opacityProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.shortTeethNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6514,7 +6514,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.shortTeethNode.pickableProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.shortTeethNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6527,7 +6527,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.shortTeethNode.visibleProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.shortTeethNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6540,7 +6540,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.straightEarsNode": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.straightEarsNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6553,7 +6553,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.straightEarsNode.opacityProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.straightEarsNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6566,7 +6566,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.straightEarsNode.pickableProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.straightEarsNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6579,7 +6579,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.straightEarsNode.visibleProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.straightEarsNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6592,7 +6592,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.visibleProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6605,7 +6605,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.whiteFurNode": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.whiteFurNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6618,7 +6618,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.whiteFurNode.opacityProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.whiteFurNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6631,7 +6631,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.whiteFurNode.pickableProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.whiteFurNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6644,7 +6644,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.legendNode.whiteFurNode.visibleProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.legendNode.whiteFurNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6657,7 +6657,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.opacityProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6670,7 +6670,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.pickableProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6683,7 +6683,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.separator": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.separator": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6696,7 +6696,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.separator.opacityProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.separator.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6709,7 +6709,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.separator.pickableProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.separator.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6722,7 +6722,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.separator.visibleProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.separator.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6735,7 +6735,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.valuesCheckbox": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.valuesCheckbox": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6748,7 +6748,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.valuesCheckbox.enabledProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.valuesCheckbox.enabledProperty": {
       "phetioDocumentation": "When disabled, the checkbox is grayed out and cannot be pressed.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6761,7 +6761,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.valuesCheckbox.opacityProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.valuesCheckbox.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6774,7 +6774,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.valuesCheckbox.pickableProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.valuesCheckbox.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6787,7 +6787,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.valuesCheckbox.property": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.valuesCheckbox.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6800,7 +6800,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.valuesCheckbox.toggleAction": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.valuesCheckbox.toggleAction": {
       "phetioDocumentation": "Emits when user input causes the checkbox to toggle, emitting a single arg: the new boolean value of the checkbox state. The arguments are:<br/><ol><li>isChecked: BooleanIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6813,7 +6813,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.valuesCheckbox.visibleProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.valuesCheckbox.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6826,7 +6826,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.proportionsNode.panel.visibleProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.panel.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6839,7 +6839,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.proportionsNode.pickableProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6852,7 +6852,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.proportionsNode.visibleProperty": {
+    "naturalSelection.labScreen.view.proportionsNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6865,7 +6865,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.resetAllButton": {
+    "naturalSelection.labScreen.view.resetAllButton": {
       "phetioDocumentation": "The orange, round button that can be used to restore the initial state",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6878,7 +6878,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ResetAllButtonIO"
     },
-    "naturalSelection.lab.view.resetAllButton.enabledProperty": {
+    "naturalSelection.labScreen.view.resetAllButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6891,7 +6891,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.resetAllButton.firedEmitter": {
+    "naturalSelection.labScreen.view.resetAllButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6904,7 +6904,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.lab.view.resetAllButton.isFiringProperty": {
+    "naturalSelection.labScreen.view.resetAllButton.isFiringProperty": {
       "phetioDocumentation": "Temporarily becomes true while the Reset All button is firing.  Commonly used to disable audio effects during reset.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6917,7 +6917,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "DerivedPropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.resetAllButton.opacityProperty": {
+    "naturalSelection.labScreen.view.resetAllButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6930,7 +6930,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.resetAllButton.pickableProperty": {
+    "naturalSelection.labScreen.view.resetAllButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6943,7 +6943,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.resetAllButton.pressListener.pressAction": {
+    "naturalSelection.labScreen.view.resetAllButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6956,7 +6956,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.lab.view.resetAllButton.pressListener.releaseAction": {
+    "naturalSelection.labScreen.view.resetAllButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6969,7 +6969,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.lab.view.resetAllButton.visibleProperty": {
+    "naturalSelection.labScreen.view.resetAllButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6982,7 +6982,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.timeControlNode": {
+    "naturalSelection.labScreen.view.timeControlNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -6995,7 +6995,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.timeControlNode.enabledProperty": {
+    "naturalSelection.labScreen.view.timeControlNode.enabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7008,7 +7008,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.timeControlNode.opacityProperty": {
+    "naturalSelection.labScreen.view.timeControlNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7021,7 +7021,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.timeControlNode.pickableProperty": {
+    "naturalSelection.labScreen.view.timeControlNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7034,7 +7034,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.timeControlNode.playPauseButton": {
+    "naturalSelection.labScreen.view.timeControlNode.playPauseButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7047,7 +7047,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ToggleButtonIO"
     },
-    "naturalSelection.lab.view.timeControlNode.playPauseButton.enabledProperty": {
+    "naturalSelection.labScreen.view.timeControlNode.playPauseButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7060,7 +7060,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.timeControlNode.playPauseButton.opacityProperty": {
+    "naturalSelection.labScreen.view.timeControlNode.playPauseButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7073,7 +7073,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.timeControlNode.playPauseButton.pickableProperty": {
+    "naturalSelection.labScreen.view.timeControlNode.playPauseButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7086,7 +7086,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.timeControlNode.playPauseButton.pressListener.pressAction": {
+    "naturalSelection.labScreen.view.timeControlNode.playPauseButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7099,7 +7099,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.lab.view.timeControlNode.playPauseButton.pressListener.releaseAction": {
+    "naturalSelection.labScreen.view.timeControlNode.playPauseButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7112,7 +7112,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.lab.view.timeControlNode.playPauseButton.property": {
+    "naturalSelection.labScreen.view.timeControlNode.playPauseButton.property": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7125,7 +7125,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "naturalSelection.lab.view.timeControlNode.playPauseButton.toggleNode": {
+    "naturalSelection.labScreen.view.timeControlNode.playPauseButton.toggleNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7138,7 +7138,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.timeControlNode.playPauseButton.toggleNode.opacityProperty": {
+    "naturalSelection.labScreen.view.timeControlNode.playPauseButton.toggleNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7151,7 +7151,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.timeControlNode.playPauseButton.toggleNode.pickableProperty": {
+    "naturalSelection.labScreen.view.timeControlNode.playPauseButton.toggleNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7164,7 +7164,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.timeControlNode.playPauseButton.toggleNode.visibleProperty": {
+    "naturalSelection.labScreen.view.timeControlNode.playPauseButton.toggleNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7177,7 +7177,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.timeControlNode.playPauseButton.toggledEmitter": {
+    "naturalSelection.labScreen.view.timeControlNode.playPauseButton.toggledEmitter": {
       "phetioDocumentation": "Emits when the button is toggled No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7190,7 +7190,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.lab.view.timeControlNode.playPauseButton.visibleProperty": {
+    "naturalSelection.labScreen.view.timeControlNode.playPauseButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7203,7 +7203,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.timeControlNode.stepForwardButton": {
+    "naturalSelection.labScreen.view.timeControlNode.stepForwardButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7216,7 +7216,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.timeControlNode.stepForwardButton.enabledProperty": {
+    "naturalSelection.labScreen.view.timeControlNode.stepForwardButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7229,7 +7229,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.timeControlNode.stepForwardButton.firedEmitter": {
+    "naturalSelection.labScreen.view.timeControlNode.stepForwardButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7242,7 +7242,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.lab.view.timeControlNode.stepForwardButton.opacityProperty": {
+    "naturalSelection.labScreen.view.timeControlNode.stepForwardButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7255,7 +7255,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.timeControlNode.stepForwardButton.pickableProperty": {
+    "naturalSelection.labScreen.view.timeControlNode.stepForwardButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7268,7 +7268,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.timeControlNode.stepForwardButton.pressListener.pressAction": {
+    "naturalSelection.labScreen.view.timeControlNode.stepForwardButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7281,7 +7281,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.lab.view.timeControlNode.stepForwardButton.pressListener.releaseAction": {
+    "naturalSelection.labScreen.view.timeControlNode.stepForwardButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7294,7 +7294,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.lab.view.timeControlNode.stepForwardButton.visibleProperty": {
+    "naturalSelection.labScreen.view.timeControlNode.stepForwardButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7307,7 +7307,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.timeControlNode.visibleProperty": {
+    "naturalSelection.labScreen.view.timeControlNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7320,7 +7320,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.viewProperties.graphProperty": {
+    "naturalSelection.labScreen.view.viewProperties.graphProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7333,7 +7333,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<EnumerationIO(POPULATION|PROPORTIONS|PEDIGREE)>"
     },
-    "naturalSelection.lab.view.viewportNode": {
+    "naturalSelection.labScreen.view.viewportNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7346,7 +7346,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.viewportNode.addAMateButton": {
+    "naturalSelection.labScreen.view.viewportNode.addAMateButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7359,7 +7359,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.viewportNode.addAMateButton.enabledProperty": {
+    "naturalSelection.labScreen.view.viewportNode.addAMateButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7372,7 +7372,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.viewportNode.addAMateButton.firedEmitter": {
+    "naturalSelection.labScreen.view.viewportNode.addAMateButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7385,7 +7385,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.lab.view.viewportNode.addAMateButton.opacityProperty": {
+    "naturalSelection.labScreen.view.viewportNode.addAMateButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7398,7 +7398,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.viewportNode.addAMateButton.pickableProperty": {
+    "naturalSelection.labScreen.view.viewportNode.addAMateButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7411,7 +7411,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.viewportNode.addAMateButton.pressListener.pressAction": {
+    "naturalSelection.labScreen.view.viewportNode.addAMateButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7424,7 +7424,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.lab.view.viewportNode.addAMateButton.pressListener.releaseAction": {
+    "naturalSelection.labScreen.view.viewportNode.addAMateButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7437,7 +7437,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.lab.view.viewportNode.addAMateButton.visibleProperty": {
+    "naturalSelection.labScreen.view.viewportNode.addAMateButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7450,7 +7450,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.viewportNode.environmentRadioButtonGroup": {
+    "naturalSelection.labScreen.view.viewportNode.environmentRadioButtonGroup": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7463,7 +7463,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.viewportNode.environmentRadioButtonGroup.opacityProperty": {
+    "naturalSelection.labScreen.view.viewportNode.environmentRadioButtonGroup.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7476,7 +7476,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.viewportNode.environmentRadioButtonGroup.pickableProperty": {
+    "naturalSelection.labScreen.view.viewportNode.environmentRadioButtonGroup.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7489,7 +7489,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.viewportNode.environmentRadioButtonGroup.visibleProperty": {
+    "naturalSelection.labScreen.view.viewportNode.environmentRadioButtonGroup.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7502,7 +7502,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.viewportNode.generationClockNode": {
+    "naturalSelection.labScreen.view.viewportNode.generationClockNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7515,7 +7515,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.viewportNode.generationClockNode.opacityProperty": {
+    "naturalSelection.labScreen.view.viewportNode.generationClockNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7528,7 +7528,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.viewportNode.generationClockNode.pickableProperty": {
+    "naturalSelection.labScreen.view.viewportNode.generationClockNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7541,7 +7541,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.viewportNode.generationClockNode.visibleProperty": {
+    "naturalSelection.labScreen.view.viewportNode.generationClockNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7554,7 +7554,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.viewportNode.opacityProperty": {
+    "naturalSelection.labScreen.view.viewportNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7567,7 +7567,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.viewportNode.pickableProperty": {
+    "naturalSelection.labScreen.view.viewportNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7580,7 +7580,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.viewportNode.playAgainButton": {
+    "naturalSelection.labScreen.view.viewportNode.playAgainButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7593,7 +7593,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "naturalSelection.lab.view.viewportNode.playAgainButton.enabledProperty": {
+    "naturalSelection.labScreen.view.viewportNode.playAgainButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7606,7 +7606,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.viewportNode.playAgainButton.firedEmitter": {
+    "naturalSelection.labScreen.view.viewportNode.playAgainButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7619,7 +7619,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "naturalSelection.lab.view.viewportNode.playAgainButton.opacityProperty": {
+    "naturalSelection.labScreen.view.viewportNode.playAgainButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7632,7 +7632,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.lab.view.viewportNode.playAgainButton.pickableProperty": {
+    "naturalSelection.labScreen.view.viewportNode.playAgainButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7645,7 +7645,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "naturalSelection.lab.view.viewportNode.playAgainButton.pressListener.pressAction": {
+    "naturalSelection.labScreen.view.viewportNode.playAgainButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the Event. The arguments are:<br/><ol><li>event: EventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7658,7 +7658,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<EventIO>"
     },
-    "naturalSelection.lab.view.viewportNode.playAgainButton.pressListener.releaseAction": {
+    "naturalSelection.labScreen.view.viewportNode.playAgainButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<EventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7671,7 +7671,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<EventIO>>"
     },
-    "naturalSelection.lab.view.viewportNode.playAgainButton.visibleProperty": {
+    "naturalSelection.labScreen.view.viewportNode.playAgainButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7684,7 +7684,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.viewportNode.visibleProperty": {
+    "naturalSelection.labScreen.view.viewportNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -7697,7 +7697,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.lab.view.visibleProperty": {
+    "naturalSelection.labScreen.view.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
