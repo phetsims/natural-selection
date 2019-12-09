@@ -47,10 +47,10 @@ define( require => {
       // Because it's instrumented for PhET-iO, the control panel must be created regardless of the value
       // of ?allelesVisible. If ?allelesVisible=false, it will not be added to the scenegraph, but will
       // still appear in the Studio element tree.
-      const panel = new AllelesPanel( pedigreeModel, {
+      const allelesPanel = new AllelesPanel( pedigreeModel, {
         fixedWidth: controlPanelWidth,
         maxHeight: size.height,
-        tandem: options.tandem.createTandem( 'panel' )
+        tandem: options.tandem.createTandem( 'allelesPanel' )
       } );
 
       const graphNode = new PedigreeGraphNode( pedigreeModel, {
@@ -61,7 +61,7 @@ define( require => {
 
       assert && assert( !options.children, 'PedigreeNode sets children' );
       options.children = NaturalSelectionQueryParameters.allelesVisible ?
-        [ panel, graphNode ] :
+        [ allelesPanel, graphNode ] :
         [ graphNode ];
 
       super( options );
