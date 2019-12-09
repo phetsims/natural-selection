@@ -16,6 +16,7 @@ define( require => {
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const Range = require( 'DOT/Range' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // strings
   const generationValueString = require( 'string!NATURAL_SELECTION/generationValue' );
@@ -29,19 +30,26 @@ define( require => {
     constructor( generationProperty, options ) {
 
       options = merge( {
-        spacing: 10
+        spacing: 10,
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       // Previous button, decrements the generation number
       const previousButton = new ArrowButton( 'left',
         () => generationProperty.value--,
-        NaturalSelectionConstants.ARROW_BUTTON_OPTIONS
+        merge( {
+          tandem: options.tandem.createTandem( 'previousButton' )
+        }, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS )
       );
 
       // Next button, increments the generation number
       const nextButton = new ArrowButton( 'right',
         () => generationProperty.value++,
-        NaturalSelectionConstants.ARROW_BUTTON_OPTIONS
+        merge( {
+          tandem: options.tandem.createTandem( 'nextButton' )
+        }, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS )
       );
 
       // Generation number display

@@ -52,21 +52,21 @@ define( require => {
         {
           value: Graphs.POPULATION,
           node: new Text( populationString, TEXT_OPTIONS ),
-          tandem: options.tandem.createTandem( 'populationRadioButton' )
+          tandemName: 'populationRadioButton'
         },
 
         // Proportions
         {
           value: Graphs.PROPORTIONS,
           node: new Text( proportionsString, TEXT_OPTIONS ),
-          tandem: options.tandem.createTandem( 'proportionsRadioButton' )
+          tandemName: 'proportionsRadioButton'
         },
 
         // Pedigree
         {
           value: Graphs.PEDIGREE,
           node: new Text( pedigreeString, TEXT_OPTIONS ),
-          tandem: options.tandem.createTandem( 'pedigreeRadioButton' )
+          tandemName: 'pedigreeRadioButton'
         }
       ];
 

@@ -26,6 +26,7 @@ define( require => {
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
   const Shape = require( 'KITE/Shape' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const ValuesMarkerDragListener = require( 'NATURAL_SELECTION/common/view/population/ValuesMarkerDragListener' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -54,7 +55,10 @@ define( require => {
     constructor( populationModel, originX, graphWidth, graphHeight, options ) {
 
       options = merge( {
-        cursor: 'ew-resize' // <->
+        cursor: 'ew-resize', // <->
+
+        // phet-io
+        tandem: Tandem.required
       }, options );
 
       // Vertical bar
@@ -108,7 +112,8 @@ define( require => {
       this.locationProperty = new Property( new Vector2( originX, 0 ) );
 
       this.addInputListener( new ValuesMarkerDragListener( this.locationProperty, new Range( originX, originX + graphWidth ), {
-        pressCursor: options.cursor
+        pressCursor: options.cursor,
+        tandem: options.tandem.createTandem( 'dragListener' )
       } ) );
 
       // visibility of Values Marker
