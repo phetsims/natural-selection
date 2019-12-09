@@ -20,6 +20,7 @@ define( require => {
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
   const SunConstants = require( 'SUN/SunConstants' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -51,7 +52,11 @@ define( require => {
      */
     constructor( pedigreeModel, options ) {
 
-      options = merge( {}, NaturalSelectionConstants.PANEL_OPTIONS, options );
+      options = merge( {
+
+        // phet-io
+        tandem: Tandem.required
+      }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
       // To make the abbreviation + icon for all alleles the same effective size
       const alleleAlignGroup = new AlignGroup();
@@ -63,7 +68,8 @@ define( require => {
           // Alleles
           new Text( allelesString, {
             font: NaturalSelectionConstants.TITLE_FONT,
-            maxWidth: 125 // determined empirically
+            maxWidth: 125, // determined empirically
+            tandem: options.tandem.createTandem( 'title' )
           } ),
 
           // Fur
@@ -71,7 +77,9 @@ define( require => {
             furString, furDominantString, furRecessiveString,
             brownFurImage, whiteFurImage,
             pedigreeModel.furVisibleProperty, pedigreeModel.furEnabledProperty,
-            alleleAlignGroup
+            alleleAlignGroup, {
+              tandem: options.tandem.createTandem( 'furRow' )
+            }
           ),
 
           // Ears
@@ -79,7 +87,9 @@ define( require => {
             earsString, earsDominantString, earsRecessiveString,
             straightEarsImage, floppyEarsImage,
             pedigreeModel.earsVisibleProperty, pedigreeModel.earsEnabledProperty,
-            alleleAlignGroup
+            alleleAlignGroup, {
+              tandem: options.tandem.createTandem( 'earsRow' )
+            }
           ),
 
           // Teeth
@@ -87,7 +97,9 @@ define( require => {
             teethString, teethDominantString, teethRecessiveString,
             longTeethImage, shortTeethImage,
             pedigreeModel.teethVisibleProperty, pedigreeModel.teethEnabledProperty,
-            alleleAlignGroup
+            alleleAlignGroup, {
+              tandem: options.tandem.createTandem( 'teethRow' )
+            }
           )
         ]
       } ) );
@@ -114,15 +126,26 @@ define( require => {
      * @param {Property.<boolean>} visibleProperty
      * @param {Property.<boolean>} enabledProperty
      * @param {AlignGroup} alignGroup
+     * @param {Object} [options]
      */
     constructor( labelString, dominantString, recessiveString, mutationIcon, nonMutationIcon,
-                 visibleProperty, enabledProperty, alignGroup ) {
+                 visibleProperty, enabledProperty, alignGroup, options ) {
+
+      options = merge( {
+
+        // phet-io
+        tandem: Tandem.required
+      }, options );
 
       const labelNode = new Text( labelString, {
         font: NaturalSelectionConstants.CHECKBOX_FONT,
         maxWidth: 100 // determined empirically
       } );
-      const checkbox = new Checkbox( labelNode, visibleProperty, NaturalSelectionConstants.CHECKBOX_OPTIONS );
+      const checkbox = new Checkbox( labelNode, visibleProperty,
+        merge( {
+          tandem: options.tandem.createTandem( 'checkbox' )
+        }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
+      );
 
       // common options
       const textOptions = {
