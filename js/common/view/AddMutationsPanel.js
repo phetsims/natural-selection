@@ -107,22 +107,30 @@ define( require => {
         ]
       } );
 
-      //TODO #26 PhET-iO instrumentation for rows
       // A row for each trait
       const furRow = new Row( furString, NaturalSelectionColors.FUR,
         brownFurImage, whiteFurImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
         () => furMutationEmitter.emit(), //TODO args
-        () => furMutationEmitter.emit() //TODO args
+        () => furMutationEmitter.emit(), //TODO args
+        {
+          tandem: options.tandem.createTandem( 'furRow' )
+        }
       );
       const earsRow = new Row( earsString, NaturalSelectionColors.EARS,
         floppyEarsImage, straightEarsImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
         () => earsMutationEmitter.emit(), //TODO args
-        () => earsMutationEmitter.emit() //TODO args
+        () => earsMutationEmitter.emit(), //TODO args
+        {
+          tandem: options.tandem.createTandem( 'earsRow' )
+        }
       );
       const teethRow = new Row( teethString, NaturalSelectionColors.TEETH,
         longTeethImage, shortTeethImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
         () => teethMutationEmitter.emit(), //TODO args
-        () => teethMutationEmitter.emit() //TODO args
+        () => teethMutationEmitter.emit(), //TODO args
+        {
+          tandem: options.tandem.createTandem( 'teethRow' )
+        }
       );
       const rows = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         children: [ furRow, earsRow, teethRow ]
@@ -233,10 +241,17 @@ define( require => {
      * @param {AlignGroup} buttonColumnsAlignGroup
      * @param {function} dominantListener
      * @param {function} recessiveListener
+     * @param {Object} [options]
      */
     constructor( traitName, traitColor, mutationIcon, nonMutationIcon,
                  iconAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
-                 dominantListener, recessiveListener ) {
+                 dominantListener, recessiveListener, options ) {
+
+      options = merge( {
+
+        // phet-io
+        tandem: Tandem.required
+      }, options );
 
       // label that indicates the trait name, to the left of buttons
       const labelNode = new Text( traitName, {
@@ -248,24 +263,28 @@ define( require => {
         xAlign: LABEL_COLUMN_X_ALIGN
       } );
 
-      // buttons, both with the same (mutation) icon
+      // dominant push button
       const dominantButton = new RectangularPushButton( {
         baseColor: NaturalSelectionColors.ADD_MUTATION_BUTTONS,
         cornerRadius: BUTTON_CORNER_RADIUS,
         content: new AlignBox( new Image( mutationIcon, {
           scale: BUTTON_ICON_SCALE
-        } ), { group: iconAlignGroup } )
+        } ), { group: iconAlignGroup } ),
+        tandem: options.tandem.createTandem( 'dominantButton' )
       } );
       const dominantButtonWrapper = new AlignBox( dominantButton, {
         group: buttonColumnsAlignGroup,
         xAlign: BUTTON_COLUMNS_X_ALIGN
       } );
+
+      // recessive push button
       const recessiveButton = new RectangularPushButton( {
         baseColor: NaturalSelectionColors.ADD_MUTATION_BUTTONS,
         cornerRadius: BUTTON_CORNER_RADIUS,
         content: new AlignBox( new Image( mutationIcon, {
           scale: BUTTON_ICON_SCALE
-        } ), { group: iconAlignGroup } )
+        } ), { group: iconAlignGroup } ),
+        tandem: options.tandem.createTandem( 'recessiveButton' )
       } );
       const recessiveButtonWrapper = new AlignBox( recessiveButton, {
         group: buttonColumnsAlignGroup,
