@@ -25,10 +25,10 @@ define( require => {
 
     /**
      * @param {GenerationClock} generationClock
-     * @param {Property.<boolean>} selectionAgentsEnabledProperty
+     * @param {Property.<boolean>} environmentalFactorEnabledProperty
      * @param {Object} [options]
      */
-    constructor( generationClock, selectionAgentsEnabledProperty, options ) {
+    constructor( generationClock, environmentalFactorEnabledProperty, options ) {
 
       // The full center of the clock.
       const fullCircle = new Circle( RADIUS, {
@@ -37,15 +37,15 @@ define( require => {
         lineWidth: LINE_WIDTH
       } );
 
-      // The part of the circle that denotes when the selection agents are active, and bunnies may die.
-      // Visible only when some selection agent is enabled.
-      const selectionAgentStartAngle = START_ANGLE + generationClock.selectionAgentPercentRange.min * 2 * Math.PI;
-      const selectionAgentEndAngle = START_ANGLE + generationClock.selectionAgentPercentRange.max * 2 * Math.PI;
-      const selectionAgentShape = new Shape()
+      // The part of the circle that denotes when the environmental factors are active, and bunnies may die.
+      // Visible only when some environmental factor is enabled.
+      const environmentalFactorStartAngle = START_ANGLE + generationClock.environmentalFactorPercentRange.min * 2 * Math.PI;
+      const environmentalFactorEndAngle = START_ANGLE + generationClock.environmentalFactorPercentRange.max * 2 * Math.PI;
+      const environmentalFactorShape = new Shape()
         .moveTo( 0, 0 )
-        .arc( 0, 0, RADIUS, selectionAgentStartAngle, selectionAgentEndAngle )
+        .arc( 0, 0, RADIUS, environmentalFactorStartAngle, environmentalFactorEndAngle )
         .close();
-      const selectionAgentPath = new Path( selectionAgentShape, {
+      const environmentalFactorPath = new Path( environmentalFactorShape, {
         fill: 'rgb( 102, 102, 102 )' // dark gray
       } );
 
@@ -59,7 +59,7 @@ define( require => {
 
       // Layering order here is important!
       assert && assert( !options.children, 'GenerationClockNode sets children' );
-      options.children = [ fullCircle, selectionAgentPath, revealArc ];
+      options.children = [ fullCircle, environmentalFactorPath, revealArc ];
 
       super( options );
 
@@ -71,10 +71,10 @@ define( require => {
           .close();
       } );
 
-      // Show selectionAgentPath if some selection agent is enabled.
+      // Show environmentalFactorPath if some environmental factor is enabled.
       // unlink is unnecessary, exists for the lifetime of the sim.
-      selectionAgentsEnabledProperty.link( selectionAgentsEnabled => {
-        selectionAgentPath.visible = selectionAgentsEnabled;
+      environmentalFactorEnabledProperty.link( environmentalFactorEnabled => {
+        environmentalFactorPath.visible = environmentalFactorEnabled;
       } );
     }
 

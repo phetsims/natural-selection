@@ -34,8 +34,8 @@ define( require => {
       this.toughFood = new ToughFood( tandem.createTandem( 'toughFood' ) );
       this.limitedFood = new LimitedFood( tandem.createTandem( 'limitedFood' ) );
 
-      // @public whether any selection agent is enabled
-      this.selectionAgentsEnabledProperty = new DerivedProperty(
+      // @public whether any environmental factor is enabled
+      this.environmentalFactorEnabledProperty = new DerivedProperty(
         [ this.wolves.enabledProperty, this.toughFood.enabledProperty, this.limitedFood.enabledProperty ],
         ( wolvesEnabled, touchFooEnabled, limitedFoodEnabled ) =>
           ( wolvesEnabled || touchFooEnabled || limitedFoodEnabled )

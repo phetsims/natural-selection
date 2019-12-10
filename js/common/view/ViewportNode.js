@@ -55,7 +55,7 @@ define( require => {
 
       // Generation clock
       const generationClockNode = new GenerationClockNode( model.generationClock,
-        model.environmentModel.selectionAgentsEnabledProperty, {
+        model.environmentModel.environmentalFactorEnabledProperty, {
           centerX: frameNode.centerX,
           top: frameNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN,
           tandem: options.tandem.createTandem( 'generationClockNode' )

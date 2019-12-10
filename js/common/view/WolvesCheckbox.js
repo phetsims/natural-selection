@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * WolvesCheckbox is a checkbox for enabling the 'wolves' selection agent.
+ * WolvesCheckbox is a checkbox for enabling the 'wolves' environmental factor.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

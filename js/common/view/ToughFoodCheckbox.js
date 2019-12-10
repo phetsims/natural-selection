@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ToughFoodCheckbox is a checkbox for enabling the 'tough food' selection agent.
+ * ToughFoodCheckbox is a checkbox for enabling the 'tough food' environmental factor.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
