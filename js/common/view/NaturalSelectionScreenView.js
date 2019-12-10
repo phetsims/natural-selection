@@ -184,14 +184,6 @@ define( require => {
     step( dt ) {
       //TODO
     }
-
-    /**
-     * Cancels a scheduled mutation.
-     * @private
-     */
-    cancelMutation() {
-      //TODO
-    }
   }
 
   return naturalSelection.register( 'NaturalSelectionScreenView', NaturalSelectionScreenView );
