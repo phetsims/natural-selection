@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ProportionsModel is the model used by the Proportion view.
+ * ProportionsModel is the sub-model used by the Proportion view.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

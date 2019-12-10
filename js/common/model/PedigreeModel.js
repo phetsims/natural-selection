@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * PedigreeModel is the model used by the Pedigree view.
+ * PedigreeModel is the sub-model used by the Pedigree view.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

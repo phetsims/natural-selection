@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * PopulationModel is the model used by the Population view.
+ * PopulationModel is the sub-model used by the Population view.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
