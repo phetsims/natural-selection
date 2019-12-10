@@ -206,8 +206,8 @@ define( require => {
         this.opacity = enabled ? 1 : SunConstants.DISABLED_OPACITY;
         checkbox.pickable = enabled;
 
-        //TODO don't show allele abbreviation and icon when disabled
-        // hBox.visible = enabled;
+        // don't show allele abbreviation and icon when disabled
+        hBox.visible = enabled;
 
         //TODO when enabled, set order of icons so that dominant is on the left
       } );
