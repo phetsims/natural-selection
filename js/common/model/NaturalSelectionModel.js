@@ -11,17 +11,12 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bunny = require( 'NATURAL_SELECTION/common/model/Bunny' );
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
-  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
-  const Environments = require( 'NATURAL_SELECTION/common/model/Environments' );
+  const EnvironmentModel = require( 'NATURAL_SELECTION/common/model/EnvironmentModel' );
   const GenerationClock = require( 'NATURAL_SELECTION/common/model/GenerationClock' );
-  const LimitedFood = require( 'NATURAL_SELECTION/common/model/LimitedFood' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const PedigreeModel = require( 'NATURAL_SELECTION/common/model/PedigreeModel' );
   const PopulationModel = require( 'NATURAL_SELECTION/common/model/PopulationModel' );
   const ProportionsModel = require( 'NATURAL_SELECTION/common/model/ProportionsModel' );
-  const ToughFood = require( 'NATURAL_SELECTION/common/model/ToughFood' );
-  const Wolves = require( 'NATURAL_SELECTION/common/model/Wolves' );
 
   class NaturalSelectionModel {
 
@@ -42,30 +37,16 @@ define( require => {
       // @public (read-only)
       this.generationClock = new GenerationClock( tandem.createTandem( 'generationClock' ) );
 
-      // @public the abiotic (physical, rather than biological) environment
-      this.environmentProperty = new EnumerationProperty( Environments, Environments.EQUATOR, {
-        tandem: tandem.createTandem( 'environmentProperty' )
-      } );
-
-      // @public (read-only) the biotic (biological, rather than physical) environmental factors
-      this.wolves = new Wolves( tandem.createTandem( 'wolves' ) );
-      this.toughFood = new ToughFood( tandem.createTandem( 'toughFood' ) );
-      this.limitedFood = new LimitedFood( tandem.createTandem( 'limitedFood' ) );
-
-      // @public whether any selection agent is enabled
-      this.selectionAgentsEnabledProperty = new DerivedProperty(
-        [ this.wolves.enabledProperty, this.toughFood.enabledProperty, this.limitedFood.enabledProperty ],
-        ( wolvesEnabled, touchFooEnabled, limitedFoodEnabled ) =>
-          ( wolvesEnabled || touchFooEnabled || limitedFoodEnabled )
-      );
-
-      // @public (read-only) {Bunny[]}
-      this.bunnies = [ Bunny.createDefault() ];
+      // @public (read-only)
+      this.environmentModel = new EnvironmentModel( tandem.createTandem( 'environmentModel' ) );
 
       // @public (read-only)
       this.populationModel = new PopulationModel( tandem.createTandem( 'populationModel' ) );
       this.proportionsModel = new ProportionsModel( tandem.createTandem( 'proportionsModel' ) );
       this.pedigreeModel = new PedigreeModel( tandem.createTandem( 'pedigreeModel' ) );
+
+      // @public (read-only) {Bunny[]}
+      this.bunnies = [ Bunny.createDefault() ];
     }
 
     /**
@@ -77,13 +58,12 @@ define( require => {
       // Properties
       this.isPlayingProperty.reset();
       this.mateWasAddedProperty.reset();
-      this.generationClock.reset();
-      this.environmentProperty.reset();
 
-      // subcomponents
-      this.wolves.reset();
-      this.toughFood.reset();
-      this.limitedFood.reset();
+      // Clock
+      this.generationClock.reset();
+
+      // sub-models
+      this.environmentModel.reset();
       this.populationModel.reset();
       this.proportionsModel.reset();
       this.pedigreeModel.reset();

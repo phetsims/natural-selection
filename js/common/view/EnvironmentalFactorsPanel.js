@@ -27,12 +27,10 @@ define( require => {
   class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
 
     /**
-     * @param {Property.<boolean>} wolvesEnabledProperty
-     * @param {Property.<boolean>} toughFoodEnabledProperty
-     * @param {Property.<boolean>} limitedFoodEnabledProperty
+     * @param {EnvironmentModel} environmentModel
      * @param {Object} [options]
      */
-    constructor( wolvesEnabledProperty, toughFoodEnabledProperty, limitedFoodEnabledProperty, options ) {
+    constructor( environmentModel, options ) {
 
       options = merge( {
 
@@ -51,17 +49,17 @@ define( require => {
           } ),
 
           // Wolves
-          new WolvesCheckbox( wolvesEnabledProperty, {
+          new WolvesCheckbox( environmentModel.wolves.enabledProperty, {
             tandem: options.tandem.createTandem( 'wolvesCheckbox' )
           } ),
 
           // Tough Food
-          new ToughFoodCheckbox( toughFoodEnabledProperty, {
+          new ToughFoodCheckbox( environmentModel.toughFood.enabledProperty, {
             tandem: options.tandem.createTandem( 'toughFoodCheckbox' )
           } ),
 
           // Limited Food
-          new LimitedFoodCheckbox( limitedFoodEnabledProperty, {
+          new LimitedFoodCheckbox( environmentModel.limitedFood.enabledProperty, {
             tandem: options.tandem.createTandem( 'limitedFoodCheckbox' )
           } )
         ]

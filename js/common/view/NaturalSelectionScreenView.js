@@ -27,6 +27,7 @@ define( require => {
   const Tandem = require( 'TANDEM/Tandem' );
   const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
   const ViewportNode = require( 'NATURAL_SELECTION/common/view/ViewportNode' );
+
   //TODO const WorldDialog = require( 'NATURAL_SELECTION/common/view/WorldDialog' );
 
   class NaturalSelectionScreenView extends ScreenView {
@@ -71,13 +72,12 @@ define( require => {
 
       const mutationAlertsNode = new MutationAlertsNode( addMutationsPanel );
 
-      const environmentalFactorsPanel = new EnvironmentalFactorsPanel(
-        model.wolves.enabledProperty, model.toughFood.enabledProperty, model.limitedFood.enabledProperty, {
-          fixedWidth: rightOfViewportWidth,
-          left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-          top: addMutationsPanel.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING,
-          tandem: options.tandem.createTandem( 'environmentalFactorsPanel' )
-        } );
+      const environmentalFactorsPanel = new EnvironmentalFactorsPanel( model.environmentModel, {
+        fixedWidth: rightOfViewportWidth,
+        left: viewportNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        top: addMutationsPanel.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING,
+        tandem: options.tandem.createTandem( 'environmentalFactorsPanel' )
+      } );
 
       // The graphs and their related controls fill the space below the viewport.
       const graphAreaSize = new Dimension2(

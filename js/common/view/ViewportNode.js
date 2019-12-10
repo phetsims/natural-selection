@@ -39,7 +39,8 @@ define( require => {
         tandem: Tandem.required
       }, options );
 
-      const environmentNode = new EnvironmentNode( model.environmentProperty, options.viewportSize, options.viewportHorizonY );
+      const environmentNode = new EnvironmentNode( model.environmentModel.environmentProperty,
+        options.viewportSize, options.viewportHorizonY );
 
       // Everything in the world, clipped to the viewport
       const worldContents = new Node( {
@@ -53,14 +54,15 @@ define( require => {
       } );
 
       // Generation clock
-      const generationClockNode = new GenerationClockNode( model.generationClock, model.selectionAgentsEnabledProperty, {
-        centerX: frameNode.centerX,
-        top: frameNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN,
-        tandem: options.tandem.createTandem( 'generationClockNode' )
-      } );
+      const generationClockNode = new GenerationClockNode( model.generationClock,
+        model.environmentModel.selectionAgentsEnabledProperty, {
+          centerX: frameNode.centerX,
+          top: frameNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN,
+          tandem: options.tandem.createTandem( 'generationClockNode' )
+        } );
 
       // Environment radio buttons
-      const environmentRadioButtonGroup = new EnvironmentRadioButtonGroup( model.environmentProperty, {
+      const environmentRadioButtonGroup = new EnvironmentRadioButtonGroup( model.environmentModel.environmentProperty, {
         right: frameNode.right - NaturalSelectionConstants.VIEWPORT_NODE_X_MARGIN,
         top: frameNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN,
         tandem: options.tandem.createTandem( 'environmentRadioButtonGroup' )
