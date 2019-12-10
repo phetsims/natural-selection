@@ -48,9 +48,9 @@ define( require => {
       } );
 
       // @public (read-only) the biotic (biological, rather than physical) environmental factors
-      this.wolves = new Wolves();
-      this.toughFood = new ToughFood();
-      this.limitedFood = new LimitedFood();
+      this.wolves = new Wolves( tandem.createTandem( 'wolves' ) );
+      this.toughFood = new ToughFood( tandem.createTandem( 'toughFood' ) );
+      this.limitedFood = new LimitedFood( tandem.createTandem( 'limitedFood' ) );
 
       // @public whether any selection agent is enabled
       this.selectionAgentsEnabledProperty = new DerivedProperty(

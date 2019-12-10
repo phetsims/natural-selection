@@ -13,8 +13,11 @@ define( require => {
 
   class LimitedFood extends EnvironmentalFactor {
 
-    constructor() {
-      super();
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
+      super( tandem );
       //TODO
     }
   }

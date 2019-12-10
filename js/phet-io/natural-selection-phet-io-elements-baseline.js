@@ -2653,6 +2653,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
+    "naturalSelection.labScreen.model.limitedFood.enabledProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
     "naturalSelection.labScreen.model.pedigreeModel.earsAllelesVisibleProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -2927,6 +2940,32 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "naturalSelection.labScreen.model.proportionsModel.valuesVisibleProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "naturalSelection.labScreen.model.toughFood.enabledProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "naturalSelection.labScreen.model.wolves.enabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,

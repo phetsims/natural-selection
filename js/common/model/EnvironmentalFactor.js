@@ -15,10 +15,15 @@ define( require => {
 
   class EnvironmentalFactor {
 
-    constructor() {
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
       // @public
-      this.enabledProperty = new BooleanProperty( false );
+      this.enabledProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'enabledProperty' )
+      } );
     }
 
     /**
