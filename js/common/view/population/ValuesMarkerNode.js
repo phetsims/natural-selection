@@ -29,6 +29,7 @@ define( require => {
   const ValuesMarkerDragListener = require( 'NATURAL_SELECTION/common/view/population/ValuesMarkerDragListener' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const Vector2 = require( 'DOT/Vector2' );
+  const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // constants
   const BAR_COLOR = 'rgb( 120, 120, 120 )';
@@ -87,14 +88,14 @@ define( require => {
       const longTeethDisplay = createDashedNumberDisplay( populationModel.longTeethCountProperty, NaturalSelectionColors.TEETH );
 
       // vertical layout of NumberDisplays 
-      const numberDisplays = new VBox( {
+      const numberDisplaysParent = new VBox( {
         spacing: 3,
         align: 'left'
         // children are set in multilink below
       } );
 
       assert && assert( !options.children, 'ValuesMarkerNode sets children' );
-      options.children = [ barNode, manipulator, numberDisplays ];
+      options.children = [ barNode, manipulator, numberDisplaysParent ];
 
       super( options );
 
@@ -118,7 +119,11 @@ define( require => {
         //TODO flip NumberDisplays around y axis at edges of graph
       } );
 
-      // When visibility of some quantity changes, change which NumberDisplays are children of numberDisplays.
+      // To add a bit of space above the top NumberDisplay, and so that  always has at least 1 child
+      // (and thus valid bounds) for layout.
+      const vStrut = new VStrut( 5 );
+
+      // When visibility of some quantity changes, change which NumberDisplays are children of numberDisplaysParent.
       Property.multilink( [
           populationModel.totalVisibleProperty,
           populationModel.whiteFurVisibleProperty,
@@ -137,7 +142,7 @@ define( require => {
           shortTeethVisible,
           longTeethVisible
         ) => {
-          const children = [];
+          const children = [ vStrut ];
 
           // Order is important here. It should match the vertical order in PopulationControlPanel.
           totalVisible && children.push( totalDisplay );
@@ -147,9 +152,9 @@ define( require => {
           floppyEarsVisible && children.push( floppyEarsDisplay );
           shortTeethVisible && children.push( shortTeethDisplay );
           longTeethVisible && children.push( longTeethDisplay );
-          numberDisplays.children = children;
-          numberDisplays.left = barNode.right;
-          numberDisplays.top = barNode.top + 5;
+          numberDisplaysParent.children = children;
+          numberDisplaysParent.left = barNode.right;
+          numberDisplaysParent.top = barNode.top;
         } );
     }
 
