@@ -16,9 +16,6 @@ define( require => {
   const Range = require( 'DOT/Range' );
   const Util = require( 'DOT/Util' );
 
-  // constants
-  const CHECKBOXES_ENABLED = true; //TODO for debugging, delete this, should be false
-
   class PopulationModel {
 
     /**
@@ -56,33 +53,14 @@ define( require => {
         tandem: tandem.createTandem( 'longTeethVisibleProperty' )
       } );
 
-      // @public enabled state of the checkbox for each allele in the Population control panel
-      // Checkboxes are disabled until an associated mutation is applied.
-      this.whiteFurEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
-        tandem: tandem.createTandem( 'whiteFurEnabledProperty' )
-      } );
-      this.brownFurEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
-        tandem: tandem.createTandem( 'brownFurEnabledProperty' )
-      } );
-      this.straightEarsEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
-        tandem: tandem.createTandem( 'straightEarsEnabledProperty' )
-      } );
-      this.floppyEarsEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
-        tandem: tandem.createTandem( 'floppyEarsEnabledProperty' )
-      } );
-      this.shortTeethEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
-        tandem: tandem.createTandem( 'shortTeethEnabledProperty' )
-      } );
-      this.longTeethEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
-        tandem: tandem.createTandem( 'longTeethEnabledProperty' )
-      } );
-
       const countPropertyOptions = {
+
+        // null means that there is no data at the location of the Values Marker
         isValidValue: value => ( value === null ) || ( typeof value === 'number' && Util.isInteger( value ) )
       };
 
       //TODO bogus values, for demo purposes
-      // @public counts displayed by the Values Marker. null means that there is no data.
+      // @public counts displayed by the Values Marker
       this.totalCountProperty = new Property( 1000, countPropertyOptions );
       this.whiteFurCountProperty = new Property( 600, countPropertyOptions );
       this.brownFurCountProperty = new Property( 400, countPropertyOptions );
@@ -91,6 +69,7 @@ define( require => {
       this.shortTeethCountProperty = new Property( 1000, countPropertyOptions );
       this.longTeethCountProperty = new Property( 0, countPropertyOptions );
 
+      //TODO should this be PhET-iO instrumented?
       // @public range of the graph's x axis, in generations
       this.xRangeProperty = new Property( new Range( 0, 6 ), {
         valueType: Range,
@@ -98,7 +77,9 @@ define( require => {
       } );
 
       // @public zoom level of the graph's y axis
-      this.yZoomLevelProperty = new NumberProperty( 1 );
+      this.yZoomLevelProperty = new NumberProperty( 1, {
+        tandem: tandem.createTandem( 'yZoomLevelProperty' )
+      } );
     }
 
     /**
@@ -115,13 +96,6 @@ define( require => {
       this.floppyEarsVisibleProperty.reset();
       this.shortTeethVisibleProperty.reset();
       this.longTeethVisibleProperty.reset();
-
-      this.whiteFurEnabledProperty.reset();
-      this.brownFurEnabledProperty.reset();
-      this.straightEarsEnabledProperty.reset();
-      this.floppyEarsEnabledProperty.reset();
-      this.shortTeethEnabledProperty.reset();
-      this.longTeethEnabledProperty.reset();
 
       this.xRangeProperty.reset();
       this.yZoomLevelProperty.reset();
