@@ -12,7 +12,6 @@ define( require => {
 
   // modules
   const Color = require( 'SCENERY/util/Color' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
@@ -30,7 +29,6 @@ define( require => {
   const ValuesMarkerDragListener = require( 'NATURAL_SELECTION/common/view/population/ValuesMarkerDragListener' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const Vector2 = require( 'DOT/Vector2' );
-  const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // constants
   const BAR_COLOR = 'rgb( 120, 120, 120 )';
@@ -64,6 +62,7 @@ define( require => {
       // Vertical bar
       const barNode = new Rectangle( 0, 0, 3, graphHeight, {
         fill: BAR_COLOR,
+        opacity: 0.6,
         centerX: 0,
         y: 0
       } );
@@ -74,7 +73,8 @@ define( require => {
       const manipulator = new ShadedSphereNode( 2 * MANIPULATOR_RADIUS, {
         mouseArea: Shape.circle( 0, 0, 2 * MANIPULATOR_RADIUS ),
         touchArea: Shape.circle( 0, 0, 2 * MANIPULATOR_RADIUS ),
-        center: barNode.centerBottom
+        centerX: barNode.centerX,
+        centerY: barNode.bottom
       } );
 
       // NumberDisplay instances
@@ -93,18 +93,8 @@ define( require => {
         // children are set in multilink below
       } );
 
-      // for adding a bit of space above the NumberDisplays
-      const vStrut = new VStrut( 5 );
-
-      // horizontal layout of bar and NumberDisplays
-      const hBox = new HBox( {
-        spacing: 0,
-        align: 'top',
-        children: [ barNode, numberDisplays ]
-      } );
-
       assert && assert( !options.children, 'ValuesMarkerNode sets children' );
-      options.children = [ hBox, manipulator ];
+      options.children = [ barNode, manipulator, numberDisplays ];
 
       super( options );
 
@@ -147,7 +137,7 @@ define( require => {
           shortTeethVisible,
           longTeethVisible
         ) => {
-          const children = [ vStrut ];
+          const children = [];
 
           // Order is important here. It should match the vertical order in PopulationControlPanel.
           totalVisible && children.push( totalDisplay );
@@ -158,6 +148,8 @@ define( require => {
           shortTeethVisible && children.push( shortTeethDisplay );
           longTeethVisible && children.push( longTeethDisplay );
           numberDisplays.children = children;
+          numberDisplays.left = barNode.right;
+          numberDisplays.top = barNode.top + 5;
         } );
     }
 
