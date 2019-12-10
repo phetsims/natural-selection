@@ -33,16 +33,16 @@ define( require => {
         tandem: tandem.createTandem( 'teethAllelesVisibleProperty' )
       } );
 
-      // @public enabled state of each row in the Alleles panel
-      // Checkboxes are disabled until an associated mutation is applied.
-      this.furEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
-        tandem: tandem.createTandem( 'furEnabledProperty' )
+      // @public whether a mutation exists for each trait
+      // Checkboxes in the Alleles panel are disabled until a mutation exists.
+      this.furMutationExistsProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
+        tandem: tandem.createTandem( 'furMutationExistsProperty' )
       } );
-      this.earsEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
-        tandem: tandem.createTandem( 'earsEnabledProperty' )
+      this.earsMutationExistsProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
+        tandem: tandem.createTandem( 'earsMutationExistsProperty' )
       } );
-      this.teethEnabledProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
-        tandem: tandem.createTandem( 'teethEnabledProperty' )
+      this.teethMutationExistsProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
+        tandem: tandem.createTandem( 'teethMutationExistsProperty' )
       } );
     }
 
@@ -54,9 +54,9 @@ define( require => {
       this.earsAllelesVisibleProperty.reset();
       this.teethAllelesVisibleProperty.reset();
 
-      this.furEnabledProperty.reset();
-      this.earsEnabledProperty.reset();
-      this.teethEnabledProperty.reset();
+      this.furMutationExistsProperty.reset();
+      this.earsMutationExistsProperty.reset();
+      this.teethMutationExistsProperty.reset();
     }
   }
 
