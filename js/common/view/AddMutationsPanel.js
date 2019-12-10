@@ -249,6 +249,9 @@ define( require => {
 
       options = merge( {
 
+        // HBox options
+        spacing: COLUMN_SPACING,
+
         // phet-io
         tandem: Tandem.required
       }, options );
@@ -334,10 +337,10 @@ define( require => {
         xAlign: BUTTON_COLUMNS_X_ALIGN
       } );
 
-      super( {
-        spacing: COLUMN_SPACING,
-        children: [ labelNodeWrapper, dominantButtonWrapper, recessiveButtonWrapper ]
-      } );
+      assert && assert( !options.children, 'Row sets children' );
+      options.children = [ labelNodeWrapper, dominantButtonWrapper, recessiveButtonWrapper ];
+
+      super( options );
 
       dominantButton.addListener( () => {
 

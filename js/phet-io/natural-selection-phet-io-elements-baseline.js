@@ -2939,6 +2939,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NodeIO"
+    },
     "naturalSelection.labScreen.view.addMutationsPanel.earsRow.dominantButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -3042,6 +3055,32 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
     "naturalSelection.labScreen.view.addMutationsPanel.earsRow.recessiveButton": {
       "phetioDocumentation": "",
@@ -3147,6 +3186,32 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
+    "naturalSelection.labScreen.view.addMutationsPanel.earsRow.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NodeIO"
+    },
     "naturalSelection.labScreen.view.addMutationsPanel.furRow.dominantButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -3250,6 +3315,32 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
     "naturalSelection.labScreen.view.addMutationsPanel.furRow.recessiveButton": {
       "phetioDocumentation": "",
@@ -3355,6 +3446,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
+    "naturalSelection.labScreen.view.addMutationsPanel.furRow.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
     "naturalSelection.labScreen.view.addMutationsPanel.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
@@ -3380,6 +3484,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NodeIO"
     },
     "naturalSelection.labScreen.view.addMutationsPanel.teethRow.dominantButton": {
       "phetioDocumentation": "",
@@ -3485,6 +3602,32 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
     "naturalSelection.labScreen.view.addMutationsPanel.teethRow.recessiveButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -3582,6 +3725,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioDynamicElementArchetype": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "naturalSelection.labScreen.view.addMutationsPanel.teethRow.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioPlayback": false,
       "phetioReadOnly": false,
