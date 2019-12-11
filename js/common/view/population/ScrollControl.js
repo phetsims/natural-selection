@@ -1,8 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * PanControl is the control for 1-dimensional panning.
- * In this sim, it's used for panning the x axis of the Population graph.
+ * ScrollControl is the control for 1-dimensional scrolling.
+ * In this sim, it's used for scrolling the x axis of the Population graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -18,7 +18,7 @@ define( require => {
   const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
 
-  class PanControl extends HBox {
+  class ScrollControl extends HBox {
 
     /**
      * @param {string} labelString
@@ -58,12 +58,12 @@ define( require => {
         }, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS )
       );
 
-      assert && assert( !options.children, 'PanControl sets children' );
+      assert && assert( !options.children, 'ScrollControl sets children' );
       options.children = [ previousButton, xAxisLabelNode, nextButton ];
 
       super( options );
     }
   }
 
-  return naturalSelection.register( 'PanControl', PanControl );
+  return naturalSelection.register( 'ScrollControl', ScrollControl );
 } );

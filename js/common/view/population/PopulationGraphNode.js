@@ -14,8 +14,8 @@ define( require => {
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const PanControl = require( 'NATURAL_SELECTION/common/view/population/PanControl' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const ScrollControl = require( 'NATURAL_SELECTION/common/view/population/ScrollControl' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const ValuesMarkerNode = require( 'NATURAL_SELECTION/common/view/population/ValuesMarkerNode' );
@@ -68,15 +68,15 @@ define( require => {
         maxWidth: 120 // determined empirically
       } );
       
-      // x-axis pan control
-      const xPanControl = new PanControl( generationString, {
-        tandem: options.tandem.createTandem( 'xPanControl' )
+      // x-axis scroll control
+      const xScrollControl = new ScrollControl( generationString, {
+        tandem: options.tandem.createTandem( 'xScrollControl' )
       } );
 
       //TODO placeholder
       // XY plot
       const plotWidth = options.graphWidth - yZoomControl.width - ZOOM_CONTROL_X_OFFSET;
-      const plotHeight = options.graphHeight - xPanControl.height - X_AXIS_LABEL_OFFSET;
+      const plotHeight = options.graphHeight - xScrollControl.height - X_AXIS_LABEL_OFFSET;
       const plotNode = new Rectangle( 0, 0, plotWidth, plotHeight, {
         fill: NaturalSelectionColors.POPULATION_GRAPH_FILL,
         stroke: NaturalSelectionColors.PANEL_STROKE,
@@ -86,8 +86,8 @@ define( require => {
       } );
 
       // center x-axis control under the graph
-      xPanControl.centerX = plotNode.centerX;
-      xPanControl.top = plotNode.bottom + X_AXIS_LABEL_OFFSET;
+      xScrollControl.centerX = plotNode.centerX;
+      xScrollControl.top = plotNode.bottom + X_AXIS_LABEL_OFFSET;
 
       const valuesMarkerNode = new ValuesMarkerNode( populationModel, plotNode.x, plotWidth, plotHeight, {
         x: plotNode.x,
@@ -96,7 +96,7 @@ define( require => {
       } );
 
       assert && assert( !options.children, 'PopulationGraphNode sets children' );
-      options.children = [ boundsRectangle, plotNode, xPanControl, yZoomControl, yAxisLabelNode, valuesMarkerNode ];
+      options.children = [ boundsRectangle, plotNode, xScrollControl, yZoomControl, yAxisLabelNode, valuesMarkerNode ];
 
       super( options );
 
