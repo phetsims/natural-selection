@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * EnvironmentNode shows the background image that corresponds to the abiotic environment.
+ * EnvironmentBackgroundNode shows the background image that corresponds to the abiotic environment.
  * The image is scaled to fit the specified dimensions.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -21,7 +21,7 @@ define( require => {
   const arcticBackgroundImage = require( 'image!NATURAL_SELECTION/arcticBackground.png' );
   const equatorBackgroundImage = require( 'image!NATURAL_SELECTION/equatorBackground.png' );
 
-  class EnvironmentNode extends Node {
+  class EnvironmentBackgroundNode extends Node {
 
     /**
      * @param {EnumerationProperty.<Environments>} environmentProperty
@@ -47,7 +47,7 @@ define( require => {
         lineWidth: 1
       } );
 
-      assert && assert( !options.children, 'EnvironmentNode sets children' );
+      assert && assert( !options.children, 'EnvironmentBackgroundNode sets children' );
       options.children = [ equatorBackground, arcticBackground, horizonLine ];
 
       super( options );
@@ -59,5 +59,5 @@ define( require => {
     }
   }
 
-  return naturalSelection.register( 'EnvironmentNode', EnvironmentNode );
+  return naturalSelection.register( 'EnvironmentBackgroundNode', EnvironmentBackgroundNode );
 } );

@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ViewportNode is our viewport into the world of bunnies.
+ * EnvironmentDisplayNode is our viewport into the world of bunnies.
+ * This class was named by committee, see https://github.com/phetsims/natural-selection/issues/27
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,7 +11,7 @@ define( require => {
 
   // modules
   const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
-  const EnvironmentNode = require( 'NATURAL_SELECTION/common/view/EnvironmentNode' );
+  const EnvironmentBackgroundNode = require( 'NATURAL_SELECTION/common/view/EnvironmentBackgroundNode' );
   const EnvironmentRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/EnvironmentRadioButtonGroup' );
   const GenerationClockNode = require( 'NATURAL_SELECTION/common/view/GenerationClockNode' );
   const merge = require( 'PHET_CORE/merge' );
@@ -23,7 +24,7 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
   const Tandem = require( 'TANDEM/Tandem' );
 
-  class ViewportNode extends Node {
+  class EnvironmentDisplayNode extends Node {
 
     /**
      * @param {NaturalSelectionModel} model
@@ -32,19 +33,19 @@ define( require => {
     constructor( model, options ) {
 
       options = merge( {
-        viewportSize: NaturalSelectionConstants.VIEWPORT_NODE_SIZE,
-        viewportHorizonY: NaturalSelectionConstants.VIEWPORT_HORIZON_Y,
+        viewportSize: NaturalSelectionConstants.ENVIRONMENT_DISPLAY_NODE_SIZE,
+        viewportHorizonY: NaturalSelectionConstants.ENVIRONMENT_DISPLAY_NODE_HORIZON_Y,
 
         // phet-io
         tandem: Tandem.REQUIRED
       }, options );
 
-      const environmentNode = new EnvironmentNode( model.environmentModel.environmentProperty,
+      const backgroundNode = new EnvironmentBackgroundNode( model.environmentModel.environmentProperty,
         options.viewportSize, options.viewportHorizonY );
 
       // Everything in the world, clipped to the viewport
       const worldContents = new Node( {
-        children: [ environmentNode ],
+        children: [ backgroundNode ],
         clipArea: Shape.rect( 0, 0, options.viewportSize.width, options.viewportSize.height )
       } );
 
@@ -57,14 +58,14 @@ define( require => {
       const generationClockNode = new GenerationClockNode( model.generationClock,
         model.environmentModel.environmentalFactorEnabledProperty, {
           centerX: frameNode.centerX,
-          top: frameNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN,
+          top: frameNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_NODE_Y_MARGIN,
           tandem: options.tandem.createTandem( 'generationClockNode' )
         } );
 
       // Environment radio buttons
       const environmentRadioButtonGroup = new EnvironmentRadioButtonGroup( model.environmentModel.environmentProperty, {
-        right: frameNode.right - NaturalSelectionConstants.VIEWPORT_NODE_X_MARGIN,
-        top: frameNode.top + NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN,
+        right: frameNode.right - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_NODE_X_MARGIN,
+        top: frameNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_NODE_Y_MARGIN,
         tandem: options.tandem.createTandem( 'environmentRadioButtonGroup' )
       } );
 
@@ -76,7 +77,7 @@ define( require => {
           //TODO
         },
         centerX: frameNode.centerX,
-        bottom: frameNode.bottom - NaturalSelectionConstants.VIEWPORT_NODE_Y_MARGIN,
+        bottom: frameNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_NODE_Y_MARGIN,
         tandem: options.tandem.createTandem( 'addAMateButton' )
       } );
 
@@ -91,7 +92,7 @@ define( require => {
       } );
 
       // layering
-      assert && assert( !options.children, 'ViewportNode sets children' );
+      assert && assert( !options.children, 'EnvironmentDisplayNode sets children' );
       options.children = [
         worldContents,
         frameNode,
@@ -104,7 +105,7 @@ define( require => {
       super( options );
 
       // @private
-      this.resetViewportNode = () => {
+      this.resetEnvironmentDisplayNode = () => {
         addAMateButton.visible = true;
       };
     }
@@ -113,9 +114,9 @@ define( require => {
      * @public
      */
     reset() {
-      this.resetViewportNode();
+      this.resetEnvironmentDisplayNode();
     }
   }
 
-  return naturalSelection.register( 'ViewportNode', ViewportNode );
+  return naturalSelection.register( 'EnvironmentDisplayNode', EnvironmentDisplayNode );
 } );
