@@ -32,23 +32,25 @@ define( require => {
       this.timeProperty = new NumberProperty( 0, {
         isValidValue: value => value >= 0,
         tandem: tandem.createTandem( 'timeProperty' ),
-        phetioReadOnly: true
+        phetioReadOnly: true,
+        phetioDocumentation: 'time that the generation clock has been running, in seconds'
       } );
 
-      // @public
+      // @public percent of the current clock cycle that has been completed
       this.percentTimeProperty = new DerivedProperty(
         [ this.timeProperty ],
         time => ( time % SECONDS_PER_GENERATION ) / SECONDS_PER_GENERATION, {
           isValidValue: value => ( value >= 0 && value <= 1 )
         } );
 
-      // @public
+      // @public generation number for the current clock cycle
       this.generationProperty = new DerivedProperty(
         [ this.timeProperty ],
         time => Math.floor( time / NaturalSelectionConstants.SECONDS_PER_GENERATION ), {
           isValidValue: value => Util.isInteger( value ),
           phetioType: DerivedPropertyIO( NumberIO ),
-          tandem: tandem.createTandem( 'generationProperty' )
+          tandem: tandem.createTandem( 'generationProperty' ),
+          phetioDocumentation: 'generation number for the current clock cycle of the generation clock'
         } );
 
       // @public (read-only) the portion of the clock cycle when environmental factors are active
