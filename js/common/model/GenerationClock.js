@@ -43,7 +43,7 @@ define( require => {
           isValidValue: value => ( value >= 0 && value <= 1 )
         } );
 
-      // @public generation number for the current clock cycle
+      // @public
       this.generationProperty = new DerivedProperty(
         [ this.timeProperty ],
         time => Math.floor( time / NaturalSelectionConstants.SECONDS_PER_GENERATION ), {
