@@ -135,9 +135,9 @@
     "value": "{{value}}%"
   },
   "lessThanValuePercent": {
-    "value": "< {{value}}%"
+    "value": "<{{value}}%"
   },
   "greaterThanValuePercent": {
-    "value": "> {{value}}%"
+    "value": ">{{value}}%"
   }
 }
