@@ -26,12 +26,12 @@ define( require => {
       // @public
       this.dataProbe = new DataProbe( tandem.createTandem( 'dataProbe' ) );
 
-      // @public visibility of the total population plot on the graph and values marker
+      // @public visibility of the total population plot on the graph and data probe
       this.totalVisibleProperty = new BooleanProperty( true, {
         tandem: tandem.createTandem( 'totalVisibleProperty' )
       } );
 
-      // @public visibility of the plot for each allele on the graph and values marker
+      // @public visibility of the plot for each allele on the graph and data probe
       this.whiteFurVisibleProperty = new BooleanProperty( false, {
         tandem: tandem.createTandem( 'whiteFurVisibleProperty' )
       } );

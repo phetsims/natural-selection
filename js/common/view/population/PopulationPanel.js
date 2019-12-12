@@ -50,7 +50,7 @@ define( require => {
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         children: [
 
-          // Values Marker
+          // Data Probe
           new Checkbox(
             new Text( dataProbeString, {
               font: NaturalSelectionConstants.CHECKBOX_FONT,
