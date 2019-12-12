@@ -23,8 +23,8 @@
   "total": {
     "value": "Total"
   },
-  "valuesMarker": {
-    "value": "Values Marker"
+  "dataProbe": {
+    "value": "Data Probe"
   },
   "whiteFur": {
     "value": "White Fur"

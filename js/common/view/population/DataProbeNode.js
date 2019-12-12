@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ValuesMarkerNode displays y-axis values at an x-axis position.  It can be dragged along the x axis.
+ * DataProbeNode displays y-axis values at an x-axis position.  It can be dragged along the x axis.
  * The origin is at the top center of barNode.
  * Historical information and requirements can be found in https://github.com/phetsims/natural-selection/issues/14.
  *
@@ -12,6 +12,7 @@ define( require => {
 
   // modules
   const Color = require( 'SCENERY/util/Color' );
+  const DataProbeDragListener = require( 'NATURAL_SELECTION/common/view/population/DataProbeDragListener' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
@@ -26,7 +27,6 @@ define( require => {
   const ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
   const Shape = require( 'KITE/Shape' );
   const Tandem = require( 'TANDEM/Tandem' );
-  const ValuesMarkerDragListener = require( 'NATURAL_SELECTION/common/view/population/ValuesMarkerDragListener' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const Vector2 = require( 'DOT/Vector2' );
   const VStrut = require( 'SCENERY/nodes/VStrut' );
@@ -42,7 +42,7 @@ define( require => {
   const NUMBER_DISPLAY_DASHED_BACKGROUND_FILL = new Color( 255, 255, 255, NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY );
   const MANIPULATOR_RADIUS = 6;
 
-  class ValuesMarkerNode extends Node {
+  class DataProbeNode extends Node {
 
     /**
      * @param {populationModel} populationModel
@@ -60,7 +60,7 @@ define( require => {
         tandem: Tandem.REQUIRED
       }, options );
 
-      const valuesMarker = populationModel.valuesMarker;
+      const dataProbe = populationModel.dataProbe;
 
       // Vertical bar
       const barNode = new Rectangle( 0, 0, 3, graphHeight, {
@@ -81,13 +81,13 @@ define( require => {
       } );
 
       // NumberDisplay instances
-      const totalDisplay = createSolidNumberDisplay( valuesMarker.totalPopulationProperty, NaturalSelectionColors.TOTAL_POPULATION );
-      const whiteFurDisplay = createSolidNumberDisplay( valuesMarker.whiteFurPopulationProperty, NaturalSelectionColors.FUR );
-      const brownFurDisplay = createDashedNumberDisplay( valuesMarker.brownFurPopulationProperty, NaturalSelectionColors.FUR );
-      const straightEarsDisplay = createSolidNumberDisplay( valuesMarker.straightEarsPopulationProperty, NaturalSelectionColors.EARS );
-      const floppyEarsDisplay = createDashedNumberDisplay( valuesMarker.floppyEarsPopulationProperty, NaturalSelectionColors.EARS );
-      const shortTeethDisplay = createSolidNumberDisplay( valuesMarker.shortTeethPopulationProperty, NaturalSelectionColors.TEETH );
-      const longTeethDisplay = createDashedNumberDisplay( valuesMarker.longTeethPopulationProperty, NaturalSelectionColors.TEETH );
+      const totalDisplay = createSolidNumberDisplay( dataProbe.totalPopulationProperty, NaturalSelectionColors.TOTAL_POPULATION );
+      const whiteFurDisplay = createSolidNumberDisplay( dataProbe.whiteFurPopulationProperty, NaturalSelectionColors.FUR );
+      const brownFurDisplay = createDashedNumberDisplay( dataProbe.brownFurPopulationProperty, NaturalSelectionColors.FUR );
+      const straightEarsDisplay = createSolidNumberDisplay( dataProbe.straightEarsPopulationProperty, NaturalSelectionColors.EARS );
+      const floppyEarsDisplay = createDashedNumberDisplay( dataProbe.floppyEarsPopulationProperty, NaturalSelectionColors.EARS );
+      const shortTeethDisplay = createSolidNumberDisplay( dataProbe.shortTeethPopulationProperty, NaturalSelectionColors.TEETH );
+      const longTeethDisplay = createDashedNumberDisplay( dataProbe.longTeethPopulationProperty, NaturalSelectionColors.TEETH );
 
       // vertical layout of NumberDisplays 
       const numberDisplaysParent = new VBox( {
@@ -96,24 +96,24 @@ define( require => {
         // children are set in multilink below
       } );
 
-      assert && assert( !options.children, 'ValuesMarkerNode sets children' );
+      assert && assert( !options.children, 'DataProbeNode sets children' );
       options.children = [ barNode, manipulator, numberDisplaysParent ];
 
       super( options );
 
-      //TODO derive from valuesMarker.generationProperty or make this go away
+      //TODO derive from dataProbe.generationProperty or make this go away
       // @private location in view coordinate frame, relative to the left edge of the graph
       this.locationProperty = new Property( new Vector2( originX, 0 ) );
 
-      this.addInputListener( new ValuesMarkerDragListener( this.locationProperty, new Range( originX, originX + graphWidth ), {
+      this.addInputListener( new DataProbeDragListener( this.locationProperty, new Range( originX, originX + graphWidth ), {
         pressCursor: options.cursor,
         tandem: options.tandem.createTandem( 'dragListener' )
       } ) );
 
-      // visibility of Values Marker
-      valuesMarker.visibleProperty.link( valuesMarkerVisible => {
+      // visibility of the probe
+      dataProbe.visibleProperty.link( dataProbeVisible => {
         this.interruptSubtreeInput(); // cancel interactions
-        this.visible = valuesMarkerVisible;
+        this.visible = dataProbeVisible;
       } );
 
       this.locationProperty.link( location => {
@@ -205,5 +205,5 @@ define( require => {
     } );
   }
 
-  return naturalSelection.register( 'ValuesMarkerNode', ValuesMarkerNode );
+  return naturalSelection.register( 'DataProbeNode', DataProbeNode );
 } );

@@ -28,7 +28,7 @@ define( require => {
   const longTeethString = require( 'string!NATURAL_SELECTION/longTeeth' );
   const shortTeethString = require( 'string!NATURAL_SELECTION/shortTeeth' );
   const totalString = require( 'string!NATURAL_SELECTION/total' );
-  const valuesMarkerString = require( 'string!NATURAL_SELECTION/valuesMarker' );
+  const dataProbeString = require( 'string!NATURAL_SELECTION/dataProbe' );
   const whiteFurString = require( 'string!NATURAL_SELECTION/whiteFur' );
 
   class PopulationPanel extends NaturalSelectionPanel {
@@ -52,13 +52,13 @@ define( require => {
 
           // Values Marker
           new Checkbox(
-            new Text( valuesMarkerString, {
+            new Text( dataProbeString, {
               font: NaturalSelectionConstants.CHECKBOX_FONT,
               maxWidth: 135 // determined empirically
             } ),
-            populationModel.valuesMarker.visibleProperty,
+            populationModel.dataProbe.visibleProperty,
             merge( {
-              tandem: options.tandem.createTandem( 'valuesMarkerCheckbox' )
+              tandem: options.tandem.createTandem( 'dataProbeCheckbox' )
             }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
           ),
 

@@ -10,11 +10,11 @@ define( require => {
 
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const DataProbe = require( 'NATURAL_SELECTION/common/model/DataProbe' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
-  const ValuesMarker = require( 'NATURAL_SELECTION/common/model/ValuesMarker' );
 
   class PopulationModel {
 
@@ -24,7 +24,7 @@ define( require => {
     constructor( tandem ) {
 
       // @public
-      this.valuesMarker = new ValuesMarker( tandem.createTandem( 'valuesMarker' ) );
+      this.dataProbe = new DataProbe( tandem.createTandem( 'dataProbe' ) );
 
       // @public visibility of the total population plot on the graph and values marker
       this.totalVisibleProperty = new BooleanProperty( true, {
@@ -78,7 +78,7 @@ define( require => {
      * @public
      */
     reset() {
-      this.valuesMarker.reset();
+      this.dataProbe.reset();
 
       this.totalVisibleProperty.reset();
       this.whiteFurVisibleProperty.reset();

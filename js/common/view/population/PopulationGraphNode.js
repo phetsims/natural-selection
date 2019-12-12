@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const DataProbeNode = require( 'NATURAL_SELECTION/common/view/population/DataProbeNode' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
@@ -18,7 +19,6 @@ define( require => {
   const ScrollControl = require( 'NATURAL_SELECTION/common/view/population/ScrollControl' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const ValuesMarkerNode = require( 'NATURAL_SELECTION/common/view/population/ValuesMarkerNode' );
   const ZoomControl = require( 'NATURAL_SELECTION/common/view/population/ZoomControl' );
 
   // strings
@@ -89,26 +89,26 @@ define( require => {
       xScrollControl.centerX = plotNode.centerX;
       xScrollControl.top = plotNode.bottom + X_AXIS_LABEL_OFFSET;
 
-      const valuesMarkerNode = new ValuesMarkerNode( populationModel, plotNode.x, plotWidth, plotHeight, {
+      const dataProbeNode = new DataProbeNode( populationModel, plotNode.x, plotWidth, plotHeight, {
         x: plotNode.x,
         top: plotNode.top,
-        tandem: options.tandem.createTandem( 'valuesMarkerNode' )
+        tandem: options.tandem.createTandem( 'dataProbeNode' )
       } );
 
       assert && assert( !options.children, 'PopulationGraphNode sets children' );
-      options.children = [ boundsRectangle, plotNode, xScrollControl, yZoomControl, yAxisLabelNode, valuesMarkerNode ];
+      options.children = [ boundsRectangle, plotNode, xScrollControl, yZoomControl, yAxisLabelNode, dataProbeNode ];
 
       super( options );
 
       // @private
-      this.valuesMarkerNode = valuesMarkerNode;
+      this.dataProbeNode = dataProbeNode;
     }
 
     /**
      * @public
      */
     reset() {
-      this.valuesMarkerNode.reset();
+      this.dataProbeNode.reset();
     }
   }
 

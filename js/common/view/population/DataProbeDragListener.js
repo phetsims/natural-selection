@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ValuesMarkerDragListener is the drag listener for the Values Marker.
+ * DataProbeDragListener is the drag listener for the data probe on the Population graph.
  * Historical information and requirements can be found in https://github.com/phetsims/natural-selection/issues/14.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -16,7 +16,7 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const Property = require( 'AXON/Property' );
 
-  class ValuesMarkerDragListener extends DragListener {
+  class DataProbeDragListener extends DragListener {
 
     /**
      * @param {Property.<Vector2>} locationProperty
@@ -27,15 +27,15 @@ define( require => {
 
       options = merge( {}, options );
 
-      assert && assert( !options.dragBoundsProperty, 'ValuesMarkerDragListener sets dragBoundsProperty' );
+      assert && assert( !options.dragBoundsProperty, 'DataProbeDragListener sets dragBoundsProperty' );
       options.dragBoundsProperty = new Property( new Bounds2( xRange.min, 0, xRange.max, 0 ) );
 
-      assert && assert( !options.locationProperty, 'ValuesMarkerDragListener sets locationProperty' );
+      assert && assert( !options.locationProperty, 'DataProbeDragListener sets locationProperty' );
       options.locationProperty = locationProperty;
 
       super( options );
     }
   }
 
-  return naturalSelection.register( 'ValuesMarkerDragListener', ValuesMarkerDragListener );
+  return naturalSelection.register( 'DataProbeDragListener', DataProbeDragListener );
 } );

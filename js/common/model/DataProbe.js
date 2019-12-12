@@ -1,8 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ValuesMarker is the model for the Values Marker, which shows population (y) values at a specific generation (x)
- * value on the graph.
+ * DataProbe is the model for the data probe on the Population graph. It shows population (y) values at a specific
+ * generation (x) value on the graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -20,14 +20,14 @@ define( require => {
   const PropertyIO = require( 'AXON/PropertyIO' );
   const Util = require( 'DOT/Util' );
 
-  class ValuesMarker {
+  class DataProbe {
 
     /**
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
 
-      // @public visibility of the Values Marker
+      // @public visibility of the probe
       this.visibleProperty = new BooleanProperty( false, {
         tandem: tandem.createTandem( 'visibleProperty' )
       } );
@@ -44,7 +44,7 @@ define( require => {
       };
 
       //TODO bogus values, for demo purposes
-      // @public counts displayed by the Values Marker
+      // @public counts displayed by the probe
       this.totalPopulationProperty = new Property( 1000, merge( {
           tandem: tandem.createTandem( 'totalPopulationProperty' )
         }, populationPropertyOptions )
@@ -91,5 +91,5 @@ define( require => {
     }
   }
 
-  return naturalSelection.register( 'ValuesMarker', ValuesMarker );
+  return naturalSelection.register( 'DataProbe', DataProbe );
 } );
