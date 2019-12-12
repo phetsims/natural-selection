@@ -16,6 +16,7 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const Image = require( 'SCENERY/nodes/Image' );
   const merge = require( 'PHET_CORE/merge' );
+  const MutationIconNode = require( 'NATURAL_SELECTION/common/view/MutationIconNode' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
@@ -32,7 +33,6 @@ define( require => {
   const brownFurImage = require( 'image!NATURAL_SELECTION/brownFur.png' );
   const straightEarsImage = require( 'image!NATURAL_SELECTION/straightEars.png' );
   const floppyEarsImage = require( 'image!NATURAL_SELECTION/floppyEars.png' );
-  const mutationIconImage = require( 'image!NATURAL_SELECTION/mutationIcon.png' );
   const longTeethImage = require( 'image!NATURAL_SELECTION/longTeeth.png' );
   const shortTeethImage = require( 'image!NATURAL_SELECTION/shortTeeth.png' );
   const whiteFurImage = require( 'image!NATURAL_SELECTION/whiteFur.png' );
@@ -87,7 +87,7 @@ define( require => {
       } );
 
       // Individual column headings
-      const mutationIconNode = new Image( mutationIconImage, { scale: 0.25 } );
+      const mutationIconNode = new MutationIconNode();
       const dominantColumnLabel = new Text( dominantString, {
         font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
         maxWidth: 60 // determined empirically
