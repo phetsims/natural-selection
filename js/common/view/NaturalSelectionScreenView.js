@@ -14,8 +14,8 @@ define( require => {
   const Dimension2 = require( 'DOT/Dimension2' );
   const EnvironmentalFactorsPanel = require( 'NATURAL_SELECTION/common/view/EnvironmentalFactorsPanel' );
   const EnvironmentDisplayNode = require( 'NATURAL_SELECTION/common/view/EnvironmentDisplayNode' );
-  const GraphRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/GraphRadioButtonGroup' );
   const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
+  const GraphsRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/GraphsRadioButtonGroup' );
   const merge = require( 'PHET_CORE/merge' );
   const MutationAlertsNode = require( 'NATURAL_SELECTION/common/view/MutationAlertsNode' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -110,11 +110,11 @@ define( require => {
       } );
 
       // Population, Proportions, Pedigree radio buttons
-      const graphRadioButtonGroup = new GraphRadioButtonGroup( viewProperties.graphProperty, {
+      const graphsRadioButtonGroup = new GraphsRadioButtonGroup( viewProperties.graphProperty, {
         maxWidth: rightOfViewportWidth,
         left: environmentDisplayNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         centerY: populationNode.centerY,
-        tandem: options.tandem.createTandem( 'graphRadioButtonGroup' )
+        tandem: options.tandem.createTandem( 'graphsRadioButtonGroup' )
       } );
 
       // Visibility of graphs is mutually exclusive
@@ -151,7 +151,7 @@ define( require => {
         environmentDisplayNode,
         addMutationsPanel,
         environmentalFactorsPanel,
-        graphRadioButtonGroup,
+        graphsRadioButtonGroup,
         timeControlNode,
         populationNode,
         proportionsNode,
