@@ -14,7 +14,7 @@ define( require => {
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
-  const Util = require( 'DOT/Util' );
+  const ValuesMarker = require( 'NATURAL_SELECTION/common/model/ValuesMarker' );
 
   class PopulationModel {
 
@@ -23,17 +23,15 @@ define( require => {
      */
     constructor( tandem ) {
 
-      // @public visibility of the Values Marker on the graph
-      this.valuesMarkerVisibleProperty = new BooleanProperty( false, {
-        tandem: tandem.createTandem( 'valuesMarkerVisibleProperty' )
-      } );
+      // @public
+      this.valuesMarker = new ValuesMarker( tandem.createTandem( 'valuesMarker' ) );
 
-      // @public visibility of the total population plot on the graph
+      // @public visibility of the total population plot on the graph and values marker
       this.totalVisibleProperty = new BooleanProperty( true, {
         tandem: tandem.createTandem( 'totalVisibleProperty' )
       } );
 
-      // @public visibility of the plot for each allele on the graph
+      // @public visibility of the plot for each allele on the graph and values marker
       this.whiteFurVisibleProperty = new BooleanProperty( false, {
         tandem: tandem.createTandem( 'whiteFurVisibleProperty' )
       } );
@@ -53,32 +51,26 @@ define( require => {
         tandem: tandem.createTandem( 'longTeethVisibleProperty' )
       } );
 
-      const countPropertyOptions = {
-
-        // null means that there is no data at the location of the Values Marker
-        isValidValue: value => ( value === null ) || ( typeof value === 'number' && Util.isInteger( value ) )
-      };
-
-      //TODO bogus values, for demo purposes
-      // @public counts displayed by the Values Marker
-      this.totalCountProperty = new Property( 1000, countPropertyOptions );
-      this.whiteFurCountProperty = new Property( 600, countPropertyOptions );
-      this.brownFurCountProperty = new Property( 400, countPropertyOptions );
-      this.straightEarsCountProperty = new Property( 988, countPropertyOptions );
-      this.floppyEarsCountProperty = new Property( 12, countPropertyOptions );
-      this.shortTeethCountProperty = new Property( 1000, countPropertyOptions );
-      this.longTeethCountProperty = new Property( 0, countPropertyOptions );
-
-      //TODO should this be PhET-iO instrumented?
+      //TODO phet-io instrumentation
       // @public range of the graph's x axis, in generations
-      this.xRangeProperty = new Property( new Range( 0, 6 ), {
+      this.xAxisRangeProperty = new Property( new Range( 0, 6 ), {
         valueType: Range,
         isValueValue: value => ( value.min && value.max )
       } );
 
+      //TODO change to yZoomIndexProperty
       // @public zoom level of the graph's y axis
       this.yZoomLevelProperty = new NumberProperty( 1, {
-        tandem: tandem.createTandem( 'yZoomLevelProperty' )
+        numberType: 'Integer'
+        //TODO isValidValue
+      } );
+
+      //TODO derived from yZoomLevelProperty?
+      //TODO phet-io instrumentation
+      // @public range of the graph's x axis, in population
+      this.yAxisRangeProperty = new Property( new Range( 0, 50 ), {
+        valueType: Range,
+        isValueValue: value => ( value.min && value.max )
       } );
     }
 
@@ -86,10 +78,9 @@ define( require => {
      * @public
      */
     reset() {
-      this.valuesMarkerVisibleProperty.reset();
+      this.valuesMarker.reset();
 
       this.totalVisibleProperty.reset();
-
       this.whiteFurVisibleProperty.reset();
       this.brownFurVisibleProperty.reset();
       this.straightEarsVisibleProperty.reset();
@@ -97,8 +88,9 @@ define( require => {
       this.shortTeethVisibleProperty.reset();
       this.longTeethVisibleProperty.reset();
 
-      this.xRangeProperty.reset();
       this.yZoomLevelProperty.reset();
+      this.xAxisRangeProperty.reset();
+      this.yAxisRangeProperty.reset();
     }
   }
 

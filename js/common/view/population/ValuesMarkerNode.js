@@ -60,6 +60,8 @@ define( require => {
         tandem: Tandem.REQUIRED
       }, options );
 
+      const valuesMarker = populationModel.valuesMarker;
+
       // Vertical bar
       const barNode = new Rectangle( 0, 0, 3, graphHeight, {
         fill: BAR_COLOR,
@@ -79,13 +81,13 @@ define( require => {
       } );
 
       // NumberDisplay instances
-      const totalDisplay = createSolidNumberDisplay( populationModel.totalCountProperty, NaturalSelectionColors.TOTAL_POPULATION );
-      const whiteFurDisplay = createSolidNumberDisplay( populationModel.whiteFurCountProperty, NaturalSelectionColors.FUR );
-      const brownFurDisplay = createDashedNumberDisplay( populationModel.brownFurCountProperty, NaturalSelectionColors.FUR );
-      const straightEarsDisplay = createSolidNumberDisplay( populationModel.straightEarsCountProperty, NaturalSelectionColors.EARS );
-      const floppyEarsDisplay = createDashedNumberDisplay( populationModel.floppyEarsCountProperty, NaturalSelectionColors.EARS );
-      const shortTeethDisplay = createSolidNumberDisplay( populationModel.shortTeethCountProperty, NaturalSelectionColors.TEETH );
-      const longTeethDisplay = createDashedNumberDisplay( populationModel.longTeethCountProperty, NaturalSelectionColors.TEETH );
+      const totalDisplay = createSolidNumberDisplay( valuesMarker.totalPopulationProperty, NaturalSelectionColors.TOTAL_POPULATION );
+      const whiteFurDisplay = createSolidNumberDisplay( valuesMarker.whiteFurPopulationProperty, NaturalSelectionColors.FUR );
+      const brownFurDisplay = createDashedNumberDisplay( valuesMarker.brownFurPopulationProperty, NaturalSelectionColors.FUR );
+      const straightEarsDisplay = createSolidNumberDisplay( valuesMarker.straightEarsPopulationProperty, NaturalSelectionColors.EARS );
+      const floppyEarsDisplay = createDashedNumberDisplay( valuesMarker.floppyEarsPopulationProperty, NaturalSelectionColors.EARS );
+      const shortTeethDisplay = createSolidNumberDisplay( valuesMarker.shortTeethPopulationProperty, NaturalSelectionColors.TEETH );
+      const longTeethDisplay = createDashedNumberDisplay( valuesMarker.longTeethPopulationProperty, NaturalSelectionColors.TEETH );
 
       // vertical layout of NumberDisplays 
       const numberDisplaysParent = new VBox( {
@@ -99,6 +101,7 @@ define( require => {
 
       super( options );
 
+      //TODO derive from valuesMarker.generationProperty or make this go away
       // @private location in view coordinate frame, relative to the left edge of the graph
       this.locationProperty = new Property( new Vector2( originX, 0 ) );
 
@@ -108,7 +111,7 @@ define( require => {
       } ) );
 
       // visibility of Values Marker
-      populationModel.valuesMarkerVisibleProperty.link( valuesMarkerVisible => {
+      valuesMarker.visibleProperty.link( valuesMarkerVisible => {
         this.interruptSubtreeInput(); // cancel interactions
         this.visible = valuesMarkerVisible;
       } );

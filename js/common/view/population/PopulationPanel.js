@@ -56,7 +56,7 @@ define( require => {
               font: NaturalSelectionConstants.CHECKBOX_FONT,
               maxWidth: 135 // determined empirically
             } ),
-            populationModel.valuesMarkerVisibleProperty,
+            populationModel.valuesMarker.visibleProperty,
             merge( {
               tandem: options.tandem.createTandem( 'valuesMarkerCheckbox' )
             }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
