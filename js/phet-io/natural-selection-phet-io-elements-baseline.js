@@ -2666,6 +2666,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
+    "naturalSelection.labScreen.model.generationClock.generationProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "DerivedPropertyIO<NumberIO>"
+    },
     "naturalSelection.labScreen.model.generationClock.timeProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
