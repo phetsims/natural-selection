@@ -46,7 +46,7 @@ define( require => {
         buttonContentYMargin: 0,  // Set to 0 because we will create our own backgrounds, see below.
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       // icons

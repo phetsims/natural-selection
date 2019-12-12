@@ -35,7 +35,7 @@ define( require => {
         } ),
 
         // phet-io
-        tandem: Tandem.optional // because we don't want to instrument this button
+        tandem: Tandem.OPTIONAL // because we don't want to instrument this button
       }, options );
 
       super( options );

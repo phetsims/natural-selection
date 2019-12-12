@@ -55,7 +55,7 @@ define( require => {
         graphHeight: 100,
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {

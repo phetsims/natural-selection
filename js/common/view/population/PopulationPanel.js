@@ -44,7 +44,7 @@ define( require => {
         xMargin: 0,
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {

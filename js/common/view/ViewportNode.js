@@ -36,7 +36,7 @@ define( require => {
         viewportHorizonY: NaturalSelectionConstants.VIEWPORT_HORIZON_Y,
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       const environmentNode = new EnvironmentNode( model.environmentModel.environmentProperty,

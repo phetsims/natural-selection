@@ -44,7 +44,7 @@ define( require => {
       options = merge( {
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, NaturalSelectionConstants.VBOX_OPTIONS, options );
 
       assert && assert( !options.children, 'ProportionsLegendNode sets children' );

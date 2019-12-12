@@ -33,7 +33,7 @@ define( require => {
         spacing: 10,
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       // Previous button, decrements the generation number

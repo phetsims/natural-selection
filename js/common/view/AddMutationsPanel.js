@@ -62,7 +62,7 @@ define( require => {
       options = merge( {
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
       //TODO options.parameters
@@ -253,7 +253,7 @@ define( require => {
         spacing: COLUMN_SPACING,
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       // label that indicates the trait name, to the left of buttons

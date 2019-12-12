@@ -57,7 +57,7 @@ define( require => {
         cursor: 'ew-resize', // <->
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       // Vertical bar

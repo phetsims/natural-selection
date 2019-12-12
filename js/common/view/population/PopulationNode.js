@@ -33,7 +33,7 @@ define( require => {
         align: 'top',
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       // Divy up the width

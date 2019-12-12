@@ -55,7 +55,7 @@ define( require => {
       options = merge( {
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
       // To make the abbreviation + icon for all alleles the same effective size
@@ -137,7 +137,7 @@ define( require => {
       options = merge( {
 
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       const labelNode = new Text( labelString, {

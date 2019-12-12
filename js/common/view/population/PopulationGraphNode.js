@@ -43,7 +43,7 @@ define( require => {
         graphHeight: 100,
         
         // phet-io
-        tandem: Tandem.required
+        tandem: Tandem.REQUIRED
       }, options );
 
       // invisible rectangle that defines the bounds of this Node
