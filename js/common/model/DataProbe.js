@@ -32,6 +32,7 @@ define( require => {
         tandem: tandem.createTandem( 'visibleProperty' )
       } );
 
+      //TODO add rangeProperty or set phetioStudioControl:false
       // @public the generation (x) value
       this.generationProperty = new NumberProperty( 0, {
         tandem: tandem.createTandem( 'generationProperty' )
