@@ -21,7 +21,7 @@ define( require => {
     constructor( tandem ) {
 
       // @public
-      this.valuesVisibleProperty = new BooleanProperty( false, {
+      this.valuesVisibleProperty = new BooleanProperty( true, {
         tandem: tandem.createTandem( 'valuesVisibleProperty' )
       } );
 
