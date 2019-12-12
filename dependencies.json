@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.0.0-dev.16 Thu Dec 12 2019 15:48:12 GMT-0700 (Mountain Standard Time)",
+  "comment": "# natural-selection 1.0.0-dev.17 Thu Dec 12 2019 16:05:01 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "a99a9ce9ee0774bf3ef509bf3e31ca7383f67478",
     "branch": "master"
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "natural-selection": {
-    "sha": "7b392c89f093ed01d5ef0554c903fb8fb08765a7",
+    "sha": "f3a95fc8a22579a6a6eee8e401be307f2831e234",
     "branch": "master"
   },
   "phet-core": {
