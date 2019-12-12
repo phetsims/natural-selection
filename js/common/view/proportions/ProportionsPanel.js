@@ -43,6 +43,17 @@ define( require => {
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         children: [
 
+          // Legend for alleles
+          new ProportionsLegendNode( {
+            tandem: options.tandem.createTandem( 'legendNode' )
+          } ),
+
+          // ---------
+          new HSeparator( options.fixedWidth - 2 * options.xMargin, {
+            stroke: NaturalSelectionColors.SEPARATOR_STROKE,
+            tandem: options.tandem.createTandem( 'separator' )
+          } ),
+
           // Values checkbox
           new Checkbox(
             new Text( valuesString, {
@@ -53,18 +64,7 @@ define( require => {
             merge( {
               tandem: options.tandem.createTandem( 'valuesCheckbox' )
             }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
-          ),
-
-          // ---------
-          new HSeparator( options.fixedWidth - 2 * options.xMargin, {
-            stroke: NaturalSelectionColors.SEPARATOR_STROKE,
-            tandem: options.tandem.createTandem( 'separator' )
-          } ),
-
-          // Legend for alleles
-          new ProportionsLegendNode( {
-            tandem: options.tandem.createTandem( 'legendNode' )
-          } )
+          )
         ]
       } ) );
 
