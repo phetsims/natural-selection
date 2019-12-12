@@ -50,24 +50,6 @@ define( require => {
       const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
         children: [
 
-          // Data Probe
-          new Checkbox(
-            new Text( dataProbeString, {
-              font: NaturalSelectionConstants.CHECKBOX_FONT,
-              maxWidth: 135 // determined empirically
-            } ),
-            populationModel.dataProbe.visibleProperty,
-            merge( {
-              tandem: options.tandem.createTandem( 'dataProbeCheckbox' )
-            }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
-          ),
-
-          // ------
-          new HSeparator( options.fixedWidth - 2 * options.xMargin, {
-            stroke: NaturalSelectionColors.SEPARATOR_STROKE,
-            tandem: options.tandem.createTandem( 'separator' )
-          } ),
-
           // Total
           new PopulationLegendCheckbox( populationModel.totalVisibleProperty, totalString, {
             color: NaturalSelectionColors.TOTAL_POPULATION,
@@ -111,7 +93,25 @@ define( require => {
             color: NaturalSelectionColors.TEETH,
             isMutation: true,
             tandem: options.tandem.createTandem( 'longTeethCheckbox' )
-          } )
+          } ),
+
+          // ------
+          new HSeparator( options.fixedWidth - 2 * options.xMargin, {
+            stroke: NaturalSelectionColors.SEPARATOR_STROKE,
+            tandem: options.tandem.createTandem( 'separator' )
+          } ),
+
+          // Data Probe
+          new Checkbox(
+            new Text( dataProbeString, {
+              font: NaturalSelectionConstants.CHECKBOX_FONT,
+              maxWidth: 135 // determined empirically
+            } ),
+            populationModel.dataProbe.visibleProperty,
+            merge( {
+              tandem: options.tandem.createTandem( 'dataProbeCheckbox' )
+            }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
+          )
         ]
       } ) );
 
