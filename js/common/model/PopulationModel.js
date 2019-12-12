@@ -62,7 +62,8 @@ define( require => {
       // @public zoom level of the graph's y axis
       this.yZoomLevelProperty = new NumberProperty( 1, {
         numberType: 'Integer'
-        //TODO isValidValue
+        //TODO isValidValue:
+        //TODO range:
       } );
 
       //TODO derived from yZoomLevelProperty?

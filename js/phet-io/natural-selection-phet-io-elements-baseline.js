@@ -2793,7 +2793,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioPlayback": false,
       "phetioReadOnly": false,
       "phetioState": true,
-      "phetioStudioControl": true,
+      "phetioStudioControl": false,
       "phetioTypeName": "NumberPropertyIO"
     },
     "naturalSelection.labScreen.model.populationModel.dataProbe.longTeethPopulationProperty": {

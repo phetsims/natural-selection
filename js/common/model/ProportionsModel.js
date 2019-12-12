@@ -29,9 +29,10 @@ define( require => {
       this.generationProperty = new NumberProperty( 0, {
         numberType: 'Integer',
         tandem: tandem.createTandem( 'generationProperty' ),
-        phetioStudioControl: false //TODO range is dynamic, add range: new Property( Range(...) )
+        phetioStudioControl: false //TODO range is dynamic
       } );
 
+      //TODO phet-io instrumentation
       //TODO these should be derived from other model state
       // @public
       this.startCountProperty = new NumberProperty( 1, {
