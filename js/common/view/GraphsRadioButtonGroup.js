@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * GraphRadioButtonGroup is the radio button group for selecting a graph.
+ * GraphsRadioButtonGroup is the radio button group for selecting which of the graphs is visible.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -28,7 +28,7 @@ define( require => {
     maxWidth: 175 // determined empirically
   };
 
-  class GraphRadioButtonGroup extends VerticalAquaRadioButtonGroup {
+  class GraphsRadioButtonGroup extends VerticalAquaRadioButtonGroup {
 
     /**
      * @param {EnumerationProperty.<Graphs>} graphProperty
@@ -74,5 +74,5 @@ define( require => {
     }
   }
 
-  return naturalSelection.register( 'GraphRadioButtonGroup', GraphRadioButtonGroup );
+  return naturalSelection.register( 'GraphsRadioButtonGroup', GraphsRadioButtonGroup );
 } );

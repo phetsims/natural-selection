@@ -10,9 +10,13 @@ define( require => {
 
   // modules
   const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const NumberIO = require( 'TANDEM/types/NumberIO' );
   const Range = require( 'DOT/Range' );
+  const Util = require( 'DOT/Util' );
 
   // constant
   const SECONDS_PER_GENERATION = 10;
@@ -26,15 +30,27 @@ define( require => {
 
       // @public (read-only)
       this.timeProperty = new NumberProperty( 0, {
-        isValidValue: value => ( value >= 0 && value <= SECONDS_PER_GENERATION ),
+        isValidValue: value => value >= 0,
         tandem: tandem.createTandem( 'timeProperty' ),
-        phetioReadOnly: true
+        phetioReadOnly: true,
+        phetioDocumentation: 'time that the generation clock has been running, in seconds'
       } );
 
-      // @public
+      // @public percent of the current clock cycle that has been completed
       this.percentTimeProperty = new DerivedProperty(
-        [ this.timeProperty ], time => time / SECONDS_PER_GENERATION, {
+        [ this.timeProperty ],
+        time => ( time % SECONDS_PER_GENERATION ) / SECONDS_PER_GENERATION, {
           isValidValue: value => ( value >= 0 && value <= 1 )
+        } );
+
+      // @public
+      this.generationProperty = new DerivedProperty(
+        [ this.timeProperty ],
+        time => Math.floor( time / NaturalSelectionConstants.SECONDS_PER_GENERATION ), {
+          isValidValue: value => Util.isInteger( value ),
+          phetioType: DerivedPropertyIO( NumberIO ),
+          tandem: tandem.createTandem( 'generationProperty' ),
+          phetioDocumentation: 'generation number for the current clock cycle of the generation clock'
         } );
 
       // @public (read-only) the portion of the clock cycle when environmental factors are active
@@ -60,7 +76,7 @@ define( require => {
      * @public
      */
     step( dt ) {
-      this.timeProperty.value = ( this.timeProperty.value + dt ) % SECONDS_PER_GENERATION;
+      this.timeProperty.value += dt;
     }
   }
 

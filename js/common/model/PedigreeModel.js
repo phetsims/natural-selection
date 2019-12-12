@@ -33,17 +33,12 @@ define( require => {
         tandem: tandem.createTandem( 'teethAllelesVisibleProperty' )
       } );
 
+      //TODO do these need phet-io instrumentation?
       // @public whether a mutation exists for each trait
       // Checkboxes in the Alleles panel are disabled until a mutation exists.
-      this.furMutationExistsProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
-        tandem: tandem.createTandem( 'furMutationExistsProperty' )
-      } );
-      this.earsMutationExistsProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
-        tandem: tandem.createTandem( 'earsMutationExistsProperty' )
-      } );
-      this.teethMutationExistsProperty = new BooleanProperty( CHECKBOXES_ENABLED, {
-        tandem: tandem.createTandem( 'teethMutationExistsProperty' )
-      } );
+      this.furMutationExistsProperty = new BooleanProperty( CHECKBOXES_ENABLED );
+      this.earsMutationExistsProperty = new BooleanProperty( CHECKBOXES_ENABLED );
+      this.teethMutationExistsProperty = new BooleanProperty( CHECKBOXES_ENABLED );
     }
 
     /**
