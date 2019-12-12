@@ -47,10 +47,12 @@ define( require => {
 
       // Portions of the bar for non-mutant and mutant counts. Only the mutantRectangle will be resized.
       const nonMutantRectangle = new Rectangle( 0, 0, options.barWidth, options.barHeight, {
-        fill: color
+        fill: color,
+        stroke: color
       } );
       const mutantRectangle = new HatchingRectangle( 0, 0, options.barWidth, options.barHeight, {
-        fill: color
+        fill: color,
+        stroke: color
       } );
 
       // Percentages for non-mutant and mutant counts

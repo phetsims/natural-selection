@@ -104,9 +104,13 @@ define( require => {
         spacing: 5
       }, options );
 
+      const rectangleOptions = {
+        fill: color,
+        stroke: color
+      };
       const rectangleNode = isMutation ?
-                            new HatchingRectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, { fill: color } ) :
-                            new Rectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, { fill: color } );
+                            new HatchingRectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, rectangleOptions ) :
+                            new Rectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, rectangleOptions );
 
 
       const textNode = new Text( labelString, {
