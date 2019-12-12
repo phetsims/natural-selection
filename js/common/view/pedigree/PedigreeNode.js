@@ -50,7 +50,10 @@ define( require => {
       const allelesPanel = new AllelesPanel( pedigreeModel, {
         fixedWidth: controlPanelWidth,
         maxHeight: size.height,
-        tandem: options.tandem.createTandem( 'allelesPanel' )
+        tandem: options.tandem.createTandem( 'allelesPanel' ),
+        phetioDocumentation: 'Note that if query parameter allelesVisible=false is specified, this panel will be ' +
+                             'created but will not be added to the UI. It will appear in the API and Studio tree, ' +
+                             'but changes to its elements and metadata will have no affect.'
       } );
 
       const graphNode = new PedigreeGraphNode( pedigreeModel, {

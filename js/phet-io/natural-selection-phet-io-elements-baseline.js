@@ -5150,7 +5150,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NodeIO"
     },
     "naturalSelection.labScreen.view.pedigreeNode.allelesPanel": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "Note that if query parameter allelesVisible=false is specified, this panel will be created but will not be added to the UI. It will appear in the API and Studio tree, but changes to its elements and metadata will have no affect.",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
       "phetioEventType": "MODEL",
