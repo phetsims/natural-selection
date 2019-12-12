@@ -9,14 +9,13 @@ define( require => {
   'use strict';
 
   // modules
-  const Image = require( 'SCENERY/nodes/Image' );
+  const Circle = require( 'SCENERY/nodes/Circle' );
+  const FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const Node = require( 'SCENERY/nodes/Node' );
 
-  // strings
-  const mutationIconImage = require( 'image!NATURAL_SELECTION/mutationIcon.png' );
-
-  class MutationIconNode extends Image {
+  class MutationIconNode extends Node {
 
     /**
      * @param {Object} [options]
@@ -24,10 +23,26 @@ define( require => {
     constructor( options ) {
 
       options = merge( {
-        scale: 0.25
+        radius: 10
       }, options );
 
-      super( mutationIconImage, options );
+      // Yellow circle
+      const circle = new Circle( options.radius, {
+        fill: 'rgb( 250, 244, 77 )',
+        stroke: 'black'
+      } );
+
+      // DNA icon centered in the circle
+      const icon = new FontAwesomeNode( 'dna_solid', {
+        maxWidth: circle.width * 0.8,
+        maxHeight: circle.height * 0.8,
+        center: circle.center
+      } );
+
+      assert && assert( !options.children, 'MutationIconNode sets children' );
+      options.children = [ circle, icon ];
+
+      super( options );
     }
   }
 
