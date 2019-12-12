@@ -44,22 +44,22 @@ define( require => {
         maxWidth: 120 // determined empirically
       } );
 
-      // previous button
-      const previousButton = new ArrowButton( 'left', options.previous,
+      // back button
+      const backButton = new ArrowButton( 'left', options.previous,
         merge( {
-          tandem: options.tandem.createTandem( 'previousButton' )
+          tandem: options.tandem.createTandem( 'backButton' )
         }, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS )
       );
 
-      // next button
-      const nextButton = new ArrowButton( 'right', options.next,
+      // forward button
+      const forwardButton = new ArrowButton( 'right', options.next,
         merge( {
-          tandem: options.tandem.createTandem( 'nextButton' )
+          tandem: options.tandem.createTandem( 'forwardButton' )
         }, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS )
       );
 
       assert && assert( !options.children, 'ScrollControl sets children' );
-      options.children = [ previousButton, xAxisLabelNode, nextButton ];
+      options.children = [ backButton, xAxisLabelNode, forwardButton ];
 
       super( options );
     }

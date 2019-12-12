@@ -49,45 +49,45 @@ define( require => {
       // invisible rectangle that defines the bounds of this Node
       const boundsRectangle = new Rectangle( 0, 0, options.graphWidth, options.graphHeight );
 
-      // y-axis zoom control
-      const yZoomControl = new ZoomControl( populationModel.yZoomLevelProperty, {
+      // Population (y-axis) zoom control
+      const populationZoomControl = new ZoomControl( populationModel.yZoomLevelProperty, {
         orientation: 'vertical',
         zoomLevelMax: 10,
         zoomLevelMin: 1,
         left: boundsRectangle.left,
         top: boundsRectangle.top,
-        tandem: options.tandem.createTandem( 'yZoomControl' )
+        tandem: options.tandem.createTandem( 'populationZoomControl' )
       } );
 
       // y-axis (Population) label
       const yAxisLabelNode = new Text( populationString, {
         font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
         rotation: -Math.PI / 2,
-        right: yZoomControl.right + ZOOM_CONTROL_X_OFFSET - Y_AXIS_LABEL_OFFSET,
+        right: populationZoomControl.right + ZOOM_CONTROL_X_OFFSET - Y_AXIS_LABEL_OFFSET,
         centerY: boundsRectangle.centerY,
         maxWidth: 120 // determined empirically
       } );
       
-      // x-axis scroll control
-      const xScrollControl = new ScrollControl( generationString, {
-        tandem: options.tandem.createTandem( 'xScrollControl' )
+      // Generation (x-axis) scroll control
+      const generationScrollControl = new ScrollControl( generationString, {
+        tandem: options.tandem.createTandem( 'generationScrollControl' )
       } );
 
       //TODO placeholder
       // XY plot
-      const plotWidth = options.graphWidth - yZoomControl.width - ZOOM_CONTROL_X_OFFSET;
-      const plotHeight = options.graphHeight - xScrollControl.height - X_AXIS_LABEL_OFFSET;
+      const plotWidth = options.graphWidth - populationZoomControl.width - ZOOM_CONTROL_X_OFFSET;
+      const plotHeight = options.graphHeight - generationScrollControl.height - X_AXIS_LABEL_OFFSET;
       const plotNode = new Rectangle( 0, 0, plotWidth, plotHeight, {
         fill: NaturalSelectionColors.POPULATION_GRAPH_FILL,
         stroke: NaturalSelectionColors.PANEL_STROKE,
-        left: yZoomControl.right + ZOOM_CONTROL_X_OFFSET,
+        left: populationZoomControl.right + ZOOM_CONTROL_X_OFFSET,
         top: boundsRectangle.top,
         tandem: options.tandem.createTandem( 'plotNode' )
       } );
 
       // center x-axis control under the graph
-      xScrollControl.centerX = plotNode.centerX;
-      xScrollControl.top = plotNode.bottom + X_AXIS_LABEL_OFFSET;
+      generationScrollControl.centerX = plotNode.centerX;
+      generationScrollControl.top = plotNode.bottom + X_AXIS_LABEL_OFFSET;
 
       const dataProbeNode = new DataProbeNode( populationModel, plotNode.x, plotWidth, plotHeight, {
         x: plotNode.x,
@@ -96,7 +96,7 @@ define( require => {
       } );
 
       assert && assert( !options.children, 'PopulationGraphNode sets children' );
-      options.children = [ boundsRectangle, plotNode, xScrollControl, yZoomControl, yAxisLabelNode, dataProbeNode ];
+      options.children = [ boundsRectangle, plotNode, generationScrollControl, populationZoomControl, yAxisLabelNode, dataProbeNode ];
 
       super( options );
 
