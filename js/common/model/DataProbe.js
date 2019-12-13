@@ -90,6 +90,14 @@ define( require => {
       this.shortTeethPopulationProperty.reset();
       this.longTeethPopulationProperty.reset();
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'DataProbe does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'DataProbe', DataProbe );

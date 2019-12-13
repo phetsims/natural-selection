@@ -30,6 +30,14 @@ define( require => {
       super.reset();
       //TODO
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'LabViewProperties does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'LabViewProperties', LabViewProperties );

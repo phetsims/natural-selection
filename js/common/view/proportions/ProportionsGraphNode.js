@@ -89,9 +89,9 @@ define( require => {
       } );
 
       // Rows
-      const startRow = new ProportionsGraphRow( startOfGenerationString, proportionsModel.startCountProperty,
+      const startRow = new Row( startOfGenerationString, proportionsModel.startCountProperty,
         labelColumnAlignGroup, barColumnsAlignGroup, proportionsModel.valuesVisibleProperty );
-      const currentRow = new ProportionsGraphRow( endOfGenerationString, proportionsModel.endCountProperty,
+      const currentRow = new Row( endOfGenerationString, proportionsModel.endCountProperty,
         labelColumnAlignGroup, barColumnsAlignGroup, proportionsModel.valuesVisibleProperty );
       const rows = new VBox( {
         spacing: 30,
@@ -113,12 +113,20 @@ define( require => {
 
       super( options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'ProportionsGraphNode does not support dispose' );
+    }
   }
 
   /**
-   * ProportionsGraphRow is a row in the Proportions graph.
+   * Row is a row in the Proportions graph.
    */
-  class ProportionsGraphRow extends HBox {
+  class Row extends HBox {
 
     /**
      * @param {string} labelString
@@ -173,6 +181,14 @@ define( require => {
           countNode.text = StringUtils.fillIn( countBunniesString, { count: count } );
         }
       } );
+    }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'Row does not support dispose' );
     }
   }
 

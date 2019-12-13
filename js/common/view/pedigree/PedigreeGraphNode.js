@@ -39,6 +39,14 @@ define( require => {
 
       super( options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'PedigreeGraphNode does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'PedigreeGraphNode', PedigreeGraphNode );

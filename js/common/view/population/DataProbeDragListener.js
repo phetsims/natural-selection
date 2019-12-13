@@ -35,6 +35,14 @@ define( require => {
 
       super( options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'DataProbeDragListener does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'DataProbeDragListener', DataProbeDragListener );

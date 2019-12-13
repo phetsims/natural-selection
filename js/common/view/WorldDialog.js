@@ -56,6 +56,14 @@ define( require => {
 
       super( content, options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'WorldDialog does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'WorldDialog', WorldDialog );

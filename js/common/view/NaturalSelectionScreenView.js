@@ -178,6 +178,14 @@ define( require => {
     }
 
     /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'NaturalSelectionScreenView does not support dispose' );
+    }
+
+    /**
      * @param {number} dt - time step, in seconds
      * @public
      */

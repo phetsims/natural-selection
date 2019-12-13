@@ -40,6 +40,14 @@ define( require => {
 
       super( options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'CancelButton does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'CancelMutationButton', CancelMutationButton );

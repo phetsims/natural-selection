@@ -80,8 +80,12 @@ define( require => {
         } );
     }
 
+    /**
+     * @public
+     * @override
+     */
     dispose() {
-      //TODO fail
+      assert && assert( false, 'ProportionsGenerationControl does not support dispose' );
     }
   }
 

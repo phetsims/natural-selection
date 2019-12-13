@@ -46,6 +46,14 @@ define( require => {
         options
       );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'IntroScreen does not support dispose' );
+    }
   }
 
   /**

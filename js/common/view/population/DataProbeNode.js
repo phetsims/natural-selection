@@ -167,6 +167,14 @@ define( require => {
     reset() {
       this.locationProperty.reset();
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'DataProbeNode does not support dispose' );
+    }
   }
 
   /**

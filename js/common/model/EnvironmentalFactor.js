@@ -32,6 +32,14 @@ define( require => {
     reset() {
       this.enabledProperty.reset();
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'EnvironmentalFactor does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'EnvironmentalFactor', EnvironmentalFactor );

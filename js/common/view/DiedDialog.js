@@ -38,6 +38,14 @@ define( require => {
 
       super( messageText, options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'DiedDialog does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'DiedDialog', DiedDialog );

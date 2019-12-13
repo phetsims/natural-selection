@@ -109,6 +109,14 @@ define( require => {
 
       super( content, options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'AllelesPanel does not support dispose' );
+    }
   }
 
   /**

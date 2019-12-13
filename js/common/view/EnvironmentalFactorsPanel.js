@@ -67,6 +67,14 @@ define( require => {
 
       super( content, options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'EnvironmentalFactorsPanel does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'EnvironmentalFactorsPanel', EnvironmentalFactorsPanel );

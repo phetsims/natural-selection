@@ -53,6 +53,14 @@ define( require => {
         options
       );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'LabScreen does not support dispose' );
+    }
   }
 
   /**

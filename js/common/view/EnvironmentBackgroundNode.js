@@ -57,6 +57,14 @@ define( require => {
         arcticBackground.visible = ( climate === Environments.ARCTIC );
       } );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'EnvironmentBackgroundNode does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'EnvironmentBackgroundNode', EnvironmentBackgroundNode );

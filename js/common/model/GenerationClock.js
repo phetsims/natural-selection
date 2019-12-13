@@ -61,7 +61,7 @@ define( require => {
      * @public
      */
     dispose() {
-      assert && assert( false, 'Generation is not intended to be disposed' );
+      assert && assert( false, 'Generation does not support dispose' );
     }
 
     /**

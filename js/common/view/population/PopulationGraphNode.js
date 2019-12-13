@@ -112,6 +112,14 @@ define( require => {
     reset() {
       this.dataProbeNode.reset();
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'PopulationGraphNode does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'PopulationGraphNode', PopulationGraphNode );

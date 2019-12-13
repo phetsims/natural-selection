@@ -48,6 +48,14 @@ define( require => {
     }
 
     /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'IntroScreenView does not support dispose' );
+    }
+
+    /**
      * Steps the view.
      * @param {number} dt - time step, in seconds
      * @public

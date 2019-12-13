@@ -117,6 +117,14 @@ define( require => {
 
       super( content, options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'PopulationPanel does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'PopulationPanel', PopulationPanel );

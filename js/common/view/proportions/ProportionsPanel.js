@@ -70,6 +70,14 @@ define( require => {
 
       super( content, options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'ProportionsPanel does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'ProportionsPanel', ProportionsPanel );

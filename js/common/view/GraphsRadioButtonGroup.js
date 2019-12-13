@@ -72,6 +72,14 @@ define( require => {
 
       super( graphProperty, items, options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'GraphsRadioButtonGroup does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'GraphsRadioButtonGroup', GraphsRadioButtonGroup );

@@ -57,6 +57,14 @@ define( require => {
 
       super( options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'ProportionsNode does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'ProportionsNode', ProportionsNode );

@@ -53,6 +53,14 @@ define( require => {
       this.earsMutationExistsProperty.reset();
       this.teethMutationExistsProperty.reset();
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'PedigreeModel does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'PedigreeModel', PedigreeModel );

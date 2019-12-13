@@ -87,6 +87,14 @@ define( require => {
       this.earsAlert.visible = false;
       this.teethAlert.visible = false;
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'MutationAlertsNode does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'MutationAlertsNode', MutationAlertsNode );

@@ -83,7 +83,7 @@ define( require => {
      * @override
      */
     dispose() {
-      assert && assert( false, 'GenerationClockNode is not intended to be disposed' );
+      assert && assert( false, 'GenerationClockNode does not support dispose' );
     }
   }
 

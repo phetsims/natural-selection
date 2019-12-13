@@ -77,6 +77,15 @@ define( require => {
 
       super( options );
     }
+
+    //TODO should this be disposed and created on demand? It's not phet-io instrumented.
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'MutationComingNode does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'MutationComingNode', MutationComingNode );

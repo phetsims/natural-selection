@@ -89,6 +89,10 @@ define( require => {
       };
     }
 
+    /**
+     * @public
+     * @override
+     */
     dispose() {
       super.dispose();
       this.disposeScrollControl();

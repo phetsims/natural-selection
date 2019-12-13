@@ -116,6 +116,14 @@ define( require => {
     reset() {
       this.resetEnvironmentDisplayNode();
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'EnvironmentDisplayNode does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'EnvironmentDisplayNode', EnvironmentDisplayNode );

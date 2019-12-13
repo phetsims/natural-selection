@@ -81,6 +81,14 @@ define( require => {
 
       super( environmentProperty, content, options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'EnvironmentRadioButtonGroup does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'EnvironmentRadioButtonGroup', EnvironmentRadioButtonGroup );

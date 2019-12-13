@@ -40,6 +40,14 @@ define( require => {
 
       super( options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'PlayAgainButton does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'PlayAgainButton', PlayAgainButton );

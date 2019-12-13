@@ -43,6 +43,14 @@ define( require => {
     }
 
     /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'LabScreenView does not support dispose' );
+    }
+
+    /**
      * @param {number} dt - time step, in seconds
      * @public
      * @override

@@ -98,6 +98,7 @@ define( require => {
 
     /**
      * @public
+     * @override
      */
     dispose() {
       super.dispose();

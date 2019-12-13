@@ -155,6 +155,14 @@ define( require => {
     }
 
     /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'AddMutationsPanel does not support dispose' );
+    }
+
+    /**
      * Gets the left center of the 'Fur' row in the global coordinate frame.
      * @returns {Vector2}
      * @public

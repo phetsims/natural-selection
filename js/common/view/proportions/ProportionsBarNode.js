@@ -84,6 +84,14 @@ define( require => {
     }
 
     /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'ProportionsBarNode does not support dispose' );
+    }
+
+    /**
      * Updates this node. Note that only mutantRectangle is resized.
      * @param {number} nonMutantCountCount
      * @param {number} mutantCount

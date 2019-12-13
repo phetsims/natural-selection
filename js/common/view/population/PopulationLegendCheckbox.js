@@ -50,6 +50,14 @@ define( require => {
 
       super( content, property, options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'PopulationLegendCheckbox does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'PopulationLegendCheckbox', PopulationLegendCheckbox );

@@ -121,6 +121,14 @@ define( require => {
       this.xAxisRangeProperty.reset();
       this.yAxisMaximumsIndexProperty.reset();
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'PopulationModel does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'PopulationModel', PopulationModel );

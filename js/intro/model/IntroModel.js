@@ -32,6 +32,14 @@ define( require => {
     }
 
     /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'IntroModel does not support dispose' );
+    }
+
+    /**
      * Steps the model.
      * @param {number} dt - time step, in seconds
      * @public

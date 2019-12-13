@@ -51,6 +51,14 @@ define( require => {
       this.toughFood.reset();
       this.limitedFood.reset();
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'EnvironmnetModel does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'EnvironmentModel', EnvironmentModel );

@@ -73,6 +73,14 @@ define( require => {
       this.valuesVisibleProperty.reset();
       this.generationProperty.reset();
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'ProportionsModel does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'ProportionsModel', ProportionsModel );

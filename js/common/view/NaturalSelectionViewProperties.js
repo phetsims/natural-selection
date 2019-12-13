@@ -32,6 +32,14 @@ define( require => {
     reset() {
       this.graphProperty.reset();
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'NaturalSelectionViewProperties does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'NaturalSelectionViewProperties', NaturalSelectionViewProperties );
