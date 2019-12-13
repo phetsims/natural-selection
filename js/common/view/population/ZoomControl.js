@@ -28,7 +28,7 @@ define( require => {
   class ZoomControl extends LayoutBox {
 
     /**
-     * @param {NumberProperty} zoomLevelProperty
+     * @param {NumberProperty} zoomLevelProperty - smaller value means more zoomed in
      * @param {Object} [options]
      */
     constructor( zoomLevelProperty, options ) {

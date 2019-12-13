@@ -19,12 +19,15 @@ define( require => {
   const PropertyIO = require( 'AXON/PropertyIO' );
   const Range = require( 'DOT/Range' );
   const RangeIO = require( 'DOT/RangeIO' );
+  const Util = require( 'DOT/Util' );
 
   // constants
   const X_AXIS_LENGTH = 7; // length of the x-axis range, in generations
   
   // Maximum population values for the y-axis scale. These are identical to the Java version.
   const Y_AXIS_MAXIMUMS = [ 5, 15, 30, 50, 75, 100, 150, 200, 250, 350, 500, 1000, 2000, 3000, 5000 ];
+  assert && assert( _.every( value => Util.isInteger( value ) ), 'Y_AXIS_MAXIMUMS must contain integer values' );
+  //TODO assert that Y_AXIS_MAXIMUMS values are in ascending order
 
   class PopulationModel {
 
