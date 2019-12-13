@@ -78,9 +78,6 @@ define( require => {
         isValidValue: range => ( range.min >= 0 ),
         tandem: tandem.createTandem( 'xAxisRangeProperty' )
       } );
-      phet.log && this.xAxisRangeProperty.link(
-        xAxisRangeProperty => phet.log( `xAxisRangeProperty=${xAxisRangeProperty}` )
-      );
 
       // @public the total range of the x-axis data
       this.xAxisTotalRangeProperty = new DerivedProperty(
