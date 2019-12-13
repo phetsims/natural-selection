@@ -2991,7 +2991,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "DerivedPropertyIO<NumberIO>"
     },
-    "naturalSelection.labScreen.model.populationModel.yMaximumsIndexProperty": {
+    "naturalSelection.labScreen.model.populationModel.yZoomIndexProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,

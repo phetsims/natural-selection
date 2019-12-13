@@ -21,13 +21,18 @@ define( require => {
 
   // constants
 
-  // Maximum population values for the y-axis scale. These are identical to the Java version.
-  const Y_MAXIMUMS = [ 5, 15, 30, 50, 75, 100, 150, 200, 250, 350, 500, 1000, 2000, 3000, 5000 ];
+  // The default index into Y_MAXIMUMS, determines the initial y-axis scale.
+  const Y_MAXIMUMS_INDEX_DEFAULT = 3;
+
+  // Maximum population values for the y-axis scale.
+  const Y_MAXIMUMS = [ 5, 14, 30, 50, 75, 100, 140, 200, 240, 350, 500, 1000, 2000, 3000, 5000 ];
   assert && assert( _.every( value => Util.isInteger( value ) ), 'Y_MAXIMUMS must contain integer values' );
   //TODO assert that Y_MAXIMUMS values are in ascending order
 
-  // The default index into Y_MAXIMUMS, determines the initial y-axis scale.
-  const Y_MAXIMUMS_INDEX_DEFAULT = 3;
+  // Spacing of tick marks for each value in Y_MAXIMUMS.
+  const Y_TICK_SPACINGS = [ 1, 2, 5, 5, 10, 10, 20, 20, 20, 50, 50, 100, 200, 200, 500 ];
+  assert && assert( Y_TICK_SPACINGS.length === Y_MAXIMUMS.length, 'incorrect number of Y_TICK_SPACINGS' );
+  assert && assert( _.every( value => Util.isInteger( value ) ), 'Y_TICK_SPACINGS must contain integer values' );
 
   class PopulationModel {
 
@@ -82,16 +87,16 @@ define( require => {
       } );
 
       // @public index into Y_MAXIMUMS
-      this.yMaximumsIndexProperty = new NumberProperty( Y_MAXIMUMS_INDEX_DEFAULT, {
+      this.yZoomIndexProperty = new NumberProperty( Y_MAXIMUMS_INDEX_DEFAULT, {
         numberType: 'Integer',
         range: new Range( 0, Y_MAXIMUMS.length - 1 ),
-        tandem: tandem.createTandem( 'yMaximumsIndexProperty' )
+        tandem: tandem.createTandem( 'yZoomIndexProperty' )
       } );
 
       // @public maximum of graph's y-axis scale, in population
       // We're storing only the max since the min is always zero.
       this.yMaximumProperty = new DerivedProperty(
-        [ this.yMaximumsIndexProperty ],
+        [ this.yZoomIndexProperty ],
         index => Y_MAXIMUMS[ index ], {
           phetioType: DerivedPropertyIO( NumberIO ),
           tandem: tandem.createTandem( 'yMaximumProperty' )
@@ -131,7 +136,7 @@ define( require => {
       this.longTeethVisibleProperty.reset();
 
       this.xMaximumProperty.reset();
-      this.yMaximumsIndexProperty.reset();
+      this.yZoomIndexProperty.reset();
     }
 
     /**

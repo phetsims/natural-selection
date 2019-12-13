@@ -58,10 +58,10 @@ define( require => {
         } );
 
       // Population (y-axis) zoom control
-      const populationZoomControl = new ZoomControl( populationModel.yMaximumsIndexProperty, {
+      const populationZoomControl = new ZoomControl( populationModel.yZoomIndexProperty, {
         orientation: 'vertical',
-        zoomLevelMin: populationModel.yMaximumsIndexProperty.range.min,
-        zoomLevelMax: populationModel.yMaximumsIndexProperty.range.max,
+        zoomLevelMin: populationModel.yZoomIndexProperty.range.min,
+        zoomLevelMax: populationModel.yZoomIndexProperty.range.max,
         left: boundsRectangle.left,
         top: boundsRectangle.top,
         tandem: options.tandem.createTandem( 'populationZoomControl' )
