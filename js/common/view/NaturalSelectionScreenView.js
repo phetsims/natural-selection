@@ -137,7 +137,7 @@ define( require => {
       // Reset All push button
       const resetAllButton = new ResetAllButton( {
         listener: () => {
-          this.interruptSubtreeInput();
+          this.interruptSubtreeInput(); // cancel interactions that are in progress
           model.reset();
           this.reset();
         },
