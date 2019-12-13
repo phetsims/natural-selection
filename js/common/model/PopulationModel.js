@@ -35,9 +35,10 @@ define( require => {
   class PopulationModel {
 
     /**
+     * @param {Property.<number>} currentGenerationProperty
      * @param {Tandem} tandem
      */
-    constructor( tandem ) {
+    constructor( currentGenerationProperty, tandem ) {
 
       // @public
       this.dataProbe = new DataProbe( tandem.createTandem( 'dataProbe' ) );
@@ -72,7 +73,13 @@ define( require => {
         phetioType: PropertyIO( RangeIO ),
         tandem: tandem.createTandem( 'xAxisRangeProperty' )
       } );
-      phet.log && this.xAxisRangeProperty.link( xAxisRangeProperty => phet.log( `xAxisRangeProperty=${xAxisRangeProperty}` ) );
+      phet.log && this.xAxisRangeProperty.link(
+        xAxisRangeProperty => phet.log( `xAxisRangeProperty=${xAxisRangeProperty}` )
+      );
+
+      // @public the total range of the x-axis data
+      this.xAxisTotalRangeProperty = new DerivedProperty( [ currentGenerationProperty ],
+        currentGeneration => new Range( 0, currentGeneration + 1 ) );
 
       // @public index into Y_AXIS_MAXIMUMS
       this.yAxisMaximumsIndexProperty = new NumberProperty( Y_AXIS_MAXIMUMS_INDEX_DEFAULT, {
@@ -88,7 +95,9 @@ define( require => {
           phetioType: DerivedPropertyIO( RangeIO ),
           tandem: tandem.createTandem( 'yAxisRangeProperty' )
         } );
-      phet.log && this.yAxisRangeProperty.link( yAxisRange => phet.log( `yAxisRange=${yAxisRange}` ) );
+      phet.log && this.yAxisRangeProperty.link(
+        yAxisRange => phet.log( `yAxisRange=${yAxisRange}` )
+      );
     }
 
     /**

@@ -25,7 +25,7 @@ define( require => {
         tandem: tandem.createTandem( 'valuesVisibleProperty' )
       } );
 
-      // @public
+      // @public the generation that is displayed by the Proportions graph
       this.generationProperty = new NumberProperty( 0, {
         numberType: 'Integer',
         tandem: tandem.createTandem( 'generationProperty' ),

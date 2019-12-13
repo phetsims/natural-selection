@@ -49,6 +49,13 @@ define( require => {
       // invisible rectangle that defines the bounds of this Node
       const boundsRectangle = new Rectangle( 0, 0, options.graphWidth, options.graphHeight );
 
+      // Generation (x-axis) scroll control
+      const generationScrollControl = new ScrollControl(
+        populationModel.xAxisRangeProperty, populationModel.xAxisTotalRangeProperty, {
+          labelString: generationString,
+          tandem: options.tandem.createTandem( 'generationScrollControl' )
+        } );
+
       // Population (y-axis) zoom control
       const populationZoomControl = new ZoomControl( populationModel.yAxisMaximumsIndexProperty, {
         orientation: 'vertical',
@@ -68,11 +75,6 @@ define( require => {
         maxWidth: 120 // determined empirically
       } );
       
-      // Generation (x-axis) scroll control
-      const generationScrollControl = new ScrollControl( generationString, {
-        tandem: options.tandem.createTandem( 'generationScrollControl' )
-      } );
-
       //TODO placeholder
       // XY plot
       const plotWidth = options.graphWidth - populationZoomControl.width - ZOOM_CONTROL_X_OFFSET;
