@@ -12,6 +12,7 @@ define( require => {
   const Dimension2 = require( 'DOT/Dimension2' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
+  const NaturalSelectionQueryParameters = require( 'NATURAL_SELECTION/common/NaturalSelectionQueryParameters' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RectangularButtonView = require( 'SUN/buttons/RectangularButtonView' );
 
@@ -28,10 +29,10 @@ define( require => {
     MAX_BUNNIES: 1000,
 
     // clock
-    SECONDS_PER_GENERATION: 10,
-    SECONDS_PER_STEP: 0.1, // dt for when the Step button is pressed, in seconds
+    SECONDS_PER_GENERATION: NaturalSelectionQueryParameters.secondsPerGeneration,
+    SECONDS_PER_STEP: NaturalSelectionQueryParameters.secondsPerStep, // dt per press of the Step button
 
-    // View ============================================================================================================
+    // View ============================================================================================================N
 
     // ScreenView
     SCREEN_VIEW_X_MARGIN: 15, // margins at left and right edges of the ScreenView
