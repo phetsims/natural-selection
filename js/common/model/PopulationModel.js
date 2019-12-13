@@ -74,7 +74,7 @@ define( require => {
         tandem: tandem.createTandem( 'yAxisMaximumsIndexProperty' )
       } );
 
-      // @public maximum for the graph's y-axis scale, in population
+      // @public range of the graph's y axis, in population
       this.yAxisRangeProperty = new DerivedProperty(
         [ this.yAxisMaximumsIndexProperty ],
         index => new Range( 0, yAxisMaximums[ index ] ), {
