@@ -16,9 +16,13 @@ define( require => {
   class ProportionsModel {
 
     /**
+     * @param {Property.<number>} currentGenerationProperty
      * @param {Tandem} tandem
      */
-    constructor( tandem ) {
+    constructor( currentGenerationProperty, tandem ) {
+
+      // @public
+      this.currentGenerationProperty = currentGenerationProperty;
 
       // @public
       this.valuesVisibleProperty = new BooleanProperty( true, {

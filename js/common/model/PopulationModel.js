@@ -41,6 +41,9 @@ define( require => {
     constructor( currentGenerationProperty, tandem ) {
 
       // @public
+      this.currentGenerationProperty = currentGenerationProperty;
+
+      // @public
       this.dataProbe = new DataProbe( tandem.createTandem( 'dataProbe' ) );
 
       // @public visibility of the total population plot on the graph and data probe

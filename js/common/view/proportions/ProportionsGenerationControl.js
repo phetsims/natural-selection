@@ -15,6 +15,7 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
+  const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const Tandem = require( 'TANDEM/Tandem' );
 
@@ -24,10 +25,11 @@ define( require => {
   class ProportionsGenerationControl extends HBox {
 
     /**
-     * @param {Property.<number>} generationProperty
+     * @param {Property.<number>} visibileGenerationProperty
+     * @param {Property.<number>} currentGenerationProperty
      * @param {Object} [options]
      */
-    constructor( generationProperty, options ) {
+    constructor( visibileGenerationProperty, currentGenerationProperty, options ) {
 
       options = merge( {
         spacing: 10,
@@ -38,7 +40,7 @@ define( require => {
 
       // Previous button, decrements the generation number
       const previousButton = new ArrowButton( 'left',
-        () => generationProperty.value--,
+        () => visibileGenerationProperty.value--,
         merge( {
           tandem: options.tandem.createTandem( 'previousButton' )
         }, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS )
@@ -46,14 +48,14 @@ define( require => {
 
       // Next button, increments the generation number
       const nextButton = new ArrowButton( 'right',
-        () => generationProperty.value++,
+        () => visibileGenerationProperty.value++,
         merge( {
           tandem: options.tandem.createTandem( 'nextButton' )
         }, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS )
       );
 
       // Generation number display
-      const generationDisplay = new NumberDisplay( generationProperty, new Range( 0, 99 ), {
+      const generationDisplay = new NumberDisplay( visibileGenerationProperty, new Range( 0, 99 ), {
         align: 'center',
         valuePattern: generationValueString,
         font: NaturalSelectionConstants.PROPORTIONS_GENERATION_CONTROL_FONT,
@@ -70,10 +72,16 @@ define( require => {
       super( options );
 
       // Enable buttons
-      generationProperty.link( generation => {
-        previousButton.enabled = ( generation > 0 );
-        //TODO nextButton.enabled = ?
-      } );
+      Property.multilink(
+        [ visibileGenerationProperty, currentGenerationProperty ],
+        ( visibileGeneration, currentGeneration ) => {
+          previousButton.enabled = ( visibileGeneration > 0 );
+          nextButton.enabled = ( visibileGeneration < currentGeneration );
+        } );
+    }
+
+    dispose() {
+      //TODO fail
     }
   }
 

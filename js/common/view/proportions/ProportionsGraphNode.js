@@ -63,13 +63,12 @@ define( require => {
         stroke: NaturalSelectionColors.PANEL_STROKE
       } );
 
-      const generationControl = new ProportionsGenerationControl( proportionsModel.generationProperty, {
-        top: backgroundNode.top + 8,
-        tandem: options.tandem.createTandem( 'generationControl' )
-      } );
-      generationControl.on( 'bounds', () => {
-        generationControl.centerX = backgroundNode.centerX;
-      } );
+      const generationControl = new ProportionsGenerationControl(
+        proportionsModel.generationProperty, proportionsModel.currentGenerationProperty, {
+          centerX: backgroundNode.centerX,
+          top: backgroundNode.top + 8,
+          tandem: options.tandem.createTandem( 'generationControl' )
+        } );
 
       const labelColumnAlignGroup = new AlignGroup();
       const barColumnsAlignGroup = new AlignGroup( { matchVertical: false } );
