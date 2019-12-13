@@ -26,7 +26,7 @@ define( require => {
     // Model ===========================================================================================================
 
     // number of bunnies required to 'take over the world'
-    MAX_BUNNIES: 1000,
+    MAX_BUNNIES: NaturalSelectionQueryParameters.maxBunnies,
 
     // clock
     SECONDS_PER_GENERATION: NaturalSelectionQueryParameters.secondsPerGeneration,

@@ -11,6 +11,7 @@ define( require => {
 
   // modules
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const Util = require( 'DOT/Util' );
 
   const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
 
@@ -28,6 +29,15 @@ define( require => {
       type: 'number',
       defaultValue: 0.1,
       isValidValue: value => ( value > 0 )
+    },
+
+    // The maximum number of bunnies that the world can support. Exceeding this number results in
+    // 'Bunnies have taken over the world' dialog.
+    // For internal use only.
+    maxBunnies: {
+      type: 'number',
+      defaultValue: 10,
+      isValidValue: value => ( value > 0 && Util.isInteger( value ) )
     },
 
     // Determines whether allele abbreviations are visible in the UI. Setting this to false hides the Pedigree 'Alleles'
