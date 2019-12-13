@@ -52,9 +52,6 @@ define( require => {
           phetioDocumentation: 'integer generation number for the current cycle of the generation clock'
         }
       );
-      phet.log && this.currentGenerationProperty.link(
-        currentGeneration => phet.log( `currentGeneration=${currentGeneration}` )
-      );
 
       // @public percent of the current clock cycle that has been completed
       this.percentTimeProperty = new DerivedProperty(

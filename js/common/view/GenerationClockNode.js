@@ -13,6 +13,8 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Text = require( 'SCENERY/nodes/Text' );
   const Shape = require( 'KITE/Shape' );
 
   // constants
@@ -62,6 +64,19 @@ define( require => {
       options.children = [ fullCircle, environmentalFactorPath, revealArc ];
 
       super( options );
+
+      // Display the current generation number below the generation clock.
+      if ( phet.chipper.queryParameters.dev ) {
+        const generationNode = new Text( '', {
+          font: new PhetFont( 14 ),
+          top: fullCircle.bottom + 3
+        } );
+        this.addChild( generationNode );
+        generationClock.currentGenerationProperty.link( currentGeneration => {
+          generationNode.text = currentGeneration;
+          generationNode.centerX = fullCircle.centerX;
+        } );
+      }
 
       // Reveal part of the clock. unlink is unnecessary, exists for the lifetime of the sim.
       generationClock.percentTimeProperty.link( percentTime => {
