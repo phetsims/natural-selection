@@ -41,16 +41,19 @@ define( require => {
       const arcticBackground = new Image( arcticBackgroundImage );
       arcticBackground.setScaleMagnitude( size.width / arcticBackground.width, size.height / arcticBackground.height );
 
-      // Horizon line, for debugging. Bunnies cannot go further from the viewer than this line.
-      const horizonLine = new Line( 0, horizonY, size.width, horizonY, {
-        stroke: phet.chipper.queryParameters.dev ? 'red' : null,
-        lineWidth: 1
-      } );
-
       assert && assert( !options.children, 'EnvironmentBackgroundNode sets children' );
-      options.children = [ equatorBackground, arcticBackground, horizonLine ];
+      options.children = [ equatorBackground, arcticBackground ];
 
       super( options );
+
+      // Horizon line, for debugging. Bunnies cannot go further from the viewer than this line.
+      if ( phet.chipper.queryParameters.dev ) {
+        const horizonLine = new Line( 0, horizonY, size.width, horizonY, {
+          stroke: 'red',
+          lineWidth: 1
+        } );
+        this.addChild( horizonLine );
+      }
 
       environmentProperty.link( climate => {
         equatorBackground.visible = ( climate === Environments.EQUATOR );
