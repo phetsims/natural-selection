@@ -146,6 +146,15 @@ define( require => {
     dispose() {
       assert && assert( false, 'PopulationModel does not support dispose' );
     }
+
+    /**
+     * Gets the y-axis tick mark spacing for the current y-axis scale.
+     * @returns {number}
+     * @public
+     */
+    getYTickSpacing() {
+      return Y_TICK_SPACINGS[ this.yZoomIndexProperty.value ];
+    }
   }
 
   return naturalSelection.register( 'PopulationModel', PopulationModel );
