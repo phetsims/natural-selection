@@ -39,8 +39,6 @@ define( require => {
     }
   } );
 
-  naturalSelection.register( 'NaturalSelectionQueryParameters', NaturalSelectionQueryParameters );
-
   // validate any dependencies between query parameters
   assert( NaturalSelectionQueryParameters.secondsPerStep < NaturalSelectionQueryParameters.secondsPerGeneration,
     'secondsPerStep must be < secondsPerGeneration' );
@@ -48,5 +46,5 @@ define( require => {
   // log the values of all sim-specific query parameters
   phet.log && phet.log( 'query parameters: ' + JSON.stringify( NaturalSelectionQueryParameters, null, 2 ) );
 
-  return NaturalSelectionQueryParameters;
+  return naturalSelection.register( 'NaturalSelectionQueryParameters', NaturalSelectionQueryParameters );
 } );
