@@ -4,6 +4,10 @@
  * Query parameters that are specific to this simulation.
  * Running with ?log will print these query parameters and their values to the console at startup.
  *
+ * Running with ?dev shows the following things that are specific to this sim:
+ * - generation number is shown below the generation clock in GenerationClockNode
+ * - horizon line is shown in in EnvironmentDisplayNode
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
