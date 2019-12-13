@@ -39,7 +39,7 @@ define( require => {
     // For internal use only.
     maxBunnies: {
       type: 'number',
-      defaultValue: 10,
+      defaultValue: 1000,
       isValidValue: value => ( value > 0 && Util.isInteger( value ) )
     },
 
