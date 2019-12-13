@@ -11,10 +11,17 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const DataProbe = require( 'NATURAL_SELECTION/common/model/DataProbe' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
+  const PropertyIO = require( 'AXON/PropertyIO' );
   const Range = require( 'DOT/Range' );
+  const RangeIO = require( 'DOT/RangeIO' );
+
+  // constants
+  const X_AXIS_WIDTH = 7; // in generations
 
   class PopulationModel {
 
@@ -51,28 +58,29 @@ define( require => {
         tandem: tandem.createTandem( 'longTeethVisibleProperty' )
       } );
 
-      //TODO phet-io instrumentation
       // @public range of the graph's x axis, in generations
-      this.xAxisRangeProperty = new Property( new Range( 0, 6 ), {
-        valueType: Range,
-        isValueValue: value => ( value.min && value.max )
+      this.xAxisRangeProperty = new Property( new Range( 0, X_AXIS_WIDTH ), {
+        phetioType: PropertyIO( RangeIO ),
+        tandem: tandem.createTandem( 'xAxisRangeProperty' )
       } );
 
-      //TODO change to yZoomIndexProperty
-      // @public zoom level of the graph's y axis
-      this.yZoomLevelProperty = new NumberProperty( 1, {
-        numberType: 'Integer'
-        //TODO isValidValue:
-        //TODO range:
+      // Maximum population values for the y-axis scale. These are identical to the Java version.
+      const yAxisMaximums = [ 5, 15, 30, 50, 75, 100, 150, 200, 250, 350, 500, 1000, 2000, 3000, 5000 ];
+
+      // @public index into yAxisMaximums
+      this.yAxisMaximumsIndexProperty = new NumberProperty( 3, {
+        numberType: 'Integer',
+        range: new Range( 0, yAxisMaximums.length - 1 ),
+        tandem: tandem.createTandem( 'yAxisMaximumsIndexProperty' )
       } );
 
-      //TODO derived from yZoomLevelProperty?
-      //TODO phet-io instrumentation
-      // @public range of the graph's x axis, in population
-      this.yAxisRangeProperty = new Property( new Range( 0, 50 ), {
-        valueType: Range,
-        isValueValue: value => ( value.min && value.max )
-      } );
+      // @public maximum for the graph's y-axis scale, in population
+      this.yAxisRangeProperty = new DerivedProperty(
+        [ this.yAxisMaximumsIndexProperty ],
+        index => new Range( 0, yAxisMaximums[ index ] ), {
+          phetioType: DerivedPropertyIO( RangeIO ),
+          tandem: tandem.createTandem( 'yAxisRangeProperty' )
+        } );
     }
 
     /**
@@ -89,9 +97,8 @@ define( require => {
       this.shortTeethVisibleProperty.reset();
       this.longTeethVisibleProperty.reset();
 
-      this.yZoomLevelProperty.reset();
       this.xAxisRangeProperty.reset();
-      this.yAxisRangeProperty.reset();
+      this.yAxisMaximumsIndexProperty.reset();
     }
   }
 

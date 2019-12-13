@@ -15,7 +15,7 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
-  const NaturalSelectionQueryParameters = require( 'NATURAL_SELECTION/common/NaturalSelectionQueryParameters' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RectangularButtonView = require( 'SUN/buttons/RectangularButtonView' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
@@ -28,19 +28,15 @@ define( require => {
   class ZoomControl extends LayoutBox {
 
     /**
-     * @param {Property.<number>} zoomLevelProperty
+     * @param {NumberProperty} zoomLevelProperty
      * @param {Object} [options]
      */
     constructor( zoomLevelProperty, options ) {
 
+      assert && assert( zoomLevelProperty instanceof NumberProperty, 'invalid zoomLevelProperty' );
+      assert && assert( zoomLevelProperty.range, 'missing zoomLevelProperty.range' );
+
       options = merge( {
-
-        // {number} the amount to change zoomLevelProperty each time a button is pressed
-        step: NaturalSelectionQueryParameters.zoomStep,
-
-        // {number|null} the range of zoomLevelProperty, affects whether buttons are disabled. null means no range.
-        zoomLevelMax: null,
-        zoomLevelMin: null,
 
         // RectangularPushButton options
         buttonOptions: {
@@ -68,7 +64,7 @@ define( require => {
       const zoomInButton = new RectangularPushButton( merge( {}, options.buttonOptions, {
         content: new Text( MathSymbols.PLUS, { font: FONT } ),
         listener: () => {
-          zoomLevelProperty.value += options.step;
+          zoomLevelProperty.value -= 1;
         },
         tandem: options.tandem.createTandem( 'zoomInButton' )
       } ) );
@@ -77,19 +73,15 @@ define( require => {
       const zoomOutButton = new RectangularPushButton( merge( {}, options.buttonOptions, {
         content: new Text( MathSymbols.MINUS, { font: FONT } ),
         listener: () => {
-          zoomLevelProperty.value -= options.step;
+          zoomLevelProperty.value += 1;
         },
         tandem: options.tandem.createTandem( 'zoomOutButton' )
       } ) );
 
       // disable a button if we reach the min or max
       const zoomLevelListener = zoomLevel => {
-        if ( options.zoomLevelMax !== null ) {
-          zoomInButton.enabled = ( zoomLevel < options.zoomLevelMax );
-        }
-        if ( options.zoomLevelMin !== null ) {
-          zoomOutButton.enabled = ( zoomLevel > options.zoomLevelMin );
-        }
+        zoomInButton.enabled = ( zoomLevel > zoomLevelProperty.range.min );
+        zoomOutButton.enabled = ( zoomLevel < zoomLevelProperty.range.max );
       };
       zoomLevelProperty.link( zoomLevelListener );
 

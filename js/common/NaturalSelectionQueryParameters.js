@@ -20,14 +20,6 @@ define( require => {
     allelesVisible: {
       type: 'boolean',
       defaultValue: true
-    },
-
-    // Step for zoom buttons on Population graph.
-    // For internal use only.
-    zoomStep: {
-      type: 'number',
-      isValidValue: value => ( value > 0 ),
-      defaultValue: 1
     }
   } );
 

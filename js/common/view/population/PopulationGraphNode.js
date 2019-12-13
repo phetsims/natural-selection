@@ -50,10 +50,10 @@ define( require => {
       const boundsRectangle = new Rectangle( 0, 0, options.graphWidth, options.graphHeight );
 
       // Population (y-axis) zoom control
-      const populationZoomControl = new ZoomControl( populationModel.yZoomLevelProperty, {
+      const populationZoomControl = new ZoomControl( populationModel.yAxisMaximumsIndexProperty, {
         orientation: 'vertical',
-        zoomLevelMax: 10,
-        zoomLevelMin: 1,
+        zoomLevelMin: populationModel.yAxisMaximumsIndexProperty.range.min,
+        zoomLevelMax: populationModel.yAxisMaximumsIndexProperty.range.max,
         left: boundsRectangle.left,
         top: boundsRectangle.top,
         tandem: options.tandem.createTandem( 'populationZoomControl' )
