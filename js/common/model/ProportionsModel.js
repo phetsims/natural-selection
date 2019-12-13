@@ -12,14 +12,16 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Property = require( 'AXON/Property' );
 
   class ProportionsModel {
 
     /**
      * @param {Property.<number>} currentGenerationProperty
+     * @param {Property.<boolean>} isPlayingProperty
      * @param {Tandem} tandem
      */
-    constructor( currentGenerationProperty, tandem ) {
+    constructor( currentGenerationProperty, isPlayingProperty, tandem ) {
 
       // @public
       this.currentGenerationProperty = currentGenerationProperty;
@@ -45,6 +47,23 @@ define( require => {
       this.endCountProperty = new NumberProperty( 50, {
         numberType: 'Integer'
       } );
+
+      // Pause the sim when a generation other than the current generation is being viewed.
+      this.generationProperty.link( generation => {
+        if ( generation !== currentGenerationProperty.value ) {
+          isPlayingProperty.value = false;
+        }
+      } );
+
+      // When the sim starts playing or the current generation changes, show the current generation immediately.
+      Property.multilink(
+        [ isPlayingProperty, currentGenerationProperty ],
+        ( isPlaying, currentGeneration ) => {
+          if ( isPlaying ) {
+            this.generationProperty.value = currentGeneration;
+          }
+        }
+      );
     }
 
     /**

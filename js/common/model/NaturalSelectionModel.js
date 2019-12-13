@@ -41,10 +41,20 @@ define( require => {
       this.environmentModel = new EnvironmentModel( tandem.createTandem( 'environmentModel' ) );
 
       // @public (read-only)
-      this.populationModel = new PopulationModel( this.generationClock.currentGenerationProperty,
-        tandem.createTandem( 'populationModel' ) );
-      this.proportionsModel = new ProportionsModel( this.generationClock.currentGenerationProperty,
-        tandem.createTandem( 'proportionsModel' ) );
+      this.populationModel = new PopulationModel(
+        this.generationClock.currentGenerationProperty,
+        this.isPlayingProperty,
+        tandem.createTandem( 'populationModel' )
+      );
+
+      // @public (read-only)
+      this.proportionsModel = new ProportionsModel(
+        this.generationClock.currentGenerationProperty,
+        this.isPlayingProperty,
+        tandem.createTandem( 'proportionsModel' )
+      );
+
+      // @public (read-only)
       this.pedigreeModel = new PedigreeModel( tandem.createTandem( 'pedigreeModel' ) );
 
       // @public (read-only) {Bunny[]}

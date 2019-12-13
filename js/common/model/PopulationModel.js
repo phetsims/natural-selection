@@ -36,9 +36,10 @@ define( require => {
 
     /**
      * @param {Property.<number>} currentGenerationProperty
+     * @param {Property.<boolean>} isPlayingProperty
      * @param {Tandem} tandem
      */
-    constructor( currentGenerationProperty, tandem ) {
+    constructor( currentGenerationProperty, isPlayingProperty, tandem ) {
 
       // @public
       this.currentGenerationProperty = currentGenerationProperty;
