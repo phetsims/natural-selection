@@ -127,6 +127,8 @@ define( require => {
       // Play/pause/step time controls
       const timeControlNode = new TimeControlNode( model.isPlayingProperty, {
         stepForwardOptions: {
+
+          //TODO Should this step such that generationClock.timeProperty.value is a multiple of SECONDS_PER_STEP?
           listener: () => model.stepOnce( NaturalSelectionConstants.SECONDS_PER_STEP )
         },
         left: environmentDisplayNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
