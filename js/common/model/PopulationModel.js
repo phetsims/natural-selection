@@ -14,23 +14,21 @@ define( require => {
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NumberIO = require( 'TANDEM/types/NumberIO' );
   const NumberProperty = require( 'AXON/NumberProperty' );
-  const Property = require( 'AXON/Property' );
-  const PropertyIO = require( 'AXON/PropertyIO' );
   const Range = require( 'DOT/Range' );
-  const RangeIO = require( 'DOT/RangeIO' );
   const Util = require( 'DOT/Util' );
 
   // constants
   const X_AXIS_LENGTH = 7; // length of the x-axis range, in generations
   
   // Maximum population values for the y-axis scale. These are identical to the Java version.
-  const Y_AXIS_MAXIMUMS = [ 5, 15, 30, 50, 75, 100, 150, 200, 250, 350, 500, 1000, 2000, 3000, 5000 ];
-  assert && assert( _.every( value => Util.isInteger( value ) ), 'Y_AXIS_MAXIMUMS must contain integer values' );
-  //TODO assert that Y_AXIS_MAXIMUMS values are in ascending order
+  const Y_MAXIMUMS = [ 5, 15, 30, 50, 75, 100, 150, 200, 250, 350, 500, 1000, 2000, 3000, 5000 ];
+  assert && assert( _.every( value => Util.isInteger( value ) ), 'Y_MAXIMUMS must contain integer values' );
+  //TODO assert that Y_MAXIMUMS values are in ascending order
 
-  // The default index into Y_AXIS_MAXIMUMS, determines the initial y-axis scale.
-  const Y_AXIS_MAXIMUMS_INDEX_DEFAULT = 3;
+  // The default index into Y_MAXIMUMS, determines the initial y-axis scale.
+  const Y_MAXIMUMS_INDEX_DEFAULT = 3;
 
   class PopulationModel {
 
@@ -43,6 +41,7 @@ define( require => {
 
       // @public
       this.generationsProperty = generationsProperty;
+      this.isPlayingProperty = isPlayingProperty;
 
       // @public
       this.dataProbe = new DataProbe( tandem.createTandem( 'dataProbe' ) );
@@ -72,54 +71,44 @@ define( require => {
         tandem: tandem.createTandem( 'longTeethVisibleProperty' )
       } );
 
-      // @public range of the graph's x axis, in generations
-      this.xAxisRangeProperty = new Property( new Range( 0, X_AXIS_LENGTH ), {
-        phetioType: PropertyIO( RangeIO ),
-        isValidValue: range => ( range.min >= 0 ),
-        tandem: tandem.createTandem( 'xAxisRangeProperty' )
+      // @public maximum of graph's x-axis scale, in generations.
+      // We're storing only the max since it's expensive to create a new Range on every clock tick.
+      this.xMaximumProperty = new NumberProperty( X_AXIS_LENGTH, {
+        isValidValue: value => ( value >= 0 ),
+        tandem: tandem.createTandem( 'xMaximumProperty' ),
+        phetioStudioControl: false //TODO range is dynamic, and changes on every clock tick
       } );
 
-      // @public the total range of the x-axis data
-      this.xAxisTotalRangeProperty = new DerivedProperty(
-        [ generationsProperty ],
-        generations => new Range( 0, generations )
-      );
-
-      // @public index into Y_AXIS_MAXIMUMS
-      this.yAxisMaximumsIndexProperty = new NumberProperty( Y_AXIS_MAXIMUMS_INDEX_DEFAULT, {
+      // @public index into Y_MAXIMUMS
+      this.yMaximumsIndexProperty = new NumberProperty( Y_MAXIMUMS_INDEX_DEFAULT, {
         numberType: 'Integer',
-        range: new Range( 0, Y_AXIS_MAXIMUMS.length - 1 ),
-        tandem: tandem.createTandem( 'yAxisMaximumsIndexProperty' )
+        range: new Range( 0, Y_MAXIMUMS.length - 1 ),
+        tandem: tandem.createTandem( 'yMaximumsIndexProperty' )
       } );
 
-      // @public range of the graph's y axis, in population
-      this.yAxisRangeProperty = new DerivedProperty(
-        [ this.yAxisMaximumsIndexProperty ],
-        index => new Range( 0, Y_AXIS_MAXIMUMS[ index ] ), {
-          phetioType: DerivedPropertyIO( RangeIO ),
-          tandem: tandem.createTandem( 'yAxisRangeProperty' )
+      // @public maximum of graph's y-axis scale, in population
+      // We're storing only the max since the min is always zero.
+      this.yMaximumProperty = new DerivedProperty(
+        [ this.yMaximumsIndexProperty ],
+        index => Y_MAXIMUMS[ index ], {
+          phetioType: DerivedPropertyIO( NumberIO ),
+          tandem: tandem.createTandem( 'yMaximumProperty' )
         } );
-      phet.log && this.yAxisRangeProperty.link(
-        yAxisRange => phet.log( `yAxisRange=${yAxisRange}` )
+      phet.log && this.yMaximumProperty.link(
+        yAxisMax => phet.log( `yAxisMax=${yAxisMax}` )
       );
 
-      // Pause the sim if we scroll back in time while it's playing
-      this.xAxisRangeProperty.link( xAxisRange => {
-        if ( isPlayingProperty.value ) {
-          isPlayingProperty.value = xAxisRange.contains( generationsProperty.value );
+      // When generations changes, scroll the x-axis so that xMax is 'now'.
+      generationsProperty.link( generations => {
+        this.xMaximumProperty.value = Math.max( generations, X_AXIS_LENGTH );
+      } );
+
+      // When the sim starts playing, scroll the x-axis so that xMax is 'now'.
+      isPlayingProperty.link( isPlaying => {
+        if ( isPlaying ) {
+          this.xMaximumProperty.value = Math.max( generationsProperty.value, X_AXIS_LENGTH );
         }
       } );
-
-      // When the sim starts playing or generations changes, scroll the x-axis so that xMax is 'now'.
-      Property.multilink(
-        [ isPlayingProperty, generationsProperty ],
-        ( isPlaying, generations ) => {
-          if ( isPlaying ) {
-            const xMax = Math.max( X_AXIS_LENGTH, generations );
-            const xMin = xMax - X_AXIS_LENGTH;
-            this.xAxisRangeProperty.value = new Range( xMin, xMax );
-          }
-        } );
     }
 
     /**
@@ -136,8 +125,8 @@ define( require => {
       this.shortTeethVisibleProperty.reset();
       this.longTeethVisibleProperty.reset();
 
-      this.xAxisRangeProperty.reset();
-      this.yAxisMaximumsIndexProperty.reset();
+      this.xMaximumProperty.reset();
+      this.yMaximumsIndexProperty.reset();
     }
 
     /**

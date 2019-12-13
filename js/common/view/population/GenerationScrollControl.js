@@ -1,8 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * ScrollControl is the control for 1-dimensional scrolling.
- * In this sim, it's used for scrolling the x axis of the Population graph.
+ * GenerationScrollControl is the control used for scrolling the x axis (Generation) of the Population graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -16,22 +15,23 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Property = require( 'AXON/Property' );
-  const Range = require( 'DOT/Range' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
 
-  class ScrollControl extends HBox {
+  class GenerationScrollControl extends HBox {
 
     /**
-     * @param {Property.<Range>} visibleRangeProperty - visible range of the quantity
-     * @param {Property.<Range>} totalRangeProperty - total range of the quantity
+     * @param {Property.<number>} valueProperty
+     * @param {Property.<number>} maxValueProperty
+     * @param {Property.<boolean>} isPlayingProperty
      * @param {Object} [options]
      */
-    constructor( visibleRangeProperty, totalRangeProperty, options ) {
+    constructor( valueProperty, maxValueProperty, isPlayingProperty, options ) {
 
       options = merge( {
 
         step: 1, // {number} amount to step the range
+        scrollWidth: 1,
         labelString: '', // {string} label that appears between the arrow buttons
         font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
 
@@ -50,9 +50,8 @@ define( require => {
 
       // back button
       const back = () => {
-        const min = Math.ceil( visibleRangeProperty.value.min - options.step );
-        const max = Math.ceil( visibleRangeProperty.value.max - options.step );
-        visibleRangeProperty.value = new Range( min, max );
+        isPlayingProperty.value = false; // pause the sim when we scroll back
+        valueProperty.value = Math.ceil( valueProperty.value - options.step ); // snap to integer value
       };
       const backButton = new ArrowButton( 'left', back,
         merge( {
@@ -62,9 +61,7 @@ define( require => {
 
       // forward button
       const forward = () => {
-        const min = visibleRangeProperty.value.min + options.step;
-        const max = visibleRangeProperty.value.max + options.step;
-        visibleRangeProperty.value = new Range( min, max );
+        valueProperty.value = Math.floor( valueProperty.value + options.step ); // snap to integer value
       };
       const forwardButton = new ArrowButton( 'right', forward,
         merge( {
@@ -72,21 +69,21 @@ define( require => {
         }, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS )
       );
 
-      assert && assert( !options.children, 'ScrollControl sets children' );
+      assert && assert( !options.children, 'GenerationScrollControl sets children' );
       options.children = [ backButton, labelNode, forwardButton ];
 
       super( options );
 
-      // Enable buttons based on the ranges
+      // Enable buttons
       const multilink = Property.multilink(
-        [ visibleRangeProperty, totalRangeProperty ],
-        ( visibleRange, totalRange ) => {
-          backButton.enabled = ( totalRange.min <= visibleRange.min - options.step );
-          forwardButton.enabled = ( totalRange.max >= visibleRange.max + options.step );
+        [ valueProperty, maxValueProperty ],
+        ( value, maxValue ) => {
+          backButton.enabled = ( value - options.scrollWidth > 0 );
+          forwardButton.enabled = ( maxValue > value  );
         } );
 
       // @private
-      this.disposeScrollControl = () => {
+      this.disposeGenerationScrollControl = () => {
         multilink.dispose();
       };
     }
@@ -97,9 +94,9 @@ define( require => {
      */
     dispose() {
       super.dispose();
-      this.disposeScrollControl();
+      this.disposeGenerationScrollControl();
     }
   }
 
-  return naturalSelection.register( 'ScrollControl', ScrollControl );
+  return naturalSelection.register( 'GenerationScrollControl', GenerationScrollControl );
 } );

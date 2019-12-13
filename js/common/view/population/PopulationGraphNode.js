@@ -10,13 +10,13 @@ define( require => {
 
   // modules
   const DataProbeNode = require( 'NATURAL_SELECTION/common/view/population/DataProbeNode' );
+  const GenerationScrollControl = require( 'NATURAL_SELECTION/common/view/population/GenerationScrollControl' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  const ScrollControl = require( 'NATURAL_SELECTION/common/view/population/ScrollControl' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const ZoomControl = require( 'NATURAL_SELECTION/common/view/population/ZoomControl' );
@@ -50,17 +50,17 @@ define( require => {
       const boundsRectangle = new Rectangle( 0, 0, options.graphWidth, options.graphHeight );
 
       // Generation (x-axis) scroll control
-      const generationScrollControl = new ScrollControl(
-        populationModel.xAxisRangeProperty, populationModel.xAxisTotalRangeProperty, {
+      const generationScrollControl = new GenerationScrollControl(
+        populationModel.xMaximumProperty, populationModel.generationsProperty, populationModel.isPlayingProperty, {
           labelString: generationString,
           tandem: options.tandem.createTandem( 'generationScrollControl' )
         } );
 
       // Population (y-axis) zoom control
-      const populationZoomControl = new ZoomControl( populationModel.yAxisMaximumsIndexProperty, {
+      const populationZoomControl = new ZoomControl( populationModel.yMaximumsIndexProperty, {
         orientation: 'vertical',
-        zoomLevelMin: populationModel.yAxisMaximumsIndexProperty.range.min,
-        zoomLevelMax: populationModel.yAxisMaximumsIndexProperty.range.max,
+        zoomLevelMin: populationModel.yMaximumsIndexProperty.range.min,
+        zoomLevelMax: populationModel.yMaximumsIndexProperty.range.max,
         left: boundsRectangle.left,
         top: boundsRectangle.top,
         tandem: options.tandem.createTandem( 'populationZoomControl' )
