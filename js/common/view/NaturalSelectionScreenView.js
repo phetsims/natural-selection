@@ -126,7 +126,7 @@ define( require => {
 
       // Play/pause/step time controls
       const timeControlNode = new TimeControlNode( model.isPlayingProperty, {
-        stepOptions: {
+        stepForwardOptions: {
           listener: () => model.stepOnce( NaturalSelectionConstants.SECONDS_PER_STEP )
         },
         left: environmentDisplayNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
