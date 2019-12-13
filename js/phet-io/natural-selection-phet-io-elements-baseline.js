@@ -2666,8 +2666,21 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.labScreen.model.generationClock.generationProperty": {
-      "phetioDocumentation": "generation number for the current clock cycle of the generation clock",
+    "naturalSelection.labScreen.model.generationClock.currentGenerationProperty": {
+      "phetioDocumentation": "integer generation number for the current cycle of the generation clock",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "DerivedPropertyIO<NumberIO>"
+    },
+    "naturalSelection.labScreen.model.generationClock.generationsProperty": {
+      "phetioDocumentation": "number of generations that the generation clock has been running",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
       "phetioEventType": "MODEL",

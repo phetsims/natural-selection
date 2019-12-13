@@ -33,25 +33,32 @@ define( require => {
         phetioDocumentation: 'time that the generation clock has been running, in seconds'
       } );
 
+      // @public
+      this.generationsProperty = new DerivedProperty(
+        [ this.timeProperty ],
+        time => time / NaturalSelectionConstants.SECONDS_PER_GENERATION, {
+          phetioType: DerivedPropertyIO( NumberIO ),
+          tandem: tandem.createTandem( 'generationsProperty' ),
+          phetioDocumentation: 'number of generations that the generation clock has been running'
+        } );
+
+      // @public
+      this.currentGenerationProperty = new DerivedProperty(
+        [ this.generationsProperty ],
+        generations => Math.floor( generations ), {
+          phetioType: DerivedPropertyIO( NumberIO ),
+          isValidValue: value => Util.isInteger( value ),
+          tandem: tandem.createTandem( 'currentGenerationProperty' ),
+          phetioDocumentation: 'integer generation number for the current cycle of the generation clock'
+        }
+      );
+
       // @public percent of the current clock cycle that has been completed
       this.percentTimeProperty = new DerivedProperty(
         [ this.timeProperty ],
         time => ( time % NaturalSelectionConstants.SECONDS_PER_GENERATION ) / NaturalSelectionConstants.SECONDS_PER_GENERATION, {
           isValidValue: value => ( value >= 0 && value <= 1 )
         } );
-
-      // @public
-      this.currentGenerationProperty = new DerivedProperty(
-        [ this.timeProperty ],
-        time => Math.floor( time / NaturalSelectionConstants.SECONDS_PER_GENERATION ), {
-          isValidValue: value => Util.isInteger( value ),
-          phetioType: DerivedPropertyIO( NumberIO ),
-          tandem: tandem.createTandem( 'generationProperty' ),
-          phetioDocumentation: 'generation number for the current clock cycle of the generation clock'
-        } );
-      phet.log && this.currentGenerationProperty.link(
-        currentGeneration => phet.log( `currentGeneration=${currentGeneration}` )
-      );
 
       // @public (read-only) the portion of the clock cycle when environmental factors are active
       this.environmentalFactorPercentRange = new Range( 0.25, 0.75 );

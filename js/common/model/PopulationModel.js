@@ -35,14 +35,14 @@ define( require => {
   class PopulationModel {
 
     /**
-     * @param {Property.<number>} currentGenerationProperty
+     * @param {Property.<number>} generationsProperty
      * @param {Property.<boolean>} isPlayingProperty
      * @param {Tandem} tandem
      */
-    constructor( currentGenerationProperty, isPlayingProperty, tandem ) {
+    constructor( generationsProperty, isPlayingProperty, tandem ) {
 
       // @public
-      this.currentGenerationProperty = currentGenerationProperty;
+      this.generationsProperty = generationsProperty;
 
       // @public
       this.dataProbe = new DataProbe( tandem.createTandem( 'dataProbe' ) );
@@ -83,8 +83,10 @@ define( require => {
       );
 
       // @public the total range of the x-axis data
-      this.xAxisTotalRangeProperty = new DerivedProperty( [ currentGenerationProperty ],
-        currentGeneration => new Range( 0, currentGeneration + 1 ) );
+      this.xAxisTotalRangeProperty = new DerivedProperty(
+        [ generationsProperty ],
+        generations => new Range( 0, generations )
+      );
 
       // @public index into Y_AXIS_MAXIMUMS
       this.yAxisMaximumsIndexProperty = new NumberProperty( Y_AXIS_MAXIMUMS_INDEX_DEFAULT, {
@@ -107,16 +109,16 @@ define( require => {
       // Pause the sim if we scroll back in time while it's playing
       this.xAxisRangeProperty.link( xAxisRange => {
         if ( isPlayingProperty.value ) {
-          isPlayingProperty.value = xAxisRange.contains( currentGenerationProperty.value );
+          isPlayingProperty.value = xAxisRange.contains( generationsProperty.value );
         }
       } );
 
-      // When the sim starts playing or the current generation changes, scroll to the current generation
+      // When the sim starts playing or generations changes, scroll the x-axis so that xMax is 'now'.
       Property.multilink(
-        [ isPlayingProperty, currentGenerationProperty ],
-        ( isPlaying, currentGeneration ) => {
+        [ isPlayingProperty, generationsProperty ],
+        ( isPlaying, generations ) => {
           if ( isPlaying ) {
-            const xMax = Math.max( X_AXIS_LENGTH, currentGeneration + 1 ); //TODO this +1 is duplicated above
+            const xMax = Math.max( X_AXIS_LENGTH, generations );
             const xMin = xMax - X_AXIS_LENGTH;
             this.xAxisRangeProperty.value = new Range( xMin, xMax );
           }

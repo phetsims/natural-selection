@@ -49,7 +49,7 @@ define( require => {
   } );
 
   // validate any dependencies between query parameters
-  assert( NaturalSelectionQueryParameters.secondsPerStep < NaturalSelectionQueryParameters.secondsPerGeneration,
+  assert && assert( NaturalSelectionQueryParameters.secondsPerStep < NaturalSelectionQueryParameters.secondsPerGeneration,
     'secondsPerStep must be < secondsPerGeneration' );
 
   // log the values of all sim-specific query parameters

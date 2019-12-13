@@ -50,8 +50,9 @@ define( require => {
 
       // back button
       const back = () => {
-        visibleRangeProperty.value =
-          new Range( visibleRangeProperty.value.min - options.step, visibleRangeProperty.value.max - options.step );
+        const min = Math.ceil( visibleRangeProperty.value.min - options.step );
+        const max = Math.ceil( visibleRangeProperty.value.max - options.step );
+        visibleRangeProperty.value = new Range( min, max );
       };
       const backButton = new ArrowButton( 'left', back,
         merge( {
@@ -61,8 +62,9 @@ define( require => {
 
       // forward button
       const forward = () => {
-        visibleRangeProperty.value =
-          new Range( visibleRangeProperty.value.min + options.step, visibleRangeProperty.value.max + options.step );
+        const min = visibleRangeProperty.value.min + options.step;
+        const max = visibleRangeProperty.value.max + options.step;
+        visibleRangeProperty.value = new Range( min, max );
       };
       const forwardButton = new ArrowButton( 'right', forward,
         merge( {

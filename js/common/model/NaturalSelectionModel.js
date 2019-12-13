@@ -42,7 +42,7 @@ define( require => {
 
       // @public (read-only)
       this.populationModel = new PopulationModel(
-        this.generationClock.currentGenerationProperty,
+        this.generationClock.generationsProperty,
         this.isPlayingProperty,
         tandem.createTandem( 'populationModel' )
       );
