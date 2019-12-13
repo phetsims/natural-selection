@@ -20,8 +20,7 @@ define( require => {
   const Util = require( 'DOT/Util' );
 
   // constants
-  const X_AXIS_LENGTH = 7; // length of the x-axis range, in generations
-  
+
   // Maximum population values for the y-axis scale. These are identical to the Java version.
   const Y_MAXIMUMS = [ 5, 15, 30, 50, 75, 100, 150, 200, 250, 350, 500, 1000, 2000, 3000, 5000 ];
   assert && assert( _.every( value => Util.isInteger( value ) ), 'Y_MAXIMUMS must contain integer values' );
@@ -71,9 +70,12 @@ define( require => {
         tandem: tandem.createTandem( 'longTeethVisibleProperty' )
       } );
 
+      // @public (read-only)
+      this.xScrollWidth = 7;
+
       // @public maximum of graph's x-axis scale, in generations.
       // We're storing only the max since it's expensive to create a new Range on every clock tick.
-      this.xMaximumProperty = new NumberProperty( X_AXIS_LENGTH, {
+      this.xMaximumProperty = new NumberProperty( this.xScrollWidth, {
         isValidValue: value => ( value >= 0 ),
         tandem: tandem.createTandem( 'xMaximumProperty' ),
         phetioStudioControl: false //TODO range is dynamic, and changes on every clock tick
@@ -100,13 +102,13 @@ define( require => {
 
       // When generations changes, scroll the x-axis so that xMax is 'now'.
       generationsProperty.link( generations => {
-        this.xMaximumProperty.value = Math.max( generations, X_AXIS_LENGTH );
+        this.xMaximumProperty.value = Math.max( generations, this.xScrollWidth );
       } );
 
       // When the sim starts playing, scroll the x-axis so that xMax is 'now'.
       isPlayingProperty.link( isPlaying => {
         if ( isPlaying ) {
-          this.xMaximumProperty.value = Math.max( generationsProperty.value, X_AXIS_LENGTH );
+          this.xMaximumProperty.value = Math.max( generationsProperty.value, this.xScrollWidth );
         }
       } );
     }
