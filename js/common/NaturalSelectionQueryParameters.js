@@ -31,8 +31,7 @@ define( require => {
       isValidValue: value => ( value > 0 )
     },
 
-    // The maximum number of bunnies that the world can support. Exceeding this number results in
-    // 'Bunnies have taken over the world' dialog.
+    // The number of bunnies required to 'take over the world'.
     // For internal use only.
     maxBunnies: {
       type: 'number',
