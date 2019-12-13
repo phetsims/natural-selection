@@ -21,7 +21,10 @@ define( require => {
   const RangeIO = require( 'DOT/RangeIO' );
 
   // constants
-  const X_AXIS_WIDTH = 7; // in generations
+  const X_AXIS_LENGTH = 7; // length of the x-axis range, in generations
+  
+  // Maximum population values for the y-axis scale. These are identical to the Java version.
+  const Y_AXIS_MAXIMUMS = [ 5, 15, 30, 50, 75, 100, 150, 200, 250, 350, 500, 1000, 2000, 3000, 5000 ];
 
   class PopulationModel {
 
@@ -59,28 +62,27 @@ define( require => {
       } );
 
       // @public range of the graph's x axis, in generations
-      this.xAxisRangeProperty = new Property( new Range( 0, X_AXIS_WIDTH ), {
+      this.xAxisRangeProperty = new Property( new Range( 0, X_AXIS_LENGTH ), {
         phetioType: PropertyIO( RangeIO ),
         tandem: tandem.createTandem( 'xAxisRangeProperty' )
       } );
+      phet.log && this.xAxisRangeProperty.link( xAxisRangeProperty => phet.log( `xAxisRangeProperty=${xAxisRangeProperty}` ) );
 
-      // Maximum population values for the y-axis scale. These are identical to the Java version.
-      const yAxisMaximums = [ 5, 15, 30, 50, 75, 100, 150, 200, 250, 350, 500, 1000, 2000, 3000, 5000 ];
-
-      // @public index into yAxisMaximums
+      // @public index into Y_AXIS_MAXIMUMS
       this.yAxisMaximumsIndexProperty = new NumberProperty( 3, {
         numberType: 'Integer',
-        range: new Range( 0, yAxisMaximums.length - 1 ),
+        range: new Range( 0, Y_AXIS_MAXIMUMS.length - 1 ),
         tandem: tandem.createTandem( 'yAxisMaximumsIndexProperty' )
       } );
 
       // @public range of the graph's y axis, in population
       this.yAxisRangeProperty = new DerivedProperty(
         [ this.yAxisMaximumsIndexProperty ],
-        index => new Range( 0, yAxisMaximums[ index ] ), {
+        index => new Range( 0, Y_AXIS_MAXIMUMS[ index ] ), {
           phetioType: DerivedPropertyIO( RangeIO ),
           tandem: tandem.createTandem( 'yAxisRangeProperty' )
         } );
+      phet.log && this.yAxisRangeProperty.link( yAxisRange => phet.log( `yAxisRange=${yAxisRange}` ) );
     }
 
     /**
