@@ -29,6 +29,9 @@ define( require => {
   assert && assert( _.every( value => Util.isInteger( value ) ), 'Y_AXIS_MAXIMUMS must contain integer values' );
   //TODO assert that Y_AXIS_MAXIMUMS values are in ascending order
 
+  // The default index into Y_AXIS_MAXIMUMS, determines the initial y-axis scale.
+  const Y_AXIS_MAXIMUMS_INDEX_DEFAULT = 3;
+
   class PopulationModel {
 
     /**
@@ -72,7 +75,7 @@ define( require => {
       phet.log && this.xAxisRangeProperty.link( xAxisRangeProperty => phet.log( `xAxisRangeProperty=${xAxisRangeProperty}` ) );
 
       // @public index into Y_AXIS_MAXIMUMS
-      this.yAxisMaximumsIndexProperty = new NumberProperty( 3, {
+      this.yAxisMaximumsIndexProperty = new NumberProperty( Y_AXIS_MAXIMUMS_INDEX_DEFAULT, {
         numberType: 'Integer',
         range: new Range( 0, Y_AXIS_MAXIMUMS.length - 1 ),
         tandem: tandem.createTandem( 'yAxisMaximumsIndexProperty' )
