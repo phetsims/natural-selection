@@ -75,6 +75,7 @@ define( require => {
       // @public range of the graph's x axis, in generations
       this.xAxisRangeProperty = new Property( new Range( 0, X_AXIS_LENGTH ), {
         phetioType: PropertyIO( RangeIO ),
+        isValidValue: range => ( range.min >= 0 ),
         tandem: tandem.createTandem( 'xAxisRangeProperty' )
       } );
       phet.log && this.xAxisRangeProperty.link(
@@ -102,6 +103,24 @@ define( require => {
       phet.log && this.yAxisRangeProperty.link(
         yAxisRange => phet.log( `yAxisRange=${yAxisRange}` )
       );
+
+      // Pause the sim if we scroll back in time while it's playing
+      this.xAxisRangeProperty.link( xAxisRange => {
+        if ( isPlayingProperty.value ) {
+          isPlayingProperty.value = xAxisRange.contains( currentGenerationProperty.value );
+        }
+      } );
+
+      // When the sim starts playing or the current generation changes, scroll to the current generation
+      Property.multilink(
+        [ isPlayingProperty, currentGenerationProperty ],
+        ( isPlaying, currentGeneration ) => {
+          if ( isPlaying ) {
+            const xMax = Math.max( X_AXIS_LENGTH, currentGeneration + 1 ); //TODO this +1 is duplicated above
+            const xMin = xMax - X_AXIS_LENGTH;
+            this.xAxisRangeProperty.value = new Range( xMin, xMax );
+          }
+        } );
     }
 
     /**
