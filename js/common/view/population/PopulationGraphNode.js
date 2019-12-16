@@ -173,9 +173,9 @@ define( require => {
   }
 
   /**
-   * XGridLines draws the vertical grid lines for the x axis.  The axis-scale never changes, but it does shift
-   * from left-to-right as time progresses.  So we create a single Shape for the x-axis grid lines, then translate it
-   * as the x-axis range changes.  Bounds are clipped to the plot.
+   * XGridLines draws the vertical grid lines for the x axis.  The x-axis tick spacing never changes, but the range
+   * does shift from left-to-right as time progresses.  So we create a single Shape for the x-axis grid lines, then
+   * translate it as the x-axis range changes.  Bounds are clipped to the plot.
    */
   class XGridLines extends Node {
 
