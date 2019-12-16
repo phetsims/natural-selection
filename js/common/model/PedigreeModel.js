@@ -12,9 +12,6 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
 
-  // constants
-  const CHECKBOXES_ENABLED = true; //TODO for debugging, delete this, should be false
-
   class PedigreeModel {
 
     /**
@@ -33,12 +30,20 @@ define( require => {
         tandem: tandem.createTandem( 'teethAllelesVisibleProperty' )
       } );
 
-      //TODO do these need phet-io instrumentation?
       // @public whether a mutation exists for each trait
       // Checkboxes in the Alleles panel are disabled until a mutation exists.
-      this.furMutationExistsProperty = new BooleanProperty( CHECKBOXES_ENABLED );
-      this.earsMutationExistsProperty = new BooleanProperty( CHECKBOXES_ENABLED );
-      this.teethMutationExistsProperty = new BooleanProperty( CHECKBOXES_ENABLED );
+      this.furMutationExistsProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'furMutationExistsProperty' ),
+        phetioReadOnly: true
+      } );
+      this.earsMutationExistsProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'earsMutationExistsProperty' ),
+        phetioReadOnly: true
+      } );
+      this.teethMutationExistsProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'teethMutationExistsProperty' ),
+        phetioReadOnly: true
+      } );
     }
 
     /**

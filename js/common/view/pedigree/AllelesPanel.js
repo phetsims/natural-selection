@@ -144,6 +144,10 @@ define( require => {
 
       options = merge( {
 
+        // VBox options
+        align: 'left',
+        spacing: 8,
+
         // phet-io
         tandem: Tandem.REQUIRED
       }, options );
@@ -202,11 +206,10 @@ define( require => {
         ]
       } );
 
-      super( {
-        align: 'left',
-        spacing: 8,
-        children: [ checkbox, hBox ]
-      } );
+      assert && assert( !options.children, 'Row sets children' );
+      options.children = [ checkbox, hBox ];
+
+      super( options);
 
       enabledProperty.link( enabled => {
 
