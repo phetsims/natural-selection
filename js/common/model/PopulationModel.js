@@ -76,7 +76,7 @@ define( require => {
       } );
 
       // @public (read-only) the width of the x-axis scale, in generations
-      this.xAxisWidth = 7;
+      this.xAxisWidth = 5;
 
       // @public (read-only) spacing between x-axis tick marks, in generations
       this.xAxisTickSpacing = 1;
