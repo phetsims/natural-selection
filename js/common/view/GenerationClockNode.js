@@ -68,7 +68,8 @@ define( require => {
       // Display the current generation number below the generation clock.
       if ( phet.chipper.queryParameters.dev ) {
         const generationNode = new Text( '', {
-          font: new PhetFont( 14 ),
+          font: new PhetFont( 18 ),
+          fill: 'red',
           top: fullCircle.bottom + 3
         } );
         this.addChild( generationNode );
