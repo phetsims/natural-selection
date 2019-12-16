@@ -2680,7 +2680,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "DerivedPropertyIO<NumberIO>"
     },
     "naturalSelection.labScreen.model.generationClock.generationsProperty": {
-      "phetioDocumentation": "number of generations that the generation clock has been running",
+      "phetioDocumentation": "decimal number of generations that the generation clock has been running",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
       "phetioEventType": "MODEL",

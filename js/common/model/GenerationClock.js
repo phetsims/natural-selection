@@ -39,7 +39,7 @@ define( require => {
         time => time / NaturalSelectionConstants.SECONDS_PER_GENERATION, {
           phetioType: DerivedPropertyIO( NumberIO ),
           tandem: tandem.createTandem( 'generationsProperty' ),
-          phetioDocumentation: 'number of generations that the generation clock has been running'
+          phetioDocumentation: 'decimal number of generations that the generation clock has been running'
         } );
 
       // @public
