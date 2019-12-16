@@ -25,7 +25,7 @@ define( require => {
   const Y_MAXIMUMS_INDEX_DEFAULT = 3;
 
   // Maximum population values for the y-axis scale.
-  const Y_MAXIMUMS = [ 5, 14, 30, 50, 75, 100, 140, 200, 240, 350, 500, 1000, 2000, 3000, 5000 ];
+  const Y_MAXIMUMS = [ 5, 14, 30, 50, 70, 100, 140, 200, 240, 350, 500, 1000, 2000, 3000, 5000 ];
   assert && assert( _.every( value => Util.isInteger( value ) ), 'Y_MAXIMUMS must contain integer values' );
   //TODO assert that Y_MAXIMUMS values are in ascending order
 
@@ -77,6 +77,9 @@ define( require => {
 
       // @public (read-only) the width of the x-axis scale, in generations
       this.xAxisWidth = 7;
+
+      // @public (read-only) spacing between x-axis tick marks, in generations
+      this.xAxisTickSpacing = 1;
 
       // @public maximum of graph's x-axis scale, in generations.
       // We're storing only the max since it's expensive to create a new Range on every clock tick.
