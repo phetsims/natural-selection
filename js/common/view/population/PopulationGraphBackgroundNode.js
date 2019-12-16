@@ -78,7 +78,7 @@ define( require => {
   /**
    * XGridLines draws the vertical grid lines for the x axis.  The x-axis tick spacing never changes, but the range
    * does shift from left-to-right as time progresses.  So we create a single Shape for the x-axis grid lines, then
-   * translate it as the x-axis range changes.  Bounds are clipped to the plot.
+   * translate it as the x-axis range changes.  Bounds are clipped to the background dimensions.
    */
   class XGridLines extends Node {
 
@@ -99,7 +99,7 @@ define( require => {
       }
       const path = new Path( shape, GRID_LINES_OPTIONS );
 
-      // Clip to the plot
+      // Clip to the background, because we'll be translating the Path outside the bounds of the background.
       assert && assert( !options.clipArea, 'XGridLines sets clipArea' );
       options.clipArea = Shape.rectangle( 0, 0, backgroundWidth, backgroundHeight );
 
@@ -153,7 +153,7 @@ define( require => {
       const numberOfGridLines = Math.floor( yMaximum / yTickSpacing ) + 1;
       const viewYSpacing = ( yTickSpacing / yMaximum ) * this.backgroundHeight;
 
-      // Create the grid lines
+      // Create the grid lines, skipping the line at y = 0.
       const shape = new Shape();
       for ( let i = 1; i < numberOfGridLines; i++ ) {
         const y = this.backgroundHeight - ( i * viewYSpacing );
