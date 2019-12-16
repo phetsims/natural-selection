@@ -63,13 +63,6 @@ define( require => {
         stroke: NaturalSelectionColors.PANEL_STROKE
       } );
 
-      const generationControl = new ProportionsGenerationControl(
-        proportionsModel.generationProperty, proportionsModel.currentGenerationProperty, {
-          centerX: backgroundNode.centerX,
-          top: backgroundNode.top + 8,
-          tandem: options.tandem.createTandem( 'generationControl' )
-        } );
-
       const labelColumnAlignGroup = new AlignGroup();
       const barColumnsAlignGroup = new AlignGroup( { matchVertical: false } );
 
@@ -103,13 +96,23 @@ define( require => {
       const graph = new VBox( {
         spacing: 20,
         align: 'left',
-        children: [ columnLabels, rows ],
-        centerX: backgroundNode.centerX,
-        centerY: backgroundNode.centerY
+        children: [ columnLabels, rows ]
+      } );
+
+      const generationControl = new ProportionsGenerationControl(
+        proportionsModel.generationProperty, proportionsModel.currentGenerationProperty, {
+          tandem: options.tandem.createTandem( 'generationControl' )
+        } );
+
+      const content = new VBox( {
+        align: 'center',
+        spacing: 35,
+        children: [ graph, generationControl ],
+        center: backgroundNode.center
       } );
 
       assert && assert( !options.children, 'ProportionGraphNode sets children' );
-      options.children = [ backgroundNode, generationControl, graph ];
+      options.children = [ backgroundNode, content ];
 
       super( options );
     }
