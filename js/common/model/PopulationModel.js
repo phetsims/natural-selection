@@ -30,7 +30,7 @@ define( require => {
   //TODO assert that Y_MAXIMUMS values are in ascending order
 
   // Spacing of tick marks for each y-axis scale in Y_MAXIMUMS.
-  const Y_TICK_SPACINGS = [ 1, 2, 5, 5, 10, 10, 20, 20, 20, 50, 50, 100, 200, 200, 500 ];
+  const Y_TICK_SPACINGS = [ 1, 2, 5, 10, 10, 20, 20, 40, 40, 50, 100, 200, 400, 500, 1000 ];
   assert && assert( Y_TICK_SPACINGS.length === Y_MAXIMUMS.length, 'incorrect number of Y_TICK_SPACINGS' );
   assert && assert( _.every( value => Util.isInteger( value ) ), 'Y_TICK_SPACINGS must contain integer values' );
 
