@@ -18,10 +18,7 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
 
   // constants
-  const GRID_LINES_OPTIONS = {
-    stroke: NaturalSelectionColors.GRID_LINES_STROKE,
-    lineWidth: 1
-  };
+  const GRID_LINES_LINE_WIDTH = 1;
 
   class PopulationGraphBackgroundNode extends Node {
 
@@ -36,27 +33,25 @@ define( require => {
         backgroundHeight: 100
       }, options );
 
+      // Background rectangle
       const rectangleNode = new Rectangle( 0, 0, options.backgroundWidth, options.backgroundHeight, {
         fill: NaturalSelectionColors.POPULATION_GRAPH_FILL,
         stroke: NaturalSelectionColors.PANEL_STROKE
       } );
 
       // Grid lines for the x axis
-      const xGridLines = new XGridLines(
-        populationModel.xMaximumProperty,
-        populationModel.xAxisWidth,
-        populationModel.xAxisTickSpacing,
-        options.backgroundWidth,
-        options.backgroundHeight
-      );
+      const xGridLines = new XGridLines( populationModel.xMaximumProperty, {
+        xAxisWidth: populationModel.xAxisWidth,
+        xAxisTickSpacing: populationModel.xAxisTickSpacing,
+        backgroundWidth: options.backgroundWidth,
+        backgroundHeight: options.backgroundHeight
+      } );
 
       // Grid lines for the y axis
-      const yGridLines = new YGridLines(
-        populationModel.yMaximumProperty.value,
-        populationModel.getYTickSpacing(),
-        options.backgroundWidth,
-        options.backgroundHeight
-      );
+      const yGridLines = new YGridLines( populationModel.yMaximumProperty, () => populationModel.getYTickSpacing(), {
+        backgroundWidth: options.backgroundWidth,
+        backgroundHeight: options.backgroundHeight
+      } );
 
       // Group the grid lines, in case we want to be able to show/hide them in the future.
       const gridLinesNode = new Node( {
@@ -67,11 +62,6 @@ define( require => {
       options.children = [ rectangleNode, gridLinesNode ];
 
       super( options );
-
-      // Adjust the y-axis grid lines when the y-axis scale changes.
-      populationModel.yMaximumProperty.link( yMaximum => {
-        yGridLines.setAxisScale( populationModel.yMaximumProperty.value, populationModel.getYTickSpacing() );
-      } );
     }
   }
 
@@ -82,27 +72,41 @@ define( require => {
    */
   class XGridLines extends Node {
 
-    constructor( xMaximumProperty, xAxisWidth, xTickSpacing, backgroundWidth, backgroundHeight, options ) {
+    /**
+     * @param {Property.<number>} xMaximumProperty
+     * @param {Object} [options]
+     */
+    constructor( xMaximumProperty, options ) {
 
-      options = merge( {}, options );
+      options = merge( {
+        xAxisWidth: 5,
+        xAxisTickSpacing: 1,
+        backgroundWidth: 100,
+        backgroundHeight: 100,
+
+        // Path options
+        stroke: NaturalSelectionColors.GRID_LINES_STROKE,
+        lineWidth: GRID_LINES_LINE_WIDTH
+      }, options );
 
       // Compute the number of grid lines and their spacing in view coordinates
-      const numberOfGridLines = Math.floor( xAxisWidth / xTickSpacing ) + 1;
-      const viewXSpacing = ( xTickSpacing / xAxisWidth ) * backgroundWidth;
+      const numberOfGridLines = Math.floor( options.xAxisWidth / options.xAxisTickSpacing ) + 1;
+      const viewXSpacing = ( options.xAxisTickSpacing / options.xAxisWidth ) * options.backgroundWidth;
 
       // Create the grid lines
       const shape = new Shape();
       for ( let i = 0; i < numberOfGridLines; i++ ) {
-        const x = backgroundWidth - ( i * viewXSpacing );
+        const x = options.backgroundWidth - ( i * viewXSpacing );
         shape.moveTo( x, 0 );
-        shape.lineTo( x, backgroundHeight );
+        shape.lineTo( x, options.backgroundHeight );
       }
-      const path = new Path( shape, GRID_LINES_OPTIONS );
+      const path = new Path( shape, options );
 
       // Clip to the background, because we'll be translating the Path outside the bounds of the background.
       assert && assert( !options.clipArea, 'XGridLines sets clipArea' );
-      options.clipArea = Shape.rectangle( 0, 0, backgroundWidth, backgroundHeight );
+      options.clipArea = Shape.rectangle( 0, 0, options.backgroundWidth, options.backgroundHeight );
 
+      // Wrapped in a Node because we're going to translate the Path
       assert && assert( !options.children, 'XGridLines sets children' );
       options.children = [ path ];
 
@@ -110,7 +114,7 @@ define( require => {
 
       // Translate the grid lines as time progresses
       xMaximumProperty.link( xMaximum => {
-        path.x = -viewXSpacing * ( ( xMaximum % xTickSpacing ) / xTickSpacing );
+        path.x = -viewXSpacing * ( ( xMaximum % options.xAxisTickSpacing ) / options.xAxisTickSpacing );
       } );
     }
   }
@@ -123,44 +127,40 @@ define( require => {
   class YGridLines extends Path {
 
     /**
-     * @param {number} yMaximum
-     * @param {number} yTickSpacing
-     * @param {number} backgroundWidth
-     * @param {number} backgroundHeight
+     * @param {Property.<number>} yMaximumProperty
+     * @param {function:number} getYTickSpacing
      * @param {Object} [options]
      */
-    constructor( yMaximum, yTickSpacing, backgroundWidth, backgroundHeight, options ) {
+    constructor( yMaximumProperty, getYTickSpacing, options ) {
 
-      options = merge( {}, GRID_LINES_OPTIONS, options );
+      options = merge( {
+        backgroundWidth: 100,
+        backgroundHeight: 100,
+
+        // Path options
+        stroke: NaturalSelectionColors.GRID_LINES_STROKE,
+        lineWidth: GRID_LINES_LINE_WIDTH
+      }, options );
 
       super( new Shape(), options );
 
-      // @private
-      this.backgroundWidth = backgroundWidth;
-      this.backgroundHeight = backgroundHeight;
+      // Adjust the y-axis grid lines when the y-axis scale changes.
+      yMaximumProperty.link( yMaximum => {
 
-      this.setAxisScale( yMaximum, yTickSpacing );
-    }
+        // Compute the number of grid lines and their spacing in view coordinates
+        const yTickSpacing = getYTickSpacing();
+        const numberOfGridLines = Math.floor( yMaximum / yTickSpacing ) + 1;
+        const viewYSpacing = ( yTickSpacing / yMaximum ) * options.backgroundHeight;
 
-    /**
-     * Updates the scale for the y axis.
-     * @param {number} yMaximum
-     * @param {number} yTickSpacing
-     */
-    setAxisScale( yMaximum, yTickSpacing ) {
-
-      // Compute the number of grid lines and their spacing in view coordinates
-      const numberOfGridLines = Math.floor( yMaximum / yTickSpacing ) + 1;
-      const viewYSpacing = ( yTickSpacing / yMaximum ) * this.backgroundHeight;
-
-      // Create the grid lines, skipping the line at y = 0.
-      const shape = new Shape();
-      for ( let i = 1; i < numberOfGridLines; i++ ) {
-        const y = this.backgroundHeight - ( i * viewYSpacing );
-        shape.moveTo( 0, y );
-        shape.lineTo( this.backgroundWidth, y );
-      }
-      this.shape = shape;
+        // Create the grid lines, skipping the line at y = 0.
+        const shape = new Shape();
+        for ( let i = 1; i < numberOfGridLines; i++ ) {
+          const y = options.backgroundHeight - ( i * viewYSpacing );
+          shape.moveTo( 0, y );
+          shape.lineTo( options.backgroundWidth, y );
+        }
+        this.shape = shape;
+      } );
     }
   }
 
