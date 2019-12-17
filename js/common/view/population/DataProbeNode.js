@@ -40,7 +40,7 @@ define( require => {
   const NUMBER_DISPLAY_NO_VALUE_STRING = '?'; //TODO what to display when there is no data
   const NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY = 0.7;
   const NUMBER_DISPLAY_DASHED_BACKGROUND_FILL = new Color( 255, 255, 255, NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY );
-  const MANIPULATOR_RADIUS = 6;
+  const MANIPULATOR_RADIUS = 5;
 
   class DataProbeNode extends Node {
 
