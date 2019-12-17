@@ -54,7 +54,7 @@ define( require => {
     constructor( populationModel, originX, graphWidth, graphHeight, options ) {
 
       options = merge( {
-        cursor: 'ew-resize', // <->
+        cursor: 'ew-resize', // left-right arrows, <->
 
         // phet-io
         tandem: Tandem.REQUIRED
