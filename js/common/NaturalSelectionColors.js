@@ -52,7 +52,8 @@ define( require => {
     POPULATION_GRAPH_FILL: 'white',
     PROPORTIONS_GRAPH_FILL: 'white',
     PEDIGREE_GRAPH_FILL: 'white',
-    GRID_LINES_STROKE: 'rgb( 225, 225, 225 )'
+    GRID_LINES_STROKE: 'rgb( 225, 225, 225 )',
+    TICK_MARKS_STROKE: 'black'
   };
 
   return naturalSelection.register( 'NaturalSelectionColors', NaturalSelectionColors );
