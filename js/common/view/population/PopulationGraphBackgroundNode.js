@@ -67,8 +67,8 @@ define( require => {
 
   /**
    * XGridLines draws the vertical grid lines for the x axis.  The x-axis tick spacing never changes, but the range
-   * does shift from left-to-right as time progresses.  So we create a single Shape for the x-axis grid lines, then
-   * translate it as the x-axis range changes.  Bounds are clipped to the background dimensions.
+   * changes as time progresses.  So we create a single Shape for the x-axis grid lines, then translate it as the
+   * x-axis range changes.  Bounds are clipped to the background dimensions.
    */
   class XGridLines extends Node {
 
@@ -122,7 +122,7 @@ define( require => {
   /**
    * YGridLines draws the horizontal grid lines for the y axis.  The y-axis scale only changes on demand, when
    * the zoom control is used.  So we draw the y-axis grid lines separately from the x-axis grid lines, and
-   * totally recreate their associated Shape.
+   * totally recreate their associated Shape when the scale changes.
    */
   class YGridLines extends Path {
 
