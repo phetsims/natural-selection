@@ -91,7 +91,7 @@ define( require => {
       // Population
       const populationNode = new PopulationNode( model.populationModel, graphAreaSize, {
         left: graphAreaLeft,
-        top: graphAreaTop,
+        y: graphAreaTop,
         tandem: options.tandem.createTandem( 'populationNode' )
       } );
 

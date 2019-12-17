@@ -9,15 +9,15 @@ define( require => {
   'use strict';
 
   // modules
-  const HBox = require( 'SCENERY/nodes/HBox' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
+  const Node = require( 'SCENERY/nodes/Node' );
   const PopulationGraphNode = require( 'NATURAL_SELECTION/common/view/population/PopulationGraphNode' );
   const PopulationPanel = require( 'NATURAL_SELECTION/common/view/population/PopulationPanel' );
   const Tandem = require( 'TANDEM/Tandem' );
 
-  class PopulationNode extends HBox {
+  class PopulationNode extends Node {
 
     /**
      * @param {PopulationModel} populationModel
@@ -27,10 +27,6 @@ define( require => {
     constructor( populationModel, size, options ) {
 
       options = merge( {
-
-        // HBox options
-        spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        align: 'top',
 
         // phet-io
         tandem: Tandem.REQUIRED
@@ -49,6 +45,8 @@ define( require => {
       const graphNode = new PopulationGraphNode( populationModel, {
         graphWidth: graphWidth,
         graphHeight: size.height,
+        y: panel.top,
+        left: panel.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         tandem: options.tandem.createTandem( 'graphNode' )
       } );
 
