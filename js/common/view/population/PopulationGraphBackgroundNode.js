@@ -32,8 +32,8 @@ define( require => {
     constructor( populationModel, options ) {
 
       options = merge( {
-        backgroundWidth: 100,
-        backgroundHeight: 100
+        backgroundWidth: 100, // width in view coordinates
+        backgroundHeight: 100 // height in view coordinates
       }, options );
 
       // Background rectangle
@@ -43,12 +43,13 @@ define( require => {
 
       // Grid lines for the x axis
       const xGridLines = new VerticalLines( populationModel.xMaximumProperty, {
-        xAxisWidth: populationModel.xAxisWidth,
-        xAxisTickSpacing: populationModel.xAxisTickSpacing,
+        xAxisWidthModel: populationModel.xAxisWidth,
+        xAxisWidth: options.backgroundWidth,
+        xSpacingModel: populationModel.xAxisTickSpacing,
+        lineLength: options.backgroundHeight,
+
         stroke: NaturalSelectionColors.GRID_LINES_STROKE,
         lineWidth: GRID_LINES_LINE_WIDTH,
-        backgroundWidth: options.backgroundWidth,
-        lineLength: options.backgroundHeight,
 
         // Clip to the background bounds, because we'll be horizontally translating the x grid lines
         clipArea: Shape.rectangle( 0, 0, options.backgroundWidth, options.backgroundHeight )
@@ -56,10 +57,10 @@ define( require => {
 
       // Grid lines for the y axis
       const yGridLines = new HorizontalLines( populationModel.yMaximumProperty, () => populationModel.getYTickSpacing(), {
-        stroke: NaturalSelectionColors.GRID_LINES_STROKE,
-        lineWidth: GRID_LINES_LINE_WIDTH,
+        yAxisHeight: options.backgroundHeight,
         lineLength: options.backgroundWidth,
-        backgroundHeight: options.backgroundHeight
+        stroke: NaturalSelectionColors.GRID_LINES_STROKE,
+        lineWidth: GRID_LINES_LINE_WIDTH
       } );
 
       // Group the grid lines, in case we want to be able to show/hide them in the future.
@@ -69,22 +70,23 @@ define( require => {
 
       // Tick marks for the x axis
       const xTickMarks = new VerticalLines( populationModel.xMaximumProperty, {
-        xAxisWidth: populationModel.xAxisWidth,
-        xAxisTickSpacing: populationModel.xAxisTickSpacing,
-        backgroundWidth: options.backgroundWidth,
+        xAxisWidthModel: populationModel.xAxisWidth,
+        xAxisWidth: options.backgroundWidth,
+        xSpacingModel: populationModel.xAxisTickSpacing,
         lineLength: TICK_MARKS_LENGTH,
+
         stroke: NaturalSelectionColors.TICK_MARKS_STROKE,
         lineWidth: TICK_MARKS_LINE_WIDTH,
         top: rectangleNode.bottom,
 
         // Clip to the tick mark bounds below the x axis, because we'll be horizontally translating the x tick marks
-        clipArea: Shape.rectangle( 0, 0, options.backgroundWidth, options.backgroundHeight + TICK_MARKS_LENGTH )
+        clipArea: Shape.rectangle( 0, 0, options.backgroundWidth , options.backgroundHeight + TICK_MARKS_LENGTH )
       } );
 
       // Tick marks for the y axis
       const yTickMarks = new HorizontalLines( populationModel.yMaximumProperty, () => populationModel.getYTickSpacing(), {
+        yAxisHeight: options.backgroundHeight,
         lineLength: TICK_MARKS_LENGTH,
-        backgroundHeight: options.backgroundHeight,
         stroke: NaturalSelectionColors.TICK_MARKS_STROKE,
         lineWidth: TICK_MARKS_LINE_WIDTH,
         right: rectangleNode.left
@@ -116,26 +118,26 @@ define( require => {
   class VerticalLines extends Node {
 
     /**
-     * @param {Property.<number>} xMaximumProperty
+     * @param {Property.<number>} xMaximumProperty - maximum of the x-axis range, in model coordinates
      * @param {Object} [options]
      */
     constructor( xMaximumProperty, options ) {
 
       options = merge( {
-        xAxisWidth: 5,
-        xAxisTickSpacing: 1,
-        backgroundWidth: 100,
-        lineLength: 100
+        xAxisWidthModel: 5, // width of the x axis, in model coordinates
+        xSpacingModel: 1, // spacing between lines, in model coordinates
+        xAxisWidth: 100, // width of the x axis, in view coordinates
+        lineLength: 100 // vertical length of the lines, in view coordinates
       }, options );
 
-      // Compute the number of grid lines and their spacing in view coordinates
-      const numberOfGridLines = Math.floor( options.xAxisWidth / options.xAxisTickSpacing ) + 1;
-      const viewXSpacing = ( options.xAxisTickSpacing / options.xAxisWidth ) * options.backgroundWidth;
+      // Compute the number of lines and their spacing in view coordinates
+      const numberOfLines = Math.floor( options.xAxisWidthModel / options.xSpacingModel ) + 1;
+      const xSpacing = ( options.xSpacingModel / options.xAxisWidthModel ) * options.xAxisWidth;
 
-      // Create the grid lines
+      // Create the lines
       const shape = new Shape();
-      for ( let i = 0; i < numberOfGridLines; i++ ) {
-        const x = options.backgroundWidth - ( i * viewXSpacing );
+      for ( let i = 0; i < numberOfLines; i++ ) {
+        const x = options.xAxisWidth - ( i * xSpacing );
         shape.moveTo( x, 0 );
         shape.lineTo( x, options.lineLength );
       }
@@ -145,9 +147,9 @@ define( require => {
       assert && assert( !options.children, 'VerticalLines sets children' );
       options.children = [ path ];
 
-      // Translate the grid lines as time progresses
+      // Translate the lines as time progresses
       xMaximumProperty.link( xMaximum => {
-        path.x = -viewXSpacing * ( ( xMaximum % options.xAxisTickSpacing ) / options.xAxisTickSpacing );
+        path.x = -xSpacing * ( ( xMaximum % options.xSpacingModel ) / options.xSpacingModel );
       } );
 
       super(  options );
@@ -162,31 +164,31 @@ define( require => {
   class HorizontalLines extends Path {
 
     /**
-     * @param {Property.<number>} yMaximumProperty
-     * @param {function:number} getYTickSpacing
+     * @param {Property.<number>} yMaximumProperty - maximum of the y-axis range, in model coordinates
+     * @param {function:number} getYSpacing - gets the y-spacing for the current value of yMaximumProperty
      * @param {Object} [options]
      */
-    constructor( yMaximumProperty, getYTickSpacing, options ) {
+    constructor( yMaximumProperty, getYSpacing, options ) {
 
       options = merge( {
-        lineLength: 100,
-        backgroundHeight: 100
+        yAxisHeight: 100, // y axis height, in view coordinates
+        lineLength: 100 // line length, in view coordinates
       }, options );
 
       super( new Shape() );
 
-      // Adjust the y-axis grid lines when the y-axis scale changes.
+      // Recreate the lines when the y-axis scale changes.
       yMaximumProperty.link( yMaximum => {
 
-        // Compute the number of grid lines and their spacing in view coordinates
-        const yTickSpacing = getYTickSpacing();
-        const numberOfGridLines = Math.floor( yMaximum / yTickSpacing ) + 1;
-        const viewYSpacing = ( yTickSpacing / yMaximum ) * options.backgroundHeight;
+        // Compute the number of lines and their spacing in view coordinates
+        const ySpacingModel = getYSpacing();
+        const numberOfLines = Math.floor( yMaximum / ySpacingModel ) + 1;
+        const ySpacing = ( ySpacingModel / yMaximum ) * options.yAxisHeight;
 
         // Create the grid lines
         const shape = new Shape();
-        for ( let i = 0; i < numberOfGridLines; i++ ) {
-          const y = options.backgroundHeight - ( i * viewYSpacing );
+        for ( let i = 0; i < numberOfLines; i++ ) {
+          const y = options.yAxisHeight - ( i * ySpacing );
           shape.moveTo( 0, y );
           shape.lineTo( options.lineLength, y );
         }
