@@ -1,7 +1,8 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * PopulationGraphBackgroundNode is the background for the Population graph, including dynamic grid lines.
+ * PopulationGraphBackgroundNode is the background for the Population graph, including dynamic grid lines and
+ * tick marks.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
