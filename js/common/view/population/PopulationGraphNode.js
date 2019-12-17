@@ -76,7 +76,7 @@ define( require => {
         maxWidth: 120 // determined empirically
       } );
 
-      //TODO placeholder
+      //TODO better names for these
       // XY plot
       const plotWidth = options.graphWidth - populationZoomControl.width - ZOOM_CONTROL_X_OFFSET;
       const plotHeight = options.graphHeight - generationScrollControl.height - X_AXIS_LABEL_OFFSET;
