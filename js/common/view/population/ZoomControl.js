@@ -44,7 +44,12 @@ define( require => {
           buttonAppearanceStrategy: RectangularButtonView.FlatAppearanceStrategy,
           cornerRadius: 0,
           xMargin: 8,
-          yMargin: 5
+          yMargin: 5,
+          fireOnHold: true,
+
+          //TODO tune these
+          fireOnHoldDelay: 600,
+          fireOnHoldInterval: 250
         },
 
         // LayoutBox options
