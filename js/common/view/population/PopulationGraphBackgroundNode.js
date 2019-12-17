@@ -152,9 +152,9 @@ define( require => {
         const numberOfGridLines = Math.floor( yMaximum / yTickSpacing ) + 1;
         const viewYSpacing = ( yTickSpacing / yMaximum ) * options.backgroundHeight;
 
-        // Create the grid lines, skipping the line at y = 0.
+        // Create the grid lines
         const shape = new Shape();
-        for ( let i = 1; i < numberOfGridLines; i++ ) {
+        for ( let i = 0; i < numberOfGridLines; i++ ) {
           const y = options.backgroundHeight - ( i * viewYSpacing );
           shape.moveTo( 0, y );
           shape.lineTo( options.backgroundWidth, y );
