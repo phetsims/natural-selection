@@ -15,13 +15,17 @@ define( require => {
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
   // constants
   const GRID_LINES_LINE_WIDTH = 1;
   const TICK_MARKS_LINE_WIDTH = 1;
-  const TICK_MARKS_LENGTH = 3;
+  const TICK_MARKS_LENGTH = 4;
+  const TICK_LABEL_SPACING = 3;
+  const TICK_MARKS_FONT = new PhetFont( 10 );
 
   class PopulationGraphBackgroundNode extends Node {
 
@@ -92,9 +96,15 @@ define( require => {
         right: rectangleNode.left
       } );
 
+      // Tick mark labels for the y axis
+      const yTickLabels = new YTickLabels( populationModel.yMaximumProperty, () => populationModel.getYTickSpacing(), {
+        yAxisHeight: options.backgroundHeight,
+        right: yTickMarks.left - TICK_LABEL_SPACING
+      } );
+
       // Group the tick marks, in case we want to be able to show/hide them in the future.
       const tickMarksNode = new Node( {
-        children: [ xTickMarks, yTickMarks ]
+        children: [ xTickMarks, yTickMarks, yTickLabels ]
       } );
 
       // A crisp frame in the foreground, to hide overlapping of tick marks and grid lines
@@ -157,9 +167,8 @@ define( require => {
   }
 
   /**
-   * HorizontalLines are used for y-axis tick marks and grid lines. The y-axis scale only changes on demand, when
-   * the zoom control is used.  So we draw the horizontal lines separately from the vertical lines, and
-   * totally recreate their associated Shape when the scale changes.
+   * HorizontalLines are used for y-axis tick marks and grid lines.
+   * They are recreated on demand, when the zoom control is used.
    */
   class HorizontalLines extends Path {
 
@@ -193,6 +202,57 @@ define( require => {
           shape.lineTo( options.lineLength, y );
         }
         this.shape = shape;
+      } );
+
+      this.mutate( options );
+    }
+  }
+
+  /**
+   * YTickLabels is the y-axis tick mark labels. They are recreated on demand, when the zoom control is used.
+   */
+  class YTickLabels extends Node {
+
+    /**
+     * @param {Property.<number>} yMaximumProperty - maximum of the y-axis range, in model coordinates
+     * @param {function:number} getYSpacing - gets the y-spacing for the current value of yMaximumProperty
+     * @param {Object} [options]
+     */
+    constructor( yMaximumProperty, getYSpacing, options ) {
+
+      options = merge( {
+        yAxisHeight: 100 // y axis height, in view coordinates
+      }, options );
+
+      assert && assert( !options.children, 'YTickLabels sets children' );
+
+      super();
+
+      // Recreate the labels when the y-axis scale changes.
+      yMaximumProperty.link( yMaximum => {
+
+        //TODO duplication with HorizontalLines
+        // Compute the number of tick marks and their spacing in view coordinates
+        const ySpacingModel = getYSpacing();
+        const numberOfTickMarks = Math.floor( yMaximum / ySpacingModel ) + 1;
+        const ySpacing = ( ySpacingModel / yMaximum ) * options.yAxisHeight;
+
+        // Create the tick mark labels
+        const labelNodes = [];
+        for ( let i = 0; i < numberOfTickMarks; i++ ) {
+
+          const y = options.yAxisHeight - ( i * ySpacing );
+
+          const labelNode = new Text( i * ySpacingModel, {
+            font: TICK_MARKS_FONT,
+            right: 0,
+            centerY: y
+          } );
+
+          labelNodes.push( labelNode );
+        }
+
+        this.children = labelNodes;
       } );
 
       this.mutate( options );
