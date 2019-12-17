@@ -71,30 +71,35 @@ define( require => {
       const yAxisLabelNode = new Text( populationString, {
         font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
         rotation: -Math.PI / 2,
-        right: populationZoomControl.right + ZOOM_CONTROL_X_OFFSET - Y_AXIS_LABEL_OFFSET,
-        centerY: boundsRectangle.centerY,
         maxWidth: 120 // determined empirically
       } );
 
+      //TODO fudge factors to fix wonky layout, need to account for tick marks
+      const FUDGE_WIDTH = 40;
+      const FUDGE_HEIGHT = 20;
+      const FUDGE_X_SPACING = 20;
+
       //TODO better names for these
       // XY plot
-      const plotWidth = options.graphWidth - populationZoomControl.width - ZOOM_CONTROL_X_OFFSET;
-      const plotHeight = options.graphHeight - generationScrollControl.height - X_AXIS_LABEL_OFFSET;
+      const plotWidth = options.graphWidth - populationZoomControl.width - ZOOM_CONTROL_X_OFFSET - FUDGE_WIDTH;
+      const plotHeight = options.graphHeight - generationScrollControl.height - X_AXIS_LABEL_OFFSET - FUDGE_HEIGHT;
 
       const backgroundNode = new PopulationGraphBackgroundNode( populationModel, {
         backgroundWidth: plotWidth,
         backgroundHeight: plotHeight,
-        left: populationZoomControl.right + ZOOM_CONTROL_X_OFFSET,
-        top: boundsRectangle.top
+        left: populationZoomControl.right + ZOOM_CONTROL_X_OFFSET + FUDGE_X_SPACING,
+        y: boundsRectangle.top
       } );
 
       // center x-axis control under the graph
-      generationScrollControl.centerX = backgroundNode.centerX;
+      generationScrollControl.centerX = backgroundNode.x + ( plotWidth / 2 );
       generationScrollControl.top = backgroundNode.bottom + X_AXIS_LABEL_OFFSET;
+      yAxisLabelNode.right = populationZoomControl.right + ZOOM_CONTROL_X_OFFSET - Y_AXIS_LABEL_OFFSET;
+      yAxisLabelNode.centerY = backgroundNode.y + ( plotHeight / 2 );
 
       const dataProbeNode = new DataProbeNode( populationModel, backgroundNode.x, plotWidth, plotHeight, {
         x: backgroundNode.x,
-        top: backgroundNode.top,
+        top: backgroundNode.y,
         tandem: options.tandem.createTandem( 'dataProbeNode' )
       } );
 
