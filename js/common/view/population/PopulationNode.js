@@ -36,34 +36,34 @@ define( require => {
       const panelWidth = 0.25 * size.width;
       const graphWidth = size.width - panelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
-      const panel = new PopulationPanel( populationModel, {
+      const populationPanel = new PopulationPanel( populationModel, {
         fixedWidth: panelWidth,
         maxHeight: size.height,
-        tandem: options.tandem.createTandem( 'panel' )
+        tandem: options.tandem.createTandem( 'populationPanel' )
       } );
 
-      const graphNode = new PopulationGraphNode( populationModel, {
+      const populationGraphNode = new PopulationGraphNode( populationModel, {
         graphWidth: graphWidth,
         graphHeight: size.height,
-        y: panel.top,
-        left: panel.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        tandem: options.tandem.createTandem( 'graphNode' )
+        y: populationPanel.top,
+        left: populationPanel.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        tandem: options.tandem.createTandem( 'populationGraphNode' )
       } );
 
       assert && assert( !options.children, 'PopulationNode sets children' );
-      options.children = [ panel, graphNode ];
+      options.children = [ populationPanel, populationGraphNode ];
 
       super( options );
 
       // @private
-      this.graphNode = graphNode;
+      this.populationGraphNode = populationGraphNode;
     }
 
     /**
      * @public
      */
     reset() {
-      this.graphNode.reset();
+      this.populationGraphNode.reset();
     }
 
     /**

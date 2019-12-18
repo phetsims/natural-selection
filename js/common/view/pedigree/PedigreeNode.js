@@ -56,16 +56,16 @@ define( require => {
                              'but changes to its elements and metadata will have no affect.'
       } );
 
-      const graphNode = new PedigreeGraphNode( pedigreeModel, {
+      const pedigreeGraphNode = new PedigreeGraphNode( pedigreeModel, {
         graphWidth: graphWidth,
         graphHeight: size.height,
-        tandem: options.tandem.createTandem( 'graphNode' )
+        tandem: options.tandem.createTandem( 'pedigreeGraphNode' )
       } );
 
       assert && assert( !options.children, 'PedigreeNode sets children' );
       options.children = NaturalSelectionQueryParameters.allelesVisible ?
-        [ allelesPanel, graphNode ] :
-        [ graphNode ];
+        [ allelesPanel, pedigreeGraphNode ] :
+        [ pedigreeGraphNode ];
 
       super( options );
     }

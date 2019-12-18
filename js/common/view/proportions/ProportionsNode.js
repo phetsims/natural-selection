@@ -40,20 +40,20 @@ define( require => {
       const panelWidth = 0.2 * size.width;
       const graphWidth = size.width - panelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
-      const panel = new ProportionsPanel( proportionsModel, {
+      const proportionsPanel = new ProportionsPanel( proportionsModel, {
         fixedWidth: panelWidth,
         maxHeight: size.height,
-        tandem: options.tandem.createTandem( 'panel' )
+        tandem: options.tandem.createTandem( 'proportionsPanel' )
       } );
 
-      const graphNode = new ProportionsGraphNode( proportionsModel, {
+      const proportionsGraphNode = new ProportionsGraphNode( proportionsModel, {
         graphWidth: graphWidth,
         graphHeight: size.height,
-        tandem: options.tandem.createTandem( 'graphNode' )
+        tandem: options.tandem.createTandem( 'proportionsGraphNode' )
       } );
 
       assert && assert( !options.children, 'ProportionsNode sets children' );
-      options.children = [ panel, graphNode ];
+      options.children = [ proportionsPanel, proportionsGraphNode ];
 
       super( options );
     }
