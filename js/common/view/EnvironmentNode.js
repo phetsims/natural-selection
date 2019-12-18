@@ -1,8 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * EnvironmentDisplayNode is our viewport into the world of bunnies.
- * This class was named by committee, see https://github.com/phetsims/natural-selection/issues/27
+ * EnvironmentNode displays everything in the environment -- bunnies, wolves, food, terrain, sky, etc.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -24,7 +23,7 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
   const Tandem = require( 'TANDEM/Tandem' );
 
-  class EnvironmentDisplayNode extends Node {
+  class EnvironmentNode extends Node {
 
     /**
      * @param {NaturalSelectionModel} model
@@ -93,7 +92,7 @@ define( require => {
       } );
 
       // layering
-      assert && assert( !options.children, 'EnvironmentDisplayNode sets children' );
+      assert && assert( !options.children, 'EnvironmentNode sets children' );
       options.children = [
         worldContents,
         frameNode,
@@ -106,7 +105,7 @@ define( require => {
       super( options );
 
       // @private
-      this.resetEnvironmentDisplayNode = () => {
+      this.resetEnvironmentNode = () => {
         addAMateButton.visible = true;
       };
     }
@@ -115,7 +114,7 @@ define( require => {
      * @public
      */
     reset() {
-      this.resetEnvironmentDisplayNode();
+      this.resetEnvironmentNode();
     }
 
     /**
@@ -123,9 +122,9 @@ define( require => {
      * @override
      */
     dispose() {
-      assert && assert( false, 'EnvironmentDisplayNode does not support dispose' );
+      assert && assert( false, 'EnvironmentNode does not support dispose' );
     }
   }
 
-  return naturalSelection.register( 'EnvironmentDisplayNode', EnvironmentDisplayNode );
+  return naturalSelection.register( 'EnvironmentNode', EnvironmentNode );
 } );

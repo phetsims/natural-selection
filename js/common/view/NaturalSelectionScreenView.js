@@ -13,7 +13,7 @@ define( require => {
   //TODO const DiedDialog = require( 'NATURAL_SELECTION/common/view/DiedDialog' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const EnvironmentalFactorsPanel = require( 'NATURAL_SELECTION/common/view/EnvironmentalFactorsPanel' );
-  const EnvironmentDisplayNode = require( 'NATURAL_SELECTION/common/view/EnvironmentDisplayNode' );
+  const EnvironmentNode = require( 'NATURAL_SELECTION/common/view/EnvironmentNode' );
   const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
   const GraphsRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/GraphsRadioButtonGroup' );
   const merge = require( 'PHET_CORE/merge' );
@@ -52,21 +52,21 @@ define( require => {
       // const diedDialog = new DiedDialog();
       // const worldDialog = new WorldDialog();
 
-      const environmentDisplayNode = new EnvironmentDisplayNode( model, {
+      const environmentNode = new EnvironmentNode( model, {
         left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
         top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
-        tandem: options.tandem.createTandem( 'environmentDisplayNode' )
+        tandem: options.tandem.createTandem( 'environmentNode' )
       } );
 
-      // Available width to the right of environmentDisplayNode, used to size control panels
-      const rightOfViewportWidth = this.layoutBounds.width - environmentDisplayNode.width -
+      // Available width to the right of environmentNode, used to size control panels
+      const rightOfViewportWidth = this.layoutBounds.width - environmentNode.width -
                                    ( 2 * NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN ) -
                                    NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
       const addMutationsPanel = new AddMutationsPanel( {
         fixedWidth: rightOfViewportWidth,
-        left: environmentDisplayNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        top: environmentDisplayNode.top,
+        left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        top: environmentNode.top,
         tandem: options.tandem.createTandem( 'addMutationsPanel' )
       } );
 
@@ -74,19 +74,19 @@ define( require => {
 
       const environmentalFactorsPanel = new EnvironmentalFactorsPanel( model.environmentModel, {
         fixedWidth: rightOfViewportWidth,
-        left: environmentDisplayNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         top: addMutationsPanel.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING,
         tandem: options.tandem.createTandem( 'environmentalFactorsPanel' )
       } );
 
       // The graphs and their related controls fill the space below the viewport.
       const graphAreaSize = new Dimension2(
-        environmentDisplayNode.width,
+        environmentNode.width,
         this.layoutBounds.height - ( 2 * NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN ) -
-        environmentDisplayNode.height - NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
+        environmentNode.height - NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
       );
-      const graphAreaLeft = environmentDisplayNode.left;
-      const graphAreaTop = environmentDisplayNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING;
+      const graphAreaLeft = environmentNode.left;
+      const graphAreaTop = environmentNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING;
 
       // Population
       const populationNode = new PopulationNode( model.populationModel, graphAreaSize, {
@@ -112,7 +112,7 @@ define( require => {
       // Population, Proportions, Pedigree radio buttons
       const graphsRadioButtonGroup = new GraphsRadioButtonGroup( viewProperties.graphProperty, {
         maxWidth: rightOfViewportWidth,
-        left: environmentDisplayNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         centerY: populationNode.centerY,
         tandem: options.tandem.createTandem( 'graphsRadioButtonGroup' )
       } );
@@ -131,7 +131,7 @@ define( require => {
           //TODO Should this step such that generationClock.timeProperty.value is a multiple of SECONDS_PER_STEP?
           listener: () => model.stepOnce( NaturalSelectionConstants.SECONDS_PER_STEP )
         },
-        left: environmentDisplayNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+        left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
         bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
         tandem: options.tandem.createTandem( 'timeControlNode' )
       } );
@@ -150,7 +150,7 @@ define( require => {
 
       // layering
       this.children = [
-        environmentDisplayNode,
+        environmentNode,
         addMutationsPanel,
         environmentalFactorsPanel,
         graphsRadioButtonGroup,
@@ -164,7 +164,7 @@ define( require => {
 
       // @private
       this.resetNaturalSelectionScreenView = () => {
-        environmentDisplayNode.reset();
+        environmentNode.reset();
         addMutationsPanel.reset();
         mutationAlertsNode.reset();
         populationNode.reset();
