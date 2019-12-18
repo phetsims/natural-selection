@@ -9,6 +9,8 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const Bunny = require( 'NATURAL_SELECTION/common/model/Bunny' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const Environments = require( 'NATURAL_SELECTION/common/model/Environments' );
@@ -29,6 +31,13 @@ define( require => {
         tandem: tandem.createTandem( 'environmentProperty' )
       } );
 
+      // @public (read-only) {Bunny[]}
+      this.bunnies = [ Bunny.createDefault() ];
+
+      //TODO this should be an Emitter
+      // @public whether a mate was added to the lone bunny that appears at startup
+      this.mateWasAddedProperty = new BooleanProperty( this.bunnies.length > 1 );
+
       // @public (read-only) the biotic (biological, rather than physical) environmental factors
       this.wolves = new Wolves( tandem.createTandem( 'wolves' ) );
       this.toughFood = new ToughFood( tandem.createTandem( 'toughFood' ) );
@@ -47,6 +56,7 @@ define( require => {
      */
     reset() {
       this.environmentProperty.reset();
+      this.mateWasAddedProperty.reset();
       this.wolves.reset();
       this.toughFood.reset();
       this.limitedFood.reset();
@@ -58,6 +68,38 @@ define( require => {
      */
     dispose() {
       assert && assert( false, 'EnvironmnetModel does not support dispose' );
+    }
+
+    /**
+     * Resets the initial bunny population. Other settings are preserved.
+     * @public
+     */
+    playAgain() {
+
+      // dispose of all bunnies
+      for ( let i = 0; i < this.bunnies.length; i++ ) {
+        this.bunnies[ i ].dispose();
+      }
+
+      //TODO create the same initial population
+      // create a lone bunny
+      this.bunnies = [ Bunny.createDefault() ];
+
+      this.mateWasAddedProperty.reset();
+    }
+
+    /**
+     * Steps the model.
+     * @param {number} dt - time step, in seconds
+     * @public
+     * @override
+     */
+    step( dt ) {
+
+      // step the bunnies
+      for ( let i = 0; i < this.bunnies.length; i++ ) {
+        this.bunnies[ i ].step( dt );
+      }
     }
   }
 

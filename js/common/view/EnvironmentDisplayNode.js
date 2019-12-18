@@ -72,10 +72,11 @@ define( require => {
       // 'Add a Mate' push button
       const addAMateButton = new AddAMateButton( {
         listener: () => {
-          model.mateWasAddedProperty.value = true;
+          model.environmentModel.mateWasAddedProperty.value = true;
           addAMateButton.visible = false;
           //TODO
         },
+        visible: !model.environmentModel.mateWasAddedProperty.value,
         centerX: frameNode.centerX,
         bottom: frameNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_NODE_Y_MARGIN,
         tandem: options.tandem.createTandem( 'addAMateButton' )

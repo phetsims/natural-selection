@@ -10,7 +10,6 @@ define( require => {
 
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const Bunny = require( 'NATURAL_SELECTION/common/model/Bunny' );
   const EnvironmentModel = require( 'NATURAL_SELECTION/common/model/EnvironmentModel' );
   const GenerationClock = require( 'NATURAL_SELECTION/common/model/GenerationClock' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -29,10 +28,6 @@ define( require => {
       this.isPlayingProperty = new BooleanProperty( true, {
         tandem: tandem.createTandem( 'isPlayingProperty' )
       } );
-
-      //TODO this should be an Emitter
-      // @public whether a mate was added to the lone bunny that appears at startup
-      this.mateWasAddedProperty = new BooleanProperty( false );
 
       // @public (read-only)
       this.generationClock = new GenerationClock( tandem.createTandem( 'generationClock' ) );
@@ -56,9 +51,6 @@ define( require => {
 
       // @public (read-only)
       this.pedigreeModel = new PedigreeModel( tandem.createTandem( 'pedigreeModel' ) );
-
-      // @public (read-only) {Bunny[]}
-      this.bunnies = [ Bunny.createDefault() ];
     }
 
     /**
@@ -69,7 +61,6 @@ define( require => {
 
       // Properties
       this.isPlayingProperty.reset();
-      this.mateWasAddedProperty.reset();
 
       // Clock
       this.generationClock.reset();
@@ -84,21 +75,12 @@ define( require => {
     }
 
     /**
-     * Starts over with a brand new bunny. Other settings are preserved.
+     * Resets the initial bunny population. Other settings are preserved.
      * @public
      */
     playAgain() {
-
-      // dispose of all bunnies
-      for ( let i = 0; i < this.bunnies.length; i++ ) {
-        this.bunnies[ i ].dispose();
-      }
-
-      // create a lone bunny
-      this.bunnies = [ Bunny.createDefault() ];
-
-      // note that a mate has not been added
-      this.mateWasAddedProperty.value = false;
+      this.environmentModel.playAgain();
+      //TODO other things?
     }
 
     /**
@@ -120,14 +102,12 @@ define( require => {
     stepOnce( dt ) {
 
       // advance the generation clock
-      if ( this.mateWasAddedProperty.value ) {
+      if ( this.environmentModel.mateWasAddedProperty.value ) {
         this.generationClock.step( dt );
       }
 
-      // step the bunnies
-      for ( let i = 0; i < this.bunnies.length; i++ ) {
-        this.bunnies[ i ].step( dt );
-      }
+      // advance the environment model
+      this.environmentModel.step( dt );
     }
   }
 
