@@ -70,7 +70,7 @@ define( require => {
      * @public
      */
     dispose() {
-      assert && assert( false, 'Generation does not support dispose' );
+      assert && assert( false, 'GenerationClock does not support dispose' );
     }
 
     /**
