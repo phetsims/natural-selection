@@ -122,6 +122,9 @@
   "oneBunny": {
     "value": "1 bunny"
   },
+  "play": {
+    "value": "Play"
+  },
   "playAgain": {
     "value": "Play Again"
   },

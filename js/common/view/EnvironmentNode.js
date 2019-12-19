@@ -18,6 +18,7 @@ define( require => {
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const PlayButton = require( 'NATURAL_SELECTION/common/view/PlayButton' );
   const PlayAgainButton = require( 'NATURAL_SELECTION/common/view/PlayAgainButton' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
@@ -81,10 +82,20 @@ define( require => {
         tandem: options.tandem.createTandem( 'addAMateButton' )
       } );
 
+      // 'Play' push button
+      const playButton = new PlayButton( {
+        center: frameNode.center,
+        visible: false, //TODO
+        listener: () => {
+          //TODO
+        },
+        tandem: options.tandem.createTandem( 'playButton' )
+      } );
+
       // 'Play Again' push button
       const playAgainButton = new PlayAgainButton( {
         center: frameNode.center,
-        // visible: false, //TODO
+        visible: false, //TODO
         listener: () => {
           //TODO
         },
@@ -99,6 +110,7 @@ define( require => {
         generationClockNode,
         environmentRadioButtonGroup,
         addAMateButton,
+        playButton,
         playAgainButton
       ];
 
