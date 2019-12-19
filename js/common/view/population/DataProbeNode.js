@@ -57,7 +57,15 @@ define( require => {
         cursor: 'ew-resize', // east-west arrows, <->
 
         // phet-io
-        tandem: Tandem.REQUIRED
+        tandem: Tandem.REQUIRED,
+        phetioComponentOptions: {
+
+          // model controls visibility
+          visibleProperty: {
+            phetioReadOnly: true,
+            phetioDocumentation: 'visibility is controlled by the model'
+          }
+        }
       }, options );
 
       const dataProbe = populationModel.dataProbe;
