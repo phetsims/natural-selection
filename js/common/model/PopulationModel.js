@@ -86,7 +86,8 @@ define( require => {
       this.xMaximumProperty = new NumberProperty( this.xAxisWidth, {
         isValidValue: value => ( value >= 0 ),
         tandem: tandem.createTandem( 'xMaximumProperty' ),
-        phetioStudioControl: false //TODO range is dynamic, and changes on every clock tick
+        phetioStudioControl: false, //TODO range is dynamic, and changes on every clock tick
+        phetioHighFrequency: true
       } );
 
       // @public index into Y_MAXIMUMS

@@ -30,7 +30,8 @@ define( require => {
         isValidValue: value => value >= 0,
         tandem: tandem.createTandem( 'timeProperty' ),
         phetioReadOnly: true,
-        phetioDocumentation: 'time that the generation clock has been running, in seconds'
+        phetioDocumentation: 'time that the generation clock has been running, in seconds',
+        phetioHighFrequency: true
       } );
 
       // @public
@@ -39,7 +40,8 @@ define( require => {
         time => time / NaturalSelectionConstants.SECONDS_PER_GENERATION, {
           phetioType: DerivedPropertyIO( NumberIO ),
           tandem: tandem.createTandem( 'generationsProperty' ),
-          phetioDocumentation: 'decimal number of generations that the generation clock has been running'
+          phetioDocumentation: 'decimal number of generations that the generation clock has been running',
+          phetioHighFrequency: true
         } );
 
       // @public
