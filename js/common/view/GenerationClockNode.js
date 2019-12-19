@@ -10,10 +10,12 @@ define( require => {
 
   // modules
   const Circle = require( 'SCENERY/nodes/Circle' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const Shape = require( 'KITE/Shape' );
 
@@ -31,6 +33,12 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( generationClock, environmentalFactorEnabledProperty, options ) {
+
+      options = merge( {
+
+        // phet-io
+        tandem: Tandem.REQUIRED
+      }, options );
 
       // The full center of the clock.
       const fullCircle = new Circle( RADIUS, {
@@ -91,6 +99,10 @@ define( require => {
       // unlink is unnecessary, exists for the lifetime of the sim.
       environmentalFactorEnabledProperty.link( environmentalFactorEnabled => {
         environmentalFactorPath.visible = environmentalFactorEnabled;
+      } );
+
+      this.addLinkedElement( generationClock, {
+        tandem: options.tandem.createTandem( 'generationClock' )
       } );
     }
 

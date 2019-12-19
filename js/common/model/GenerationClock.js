@@ -11,6 +11,7 @@ define( require => {
   // modules
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
+  const PhetioObject = require( 'TANDEM/PhetioObject' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NumberProperty = require( 'AXON/NumberProperty' );
@@ -18,12 +19,17 @@ define( require => {
   const Range = require( 'DOT/Range' );
   const Util = require( 'DOT/Util' );
 
-  class GenerationClock {
+  class GenerationClock extends PhetioObject {
 
     /**
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
+
+      super( {
+        tandem: tandem,
+        phetioState: false // to prevent serialization, because we don't have an IO type
+      } );
 
       // @public (read-only)
       this.timeProperty = new NumberProperty( 0, {
