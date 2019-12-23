@@ -1,4 +1,4 @@
-#44 {Property.<Range>} xAxisRange, yAxisRange
+TODO list for natural-selection
 
 Make graphs wider by making control panels narrower.
 Animate contents of Proportions view when switching generations.
