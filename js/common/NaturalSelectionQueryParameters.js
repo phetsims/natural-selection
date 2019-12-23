@@ -28,7 +28,8 @@ define( require => {
     // Public facing.
     allelesVisible: {
       type: 'boolean',
-      defaultValue: true
+      defaultValue: true,
+      isGraceful: true
     },
 
     //------------------------------------------------------------------------------------------------------------------
