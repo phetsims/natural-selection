@@ -3031,7 +3031,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "naturalSelection.labScreen.model.populationModel.yRangeIndexProperty": {
-      "phetioDocumentation": "index into an array of predefined ranges for the y axis (Population), larger values are larger ranges",
+      "phetioDocumentation": "index into an array of ranges for the y axis, larger values are larger ranges",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
       "phetioEventType": "MODEL",
@@ -3044,7 +3044,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "naturalSelection.labScreen.model.populationModel.yRangeProperty": {
-      "phetioDocumentation": "range of the y axis (Population)",
+      "phetioDocumentation": "range of the y axis",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
       "phetioEventType": "MODEL",

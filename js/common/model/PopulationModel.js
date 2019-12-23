@@ -21,15 +21,18 @@ define( require => {
 
   // constants
 
-  // The default index into Y_MAXIMUMS, determines the initial y-axis scale.
+  // The default index into Y_MAXIMUMS, determines the initial y-axis range.
   const Y_MAXIMUMS_INDEX_DEFAULT = 3;
 
-  // Maximum population values for the y-axis scale.
+  // Minimum value for the y-axis range.
+  const Y_MINIMUM = 0;
+
+  // Maximum population values for the y-axis range.
   const Y_MAXIMUMS = [ 5, 14, 30, 50, 70, 100, 140, 200, 240, 350, 500, 1000, 2000, 3000, 5000 ];
   assert && assert( _.every( value => Util.isInteger( value ) ), 'Y_MAXIMUMS must contain integer values' );
   //TODO assert that Y_MAXIMUMS values are in ascending order
 
-  // Spacing of tick marks for each y-axis scale in Y_MAXIMUMS.
+  // Spacing of tick marks for each value of Y_MAXIMUMS.
   const Y_TICK_SPACINGS = [ 1, 2, 5, 10, 10, 20, 20, 40, 40, 50, 100, 200, 400, 500, 1000 ];
   assert && assert( Y_TICK_SPACINGS.length === Y_MAXIMUMS.length, 'incorrect number of Y_TICK_SPACINGS' );
   assert && assert( _.every( value => Util.isInteger( value ) ), 'Y_TICK_SPACINGS must contain integer values' );
@@ -90,21 +93,21 @@ define( require => {
         phetioHighFrequency: true
       } );
 
-      // @public index into Y_MAXIMUMS
+      // @public index into Y_MAXIMUMS, determines the y-axis range
       this.yRangeIndexProperty = new NumberProperty( Y_MAXIMUMS_INDEX_DEFAULT, {
         numberType: 'Integer',
         range: new Range( 0, Y_MAXIMUMS.length - 1 ),
         tandem: tandem.createTandem( 'yRangeIndexProperty' ),
-        phetioDocumentation: 'index into an array of predefined ranges for the y axis (Population), larger values are larger ranges'
+        phetioDocumentation: 'index into an array of ranges for the y axis, larger values are larger ranges'
       } );
 
-      // @public range of graph's y-axis scale, in population
+      // @public range of y-axis, in population
       this.yRangeProperty = new DerivedProperty(
         [ this.yRangeIndexProperty ],
-        index => new Range( 0, Y_MAXIMUMS[ index ] ), {
+        yRangeIndex => new Range( Y_MINIMUM, Y_MAXIMUMS[ yRangeIndex ] ), {
           phetioType: DerivedPropertyIO( RangeIO ),
           tandem: tandem.createTandem( 'yRangeProperty' ),
-          phetioDocumentation: 'range of the y axis (Population)'
+          phetioDocumentation: 'range of the y axis'
         } );
       phet.log && this.yRangeProperty.link( yRange => phet.log( `yRange=${yRange}` ) );
 
