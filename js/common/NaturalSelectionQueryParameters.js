@@ -60,7 +60,7 @@ define( require => {
     }
   } );
 
-  // validate any dependencies between query parameters
+  // check dependencies between query parameters
   assert && assert( NaturalSelectionQueryParameters.secondsPerStep < NaturalSelectionQueryParameters.secondsPerGeneration,
     'secondsPerStep must be < secondsPerGeneration' );
 
