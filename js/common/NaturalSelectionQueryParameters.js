@@ -24,7 +24,7 @@ define( require => {
     secondsPerGeneration: {
       type: 'number',
       defaultValue: 10,
-      isValidValue: value => ( value > 0 )
+      isValidValue: secondsPerGeneration => ( secondsPerGeneration > 0 )
     },
 
     // Seconds of real time per each press of the Step button.
@@ -32,7 +32,7 @@ define( require => {
     secondsPerStep: {
       type: 'number',
       defaultValue: 0.1,
-      isValidValue: value => ( value > 0 )
+      isValidValue: secondsPerStep => ( secondsPerStep > 0 )
     },
 
     // The number of bunnies required to 'take over the world'.
@@ -40,7 +40,7 @@ define( require => {
     maxBunnies: {
       type: 'number',
       defaultValue: 1000,
-      isValidValue: value => ( value > 0 && Util.isInteger( value ) )
+      isValidValue: maxBunnies => ( maxBunnies > 0 && Util.isInteger( maxBunnies ) )
     },
 
     // Determines whether allele abbreviations are visible in the UI. Setting this to false hides the Pedigree 'Alleles'
