@@ -189,14 +189,10 @@ define( require => {
       // Recreate the lines when the y-axis range changes.
       yRangeProperty.link( yRange => {
 
-        //TODO generalize to support yRange.min > 0 ?
-        assert && assert( yRange.min === 0, `unexpected yRange.min: ${yRange.min}` );
-        const yMax = yRange.max;
-
         // Compute the number of lines and their spacing in view coordinates
         const ySpacingModel = getYSpacing();
-        const numberOfLines = Math.floor( yMax / ySpacingModel ) + 1;
-        const ySpacing = ( ySpacingModel / yMax ) * options.yAxisHeight;
+        const numberOfLines = Math.floor( yRange.getLength() / ySpacingModel ) + 1;
+        const ySpacing = ( ySpacingModel / yRange.getLength() ) * options.yAxisHeight;
 
         // Create the grid lines
         const shape = new Shape();
@@ -235,26 +231,20 @@ define( require => {
       // Recreate the labels when the y-axis range changes.
       yRangeProperty.link( yRange => {
 
-        //TODO generalize to support yRange.min > 0 ?
-        assert && assert( yRange.min === 0, `unexpected yRange.min: ${yRange.min}` );
-        const yMax = yRange.max;
-
         //TODO duplication with HorizontalLines
         // Compute the number of tick marks and their spacing in view coordinates
         const ySpacingModel = getYSpacing();
-        const numberOfTickMarks = Math.floor( yMax / ySpacingModel ) + 1;
-        const ySpacing = ( ySpacingModel / yMax ) * options.yAxisHeight;
+        const numberOfTickMarks = Math.floor( yRange.getLength() / ySpacingModel ) + 1;
+        const ySpacing = ( ySpacingModel / yRange.getLength() ) * options.yAxisHeight;
 
         // Create the tick mark labels
         const labelNodes = [];
         for ( let i = 0; i < numberOfTickMarks; i++ ) {
 
-          const y = options.yAxisHeight - ( i * ySpacing );
-
-          const labelNode = new Text( i * ySpacingModel, {
+          const labelNode = new Text( yRange.min + ( i * ySpacingModel ), {
             font: TICK_MARKS_FONT,
             right: 0,
-            centerY: y
+            centerY: options.yAxisHeight - ( i * ySpacing )
           } );
 
           labelNodes.push( labelNode );
