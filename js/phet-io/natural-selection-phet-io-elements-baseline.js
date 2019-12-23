@@ -3030,21 +3030,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": false,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.labScreen.model.populationModel.yMaximumProperty": {
-      "phetioDocumentation": "",
-      "phetioDynamicElement": false,
-      "phetioDynamicElementArchetype": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": true,
-      "phetioStudioControl": true,
-      "phetioTypeName": "DerivedPropertyIO<NumberIO>"
-    },
-    "naturalSelection.labScreen.model.populationModel.yZoomIndexProperty": {
-      "phetioDocumentation": "",
+    "naturalSelection.labScreen.model.populationModel.yRangeIndexProperty": {
+      "phetioDocumentation": "index into an array of predefined ranges for the y axis (Population), larger values are larger ranges",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
       "phetioEventType": "MODEL",
@@ -3055,6 +3042,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
+    },
+    "naturalSelection.labScreen.model.populationModel.yRangeProperty": {
+      "phetioDocumentation": "range of the y axis (Population)",
+      "phetioDynamicElement": false,
+      "phetioDynamicElementArchetype": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "DerivedPropertyIO<RangeIO>"
     },
     "naturalSelection.labScreen.model.proportionsModel.generationProperty": {
       "phetioDocumentation": "",

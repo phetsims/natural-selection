@@ -14,9 +14,9 @@ define( require => {
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NumberIO = require( 'TANDEM/types/NumberIO' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Range = require( 'DOT/Range' );
+  const RangeIO = require( 'DOT/RangeIO' );
   const Util = require( 'DOT/Util' );
 
   // constants
@@ -91,23 +91,22 @@ define( require => {
       } );
 
       // @public index into Y_MAXIMUMS
-      this.yZoomIndexProperty = new NumberProperty( Y_MAXIMUMS_INDEX_DEFAULT, {
+      this.yRangeIndexProperty = new NumberProperty( Y_MAXIMUMS_INDEX_DEFAULT, {
         numberType: 'Integer',
         range: new Range( 0, Y_MAXIMUMS.length - 1 ),
-        tandem: tandem.createTandem( 'yZoomIndexProperty' )
+        tandem: tandem.createTandem( 'yRangeIndexProperty' ),
+        phetioDocumentation: 'index into an array of predefined ranges for the y axis (Population), larger values are larger ranges'
       } );
 
-      // @public maximum of graph's y-axis scale, in population
-      // We're storing only the max since the min is always zero.
-      this.yMaximumProperty = new DerivedProperty(
-        [ this.yZoomIndexProperty ],
-        index => Y_MAXIMUMS[ index ], {
-          phetioType: DerivedPropertyIO( NumberIO ),
-          tandem: tandem.createTandem( 'yMaximumProperty' )
+      // @public range of graph's y-axis scale, in population
+      this.yRangeProperty = new DerivedProperty(
+        [ this.yRangeIndexProperty ],
+        index => new Range( 0, Y_MAXIMUMS[ index ] ), {
+          phetioType: DerivedPropertyIO( RangeIO ),
+          tandem: tandem.createTandem( 'yRangeProperty' ),
+          phetioDocumentation: 'range of the y axis (Population)'
         } );
-      phet.log && this.yMaximumProperty.link(
-        yAxisMax => phet.log( `yAxisMax=${yAxisMax}` )
-      );
+      phet.log && this.yRangeProperty.link( yRange => phet.log( `yRange=${yRange}` ) );
 
       // Scrolls the x-axis so that xMax is 'now'.
       const scrollToNow = () => {
@@ -140,7 +139,7 @@ define( require => {
       this.longTeethVisibleProperty.reset();
 
       this.xMaximumProperty.reset();
-      this.yZoomIndexProperty.reset();
+      this.yRangeIndexProperty.reset();
     }
 
     /**
@@ -157,7 +156,7 @@ define( require => {
      * @public
      */
     getYTickSpacing() {
-      return Y_TICK_SPACINGS[ this.yZoomIndexProperty.value ];
+      return Y_TICK_SPACINGS[ this.yRangeIndexProperty.value ];
     }
   }
 

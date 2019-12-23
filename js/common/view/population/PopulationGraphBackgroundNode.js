@@ -60,7 +60,7 @@ define( require => {
       } );
 
       // Grid lines for the y axis
-      const yGridLines = new HorizontalLines( populationModel.yMaximumProperty, () => populationModel.getYTickSpacing(), {
+      const yGridLines = new HorizontalLines( populationModel.yRangeProperty, () => populationModel.getYTickSpacing(), {
         yAxisHeight: options.backgroundHeight,
         lineLength: options.backgroundWidth,
         stroke: NaturalSelectionColors.GRID_LINES_STROKE,
@@ -88,7 +88,7 @@ define( require => {
       } );
 
       // Tick marks for the y axis
-      const yTickMarks = new HorizontalLines( populationModel.yMaximumProperty, () => populationModel.getYTickSpacing(), {
+      const yTickMarks = new HorizontalLines( populationModel.yRangeProperty, () => populationModel.getYTickSpacing(), {
         yAxisHeight: options.backgroundHeight,
         lineLength: TICK_MARKS_LENGTH,
         stroke: NaturalSelectionColors.TICK_MARKS_STROKE,
@@ -97,7 +97,7 @@ define( require => {
       } );
 
       // Tick mark labels for the y axis
-      const yTickLabels = new YTickLabels( populationModel.yMaximumProperty, () => populationModel.getYTickSpacing(), {
+      const yTickLabels = new YTickLabels( populationModel.yRangeProperty, () => populationModel.getYTickSpacing(), {
         yAxisHeight: options.backgroundHeight,
         right: yTickMarks.left - TICK_LABEL_SPACING
       } );
@@ -173,11 +173,11 @@ define( require => {
   class HorizontalLines extends Path {
 
     /**
-     * @param {Property.<number>} yMaximumProperty - maximum of the y-axis range, in model coordinates
-     * @param {function:number} getYSpacing - gets the y-spacing for the current value of yMaximumProperty
+     * @param {Property.<Range>} yRangeProperty - range of the y-axis range, in model coordinates
+     * @param {function:number} getYSpacing - gets the y-spacing for the current value of yRangeProperty
      * @param {Object} [options]
      */
-    constructor( yMaximumProperty, getYSpacing, options ) {
+    constructor( yRangeProperty, getYSpacing, options ) {
 
       options = merge( {
         yAxisHeight: 100, // y axis height, in view coordinates
@@ -186,13 +186,17 @@ define( require => {
 
       super( new Shape() );
 
-      // Recreate the lines when the y-axis scale changes.
-      yMaximumProperty.link( yMaximum => {
+      // Recreate the lines when the y-axis range changes.
+      yRangeProperty.link( yRange => {
+
+        //TODO generalize to support yRange.min > 0 ?
+        assert && assert( yRange.min === 0, `unexpected yRange.min: ${yRange.min}` );
+        const yMax = yRange.max;
 
         // Compute the number of lines and their spacing in view coordinates
         const ySpacingModel = getYSpacing();
-        const numberOfLines = Math.floor( yMaximum / ySpacingModel ) + 1;
-        const ySpacing = ( ySpacingModel / yMaximum ) * options.yAxisHeight;
+        const numberOfLines = Math.floor( yMax / ySpacingModel ) + 1;
+        const ySpacing = ( ySpacingModel / yMax ) * options.yAxisHeight;
 
         // Create the grid lines
         const shape = new Shape();
@@ -214,11 +218,11 @@ define( require => {
   class YTickLabels extends Node {
 
     /**
-     * @param {Property.<number>} yMaximumProperty - maximum of the y-axis range, in model coordinates
-     * @param {function:number} getYSpacing - gets the y-spacing for the current value of yMaximumProperty
+     * @param {Property.<Range>} yRangeProperty - range of the y-axis range, in model coordinates
+     * @param {function:number} getYSpacing - gets the y-spacing for the current value of yRangeProperty
      * @param {Object} [options]
      */
-    constructor( yMaximumProperty, getYSpacing, options ) {
+    constructor( yRangeProperty, getYSpacing, options ) {
 
       options = merge( {
         yAxisHeight: 100 // y axis height, in view coordinates
@@ -228,14 +232,18 @@ define( require => {
 
       super();
 
-      // Recreate the labels when the y-axis scale changes.
-      yMaximumProperty.link( yMaximum => {
+      // Recreate the labels when the y-axis range changes.
+      yRangeProperty.link( yRange => {
+
+        //TODO generalize to support yRange.min > 0 ?
+        assert && assert( yRange.min === 0, `unexpected yRange.min: ${yRange.min}` );
+        const yMax = yRange.max;
 
         //TODO duplication with HorizontalLines
         // Compute the number of tick marks and their spacing in view coordinates
         const ySpacingModel = getYSpacing();
-        const numberOfTickMarks = Math.floor( yMaximum / ySpacingModel ) + 1;
-        const ySpacing = ( ySpacingModel / yMaximum ) * options.yAxisHeight;
+        const numberOfTickMarks = Math.floor( yMax / ySpacingModel ) + 1;
+        const ySpacing = ( ySpacingModel / yMax ) * options.yAxisHeight;
 
         // Create the tick mark labels
         const labelNodes = [];
