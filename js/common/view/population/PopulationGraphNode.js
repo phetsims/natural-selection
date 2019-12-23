@@ -51,8 +51,7 @@ define( require => {
 
       // Generation (x-axis) scroll control
       const generationScrollControl = new GenerationScrollControl(
-        populationModel.xMaximumProperty, populationModel.generationsProperty, populationModel.isPlayingProperty, {
-          scrollWidth: populationModel.xAxisWidth,
+        populationModel.xRangeProperty, populationModel.generationsProperty, populationModel.isPlayingProperty, {
           labelString: generationString,
           tandem: options.tandem.createTandem( 'generationScrollControl' )
         } );

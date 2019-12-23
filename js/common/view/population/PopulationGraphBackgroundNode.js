@@ -46,8 +46,7 @@ define( require => {
       } );
 
       // Grid lines for the x axis
-      const xGridLines = new VerticalLines( populationModel.xMaximumProperty, {
-        xAxisWidthModel: populationModel.xAxisWidth,
+      const xGridLines = new VerticalLines( populationModel.xRangeProperty, {
         xAxisWidth: options.backgroundWidth,
         xSpacingModel: populationModel.xAxisTickSpacing,
         lineLength: options.backgroundHeight,
@@ -73,8 +72,7 @@ define( require => {
       } );
 
       // Tick marks for the x axis
-      const xTickMarks = new VerticalLines( populationModel.xMaximumProperty, {
-        xAxisWidthModel: populationModel.xAxisWidth,
+      const xTickMarks = new VerticalLines( populationModel.xRangeProperty, {
         xAxisWidth: options.backgroundWidth,
         xSpacingModel: populationModel.xAxisTickSpacing,
         lineLength: TICK_MARKS_LENGTH,
@@ -128,21 +126,20 @@ define( require => {
   class VerticalLines extends Node {
 
     /**
-     * @param {Property.<number>} xMaximumProperty - maximum of the x-axis range, in model coordinates
+     * @param {Property.<Range>} xRangeProperty - range of the x-axis, in model coordinates
      * @param {Object} [options]
      */
-    constructor( xMaximumProperty, options ) {
+    constructor( xRangeProperty, options ) {
 
       options = merge( {
-        xAxisWidthModel: 5, // width of the x axis, in model coordinates
         xSpacingModel: 1, // spacing between lines, in model coordinates
         xAxisWidth: 100, // width of the x axis, in view coordinates
         lineLength: 100 // vertical length of the lines, in view coordinates
       }, options );
 
       // Compute the number of lines and their spacing in view coordinates
-      const numberOfLines = Math.floor( options.xAxisWidthModel / options.xSpacingModel ) + 1;
-      const xSpacing = ( options.xSpacingModel / options.xAxisWidthModel ) * options.xAxisWidth;
+      const numberOfLines = Math.floor( xRangeProperty.value.getLength() / options.xSpacingModel ) + 1;
+      const xSpacing = ( options.xSpacingModel / xRangeProperty.value.getLength() ) * options.xAxisWidth;
 
       // Create the lines
       const shape = new Shape();
@@ -158,8 +155,8 @@ define( require => {
       options.children = [ path ];
 
       // Translate the lines as time progresses
-      xMaximumProperty.link( xMaximum => {
-        path.x = -xSpacing * ( ( xMaximum % options.xSpacingModel ) / options.xSpacingModel );
+      xRangeProperty.link( xRange => {
+        path.x = -xSpacing * ( ( xRange.max % options.xSpacingModel ) / options.xSpacingModel );
       } );
 
       super(  options );

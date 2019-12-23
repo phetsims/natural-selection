@@ -3017,7 +3017,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.labScreen.model.populationModel.xMaximumProperty": {
+    "naturalSelection.labScreen.model.populationModel.xRangeProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioDynamicElementArchetype": false,
@@ -3028,7 +3028,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": false,
-      "phetioTypeName": "NumberPropertyIO"
+      "phetioTypeName": "PropertyIO<RangeIO>"
     },
     "naturalSelection.labScreen.model.populationModel.yRangeIndexProperty": {
       "phetioDocumentation": "index into an array of ranges for the y axis, larger values are larger ranges",

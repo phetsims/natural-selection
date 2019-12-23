@@ -15,11 +15,16 @@ define( require => {
   const DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const Property = require( 'AXON/Property' );
+  const PropertyIO = require( 'AXON/PropertyIO' );
   const Range = require( 'DOT/Range' );
   const RangeIO = require( 'DOT/RangeIO' );
   const Util = require( 'DOT/Util' );
 
   // constants
+
+  // Default x-axis range, in generations.
+  const X_RANGE_DEFAULT = new Range( 0, 5 );
 
   // The default index into Y_MAXIMUMS, determines the initial y-axis range.
   const Y_MAXIMUMS_INDEX_DEFAULT = 3;
@@ -78,17 +83,20 @@ define( require => {
         tandem: tandem.createTandem( 'longTeethVisibleProperty' )
       } );
 
-      // @public (read-only) the width of the x-axis scale, in generations
-      this.xAxisWidth = 5;
-
       // @public (read-only) spacing between x-axis tick marks, in generations
       this.xAxisTickSpacing = 1;
 
-      // @public maximum of graph's x-axis scale, in generations.
-      // We're storing only the max since it's expensive to create a new Range on every clock tick.
-      this.xMaximumProperty = new NumberProperty( this.xAxisWidth, {
-        isValidValue: value => ( value >= 0 ),
-        tandem: tandem.createTandem( 'xMaximumProperty' ),
+      // @public range of the x-axis, in generations
+      // See https://github.com/phetsims/natural-selection/issues/44.
+      // For the PhET-iO API, it was desirable that we present the x-axis range, since that's intuitive for designers.
+      // This Property is updated on every clock tick when the sim is playing. Allocating a new Range instance every
+      // time the range changes is expensive.  So the Range instance is mutated, and notification of Property listeners
+      // is explicitly performed.  This also has implication for initializing and resetting this Property, requiring
+      // that we call X_RANGE_DEFAULT.copy() to prevent mutation of that constant.
+      this.xRangeProperty = new Property( X_RANGE_DEFAULT.copy(), {
+        isValidValue: xRange => ( xRange.min >= 0 ),
+        tandem: tandem.createTandem( 'xRangeProperty' ),
+        phetioType: PropertyIO( RangeIO ),
         phetioStudioControl: false, //TODO range is dynamic, and changes on every clock tick
         phetioHighFrequency: true
       } );
@@ -101,19 +109,25 @@ define( require => {
         phetioDocumentation: 'index into an array of ranges for the y axis, larger values are larger ranges'
       } );
 
-      // @public range of y-axis, in population
+      // @public range of the y-axis, in population
       this.yRangeProperty = new DerivedProperty(
         [ this.yRangeIndexProperty ],
         yRangeIndex => new Range( Y_MINIMUM, Y_MAXIMUMS[ yRangeIndex ] ), {
+          isValidValue: yRange => ( yRange.min >= 0 ),
           phetioType: DerivedPropertyIO( RangeIO ),
           tandem: tandem.createTandem( 'yRangeProperty' ),
           phetioDocumentation: 'range of the y axis'
         } );
       phet.log && this.yRangeProperty.link( yRange => phet.log( `yRange=${yRange}` ) );
 
-      // Scrolls the x-axis so that xMax is 'now'.
+      // Scrolls the x-axis so that xRangeProperty.max is 'now'.
       const scrollToNow = () => {
-        this.xMaximumProperty.value = Math.max( generationsProperty.value, this.xAxisWidth );
+        if ( generationsProperty.value > this.xRangeProperty.value.max ) {
+          const max = generationsProperty.value;
+          const min = max - X_RANGE_DEFAULT.getLength();
+          this.xRangeProperty.value.setMinMax( min, max ); // mutate value
+          this.xRangeProperty.notifyListenersStatic(); // force notification
+        }
       };
 
       // When generations changes, scroll the x-axis.
@@ -141,7 +155,7 @@ define( require => {
       this.shortTeethVisibleProperty.reset();
       this.longTeethVisibleProperty.reset();
 
-      this.xMaximumProperty.reset();
+      this.xRangeProperty.value = X_RANGE_DEFAULT.copy(); // because we're mutating xRangeProperty.value
       this.yRangeIndexProperty.reset();
     }
 

@@ -1,7 +1,7 @@
 // Copyright 2019, University of Colorado Boulder
 
 /**
- * GenerationScrollControl is the control used for scrolling the x axis (Generation) of the Population graph.
+ * GenerationScrollControl is the control used for scrolling the x-axis (Generation) of the Population graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -21,17 +21,16 @@ define( require => {
   class GenerationScrollControl extends HBox {
 
     /**
-     * @param {Property.<number>} valueProperty
-     * @param {Property.<number>} maxValueProperty
+     * @param {Property.<Range>} rangeProperty
+     * @param {Property.<number>} maxProperty - maximum value for rangeProperty.value.max
      * @param {Property.<boolean>} isPlayingProperty
      * @param {Object} [options]
      */
-    constructor( valueProperty, maxValueProperty, isPlayingProperty, options ) {
+    constructor( rangeProperty, maxProperty, isPlayingProperty, options ) {
 
       options = merge( {
 
         step: 1, // {number} amount to step the range
-        scrollWidth: 1,
         labelString: '', // {string} label that appears between the arrow buttons
         font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
 
@@ -42,6 +41,9 @@ define( require => {
         tandem: Tandem.REQUIRED
       }, options );
 
+      // Maintain the intial range length
+      const rangeLength = rangeProperty.value.getLength();
+
       // label
       const labelNode = new Text( options.labelString, {
         font: options.font,
@@ -51,7 +53,10 @@ define( require => {
       // back button
       const back = () => {
         isPlayingProperty.value = false; // pause the sim when we scroll back
-        valueProperty.value = Math.ceil( valueProperty.value - options.step ); // snap to integer value
+        const max = Math.ceil( rangeProperty.value.max - options.step ); // snap to integer value
+        const min = max - rangeLength;
+        rangeProperty.value.setMinMax( min, max ); // mutate value
+        rangeProperty.notifyListenersStatic(); // force notification
       };
       const backButton = new ArrowButton( 'left', back,
         merge( {
@@ -61,7 +66,10 @@ define( require => {
 
       // forward button
       const forward = () => {
-        valueProperty.value = Math.floor( valueProperty.value + options.step ); // snap to integer value
+        const max = Math.floor( rangeProperty.value.max + options.step ); // snap to integer value
+        const min = max - rangeLength;
+        rangeProperty.value.setMinMax( min, max ); // mutate value
+        rangeProperty.notifyListenersStatic(); // force notification
       };
       const forwardButton = new ArrowButton( 'right', forward,
         merge( {
@@ -76,10 +84,10 @@ define( require => {
 
       // Enable buttons
       const multilink = Property.multilink(
-        [ valueProperty, maxValueProperty ],
-        ( value, maxValue ) => {
-          backButton.enabled = ( value - options.scrollWidth > 0 );
-          forwardButton.enabled = ( maxValue > value  );
+        [ rangeProperty, maxProperty ],
+        ( range, max ) => {
+          backButton.enabled = ( range.min > 0 );
+          forwardButton.enabled = ( range.max < max  );
         } );
 
       // @private
