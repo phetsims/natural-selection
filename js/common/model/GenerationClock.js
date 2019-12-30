@@ -17,7 +17,7 @@ define( require => {
   const NumberProperty = require( 'AXON/NumberProperty' );
   const NumberIO = require( 'TANDEM/types/NumberIO' );
   const Range = require( 'DOT/Range' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   class GenerationClock extends PhetioObject {
 
@@ -55,7 +55,7 @@ define( require => {
         [ this.generationsProperty ],
         generations => Math.floor( generations ), {
           phetioType: DerivedPropertyIO( NumberIO ),
-          isValidValue: currentGeneration => Util.isInteger( currentGeneration ),
+          isValidValue: currentGeneration => Utils.isInteger( currentGeneration ),
           tandem: tandem.createTandem( 'currentGenerationProperty' ),
           phetioDocumentation: 'integer generation number for the current cycle of the generation clock'
         }

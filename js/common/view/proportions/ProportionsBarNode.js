@@ -19,7 +19,7 @@ define( require => {
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // strings
   const greaterThanValuePercentString = require( 'string!NATURAL_SELECTION/greaterThanValuePercent' );
@@ -134,13 +134,13 @@ define( require => {
       else {
 
         // round both percentages to the nearest integer
-        this.mutantRectangle.rectWidth = ( Util.roundSymmetric( mutantPercentage ) / 100 ) * this.barWidth;
+        this.mutantRectangle.rectWidth = ( Utils.roundSymmetric( mutantPercentage ) / 100 ) * this.barWidth;
 
         this.nonMutantPercentageNode.text = StringUtils.fillIn( valuePercentString, {
-          value: Util.roundSymmetric( nonMutantPercentage )
+          value: Utils.roundSymmetric( nonMutantPercentage )
         } );
         this.mutantPercentageNode.text = StringUtils.fillIn( valuePercentString, {
-          value: Util.roundSymmetric( mutantPercentage )
+          value: Utils.roundSymmetric( mutantPercentage )
         } );
       }
       this.mutantRectangle.right = this.nonMutantRectangle.right;

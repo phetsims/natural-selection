@@ -15,7 +15,7 @@ define( require => {
 
   // modules
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
 
@@ -57,7 +57,7 @@ define( require => {
     maxBunnies: {
       type: 'number',
       defaultValue: 1000,
-      isValidValue: maxBunnies => ( maxBunnies > 0 && Util.isInteger( maxBunnies ) )
+      isValidValue: maxBunnies => ( maxBunnies > 0 && Utils.isInteger( maxBunnies ) )
     }
   } );
 

@@ -19,7 +19,7 @@ define( require => {
   const PropertyIO = require( 'AXON/PropertyIO' );
   const Range = require( 'DOT/Range' );
   const RangeIO = require( 'DOT/RangeIO' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // constants
 
@@ -34,13 +34,13 @@ define( require => {
 
   // Maximum population values for the y-axis range.
   const Y_MAXIMUMS = [ 5, 14, 30, 50, 70, 100, 140, 200, 240, 350, 500, 1000, 2000, 3000, 5000 ];
-  assert && assert( _.every( value => Util.isInteger( value ) ), 'Y_MAXIMUMS must contain integer values' );
+  assert && assert( _.every( value => Utils.isInteger( value ) ), 'Y_MAXIMUMS must contain integer values' );
   //TODO assert that Y_MAXIMUMS values are in ascending order
 
   // Spacing of tick marks for each value of Y_MAXIMUMS.
   const Y_TICK_SPACINGS = [ 1, 2, 5, 10, 10, 20, 20, 40, 40, 50, 100, 200, 400, 500, 1000 ];
   assert && assert( Y_TICK_SPACINGS.length === Y_MAXIMUMS.length, 'incorrect number of Y_TICK_SPACINGS' );
-  assert && assert( _.every( value => Util.isInteger( value ) ), 'Y_TICK_SPACINGS must contain integer values' );
+  assert && assert( _.every( value => Utils.isInteger( value ) ), 'Y_TICK_SPACINGS must contain integer values' );
 
   class PopulationModel {
 

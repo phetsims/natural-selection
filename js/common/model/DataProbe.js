@@ -18,7 +18,7 @@ define( require => {
   const NullableIO = require( 'TANDEM/types/NullableIO' );
   const Property = require( 'AXON/Property' );
   const PropertyIO = require( 'AXON/PropertyIO' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   class DataProbe {
 
@@ -39,7 +39,7 @@ define( require => {
       } );
 
       const populationPropertyOptions = {
-        isValidValues: value => ( value === null ) || ( typeof value === 'number' && Util.isInteger( value ) ),
+        isValidValues: value => ( value === null ) || ( typeof value === 'number' && Utils.isInteger( value ) ),
         phetioType: PropertyIO( NullableIO( NumberIO ) ),
         phetioReadOnly: true
       };
