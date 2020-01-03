@@ -29,7 +29,7 @@ define( require => {
     allelesVisible: {
       type: 'boolean',
       defaultValue: true,
-      isGraceful: true
+      public: true
     },
 
     //------------------------------------------------------------------------------------------------------------------
