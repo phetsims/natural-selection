@@ -73,8 +73,8 @@ define( require => {
 
       // Tick marks for the x axis
       const xTickMarks = new VerticalLines( populationModel.xRangeProperty, {
-        xAxisWidth: options.backgroundWidth,
         xSpacingModel: populationModel.xAxisTickSpacing,
+        xAxisWidth: options.backgroundWidth,
         lineLength: TICK_MARKS_LENGTH,
 
         stroke: NaturalSelectionColors.TICK_MARKS_STROKE,
@@ -83,6 +83,13 @@ define( require => {
 
         // Clip to the tick mark bounds below the x axis, because we'll be horizontally translating the x tick marks
         clipArea: Shape.rectangle( 0, 0, options.backgroundWidth , options.backgroundHeight + TICK_MARKS_LENGTH )
+      } );
+
+      // Tick mark labels for the x axis
+      const xTickLabels = new XTickLabels( populationModel.xRangeProperty, {
+        xSpacingModel: populationModel.xAxisTickSpacing,
+        xAxisWidth: options.backgroundWidth,
+        top: xTickMarks.bottom + TICK_LABEL_SPACING
       } );
 
       // Tick marks for the y axis
@@ -102,7 +109,7 @@ define( require => {
 
       // Group the tick marks, in case we want to be able to show/hide them in the future.
       const tickMarksNode = new Node( {
-        children: [ xTickMarks, yTickMarks, yTickLabels ]
+        children: [ xTickMarks, xTickLabels, yTickMarks, yTickLabels ]
       } );
 
       // A crisp frame in the foreground, to hide overlapping of tick marks and grid lines
@@ -139,12 +146,12 @@ define( require => {
 
       // Compute the number of lines and their spacing in view coordinates
       const numberOfLines = Math.floor( xRangeProperty.value.getLength() / options.xSpacingModel ) + 1;
-      const xSpacing = ( options.xSpacingModel / xRangeProperty.value.getLength() ) * options.xAxisWidth;
+      const xSpacingView = ( options.xSpacingModel / xRangeProperty.value.getLength() ) * options.xAxisWidth;
 
       // Create the lines
       const shape = new Shape();
       for ( let i = 0; i < numberOfLines; i++ ) {
-        const x = options.xAxisWidth - ( i * xSpacing );
+        const x = options.xAxisWidth - ( i * xSpacingView );
         shape.moveTo( x, 0 );
         shape.lineTo( x, options.lineLength );
       }
@@ -156,7 +163,7 @@ define( require => {
 
       // Translate the lines as time progresses
       xRangeProperty.link( xRange => {
-        path.x = -xSpacing * ( ( xRange.max % options.xSpacingModel ) / options.xSpacingModel );
+        path.x = -xSpacingView * ( ( xRange.max % options.xSpacingModel ) / options.xSpacingModel );
       } );
 
       super(  options );
@@ -189,12 +196,12 @@ define( require => {
         // Compute the number of lines and their spacing in view coordinates
         const ySpacingModel = getYSpacing();
         const numberOfLines = Math.floor( yRange.getLength() / ySpacingModel ) + 1;
-        const ySpacing = ( ySpacingModel / yRange.getLength() ) * options.yAxisHeight;
+        const ySpacingView = ( ySpacingModel / yRange.getLength() ) * options.yAxisHeight;
 
         // Create the grid lines
         const shape = new Shape();
         for ( let i = 0; i < numberOfLines; i++ ) {
-          const y = options.yAxisHeight - ( i * ySpacing );
+          const y = options.yAxisHeight - ( i * ySpacingView );
           shape.moveTo( 0, y );
           shape.lineTo( options.lineLength, y );
         }
@@ -206,12 +213,66 @@ define( require => {
   }
 
   /**
+   * XTickLabels is the x-axis tick mark labels. There is a static number of labels, and they are reused and
+   * repositioned as the x-axis range changes.
+   */
+  class XTickLabels extends Node {
+
+    /**
+     * @param {Property.<Range>} xRangeProperty - the x-axis range, in model coordinates
+     * @param {Object} [options]
+     */
+    constructor( xRangeProperty, options ) {
+
+      options = merge( {
+        xSpacingModel: 1, // spacing between lines, in model coordinates
+        xAxisWidth: 100 // x axis width, in view coordinates
+      }, options );
+
+      //TODO duplication with VerticalLines
+      // Compute the number of labels and their spacing in view coordinates
+      const numberOfLabels = Math.floor( xRangeProperty.value.getLength() / options.xSpacingModel ) + 1;
+      const xSpacingView = ( options.xSpacingModel / xRangeProperty.value.getLength() ) * options.xAxisWidth;
+
+      // Create a fixed number of labels. Their values and positions will be adjusted by xRangeProperty listener below.
+      const labelNodes = []; // {Text[]}
+      for ( let i = 0; i < numberOfLabels; i++ ) {
+        labelNodes.push( new Text( i, {
+          font: TICK_MARKS_FONT
+        } ) );
+      }
+
+      assert && assert( !options.children, 'XTickLabels set children' );
+      options.children = labelNodes;
+
+      super( options );
+
+      // Adjusts the text and position for all labels when the x-axis range changes.
+      xRangeProperty.link( xRange => {
+
+        const xOffsetModel = Math.floor( options.xSpacingModel * xRange.min / options.xSpacingModel );
+        const xOffsetView = -xSpacingView * ( ( xRange.max % options.xSpacingModel ) / options.xSpacingModel );
+
+        for ( let i = 0; i < numberOfLabels; i++ ) {
+          const labelNode = labelNodes[ i ];
+          const xModel = xOffsetModel + ( i * options.xSpacingModel );
+          labelNode.visible = ( xModel >= xRange.min && xModel <= xRange.max );
+          if ( labelNode.visible ) {
+            labelNode.text = xModel;
+            labelNode.centerX = xOffsetView + ( i * xSpacingView );
+          }
+        }
+      } );
+    }
+  }
+
+  /**
    * YTickLabels is the y-axis tick mark labels. They are recreated on demand, when the zoom control is used.
    */
   class YTickLabels extends Node {
 
     /**
-     * @param {Property.<Range>} yRangeProperty - range of the y-axis range, in model coordinates
+     * @param {Property.<Range>} yRangeProperty - the y-axis range, in model coordinates
      * @param {function:number} getYSpacing - gets the y-spacing for the current value of yRangeProperty
      * @param {Object} [options]
      */
