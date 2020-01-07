@@ -70,6 +70,9 @@ define( require => {
 
       const dataProbe = populationModel.dataProbe;
 
+      // Which side of the bar the displays are on: true = right, false = left
+      let displaysOnRight = true;
+
       // Vertical bar
       const barNode = new Rectangle( 0, 0, 3, graphHeight, {
         fill: BAR_COLOR,
@@ -113,7 +116,10 @@ define( require => {
       // @private location in view coordinate frame, relative to the left edge of the graph
       this.locationProperty = new Property( new Vector2( originX, 0 ) );
 
-      this.addInputListener( new DataProbeDragListener( this.locationProperty, new Range( originX, originX + graphWidth ), {
+      // x range in view coordinates
+      const xRangeView = new Range( originX, originX + graphWidth );
+
+      this.addInputListener( new DataProbeDragListener( this.locationProperty, xRangeView, {
         pressCursor: options.cursor,
         tandem: options.tandem.createTandem( 'dragListener' )
       } ) );
@@ -124,10 +130,31 @@ define( require => {
         this.visible = dataProbeVisible;
       } );
 
+      // Positions the displays on the proper side of the bar.
+      const updateDisplayLayout = () => {
+        if ( displaysOnRight ) {
+          numberDisplaysParent.left = barNode.right;
+        }
+        else {
+          numberDisplaysParent.right = barNode.left;
+        }
+        numberDisplaysParent.top = barNode.top;
+      };
+
       this.locationProperty.link( location => {
         this.x = location.x;
-        //TODO update display
-        //TODO flip NumberDisplays around y axis at edges of graph
+
+        //TODO update display values
+
+        // flip NumberDisplays around y axis at edges of graph
+        if ( this.left < xRangeView.min && !displaysOnRight ) {
+          displaysOnRight = true;
+          updateDisplayLayout();
+        }
+        else if ( this.right > xRangeView.max && displaysOnRight ) {
+          displaysOnRight = false;
+          updateDisplayLayout();
+        }
       } );
 
       // To add a bit of space above the top NumberDisplay, and so that  always has at least 1 child
@@ -164,8 +191,7 @@ define( require => {
           shortTeethVisible && children.push( shortTeethDisplay );
           longTeethVisible && children.push( longTeethDisplay );
           numberDisplaysParent.children = children;
-          numberDisplaysParent.left = barNode.right;
-          numberDisplaysParent.top = barNode.top;
+          updateDisplayLayout();
         } );
     }
 
