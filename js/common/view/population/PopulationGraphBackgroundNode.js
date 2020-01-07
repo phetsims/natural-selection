@@ -86,7 +86,7 @@ define( require => {
         clipArea: Shape.rectangle( 0, 0, options.backgroundWidth , options.backgroundHeight + TICK_MARKS_LENGTH )
       } );
 
-      // Tick mark labels for the x axis
+      // Tick labels for the x axis
       const xTickLabels = new XTickLabels( populationModel.xRangeProperty, {
         xSpacingModel: populationModel.xAxisTickSpacing,
         xAxisWidth: options.backgroundWidth,
@@ -102,7 +102,7 @@ define( require => {
         right: rectangleNode.left
       } );
 
-      // Tick mark labels for the y axis
+      // Tick labels for the y axis
       const yTickLabels = new YTickLabels( populationModel.yRangeProperty, () => populationModel.getYTickSpacing(), {
         yAxisHeight: options.backgroundHeight,
         right: yTickMarks.left - TICK_LABEL_SPACING
@@ -214,8 +214,8 @@ define( require => {
   }
 
   /**
-   * XTickLabels is the x-axis tick mark labels. There is a static number of labels, and they are reused and
-   * repositioned as the x-axis range changes.
+   * XTickLabels renders the x-axis tick mark labels. There is a static number of labels, reused and repositioned as
+   * the x-axis range changes.
    */
   class XTickLabels extends Node {
 
@@ -268,7 +268,7 @@ define( require => {
   }
 
   /**
-   * YTickLabels is the y-axis tick mark labels. They are recreated on demand, when the zoom control is used.
+   * YTickLabels renders the y-axis tick mark labels. They are recreated on demand, when the zoom control is used.
    */
   class YTickLabels extends Node {
 
