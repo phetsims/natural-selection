@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO should probably have a positionProperty that changes as graph scrolls and user drags
 /**
  * DataProbe is the model for the data probe on the Population graph. It shows population (y) values at a specific
  * generation (x) value on the graph.
