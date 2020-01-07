@@ -113,13 +113,13 @@ define( require => {
       super( options );
 
       //TODO derive from dataProbe.generationProperty or make this go away
-      // @private location in view coordinate frame, relative to the left edge of the graph
-      this.locationProperty = new Property( new Vector2( originX, 0 ) );
+      // @private position in view coordinate frame, relative to the left edge of the graph
+      this.positionProperty = new Property( new Vector2( originX, 0 ) );
 
       // x range in view coordinates
       const xRangeView = new Range( originX, originX + graphWidth );
 
-      this.addInputListener( new DataProbeDragListener( this.locationProperty, xRangeView, {
+      this.addInputListener( new DataProbeDragListener( this.positionProperty, xRangeView, {
         pressCursor: options.cursor,
         tandem: options.tandem.createTandem( 'dragListener' )
       } ) );
@@ -141,8 +141,8 @@ define( require => {
         numberDisplaysParent.top = barNode.top;
       };
 
-      this.locationProperty.link( location => {
-        this.x = location.x;
+      this.positionProperty.link( position => {
+        this.x = position.x;
 
         //TODO update display values
 
@@ -199,7 +199,7 @@ define( require => {
      * @public
      */
     reset() {
-      this.locationProperty.reset();
+      this.positionProperty.reset();
     }
 
     /**

@@ -19,19 +19,19 @@ define( require => {
   class DataProbeDragListener extends DragListener {
 
     /**
-     * @param {Property.<Vector2>} locationProperty
+     * @param {Property.<Vector2>} positionProperty
      * @param {Range} xRange
      * @param {Object} [options]
      */
-    constructor( locationProperty, xRange, options ) {
+    constructor( positionProperty, xRange, options ) {
 
       options = merge( {}, options );
 
       assert && assert( !options.dragBoundsProperty, 'DataProbeDragListener sets dragBoundsProperty' );
       options.dragBoundsProperty = new Property( new Bounds2( xRange.min, 0, xRange.max, 0 ) );
 
-      assert && assert( !options.locationProperty, 'DataProbeDragListener sets locationProperty' );
-      options.locationProperty = locationProperty;
+      assert && assert( !options.positionProperty, 'DataProbeDragListener sets positionProperty' );
+      options.positionProperty = positionProperty;
 
       super( options );
     }
