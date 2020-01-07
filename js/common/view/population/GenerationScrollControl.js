@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * GenerationScrollControl is the control used for scrolling the x-axis (Generation) of the Population graph.
