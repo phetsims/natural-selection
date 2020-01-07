@@ -1,5 +1,6 @@
 // Copyright 2019, University of Colorado Boulder
 
+//TODO rename locationProperty to positionProperty when https://github.com/phetsims/phet-info/issues/126 has been addressed for DragListener
 /**
  * DataProbeDragListener is the drag listener for the data probe on the Population graph.
  * Historical information and requirements can be found in https://github.com/phetsims/natural-selection/issues/14.
@@ -19,19 +20,19 @@ define( require => {
   class DataProbeDragListener extends DragListener {
 
     /**
-     * @param {Property.<Vector2>} positionProperty
+     * @param {Property.<Vector2>} locationProperty
      * @param {Range} xRange
      * @param {Object} [options]
      */
-    constructor( positionProperty, xRange, options ) {
+    constructor( locationProperty, xRange, options ) {
 
       options = merge( {}, options );
 
       assert && assert( !options.dragBoundsProperty, 'DataProbeDragListener sets dragBoundsProperty' );
       options.dragBoundsProperty = new Property( new Bounds2( xRange.min, 0, xRange.max, 0 ) );
 
-      assert && assert( !options.positionProperty, 'DataProbeDragListener sets positionProperty' );
-      options.positionProperty = positionProperty;
+      assert && assert( !options.locationProperty, 'DataProbeDragListener sets locationProperty' );
+      options.locationProperty = locationProperty;
 
       super( options );
     }
