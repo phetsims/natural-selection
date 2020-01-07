@@ -27,7 +27,7 @@ define( require => {
 
   // const
   const ZOOM_CONTROL_X_OFFSET = 5;
-  const X_AXIS_LABEL_OFFSET = 5;
+  const X_AXIS_LABEL_OFFSET = 7;
   const Y_AXIS_LABEL_OFFSET = 7;
 
   class PopulationGraphNode extends Node {
@@ -70,13 +70,13 @@ define( require => {
       const yAxisLabelNode = new Text( populationString, {
         font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
         rotation: -Math.PI / 2,
-        maxWidth: 120 // determined empirically
+        maxWidth: 90 // determined empirically
       } );
 
       //TODO fudge factors to fix wonky layout, need to account for tick marks
-      const FUDGE_WIDTH = 40;
+      const FUDGE_WIDTH = 27;
       const FUDGE_HEIGHT = 20;
-      const FUDGE_X_SPACING = 20;
+      const FUDGE_X_SPACING = 8;
 
       //TODO better names for these
       // XY plot
