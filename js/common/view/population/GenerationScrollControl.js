@@ -9,15 +9,13 @@ define( require => {
   'use strict';
 
   // modules
-  const Action = require( 'AXON/Action' );
   const ArrowButton = require( 'SUN/buttons/ArrowButton' );
-  const EventType = require( 'TANDEM/EventType' );
   const merge = require( 'PHET_CORE/merge' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const NumberIO = require( 'TANDEM/types/NumberIO' );
   const Property = require( 'AXON/Property' );
+  const Range = require( 'DOT/Range' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
 
@@ -44,7 +42,7 @@ define( require => {
         tandem: Tandem.REQUIRED
       }, options );
 
-      // Maintain the intial range length
+      // Maintain the initial range length
       const rangeLength = rangeProperty.value.getLength();
 
       // label
@@ -53,28 +51,12 @@ define( require => {
         maxWidth: 120 // determined empirically
       } );
 
-      // Sends a PhET-iO message when the generation range is changed by the user using one of the arrow buttons.
-      // See https://github.com/phetsims/natural-selection/issues/43
-      const changeGenerationRangeAction = new Action( function( min, max ) {
-        rangeProperty.value.setMinMax( min, max ); // mutate value
-        rangeProperty.notifyListenersStatic(); // force notification
-      }, {
-        parameters: [
-          { name: 'min', phetioType: NumberIO },
-          { name: 'max', phetioType: NumberIO }
-        ],
-        tandem: options.tandem.createTandem( 'changeGenerationRangeAction' ),
-        phetioDocumentation: 'When the user changes the generation range, this emits the new range.',
-        phetioReadOnly: true,
-        phetioEventType: EventType.USER
-      } );
-
       // back button
       const back = () => {
         isPlayingProperty.value = false; // pause the sim when we scroll back
         const max = Math.ceil( rangeProperty.value.max - options.step ); // snap to integer value
         const min = max - rangeLength;
-        changeGenerationRangeAction.execute( min, max );
+        rangeProperty.value = new Range( min, max );
       };
       const backButton = new ArrowButton( 'left', back,
         merge( {
@@ -86,7 +68,7 @@ define( require => {
       const forward = () => {
         const max = Math.floor( rangeProperty.value.max + options.step ); // snap to integer value
         const min = max - rangeLength;
-        changeGenerationRangeAction.execute( min, max );
+        rangeProperty.value = new Range( min, max );
       };
       const forwardButton = new ArrowButton( 'right', forward,
         merge( {
@@ -100,17 +82,12 @@ define( require => {
       super( options );
 
       // Enable buttons
-      const multilink = Property.multilink(
+      Property.multilink(
         [ rangeProperty, maxProperty ],
         ( range, max ) => {
           backButton.enabled = ( range.min > 0 );
-          forwardButton.enabled = ( range.max < max  );
+          forwardButton.enabled = ( range.max < max );
         } );
-
-      // @private
-      this.disposeGenerationScrollControl = () => {
-        multilink.dispose();
-      };
     }
 
     /**
@@ -118,8 +95,7 @@ define( require => {
      * @override
      */
     dispose() {
-      super.dispose();
-      this.disposeGenerationScrollControl();
+      assert && assert( false, 'GenerationScrollControl does not support dispose' );
     }
   }
 

@@ -87,13 +87,7 @@ define( require => {
       this.xAxisTickSpacing = 1;
 
       // @public range of the x-axis, in generations
-      // See https://github.com/phetsims/natural-selection/issues/44.
-      // For the PhET-iO API, it was desirable that we present the x-axis range, since that's intuitive for designers.
-      // This Property is updated on every clock tick when the sim is playing. Allocating a new Range instance every
-      // time the range changes is expensive.  So the Range instance is mutated, and notification of Property listeners
-      // is explicitly performed.  This also has implication for initializing and resetting this Property, requiring
-      // that we call X_RANGE_DEFAULT.copy() to prevent mutation of that constant.
-      this.xRangeProperty = new Property( X_RANGE_DEFAULT.copy(), {
+      this.xRangeProperty = new Property( new Range( 0, 5 ), {
         isValidValue: xRange => ( xRange.min >= 0 ),
         tandem: tandem.createTandem( 'xRangeProperty' ),
         phetioType: PropertyIO( RangeIO ),
@@ -125,8 +119,7 @@ define( require => {
         if ( generationsProperty.value > this.xRangeProperty.value.max ) {
           const max = generationsProperty.value;
           const min = max - X_RANGE_DEFAULT.getLength();
-          this.xRangeProperty.value.setMinMax( min, max ); // mutate value
-          this.xRangeProperty.notifyListenersStatic(); // force notification
+          this.xRangeProperty.value = new Range( min, max );
         }
       };
 
@@ -155,7 +148,7 @@ define( require => {
       this.shortTeethVisibleProperty.reset();
       this.longTeethVisibleProperty.reset();
 
-      this.xRangeProperty.value = X_RANGE_DEFAULT.copy(); // because we're mutating xRangeProperty.value
+      this.xRangeProperty.reset();
       this.yRangeIndexProperty.reset();
     }
 
