@@ -3018,7 +3018,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "naturalSelection.labScreen.model.populationModel.xRangeProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "range of the x axis, in generations",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3044,7 +3044,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "naturalSelection.labScreen.model.populationModel.yRangeProperty": {
-      "phetioDocumentation": "range of the y axis",
+      "phetioDocumentation": "range of the y axis, in number of bunnies",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -6331,19 +6331,6 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
-    },
-    "naturalSelection.labScreen.view.populationNode.populationGraphNode.generationScrollControl.changeGenerationRangeAction": {
-      "phetioDocumentation": "When the user changes the generation range, this emits the new range. The arguments are:<br/><ol><li>min: NumberIO</li><br/><li>max: NumberIO</li></ol>",
-      "phetioDynamicElement": false,
-      "phetioEventType": "USER",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": false,
-      "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO<NumberIO, NumberIO>"
     },
     "naturalSelection.labScreen.view.populationNode.populationGraphNode.generationScrollControl.forwardButton": {
       "phetioDocumentation": "",

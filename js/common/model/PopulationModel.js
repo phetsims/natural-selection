@@ -92,7 +92,8 @@ define( require => {
         tandem: tandem.createTandem( 'xRangeProperty' ),
         phetioType: PropertyIO( RangeIO ),
         phetioStudioControl: false, //TODO range is dynamic, and changes on every clock tick
-        phetioHighFrequency: true
+        phetioHighFrequency: true,
+        phetioDocumentation: 'range of the x axis, in generations'
       } );
 
       // @public index into Y_MAXIMUMS, determines the y-axis range
@@ -110,7 +111,7 @@ define( require => {
           isValidValue: yRange => ( yRange.min >= 0 ),
           phetioType: DerivedPropertyIO( RangeIO ),
           tandem: tandem.createTandem( 'yRangeProperty' ),
-          phetioDocumentation: 'range of the y axis'
+          phetioDocumentation: 'range of the y axis, in number of bunnies'
         } );
       phet.log && this.yRangeProperty.link( yRange => phet.log( `yRange=${yRange}` ) );
 
