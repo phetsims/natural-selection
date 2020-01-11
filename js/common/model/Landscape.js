@@ -1,10 +1,10 @@
 // Copyright 2020, University of Colorado Boulder
 
 //TODO scaling aspect of this is unnecessary in JS version
-//TODO document that this was ported from Landscape.js, indicate how it was modified
+//TODO does not appear to handle perspective, model x & y distance doesn't scale with z depth
 //TODO 'ground' calculations don't respect the horizon, things end up floating above the horizon
 //TODO model yModel=0 should correspond to bottom of EnvironmentNode, yModel < 0 should fail
-//TODO replace this entire class with a custom 3D-2D MVT
+//TODO replace this entire class with a custom 3D-2D MVT, or doc how it was ported from Java
 
 /**
  * Represents both a landscape itself (ground plane), but also the coordinates and transformations from this 3D
