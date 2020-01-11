@@ -223,9 +223,8 @@ define( require => {
   // coordinate system, regardless of the dimensions of the viewing window.
   Landscape.SIZE = NaturalSelectionConstants.ENVIRONMENT_DISPLAY_SIZE;
 
-  //TODO what coordinate and frame?
-  // The pixel-level from the top of the "horizon", where the 3D bunny positions would appear if infinitely far away
-  Landscape.HORIZON = 120;
+  // Y coordinate of the horizon, in view coordinates, where the 3D bunny positions would appear if infinitely far away.
+  Landscape.HORIZON = NaturalSelectionConstants.ENVIRONMENT_DISPLAY_HORIZON_Y;
 
   //TODO what coordinate and frame?
   // This is as close as bunnies can get to the "camera". Essentially the bottom and front of the ground
