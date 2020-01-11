@@ -82,6 +82,14 @@ define( require => {
 
       super( options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'ProportionsLegendNode does not support dispose' );
+    }
   }
 
   /**
@@ -129,7 +137,7 @@ define( require => {
      * @override
      */
     dispose() {
-      assert && assert( false, 'ProportionsLegendNode does not support dispose' );
+      assert && assert( false, 'Row does not support dispose' );
     }
   }
 

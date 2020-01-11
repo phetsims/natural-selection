@@ -61,7 +61,6 @@ define( require => {
 
     /**
      * @public
-     * @override
      */
     dispose() {
       assert && assert( false, 'PedigreeModel does not support dispose' );

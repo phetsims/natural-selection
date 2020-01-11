@@ -94,7 +94,6 @@ define( require => {
 
     /**
      * @public
-     * @override
      */
     dispose() {
       assert && assert( false, 'DataProbe does not support dispose' );

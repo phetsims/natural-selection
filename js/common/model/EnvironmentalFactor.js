@@ -35,7 +35,6 @@ define( require => {
 
     /**
      * @public
-     * @override
      */
     dispose() {
       assert && assert( false, 'EnvironmentalFactor does not support dispose' );

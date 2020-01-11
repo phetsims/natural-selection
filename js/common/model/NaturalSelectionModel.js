@@ -75,6 +75,13 @@ define( require => {
     }
 
     /**
+     * @public
+     */
+    dispose() {
+      assert && assert( false, 'NaturalSelectionModel does not support dispose' );
+    }
+
+    /**
      * Resets the initial bunny population. Other settings are preserved.
      * @public
      */

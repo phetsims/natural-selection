@@ -75,15 +75,15 @@ define( require => {
     /**
      * @public
      */
-    dispose() {
-      assert && assert( false, 'GenerationClock does not support dispose' );
+    reset() {
+      this.timeProperty.reset();
     }
 
     /**
      * @public
      */
-    reset() {
-      this.timeProperty.reset();
+    dispose() {
+      assert && assert( false, 'GenerationClock does not support dispose' );
     }
 
     /**

@@ -76,7 +76,6 @@ define( require => {
 
     /**
      * @public
-     * @override
      */
     dispose() {
       assert && assert( false, 'ProportionsModel does not support dispose' );

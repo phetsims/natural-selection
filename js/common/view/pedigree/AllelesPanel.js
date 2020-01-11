@@ -223,6 +223,14 @@ define( require => {
         //TODO when enabled, set order of icons so that dominant is on the left
       } );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'Row does not support dispose' );
+    }
   }
 
   return naturalSelection.register( 'AllelesPanel', AllelesPanel );

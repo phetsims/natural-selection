@@ -124,6 +124,14 @@ define( require => {
 
       super( options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'PopulationGraphBackgroundNode does not support dispose' );
+    }
   }
 
   /**
@@ -169,6 +177,14 @@ define( require => {
 
       super(  options );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'VerticalLines does not support dispose' );
+    }
   }
 
   /**
@@ -210,6 +226,14 @@ define( require => {
       } );
 
       this.mutate( options );
+    }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'HorizontalLines does not support dispose' );
     }
   }
 
@@ -265,6 +289,14 @@ define( require => {
         }
       } );
     }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'XTickLabels does not support dispose' );
+    }
   }
 
   /**
@@ -313,6 +345,14 @@ define( require => {
       } );
 
       this.mutate( options );
+    }
+
+    /**
+     * @public
+     * @override
+     */
+    dispose() {
+      assert && assert( false, 'YTickLabels does not support dispose' );
     }
   }
 

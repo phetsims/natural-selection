@@ -40,14 +40,6 @@ define( require => {
 
       super( options );
     }
-
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'AddAMateButton does not support dispose' );
-    }
   }
 
   return naturalSelection.register( 'AddAMateButton', AddAMateButton );
