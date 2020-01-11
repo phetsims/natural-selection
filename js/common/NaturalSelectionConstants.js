@@ -41,7 +41,7 @@ define( require => {
     SCREEN_VIEW_Y_SPACING: 15, // vertical spacing between UI components in the ScreenView
 
     // EnvironmentNode
-    ENVIRONMENT_DISPLAY_SIZE: new Dimension2( 770, 310 ),
+    ENVIRONMENT_DISPLAY_SIZE: new Dimension2( 770, 310 ), // same size as background images
     ENVIRONMENT_DISPLAY_HORIZON_Y: 95, // where the horizon is, determined empirically from background PNG files //TODO move to model
     ENVIRONMENT_DISPLAY_X_MARGIN: 15, // margins at left and right edges of the viewport
     ENVIRONMENT_DISPLAY_Y_MARGIN: 15, // margins at top and bottom edges of the viewport
