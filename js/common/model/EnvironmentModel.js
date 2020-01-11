@@ -14,7 +14,9 @@ define( require => {
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const Environments = require( 'NATURAL_SELECTION/common/model/Environments' );
+  const Food = require( 'NATURAL_SELECTION/common/model/Food' );
   const LimitedFood = require( 'NATURAL_SELECTION/common/model/LimitedFood' );
+  const Landscape = require( 'NATURAL_SELECTION/common/model/Landscape' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const ToughFood = require( 'NATURAL_SELECTION/common/model/ToughFood' );
   const Wolves = require( 'NATURAL_SELECTION/common/model/Wolves' );
@@ -26,10 +28,20 @@ define( require => {
      */
     constructor( tandem ) {
 
+      // @public
+      this.landscape = new Landscape();
+
       // @public the abiotic (physical, rather than biological) environment
       this.environmentProperty = new EnumerationProperty( Environments, Environments.EQUATOR, {
         tandem: tandem.createTandem( 'environmentProperty' )
       } );
+
+      // @public {Food[]}
+      this.food = [
+        new Food( { position: this.landscape.landscapeToModel( 385, 75 ) } ),
+        new Food( { position: this.landscape.landscapeToModel( 385, 200 ) } ),
+        new Food( { position: this.landscape.landscapeToModel( 385, 300 ) } )
+      ];
 
       // @public (read-only) {Bunny[]}
       this.bunnies = [ Bunny.createDefault() ];

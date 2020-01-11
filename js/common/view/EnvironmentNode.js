@@ -12,6 +12,7 @@ define( require => {
   const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
   const EnvironmentBackgroundNode = require( 'NATURAL_SELECTION/common/view/EnvironmentBackgroundNode' );
   const EnvironmentRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/EnvironmentRadioButtonGroup' );
+  const FoodNode = require( 'NATURAL_SELECTION/common/view/FoodNode' );
   const GenerationClockNode = require( 'NATURAL_SELECTION/common/view/GenerationClockNode' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -101,6 +102,11 @@ define( require => {
         },
         tandem: options.tandem.createTandem( 'playAgainButton' )
       } );
+
+      // Add food
+      for ( let i = 0; i < model.environmentModel.food.length; i++ ) {
+        worldContents.addChild( new FoodNode( model.environmentModel.food[ i ], model.environmentModel.landscape ) );
+      }
 
       // layering
       assert && assert( !options.children, 'EnvironmentNode sets children' );
