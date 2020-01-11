@@ -3,6 +3,7 @@
 //TODO scaling aspect of this is unnecessary in JS version
 //TODO document that this was ported from Landscape.js, indicate how it was modified
 //TODO 'ground' calculations don't respect the horizon, things end up floating above the horizon
+//TODO model yModel=0 should correspond to bottom of EnvironmentNode, yModel < 0 should fail
 //TODO replace this entire class with a custom 3D-2D MVT
 
 /**
