@@ -1,5 +1,7 @@
 TODO list for natural-selection
 
+#17 positions for food
+
 About viewport transform, JO said in Slack developer channel on 11/22/19:
 > It's possible to do that with Matrix4s and homogeneous coordinates, but that wouldn't be a standard type
 > or what I would name ModelViewTransform3
