@@ -29,6 +29,7 @@ define( require => {
 
       // @public (read-only)
       this.position = options.position;
+      phet.log && phet.log( `Food position=${this.position}` );
 
       // @public
       this.existsProperty = new BooleanProperty( options.exists );

@@ -34,11 +34,9 @@ define( require => {
       super( options );
 
       const scale = landscape.getViewScale( food.position.z );
-      console.log( `FoodNode scale=${scale}` );
       this.setScaleMagnitude( scale );
 
       const viewPosition = landscape.spriteToScreen( food.position );
-      console.log( `FoodNode viewPosition=${viewPosition}` );
       this.centerX = viewPosition.x;
       this.bottom = viewPosition.y;
 

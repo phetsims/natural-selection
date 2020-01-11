@@ -4,6 +4,7 @@
 //TODO does not appear to handle perspective, model x & y distance doesn't scale with z depth
 //TODO 'ground' calculations don't respect the horizon, things end up floating above the horizon
 //TODO model yModel=0 should correspond to bottom of EnvironmentNode, yModel < 0 should fail
+//TODO Food positions set in EnvironmentModel and logged in Food don't make sense
 //TODO replace this entire class with a custom 3D-2D MVT, or doc how it was ported from Java
 
 /**
