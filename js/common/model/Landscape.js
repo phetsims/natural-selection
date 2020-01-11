@@ -221,7 +221,7 @@ define( require => {
 
   // Static "landscape" size in view coordinates. Bunny (and other sprite) 3D coordinates are contained within this
   // coordinate system, regardless of the dimensions of the viewing window.
-  Landscape.SIZE = NaturalSelectionConstants.ENVIRONMENT_DISPLAY_NODE_SIZE;
+  Landscape.SIZE = NaturalSelectionConstants.ENVIRONMENT_DISPLAY_SIZE;
 
   //TODO what coordinate and frame?
   // The pixel-level from the top of the "horizon", where the 3D bunny positions would appear if infinitely far away

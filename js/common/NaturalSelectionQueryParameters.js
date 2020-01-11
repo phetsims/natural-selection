@@ -6,7 +6,7 @@
  *
  * Running with ?dev shows the following things that are specific to this sim:
  * - generation number is shown below the generation clock in GenerationClockNode
- * - horizon line is shown in in EnvironmentDisplayNode
+ * - horizon line is shown in EnvironmentNode
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

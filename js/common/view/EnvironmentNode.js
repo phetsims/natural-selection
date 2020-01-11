@@ -34,8 +34,8 @@ define( require => {
     constructor( model, options ) {
 
       options = merge( {
-        viewportSize: NaturalSelectionConstants.ENVIRONMENT_DISPLAY_NODE_SIZE,
-        viewportHorizonY: NaturalSelectionConstants.ENVIRONMENT_DISPLAY_NODE_HORIZON_Y,
+        viewportSize: NaturalSelectionConstants.ENVIRONMENT_DISPLAY_SIZE,
+        viewportHorizonY: NaturalSelectionConstants.ENVIRONMENT_DISPLAY_HORIZON_Y,
 
         // phet-io
         tandem: Tandem.REQUIRED
@@ -59,14 +59,14 @@ define( require => {
       const generationClockNode = new GenerationClockNode( model.generationClock,
         model.environmentModel.environmentalFactorEnabledProperty, {
           centerX: frameNode.centerX,
-          top: frameNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_NODE_Y_MARGIN,
+          top: frameNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
           tandem: options.tandem.createTandem( 'generationClockNode' )
         } );
 
       // Environment radio buttons
       const environmentRadioButtonGroup = new EnvironmentRadioButtonGroup( model.environmentModel.environmentProperty, {
-        right: frameNode.right - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_NODE_X_MARGIN,
-        top: frameNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_NODE_Y_MARGIN,
+        right: frameNode.right - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_X_MARGIN,
+        top: frameNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
         tandem: options.tandem.createTandem( 'environmentRadioButtonGroup' )
       } );
 
@@ -79,7 +79,7 @@ define( require => {
         },
         visible: !model.environmentModel.mateWasAddedProperty.value,
         centerX: frameNode.centerX,
-        bottom: frameNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_NODE_Y_MARGIN,
+        bottom: frameNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
         tandem: options.tandem.createTandem( 'addAMateButton' )
       } );
 
