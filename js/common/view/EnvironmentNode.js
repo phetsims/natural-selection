@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * EnvironmentNode displays everything in the environment -- bunnies, wolves, food, terrain, sky, etc.

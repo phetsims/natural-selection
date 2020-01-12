@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * EnvironmentalFactor is the base class for all environmental factors. These are things that affect the fertility

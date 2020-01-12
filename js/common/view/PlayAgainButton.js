@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * PlayAgainButton is the push button that is shown after all bunnies die, or bunnies take over the world.
