@@ -29,10 +29,9 @@ define( require => {
 
     /**
      * @param {EnvironmentModel} environmentModel
-     * @param {generationClock} generationClock
      * @param {Object} [options]
      */
-    constructor( environmentModel, generationClock, options ) {
+    constructor( environmentModel, options ) {
 
       options = merge( {
         viewportSize: NaturalSelectionConstants.ENVIRONMENT_DISPLAY_SIZE,
@@ -57,7 +56,7 @@ define( require => {
       } );
 
       // Generation clock
-      const generationClockNode = new GenerationClockNode( generationClock,
+      const generationClockNode = new GenerationClockNode( environmentModel.generationClock,
         environmentModel.environmentalFactorEnabledProperty, {
           centerX: frameNode.centerX,
           top: frameNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,

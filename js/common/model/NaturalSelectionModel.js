@@ -33,7 +33,7 @@ define( require => {
       this.generationClock = new GenerationClock( tandem.createTandem( 'generationClock' ) );
 
       // @public (read-only)
-      this.environmentModel = new EnvironmentModel( tandem.createTandem( 'environmentModel' ) );
+      this.environmentModel = new EnvironmentModel( this.generationClock, tandem.createTandem( 'environmentModel' ) );
 
       // @public (read-only)
       this.populationModel = new PopulationModel(

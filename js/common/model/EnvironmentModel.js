@@ -26,14 +26,18 @@ define( require => {
   class EnvironmentModel extends PhetioObject {
 
     /**
+     * @param {GenerationClock} generationClock
      * @param {Tandem} tandem
      */
-    constructor( tandem ) {
+    constructor( generationClock, tandem ) {
 
       super( {
         tandem: tandem,
         phetioState: false // to prevent serialization, because we don't have an IO type
       } );
+
+      // @public (read-only)
+      this.generationClock = generationClock;
 
       // @public
       this.landscape = new Landscape();
