@@ -52,7 +52,7 @@ define( require => {
       // const diedDialog = new DiedDialog();
       // const worldDialog = new WorldDialog();
 
-      const environmentNode = new EnvironmentNode( model, {
+      const environmentNode = new EnvironmentNode( model.environmentModel, model.generationClock, {
         left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
         top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
         tandem: options.tandem.createTandem( 'environmentNode' )

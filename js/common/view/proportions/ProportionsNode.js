@@ -56,6 +56,11 @@ define( require => {
       options.children = [ proportionsPanel, proportionsGraphNode ];
 
       super( options );
+
+      // Create a link to the model that this Node displays
+      this.addLinkedElement( proportionsModel, {
+        tandem: options.tandem.createTandem( 'proportionsModel' )
+      } );
     }
 
     /**

@@ -68,6 +68,11 @@ define( require => {
         [ pedigreeGraphNode ];
 
       super( options );
+
+      // Create a link to the model that this Node displays
+      this.addLinkedElement( pedigreeModel, {
+        tandem: options.tandem.createTandem( 'pedigreeModel' )
+      } );
     }
 
     /**

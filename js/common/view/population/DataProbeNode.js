@@ -193,6 +193,11 @@ define( require => {
           numberDisplaysParent.children = children;
           updateDisplayLayout();
         } );
+
+      // Create a link to the model that this Node displays
+      this.addLinkedElement( populationModel.dataProbe, {
+        tandem: options.tandem.createTandem( 'dataProbe' )
+      } );
     }
 
     /**

@@ -15,6 +15,7 @@ define( require => {
   const DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const PhetioObject = require( 'TANDEM/PhetioObject' );
   const Property = require( 'AXON/Property' );
   const PropertyIO = require( 'AXON/PropertyIO' );
   const Range = require( 'DOT/Range' );
@@ -42,7 +43,7 @@ define( require => {
   assert && assert( Y_TICK_SPACINGS.length === Y_MAXIMUMS.length, 'incorrect number of Y_TICK_SPACINGS' );
   assert && assert( _.every( value => Utils.isInteger( value ) ), 'Y_TICK_SPACINGS must contain integer values' );
 
-  class PopulationModel {
+  class PopulationModel extends PhetioObject {
 
     /**
      * @param {Property.<number>} generationsProperty
@@ -50,6 +51,11 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( generationsProperty, isPlayingProperty, tandem ) {
+
+      super( {
+        tandem: tandem,
+        phetioState: false // to prevent serialization, because we don't have an IO type
+      } );
 
       // @public
       this.generationsProperty = generationsProperty;

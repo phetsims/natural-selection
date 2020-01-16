@@ -19,15 +19,21 @@ define( require => {
   const Landscape = require( 'NATURAL_SELECTION/common/model/Landscape' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
+  const PhetioObject = require( 'TANDEM/PhetioObject' );
   const ToughFood = require( 'NATURAL_SELECTION/common/model/ToughFood' );
   const Wolves = require( 'NATURAL_SELECTION/common/model/Wolves' );
 
-  class EnvironmentModel {
+  class EnvironmentModel extends PhetioObject {
 
     /**
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
+
+      super( {
+        tandem: tandem,
+        phetioState: false // to prevent serialization, because we don't have an IO type
+      } );
 
       // @public
       this.landscape = new Landscape();

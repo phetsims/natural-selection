@@ -17,16 +17,22 @@ define( require => {
   const NumberProperty = require( 'AXON/NumberProperty' );
   const NumberIO = require( 'TANDEM/types/NumberIO' );
   const NullableIO = require( 'TANDEM/types/NullableIO' );
+  const PhetioObject = require( 'TANDEM/PhetioObject' );
   const Property = require( 'AXON/Property' );
   const PropertyIO = require( 'AXON/PropertyIO' );
   const Utils = require( 'DOT/Utils' );
 
-  class DataProbe {
+  class DataProbe extends PhetioObject {
 
     /**
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
+
+      super( {
+        tandem: tandem,
+        phetioState: false // to prevent serialization, because we don't have an IO type
+      } );
 
       // @public visibility of the probe
       this.visibleProperty = new BooleanProperty( false, {

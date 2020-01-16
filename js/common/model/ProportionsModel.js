@@ -12,9 +12,10 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const PhetioObject = require( 'TANDEM/PhetioObject' );
   const Property = require( 'AXON/Property' );
 
-  class ProportionsModel {
+  class ProportionsModel extends PhetioObject {
 
     /**
      * @param {Property.<number>} currentGenerationProperty
@@ -22,6 +23,11 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( currentGenerationProperty, isPlayingProperty, tandem ) {
+
+      super( {
+        tandem: tandem,
+        phetioState: false // to prevent serialization, because we don't have an IO type
+      } );
 
       // @public
       this.currentGenerationProperty = currentGenerationProperty;

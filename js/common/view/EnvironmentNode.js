@@ -28,10 +28,11 @@ define( require => {
   class EnvironmentNode extends Node {
 
     /**
-     * @param {NaturalSelectionModel} model
+     * @param {EnvironmentModel} environmentModel
+     * @param {generationClock} generationClock
      * @param {Object} [options]
      */
-    constructor( model, options ) {
+    constructor( environmentModel, generationClock, options ) {
 
       options = merge( {
         viewportSize: NaturalSelectionConstants.ENVIRONMENT_DISPLAY_SIZE,
@@ -41,7 +42,7 @@ define( require => {
         tandem: Tandem.REQUIRED
       }, options );
 
-      const backgroundNode = new EnvironmentBackgroundNode( model.environmentModel.environmentProperty,
+      const backgroundNode = new EnvironmentBackgroundNode( environmentModel.environmentProperty,
         options.viewportSize, options.viewportHorizonY );
 
       // Everything in the world, clipped to the viewport
@@ -56,15 +57,15 @@ define( require => {
       } );
 
       // Generation clock
-      const generationClockNode = new GenerationClockNode( model.generationClock,
-        model.environmentModel.environmentalFactorEnabledProperty, {
+      const generationClockNode = new GenerationClockNode( generationClock,
+        environmentModel.environmentalFactorEnabledProperty, {
           centerX: frameNode.centerX,
           top: frameNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
           tandem: options.tandem.createTandem( 'generationClockNode' )
         } );
 
       // Environment radio buttons
-      const environmentRadioButtonGroup = new EnvironmentRadioButtonGroup( model.environmentModel.environmentProperty, {
+      const environmentRadioButtonGroup = new EnvironmentRadioButtonGroup( environmentModel.environmentProperty, {
         right: frameNode.right - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_X_MARGIN,
         top: frameNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
         tandem: options.tandem.createTandem( 'environmentRadioButtonGroup' )
@@ -73,11 +74,11 @@ define( require => {
       // 'Add a Mate' push button
       const addAMateButton = new AddAMateButton( {
         listener: () => {
-          model.environmentModel.mateWasAddedProperty.value = true;
+          environmentModel.mateWasAddedProperty.value = true;
           addAMateButton.visible = false;
           //TODO
         },
-        visible: !model.environmentModel.mateWasAddedProperty.value,
+        visible: !environmentModel.mateWasAddedProperty.value,
         centerX: frameNode.centerX,
         bottom: frameNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
         tandem: options.tandem.createTandem( 'addAMateButton' )
@@ -104,8 +105,8 @@ define( require => {
       } );
 
       // Add food
-      for ( let i = 0; i < model.environmentModel.food.length; i++ ) {
-        worldContents.addChild( new FoodNode( model.environmentModel.food[ i ], model.environmentModel.landscape ) );
+      for ( let i = 0; i < environmentModel.food.length; i++ ) {
+        worldContents.addChild( new FoodNode( environmentModel.food[ i ], environmentModel.landscape ) );
       }
 
       // layering
@@ -126,6 +127,11 @@ define( require => {
       this.resetEnvironmentNode = () => {
         addAMateButton.visible = true;
       };
+
+      // Create a link to the model that this Node displays
+      this.addLinkedElement( environmentModel, {
+        tandem: options.tandem.createTandem( 'environmentModel' )
+      } );
     }
 
     /**
