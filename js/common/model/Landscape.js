@@ -9,7 +9,7 @@
 
 //TODO where is the model origin?
 //TODO   model x=0 appears to be in middle, negative to left, positive to right
-//TODO   model y=0 appears to be at the horizon, negative closer to the camera
+//TODO   model y=0 appears to be at the horizon, negative closer to the camera, why isn't it at the camera?
 //TODO   is z=0 at the camera?
 
 /**
