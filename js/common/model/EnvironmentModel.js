@@ -51,8 +51,8 @@ define( require => {
       const foodX = NaturalSelectionConstants.ENVIRONMENT_DISPLAY_SIZE.width / 4;
       this.food = [
         new Food( { position: this.landscape.landscapeToModel( foodX, Landscape.HORIZON ) } ),
-        new Food( { position: this.landscape.landscapeToModel( foodX, 200 ) } ),
-        new Food( { position: this.landscape.landscapeToModel( foodX, 300 ) } )
+        new Food( { position: this.landscape.landscapeToModel( foodX, Landscape.HORIZON + 100 ) } ),
+        new Food( { position: this.landscape.landscapeToModel( foodX, Landscape.HORIZON + 200 ) } )
       ];
 
       // @public (read-only) {Bunny[]}

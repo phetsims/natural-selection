@@ -7,6 +7,11 @@
 //TODO Food positions set in EnvironmentModel and logged in Food don't make sense
 //TODO replace this entire class with a custom 3D-2D MVT, or doc how it was ported from Java
 
+//TODO where is the model origin?
+//TODO   model x=0 appears to be in middle, negative to left, positive to right
+//TODO   model y=0 appears to be at the horizon, negative closer to the camera
+//TODO   is z=0 at the camera?
+
 /**
  * Represents both a landscape itself (ground plane), but also the coordinates and transformations from this 3D
  * system to and from view coordinates. View coordinates are scaled so that the "screen" coordinates are independent
@@ -233,11 +238,12 @@ define( require => {
   Landscape.NEARPLANE = 150;
 
   //TODO what coordinate and frame?
-  // This is as far as bunnies can get from the "camera". Essentially the top and the back of the ground
+  // The z distance of the horizon from the "camera"
   Landscape.FARPLANE = 300;
 
   //TODO what frame?
-  // Total vertical rise of the ground plane from the front to the back.
+  //TODO does "from the front to the back" mean from NEARPLANE to FARPLANE, from camera to FARPLANE, ...?
+  // Total vertical (y) rise of the ground plane from the front to the back.
   Landscape.VERTICAL_RISE = 100;
 
   return naturalSelection.register( 'Landscape', Landscape );
