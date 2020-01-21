@@ -1,17 +1,17 @@
 // Copyright 2020, University of Colorado Boulder
 
 //TODO scaling aspect of this is unnecessary in JS version
-//TODO does not appear to handle perspective, model x & y distance doesn't scale with z depth
-//TODO 'ground' calculations don't respect the horizon, things end up floating above the horizon
-//TODO model yModel=0 should correspond to bottom of EnvironmentNode, yModel < 0 should fail
-//TODO Food positions set in EnvironmentModel and logged in Food don't make sense
+//TODO most of this is not well-behaved above the horizon
 //TODO replace this entire class with a custom 3D-2D MVT, or doc how it was ported from Java
-//TODO draw a picture of the model space
+//TODO draw a picture of the model space, for the next person
 
 //TODO where is the model origin?
-//TODO   model x=0 appears to be in middle, negative to left, positive to right
-//TODO   model y=0 appears to be at the horizon, negative closer to the camera, why isn't it at the camera?
-//TODO   is z=0 at the camera?
+//TODO   model x=0 is in the middle, negative to left, positive to right
+//TODO   model y=0 is at the horizon, negative closer to the camera
+//TODO   model z=0 is at the camera
+//TODO (0,-RISE,NEARPLANE) = (0,-100,150) is at bottom center of viewport, xMax = ~179
+//TODO (0, 0, FARPLANCE) = (0, 0, 300) is at center of horizon, xMax = ~358
+//TODO (0, 158, 538) is at top-center of viewport, xMax = ~642 -- above horizon things seem wrong
 
 /**
  * Represents both a landscape itself (ground plane), but also the coordinates and transformations from this 3D
@@ -53,7 +53,7 @@ define( require => {
       this.landscapeHeight = options.landscapeHeight;
     }
 
-    //TODO delete this, not needed in JS version
+    //TODO delete this since we're not resizing the viewport
     /**
      * Sets the dimensions of the landscape.
      * @param {number} landscapeWidth
@@ -94,6 +94,9 @@ define( require => {
     }
 
     //TODO xModel is unused
+    //TODO for z > FARPLANE, this behaves as if ground continues past horizon and gives a position in the sky
+    //TODO for z < NEARPLANE, this behaves as if the ground continues between NEARPLANE and camera
+    //TODO so is the ground a trapedoid or a plane?
     /**
      * Gets the ground height at specified x and z coordinates.
      * @param {number} xModel
@@ -105,6 +108,8 @@ define( require => {
       return ( zModel - Landscape.FARPLANE ) * Landscape.VERTICAL_RISE / ( Landscape.FARPLANE - Landscape.NEARPLANE );
     }
 
+    //TODO getMaximumX( 0 ) returns 0. So is the ground really a trapedoid?
+    //TODO this is not well-behaved for z > FARPLANE
     /**
      * Gets the maximum x value for a particular depth. This varies on depth, since the bunnies are (in 3D)
      * laid out on a trapezoidal field.
@@ -127,7 +132,6 @@ define( require => {
     }
 
     //TODO what is this?
-    //TODO model or view coordinates?
     //TODO this should be a constant
     /**
      * Common scaling factor
@@ -138,6 +142,8 @@ define( require => {
       return ( Landscape.SIZE.height - Landscape.HORIZON ) * Landscape.NEARPLANE / Landscape.VERTICAL_RISE;
     }
 
+    //TODO this is not well-behaved for yView < HORIZON
+    //TODO this is not well-behaved for yView > SIZE.height, approaches 0 but never gets there
     /**
      * Given a view y value, return the model z value where the ground has that y height.
      * @param {number} yView
@@ -161,6 +167,8 @@ define( require => {
     }
 
     //TODO rename to viewToModelPosition
+    //TODO not well-behaved for y < HORIZON, returns positions up in the sky
+    //TODO not well-behaved for y > SIZE.height, z approaches 0 but never gets there
     /**
      * Given view coordinates (x,y), return the ground position in model coordinates.
      * @param {number} xView
@@ -185,18 +193,21 @@ define( require => {
     spriteToScreen( position ) {
       const landscapeX = ( Landscape.SIZE.width / 2 ) + ( position.x / position.z ) * this.getFactor();
       const landscapeY = Landscape.HORIZON - ( position.y / position.z ) * this.getFactor();
+
+      //TODO scaling here can be deleted, since we're not resizing the viewport
       return new Vector2(
         landscapeX * this.landscapeWidth / Landscape.SIZE.width,
         landscapeY * this.landscapeHeight / Landscape.SIZE.height
       );
     }
 
+    //TODO I don't understand this, what is a 'view distance'?
     //TODO rename to viewToModelDistance
     /**
      * Turns a view distance into a model distance at a particular model z (depth).
      * @param {number} distanceView
      * @param {number} zModel
-     * @returns {number} distance, in model coordiantes
+     * @returns {number} distance, in model coordinates
      * @public
      */
     landscapeDistanceToModel( distanceView, zModel ) {
@@ -205,8 +216,10 @@ define( require => {
 
     //TODO this was copied from Java BunnyNode.rescale and Wolf.wolfScale, but was not used for food, see
     // ShrubNode.rescale, TreeNode.rescale
+    //TODO 0.25 is the scale at NEARPLANE
+    //TODO not well-behaved, Infinity at zModel = 0
     /**
-     * Gets the view scaling factor that corresponds to model z postion.
+     * Gets the view scaling factor that corresponds to model z position.
      * @param {number} zModel
      * @returns {number}
      */
@@ -222,26 +235,25 @@ define( require => {
     }
   }
 
+  //TODO can delete 'regardless of the dimensions of the viewing window' since we won't be resizing the viewport
   // Static "landscape" size in view coordinates. Bunny (and other sprite) 3D coordinates are contained within this
   // coordinate system, regardless of the dimensions of the viewing window.
   Landscape.SIZE = NaturalSelectionConstants.ENVIRONMENT_DISPLAY_SIZE;
 
+  //TODO 'if infinitely far away' is not handled correctly. And z > FAR_PLANE will put the bunny in the sky.
   // Y coordinate of the horizon, in view coordinates, where the 3D bunny positions would appear if infinitely far away.
   Landscape.HORIZON = NaturalSelectionConstants.ENVIRONMENT_DISPLAY_HORIZON_Y;
 
-  //TODO what coordinate frame? relative to?
   //TODO what happens for z values smaller than this?
-  // This is as close as bunnies can get to the "camera". Essentially the bottom and front of the ground
+  // The z distance of the bottom and front of the ground, in model coordinates.
+  // This is as close as bunnies can get to the "camera".
   Landscape.NEARPLANE = 150;
 
-  //TODO what coordinate frame? relative to?
   //TODO what happens for z values larger than this?
-  // The z distance of the horizon from the "camera"
+  // The z distance of the horizon from the "camera", in model coordinates.
   Landscape.FARPLANE = 300;
 
-  //TODO what coordinate frame?
-  //TODO does "from the front to the back" mean from NEARPLANE to FARPLANE, from camera to FARPLANE, ...?
-  // Total vertical (y) rise of the ground plane from the front to the back.
+  // Total vertical (y) rise of the ground plane from NEARPLANE to FARPLANE, in model coordinates.
   Landscape.VERTICAL_RISE = 100;
 
   return naturalSelection.register( 'Landscape', Landscape );
