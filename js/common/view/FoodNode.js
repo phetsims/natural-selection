@@ -26,7 +26,7 @@ define( require => {
 
       //TODO need PNG files for food
       const toughFoodNode = new Rectangle( 0, 0, 50, 50, { fill: 'red' } );
-      const tenderFoodNode = new Rectangle( 0, 0, 50, 50, { fill: 'green' } );
+      const tenderFoodNode = new Rectangle( 0, 0, 50, 50, { fill: 'yellow' } );
 
       assert && assert( !options.children, 'FoodNode sets children' );
       options.children = [ toughFoodNode, tenderFoodNode ];
