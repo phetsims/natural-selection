@@ -6,6 +6,7 @@
 //TODO model yModel=0 should correspond to bottom of EnvironmentNode, yModel < 0 should fail
 //TODO Food positions set in EnvironmentModel and logged in Food don't make sense
 //TODO replace this entire class with a custom 3D-2D MVT, or doc how it was ported from Java
+//TODO draw a picture of the model space
 
 //TODO where is the model origin?
 //TODO   model x=0 appears to be in middle, negative to left, positive to right
@@ -81,12 +82,11 @@ define( require => {
       return new Vector3( x, y, z );
     }
 
-    //TODO model or view coordinates?
     /**
      * Gets the ground position at specified x and z coordinates.
      * @param {number} xModel
      * @param {number} zModel
-     * @returns {Vector3D} ground position, in model coordinates
+     * @returns {Vector3} ground position, in model coordinates
      * @public
      */
     getGroundPoint( xModel, zModel ) {
@@ -94,7 +94,6 @@ define( require => {
     }
 
     //TODO xModel is unused
-    //TODO model or view coordinates?
     /**
      * Gets the ground height at specified x and z coordinates.
      * @param {number} xModel
@@ -106,33 +105,30 @@ define( require => {
       return ( zModel - Landscape.FARPLANE ) * Landscape.VERTICAL_RISE / ( Landscape.FARPLANE - Landscape.NEARPLANE );
     }
 
-    //TODO model or view coordinates?
     /**
      * Gets the maximum x value for a particular depth. This varies on depth, since the bunnies are (in 3D)
      * laid out on a trapezoidal field.
-     * @param z - the depth
-     * @returns {number}
+     * @param zModel
+     * @returns {number} maximum x, in model coordinates
      * @public
      */
-    getMaximumX( z ) {
-      return z * Landscape.SIZE.width * 0.5 / this.getFactor();
+    getMaximumX( zModel ) {
+      return zModel * Landscape.SIZE.width * 0.5 / this.getFactor();
     }
 
-    //TODO why is minX = -maxX ?
     /**
-     * Gets the minimum x value for a particular depth. This varies on depth, since the bunnies are (in 3D)
-     * laid out on a trapezoidal field.
-     * @param z - the depth
-     * @returns {number}
+     * Gets the minimum x value for a particular depth. Since x=0 is in the center, xMin === -xMax.
+     * @param zModel
+     * @returns {number} minimum x, in model coordinates
      * @public
      */
-    getMinimumX( z ) {
-      return -this.getMaximumX( z );
+    getMinimumX( zModel ) {
+      return -this.getMaximumX( zModel );
     }
 
     //TODO what is this?
     //TODO model or view coordinates?
-    //TODO why isn't this a constant?
+    //TODO this should be a constant
     /**
      * Common scaling factor
      * @returns {number}
@@ -145,7 +141,7 @@ define( require => {
     /**
      * Given a view y value, return the model z value where the ground has that y height.
      * @param {number} yView
-     * @returns {number} z in model coordinates
+     * @returns {number} z, in model coordinates
      * @public
      */
     landscapeYToZ( yView ) {
@@ -233,15 +229,17 @@ define( require => {
   // Y coordinate of the horizon, in view coordinates, where the 3D bunny positions would appear if infinitely far away.
   Landscape.HORIZON = NaturalSelectionConstants.ENVIRONMENT_DISPLAY_HORIZON_Y;
 
-  //TODO what coordinate and frame?
+  //TODO what coordinate frame? relative to?
+  //TODO what happens for z values smaller than this?
   // This is as close as bunnies can get to the "camera". Essentially the bottom and front of the ground
   Landscape.NEARPLANE = 150;
 
-  //TODO what coordinate and frame?
+  //TODO what coordinate frame? relative to?
+  //TODO what happens for z values larger than this?
   // The z distance of the horizon from the "camera"
   Landscape.FARPLANE = 300;
 
-  //TODO what frame?
+  //TODO what coordinate frame?
   //TODO does "from the front to the back" mean from NEARPLANE to FARPLANE, from camera to FARPLANE, ...?
   // Total vertical (y) rise of the ground plane from the front to the back.
   Landscape.VERTICAL_RISE = 100;
