@@ -41,6 +41,7 @@ define( require => {
 
       // @public
       this.landscape = new Landscape();
+      phet.naturalSelection.landscape = this.landscape;//XXX TODO delete this
 
       // @public the abiotic (physical, rather than biological) environment
       this.environmentProperty = new EnumerationProperty( Environments, Environments.EQUATOR, {
