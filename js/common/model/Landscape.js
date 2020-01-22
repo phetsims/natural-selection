@@ -1,7 +1,5 @@
 // Copyright 2020, University of Colorado Boulder
 
-//TODO draw a picture of the model space, for the next person
-
 /**
  * Model-view transform for the 'environment', the place where bunnies, wolves, food, etc. appear.
  * The ground is a trapezoid that rises with constant slope as distance from the 'camera' increases.
@@ -13,7 +11,10 @@
  * y=0 is at the horizon, negative down, positive up
  * z=0 is at the camera, positive into the screen
  *
+ * TODO draw an ASCII picture of the model space
+ *
  * @author Chris Malley (PixelZoom, Inc.)
+ * @author Jonathan Olson (Landscape.java, from which this was adapted)
  */
 define( require => {
   'use strict';
