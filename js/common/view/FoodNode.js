@@ -17,10 +17,10 @@ define( require => {
 
     /**
      * @param {Food} food
-     * @param {Landscape} landscape
+     * @param {EnvironmentModelViewTransform} modelViewTransform
      * @param {Object} [options]
      */
-    constructor( food, landscape, options ) {
+    constructor( food, modelViewTransform, options ) {
 
       options = options || {};
 
@@ -33,10 +33,10 @@ define( require => {
 
       super( options );
 
-      const scale = landscape.getViewScale( food.position.z );
+      const scale = modelViewTransform.getViewScale( food.position.z );
       this.setScaleMagnitude( scale );
 
-      const viewPosition = landscape.modelToViewPosition( food.position );
+      const viewPosition = modelViewTransform.modelToViewPosition( food.position );
       this.centerX = viewPosition.x;
       this.bottom = viewPosition.y;
 
