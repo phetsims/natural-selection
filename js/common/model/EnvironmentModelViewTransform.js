@@ -149,8 +149,12 @@ define( require => {
     getGroundY( zModel ) {
       assert && assert( zModel >= this.zNearModel && zModel <= this.zFarModel, `invalid zModel: ${zModel}` );
 
-      //TODO what is this computation?
-      return ( zModel - this.zFarModel ) * this.riseModel / ( this.zFarModel - this.zNearModel );
+      // The slope is constant between near and far planes, so compute the scale accordingly.
+      // Flip the sign because the rise is from near to far, and y = 0 is at the far plane, so all ground positions
+      // will have y <= 0.
+      const scale = -( this.zFarModel - zModel ) / ( this.zFarModel - this.zNearModel );
+
+      return scale * this.riseModel;
     }
 
     /**
