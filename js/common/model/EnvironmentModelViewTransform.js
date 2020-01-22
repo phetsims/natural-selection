@@ -101,8 +101,9 @@ define( require => {
       this.riseModel = 100;
 
       //TODO I don't understand this
-      // @private
-      this.scaleFactor = ( this.viewSize.height - this.yHorizonView ) * this.zNearModel / this.riseModel;
+      // @private common scaling factor used to convert x and y between model and view
+      // Multiply for model-to-view, divide for view-to-model.
+      this.scaleFactor = this.zNearModel * ( this.viewSize.height - this.yHorizonView ) / this.riseModel;
     }
 
     /**
