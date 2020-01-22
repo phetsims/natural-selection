@@ -6,7 +6,7 @@
  *
  * The ground is a trapezoid that rises with constant slope as distance from the 'camera' increases.
  * zNearModel and zFarModel define the front and back of the trapezoid, and methods related to the ground
- * are well-behaved only between zNearModel and zFarModel.
+ * are well-behaved only for z between zNearModel and zFarModel.
  *
  * Model origin and axes:
  * x = 0 is in the middle, positive right
