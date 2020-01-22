@@ -1,22 +1,57 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * EnvironmentModelViewTransform is the model-view transform for the 'environment', the place where bunnies, wolves,
+ * EnvironmentModelViewTransform is the model-view transform for the 'environment', the space where bunnies, wolves,
  * food, etc. appear. The model is 3D, the view is 2D, so this deals with the 2D projection of a 3D space.
  *
  * The ground is a trapezoid that rises with constant slope as distance from the 'camera' increases.
- * zNearModel and zFarModel define the from an back of the trapezoid, and methods are generally well-behaved
- * only between zNearModel and zFarModel.
+ * zNearModel and zFarModel define the front and back of the trapezoid, and methods related to the ground
+ * are well-behaved only between zNearModel and zFarModel.
  *
  * Model origin and axes:
- * x=0 is in the middle, negative left, positive right
- * y=0 is at the horizon, negative down, positive up
- * z=0 is at the camera, positive into the screen
+ * x = 0 is in the middle, positive right
+ * y = 0 is at the horizon, positive up
+ * z = 0 is at the camera, positive into the screen
  *
- * TODO draw an ASCII picture of the model space
+ * View origin and axes are typical scenery:
+ * x = 0 at upper-left, positive right
+ * y = 0 at upper-left, positive down
+ *
+ * Here are some diagrams (not to scale) that illustrate the 3D model space:
+ *
+ * Top view:
+ *
+ *  xMin                 xMax
+ *    \                  /
+ *  ___\________________/_______ z = zFarModel (horizon)
+ *      \    ground    /
+ *       \ trapezoid  /
+ *        \          /
+ *  _______\________/___________ z = zNearModel (bottom of view)
+ *          \      /
+ *           \    /
+ *            \  /
+ *  ___________\/_______________ z = 0 (camera)
+ *            x=0
+ *
+ * Side view:
+ *
+ *     camera
+ *      z=0    zNearModel  zFarModel
+ *       |         |        |
+ *    ___|_________|________|_____  y = 0 (horizon)
+ *       |         |       /|
+ *       |         |      / |
+ *       |         |     /  |
+ *       |         |    /   |
+ *       |         |   /    |
+ *       |         |  /     |
+ *       |         | /      |
+ *    ___|_________|/_______|_____ y = -riseModel (bottom of view)
+ *       |         |        |
  *
  * @author Chris Malley (PixelZoom, Inc.)
- * @author Jonathan Olson (EnvironmentModelViewTransform.java, from which this was adapted)
+ * @author Jonathan Olson (Landscape.java, from which this was adapted)
  */
 define( require => {
   'use strict';
@@ -59,7 +94,7 @@ define( require => {
      * @returns {Vector3}
      * @public
      */
-    getRandomGroundPosition() {
+     getRandomGroundPosition() {
 
       //TODO this might be moving the distribution closer to NEARPLANE, so we have more things closer to camera
       //TODO what is this computation? why isn't this just random z between NEARPLANE and FARPLANE?
