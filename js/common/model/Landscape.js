@@ -1,16 +1,17 @@
 // Copyright 2020, University of Colorado Boulder
 
 //TODO scaling aspect of this is unnecessary in JS version
-//TODO most of this is not well-behaved above the horizon
 //TODO draw a picture of the model space, for the next person
+//TODO methods that refer to 'ground' are not well-behaved for z < NEARPLANE and z > FARPLANE
 
 //TODO where is the model origin?
-//TODO   model x=0 is in the middle, negative to left, positive to right
-//TODO   model y=0 is at the horizon, negative closer to the camera
-//TODO   model z=0 is at the camera
-//TODO (0,-RISE,NEARPLANE) = (0,-100,150) is at bottom center of viewport, xMax = ~179
+//TODO   x=0 is in the middle, negative left, positive right
+//TODO   y=0 is at the horizon, negative down, positive up
+//TODO   z=0 is at the camera, positive into the screen
+
+//TODO (0, -RISE, NEARPLANE) = (0,-100,150) is at bottom center of viewport, xMax = ~179
 //TODO (0, 0, FARPLANE) = (0, 0, 300) is at center of horizon, xMax = ~358
-//TODO (0, 158, 538) is at top-center of viewport, xMax = ~642 -- above horizon things seem wrong
+//TODO (0, 158, 538) is at top-center of viewport, xMax = ~642
 
 /**
  * Represents both a landscape itself (ground plane), but also the coordinates and transformations from this 3D
@@ -72,13 +73,12 @@ define( require => {
      */
     getRandomGroundPosition() {
 
-      //TODO what is this computation?
+      //TODO what is this computation? why isn't this just random z between NEARPLANE and FARPLANE?
       // randomly sample the trapezoid in the z direction
       const z = Math.sqrt( Landscape.NEARPLANE * Landscape.NEARPLANE +
-                           phet.joist.random() *
-                           ( Landscape.FARPLANE * Landscape.FARPLANE - Landscape.NEARPLANE * Landscape.NEARPLANE ) );
+                           phet.joist.random.nextDouble() * ( Landscape.FARPLANE * Landscape.FARPLANE - Landscape.NEARPLANE * Landscape.NEARPLANE ) );
 
-      const x = this.getMaximumX( z ) * ( phet.joist.random() * 2 - 1 );
+      const x = this.getMaximumX( z ) * ( phet.joist.random.nextDouble() * 2 - 1 );
       const y = this.getGroundY( x, z );
 
       return new Vector3( x, y, z );
@@ -221,9 +221,8 @@ define( require => {
       return distanceView * zModel / this.getFactor();
     }
 
-    //TODO this was copied from Java BunnyNode.rescale and Wolf.wolfScale, but was not used for food, see
-    // ShrubNode.rescale, TreeNode.rescale
-    //TODO 0.25 is the scale at NEARPLANE
+    //TODO this was copied from Java BunnyNode.rescale and Wolf.wolfScale, but was not used for food, see ShrubNode.rescale, TreeNode.rescale
+    //TODO factor out 0.25, which is the scale at NEARPLANE
     //TODO Infinity at zModel = 0 ??
     /**
      * Gets the view scaling factor that corresponds to model z position.
