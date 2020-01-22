@@ -9,9 +9,15 @@ define( require => {
   'use strict';
 
   // modules
+  const Circle = require( 'SCENERY/nodes/Circle' );
+  const Image = require( 'SCENERY/nodes/Image' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Text = require( 'SCENERY/nodes/Text' );
+
+  // constants
+  const SCALE = 0.5; // scale applied in addition to modelViewTransform scale
 
   class FoodNode extends Node {
 
@@ -24,21 +30,44 @@ define( require => {
 
       options = options || {};
 
-      //TODO need PNG files for food
-      const toughFoodNode = new Rectangle( 0, 0, 50, 50, { fill: 'red' } );
-      const tenderFoodNode = new Rectangle( 0, 0, 50, 50, { fill: 'yellow' } );
+      const toughFoodNode = new Image( food.toughImage, {
+        centerX: 0,
+        bottom: 0
+      } );
+
+      const tenderFoodNode = new Image( food.tenderImage, {
+        centerX: toughFoodNode.centerX,
+        bottom: toughFoodNode.bottom
+      } );
 
       assert && assert( !options.children, 'FoodNode sets children' );
       options.children = [ toughFoodNode, tenderFoodNode ];
 
+      if ( phet.chipper.queryParameters.dev ) {
+
+        // Red dot at the origin
+        const originNode = new Circle( 4, {
+          fill: 'red'
+        } );
+
+        // Show the label corresponding to the specification in https://github.com/phetsims/natural-selection/issues/17.
+        const debugLabelNode = new Text( food.debugLabel, {
+          font: new PhetFont( 32 ),
+          fill: 'black',
+          centerX: toughFoodNode.centerX,
+          top: toughFoodNode.bottom + 5
+        } );
+
+        options.children.push( originNode );
+        options.children.push( debugLabelNode );
+      }
+
       super( options );
 
-      const scale = modelViewTransform.getViewScale( food.position.z );
+      const scale = SCALE * modelViewTransform.getViewScale( food.position.z );
       this.setScaleMagnitude( scale );
 
-      const viewPosition = modelViewTransform.modelToViewPosition( food.position );
-      this.centerX = viewPosition.x;
-      this.bottom = viewPosition.y;
+      this.translation = modelViewTransform.modelToViewPosition( food.position );
 
       // Hide food that doesn't exist
       food.existsProperty.link( exists => {

@@ -79,7 +79,8 @@ define( require => {
   const Vector3 = require( 'DOT/Vector3' );
 
   // constants
-  const NEAR_SCALE = 0.25; // scale at zNearModel
+  const NEAR_SCALE = 1; // scale at zNearModel
+  assert && assert( NEAR_SCALE > 0 && NEAR_SCALE <= 1, `invalid NEAR_SCALE: ${NEAR_SCALE}` );
 
   class EnvironmentModelViewTransform {
 

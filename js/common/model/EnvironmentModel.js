@@ -22,6 +22,14 @@ define( require => {
   const ToughFood = require( 'NATURAL_SELECTION/common/model/ToughFood' );
   const Wolves = require( 'NATURAL_SELECTION/common/model/Wolves' );
 
+  // images
+  const tenderFoodAImage = require( 'image!NATURAL_SELECTION/tenderFoodA' );
+  const tenderFoodBImage = require( 'image!NATURAL_SELECTION/tenderFoodB' );
+  const tenderFoodCImage = require( 'image!NATURAL_SELECTION/tenderFoodC' );
+  const toughFoodAImage = require( 'image!NATURAL_SELECTION/toughFoodA' );
+  const toughFoodBImage = require( 'image!NATURAL_SELECTION/toughFoodB' );
+  const toughFoodCImage = require( 'image!NATURAL_SELECTION/toughFoodC' );
+
   class EnvironmentModel extends PhetioObject {
 
     /**
@@ -48,9 +56,32 @@ define( require => {
       } );
 
       // @public {Food[]}
+      // See https://github.com/phetsims/natural-selection/issues/17 for specification of positions.
       this.food = [
-        new Food( { position: this.modelViewTransform.viewToModelGroundPosition( this.modelViewTransform.viewSize.width / 4, this.modelViewTransform.yHorizonView ) } ),
-        new Food( { position: this.modelViewTransform.viewToModelGroundPosition( this.modelViewTransform.viewSize.width / 4, this.modelViewTransform.viewSize.height ) } )
+
+        // Food 'A'
+        new Food( 'A1', toughFoodAImage, tenderFoodAImage, {
+          position: this.modelViewTransform.getGroundPosition( -75, 200 )
+        } ),
+        new Food( 'A2', toughFoodAImage, tenderFoodAImage, {
+          position: this.modelViewTransform.getGroundPosition( 155, 160 )
+        } ),
+
+        // Food 'B'
+        new Food( 'B1', toughFoodBImage, tenderFoodBImage, {
+          position: this.modelViewTransform.getGroundPosition( -155, 160 )
+        } ),
+        new Food( 'B2', toughFoodBImage, tenderFoodBImage, {
+          position: this.modelViewTransform.getGroundPosition( 200, 250 )
+        } ),
+
+        // Food 'C'
+        new Food( 'C1', toughFoodCImage, tenderFoodCImage, {
+          position: this.modelViewTransform.getGroundPosition( 75, 180 )
+        } ),
+        new Food( 'C2', toughFoodCImage, tenderFoodCImage, {
+          position: this.modelViewTransform.getGroundPosition( -180, 270 )
+        } )
       ];
 
       // @public (read-only) {Bunny[]}
@@ -62,8 +93,8 @@ define( require => {
 
       // @public (read-only) the biotic (biological, rather than physical) environmental factors
       this.wolves = new Wolves( tandem.createTandem( 'wolves' ) );
-      this.toughFood = new ToughFood( tandem.createTandem( 'toughFood' ) );
-      this.limitedFood = new LimitedFood( tandem.createTandem( 'limitedFood' ) );
+      this.toughFood = new ToughFood( this.food, tandem.createTandem( 'toughFood' ) );
+      this.limitedFood = new LimitedFood( this.food, tandem.createTandem( 'limitedFood' ) );
 
       // @public whether any environmental factor is enabled
       this.environmentalFactorEnabledProperty = new DerivedProperty(

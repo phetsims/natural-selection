@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
-//TODO temporary model of one item of food
 /**
+ * Food is the model of one item of food.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -17,15 +17,23 @@ define( require => {
   class Food {
 
     /**
+     * @param {string} debugLabel
+     * @param {HTMLImageElement} toughImage
+     * @param {HTMLImageElement} tenderImage
      * @param {Object} [options]
      */
-    constructor( options ) {
+    constructor( debugLabel, toughImage, tenderImage, options ) {
 
       options = merge( {
         position: Vector3.ZERO,
         exists: true,
         isTough: false
       }, options );
+
+      // @public (read-only)
+      this.debugLabel = debugLabel;
+      this.toughImage = toughImage;
+      this.tenderImage = tenderImage;
 
       // @public (read-only)
       this.position = options.position;

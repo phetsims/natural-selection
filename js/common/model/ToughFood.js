@@ -14,11 +14,17 @@ define( require => {
   class ToughFood extends EnvironmentalFactor {
 
     /**
+     * @param {Food[]} food
      * @param {Tandem} tandem
      */
-    constructor( tandem ) {
+    constructor( food, tandem ) {
       super( tandem );
-      //TODO
+
+      this.enabledProperty.link( enabled => {
+        for ( let i = 0; i < food.length; i++ ) {
+          food[ i ].isToughProperty.value = enabled;
+        }
+      } );
     }
   }
 
