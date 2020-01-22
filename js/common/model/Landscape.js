@@ -208,7 +208,7 @@ define( require => {
       );
     }
 
-    //TODO I don't understand this, what is a 'view distance'?
+    //TODO I don't understand this, what is a 'view distance'? Is it an x distance?
     //TODO rename to viewToModelDistance
     /**
      * Turns a view distance into a model distance at a particular model z (depth).
