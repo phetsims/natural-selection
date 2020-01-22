@@ -14,6 +14,7 @@ define( require => {
   const EnvironmentRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/EnvironmentRadioButtonGroup' );
   const FoodNode = require( 'NATURAL_SELECTION/common/view/FoodNode' );
   const GenerationClockNode = require( 'NATURAL_SELECTION/common/view/GenerationClockNode' );
+  const Landscape = require( 'NATURAL_SELECTION/common/model/Landscape' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
@@ -34,24 +35,24 @@ define( require => {
     constructor( environmentModel, options ) {
 
       options = merge( {
-        viewportSize: NaturalSelectionConstants.ENVIRONMENT_DISPLAY_SIZE,
-        viewportHorizonY: NaturalSelectionConstants.ENVIRONMENT_DISPLAY_HORIZON_Y,
+        size: Landscape.SIZE,
+        horizonY: Landscape.HORIZON,
 
         // phet-io
         tandem: Tandem.REQUIRED
       }, options );
 
-      const backgroundNode = new EnvironmentBackgroundNode( environmentModel.environmentProperty,
-        options.viewportSize, options.viewportHorizonY );
+      const backgroundNode = new EnvironmentBackgroundNode( environmentModel.environmentProperty, options.size,
+        options.horizonY );
 
       // Everything in the world, clipped to the viewport
       const worldContents = new Node( {
         children: [ backgroundNode ],
-        clipArea: Shape.rect( 0, 0, options.viewportSize.width, options.viewportSize.height )
+        clipArea: Shape.rect( 0, 0, options.size.width, options.size.height )
       } );
 
       // Frame around the viewport, to provide a nice crisp border, and for layout of UI components.
-      const frameNode = new Rectangle( 0, 0, options.viewportSize.width, options.viewportSize.height, {
+      const frameNode = new Rectangle( 0, 0, options.size.width, options.size.height, {
         stroke: NaturalSelectionColors.PANEL_STROKE
       } );
 

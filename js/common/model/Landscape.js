@@ -3,7 +3,6 @@
 //TODO scaling aspect of this is unnecessary in JS version
 //TODO most of this is not well-behaved above the horizon
 //TODO draw a picture of the model space, for the next person
-//TODO move NaturalSelectionConstants.ENVIRONMENT_DISPLAY_SIZE and ENVIRONMENT_DISPLAY_HORIZON_Y into here
 
 //TODO where is the model origin?
 //TODO   model x=0 is in the middle, negative to left, positive to right
@@ -28,9 +27,9 @@ define( require => {
   'use strict';
 
   // modules
+  const Dimension2 = require( 'DOT/Dimension2' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Vector2 = require( 'DOT/Vector2' );
   const Vector3 = require( 'DOT/Vector3' );
 
@@ -85,6 +84,7 @@ define( require => {
       return new Vector3( x, y, z );
     }
 
+    //TODO this only returns a ground position if z is between NEARPLANE and FARPLANE
     /**
      * Gets the ground position at specified x and z coordinates.
      * @param {number} xModel
@@ -245,11 +245,12 @@ define( require => {
   //TODO can delete 'regardless of the dimensions of the viewing window' since we won't be resizing the viewport
   // Static "landscape" size in view coordinates. Bunny (and other sprite) 3D coordinates are contained within this
   // coordinate system, regardless of the dimensions of the viewing window.
-  Landscape.SIZE = NaturalSelectionConstants.ENVIRONMENT_DISPLAY_SIZE;
+  Landscape.SIZE = new Dimension2( 770, 310 ); // same size as background images
 
   //TODO 'if infinitely far away' is not handled correctly. And z > FAR_PLANE will put the bunny in the sky.
   // Y coordinate of the horizon, in view coordinates, where the 3D bunny positions would appear if infinitely far away.
-  Landscape.HORIZON = NaturalSelectionConstants.ENVIRONMENT_DISPLAY_HORIZON_Y;
+  // Determined empirically from background PNG files.
+  Landscape.HORIZON = 95;
 
   //TODO what happens for z values smaller than this?
   // The z distance of the bottom and front of the ground, in model coordinates.

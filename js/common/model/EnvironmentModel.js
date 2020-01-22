@@ -18,7 +18,6 @@ define( require => {
   const LimitedFood = require( 'NATURAL_SELECTION/common/model/LimitedFood' );
   const Landscape = require( 'NATURAL_SELECTION/common/model/Landscape' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const PhetioObject = require( 'TANDEM/PhetioObject' );
   const ToughFood = require( 'NATURAL_SELECTION/common/model/ToughFood' );
   const Wolves = require( 'NATURAL_SELECTION/common/model/Wolves' );
@@ -49,10 +48,10 @@ define( require => {
       } );
 
       // @public {Food[]}
-      const foodX = NaturalSelectionConstants.ENVIRONMENT_DISPLAY_SIZE.width / 4;
+      const foodX = Landscape.SIZE.width / 4;
       this.food = [
         new Food( { position: this.landscape.landscapeToModel( foodX, Landscape.HORIZON ) } ),
-        new Food( { position: this.landscape.landscapeToModel( foodX, NaturalSelectionConstants.ENVIRONMENT_DISPLAY_SIZE.height ) } )
+        new Food( { position: this.landscape.landscapeToModel( foodX, Landscape.SIZE.height ) } )
       ];
 
       // @public (read-only) {Bunny[]}
