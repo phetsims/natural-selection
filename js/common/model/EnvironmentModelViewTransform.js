@@ -21,50 +21,50 @@
  *
  * Model, top view:
  *
- *  xMin                 xMax
- *    \                  /
- *  ___\________________/_______ z = zFarModel (horizon)
- *      \    ground    /
- *       \ trapezoid  /
- *        \          /
- *  _______\________/___________ z = zNearModel (bottom of view)
- *          \      /
- *           \    /
- *            \  /
- *  ___________\/_______________ z = 0 (camera)
- *            x=0
+ *       xMin (-xMax)         xMax
+ *          \                  /
+ *        ___\________________/_______ z = zFarModel (horizon)
+ *            \    ground    /
+ *             \ trapezoid  /
+ *              \          /
+ *        _______\________/___________ z = zNearModel (bottom of view)
+ *                \      /
+ *                 \    /
+ *                  \  /
+ *        ___________\/_______________ z = 0 (camera)
+ *                  x=0
  *
  * Model, side view:
  *
- *     camera
- *      z=0    zNearModel  zFarModel
- *       |         |        |
- *    ___|_________|________|_____  y = 0 (horizon)
- *       |         |       /|
- *       |         |      / |
- *       |         |     /  |
- *       |         |    /   |
- *       |         |   /    |
- *       |         |  /     |
- *       |         | /      |
- *    ___|_________|/_______|_____ y = -riseModel (bottom of view)
- *       |         |        |
+ *         camera
+ *          z=0    zNearModel  zFarModel
+ *           |         |        |
+ *        ___|_________|________|_____  y = 0 (horizon)
+ *           |         |       /|
+ *           |         |      / |
+ *           |         |     /  |
+ *           |         |    /   |
+ *           |         |   /    |
+ *           |         |  /     |
+ *           |         | /      |
+ *        ___|_________|/_______|_____ y = -riseModel (bottom of view)
+ *           |         |        |
  *
  * View, 2D projection:
  *
- *  (0,0)
- *   o----------------------------------------------------+
- *   |                                                    |
- *   |                  (0, 0, zFarModel )                |
- *   |-------------------------o--------------------------o (viewSize.width, yHorizonView )
- *   |                                                    |
- *   |                                                    |
- *   |                                                    |
- *   |                                                    |
- *   |                                                    |
- *   |             (0, -riseModel, zNearModel )           |
- *   +-------------------------o--------------------------o
- *                                       (viewSize.width, viewSize.height)
+ *      (0,0)
+ *        o----------------------------------------------------+
+ *        |                                                    |
+ *        |                  (0, 0, zFarModel )                |
+ *        |-------------------------o--------------------------o (viewSize.width, yHorizonView )
+ *        |                                                    |
+ *        |                                                    |
+ *        |                                                    |
+ *        |                                                    |
+ *        |                                                    |
+ *        |             (0, -riseModel, zNearModel )           |
+ *        +-------------------------o--------------------------o
+ *                                              (viewSize.width, viewSize.height)
  *
  * @author Chris Malley (PixelZoom, Inc.)
  * @author Jonathan Olson (Landscape.java, from which this was adapted)
