@@ -73,8 +73,11 @@ define( require => {
      */
     getRandomGroundPosition() {
 
+      //TODO what is this computation?
       // randomly sample the trapezoid in the z direction
-      const z = Math.sqrt( Landscape.NEARPLANE * Landscape.NEARPLANE + phet.joist.random() * ( Landscape.FARPLANE * Landscape.FARPLANE - Landscape.NEARPLANE * Landscape.NEARPLANE ) );
+      const z = Math.sqrt( Landscape.NEARPLANE * Landscape.NEARPLANE +
+                           phet.joist.random() *
+                           ( Landscape.FARPLANE * Landscape.FARPLANE - Landscape.NEARPLANE * Landscape.NEARPLANE ) );
 
       const x = this.getMaximumX( z ) * ( phet.joist.random() * 2 - 1 );
       const y = this.getGroundY( x, z );
@@ -105,6 +108,8 @@ define( require => {
      * @public
      */
     getGroundY( xModel, zModel ) {
+
+      //TODO what is this computation?
       return ( zModel - Landscape.FARPLANE ) * Landscape.VERTICAL_RISE / ( Landscape.FARPLANE - Landscape.NEARPLANE );
     }
 
@@ -151,6 +156,8 @@ define( require => {
      * @public
      */
     landscapeYToZ( yView ) {
+
+      //TODO what is this computation?
       return ( Landscape.NEARPLANE * Landscape.FARPLANE * ( Landscape.HORIZON - Landscape.SIZE.height ) ) /
              ( Landscape.FARPLANE * ( Landscape.HORIZON - yView ) + Landscape.NEARPLANE * ( yView - Landscape.SIZE.height ) );
     }
