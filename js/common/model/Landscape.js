@@ -1,28 +1,19 @@
 // Copyright 2020, University of Colorado Boulder
 
-//TODO scaling aspect of this is unnecessary in JS version
 //TODO draw a picture of the model space, for the next person
-//TODO methods that refer to 'ground' are not well-behaved for z < NEARPLANE and z > FARPLANE
-
-//TODO where is the model origin?
-//TODO   x=0 is in the middle, negative left, positive right
-//TODO   y=0 is at the horizon, negative down, positive up
-//TODO   z=0 is at the camera, positive into the screen
-
-//TODO (0, -RISE, NEARPLANE) = (0,-100,150) is at bottom center of viewport, xMax = ~179
-//TODO (0, 0, FARPLANE) = (0, 0, 300) is at center of horizon, xMax = ~358
-//TODO (0, 158, 538) is at top-center of viewport, xMax = ~642
 
 /**
- * Represents both a landscape itself (ground plane), but also the coordinates and transformations from this 3D
- * system to and from view coordinates. View coordinates are scaled so that the "screen" coordinates are independent
- * of how the view is resized.
+ * Model-view transform for the 'environment', the place where bunnies, wolves, food, etc. appear.
+ * The ground is a trapezoid that rises with constant slope as distance from the 'camera' increases.
+ * zNearModel and zFarModel define the from an back of the trapedoid, and methods are generally well-behaved
+ * only between zNearModel and zFarModel.
  *
- * The actual ground is a plane, angled so that it looks like it is a hillside whose elevation increases from
- * foreground to background.
+ * Model origin and axes:
+ * x=0 is in the middle, negative left, positive right
+ * y=0 is at the horizon, negative down, positive up
+ * z=0 is at the camera, positive into the screen
  *
- * @author Jonathan Olson - Java version
- * @author Chris Malley (PixelZoom, Inc.) - JavaScript version
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( require => {
   'use strict';
