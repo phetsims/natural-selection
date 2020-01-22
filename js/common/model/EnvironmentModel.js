@@ -48,10 +48,9 @@ define( require => {
       } );
 
       // @public {Food[]}
-      const foodX = Landscape.SIZE.width / 4;
       this.food = [
-        new Food( { position: this.landscape.landscapeToModel( foodX, Landscape.HORIZON ) } ),
-        new Food( { position: this.landscape.landscapeToModel( foodX, Landscape.SIZE.height ) } )
+        new Food( { position: this.landscape.landscapeToModel( Landscape.SIZE.width / 4, Landscape.HORIZON ) } ),
+        new Food( { position: this.landscape.landscapeToModel( Landscape.SIZE.width / 4, Landscape.SIZE.height ) } )
       ];
 
       // @public (read-only) {Bunny[]}
