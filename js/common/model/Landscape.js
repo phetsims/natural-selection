@@ -2,7 +2,6 @@
 
 //TODO scaling aspect of this is unnecessary in JS version
 //TODO most of this is not well-behaved above the horizon
-//TODO replace this entire class with a custom 3D-2D MVT, or doc how it was ported from Java
 //TODO draw a picture of the model space, for the next person
 //TODO move NaturalSelectionConstants.ENVIRONMENT_DISPLAY_SIZE and ENVIRONMENT_DISPLAY_HORIZON_Y into here
 
