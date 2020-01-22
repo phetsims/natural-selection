@@ -17,9 +17,9 @@
  * x = 0 at upper-left, positive right
  * y = 0 at upper-left, positive down
  *
- * Here are some diagrams (not to scale) that illustrate the 3D model space:
+ * Here are some diagrams (not to scale) that illustrate the model (3D) and view (2D) spaces:
  *
- * Top view:
+ * Model, top view:
  *
  *  xMin                 xMax
  *    \                  /
@@ -34,7 +34,7 @@
  *  ___________\/_______________ z = 0 (camera)
  *            x=0
  *
- * Side view:
+ * Model, side view:
  *
  *     camera
  *      z=0    zNearModel  zFarModel
@@ -49,6 +49,22 @@
  *       |         | /      |
  *    ___|_________|/_______|_____ y = -riseModel (bottom of view)
  *       |         |        |
+ *
+ * View, 2D projection:
+ *
+ *  (0,0)
+ *   o----------------------------------------------------+
+ *   |                                                    |
+ *   |                  (0, 0, zFarModel )                |
+ *   |-------------------------o--------------------------o (viewSize.width, yHorizonView )
+ *   |                                                    |
+ *   |                                                    |
+ *   |                                                    |
+ *   |                                                    |
+ *   |                                                    |
+ *   |             (0, -riseModel, zNearModel )           |
+ *   +-------------------------o--------------------------o
+ *                                       (viewSize.width, viewSize.height)
  *
  * @author Chris Malley (PixelZoom, Inc.)
  * @author Jonathan Olson (Landscape.java, from which this was adapted)
