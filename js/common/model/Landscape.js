@@ -224,7 +224,7 @@ define( require => {
     //TODO this was copied from Java BunnyNode.rescale and Wolf.wolfScale, but was not used for food, see
     // ShrubNode.rescale, TreeNode.rescale
     //TODO 0.25 is the scale at NEARPLANE
-    //TODO not well-behaved, Infinity at zModel = 0
+    //TODO Infinity at zModel = 0 ??
     /**
      * Gets the view scaling factor that corresponds to model z position.
      * @param {number} zModel
