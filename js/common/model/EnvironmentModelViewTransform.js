@@ -19,7 +19,7 @@
  *
  * Here are some diagrams (not to scale) that illustrate the model (3D) and view (2D) spaces:
  *
- * Model, top view:
+ * Model, viewed from the top:
  *
  *       xMin (-xMax)         xMax
  *          \                  /
@@ -34,7 +34,7 @@
  *        ___________\/_______________ z = 0 (camera)
  *                  x=0
  *
- * Model, side view:
+ * Model, viewed from the side:
  *
  *         camera
  *          z=0    zNearModel  zFarModel
