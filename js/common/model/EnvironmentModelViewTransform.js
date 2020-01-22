@@ -1,9 +1,11 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Model-view transform for the 'environment', the place where bunnies, wolves, food, etc. appear.
+ * EnvironmentModelViewTransform is the model-view transform for the 'environment', the place where bunnies, wolves,
+ * food, etc. appear. The model is 3D, the view is 2D, so this deals with the 2D projection of a 3D space.
+ *
  * The ground is a trapezoid that rises with constant slope as distance from the 'camera' increases.
- * zNearModel and zFarModel define the from an back of the trapedoid, and methods are generally well-behaved
+ * zNearModel and zFarModel define the from an back of the trapezoid, and methods are generally well-behaved
  * only between zNearModel and zFarModel.
  *
  * Model origin and axes:
@@ -14,7 +16,7 @@
  * TODO draw an ASCII picture of the model space
  *
  * @author Chris Malley (PixelZoom, Inc.)
- * @author Jonathan Olson (Landscape.java, from which this was adapted)
+ * @author Jonathan Olson (EnvironmentModelViewTransform.java, from which this was adapted)
  */
 define( require => {
   'use strict';
@@ -28,7 +30,7 @@ define( require => {
   // constants
   const NEAR_SCALE = 0.25; // scale at zNearModel
 
-  class Landscape {
+  class EnvironmentModelViewTransform {
 
     constructor() {
 
@@ -197,9 +199,9 @@ define( require => {
      * @public
      */
     dispose() {
-      assert && assert( false, 'Landscape does not support dispose' );
+      assert && assert( false, 'EnvironmentModelViewTransform does not support dispose' );
     }
   }
 
-  return naturalSelection.register( 'Landscape', Landscape );
+  return naturalSelection.register( 'EnvironmentModelViewTransform', EnvironmentModelViewTransform );
 } );

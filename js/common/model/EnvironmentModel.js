@@ -13,10 +13,10 @@ define( require => {
   const Bunny = require( 'NATURAL_SELECTION/common/model/Bunny' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
+  const EnvironmentModelViewTransform = require( 'NATURAL_SELECTION/common/model/EnvironmentModelViewTransform' );
   const Environments = require( 'NATURAL_SELECTION/common/model/Environments' );
   const Food = require( 'NATURAL_SELECTION/common/model/Food' );
   const LimitedFood = require( 'NATURAL_SELECTION/common/model/LimitedFood' );
-  const Landscape = require( 'NATURAL_SELECTION/common/model/Landscape' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const PhetioObject = require( 'TANDEM/PhetioObject' );
   const ToughFood = require( 'NATURAL_SELECTION/common/model/ToughFood' );
@@ -39,8 +39,8 @@ define( require => {
       this.generationClock = generationClock;
 
       // @public
-      this.landscape = new Landscape();
-      phet.naturalSelection.landscape = this.landscape;//XXX TODO delete this
+      this.modelViewTransform = new EnvironmentModelViewTransform();
+      phet.naturalSelection.modelViewTransform = this.modelViewTransform;//XXX TODO delete this
 
       // @public
       this.environmentProperty = new EnumerationProperty( Environments, Environments.EQUATOR, {
@@ -49,8 +49,8 @@ define( require => {
 
       // @public {Food[]}
       this.food = [
-        new Food( { position: this.landscape.viewToModelGroundPosition( this.landscape.viewSize.width / 4, this.landscape.yHorizonView ) } ),
-        new Food( { position: this.landscape.viewToModelGroundPosition( this.landscape.viewSize.width / 4, this.landscape.viewSize.height ) } )
+        new Food( { position: this.modelViewTransform.viewToModelGroundPosition( this.modelViewTransform.viewSize.width / 4, this.modelViewTransform.yHorizonView ) } ),
+        new Food( { position: this.modelViewTransform.viewToModelGroundPosition( this.modelViewTransform.viewSize.width / 4, this.modelViewTransform.viewSize.height ) } )
       ];
 
       // @public (read-only) {Bunny[]}

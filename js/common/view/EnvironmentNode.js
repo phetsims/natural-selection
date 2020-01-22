@@ -34,8 +34,8 @@ define( require => {
     constructor( environmentModel, options ) {
 
       options = merge( {
-        size: environmentModel.landscape.viewSize,
-        yHorizon: environmentModel.landscape.yHorizonView,
+        size: environmentModel.modelViewTransform.viewSize,
+        yHorizon: environmentModel.modelViewTransform.yHorizonView,
 
         // phet-io
         tandem: Tandem.REQUIRED
@@ -105,7 +105,7 @@ define( require => {
 
       // Add food
       for ( let i = 0; i < environmentModel.food.length; i++ ) {
-        worldContents.addChild( new FoodNode( environmentModel.food[ i ], environmentModel.landscape ) );
+        worldContents.addChild( new FoodNode( environmentModel.food[ i ], environmentModel.modelViewTransform ) );
       }
 
       // layering
