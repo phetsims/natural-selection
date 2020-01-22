@@ -91,10 +91,10 @@ define( require => {
       // @public (read-only) horizon distance from the top of the view, determined empirically from background PNG files
       this.yHorizonView = 95;
 
-      // @private z coordinate of the ground at the bottom-front of the view, nearest ground point to camera
+      // @private z coordinate of the ground at the bottom-front of the view, nearest ground point to the camera
       this.zNearModel = 150;
 
-      // @private z coordinate of the ground at the horizon, furthest ground point from camera
+      // @private z coordinate of the ground at the horizon, furthest ground point from the camera
       this.zFarModel = 300;
 
       // @private rise of the ground from zNearModel to zFarModel
@@ -115,13 +115,14 @@ define( require => {
       //TODO this might be moving the distribution closer to NEARPLANE, so we have more things closer to camera
       //TODO what is this computation? why isn't this just random z between NEARPLANE and FARPLANE?
       // randomly sample the trapezoid in the z direction
-      const z = Math.sqrt( this.zNearModel * this.zNearModel +
-                           phet.joist.random.nextDouble() * ( this.zFarModel * this.zFarModel - this.zNearModel * this.zNearModel ) );
+      const zModel = Math.sqrt( this.zNearModel * this.zNearModel +
+                                phet.joist.random.nextDouble() *
+                                ( this.zFarModel * this.zFarModel - this.zNearModel * this.zNearModel ) );
 
-      const x = this.getMaximumX( z ) * ( phet.joist.random.nextDouble() * 2 - 1 );
-      const y = this.getGroundY( z );
+      const xModel = this.getMaximumX( zModel ) * ( phet.joist.random.nextDouble() * 2 - 1 );
+      const yModel = this.getGroundY( zModel );
 
-      return new Vector3( x, y, z );
+      return new Vector3( xModel, yModel, zModel );
     }
 
     /**
