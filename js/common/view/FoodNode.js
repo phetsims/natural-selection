@@ -36,7 +36,7 @@ define( require => {
       const scale = landscape.getViewScale( food.position.z );
       this.setScaleMagnitude( scale );
 
-      const viewPosition = landscape.spriteToScreen( food.position );
+      const viewPosition = landscape.modelToViewPosition( food.position );
       this.centerX = viewPosition.x;
       this.bottom = viewPosition.y;
 

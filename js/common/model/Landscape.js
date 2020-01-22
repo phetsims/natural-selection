@@ -29,62 +29,49 @@ define( require => {
 
   // modules
   const Dimension2 = require( 'DOT/Dimension2' );
-  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const Vector2 = require( 'DOT/Vector2' );
   const Vector3 = require( 'DOT/Vector3' );
 
   class Landscape {
 
-    /**
-     * @param {Object} [options]
-     */
-    constructor( options ) {
+    constructor() {
 
-      options = merge( {
+      // @public (read-only) size of the 2D view
+      this.viewSize = new Dimension2( 770, 310 ); // same size as background images
 
-        //TODO
-        landscapeWidth: Landscape.SIZE.width,
-        landscapeHeight: Landscape.SIZE.height
-      }, options );
+      // @public (read-only) horizon distance from the top of the view, determined empirically from background PNG files
+      this.yHorizonView = 95;
+      
+      // @private rise of the ground from zNearModel to zFarModel
+      this.riseModel = 100;
 
-      // @public {number}
-      this.landscapeWidth = options.landscapeWidth;
-      this.landscapeHeight = options.landscapeHeight;
+      // @private z coordinate of the bottom-front of the ground
+      this.zNearModel = 150;
+
+      // @private z coordinate of the horizon from the "camera"
+      this.zFarModel = 300;
     }
 
-    //TODO delete this since we're not resizing the viewport
     /**
-     * Sets the dimensions of the landscape.
-     * @param {number} landscapeWidth
-     * @param {number} landscapeHeight
-     * @public
-     */
-    setSize( landscapeWidth, landscapeHeight ) {
-      this.landscapeWidth = landscapeWidth;
-      this.landscapeHeight = landscapeHeight;
-    }
-
-    //TODO model or view coordinates?
-    /**
-     * Returns a random position on the ground. Since the ground display is similar to a trapezoid, we sample it as such.
-     * @returns {Vector3} random 3D ground position
+     * Returns a random position on the ground, in model coordinates.
+     * @returns {Vector3}
      * @public
      */
     getRandomGroundPosition() {
 
+      //TODO this might be moving the distribution closer to NEARPLANE, so we have more things closer to camera
       //TODO what is this computation? why isn't this just random z between NEARPLANE and FARPLANE?
       // randomly sample the trapezoid in the z direction
-      const z = Math.sqrt( Landscape.NEARPLANE * Landscape.NEARPLANE +
-                           phet.joist.random.nextDouble() * ( Landscape.FARPLANE * Landscape.FARPLANE - Landscape.NEARPLANE * Landscape.NEARPLANE ) );
+      const z = Math.sqrt( this.zNearModel * this.zNearModel +
+                           phet.joist.random.nextDouble() * ( this.zFarModel * this.zFarModel - this.zNearModel * this.zNearModel ) );
 
       const x = this.getMaximumX( z ) * ( phet.joist.random.nextDouble() * 2 - 1 );
-      const y = this.getGroundY( x, z );
+      const y = this.getGroundY( z );
 
       return new Vector3( x, y, z );
     }
 
-    //TODO this only returns a ground position if z is between NEARPLANE and FARPLANE
     /**
      * Gets the ground position at specified x and z coordinates.
      * @param {number} xModel
@@ -92,38 +79,33 @@ define( require => {
      * @returns {Vector3} ground position, in model coordinates
      * @public
      */
-    getGroundPoint( xModel, zModel ) {
-      return new Vector3( xModel, this.getGroundY( xModel, zModel ), zModel );
+    getGroundPosition( xModel, zModel ) {
+      assert && assert( zModel >= this.zNearModel && zModel <= this.zFarModel, `invalid zModel: ${zModel}` );
+      return new Vector3( xModel, this.getGroundY( zModel ), zModel );
     }
 
-    //TODO xModel is unused
-    //TODO for z > FARPLANE, this behaves as if ground continues past horizon and gives a position in the sky
-    //TODO for z < NEARPLANE, this behaves as if the ground continues between NEARPLANE and camera
-    //TODO so is the ground a trapedoid or a plane?
     /**
-     * Gets the ground height at specified x and z coordinates.
-     * @param {number} xModel
+     * Gets the ground y at the specified z coordinate.
      * @param {number} zModel
      * @returns {number} y, in model coordinates
      * @public
      */
-    getGroundY( xModel, zModel ) {
+    getGroundY( zModel ) {
+      assert && assert( zModel >= this.zNearModel && zModel <= this.zFarModel, `invalid zModel: ${zModel}` );
 
       //TODO what is this computation?
-      return ( zModel - Landscape.FARPLANE ) * Landscape.VERTICAL_RISE / ( Landscape.FARPLANE - Landscape.NEARPLANE );
+      return ( zModel - this.zFarModel ) * this.riseModel / ( this.zFarModel - this.zNearModel );
     }
 
-    //TODO getMaximumX( 0 ) returns 0. So is the ground really a trapedoid?
-    //TODO this is not well-behaved for z > FARPLANE
     /**
-     * Gets the maximum x value for a particular depth. This varies on depth, since the bunnies are (in 3D)
-     * laid out on a trapezoidal field.
+     * Gets the maximum x value for a particular depth. This varies based on depth, since the ground is a trapezoid.
      * @param zModel
      * @returns {number} maximum x, in model coordinates
      * @public
      */
     getMaximumX( zModel ) {
-      return zModel * Landscape.SIZE.width * 0.5 / this.getFactor();
+      assert && assert( zModel >= this.zNearModel && zModel <= this.zFarModel, `invalid zModel: ${zModel}` );
+      return zModel * this.viewSize.width * 0.5 / this.getFactor();
     }
 
     /**
@@ -144,22 +126,21 @@ define( require => {
      * @public
      */
     getFactor() {
-      return ( Landscape.SIZE.height - Landscape.HORIZON ) * Landscape.NEARPLANE / Landscape.VERTICAL_RISE;
+      return ( this.viewSize.height - this.yHorizonView ) * this.zNearModel / this.riseModel;
     }
 
-    //TODO this is not well-behaved for yView < HORIZON
-    //TODO this is not well-behaved for yView > SIZE.height, approaches 0 but never gets there
     /**
      * Given a view y value, return the model z value where the ground has that y height.
      * @param {number} yView
      * @returns {number} z, in model coordinates
      * @public
      */
-    landscapeYToZ( yView ) {
+    viewToModelZ( yView ) {
+      assert && assert( yView >= this.yHorizonView && yView <= this.viewSize.height, `invalid yView: ${yView}` );
 
       //TODO what is this computation?
-      return ( Landscape.NEARPLANE * Landscape.FARPLANE * ( Landscape.HORIZON - Landscape.SIZE.height ) ) /
-             ( Landscape.FARPLANE * ( Landscape.HORIZON - yView ) + Landscape.NEARPLANE * ( yView - Landscape.SIZE.height ) );
+      return ( this.zNearModel * this.zFarModel * ( this.yHorizonView - this.viewSize.height ) ) /
+             ( this.zFarModel * ( this.yHorizonView - yView ) + this.zNearModel * ( yView - this.viewSize.height ) );
     }
 
     /**
@@ -169,13 +150,10 @@ define( require => {
      * @returns {number} x, in model coordinates
      * @public
      */
-    landscapeXZToX( xView, zModel ) {
-      return zModel * ( xView - Landscape.SIZE.width / 2 ) / this.getFactor();
+    viewToModelX( xView, zModel ) {
+      return zModel * ( xView - this.viewSize.width / 2 ) / this.getFactor();
     }
 
-    //TODO rename to viewToModelPosition
-    //TODO not well-behaved for y < HORIZON, returns positions up in the sky
-    //TODO not well-behaved for y > SIZE.height, z approaches 0 but never gets there
     /**
      * Given view coordinates (x,y), return the ground position in model coordinates.
      * @param {number} xView
@@ -183,33 +161,30 @@ define( require => {
      * @returns {Vector3} ground position, in model coordinates
      * @public
      */
-    landscapeToModel( xView, yView ) {
-      const zModel = this.landscapeYToZ( yView );
-      const xModel = this.landscapeXZToX( xView, zModel );
-      const yModel = this.getGroundY( xModel, zModel );
+    viewToModelGroundPosition( xView, yView ) {
+      assert && assert( xView >= 0 && xView <= this.viewSize.width, `invalid xView: ${xView}` );
+      assert && assert( yView >= this.yHorizonView && yView <= this.viewSize.height, `invalid yView: ${yView}` );
+
+      const zModel = this.viewToModelZ( yView );
+      const xModel = this.viewToModelX( xView, zModel );
+      const yModel = this.getGroundY( zModel );
       return new Vector3( xModel, yModel, zModel );
     }
 
-    //TODO rename to modelToViewPosition
     /**
      * Given a 3D model position, project it into 2D view coordinates.
      * @param {Vector3 } position
      * @returns {Vector2}
      * @public
      */
-    spriteToScreen( position ) {
-      const landscapeX = ( Landscape.SIZE.width / 2 ) + ( position.x / position.z ) * this.getFactor();
-      const landscapeY = Landscape.HORIZON - ( position.y / position.z ) * this.getFactor();
-
-      //TODO scaling here can be deleted, since we're not resizing the viewport
-      return new Vector2(
-        landscapeX * this.landscapeWidth / Landscape.SIZE.width,
-        landscapeY * this.landscapeHeight / Landscape.SIZE.height
-      );
+    modelToViewPosition( position ) {
+      const xView = ( this.viewSize.width / 2 ) + ( position.x / position.z ) * this.getFactor();
+      const yView = this.yHorizonView - ( position.y / position.z ) * this.getFactor();
+      return new Vector2( xView, yView );
     }
 
     //TODO I don't understand this, what is a 'view distance'? Is it an x distance?
-    //TODO rename to viewToModelDistance
+    //TODO rename
     /**
      * Turns a view distance into a model distance at a particular model z (depth).
      * @param {number} distanceView
@@ -221,16 +196,14 @@ define( require => {
       return distanceView * zModel / this.getFactor();
     }
 
-    //TODO this was copied from Java BunnyNode.rescale and Wolf.wolfScale, but was not used for food, see ShrubNode.rescale, TreeNode.rescale
-    //TODO factor out 0.25, which is the scale at NEARPLANE
-    //TODO Infinity at zModel = 0 ??
     /**
      * Gets the view scaling factor that corresponds to model z position.
      * @param {number} zModel
      * @returns {number}
      */
     getViewScale( zModel ) {
-      return Landscape.NEARPLANE * 0.25 / zModel;
+      assert && assert( zModel > 0, `invalid zModel: ${zModel}` );
+      return this.zNearModel * 0.25 / zModel;
     }
 
     /**
@@ -240,28 +213,6 @@ define( require => {
       assert && assert( false, 'Landscape does not support dispose' );
     }
   }
-
-  //TODO can delete 'regardless of the dimensions of the viewing window' since we won't be resizing the viewport
-  // Static "landscape" size in view coordinates. Bunny (and other sprite) 3D coordinates are contained within this
-  // coordinate system, regardless of the dimensions of the viewing window.
-  Landscape.SIZE = new Dimension2( 770, 310 ); // same size as background images
-
-  //TODO 'if infinitely far away' is not handled correctly. And z > FAR_PLANE will put the bunny in the sky.
-  // Y coordinate of the horizon, in view coordinates, where the 3D bunny positions would appear if infinitely far away.
-  // Determined empirically from background PNG files.
-  Landscape.HORIZON = 95;
-
-  //TODO what happens for z values smaller than this?
-  // The z distance of the bottom and front of the ground, in model coordinates.
-  // This is as close as bunnies can get to the "camera".
-  Landscape.NEARPLANE = 150;
-
-  //TODO what happens for z values larger than this?
-  // The z distance of the horizon from the "camera", in model coordinates.
-  Landscape.FARPLANE = 300;
-
-  // Total vertical (y) rise of the ground plane from NEARPLANE to FARPLANE, in model coordinates.
-  Landscape.VERTICAL_RISE = 100;
 
   return naturalSelection.register( 'Landscape', Landscape );
 } );

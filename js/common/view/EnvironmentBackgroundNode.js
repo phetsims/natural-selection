@@ -26,10 +26,10 @@ define( require => {
     /**
      * @param {EnumerationProperty.<Environments>} environmentProperty
      * @param {Dimension2} size - dimensions of the backgrounds, in view coordinates
-     * @param {number} horizonY - y coordinate of the horizon, in view coordinates
+     * @param {number} yHorizon - y coordinate of the horizon, in view coordinates
      * @param {Object} [options]
      */
-    constructor( environmentProperty, size, horizonY, options ) {
+    constructor( environmentProperty, size, yHorizon, options ) {
 
       options = merge( {}, options );
 
@@ -48,7 +48,7 @@ define( require => {
 
       // Horizon line, for debugging. Bunnies cannot go further from the viewer than this line.
       if ( phet.chipper.queryParameters.dev ) {
-        const horizonLine = new Line( 0, horizonY, size.width, horizonY, {
+        const horizonLine = new Line( 0, yHorizon, size.width, yHorizon, {
           stroke: 'red',
           lineWidth: 1
         } );

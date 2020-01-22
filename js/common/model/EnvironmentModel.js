@@ -49,8 +49,8 @@ define( require => {
 
       // @public {Food[]}
       this.food = [
-        new Food( { position: this.landscape.landscapeToModel( Landscape.SIZE.width / 4, Landscape.HORIZON ) } ),
-        new Food( { position: this.landscape.landscapeToModel( Landscape.SIZE.width / 4, Landscape.SIZE.height ) } )
+        new Food( { position: this.landscape.viewToModelGroundPosition( this.landscape.viewSize.width / 4, this.landscape.yHorizonView ) } ),
+        new Food( { position: this.landscape.viewToModelGroundPosition( this.landscape.viewSize.width / 4, this.landscape.viewSize.height ) } )
       ];
 
       // @public (read-only) {Bunny[]}

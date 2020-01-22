@@ -14,7 +14,6 @@ define( require => {
   const EnvironmentRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/EnvironmentRadioButtonGroup' );
   const FoodNode = require( 'NATURAL_SELECTION/common/view/FoodNode' );
   const GenerationClockNode = require( 'NATURAL_SELECTION/common/view/GenerationClockNode' );
-  const Landscape = require( 'NATURAL_SELECTION/common/model/Landscape' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
@@ -35,15 +34,15 @@ define( require => {
     constructor( environmentModel, options ) {
 
       options = merge( {
-        size: Landscape.SIZE,
-        horizonY: Landscape.HORIZON,
+        size: environmentModel.landscape.viewSize,
+        yHorizon: environmentModel.landscape.yHorizonView,
 
         // phet-io
         tandem: Tandem.REQUIRED
       }, options );
 
       const backgroundNode = new EnvironmentBackgroundNode( environmentModel.environmentProperty, options.size,
-        options.horizonY );
+        options.yHorizon );
 
       // Everything in the world, clipped to the viewport
       const worldContents = new Node( {
