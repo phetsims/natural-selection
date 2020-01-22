@@ -25,24 +25,31 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
   const Vector3 = require( 'DOT/Vector3' );
 
+  // constants
+  const NEAR_SCALE = 0.25; // scale at zNearModel
+
   class Landscape {
 
     constructor() {
 
-      // @public (read-only) size of the 2D view
-      this.viewSize = new Dimension2( 770, 310 ); // same size as background images
+      // @public (read-only) size of the 2D view, same size as background PNG files
+      this.viewSize = new Dimension2( 770, 310 );
 
       // @public (read-only) horizon distance from the top of the view, determined empirically from background PNG files
       this.yHorizonView = 95;
-      
+
+      // @private z coordinate of the ground at the bottom-front of the view, nearest ground point to camera
+      this.zNearModel = 150;
+
+      // @private z coordinate of the ground at the horizon, furthest ground point from camera
+      this.zFarModel = 300;
+
       // @private rise of the ground from zNearModel to zFarModel
       this.riseModel = 100;
 
-      // @private z coordinate of the bottom-front of the ground
-      this.zNearModel = 150;
-
-      // @private z coordinate of the horizon from the "camera"
-      this.zFarModel = 300;
+      //TODO I don't understand this
+      // @private
+      this.scaleFactor = ( this.viewSize.height - this.yHorizonView ) * this.zNearModel / this.riseModel;
     }
 
     /**
@@ -97,7 +104,7 @@ define( require => {
      */
     getMaximumX( zModel ) {
       assert && assert( zModel >= this.zNearModel && zModel <= this.zFarModel, `invalid zModel: ${zModel}` );
-      return zModel * this.viewSize.width * 0.5 / this.getFactor();
+      return zModel * this.viewSize.width * 0.5 / this.scaleFactor;
     }
 
     /**
@@ -110,15 +117,27 @@ define( require => {
       return -this.getMaximumX( zModel );
     }
 
-    //TODO what is this?
-    //TODO this should be a constant
     /**
-     * Common scaling factor
+     * Gets the view scaling factor that corresponds to model z position.
+     * @param {number} zModel
      * @returns {number}
      * @public
      */
-    getFactor() {
-      return ( this.viewSize.height - this.yHorizonView ) * this.zNearModel / this.riseModel;
+    getViewScale( zModel ) {
+      assert && assert( zModel > 0, `invalid zModel: ${zModel}` );
+      return NEAR_SCALE * this.zNearModel / zModel;
+    }
+
+    /**
+     * Given a 3D model position, project it into 2D view coordinates.
+     * @param {Vector3 } position
+     * @returns {Vector2}
+     * @public
+     */
+    modelToViewPosition( position ) {
+      const xView = ( this.viewSize.width / 2 ) + ( position.x / position.z ) * this.scaleFactor;
+      const yView = this.yHorizonView - ( position.y / position.z ) * this.scaleFactor;
+      return new Vector2( xView, yView );
     }
 
     /**
@@ -143,7 +162,7 @@ define( require => {
      * @public
      */
     viewToModelX( xView, zModel ) {
-      return zModel * ( xView - this.viewSize.width / 2 ) / this.getFactor();
+      return zModel * ( xView - this.viewSize.width / 2 ) / this.scaleFactor;
     }
 
     /**
@@ -164,38 +183,14 @@ define( require => {
     }
 
     /**
-     * Given a 3D model position, project it into 2D view coordinates.
-     * @param {Vector3 } position
-     * @returns {Vector2}
-     * @public
-     */
-    modelToViewPosition( position ) {
-      const xView = ( this.viewSize.width / 2 ) + ( position.x / position.z ) * this.getFactor();
-      const yView = this.yHorizonView - ( position.y / position.z ) * this.getFactor();
-      return new Vector2( xView, yView );
-    }
-
-    //TODO I don't understand this, what is a 'view distance'? Is it an x distance?
-    //TODO rename
-    /**
-     * Turns a view distance into a model distance at a particular model z (depth).
+     * Turns a view distance (x or y) into a model distance at a specified model z.
      * @param {number} distanceView
      * @param {number} zModel
      * @returns {number} distance, in model coordinates
      * @public
      */
-    landscapeDistanceToModel( distanceView, zModel ) {
-      return distanceView * zModel / this.getFactor();
-    }
-
-    /**
-     * Gets the view scaling factor that corresponds to model z position.
-     * @param {number} zModel
-     * @returns {number}
-     */
-    getViewScale( zModel ) {
-      assert && assert( zModel > 0, `invalid zModel: ${zModel}` );
-      return this.zNearModel * 0.25 / zModel;
+    viewToModelDistance( distanceView, zModel ) {
+      return distanceView * zModel / this.scaleFactor;
     }
 
     /**
