@@ -10,7 +10,7 @@
 //TODO   model y=0 is at the horizon, negative closer to the camera
 //TODO   model z=0 is at the camera
 //TODO (0,-RISE,NEARPLANE) = (0,-100,150) is at bottom center of viewport, xMax = ~179
-//TODO (0, 0, FARPLANCE) = (0, 0, 300) is at center of horizon, xMax = ~358
+//TODO (0, 0, FARPLANE) = (0, 0, 300) is at center of horizon, xMax = ~358
 //TODO (0, 158, 538) is at top-center of viewport, xMax = ~642 -- above horizon things seem wrong
 
 /**
