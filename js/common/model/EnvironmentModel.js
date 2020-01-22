@@ -42,7 +42,7 @@ define( require => {
       this.landscape = new Landscape();
       phet.naturalSelection.landscape = this.landscape;//XXX TODO delete this
 
-      // @public the abiotic (physical, rather than biological) environment
+      // @public
       this.environmentProperty = new EnumerationProperty( Environments, Environments.EQUATOR, {
         tandem: tandem.createTandem( 'environmentProperty' )
       } );
