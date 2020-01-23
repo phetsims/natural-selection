@@ -84,9 +84,9 @@ define( require => {
       } );
       this.isLimitedProperty.link( isLimited => {
 
-        // When food is limited, cut the food supply in half
+        // When food is limited, hide half of the food
         for ( let i = 0; i < this.food.length; i++ ) {
-          this.food[ i ].existsProperty.value = ( i % 2 === 0 || !isLimited );
+          this.food[ i ].visibleProperty.value = ( i % 2 === 0 || !isLimited );
         }
       } );
     }
@@ -95,6 +95,7 @@ define( require => {
      * @public
      */
     reset() {
+      _.forEach( this.food, food => food.reset() );
       this.isToughProperty.reset();
       this.isLimitedProperty.reset();
     }

@@ -25,9 +25,7 @@ define( require => {
     constructor( debugLabel, toughImage, tenderImage, options ) {
 
       options = merge( {
-        position: Vector3.ZERO,
-        exists: true,
-        isTough: false
+        position: Vector3.ZERO
       }, options );
 
       assert && assert( !options.tandem, 'Food instances should not be instrumented' );
@@ -39,20 +37,19 @@ define( require => {
 
       // @public (read-only)
       this.position = options.position;
-      phet.log && phet.log( `Food position=${this.position}` );
 
       // @public
-      this.existsProperty = new BooleanProperty( options.exists );
+      this.isToughProperty = new BooleanProperty( false );
 
-      // @public
-      this.isToughProperty = new BooleanProperty( options.isTough );
+      // @public whether the food is visible, used to hide food when the food supply is limited
+      this.visibleProperty = new BooleanProperty( true );
     }
 
     /**
      * @public
      */
     reset() {
-      this.existsProperty.reset();
+      this.visibleProperty.reset();
       this.isToughProperty.reset();
     }
 

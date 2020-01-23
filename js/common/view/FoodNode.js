@@ -69,9 +69,9 @@ define( require => {
 
       this.translation = modelViewTransform.modelToViewPosition( food.position );
 
-      // Hide food that doesn't exist
-      food.existsProperty.link( exists => {
-        this.visible = exists;
+      // Show/hide food
+      food.visibleProperty.link( visible => {
+        this.visible = visible;
       } );
 
       //TODO use ToggleNode
