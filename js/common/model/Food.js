@@ -30,6 +30,8 @@ define( require => {
         isTough: false
       }, options );
 
+      assert && assert( !options.tandem, 'Food instances should not be instrumented' );
+
       // @public (read-only)
       this.debugLabel = debugLabel;
       this.toughImage = toughImage;
