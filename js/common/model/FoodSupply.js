@@ -43,7 +43,7 @@ define( require => {
 
         // Food 'A'
         new Food( 'A1', toughFoodAImage, tenderFoodAImage, {
-          position: modelViewTransform.getGroundPosition( -75, 200 )
+          position: modelViewTransform.getGroundPosition( -65, 210 )
         } ),
         new Food( 'A2', toughFoodAImage, tenderFoodAImage, {
           position: modelViewTransform.getGroundPosition( 155, 160 )
@@ -59,7 +59,7 @@ define( require => {
 
         // Food 'C'
         new Food( 'C1', toughFoodCImage, tenderFoodCImage, {
-          position: modelViewTransform.getGroundPosition( 75, 180 )
+          position: modelViewTransform.getGroundPosition( 60, 185 )
         } ),
         new Food( 'C2', toughFoodCImage, tenderFoodCImage, {
           position: modelViewTransform.getGroundPosition( -180, 270 )
