@@ -16,12 +16,12 @@ define( require => {
   const Tandem = require( 'TANDEM/Tandem' );
 
   // images
-  const tenderFoodAImage = require( 'image!NATURAL_SELECTION/tenderFoodA' );
-  const tenderFoodBImage = require( 'image!NATURAL_SELECTION/tenderFoodB' );
-  const tenderFoodCImage = require( 'image!NATURAL_SELECTION/tenderFoodC' );
-  const toughFoodAImage = require( 'image!NATURAL_SELECTION/toughFoodA' );
-  const toughFoodBImage = require( 'image!NATURAL_SELECTION/toughFoodB' );
-  const toughFoodCImage = require( 'image!NATURAL_SELECTION/toughFoodC' );
+  const tenderFoodAImage = require( 'image!NATURAL_SELECTION/tenderFoodA.png' );
+  const tenderFoodBImage = require( 'image!NATURAL_SELECTION/tenderFoodB.png' );
+  const tenderFoodCImage = require( 'image!NATURAL_SELECTION/tenderFoodC.png' );
+  const toughFoodAImage = require( 'image!NATURAL_SELECTION/toughFoodA.png' );
+  const toughFoodBImage = require( 'image!NATURAL_SELECTION/toughFoodB.png' );
+  const toughFoodCImage = require( 'image!NATURAL_SELECTION/toughFoodC.png' );
 
   class FoodSupply {
 
