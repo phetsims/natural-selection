@@ -15,20 +15,10 @@ define( require => {
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const EnvironmentModelViewTransform = require( 'NATURAL_SELECTION/common/model/EnvironmentModelViewTransform' );
   const Environments = require( 'NATURAL_SELECTION/common/model/Environments' );
-  const Food = require( 'NATURAL_SELECTION/common/model/Food' );
-  const LimitedFood = require( 'NATURAL_SELECTION/common/model/LimitedFood' );
+  const FoodSupply = require( 'NATURAL_SELECTION/common/model/FoodSupply' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const PhetioObject = require( 'TANDEM/PhetioObject' );
-  const ToughFood = require( 'NATURAL_SELECTION/common/model/ToughFood' );
   const Wolves = require( 'NATURAL_SELECTION/common/model/Wolves' );
-
-  // images
-  const tenderFoodAImage = require( 'image!NATURAL_SELECTION/tenderFoodA' );
-  const tenderFoodBImage = require( 'image!NATURAL_SELECTION/tenderFoodB' );
-  const tenderFoodCImage = require( 'image!NATURAL_SELECTION/tenderFoodC' );
-  const toughFoodAImage = require( 'image!NATURAL_SELECTION/toughFoodA' );
-  const toughFoodBImage = require( 'image!NATURAL_SELECTION/toughFoodB' );
-  const toughFoodCImage = require( 'image!NATURAL_SELECTION/toughFoodC' );
 
   class EnvironmentModel extends PhetioObject {
 
@@ -48,41 +38,19 @@ define( require => {
 
       // @public
       this.modelViewTransform = new EnvironmentModelViewTransform();
-      phet.naturalSelection.modelViewTransform = this.modelViewTransform;//XXX TODO delete this
 
       // @public
       this.environmentProperty = new EnumerationProperty( Environments, Environments.EQUATOR, {
         tandem: tandem.createTandem( 'environmentProperty' )
       } );
 
-      // @public {Food[]}
-      // See https://github.com/phetsims/natural-selection/issues/17 for specification of positions.
-      this.food = [
+      // @public (read-only)
+      this.wolves = new Wolves( tandem.createTandem( 'wolves' ) );
 
-        // Food 'A'
-        new Food( 'A1', toughFoodAImage, tenderFoodAImage, {
-          position: this.modelViewTransform.getGroundPosition( -75, 200 )
-        } ),
-        new Food( 'A2', toughFoodAImage, tenderFoodAImage, {
-          position: this.modelViewTransform.getGroundPosition( 155, 160 )
-        } ),
-
-        // Food 'B'
-        new Food( 'B1', toughFoodBImage, tenderFoodBImage, {
-          position: this.modelViewTransform.getGroundPosition( -155, 160 )
-        } ),
-        new Food( 'B2', toughFoodBImage, tenderFoodBImage, {
-          position: this.modelViewTransform.getGroundPosition( 200, 250 )
-        } ),
-
-        // Food 'C'
-        new Food( 'C1', toughFoodCImage, tenderFoodCImage, {
-          position: this.modelViewTransform.getGroundPosition( 75, 180 )
-        } ),
-        new Food( 'C2', toughFoodCImage, tenderFoodCImage, {
-          position: this.modelViewTransform.getGroundPosition( -180, 270 )
-        } )
-      ];
+      // @public (read-only)
+      this.foodSupply = new FoodSupply( this.modelViewTransform, {
+        tandem: tandem.createTandem( 'foodSupply' )
+      } );
 
       // @public (read-only) {Bunny[]}
       this.bunnies = [ Bunny.createDefault() ];
@@ -91,16 +59,10 @@ define( require => {
       // @public whether a mate was added to the lone bunny that appears at startup
       this.mateWasAddedProperty = new BooleanProperty( this.bunnies.length > 1 );
 
-      // @public (read-only) the biotic (biological, rather than physical) environmental factors
-      this.wolves = new Wolves( tandem.createTandem( 'wolves' ) );
-      this.toughFood = new ToughFood( this.food, tandem.createTandem( 'toughFood' ) );
-      this.limitedFood = new LimitedFood( this.food, tandem.createTandem( 'limitedFood' ) );
-
       // @public whether any environmental factor is enabled
       this.environmentalFactorEnabledProperty = new DerivedProperty(
-        [ this.wolves.enabledProperty, this.toughFood.enabledProperty, this.limitedFood.enabledProperty ],
-        ( wolvesEnabled, touchFooEnabled, limitedFoodEnabled ) =>
-          ( wolvesEnabled || touchFooEnabled || limitedFoodEnabled )
+        [ this.wolves.enabledProperty, this.foodSupply.isToughProperty, this.foodSupply.isLimitedProperty ],
+        ( wolvesEnabled, foodIsTough, foodIsLimited ) => ( wolvesEnabled || foodIsTough || foodIsLimited )
       );
     }
 
@@ -109,10 +71,9 @@ define( require => {
      */
     reset() {
       this.environmentProperty.reset();
-      this.mateWasAddedProperty.reset();
       this.wolves.reset();
-      this.toughFood.reset();
-      this.limitedFood.reset();
+      this.foodSupply.reset();
+      this.mateWasAddedProperty.reset();
     }
 
     /**
@@ -120,7 +81,7 @@ define( require => {
      * @override
      */
     dispose() {
-      assert && assert( false, 'EnvironmnetModel does not support dispose' );
+      assert && assert( false, 'EnvironmentModel does not support dispose' );
     }
 
     /**

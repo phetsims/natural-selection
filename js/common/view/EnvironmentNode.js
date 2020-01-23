@@ -103,9 +103,10 @@ define( require => {
         tandem: options.tandem.createTandem( 'playAgainButton' )
       } );
 
-      // Add food
-      for ( let i = 0; i < environmentModel.food.length; i++ ) {
-        worldContents.addChild( new FoodNode( environmentModel.food[ i ], environmentModel.modelViewTransform ) );
+      // Add food items
+      const food = environmentModel.foodSupply.food;
+      for ( let i = 0; i < food.length; i++ ) {
+        worldContents.addChild( new FoodNode( food[ i ], environmentModel.modelViewTransform ) );
       }
 
       // layering

@@ -3017,7 +3017,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<EnumerationIO(EQUATOR|ARCTIC)>"
     },
-    "naturalSelection.labScreen.model.environmentModel.limitedFood.enabledProperty": {
+    "naturalSelection.labScreen.model.environmentModel.foodSupply.isLimitedProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3030,7 +3030,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.labScreen.model.environmentModel.toughFood.enabledProperty": {
+    "naturalSelection.labScreen.model.environmentModel.foodSupply.isToughProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",

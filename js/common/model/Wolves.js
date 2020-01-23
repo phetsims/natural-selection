@@ -8,17 +8,34 @@ define( require => {
   'use strict';
 
   // modules
-  const EnvironmentalFactor = require( 'NATURAL_SELECTION/common/model/EnvironmentalFactor' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
 
-  class Wolves extends EnvironmentalFactor {
+  class Wolves {
 
     /**
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
-      super( tandem );
-      //TODO
+
+      // @public
+      this.enabledProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'enabledProperty' )
+      } );
+    }
+
+    /**
+     * @public
+     */
+    reset() {
+      this.enabledProperty.reset();
+    }
+
+    /**
+     * @public
+     */
+    dispose() {
+      assert && assert( false, 'Wolves does not support dispose' );
     }
   }
 

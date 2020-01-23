@@ -54,12 +54,12 @@ define( require => {
           } ),
 
           // Tough Food
-          new ToughFoodCheckbox( environmentModel.toughFood.enabledProperty, {
+          new ToughFoodCheckbox( environmentModel.foodSupply.isToughProperty, {
             tandem: options.tandem.createTandem( 'toughFoodCheckbox' )
           } ),
 
           // Limited Food
-          new LimitedFoodCheckbox( environmentModel.limitedFood.enabledProperty, {
+          new LimitedFoodCheckbox( environmentModel.foodSupply.isLimitedProperty, {
             tandem: options.tandem.createTandem( 'limitedFoodCheckbox' )
           } )
         ]
