@@ -32,6 +32,42 @@ define( require => {
       public: true
     },
 
+    // Specifies the mutations that appear in the initial population of bunnies. The value determines which
+    // alleles abbreviations can appear in the population query parameter.
+    // See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
+    //TODO how to specify mutations per screen?
+    mutations: {
+      type: 'array',
+      elementSchema: {
+        type: 'string'
+      },
+      defaultValue: [],
+      isValidValue: value => true, //TODO #9
+      public: true
+    },
+
+    // Specifies the initial population of bunnies. The value of the mutations query parameter determines which
+    // alleles abbreviations can appear in this query parameter's value.
+    // See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
+    //TODO how to specify population per screen?
+    // population: {
+    //   type: 'array',
+    //   elementSchema: {
+    //     type: 'string'
+    //   },
+    //   defaultValue: [ '1' ],
+    //   isValidValue: value => true, //TODO #9
+    //   public: true
+    // },
+
+    //TODO #9 for now, ignore mutations and specify the initial number of bunnies
+    population: {
+      type: 'number',
+      defaultValue: 1,
+      isValidValue: value => ( value > 0 && Utils.isInteger( value ) ),
+      public: true
+    },
+
     //------------------------------------------------------------------------------------------------------------------
     // For internal use only
     //------------------------------------------------------------------------------------------------------------------
@@ -62,6 +98,10 @@ define( require => {
   } );
 
   // check dependencies between query parameters
+
+  // Check that population is valid for mutations, see https://github.com/phetsims/natural-selection/issues/9
+  //TODO #9, validate mutations and population, call QueryStringMachine.addWarning
+
   assert && assert( NaturalSelectionQueryParameters.secondsPerStep < NaturalSelectionQueryParameters.secondsPerGeneration,
     'secondsPerStep must be < secondsPerGeneration' );
 
