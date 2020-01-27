@@ -114,12 +114,8 @@ define( require => {
      */
      getRandomGroundPosition() {
 
-      //TODO what is this computation? why isn't this just random z between NEARPLANE and FARPLANE?
-      //TODO this might be moving the distribution closer to NEARPLANE, so we have more things closer to camera
       // Choose a random z coordinate on the ground trapezoid.
-      const zModel = Math.sqrt( this.zNearModel * this.zNearModel +
-                                phet.joist.random.nextDouble() *
-                                ( this.zFarModel * this.zFarModel - this.zNearModel * this.zNearModel ) );
+      const zModel = phet.joist.random.nextDoubleBetween( this.zNearModel, this.zFarModel );
 
       // Choose a random x coordinate at the z coordinate.
       const xModel = this.getMaximumX( zModel ) * ( phet.joist.random.nextDouble() * 2 - 1 );
