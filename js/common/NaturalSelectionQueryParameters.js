@@ -42,7 +42,7 @@ define( require => {
         type: 'string'
       },
       defaultValue: [],
-      isValidValue: value => true, //TODO #9
+      isValidValue: mutations => true, //TODO #9
       public: true
     },
 
@@ -56,7 +56,7 @@ define( require => {
     //     type: 'string'
     //   },
     //   defaultValue: [ '1' ],
-    //   isValidValue: value => true, //TODO #9
+    //   isValidValue: population => true, //TODO #9
     //   public: true
     // },
 
@@ -64,7 +64,7 @@ define( require => {
     population: {
       type: 'number',
       defaultValue: 1,
-      isValidValue: value => ( value > 0 && Utils.isInteger( value ) ),
+      isValidValue: population => ( population > 0 && Utils.isInteger( population ) ),
       public: true
     },
 
