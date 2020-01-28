@@ -34,7 +34,8 @@ define( require => {
       options = merge( {
 
         // phet-io
-        tandem: Tandem.REQUIRED
+        tandem: Tandem.REQUIRED,
+        phetioDocumentation: 'the Population graph and its control panel'
       }, options );
 
       // Divy up the width

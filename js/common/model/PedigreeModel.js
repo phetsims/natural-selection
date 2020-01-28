@@ -27,7 +27,8 @@ define( require => {
 
         // phet-io
         tandem: tandem,
-        phetioState: false // to prevent serialization, because we don't have an IO type
+        phetioState: false, // to prevent serialization, because we don't have an IO type
+        phetioDocumentation: 'portion of the model that deals with the Pedigree graph'
       } );
 
       // @public visibility of the alleles for each gene in the Pedigree tree

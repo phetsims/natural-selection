@@ -38,7 +38,8 @@ define( require => {
         align: 'center',
 
         // phet-io
-        tandem: Tandem.REQUIRED
+        tandem: Tandem.REQUIRED,
+        phetioDocumentation: 'the Proportions graph and its control panel'
       }, options );
 
       // Divy up the width

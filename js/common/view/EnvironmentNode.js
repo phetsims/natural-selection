@@ -42,7 +42,8 @@ define( require => {
         yHorizon: environmentModel.modelViewTransform.yHorizonView,
 
         // phet-io
-        tandem: Tandem.REQUIRED
+        tandem: Tandem.REQUIRED,
+        phetioDocumentation: 'the area of the screen that displays what is happening in the environment'
       }, options );
 
       const backgroundNode = new EnvironmentBackgroundNode( environmentModel.environmentProperty, options.size,

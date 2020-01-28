@@ -2888,7 +2888,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "naturalSelection.labScreen.model.environmentModel": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "portion of the model that deals with the environment",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3044,7 +3044,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "naturalSelection.labScreen.model.pedigreeModel": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "portion of the model that deals with the Pedigree graph",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3135,7 +3135,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "naturalSelection.labScreen.model.populationModel": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "portion of the model that deals with the Population graph",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3408,7 +3408,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "DerivedPropertyIO<RangeIO>"
     },
     "naturalSelection.labScreen.model.proportionsModel": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "portion of the model that deals with the Proportions graph",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -4292,7 +4292,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "naturalSelection.labScreen.view.environmentNode": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the area of the screen that displays what is happening in the environment",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -5787,7 +5787,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "naturalSelection.labScreen.view.pedigreeNode": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the Pedigree graph and its control panel",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -6463,7 +6463,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
     "naturalSelection.labScreen.view.populationNode": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the Population graph and its control panel",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -8036,7 +8036,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "naturalSelection.labScreen.view.proportionsNode": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the Proportions graph and its control panel",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
