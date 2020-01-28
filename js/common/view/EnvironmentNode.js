@@ -143,13 +143,13 @@ define( require => {
       // Create the view for each bunny
       environmentModel.bunnies.forEach( bunny => {
         worldContents.addChild( new BunnyNode( bunny, environmentModel.modelViewTransform ) );
-        //TODO sort by depth
+        //TODO sort by positionProperty.value.z
       } );
 
       // When a bunny is added to the model, create its view
       environmentModel.bunnyAddedEmitter.addListener( bunny => {
         worldContents.addChild( new BunnyNode( bunny, environmentModel.modelViewTransform ) );
-        //TODO sort by depth
+        //TODO sort by positionProperty.value.z
       } );
     }
 

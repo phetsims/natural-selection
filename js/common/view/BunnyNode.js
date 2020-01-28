@@ -13,8 +13,8 @@
    const EnvironmentModelViewTransform = require( 'NATURAL_SELECTION/common/model/EnvironmentModelViewTransform' );
    const Image = require( 'SCENERY/nodes/Image' );
    const merge = require( 'PHET_CORE/merge' );
+   const Movable3Node = require( 'NATURAL_SELECTION/common/view/Movable3Node' );
    const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-   const Node = require( 'SCENERY/nodes/Node' );
 
    // images
    const bunnyWhiteFurStraightEarsShortTeethImage = require( 'image!NATURAL_SELECTION/bunny-whiteFur-straightEars-shortTeeth.png' );
@@ -22,7 +22,7 @@
    // constants
    const SCALE = 0.5; // scale applied in addition to modelViewTransform scale
 
-   class BunnyNode extends Node {
+   class BunnyNode extends Movable3Node {
 
      /**
       * @param {Bunny} bunny
@@ -53,7 +53,7 @@
          options.children.push( new Circle( 4, { fill: 'red' } ) );
        }
 
-       super( options );
+       super( bunny, options );
 
        // Position the bunny, and scale it based on depth.
        const bunnyPositionObserver = position => {
@@ -62,12 +62,18 @@
          // position
          this.translation = modelViewTransform.modelToViewPosition( position );
 
-         // scale and direction
-         const scale = SCALE * modelViewTransform.getViewScale( position.z );
-         const direction = bunny.movingRight ? 1 : -1; // bunny images point to right
-         this.setScaleMagnitude( direction * scale, scale );
+         // scale
+         this.setScaleMagnitude( SCALE * modelViewTransform.getViewScale( position.z ) );
        };
        bunny.positionProperty.link( bunnyPositionObserver );
+
+       // Direction the bunny is facing
+       const bunnyDirectionObserver = isMovingRight => {
+         const getScaleVector = this.getScaleVector();
+         const xScale = isMovingRight ? getScaleVector.x : -getScaleVector.x;
+         this.setScaleMagnitude( xScale, getScaleVector.y );
+       };
+       bunny.isMovingRightProperty.link( bunnyDirectionObserver );
 
        // Optionally hide the bunny when it dies. Dead bunnies are shown in the Pedigree graph.
        const bunnyIsAliveObserver = isAlive => {
@@ -84,6 +90,7 @@
        // @private
        this.disposeBunnyNode = () => {
          bunny.positionProperty.unlink( bunnyPositionObserver );
+         bunny.isMovingRightProperty.unlink( bunnyDirectionObserver );
          bunny.isAliveProperty.unlink( bunnyIsAliveObserver );
          bunny.disposedEmitter.removeListener( bunnyDisposedListener );
        };

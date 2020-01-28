@@ -13,15 +13,15 @@ define( require => {
   const EnvironmentModelViewTransform = require( 'NATURAL_SELECTION/common/model/EnvironmentModelViewTransform' );
   const Food = require( 'NATURAL_SELECTION/common/model/Food' );
   const Image = require( 'SCENERY/nodes/Image' );
+  const Movable3Node = require( 'NATURAL_SELECTION/common/view/Movable3Node' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   // constants
   const SCALE = 0.5; // scale applied in addition to modelViewTransform scale
 
-  class FoodNode extends Node {
+  class FoodNode extends Movable3Node {
 
     /**
      * @param {Food} food
@@ -65,12 +65,12 @@ define( require => {
         options.children.push( debugLabelNode );
       }
 
-      super( options );
+      super( food, options );
 
-      const scale = SCALE * modelViewTransform.getViewScale( food.position.z );
+      const scale = SCALE * modelViewTransform.getViewScale( food.positionProperty.value.z );
       this.setScaleMagnitude( scale );
 
-      this.translation = modelViewTransform.modelToViewPosition( food.position );
+      this.translation = modelViewTransform.modelToViewPosition( food.positionProperty.value );
 
       // Show/hide food
       food.visibleProperty.link( visible => {

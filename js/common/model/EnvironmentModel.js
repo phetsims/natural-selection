@@ -181,7 +181,10 @@ define( require => {
      * @public
      */
     addRandomBunny() {
-      this.addBunny( new Bunny( this.modelViewTransform.getRandomGroundPosition() ) );
+      this.addBunny( new Bunny( {
+        position: this.modelViewTransform.getRandomGroundPosition(),
+        isMovingRight: phet.joist.random.nextBoolean()
+      } ) );
     }
 
     /**

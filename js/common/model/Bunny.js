@@ -13,38 +13,34 @@ define( require => {
   const Emitter = require( 'AXON/Emitter' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const Property = require( 'AXON/Property' );
+  const Movable3 = require( 'NATURAL_SELECTION/common/model/Movable3' );
   const Utils = require( 'DOT/Utils' );
   const Vector3 = require( 'DOT/Vector3' );
 
   // Number of bunnies instantiated.
   let bunnyCount = 0;
 
-  class Bunny {
+  class Bunny extends Movable3 {
 
     /**
-     * @param {Vector3} position
      * @param {Object} [options]
      */
-    constructor( position, options ) {
+    constructor( options ) {
 
       options = merge( {
+        position: Vector3.ZERO,
+        isMovingRight: true,
         generation: 0,
         father: null, // {Bunny|null} null if no father
         mother: null // {Bunny|null} null if no mother
       }, options );
 
       assert && assert( Utils.isInteger( options.generation ), `invalid generation: ${options.generation}` );
+      assert && assert( !options.tandem, 'Bunny instances should not be instrumented' );
 
-      // @public
-      this.positionProperty = new Property( position, {
-        valueType: Vector3
-      } );
-      this.positionProperty.lazyLink( position => {
-        assert && assert( !this.isDisposed, 'bunny is disposed' );
-      } );
+      super( options );
 
-      // @public
+      // @public (read-only)
       this.isAliveProperty = new BooleanProperty( true );
       this.isAliveProperty.lazyLink( isAlive => {
         assert && assert( !this.isDisposed, 'bunny is disposed' );
@@ -53,14 +49,23 @@ define( require => {
 
       // @public (read-only)
       this.id = bunnyCount++;
-      this.movingRight = phet.joist.random.nextBoolean();
       this.generation = options.generation;
       this.father = options.father;
       this.mother = options.mother;
+
+      // @public (read-only)
       this.isDisposed = false;
       this.disposedEmitter = new Emitter( {
         parameters: [ { valueType: Bunny } ]
       } );
+    }
+
+    /**
+     * @public
+     * @override
+     */
+    reset() {
+      assert && assert( false, 'Bunny does not support reset' );
     }
 
     /**

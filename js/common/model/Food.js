@@ -11,10 +11,11 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const merge = require( 'PHET_CORE/merge' );
+  const Movable3 = require( 'NATURAL_SELECTION/common/model/Movable3' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const Vector3 = require( 'DOT/Vector3' );
 
-  class Food {
+  class Food extends Movable3 {
 
     /**
      * @param {string} debugLabel
@@ -25,18 +26,18 @@ define( require => {
     constructor( debugLabel, toughImage, tenderImage, options ) {
 
       options = merge( {
-        position: Vector3.ZERO
+        position: Vector3.ZERO,
+        isMovingRight: true
       }, options );
 
       assert && assert( !options.tandem, 'Food instances should not be instrumented' );
+
+      super( options );
 
       // @public (read-only)
       this.debugLabel = debugLabel;
       this.toughImage = toughImage;
       this.tenderImage = tenderImage;
-
-      // @public (read-only)
-      this.position = options.position;
 
       // @public
       this.isToughProperty = new BooleanProperty( false );
@@ -49,6 +50,7 @@ define( require => {
      * @public
      */
     reset() {
+      super.reset();
       this.visibleProperty.reset();
       this.isToughProperty.reset();
     }
