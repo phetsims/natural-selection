@@ -32,7 +32,7 @@ define( require => {
         yMargin: 8,
 
         // phet-io
-        phetioReadOnly: true
+        phetioReadOnly: true // because sim state controls when this button is visible
       }, options );
 
       assert && assert( !options.content, 'PlayButton sets content' );
