@@ -144,7 +144,6 @@ define( require => {
 
       // When a bunny is born, add it to the view
       environmentModel.bunnyBornEmitter.addListener( bunny => {
-        phet.log && phet.log( `creating view for bunny ${bunny.toString()}` );
         worldContents.addChild( new BunnyNode( bunny, environmentModel.modelViewTransform ) );
       } );
     }
