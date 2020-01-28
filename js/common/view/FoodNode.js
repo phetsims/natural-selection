@@ -13,13 +13,11 @@ define( require => {
   const EnvironmentModelViewTransform = require( 'NATURAL_SELECTION/common/model/EnvironmentModelViewTransform' );
   const Food = require( 'NATURAL_SELECTION/common/model/Food' );
   const Image = require( 'SCENERY/nodes/Image' );
+  const merge = require( 'PHET_CORE/merge' );
   const Movable3Node = require( 'NATURAL_SELECTION/common/view/Movable3Node' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );
-
-  // constants
-  const SCALE = 0.5; // scale applied in addition to modelViewTransform scale
 
   class FoodNode extends Movable3Node {
 
@@ -33,7 +31,11 @@ define( require => {
       assert && assert( food instanceof Food, 'invalid food' );
       assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
-      options = options || {};
+      options = merge( {
+
+        // Movable3Node options
+        scaleFactor: 0.5 // scale applied in addition to modelViewTransform scale
+      }, options );
 
       const toughFoodNode = new Image( food.toughImage, {
         centerX: 0,
@@ -65,12 +67,7 @@ define( require => {
         options.children.push( debugLabelNode );
       }
 
-      super( food, options );
-
-      const scale = SCALE * modelViewTransform.getViewScale( food.positionProperty.value.z );
-      this.setScaleMagnitude( scale );
-
-      this.translation = modelViewTransform.modelToViewPosition( food.positionProperty.value );
+      super( food, modelViewTransform, options );
 
       // Show/hide food
       food.visibleProperty.link( visible => {

@@ -1,7 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Movable3 is the base class for something that can be moved and positioned in 3D space.
+ * Movable3 is the base class for a model element that exists in 3D space.  It can be positioned, and it has
+ * a direction along the x axis.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -23,16 +24,16 @@ define( require => {
     constructor( options ) {
 
       options = merge( {
-        position: Vector3.ZERO,
-        isMovingRight: true
+        position: Vector3.ZERO, // initial position
+        isMovingRight: true // initial direction along the x axis, true=right, false=left
       }, options );
 
-      // @public
+      // @public position in 3D space
       this.positionProperty = new Property( options.position, {
         valueType: Vector3
       } );
 
-      // @public
+      // @public direction along the x axis, true=right, false=left
       this.isMovingRightProperty = new BooleanProperty( options.isMovingRight );
     }
 

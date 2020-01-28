@@ -19,9 +19,6 @@
    // images
    const bunnyWhiteFurStraightEarsShortTeethImage = require( 'image!NATURAL_SELECTION/bunny-whiteFur-straightEars-shortTeeth.png' );
 
-   // constants
-   const SCALE = 0.5; // scale applied in addition to modelViewTransform scale
-
    class BunnyNode extends Movable3Node {
 
      /**
@@ -35,11 +32,13 @@
        assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
        options = merge( {
-         showDeadBunny: false
+         showDeadBunny: false,
+
+         // Movable3Node options
+         scaleFactor: 0.4 // scale applied in addition to modelViewTransform scale
        }, options );
 
        const image = new Image( bunnyWhiteFurStraightEarsShortTeethImage, {
-         scale: modelViewTransform.getViewScale( bunny.positionProperty.value.z ),
          centerX: 0,
          bottom: 0
        } );
@@ -53,27 +52,7 @@
          options.children.push( new Circle( 4, { fill: 'red' } ) );
        }
 
-       super( bunny, options );
-
-       // Position the bunny, and scale it based on depth.
-       const bunnyPositionObserver = position => {
-         assert && assert( bunny.isAliveProperty.value, 'bunny is dead' );
-
-         // position
-         this.translation = modelViewTransform.modelToViewPosition( position );
-
-         // scale
-         this.setScaleMagnitude( SCALE * modelViewTransform.getViewScale( position.z ) );
-       };
-       bunny.positionProperty.link( bunnyPositionObserver );
-
-       // Direction the bunny is facing
-       const bunnyDirectionObserver = isMovingRight => {
-         const getScaleVector = this.getScaleVector();
-         const xScale = isMovingRight ? getScaleVector.x : -getScaleVector.x;
-         this.setScaleMagnitude( xScale, getScaleVector.y );
-       };
-       bunny.isMovingRightProperty.link( bunnyDirectionObserver );
+       super( bunny, modelViewTransform, options );
 
        // Optionally hide the bunny when it dies. Dead bunnies are shown in the Pedigree graph.
        const bunnyIsAliveObserver = isAlive => {
@@ -89,8 +68,6 @@
 
        // @private
        this.disposeBunnyNode = () => {
-         bunny.positionProperty.unlink( bunnyPositionObserver );
-         bunny.isMovingRightProperty.unlink( bunnyDirectionObserver );
          bunny.isAliveProperty.unlink( bunnyIsAliveObserver );
          bunny.disposedEmitter.removeListener( bunnyDisposedListener );
        };
