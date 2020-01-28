@@ -7,6 +7,7 @@
  * Running with ?dev shows the following things that are specific to this sim:
  * - generation number is shown below the generation clock in GenerationClockNode
  * - horizon line is shown in EnvironmentNode
+ * - a red dot is rendered at the origin of various objects (bunnies, food, wolves,...)
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
