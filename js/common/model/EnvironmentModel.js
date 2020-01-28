@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bunny = require( 'NATURAL_SELECTION/common/model/Bunny' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const Emitter = require( 'AXON/Emitter' );
@@ -26,12 +25,10 @@ define( require => {
   class EnvironmentModel extends PhetioObject {
 
     /**
-     * @param {GenerationClock} generationClock
      * @param {Tandem} tandem
      */
-    constructor( generationClock, tandem ) {
+    constructor( tandem ) {
 
-      assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
       assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
       super( {
@@ -40,7 +37,7 @@ define( require => {
       } );
 
       // @public (read-only)
-      this.generationClock = generationClock;
+      this.generationClock = new GenerationClock( tandem.createTandem( 'generationClock' ) );
 
       // @public
       this.modelViewTransform = new EnvironmentModelViewTransform();
@@ -75,10 +72,6 @@ define( require => {
       } );
 
       this.initializeBunnyPopulation();
-
-      //TODO this should be an Emitter
-      // @public whether a mate was added to the lone bunny that appears at startup
-      this.mateWasAddedProperty = new BooleanProperty( this.bunnies.length > 1 );
     }
 
     /**
@@ -86,13 +79,14 @@ define( require => {
      */
     reset() {
       phet.log && phet.log( 'EnvironmentModel.reset' );
-      
+
+      this.generationClock.reset();
+
       // reset Properties
       this.environmentProperty.reset();
       this.wolves.reset();
       this.foodSupply.reset();
-      this.mateWasAddedProperty.reset();
-      
+
       // dispose of all bunnies and reinitialize
       this.disposeBunnies();
       this.initializeBunnyPopulation();
@@ -107,6 +101,22 @@ define( require => {
     }
 
     /**
+     * Steps the model.
+     * @param {number} dt - time step, in seconds
+     * @public
+     */
+    step( dt ) {
+
+      // step the generation clock
+      this.generationClock.step( dt );
+
+      // step the bunnies
+      for ( let i = 0; i < this.bunnies.length; i++ ) {
+        this.bunnies[ i ].step( dt );
+      }
+    }
+
+    /**
      * Resets the initial bunny population. Other settings are preserved.
      * @public
      */
@@ -116,22 +126,6 @@ define( require => {
       // dispose of all bunnies and reinitialize
       this.disposeBunnies();
       this.initializeBunnyPopulation();
-
-      this.mateWasAddedProperty.reset();
-    }
-
-    /**
-     * Steps the model.
-     * @param {number} dt - time step, in seconds
-     * @public
-     * @override
-     */
-    step( dt ) {
-
-      // step the bunnies
-      for ( let i = 0; i < this.bunnies.length; i++ ) {
-        this.bunnies[ i ].step( dt );
-      }
     }
 
     /**
@@ -152,7 +146,7 @@ define( require => {
      * @private
      */
     initializeBunnyPopulation() {
-      phet.log && phet.log( 'initializeBunnyPopulation' );
+      phet.log && phet.log( 'EnvironmentModel.initializeBunnyPopulation' );
       assert && assert( this.bunnies.length === 0, 'bunnies exist' );
 
       const bunny = new Bunny( this.modelViewTransform.getRandomGroundPosition() );

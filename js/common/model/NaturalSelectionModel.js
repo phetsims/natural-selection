@@ -11,7 +11,6 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const EnvironmentModel = require( 'NATURAL_SELECTION/common/model/EnvironmentModel' );
-  const GenerationClock = require( 'NATURAL_SELECTION/common/model/GenerationClock' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const PedigreeModel = require( 'NATURAL_SELECTION/common/model/PedigreeModel' );
   const PopulationModel = require( 'NATURAL_SELECTION/common/model/PopulationModel' );
@@ -33,21 +32,18 @@ define( require => {
       } );
 
       // @public (read-only)
-      this.generationClock = new GenerationClock( tandem.createTandem( 'generationClock' ) );
-
-      // @public (read-only)
-      this.environmentModel = new EnvironmentModel( this.generationClock, tandem.createTandem( 'environmentModel' ) );
+      this.environmentModel = new EnvironmentModel( tandem.createTandem( 'environmentModel' ) );
 
       // @public (read-only)
       this.populationModel = new PopulationModel(
-        this.generationClock.generationsProperty,
+        this.environmentModel.generationClock.generationsProperty,
         this.isPlayingProperty,
         tandem.createTandem( 'populationModel' )
       );
 
       // @public (read-only)
       this.proportionsModel = new ProportionsModel(
-        this.generationClock.currentGenerationProperty,
+        this.environmentModel.generationClock.currentGenerationProperty,
         this.isPlayingProperty,
         tandem.createTandem( 'proportionsModel' )
       );
@@ -64,9 +60,6 @@ define( require => {
 
       // Properties
       this.isPlayingProperty.reset();
-
-      // Clock
-      this.generationClock.reset();
 
       // sub-models
       this.environmentModel.reset();
@@ -108,13 +101,6 @@ define( require => {
      * @public
      */
     stepOnce( dt ) {
-
-      // advance the generation clock
-      if ( this.environmentModel.mateWasAddedProperty.value ) {
-        this.generationClock.step( dt );
-      }
-
-      // advance the environment model
       this.environmentModel.step( dt );
     }
   }

@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
   const PhetioObject = require( 'TANDEM/PhetioObject' );
@@ -32,6 +33,13 @@ define( require => {
       super( {
         tandem: tandem,
         phetioState: false // to prevent serialization, because we don't have an IO type
+      } );
+
+      // @public
+      this.isRunningProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'isRunningProperty' ),
+        phetioReadOnly: true,
+        phetioDocumentation: 'whether the generation clock is running'
       } );
 
       // @public (read-only)
@@ -79,11 +87,13 @@ define( require => {
      * @public
      */
     reset() {
+      this.isRunningProperty.reset();
       this.timeProperty.reset();
     }
 
     /**
      * @public
+     * @override
      */
     dispose() {
       assert && assert( false, 'GenerationClock does not support dispose' );
@@ -94,7 +104,9 @@ define( require => {
      * @public
      */
     step( dt ) {
-      this.timeProperty.value += dt;
+      if ( this.isRunningProperty.value ) {
+        this.timeProperty.value += dt;
+      }
     }
   }
 

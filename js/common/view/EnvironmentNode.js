@@ -76,12 +76,12 @@ define( require => {
 
       // 'Add a Mate' push button
       const addAMateButton = new AddAMateButton( {
+        visible: ( environmentModel.bunnies.length === 1 ),
         listener: () => {
-          environmentModel.mateWasAddedProperty.value = true;
           addAMateButton.visible = false;
-          //TODO
+          //TODO add a bunny
+          environmentModel.generationClock.isRunningProperty.value = true;
         },
-        visible: !environmentModel.mateWasAddedProperty.value,
         centerX: frameNode.centerX,
         bottom: frameNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
         tandem: options.tandem.createTandem( 'addAMateButton' )
@@ -89,19 +89,21 @@ define( require => {
 
       // 'Play' push button
       const playButton = new PlayButton( {
-        center: frameNode.center,
-        visible: false, //TODO
+        visible: ( environmentModel.bunnies.length > 1 ),
         listener: () => {
-          //TODO
+          playButton.visible = false;
+          environmentModel.generationClock.isRunningProperty.value = true;
         },
+        center: frameNode.center,
         tandem: options.tandem.createTandem( 'playButton' )
       } );
 
       // 'Play Again' push button
       const playAgainButton = new PlayAgainButton( {
         center: frameNode.center,
-        visible: false, //TODO
+        visible: false,
         listener: () => {
+          playAgainButton.visible = false;
           //TODO
         },
         tandem: options.tandem.createTandem( 'playAgainButton' )
@@ -129,7 +131,9 @@ define( require => {
 
       // @private
       this.resetEnvironmentNode = () => {
-        addAMateButton.visible = true;
+        addAMateButton.visible = ( environmentModel.bunnies.length === 1 );
+        playButton.visible = ( environmentModel.bunnies.length > 1 );
+        playAgainButton.visible = false;
       };
 
       // Create a link to the model that this Node displays
