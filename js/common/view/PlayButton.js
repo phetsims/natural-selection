@@ -29,7 +29,10 @@ define( require => {
       options = merge( {}, NaturalSelectionConstants.RECTANGULAR_PUSH_BUTTON_OPTIONS, {
         baseColor: NaturalSelectionColors.ADD_A_MATE_BUTTON,
         xMargin: 12,
-        yMargin: 8
+        yMargin: 8,
+
+        // phet-io
+        phetioReadOnly: true
       }, options );
 
       assert && assert( !options.content, 'PlayButton sets content' );
