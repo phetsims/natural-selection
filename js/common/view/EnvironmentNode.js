@@ -76,10 +76,9 @@ define( require => {
 
       // 'Add a Mate' push button
       const addAMateButton = new AddAMateButton( {
-        visible: ( environmentModel.bunnies.length === 1 ),
         listener: () => {
           addAMateButton.visible = false;
-          //TODO add a bunny
+          environmentModel.addRandomBunny();
           environmentModel.generationClock.isRunningProperty.value = true;
         },
         centerX: frameNode.centerX,
@@ -89,19 +88,17 @@ define( require => {
 
       // 'Play' push button
       const playButton = new PlayButton( {
-        visible: ( environmentModel.bunnies.length > 1 ),
         listener: () => {
           playButton.visible = false;
           environmentModel.generationClock.isRunningProperty.value = true;
         },
-        center: frameNode.center,
+        center: addAMateButton.center,
         tandem: options.tandem.createTandem( 'playButton' )
       } );
 
       // 'Play Again' push button
       const playAgainButton = new PlayAgainButton( {
-        center: frameNode.center,
-        visible: false,
+        center: addAMateButton.center,
         listener: () => {
           playAgainButton.visible = false;
           //TODO
@@ -130,25 +127,28 @@ define( require => {
       super( options );
 
       // @private
-      this.resetEnvironmentNode = () => {
-        addAMateButton.visible = ( environmentModel.bunnies.length === 1 );
-        playButton.visible = ( environmentModel.bunnies.length > 1 );
+      this.initializeButtons = () => {
+        addAMateButton.visible = ( environmentModel.numberOfBunniesProperty.value === 1 );
+        playButton.visible = ( environmentModel.numberOfBunniesProperty.value > 1 );
         playAgainButton.visible = false;
       };
+      this.initializeButtons();
 
       // Create a link to the model that this Node displays
       this.addLinkedElement( environmentModel, {
         tandem: options.tandem.createTandem( 'environmentModel' )
       } );
 
-      // Create view for each bunny
+      // Create the view for each bunny
       environmentModel.bunnies.forEach( bunny => {
         worldContents.addChild( new BunnyNode( bunny, environmentModel.modelViewTransform ) );
+        //TODO sort by depth
       } );
 
-      // When a bunny is born, add it to the view
-      environmentModel.bunnyBornEmitter.addListener( bunny => {
+      // When a bunny is added to the model, create its view
+      environmentModel.bunnyAddedEmitter.addListener( bunny => {
         worldContents.addChild( new BunnyNode( bunny, environmentModel.modelViewTransform ) );
+        //TODO sort by depth
       } );
     }
 
@@ -156,7 +156,7 @@ define( require => {
      * @public
      */
     reset() {
-      this.resetEnvironmentNode();
+      this.initializeButtons();
     }
 
     /**

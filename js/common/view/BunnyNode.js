@@ -56,7 +56,7 @@
        super( options );
 
        // Position the bunny, and scale it based on depth.
-       const positionObserver = position => {
+       const bunnyPositionObserver = position => {
          assert && assert( bunny.isAliveProperty.value, 'bunny is dead' );
 
          // position
@@ -67,24 +67,25 @@
          const direction = bunny.movingRight ? 1 : -1; // bunny images point to right
          this.setScaleMagnitude( direction * scale, scale );
        };
-       bunny.positionProperty.link( positionObserver );
+       bunny.positionProperty.link( bunnyPositionObserver );
 
        // Optionally hide the bunny when it dies. Dead bunnies are shown in the Pedigree graph.
-       const isAliveObserver = isAlive => {
+       const bunnyIsAliveObserver = isAlive => {
          this.visible = isAlive || options.showDeadBunny;
        };
-       bunny.isAliveProperty.link( isAliveObserver );
+       bunny.isAliveProperty.link( bunnyIsAliveObserver );
 
-       const disposedListener = () => {
+       // Dispose this node when its associated bunny is disposed.
+       const bunnyDisposedListener = () => {
          this.dispose();
        };
-       bunny.disposedEmitter.addListener( disposedListener );
+       bunny.disposedEmitter.addListener( bunnyDisposedListener );
 
        // @private
        this.disposeBunnyNode = () => {
-         bunny.positionProperty.unlink( positionObserver );
-         bunny.isAliveProperty.unlink( isAliveObserver );
-         bunny.disposedEmitter.removeListener( disposedListener );
+         bunny.positionProperty.unlink( bunnyPositionObserver );
+         bunny.isAliveProperty.unlink( bunnyIsAliveObserver );
+         bunny.disposedEmitter.removeListener( bunnyDisposedListener );
        };
      }
 

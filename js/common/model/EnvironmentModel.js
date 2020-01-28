@@ -18,6 +18,8 @@ define( require => {
   const FoodSupply = require( 'NATURAL_SELECTION/common/model/FoodSupply' );
   const GenerationClock = require( 'NATURAL_SELECTION/common/model/GenerationClock' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionQueryParameters = require( 'NATURAL_SELECTION/common/NaturalSelectionQueryParameters' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const PhetioObject = require( 'TANDEM/PhetioObject' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Wolves = require( 'NATURAL_SELECTION/common/model/Wolves' );
@@ -63,11 +65,24 @@ define( require => {
         ( wolvesEnabled, foodIsTough, foodIsLimited ) => ( wolvesEnabled || foodIsTough || foodIsLimited )
       );
 
-      // @public (read-only) {Bunny[]}
+      // @public (read-only) {Bunny[]} use only addBunny and removeBunny to modify this array!
       this.bunnies = [];
 
-      // @public (read-only) emits when a bunny is born
-      this.bunnyBornEmitter = new Emitter( {
+      // @public (read-only)
+      this.numberOfBunniesProperty = new NumberProperty( this.bunnies.length, {
+        numberType: 'Integer',
+        tandem: tandem.createTandem( 'numberOfBunniesProperty' ),
+        phetioReadOnly: true,
+        phetioDocumentation: 'the number of bunnies that exist, living and dead'
+      } );
+
+      // @public (read-only) emit(Bunny) when a bunny is added
+      this.bunnyAddedEmitter = new Emitter( {
+        parameters: [ { valueType: Bunny } ]
+      } );
+
+      // @public (read-only) emit(Bunny) when a bunny is removed
+      this.bunnyRemovedEmitter = new Emitter( {
         parameters: [ { valueType: Bunny } ]
       } );
 
@@ -134,10 +149,11 @@ define( require => {
      */
     disposeBunnies() {
       phet.log && phet.log( 'EnvironmentModel.disposeBunnies' );
-      for ( let i = 0; i < this.bunnies.length; i++ ) {
-        this.bunnies[ i ].dispose();
+      for ( let i = this.bunnies.length - 1; i >= 0; i-- ) {
+        const bunny = this.bunnies[ i ];
+        this.removeBunny( bunny );
+        bunny.dispose();
       }
-      this.bunnies = [];
       //TODO? Bunny.resetStatic();
     }
 
@@ -149,9 +165,44 @@ define( require => {
       phet.log && phet.log( 'EnvironmentModel.initializeBunnyPopulation' );
       assert && assert( this.bunnies.length === 0, 'bunnies exist' );
 
-      const bunny = new Bunny( this.modelViewTransform.getRandomGroundPosition() );
+      //TODO read query parameters and create initial population
+      for ( let i = 0; i < NaturalSelectionQueryParameters.population; i++ ) {
+        this.addRandomBunny();
+      }
+    }
+
+    /**
+     * Adds a bunny at a random position.
+     * @public
+     */
+    addRandomBunny() {
+      this.addBunny( new Bunny( this.modelViewTransform.getRandomGroundPosition() ) );
+    }
+
+    /**
+     * Adds a bunny to the collection.
+     * @param {Bunny} bunny
+     * @private
+     */
+    addBunny( bunny ) {
+      assert && assert( bunny instanceof Bunny, 'invalid bunny' );
       this.bunnies.push( bunny );
-      this.bunnyBornEmitter.emit( bunny );
+      this.numberOfBunniesProperty.value++;
+      this.bunnyAddedEmitter.emit( bunny );
+    }
+
+    /**
+     * Removes a bunny from the collection.
+     * @param {Bunny} bunny
+     * @private
+     */
+    removeBunny( bunny ) {
+      assert && assert( bunny instanceof Bunny, 'invalid bunny' );
+      const index = this.bunnies.indexOf( bunny );
+      assert && assert( index !== -1, `bunny not found: ${bunny}` );
+      this.bunnies.splice( index, 1 );
+      this.numberOfBunniesProperty.value--;
+      this.bunnyRemovedEmitter.emit( bunny );
     }
   }
 
