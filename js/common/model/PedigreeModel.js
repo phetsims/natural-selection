@@ -12,6 +12,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const PhetioObject = require( 'TANDEM/PhetioObject' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class PedigreeModel extends PhetioObject {
 
@@ -19,6 +20,8 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
+
+      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
       super( {
         tandem: tandem,

@@ -14,6 +14,7 @@ define( require => {
   const NumberProperty = require( 'AXON/NumberProperty' );
   const PhetioObject = require( 'TANDEM/PhetioObject' );
   const Property = require( 'AXON/Property' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class ProportionsModel extends PhetioObject {
 
@@ -23,6 +24,8 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( currentGenerationProperty, isPlayingProperty, tandem ) {
+
+      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
       super( {
         tandem: tandem,

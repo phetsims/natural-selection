@@ -20,6 +20,7 @@ define( require => {
   const GenerationClock = require( 'NATURAL_SELECTION/common/model/GenerationClock' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const PhetioObject = require( 'TANDEM/PhetioObject' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Wolves = require( 'NATURAL_SELECTION/common/model/Wolves' );
 
   class EnvironmentModel extends PhetioObject {
@@ -31,6 +32,7 @@ define( require => {
     constructor( generationClock, tandem ) {
 
       assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
+      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
       super( {
         tandem: tandem,

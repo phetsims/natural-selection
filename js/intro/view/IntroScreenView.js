@@ -9,10 +9,12 @@ define( require => {
   'use strict';
 
   // modules
+  const IntroModel = require( 'NATURAL_SELECTION/intro/model/IntroModel' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScreenView = require( 'JOIST/ScreenView' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class IntroScreenView extends ScreenView {
 
@@ -21,6 +23,9 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( model, tandem ) {
+
+      assert && assert( model instanceof IntroModel, 'invalid model' );
+      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
       super( {
         tandem: tandem

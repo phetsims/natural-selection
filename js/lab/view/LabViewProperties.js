@@ -11,6 +11,7 @@ define( require => {
   // modules
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionViewProperties = require( 'NATURAL_SELECTION/common/view/NaturalSelectionViewProperties' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class LabViewProperties extends NaturalSelectionViewProperties {
 
@@ -18,6 +19,9 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
+
+      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
+
       super( tandem );
       //TODO
     }

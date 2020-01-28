@@ -12,6 +12,7 @@ define( require => {
   const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class NaturalSelectionViewProperties {
 
@@ -19,6 +20,8 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
+
+      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
       // @public
       this.graphProperty = new EnumerationProperty( Graphs, Graphs.POPULATION, {

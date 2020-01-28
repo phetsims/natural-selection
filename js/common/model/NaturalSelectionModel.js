@@ -16,6 +16,7 @@ define( require => {
   const PedigreeModel = require( 'NATURAL_SELECTION/common/model/PedigreeModel' );
   const PopulationModel = require( 'NATURAL_SELECTION/common/model/PopulationModel' );
   const ProportionsModel = require( 'NATURAL_SELECTION/common/model/ProportionsModel' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class NaturalSelectionModel {
 
@@ -23,6 +24,8 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
+
+      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
       // @public whether the sim is playing
       this.isPlayingProperty = new BooleanProperty( true, {

@@ -9,9 +9,11 @@ define( require => {
   'use strict';
 
   // modules
+  const LabModel = require( 'NATURAL_SELECTION/lab/model/LabModel' );
   const LabViewProperties = require( 'NATURAL_SELECTION/lab/view/LabViewProperties' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionScreenView = require( 'NATURAL_SELECTION/common/view/NaturalSelectionScreenView' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class LabScreenView extends NaturalSelectionScreenView {
 
@@ -20,6 +22,9 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( model, tandem ) {
+
+      assert && assert( model instanceof LabModel, 'invalid model' );
+      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
       const viewProperties = new LabViewProperties( tandem.createTandem( 'viewProperties') );
 

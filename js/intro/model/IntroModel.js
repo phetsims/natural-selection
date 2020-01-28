@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   /**
    * @constructor
@@ -20,6 +21,8 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
+
+      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
       //TODO
     }
 

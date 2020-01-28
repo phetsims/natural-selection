@@ -18,6 +18,7 @@ define( require => {
   const Property = require( 'AXON/Property' );
   const Screen = require( 'JOIST/Screen' );
   const ScreenIcon = require( 'JOIST/ScreenIcon' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // images
   const brownBunnyImage = require( 'image!NATURAL_SELECTION/bunny-brownFur-straightEars-shortTeeth.png' );
@@ -32,6 +33,8 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
+
+      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
       const options = {
         name: screenIntroString,

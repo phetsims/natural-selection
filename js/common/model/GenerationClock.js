@@ -17,6 +17,7 @@ define( require => {
   const NumberProperty = require( 'AXON/NumberProperty' );
   const NumberIO = require( 'TANDEM/types/NumberIO' );
   const Range = require( 'DOT/Range' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Utils = require( 'DOT/Utils' );
 
   class GenerationClock extends PhetioObject {
@@ -25,6 +26,8 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
+
+      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
       super( {
         tandem: tandem,

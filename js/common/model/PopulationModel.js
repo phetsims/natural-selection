@@ -20,6 +20,7 @@ define( require => {
   const PropertyIO = require( 'AXON/PropertyIO' );
   const Range = require( 'DOT/Range' );
   const RangeIO = require( 'DOT/RangeIO' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Utils = require( 'DOT/Utils' );
 
   // constants
@@ -51,6 +52,8 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( generationsProperty, isPlayingProperty, tandem ) {
+
+      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
       super( {
         tandem: tandem,
