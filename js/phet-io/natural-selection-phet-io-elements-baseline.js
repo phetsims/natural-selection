@@ -2939,20 +2939,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.labScreen.model.environmentModel.wolves.enabledProperty": {
-      "phetioDocumentation": "",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": false,
-      "phetioState": true,
-      "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO<BooleanIO>"
-    },
-    "naturalSelection.labScreen.model.generationClock": {
+    "naturalSelection.labScreen.model.environmentModel.generationClock": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2965,7 +2952,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ObjectIO"
     },
-    "naturalSelection.labScreen.model.generationClock.currentGenerationProperty": {
+    "naturalSelection.labScreen.model.environmentModel.generationClock.currentGenerationProperty": {
       "phetioDocumentation": "integer generation number for the current cycle of the generation clock",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2978,7 +2965,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "DerivedPropertyIO<NumberIO>"
     },
-    "naturalSelection.labScreen.model.generationClock.generationsProperty": {
+    "naturalSelection.labScreen.model.environmentModel.generationClock.generationsProperty": {
       "phetioDocumentation": "decimal number of generations that the generation clock has been running",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2991,7 +2978,20 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "DerivedPropertyIO<NumberIO>"
     },
-    "naturalSelection.labScreen.model.generationClock.timeProperty": {
+    "naturalSelection.labScreen.model.environmentModel.generationClock.isRunningProperty": {
+      "phetioDocumentation": "whether the generation clock is running",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "naturalSelection.labScreen.model.environmentModel.generationClock.timeProperty": {
       "phetioDocumentation": "time that the generation clock has been running, in seconds",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3003,6 +3003,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
+    },
+    "naturalSelection.labScreen.model.environmentModel.wolves.enabledProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "naturalSelection.labScreen.model.isPlayingProperty": {
       "phetioDocumentation": "",
