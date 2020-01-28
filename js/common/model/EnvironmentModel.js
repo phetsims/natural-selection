@@ -73,7 +73,7 @@ define( require => {
       // @public (read-only) {Bunny[]} use only addBunny and removeBunny to modify this array!
       this.bunnies = [];
 
-      // @public (read-only)
+      // @public (read-only) use only addBunny and removeBunny to modify this Property!
       this.numberOfBunniesProperty = new NumberProperty( this.bunnies.length, {
         numberType: 'Integer',
         tandem: tandem.createTandem( 'numberOfBunniesProperty' ),
