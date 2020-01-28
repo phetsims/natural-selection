@@ -10,11 +10,13 @@ define( require => {
 
   // modules
   const Circle = require( 'SCENERY/nodes/Circle' );
+  const GenerationClock = require( 'NATURAL_SELECTION/common/model/GenerationClock' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Property = require( 'AXON/Property' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const Shape = require( 'KITE/Shape' );
@@ -33,6 +35,9 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( generationClock, environmentalFactorEnabledProperty, options ) {
+
+      assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
+      assert && assert( environmentalFactorEnabledProperty instanceof Property, 'invalid environmentalFactorEnabledProperty' );
 
       options = merge( {
 

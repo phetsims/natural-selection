@@ -10,6 +10,7 @@ define( require => {
   'use strict';
 
   // modules
+  const EnvironmentModel = require( 'NATURAL_SELECTION/common/model/EnvironmentModel' );
   const LimitedFoodCheckbox = require( 'NATURAL_SELECTION/common/view/LimitedFoodCheckbox' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -31,6 +32,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( environmentModel, options ) {
+
+      assert && assert( environmentModel instanceof EnvironmentModel, 'invalid environmentModel' );
 
       options = merge( {
 

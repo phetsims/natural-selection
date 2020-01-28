@@ -21,6 +21,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const PopulationModel = require( 'NATURAL_SELECTION/common/model/PopulationModel' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -45,13 +46,15 @@ define( require => {
   class DataProbeNode extends Node {
 
     /**
-     * @param {populationModel} populationModel
+     * @param {PopulationModel} populationModel
      * @param {number} originX TODO make this go away
      * @param {number} graphWidth
      * @param {number} graphHeight
      * @param {Object} [options]
      */
     constructor( populationModel, originX, graphWidth, graphHeight, options ) {
+
+      assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
 
       options = merge( {
         cursor: 'ew-resize', // east-west arrows, <->

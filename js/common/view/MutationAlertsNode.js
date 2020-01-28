@@ -8,6 +8,7 @@ define( require => {
   'use strict';
 
   // modules
+  const AddMutationsPanel = require( 'NATURAL_SELECTION/common/view/AddMutationsPanel' );
   const merge = require( 'PHET_CORE/merge' );
   const MutationComingNode = require( 'NATURAL_SELECTION/common/view/MutationComingNode' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -23,6 +24,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( addMutationsPanel, options ) {
+
+      assert && assert( addMutationsPanel instanceof AddMutationsPanel, 'invalid addMutationsPanel' );
 
       options = merge( {}, options );
 

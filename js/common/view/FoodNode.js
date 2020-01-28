@@ -10,6 +10,8 @@ define( require => {
 
   // modules
   const Circle = require( 'SCENERY/nodes/Circle' );
+  const EnvironmentModelViewTransform = require( 'NATURAL_SELECTION/common/model/EnvironmentModelViewTransform' );
+  const Food = require( 'NATURAL_SELECTION/common/model/Food' );
   const Image = require( 'SCENERY/nodes/Image' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -27,6 +29,9 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( food, modelViewTransform, options ) {
+
+      assert && assert( food instanceof Food, 'invalid food' );
+      assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
       options = options || {};
 

@@ -19,7 +19,9 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const MutationAlertsNode = require( 'NATURAL_SELECTION/common/view/MutationAlertsNode' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const NaturalSelectionModel = require( 'NATURAL_SELECTION/common/model/NaturalSelectionModel' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
+  const NaturalSelectionViewProperties = require( 'NATURAL_SELECTION/common/view/NaturalSelectionViewProperties' );
   const PedigreeNode = require( 'NATURAL_SELECTION/common/view/pedigree/PedigreeNode' );
   const PopulationNode = require( 'NATURAL_SELECTION/common/view/population/PopulationNode' );
   const ProportionsNode = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsNode' );
@@ -38,6 +40,9 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( model, viewProperties, options ) {
+
+      assert && assert( model instanceof NaturalSelectionModel, 'invalid model' );
+      assert && assert( viewProperties instanceof NaturalSelectionViewProperties, 'invalid viewProperties' );
 
       options = merge( {
 

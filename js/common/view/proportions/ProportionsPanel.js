@@ -17,6 +17,7 @@ define( require => {
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
   const ProportionsLegendNode = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsLegendNode' );
+  const ProportionsModel = require( 'NATURAL_SELECTION/common/model/ProportionsModel' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -31,6 +32,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( proportionsModel, options ) {
+
+      assert && assert( proportionsModel instanceof ProportionsModel, 'invalid proportionsModel' );
 
       options = merge( {
         fixedWidth: 100,

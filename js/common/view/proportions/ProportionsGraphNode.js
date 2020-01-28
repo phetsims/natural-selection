@@ -22,6 +22,7 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const ProportionsBarNode = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsBarNode' );
   const ProportionsGenerationControl = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsGenerationControl' );
+  const ProportionsModel = require( 'NATURAL_SELECTION/common/model/ProportionsModel' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Tandem = require( 'TANDEM/Tandem' );
@@ -49,6 +50,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( proportionsModel, options ) {
+
+      assert && assert( proportionsModel instanceof ProportionsModel, 'invalid proportionsModel' );
 
       options = merge( {
         graphWidth: 100,

@@ -16,6 +16,7 @@ define( require => {
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PopulationGraphBackgroundNode = require( 'NATURAL_SELECTION/common/view/population/PopulationGraphBackgroundNode' );
+  const PopulationModel = require( 'NATURAL_SELECTION/common/model/PopulationModel' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -37,6 +38,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( populationModel, options ) {
+
+      assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
 
       options = merge( {
         graphWidth: 100,

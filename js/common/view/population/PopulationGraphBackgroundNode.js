@@ -17,6 +17,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const PopulationModel = require( 'NATURAL_SELECTION/common/model/PopulationModel' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -35,6 +36,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( populationModel, options ) {
+
+      assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
 
       options = merge( {
         backgroundWidth: 100, // width in view coordinates

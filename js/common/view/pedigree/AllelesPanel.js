@@ -19,6 +19,7 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
+  const PedigreeModel = require( 'NATURAL_SELECTION/common/model/PedigreeModel' );
   const SunConstants = require( 'SUN/SunConstants' );
   const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -51,6 +52,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( pedigreeModel, options ) {
+
+      assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
 
       options = merge( {
 

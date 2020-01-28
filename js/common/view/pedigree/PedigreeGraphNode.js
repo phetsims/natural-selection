@@ -13,6 +13,7 @@ define( require => {
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const PedigreeModel = require( 'NATURAL_SELECTION/common/model/PedigreeModel' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   class PedigreeGraphNode extends Node {
@@ -22,6 +23,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( pedigreeModel, options ) {
+
+      assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
 
       options = merge( {
         graphWidth: 100,
