@@ -9,11 +9,13 @@ define( require => {
   'use strict';
 
   // modules
+  const Dimension2 = require( 'DOT/Dimension2' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const ProportionsGraphNode = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsGraphNode' );
+  const ProportionsModel = require( 'NATURAL_SELECTION/common/model/ProportionsModel' );
   const ProportionsPanel = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsPanel' );
   const Tandem = require( 'TANDEM/Tandem' );
 
@@ -25,6 +27,9 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( proportionsModel, size, options ) {
+
+      assert && assert( proportionsModel instanceof ProportionsModel, 'invalid proportionsModel' );
+      assert && assert( size instanceof Dimension2, 'invalid size' );
 
       options = merge( {
 

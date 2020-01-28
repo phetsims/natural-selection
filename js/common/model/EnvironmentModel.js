@@ -12,6 +12,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bunny = require( 'NATURAL_SELECTION/common/model/Bunny' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const Emitter = require( 'AXON/Emitter' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const EnvironmentModelViewTransform = require( 'NATURAL_SELECTION/common/model/EnvironmentModelViewTransform' );
   const Environments = require( 'NATURAL_SELECTION/common/model/Environments' );
@@ -52,28 +53,42 @@ define( require => {
         tandem: tandem.createTandem( 'foodSupply' )
       } );
 
-      // @public (read-only) {Bunny[]}
-      this.bunnies = [ Bunny.createDefault() ];
-
-      //TODO this should be an Emitter
-      // @public whether a mate was added to the lone bunny that appears at startup
-      this.mateWasAddedProperty = new BooleanProperty( this.bunnies.length > 1 );
-
       // @public whether any environmental factor is enabled
       this.environmentalFactorEnabledProperty = new DerivedProperty(
         [ this.wolves.enabledProperty, this.foodSupply.isToughProperty, this.foodSupply.isLimitedProperty ],
         ( wolvesEnabled, foodIsTough, foodIsLimited ) => ( wolvesEnabled || foodIsTough || foodIsLimited )
       );
+
+      // @public (read-only) {Bunny[]}
+      this.bunnies = [];
+
+      // @public (read-only) emits when a bunny is born
+      this.bunnyBornEmitter = new Emitter( {
+        parameters: [ { valueType: Bunny } ]
+      } );
+
+      this.initializeBunnyPopulation();
+
+      //TODO this should be an Emitter
+      // @public whether a mate was added to the lone bunny that appears at startup
+      this.mateWasAddedProperty = new BooleanProperty( this.bunnies.length > 1 );
     }
 
     /**
      * @public
      */
     reset() {
+      phet.log && phet.log( 'EnvironmentModel.reset' );
+      
+      // reset Properties
       this.environmentProperty.reset();
       this.wolves.reset();
       this.foodSupply.reset();
       this.mateWasAddedProperty.reset();
+      
+      // dispose of all bunnies and reinitialize
+      this.disposeBunnies();
+      this.initializeBunnyPopulation();
     }
 
     /**
@@ -89,15 +104,11 @@ define( require => {
      * @public
      */
     playAgain() {
+      phet.log && phet.log( 'EnvironmentModel.playAgain' );
 
-      // dispose of all bunnies
-      for ( let i = 0; i < this.bunnies.length; i++ ) {
-        this.bunnies[ i ].dispose();
-      }
-
-      //TODO create the same initial population
-      // create a lone bunny
-      this.bunnies = [ Bunny.createDefault() ];
+      // dispose of all bunnies and reinitialize
+      this.disposeBunnies();
+      this.initializeBunnyPopulation();
 
       this.mateWasAddedProperty.reset();
     }
@@ -114,6 +125,32 @@ define( require => {
       for ( let i = 0; i < this.bunnies.length; i++ ) {
         this.bunnies[ i ].step( dt );
       }
+    }
+
+    /**
+     * Disposes of all bunnies.
+     * @private
+     */
+    disposeBunnies() {
+      phet.log && phet.log( 'EnvironmentModel.disposeBunnies' );
+      for ( let i = 0; i < this.bunnies.length; i++ ) {
+        this.bunnies[ i ].dispose();
+      }
+      this.bunnies = [];
+      //TODO? Bunny.resetStatic();
+    }
+
+    /**
+     * Initializes the bunny population.
+     * @private
+     */
+    initializeBunnyPopulation() {
+      phet.log && phet.log( 'initializeBunnyPopulation' );
+      assert && assert( this.bunnies.length === 0, 'bunnies exist' );
+
+      const bunny = new Bunny( this.modelViewTransform.getRandomGroundPosition() );
+      this.bunnies.push( bunny );
+      this.bunnyBornEmitter.emit( bunny );
     }
   }
 

@@ -9,11 +9,13 @@ define( require => {
   'use strict';
 
   // modules
+  const Dimension2 = require( 'DOT/Dimension2' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PopulationGraphNode = require( 'NATURAL_SELECTION/common/view/population/PopulationGraphNode' );
+  const PopulationModel = require( 'NATURAL_SELECTION/common/model/PopulationModel' );
   const PopulationPanel = require( 'NATURAL_SELECTION/common/view/population/PopulationPanel' );
   const Tandem = require( 'TANDEM/Tandem' );
 
@@ -25,6 +27,9 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( populationModel, size, options ) {
+
+      assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
+      assert && assert( size instanceof Dimension2, 'invalid size' );
 
       options = merge( {
 

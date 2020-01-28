@@ -10,22 +10,27 @@ define( require => {
 
   // modules
   const AllelesPanel = require( 'NATURAL_SELECTION/common/view/pedigree/AllelesPanel' );
+  const Dimension2 = require( 'DOT/Dimension2' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
   const NaturalSelectionQueryParameters = require( 'NATURAL_SELECTION/common/NaturalSelectionQueryParameters' );
   const PedigreeGraphNode = require( 'NATURAL_SELECTION/common/view/pedigree/PedigreeGraphNode' );
+  const PedigreeModel = require( 'NATURAL_SELECTION/common/model/PedigreeModel' );
   const Tandem = require( 'TANDEM/Tandem' );
 
   class PedigreeNode extends HBox {
 
     /**
      * @param {PedigreeModel} pedigreeModel
-     * param {Dimension2} size - dimensions of the rectangle available for this Node and its children
+     * @param {Dimension2} size - dimensions of the rectangle available for this Node and its children
      * @param {Object} [options]
      */
     constructor( pedigreeModel, size, options ) {
+
+      assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
+      assert && assert( size instanceof Dimension2, 'invalid size' );
 
       options = merge( {
 

@@ -9,25 +9,58 @@ define( require => {
   'use strict';
 
   // modules
-  const BunnyGenotype = require( 'NATURAL_SELECTION/common/model/BunnyGenotype' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Emitter = require( 'AXON/Emitter' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const Property = require( 'AXON/Property' );
+  const Utils = require( 'DOT/Utils' );
+  const Vector3 = require( 'DOT/Vector3' );
+
+  // Number of bunnies instantiated.
+  let bunnyCount = 0;
 
   class Bunny {
 
     /**
-     * @param {BunnyGenotype} genotype
+     * @param {Vector3} position
+     * @param {Object} [options]
      */
-    constructor( genotype ) {
-      assert && assert( genotype instanceof BunnyGenotype, 'invalid genotype' );
+    constructor( position, options ) {
+
+      options = merge( {
+        generation: 0,
+        father: null, // {Bunny|null} null if no father
+        mother: null // {Bunny|null} null if no mother
+      }, options );
+
+      assert && assert( Utils.isInteger( options.generation ), `invalid generation: ${options.generation}` );
+
+      // @public
+      this.positionProperty = new Property( position, {
+        valueType: Vector3
+      } );
+      this.positionProperty.lazyLink( position => {
+        assert && assert( !this.isDisposed, 'bunny is disposed' );
+      } );
+
+      // @public
+      this.isAliveProperty = new BooleanProperty( true );
+      this.isAliveProperty.lazyLink( isAlive => {
+        assert && assert( !this.isDisposed, 'bunny is disposed' );
+        assert && assert( !isAlive, 'bunny cannot be resurrected' );
+      } );
 
       // @public (read-only)
-      this.genotype = genotype;
-
-      // @public (read-only)
-      this.deathEmitter = new Emitter();
-      this.isAlive = true;
+      this.id = bunnyCount++;
+      this.movingRight = phet.joist.random.nextBoolean();
+      this.generation = options.generation;
+      this.father = options.father;
+      this.mother = options.mother;
       this.isDisposed = false;
+      this.disposedEmitter = new Emitter( {
+        parameters: [ { valueType: Bunny } ]
+      } );
     }
 
     /**
@@ -35,8 +68,8 @@ define( require => {
      * @public
      */
     step( dt ) {
-      assert && assert( !this.isDisposed, 'attempted to step a disposed bunny' );
-      if ( this.isAlive ) {
+      assert && assert( !this.isDisposed, 'bunny is disposed' );
+      if ( this.isAliveProperty.value ) {
         //TODO
       }
     }
@@ -46,29 +79,42 @@ define( require => {
      * @public
      */
     kill() {
-      assert && assert( this.isAlive, 'bunny is already dead' );
-      assert && assert( !this.isDisposed, 'attempted to kill a disposed bunny' );
-      this.isAlive = false;
-      this.deathEmitter.emit();
+      assert && assert( this.isAliveProperty.value, 'bunny is dead' );
+      assert && assert( !this.isDisposed, 'bunny is disposed' );
+      this.isAliveProperty.value = false;
     }
 
     /**
      * @public
      */
     dispose() {
-      assert && assert( !this.isDisposed, 'bunny is already disposed' );
-      //TODO
+      assert && assert( !this.isDisposed, 'bunny is disposed' );
       this.isDisposed = true;
+      this.disposedEmitter.emit( this );
+      this.disposedEmitter.dispose();
+      //TODO
     }
 
     /**
-     * Creates a bunny with the default genotype.
-     * This is used for bunnies that have no ancestors, the lone bunny and its mate.
-     * @returns {Bunny}
+     * String representation of this bunny. For debugging only. DO NOT RELY ON THE FORMAT OF THIS STRING!
+     * @returns {string}
      * @public
      */
-    static createDefault() {
-      return new Bunny( BunnyGenotype.createDefault() );
+    toString() {
+      return 'Bunny[' +
+             `id:${this.id}, ` +
+             `generation:${this.generation}, ` +
+             'father:' + ( (this.father && this.father.id) || null ) + ', ' +
+             'mother:' + ( (this.mother && this.mother.id) || null ) + ', ' +
+             `position: ${this.positionProperty.value}` +
+             ']';
+    }
+
+    /**
+     * @public
+     */
+    static resetStatic() {
+      bunnyCount = 0;
     }
   }
 

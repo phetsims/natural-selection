@@ -10,7 +10,9 @@ define( require => {
 
   // modules
   const AddAMateButton = require( 'NATURAL_SELECTION/common/view/AddAMateButton' );
+  const BunnyNode = require( 'NATURAL_SELECTION/common/view/BunnyNode' );
   const EnvironmentBackgroundNode = require( 'NATURAL_SELECTION/common/view/EnvironmentBackgroundNode' );
+  const EnvironmentModel = require( 'NATURAL_SELECTION/common/model/EnvironmentModel' );
   const EnvironmentRadioButtonGroup = require( 'NATURAL_SELECTION/common/view/EnvironmentRadioButtonGroup' );
   const FoodNode = require( 'NATURAL_SELECTION/common/view/FoodNode' );
   const GenerationClockNode = require( 'NATURAL_SELECTION/common/view/GenerationClockNode' );
@@ -32,6 +34,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( environmentModel, options ) {
+
+      assert && assert( environmentModel instanceof EnvironmentModel, 'invalid environmentModel' );
 
       options = merge( {
         size: environmentModel.modelViewTransform.viewSize,
@@ -131,6 +135,17 @@ define( require => {
       // Create a link to the model that this Node displays
       this.addLinkedElement( environmentModel, {
         tandem: options.tandem.createTandem( 'environmentModel' )
+      } );
+
+      // Create view for each bunny
+      environmentModel.bunnies.forEach( bunny => {
+        worldContents.addChild( new BunnyNode( bunny, environmentModel.modelViewTransform ) );
+      } );
+
+      // When a bunny is born, add it to the view
+      environmentModel.bunnyBornEmitter.addListener( bunny => {
+        phet.log && phet.log( `creating view for bunny ${bunny.toString()}` );
+        worldContents.addChild( new BunnyNode( bunny, environmentModel.modelViewTransform ) );
       } );
     }
 

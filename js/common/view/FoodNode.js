@@ -46,9 +46,7 @@ define( require => {
       if ( phet.chipper.queryParameters.dev ) {
 
         // Red dot at the origin
-        const originNode = new Circle( 4, {
-          fill: 'red'
-        } );
+        const originNode = new Circle( 4, { fill: 'red' } );
 
         // Show the label corresponding to the specification in https://github.com/phetsims/natural-selection/issues/17.
         const debugLabelNode = new Text( food.debugLabel, {

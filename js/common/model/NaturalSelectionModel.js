@@ -70,8 +70,6 @@ define( require => {
       this.populationModel.reset();
       this.proportionsModel.reset();
       this.pedigreeModel.reset();
-
-      this.playAgain();
     }
 
     /**
