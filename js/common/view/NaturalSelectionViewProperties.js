@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * NaturalSelectionViewProperties contains view-specific Properties that are common to all screens.
