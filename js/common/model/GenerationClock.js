@@ -12,6 +12,7 @@ define( require => {
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
+  const merge = require( 'PHET_CORE/merge' );
   const PhetioObject = require( 'TANDEM/PhetioObject' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
@@ -24,20 +25,22 @@ define( require => {
   class GenerationClock extends PhetioObject {
 
     /**
-     * @param {Tandem} tandem
+     * @param {Object} [options]
      */
-    constructor( tandem ) {
+    constructor( options ) {
 
-      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
+      options = merge( {
 
-      super( {
-        tandem: tandem,
+        // phet-io
+        tandem: Tandem.REQUIRED,
         phetioState: false // to prevent serialization, because we don't have an IO type
-      } );
+      }, options );
+
+      super( options );
 
       // @public
       this.isRunningProperty = new BooleanProperty( false, {
-        tandem: tandem.createTandem( 'isRunningProperty' ),
+        tandem: options.tandem.createTandem( 'isRunningProperty' ),
         phetioReadOnly: true,
         phetioDocumentation: 'whether the generation clock is running'
       } );
@@ -45,7 +48,7 @@ define( require => {
       // @public (read-only)
       this.timeProperty = new NumberProperty( 0, {
         isValidValue: time => ( time >= 0 ),
-        tandem: tandem.createTandem( 'timeProperty' ),
+        tandem: options.tandem.createTandem( 'timeProperty' ),
         phetioReadOnly: true,
         phetioDocumentation: 'time that the generation clock has been running, in seconds',
         phetioHighFrequency: true
@@ -56,7 +59,7 @@ define( require => {
         [ this.timeProperty ],
         time => time / NaturalSelectionConstants.SECONDS_PER_GENERATION, {
           phetioType: DerivedPropertyIO( NumberIO ),
-          tandem: tandem.createTandem( 'generationsProperty' ),
+          tandem: options.tandem.createTandem( 'generationsProperty' ),
           phetioDocumentation: 'decimal number of generations that the generation clock has been running',
           phetioHighFrequency: true
         } );
@@ -67,7 +70,7 @@ define( require => {
         generations => Math.floor( generations ), {
           phetioType: DerivedPropertyIO( NumberIO ),
           isValidValue: currentGeneration => Utils.isInteger( currentGeneration ),
-          tandem: tandem.createTandem( 'currentGenerationProperty' ),
+          tandem: options.tandem.createTandem( 'currentGenerationProperty' ),
           phetioDocumentation: 'integer generation number for the current cycle of the generation clock'
         }
       );

@@ -59,7 +59,6 @@ define( require => {
 
         // phet-io
         tandem: Tandem.REQUIRED
-
       }, options );
 
       assert && assert( !options.buttonOptions.content, 'ZoomControl sets buttonOptions.content' );

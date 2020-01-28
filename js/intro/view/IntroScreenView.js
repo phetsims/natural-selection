@@ -28,6 +28,8 @@ define( require => {
       assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
       super( {
+
+        // phet-io
         tandem: tandem
       } );
 

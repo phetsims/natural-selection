@@ -34,12 +34,16 @@ define( require => {
       assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
       super( {
+
+        // phet-io
         tandem: tandem,
         phetioState: false // to prevent serialization, because we don't have an IO type
       } );
 
       // @public (read-only)
-      this.generationClock = new GenerationClock( tandem.createTandem( 'generationClock' ) );
+      this.generationClock = new GenerationClock( {
+        tandem: tandem.createTandem( 'generationClock' )
+      } );
 
       // @public
       this.modelViewTransform = new EnvironmentModelViewTransform();

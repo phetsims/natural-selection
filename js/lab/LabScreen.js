@@ -47,6 +47,8 @@ define( require => {
         name: screenLabString,
         backgroundColorProperty: new Property( NaturalSelectionColors.SCREEN_VIEW_BACKGROUND ),
         homeScreenIcon: createScreenIcon(),
+
+        // phet-io
         tandem: tandem
       };
 

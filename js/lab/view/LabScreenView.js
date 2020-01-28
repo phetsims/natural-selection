@@ -29,6 +29,8 @@ define( require => {
       const viewProperties = new LabViewProperties( tandem.createTandem( 'viewProperties') );
 
       super( model, viewProperties, {
+
+        // phet-io
         tandem: tandem
       } );
 
