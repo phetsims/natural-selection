@@ -17,6 +17,7 @@ define( require => {
   const EnvironmentModelViewTransform = require( 'NATURAL_SELECTION/common/model/EnvironmentModelViewTransform' );
   const Environments = require( 'NATURAL_SELECTION/common/model/Environments' );
   const FoodSupply = require( 'NATURAL_SELECTION/common/model/FoodSupply' );
+  const GenerationClock = require( 'NATURAL_SELECTION/common/model/GenerationClock' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const PhetioObject = require( 'TANDEM/PhetioObject' );
   const Wolves = require( 'NATURAL_SELECTION/common/model/Wolves' );
@@ -28,6 +29,8 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( generationClock, tandem ) {
+
+      assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
 
       super( {
         tandem: tandem,

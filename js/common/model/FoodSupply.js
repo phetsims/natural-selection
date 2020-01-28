@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const EnvironmentModelViewTransform = require( 'NATURAL_SELECTION/common/model/EnvironmentModelViewTransform' );
   const Food = require( 'NATURAL_SELECTION/common/model/Food' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -30,6 +31,8 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( modelViewTransform, options ) {
+
+      assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
       options = merge( {
 
