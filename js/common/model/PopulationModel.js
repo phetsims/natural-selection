@@ -168,6 +168,7 @@ define( require => {
 
     /**
      * @public
+     * @override
      */
     dispose() {
       assert && assert( false, 'PopulationModel does not support dispose' );
