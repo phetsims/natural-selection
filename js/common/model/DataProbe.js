@@ -20,28 +20,33 @@ define( require => {
   const PhetioObject = require( 'TANDEM/PhetioObject' );
   const Property = require( 'AXON/Property' );
   const PropertyIO = require( 'AXON/PropertyIO' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Utils = require( 'DOT/Utils' );
 
   class DataProbe extends PhetioObject {
 
     /**
-     * @param {Tandem} tandem
+     * @param {Object} [options]
      */
-    constructor( tandem ) {
+    constructor( options ) {
 
-      super( {
-        tandem: tandem,
+      options = merge( {
+
+        // phet-io
+        tandem: Tandem.REQUIRED,
         phetioState: false // to prevent serialization, because we don't have an IO type
-      } );
+      }, options );
+
+      super( options );
 
       // @public visibility of the probe
       this.visibleProperty = new BooleanProperty( false, {
-        tandem: tandem.createTandem( 'visibleProperty' )
+        tandem: options.tandem.createTandem( 'visibleProperty' )
       } );
 
       // @public the generation (x) value
       this.generationProperty = new NumberProperty( 0, {
-        tandem: tandem.createTandem( 'generationProperty' ),
+        tandem: options.tandem.createTandem( 'generationProperty' ),
         phetioStudioControl: false //TODO range is dynamic
       } );
 
@@ -54,31 +59,31 @@ define( require => {
       //TODO bogus values, for demo purposes
       // @public counts displayed by the probe
       this.totalPopulationProperty = new Property( 1000, merge( {
-          tandem: tandem.createTandem( 'totalPopulationProperty' )
+          tandem: options.tandem.createTandem( 'totalPopulationProperty' )
         }, populationPropertyOptions )
       );
       this.whiteFurPopulationProperty = new Property( 600, merge( {
-          tandem: tandem.createTandem( 'whiteFurPopulationProperty' )
+          tandem: options.tandem.createTandem( 'whiteFurPopulationProperty' )
         }, populationPropertyOptions )
       );
       this.brownFurPopulationProperty = new Property( 400, merge( {
-          tandem: tandem.createTandem( 'brownFurPopulationProperty' )
+          tandem: options.tandem.createTandem( 'brownFurPopulationProperty' )
         }, populationPropertyOptions )
       );
       this.straightEarsPopulationProperty = new Property( 988, merge( {
-          tandem: tandem.createTandem( 'straightEarsPopulationProperty' )
+          tandem: options.tandem.createTandem( 'straightEarsPopulationProperty' )
         }, populationPropertyOptions )
       );
       this.floppyEarsPopulationProperty = new Property( 12, merge( {
-          tandem: tandem.createTandem( 'floppyEarsPopulationProperty' )
+          tandem: options.tandem.createTandem( 'floppyEarsPopulationProperty' )
         }, populationPropertyOptions )
       );
       this.shortTeethPopulationProperty = new Property( 1000, merge( {
-          tandem: tandem.createTandem( 'shortTeethPopulationProperty' )
+          tandem: options.tandem.createTandem( 'shortTeethPopulationProperty' )
         }, populationPropertyOptions )
       );
       this.longTeethPopulationProperty = new Property( 0, merge( {
-          tandem: tandem.createTandem( 'longTeethPopulationProperty' )
+          tandem: options.tandem.createTandem( 'longTeethPopulationProperty' )
         }, populationPropertyOptions )
       );
     }

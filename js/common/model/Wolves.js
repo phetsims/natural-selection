@@ -9,18 +9,26 @@ define( require => {
 
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   class Wolves {
 
     /**
-     * @param {Tandem} tandem
+     * @param {Object} [options]
      */
-    constructor( tandem ) {
+    constructor( options ) {
+
+      options = merge( {
+
+        // phet-io
+        tandem: Tandem.REQUIRED
+      }, options );
 
       // @public
       this.enabledProperty = new BooleanProperty( false, {
-        tandem: tandem.createTandem( 'enabledProperty' )
+        tandem: options.tandem.createTandem( 'enabledProperty' )
       } );
     }
 

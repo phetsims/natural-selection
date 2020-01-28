@@ -49,7 +49,9 @@ define( require => {
       } );
 
       // @public (read-only)
-      this.wolves = new Wolves( tandem.createTandem( 'wolves' ) );
+      this.wolves = new Wolves( {
+        tandem: tandem.createTandem( 'wolves' )
+      } );
 
       // @public (read-only)
       this.foodSupply = new FoodSupply( this.modelViewTransform, {

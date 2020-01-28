@@ -62,7 +62,9 @@ define( require => {
       this.isPlayingProperty = isPlayingProperty;
 
       // @public
-      this.dataProbe = new DataProbe( tandem.createTandem( 'dataProbe' ) );
+      this.dataProbe = new DataProbe( {
+        tandem: tandem.createTandem( 'dataProbe' )
+      } );
 
       // @public visibility of the total population plot on the graph and data probe
       this.totalVisibleProperty = new BooleanProperty( true, {
