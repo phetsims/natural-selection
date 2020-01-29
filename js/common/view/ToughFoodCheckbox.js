@@ -21,7 +21,7 @@ define( require => {
   const toughFoodString = require( 'string!NATURAL_SELECTION/toughFood' );
 
   // images
-  const toughFoodIcon = require( 'image!NATURAL_SELECTION/toughFoodIcon.png' );
+  const toughFoodCImage = require( 'image!NATURAL_SELECTION/toughFoodC.png' );
 
   class ToughFoodCheckbox extends Checkbox {
 
@@ -33,16 +33,17 @@ define( require => {
 
       options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 
+      const text = new Text( toughFoodString, {
+        font: NaturalSelectionConstants.CHECKBOX_FONT,
+        maxWidth: 110 // determined empirically
+      } );
+
+      const icon = new Image( toughFoodCImage, { scale: 0.2 } );
+
       const content = new HBox( {
         spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING,
-        children: [
-          new Text( toughFoodString, {
-            font: NaturalSelectionConstants.CHECKBOX_FONT,
-            maxWidth: 110 // determined empirically
-          } ),
-          new Image( toughFoodIcon, { scale: 0.4 } )
-        ]
-      });
+        children: [ text, icon ]
+      } );
 
       super( content, wolvesEnabledProperty, options );
     }
