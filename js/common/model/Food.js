@@ -10,12 +10,10 @@ define( require => {
 
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const merge = require( 'PHET_CORE/merge' );
-  const Movable3 = require( 'NATURAL_SELECTION/common/model/Movable3' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const Vector3 = require( 'DOT/Vector3' );
+  const Sprite = require( 'NATURAL_SELECTION/common/model/Sprite' );
 
-  class Food extends Movable3 {
+  class Food extends Sprite {
 
     /**
      * @param {string} debugLabel
@@ -24,11 +22,6 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( debugLabel, toughImage, tenderImage, options ) {
-
-      options = merge( {
-        position: Vector3.ZERO,
-        isMovingRight: true
-      }, options );
 
       assert && assert( !options.tandem, 'Food instances should not be instrumented' );
 

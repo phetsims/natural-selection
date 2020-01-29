@@ -13,13 +13,13 @@
    const EnvironmentModelViewTransform = require( 'NATURAL_SELECTION/common/model/EnvironmentModelViewTransform' );
    const Image = require( 'SCENERY/nodes/Image' );
    const merge = require( 'PHET_CORE/merge' );
-   const Movable3Node = require( 'NATURAL_SELECTION/common/view/Movable3Node' );
+   const SpriteNode = require( 'NATURAL_SELECTION/common/view/SpriteNode' );
    const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
 
    // images
    const bunnyWhiteFurStraightEarsShortTeethImage = require( 'image!NATURAL_SELECTION/bunny-whiteFur-straightEars-shortTeeth.png' );
 
-   class BunnyNode extends Movable3Node {
+   class BunnyNode extends SpriteNode {
 
      /**
       * @param {Bunny} bunny
@@ -34,7 +34,7 @@
        options = merge( {
          showDeadBunny: false,
 
-         // Movable3Node options
+         // SpriteNode options
          scaleFactor: 0.4 // scale applied in addition to modelViewTransform scale
        }, options );
 

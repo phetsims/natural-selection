@@ -183,7 +183,7 @@ define( require => {
     addRandomBunny() {
       this.addBunny( new Bunny( {
         position: this.modelViewTransform.getRandomGroundPosition(),
-        isMovingRight: phet.joist.random.nextBoolean()
+        xDirection: phet.joist.random.nextBoolean() ? 1 : -1
       } ) );
     }
 

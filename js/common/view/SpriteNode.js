@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Movable3Node is a Node that has an associated Movable3 model element, and handles the 3D to 2D projection.
+ * SpriteNode represents a Sprite model element (which exists in 3D space) as a 2D image projected onto the screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -11,14 +11,14 @@ define( require => {
   // modules
   const EnvironmentModelViewTransform = require( 'NATURAL_SELECTION/common/model/EnvironmentModelViewTransform' );
   const merge = require( 'PHET_CORE/merge' );
-  const Movable3 = require( 'NATURAL_SELECTION/common/model/Movable3' );
+  const Sprite = require( 'NATURAL_SELECTION/common/model/Sprite' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const Node = require( 'SCENERY/nodes/Node' );
 
-  class Movable3Node extends Node {
+  class SpriteNode extends Node {
 
     /**
-     * @param {Movable3} movable
+     * @param {Sprite} movable
      * @param {EnvironmentModelViewTransform} modelViewTransform
      * @param {Object} [options]
      */
@@ -28,7 +28,7 @@ define( require => {
         scaleFactor: 1  // scale applied in addition to modelViewTransform scale
       }, options );
 
-      assert && assert( movable instanceof Movable3, 'invalid movable' );
+      assert && assert( movable instanceof Sprite, 'invalid movable' );
       assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
       super( options );
@@ -44,17 +44,16 @@ define( require => {
       movable.positionProperty.link( positionObserver );
 
       // Direction along the x axis
-      const directionObserver = isMovingRight => {
+      const xDirectionObserver = xDirection => {
         const getScaleVector = this.getScaleVector();
-        const xScale = isMovingRight ? getScaleVector.x : -getScaleVector.x;
-        this.setScaleMagnitude( xScale, getScaleVector.y );
+        this.setScaleMagnitude( Math.abs( getScaleVector.x ) * xDirection, getScaleVector.y );
       };
-      movable.isMovingRightProperty.link( directionObserver );
+      movable.xDirectionProperty.link( xDirectionObserver );
 
       // @private
-      this.disposeMovable3Node = () => {
+      this.disposeSpriteNode = () => {
         movable.positionProperty.unlink( positionObserver );
-        movable.isMovingRightProperty.unlink( directionObserver );
+        movable.xDirectionProperty.unlink( xDirectionObserver );
       };
     }
 
@@ -64,9 +63,9 @@ define( require => {
      */
     dispose() {
       super.dispose();
-      this.disposeMovable3Node();
+      this.disposeSpriteNode();
     }
   }
 
-  return naturalSelection.register( 'Movable3Node', Movable3Node );
+  return naturalSelection.register( 'SpriteNode', SpriteNode );
 } );

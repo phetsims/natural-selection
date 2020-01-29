@@ -13,14 +13,13 @@ define( require => {
   const Emitter = require( 'AXON/Emitter' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const Movable3 = require( 'NATURAL_SELECTION/common/model/Movable3' );
+  const Sprite = require( 'NATURAL_SELECTION/common/model/Sprite' );
   const Utils = require( 'DOT/Utils' );
-  const Vector3 = require( 'DOT/Vector3' );
 
   // Number of bunnies instantiated.
   let bunnyCount = 0;
 
-  class Bunny extends Movable3 {
+  class Bunny extends Sprite {
 
     /**
      * @param {Object} [options]
@@ -28,8 +27,6 @@ define( require => {
     constructor( options ) {
 
       options = merge( {
-        position: Vector3.ZERO,
-        isMovingRight: true,
         generation: 0,
         father: null, // {Bunny|null} null if no father
         mother: null // {Bunny|null} null if no mother

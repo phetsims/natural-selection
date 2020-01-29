@@ -14,12 +14,12 @@ define( require => {
   const Food = require( 'NATURAL_SELECTION/common/model/Food' );
   const Image = require( 'SCENERY/nodes/Image' );
   const merge = require( 'PHET_CORE/merge' );
-  const Movable3Node = require( 'NATURAL_SELECTION/common/view/Movable3Node' );
+  const SpriteNode = require( 'NATURAL_SELECTION/common/view/SpriteNode' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );
 
-  class FoodNode extends Movable3Node {
+  class FoodNode extends SpriteNode {
 
     /**
      * @param {Food} food
@@ -33,7 +33,7 @@ define( require => {
 
       options = merge( {
 
-        // Movable3Node options
+        // SpriteNode options
         scaleFactor: 0.5 // scale applied in addition to modelViewTransform scale
       }, options );
 
