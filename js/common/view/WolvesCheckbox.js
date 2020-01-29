@@ -21,7 +21,7 @@ define( require => {
   const wolvesString = require( 'string!NATURAL_SELECTION/wolves' );
 
   // images
-  const wolfIcon = require( 'image!NATURAL_SELECTION/wolfIcon.png' );
+  const wolfImage = require( 'image!NATURAL_SELECTION/wolf.png' );
 
   class WolvesCheckbox extends Checkbox {
 
@@ -33,16 +33,19 @@ define( require => {
 
       options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 
+      const text =  new Text( wolvesString, {
+        font: NaturalSelectionConstants.CHECKBOX_FONT,
+        maxWidth: 110 // determined empirically
+      } );
+
+      const icon = new Image( wolfImage );
+      const scale = 0.064;
+      icon.setScaleMagnitude( -scale, scale );
+
       const content = new HBox( {
         spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING,
-        children: [
-          new Text( wolvesString, {
-            font: NaturalSelectionConstants.CHECKBOX_FONT,
-            maxWidth: 110 // determined empirically
-          } ),
-          new Image( wolfIcon, { scale: 0.4 } )
-        ]
-      });
+        children: [ text, icon ]
+      } );
 
       super( content, wolvesEnabledProperty, options );
     }
