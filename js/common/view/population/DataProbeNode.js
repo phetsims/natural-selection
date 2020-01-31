@@ -123,7 +123,6 @@ define( require => {
       const xRangeView = new Range( originX, originX + graphWidth );
 
       this.addInputListener( new DataProbeDragListener( this.positionProperty, xRangeView, {
-        pressCursor: options.cursor,
         tandem: options.tandem.createTandem( 'dragListener' )
       } ) );
 
