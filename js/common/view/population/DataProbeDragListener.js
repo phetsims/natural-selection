@@ -30,9 +30,8 @@ define( require => {
       assert && assert( !options.dragBoundsProperty, 'DataProbeDragListener sets dragBoundsProperty' );
       options.dragBoundsProperty = new Property( new Bounds2( xRange.min, 0, xRange.max, 0 ) );
 
-      //TODO rename options.locationProperty to positionProperty when https://github.com/phetsims/phet-info/issues/126 has been addressed for DragListener
-      assert && assert( !options.locationProperty, 'DataProbeDragListener sets locationProperty' );
-      options.locationProperty = positionProperty;
+      assert && assert( !options.positionProperty, 'DataProbeDragListener sets positionProperty' );
+      options.positionProperty = positionProperty;
 
       super( options );
     }
