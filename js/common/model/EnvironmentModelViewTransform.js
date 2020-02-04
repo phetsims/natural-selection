@@ -79,8 +79,13 @@ define( require => {
   const Vector3 = require( 'DOT/Vector3' );
 
   // constants
-  const NEAR_SCALE = 1; // scale at zNearModel
+
+  // scale at zNearModel
+  const NEAR_SCALE = 1;
   assert && assert( NEAR_SCALE > 0 && NEAR_SCALE <= 1, `invalid NEAR_SCALE: ${NEAR_SCALE}` );
+
+  // margin for getRandomGroundPosition (in model coordinates), to keep bunnies totally inside the viewing area
+  const X_MARGIN = 20;
 
   class EnvironmentModelViewTransform {
 
@@ -118,7 +123,9 @@ define( require => {
       const zModel = phet.joist.random.nextDoubleBetween( this.zNearModel, this.zFarModel );
 
       // Choose a random x coordinate at the z coordinate.
-      const xModel = this.getMaximumX( zModel ) * ( phet.joist.random.nextDouble() * 2 - 1 );
+      const xMinModel = this.getMinimumX( zModel ) + X_MARGIN;
+      const xMaxModel = this.getMaximumX( zModel ) - X_MARGIN;
+      const xModel = phet.joist.random.nextDoubleBetween( xMinModel, xMaxModel );
 
       // Get the ground y coordinate at the z coordinate.
       const yModel = this.getGroundY( zModel );
@@ -176,6 +183,7 @@ define( require => {
       return -this.getMaximumX( zModel );
     }
 
+    //TODO this isn't the same as scale used to compute coordinates, like getMaximumX. Should it be?
     /**
      * Gets the view scaling factor that corresponds to model z position.
      * @param {number} zModel
