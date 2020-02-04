@@ -10,7 +10,6 @@
    // modules
    const Bunny = require( 'NATURAL_SELECTION/common/model/Bunny' );
    const Circle = require( 'SCENERY/nodes/Circle' );
-   const EnvironmentModelViewTransform = require( 'NATURAL_SELECTION/common/model/EnvironmentModelViewTransform' );
    const Image = require( 'SCENERY/nodes/Image' );
    const merge = require( 'PHET_CORE/merge' );
    const SpriteNode = require( 'NATURAL_SELECTION/common/view/SpriteNode' );
@@ -23,13 +22,11 @@
 
      /**
       * @param {Bunny} bunny
-      * @param {EnvironmentModelViewTransform} modelViewTransform
       * @param {Object} [options]
       */
-     constructor( bunny, modelViewTransform, options ) {
+     constructor( bunny, options ) {
 
        assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-       assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
        options = merge( {
          showDeadBunny: false,
@@ -52,7 +49,7 @@
          options.children.push( new Circle( 4, { fill: 'red' } ) );
        }
 
-       super( bunny, modelViewTransform, options );
+       super( bunny, options );
 
        // Optionally hide the bunny when it dies. Dead bunnies are shown in the Pedigree graph.
        const bunnyIsAliveObserver = isAlive => {

@@ -45,26 +45,26 @@ define( require => {
       this.food = [
 
         // Food 'A'
-        new Food( 'A1', toughFoodAImage, tenderFoodAImage, {
+        new Food( 'A1', toughFoodAImage, tenderFoodAImage, modelViewTransform, {
           position: modelViewTransform.getGroundPosition( -65, 210 )
         } ),
-        new Food( 'A2', toughFoodAImage, tenderFoodAImage, {
+        new Food( 'A2', toughFoodAImage, tenderFoodAImage, modelViewTransform, {
           position: modelViewTransform.getGroundPosition( 155, 160 )
         } ),
 
         // Food 'B'
-        new Food( 'B1', toughFoodBImage, tenderFoodBImage, {
+        new Food( 'B1', toughFoodBImage, tenderFoodBImage, modelViewTransform, {
           position: modelViewTransform.getGroundPosition( -155, 160 )
         } ),
-        new Food( 'B2', toughFoodBImage, tenderFoodBImage, {
+        new Food( 'B2', toughFoodBImage, tenderFoodBImage, modelViewTransform, {
           position: modelViewTransform.getGroundPosition( 200, 250 )
         } ),
 
         // Food 'C'
-        new Food( 'C1', toughFoodCImage, tenderFoodCImage, {
+        new Food( 'C1', toughFoodCImage, tenderFoodCImage, modelViewTransform, {
           position: modelViewTransform.getGroundPosition( 60, 185 )
         } ),
-        new Food( 'C2', toughFoodCImage, tenderFoodCImage, {
+        new Food( 'C2', toughFoodCImage, tenderFoodCImage, modelViewTransform, {
           position: modelViewTransform.getGroundPosition( -180, 270 )
         } )
       ];

@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-  const EnvironmentModelViewTransform = require( 'NATURAL_SELECTION/common/model/EnvironmentModelViewTransform' );
   const merge = require( 'PHET_CORE/merge' );
   const Sprite = require( 'NATURAL_SELECTION/common/model/Sprite' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
@@ -18,42 +17,40 @@ define( require => {
   class SpriteNode extends Node {
 
     /**
-     * @param {Sprite} movable
-     * @param {EnvironmentModelViewTransform} modelViewTransform
+     * @param {Sprite} sprite
      * @param {Object} [options]
      */
-    constructor( movable, modelViewTransform, options ) {
+    constructor( sprite, options ) {
 
       options = merge( {
         scaleFactor: 1  // scale applied in addition to modelViewTransform scale
       }, options );
 
-      assert && assert( movable instanceof Sprite, 'invalid movable' );
-      assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
+      assert && assert( sprite instanceof Sprite, 'invalid sprite' );
 
       super( options );
 
       // @public (read-only)
-      this.movable = movable;
+      this.sprite = sprite;
 
       // Position and scale
       const positionObserver = position => {
-        this.translation = modelViewTransform.modelToViewPosition( position );
-        this.setScaleMagnitude( options.scaleFactor * modelViewTransform.getViewScale( position.z ) );
+        this.translation = sprite.modelViewTransform.modelToViewPosition( position );
+        this.setScaleMagnitude( options.scaleFactor * sprite.modelViewTransform.getViewScale( position.z ) );
       };
-      movable.positionProperty.link( positionObserver );
+      sprite.positionProperty.link( positionObserver );
 
       // Direction along the x axis
       const xDirectionObserver = xDirection => {
         const getScaleVector = this.getScaleVector();
         this.setScaleMagnitude( Math.abs( getScaleVector.x ) * xDirection, getScaleVector.y );
       };
-      movable.xDirectionProperty.link( xDirectionObserver );
+      sprite.xDirectionProperty.link( xDirectionObserver );
 
       // @private
       this.disposeSpriteNode = () => {
-        movable.positionProperty.unlink( positionObserver );
-        movable.xDirectionProperty.unlink( xDirectionObserver );
+        sprite.positionProperty.unlink( positionObserver );
+        sprite.xDirectionProperty.unlink( xDirectionObserver );
       };
     }
 

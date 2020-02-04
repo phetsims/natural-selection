@@ -84,8 +84,11 @@ define( require => {
   const NEAR_SCALE = 1;
   assert && assert( NEAR_SCALE > 0 && NEAR_SCALE <= 1, `invalid NEAR_SCALE: ${NEAR_SCALE}` );
 
-  // margin for getRandomGroundPosition (in model coordinates), to keep bunnies totally inside the viewing area
-  const X_MARGIN = 20;
+  // margins for getRandomGroundPosition (in model coordinates)
+  // This keeps bunnies well within the ground trapezoid, and avoids floating-point errors that would have them 
+  // end up just outside the ground trapezoid.
+  const X_MARGIN_MODEL = 20;
+  const Z_MARGIN_MODEL = 10;
 
   class EnvironmentModelViewTransform {
 
@@ -120,11 +123,11 @@ define( require => {
      getRandomGroundPosition() {
 
       // Choose a random z coordinate on the ground trapezoid.
-      const zModel = phet.joist.random.nextDoubleBetween( this.zNearModel, this.zFarModel );
+      const zModel = phet.joist.random.nextDoubleBetween( this.zNearModel + Z_MARGIN_MODEL, this.zFarModel - Z_MARGIN_MODEL );
 
       // Choose a random x coordinate at the z coordinate.
-      const xMinModel = this.getMinimumX( zModel ) + X_MARGIN;
-      const xMaxModel = this.getMaximumX( zModel ) - X_MARGIN;
+      const xMinModel = this.getMinimumX( zModel ) + X_MARGIN_MODEL;
+      const xMaxModel = this.getMaximumX( zModel ) - X_MARGIN_MODEL;
       const xModel = phet.joist.random.nextDoubleBetween( xMinModel, xMaxModel );
 
       // Get the ground y coordinate at the z coordinate.
@@ -181,6 +184,22 @@ define( require => {
      */
     getMinimumX( zModel ) {
       return -this.getMaximumX( zModel );
+    }
+
+    /**
+     * Gets the minimum z model coordinate for the ground trapezoid.
+     * @returns {number}
+     */
+    getMinimumZ() {
+      return this.zNearModel;
+    }
+
+    /**
+     * Gets the maximum z model coordinate for the ground trapezoid.
+     * @returns {number}
+     */
+    getMaximumZ() {
+      return this.zFarModel;
     }
 
     //TODO this isn't the same as scale used to compute coordinates, like getMaximumX. Should it be?
@@ -267,6 +286,9 @@ define( require => {
       assert && assert( false, 'EnvironmentModelViewTransform does not support dispose' );
     }
   }
+
+  EnvironmentModelViewTransform.X_MARGIN_MODEL = X_MARGIN_MODEL;
+  EnvironmentModelViewTransform.Z_MARGIN_MODEL = Z_MARGIN_MODEL;
 
   return naturalSelection.register( 'EnvironmentModelViewTransform', EnvironmentModelViewTransform );
 } );

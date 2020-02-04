@@ -10,7 +10,6 @@ define( require => {
 
   // modules
   const Circle = require( 'SCENERY/nodes/Circle' );
-  const EnvironmentModelViewTransform = require( 'NATURAL_SELECTION/common/model/EnvironmentModelViewTransform' );
   const Food = require( 'NATURAL_SELECTION/common/model/Food' );
   const Image = require( 'SCENERY/nodes/Image' );
   const merge = require( 'PHET_CORE/merge' );
@@ -23,13 +22,11 @@ define( require => {
 
     /**
      * @param {Food} food
-     * @param {EnvironmentModelViewTransform} modelViewTransform
      * @param {Object} [options]
      */
-    constructor( food, modelViewTransform, options ) {
+    constructor( food, options ) {
 
       assert && assert( food instanceof Food, 'invalid food' );
-      assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
       options = merge( {
 
@@ -67,7 +64,7 @@ define( require => {
         options.children.push( debugLabelNode );
       }
 
-      super( food, modelViewTransform, options );
+      super( food, options );
 
       // Show/hide food
       food.visibleProperty.link( visible => {

@@ -181,7 +181,7 @@ define( require => {
      * @public
      */
     addRandomBunny() {
-      this.addBunny( new Bunny( {
+      this.addBunny( new Bunny( this.modelViewTransform, {
         position: this.modelViewTransform.getRandomGroundPosition(),
         xDirection: phet.joist.random.nextBoolean() ? 1 : -1
       } ) );

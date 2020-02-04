@@ -19,13 +19,14 @@ define( require => {
      * @param {string} debugLabel
      * @param {HTMLImageElement} toughImage
      * @param {HTMLImageElement} tenderImage
+     * @param {EnvironmentModelViewTransform} modelViewTransform
      * @param {Object} [options]
      */
-    constructor( debugLabel, toughImage, tenderImage, options ) {
+    constructor( debugLabel, toughImage, tenderImage, modelViewTransform, options ) {
 
       assert && assert( !options.tandem, 'Food instances should not be instrumented' );
 
-      super( options );
+      super( modelViewTransform, options );
 
       // @public (read-only)
       this.debugLabel = debugLabel;
