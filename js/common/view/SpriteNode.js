@@ -10,9 +10,10 @@ define( require => {
 
   // modules
   const merge = require( 'PHET_CORE/merge' );
-  const Sprite = require( 'NATURAL_SELECTION/common/model/Sprite' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const Property = require( 'AXON/Property' );
+  const Sprite = require( 'NATURAL_SELECTION/common/model/Sprite' );
 
   class SpriteNode extends Node {
 
@@ -34,23 +35,16 @@ define( require => {
       this.sprite = sprite;
 
       // Position and scale
-      const positionObserver = position => {
+      const multilink = Property.multilink( [ sprite.positionProperty, sprite.xDirectionProperty ], ( position, xDirection ) => {
+        this.resetTransform();
         this.translation = sprite.modelViewTransform.modelToViewPosition( position );
-        this.setScaleMagnitude( options.scaleFactor * sprite.modelViewTransform.getViewScale( position.z ) );
-      };
-      sprite.positionProperty.link( positionObserver );
-
-      // Direction along the x axis
-      const xDirectionObserver = xDirection => {
-        const getScaleVector = this.getScaleVector();
-        this.setScaleMagnitude( Math.abs( getScaleVector.x ) * xDirection, getScaleVector.y );
-      };
-      sprite.xDirectionProperty.link( xDirectionObserver );
+        const scale = options.scaleFactor * sprite.modelViewTransform.getViewScale( position.z );
+        this.setScaleMagnitude( scale * xDirection, scale );
+      } );
 
       // @private
       this.disposeSpriteNode = () => {
-        sprite.positionProperty.unlink( positionObserver );
-        sprite.xDirectionProperty.unlink( xDirectionObserver );
+        multilink.dispose();
       };
     }
 

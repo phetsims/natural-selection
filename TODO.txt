@@ -1,6 +1,5 @@
 TODO list for natural-selection
 
-Bunnies that change direction at left edge of screen do not reflect their image.
 Bunny.hop is based on number of steps, not dt.
 Lousy names related to Bunny.hop (sinceHopTime, BETWEEN_HOP_TIME, HOP_TIME)
 Layering of SpriteNodes by their positionProperty.value.z
