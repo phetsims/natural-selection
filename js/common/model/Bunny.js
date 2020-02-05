@@ -80,8 +80,8 @@ define( require => {
       // @private {number} the number of steps that the bunny rests before hopping
       this.restSteps = phet.joist.random.nextInt( MIN_REST_STEPS, MAX_REST_STEPS );
 
-      // @private {number} TODO
-      this.sinceHopTime = phet.joist.random.nextInt( this.restSteps );
+      // @private {number} number of times that step has been called in the current rest + hop cycle
+      this.stepsCount = phet.joist.random.nextInt( this.restSteps );
 
       // @public (read-only)
       this.isDisposed = false;
@@ -159,21 +159,22 @@ define( require => {
       //TODO why do we need MAX_HUNGER limit?
       this.hunger = Math.min( this.hunger + phet.joist.random.nextInt( MAX_HUNGER_DELTA ), MAX_HUNGER );
 
-      this.sinceHopTime++;
+      this.stepsCount++;
 
       // When we've completed a hop...
-      if ( this.sinceHopTime > this.restSteps + HOP_STEPS ) {
+      if ( this.stepsCount > this.restSteps + HOP_STEPS ) {
 
         assert && assert( this.modelViewTransform.isGroundPosition( this.positionProperty.value ),
           `expected bunny to be on the ground, position: ${this.positionProperty.value}` );
 
-        this.sinceHopTime = 0;
+        this.stepsCount = 0;
         this.restSteps = phet.joist.random.nextInt( MIN_REST_STEPS, MAX_REST_STEPS );
 
         // Get the delta for the next hop cycle.
         this.hopDelta = this.getHopDelta();
 
         // Reverse delta x if the hop would exceed x boundaries
+        //TODO bunnies only reverse direction when they hit the left/right edges, should they change direction randomly?
         const hopEndX = this.positionProperty.value.x + this.hopDelta.x;
         if ( hopEndX <= this.getMinimumX() || hopEndX >= this.getMaximumX() ) {
           this.hopDelta.setX( -this.hopDelta.x );
@@ -190,10 +191,10 @@ define( require => {
       }
 
       // do part of a hop cycle
-      if ( this.sinceHopTime > this.restSteps ) {
+      if ( this.stepsCount > this.restSteps ) {
         const x = this.positionProperty.value.x + ( this.hopDelta.x / HOP_STEPS );
         const z = this.positionProperty.value.z + ( this.hopDelta.z / HOP_STEPS );
-        const hopHeightFraction = ( this.sinceHopTime - this.restSteps ) / HOP_STEPS;
+        const hopHeightFraction = ( this.stepsCount - this.restSteps ) / HOP_STEPS;
         //TODO I don't understand the last part of this
         const y = this.modelViewTransform.getGroundY( z ) + this.hopDelta.y * 2 * ( -hopHeightFraction * hopHeightFraction + hopHeightFraction );
         this.positionProperty.value = new Vector3( x, y, z );
