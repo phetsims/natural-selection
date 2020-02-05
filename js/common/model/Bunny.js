@@ -157,6 +157,8 @@ define( require => {
 
       // moving expends some energy and makes the bunny more hungry
       //TODO why do we need MAX_HUNGER limit?
+      //TODO should this happen only when the bunny hops? hopping uses more energy than resting
+      //TODO should hungrier bunnies rest longer? hop shorter distances?
       this.hunger = Math.min( this.hunger + phet.joist.random.nextInt( MAX_HUNGER_DELTA ), MAX_HUNGER );
 
       this.stepsCount++;
