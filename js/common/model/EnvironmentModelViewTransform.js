@@ -172,7 +172,7 @@ define( require => {
      * @public
      */
     getMaximumX( zModel ) {
-      assert && assert( zModel >= this.zNearModel && zModel <= this.zFarModel, `invalid zModel: ${zModel}` );
+      assert && assert( zModel > 0, `invalid zModel: ${zModel}` );
       return zModel * this.viewSize.width * 0.5 / this.scaleFactor;
     }
 
