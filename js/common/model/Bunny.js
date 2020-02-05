@@ -166,9 +166,6 @@ define( require => {
       // When we've completed a hop...
       if ( this.hopDelta === null || this.stepsCount > this.restSteps + HOP_STEPS ) {
 
-        assert && assert( this.modelViewTransform.isGroundPosition( this.positionProperty.value ),
-          `expected bunny to be on the ground, position: ${this.positionProperty.value}` );
-
         this.stepsCount = 0;
         this.restSteps = phet.joist.random.nextInt( MIN_REST_STEPS, MAX_REST_STEPS );
 
