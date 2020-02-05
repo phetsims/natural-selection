@@ -74,8 +74,8 @@ define( require => {
       // @private
       this.hunger = phet.joist.random.nextInt( MAX_HUNGER );
 
-      // @private {Vector3} the change in position when the bunny hops
-      this.hopDelta = this.getHopDelta();
+      // @private {Vector3|null} the change in position when the bunny hops
+      this.hopDelta = null;
 
       // @private {number} the number of steps that the bunny rests before hopping
       this.restSteps = phet.joist.random.nextInt( MIN_REST_STEPS, MAX_REST_STEPS );
@@ -164,7 +164,7 @@ define( require => {
       this.stepsCount++;
 
       // When we've completed a hop...
-      if ( this.stepsCount > this.restSteps + HOP_STEPS ) {
+      if ( this.hopDelta === null || this.stepsCount > this.restSteps + HOP_STEPS ) {
 
         assert && assert( this.modelViewTransform.isGroundPosition( this.positionProperty.value ),
           `expected bunny to be on the ground, position: ${this.positionProperty.value}` );

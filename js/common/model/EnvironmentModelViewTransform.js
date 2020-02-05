@@ -88,7 +88,7 @@ define( require => {
   // This keeps bunnies well within the ground trapezoid, and avoids floating-point errors that would have them 
   // end up just outside the ground trapezoid.
   const X_MARGIN_MODEL = 30;
-  const Z_MARGIN_MODEL = 5;
+  const Z_MARGIN_MODEL = 1;
 
   class EnvironmentModelViewTransform {
 
