@@ -2,8 +2,6 @@ TODO list for natural-selection
 
 Bunnies are getting outside the ground trapezoid
 Bunny.hop sometimes fails in call to modelViewTransform.getGroundY(z) because z is slightly outside ground trapezoid
-Bunny.hop is based on number of steps, not dt.
-Lousy names related to Bunny.hop (sinceHopTime, BETWEEN_HOP_TIME, HOP_TIME)
 
 DESIGN
 Make graphs wider by making control panels narrower?
