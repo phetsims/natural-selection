@@ -214,6 +214,7 @@ define( require => {
 
       const swap = ( Math.abs( a ) < Math.abs( b ) );
 
+      //TODO dx could be zero, and that is undesirable
       const dx = Math.abs( swap ? b : a ) * ( this.isMovingRight() ? 1 : -1 ); // match direction of movement
       const dy = HOP_HEIGHT;
       const dz = ( swap ? a : b );
