@@ -150,7 +150,10 @@ define( require => {
       // Get the ground y coordinate at the z coordinate.
       const yModel = this.getGroundY( zModel );
 
-      return new Vector3( xModel, yModel, zModel );
+      const position = new Vector3( xModel, yModel, zModel );
+      assert && assert( this.isGroundPosition( position ), `unexpected position: ${position}` );
+
+      return position;
     }
 
     /**
