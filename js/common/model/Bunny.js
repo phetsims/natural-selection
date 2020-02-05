@@ -21,7 +21,8 @@ define( require => {
   // constants
   const MAX_HUNGER = 600; //TODO describe
   const MAX_HUNGER_DELTA = 3; //TODO describe
-  const BETWEEN_HOP_TIME = 50;
+  const MIN_REST_DURATION = 120;
+  const MAX_REST_DURATION = 1200;
   const HOP_TIME = 10;
   const MAX_HOP_XZ = 20; // max x or z distance that a bunny hops
   const HOP_HEIGHT = 50; // how high above the ground a bunny hops
@@ -63,8 +64,9 @@ define( require => {
 
       // private
       this.hunger = phet.joist.random.nextInt( MAX_HUNGER );
-      this.sinceHopTime = phet.joist.random.nextInt( BETWEEN_HOP_TIME );
       this.hopDelta = this.getHopDelta(); // {Vector3}
+      this.restDuration = phet.joist.random.nextInt( MIN_REST_DURATION, MAX_REST_DURATION );
+      this.sinceHopTime = phet.joist.random.nextInt( this.restDuration );
 
       // @public (read-only)
       this.isDisposed = false;
@@ -144,9 +146,10 @@ define( require => {
       this.sinceHopTime++;
 
       // When we've completed a hop...
-      if ( this.sinceHopTime > BETWEEN_HOP_TIME + HOP_TIME ) {
+      if ( this.sinceHopTime > this.restDuration + HOP_TIME ) {
 
         this.sinceHopTime = 0;
+        this.restDuration = phet.joist.random.nextInt( MIN_REST_DURATION, MAX_REST_DURATION );
 
         // Get the delta for the next hop cycle.
         this.hopDelta = this.getHopDelta();
@@ -168,10 +171,10 @@ define( require => {
       }
 
       // do part of a hop cycle
-      if ( this.sinceHopTime > BETWEEN_HOP_TIME ) {
+      if ( this.sinceHopTime > this.restDuration ) {
         const x = this.positionProperty.value.x + this.hopDelta.x / HOP_TIME;
         const z = this.positionProperty.value.z + this.hopDelta.z / HOP_TIME;
-        const hopHeightFraction = ( this.sinceHopTime - BETWEEN_HOP_TIME ) / HOP_TIME;
+        const hopHeightFraction = ( this.sinceHopTime - this.restDuration ) / HOP_TIME;
         //TODO I don't understand the last part of this
         const y = this.modelViewTransform.getGroundY( z ) + this.hopDelta.y * 2 * ( -hopHeightFraction * hopHeightFraction + hopHeightFraction );
         this.positionProperty.value = new Vector3( x, y, z );
