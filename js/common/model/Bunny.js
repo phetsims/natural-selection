@@ -21,11 +21,20 @@ define( require => {
   // constants
   const MAX_HUNGER = 600; //TODO describe
   const MAX_HUNGER_DELTA = 3; //TODO describe
-  const MIN_REST_DURATION = 120;
-  const MAX_REST_DURATION = 1200;
-  const HOP_TIME = 10;
-  const MAX_HOP_XZ = 20; // max x or z distance that a bunny hops
-  const HOP_HEIGHT = 50; // how high above the ground a bunny hops
+
+  // min and max number of steps that the Bunny will rest before hopping
+  const MIN_REST_STEPS = 120;
+  const MAX_REST_STEPS = 1200;
+
+  // number of steps that is takes to complete a hop
+  const HOP_STEPS = 10;
+
+  // max x or z distance that a bunny hops
+  const MAX_HOP_XZ = 20;
+
+  // how high above the ground a bunny hops
+  //TODO should this be randomized?
+  const HOP_HEIGHT = 50;
 
   // Number of bunnies instantiated.
   let bunnyCount = 0;
@@ -62,14 +71,22 @@ define( require => {
       this.father = options.father;
       this.mother = options.mother;
 
-      // private
+      // @private
       this.hunger = phet.joist.random.nextInt( MAX_HUNGER );
-      this.hopDelta = this.getHopDelta(); // {Vector3}
-      this.restDuration = phet.joist.random.nextInt( MIN_REST_DURATION, MAX_REST_DURATION );
-      this.sinceHopTime = phet.joist.random.nextInt( this.restDuration );
+
+      // @private {Vector3} the change in position when the bunny hops
+      this.hopDelta = this.getHopDelta();
+
+      // @private {number} the number of steps that the bunny rests before hopping
+      this.restSteps = phet.joist.random.nextInt( MIN_REST_STEPS, MAX_REST_STEPS );
+
+      // @private {number} TODO
+      this.sinceHopTime = phet.joist.random.nextInt( this.restSteps );
 
       // @public (read-only)
       this.isDisposed = false;
+
+      // @public emit(Bunny) is called when this Bunny is disposed
       this.disposedEmitter = new Emitter( {
         parameters: [ { valueType: Bunny } ]
       } );
@@ -81,6 +98,17 @@ define( require => {
      */
     reset() {
       assert && assert( false, 'Bunny does not support reset' );
+    }
+
+    /**
+     * @public
+     */
+    dispose() {
+      assert && assert( !this.isDisposed, 'bunny is disposed' );
+      this.isDisposed = true;
+      this.disposedEmitter.emit( this );
+      this.disposedEmitter.dispose();
+      //TODO
     }
 
     /**
@@ -104,17 +132,6 @@ define( require => {
       this.isAliveProperty.value = false;
     }
 
-    /**
-     * @public
-     */
-    dispose() {
-      assert && assert( !this.isDisposed, 'bunny is disposed' );
-      this.isDisposed = true;
-      this.disposedEmitter.emit( this );
-      this.disposedEmitter.dispose();
-      //TODO
-    }
-
     //TODO delete this later in development?
     /**
      * String representation of this bunny. For debugging only. DO NOT RELY ON THE FORMAT OF THIS STRING!
@@ -125,19 +142,18 @@ define( require => {
       return 'Bunny[' +
              `id:${this.id}, ` +
              `generation:${this.generation}, ` +
-             'father:' + ( (this.father && this.father.id) || null ) + ', ' +
-             'mother:' + ( (this.mother && this.mother.id) || null ) + ', ' +
+             'father:' + ( ( this.father && this.father.id ) || null ) + ', ' +
+             'mother:' + ( ( this.mother && this.mother.id ) || null ) + ', ' +
              `position: ${this.positionProperty.value}` +
              ']';
     }
 
     /**
      * This is the hop cycle for a bunny. Each bunny rests, then hops, ad nauseam.
-     * @param {number} dt - time step, in seconds
      * @private
      */
-    hop( dt ) {
-      //TODO use dt
+    hop() {
+      //TODO this is based on number of steps, should it use dt?
 
       // moving expends some energy and makes the bunny more hungry
       //TODO why do we need MAX_HUNGER limit?
@@ -146,24 +162,24 @@ define( require => {
       this.sinceHopTime++;
 
       // When we've completed a hop...
-      if ( this.sinceHopTime > this.restDuration + HOP_TIME ) {
+      if ( this.sinceHopTime > this.restSteps + HOP_STEPS ) {
 
         assert && assert( this.modelViewTransform.isGroundPosition( this.positionProperty.value ),
           `expected bunny to be on the ground, position: ${this.positionProperty.value}` );
 
         this.sinceHopTime = 0;
-        this.restDuration = phet.joist.random.nextInt( MIN_REST_DURATION, MAX_REST_DURATION );
+        this.restSteps = phet.joist.random.nextInt( MIN_REST_STEPS, MAX_REST_STEPS );
 
         // Get the delta for the next hop cycle.
         this.hopDelta = this.getHopDelta();
 
-        // Adjust delta z if the hop would exceed X boundaries
+        // Reverse delta x if the hop would exceed x boundaries
         const hopEndX = this.positionProperty.value.x + this.hopDelta.x;
         if ( hopEndX <= this.getMinimumX() || hopEndX >= this.getMaximumX() ) {
           this.hopDelta.setX( -this.hopDelta.x );
         }
 
-        // Adjust delta z if the hop would exceed z boundaries
+        // Reverse delta z if the hop would exceed z boundaries
         const hopEndZ = this.positionProperty.value.z + this.hopDelta.z;
         if ( hopEndZ <= this.getMinimumZ() || hopEndZ >= this.getMaximumZ() ) {
           this.hopDelta.setZ( -this.hopDelta.z );
@@ -174,10 +190,10 @@ define( require => {
       }
 
       // do part of a hop cycle
-      if ( this.sinceHopTime > this.restDuration ) {
-        const x = this.positionProperty.value.x + this.hopDelta.x / HOP_TIME;
-        const z = this.positionProperty.value.z + this.hopDelta.z / HOP_TIME;
-        const hopHeightFraction = ( this.sinceHopTime - this.restDuration ) / HOP_TIME;
+      if ( this.sinceHopTime > this.restSteps ) {
+        const x = this.positionProperty.value.x + ( this.hopDelta.x / HOP_STEPS );
+        const z = this.positionProperty.value.z + ( this.hopDelta.z / HOP_STEPS );
+        const hopHeightFraction = ( this.sinceHopTime - this.restSteps ) / HOP_STEPS;
         //TODO I don't understand the last part of this
         const y = this.modelViewTransform.getGroundY( z ) + this.hopDelta.y * 2 * ( -hopHeightFraction * hopHeightFraction + hopHeightFraction );
         this.positionProperty.value = new Vector3( x, y, z );
