@@ -148,6 +148,9 @@ define( require => {
       // When we've completed a hop...
       if ( this.sinceHopTime > this.restDuration + HOP_TIME ) {
 
+        assert && assert( this.modelViewTransform.isGroundPosition( this.positionProperty.value ),
+          `expected bunny to be on the ground, position: ${this.positionProperty.value}` );
+
         this.sinceHopTime = 0;
         this.restDuration = phet.joist.random.nextInt( MIN_REST_DURATION, MAX_REST_DURATION );
 

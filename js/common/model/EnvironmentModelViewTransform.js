@@ -87,8 +87,8 @@ define( require => {
   // margins for getRandomGroundPosition (in model coordinates)
   // This keeps bunnies well within the ground trapezoid, and avoids floating-point errors that would have them 
   // end up just outside the ground trapezoid.
-  const X_MARGIN_MODEL = 20;
-  const Z_MARGIN_MODEL = 10;
+  const X_MARGIN_MODEL = 30;
+  const Z_MARGIN_MODEL = 5;
 
   class EnvironmentModelViewTransform {
 
@@ -113,6 +113,23 @@ define( require => {
       // @private common scaling factor used to convert x and y between model and view
       // Multiply for model-to-view, divide for view-to-model.
       this.scaleFactor = this.zNearModel * ( this.viewSize.height - this.yHorizonView ) / this.riseModel;
+    }
+
+    /**
+     * Determines whether the specified position is on the ground trapezoid.
+     * @param {Vector3} position
+     * @returns {boolean}
+     * @public
+     */
+    isGroundPosition( position ) {
+      return (
+        // z
+        position.z >= this.zNearModel && position.z <= this.zFarModel &&
+        // x
+        position.x >= this.getMinimumX( position.z ) && position.x <= this.getMaximumX( position.z ) &&
+        // y
+        position.y === this.getGroundY( position.z )
+      );
     }
 
     /**
