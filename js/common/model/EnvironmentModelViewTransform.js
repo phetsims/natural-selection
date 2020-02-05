@@ -87,7 +87,7 @@ define( require => {
   // margins for getRandomGroundPosition (in model coordinates)
   // This keeps bunnies well within the ground trapezoid, and avoids floating-point errors that would have them 
   // end up just outside the ground trapezoid.
-  const X_MARGIN_MODEL = 30;
+  const X_MARGIN_MODEL = 20;
   const Z_MARGIN_MODEL = 1;
 
   class EnvironmentModelViewTransform {
@@ -113,23 +113,6 @@ define( require => {
       // @private common scaling factor used to convert x and y between model and view
       // Multiply for model-to-view, divide for view-to-model.
       this.scaleFactor = this.zNearModel * ( this.viewSize.height - this.yHorizonView ) / this.riseModel;
-    }
-
-    /**
-     * Determines whether the specified position is on the ground trapezoid.
-     * @param {Vector3} position
-     * @returns {boolean}
-     * @public
-     */
-    isGroundPosition( position ) {
-      return (
-        // z
-        position.z >= this.zNearModel && position.z <= this.zFarModel &&
-        // x
-        position.x >= this.getMinimumX( position.z ) && position.x <= this.getMaximumX( position.z ) &&
-        // y
-        position.y === this.getGroundY( position.z )
-      );
     }
 
     /**
@@ -304,6 +287,48 @@ define( require => {
      */
     dispose() {
       assert && assert( false, 'EnvironmentModelViewTransform does not support dispose' );
+    }
+
+    /**
+     * Determines whether the specified position is on the ground trapezoid.
+     * @param {Vector3} position
+     * @returns {boolean}
+     * @public
+     */
+    isGroundPosition( position ) {
+
+      // check z first, because the validity of x and y depend on z
+      return ( this.isGroundZ( position ) && this.isGroundX( position ) && this.isGroundY( position ) );
+    }
+
+    /**
+     * Determines whether the specified position has its x coordinate on the ground trapezoid.
+     * @param {Vector3} position
+     * @returns {boolean}
+     * @private
+     */
+    isGroundX( position ) {
+      return ( position.x >= this.getMinimumX( position.z ) && position.x <= this.getMaximumX( position.z ) );
+    }
+
+    /**
+     * Determines whether the specified position has its y coordinate on the ground trapezoid.
+     * @param {Vector3} position
+     * @returns {boolean}
+     * @private
+     */
+    isGroundY( position ) {
+      return ( position.y === this.getGroundY( position.z ) );
+    }
+
+    /**
+     * Determines whether the specified position has its z coordinate on the ground trapezoid.
+     * @param {Vector3} position
+     * @returns {boolean}
+     * @private
+     */
+    isGroundZ( position ) {
+      return ( position.z >= this.zNearModel && position.z <= this.zFarModel );
     }
   }
 
