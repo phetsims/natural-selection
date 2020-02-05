@@ -175,6 +175,10 @@ define( require => {
         populationNode.reset();
         //TODO
       };
+
+      // @private
+      this.model = model;
+      this.environmentNode = environmentNode;
     }
 
     /**
@@ -197,7 +201,9 @@ define( require => {
      * @public
      */
     step( dt ) {
-      //TODO
+      if ( this.model.isPlayingProperty.value ) {
+        this.environmentNode.step( dt );
+      }
     }
   }
 

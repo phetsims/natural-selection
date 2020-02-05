@@ -25,6 +25,7 @@ define( require => {
   const PlayAgainButton = require( 'NATURAL_SELECTION/common/view/PlayAgainButton' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
+  const SpriteNode = require( 'NATURAL_SELECTION/common/view/SpriteNode' );
   const Tandem = require( 'TANDEM/Tandem' );
 
   class EnvironmentNode extends Node {
@@ -45,15 +46,9 @@ define( require => {
         tandem: Tandem.REQUIRED,
         phetioDocumentation: 'the area of the screen that displays what is happening in the environment'
       }, options );
-
+      
       const backgroundNode = new EnvironmentBackgroundNode( environmentModel.environmentProperty, options.size,
         options.yHorizon );
-
-      // Everything in the world, clipped to the viewport
-      const worldContents = new Node( {
-        children: [ backgroundNode ],
-        clipArea: Shape.rect( 0, 0, options.size.width, options.size.height )
-      } );
 
       // Frame around the viewport, to provide a nice crisp border, and for layout of UI components.
       const frameNode = new Rectangle( 0, 0, options.size.width, options.size.height, {
@@ -107,16 +102,23 @@ define( require => {
         tandem: options.tandem.createTandem( 'playAgainButton' )
       } );
 
+      // Parent for all SpriteNodes, clipped to the viewport
+      const spritesNode = new Node( {
+        children: [],
+        clipArea: Shape.rect( 0, 0, options.size.width, options.size.height )
+      } );
+      
       // Add food items
       const food = environmentModel.foodSupply.food;
       for ( let i = 0; i < food.length; i++ ) {
-        worldContents.addChild( new FoodNode( food[ i ] ) );
+        spritesNode.addChild( new FoodNode( food[ i ] ) );
       }
 
       // layering
       assert && assert( !options.children, 'EnvironmentNode sets children' );
       options.children = [
-        worldContents,
+        backgroundNode,
+        spritesNode,
         frameNode,
         generationClockNode,
         environmentRadioButtonGroup,
@@ -142,15 +144,22 @@ define( require => {
 
       // Create the view for each bunny
       environmentModel.bunnies.forEach( bunny => {
-        worldContents.addChild( new BunnyNode( bunny ) );
+        spritesNode.addChild( new BunnyNode( bunny ) );
         //TODO sort by positionProperty.value.z
       } );
 
       // When a bunny is added to the model, create its view
       environmentModel.bunnyAddedEmitter.addListener( bunny => {
-        worldContents.addChild( new BunnyNode( bunny ) );
+        spritesNode.addChild( new BunnyNode( bunny ) );
         //TODO sort by positionProperty.value.z
       } );
+
+      // @private
+      this.environmentModel = environmentModel;
+      this.spritesNode = spritesNode;
+
+      assert && assert( _.every( this.spritesNode.children, child => child instanceof SpriteNode ),
+        'every child of spritesNode must be an instanceof SpriteNode' );
     }
 
     /**
@@ -166,6 +175,19 @@ define( require => {
      */
     dispose() {
       assert && assert( false, 'EnvironmentNode does not support dispose' );
+    }
+
+    /**
+     * @param dt - time step, in seconds
+     * @public
+     */
+    step( dt ) {
+
+      // Sort the SpriteNodes by decreasing position.z
+      this.spritesNode.children = _.sortBy(
+        this.spritesNode.children,
+        child => child.sprite.positionProperty.value.z
+      ).reverse();
     }
   }
 
