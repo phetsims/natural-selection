@@ -22,19 +22,21 @@ define( require => {
   const MAX_HUNGER = 600; //TODO describe
   const MAX_HUNGER_DELTA = 3; //TODO describe
 
-  // min and max number of steps that the Bunny will rest before hopping
-  const MIN_REST_STEPS = 120;
-  const MAX_REST_STEPS = 1200;
+  // number of steps that the Bunny will rest before hopping
+  const MIN_REST_STEPS = 40;
+  const MAX_REST_STEPS = 160;
 
   // number of steps that is takes to complete a hop
-  const HOP_STEPS = 10;
+  const MIN_HOP_STEPS = 10;
+  const MAX_HOP_STEPS = 20;
 
-  // max x or z distance that a bunny hops
+  // x or z distance that a bunny hops
+  const MIN_HOP_XZ = 15;
   const MAX_HOP_XZ = 20;
 
   // how high above the ground a bunny hops
-  //TODO should this be randomized?
-  const HOP_HEIGHT = 50;
+  const MIN_HOP_HEIGHT = 30;
+  const MAX_HOP_HEIGHT = 50;
 
   // Number of bunnies instantiated.
   let bunnyCount = 0;
@@ -74,14 +76,17 @@ define( require => {
       // @private
       this.hunger = phet.joist.random.nextInt( MAX_HUNGER );
 
-      // @private {Vector3|null} the change in position when the bunny hops
-      this.hopDelta = null;
+      // @private {number} number of times that step has been called in the current rest + hop cycle
+      this.stepsCount = 0;
 
       // @private {number} the number of steps that the bunny rests before hopping
-      this.restSteps = phet.joist.random.nextInt( MIN_REST_STEPS, MAX_REST_STEPS );
+      this.restSteps = MAX_REST_STEPS;
 
-      // @private {number} number of times that step has been called in the current rest + hop cycle
-      this.stepsCount = phet.joist.random.nextInt( this.restSteps );
+      // @private {number} the number of steps required to complete one full hop
+      this.hopSteps = MAX_HOP_STEPS;
+
+      // @private {Vector3|null} the change in position when the bunny hops
+      this.hopDelta = null;
 
       // @public (read-only)
       this.isDisposed = false;
@@ -118,7 +123,7 @@ define( require => {
     step( dt ) {
       assert && assert( !this.isDisposed, 'bunny is disposed' );
       if ( this.isAliveProperty.value ) {
-        this.hop();
+        this.moveAround();
       }
     }
 
@@ -149,76 +154,82 @@ define( require => {
     }
 
     /**
-     * This is the hop cycle for a bunny. Each bunny rests, then hops, ad nauseam.
+     * This is the motion cycle for a bunny. Each bunny rests, then hops, ad nauseam.
      * @private
      */
-    hop() {
+    moveAround() {
       //TODO this is based on number of steps, should it use dt?
 
       // moving expends some energy and makes the bunny more hungry
       //TODO why do we need MAX_HUNGER limit?
       //TODO should this happen only when the bunny hops? hopping uses more energy than resting
       //TODO should hungrier bunnies rest longer? hop shorter distances?
+      //TODO why a random (possibly zero) delta?
       this.hunger = Math.min( this.hunger + phet.joist.random.nextInt( MAX_HUNGER_DELTA ), MAX_HUNGER );
 
       this.stepsCount++;
 
-      // When we've completed a hop...
-      if ( this.hopDelta === null || this.stepsCount > this.restSteps + HOP_STEPS ) {
+      if ( this.hopDelta === null || this.stepsCount > this.restSteps + this.hopSteps ) {
 
-        this.stepsCount = 0;
-        this.restSteps = phet.joist.random.nextInt( MIN_REST_STEPS, MAX_REST_STEPS );
-
-        // Get the delta for the next hop cycle.
-        this.hopDelta = this.getHopDelta();
-
-        // Reverse delta x if the hop would exceed x boundaries
-        //TODO bunnies only reverse direction when they hit the left/right edges, should they change direction randomly?
-        const hopEndX = this.positionProperty.value.x + this.hopDelta.x;
-        if ( hopEndX <= this.getMinimumX() || hopEndX >= this.getMaximumX() ) {
-          this.hopDelta.setX( -this.hopDelta.x );
-        }
-
-        // Reverse delta z if the hop would exceed z boundaries
-        const hopEndZ = this.positionProperty.value.z + this.hopDelta.z;
-        if ( hopEndZ <= this.getMinimumZ() || hopEndZ >= this.getMaximumZ() ) {
-          this.hopDelta.setZ( -this.hopDelta.z );
-        }
-
-        // Adjust the x direction to match the hop delta x
-        this.xDirectionProperty.value = ( this.hopDelta.x >= 0 ) ? 1 : -1;
+        // When we've completed a cycle, initialize the next cycle
+        this.initializeMotion();
       }
+      else if ( this.stepsCount > this.restSteps ) {
 
-      // do part of a hop cycle
-      if ( this.stepsCount > this.restSteps ) {
-        const x = this.positionProperty.value.x + ( this.hopDelta.x / HOP_STEPS );
-        const z = this.positionProperty.value.z + ( this.hopDelta.z / HOP_STEPS );
-        const hopHeightFraction = ( this.stepsCount - this.restSteps ) / HOP_STEPS;
-        //TODO I don't understand the last part of this
-        const y = this.modelViewTransform.getGroundY( z ) + this.hopDelta.y * 2 * ( -hopHeightFraction * hopHeightFraction + hopHeightFraction );
-        this.positionProperty.value = new Vector3( x, y, z );
+        // do part of a hop cycle
+        this.hop();
+      }
+      else {
+
+        // do nothing, the bunny is resting
       }
     }
 
     /**
-     * Gets the Vector3 that describes the change in x, y, z for a hop cycle.
-     * @returns {Vector3}
+     * Initializes the next motion cycle.
      * @private
      */
-    getHopDelta() {
+    initializeMotion() {
 
-      //TODO I don't understand the use of cos, sin, and swap
-      const angle = phet.joist.random.nextDoubleBetween( 0, 2 * Math.PI );
-      const a = MAX_HOP_XZ * Math.cos( angle );
-      const b = MAX_HOP_XZ * Math.sin( angle );
+      this.stepsCount = 0;
 
-      const swap = ( Math.abs( a ) < Math.abs( b ) );
+      // Randomize motion for the next cycle
+      this.restSteps = phet.joist.random.nextIntBetween( MIN_REST_STEPS, MAX_REST_STEPS );
+      this.hopSteps = phet.joist.random.nextIntBetween( MIN_HOP_STEPS, MAX_HOP_STEPS );
+      const hopXZ = phet.joist.random.nextIntBetween( MIN_HOP_XZ, MAX_HOP_XZ );
+      const hopHeight = phet.joist.random.nextIntBetween( MIN_HOP_HEIGHT, MAX_HOP_HEIGHT );
 
-      //TODO dx could be zero, and that is undesirable
-      const dx = Math.abs( swap ? b : a ) * ( this.isMovingRight() ? 1 : -1 ); // match direction of movement
-      const dy = HOP_HEIGHT;
-      const dz = ( swap ? a : b );
-      return new Vector3( dx, dy, dz );
+      // Get motion delta for the next cycle
+      this.hopDelta = getHopDelta( hopXZ, hopHeight, this.isMovingRight() );
+
+      // Reverse delta x if the hop would exceed x boundaries
+      //TODO bunnies only reverse direction when they hit the left/right edges, should they change direction randomly?
+      const hopEndX = this.positionProperty.value.x + this.hopDelta.x;
+      if ( hopEndX <= this.getMinimumX() || hopEndX >= this.getMaximumX() ) {
+        this.hopDelta.setX( -this.hopDelta.x );
+      }
+
+      // Reverse delta z if the hop would exceed z boundaries
+      const hopEndZ = this.positionProperty.value.z + this.hopDelta.z;
+      if ( hopEndZ <= this.getMinimumZ() || hopEndZ >= this.getMaximumZ() ) {
+        this.hopDelta.setZ( -this.hopDelta.z );
+      }
+
+      // Adjust the x direction to match the hop delta x
+      this.xDirectionProperty.value = ( this.hopDelta.x >= 0 ) ? 1 : -1;
+    }
+
+    /**
+     * Do part of a hop cycle.
+     * @private
+     */
+    hop() {
+      const x = this.positionProperty.value.x + ( this.hopDelta.x / this.hopSteps );
+      const z = this.positionProperty.value.z + ( this.hopDelta.z / this.hopSteps );
+      const hopHeightFraction = ( this.stepsCount - this.restSteps ) / this.hopSteps;
+      //TODO I don't understand the last part of this
+      const y = this.modelViewTransform.getGroundY( z ) + this.hopDelta.y * 2 * ( -hopHeightFraction * hopHeightFraction + hopHeightFraction );
+      this.positionProperty.value = new Vector3( x, y, z );
     }
 
     /**
@@ -265,6 +276,29 @@ define( require => {
     static resetStatic() {
       bunnyCount = 0;
     }
+  }
+
+  /**
+   * Gets the Vector3 that describes the change in x, y, and z for a hop cycle.
+   * @param {number} maxHopXZ - max x or z distance that the bunny will hop.
+   * @param {number} hopHeight - height above the ground that the bunny will hop
+   * @param {boolean} isMovingRight - true if the bunny is moving to the right
+   * @returns {Vector3}
+   */
+  function getHopDelta( maxHopXZ, hopHeight, isMovingRight ) {
+
+    //TODO I don't understand the use of cos, sin, and swap
+    const angle = phet.joist.random.nextDoubleBetween( 0, 2 * Math.PI );
+    const a = maxHopXZ * Math.cos( angle );
+    const b = maxHopXZ * Math.sin( angle );
+
+    const swap = ( Math.abs( a ) < Math.abs( b ) );
+
+    //TODO dx could be zero, and that is undesirable
+    const dx = Math.abs( swap ? b : a ) * ( isMovingRight ? 1 : -1 ); // match direction of movement
+    const dy = hopHeight;
+    const dz = ( swap ? a : b );
+    return new Vector3( dx, dy, dz );
   }
 
   return naturalSelection.register( 'Bunny', Bunny );
