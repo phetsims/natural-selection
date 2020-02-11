@@ -30,9 +30,9 @@ define( require => {
   const MIN_HOP_STEPS = 10;
   const MAX_HOP_STEPS = 20;
 
-  // x or z distance that a bunny hops
-  const MIN_HOP_XZ = 15;
-  const MAX_HOP_XZ = 20;
+  // x and z distance that a bunny hops
+  const MIN_HOP_DISTANCE = 15;
+  const MAX_HOP_DISTANCE = 20;
 
   // how high above the ground a bunny hops
   const MIN_HOP_HEIGHT = 30;
@@ -79,10 +79,10 @@ define( require => {
       // @private {number} number of times that step has been called in the current rest + hop cycle
       this.stepsCount = 0;
 
-      // @private {number} the number of steps that the bunny rests before hopping
+      // @private {number} the number of steps that the bunny rests before hopping, randomized in initializeMotion
       this.restSteps = MAX_REST_STEPS;
 
-      // @private {number} the number of steps required to complete one full hop
+      // @private {number} the number of steps required to complete one full hop, randomized in initializeMotion
       this.hopSteps = MAX_HOP_STEPS;
 
       // @private {Vector3|null} the change in position when the bunny hops
@@ -196,11 +196,11 @@ define( require => {
       // Randomize motion for the next cycle
       this.restSteps = phet.joist.random.nextIntBetween( MIN_REST_STEPS, MAX_REST_STEPS );
       this.hopSteps = phet.joist.random.nextIntBetween( MIN_HOP_STEPS, MAX_HOP_STEPS );
-      const hopXZ = phet.joist.random.nextIntBetween( MIN_HOP_XZ, MAX_HOP_XZ );
+      const hopDistance = phet.joist.random.nextIntBetween( MIN_HOP_DISTANCE, MAX_HOP_DISTANCE );
       const hopHeight = phet.joist.random.nextIntBetween( MIN_HOP_HEIGHT, MAX_HOP_HEIGHT );
 
       // Get motion delta for the next cycle
-      this.hopDelta = getHopDelta( hopXZ, hopHeight, this.isMovingRight() );
+      this.hopDelta = getHopDelta( hopDistance, hopHeight, this.isMovingRight() );
 
       // Reverse delta x if the hop would exceed x boundaries
       //TODO bunnies only reverse direction when they hit the left/right edges, should they change direction randomly?
@@ -280,17 +280,17 @@ define( require => {
 
   /**
    * Gets the Vector3 that describes the change in x, y, and z for a hop cycle.
-   * @param {number} maxHopXZ - max x or z distance that the bunny will hop.
+   * @param {number} hopDistance - maximum x and z distance that the bunny will hop
    * @param {number} hopHeight - height above the ground that the bunny will hop
    * @param {boolean} isMovingRight - true if the bunny is moving to the right
    * @returns {Vector3}
    */
-  function getHopDelta( maxHopXZ, hopHeight, isMovingRight ) {
+  function getHopDelta( hopDistance, hopHeight, isMovingRight ) {
 
     //TODO I don't understand the use of cos, sin, and swap
     const angle = phet.joist.random.nextDoubleBetween( 0, 2 * Math.PI );
-    const a = maxHopXZ * Math.cos( angle );
-    const b = maxHopXZ * Math.sin( angle );
+    const a = hopDistance * Math.cos( angle );
+    const b = hopDistance * Math.sin( angle );
 
     const swap = ( Math.abs( a ) < Math.abs( b ) );
 
