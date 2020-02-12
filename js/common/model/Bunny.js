@@ -14,6 +14,7 @@ define( require => {
   const Emitter = require( 'AXON/Emitter' );
   const merge = require( 'PHET_CORE/merge' );
   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+  const Range = require( 'DOT/Range' );
   const Sprite = require( 'NATURAL_SELECTION/common/model/Sprite' );
   const Utils = require( 'DOT/Utils' );
   const Vector3 = require( 'DOT/Vector3' );
@@ -21,24 +22,12 @@ define( require => {
   // constants
   const MAX_HUNGER = 600; //TODO describe
   const MAX_HUNGER_DELTA = 3; //TODO describe
+  const REST_STEPS_RANGE = new Range( 40, 160 );  // number of steps that the Bunny will rest before hopping
+  const HOP_STEPS_RANGE = new Range( 10, 20 );    // number of steps that is takes to complete a hop
+  const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // x and z distance that a bunny hops
+  const HOP_HEIGHT_RANGE = new Range( 30, 50 );   // how high above the ground a bunny hops
 
-  // number of steps that the Bunny will rest before hopping
-  const MIN_REST_STEPS = 40;
-  const MAX_REST_STEPS = 160;
-
-  // number of steps that is takes to complete a hop
-  const MIN_HOP_STEPS = 10;
-  const MAX_HOP_STEPS = 20;
-
-  // x and z distance that a bunny hops
-  const MIN_HOP_DISTANCE = 15;
-  const MAX_HOP_DISTANCE = 20;
-
-  // how high above the ground a bunny hops
-  const MIN_HOP_HEIGHT = 30;
-  const MAX_HOP_HEIGHT = 50;
-
-  // Number of bunnies instantiated.
+  // Number of bunnies instantiated, used to assign unique ids to Bunny instances
   let bunnyCount = 0;
 
   class Bunny extends Sprite {
@@ -80,10 +69,10 @@ define( require => {
       this.stepsCount = 0;
 
       // @private {number} the number of steps that the bunny rests before hopping, randomized in initializeMotion
-      this.restSteps = MAX_REST_STEPS;
+      this.restSteps = REST_STEPS_RANGE.max;
 
       // @private {number} the number of steps required to complete one full hop, randomized in initializeMotion
-      this.hopSteps = MAX_HOP_STEPS;
+      this.hopSteps = HOP_STEPS_RANGE.max;
 
       // @private {Vector3|null} the change in position when the bunny hops
       this.hopDelta = null;
@@ -171,16 +160,15 @@ define( require => {
 
       if ( this.hopDelta === null || this.stepsCount > this.restSteps + this.hopSteps ) {
 
-        // When we've completed a cycle, initialize the next cycle
+        // When we've completed a motion cycle, initialize the next cycle
         this.initializeMotion();
       }
       else if ( this.stepsCount > this.restSteps ) {
 
-        // do part of a hop cycle
+        // do part of the hop cycle
         this.hop();
       }
       else {
-
         // do nothing, the bunny is resting
       }
     }
@@ -194,10 +182,10 @@ define( require => {
       this.stepsCount = 0;
 
       // Randomize motion for the next cycle
-      this.restSteps = phet.joist.random.nextIntBetween( MIN_REST_STEPS, MAX_REST_STEPS );
-      this.hopSteps = phet.joist.random.nextIntBetween( MIN_HOP_STEPS, MAX_HOP_STEPS );
-      const hopDistance = phet.joist.random.nextIntBetween( MIN_HOP_DISTANCE, MAX_HOP_DISTANCE );
-      const hopHeight = phet.joist.random.nextIntBetween( MIN_HOP_HEIGHT, MAX_HOP_HEIGHT );
+      this.restSteps = phet.joist.random.nextIntBetween( REST_STEPS_RANGE.min, REST_STEPS_RANGE.max );
+      this.hopSteps = phet.joist.random.nextIntBetween( HOP_STEPS_RANGE.min, HOP_STEPS_RANGE.max );
+      const hopDistance = phet.joist.random.nextIntBetween( HOP_DISTANCE_RANGE.min, HOP_DISTANCE_RANGE.max );
+      const hopHeight = phet.joist.random.nextIntBetween( HOP_HEIGHT_RANGE.min, HOP_HEIGHT_RANGE.max );
 
       // Get motion delta for the next cycle
       this.hopDelta = getHopDelta( hopDistance, hopHeight, this.isMovingRight() );
@@ -220,7 +208,7 @@ define( require => {
     }
 
     /**
-     * Do part of a hop cycle.
+     * Do part of the hop cycle.
      * @private
      */
     hop() {
@@ -294,7 +282,6 @@ define( require => {
 
     const swap = ( Math.abs( a ) < Math.abs( b ) );
 
-    //TODO dx could be zero, and that is undesirable
     const dx = Math.abs( swap ? b : a ) * ( isMovingRight ? 1 : -1 ); // match direction of movement
     const dy = hopHeight;
     const dz = ( swap ? a : b );
