@@ -127,7 +127,6 @@ define( require => {
           tandem: tandem.createTandem( 'yRangeProperty' ),
           phetioDocumentation: 'range of the y axis, in number of bunnies'
         } );
-      phet.log && this.yRangeProperty.link( yRange => phet.log( `yRange=${yRange}` ) );
 
       // Scrolls the x-axis so that xRangeProperty.max is 'now'.
       const scrollToNow = () => {
