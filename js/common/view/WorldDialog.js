@@ -6,65 +6,60 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Dialog = require( 'SUN/Dialog' );
-  const Image = require( 'SCENERY/nodes/Image' );
-  const merge = require( 'PHET_CORE/merge' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const Text = require( 'SCENERY/nodes/Text' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
+import merge from '../../../../phet-core/js/merge.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import VBox from '../../../../scenery/js/nodes/VBox.js';
+import Dialog from '../../../../sun/js/Dialog.js';
+import worldImage from '../../../images/world_png.js';
+import naturalSelectionStrings from '../../natural-selection-strings.js';
+import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-  // images
-  const worldImage = require( 'image!NATURAL_SELECTION/world.png' );
+const bunniesHaveTakenOverTheWorldString = naturalSelectionStrings.bunniesHaveTakenOverTheWorld;
 
-  // strings
-  const bunniesHaveTakenOverTheWorldString = require( 'string!NATURAL_SELECTION/bunniesHaveTakenOverTheWorld' );
+class WorldDialog extends Dialog {
 
-  class WorldDialog extends Dialog {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
 
-    /**
-     * @param {Object} [options]
-     */
-    constructor( options ) {
+    options = merge( {
+      fill: 'black',
+      closeButtonColor: 'white',
+      topMargin: 25
+    }, options );
 
-      options = merge( {
-        fill: 'black',
-        closeButtonColor: 'white',
-        topMargin: 25
-      }, options );
+    const worldNode = new Image( worldImage, {
+      scale: 0.8 // determined empirically
+    } );
 
-      const worldNode = new Image( worldImage, {
-        scale: 0.8 // determined empirically
-      } );
+    const messageText = new Text( bunniesHaveTakenOverTheWorldString, {
+      font: NaturalSelectionConstants.DIALOG_FONT,
+      fill: 'white',
+      maxWidth: worldNode.width
+    } );
 
-      const messageText = new Text( bunniesHaveTakenOverTheWorldString, {
-        font: NaturalSelectionConstants.DIALOG_FONT,
-        fill: 'white',
-        maxWidth: worldNode.width
-      } );
+    const content = new VBox( {
+      spacing: 25,
+      align: 'center',
+      children: [ messageText, worldNode ],
+      scale: NaturalSelectionConstants.DIALOG_CONTENT_SCALE
+    } );
 
-      const content = new VBox( {
-        spacing: 25,
-        align: 'center',
-        children: [ messageText, worldNode ],
-        scale: NaturalSelectionConstants.DIALOG_CONTENT_SCALE
-      } );
-
-      super( content, options );
-    }
-
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'WorldDialog does not support dispose' );
-    }
+    super( content, options );
   }
 
-  return naturalSelection.register( 'WorldDialog', WorldDialog );
-} );
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'WorldDialog does not support dispose' );
+  }
+}
+
+naturalSelection.register( 'WorldDialog', WorldDialog );
+export default WorldDialog;

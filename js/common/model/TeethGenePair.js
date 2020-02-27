@@ -5,27 +5,24 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const TeethGene = require( 'NATURAL_SELECTION/common/model/TeethGene' );
-  const GenePair = require( 'NATURAL_SELECTION/common/model/GenePair' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+import naturalSelection from '../../naturalSelection.js';
+import GenePair from './GenePair.js';
+import TeethGene from './TeethGene.js';
 
-  class TeethGenePair extends GenePair {
+class TeethGenePair extends GenePair {
 
-    /**
-     * @param {TeethGene} fatherGene
-     * @param {TeethGene} motherGene
-     */
-    constructor( fatherGene, motherGene ) {
-      assert && assert( fatherGene instanceof TeethGene, 'invalid fatherGene' );
-      assert && assert( motherGene instanceof TeethGene, 'invalid motherGene' );
+  /**
+   * @param {TeethGene} fatherGene
+   * @param {TeethGene} motherGene
+   */
+  constructor( fatherGene, motherGene ) {
+    assert && assert( fatherGene instanceof TeethGene, 'invalid fatherGene' );
+    assert && assert( motherGene instanceof TeethGene, 'invalid motherGene' );
 
-      super( fatherGene, motherGene );
-    }
+    super( fatherGene, motherGene );
   }
+}
 
-  return naturalSelection.register( 'TeethGenePair', TeethGenePair );
-} );
+naturalSelection.register( 'TeethGenePair', TeethGenePair );
+export default TeethGenePair;

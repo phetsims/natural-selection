@@ -5,22 +5,19 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const FurGene = require( 'NATURAL_SELECTION/common/model/FurGene' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+import naturalSelectionStrings from '../../natural-selection-strings.js';
+import naturalSelection from '../../naturalSelection.js';
+import FurGene from './FurGene.js';
 
-  // strings
-  const brownFurString = require( 'string!NATURAL_SELECTION/brownFur' );
+const brownFurString = naturalSelectionStrings.brownFur;
 
-  class BrownFurAllele extends FurGene {
+class BrownFurAllele extends FurGene {
 
-    constructor() {
-      super( brownFurString );
-    }
+  constructor() {
+    super( brownFurString );
   }
+}
 
-  return naturalSelection.register( 'BrownFurAllele', BrownFurAllele );
-} );
+naturalSelection.register( 'BrownFurAllele', BrownFurAllele );
+export default BrownFurAllele;

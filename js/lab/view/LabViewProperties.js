@@ -5,44 +5,41 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionViewProperties = require( 'NATURAL_SELECTION/common/view/NaturalSelectionViewProperties' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import Tandem from '../../../../tandem/js/Tandem.js';
+import NaturalSelectionViewProperties from '../../common/view/NaturalSelectionViewProperties.js';
+import naturalSelection from '../../naturalSelection.js';
 
-  class LabViewProperties extends NaturalSelectionViewProperties {
+class LabViewProperties extends NaturalSelectionViewProperties {
 
-    /**
-     * @param {Tandem} tandem
-     */
-    constructor( tandem ) {
+  /**
+   * @param {Tandem} tandem
+   */
+  constructor( tandem ) {
 
-      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
+    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
-      super( tandem );
-      //TODO
-    }
-
-    /**
-     * @public
-     * @override
-     */
-    reset() {
-      super.reset();
-      //TODO
-    }
-
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'LabViewProperties does not support dispose' );
-    }
+    super( tandem );
+    //TODO
   }
 
-  return naturalSelection.register( 'LabViewProperties', LabViewProperties );
-} );
+  /**
+   * @public
+   * @override
+   */
+  reset() {
+    super.reset();
+    //TODO
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'LabViewProperties does not support dispose' );
+  }
+}
+
+naturalSelection.register( 'LabViewProperties', LabViewProperties );
+export default LabViewProperties;

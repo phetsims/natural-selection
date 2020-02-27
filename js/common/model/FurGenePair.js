@@ -5,27 +5,24 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const FurGene = require( 'NATURAL_SELECTION/common/model/FurGene' );
-  const GenePair = require( 'NATURAL_SELECTION/common/model/GenePair' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+import naturalSelection from '../../naturalSelection.js';
+import FurGene from './FurGene.js';
+import GenePair from './GenePair.js';
 
-  class FurGenePair extends GenePair {
+class FurGenePair extends GenePair {
 
-    /**
-     * @param {FurGene} fatherGene
-     * @param {FurGene} motherGene
-     */
-    constructor( fatherGene, motherGene ) {
-      assert && assert( fatherGene instanceof FurGene, 'invalid fatherGene' );
-      assert && assert( motherGene instanceof FurGene, 'invalid motherGene' );
+  /**
+   * @param {FurGene} fatherGene
+   * @param {FurGene} motherGene
+   */
+  constructor( fatherGene, motherGene ) {
+    assert && assert( fatherGene instanceof FurGene, 'invalid fatherGene' );
+    assert && assert( motherGene instanceof FurGene, 'invalid motherGene' );
 
-      super( fatherGene, motherGene );
-    }
+    super( fatherGene, motherGene );
   }
+}
 
-  return naturalSelection.register( 'FurGenePair', FurGenePair );
-} );
+naturalSelection.register( 'FurGenePair', FurGenePair );
+export default FurGenePair;

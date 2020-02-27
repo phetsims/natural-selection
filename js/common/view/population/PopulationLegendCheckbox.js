@@ -6,59 +6,56 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Checkbox = require( 'SUN/Checkbox' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const Line = require( 'SCENERY/nodes/Line' );
-  const merge = require( 'PHET_CORE/merge' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const Text = require( 'SCENERY/nodes/Text' );
+import merge from '../../../../../phet-core/js/merge.js';
+import HBox from '../../../../../scenery/js/nodes/HBox.js';
+import Line from '../../../../../scenery/js/nodes/Line.js';
+import Text from '../../../../../scenery/js/nodes/Text.js';
+import Checkbox from '../../../../../sun/js/Checkbox.js';
+import naturalSelection from '../../../naturalSelection.js';
+import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
-  class PopulationLegendCheckbox extends Checkbox {
+class PopulationLegendCheckbox extends Checkbox {
 
-    /**
-     * @param {Property.<boolean>} property
-     * @param {string} labelString
-     * @param {Object} [options]
-     */
-    constructor( property, labelString, options ) {
+  /**
+   * @param {Property.<boolean>} property
+   * @param {string} labelString
+   * @param {Object} [options]
+   */
+  constructor( property, labelString, options ) {
 
-      options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-        color: 'white',
-        isMutation: false
-      }, options );
+    options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+      color: 'white',
+      isMutation: false
+    }, options );
 
-      const lineNode = new Line( 0, 0, 28, 0, {
-        stroke: options.color,
-        lineWidth: 3,
-        lineDash: options.isMutation ? [ 3, 3 ] : []  // mutations use a dashed line
-      } );
+    const lineNode = new Line( 0, 0, 28, 0, {
+      stroke: options.color,
+      lineWidth: 3,
+      lineDash: options.isMutation ? [ 3, 3 ] : []  // mutations use a dashed line
+    } );
 
-      const textNode = new Text( labelString, {
-        font: NaturalSelectionConstants.CHECKBOX_FONT,
-        maxWidth: 105 // determined empirically
-      } );
+    const textNode = new Text( labelString, {
+      font: NaturalSelectionConstants.CHECKBOX_FONT,
+      maxWidth: 105 // determined empirically
+    } );
 
-      const content = new HBox( {
-        spacing: 5,
-        children: [ lineNode, textNode ]
-      }  );
+    const content = new HBox( {
+      spacing: 5,
+      children: [ lineNode, textNode ]
+    } );
 
-      super( content, property, options );
-    }
-
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'PopulationLegendCheckbox does not support dispose' );
-    }
+    super( content, property, options );
   }
 
-  return naturalSelection.register( 'PopulationLegendCheckbox', PopulationLegendCheckbox );
-} );
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'PopulationLegendCheckbox does not support dispose' );
+  }
+}
+
+naturalSelection.register( 'PopulationLegendCheckbox', PopulationLegendCheckbox );
+export default PopulationLegendCheckbox;

@@ -5,46 +5,43 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Circle = require( 'SCENERY/nodes/Circle' );
-  const FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
-  const merge = require( 'PHET_CORE/merge' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const Node = require( 'SCENERY/nodes/Node' );
+import merge from '../../../../phet-core/js/merge.js';
+import Circle from '../../../../scenery/js/nodes/Circle.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import FontAwesomeNode from '../../../../sun/js/FontAwesomeNode.js';
+import naturalSelection from '../../naturalSelection.js';
 
-  class MutationIconNode extends Node {
+class MutationIconNode extends Node {
 
-    /**
-     * @param {Object} [options]
-     */
-    constructor( options ) {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
 
-      options = merge( {
-        radius: 10
-      }, options );
+    options = merge( {
+      radius: 10
+    }, options );
 
-      // Yellow circle
-      const circle = new Circle( options.radius, {
-        fill: 'rgb( 250, 244, 77 )',
-        stroke: 'black'
-      } );
+    // Yellow circle
+    const circle = new Circle( options.radius, {
+      fill: 'rgb( 250, 244, 77 )',
+      stroke: 'black'
+    } );
 
-      // DNA icon centered in the circle
-      const icon = new FontAwesomeNode( 'dna_solid', {
-        maxWidth: circle.width * 0.8,
-        maxHeight: circle.height * 0.8,
-        center: circle.center
-      } );
+    // DNA icon centered in the circle
+    const icon = new FontAwesomeNode( 'dna_solid', {
+      maxWidth: circle.width * 0.8,
+      maxHeight: circle.height * 0.8,
+      center: circle.center
+    } );
 
-      assert && assert( !options.children, 'MutationIconNode sets children' );
-      options.children = [ circle, icon ];
+    assert && assert( !options.children, 'MutationIconNode sets children' );
+    options.children = [ circle, icon ];
 
-      super( options );
-    }
+    super( options );
   }
+}
 
-  return naturalSelection.register( 'MutationIconNode', MutationIconNode );
-} );
+naturalSelection.register( 'MutationIconNode', MutationIconNode );
+export default MutationIconNode;

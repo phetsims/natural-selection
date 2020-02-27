@@ -5,51 +5,47 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Checkbox = require( 'SUN/Checkbox' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const Image = require( 'SCENERY/nodes/Image' );
-  const merge = require( 'PHET_CORE/merge' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const Text = require( 'SCENERY/nodes/Text' );
+import merge from '../../../../phet-core/js/merge.js';
+import HBox from '../../../../scenery/js/nodes/HBox.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import Checkbox from '../../../../sun/js/Checkbox.js';
+import wolfImage from '../../../images/wolf_png.js';
+import naturalSelectionStrings from '../../natural-selection-strings.js';
+import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-  // strings
-  const wolvesString = require( 'string!NATURAL_SELECTION/wolves' );
+const wolvesString = naturalSelectionStrings.wolves;
 
-  // images
-  const wolfImage = require( 'image!NATURAL_SELECTION/wolf.png' );
 
-  class WolvesCheckbox extends Checkbox {
+class WolvesCheckbox extends Checkbox {
 
-    /**
-     * @param {Property.<boolean>} wolvesEnabledProperty
-     * @param {Object} [options]
-     */
-    constructor( wolvesEnabledProperty, options ) {
+  /**
+   * @param {Property.<boolean>} wolvesEnabledProperty
+   * @param {Object} [options]
+   */
+  constructor( wolvesEnabledProperty, options ) {
 
-      options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
+    options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 
-      const text =  new Text( wolvesString, {
-        font: NaturalSelectionConstants.CHECKBOX_FONT,
-        maxWidth: 110 // determined empirically
-      } );
+    const text = new Text( wolvesString, {
+      font: NaturalSelectionConstants.CHECKBOX_FONT,
+      maxWidth: 110 // determined empirically
+    } );
 
-      const icon = new Image( wolfImage );
-      const scale = 0.064;
-      icon.setScaleMagnitude( -scale, scale );
+    const icon = new Image( wolfImage );
+    const scale = 0.064;
+    icon.setScaleMagnitude( -scale, scale );
 
-      const content = new HBox( {
-        spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING,
-        children: [ text, icon ]
-      } );
+    const content = new HBox( {
+      spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING,
+      children: [ text, icon ]
+    } );
 
-      super( content, wolvesEnabledProperty, options );
-    }
+    super( content, wolvesEnabledProperty, options );
   }
+}
 
-  return naturalSelection.register( 'WolvesCheckbox', WolvesCheckbox );
-} );
+naturalSelection.register( 'WolvesCheckbox', WolvesCheckbox );
+export default WolvesCheckbox;

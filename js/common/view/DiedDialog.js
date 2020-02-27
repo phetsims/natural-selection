@@ -5,48 +5,45 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Dialog = require( 'SUN/Dialog' );
-  const merge = require( 'PHET_CORE/merge' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const Text = require( 'SCENERY/nodes/Text' );
+import merge from '../../../../phet-core/js/merge.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import Dialog from '../../../../sun/js/Dialog.js';
+import naturalSelectionStrings from '../../natural-selection-strings.js';
+import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-  // strings
-  const allOfTheBunniesHaveDiedString = require( 'string!NATURAL_SELECTION/allOfTheBunniesHaveDied' );
+const allOfTheBunniesHaveDiedString = naturalSelectionStrings.allOfTheBunniesHaveDied;
 
-  class DiedDialog extends Dialog {
+class DiedDialog extends Dialog {
 
-    /**
-     * @param {Object} [options]
-     */
-    constructor( options ) {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
 
-      options = merge( {
-       topMargin: 50,
-       bottomMargin: 50
-      }, options );
+    options = merge( {
+      topMargin: 50,
+      bottomMargin: 50
+    }, options );
 
-      const messageText = new Text( allOfTheBunniesHaveDiedString, {
-        font: NaturalSelectionConstants.DIALOG_FONT,
-        scale: NaturalSelectionConstants.DIALOG_CONTENT_SCALE,
-        maxWidth: 450 // determined empirically
-      } );
+    const messageText = new Text( allOfTheBunniesHaveDiedString, {
+      font: NaturalSelectionConstants.DIALOG_FONT,
+      scale: NaturalSelectionConstants.DIALOG_CONTENT_SCALE,
+      maxWidth: 450 // determined empirically
+    } );
 
-      super( messageText, options );
-    }
-
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'DiedDialog does not support dispose' );
-    }
+    super( messageText, options );
   }
 
-  return naturalSelection.register( 'DiedDialog', DiedDialog );
-} );
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'DiedDialog does not support dispose' );
+  }
+}
+
+naturalSelection.register( 'DiedDialog', DiedDialog );
+export default DiedDialog;

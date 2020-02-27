@@ -5,236 +5,231 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const AlignBox = require( 'SCENERY/nodes/AlignBox' );
-  const AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
-  const Checkbox = require( 'SUN/Checkbox' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const HStrut = require( 'SCENERY/nodes/HStrut' );
-  const Image = require( 'SCENERY/nodes/Image' );
-  const merge = require( 'PHET_CORE/merge' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
-  const PedigreeModel = require( 'NATURAL_SELECTION/common/model/PedigreeModel' );
-  const SunConstants = require( 'SUN/SunConstants' );
-  const Tandem = require( 'TANDEM/Tandem' );
-  const Text = require( 'SCENERY/nodes/Text' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
+import merge from '../../../../../phet-core/js/merge.js';
+import AlignBox from '../../../../../scenery/js/nodes/AlignBox.js';
+import AlignGroup from '../../../../../scenery/js/nodes/AlignGroup.js';
+import HBox from '../../../../../scenery/js/nodes/HBox.js';
+import HStrut from '../../../../../scenery/js/nodes/HStrut.js';
+import Image from '../../../../../scenery/js/nodes/Image.js';
+import Text from '../../../../../scenery/js/nodes/Text.js';
+import VBox from '../../../../../scenery/js/nodes/VBox.js';
+import Checkbox from '../../../../../sun/js/Checkbox.js';
+import SunConstants from '../../../../../sun/js/SunConstants.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
+import brownFurImage from '../../../../images/brownFur_png.js';
+import floppyEarsImage from '../../../../images/floppyEars_png.js';
+import longTeethImage from '../../../../images/longTeeth_png.js';
+import shortTeethImage from '../../../../images/shortTeeth_png.js';
+import straightEarsImage from '../../../../images/straightEars_png.js';
+import whiteFurImage from '../../../../images/whiteFur_png.js';
+import naturalSelectionStrings from '../../../natural-selection-strings.js';
+import naturalSelection from '../../../naturalSelection.js';
+import PedigreeModel from '../../model/PedigreeModel.js';
+import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
+import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
 
-  // images
-  const brownFurImage = require( 'image!NATURAL_SELECTION/brownFur.png' );
-  const straightEarsImage = require( 'image!NATURAL_SELECTION/straightEars.png' );
-  const floppyEarsImage = require( 'image!NATURAL_SELECTION/floppyEars.png' );
-  const longTeethImage = require( 'image!NATURAL_SELECTION/longTeeth.png' );
-  const shortTeethImage = require( 'image!NATURAL_SELECTION/shortTeeth.png' );
-  const whiteFurImage = require( 'image!NATURAL_SELECTION/whiteFur.png' );
+const allelesString = naturalSelectionStrings.alleles;
+const earsDominantString = naturalSelectionStrings.earsDominant;
+const earsRecessiveString = naturalSelectionStrings.earsRecessive;
+const earsString = naturalSelectionStrings.ears;
+const furDominantString = naturalSelectionStrings.furDominant;
+const furRecessiveString = naturalSelectionStrings.furRecessive;
+const furString = naturalSelectionStrings.fur;
+const teethDominantString = naturalSelectionStrings.teethDominant;
+const teethRecessiveString = naturalSelectionStrings.teethRecessive;
+const teethString = naturalSelectionStrings.teeth;
 
-  // strings
-  const allelesString = require( 'string!NATURAL_SELECTION/alleles' );
-  const earsDominantString = require( 'string!NATURAL_SELECTION/earsDominant' );
-  const earsRecessiveString = require( 'string!NATURAL_SELECTION/earsRecessive' );
-  const earsString = require( 'string!NATURAL_SELECTION/ears' );
-  const furDominantString = require( 'string!NATURAL_SELECTION/furDominant' );
-  const furRecessiveString = require( 'string!NATURAL_SELECTION/furRecessive' );
-  const furString = require( 'string!NATURAL_SELECTION/fur' );
-  const teethDominantString = require( 'string!NATURAL_SELECTION/teethDominant' );
-  const teethRecessiveString = require( 'string!NATURAL_SELECTION/teethRecessive' );
-  const teethString = require( 'string!NATURAL_SELECTION/teeth' );
+class AllelesPanel extends NaturalSelectionPanel {
 
-  class AllelesPanel extends NaturalSelectionPanel {
+  /**
+   * @param {PedigreeModel} pedigreeModel
+   * @param {Object} [options]
+   */
+  constructor( pedigreeModel, options ) {
 
-    /**
-     * @param {PedigreeModel} pedigreeModel
-     * @param {Object} [options]
-     */
-    constructor( pedigreeModel, options ) {
+    assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
 
-      assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
+    options = merge( {
 
-      options = merge( {
+      // phet-io
+      tandem: Tandem.REQUIRED
+    }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
-        // phet-io
-        tandem: Tandem.REQUIRED
-      }, NaturalSelectionConstants.PANEL_OPTIONS, options );
+    // To make the abbreviation + icon for all alleles the same effective size
+    const alleleAlignGroup = new AlignGroup();
 
-      // To make the abbreviation + icon for all alleles the same effective size
-      const alleleAlignGroup = new AlignGroup();
+    const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+      spacing: 25,
+      children: [
 
-      const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-        spacing: 25,
-        children: [
+        // Alleles
+        new Text( allelesString, {
+          font: NaturalSelectionConstants.TITLE_FONT,
+          maxWidth: 125, // determined empirically
+          tandem: options.tandem.createTandem( 'title' )
+        } ),
 
-          // Alleles
-          new Text( allelesString, {
-            font: NaturalSelectionConstants.TITLE_FONT,
-            maxWidth: 125, // determined empirically
-            tandem: options.tandem.createTandem( 'title' )
-          } ),
+        // Fur
+        new Row(
+          furString, furDominantString, furRecessiveString,
+          brownFurImage, whiteFurImage,
+          pedigreeModel.furAllelesVisibleProperty, pedigreeModel.furMutationExistsProperty,
+          alleleAlignGroup, {
+            tandem: options.tandem.createTandem( 'furRow' ),
+            phetioReadOnly: true
+          }
+        ),
 
-          // Fur
-          new Row(
-            furString, furDominantString, furRecessiveString,
-            brownFurImage, whiteFurImage,
-            pedigreeModel.furAllelesVisibleProperty, pedigreeModel.furMutationExistsProperty,
-            alleleAlignGroup, {
-              tandem: options.tandem.createTandem( 'furRow' ),
-              phetioReadOnly: true
-            }
-          ),
+        // Ears
+        new Row(
+          earsString, earsDominantString, earsRecessiveString,
+          straightEarsImage, floppyEarsImage,
+          pedigreeModel.earsAllelesVisibleProperty, pedigreeModel.earsMutationExistsProperty,
+          alleleAlignGroup, {
+            tandem: options.tandem.createTandem( 'earsRow' ),
+            phetioReadOnly: true
+          }
+        ),
 
-          // Ears
-          new Row(
-            earsString, earsDominantString, earsRecessiveString,
-            straightEarsImage, floppyEarsImage,
-            pedigreeModel.earsAllelesVisibleProperty, pedigreeModel.earsMutationExistsProperty,
-            alleleAlignGroup, {
-              tandem: options.tandem.createTandem( 'earsRow' ),
-              phetioReadOnly: true
-            }
-          ),
+        // Teeth
+        new Row(
+          teethString, teethDominantString, teethRecessiveString,
+          longTeethImage, shortTeethImage,
+          pedigreeModel.teethAllelesVisibleProperty, pedigreeModel.teethMutationExistsProperty,
+          alleleAlignGroup, {
+            tandem: options.tandem.createTandem( 'teethRow' ),
+            phetioReadOnly: true
+          }
+        )
+      ]
+    } ) );
 
-          // Teeth
-          new Row(
-            teethString, teethDominantString, teethRecessiveString,
-            longTeethImage, shortTeethImage,
-            pedigreeModel.teethAllelesVisibleProperty, pedigreeModel.teethMutationExistsProperty,
-            alleleAlignGroup, {
-              tandem: options.tandem.createTandem( 'teethRow' ),
-              phetioReadOnly: true
-            }
-          )
-        ]
-      } ) );
-
-      super( content, options );
-    }
-
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'AllelesPanel does not support dispose' );
-    }
+    super( content, options );
   }
 
   /**
-   * Row is a row in AllelesPanel.
-   *
-   * Each row has a checkbox for showing allele abbreviations in the Pedigree graph, and icons that indicate the
-   * phenotype for each abbreviation (e.g. 'F' <white fur icon>  'f' <brown fur icon>).  A row is hidden until
-   * its corresponding mutation has been applied.
+   * @public
+   * @override
    */
-  class Row extends VBox {
+  dispose() {
+    assert && assert( false, 'AllelesPanel does not support dispose' );
+  }
+}
 
-    /**
-     * @param {string} labelString
-     * @param {string} dominantString
-     * @param {string} recessiveString
-     * @param {HTMLImageElement} mutationIcon
-     * @param {HTMLImageElement} nonMutationIcon
-     * @param {Property.<boolean>} visibleProperty
-     * @param {Property.<boolean>} enabledProperty
-     * @param {AlignGroup} alignGroup
-     * @param {Object} [options]
-     */
-    constructor( labelString, dominantString, recessiveString, mutationIcon, nonMutationIcon,
-                 visibleProperty, enabledProperty, alignGroup, options ) {
+/**
+ * Row is a row in AllelesPanel.
+ *
+ * Each row has a checkbox for showing allele abbreviations in the Pedigree graph, and icons that indicate the
+ * phenotype for each abbreviation (e.g. 'F' <white fur icon>  'f' <brown fur icon>).  A row is hidden until
+ * its corresponding mutation has been applied.
+ */
+class Row extends VBox {
 
-      options = merge( {
+  /**
+   * @param {string} labelString
+   * @param {string} dominantString
+   * @param {string} recessiveString
+   * @param {HTMLImageElement} mutationIcon
+   * @param {HTMLImageElement} nonMutationIcon
+   * @param {Property.<boolean>} visibleProperty
+   * @param {Property.<boolean>} enabledProperty
+   * @param {AlignGroup} alignGroup
+   * @param {Object} [options]
+   */
+  constructor( labelString, dominantString, recessiveString, mutationIcon, nonMutationIcon,
+               visibleProperty, enabledProperty, alignGroup, options ) {
 
-        // VBox options
-        align: 'left',
-        spacing: 8,
+    options = merge( {
 
-        // phet-io
-        tandem: Tandem.REQUIRED
-      }, options );
+      // VBox options
+      align: 'left',
+      spacing: 8,
 
-      const labelNode = new Text( labelString, {
-        font: NaturalSelectionConstants.CHECKBOX_FONT,
-        maxWidth: 100 // determined empirically
-      } );
-      const checkbox = new Checkbox( labelNode, visibleProperty,
-        merge( {
-          tandem: options.tandem.createTandem( 'checkbox' )
-        }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
-      );
+      // phet-io
+      tandem: Tandem.REQUIRED
+    }, options );
 
-      // common options
-      const textOptions = {
-        font: NaturalSelectionConstants.CHECKBOX_FONT,
-        maxWidth: 12 // determined empirically
-      };
-      const imageOptions = {
-        scale: 0.5 // determined empirically
-      };
-      const alignBoxOptions = {
-        group: alignGroup,
-        xAlign: 'left'
-      };
-      const textImageSpacing = 6;
+    const labelNode = new Text( labelString, {
+      font: NaturalSelectionConstants.CHECKBOX_FONT,
+      maxWidth: 100 // determined empirically
+    } );
+    const checkbox = new Checkbox( labelNode, visibleProperty,
+      merge( {
+        tandem: options.tandem.createTandem( 'checkbox' )
+      }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
+    );
 
-      // Mutation abbreviation and icon
-      const mutationText = new Text( dominantString, textOptions );
-      const mutationImage = new Image( mutationIcon, imageOptions );
-      const mutationHBox = new HBox( {
-        children: [ mutationText, mutationImage ],
-        spacing: textImageSpacing
-      } );
-      const mutationAlignBox = new AlignBox( mutationHBox, alignBoxOptions );
+    // common options
+    const textOptions = {
+      font: NaturalSelectionConstants.CHECKBOX_FONT,
+      maxWidth: 12 // determined empirically
+    };
+    const imageOptions = {
+      scale: 0.5 // determined empirically
+    };
+    const alignBoxOptions = {
+      group: alignGroup,
+      xAlign: 'left'
+    };
+    const textImageSpacing = 6;
 
-      // Non-mutation abbreviation and icon
-      const nonMutationText = new Text( recessiveString, textOptions );
-      const nonMutationImage = new Image( nonMutationIcon, imageOptions );
-      const nonMutationHBox = new HBox( {
-        children: [ nonMutationText, nonMutationImage ],
-        spacing: textImageSpacing
-      } );
-      const nonMutationAlignBox = new AlignBox( nonMutationHBox, alignBoxOptions );
+    // Mutation abbreviation and icon
+    const mutationText = new Text( dominantString, textOptions );
+    const mutationImage = new Image( mutationIcon, imageOptions );
+    const mutationHBox = new HBox( {
+      children: [ mutationText, mutationImage ],
+      spacing: textImageSpacing
+    } );
+    const mutationAlignBox = new AlignBox( mutationHBox, alignBoxOptions );
 
-      // Indent the abbreviations and icons
-      const hBox = new HBox( {
-        spacing: 0,
-        children: [
-          new HStrut( 8 ),
-          new HBox( {
-            spacing: 12,
-            children: [ mutationAlignBox, nonMutationAlignBox ]
-          } )
-        ]
-      } );
+    // Non-mutation abbreviation and icon
+    const nonMutationText = new Text( recessiveString, textOptions );
+    const nonMutationImage = new Image( nonMutationIcon, imageOptions );
+    const nonMutationHBox = new HBox( {
+      children: [ nonMutationText, nonMutationImage ],
+      spacing: textImageSpacing
+    } );
+    const nonMutationAlignBox = new AlignBox( nonMutationHBox, alignBoxOptions );
 
-      assert && assert( !options.children, 'Row sets children' );
-      options.children = [ checkbox, hBox ];
+    // Indent the abbreviations and icons
+    const hBox = new HBox( {
+      spacing: 0,
+      children: [
+        new HStrut( 8 ),
+        new HBox( {
+          spacing: 12,
+          children: [ mutationAlignBox, nonMutationAlignBox ]
+        } )
+      ]
+    } );
 
-      super( options);
+    assert && assert( !options.children, 'Row sets children' );
+    options.children = [ checkbox, hBox ];
 
-      enabledProperty.link( enabled => {
+    super( options );
 
-        // Disable this row
-        this.opacity = enabled ? 1 : SunConstants.DISABLED_OPACITY;
-        checkbox.pickable = enabled;
+    enabledProperty.link( enabled => {
 
-        // don't show allele abbreviation and icon when disabled
-        hBox.visible = enabled;
+      // Disable this row
+      this.opacity = enabled ? 1 : SunConstants.DISABLED_OPACITY;
+      checkbox.pickable = enabled;
 
-        //TODO when enabled, set order of icons so that dominant is on the left
-      } );
-    }
+      // don't show allele abbreviation and icon when disabled
+      hBox.visible = enabled;
 
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'Row does not support dispose' );
-    }
+      //TODO when enabled, set order of icons so that dominant is on the left
+    } );
   }
 
-  return naturalSelection.register( 'AllelesPanel', AllelesPanel );
-} );
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'Row does not support dispose' );
+  }
+}
+
+naturalSelection.register( 'AllelesPanel', AllelesPanel );
+export default AllelesPanel;

@@ -5,37 +5,34 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Checkbox = require( 'SUN/Checkbox' );
-  const merge = require( 'PHET_CORE/merge' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const Text = require( 'SCENERY/nodes/Text' );
+import merge from '../../../../phet-core/js/merge.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import Checkbox from '../../../../sun/js/Checkbox.js';
+import naturalSelectionStrings from '../../natural-selection-strings.js';
+import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-  // strings
-  const limitedFoodString = require( 'string!NATURAL_SELECTION/limitedFood' );
+const limitedFoodString = naturalSelectionStrings.limitedFood;
 
-  class LimitedFoodCheckbox extends Checkbox {
+class LimitedFoodCheckbox extends Checkbox {
 
-    /**
-     * @param {Property.<boolean>} limitedFoodProperty
-     * @param {Object} [options]
-     */
-    constructor( limitedFoodProperty, options ) {
+  /**
+   * @param {Property.<boolean>} limitedFoodProperty
+   * @param {Object} [options]
+   */
+  constructor( limitedFoodProperty, options ) {
 
-      options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
+    options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 
-      const content = new Text( limitedFoodString, {
-        font: NaturalSelectionConstants.CHECKBOX_FONT,
-        maxWidth: 150 // determined empirically
-      } );
+    const content = new Text( limitedFoodString, {
+      font: NaturalSelectionConstants.CHECKBOX_FONT,
+      maxWidth: 150 // determined empirically
+    } );
 
-      super( content, limitedFoodProperty, options );
-    }
+    super( content, limitedFoodProperty, options );
   }
+}
 
-  return naturalSelection.register( 'LimitedFoodCheckbox', LimitedFoodCheckbox );
-} );
+naturalSelection.register( 'LimitedFoodCheckbox', LimitedFoodCheckbox );
+export default LimitedFoodCheckbox;

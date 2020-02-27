@@ -5,52 +5,49 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import Tandem from '../../../../tandem/js/Tandem.js';
+import naturalSelection from '../../naturalSelection.js';
+
+/**
+ * @constructor
+ */
+class IntroModel {
 
   /**
-   * @constructor
+   * @param {Tandem} tandem
    */
-  class IntroModel  {
+  constructor( tandem ) {
 
-    /**
-     * @param {Tandem} tandem
-     */
-    constructor( tandem ) {
-
-      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
-      //TODO
-    }
-
-    /**
-     * Resets the model.
-     * @public
-     */
-    reset() {
-      //TODO
-    }
-
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'IntroModel does not support dispose' );
-    }
-
-    /**
-     * Steps the model.
-     * @param {number} dt - time step, in seconds
-     * @public
-     */
-    step( dt ) {
-      //TODO
-    }
+    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
+    //TODO
   }
 
-  return naturalSelection.register( 'IntroModel', IntroModel );
-} );
+  /**
+   * Resets the model.
+   * @public
+   */
+  reset() {
+    //TODO
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'IntroModel does not support dispose' );
+  }
+
+  /**
+   * Steps the model.
+   * @param {number} dt - time step, in seconds
+   * @public
+   */
+  step( dt ) {
+    //TODO
+  }
+}
+
+naturalSelection.register( 'IntroModel', IntroModel );
+export default IntroModel;

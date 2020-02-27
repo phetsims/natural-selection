@@ -5,22 +5,19 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const EarsGene = require( 'NATURAL_SELECTION/common/model/EarsGene' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+import naturalSelectionStrings from '../../natural-selection-strings.js';
+import naturalSelection from '../../naturalSelection.js';
+import EarsGene from './EarsGene.js';
 
-  // strings
-  const straightEarsString = require( 'string!NATURAL_SELECTION/straightEars' );
+const straightEarsString = naturalSelectionStrings.straightEars;
 
-  class StraightEarsAllele extends EarsGene {
+class StraightEarsAllele extends EarsGene {
 
-    constructor() {
-      super( straightEarsString );
-    }
+  constructor() {
+    super( straightEarsString );
   }
+}
 
-  return naturalSelection.register( 'StraightEarsAllele', StraightEarsAllele );
-} );
+naturalSelection.register( 'StraightEarsAllele', StraightEarsAllele );
+export default StraightEarsAllele;

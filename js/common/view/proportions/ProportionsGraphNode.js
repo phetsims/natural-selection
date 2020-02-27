@@ -7,196 +7,193 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const AlignBox = require( 'SCENERY/nodes/AlignBox' );
-  const AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const merge = require( 'PHET_CORE/merge' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const ProportionsBarNode = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsBarNode' );
-  const ProportionsGenerationControl = require( 'NATURAL_SELECTION/common/view/proportions/ProportionsGenerationControl' );
-  const ProportionsModel = require( 'NATURAL_SELECTION/common/model/ProportionsModel' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  const Tandem = require( 'TANDEM/Tandem' );
-  const Text = require( 'SCENERY/nodes/Text' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
+import NumberProperty from '../../../../../axon/js/NumberProperty.js';
+import merge from '../../../../../phet-core/js/merge.js';
+import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
+import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
+import AlignBox from '../../../../../scenery/js/nodes/AlignBox.js';
+import AlignGroup from '../../../../../scenery/js/nodes/AlignGroup.js';
+import HBox from '../../../../../scenery/js/nodes/HBox.js';
+import Node from '../../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
+import Text from '../../../../../scenery/js/nodes/Text.js';
+import VBox from '../../../../../scenery/js/nodes/VBox.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
+import naturalSelectionStrings from '../../../natural-selection-strings.js';
+import naturalSelection from '../../../naturalSelection.js';
+import ProportionsModel from '../../model/ProportionsModel.js';
+import NaturalSelectionColors from '../../NaturalSelectionColors.js';
+import ProportionsBarNode from './ProportionsBarNode.js';
+import ProportionsGenerationControl from './ProportionsGenerationControl.js';
 
-  // strings
-  const countBunniesString = require( 'string!NATURAL_SELECTION/countBunnies' );
-  const earsString = require( 'string!NATURAL_SELECTION/ears' );
-  const endOfGenerationString = require( 'string!NATURAL_SELECTION/endOfGeneration' );
-  const furString = require( 'string!NATURAL_SELECTION/fur' );
-  const oneBunnyString = require( 'string!NATURAL_SELECTION/oneBunny' );
-  const startOfGenerationString = require( 'string!NATURAL_SELECTION/startOfGeneration' );
-  const teethString = require( 'string!NATURAL_SELECTION/teeth' );
+const countBunniesString = naturalSelectionStrings.countBunnies;
+const earsString = naturalSelectionStrings.ears;
+const endOfGenerationString = naturalSelectionStrings.endOfGeneration;
+const furString = naturalSelectionStrings.fur;
+const oneBunnyString = naturalSelectionStrings.oneBunny;
+const startOfGenerationString = naturalSelectionStrings.startOfGeneration;
+const teethString = naturalSelectionStrings.teeth;
 
-  // constants
-  const COLUMNS_SPACING = 20;
-  const LABEL_FONT = new PhetFont( 14 );
-  const VALUE_FONT = new PhetFont( 14 );
+// constants
+const COLUMNS_SPACING = 20;
+const LABEL_FONT = new PhetFont( 14 );
+const VALUE_FONT = new PhetFont( 14 );
 
-  class ProportionsGraphNode extends Node {
+class ProportionsGraphNode extends Node {
 
-    /**
-     * @param {ProportionsModel} proportionsModel
-     * @param {Object} [options]
-     */
-    constructor( proportionsModel, options ) {
+  /**
+   * @param {ProportionsModel} proportionsModel
+   * @param {Object} [options]
+   */
+  constructor( proportionsModel, options ) {
 
-      assert && assert( proportionsModel instanceof ProportionsModel, 'invalid proportionsModel' );
+    assert && assert( proportionsModel instanceof ProportionsModel, 'invalid proportionsModel' );
 
-      options = merge( {
-        graphWidth: 100,
-        graphHeight: 100,
+    options = merge( {
+      graphWidth: 100,
+      graphHeight: 100,
 
-        // phet-io
-        tandem: Tandem.REQUIRED
-      }, options );
+      // phet-io
+      tandem: Tandem.REQUIRED
+    }, options );
 
-      const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
-        fill: NaturalSelectionColors.PROPORTIONS_GRAPH_FILL,
-        stroke: NaturalSelectionColors.PANEL_STROKE
+    const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
+      fill: NaturalSelectionColors.PROPORTIONS_GRAPH_FILL,
+      stroke: NaturalSelectionColors.PANEL_STROKE
+    } );
+
+    const labelColumnAlignGroup = new AlignGroup();
+    const barColumnsAlignGroup = new AlignGroup( { matchVertical: false } );
+
+    // Column labels
+    const columnLabelOptions = {
+      font: LABEL_FONT,
+      maxWidth: 120 // determined empirically
+    };
+    const columnLabels = new HBox( {
+      spacing: COLUMNS_SPACING,
+      children: [
+        new AlignBox( new Text( '', columnLabelOptions ), { group: barColumnsAlignGroup } ),
+        new AlignBox( new Text( furString, columnLabelOptions ), { group: barColumnsAlignGroup } ),
+        new AlignBox( new Text( earsString, columnLabelOptions ), { group: barColumnsAlignGroup } ),
+        new AlignBox( new Text( teethString, columnLabelOptions ), { group: barColumnsAlignGroup } )
+      ]
+    } );
+
+    // Rows
+    const startRow = new Row( startOfGenerationString, proportionsModel.startCountProperty,
+      labelColumnAlignGroup, barColumnsAlignGroup, proportionsModel.valuesVisibleProperty );
+    const currentRow = new Row( endOfGenerationString, proportionsModel.endCountProperty,
+      labelColumnAlignGroup, barColumnsAlignGroup, proportionsModel.valuesVisibleProperty );
+    const rows = new VBox( {
+      spacing: 30,
+      align: 'left',
+      children: [ startRow, currentRow ]
+    } );
+
+    // Column labels above rows
+    const graph = new VBox( {
+      spacing: 20,
+      align: 'left',
+      children: [ columnLabels, rows ]
+    } );
+
+    const generationControl = new ProportionsGenerationControl(
+      proportionsModel.generationProperty, proportionsModel.currentGenerationProperty, {
+        tandem: options.tandem.createTandem( 'generationControl' )
       } );
 
-      const labelColumnAlignGroup = new AlignGroup();
-      const barColumnsAlignGroup = new AlignGroup( { matchVertical: false } );
+    const content = new VBox( {
+      align: 'center',
+      spacing: 35,
+      children: [ graph, generationControl ],
+      center: backgroundNode.center
+    } );
 
-      // Column labels
-      const columnLabelOptions = {
-        font: LABEL_FONT,
-        maxWidth: 120 // determined empirically
-      };
-      const columnLabels = new HBox( {
-        spacing: COLUMNS_SPACING,
-        children: [
-          new AlignBox( new Text( '', columnLabelOptions ), { group: barColumnsAlignGroup } ),
-          new AlignBox( new Text( furString, columnLabelOptions ), { group: barColumnsAlignGroup } ),
-          new AlignBox( new Text( earsString, columnLabelOptions ), { group: barColumnsAlignGroup } ),
-          new AlignBox( new Text( teethString, columnLabelOptions ), { group: barColumnsAlignGroup } )
-        ]
-      } );
+    assert && assert( !options.children, 'ProportionGraphNode sets children' );
+    options.children = [ backgroundNode, content ];
 
-      // Rows
-      const startRow = new Row( startOfGenerationString, proportionsModel.startCountProperty,
-        labelColumnAlignGroup, barColumnsAlignGroup, proportionsModel.valuesVisibleProperty );
-      const currentRow = new Row( endOfGenerationString, proportionsModel.endCountProperty,
-        labelColumnAlignGroup, barColumnsAlignGroup, proportionsModel.valuesVisibleProperty );
-      const rows = new VBox( {
-        spacing: 30,
-        align: 'left',
-        children: [ startRow, currentRow ]
-      } );
-
-      // Column labels above rows
-      const graph = new VBox( {
-        spacing: 20,
-        align: 'left',
-        children: [ columnLabels, rows ]
-      } );
-
-      const generationControl = new ProportionsGenerationControl(
-        proportionsModel.generationProperty, proportionsModel.currentGenerationProperty, {
-          tandem: options.tandem.createTandem( 'generationControl' )
-        } );
-
-      const content = new VBox( {
-        align: 'center',
-        spacing: 35,
-        children: [ graph, generationControl ],
-        center: backgroundNode.center
-      } );
-
-      assert && assert( !options.children, 'ProportionGraphNode sets children' );
-      options.children = [ backgroundNode, content ];
-
-      super( options );
-    }
-
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'ProportionsGraphNode does not support dispose' );
-    }
+    super( options );
   }
 
   /**
-   * Row is a row in the Proportions graph.
+   * @public
+   * @override
    */
-  class Row extends HBox {
+  dispose() {
+    assert && assert( false, 'ProportionsGraphNode does not support dispose' );
+  }
+}
 
-    /**
-     * @param {string} labelString
-     * @param {Property.<number>} countProperty
-     * @param {AlignGroup} valueAlignGroup
-     * @param {AlignGroup} barColumnsAlignGroup
-     * @param {Property.<boolean>} valuesVisibleProperty
-     */
-    constructor( labelString, countProperty, valueAlignGroup, barColumnsAlignGroup, valuesVisibleProperty ) {
+/**
+ * Row is a row in the Proportions graph.
+ */
+class Row extends HBox {
 
-      const labelNode = new Text( labelString, {
-        font: LABEL_FONT,
-        maxWidth: 120 // determined empirically
-      } );
+  /**
+   * @param {string} labelString
+   * @param {Property.<number>} countProperty
+   * @param {AlignGroup} valueAlignGroup
+   * @param {AlignGroup} barColumnsAlignGroup
+   * @param {Property.<boolean>} valuesVisibleProperty
+   */
+  constructor( labelString, countProperty, valueAlignGroup, barColumnsAlignGroup, valuesVisibleProperty ) {
 
-      // {{count}} bunnies
-      const countNode = new Text( '', {
-        font: VALUE_FONT,
-        maxWidth: 120 // determined empirically
-      } );
+    const labelNode = new Text( labelString, {
+      font: LABEL_FONT,
+      maxWidth: 120 // determined empirically
+    } );
 
-      const valueVBox = new VBox( {
-        spacing: 2,
-        align: 'left',
-        children: [
-          labelNode,
-          countNode
-        ]
-      } );
+    // {{count}} bunnies
+    const countNode = new Text( '', {
+      font: VALUE_FONT,
+      maxWidth: 120 // determined empirically
+    } );
 
-      //TODO temporary Properties
-      const furBarNode = new ProportionsBarNode( NaturalSelectionColors.FUR, new NumberProperty( 990 ), new NumberProperty( 1 ), valuesVisibleProperty );
-      const earsBarNode = new ProportionsBarNode( NaturalSelectionColors.EARS, new NumberProperty( 40 ), new NumberProperty( 60 ), valuesVisibleProperty );
-      const teethBarNode = new ProportionsBarNode( NaturalSelectionColors.TEETH, new NumberProperty( 100 ), new NumberProperty( 0 ), valuesVisibleProperty );
+    const valueVBox = new VBox( {
+      spacing: 2,
+      align: 'left',
+      children: [
+        labelNode,
+        countNode
+      ]
+    } );
 
-      super( {
-        spacing: COLUMNS_SPACING,
-        align: 'bottom', //TODO this looks lousy for ?stringTest=long
-        children: [
-          new AlignBox( valueVBox, { group: valueAlignGroup, xAlign: 'left' } ),
-          new AlignBox( furBarNode, { group: barColumnsAlignGroup, xAlign: 'center' } ),
-          new AlignBox( earsBarNode, { group: barColumnsAlignGroup, xAlign: 'center' } ),
-          new AlignBox( teethBarNode, { group: barColumnsAlignGroup, xAlign: 'center' } )
-        ]
-      } );
+    //TODO temporary Properties
+    const furBarNode = new ProportionsBarNode( NaturalSelectionColors.FUR, new NumberProperty( 990 ), new NumberProperty( 1 ), valuesVisibleProperty );
+    const earsBarNode = new ProportionsBarNode( NaturalSelectionColors.EARS, new NumberProperty( 40 ), new NumberProperty( 60 ), valuesVisibleProperty );
+    const teethBarNode = new ProportionsBarNode( NaturalSelectionColors.TEETH, new NumberProperty( 100 ), new NumberProperty( 0 ), valuesVisibleProperty );
 
-      countProperty.link( count => {
-        if ( count === 1 ) {
-          countNode.text = oneBunnyString;
-        }
-        else {
-          countNode.text = StringUtils.fillIn( countBunniesString, { count: count } );
-        }
-      } );
-    }
+    super( {
+      spacing: COLUMNS_SPACING,
+      align: 'bottom', //TODO this looks lousy for ?stringTest=long
+      children: [
+        new AlignBox( valueVBox, { group: valueAlignGroup, xAlign: 'left' } ),
+        new AlignBox( furBarNode, { group: barColumnsAlignGroup, xAlign: 'center' } ),
+        new AlignBox( earsBarNode, { group: barColumnsAlignGroup, xAlign: 'center' } ),
+        new AlignBox( teethBarNode, { group: barColumnsAlignGroup, xAlign: 'center' } )
+      ]
+    } );
 
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'Row does not support dispose' );
-    }
+    countProperty.link( count => {
+      if ( count === 1 ) {
+        countNode.text = oneBunnyString;
+      }
+      else {
+        countNode.text = StringUtils.fillIn( countBunniesString, { count: count } );
+      }
+    } );
   }
 
-  return naturalSelection.register( 'ProportionsGraphNode', ProportionsGraphNode );
-} );
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'Row does not support dispose' );
+  }
+}
+
+naturalSelection.register( 'ProportionsGraphNode', ProportionsGraphNode );
+export default ProportionsGraphNode;

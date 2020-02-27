@@ -4,48 +4,45 @@
  * TODO
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const merge = require( 'PHET_CORE/merge' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import naturalSelection from '../../naturalSelection.js';
 
-  class Wolves {
+class Wolves {
 
-    /**
-     * @param {Object} [options]
-     */
-    constructor( options ) {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
 
-      options = merge( {
+    options = merge( {
 
-        // phet-io
-        tandem: Tandem.REQUIRED
-      }, options );
+      // phet-io
+      tandem: Tandem.REQUIRED
+    }, options );
 
-      // @public
-      this.enabledProperty = new BooleanProperty( false, {
-        tandem: options.tandem.createTandem( 'enabledProperty' )
-      } );
-    }
-
-    /**
-     * @public
-     */
-    reset() {
-      this.enabledProperty.reset();
-    }
-
-    /**
-     * @public
-     */
-    dispose() {
-      assert && assert( false, 'Wolves does not support dispose' );
-    }
+    // @public
+    this.enabledProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'enabledProperty' )
+    } );
   }
 
-  return naturalSelection.register( 'Wolves', Wolves );
-} );
+  /**
+   * @public
+   */
+  reset() {
+    this.enabledProperty.reset();
+  }
+
+  /**
+   * @public
+   */
+  dispose() {
+    assert && assert( false, 'Wolves does not support dispose' );
+  }
+}
+
+naturalSelection.register( 'Wolves', Wolves );
+export default Wolves;

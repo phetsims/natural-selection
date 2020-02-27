@@ -5,49 +5,45 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Checkbox = require( 'SUN/Checkbox' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const Image = require( 'SCENERY/nodes/Image' );
-  const merge = require( 'PHET_CORE/merge' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const Text = require( 'SCENERY/nodes/Text' );
+import merge from '../../../../phet-core/js/merge.js';
+import HBox from '../../../../scenery/js/nodes/HBox.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import Checkbox from '../../../../sun/js/Checkbox.js';
+import toughFoodCImage from '../../../images/toughFoodC_png.js';
+import naturalSelectionStrings from '../../natural-selection-strings.js';
+import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-  // strings
-  const toughFoodString = require( 'string!NATURAL_SELECTION/toughFood' );
+const toughFoodString = naturalSelectionStrings.toughFood;
 
-  // images
-  const toughFoodCImage = require( 'image!NATURAL_SELECTION/toughFoodC.png' );
 
-  class ToughFoodCheckbox extends Checkbox {
+class ToughFoodCheckbox extends Checkbox {
 
-    /**
-     * @param {Property.<boolean>} wolvesEnabledProperty
-     * @param {Object} [options]
-     */
-    constructor( wolvesEnabledProperty, options ) {
+  /**
+   * @param {Property.<boolean>} wolvesEnabledProperty
+   * @param {Object} [options]
+   */
+  constructor( wolvesEnabledProperty, options ) {
 
-      options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
+    options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 
-      const text = new Text( toughFoodString, {
-        font: NaturalSelectionConstants.CHECKBOX_FONT,
-        maxWidth: 110 // determined empirically
-      } );
+    const text = new Text( toughFoodString, {
+      font: NaturalSelectionConstants.CHECKBOX_FONT,
+      maxWidth: 110 // determined empirically
+    } );
 
-      const icon = new Image( toughFoodCImage, { scale: 0.2 } );
+    const icon = new Image( toughFoodCImage, { scale: 0.2 } );
 
-      const content = new HBox( {
-        spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING,
-        children: [ text, icon ]
-      } );
+    const content = new HBox( {
+      spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING,
+      children: [ text, icon ]
+    } );
 
-      super( content, wolvesEnabledProperty, options );
-    }
+    super( content, wolvesEnabledProperty, options );
   }
+}
 
-  return naturalSelection.register( 'ToughFoodCheckbox', ToughFoodCheckbox );
-} );
+naturalSelection.register( 'ToughFoodCheckbox', ToughFoodCheckbox );
+export default ToughFoodCheckbox;

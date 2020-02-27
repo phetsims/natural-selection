@@ -5,130 +5,127 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Checkbox = require( 'SUN/Checkbox' );
-  const HSeparator = require( 'SUN/HSeparator' );
-  const merge = require( 'PHET_CORE/merge' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
-  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const NaturalSelectionPanel = require( 'NATURAL_SELECTION/common/view/NaturalSelectionPanel' );
-  const PopulationLegendCheckbox = require( 'NATURAL_SELECTION/common/view/population/PopulationLegendCheckbox' );
-  const PopulationModel = require( 'NATURAL_SELECTION/common/model/PopulationModel' );
-  const Tandem = require( 'TANDEM/Tandem' );
-  const Text = require( 'SCENERY/nodes/Text' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
+import merge from '../../../../../phet-core/js/merge.js';
+import Text from '../../../../../scenery/js/nodes/Text.js';
+import VBox from '../../../../../scenery/js/nodes/VBox.js';
+import Checkbox from '../../../../../sun/js/Checkbox.js';
+import HSeparator from '../../../../../sun/js/HSeparator.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
+import naturalSelectionStrings from '../../../natural-selection-strings.js';
+import naturalSelection from '../../../naturalSelection.js';
+import PopulationModel from '../../model/PopulationModel.js';
+import NaturalSelectionColors from '../../NaturalSelectionColors.js';
+import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
+import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
+import PopulationLegendCheckbox from './PopulationLegendCheckbox.js';
 
-  // strings
-  const brownFurString = require( 'string!NATURAL_SELECTION/brownFur' );
-  const straightEarsString = require( 'string!NATURAL_SELECTION/straightEars' );
-  const floppyEarsString = require( 'string!NATURAL_SELECTION/floppyEars' );
-  const longTeethString = require( 'string!NATURAL_SELECTION/longTeeth' );
-  const shortTeethString = require( 'string!NATURAL_SELECTION/shortTeeth' );
-  const totalString = require( 'string!NATURAL_SELECTION/total' );
-  const dataProbeString = require( 'string!NATURAL_SELECTION/dataProbe' );
-  const whiteFurString = require( 'string!NATURAL_SELECTION/whiteFur' );
+const brownFurString = naturalSelectionStrings.brownFur;
+const straightEarsString = naturalSelectionStrings.straightEars;
+const floppyEarsString = naturalSelectionStrings.floppyEars;
+const longTeethString = naturalSelectionStrings.longTeeth;
+const shortTeethString = naturalSelectionStrings.shortTeeth;
+const totalString = naturalSelectionStrings.total;
+const dataProbeString = naturalSelectionStrings.dataProbe;
+const whiteFurString = naturalSelectionStrings.whiteFur;
 
-  class PopulationPanel extends NaturalSelectionPanel {
+class PopulationPanel extends NaturalSelectionPanel {
 
-    /**
-     * @param {PopulationModel} populationModel
-     * @param {Object} [options]
-     */
-    constructor( populationModel, options ) {
+  /**
+   * @param {PopulationModel} populationModel
+   * @param {Object} [options]
+   */
+  constructor( populationModel, options ) {
 
-      assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
+    assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
 
-      options = merge( {
-        fixedWidth: 100,
-        xMargin: 0,
+    options = merge( {
+      fixedWidth: 100,
+      xMargin: 0,
 
-        // phet-io
-        tandem: Tandem.REQUIRED
-      }, NaturalSelectionConstants.PANEL_OPTIONS, options );
+      // phet-io
+      tandem: Tandem.REQUIRED
+    }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
-      const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-        children: [
+    const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+      children: [
 
-          // Total
-          new PopulationLegendCheckbox( populationModel.totalVisibleProperty, totalString, {
-            color: NaturalSelectionColors.TOTAL_POPULATION,
-            tandem: options.tandem.createTandem( 'totalCheckbox' )
+        // Total
+        new PopulationLegendCheckbox( populationModel.totalVisibleProperty, totalString, {
+          color: NaturalSelectionColors.TOTAL_POPULATION,
+          tandem: options.tandem.createTandem( 'totalCheckbox' )
+        } ),
+
+        // White Fur
+        new PopulationLegendCheckbox( populationModel.whiteFurVisibleProperty, whiteFurString, {
+          color: NaturalSelectionColors.FUR,
+          tandem: options.tandem.createTandem( 'whiteFurCheckbox' )
+        } ),
+
+        // Brown Fur
+        new PopulationLegendCheckbox( populationModel.brownFurVisibleProperty, brownFurString, {
+          color: NaturalSelectionColors.FUR,
+          isMutation: true,
+          tandem: options.tandem.createTandem( 'brownFurCheckbox' )
+        } ),
+
+        // Straight Ears
+        new PopulationLegendCheckbox( populationModel.straightEarsVisibleProperty, straightEarsString, {
+          color: NaturalSelectionColors.EARS,
+          tandem: options.tandem.createTandem( 'straightEarsCheckbox' )
+        } ),
+
+        // Floppy Ears
+        new PopulationLegendCheckbox( populationModel.floppyEarsVisibleProperty, floppyEarsString, {
+          color: NaturalSelectionColors.EARS,
+          isMutation: true,
+          tandem: options.tandem.createTandem( 'floppyEarsCheckbox' )
+        } ),
+
+        // Short Teeth
+        new PopulationLegendCheckbox( populationModel.shortTeethVisibleProperty, shortTeethString, {
+          color: NaturalSelectionColors.TEETH,
+          tandem: options.tandem.createTandem( 'shortTeethCheckbox' )
+        } ),
+
+        // Long Teeth
+        new PopulationLegendCheckbox( populationModel.longTeethVisibleProperty, longTeethString, {
+          color: NaturalSelectionColors.TEETH,
+          isMutation: true,
+          tandem: options.tandem.createTandem( 'longTeethCheckbox' )
+        } ),
+
+        // ------
+        new HSeparator( options.fixedWidth - 2 * options.xMargin, {
+          stroke: NaturalSelectionColors.SEPARATOR_STROKE,
+          tandem: options.tandem.createTandem( 'separator' )
+        } ),
+
+        // Data Probe
+        new Checkbox(
+          new Text( dataProbeString, {
+            font: NaturalSelectionConstants.CHECKBOX_FONT,
+            maxWidth: 135 // determined empirically
           } ),
+          populationModel.dataProbe.visibleProperty,
+          merge( {
+            tandem: options.tandem.createTandem( 'dataProbeCheckbox' )
+          }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
+        )
+      ]
+    } ) );
 
-          // White Fur
-          new PopulationLegendCheckbox( populationModel.whiteFurVisibleProperty, whiteFurString, {
-            color: NaturalSelectionColors.FUR,
-            tandem: options.tandem.createTandem( 'whiteFurCheckbox' )
-          } ),
-
-          // Brown Fur
-          new PopulationLegendCheckbox( populationModel.brownFurVisibleProperty, brownFurString, {
-            color: NaturalSelectionColors.FUR,
-            isMutation: true,
-            tandem: options.tandem.createTandem( 'brownFurCheckbox' )
-          } ),
-
-          // Straight Ears
-          new PopulationLegendCheckbox( populationModel.straightEarsVisibleProperty, straightEarsString, {
-            color: NaturalSelectionColors.EARS,
-            tandem: options.tandem.createTandem( 'straightEarsCheckbox' )
-          } ),
-
-          // Floppy Ears
-          new PopulationLegendCheckbox( populationModel.floppyEarsVisibleProperty, floppyEarsString, {
-            color: NaturalSelectionColors.EARS,
-            isMutation: true,
-            tandem: options.tandem.createTandem( 'floppyEarsCheckbox' )
-          } ),
-
-          // Short Teeth
-          new PopulationLegendCheckbox( populationModel.shortTeethVisibleProperty, shortTeethString, {
-            color: NaturalSelectionColors.TEETH,
-            tandem: options.tandem.createTandem( 'shortTeethCheckbox' )
-          } ),
-
-          // Long Teeth
-          new PopulationLegendCheckbox( populationModel.longTeethVisibleProperty, longTeethString, {
-            color: NaturalSelectionColors.TEETH,
-            isMutation: true,
-            tandem: options.tandem.createTandem( 'longTeethCheckbox' )
-          } ),
-
-          // ------
-          new HSeparator( options.fixedWidth - 2 * options.xMargin, {
-            stroke: NaturalSelectionColors.SEPARATOR_STROKE,
-            tandem: options.tandem.createTandem( 'separator' )
-          } ),
-
-          // Data Probe
-          new Checkbox(
-            new Text( dataProbeString, {
-              font: NaturalSelectionConstants.CHECKBOX_FONT,
-              maxWidth: 135 // determined empirically
-            } ),
-            populationModel.dataProbe.visibleProperty,
-            merge( {
-              tandem: options.tandem.createTandem( 'dataProbeCheckbox' )
-            }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
-          )
-        ]
-      } ) );
-
-      super( content, options );
-    }
-
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'PopulationPanel does not support dispose' );
-    }
+    super( content, options );
   }
 
-  return naturalSelection.register( 'PopulationPanel', PopulationPanel );
-} );
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'PopulationPanel does not support dispose' );
+  }
+}
+
+naturalSelection.register( 'PopulationPanel', PopulationPanel );
+export default PopulationPanel;

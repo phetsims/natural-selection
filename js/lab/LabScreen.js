@@ -5,103 +5,98 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const Image = require( 'SCENERY/nodes/Image' );
-  const LabModel = require( 'NATURAL_SELECTION/lab/model/LabModel' );
-  const LabScreenView = require( 'NATURAL_SELECTION/lab/view/LabScreenView' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionColors = require( 'NATURAL_SELECTION/common/NaturalSelectionColors' );
-  const Property = require( 'AXON/Property' );
-  const Screen = require( 'JOIST/Screen' );
-  const ScreenIcon = require( 'JOIST/ScreenIcon' );
-  const Tandem = require( 'TANDEM/Tandem' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
+import Property from '../../../axon/js/Property.js';
+import Screen from '../../../joist/js/Screen.js';
+import ScreenIcon from '../../../joist/js/ScreenIcon.js';
+import HBox from '../../../scenery/js/nodes/HBox.js';
+import Image from '../../../scenery/js/nodes/Image.js';
+import VBox from '../../../scenery/js/nodes/VBox.js';
+import Tandem from '../../../tandem/js/Tandem.js';
+import brownBunnyImage4 from '../../images/bunny-brownFur-floppyEars-longTeeth_png.js';
+import brownBunnyImage2 from '../../images/bunny-brownFur-floppyEars-shortTeeth_png.js';
+import brownBunnyImage3 from '../../images/bunny-brownFur-straightEars-longTeeth_png.js';
+import brownBunnyImage1 from '../../images/bunny-brownFur-straightEars-shortTeeth_png.js';
+import whiteBunnyImage4 from '../../images/bunny-whiteFur-floppyEars-longTeeth_png.js';
+import whiteBunnyImage2 from '../../images/bunny-whiteFur-floppyEars-shortTeeth_png.js';
+import whiteBunnyImage3 from '../../images/bunny-whiteFur-straightEars-longTeeth_png.js';
+import whiteBunnyImage1 from '../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
+import NaturalSelectionColors from '../common/NaturalSelectionColors.js';
+import naturalSelectionStrings from '../natural-selection-strings.js';
+import naturalSelection from '../naturalSelection.js';
+import LabModel from './model/LabModel.js';
+import LabScreenView from './view/LabScreenView.js';
 
-  // images
-  const brownBunnyImage1 = require( 'image!NATURAL_SELECTION/bunny-brownFur-straightEars-shortTeeth.png' );
-  const brownBunnyImage2 = require( 'image!NATURAL_SELECTION/bunny-brownFur-floppyEars-shortTeeth.png' );
-  const brownBunnyImage3 = require( 'image!NATURAL_SELECTION/bunny-brownFur-straightEars-longTeeth.png' );
-  const brownBunnyImage4 = require( 'image!NATURAL_SELECTION/bunny-brownFur-floppyEars-longTeeth.png' );
-  const whiteBunnyImage1 = require( 'image!NATURAL_SELECTION/bunny-whiteFur-straightEars-shortTeeth.png' );
-  const whiteBunnyImage2 = require( 'image!NATURAL_SELECTION/bunny-whiteFur-floppyEars-shortTeeth.png' );
-  const whiteBunnyImage3 = require( 'image!NATURAL_SELECTION/bunny-whiteFur-straightEars-longTeeth.png' );
-  const whiteBunnyImage4 = require( 'image!NATURAL_SELECTION/bunny-whiteFur-floppyEars-longTeeth.png' );
+const screenLabString = naturalSelectionStrings.screen.lab;
 
-  // strings
-  const screenLabString = require( 'string!NATURAL_SELECTION/screen.lab' );
+class LabScreen extends Screen {
 
-  class LabScreen extends Screen {
+  /**
+   * @param {Tandem} tandem
+   */
+  constructor( tandem ) {
 
-    /**
-     * @param {Tandem} tandem
-     */
-    constructor( tandem ) {
+    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
-      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
+    const options = {
+      name: screenLabString,
+      backgroundColorProperty: new Property( NaturalSelectionColors.SCREEN_VIEW_BACKGROUND ),
+      homeScreenIcon: createScreenIcon(),
 
-      const options = {
-        name: screenLabString,
-        backgroundColorProperty: new Property( NaturalSelectionColors.SCREEN_VIEW_BACKGROUND ),
-        homeScreenIcon: createScreenIcon(),
+      // phet-io
+      tandem: tandem
+    };
 
-        // phet-io
-        tandem: tandem
-      };
-
-      super(
-        () => new LabModel( tandem.createTandem( 'model' ) ),
-        model => new LabScreenView( model, tandem.createTandem( 'view' ) ),
-        options
-      );
-    }
-
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'LabScreen does not support dispose' );
-    }
+    super(
+      () => new LabModel( tandem.createTandem( 'model' ) ),
+      model => new LabScreenView( model, tandem.createTandem( 'view' ) ),
+      options
+    );
   }
 
   /**
-   * Creates the icon for this screen.
-   * @returns {ScreenIcon}
+   * @public
+   * @override
    */
-  function createScreenIcon() {
-
-    const SPACING = 20;
-
-    return new ScreenIcon( new VBox( {
-      spacing: SPACING,
-      children: [
-        
-        // row 1
-        new HBox( {
-          spacing: SPACING,
-          children: [
-            new Image( brownBunnyImage1 ), new Image( whiteBunnyImage1 ),
-            new Image( brownBunnyImage2 ), new Image( whiteBunnyImage2 )
-          ]
-        } ),
-
-        // row 2
-        new HBox( {
-          spacing: SPACING,
-          children: [
-            new Image( whiteBunnyImage3 ), new Image( brownBunnyImage3 ),
-            new Image( whiteBunnyImage4 ), new Image( brownBunnyImage4 )
-          ]
-        } )
-      ]
-    } ), {
-      fill: NaturalSelectionColors.SCREEN_VIEW_BACKGROUND
-    } );
+  dispose() {
+    assert && assert( false, 'LabScreen does not support dispose' );
   }
+}
 
-  return naturalSelection.register( 'LabScreen', LabScreen );
-} );
+/**
+ * Creates the icon for this screen.
+ * @returns {ScreenIcon}
+ */
+function createScreenIcon() {
+
+  const SPACING = 20;
+
+  return new ScreenIcon( new VBox( {
+    spacing: SPACING,
+    children: [
+
+      // row 1
+      new HBox( {
+        spacing: SPACING,
+        children: [
+          new Image( brownBunnyImage1 ), new Image( whiteBunnyImage1 ),
+          new Image( brownBunnyImage2 ), new Image( whiteBunnyImage2 )
+        ]
+      } ),
+
+      // row 2
+      new HBox( {
+        spacing: SPACING,
+        children: [
+          new Image( whiteBunnyImage3 ), new Image( brownBunnyImage3 ),
+          new Image( whiteBunnyImage4 ), new Image( brownBunnyImage4 )
+        ]
+      } )
+    ]
+  } ), {
+    fill: NaturalSelectionColors.SCREEN_VIEW_BACKGROUND
+  } );
+}
+
+naturalSelection.register( 'LabScreen', LabScreen );
+export default LabScreen;

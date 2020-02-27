@@ -5,14 +5,11 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Enumeration = require( 'PHET_CORE/Enumeration' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import naturalSelection from '../../naturalSelection.js';
 
-  const Graphs = Enumeration.byKeys( [ 'POPULATION', 'PROPORTIONS', 'PEDIGREE' ] );
+const Graphs = Enumeration.byKeys( [ 'POPULATION', 'PROPORTIONS', 'PEDIGREE' ] );
 
-  return naturalSelection.register( 'Graphs', Graphs );
-} );
+naturalSelection.register( 'Graphs', Graphs );
+export default Graphs;

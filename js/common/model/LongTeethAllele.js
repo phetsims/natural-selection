@@ -5,22 +5,19 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const TeethGene = require( 'NATURAL_SELECTION/common/model/TeethGene' );
+import naturalSelectionStrings from '../../natural-selection-strings.js';
+import naturalSelection from '../../naturalSelection.js';
+import TeethGene from './TeethGene.js';
 
-  // strings
-  const longTeethString = require( 'string!NATURAL_SELECTION/longTeeth' );
+const longTeethString = naturalSelectionStrings.longTeeth;
 
-  class LongTeethAllele extends TeethGene {
+class LongTeethAllele extends TeethGene {
 
-    constructor() {
-      super( longTeethString );
-    }
+  constructor() {
+    super( longTeethString );
   }
+}
 
-  return naturalSelection.register( 'LongTeethAllele', LongTeethAllele );
-} );
+naturalSelection.register( 'LongTeethAllele', LongTeethAllele );
+export default LongTeethAllele;

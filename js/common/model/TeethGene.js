@@ -2,28 +2,25 @@
 
 /**
  * TeethGene is the base class for genes related to teeth.
- * 
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Gene = require( 'NATURAL_SELECTION/common/model/Gene' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+import naturalSelectionStrings from '../../natural-selection-strings.js';
+import naturalSelection from '../../naturalSelection.js';
+import Gene from './Gene.js';
 
-  // strings
-  const teethString = require( 'string!NATURAL_SELECTION/teeth' );
+const teethString = naturalSelectionStrings.teeth;
 
-  class TeethGene extends Gene {
+class TeethGene extends Gene {
 
-    /**
-     * @param {string} alleleName
-     */
-    constructor( alleleName ) {
-      super( teethString, alleleName );
-    }
+  /**
+   * @param {string} alleleName
+   */
+  constructor( alleleName ) {
+    super( teethString, alleleName );
   }
+}
 
-  return naturalSelection.register( 'TeethGene', TeethGene );
-} );
+naturalSelection.register( 'TeethGene', TeethGene );
+export default TeethGene;

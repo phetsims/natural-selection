@@ -6,44 +6,41 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Bounds2 = require( 'DOT/Bounds2' );
-  const DragListener = require( 'SCENERY/listeners/DragListener' );
-  const merge = require( 'PHET_CORE/merge' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const Property = require( 'AXON/Property' );
+import Property from '../../../../../axon/js/Property.js';
+import Bounds2 from '../../../../../dot/js/Bounds2.js';
+import merge from '../../../../../phet-core/js/merge.js';
+import DragListener from '../../../../../scenery/js/listeners/DragListener.js';
+import naturalSelection from '../../../naturalSelection.js';
 
-  class DataProbeDragListener extends DragListener {
+class DataProbeDragListener extends DragListener {
 
-    /**
-     * @param {Property.<Vector2>} positionProperty
-     * @param {Range} xRange
-     * @param {Object} [options]
-     */
-    constructor( positionProperty, xRange, options ) {
+  /**
+   * @param {Property.<Vector2>} positionProperty
+   * @param {Range} xRange
+   * @param {Object} [options]
+   */
+  constructor( positionProperty, xRange, options ) {
 
-      options = merge( {}, options );
+    options = merge( {}, options );
 
-      assert && assert( !options.dragBoundsProperty, 'DataProbeDragListener sets dragBoundsProperty' );
-      options.dragBoundsProperty = new Property( new Bounds2( xRange.min, 0, xRange.max, 0 ) );
+    assert && assert( !options.dragBoundsProperty, 'DataProbeDragListener sets dragBoundsProperty' );
+    options.dragBoundsProperty = new Property( new Bounds2( xRange.min, 0, xRange.max, 0 ) );
 
-      assert && assert( !options.positionProperty, 'DataProbeDragListener sets positionProperty' );
-      options.positionProperty = positionProperty;
+    assert && assert( !options.positionProperty, 'DataProbeDragListener sets positionProperty' );
+    options.positionProperty = positionProperty;
 
-      super( options );
-    }
-
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'DataProbeDragListener does not support dispose' );
-    }
+    super( options );
   }
 
-  return naturalSelection.register( 'DataProbeDragListener', DataProbeDragListener );
-} );
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'DataProbeDragListener does not support dispose' );
+  }
+}
+
+naturalSelection.register( 'DataProbeDragListener', DataProbeDragListener );
+export default DataProbeDragListener;

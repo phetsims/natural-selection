@@ -5,135 +5,132 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const DataProbeNode = require( 'NATURAL_SELECTION/common/view/population/DataProbeNode' );
-  const GenerationScrollControl = require( 'NATURAL_SELECTION/common/view/population/GenerationScrollControl' );
-  const merge = require( 'PHET_CORE/merge' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const PopulationGraphBackgroundNode = require( 'NATURAL_SELECTION/common/view/population/PopulationGraphBackgroundNode' );
-  const PopulationModel = require( 'NATURAL_SELECTION/common/model/PopulationModel' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  const Tandem = require( 'TANDEM/Tandem' );
-  const Text = require( 'SCENERY/nodes/Text' );
-  const ZoomControl = require( 'NATURAL_SELECTION/common/view/population/ZoomControl' );
+import merge from '../../../../../phet-core/js/merge.js';
+import Node from '../../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
+import Text from '../../../../../scenery/js/nodes/Text.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
+import naturalSelectionStrings from '../../../natural-selection-strings.js';
+import naturalSelection from '../../../naturalSelection.js';
+import PopulationModel from '../../model/PopulationModel.js';
+import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
+import DataProbeNode from './DataProbeNode.js';
+import GenerationScrollControl from './GenerationScrollControl.js';
+import PopulationGraphBackgroundNode from './PopulationGraphBackgroundNode.js';
+import ZoomControl from './ZoomControl.js';
 
-  // strings
-  const generationString = require( 'string!NATURAL_SELECTION/generation' );
-  const populationString = require( 'string!NATURAL_SELECTION/population' );
+const generationString = naturalSelectionStrings.generation;
+const populationString = naturalSelectionStrings.population;
 
-  // const
-  const ZOOM_CONTROL_X_OFFSET = 5;
-  const X_AXIS_LABEL_OFFSET = 7;
-  const Y_AXIS_LABEL_OFFSET = 7;
+// const
+const ZOOM_CONTROL_X_OFFSET = 5;
+const X_AXIS_LABEL_OFFSET = 7;
+const Y_AXIS_LABEL_OFFSET = 7;
 
-  class PopulationGraphNode extends Node {
+class PopulationGraphNode extends Node {
 
-    /**
-     * @param {PopulationModel} populationModel
-     * @param {Object} [options]
-     */
-    constructor( populationModel, options ) {
+  /**
+   * @param {PopulationModel} populationModel
+   * @param {Object} [options]
+   */
+  constructor( populationModel, options ) {
 
-      assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
+    assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
 
-      options = merge( {
-        graphWidth: 100,
-        graphHeight: 100,
+    options = merge( {
+      graphWidth: 100,
+      graphHeight: 100,
 
-        // phet-io
-        tandem: Tandem.REQUIRED
-      }, options );
+      // phet-io
+      tandem: Tandem.REQUIRED
+    }, options );
 
-      // invisible rectangle that defines the bounds of this Node
-      const boundsRectangle = new Rectangle( 0, 0, options.graphWidth, options.graphHeight );
+    // invisible rectangle that defines the bounds of this Node
+    const boundsRectangle = new Rectangle( 0, 0, options.graphWidth, options.graphHeight );
 
-      // Generation (x-axis) scroll control
-      const generationScrollControl = new GenerationScrollControl(
-        populationModel.xRangeProperty, populationModel.generationsProperty, populationModel.isPlayingProperty, {
-          labelString: generationString,
-          tandem: options.tandem.createTandem( 'generationScrollControl' )
-        } );
-
-      // Population (y-axis) zoom control
-      const populationZoomControl = new ZoomControl( populationModel.yRangeIndexProperty, {
-        orientation: 'vertical',
-        zoomLevelMin: populationModel.yRangeIndexProperty.range.min,
-        zoomLevelMax: populationModel.yRangeIndexProperty.range.max,
-        left: boundsRectangle.left,
-        top: boundsRectangle.top,
-        tandem: options.tandem.createTandem( 'populationZoomControl' )
+    // Generation (x-axis) scroll control
+    const generationScrollControl = new GenerationScrollControl(
+      populationModel.xRangeProperty, populationModel.generationsProperty, populationModel.isPlayingProperty, {
+        labelString: generationString,
+        tandem: options.tandem.createTandem( 'generationScrollControl' )
       } );
 
-      // y-axis (Population) label
-      const yAxisLabelNode = new Text( populationString, {
-        font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
-        rotation: -Math.PI / 2,
-        maxWidth: 90 // determined empirically
-      } );
+    // Population (y-axis) zoom control
+    const populationZoomControl = new ZoomControl( populationModel.yRangeIndexProperty, {
+      orientation: 'vertical',
+      zoomLevelMin: populationModel.yRangeIndexProperty.range.min,
+      zoomLevelMax: populationModel.yRangeIndexProperty.range.max,
+      left: boundsRectangle.left,
+      top: boundsRectangle.top,
+      tandem: options.tandem.createTandem( 'populationZoomControl' )
+    } );
 
-      //TODO fudge factors to fix wonky layout, need to account for tick marks
-      const FUDGE_WIDTH = 27;
-      const FUDGE_HEIGHT = 20;
-      const FUDGE_X_SPACING = 8;
+    // y-axis (Population) label
+    const yAxisLabelNode = new Text( populationString, {
+      font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
+      rotation: -Math.PI / 2,
+      maxWidth: 90 // determined empirically
+    } );
 
-      //TODO better names for these
-      // XY plot
-      const plotWidth = options.graphWidth - populationZoomControl.width - ZOOM_CONTROL_X_OFFSET - FUDGE_WIDTH;
-      const plotHeight = options.graphHeight - generationScrollControl.height - X_AXIS_LABEL_OFFSET - FUDGE_HEIGHT;
+    //TODO fudge factors to fix wonky layout, need to account for tick marks
+    const FUDGE_WIDTH = 27;
+    const FUDGE_HEIGHT = 20;
+    const FUDGE_X_SPACING = 8;
 
-      const backgroundNode = new PopulationGraphBackgroundNode( populationModel, {
-        backgroundWidth: plotWidth,
-        backgroundHeight: plotHeight,
-        left: populationZoomControl.right + ZOOM_CONTROL_X_OFFSET + FUDGE_X_SPACING,
-        y: boundsRectangle.top
-      } );
+    //TODO better names for these
+    // XY plot
+    const plotWidth = options.graphWidth - populationZoomControl.width - ZOOM_CONTROL_X_OFFSET - FUDGE_WIDTH;
+    const plotHeight = options.graphHeight - generationScrollControl.height - X_AXIS_LABEL_OFFSET - FUDGE_HEIGHT;
 
-      // center x-axis control under the graph
-      generationScrollControl.centerX = backgroundNode.x + ( plotWidth / 2 );
-      generationScrollControl.top = backgroundNode.bottom + X_AXIS_LABEL_OFFSET;
-      yAxisLabelNode.right = populationZoomControl.right + ZOOM_CONTROL_X_OFFSET - Y_AXIS_LABEL_OFFSET;
-      yAxisLabelNode.centerY = backgroundNode.y + ( plotHeight / 2 );
+    const backgroundNode = new PopulationGraphBackgroundNode( populationModel, {
+      backgroundWidth: plotWidth,
+      backgroundHeight: plotHeight,
+      left: populationZoomControl.right + ZOOM_CONTROL_X_OFFSET + FUDGE_X_SPACING,
+      y: boundsRectangle.top
+    } );
 
-      const dataProbeNode = new DataProbeNode( populationModel, backgroundNode.x, plotWidth, plotHeight, {
-        x: backgroundNode.x,
-        top: backgroundNode.y,
-        tandem: options.tandem.createTandem( 'dataProbeNode' )
-      } );
+    // center x-axis control under the graph
+    generationScrollControl.centerX = backgroundNode.x + ( plotWidth / 2 );
+    generationScrollControl.top = backgroundNode.bottom + X_AXIS_LABEL_OFFSET;
+    yAxisLabelNode.right = populationZoomControl.right + ZOOM_CONTROL_X_OFFSET - Y_AXIS_LABEL_OFFSET;
+    yAxisLabelNode.centerY = backgroundNode.y + ( plotHeight / 2 );
 
-      assert && assert( !options.children, 'PopulationGraphNode sets children' );
-      options.children = [
-        boundsRectangle, backgroundNode,
-        generationScrollControl,
-        populationZoomControl, yAxisLabelNode,
-        dataProbeNode
-      ];
+    const dataProbeNode = new DataProbeNode( populationModel, backgroundNode.x, plotWidth, plotHeight, {
+      x: backgroundNode.x,
+      top: backgroundNode.y,
+      tandem: options.tandem.createTandem( 'dataProbeNode' )
+    } );
 
-      super( options );
+    assert && assert( !options.children, 'PopulationGraphNode sets children' );
+    options.children = [
+      boundsRectangle, backgroundNode,
+      generationScrollControl,
+      populationZoomControl, yAxisLabelNode,
+      dataProbeNode
+    ];
 
-      // @private
-      this.dataProbeNode = dataProbeNode;
-    }
+    super( options );
 
-    /**
-     * @public
-     */
-    reset() {
-      this.dataProbeNode.reset();
-    }
-
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'PopulationGraphNode does not support dispose' );
-    }
+    // @private
+    this.dataProbeNode = dataProbeNode;
   }
 
-  return naturalSelection.register( 'PopulationGraphNode', PopulationGraphNode );
-} );
+  /**
+   * @public
+   */
+  reset() {
+    this.dataProbeNode.reset();
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'PopulationGraphNode does not support dispose' );
+  }
+}
+
+naturalSelection.register( 'PopulationGraphNode', PopulationGraphNode );
+export default PopulationGraphNode;

@@ -7,14 +7,11 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Enumeration = require( 'PHET_CORE/Enumeration' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import naturalSelection from '../../naturalSelection.js';
 
-  const Environments = Enumeration.byKeys( [ 'EQUATOR', 'ARCTIC' ] );
+const Environments = Enumeration.byKeys( [ 'EQUATOR', 'ARCTIC' ] );
 
-  return naturalSelection.register( 'Environments', Environments );
-} );
+naturalSelection.register( 'Environments', Environments );
+export default Environments;

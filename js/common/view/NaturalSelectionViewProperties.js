@@ -5,45 +5,42 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Graphs = require( 'NATURAL_SELECTION/common/view/Graphs' );
-  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import naturalSelection from '../../naturalSelection.js';
+import Graphs from './Graphs.js';
 
-  class NaturalSelectionViewProperties {
+class NaturalSelectionViewProperties {
 
-    /**
-     * @param {Tandem} tandem
-     */
-    constructor( tandem ) {
+  /**
+   * @param {Tandem} tandem
+   */
+  constructor( tandem ) {
 
-      assert && assert( tandem instanceof Tandem, 'invalid tandem' );
+    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
-      // @public
-      this.graphProperty = new EnumerationProperty( Graphs, Graphs.POPULATION, {
-        tandem: tandem.createTandem( 'graphProperty' )
-      } );
-    }
-
-    /**
-     * @public
-     */
-    reset() {
-      this.graphProperty.reset();
-    }
-
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'NaturalSelectionViewProperties does not support dispose' );
-    }
+    // @public
+    this.graphProperty = new EnumerationProperty( Graphs, Graphs.POPULATION, {
+      tandem: tandem.createTandem( 'graphProperty' )
+    } );
   }
 
-  return naturalSelection.register( 'NaturalSelectionViewProperties', NaturalSelectionViewProperties );
-} );
+  /**
+   * @public
+   */
+  reset() {
+    this.graphProperty.reset();
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'NaturalSelectionViewProperties does not support dispose' );
+  }
+}
+
+naturalSelection.register( 'NaturalSelectionViewProperties', NaturalSelectionViewProperties );
+export default NaturalSelectionViewProperties;

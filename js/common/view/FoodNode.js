@@ -5,88 +5,85 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Circle = require( 'SCENERY/nodes/Circle' );
-  const Food = require( 'NATURAL_SELECTION/common/model/Food' );
-  const Image = require( 'SCENERY/nodes/Image' );
-  const merge = require( 'PHET_CORE/merge' );
-  const SpriteNode = require( 'NATURAL_SELECTION/common/view/SpriteNode' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const Text = require( 'SCENERY/nodes/Text' );
+import merge from '../../../../phet-core/js/merge.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import Circle from '../../../../scenery/js/nodes/Circle.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import naturalSelection from '../../naturalSelection.js';
+import Food from '../model/Food.js';
+import SpriteNode from './SpriteNode.js';
 
-  class FoodNode extends SpriteNode {
+class FoodNode extends SpriteNode {
 
-    /**
-     * @param {Food} food
-     * @param {Object} [options]
-     */
-    constructor( food, options ) {
+  /**
+   * @param {Food} food
+   * @param {Object} [options]
+   */
+  constructor( food, options ) {
 
-      assert && assert( food instanceof Food, 'invalid food' );
+    assert && assert( food instanceof Food, 'invalid food' );
 
-      options = merge( {
+    options = merge( {
 
-        // SpriteNode options
-        scaleFactor: 0.5 // scale applied in addition to modelViewTransform scale
-      }, options );
+      // SpriteNode options
+      scaleFactor: 0.5 // scale applied in addition to modelViewTransform scale
+    }, options );
 
-      const toughFoodNode = new Image( food.toughImage, {
-        centerX: 0,
-        bottom: 0
-      } );
+    const toughFoodNode = new Image( food.toughImage, {
+      centerX: 0,
+      bottom: 0
+    } );
 
-      const tenderFoodNode = new Image( food.tenderImage, {
+    const tenderFoodNode = new Image( food.tenderImage, {
+      centerX: toughFoodNode.centerX,
+      bottom: toughFoodNode.bottom
+    } );
+
+    assert && assert( !options.children, 'FoodNode sets children' );
+    options.children = [ toughFoodNode, tenderFoodNode ];
+
+    if ( phet.chipper.queryParameters.dev ) {
+
+      // Red dot at the origin
+      const originNode = new Circle( 4, { fill: 'red' } );
+
+      // Show the label corresponding to the specification in https://github.com/phetsims/natural-selection/issues/17.
+      const debugLabelNode = new Text( food.debugLabel, {
+        font: new PhetFont( 32 ),
+        fill: 'black',
         centerX: toughFoodNode.centerX,
-        bottom: toughFoodNode.bottom
+        top: toughFoodNode.bottom + 5
       } );
 
-      assert && assert( !options.children, 'FoodNode sets children' );
-      options.children = [ toughFoodNode, tenderFoodNode ];
-
-      if ( phet.chipper.queryParameters.dev ) {
-
-        // Red dot at the origin
-        const originNode = new Circle( 4, { fill: 'red' } );
-
-        // Show the label corresponding to the specification in https://github.com/phetsims/natural-selection/issues/17.
-        const debugLabelNode = new Text( food.debugLabel, {
-          font: new PhetFont( 32 ),
-          fill: 'black',
-          centerX: toughFoodNode.centerX,
-          top: toughFoodNode.bottom + 5
-        } );
-
-        options.children.push( originNode );
-        options.children.push( debugLabelNode );
-      }
-
-      super( food, options );
-
-      // Show/hide food
-      food.visibleProperty.link( visible => {
-        this.visible = visible;
-      } );
-
-      //TODO use ToggleNode
-      // Toggle the look of the food between tender and tough.
-      food.isToughProperty.link( isTough => {
-        toughFoodNode.visible = isTough;
-        tenderFoodNode.visible = !isTough;
-      } );
+      options.children.push( originNode );
+      options.children.push( debugLabelNode );
     }
 
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'FoodNode does not support dispose' );
-    }
+    super( food, options );
+
+    // Show/hide food
+    food.visibleProperty.link( visible => {
+      this.visible = visible;
+    } );
+
+    //TODO use ToggleNode
+    // Toggle the look of the food between tender and tough.
+    food.isToughProperty.link( isTough => {
+      toughFoodNode.visible = isTough;
+      tenderFoodNode.visible = !isTough;
+    } );
   }
 
-  return naturalSelection.register( 'FoodNode', FoodNode );
-} );
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'FoodNode does not support dispose' );
+  }
+}
+
+naturalSelection.register( 'FoodNode', FoodNode );
+export default FoodNode;

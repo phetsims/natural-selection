@@ -5,30 +5,27 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import naturalSelection from '../../naturalSelection.js';
 
-  class Gene {
+class Gene {
 
-    /**
-     * @param {string} geneName
-     * @param {string} alleleName
-     */
-    constructor( geneName, alleleName ) {
+  /**
+   * @param {string} geneName
+   * @param {string} alleleName
+   */
+  constructor( geneName, alleleName ) {
 
-      // @public (read-only)
-      this.geneName = geneName;
-      this.alleleName = alleleName;
+    // @public (read-only)
+    this.geneName = geneName;
+    this.alleleName = alleleName;
 
-      // @public whether the gene is dominant (true) or recessive (false)
-      // Until a mutation is applied, all genes are recessive by default.
-      this.isDominantProperty = new BooleanProperty( false );
-    }
+    // @public whether the gene is dominant (true) or recessive (false)
+    // Until a mutation is applied, all genes are recessive by default.
+    this.isDominantProperty = new BooleanProperty( false );
   }
+}
 
-  return naturalSelection.register( 'Gene', Gene );
-} );
+naturalSelection.register( 'Gene', Gene );
+export default Gene;

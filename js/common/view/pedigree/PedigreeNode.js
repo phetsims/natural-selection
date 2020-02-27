@@ -5,90 +5,87 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const AllelesPanel = require( 'NATURAL_SELECTION/common/view/pedigree/AllelesPanel' );
-  const Dimension2 = require( 'DOT/Dimension2' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const merge = require( 'PHET_CORE/merge' );
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
-  const NaturalSelectionConstants = require( 'NATURAL_SELECTION/common/NaturalSelectionConstants' );
-  const NaturalSelectionQueryParameters = require( 'NATURAL_SELECTION/common/NaturalSelectionQueryParameters' );
-  const PedigreeGraphNode = require( 'NATURAL_SELECTION/common/view/pedigree/PedigreeGraphNode' );
-  const PedigreeModel = require( 'NATURAL_SELECTION/common/model/PedigreeModel' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import Dimension2 from '../../../../../dot/js/Dimension2.js';
+import merge from '../../../../../phet-core/js/merge.js';
+import HBox from '../../../../../scenery/js/nodes/HBox.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
+import naturalSelection from '../../../naturalSelection.js';
+import PedigreeModel from '../../model/PedigreeModel.js';
+import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
+import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
+import AllelesPanel from './AllelesPanel.js';
+import PedigreeGraphNode from './PedigreeGraphNode.js';
 
-  class PedigreeNode extends HBox {
+class PedigreeNode extends HBox {
 
-    /**
-     * @param {PedigreeModel} pedigreeModel
-     * @param {Dimension2} size - dimensions of the rectangle available for this Node and its children
-     * @param {Object} [options]
-     */
-    constructor( pedigreeModel, size, options ) {
+  /**
+   * @param {PedigreeModel} pedigreeModel
+   * @param {Dimension2} size - dimensions of the rectangle available for this Node and its children
+   * @param {Object} [options]
+   */
+  constructor( pedigreeModel, size, options ) {
 
-      assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
-      assert && assert( size instanceof Dimension2, 'invalid size' );
+    assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
+    assert && assert( size instanceof Dimension2, 'invalid size' );
 
-      options = merge( {
+    options = merge( {
 
-        // HBox options
-        spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-        align: 'center',
+      // HBox options
+      spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+      align: 'center',
 
-        // phet-io
-        tandem: Tandem.REQUIRED,
-        phetioDocumentation: 'the Pedigree graph and its control panel'
-      }, options );
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      phetioDocumentation: 'the Pedigree graph and its control panel'
+    }, options );
 
-      // Divy up the width
-      // If ?allelesVisible=false, the control panel is omitted, and the graph fills the width.
-      const controlPanelWidth = 0.2 * size.width;
-      const graphWidth = NaturalSelectionQueryParameters.allelesVisible ?
-                         size.width - controlPanelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING :
-                         size.width;
+    // Divy up the width
+    // If ?allelesVisible=false, the control panel is omitted, and the graph fills the width.
+    const controlPanelWidth = 0.2 * size.width;
+    const graphWidth = NaturalSelectionQueryParameters.allelesVisible ?
+                       size.width - controlPanelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING :
+                       size.width;
 
-      // Because it's instrumented for PhET-iO, the AllelesPanel must be instantiated regardless of the value
-      // of ?allelesVisible. If ?allelesVisible=false, it will not be added to the scenegraph, but will
-      // still appear in the Studio element tree.
-      const allelesPanel = new AllelesPanel( pedigreeModel, {
-        fixedWidth: controlPanelWidth,
-        maxHeight: size.height,
-        tandem: options.tandem.createTandem( 'allelesPanel' ),
-        phetioDocumentation: 'Note that if query parameter allelesVisible=false is specified, this panel will be ' +
-                             'created but will not be added to the UI. It will appear in the API and Studio tree, ' +
-                             'but changes to its elements and metadata will have no affect.'
-      } );
+    // Because it's instrumented for PhET-iO, the AllelesPanel must be instantiated regardless of the value
+    // of ?allelesVisible. If ?allelesVisible=false, it will not be added to the scenegraph, but will
+    // still appear in the Studio element tree.
+    const allelesPanel = new AllelesPanel( pedigreeModel, {
+      fixedWidth: controlPanelWidth,
+      maxHeight: size.height,
+      tandem: options.tandem.createTandem( 'allelesPanel' ),
+      phetioDocumentation: 'Note that if query parameter allelesVisible=false is specified, this panel will be ' +
+                           'created but will not be added to the UI. It will appear in the API and Studio tree, ' +
+                           'but changes to its elements and metadata will have no affect.'
+    } );
 
-      const pedigreeGraphNode = new PedigreeGraphNode( pedigreeModel, {
-        graphWidth: graphWidth,
-        graphHeight: size.height,
-        tandem: options.tandem.createTandem( 'pedigreeGraphNode' )
-      } );
+    const pedigreeGraphNode = new PedigreeGraphNode( pedigreeModel, {
+      graphWidth: graphWidth,
+      graphHeight: size.height,
+      tandem: options.tandem.createTandem( 'pedigreeGraphNode' )
+    } );
 
-      assert && assert( !options.children, 'PedigreeNode sets children' );
-      options.children = NaturalSelectionQueryParameters.allelesVisible ?
-        [ allelesPanel, pedigreeGraphNode ] :
-        [ pedigreeGraphNode ];
+    assert && assert( !options.children, 'PedigreeNode sets children' );
+    options.children = NaturalSelectionQueryParameters.allelesVisible ?
+      [ allelesPanel, pedigreeGraphNode ] :
+      [ pedigreeGraphNode ];
 
-      super( options );
+    super( options );
 
-      // Create a link to the model that this Node displays
-      this.addLinkedElement( pedigreeModel, {
-        tandem: options.tandem.createTandem( 'pedigreeModel' )
-      } );
-    }
-
-    /**
-     * @public
-     * @override
-     */
-    dispose() {
-      assert && assert( false, 'PedigreeNode does not support dispose' );
-    }
+    // Create a link to the model that this Node displays
+    this.addLinkedElement( pedigreeModel, {
+      tandem: options.tandem.createTandem( 'pedigreeModel' )
+    } );
   }
 
-  return naturalSelection.register( 'PedigreeNode', PedigreeNode );
-} );
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'PedigreeNode does not support dispose' );
+  }
+}
+
+naturalSelection.register( 'PedigreeNode', PedigreeNode );
+export default PedigreeNode;

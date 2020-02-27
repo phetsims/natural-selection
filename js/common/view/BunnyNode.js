@@ -4,81 +4,78 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
- define( require => {
-   'use strict';
 
-   // modules
-   const Bunny = require( 'NATURAL_SELECTION/common/model/Bunny' );
-   const Circle = require( 'SCENERY/nodes/Circle' );
-   const Image = require( 'SCENERY/nodes/Image' );
-   const merge = require( 'PHET_CORE/merge' );
-   const SpriteNode = require( 'NATURAL_SELECTION/common/view/SpriteNode' );
-   const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
 
-   // images
-   const bunnyWhiteFurStraightEarsShortTeethImage = require( 'image!NATURAL_SELECTION/bunny-whiteFur-straightEars-shortTeeth.png' );
+import merge from '../../../../phet-core/js/merge.js';
+import Circle from '../../../../scenery/js/nodes/Circle.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
+// images
+import bunnyWhiteFurStraightEarsShortTeethImage from '../../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
+import naturalSelection from '../../naturalSelection.js';
+// modules
+import Bunny from '../model/Bunny.js';
+import SpriteNode from './SpriteNode.js';
 
-   class BunnyNode extends SpriteNode {
+class BunnyNode extends SpriteNode {
 
-     /**
-      * @param {Bunny} bunny
-      * @param {Object} [options]
-      */
-     constructor( bunny, options ) {
+  /**
+   * @param {Bunny} bunny
+   * @param {Object} [options]
+   */
+  constructor( bunny, options ) {
 
-       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
+    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
-       options = merge( {
-         showDeadBunny: false,
+    options = merge( {
+      showDeadBunny: false,
 
-         // SpriteNode options
-         scaleFactor: 0.4 // scale applied in addition to modelViewTransform scale
-       }, options );
+      // SpriteNode options
+      scaleFactor: 0.4 // scale applied in addition to modelViewTransform scale
+    }, options );
 
-       const image = new Image( bunnyWhiteFurStraightEarsShortTeethImage, {
-         centerX: 0,
-         bottom: 0
-       } );
+    const image = new Image( bunnyWhiteFurStraightEarsShortTeethImage, {
+      centerX: 0,
+      bottom: 0
+    } );
 
-       assert && assert( !options.children, 'BunnyNode sets children' );
-       options.children = [ image ];
+    assert && assert( !options.children, 'BunnyNode sets children' );
+    options.children = [ image ];
 
-       if ( phet.chipper.queryParameters.dev ) {
+    if ( phet.chipper.queryParameters.dev ) {
 
-         // Red dot at the origin
-         options.children.push( new Circle( 4, { fill: 'red' } ) );
-       }
+      // Red dot at the origin
+      options.children.push( new Circle( 4, { fill: 'red' } ) );
+    }
 
-       super( bunny, options );
+    super( bunny, options );
 
-       // Optionally hide the bunny when it dies. Dead bunnies are shown in the Pedigree graph.
-       const bunnyIsAliveObserver = isAlive => {
-         this.visible = isAlive || options.showDeadBunny;
-       };
-       bunny.isAliveProperty.link( bunnyIsAliveObserver );
+    // Optionally hide the bunny when it dies. Dead bunnies are shown in the Pedigree graph.
+    const bunnyIsAliveObserver = isAlive => {
+      this.visible = isAlive || options.showDeadBunny;
+    };
+    bunny.isAliveProperty.link( bunnyIsAliveObserver );
 
-       // Dispose this node when its associated bunny is disposed.
-       const bunnyDisposedListener = () => {
-         this.dispose();
-       };
-       bunny.disposedEmitter.addListener( bunnyDisposedListener );
+    // Dispose this node when its associated bunny is disposed.
+    const bunnyDisposedListener = () => {
+      this.dispose();
+    };
+    bunny.disposedEmitter.addListener( bunnyDisposedListener );
 
-       // @private
-       this.disposeBunnyNode = () => {
-         bunny.isAliveProperty.unlink( bunnyIsAliveObserver );
-         bunny.disposedEmitter.removeListener( bunnyDisposedListener );
-       };
-     }
+    // @private
+    this.disposeBunnyNode = () => {
+      bunny.isAliveProperty.unlink( bunnyIsAliveObserver );
+      bunny.disposedEmitter.removeListener( bunnyDisposedListener );
+    };
+  }
 
-     /**
-      * @public
-      * @override
-      */
-     dispose() {
-       super.dispose();
-       this.disposeBunnyNode();
-     }
-   }
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    super.dispose();
+    this.disposeBunnyNode();
+  }
+}
 
-   return naturalSelection.register( 'BunnyNode', BunnyNode );
- } );
+export default naturalSelection.register( 'BunnyNode', BunnyNode );

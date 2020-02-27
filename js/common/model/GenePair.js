@@ -5,25 +5,22 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const naturalSelection = require( 'NATURAL_SELECTION/naturalSelection' );
+import naturalSelection from '../../naturalSelection.js';
 
-  class GenePair {
+class GenePair {
 
-    /**
-     * @param {Gene} fatherGene
-     * @param {Gene} motherGene
-     */
-    constructor( fatherGene, motherGene ) {
+  /**
+   * @param {Gene} fatherGene
+   * @param {Gene} motherGene
+   */
+  constructor( fatherGene, motherGene ) {
 
-      // @public (read-only)
-      this.fatherGene = fatherGene;
-      this.motherGene = motherGene;
-    }
+    // @public (read-only)
+    this.fatherGene = fatherGene;
+    this.motherGene = motherGene;
   }
+}
 
-  return naturalSelection.register( 'GenePair', GenePair );
-} );
+naturalSelection.register( 'GenePair', GenePair );
+export default GenePair;
