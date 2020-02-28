@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * PopulationLegendCheckbox is a checkbox in the control panel for the Population graph.

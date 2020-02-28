@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * MutationComingNode is a pseudo non-modal dialog. It informs the user that a mutation is about to be occur,

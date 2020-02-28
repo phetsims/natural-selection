@@ -1,4 +1,4 @@
-// Copyright 2019, University of Colorado Boulder
+// Copyright 2019-2020, University of Colorado Boulder
 
 /**
  * EnvironmentRadioButtonGroup is the radio button group for choosing the abiotic component of the environment.
