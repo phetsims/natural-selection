@@ -2495,7 +2495,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ResetAllButtonIO"
+      "phetioTypeName": "NodeIO"
     },
     "naturalSelection.introScreen.view.resetAllButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
@@ -8735,7 +8735,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ResetAllButtonIO"
+      "phetioTypeName": "NodeIO"
     },
     "naturalSelection.labScreen.view.resetAllButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
