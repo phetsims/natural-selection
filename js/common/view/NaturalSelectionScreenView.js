@@ -129,10 +129,12 @@ class NaturalSelectionScreenView extends ScreenView {
 
     // Play/pause/step time controls
     const timeControlNode = new TimeControlNode( model.isPlayingProperty, {
-      stepForwardOptions: {
+      playPauseStepButtonOptions: {
+        stepForwardButtonOptions: {
 
-        //TODO Should this step such that generationClock.timeProperty.value is a multiple of SECONDS_PER_STEP?
-        listener: () => model.stepOnce( NaturalSelectionConstants.SECONDS_PER_STEP )
+          //TODO Should this step such that generationClock.timeProperty.value is a multiple of SECONDS_PER_STEP?
+          listener: () => model.stepOnce( NaturalSelectionConstants.SECONDS_PER_STEP )
+        }
       },
       left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
       bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
