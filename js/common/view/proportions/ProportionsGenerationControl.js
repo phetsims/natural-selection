@@ -55,7 +55,9 @@ class ProportionsGenerationControl extends HBox {
     const generationDisplay = new NumberDisplay( visibileGenerationProperty, new Range( 0, 99 ), {
       align: 'center',
       valuePattern: generationValueString,
-      font: NaturalSelectionConstants.PROPORTIONS_GENERATION_CONTROL_FONT,
+      textOptions: {
+        font: NaturalSelectionConstants.PROPORTIONS_GENERATION_CONTROL_FONT
+      },
       xMargin: 0,
       yMargin: 0,
       backgroundFill: null,
