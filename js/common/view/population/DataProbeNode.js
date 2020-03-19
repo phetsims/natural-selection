@@ -224,8 +224,10 @@ class DataProbeNode extends Node {
 function createSolidNumberDisplay( numberProperty, color ) {
   const colorWithAlpha = Color.toColor( color ).withAlpha( NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY );
   return new NumberDisplay( numberProperty, NUMBER_DISPLAY_RANGE, {
-    font: NUMBER_DISPLAY_FONT,
-    numberFill: NaturalSelectionUtils.isDarkColor( colorWithAlpha ) ? 'white' : 'black',
+    textOptions: {
+      font: NUMBER_DISPLAY_FONT,
+      fill: NaturalSelectionUtils.isDarkColor( colorWithAlpha ) ? 'white' : 'black'
+    },
     backgroundFill: colorWithAlpha,
     backgroundStroke: colorWithAlpha,  // also set stroke, so all NumberDisplay have same dimensions
     backgroundLineWidth: NUMBER_DISPLAY_LINE_WIDTH,
@@ -241,8 +243,10 @@ function createSolidNumberDisplay( numberProperty, color ) {
  */
 function createDashedNumberDisplay( numberProperty, color ) {
   return new NumberDisplay( numberProperty, NUMBER_DISPLAY_RANGE, {
-    font: NUMBER_DISPLAY_FONT,
-    numberFill: NaturalSelectionUtils.isDarkColor( NUMBER_DISPLAY_DASHED_BACKGROUND_FILL ) ? 'white' : 'black',
+    textOptions: {
+      font: NUMBER_DISPLAY_FONT,
+      fill: NaturalSelectionUtils.isDarkColor( NUMBER_DISPLAY_DASHED_BACKGROUND_FILL ) ? 'white' : 'black'
+    },
     backgroundFill: NUMBER_DISPLAY_DASHED_BACKGROUND_FILL,
     backgroundStroke: color,
     backgroundLineDash: NUMBER_DISPLAY_LINE_DASH,
