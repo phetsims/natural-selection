@@ -17,8 +17,6 @@ import naturalSelectionStrings from '../../../natural-selection-strings.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
-const generationValueString = naturalSelectionStrings.generationValue;
-
 class ProportionsGenerationControl extends HBox {
 
   /**
@@ -54,7 +52,7 @@ class ProportionsGenerationControl extends HBox {
     // Generation number display
     const generationDisplay = new NumberDisplay( visibileGenerationProperty, new Range( 0, 99 ), {
       align: 'center',
-      valuePattern: generationValueString,
+      valuePattern: naturalSelectionStrings.generationValue,
       textOptions: {
         font: NaturalSelectionConstants.PROPORTIONS_GENERATION_CONTROL_FONT
       },

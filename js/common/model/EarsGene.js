@@ -10,15 +10,13 @@ import naturalSelectionStrings from '../../natural-selection-strings.js';
 import naturalSelection from '../../naturalSelection.js';
 import Gene from './Gene.js';
 
-const earsString = naturalSelectionStrings.ears;
-
 class EarsGene extends Gene {
 
   /**
    * @param {string} alleleName
    */
   constructor( alleleName ) {
-    super( earsString, alleleName );
+    super( naturalSelectionStrings.ears, alleleName );
   }
 }
 

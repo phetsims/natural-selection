@@ -14,8 +14,6 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-const playAgainString = naturalSelectionStrings.playAgain;
-
 class PlayAgainButton extends RectangularPushButton {
 
   /**
@@ -33,7 +31,7 @@ class PlayAgainButton extends RectangularPushButton {
     }, options );
 
     assert && assert( !options.content, 'PlayAgainButton sets content' );
-    options.content = new Text( playAgainString, {
+    options.content = new Text( naturalSelectionStrings.playAgain, {
       font: NaturalSelectionConstants.PUSH_BUTTON_FONT,
       maxWidth: 150 // determined empirically
     } );

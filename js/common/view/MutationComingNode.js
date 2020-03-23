@@ -19,8 +19,6 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import CancelMutationButton from './CancelMutationButton.js';
 
-const mutationComingString = naturalSelectionStrings.mutationComing;
-
 // constants
 const X_MARGIN = 8;
 const Y_MARGIN = 4;
@@ -41,7 +39,7 @@ class MutationComingNode extends Node {
       listener: options.cancelButtonListener
     } );
 
-    const textNode = new Text( mutationComingString, {
+    const textNode = new Text( naturalSelectionStrings.mutationComing, {
       font: NaturalSelectionConstants.MUTATION_COMING_FONT,
       maxWidth: 200 // determined empirically
     } );

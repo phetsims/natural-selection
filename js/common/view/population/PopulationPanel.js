@@ -20,15 +20,6 @@ import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
 import PopulationLegendCheckbox from './PopulationLegendCheckbox.js';
 
-const brownFurString = naturalSelectionStrings.brownFur;
-const straightEarsString = naturalSelectionStrings.straightEars;
-const floppyEarsString = naturalSelectionStrings.floppyEars;
-const longTeethString = naturalSelectionStrings.longTeeth;
-const shortTeethString = naturalSelectionStrings.shortTeeth;
-const totalString = naturalSelectionStrings.total;
-const dataProbeString = naturalSelectionStrings.dataProbe;
-const whiteFurString = naturalSelectionStrings.whiteFur;
-
 class PopulationPanel extends NaturalSelectionPanel {
 
   /**
@@ -51,45 +42,45 @@ class PopulationPanel extends NaturalSelectionPanel {
       children: [
 
         // Total
-        new PopulationLegendCheckbox( populationModel.totalVisibleProperty, totalString, {
+        new PopulationLegendCheckbox( populationModel.totalVisibleProperty, naturalSelectionStrings.total, {
           color: NaturalSelectionColors.TOTAL_POPULATION,
           tandem: options.tandem.createTandem( 'totalCheckbox' )
         } ),
 
         // White Fur
-        new PopulationLegendCheckbox( populationModel.whiteFurVisibleProperty, whiteFurString, {
+        new PopulationLegendCheckbox( populationModel.whiteFurVisibleProperty, naturalSelectionStrings.whiteFur, {
           color: NaturalSelectionColors.FUR,
           tandem: options.tandem.createTandem( 'whiteFurCheckbox' )
         } ),
 
         // Brown Fur
-        new PopulationLegendCheckbox( populationModel.brownFurVisibleProperty, brownFurString, {
+        new PopulationLegendCheckbox( populationModel.brownFurVisibleProperty, naturalSelectionStrings.brownFur, {
           color: NaturalSelectionColors.FUR,
           isMutation: true,
           tandem: options.tandem.createTandem( 'brownFurCheckbox' )
         } ),
 
         // Straight Ears
-        new PopulationLegendCheckbox( populationModel.straightEarsVisibleProperty, straightEarsString, {
+        new PopulationLegendCheckbox( populationModel.straightEarsVisibleProperty, naturalSelectionStrings.straightEars, {
           color: NaturalSelectionColors.EARS,
           tandem: options.tandem.createTandem( 'straightEarsCheckbox' )
         } ),
 
         // Floppy Ears
-        new PopulationLegendCheckbox( populationModel.floppyEarsVisibleProperty, floppyEarsString, {
+        new PopulationLegendCheckbox( populationModel.floppyEarsVisibleProperty, naturalSelectionStrings.floppyEars, {
           color: NaturalSelectionColors.EARS,
           isMutation: true,
           tandem: options.tandem.createTandem( 'floppyEarsCheckbox' )
         } ),
 
         // Short Teeth
-        new PopulationLegendCheckbox( populationModel.shortTeethVisibleProperty, shortTeethString, {
+        new PopulationLegendCheckbox( populationModel.shortTeethVisibleProperty, naturalSelectionStrings.shortTeeth, {
           color: NaturalSelectionColors.TEETH,
           tandem: options.tandem.createTandem( 'shortTeethCheckbox' )
         } ),
 
         // Long Teeth
-        new PopulationLegendCheckbox( populationModel.longTeethVisibleProperty, longTeethString, {
+        new PopulationLegendCheckbox( populationModel.longTeethVisibleProperty, naturalSelectionStrings.longTeeth, {
           color: NaturalSelectionColors.TEETH,
           isMutation: true,
           tandem: options.tandem.createTandem( 'longTeethCheckbox' )
@@ -103,7 +94,7 @@ class PopulationPanel extends NaturalSelectionPanel {
 
         // Data Probe
         new Checkbox(
-          new Text( dataProbeString, {
+          new Text( naturalSelectionStrings.dataProbe, {
             font: NaturalSelectionConstants.CHECKBOX_FONT,
             maxWidth: 135 // determined empirically
           } ),

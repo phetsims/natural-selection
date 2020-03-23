@@ -13,8 +13,6 @@ import naturalSelectionStrings from '../../natural-selection-strings.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-const allOfTheBunniesHaveDiedString = naturalSelectionStrings.allOfTheBunniesHaveDied;
-
 class DiedDialog extends Dialog {
 
   /**
@@ -28,7 +26,7 @@ class DiedDialog extends Dialog {
       scale: NaturalSelectionConstants.DIALOG_SCALE //TODO workaround for https://github.com/phetsims/joist/issues/586
     }, options );
 
-    const messageText = new Text( allOfTheBunniesHaveDiedString, {
+    const messageText = new Text( naturalSelectionStrings.allOfTheBunniesHaveDied, {
       font: NaturalSelectionConstants.DIALOG_FONT,
       maxWidth: 450 // determined empirically
     } );

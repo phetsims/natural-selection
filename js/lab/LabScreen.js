@@ -27,8 +27,6 @@ import naturalSelection from '../naturalSelection.js';
 import LabModel from './model/LabModel.js';
 import LabScreenView from './view/LabScreenView.js';
 
-const screenLabString = naturalSelectionStrings.screen.lab;
-
 class LabScreen extends Screen {
 
   /**
@@ -39,7 +37,7 @@ class LabScreen extends Screen {
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
     const options = {
-      name: screenLabString,
+      name: naturalSelectionStrings.screen.lab,
       backgroundColorProperty: new Property( NaturalSelectionColors.SCREEN_VIEW_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
 

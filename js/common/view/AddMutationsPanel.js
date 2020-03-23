@@ -33,13 +33,6 @@ import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import MutationIconNode from './MutationIconNode.js';
 import NaturalSelectionPanel from './NaturalSelectionPanel.js';
 
-const addMutationsString = naturalSelectionStrings.addMutations;
-const dominantString = naturalSelectionStrings.dominant;
-const earsString = naturalSelectionStrings.ears;
-const furString = naturalSelectionStrings.fur;
-const teethString = naturalSelectionStrings.teeth;
-const recessiveString = naturalSelectionStrings.recessive;
-
 // constants
 const COLUMN_SPACING = 8;
 const BUTTON_ICON_SCALE = 0.5;
@@ -76,18 +69,18 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
     //TODO title should be singular 'Add Mutation' when there is only 1 mutation in the panel
     // title is text + icon
-    const titleNode = new Text( addMutationsString, {
+    const titleNode = new Text( naturalSelectionStrings.addMutations, {
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 180 // determined empirically
     } );
 
     // Individual column headings
     const mutationIconNode = new MutationIconNode();
-    const dominantColumnLabel = new Text( dominantString, {
+    const dominantColumnLabel = new Text( naturalSelectionStrings.dominant, {
       font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
       maxWidth: 60 // determined empirically
     } );
-    const recessiveColumnLabel = new Text( recessiveString, {
+    const recessiveColumnLabel = new Text( naturalSelectionStrings.recessive, {
       font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
       maxWidth: 60 // determined empirically
     } );
@@ -103,7 +96,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     } );
 
     // A row for each trait
-    const furRow = new Row( furString, NaturalSelectionColors.FUR,
+    const furRow = new Row( naturalSelectionStrings.fur, NaturalSelectionColors.FUR,
       brownFurImage, whiteFurImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
       () => furMutationEmitter.emit(), //TODO args
       () => furMutationEmitter.emit(), //TODO args
@@ -111,7 +104,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
         tandem: options.tandem.createTandem( 'furRow' )
       }
     );
-    const earsRow = new Row( earsString, NaturalSelectionColors.EARS,
+    const earsRow = new Row( naturalSelectionStrings.ears, NaturalSelectionColors.EARS,
       floppyEarsImage, straightEarsImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
       () => earsMutationEmitter.emit(), //TODO args
       () => earsMutationEmitter.emit(), //TODO args
@@ -119,7 +112,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
         tandem: options.tandem.createTandem( 'earsRow' )
       }
     );
-    const teethRow = new Row( teethString, NaturalSelectionColors.TEETH,
+    const teethRow = new Row( naturalSelectionStrings.teeth, NaturalSelectionColors.TEETH,
       longTeethImage, shortTeethImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
       () => teethMutationEmitter.emit(), //TODO args
       () => teethMutationEmitter.emit(), //TODO args

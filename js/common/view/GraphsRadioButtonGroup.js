@@ -15,10 +15,6 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import Graphs from './Graphs.js';
 
-const populationString = naturalSelectionStrings.population;
-const proportionsString = naturalSelectionStrings.proportions;
-const pedigreeString = naturalSelectionStrings.pedigree;
-
 // constants
 const TEXT_OPTIONS = {
   font: NaturalSelectionConstants.RADIO_BUTTON_FONT,
@@ -48,21 +44,21 @@ class GraphsRadioButtonGroup extends VerticalAquaRadioButtonGroup {
       // Population
       {
         value: Graphs.POPULATION,
-        node: new Text( populationString, TEXT_OPTIONS ),
+        node: new Text( naturalSelectionStrings.population, TEXT_OPTIONS ),
         tandemName: 'populationRadioButton'
       },
 
       // Proportions
       {
         value: Graphs.PROPORTIONS,
-        node: new Text( proportionsString, TEXT_OPTIONS ),
+        node: new Text( naturalSelectionStrings.proportions, TEXT_OPTIONS ),
         tandemName: 'proportionsRadioButton'
       },
 
       // Pedigree
       {
         value: Graphs.PEDIGREE,
-        node: new Text( pedigreeString, TEXT_OPTIONS ),
+        node: new Text( naturalSelectionStrings.pedigree, TEXT_OPTIONS ),
         tandemName: 'pedigreeRadioButton'
       }
     ];

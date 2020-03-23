@@ -10,12 +10,10 @@ import naturalSelectionStrings from '../../natural-selection-strings.js';
 import naturalSelection from '../../naturalSelection.js';
 import FurGene from './FurGene.js';
 
-const brownFurString = naturalSelectionStrings.brownFur;
-
 class BrownFurAllele extends FurGene {
 
   constructor() {
-    super( brownFurString );
+    super( naturalSelectionStrings.brownFur );
   }
 }
 

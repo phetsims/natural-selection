@@ -13,8 +13,6 @@ import naturalSelectionStrings from '../../natural-selection-strings.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-const limitedFoodString = naturalSelectionStrings.limitedFood;
-
 class LimitedFoodCheckbox extends Checkbox {
 
   /**
@@ -25,7 +23,7 @@ class LimitedFoodCheckbox extends Checkbox {
 
     options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 
-    const content = new Text( limitedFoodString, {
+    const content = new Text( naturalSelectionStrings.limitedFood, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 150 // determined empirically
     } );

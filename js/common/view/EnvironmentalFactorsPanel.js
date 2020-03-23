@@ -20,8 +20,6 @@ import NaturalSelectionPanel from './NaturalSelectionPanel.js';
 import ToughFoodCheckbox from './ToughFoodCheckbox.js';
 import WolvesCheckbox from './WolvesCheckbox.js';
 
-const environmentalFactorsString = naturalSelectionStrings.environmentalFactors;
-
 class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
 
   /**
@@ -42,7 +40,7 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       children: [
 
         // title
-        new Text( environmentalFactorsString, {
+        new Text( naturalSelectionStrings.environmentalFactors, {
           font: NaturalSelectionConstants.TITLE_FONT,
           maxWidth: 175, // determined empirically,
           tandem: options.tandem.createTandem( 'environmentalFactorsText' )

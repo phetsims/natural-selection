@@ -20,13 +20,6 @@ import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import HatchingRectangle from '../HatchingRectangle.js';
 
-const brownFurString = naturalSelectionStrings.brownFur;
-const straightEarsString = naturalSelectionStrings.straightEars;
-const floppyEarsString = naturalSelectionStrings.floppyEars;
-const longTeethString = naturalSelectionStrings.longTeeth;
-const shortTeethString = naturalSelectionStrings.shortTeeth;
-const whiteFurString = naturalSelectionStrings.whiteFur;
-
 // constants
 const RECTANGLE_WIDTH = 25;
 const RECTANGLE_HEIGHT = 15;
@@ -48,10 +41,10 @@ class ProportionsLegendNode extends VBox {
     options.children = [
 
       // Fur
-      new Row( whiteFurString, NaturalSelectionColors.FUR, false /* isMutation */, {
+      new Row( naturalSelectionStrings.whiteFur, NaturalSelectionColors.FUR, false /* isMutation */, {
         tandem: options.tandem.createTandem( 'whiteFurNode' )
       } ),
-      new Row( brownFurString, NaturalSelectionColors.FUR, true, {
+      new Row( naturalSelectionStrings.brownFur, NaturalSelectionColors.FUR, true, {
         tandem: options.tandem.createTandem( 'brownFurNode' )
       } ),
 
@@ -59,20 +52,20 @@ class ProportionsLegendNode extends VBox {
       new VStrut( 1 ),
 
       // Ears
-      new Row( straightEarsString, NaturalSelectionColors.EARS, false, {
+      new Row( naturalSelectionStrings.straightEars, NaturalSelectionColors.EARS, false, {
         tandem: options.tandem.createTandem( 'straightEarsNode' )
       } ),
-      new Row( floppyEarsString, NaturalSelectionColors.EARS, true, {
+      new Row( naturalSelectionStrings.floppyEars, NaturalSelectionColors.EARS, true, {
         tandem: options.tandem.createTandem( 'floppyEarsNode' )
       } ),
 
       new VStrut( 1 ),
 
       // Teeth
-      new Row( shortTeethString, NaturalSelectionColors.TEETH, false, {
+      new Row( naturalSelectionStrings.shortTeeth, NaturalSelectionColors.TEETH, false, {
         tandem: options.tandem.createTandem( 'shortTeethNode' )
       } ),
-      new Row( longTeethString, NaturalSelectionColors.TEETH, true, {
+      new Row( naturalSelectionStrings.longTeeth, NaturalSelectionColors.TEETH, true, {
         tandem: options.tandem.createTandem( 'longTeethNode' )
       } )
     ];

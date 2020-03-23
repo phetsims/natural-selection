@@ -10,12 +10,10 @@ import naturalSelectionStrings from '../../natural-selection-strings.js';
 import naturalSelection from '../../naturalSelection.js';
 import TeethAllele from './TeethAllele.js';
 
-const shortTeethString = naturalSelectionStrings.shortTeeth;
-
 class ShortTeethAllele extends TeethAllele {
 
   constructor() {
-    super( shortTeethString );
+    super( naturalSelectionStrings.shortTeeth );
   }
 }
 

@@ -14,8 +14,6 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-const addAMateString = naturalSelectionStrings.addAMate;
-
 class AddAMateButton extends RectangularPushButton {
 
   /**
@@ -33,7 +31,7 @@ class AddAMateButton extends RectangularPushButton {
     }, options );
 
     assert && assert( !options.content, 'AddAMateButton sets content' );
-    options.content = new Text( addAMateString, {
+    options.content = new Text( naturalSelectionStrings.addAMate, {
       font: NaturalSelectionConstants.PUSH_BUTTON_FONT,
       maxWidth: 150 // determined empirically
     } );

@@ -16,9 +16,6 @@ import naturalSelectionStrings from '../../natural-selection-strings.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-const toughFoodString = naturalSelectionStrings.toughFood;
-
-
 class ToughFoodCheckbox extends Checkbox {
 
   /**
@@ -29,7 +26,7 @@ class ToughFoodCheckbox extends Checkbox {
 
     options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 
-    const text = new Text( toughFoodString, {
+    const text = new Text( naturalSelectionStrings.toughFood, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 110 // determined empirically
     } );

@@ -20,8 +20,6 @@ import naturalSelection from '../naturalSelection.js';
 import IntroModel from './model/IntroModel.js';
 import IntroScreenView from './view/IntroScreenView.js';
 
-const screenIntroString = naturalSelectionStrings.screen.intro;
-
 class IntroScreen extends Screen {
 
   /**
@@ -32,7 +30,7 @@ class IntroScreen extends Screen {
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
     const options = {
-      name: screenIntroString,
+      name: naturalSelectionStrings.screen.intro,
       backgroundColorProperty: new Property( NaturalSelectionColors.SCREEN_VIEW_BACKGROUND ),
       homeScreenIcon: createScreenIcon(),
 

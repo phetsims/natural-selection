@@ -14,8 +14,6 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-const playString = naturalSelectionStrings.play;
-
 class PlayButton extends RectangularPushButton {
 
   /**
@@ -33,7 +31,7 @@ class PlayButton extends RectangularPushButton {
     }, options );
 
     assert && assert( !options.content, 'PlayButton sets content' );
-    options.content = new Text( playString, {
+    options.content = new Text( naturalSelectionStrings.play, {
       font: NaturalSelectionConstants.PUSH_BUTTON_FONT,
       maxWidth: 150 // determined empirically
     } );

@@ -17,8 +17,6 @@ import naturalSelectionStrings from '../../natural-selection-strings.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-const bunniesHaveTakenOverTheWorldString = naturalSelectionStrings.bunniesHaveTakenOverTheWorld;
-
 class WorldDialog extends Dialog {
 
   /**
@@ -37,7 +35,7 @@ class WorldDialog extends Dialog {
       scale: 0.8 // determined empirically
     } );
 
-    const messageText = new Text( bunniesHaveTakenOverTheWorldString, {
+    const messageText = new Text( naturalSelectionStrings.bunniesHaveTakenOverTheWorld, {
       font: NaturalSelectionConstants.DIALOG_FONT,
       fill: 'white',
       maxWidth: worldNode.width

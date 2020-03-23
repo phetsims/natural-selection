@@ -27,14 +27,6 @@ import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import ProportionsBarNode from './ProportionsBarNode.js';
 import ProportionsGenerationControl from './ProportionsGenerationControl.js';
 
-const countBunniesString = naturalSelectionStrings.countBunnies;
-const earsString = naturalSelectionStrings.ears;
-const endOfGenerationString = naturalSelectionStrings.endOfGeneration;
-const furString = naturalSelectionStrings.fur;
-const oneBunnyString = naturalSelectionStrings.oneBunny;
-const startOfGenerationString = naturalSelectionStrings.startOfGeneration;
-const teethString = naturalSelectionStrings.teeth;
-
 // constants
 const COLUMNS_SPACING = 20;
 const LABEL_FONT = new PhetFont( 14 );
@@ -75,16 +67,16 @@ class ProportionsGraphNode extends Node {
       spacing: COLUMNS_SPACING,
       children: [
         new AlignBox( new Text( '', columnLabelOptions ), { group: barColumnsAlignGroup } ),
-        new AlignBox( new Text( furString, columnLabelOptions ), { group: barColumnsAlignGroup } ),
-        new AlignBox( new Text( earsString, columnLabelOptions ), { group: barColumnsAlignGroup } ),
-        new AlignBox( new Text( teethString, columnLabelOptions ), { group: barColumnsAlignGroup } )
+        new AlignBox( new Text( naturalSelectionStrings.fur, columnLabelOptions ), { group: barColumnsAlignGroup } ),
+        new AlignBox( new Text( naturalSelectionStrings.ears, columnLabelOptions ), { group: barColumnsAlignGroup } ),
+        new AlignBox( new Text( naturalSelectionStrings.teeth, columnLabelOptions ), { group: barColumnsAlignGroup } )
       ]
     } );
 
     // Rows
-    const startRow = new Row( startOfGenerationString, proportionsModel.startCountProperty,
+    const startRow = new Row( naturalSelectionStrings.startOfGeneration, proportionsModel.startCountProperty,
       labelColumnAlignGroup, barColumnsAlignGroup, proportionsModel.valuesVisibleProperty );
-    const currentRow = new Row( endOfGenerationString, proportionsModel.endCountProperty,
+    const currentRow = new Row( naturalSelectionStrings.endOfGeneration, proportionsModel.endCountProperty,
       labelColumnAlignGroup, barColumnsAlignGroup, proportionsModel.valuesVisibleProperty );
     const rows = new VBox( {
       spacing: 30,
@@ -178,10 +170,10 @@ class Row extends HBox {
 
     countProperty.link( count => {
       if ( count === 1 ) {
-        countNode.text = oneBunnyString;
+        countNode.text = naturalSelectionStrings.oneBunny;
       }
       else {
-        countNode.text = StringUtils.fillIn( countBunniesString, { count: count } );
+        countNode.text = StringUtils.fillIn( naturalSelectionStrings.countBunnies, { count: count } );
       }
     } );
   }

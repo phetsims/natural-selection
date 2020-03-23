@@ -20,9 +20,6 @@ import GenerationScrollControl from './GenerationScrollControl.js';
 import PopulationGraphBackgroundNode from './PopulationGraphBackgroundNode.js';
 import ZoomControl from './ZoomControl.js';
 
-const generationString = naturalSelectionStrings.generation;
-const populationString = naturalSelectionStrings.population;
-
 // const
 const ZOOM_CONTROL_X_OFFSET = 5;
 const X_AXIS_LABEL_OFFSET = 7;
@@ -52,7 +49,7 @@ class PopulationGraphNode extends Node {
     // Generation (x-axis) scroll control
     const generationScrollControl = new GenerationScrollControl(
       populationModel.xRangeProperty, populationModel.generationsProperty, populationModel.isPlayingProperty, {
-        labelString: generationString,
+        labelString: naturalSelectionStrings.generation,
         tandem: options.tandem.createTandem( 'generationScrollControl' )
       } );
 
@@ -67,7 +64,7 @@ class PopulationGraphNode extends Node {
     } );
 
     // y-axis (Population) label
-    const yAxisLabelNode = new Text( populationString, {
+    const yAxisLabelNode = new Text( naturalSelectionStrings.population, {
       font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
       rotation: -Math.PI / 2,
       maxWidth: 90 // determined empirically

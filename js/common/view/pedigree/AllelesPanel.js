@@ -29,17 +29,6 @@ import PedigreeModel from '../../model/PedigreeModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
 
-const allelesString = naturalSelectionStrings.alleles;
-const earsDominantString = naturalSelectionStrings.earsDominant;
-const earsRecessiveString = naturalSelectionStrings.earsRecessive;
-const earsString = naturalSelectionStrings.ears;
-const furDominantString = naturalSelectionStrings.furDominant;
-const furRecessiveString = naturalSelectionStrings.furRecessive;
-const furString = naturalSelectionStrings.fur;
-const teethDominantString = naturalSelectionStrings.teethDominant;
-const teethRecessiveString = naturalSelectionStrings.teethRecessive;
-const teethString = naturalSelectionStrings.teeth;
-
 class AllelesPanel extends NaturalSelectionPanel {
 
   /**
@@ -64,7 +53,7 @@ class AllelesPanel extends NaturalSelectionPanel {
       children: [
 
         // Alleles
-        new Text( allelesString, {
+        new Text( naturalSelectionStrings.alleles, {
           font: NaturalSelectionConstants.TITLE_FONT,
           maxWidth: 125, // determined empirically
           tandem: options.tandem.createTandem( 'title' )
@@ -72,7 +61,7 @@ class AllelesPanel extends NaturalSelectionPanel {
 
         // Fur
         new Row(
-          furString, furDominantString, furRecessiveString,
+          naturalSelectionStrings.fur, naturalSelectionStrings.furDominant, naturalSelectionStrings.furRecessive,
           brownFurImage, whiteFurImage,
           pedigreeModel.furAllelesVisibleProperty, pedigreeModel.furMutationExistsProperty,
           alleleAlignGroup, {
@@ -83,7 +72,7 @@ class AllelesPanel extends NaturalSelectionPanel {
 
         // Ears
         new Row(
-          earsString, earsDominantString, earsRecessiveString,
+          naturalSelectionStrings.ears, naturalSelectionStrings.earsDominant, naturalSelectionStrings.earsRecessive,
           straightEarsImage, floppyEarsImage,
           pedigreeModel.earsAllelesVisibleProperty, pedigreeModel.earsMutationExistsProperty,
           alleleAlignGroup, {
@@ -94,7 +83,7 @@ class AllelesPanel extends NaturalSelectionPanel {
 
         // Teeth
         new Row(
-          teethString, teethDominantString, teethRecessiveString,
+          naturalSelectionStrings.teeth, naturalSelectionStrings.teethDominant, naturalSelectionStrings.teethRecessive,
           longTeethImage, shortTeethImage,
           pedigreeModel.teethAllelesVisibleProperty, pedigreeModel.teethMutationExistsProperty,
           alleleAlignGroup, {

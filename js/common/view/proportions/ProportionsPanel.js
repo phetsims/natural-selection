@@ -20,8 +20,6 @@ import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
 import ProportionsLegendNode from './ProportionsLegendNode.js';
 
-const valuesString = naturalSelectionStrings.values;
-
 class ProportionsPanel extends NaturalSelectionPanel {
 
   /**
@@ -56,7 +54,7 @@ class ProportionsPanel extends NaturalSelectionPanel {
 
         // Values checkbox
         new Checkbox(
-          new Text( valuesString, {
+          new Text( naturalSelectionStrings.values, {
             font: NaturalSelectionConstants.CHECKBOX_FONT,
             maxWidth: 100 // determined empirically
           } ),

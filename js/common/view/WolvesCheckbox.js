@@ -16,9 +16,6 @@ import naturalSelectionStrings from '../../natural-selection-strings.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-const wolvesString = naturalSelectionStrings.wolves;
-
-
 class WolvesCheckbox extends Checkbox {
 
   /**
@@ -29,7 +26,7 @@ class WolvesCheckbox extends Checkbox {
 
     options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 
-    const text = new Text( wolvesString, {
+    const text = new Text( naturalSelectionStrings.wolves, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 110 // determined empirically
     } );

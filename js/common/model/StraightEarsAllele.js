@@ -10,12 +10,10 @@ import naturalSelectionStrings from '../../natural-selection-strings.js';
 import naturalSelection from '../../naturalSelection.js';
 import EarsGene from './EarsGene.js';
 
-const straightEarsString = naturalSelectionStrings.straightEars;
-
 class StraightEarsAllele extends EarsGene {
 
   constructor() {
-    super( straightEarsString );
+    super( naturalSelectionStrings.straightEars );
   }
 }
 

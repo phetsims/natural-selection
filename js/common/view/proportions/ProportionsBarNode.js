@@ -19,10 +19,6 @@ import naturalSelectionStrings from '../../../natural-selection-strings.js';
 import naturalSelection from '../../../naturalSelection.js';
 import HatchingRectangle from '../HatchingRectangle.js';
 
-const greaterThanValuePercentString = naturalSelectionStrings.greaterThanValuePercent;
-const lessThanValuePercentString = naturalSelectionStrings.lessThanValuePercent;
-const valuePercentString = naturalSelectionStrings.valuePercent;
-
 // constants
 const PERCENTAGE_FONT = new PhetFont( 12 );
 
@@ -116,8 +112,8 @@ class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.01 * this.barWidth;
 
       // > 99% non-mutant, < 1% mutant
-      this.nonMutantPercentageNode.text = StringUtils.fillIn( greaterThanValuePercentString, { value: 99 } );
-      this.mutantPercentageNode.text = StringUtils.fillIn( lessThanValuePercentString, { value: 1 } );
+      this.nonMutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercent, { value: 99 } );
+      this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercent, { value: 1 } );
     }
     else if ( nonMutantPercentage > 0 && nonMutantPercentage < 1 ) {
 
@@ -125,18 +121,18 @@ class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.99 * this.barWidth;
 
       // < 1% non-mutant, > 99% mutant
-      this.nonMutantPercentageNode.text = StringUtils.fillIn( lessThanValuePercentString, { value: 1 } );
-      this.mutantPercentageNode.text = StringUtils.fillIn( greaterThanValuePercentString, { value: 99 } );
+      this.nonMutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercent, { value: 1 } );
+      this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercent, { value: 99 } );
     }
     else {
 
       // round both percentages to the nearest integer
       this.mutantRectangle.rectWidth = ( Utils.roundSymmetric( mutantPercentage ) / 100 ) * this.barWidth;
 
-      this.nonMutantPercentageNode.text = StringUtils.fillIn( valuePercentString, {
+      this.nonMutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercent, {
         value: Utils.roundSymmetric( nonMutantPercentage )
       } );
-      this.mutantPercentageNode.text = StringUtils.fillIn( valuePercentString, {
+      this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercent, {
         value: Utils.roundSymmetric( mutantPercentage )
       } );
     }
