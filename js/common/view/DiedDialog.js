@@ -25,7 +25,7 @@ class DiedDialog extends Dialog {
     options = merge( {
       topMargin: 50,
       bottomMargin: 50,
-      scale: NaturalSelectionConstants.DIALOG_SCALE //TODO to compensate for https://github.com/phetsims/joist/issues/586
+      scale: NaturalSelectionConstants.DIALOG_SCALE //TODO workaround for https://github.com/phetsims/joist/issues/586
     }, options );
 
     const messageText = new Text( allOfTheBunniesHaveDiedString, {
