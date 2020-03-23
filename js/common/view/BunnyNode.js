@@ -5,14 +5,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-
 import merge from '../../../../phet-core/js/merge.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
-// images
 import bunnyWhiteFurStraightEarsShortTeethImage from '../../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
 import naturalSelection from '../../naturalSelection.js';
-// modules
 import Bunny from '../model/Bunny.js';
 import SpriteNode from './SpriteNode.js';
 
