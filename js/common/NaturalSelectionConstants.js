@@ -6,6 +6,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import HomeScreenView from '../../../joist/js/HomeScreenView.js';
+import ScreenView from '../../../joist/js/ScreenView.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import RectangularButtonView from '../../../sun/js/buttons/RectangularButtonView.js';
 import naturalSelection from '../naturalSelection.js';
@@ -84,7 +86,8 @@ const NaturalSelectionConstants = {
   },
 
   // Dialog
-  DIALOG_SCALE: 0.75, //TODO to compensate for https://github.com/phetsims/joist/issues/586
+  //TODO to compensate for https://github.com/phetsims/joist/issues/586
+  DIALOG_SCALE: HomeScreenView.LAYOUT_BOUNDS.width / ScreenView.DEFAULT_LAYOUT_BOUNDS.width,
 
   // Fonts
   CHECKBOX_FONT: new PhetFont( 16 ),
@@ -99,6 +102,8 @@ const NaturalSelectionConstants = {
   PROPORTIONS_LEGEND_FONT: new PhetFont( 16 ),
   DIALOG_FONT: new PhetFont( 16 )
 };
+
+console.log( `DIALOG_SCALE=${NaturalSelectionConstants.DIALOG_SCALE}` );
 
 naturalSelection.register( 'NaturalSelectionConstants', NaturalSelectionConstants );
 export default NaturalSelectionConstants;
