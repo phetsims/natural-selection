@@ -29,7 +29,8 @@ class WorldDialog extends Dialog {
     options = merge( {
       fill: 'black',
       closeButtonColor: 'white',
-      topMargin: 25
+      topMargin: 25,
+      scale: NaturalSelectionConstants.DIALOG_SCALE //TODO to compensate for https://github.com/phetsims/joist/issues/586
     }, options );
 
     const worldNode = new Image( worldImage, {
@@ -45,8 +46,7 @@ class WorldDialog extends Dialog {
     const content = new VBox( {
       spacing: 25,
       align: 'center',
-      children: [ messageText, worldNode ],
-      scale: NaturalSelectionConstants.DIALOG_CONTENT_SCALE
+      children: [ messageText, worldNode ]
     } );
 
     super( content, options );

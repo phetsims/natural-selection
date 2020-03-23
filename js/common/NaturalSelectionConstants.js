@@ -84,7 +84,7 @@ const NaturalSelectionConstants = {
   },
 
   // Dialog
-  DIALOG_CONTENT_SCALE: 0.75, //TODO to compensate for https://github.com/phetsims/joist/issues/586
+  DIALOG_SCALE: 0.75, //TODO to compensate for https://github.com/phetsims/joist/issues/586
 
   // Fonts
   CHECKBOX_FONT: new PhetFont( 16 ),

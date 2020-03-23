@@ -26,9 +26,8 @@ import PedigreeNode from './pedigree/PedigreeNode.js';
 import PopulationNode from './population/PopulationNode.js';
 import ProportionsNode from './proportions/ProportionsNode.js';
 
-//TODO const DiedDialog = require( '/natural-selection/js/common/view/DiedDialog' );
-
-//TODO const WorldDialog = require( '/natural-selection/js/common/view/WorldDialog' );
+// import DiedDialog from './DiedDialog';
+// import WorldDialog from './WorldDialog';
 
 class NaturalSelectionScreenView extends ScreenView {
 
@@ -50,8 +49,8 @@ class NaturalSelectionScreenView extends ScreenView {
 
     super( options );
 
-    //TODO
     // Dialogs, displayed when the 'game' ends because bunnies have taken over the world, or all bunnies have died.
+    //TODO
     // const diedDialog = new DiedDialog();
     // const worldDialog = new WorldDialog();
 
