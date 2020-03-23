@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * SpriteNode represents a Sprite model element (which exists in 3D space) as a 2D image projected onto the screen.
+ * SpriteNode displays a Sprite model element (which exists in 3D space) as a 2D image projected onto the screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
