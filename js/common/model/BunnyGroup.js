@@ -49,6 +49,7 @@ class BunnyGroup extends PhetioGroup {
 
     // defaultArguments, passed to createMember during API harvest (when running 'grunt update').
     // Note that its necessary to include {} for options.
+    //TODO having to include {} for options is mildly annoying
     const defaultArguments = [ {} ];
 
     super( createMember, defaultArguments, options );
