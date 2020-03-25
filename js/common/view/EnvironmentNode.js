@@ -198,7 +198,7 @@ class EnvironmentNode extends Node {
    */
   step( dt ) {
 
-    // Sort the SpriteNodes by decreasing position.z
+    // Sort the SpriteNodes by descending position.z (furthest to closest)
     this.spritesNode.children = _.sortBy(
       this.spritesNode.children,
       child => child.sprite.positionProperty.value.z
