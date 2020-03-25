@@ -3,7 +3,7 @@ TODO list for natural-selection
 IO
 Review instrumentation of Bunny and BunnyNode with IO team
 Serialization of Bunny father and mother
-How is cyclic serialization handled? A -> B -> A
+How is cyclic serialization handled? A -> B -> C -> A, or A <-> B
 What if I need to use BunnyIO for a Bunny that's not managed by BunnyGroup?
 Is using PhetioGroup.createCorrespondingGroupMember for view a requirement or convention?
 
