@@ -4525,6 +4525,32 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
+    "naturalSelection.labScreen.view.environmentNode.bunnyNodeGroup": {
+      "phetioDocumentation": "TODO",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PhetioGroupIO<ReferenceIO>"
+    },
+    "naturalSelection.labScreen.view.environmentNode.bunnyNodeGroup.archetype": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ReferenceIO"
+    },
     "naturalSelection.labScreen.view.environmentNode.environmentModel": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,

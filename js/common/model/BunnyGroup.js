@@ -23,6 +23,7 @@ class BunnyGroup extends PhetioGroup {
    * @param {Object} [options]
    */
   constructor( modelViewTransform, options ) {
+
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
     options = merge( {
@@ -46,7 +47,8 @@ class BunnyGroup extends PhetioGroup {
       } ) );
     };
 
-    // defaultArguments, passed to createMember during API harvest. Note that its necessary to include {} for options.
+    // defaultArguments, passed to createMember during API harvest (when running 'grunt update').
+    // Note that its necessary to include {} for options.
     const defaultArguments = [ {} ];
 
     super( createMember, defaultArguments, options );

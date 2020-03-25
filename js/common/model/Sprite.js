@@ -19,6 +19,9 @@ import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import SpriteIO from './SpriteIO.js';
 
+// constants
+const DEFAULT_POSITION = new Vector3( 0, 0, 1 ); // z=0 is illegal, results in divide-by-zero
+
 class Sprite extends PhetioObject {
 
   /**
@@ -30,7 +33,7 @@ class Sprite extends PhetioObject {
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
     options = merge( {
-      position: Vector3.ZERO, // initial position
+      position: DEFAULT_POSITION, // initial position
       xDirection: 1, // initial direction along the x axis, 1=right, -1=left
 
       // phet-io

@@ -7,7 +7,6 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import Emitter from '../../../../axon/js/Emitter.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
@@ -76,22 +75,9 @@ class Bunny extends Sprite {
     // @private {Vector3|null} the change in position when the bunny hops
     this.hopDelta = null;
 
-    // @public (read-only)
-    //TODO is this needed? It's not currently serialized.
-    this.isDisposed = false;
-
-    // @public emit(Bunny) is called when this Bunny is disposed
-    //TODO delete this and use BunnyGroup.addMemberDisposedListener ?
-    this.disposedEmitter = new Emitter( {
-      parameters: [ { valueType: Bunny } ]
-    } );
-
     // @private
     this.disposeBunny = () => {
-      this.isDisposed = true;
       this.isAliveProperty.dispose();
-      this.disposedEmitter.emit( this );
-      this.disposedEmitter.dispose();
     };
   }
 
@@ -108,7 +94,6 @@ class Bunny extends Sprite {
    * @override
    */
   dispose() {
-    assert && assert( !this.isDisposed, 'bunny is already disposed' );
     super.dispose();
     this.disposeBunny();
   }
@@ -118,7 +103,6 @@ class Bunny extends Sprite {
    * @public
    */
   step( dt ) {
-    assert && assert( !this.isDisposed, 'bunny is disposed' );
     if ( this.isAliveProperty.value ) {
       this.moveAround();
     }
@@ -130,7 +114,6 @@ class Bunny extends Sprite {
    */
   kill() {
     assert && assert( this.isAliveProperty.value, 'bunny is already dead' );
-    assert && assert( !this.isDisposed, 'bunny is disposed' );
     this.isAliveProperty.value = false;
   }
 

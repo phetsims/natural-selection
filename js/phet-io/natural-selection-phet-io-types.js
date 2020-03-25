@@ -1101,6 +1101,17 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "PhetioGroupIO<BunnyIO>"
     },
+    "PhetioGroupIO<ReferenceIO>": {
+      "documentation": "An array that sends notifications when its values have changed.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "ReferenceIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "PhetioGroupIO<ReferenceIO>"
+    },
     "PropertyIO<BooleanIO>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
       "events": [

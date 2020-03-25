@@ -1,6 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
+ * BunnyNode is the view of a Bunny.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -8,6 +9,8 @@
 import merge from '../../../../phet-core/js/merge.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import bunnyWhiteFurStraightEarsShortTeethImage from '../../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
@@ -24,10 +27,14 @@ class BunnyNode extends SpriteNode {
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
     options = merge( {
-      showDeadBunny: false,
 
       // SpriteNode options
-      scaleFactor: 0.4 // scale applied in addition to modelViewTransform scale
+      scaleFactor: 0.4, // scale applied in addition to modelViewTransform scale
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      phetioDynamicElement: true,
+      phetioType: ReferenceIO //TODO why doesn't PhetioGroup( BunnyNodeIO ) work?
     }, options );
 
     const image = new Image( bunnyWhiteFurStraightEarsShortTeethImage, {
@@ -45,33 +52,6 @@ class BunnyNode extends SpriteNode {
     }
 
     super( bunny, options );
-
-    // Optionally hide the bunny when it dies. Dead bunnies are shown in the Pedigree graph.
-    const bunnyIsAliveObserver = isAlive => {
-      this.visible = isAlive || options.showDeadBunny;
-    };
-    bunny.isAliveProperty.link( bunnyIsAliveObserver );
-
-    // Dispose this node when its associated bunny is disposed.
-    const bunnyDisposedListener = () => {
-      this.dispose();
-    };
-    bunny.disposedEmitter.addListener( bunnyDisposedListener );
-
-    // @private
-    this.disposeBunnyNode = () => {
-      bunny.isAliveProperty.unlink( bunnyIsAliveObserver );
-      bunny.disposedEmitter.removeListener( bunnyDisposedListener );
-    };
-  }
-
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
-    super.dispose();
-    this.disposeBunnyNode();
   }
 }
 

@@ -221,6 +221,7 @@ class EnvironmentModelViewTransform {
    * @public
    */
   modelToViewPosition( position ) {
+    assert && assert( position.z !== 0, 'z cannot be zero' );
     const xView = ( this.viewSize.width / 2 ) + ( position.x / position.z ) * this.scaleFactor;
     const yView = this.yHorizonView - ( position.y / position.z ) * this.scaleFactor;
     return new Vector2( xView, yView );

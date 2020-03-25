@@ -16,7 +16,7 @@ import EnvironmentModel from '../model/EnvironmentModel.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import AddAMateButton from './AddAMateButton.js';
-import BunnyNode from './BunnyNode.js';
+import BunnyNodeGroup from './BunnyNodeGroup.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
 import EnvironmentRadioButtonGroup from './EnvironmentRadioButtonGroup.js';
 import FoodNode from './FoodNode.js';
@@ -139,17 +139,33 @@ class EnvironmentNode extends Node {
       tandem: options.tandem.createTandem( 'environmentModel' )
     } );
 
-    // Create the view for each bunny
-    environmentModel.bunnyGroup.forEach( bunny => {
-      spritesNode.addChild( new BunnyNode( bunny ) );
-      //TODO sort by positionProperty.value.z
+    // @private PhetioGroup for managing dynamic BunnyNode instances
+    this.bunnyNodeGroup = new BunnyNodeGroup( environmentModel.bunnyGroup, {
+      tandem: options.tandem.createTandem( 'bunnyNodeGroup' )
     } );
 
-    // When a bunny is added to the model, create its view
-    environmentModel.bunnyGroup.addMemberCreatedListener( bunny => {
-      spritesNode.addChild( new BunnyNode( bunny ) );
-      //TODO sort by positionProperty.value.z
-    } );
+    const createBunnyNode = bunny => {
+      assert && assert( bunny.isAliveProperty.value, 'bunny is dead' );
+      assert && assert( !bunny.isDisposed, 'bunny is disposed' );
+
+      // Create the BunnyNode
+      const bunnyNode = this.bunnyNodeGroup.createCorrespondingGroupMember( bunny, bunny );
+      spritesNode.addChild( bunnyNode );
+
+      // If the bunny dies or is disposed, delete the node.
+      bunny.isAliveProperty.lazyLink( () => this.bunnyNodeGroup.disposeMember( bunnyNode ) );
+      environmentModel.bunnyGroup.addMemberDisposedListener( member => {
+        if ( member === bunny ) {
+          this.bunnyNodeGroup.disposeMember( bunnyNode );
+        }
+      } );
+    };
+
+    // Create a BunnyNode for each Bunny in the initial population.
+    environmentModel.bunnyGroup.forEach( bunny => createBunnyNode( bunny ) );
+
+    // When a Bunny is added to the model, create the corresponding BunnyNode.
+    environmentModel.bunnyGroup.addMemberCreatedListener( bunny => createBunnyNode( bunny ) );
 
     // @private
     this.environmentModel = environmentModel;
