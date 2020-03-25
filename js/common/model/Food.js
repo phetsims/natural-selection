@@ -22,6 +22,9 @@ class Food extends Sprite {
    */
   constructor( debugLabel, toughImage, tenderImage, modelViewTransform, isToughProperty, options ) {
 
+    options = options || {};
+    assert && assert( !options.tandem, 'Food is not designed to be instrumented' );
+
     super( modelViewTransform, options );
 
     // @public (read-only)
