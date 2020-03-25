@@ -11,10 +11,10 @@ import merge from '../../../../phet-core/js/merge.js';
 import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
 import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import BunnyGroup from '../model/BunnyGroup.js';
 import BunnyNode from './BunnyNode.js';
+import BunnyNodeIO from './BunnyNodeIO.js';
 
 class BunnyNodeGroup extends PhetioGroup {
 
@@ -30,7 +30,7 @@ class BunnyNodeGroup extends PhetioGroup {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: PhetioGroupIO( ReferenceIO ), //TODO why doesn't PhetioGroup( BunnyNodeIO ) work?
+      phetioType: PhetioGroupIO( BunnyNodeIO ),
       phetioState: false,
       phetioDocumentation: 'TODO'
     }, options );

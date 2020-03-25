@@ -4536,7 +4536,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "PhetioGroupIO<ReferenceIO>"
+      "phetioTypeName": "PhetioGroupIO<BunnyNodeIO>"
     },
     "naturalSelection.labScreen.view.environmentNode.bunnyNodeGroup.archetype": {
       "phetioDocumentation": "",
@@ -4549,7 +4549,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ReferenceIO"
+      "phetioTypeName": "BunnyNodeIO"
     },
     "naturalSelection.labScreen.view.environmentNode.environmentModel": {
       "phetioDocumentation": "",

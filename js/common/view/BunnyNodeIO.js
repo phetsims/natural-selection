@@ -15,7 +15,7 @@ class BunnyNodeIO extends ReferenceIO {}
 
 BunnyNodeIO.documentation = 'TODO';
 BunnyNodeIO.validator = { isValidValue: value => value instanceof BunnyNode };
-BunnyNodeIO.typeName = 'BunnyIO';
+BunnyNodeIO.typeName = 'BunnyNodeIO';
 ObjectIO.validateSubtype( BunnyNodeIO );
 
 naturalSelection.register( 'BunnyNodeIO', BunnyNodeIO );

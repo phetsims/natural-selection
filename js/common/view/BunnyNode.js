@@ -10,10 +10,10 @@ import merge from '../../../../phet-core/js/merge.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import bunnyWhiteFurStraightEarsShortTeethImage from '../../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
+import BunnyNodeIO from './BunnyNodeIO.js';
 import SpriteNode from './SpriteNode.js';
 
 class BunnyNode extends SpriteNode {
@@ -34,7 +34,7 @@ class BunnyNode extends SpriteNode {
       // phet-io
       tandem: Tandem.REQUIRED,
       phetioDynamicElement: true,
-      phetioType: ReferenceIO //TODO why doesn't PhetioGroup( BunnyNodeIO ) work?
+      phetioType: BunnyNodeIO
     }, options );
 
     const image = new Image( bunnyWhiteFurStraightEarsShortTeethImage, {

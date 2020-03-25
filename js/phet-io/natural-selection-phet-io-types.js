@@ -205,6 +205,14 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "BunnyIO"
     },
+    "BunnyNodeIO": {
+      "documentation": "TODO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ReferenceIO",
+      "typeName": "BunnyNodeIO"
+    },
     "DerivedPropertyIO<BooleanIO>": {
       "documentation": "Like PropertyIO, but not settable.  Instead it is derived from other DerivedPropertyIO or PropertyIO instances",
       "events": [
@@ -1101,16 +1109,16 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "PhetioGroupIO<BunnyIO>"
     },
-    "PhetioGroupIO<ReferenceIO>": {
+    "PhetioGroupIO<BunnyNodeIO>": {
       "documentation": "An array that sends notifications when its values have changed.",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "ReferenceIO"
+        "BunnyNodeIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "PhetioGroupIO<ReferenceIO>"
+      "typeName": "PhetioGroupIO<BunnyNodeIO>"
     },
     "PropertyIO<BooleanIO>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
