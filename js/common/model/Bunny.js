@@ -242,10 +242,16 @@ class Bunny extends Sprite {
     return this.modelViewTransform.getMaximumZ() - EnvironmentModelViewTransform.Z_MARGIN_MODEL;
   }
 
+  //--------------------------------------------------------------------------------------------------------------------
+  // Methods used by BunnyIO to save and restore state
+  //--------------------------------------------------------------------------------------------------------------------
+
   /**
-   * Returns the serialized information needed by BunnyIO.toStateObject. Instrumented properties do not need to be
-   * handled here; they are automatically restored by PhET-iO.
+   * Returns the serialized information needed by BunnyIO.toStateObject. Providing this method prevents BunnyIO
+   * from reaching into Bunny and accessing private fields. Note that instrumented Properties do not need to be
+   * handled here, they are automatically restored by PhET-iO.
    * @returns {Object}
+   * @public for use by BunnyIO only
    */
   toStateObject() {
     return {
@@ -258,23 +264,52 @@ class Bunny extends Sprite {
   }
 
   /**
-   * Restores private state for PhET-iO
-   * This is called by BunnyIO.setValue after a Bunny has been instantiated during deserialization.
-   * @param {Object} privateState
+   * Deserializes the state needed by stateToArgsForConstructor.
+   * @param {Object} stateObject - return value from toStateObject
+   * @returns {Object}
+   * @public for use by BunnyIO only
    */
-  restorePrivateState( privateState ) {
+  static fromStateObject( stateObject ) {
+    return {
 
-    privateState = merge( {
-      stepsCount: required( privateState.stepsCount ),
-      restSteps: required( privateState.restSteps ),
-      hopSteps: required( privateState.hopSteps ),
-      hopDelta: required( privateState.hopDelta )
-    }, privateState );
+      // This is the options arg to Bunny constructor, passed to BunnyGroup createMember.
+      options: {
+        generation: NumberIO.fromStateObject( stateObject.generation )
+      },
 
-    this.stepsCount = privateState.stepsCount;
-    this.restSteps = privateState.restSteps;
-    this.hopSteps = privateState.hopSteps;
-    this.hopDelta = privateState.hopDelta;
+      // This part of the state will be restored via setValue, after a Bunny is instantiated.
+      privateState: {
+        stepsCount: NumberIO.fromStateObject( stateObject.stepsCount ),
+        restSteps: NumberIO.fromStateObject( stateObject.restSteps ),
+        hopSteps: NumberIO.fromStateObject( stateObject.hopSteps ),
+        hopDelta: NullableIO( Vector3IO ).fromStateObject( stateObject.hopDelta )
+      }
+    };
+  }
+
+  /**
+   * Creates the args to BunnyGroup.createNextMember that creates Bunny instances.
+   * @param state
+   * @returns {Object[]}
+   * @public for use by BunnyIO only
+   */
+  static stateToArgsForConstructor( state ) {
+    required( state.options );
+    return [ state.options ];
+  }
+
+  /**
+   * Restores private state for PhET-iO. This is called by BunnyIO.setValue after a Bunny has been instantiated during
+   * deserialization. Providing this method prevents BunnyIO from reaching into Bunny and accessing private fields.
+   * @param {Object} state - return value of fromStateObject
+   * @public for use by BunnyIO only
+   */
+  setValue( state ) {
+    required( state.privateState );
+    this.stepsCount = required( state.privateState.stepsCount );
+    this.restSteps = required( state.privateState.restSteps );
+    this.hopSteps = required( state.privateState.hopSteps );
+    this.hopDelta = required( state.privateState.hopDelta );
   }
 }
 

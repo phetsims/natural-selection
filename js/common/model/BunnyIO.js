@@ -7,9 +7,6 @@
  */
 
 import validate from '../../../../axon/js/validate.js';
-import Vector3IO from '../../../../dot/js/Vector3IO.js';
-import NullableIO from '../../../../tandem/js/types/NullableIO.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
@@ -36,21 +33,7 @@ class BunnyIO extends SpriteIO {
    * @returns {Object}
    */
   static fromStateObject( stateObject ) {
-    return {
-
-      // This is the options arg to Bunny constructor
-      options: {
-        generation: NumberIO.fromStateObject( stateObject.generation )
-      },
-
-      // This will be restored via BunnyIO.setValue, after a Bunny is instantiated.
-      privateState: {
-        stepsCount: NumberIO.fromStateObject( stateObject.stepsCount ),
-        restSteps: NumberIO.fromStateObject( stateObject.restSteps ),
-        hopSteps: NumberIO.fromStateObject( stateObject.hopSteps ),
-        hopDelta: NullableIO( Vector3IO ).fromStateObject( stateObject.hopDelta )
-      }
-    };
+    return Bunny.fromStateObject( stateObject );
   }
 
   /**
@@ -59,8 +42,7 @@ class BunnyIO extends SpriteIO {
    * @returns {Object[]}
    */
   static stateToArgsForConstructor( state ) {
-    assert && assert( state.options, 'missing state.options' );
-    return [ state.options ];
+    return Bunny.stateToArgsForConstructor( state );
   }
 
   /**
@@ -69,8 +51,7 @@ class BunnyIO extends SpriteIO {
    * @param {Object} state
    */
   static setValue( bunny, state ) {
-    assert && assert( state.privateState, 'missing state.privateState' );
-    bunny.restorePrivateState( state.privateState );
+    bunny.setValue( state );
   }
 }
 
