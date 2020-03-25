@@ -46,7 +46,8 @@ class Sprite extends PhetioObject {
     // @public position in 3D space
     this.positionProperty = new Property( options.position, {
       tandem: options.tandem.createTandem( 'positionProperty' ),
-      phetioType: PropertyIO( Vector3IO )
+      phetioType: PropertyIO( Vector3IO ),
+      phetioReadOnly: true
     } );
 
     // @public direction along the x axis, 1=right, -1=left
@@ -56,7 +57,8 @@ class Sprite extends PhetioObject {
     //TODO I don't like this
     this.xDirectionProperty = new NumberProperty( options.xDirection, {
       isValidValue: value => ( value === 1 || value === -1 ),
-      tandem: options.tandem.createTandem( 'xDirectionProperty' )
+      tandem: options.tandem.createTandem( 'xDirectionProperty' ),
+      phetioReadOnly: true
     } );
 
     // @private
