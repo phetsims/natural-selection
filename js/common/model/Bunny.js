@@ -38,9 +38,9 @@ class Bunny extends Sprite {
 
     options = merge( {
 
-      generation: 0,
-      father: null, // {Bunny|null} null if no father
-      mother: null, // {Bunny|null} null if no mother
+      generation: 0, // {number} generation that this Bunny belongs to
+      father: null, // {Bunny|null} the Bunny's father, null if no father
+      mother: null, // {Bunny|null} the Bunny's mother, null if no mother
 
       // phet-io
       tandem: Tandem.REQUIRED,
@@ -116,22 +116,6 @@ class Bunny extends Sprite {
   kill() {
     assert && assert( this.isAliveProperty.value, 'bunny is already dead' );
     this.isAliveProperty.value = false;
-  }
-
-  //TODO delete this later in development
-  /**
-   * String representation of this bunny. For debugging only. DO NOT RELY ON THE FORMAT OF THIS STRING!
-   * @returns {string}
-   * @public
-   */
-  toString() {
-    return 'Bunny[' +
-           `tandem.name: ${this.tandem.name}, ` +
-           `generation:${this.generation}, ` +
-           'father:' + ( ( this.father && this.father.tandem ) || null ) + ', ' +
-           'mother:' + ( ( this.mother && this.mother.tandem ) || null ) + ', ' +
-           `position: ${this.positionProperty.value}` +
-           ']';
   }
 
   /**
