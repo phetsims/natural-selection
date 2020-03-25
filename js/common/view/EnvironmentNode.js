@@ -128,8 +128,8 @@ class EnvironmentNode extends Node {
 
     // @private
     this.initializeButtons = () => {
-      addAMateButton.visible = ( environmentModel.numberOfBunniesProperty.value === 1 );
-      playButton.visible = ( environmentModel.numberOfBunniesProperty.value > 1 );
+      addAMateButton.visible = ( environmentModel.bunnyGroup.length === 1 );
+      playButton.visible = ( environmentModel.bunnyGroup.length > 1 );
       playAgainButton.visible = false;
     };
     this.initializeButtons();

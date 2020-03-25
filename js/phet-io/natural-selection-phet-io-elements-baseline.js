@@ -2822,19 +2822,6 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.labScreen.model.environmentModel.numberOfBunniesProperty": {
-      "phetioDocumentation": "the number of bunnies that exist, living and dead",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": true,
-      "phetioStudioControl": true,
-      "phetioTypeName": "NumberPropertyIO"
-    },
     "naturalSelection.labScreen.model.environmentModel.wolves.enabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,

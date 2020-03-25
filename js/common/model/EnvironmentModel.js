@@ -8,7 +8,6 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -70,23 +69,6 @@ class EnvironmentModel extends PhetioObject {
     // @public (read-only) {PhetioGroup} to create Bunny instances
     this.bunnyGroup = new BunnyGroup( this.modelViewTransform, {
       tandem: tandem.createTandem( 'bunnyGroup' )
-    } );
-
-    // @public (read-only) do not modify this Property, it must remain sync'd to the length of bunnyGroup
-    this.numberOfBunniesProperty = new NumberProperty( this.bunnyGroup.length, {
-      numberType: 'Integer',
-      tandem: tandem.createTandem( 'numberOfBunniesProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'the number of bunnies that exist, living and dead'
-    } );
-
-    //TODO add lengthProperty to PhetioGroup?
-    // Sync numberOfBunniesProperty to the length of bunnyGroup
-    this.bunnyGroup.addMemberCreatedListener( () => {
-      this.numberOfBunniesProperty.value = this.bunnyGroup.length;
-    } );
-    this.bunnyGroup.addMemberDisposedListener( () => {
-      this.numberOfBunniesProperty.value = this.bunnyGroup.length;
     } );
 
     this.initializeBunnyPopulation();
