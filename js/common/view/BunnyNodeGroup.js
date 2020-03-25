@@ -47,7 +47,7 @@ class BunnyNodeGroup extends PhetioGroup {
       } );
     };
 
-      // defaultArguments, passed to createMember during API harvest (when running 'grunt update').
+    // defaultArguments, passed to createMember during API harvest (when running 'grunt update').
     // Note that bunnyGroup.archetype is null except during API harvest.
     const defaultArguments = [ bunnyGroup.archetype ];
 

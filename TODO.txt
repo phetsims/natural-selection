@@ -1,12 +1,12 @@
 TODO list for natural-selection
 
 IO
-Review instrumentation of Bunny and BunnyNode with IO team
-Serialization of Bunny father and mother
+X Review instrumentation of Bunny and BunnyNode with IO team
+Serialization of Bunny father and mother A -> B (A & B are both Bunny)
 How is cyclic serialization handled? A -> B -> C -> A, or A <-> B
-What if I need to use BunnyIO for a Bunny that's not managed by BunnyGroup?
-Is using PhetioGroup.createCorrespondingGroupMember for view a requirement or convention?\
-Symmetry between IO type hierarchy and non-IO class hierarchy - goal?
+X What if I need to use BunnyIO for a Bunny that's not managed by BunnyGroup?
+X Is using PhetioGroup.createCorrespondingGroupMember for view a requirement or convention?\
+X Symmetry between IO type hierarchy and non-IO class hierarchy - goal?
 
 DESIGN
 Make graphs wider by making control panels narrower?
