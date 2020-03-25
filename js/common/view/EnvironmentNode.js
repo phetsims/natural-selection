@@ -153,8 +153,8 @@ class EnvironmentNode extends Node {
       spritesNode.addChild( bunnyNode );
 
       // If the bunny is disposed or dies, remove listener and delete the associated BunnyNode.
-      const cleanupListener = element => {
-        if ( element === bunny ) {
+      const cleanupListener = disposedBunny => {
+        if ( disposedBunny === bunny ) {
           environmentModel.bunnyGroup.removeMemberDisposedListener( cleanupListener );
           this.bunnyNodeGroup.disposeMember( bunnyNode );
         }
