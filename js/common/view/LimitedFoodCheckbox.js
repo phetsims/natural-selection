@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
@@ -20,6 +21,8 @@ class LimitedFoodCheckbox extends Checkbox {
    * @param {Object} [options]
    */
   constructor( limitedFoodProperty, options ) {
+
+    assert && assert( limitedFoodProperty instanceof Property, 'invalid limitedFoodProperty' );
 
     options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 

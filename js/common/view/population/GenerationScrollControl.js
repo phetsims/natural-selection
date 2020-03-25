@@ -26,6 +26,10 @@ class GenerationScrollControl extends HBox {
    */
   constructor( rangeProperty, maxProperty, isPlayingProperty, options ) {
 
+    assert && assert( rangeProperty instanceof Property, 'invalid rangeProperty' );
+    assert && assert( maxProperty instanceof Property, 'invalid maxProperty' );
+    assert && assert( isPlayingProperty instanceof Property, 'invalid isPlayingProperty' );
+
     options = merge( {
 
       step: 1, // {number} amount to step the range

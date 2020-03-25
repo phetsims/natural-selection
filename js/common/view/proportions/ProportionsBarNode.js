@@ -15,6 +15,7 @@ import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
+import Color from '../../../../../scenery/js/util/Color.js';
 import naturalSelectionStrings from '../../../natural-selection-strings.js';
 import naturalSelection from '../../../naturalSelection.js';
 import HatchingRectangle from '../HatchingRectangle.js';
@@ -32,6 +33,11 @@ class ProportionsBarNode extends Node {
    * @param {Object} [options]
    */
   constructor( color, nonMutantCountCountProperty, mutantCountProperty, valuesVisibleProperty, options ) {
+
+    assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
+    assert && assert( nonMutantCountCountProperty instanceof Property, 'invalid nonMutantCountCountProperty' );
+    assert && assert( mutantCountProperty instanceof Property, 'invalid mutantCountProperty' );
+    assert && assert( valuesVisibleProperty instanceof Property, 'invalid valuesVisibleProperty' );
 
     options = merge( {
       barWidth: 120,

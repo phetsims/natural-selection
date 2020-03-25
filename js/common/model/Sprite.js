@@ -26,6 +26,7 @@ class Sprite extends PhetioObject {
    * @param {Object} [options]
    */
   constructor( modelViewTransform, options ) {
+
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
     options = merge( {

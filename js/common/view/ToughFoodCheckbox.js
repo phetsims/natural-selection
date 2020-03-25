@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
@@ -19,10 +20,12 @@ import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 class ToughFoodCheckbox extends Checkbox {
 
   /**
-   * @param {Property.<boolean>} wolvesEnabledProperty
+   * @param {Property.<boolean>} isToughProperty
    * @param {Object} [options]
    */
-  constructor( wolvesEnabledProperty, options ) {
+  constructor( isToughProperty, options ) {
+    
+    assert && assert( isToughProperty instanceof Property, 'invalid isToughProperty' );
 
     options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 
@@ -38,7 +41,7 @@ class ToughFoodCheckbox extends Checkbox {
       children: [ text, icon ]
     } );
 
-    super( content, wolvesEnabledProperty, options );
+    super( content, isToughProperty, options );
   }
 }
 

@@ -7,6 +7,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
@@ -25,6 +27,10 @@ class EnvironmentBackgroundNode extends Node {
    * @param {Object} [options]
    */
   constructor( environmentProperty, size, yHorizon, options ) {
+
+    assert && assert( environmentProperty instanceof EnumerationProperty, 'invalid environmentProperty' );
+    assert && assert( size instanceof Dimension2, 'invalid size' );
+    assert && assert( typeof yHorizon === 'number', 'invalid yHorizon' );
 
     options = merge( {}, options );
 

@@ -10,6 +10,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Wolf from './Wolf.js';
 
 // constants
@@ -22,6 +23,8 @@ class Wolves {
    * @param {Object} [options]
    */
   constructor( modelViewTransform, options ) {
+
+    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
     options = merge( {
 

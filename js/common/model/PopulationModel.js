@@ -50,6 +50,8 @@ class PopulationModel extends PhetioObject {
    */
   constructor( generationsProperty, isPlayingProperty, tandem ) {
 
+    assert && assert( generationsProperty instanceof Property, 'invalid generationsProperty' );
+    assert && assert( isPlayingProperty instanceof Property, 'invalid isPlayingProperty' );
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
     super( {

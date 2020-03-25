@@ -20,6 +20,8 @@ class SpriteNode extends Node {
    */
   constructor( sprite, options ) {
 
+    assert && assert( sprite instanceof Sprite, 'invalid sprite' );
+
     options = merge( {
       scaleFactor: 1  // scale applied in addition to modelViewTransform scale
     }, options );

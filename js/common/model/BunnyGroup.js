@@ -14,6 +14,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
 import BunnyIO from './BunnyIO.js';
+import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 
 class BunnyGroup extends PhetioGroup {
 
@@ -22,6 +23,7 @@ class BunnyGroup extends PhetioGroup {
    * @param {Object} [options]
    */
   constructor( modelViewTransform, options ) {
+    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
     options = merge( {
 

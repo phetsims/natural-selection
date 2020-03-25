@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VerticalAquaRadioButtonGroup from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
@@ -28,6 +29,8 @@ class GraphsRadioButtonGroup extends VerticalAquaRadioButtonGroup {
    * @param {Object} [options]
    */
   constructor( graphProperty, options ) {
+
+    assert && assert( graphProperty instanceof EnumerationProperty, 'invalid graphProperty' );
 
     options = merge( {
       radius: 8,

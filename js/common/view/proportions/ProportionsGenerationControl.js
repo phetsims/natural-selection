@@ -26,6 +26,9 @@ class ProportionsGenerationControl extends HBox {
    */
   constructor( visibileGenerationProperty, currentGenerationProperty, options ) {
 
+    assert && assert( visibileGenerationProperty instanceof Property, 'invalid visibileGenerationProperty' );
+    assert && assert( currentGenerationProperty instanceof Property, 'invalid currentGenerationProperty' );
+
     options = merge( {
       spacing: 10,
 

@@ -52,6 +52,9 @@ class DataProbeNode extends Node {
   constructor( populationModel, originX, graphWidth, graphHeight, options ) {
 
     assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
+    assert && assert( typeof originX === 'number', 'invalid originX' );
+    assert && assert( typeof graphWidth === 'number', 'invalid graphWidth' );
+    assert && assert( typeof graphHeight === 'number', 'invalid graphHeight' );
 
     options = merge( {
       cursor: 'ew-resize', // east-west arrows, <->

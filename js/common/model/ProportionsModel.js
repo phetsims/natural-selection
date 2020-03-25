@@ -22,6 +22,8 @@ class ProportionsModel extends PhetioObject {
    */
   constructor( currentGenerationProperty, isPlayingProperty, tandem ) {
 
+    assert && assert( currentGenerationProperty instanceof Property, 'invalid currentGenerationProperty' );
+    assert && assert( isPlayingProperty instanceof Property, 'invalid isPlayingProperty' );
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
     super( {

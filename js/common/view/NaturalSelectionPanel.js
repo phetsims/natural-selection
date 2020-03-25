@@ -8,6 +8,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import Panel from '../../../../sun/js/Panel.js';
 import naturalSelection from '../../naturalSelection.js';
 
@@ -18,6 +19,8 @@ class NaturalSelectionPanel extends Panel {
    * @param {Object} [options]
    */
   constructor( content, options ) {
+
+    assert && assert( content instanceof Node, 'invalid content' );
 
     options = merge( {
       fixedWidth: null // {number|null} optional fixed width

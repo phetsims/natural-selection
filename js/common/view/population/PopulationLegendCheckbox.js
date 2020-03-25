@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../../axon/js/Property.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import HBox from '../../../../../scenery/js/nodes/HBox.js';
 import Line from '../../../../../scenery/js/nodes/Line.js';
@@ -23,6 +24,9 @@ class PopulationLegendCheckbox extends Checkbox {
    * @param {Object} [options]
    */
   constructor( property, labelString, options ) {
+
+    assert && assert( property instanceof Property, 'invalid property' );
+    assert && assert( typeof labelString === 'string', 'invalid labelString' );
 
     options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
       color: 'white',

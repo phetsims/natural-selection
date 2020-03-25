@@ -7,7 +7,9 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import naturalSelection from '../../naturalSelection.js';
+import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Sprite from './Sprite.js';
 
 class Food extends Sprite {
@@ -21,6 +23,12 @@ class Food extends Sprite {
    * @param {Object} [options]
    */
   constructor( debugLabel, toughImage, tenderImage, modelViewTransform, isToughProperty, options ) {
+
+    assert && assert( typeof debugLabel === 'string', 'invalid debugLabel' );
+    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
+    assert && assert( toughImage instanceof HTMLImageElement, 'invalid toughImage' );
+    assert && assert( tenderImage instanceof HTMLImageElement, 'invalid tenderImage' );
+    assert && assert( isToughProperty instanceof Property, 'invalid isToughProperty' );
 
     options = options || {};
     assert && assert( !options.tandem, 'Food is not designed to be instrumented' );
