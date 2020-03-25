@@ -33,7 +33,7 @@ class Sprite extends PhetioObject {
       xDirection: 1, // initial direction along the x axis, 1=right, -1=left
 
       // phet-io
-      tandem: Tandem.OPTIONAL,
+      tandem: Tandem.OPTIONAL, // not all Sprites are instrumented
       phetioType: SpriteIO
     }, options );
 
