@@ -57,8 +57,11 @@ class BunnyNode extends SpriteNode {
     this.addInputListener( new PressListener( {
 
       press: () => {
-        //TODO
+
+        // Reminder: You can inspect an element in the console via phet.phetIo.phetioEngine.phetioObjectMap[phetioID]
         phet.log && phet.log( `selected bunny:\nmodel=${bunny.tandem.phetioID}\nview=${this.tandem.phetioID}` );
+
+        //TODO select this bunny for viewing in the Pedigree graph
       },
 
       tandem: options.tandem.createTandem( 'pressListener' )
