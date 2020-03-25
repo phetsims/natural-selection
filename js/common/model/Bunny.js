@@ -16,6 +16,7 @@ import required from '../../../../phet-core/js/required.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -256,6 +257,8 @@ class Bunny extends Sprite {
   toStateObject() {
     return {
       generation: NumberIO.toStateObject( this.generation ),
+      father: NullableIO( ReferenceIO ).toStateObject( this.father ),
+      mother: NullableIO( ReferenceIO ).toStateObject( this.mother ),
       stepsCount: NumberIO.toStateObject( this.stepsCount ),
       restSteps: NumberIO.toStateObject( this.restSteps ),
       hopSteps: NumberIO.toStateObject( this.hopSteps ),
@@ -271,31 +274,28 @@ class Bunny extends Sprite {
    */
   static fromStateObject( stateObject ) {
     return {
-
-      // This is the options arg to Bunny constructor, passed to BunnyGroup createMember.
-      options: {
-        generation: NumberIO.fromStateObject( stateObject.generation )
-      },
-
-      // This part of the state will be restored via setValue, after a Bunny is instantiated.
-      privateState: {
-        stepsCount: NumberIO.fromStateObject( stateObject.stepsCount ),
-        restSteps: NumberIO.fromStateObject( stateObject.restSteps ),
-        hopSteps: NumberIO.fromStateObject( stateObject.hopSteps ),
-        hopDelta: NullableIO( Vector3IO ).fromStateObject( stateObject.hopDelta )
-      }
+      generation: NumberIO.fromStateObject( stateObject.generation ),
+      father: NullableIO( ReferenceIO ).fromStateObject( stateObject.father ),
+      mother: NullableIO( ReferenceIO ).fromStateObject( stateObject.mother ),
+      stepsCount: NumberIO.fromStateObject( stateObject.stepsCount ),
+      restSteps: NumberIO.fromStateObject( stateObject.restSteps ),
+      hopSteps: NumberIO.fromStateObject( stateObject.hopSteps ),
+      hopDelta: NullableIO( Vector3IO ).fromStateObject( stateObject.hopDelta )
     };
   }
 
   /**
-   * Creates the args to BunnyGroup.createNextMember that creates Bunny instances.
+   * Creates the args that BunnyGroup uses to create a Bunny instance.
    * @param state
    * @returns {Object[]}
    * @public for use by BunnyIO only
    */
   static stateToArgsForConstructor( state ) {
-    required( state.options );
-    return [ state.options ];
+
+    // stateToArgsForConstructor is called only for dynamic elements that are part of a group.
+    // So we are not restoring anything through options, because that would not support static elements.
+    // Everything will be restored via setValue.
+    return [ {} ];  // explicit options arg to Bunny constructor
   }
 
   /**
@@ -305,11 +305,14 @@ class Bunny extends Sprite {
    * @public for use by BunnyIO only
    */
   setValue( state ) {
-    required( state.privateState );
-    this.stepsCount = required( state.privateState.stepsCount );
-    this.restSteps = required( state.privateState.restSteps );
-    this.hopSteps = required( state.privateState.hopSteps );
-    this.hopDelta = required( state.privateState.hopDelta );
+    required( state );
+    this.generation = required( state.generation );
+    this.father = required( state.father );
+    this.mother = required( state.mother );
+    this.stepsCount = required( state.stepsCount );
+    this.restSteps = required( state.restSteps );
+    this.hopSteps = required( state.hopSteps );
+    this.hopDelta = required( state.hopDelta );
   }
 }
 

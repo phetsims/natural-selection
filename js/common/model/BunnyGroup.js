@@ -38,19 +38,18 @@ class BunnyGroup extends PhetioGroup {
      * Called to instantiate a Bunny. Note that modelViewTransform is passed via closure, so we don't have to create
      * it as part of defaultArguments, and don't have to deal with serializing it in BunnyIO.
      * @param {Tandem} tandem - PhetioGroup requires tandem to be the first param
-     * @param {Object} [options]
+     * @param {Object} bunnyOptions - options to Bunny constructor, not actually optional, because createMember
+     *                                must have a fixed number of args
      * @returns {Bunny}
      */
-    const createMember = ( tandem, options ) => {
-      return new Bunny( modelViewTransform, merge( {}, options, {
+    const createMember = ( tandem, bunnyOptions ) => {
+      return new Bunny( modelViewTransform, merge( {}, bunnyOptions, {
         tandem: tandem
       } ) );
     };
 
     // defaultArguments, passed to createMember during API harvest (when running 'grunt update').
-    // Note that its necessary to include {} for options.
-    //TODO having to include {} for options is mildly annoying
-    const defaultArguments = [ {} ];
+    const defaultArguments = [ {} ]; // explicit bunnyOptions arg, see createMember above
 
     super( createMember, defaultArguments, options );
   }
