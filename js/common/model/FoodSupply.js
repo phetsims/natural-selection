@@ -86,7 +86,6 @@ class FoodSupply {
    * @public
    */
   reset() {
-    this.food.forEach( food => food.reset() );
     this.isToughProperty.reset();
     this.isLimitedProperty.reset();
   }

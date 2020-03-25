@@ -41,8 +41,7 @@ class Food extends Sprite {
    * @public
    */
   reset() {
-    super.reset();
-    this.visibleProperty.reset();
+    assert && assert( false, 'Food does not support reset' );
   }
 
   /**
