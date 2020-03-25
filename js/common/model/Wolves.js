@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * TODO
+ * Wolves is the model of a pack of wolves.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

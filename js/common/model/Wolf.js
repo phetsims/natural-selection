@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * TODO
+ * Wolf is the model of an individual wolf.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

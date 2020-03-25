@@ -1,7 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
+//TODO delete if not needed
 /**
- * TODO
+ * WolfIO is the IO type for an individual wolf.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
