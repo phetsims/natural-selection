@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * BunnyGroup is the PhetioGroup for managing dynamic instances of Bunny.
+ * BunnyGroup is the PhetioGroup for Bunny.  It manages dynamic instances of Bunny.
  * All Bunny instances are created and disposed via this group.
  *
  * @author Chris Malley (PixelZoom, Inc.)
