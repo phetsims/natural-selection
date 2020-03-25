@@ -261,7 +261,7 @@ class Bunny extends Sprite {
   /**
    * Returns the serialized information needed by BunnyIO.toStateObject. Instrumented properties do not need to be
    * handled here; they are automatically restored by PhET-iO.
-   * @returns {*}
+   * @returns {Object}
    */
   toStateObject() {
     return {
@@ -276,7 +276,7 @@ class Bunny extends Sprite {
   /**
    * Restores private state for PhET-iO
    * This is called by BunnyIO.setValue after a Bunny has been instantiated during deserialization.
-   * @param {*} privateState
+   * @param {Object} privateState
    */
   restorePrivateState( privateState ) {
 
