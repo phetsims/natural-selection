@@ -202,7 +202,7 @@ window.phet.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
-      "supertype": "ObjectIO",
+      "supertype": "SpriteIO",
       "typeName": "BunnyIO"
     },
     "BunnyNodeIO": {
