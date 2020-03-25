@@ -140,13 +140,13 @@ class EnvironmentNode extends Node {
     } );
 
     // Create the view for each bunny
-    environmentModel.bunnies.forEach( bunny => {
+    environmentModel.bunnyGroup.forEach( bunny => {
       spritesNode.addChild( new BunnyNode( bunny ) );
       //TODO sort by positionProperty.value.z
     } );
 
     // When a bunny is added to the model, create its view
-    environmentModel.bunnyAddedEmitter.addListener( bunny => {
+    environmentModel.bunnyGroup.addMemberCreatedListener( bunny => {
       spritesNode.addChild( new BunnyNode( bunny ) );
       //TODO sort by positionProperty.value.z
     } );

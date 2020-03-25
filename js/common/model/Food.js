@@ -7,7 +7,10 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import FoodIO from './FoodIO.js';
 import Sprite from './Sprite.js';
 
 class Food extends Sprite {
@@ -21,7 +24,12 @@ class Food extends Sprite {
    */
   constructor( debugLabel, toughImage, tenderImage, modelViewTransform, options ) {
 
-    assert && assert( !options.tandem, 'Food instances should not be instrumented' );
+    options = merge( {
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      phetioType: FoodIO
+    }, options );
 
     super( modelViewTransform, options );
 
@@ -31,10 +39,14 @@ class Food extends Sprite {
     this.tenderImage = tenderImage;
 
     // @public
-    this.isToughProperty = new BooleanProperty( false );
+    this.isToughProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'isToughProperty' )
+    } );
 
     // @public whether the food is visible, used to hide food when the food supply is limited
-    this.visibleProperty = new BooleanProperty( true );
+    this.visibleProperty = new BooleanProperty( true, {
+      tandem: options.tandem.createTandem( 'visibleProperty' )
+    } );
   }
 
   /**

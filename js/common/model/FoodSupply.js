@@ -35,32 +35,38 @@ class FoodSupply {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // @public (read-only) individual food items, as specified in
+    // @public (read-only) individual food items, as identified in
     // https://github.com/phetsims/natural-selection/issues/17
     this.food = [
 
       // Food 'A'
       new Food( 'A1', toughFoodAImage, tenderFoodAImage, modelViewTransform, {
-        position: modelViewTransform.getGroundPosition( -65, 210 )
+        position: modelViewTransform.getGroundPosition( -65, 210 ),
+        tandem: options.tandem.createTandem( 'foodA1' )
       } ),
       new Food( 'A2', toughFoodAImage, tenderFoodAImage, modelViewTransform, {
-        position: modelViewTransform.getGroundPosition( 155, 160 )
+        position: modelViewTransform.getGroundPosition( 155, 160 ),
+        tandem: options.tandem.createTandem( 'foodA2' )
       } ),
 
       // Food 'B'
       new Food( 'B1', toughFoodBImage, tenderFoodBImage, modelViewTransform, {
-        position: modelViewTransform.getGroundPosition( -155, 160 )
+        position: modelViewTransform.getGroundPosition( -155, 160 ),
+        tandem: options.tandem.createTandem( 'foodB1' )
       } ),
       new Food( 'B2', toughFoodBImage, tenderFoodBImage, modelViewTransform, {
-        position: modelViewTransform.getGroundPosition( 200, 250 )
+        position: modelViewTransform.getGroundPosition( 200, 250 ),
+        tandem: options.tandem.createTandem( 'foodB2' )
       } ),
 
       // Food 'C'
       new Food( 'C1', toughFoodCImage, tenderFoodCImage, modelViewTransform, {
-        position: modelViewTransform.getGroundPosition( 60, 185 )
+        position: modelViewTransform.getGroundPosition( 60, 185 ),
+        tandem: options.tandem.createTandem( 'foodC1' )
       } ),
       new Food( 'C2', toughFoodCImage, tenderFoodCImage, modelViewTransform, {
-        position: modelViewTransform.getGroundPosition( -180, 270 )
+        position: modelViewTransform.getGroundPosition( -180, 270 ),
+        tandem: options.tandem.createTandem( 'foodC2' )
       } )
     ];
 
@@ -80,9 +86,9 @@ class FoodSupply {
     this.isLimitedProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'isLimitedProperty' )
     } );
-    this.isLimitedProperty.link( isLimited => {
 
-      // When food is limited, hide half of the food
+    // When food is limited, hide half of the food
+    this.isLimitedProperty.link( isLimited => {
       for ( let i = 0; i < this.food.length; i++ ) {
         this.food[ i ].visibleProperty.value = ( i % 2 === 0 || !isLimited );
       }

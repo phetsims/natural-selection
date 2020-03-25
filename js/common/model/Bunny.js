@@ -12,19 +12,21 @@ import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import merge from '../../../../phet-core/js/merge.js';
+import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
+import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Sprite from './Sprite.js';
 
 // constants
-const MAX_HUNGER = 600; //TODO describe
-const MAX_HUNGER_DELTA = 3; //TODO describe
 const REST_STEPS_RANGE = new Range( 40, 160 );  // number of steps that the Bunny will rest before hopping
 const HOP_STEPS_RANGE = new Range( 10, 20 );    // number of steps that is takes to complete a hop
 const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // x and z distance that a bunny hops
 const HOP_HEIGHT_RANGE = new Range( 30, 50 );   // how high above the ground a bunny hops
 
-// Number of bunnies instantiated, used to assign unique ids to Bunny instances
+// Number of bunnies instantiated, used to assign unique ids to Bunny instances for debugging
 let bunnyCount = 0;
 
 class Bunny extends Sprite {
@@ -36,43 +38,51 @@ class Bunny extends Sprite {
   constructor( modelViewTransform, options ) {
 
     options = merge( {
+
       generation: 0,
       father: null, // {Bunny|null} null if no father
-      mother: null // {Bunny|null} null if no mother
+      mother: null, // {Bunny|null} null if no mother
+
+      stepsCount: 0,
+      restSteps: REST_STEPS_RANGE.max,
+      hopSteps: HOP_STEPS_RANGE.max,
+      hopDelta: null,
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      phetioType: BunnyIO,
+      phetioDynamicElement: true
     }, options );
 
-    assert && assert( Utils.isInteger( options.generation ), `invalid generation: ${options.generation}` );
-    assert && assert( !options.tandem, 'Bunny instances should not be instrumented' );
+    assert && assert( Utils.isInteger( options.generation ) && options.generation >= 0, `invalid generation: ${options.generation}` );
 
     super( modelViewTransform, options );
 
     // @public (read-only)
     this.isAliveProperty = new BooleanProperty( true );
     this.isAliveProperty.lazyLink( isAlive => {
-      assert && assert( !this.isDisposed, 'bunny is disposed' );
       assert && assert( !isAlive, 'bunny cannot be resurrected' );
     } );
 
-    // @public (read-only)
+    // @public (read-only) FOR DEBUGGING ONLY!
     this.id = bunnyCount++;
+
+    // @public (read-only)
     this.generation = options.generation;
     this.father = options.father;
     this.mother = options.mother;
 
-    // @private
-    this.hunger = phet.joist.random.nextInt( MAX_HUNGER );
-
     // @private {number} number of times that step has been called in the current rest + hop cycle
-    this.stepsCount = 0;
+    this.stepsCount = options.stepsCount;
 
     // @private {number} the number of steps that the bunny rests before hopping, randomized in initializeMotion
-    this.restSteps = REST_STEPS_RANGE.max;
+    this.restSteps = options.restSteps;
 
     // @private {number} the number of steps required to complete one full hop, randomized in initializeMotion
-    this.hopSteps = HOP_STEPS_RANGE.max;
+    this.hopSteps = options.hopSteps;
 
     // @private {Vector3|null} the change in position when the bunny hops
-    this.hopDelta = null;
+    this.hopDelta = options.hopDelta;
 
     // @public (read-only)
     this.isDisposed = false;
@@ -145,13 +155,6 @@ class Bunny extends Sprite {
    */
   moveAround() {
     //TODO this is based on number of steps, should it use dt?
-
-    // moving expends some energy and makes the bunny more hungry
-    //TODO why do we need MAX_HUNGER limit?
-    //TODO should this happen only when the bunny hops? hopping uses more energy than resting
-    //TODO should hungrier bunnies rest longer? hop shorter distances?
-    //TODO why a random (possibly zero) delta?
-    this.hunger = Math.min( this.hunger + phet.joist.random.nextInt( MAX_HUNGER_DELTA ), MAX_HUNGER );
 
     this.stepsCount++;
 
@@ -260,6 +263,39 @@ class Bunny extends Sprite {
    */
   static resetStatic() {
     bunnyCount = 0;
+  }
+
+  /**
+   * Creates a PhetioGroup for Bunny instances, which are dynamically created.
+   * @param {EnvironmentModelViewTransform} modelViewTransform
+   * @param {Tandem} tandem
+   * @returns {PhetioGroup}
+   */
+  static createGroup( modelViewTransform, tandem ) {
+    return new PhetioGroup(
+
+      /**
+       * createMember argument, called to instantiate a Bunny.
+       * @param {Tandem} tandem - PhetioGroup requires this to be the first param
+       * @param {Object} [options]
+       * @returns {Bunny}
+       */
+      ( tandem, options ) => {
+        return new Bunny( modelViewTransform, merge( {}, options, {
+          tandem: tandem
+        } ) );
+      },
+
+      // defaultArguments, passed to createMember during API harvest
+      [ {} ],
+
+      // options
+      {
+        tandem: tandem,
+        phetioType: PhetioGroupIO( BunnyIO ),
+        phetioDocumentation: 'TODO'
+      }
+    );
   }
 }
 

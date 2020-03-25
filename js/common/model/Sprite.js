@@ -9,12 +9,17 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
+import Vector3IO from '../../../../dot/js/Vector3IO.js';
 import merge from '../../../../phet-core/js/merge.js';
+import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
+import SpriteIO from './SpriteIO.js';
 
-class Sprite {
+class Sprite extends PhetioObject {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
@@ -25,15 +30,22 @@ class Sprite {
 
     options = merge( {
       position: Vector3.ZERO, // initial position
-      xDirection: 1 // initial direction along the x axis, 1=right, -1=left
+      xDirection: 1, // initial direction along the x axis, 1=right, -1=left
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      phetioType: SpriteIO
     }, options );
+
+    super( options );
 
     // @public (read-only)
     this.modelViewTransform = modelViewTransform;
 
     // @public position in 3D space
     this.positionProperty = new Property( options.position, {
-      valueType: Vector3
+      tandem: options.tandem.createTandem( 'positionProperty' ),
+      phetioType: PropertyIO( Vector3IO )
     } );
 
     // @public direction along the x axis, 1=right, -1=left
@@ -42,7 +54,8 @@ class Sprite {
     // in an orientation where the sprite is moving to the right.
     //TODO I don't like this
     this.xDirectionProperty = new NumberProperty( options.xDirection, {
-      isValidValue: value => ( value === 1 || value === -1 )
+      isValidValue: value => ( value === 1 || value === -1 ),
+      tandem: options.tandem.createTandem( 'xDirectionProperty' )
     } );
   }
 

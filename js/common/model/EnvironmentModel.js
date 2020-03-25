@@ -7,7 +7,6 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import Emitter from '../../../../axon/js/Emitter.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
@@ -52,7 +51,7 @@ class EnvironmentModel extends PhetioObject {
     } );
 
     // @public (read-only)
-    this.wolves = new Wolves( {
+    this.wolves = new Wolves( this.modelViewTransform, {
       tandem: tandem.createTandem( 'wolves' )
     } );
 
@@ -67,25 +66,24 @@ class EnvironmentModel extends PhetioObject {
       ( wolvesEnabled, foodIsTough, foodIsLimited ) => ( wolvesEnabled || foodIsTough || foodIsLimited )
     );
 
-    // @public (read-only) {Bunny[]} use only addBunny and removeBunny to modify this array!
-    this.bunnies = [];
+    // @public (read-only) {PhetioGroup} to create Bunny instances
+    this.bunnyGroup = Bunny.createGroup( this.modelViewTransform, tandem.createTandem( 'bunnyGroup' ) );
 
-    // @public (read-only) use only addBunny and removeBunny to modify this Property!
-    this.numberOfBunniesProperty = new NumberProperty( this.bunnies.length, {
+    // @public (read-only) do not modify this Property, it must remain sync'd to the length of bunnyGroup
+    this.numberOfBunniesProperty = new NumberProperty( this.bunnyGroup.length, {
       numberType: 'Integer',
       tandem: tandem.createTandem( 'numberOfBunniesProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'the number of bunnies that exist, living and dead'
     } );
 
-    // @public (read-only) emit(Bunny) when a bunny is added
-    this.bunnyAddedEmitter = new Emitter( {
-      parameters: [ { valueType: Bunny } ]
+    //TODO add lengthProperty to PhetioGroup?
+    // Sync numberOfBunniesProperty to the length of bunnyGroup
+    this.bunnyGroup.addMemberCreatedListener( () => {
+      this.numberOfBunniesProperty.value = this.bunnyGroup.length;
     } );
-
-    // @public (read-only) emit(Bunny) when a bunny is removed
-    this.bunnyRemovedEmitter = new Emitter( {
-      parameters: [ { valueType: Bunny } ]
+    this.bunnyGroup.addMemberDisposedListener( () => {
+      this.numberOfBunniesProperty.value = this.bunnyGroup.length;
     } );
 
     this.initializeBunnyPopulation();
@@ -128,8 +126,9 @@ class EnvironmentModel extends PhetioObject {
     this.generationClock.step( dt );
 
     // step the bunnies
-    for ( let i = 0; i < this.bunnies.length; i++ ) {
-      this.bunnies[ i ].step( dt );
+    const numberOfBunnies = this.bunnyGroup.length;
+    for ( let i = 0; i < numberOfBunnies; i++ ) {
+      this.bunnyGroup.get( i ).step( dt );
     }
   }
 
@@ -151,11 +150,7 @@ class EnvironmentModel extends PhetioObject {
    */
   disposeBunnies() {
     phet.log && phet.log( 'EnvironmentModel.disposeBunnies' );
-    for ( let i = this.bunnies.length - 1; i >= 0; i-- ) {
-      const bunny = this.bunnies[ i ];
-      this.removeBunny( bunny );
-      bunny.dispose();
-    }
+    this.bunnyGroup.clear();
     //TODO? Bunny.resetStatic();
   }
 
@@ -165,7 +160,7 @@ class EnvironmentModel extends PhetioObject {
    */
   initializeBunnyPopulation() {
     phet.log && phet.log( 'EnvironmentModel.initializeBunnyPopulation' );
-    assert && assert( this.bunnies.length === 0, 'bunnies exist' );
+    assert && assert( this.bunnyGroup.length === 0, 'bunnies already exist' );
 
     //TODO read query parameters and create initial population
     for ( let i = 0; i < NaturalSelectionQueryParameters.population; i++ ) {
@@ -175,25 +170,14 @@ class EnvironmentModel extends PhetioObject {
 
   /**
    * Adds a bunny at a random position.
+   * @returns {Bunny}
    * @public
    */
   addRandomBunny() {
-    this.addBunny( new Bunny( this.modelViewTransform, {
+    return this.bunnyGroup.createNextMember( {
       position: this.modelViewTransform.getRandomGroundPosition(),
       xDirection: phet.joist.random.nextBoolean() ? 1 : -1
-    } ) );
-  }
-
-  /**
-   * Adds a bunny to the collection.
-   * @param {Bunny} bunny
-   * @private
-   */
-  addBunny( bunny ) {
-    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-    this.bunnies.push( bunny );
-    this.numberOfBunniesProperty.value++;
-    this.bunnyAddedEmitter.emit( bunny );
+    } );
   }
 
   /**
@@ -203,11 +187,7 @@ class EnvironmentModel extends PhetioObject {
    */
   removeBunny( bunny ) {
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-    const index = this.bunnies.indexOf( bunny );
-    assert && assert( index !== -1, `bunny not found: ${bunny}` );
-    this.bunnies.splice( index, 1 );
-    this.numberOfBunniesProperty.value--;
-    this.bunnyRemovedEmitter.emit( bunny );
+    this.bunnyGroup.disposeMember( bunny );
   }
 }
 

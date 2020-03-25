@@ -197,6 +197,14 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "BooleanIO"
     },
+    "BunnyIO": {
+      "documentation": "TODO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ObjectIO",
+      "typeName": "BunnyIO"
+    },
     "DerivedPropertyIO<BooleanIO>": {
       "documentation": "Like PropertyIO, but not settable.  Instead it is derived from other DerivedPropertyIO or PropertyIO instances",
       "events": [
@@ -375,6 +383,14 @@ window.phet.phetio.phetioTypes = assert &&
       "methods": {},
       "supertype": "ObjectIO",
       "typeName": "FontIO"
+    },
+    "FoodIO": {
+      "documentation": "TODO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "SpriteIO",
+      "typeName": "FoodIO"
     },
     "FunctionIO()=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> VoidIO<br><strong>Return Type:</strong> VoidIO",
@@ -581,6 +597,19 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "FunctionIO(StringIO,StringIO)=>VoidIO"
     },
+    "FunctionIO(Vector3IO,NullableIO<Vector3IO>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> Vector3IO, NullableIO<Vector3IO><br><strong>Return Type:</strong> VoidIO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "Vector3IO",
+        "NullableIO<Vector3IO>",
+        "VoidIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "FunctionIO(Vector3IO,NullableIO<Vector3IO>)=>VoidIO"
+    },
     "LinkedElementIO": {
       "documentation": "A LinkedElement",
       "events": [],
@@ -750,6 +779,17 @@ window.phet.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "NullableIO<StringIO>"
+    },
+    "NullableIO<Vector3IO>": {
+      "documentation": "A wrapper to wrap another IOType, adding support for null.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "Vector3IO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "NullableIO<Vector3IO>"
     },
     "NumberIO": {
       "documentation": "Wrapper for the built-in JS number type (floating point, but also represents integers)",
@@ -1057,6 +1097,17 @@ window.phet.phetio.phetioTypes = assert &&
       },
       "supertype": "ObjectIO",
       "typeName": "PhetioEngineIO"
+    },
+    "PhetioGroupIO<BunnyIO>": {
+      "documentation": "An array that sends notifications when its values have changed.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "BunnyIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "PhetioGroupIO<BunnyIO>"
     },
     "PropertyIO<BooleanIO>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
@@ -1542,6 +1593,50 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "PropertyIO<StringIO>"
     },
+    "PropertyIO<Vector3IO>": {
+      "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
+      "events": [
+        "changed"
+      ],
+      "methodOrder": [
+        "link",
+        "lazyLink"
+      ],
+      "methods": {
+        "getValue": {
+          "documentation": "Gets the current value.",
+          "parameterTypes": [],
+          "returnType": "Vector3IO"
+        },
+        "lazyLink": {
+          "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO(Vector3IO,NullableIO<Vector3IO>)=>VoidIO"
+          ],
+          "returnType": "VoidIO"
+        },
+        "link": {
+          "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO(Vector3IO,NullableIO<Vector3IO>)=>VoidIO"
+          ],
+          "returnType": "VoidIO"
+        },
+        "setValue": {
+          "documentation": "Sets the value of the Property. If the value differs from the previous value, listeners are notified with the new value.",
+          "invocableForReadOnlyElements": false,
+          "parameterTypes": [
+            "Vector3IO"
+          ],
+          "returnType": "VoidIO"
+        }
+      },
+      "parameterTypes": [
+        "Vector3IO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "PropertyIO<Vector3IO>"
+    },
     "RangeIO": {
       "documentation": "A range with \"min\" and a \"max\" members.",
       "events": [],
@@ -1592,6 +1687,14 @@ window.phet.phetio.phetioTypes = assert &&
       "methods": {},
       "supertype": "ReferenceIO",
       "typeName": "ScreenIO"
+    },
+    "SpriteIO": {
+      "documentation": "TODO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ReferenceIO",
+      "typeName": "SpriteIO"
     },
     "StringIO": {
       "documentation": "Wrapper for the built-in JS string type",
@@ -1665,6 +1768,14 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "Vector2IO"
     },
+    "Vector3IO": {
+      "documentation": "Basic 3-dimensional vector, represented as (x,y,z)",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ObjectIO",
+      "typeName": "Vector3IO"
+    },
     "VoidIO": {
       "documentation": "Type for which there is no instance, usually to mark functions without a return value",
       "events": [],
@@ -1672,5 +1783,13 @@ window.phet.phetio.phetioTypes = assert &&
       "methods": {},
       "supertype": "ObjectIO",
       "typeName": "VoidIO"
+    },
+    "WolvesIO": {
+      "documentation": "TODO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "SpriteIO",
+      "typeName": "WolvesIO"
     }
   };
