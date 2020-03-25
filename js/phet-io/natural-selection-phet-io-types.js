@@ -384,14 +384,6 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "FontIO"
     },
-    "FoodIO": {
-      "documentation": "TODO",
-      "events": [],
-      "methodOrder": [],
-      "methods": {},
-      "supertype": "SpriteIO",
-      "typeName": "FoodIO"
-    },
     "FunctionIO()=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> VoidIO<br><strong>Return Type:</strong> VoidIO",
       "events": [],

@@ -53,10 +53,10 @@ class Bunny extends Sprite {
     super( modelViewTransform, options );
 
     // @public (read-only)
-    this.isAliveProperty = new BooleanProperty( true );
-    this.isAliveProperty.lazyLink( isAlive => {
-      assert && assert( !isAlive, 'bunny cannot be resurrected' );
+    this.isAliveProperty = new BooleanProperty( true, {
+      tandem: options.tandem.createTandem( 'isAliveProperty' )
     } );
+    this.isAliveProperty.lazyLink( isAlive => { assert && assert( !isAlive, 'bunny cannot be resurrected' );} );
 
     // @public (read-only)
     this.generation = options.generation;
@@ -84,6 +84,14 @@ class Bunny extends Sprite {
     this.disposedEmitter = new Emitter( {
       parameters: [ { valueType: Bunny } ]
     } );
+
+    // @private
+    this.disposeBunny = () => {
+      this.isDisposed = true;
+      this.isAliveProperty.dispose();
+      this.disposedEmitter.emit( this );
+      this.disposedEmitter.dispose();
+    };
   }
 
   /**
@@ -96,13 +104,12 @@ class Bunny extends Sprite {
 
   /**
    * @public
+   * @override
    */
   dispose() {
     assert && assert( !this.isDisposed, 'bunny is disposed' );
-    this.isDisposed = true;
-    this.disposedEmitter.emit( this );
-    this.disposedEmitter.dispose();
-    //TODO
+    super.dispose();
+    this.disposeBunny();
   }
 
   /**

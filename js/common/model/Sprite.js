@@ -33,7 +33,7 @@ class Sprite extends PhetioObject {
       xDirection: 1, // initial direction along the x axis, 1=right, -1=left
 
       // phet-io
-      tandem: Tandem.REQUIRED,
+      tandem: Tandem.OPTIONAL,
       phetioType: SpriteIO
     }, options );
 
@@ -57,6 +57,12 @@ class Sprite extends PhetioObject {
       isValidValue: value => ( value === 1 || value === -1 ),
       tandem: options.tandem.createTandem( 'xDirectionProperty' )
     } );
+
+    // @private
+    this.disposeSprite = () => {
+      this.positionProperty.dispose();
+      this.xDirectionProperty.dispose();
+    };
   }
 
   /**
@@ -65,6 +71,15 @@ class Sprite extends PhetioObject {
   reset() {
     this.positionProperty.reset();
     this.xDirectionProperty.reset();
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    super.dispose();
+    this.disposeSprite();
   }
 
   /**

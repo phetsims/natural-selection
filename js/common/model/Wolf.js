@@ -29,6 +29,14 @@ class Wolf extends Sprite {
 
     super( modelViewTransform, options );
   }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'Wolf does not support dispose' );
+  }
 }
 
 naturalSelection.register( 'Wolf', Wolf );
