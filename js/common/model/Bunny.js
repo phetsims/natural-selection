@@ -275,7 +275,9 @@ class Bunny extends Sprite {
     return new PhetioGroup(
 
       /**
-       * createMember argument, called to instantiate a Bunny.
+       * createMember argument, called to instantiate a Bunny. Note that modelViewTransform is passed via closure,
+       * so we don't have to create it as part of defaultArguments, and don't have to deal with serializing it in
+       * BunnyIO.
        * @param {Tandem} tandem - PhetioGroup requires this to be the first param
        * @param {Object} [options]
        * @returns {Bunny}
