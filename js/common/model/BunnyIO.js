@@ -13,7 +13,7 @@ import Bunny from './Bunny.js';
 import SpriteIO from './SpriteIO.js';
 
 // NOTE: This extends SpriteIO for symmetry with the non-IO class hierarchy, but uses nothing from SpriteIO and
-// could just as easily extend ObjectIO.
+// would work if it extends ObjectIO.
 class BunnyIO extends SpriteIO {
 
   /**
