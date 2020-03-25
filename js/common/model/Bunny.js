@@ -108,7 +108,7 @@ class Bunny extends Sprite {
    * @override
    */
   dispose() {
-    assert && assert( !this.isDisposed, 'bunny is disposed' );
+    assert && assert( !this.isDisposed, 'bunny is already disposed' );
     super.dispose();
     this.disposeBunny();
   }
@@ -129,7 +129,7 @@ class Bunny extends Sprite {
    * @public
    */
   kill() {
-    assert && assert( this.isAliveProperty.value, 'bunny is dead' );
+    assert && assert( this.isAliveProperty.value, 'bunny is already dead' );
     assert && assert( !this.isDisposed, 'bunny is disposed' );
     this.isAliveProperty.value = false;
   }
