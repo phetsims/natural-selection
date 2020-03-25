@@ -1,6 +1,6 @@
 TODO list for natural-selection
 
-PhET-iO
+IO
 Review instrumentation of Bunny and BunnyNode with iO team
 Serialization of Bunny father and mother
 How is cyclic serialization handled? A -> B -> A
