@@ -13,8 +13,11 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
+import SpriteIO from './SpriteIO.js';
 
-class BunnyIO extends ObjectIO {
+// NOTE: This extends SpriteIO for symmetry with the non-IO class hierarchy, but uses nothing from SpriteIO and
+// could just as easily extend ObjectIO.
+class BunnyIO extends SpriteIO {
 
   /**
    * Serializes a Bunny to a state object.
