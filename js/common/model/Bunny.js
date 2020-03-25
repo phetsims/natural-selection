@@ -53,16 +53,16 @@ class Bunny extends Sprite {
     super( modelViewTransform, options );
 
     // @public (read-only)
+    this.generation = options.generation;
+    this.father = options.father;
+    this.mother = options.mother;
+
+    // @public (read-only)
     this.isAliveProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'isAliveProperty' ),
       phetioReadOnly: true
     } );
-    this.isAliveProperty.lazyLink( isAlive => { assert && assert( !isAlive, 'bunny cannot be resurrected' );} );
-
-    // @public (read-only)
-    this.generation = options.generation;
-    this.father = options.father;
-    this.mother = options.mother;
+    this.isAliveProperty.lazyLink( isAlive => { assert && assert( !isAlive, 'bunny cannot be resurrected' ); } );
 
     // @private {number} number of times that step has been called in the current rest + hop cycle
     this.stepsCount = 0;
