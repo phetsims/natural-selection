@@ -7,6 +7,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import PressListener from '../../../../scenery/js/listeners/PressListener.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -52,6 +53,16 @@ class BunnyNode extends SpriteNode {
     }
 
     super( bunny, options );
+
+    this.addInputListener( new PressListener( {
+
+      press: () => {
+        //TODO
+        phet.log && phet.log( `selected bunny:\nmodel=${bunny.tandem.phetioID}\nview=${this.tandem.phetioID}` );
+      },
+
+      tandem: options.tandem.createTandem( 'pressListener' )
+    } ) );
   }
 }
 

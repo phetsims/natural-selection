@@ -126,7 +126,7 @@ class Bunny extends Sprite {
    */
   toString() {
     return 'Bunny[' +
-           `${this.tandem}` +
+           `tandem.name: ${this.tandem.name}, ` +
            `generation:${this.generation}, ` +
            'father:' + ( ( this.father && this.father.tandem ) || null ) + ', ' +
            'mother:' + ( ( this.mother && this.mother.tandem ) || null ) + ', ' +
