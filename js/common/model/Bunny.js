@@ -11,10 +11,12 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
+import Vector3IO from '../../../../dot/js/Vector3IO.js';
 import merge from '../../../../phet-core/js/merge.js';
-import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
-import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
+import required from '../../../../phet-core/js/required.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import NullableIO from '../../../../tandem/js/types/NullableIO.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -25,9 +27,6 @@ const REST_STEPS_RANGE = new Range( 40, 160 );  // number of steps that the Bunn
 const HOP_STEPS_RANGE = new Range( 10, 20 );    // number of steps that is takes to complete a hop
 const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // x and z distance that a bunny hops
 const HOP_HEIGHT_RANGE = new Range( 30, 50 );   // how high above the ground a bunny hops
-
-// Number of bunnies instantiated, used to assign unique ids to Bunny instances for debugging
-let bunnyCount = 0;
 
 class Bunny extends Sprite {
 
@@ -42,11 +41,6 @@ class Bunny extends Sprite {
       generation: 0,
       father: null, // {Bunny|null} null if no father
       mother: null, // {Bunny|null} null if no mother
-
-      stepsCount: 0,
-      restSteps: REST_STEPS_RANGE.max,
-      hopSteps: HOP_STEPS_RANGE.max,
-      hopDelta: null,
 
       // phet-io
       tandem: Tandem.REQUIRED,
@@ -64,30 +58,29 @@ class Bunny extends Sprite {
       assert && assert( !isAlive, 'bunny cannot be resurrected' );
     } );
 
-    // @public (read-only) FOR DEBUGGING ONLY!
-    this.id = bunnyCount++;
-
     // @public (read-only)
     this.generation = options.generation;
     this.father = options.father;
     this.mother = options.mother;
 
     // @private {number} number of times that step has been called in the current rest + hop cycle
-    this.stepsCount = options.stepsCount;
+    this.stepsCount = 0;
 
     // @private {number} the number of steps that the bunny rests before hopping, randomized in initializeMotion
-    this.restSteps = options.restSteps;
+    this.restSteps = REST_STEPS_RANGE.max;
 
     // @private {number} the number of steps required to complete one full hop, randomized in initializeMotion
-    this.hopSteps = options.hopSteps;
+    this.hopSteps = HOP_STEPS_RANGE.max;
 
     // @private {Vector3|null} the change in position when the bunny hops
-    this.hopDelta = options.hopDelta;
+    this.hopDelta = null;
 
     // @public (read-only)
+    //TODO is this needed? It's not currently serialized.
     this.isDisposed = false;
 
     // @public emit(Bunny) is called when this Bunny is disposed
+    //TODO delete this and use BunnyGroup.addMemberDisposedListener ?
     this.disposedEmitter = new Emitter( {
       parameters: [ { valueType: Bunny } ]
     } );
@@ -133,7 +126,7 @@ class Bunny extends Sprite {
     this.isAliveProperty.value = false;
   }
 
-  //TODO delete this later in development?
+  //TODO delete this later in development
   /**
    * String representation of this bunny. For debugging only. DO NOT RELY ON THE FORMAT OF THIS STRING!
    * @returns {string}
@@ -141,10 +134,10 @@ class Bunny extends Sprite {
    */
   toString() {
     return 'Bunny[' +
-           `id:${this.id}, ` +
+           `${this.tandem}` +
            `generation:${this.generation}, ` +
-           'father:' + ( ( this.father && this.father.id ) || null ) + ', ' +
-           'mother:' + ( ( this.mother && this.mother.id ) || null ) + ', ' +
+           'father:' + ( ( this.father && this.father.tandem ) || null ) + ', ' +
+           'mother:' + ( ( this.mother && this.mother.tandem ) || null ) + ', ' +
            `position: ${this.positionProperty.value}` +
            ']';
   }
@@ -259,45 +252,38 @@ class Bunny extends Sprite {
   }
 
   /**
-   * @public
+   * Returns the serialized information needed by BunnyIO.toStateObject. Instrumented properties do not need to be
+   * handled here; they are automatically restored by PhET-iO.
+   * @returns {*}
    */
-  static resetStatic() {
-    bunnyCount = 0;
+  toStateObject() {
+    return {
+      generation: NumberIO.toStateObject( this.generation ),
+      stepsCount: NumberIO.toStateObject( this.stepsCount ),
+      restSteps: NumberIO.toStateObject( this.restSteps ),
+      hopSteps: NumberIO.toStateObject( this.hopSteps ),
+      hopDelta: NullableIO( Vector3IO ).toStateObject( this.hopDelta )
+    };
   }
 
   /**
-   * Creates a PhetioGroup for Bunny instances, which are dynamically created.
-   * @param {EnvironmentModelViewTransform} modelViewTransform
-   * @param {Tandem} tandem
-   * @returns {PhetioGroup}
+   * Restores private state for PhET-iO
+   * This is called by BunnyIO.setValue after a Bunny has been instantiated during deserialization.
+   * @param {*} privateState
    */
-  static createGroup( modelViewTransform, tandem ) {
-    return new PhetioGroup(
+  restorePrivateState( privateState ) {
 
-      /**
-       * createMember argument, called to instantiate a Bunny. Note that modelViewTransform is passed via closure,
-       * so we don't have to create it as part of defaultArguments, and don't have to deal with serializing it in
-       * BunnyIO.
-       * @param {Tandem} tandem - PhetioGroup requires this to be the first param
-       * @param {Object} [options]
-       * @returns {Bunny}
-       */
-      ( tandem, options ) => {
-        return new Bunny( modelViewTransform, merge( {}, options, {
-          tandem: tandem
-        } ) );
-      },
+    privateState = merge( {
+      stepsCount: required( privateState.stepsCount ),
+      restSteps: required( privateState.restSteps ),
+      hopSteps: required( privateState.hopSteps ),
+      hopDelta: required( privateState.hopDelta )
+    }, privateState );
 
-      // defaultArguments, passed to createMember during API harvest
-      [ {} ],
-
-      // options
-      {
-        tandem: tandem,
-        phetioType: PhetioGroupIO( BunnyIO ),
-        phetioDocumentation: 'TODO'
-      }
-    );
+    this.stepsCount = privateState.stepsCount;
+    this.restSteps = privateState.restSteps;
+    this.hopSteps = privateState.hopSteps;
+    this.hopDelta = privateState.hopDelta;
   }
 }
 

@@ -14,6 +14,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import Bunny from './Bunny.js';
+import BunnyGroup from './BunnyGroup.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Environments from './Environments.js';
 import FoodSupply from './FoodSupply.js';
@@ -67,7 +68,9 @@ class EnvironmentModel extends PhetioObject {
     );
 
     // @public (read-only) {PhetioGroup} to create Bunny instances
-    this.bunnyGroup = Bunny.createGroup( this.modelViewTransform, tandem.createTandem( 'bunnyGroup' ) );
+    this.bunnyGroup = new BunnyGroup( this.modelViewTransform, {
+      tandem: tandem.createTandem( 'bunnyGroup' )
+    } );
 
     // @public (read-only) do not modify this Property, it must remain sync'd to the length of bunnyGroup
     this.numberOfBunniesProperty = new NumberProperty( this.bunnyGroup.length, {
@@ -103,7 +106,7 @@ class EnvironmentModel extends PhetioObject {
     this.foodSupply.reset();
 
     // dispose of all bunnies and reinitialize
-    this.disposeBunnies();
+    this.bunnyGroup.clear();
     this.initializeBunnyPopulation();
   }
 
@@ -140,18 +143,8 @@ class EnvironmentModel extends PhetioObject {
     phet.log && phet.log( 'EnvironmentModel.playAgain' );
 
     // dispose of all bunnies and reinitialize
-    this.disposeBunnies();
-    this.initializeBunnyPopulation();
-  }
-
-  /**
-   * Disposes of all bunnies.
-   * @private
-   */
-  disposeBunnies() {
-    phet.log && phet.log( 'EnvironmentModel.disposeBunnies' );
     this.bunnyGroup.clear();
-    //TODO? Bunny.resetStatic();
+    this.initializeBunnyPopulation();
   }
 
   /**

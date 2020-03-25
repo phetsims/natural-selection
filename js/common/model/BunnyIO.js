@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * TODO
+ * BunnyIO is the IO type for Bunny. It is the interface that PhET-iO uses for serialization and deserialization.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -24,13 +24,7 @@ class BunnyIO extends ObjectIO {
    */
   static toStateObject( bunny ) {
     validate( bunny, this.validator );
-    return {
-      generation: NumberIO.toStateObject( bunny.generation ),
-      stepsCount: NumberIO.toStateObject( bunny.stepsCount ),
-      restSteps: NumberIO.toStateObject( bunny.restSteps ),
-      hopSteps: NumberIO.toStateObject( bunny.hopSteps ),
-      hopDelta: NullableIO( Vector3IO ).toStateObject( bunny.hopDelta )
-    };
+    return bunny.toStateObject();
   }
 
   /**
@@ -43,7 +37,11 @@ class BunnyIO extends ObjectIO {
 
       // This is the options arg to Bunny constructor
       options: {
-        generation: NumberIO.fromStateObject( stateObject.generation ),
+        generation: NumberIO.fromStateObject( stateObject.generation )
+      },
+
+      // This will be restored via BunnyIO.setValue, after a Bunny is instantiated.
+      privateState: {
         stepsCount: NumberIO.fromStateObject( stateObject.stepsCount ),
         restSteps: NumberIO.fromStateObject( stateObject.restSteps ),
         hopSteps: NumberIO.fromStateObject( stateObject.hopSteps ),
@@ -53,18 +51,24 @@ class BunnyIO extends ObjectIO {
   }
 
   /**
-   * Creates the args to PhetioGroup.createNextMember that creates Bunny instances.
+   * Creates the args to BunnyGroup.createNextMember that creates Bunny instances.
    * @param state
    * @returns {Object[]}
    */
   static stateToArgsForConstructor( state ) {
+    assert && assert( state.options, 'missing state.options' );
     return [ state.options ];
   }
 
-  //TODO delete this reminder later
-  // static setValue( bunny, state ) {
-  //   bunny.setFoobar( state.foobar );
-  // }
+  /**
+   * Restores Bunny state after instantiation.
+   * @param {Bunny} bunny
+   * @param {*} state
+   */
+  static setValue( bunny, state ) {
+    assert && assert( state.privateState, 'missing state.privateState' );
+    bunny.restorePrivateState( state.privateState );
+  }
 }
 
 BunnyIO.documentation = 'TODO';
