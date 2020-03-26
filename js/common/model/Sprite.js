@@ -83,22 +83,6 @@ class Sprite extends PhetioObject {
     super.dispose();
     this.disposeSprite();
   }
-
-  /**
-   * Debugging method to inspect a Sprite instance in the console.
-   * Example: phet.naturalSelection.Sprite.inspect( 'naturalSelection.labScreen.model.environmentModel.bunnyGroup.bunny_0' )
-   * @param {string} phetioID
-   * @returns {null|PhetioObject}
-   */
-  static inspect( phetioID ) {
-    if ( phet.phetIo ) {
-      return phet.phetIo.phetioEngine.phetioObjectMap[ phetioID ];
-    }
-    else {
-      console.log( 'PhET-iO is not initialized' );
-      return undefined;
-    }
-  }
 }
 
 naturalSelection.register( 'Sprite', Sprite );
