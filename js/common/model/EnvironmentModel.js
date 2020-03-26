@@ -18,6 +18,7 @@ import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Environments from './Environments.js';
 import FoodSupply from './FoodSupply.js';
 import GenerationClock from './GenerationClock.js';
+import SpriteDirection from './SpriteDirection.js';
 import Wolves from './Wolves.js';
 
 class EnvironmentModel extends PhetioObject {
@@ -151,7 +152,7 @@ class EnvironmentModel extends PhetioObject {
   addRandomBunny() {
     return this.bunnyGroup.createNextMember( {
       position: this.modelViewTransform.getRandomGroundPosition(),
-      xDirection: phet.joist.random.nextBoolean() ? 1 : -1
+      direction: phet.joist.random.nextBoolean() ? SpriteDirection.RIGHT : SpriteDirection.LEFT
     } );
   }
 
