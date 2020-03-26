@@ -34,11 +34,11 @@ class SpriteNode extends Node {
     this.sprite = sprite;
 
     // Position and scale
-    const multilink = Property.multilink( [ sprite.positionProperty, sprite.xDirectionProperty ], ( position, xDirection ) => {
+    const multilink = Property.multilink( [ sprite.positionProperty, sprite.directionProperty ], ( position, direction ) => {
       this.resetTransform();
       this.translation = sprite.modelViewTransform.modelToViewPosition( position );
       const scale = options.scaleFactor * sprite.modelViewTransform.getViewScale( position.z );
-      this.setScaleMagnitude( scale * xDirection, scale );
+      this.setScaleMagnitude( scale * Sprite.directionToScale( direction ), scale );
     } );
 
     // @private

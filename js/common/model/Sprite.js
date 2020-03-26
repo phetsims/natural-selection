@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
@@ -17,6 +17,7 @@ import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
+import SpriteDirection from './SpriteDirection.js';
 import SpriteIO from './SpriteIO.js';
 
 // constants
@@ -34,7 +35,7 @@ class Sprite extends PhetioObject {
 
     options = merge( {
       position: DEFAULT_POSITION, // initial position
-      xDirection: 1, // initial direction along the x axis, 1=right, -1=left
+      direction: SpriteDirection.RIGHT, // initial direction of motion
 
       // phet-io
       tandem: Tandem.OPTIONAL, // not all Sprites are instrumented
@@ -53,21 +54,16 @@ class Sprite extends PhetioObject {
       phetioReadOnly: true
     } );
 
-    // @public direction along the x axis, 1=right, -1=left
-    // This is also used as a scale multiplier, to reflect the sprite's image about the y axis so that
-    // the sprite looks like it's headed in the correct direction.  All artwork must therefore be drawn
-    // in an orientation where the sprite is moving to the right.
-    //TODO I don't like this
-    this.xDirectionProperty = new NumberProperty( options.xDirection, {
-      isValidValue: value => ( value === 1 || value === -1 ),
-      tandem: options.tandem.createTandem( 'xDirectionProperty' ),
+    // @public direction that the Sprite is facing along the x axis
+    this.directionProperty = new EnumerationProperty( SpriteDirection, options.direction, {
+      tandem: options.tandem.createTandem( 'directionProperty' ),
       phetioReadOnly: true
     } );
 
     // @private
     this.disposeSprite = () => {
       this.positionProperty.dispose();
-      this.xDirectionProperty.dispose();
+      this.directionProperty.dispose();
     };
   }
 
@@ -76,7 +72,7 @@ class Sprite extends PhetioObject {
    */
   reset() {
     this.positionProperty.reset();
-    this.xDirectionProperty.reset();
+    this.directionProperty.reset();
   }
 
   /**
@@ -93,8 +89,9 @@ class Sprite extends PhetioObject {
    * @returns {boolean}
    * @public
    */
+  //TODO delete this?
   isMovingLeft() {
-    return ( this.xDirectionProperty.value === -1 );
+    return ( this.directionProperty.value === SpriteDirection.LEFT );
   }
 
   /**
@@ -102,8 +99,9 @@ class Sprite extends PhetioObject {
    * @returns {boolean}
    * @public
    */
+  //TODO delete this?
   isMovingRight() {
-    return ( this.xDirectionProperty.value === 1 );
+    return ( this.directionProperty.value === SpriteDirection.RIGHT );
   }
 
   /**
@@ -111,7 +109,19 @@ class Sprite extends PhetioObject {
    * @public
    */
   reverseXDirection() {
-    this.xDirectionProperty.value *= -1;
+    this.directionProperty.value =
+      ( this.directionProperty.value === SpriteDirection.RIGHT ) ? SpriteDirection.LEFT : SpriteDirection.RIGHT;
+  }
+
+  /**
+   * Converts x direction to x scale, use to reflect the corresponding Node about the y axis.
+   * This assumes that the default direction for all Sprites is SpriteDirection.RIGHT.
+   * For example, this means that all bunny PNG files were drawn with the bunny facing right.
+   * @param {SpriteDirection} direction
+   * @returns {number}
+   */
+  static directionToScale( direction ) {
+    return ( direction === SpriteDirection.RIGHT ) ? 1 : -1;
   }
 }
 

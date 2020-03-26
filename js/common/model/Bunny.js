@@ -21,6 +21,7 @@ import naturalSelection from '../../naturalSelection.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Sprite from './Sprite.js';
+import SpriteDirection from './SpriteDirection.js';
 
 // constants
 const REST_STEPS_RANGE = new Range( 40, 160 );  // number of steps that the Bunny will rest before hopping
@@ -173,7 +174,7 @@ class Bunny extends Sprite {
     }
 
     // Adjust the x direction to match the hop delta x
-    this.xDirectionProperty.value = ( this.hopDelta.x >= 0 ) ? 1 : -1;
+    this.directionProperty.value = ( this.hopDelta.x >= 0 ) ? SpriteDirection.RIGHT : SpriteDirection.LEFT;
   }
 
   /**

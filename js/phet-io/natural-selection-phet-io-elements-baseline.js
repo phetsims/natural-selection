@@ -2679,6 +2679,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "BunnyIO"
     },
+    "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype.directionProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
+    },
     "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype.isAliveProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -2704,19 +2717,6 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<Vector3IO>"
-    },
-    "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype.xDirectionProperty": {
-      "phetioDocumentation": "",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": true,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": true,
-      "phetioStudioControl": true,
-      "phetioTypeName": "NumberPropertyIO"
     },
     "naturalSelection.labScreen.model.environmentModel.environmentProperty": {
       "phetioDocumentation": "",
@@ -2848,6 +2848,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "WolvesIO"
     },
+    "naturalSelection.labScreen.model.environmentModel.wolves.wolf0.directionProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
+    },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf0.positionProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -2860,19 +2873,6 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<Vector3IO>"
-    },
-    "naturalSelection.labScreen.model.environmentModel.wolves.wolf0.xDirectionProperty": {
-      "phetioDocumentation": "",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": true,
-      "phetioStudioControl": true,
-      "phetioTypeName": "NumberPropertyIO"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf1": {
       "phetioDocumentation": "",
@@ -2887,6 +2887,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "WolvesIO"
     },
+    "naturalSelection.labScreen.model.environmentModel.wolves.wolf1.directionProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
+    },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf1.positionProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -2899,19 +2912,6 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<Vector3IO>"
-    },
-    "naturalSelection.labScreen.model.environmentModel.wolves.wolf1.xDirectionProperty": {
-      "phetioDocumentation": "",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": true,
-      "phetioStudioControl": true,
-      "phetioTypeName": "NumberPropertyIO"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf2": {
       "phetioDocumentation": "",
@@ -2926,6 +2926,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "WolvesIO"
     },
+    "naturalSelection.labScreen.model.environmentModel.wolves.wolf2.directionProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
+    },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf2.positionProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -2938,19 +2951,6 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<Vector3IO>"
-    },
-    "naturalSelection.labScreen.model.environmentModel.wolves.wolf2.xDirectionProperty": {
-      "phetioDocumentation": "",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": true,
-      "phetioStudioControl": true,
-      "phetioTypeName": "NumberPropertyIO"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf3": {
       "phetioDocumentation": "",
@@ -2965,6 +2965,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "WolvesIO"
     },
+    "naturalSelection.labScreen.model.environmentModel.wolves.wolf3.directionProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
+    },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf3.positionProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -2977,19 +2990,6 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<Vector3IO>"
-    },
-    "naturalSelection.labScreen.model.environmentModel.wolves.wolf3.xDirectionProperty": {
-      "phetioDocumentation": "",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": true,
-      "phetioStudioControl": true,
-      "phetioTypeName": "NumberPropertyIO"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf4": {
       "phetioDocumentation": "",
@@ -3004,6 +3004,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "WolvesIO"
     },
+    "naturalSelection.labScreen.model.environmentModel.wolves.wolf4.directionProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
+    },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf4.positionProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -3016,19 +3029,6 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<Vector3IO>"
-    },
-    "naturalSelection.labScreen.model.environmentModel.wolves.wolf4.xDirectionProperty": {
-      "phetioDocumentation": "",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": true,
-      "phetioStudioControl": true,
-      "phetioTypeName": "NumberPropertyIO"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf5": {
       "phetioDocumentation": "",
@@ -3043,6 +3043,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "WolvesIO"
     },
+    "naturalSelection.labScreen.model.environmentModel.wolves.wolf5.directionProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
+    },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf5.positionProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -3055,19 +3068,6 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<Vector3IO>"
-    },
-    "naturalSelection.labScreen.model.environmentModel.wolves.wolf5.xDirectionProperty": {
-      "phetioDocumentation": "",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": true,
-      "phetioStudioControl": true,
-      "phetioTypeName": "NumberPropertyIO"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf6": {
       "phetioDocumentation": "",
@@ -3082,6 +3082,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "WolvesIO"
     },
+    "naturalSelection.labScreen.model.environmentModel.wolves.wolf6.directionProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
+    },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf6.positionProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -3094,19 +3107,6 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<Vector3IO>"
-    },
-    "naturalSelection.labScreen.model.environmentModel.wolves.wolf6.xDirectionProperty": {
-      "phetioDocumentation": "",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": true,
-      "phetioStudioControl": true,
-      "phetioTypeName": "NumberPropertyIO"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf7": {
       "phetioDocumentation": "",
@@ -3121,6 +3121,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "WolvesIO"
     },
+    "naturalSelection.labScreen.model.environmentModel.wolves.wolf7.directionProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
+    },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf7.positionProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -3133,19 +3146,6 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<Vector3IO>"
-    },
-    "naturalSelection.labScreen.model.environmentModel.wolves.wolf7.xDirectionProperty": {
-      "phetioDocumentation": "",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": true,
-      "phetioStudioControl": true,
-      "phetioTypeName": "NumberPropertyIO"
     },
     "naturalSelection.labScreen.model.isPlayingProperty": {
       "phetioDocumentation": "",
