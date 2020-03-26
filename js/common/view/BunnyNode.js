@@ -54,18 +54,32 @@ class BunnyNode extends SpriteNode {
 
     super( bunny, options );
 
-    this.addInputListener( new PressListener( {
+    const pressListener = new PressListener( {
 
+      //TODO select this bunny for viewing in the Pedigree graph
       press: () => {
 
         // Reminder: You can inspect an element in the console via phet.phetIo.phetioEngine.phetioObjectMap[phetioID]
         phet.log && phet.log( `selected bunny:\nmodel=${bunny.tandem.phetioID}\nview=${this.tandem.phetioID}` );
-
-        //TODO select this bunny for viewing in the Pedigree graph
       },
 
       tandem: options.tandem.createTandem( 'pressListener' )
-    } ) );
+    } );
+    this.addInputListener( pressListener );
+
+    // @private
+    this.disposeBunnyNode = () => {
+      pressListener.dispose();
+    };
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    super.dispose();
+    this.disposeBunnyNode();
   }
 }
 
