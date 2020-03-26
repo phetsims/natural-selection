@@ -8,7 +8,7 @@
 
 import Namespace from '../../phet-core/js/Namespace.js';
 
-const namespace = new Namespace( 'naturalSelection' );
+const naturalSelection = new Namespace( 'naturalSelection' );
 
 /**
  * Gets the PhET-iO element for a specified phetioID.
@@ -17,7 +17,7 @@ const namespace = new Namespace( 'naturalSelection' );
  * @param {string} phetioID
  * @returns {null|PhetioObject}
  */
-namespace.getElement = phetioID => {
+naturalSelection.getElement = phetioID => {
   if ( phet.phetIo ) {
     return phet.phetIo.phetioEngine.phetioObjectMap[ phetioID ];
   }
@@ -27,4 +27,4 @@ namespace.getElement = phetioID => {
   }
 };
 
-export default namespace;
+export default naturalSelection;
