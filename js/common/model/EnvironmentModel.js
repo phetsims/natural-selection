@@ -130,6 +130,7 @@ class EnvironmentModel extends PhetioObject {
     this.initializeBunnyPopulation();
   }
 
+  //TODO read query parameters and create initial population
   /**
    * Initializes the bunny population.
    * @private
@@ -138,22 +139,16 @@ class EnvironmentModel extends PhetioObject {
     phet.log && phet.log( 'EnvironmentModel.initializeBunnyPopulation' );
     assert && assert( this.bunnyGroup.length === 0, 'bunnies already exist' );
 
-    //TODO read query parameters and create initial population
-    for ( let i = 0; i < NaturalSelectionQueryParameters.population; i++ ) {
-      this.addRandomBunny();
-    }
-  }
+    const generation = this.generationClock.currentGenerationProperty.value;
+    assert && assert( generation === 0, `unexpected generation for initial population: ${generation}` );
 
-  /**
-   * Adds a bunny at a random position.
-   * @returns {Bunny}
-   * @public
-   */
-  addRandomBunny() {
-    return this.bunnyGroup.createNextMember( {
-      position: this.modelViewTransform.getRandomGroundPosition(),
-      direction: phet.joist.random.nextBoolean() ? SpriteDirection.RIGHT : SpriteDirection.LEFT
-    } );
+    for ( let i = 0; i < NaturalSelectionQueryParameters.population; i++ ) {
+      this.bunnyGroup.createNextMember( {
+        generation: generation,
+        position: this.modelViewTransform.getRandomGroundPosition(),
+        direction: SpriteDirection.getRandom()
+      } );
+    }
   }
 
   /**

@@ -83,46 +83,6 @@ class Sprite extends PhetioObject {
     super.dispose();
     this.disposeSprite();
   }
-
-  /**
-   * Is the sprite moving towards the left?
-   * @returns {boolean}
-   * @public
-   */
-  //TODO delete this?
-  isMovingLeft() {
-    return ( this.directionProperty.value === SpriteDirection.LEFT );
-  }
-
-  /**
-   * Is the sprite moving towards the right?
-   * @returns {boolean}
-   * @public
-   */
-  //TODO delete this?
-  isMovingRight() {
-    return ( this.directionProperty.value === SpriteDirection.RIGHT );
-  }
-
-  /**
-   * Change the x direction of motion.
-   * @public
-   */
-  reverseXDirection() {
-    this.directionProperty.value =
-      ( this.directionProperty.value === SpriteDirection.RIGHT ) ? SpriteDirection.LEFT : SpriteDirection.RIGHT;
-  }
-
-  /**
-   * Converts x direction to x scale, use to reflect the corresponding Node about the y axis.
-   * This assumes that the default direction for all Sprites is SpriteDirection.RIGHT.
-   * For example, this means that all bunny PNG files were drawn with the bunny facing right.
-   * @param {SpriteDirection} direction
-   * @returns {number}
-   */
-  static directionToScale( direction ) {
-    return ( direction === SpriteDirection.RIGHT ) ? 1 : -1;
-  }
 }
 
 naturalSelection.register( 'Sprite', Sprite );

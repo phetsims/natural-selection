@@ -11,6 +11,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import naturalSelection from '../../naturalSelection.js';
 import Sprite from '../model/Sprite.js';
+import SpriteDirection from '../model/SpriteDirection.js';
 
 class SpriteNode extends Node {
 
@@ -38,7 +39,7 @@ class SpriteNode extends Node {
       this.resetTransform();
       this.translation = sprite.modelViewTransform.modelToViewPosition( position );
       const scale = options.scaleFactor * sprite.modelViewTransform.getViewScale( position.z );
-      this.setScaleMagnitude( scale * Sprite.directionToScale( direction ), scale );
+      this.setScaleMagnitude( scale * SpriteDirection.toSign( direction ), scale );
     } );
 
     // @private

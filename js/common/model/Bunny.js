@@ -158,7 +158,7 @@ class Bunny extends Sprite {
     const hopHeight = phet.joist.random.nextIntBetween( HOP_HEIGHT_RANGE.min, HOP_HEIGHT_RANGE.max );
 
     // Get motion delta for the next cycle
-    this.hopDelta = getHopDelta( hopDistance, hopHeight, this.isMovingRight() );
+    this.hopDelta = getHopDelta( hopDistance, hopHeight, this.directionProperty.value );
 
     // Reverse delta x if the hop would exceed x boundaries
     //TODO bunnies only reverse direction when they hit the left/right edges, should they change direction randomly?
@@ -305,10 +305,10 @@ class Bunny extends Sprite {
  * Gets the Vector3 that describes the change in x, y, and z for a hop cycle.
  * @param {number} hopDistance - maximum x and z distance that the bunny will hop
  * @param {number} hopHeight - height above the ground that the bunny will hop
- * @param {boolean} isMovingRight - true if the bunny is moving to the right
+ * @param {SpriteDirection} direction - direction that the bunny is facing
  * @returns {Vector3}
  */
-function getHopDelta( hopDistance, hopHeight, isMovingRight ) {
+function getHopDelta( hopDistance, hopHeight, direction ) {
 
   //TODO I don't understand the use of cos, sin, and swap
   const angle = phet.joist.random.nextDoubleBetween( 0, 2 * Math.PI );
@@ -317,7 +317,7 @@ function getHopDelta( hopDistance, hopHeight, isMovingRight ) {
 
   const swap = ( Math.abs( a ) < Math.abs( b ) );
 
-  const dx = Math.abs( swap ? b : a ) * ( isMovingRight ? 1 : -1 ); // match direction of movement
+  const dx = Math.abs( swap ? b : a ) * SpriteDirection.toSign( direction );
   const dy = hopHeight;
   const dz = ( swap ? a : b );
   return new Vector3( dx, dy, dz );

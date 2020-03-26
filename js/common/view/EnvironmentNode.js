@@ -13,6 +13,7 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModel from '../model/EnvironmentModel.js';
+import SpriteDirection from '../model/SpriteDirection.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import AddAMateButton from './AddAMateButton.js';
@@ -71,7 +72,7 @@ class EnvironmentNode extends Node {
     const addAMateButton = new AddAMateButton( {
       listener: () => {
         addAMateButton.visible = false;
-        environmentModel.addRandomBunny();
+        this.addAMate();
         environmentModel.generationClock.isRunningProperty.value = true;
       },
       centerX: frameNode.centerX,
@@ -203,6 +204,24 @@ class EnvironmentNode extends Node {
       this.spritesNode.children,
       child => child.sprite.positionProperty.value.z
     ).reverse();
+  }
+
+  /**
+   * Adds a mate for a lone bunny.
+   * @private
+   */
+  addAMate() {
+
+    assert && assert( this.environmentModel.bunnyGroup.length === 1, 'there should only be 1 bunny' );
+
+    const generation = this.environmentModel.generationClock.currentGenerationProperty.value;
+    assert && assert( generation === 0, `unexpected generation for addAMate: ${generation}` );
+
+    this.environmentModel.bunnyGroup.createNextMember( {
+      generation: generation,
+      position: this.environmentModel.modelViewTransform.getRandomGroundPosition(),
+      direction: SpriteDirection.getRandom()
+    } );
   }
 }
 
