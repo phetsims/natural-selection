@@ -25,7 +25,7 @@ naturalSelection.getElement = phetioID => {
     return phet.phetIo.phetioEngine.phetioObjectMap[ phetioID ];
   }
   else {
-    console.log( 'PhET-iO is not initialized' );
+    console.warn( 'PhET-iO is not initialized' );
     return undefined;
   }
 };
