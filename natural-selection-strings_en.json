@@ -142,5 +142,8 @@
   },
   "greaterThanValuePercent": {
     "value": ">{{value}}%"
+  },
+  "selectABunny": {
+    "value": "Select a Bunny"
   }
 }

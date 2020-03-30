@@ -98,6 +98,7 @@ class EnvironmentModel extends PhetioObject {
     this.environmentProperty.reset();
     this.wolves.reset();
     this.foodSupply.reset();
+    this.selectedBunnyProperty.reset();
 
     // dispose of all bunnies and reinitialize
     this.bunnyGroup.clear();

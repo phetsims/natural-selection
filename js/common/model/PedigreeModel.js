@@ -14,9 +14,10 @@ import naturalSelection from '../../naturalSelection.js';
 class PedigreeModel extends PhetioObject {
 
   /**
+   * @param {Property.<Bunny|null>} selectedBunnyProperty
    * @param {Tandem} tandem
    */
-  constructor( tandem ) {
+  constructor( selectedBunnyProperty, tandem ) {
 
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
@@ -27,6 +28,9 @@ class PedigreeModel extends PhetioObject {
       phetioState: false, // to prevent serialization, because we don't have an IO type
       phetioDocumentation: 'portion of the model that deals with the Pedigree graph'
     } );
+
+    // @public
+    this.selectedBunnyProperty = selectedBunnyProperty;
 
     // @public visibility of the alleles for each gene in the Pedigree tree
     this.furAllelesVisibleProperty = new BooleanProperty( false, {
