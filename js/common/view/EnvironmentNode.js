@@ -141,7 +141,7 @@ class EnvironmentNode extends Node {
     } );
 
     // @private PhetioGroup for managing dynamic BunnyNode instances
-    this.bunnyNodeGroup = new BunnyNodeGroup( environmentModel.bunnyGroup, {
+    this.bunnyNodeGroup = new BunnyNodeGroup( environmentModel.bunnyGroup, environmentModel.selectedBunnyProperty, {
       tandem: options.tandem.createTandem( 'bunnyNodeGroup' )
     } );
 

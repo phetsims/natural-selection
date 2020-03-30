@@ -2822,6 +2822,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
+    "naturalSelection.labScreen.model.environmentModel.selectedBunnyProperty": {
+      "phetioDocumentation": "bunny selected in environmentNode, whose pedigree is displayed by pedigreeNode",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<ReferenceIO>>"
+    },
     "naturalSelection.labScreen.model.environmentModel.wolves.enabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,

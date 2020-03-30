@@ -502,6 +502,19 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "FunctionIO(NullableIO<NumberIO>,NullableIO<NullableIO<NumberIO>>)=>VoidIO"
     },
+    "FunctionIO(NullableIO<ReferenceIO>,NullableIO<NullableIO<ReferenceIO>>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO<ReferenceIO>, NullableIO<NullableIO<ReferenceIO>><br><strong>Return Type:</strong> VoidIO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "NullableIO<ReferenceIO>",
+        "NullableIO<NullableIO<ReferenceIO>>",
+        "VoidIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "FunctionIO(NullableIO<ReferenceIO>,NullableIO<NullableIO<ReferenceIO>>)=>VoidIO"
+    },
     "FunctionIO(NullableIO<SceneryEventIO>)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO<SceneryEventIO><br><strong>Return Type:</strong> VoidIO",
       "events": [],
@@ -745,6 +758,17 @@ window.phet.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "NullableIO<NullableIO<NumberIO>>"
+    },
+    "NullableIO<NullableIO<ReferenceIO>>": {
+      "documentation": "A wrapper to wrap another IOType, adding support for null.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "NullableIO<ReferenceIO>"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "NullableIO<NullableIO<ReferenceIO>>"
     },
     "NullableIO<NumberIO>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
@@ -1459,6 +1483,50 @@ window.phet.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "PropertyIO<NullableIO<NumberIO>>"
+    },
+    "PropertyIO<NullableIO<ReferenceIO>>": {
+      "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
+      "events": [
+        "changed"
+      ],
+      "methodOrder": [
+        "link",
+        "lazyLink"
+      ],
+      "methods": {
+        "getValue": {
+          "documentation": "Gets the current value.",
+          "parameterTypes": [],
+          "returnType": "NullableIO<ReferenceIO>"
+        },
+        "lazyLink": {
+          "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO(NullableIO<ReferenceIO>,NullableIO<NullableIO<ReferenceIO>>)=>VoidIO"
+          ],
+          "returnType": "VoidIO"
+        },
+        "link": {
+          "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO(NullableIO<ReferenceIO>,NullableIO<NullableIO<ReferenceIO>>)=>VoidIO"
+          ],
+          "returnType": "VoidIO"
+        },
+        "setValue": {
+          "documentation": "Sets the value of the Property. If the value differs from the previous value, listeners are notified with the new value.",
+          "invocableForReadOnlyElements": false,
+          "parameterTypes": [
+            "NullableIO<ReferenceIO>"
+          ],
+          "returnType": "VoidIO"
+        }
+      },
+      "parameterTypes": [
+        "NullableIO<ReferenceIO>"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "PropertyIO<NullableIO<ReferenceIO>>"
     },
     "PropertyIO<NumberIO>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",

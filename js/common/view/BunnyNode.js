@@ -6,10 +6,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PressListener from '../../../../scenery/js/listeners/PressListener.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import bunnyWhiteFurStraightEarsShortTeethImage from '../../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -21,16 +23,21 @@ class BunnyNode extends SpriteNode {
 
   /**
    * @param {Bunny} bunny
+   * @param {Property.<Bunny>} selectedBunnyProperty
    * @param {Object} [options]
    */
-  constructor( bunny, options ) {
+  constructor( bunny, selectedBunnyProperty, options ) {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
+    assert && assert( selectedBunnyProperty instanceof Property, 'invalid selectedBunnyProperty' );
 
     options = merge( {
 
       // SpriteNode options
       scaleFactor: 0.4, // scale applied in addition to modelViewTransform scale
+
+      // Node options
+      cursor: 'pointer',
 
       // phet-io
       tandem: Tandem.REQUIRED,
@@ -43,12 +50,19 @@ class BunnyNode extends SpriteNode {
       bottom: 0
     } );
 
+    // Rectangle that appears around this Node when bunny is selected
+    const selectionRectangle = new Rectangle( image.bounds.dilated( 10 ), {
+      stroke: 'blue',
+      lineWidth: 5,
+      cornerRadius: 20,
+      center: image.center
+    } );
+
     assert && assert( !options.children, 'BunnyNode sets children' );
-    options.children = [ image ];
+    options.children = [ selectionRectangle, image ];
 
+    // Red dot at the origin
     if ( phet.chipper.queryParameters.dev ) {
-
-      // Red dot at the origin
       options.children.push( new Circle( 4, { fill: 'red' } ) );
     }
 
@@ -56,20 +70,25 @@ class BunnyNode extends SpriteNode {
 
     const pressListener = new PressListener( {
 
-      //TODO select this bunny for viewing in the Pedigree graph
+      // Select this bunny
       press: () => {
-
-        // Reminder: You can inspect an element in the console via phet.phetIo.phetioEngine.phetioObjectMap[phetioID]
-        phet.log && phet.log( `selected bunny:\nmodel=${bunny.tandem.phetioID}\nview=${this.tandem.phetioID}` );
+        selectedBunnyProperty.value = bunny;
       },
 
       tandem: options.tandem.createTandem( 'pressListener' )
     } );
     this.addInputListener( pressListener );
 
+    // Indicate that this bunny is selected
+    const selectedBunnyListener = someBunny => {
+      selectionRectangle.visible = ( someBunny === bunny );
+    };
+    selectedBunnyProperty.link( selectedBunnyListener );
+
     // @private
     this.disposeBunnyNode = () => {
       pressListener.dispose();
+      selectedBunnyProperty.unlink( selectedBunnyListener );
     };
   }
 

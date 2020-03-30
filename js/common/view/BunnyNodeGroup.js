@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
 import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
@@ -20,11 +21,13 @@ class BunnyNodeGroup extends PhetioGroup {
 
   /**
    * @param {BunnyGroup} bunnyGroup
+   * @param {Property.<Bunny>} selectedBunnyProperty
    * @param {Object} [options]
    */
-  constructor( bunnyGroup, options ) {
+  constructor( bunnyGroup, selectedBunnyProperty, options ) {
 
     assert && assert( bunnyGroup instanceof BunnyGroup, 'invalid bunnyGroup' );
+    assert && assert( selectedBunnyProperty instanceof Property, 'invalid selectedBunnyProperty' );
 
     options = merge( {
 
@@ -42,7 +45,7 @@ class BunnyNodeGroup extends PhetioGroup {
      * @returns {Bunny}
      */
     const createMember = ( tandem, bunny ) => {
-      return new BunnyNode( bunny, {
+      return new BunnyNode( bunny, selectedBunnyProperty, {
         tandem: tandem
       } );
     };

@@ -8,8 +8,12 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import NullableIO from '../../../../tandem/js/types/NullableIO.js';
+import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import Bunny from './Bunny.js';
@@ -70,6 +74,13 @@ class EnvironmentModel extends PhetioObject {
     // @public (read-only) {PhetioGroup} to create Bunny instances
     this.bunnyGroup = new BunnyGroup( this.modelViewTransform, {
       tandem: tandem.createTandem( 'bunnyGroup' )
+    } );
+
+    // @public {Property.<Bunny|null>}
+    this.selectedBunnyProperty = new Property( null, {
+      tandem: tandem.createTandem( 'selectedBunnyProperty' ),
+      phetioType: PropertyIO( NullableIO( ReferenceIO ) ),
+      phetioDocumentation: 'bunny selected in environmentNode, whose pedigree is displayed by pedigreeNode'
     } );
 
     this.initializeBunnyPopulation();
