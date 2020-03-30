@@ -18,7 +18,7 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import BunnyIO from './BunnyIO.js';
+import BunnyDynamicIO from './BunnyDynamicIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Sprite from './Sprite.js';
 import SpriteDirection from './SpriteDirection.js';
@@ -45,7 +45,7 @@ class Bunny extends Sprite {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: BunnyIO,
+      phetioType: BunnyDynamicIO,
       phetioDynamicElement: true
     }, options );
 
@@ -233,11 +233,11 @@ class Bunny extends Sprite {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Returns the serialized information needed by BunnyIO.toStateObject. Providing this method prevents BunnyIO
-   * from reaching into Bunny and accessing private fields. Note that instrumented Properties do not need to be
-   * handled here, they are automatically restored by PhET-iO.
+   * Returns the serialized information needed by BunnyDynamicIO.toStateObject. Providing this method prevents
+   * BunnyDynamicIO from reaching into Bunny and accessing private fields. Note that instrumented Properties do not
+   * need to be handled here, they are automatically restored by PhET-iO.
    * @returns {Object}
-   * @public for use by BunnyIO only
+   * @public for use by BunnyDynamicIO only
    */
   toStateObject() {
     return {
@@ -255,7 +255,7 @@ class Bunny extends Sprite {
    * Deserializes the state needed by stateToArgsForConstructor.
    * @param {Object} stateObject - return value from toStateObject
    * @returns {Object}
-   * @public for use by BunnyIO only
+   * @public for use by BunnyDynamicIO only
    */
   static fromStateObject( stateObject ) {
     return {
@@ -273,7 +273,7 @@ class Bunny extends Sprite {
    * Creates the args that BunnyGroup uses to create a Bunny instance.
    * @param state
    * @returns {Object[]}
-   * @public for use by BunnyIO only
+   * @public for use by BunnyDynamicIO only
    */
   static stateToArgsForConstructor( state ) {
 
@@ -284,10 +284,11 @@ class Bunny extends Sprite {
   }
 
   /**
-   * Restores private state for PhET-iO. This is called by BunnyIO.setValue after a Bunny has been instantiated during
-   * deserialization. Providing this method prevents BunnyIO from reaching into Bunny and accessing private fields.
+   * Restores private state for PhET-iO. This is called by BunnyDynamicIO.setValue after a Bunny has been instantiated
+   * during deserialization. Providing this method prevents BunnyDynamicIO from reaching into Bunny and accessing
+   * private fields.
    * @param {Object} state - return value of fromStateObject
-   * @public for use by BunnyIO only
+   * @public for use by BunnyDynamicIO only
    */
   setValue( state ) {
     required( state );

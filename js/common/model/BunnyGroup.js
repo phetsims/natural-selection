@@ -13,7 +13,7 @@ import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
-import BunnyIO from './BunnyIO.js';
+import BunnyDynamicIO from './BunnyDynamicIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 
 class BunnyGroup extends PhetioGroup {
@@ -30,13 +30,13 @@ class BunnyGroup extends PhetioGroup {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: PhetioGroupIO( BunnyIO ),
+      phetioType: PhetioGroupIO( BunnyDynamicIO ),
       phetioDocumentation: 'TODO'
     }, options );
 
     /**
      * Called to instantiate a Bunny. Note that modelViewTransform is passed via closure, so we don't have to create
-     * it as part of defaultArguments, and don't have to deal with serializing it in BunnyIO.
+     * it as part of defaultArguments, and don't have to deal with serializing it in BunnyDynamicIO.
      * @param {Tandem} tandem - PhetioGroup requires tandem to be the first param
      * @param {Object} bunnyOptions - options to Bunny constructor, not actually optional, because createMember
      *                                must have a fixed number of args

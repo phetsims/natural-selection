@@ -13,11 +13,11 @@ import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
-import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import Bunny from './Bunny.js';
 import BunnyGroup from './BunnyGroup.js';
+import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Environments from './Environments.js';
 import FoodSupply from './FoodSupply.js';
@@ -79,7 +79,7 @@ class EnvironmentModel extends PhetioObject {
     // @public {Property.<Bunny|null>}
     this.selectedBunnyProperty = new Property( null, {
       tandem: tandem.createTandem( 'selectedBunnyProperty' ),
-      phetioType: PropertyIO( NullableIO( ReferenceIO ) ),
+      phetioType: PropertyIO( NullableIO( BunnyIO ) ),
       phetioDocumentation: 'bunny selected in environmentNode, whose pedigree is displayed by pedigreeNode'
     } );
 
