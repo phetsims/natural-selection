@@ -17,7 +17,7 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import Bunny from './Bunny.js';
 import BunnyGroup from './BunnyGroup.js';
-import BunnyIO from './BunnyIO.js';
+import BunnyReferenceIO from './BunnyReferenceIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Environments from './Environments.js';
 import FoodSupply from './FoodSupply.js';
@@ -79,7 +79,7 @@ class EnvironmentModel extends PhetioObject {
     // @public {Property.<Bunny|null>}
     this.selectedBunnyProperty = new Property( null, {
       tandem: tandem.createTandem( 'selectedBunnyProperty' ),
-      phetioType: PropertyIO( NullableIO( BunnyIO ) ),
+      phetioType: PropertyIO( NullableIO( BunnyReferenceIO ) ),
       phetioDocumentation: 'bunny selected in environmentNode, whose pedigree is displayed by pedigreeNode'
     } );
 

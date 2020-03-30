@@ -205,14 +205,6 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "SpriteIO",
       "typeName": "BunnyDynamicIO"
     },
-    "BunnyIO": {
-      "documentation": "TODO",
-      "events": [],
-      "methodOrder": [],
-      "methods": {},
-      "supertype": "ReferenceIO",
-      "typeName": "BunnyIO"
-    },
     "BunnyNodeIO": {
       "documentation": "TODO",
       "events": [],
@@ -220,6 +212,14 @@ window.phet.phetio.phetioTypes = assert &&
       "methods": {},
       "supertype": "ReferenceIO",
       "typeName": "BunnyNodeIO"
+    },
+    "BunnyReferenceIO": {
+      "documentation": "TODO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ReferenceIO",
+      "typeName": "BunnyReferenceIO"
     },
     "DerivedPropertyIO<BooleanIO>": {
       "documentation": "Like PropertyIO, but not settable.  Instead it is derived from other DerivedPropertyIO or PropertyIO instances",
@@ -484,18 +484,18 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "FunctionIO(NullableIO<BooleanIO>,NullableIO<NullableIO<BooleanIO>>)=>VoidIO"
     },
-    "FunctionIO(NullableIO<BunnyIO>,NullableIO<NullableIO<BunnyIO>>)=>VoidIO": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO<BunnyIO>, NullableIO<NullableIO<BunnyIO>><br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO(NullableIO<BunnyReferenceIO>,NullableIO<NullableIO<BunnyReferenceIO>>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO<BunnyReferenceIO>, NullableIO<NullableIO<BunnyReferenceIO>><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "NullableIO<BunnyIO>",
-        "NullableIO<NullableIO<BunnyIO>>",
+        "NullableIO<BunnyReferenceIO>",
+        "NullableIO<NullableIO<BunnyReferenceIO>>",
         "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO(NullableIO<BunnyIO>,NullableIO<NullableIO<BunnyIO>>)=>VoidIO"
+      "typeName": "FunctionIO(NullableIO<BunnyReferenceIO>,NullableIO<NullableIO<BunnyReferenceIO>>)=>VoidIO"
     },
     "FunctionIO(NullableIO<FocusIO>,NullableIO<NullableIO<FocusIO>>)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO<FocusIO>, NullableIO<NullableIO<FocusIO>><br><strong>Return Type:</strong> VoidIO",
@@ -703,16 +703,16 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "NullableIO<BooleanIO>"
     },
-    "NullableIO<BunnyIO>": {
+    "NullableIO<BunnyReferenceIO>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "BunnyIO"
+        "BunnyReferenceIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "NullableIO<BunnyIO>"
+      "typeName": "NullableIO<BunnyReferenceIO>"
     },
     "NullableIO<EnumerationIO(EQUATOR|ARCTIC)>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
@@ -769,16 +769,16 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "NullableIO<NullableIO<BooleanIO>>"
     },
-    "NullableIO<NullableIO<BunnyIO>>": {
+    "NullableIO<NullableIO<BunnyReferenceIO>>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "NullableIO<BunnyIO>"
+        "NullableIO<BunnyReferenceIO>"
       ],
       "supertype": "ObjectIO",
-      "typeName": "NullableIO<NullableIO<BunnyIO>>"
+      "typeName": "NullableIO<NullableIO<BunnyReferenceIO>>"
     },
     "NullableIO<NullableIO<FocusIO>>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
@@ -1439,7 +1439,7 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "PropertyIO<NullableIO<BunnyIO>>": {
+    "PropertyIO<NullableIO<BunnyReferenceIO>>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
       "events": [
         "changed"
@@ -1452,19 +1452,19 @@ window.phet.phetio.phetioTypes = assert &&
         "getValue": {
           "documentation": "Gets the current value.",
           "parameterTypes": [],
-          "returnType": "NullableIO<BunnyIO>"
+          "returnType": "NullableIO<BunnyReferenceIO>"
         },
         "lazyLink": {
           "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO(NullableIO<BunnyIO>,NullableIO<NullableIO<BunnyIO>>)=>VoidIO"
+            "FunctionIO(NullableIO<BunnyReferenceIO>,NullableIO<NullableIO<BunnyReferenceIO>>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
         "link": {
           "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO(NullableIO<BunnyIO>,NullableIO<NullableIO<BunnyIO>>)=>VoidIO"
+            "FunctionIO(NullableIO<BunnyReferenceIO>,NullableIO<NullableIO<BunnyReferenceIO>>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
@@ -1472,16 +1472,16 @@ window.phet.phetio.phetioTypes = assert &&
           "documentation": "Sets the value of the Property. If the value differs from the previous value, listeners are notified with the new value.",
           "invocableForReadOnlyElements": false,
           "parameterTypes": [
-            "NullableIO<BunnyIO>"
+            "NullableIO<BunnyReferenceIO>"
           ],
           "returnType": "VoidIO"
         }
       },
       "parameterTypes": [
-        "NullableIO<BunnyIO>"
+        "NullableIO<BunnyReferenceIO>"
       ],
       "supertype": "ObjectIO",
-      "typeName": "PropertyIO<NullableIO<BunnyIO>>"
+      "typeName": "PropertyIO<NullableIO<BunnyReferenceIO>>"
     },
     "PropertyIO<NullableIO<FocusIO>>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
