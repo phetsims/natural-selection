@@ -93,6 +93,7 @@ const NaturalSelectionConstants = {
   CHECKBOX_FONT: new PhetFont( 16 ),
   PUSH_BUTTON_FONT: new PhetFont( 16 ),
   RADIO_BUTTON_FONT: new PhetFont( 16 ),
+  INSTRUCTIONS_FONT: new PhetFont( 16 ),
   TITLE_FONT: new PhetFont( { size: 16, weight: 'bold' } ),
   ADD_MUTATION_TRAIT_FONT: new PhetFont( 16 ),
   ADD_MUTATION_COLUMN_HEADING_FONT: new PhetFont( 14 ),

@@ -7,14 +7,14 @@
  */
 
 import merge from '../../../../../phet-core/js/merge.js';
-import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
-import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import naturalSelection from '../../../naturalSelection.js';
+import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import PedigreeModel from '../../model/PedigreeModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
+import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
 class PedigreeGraphNode extends Node {
 
@@ -38,7 +38,7 @@ class PedigreeGraphNode extends Node {
     } );
 
     const selectABunnyText = new Text( naturalSelectionStrings.selectABunny, {
-      font: new PhetFont( 20 ),
+      font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
       center: rectangle.center
     } );
 
