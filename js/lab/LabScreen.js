@@ -22,7 +22,7 @@ import whiteBunnyImage2 from '../../images/bunny-whiteFur-floppyEars-shortTeeth_
 import whiteBunnyImage3 from '../../images/bunny-whiteFur-straightEars-longTeeth_png.js';
 import whiteBunnyImage1 from '../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
 import NaturalSelectionColors from '../common/NaturalSelectionColors.js';
-import naturalSelectionStrings from '../natural-selection-strings.js';
+import naturalSelectionStrings from '../naturalSelectionStrings.js';
 import naturalSelection from '../naturalSelection.js';
 import LabModel from './model/LabModel.js';
 import LabScreenView from './view/LabScreenView.js';

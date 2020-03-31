@@ -10,7 +10,7 @@ import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
-import naturalSelectionStrings from '../../natural-selection-strings.js';
+import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 

@@ -26,7 +26,7 @@ import longTeethImage from '../../../images/longTeeth_png.js';
 import shortTeethImage from '../../../images/shortTeeth_png.js';
 import straightEarsImage from '../../../images/straightEars_png.js';
 import whiteFurImage from '../../../images/whiteFur_png.js';
-import naturalSelectionStrings from '../../natural-selection-strings.js';
+import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';

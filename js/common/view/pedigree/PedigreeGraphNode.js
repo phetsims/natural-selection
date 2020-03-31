@@ -11,7 +11,7 @@ import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
-import naturalSelectionStrings from '../../../natural-selection-strings.js';
+import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import naturalSelection from '../../../naturalSelection.js';
 import PedigreeModel from '../../model/PedigreeModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';

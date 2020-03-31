@@ -12,7 +12,7 @@ import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import Checkbox from '../../../../../sun/js/Checkbox.js';
 import HSeparator from '../../../../../sun/js/HSeparator.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
-import naturalSelectionStrings from '../../../natural-selection-strings.js';
+import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import naturalSelection from '../../../naturalSelection.js';
 import ProportionsModel from '../../model/ProportionsModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';

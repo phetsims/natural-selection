@@ -14,7 +14,7 @@ import Text from '../../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import VStrut from '../../../../../scenery/js/nodes/VStrut.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
-import naturalSelectionStrings from '../../../natural-selection-strings.js';
+import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
