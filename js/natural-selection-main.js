@@ -11,7 +11,7 @@ import SimLauncher from '../../joist/js/SimLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import IntroScreen from './intro/IntroScreen.js';
 import LabScreen from './lab/LabScreen.js';
-import naturalSelectionStrings from './natural-selection-strings.js';
+import naturalSelectionStrings from './naturalSelectionStrings.js';
 
 SimLauncher.launch( () => {
 

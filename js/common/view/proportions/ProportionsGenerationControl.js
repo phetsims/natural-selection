@@ -13,7 +13,7 @@ import NumberDisplay from '../../../../../scenery-phet/js/NumberDisplay.js';
 import HBox from '../../../../../scenery/js/nodes/HBox.js';
 import ArrowButton from '../../../../../sun/js/buttons/ArrowButton.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
-import naturalSelectionStrings from '../../../natural-selection-strings.js';
+import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 

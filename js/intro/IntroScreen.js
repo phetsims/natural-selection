@@ -15,7 +15,7 @@ import Tandem from '../../../tandem/js/Tandem.js';
 import brownBunnyImage from '../../images/bunny-brownFur-straightEars-shortTeeth_png.js';
 import whiteBunnyImage from '../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
 import NaturalSelectionColors from '../common/NaturalSelectionColors.js';
-import naturalSelectionStrings from '../natural-selection-strings.js';
+import naturalSelectionStrings from '../naturalSelectionStrings.js';
 import naturalSelection from '../naturalSelection.js';
 import IntroModel from './model/IntroModel.js';
 import IntroScreenView from './view/IntroScreenView.js';
