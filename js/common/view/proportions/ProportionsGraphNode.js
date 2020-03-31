@@ -20,12 +20,12 @@ import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
-import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import naturalSelection from '../../../naturalSelection.js';
+import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import ProportionsModel from '../../model/ProportionsModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import ProportionsBarNode from './ProportionsBarNode.js';
-import ProportionsGenerationControl from './ProportionsGenerationControl.js';
+import PopulationGenerationSpinner from './ProportionsGenerationSpinner.js';
 
 // constants
 const COLUMNS_SPACING = 20;
@@ -91,15 +91,14 @@ class ProportionsGraphNode extends Node {
       children: [ columnLabels, rows ]
     } );
 
-    const generationControl = new ProportionsGenerationControl(
-      proportionsModel.generationProperty, proportionsModel.currentGenerationProperty, {
-        tandem: options.tandem.createTandem( 'generationControl' )
-      } );
+    const generationSpinner = new PopulationGenerationSpinner( proportionsModel.generationProperty, {
+      tandem: options.tandem.createTandem( 'generationSpinner' )
+    } );
 
     const content = new VBox( {
       align: 'center',
       spacing: 35,
-      children: [ graph, generationControl ],
+      children: [ graph, generationSpinner ],
       center: backgroundNode.center
     } );
 

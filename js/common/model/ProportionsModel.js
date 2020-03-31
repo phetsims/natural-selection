@@ -7,8 +7,12 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import Range from '../../../../dot/js/Range.js';
+import RangeIO from '../../../../dot/js/RangeIO.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -42,11 +46,20 @@ class ProportionsModel extends PhetioObject {
       tandem: tandem.createTandem( 'valuesVisibleProperty' )
     } );
 
+    // Range of generationProperty changes as the number of generations increases.
+    const generationRangeProperty = new DerivedProperty(
+      [ currentGenerationProperty ] ,
+      currentGeneration => new Range( 0, currentGeneration ), {
+        tandem: tandem.createTandem( 'generationRangeProperty' ),
+        phetioType: DerivedPropertyIO( RangeIO )
+      } );
+
     // @public the generation that is displayed by the Proportions graph
     this.generationProperty = new NumberProperty( 0, {
       numberType: 'Integer',
+      range: generationRangeProperty,
       tandem: tandem.createTandem( 'generationProperty' ),
-      phetioStudioControl: false //TODO range is dynamic
+      phetioStudioControl: false // range is dynamic
     } );
 
     //TODO phet-io instrumentation
