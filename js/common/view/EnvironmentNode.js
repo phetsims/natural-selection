@@ -8,6 +8,7 @@
 
 import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
+import PressListener from '../../../../scenery/js/listeners/PressListener.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -176,6 +177,15 @@ class EnvironmentNode extends Node {
 
     assert && assert( _.every( this.spritesNode.children, child => child instanceof SpriteNode ),
       'every child of spritesNode must be an instanceof SpriteNode' );
+
+    // Press on the background to clear the selected bunny.
+    // No need to removeInputListener, exists for the lifetime of the sim.
+    backgroundNode.addInputListener( new PressListener( {
+      press: () => {
+        environmentModel.selectedBunnyProperty.value = null;
+      },
+      tandem: options.tandem.createTandem( 'pressListener' )
+    } ) );
   }
 
   /**
