@@ -3,6 +3,10 @@
 /**
  * GenerationScrollControl is the control used for scrolling the x-axis (Generation) of the Population graph.
  *
+ * Note that this looks and behaves a bit like a spinner. But NumberSpinner cannot be used because it must
+ * show a value. And this control is modifying a {Property.<Range>}, not a {Property.<number>}. So think of
+ * this as a set of 'forward' and 'back' buttons.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
