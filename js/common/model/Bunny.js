@@ -242,8 +242,8 @@ class Bunny extends Sprite {
   toStateObject() {
     return {
       generation: NumberIO.toStateObject( this.generation ),
-      father: NullableIO( ReferenceIO ).toStateObject( this.father ),
-      mother: NullableIO( ReferenceIO ).toStateObject( this.mother ),
+      father: NullableIO( ReferenceIO( BunnyDynamicIO ) ).toStateObject( this.father ), // TODO: make sure this is renamed to BunnyIO
+      mother: NullableIO( ReferenceIO( BunnyDynamicIO ) ).toStateObject( this.mother ),
       stepsCount: NumberIO.toStateObject( this.stepsCount ),
       restSteps: NumberIO.toStateObject( this.restSteps ),
       hopSteps: NumberIO.toStateObject( this.hopSteps ),
@@ -260,8 +260,8 @@ class Bunny extends Sprite {
   static fromStateObject( stateObject ) {
     return {
       generation: NumberIO.fromStateObject( stateObject.generation ),
-      father: NullableIO( ReferenceIO ).fromStateObject( stateObject.father ),
-      mother: NullableIO( ReferenceIO ).fromStateObject( stateObject.mother ),
+      father: NullableIO( ReferenceIO( BunnyDynamicIO ) ).fromStateObject( stateObject.father ),
+      mother: NullableIO( ReferenceIO( BunnyDynamicIO ) ).fromStateObject( stateObject.mother ),
       stepsCount: NumberIO.fromStateObject( stateObject.stepsCount ),
       restSteps: NumberIO.fromStateObject( stateObject.restSteps ),
       hopSteps: NumberIO.fromStateObject( stateObject.hopSteps ),

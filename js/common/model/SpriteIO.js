@@ -11,7 +11,7 @@ import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Sprite from './Sprite.js';
 
-class SpriteIO extends ReferenceIO {}
+class SpriteIO extends ReferenceIO( ObjectIO ) {}
 
 SpriteIO.documentation = 'TODO';
 SpriteIO.validator = { isValidValue: value => value instanceof Sprite };

@@ -11,7 +11,7 @@ import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
 
-class BunnyReferenceIO extends ReferenceIO {}
+class BunnyReferenceIO extends ReferenceIO( ObjectIO ) {}
 
 BunnyReferenceIO.documentation = 'TODO';
 BunnyReferenceIO.validator = { isValidValue: value => value instanceof Bunny };
