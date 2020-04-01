@@ -47,7 +47,7 @@ class ProportionsModel extends PhetioObject {
 
     // @private Range of generationProperty changes as the number of generations increases. This cannot be a
     // DerivedProperty because we need to use NumberProperty.setValueAndRange to update generationProperty's
-    // value and range atomically.
+    // value and range atomically. See https://github.com/phetsims/axon/issues/289
     this.generationRangeProperty = new Property( new Range( 0, 0 ), {
 
       // Must be instrumented because we're using setValueAndRange.
