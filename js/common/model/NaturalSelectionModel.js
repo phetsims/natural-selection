@@ -62,12 +62,10 @@ class NaturalSelectionModel {
     this.isPlayingProperty.reset();
 
     // sub-models
+    this.environmentModel.reset();
     this.populationModel.reset();
     this.proportionsModel.reset();
     this.pedigreeModel.reset();
-
-    // Reset environmentModel last. Other sub-models have NumberProperties with dynamic ranges that depend on it.
-    this.environmentModel.reset();
   }
 
   /**
