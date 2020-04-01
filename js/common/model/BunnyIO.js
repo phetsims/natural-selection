@@ -1,8 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * BunnyDynamicIO is the IO type for Bunny instances that are dynamically created by BunnyGroup.
- * It is the interface that PhET-iO uses for serialization and deserialization.
+ * BunnyIO is the IO type for Bunny. It is the interface that PhET-iO uses for serialization and deserialization.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -15,7 +14,7 @@ import SpriteIO from './SpriteIO.js';
 
 // NOTE: This extends SpriteIO for symmetry with the non-IO class hierarchy, but uses nothing from SpriteIO and
 // would work if it extends ObjectIO.
-class BunnyDynamicIO extends SpriteIO {
+class BunnyIO extends SpriteIO {
 
   /**
    * Serializes a Bunny to a state object.
@@ -56,10 +55,10 @@ class BunnyDynamicIO extends SpriteIO {
   }
 }
 
-BunnyDynamicIO.documentation = 'TODO';
-BunnyDynamicIO.validator = { isValidValue: value => value instanceof Bunny };
-BunnyDynamicIO.typeName = 'BunnyDynamicIO';
-ObjectIO.validateSubtype( BunnyDynamicIO );
+BunnyIO.documentation = 'TODO';
+BunnyIO.validator = { isValidValue: value => value instanceof Bunny };
+BunnyIO.typeName = 'BunnyIO';
+ObjectIO.validateSubtype( BunnyIO );
 
-naturalSelection.register( 'BunnyDynamicIO', BunnyDynamicIO );
-export default BunnyDynamicIO;
+naturalSelection.register( 'BunnyIO', BunnyIO );
+export default BunnyIO;

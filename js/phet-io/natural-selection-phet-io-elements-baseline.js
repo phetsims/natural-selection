@@ -2690,7 +2690,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "PhetioGroupIO<BunnyDynamicIO>"
+      "phetioTypeName": "PhetioGroupIO<BunnyIO>"
     },
     "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype": {
       "phetioDocumentation": "",
@@ -2703,7 +2703,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "BunnyDynamicIO"
+      "phetioTypeName": "BunnyIO"
     },
     "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype.directionProperty": {
       "phetioDocumentation": "",
@@ -2859,7 +2859,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO<NullableIO<BunnyReferenceIO>>"
+      "phetioTypeName": "PropertyIO<NullableIO<ReferenceIO>>"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.enabledProperty": {
       "phetioDocumentation": "",

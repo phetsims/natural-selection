@@ -18,7 +18,7 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import BunnyDynamicIO from './BunnyDynamicIO.js';
+import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Sprite from './Sprite.js';
 import SpriteDirection from './SpriteDirection.js';
@@ -45,7 +45,7 @@ class Bunny extends Sprite {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: BunnyDynamicIO,
+      phetioType: BunnyIO,
       phetioDynamicElement: true
     }, options );
 
@@ -229,21 +229,21 @@ class Bunny extends Sprite {
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  // Methods used by BunnyDynamicIO to save and restore state
+  // Methods used by BunnyIO to save and restore state
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Returns the serialized information needed by BunnyDynamicIO.toStateObject. Providing this method prevents
-   * BunnyDynamicIO from reaching into Bunny and accessing private fields. Note that instrumented Properties do not
+   * Returns the serialized information needed by BunnyIO.toStateObject. Providing this method prevents
+   * BunnyIO from reaching into Bunny and accessing private fields. Note that instrumented Properties do not
    * need to be handled here, they are automatically restored by PhET-iO.
    * @returns {Object}
-   * @public for use by BunnyDynamicIO only
+   * @public for use by BunnyIO only
    */
   toStateObject() {
     return {
       generation: NumberIO.toStateObject( this.generation ),
-      father: NullableIO( ReferenceIO( BunnyDynamicIO ) ).toStateObject( this.father ), // TODO: make sure this is renamed to BunnyIO
-      mother: NullableIO( ReferenceIO( BunnyDynamicIO ) ).toStateObject( this.mother ),
+      father: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.father ), // TODO: make sure this is renamed to BunnyIO
+      mother: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.mother ),
       stepsCount: NumberIO.toStateObject( this.stepsCount ),
       restSteps: NumberIO.toStateObject( this.restSteps ),
       hopSteps: NumberIO.toStateObject( this.hopSteps ),
@@ -255,13 +255,13 @@ class Bunny extends Sprite {
    * Deserializes the state needed by stateToArgsForConstructor.
    * @param {Object} stateObject - return value from toStateObject
    * @returns {Object}
-   * @public for use by BunnyDynamicIO only
+   * @public for use by BunnyIO only
    */
   static fromStateObject( stateObject ) {
     return {
       generation: NumberIO.fromStateObject( stateObject.generation ),
-      father: NullableIO( ReferenceIO( BunnyDynamicIO ) ).fromStateObject( stateObject.father ),
-      mother: NullableIO( ReferenceIO( BunnyDynamicIO ) ).fromStateObject( stateObject.mother ),
+      father: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.father ),
+      mother: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.mother ),
       stepsCount: NumberIO.fromStateObject( stateObject.stepsCount ),
       restSteps: NumberIO.fromStateObject( stateObject.restSteps ),
       hopSteps: NumberIO.fromStateObject( stateObject.hopSteps ),
@@ -273,7 +273,7 @@ class Bunny extends Sprite {
    * Creates the args that BunnyGroup uses to create a Bunny instance.
    * @param state
    * @returns {Object[]}
-   * @public for use by BunnyDynamicIO only
+   * @public for use by BunnyIO only
    */
   static stateToArgsForConstructor( state ) {
 
@@ -284,11 +284,11 @@ class Bunny extends Sprite {
   }
 
   /**
-   * Restores private state for PhET-iO. This is called by BunnyDynamicIO.setValue after a Bunny has been instantiated
-   * during deserialization. Providing this method prevents BunnyDynamicIO from reaching into Bunny and accessing
+   * Restores private state for PhET-iO. This is called by BunnyIO.setValue after a Bunny has been instantiated
+   * during deserialization. Providing this method prevents BunnyIO from reaching into Bunny and accessing
    * private fields.
    * @param {Object} state - return value of fromStateObject
-   * @public for use by BunnyDynamicIO only
+   * @public for use by BunnyIO only
    */
   setValue( state ) {
     required( state );
