@@ -3600,7 +3600,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": true,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "DerivedPropertyIO<RangeIO>"
+      "phetioTypeName": "PropertyIO<RangeIO>"
     },
     "naturalSelection.labScreen.model.proportionsModel.valuesVisibleProperty": {
       "phetioDocumentation": "",
