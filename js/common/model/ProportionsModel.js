@@ -49,8 +49,12 @@ class ProportionsModel extends PhetioObject {
     // DerivedProperty because we need to use NumberProperty.setValueAndRange to update generationProperty's
     // value and range atomically.
     this.generationRangeProperty = new Property( new Range( 0, 0 ), {
-      phetioType: PropertyIO( RangeIO )
-      // No tandem, do not instrument
+
+      // Must be instrumented because we're using setValueAndRange.
+      // If we don't instrument, then save/restore state will fail when the sim is reset.
+      tandem: tandem.createTandem( 'generationRangeProperty' ),
+      phetioType: PropertyIO( RangeIO ),
+      phetioReadOnly: true
     } );
 
     // @public the generation that is displayed by the Proportions graph
