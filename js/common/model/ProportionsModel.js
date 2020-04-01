@@ -7,10 +7,9 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Range from '../../../../dot/js/Range.js';
 import RangeIO from '../../../../dot/js/RangeIO.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
@@ -46,18 +45,19 @@ class ProportionsModel extends PhetioObject {
       tandem: tandem.createTandem( 'valuesVisibleProperty' )
     } );
 
-    // Range of generationProperty changes as the number of generations increases.
-    const generationRangeProperty = new DerivedProperty(
-      [ currentGenerationProperty ] ,
-      currentGeneration => new Range( 0, currentGeneration ), {
-        tandem: tandem.createTandem( 'generationRangeProperty' ),
-        phetioType: DerivedPropertyIO( RangeIO )
-      } );
+    // @private Range of generationProperty changes as the number of generations increases. This cannot be a
+    // DerivedProperty because we need to use NumberProperty.setValueAndRange to update generationProperty's
+    // value and range atomically.
+    this.generationRangeProperty = new Property( new Range( 0, 0 ), {
+      tandem: tandem.createTandem( 'generationRangeProperty' ),
+      phetioType: PropertyIO( RangeIO ),
+      phetioReadOnly: true
+    } );
 
     // @public the generation that is displayed by the Proportions graph
     this.generationProperty = new NumberProperty( 0, {
       numberType: 'Integer',
-      range: generationRangeProperty,
+      range: this.generationRangeProperty,
       tandem: tandem.createTandem( 'generationProperty' ),
       phetioStudioControl: false // range is dynamic
     } );
@@ -84,7 +84,7 @@ class ProportionsModel extends PhetioObject {
       [ isPlayingProperty, currentGenerationProperty ],
       ( isPlaying, currentGeneration ) => {
         if ( isPlaying ) {
-          this.generationProperty.value = currentGeneration;
+          this.generationProperty.setValueAndRange( currentGeneration, new Range( 0, currentGeneration ) );
         }
       }
     );
@@ -95,7 +95,7 @@ class ProportionsModel extends PhetioObject {
    */
   reset() {
     this.valuesVisibleProperty.reset();
-    this.generationProperty.reset();
+    this.generationProperty.resetValueAndRange(); // because we are using setValueAndRange
   }
 
   /**
