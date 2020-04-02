@@ -77,7 +77,7 @@ class EnvironmentModel extends PhetioObject {
       tandem: tandem.createTandem( 'bunnyGroup' )
     } );
 
-    // @public {Property.<Bunny|null>}
+    // @public {Property.<Bunny|null>} a reference to a Bunny instance in bunnyGroup, null if no selection
     this.selectedBunnyProperty = new Property( null, {
       tandem: tandem.createTandem( 'selectedBunnyProperty' ),
       phetioType: PropertyIO( NullableIO( ReferenceIO( BunnyIO ) ) ),
