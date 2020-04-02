@@ -48,8 +48,8 @@ class FoodSupply {
     // {Array} Description of food, where each element contains:
     // {HTMLImageElement} toughImage - image used for tough food
     // {HTMLImageElement} tenderImage - image used for tender food
-    // {number} x - x location in model coordinates
-    // {number} z - z location in model coordinates
+    // {number} x - x position in model coordinates
+    // {number} z - z position in model coordinates
     const foodConfig = [
       { toughImage: toughFoodAImage, tenderImage: tenderFoodAImage, x: -65, z: 210 },
       { toughImage: toughFoodAImage, tenderImage: tenderFoodAImage, x: 155, z: 160 },

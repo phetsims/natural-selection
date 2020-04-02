@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * Constants used in multiple locations within this simulation.
+ * Constants used throughout within this simulation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
