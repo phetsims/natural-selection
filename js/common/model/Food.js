@@ -48,7 +48,8 @@ class Food extends Sprite {
     // @public whether the food is visible, used to hide food when the food supply is limited
     this.visibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'visibleProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioDocumentation: 'whether the food is visible'
     } );
   }
 

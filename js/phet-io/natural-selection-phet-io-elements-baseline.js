@@ -2706,7 +2706,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "BunnyIO"
     },
     "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype.directionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "direction that the sprite is facing",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2719,7 +2719,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
     "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype.isAliveProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether the bunny is alive",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2732,7 +2732,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype.positionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2771,7 +2771,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "FoodIO"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food0.directionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "direction that the sprite is facing",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2784,7 +2784,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food0.positionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2797,7 +2797,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<Vector3IO>"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food0.visibleProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether the food is visible",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2823,7 +2823,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "FoodIO"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food1.directionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "direction that the sprite is facing",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2836,7 +2836,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food1.positionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2849,7 +2849,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<Vector3IO>"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food1.visibleProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether the food is visible",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2875,7 +2875,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "FoodIO"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food2.directionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "direction that the sprite is facing",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2888,7 +2888,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food2.positionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2901,7 +2901,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<Vector3IO>"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food2.visibleProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether the food is visible",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2927,7 +2927,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "FoodIO"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food3.directionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "direction that the sprite is facing",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2940,7 +2940,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food3.positionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2953,7 +2953,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<Vector3IO>"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food3.visibleProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether the food is visible",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2979,7 +2979,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "FoodIO"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food4.directionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "direction that the sprite is facing",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2992,7 +2992,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food4.positionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3005,7 +3005,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<Vector3IO>"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food4.visibleProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether the food is visible",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3031,7 +3031,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "FoodIO"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food5.directionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "direction that the sprite is facing",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3044,7 +3044,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food5.positionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3057,7 +3057,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<Vector3IO>"
     },
     "naturalSelection.labScreen.model.environmentModel.foodSupply.food5.visibleProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether the food is visible",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3200,7 +3200,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "WolvesIO"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf0.directionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "direction that the sprite is facing",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3213,7 +3213,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf0.positionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3239,7 +3239,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "WolvesIO"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf1.directionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "direction that the sprite is facing",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3252,7 +3252,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf1.positionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3278,7 +3278,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "WolvesIO"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf2.directionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "direction that the sprite is facing",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3291,7 +3291,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf2.positionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3317,7 +3317,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "WolvesIO"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf3.directionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "direction that the sprite is facing",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3330,7 +3330,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf3.positionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3356,7 +3356,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "WolvesIO"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf4.directionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "direction that the sprite is facing",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3369,7 +3369,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf4.positionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3395,7 +3395,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "WolvesIO"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf5.directionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "direction that the sprite is facing",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3408,7 +3408,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf5.positionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3434,7 +3434,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "WolvesIO"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf6.directionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "direction that the sprite is facing",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3447,7 +3447,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf6.positionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3473,7 +3473,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "WolvesIO"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf7.directionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "direction that the sprite is facing",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -3486,7 +3486,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.wolf7.positionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,

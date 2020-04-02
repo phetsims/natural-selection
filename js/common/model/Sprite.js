@@ -49,13 +49,15 @@ class Sprite extends PhetioObject {
     this.positionProperty = new Property( options.position, {
       tandem: options.tandem.createTandem( 'positionProperty' ),
       phetioType: PropertyIO( Vector3IO ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioDocumentation: 'position in the 3D model coordinate frame'
     } );
 
     // @public direction that the Sprite is facing along the x axis
     this.directionProperty = new EnumerationProperty( SpriteDirection, options.direction, {
       tandem: options.tandem.createTandem( 'directionProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioDocumentation: 'direction that the sprite is facing'
     } );
 
     // @private
