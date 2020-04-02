@@ -18,7 +18,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import SpriteDirection from './SpriteDirection.js';
-import SpriteIO from './SpriteIO.js';
 
 // constants
 const DEFAULT_POSITION = new Vector3( 0, 0, 1 ); // z=0 is illegal, results in divide-by-zero
@@ -38,8 +37,7 @@ class Sprite extends PhetioObject {
       direction: SpriteDirection.RIGHT, // initial direction of motion
 
       // phet-io
-      tandem: Tandem.OPTIONAL, // not all Sprites are instrumented
-      phetioType: SpriteIO
+      tandem: Tandem.REQUIRED
     }, options );
 
     super( options );

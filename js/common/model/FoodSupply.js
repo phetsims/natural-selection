@@ -45,34 +45,29 @@ class FoodSupply {
       tandem: options.tandem.createTandem( 'isLimitedProperty' )
     } );
 
-    // @public (read-only) individual food items, as labeled in
-    // https://github.com/phetsims/natural-selection/issues/17
-    this.food = [
-
-      // Food 'A'
-      new Food( 'A1', toughFoodAImage, tenderFoodAImage, modelViewTransform, this.isToughProperty, {
-        position: modelViewTransform.getGroundPosition( -65, 210 )
-      } ),
-      new Food( 'A2', toughFoodAImage, tenderFoodAImage, modelViewTransform, this.isToughProperty, {
-        position: modelViewTransform.getGroundPosition( 155, 160 )
-      } ),
-
-      // Food 'B'
-      new Food( 'B1', toughFoodBImage, tenderFoodBImage, modelViewTransform, this.isToughProperty, {
-        position: modelViewTransform.getGroundPosition( -155, 160 )
-      } ),
-      new Food( 'B2', toughFoodBImage, tenderFoodBImage, modelViewTransform, this.isToughProperty, {
-        position: modelViewTransform.getGroundPosition( 200, 250 )
-      } ),
-
-      // Food 'C'
-      new Food( 'C1', toughFoodCImage, tenderFoodCImage, modelViewTransform, this.isToughProperty, {
-        position: modelViewTransform.getGroundPosition( 60, 185 )
-      } ),
-      new Food( 'C2', toughFoodCImage, tenderFoodCImage, modelViewTransform, this.isToughProperty, {
-        position: modelViewTransform.getGroundPosition( -180, 270 )
-      } )
+    // {Array} Description of food, where each element contains:
+    // {HTMLImageElement} toughImage - image used for tough food
+    // {HTMLImageElement} tenderImage - image used for tender food
+    // {number} x - x location in model coordinates
+    // {number} z - z location in model coordinates
+    const foodConfig = [
+      { toughImage: toughFoodAImage, tenderImage: tenderFoodAImage, x: -65, z: 210 },
+      { toughImage: toughFoodAImage, tenderImage: tenderFoodAImage, x: 155, z: 160 },
+      { toughImage: toughFoodBImage, tenderImage: tenderFoodBImage, x: -155, z: 160 },
+      { toughImage: toughFoodBImage, tenderImage: tenderFoodBImage, x: 200, z: 250 },
+      { toughImage: toughFoodCImage, tenderImage: tenderFoodCImage, x: 60, z: 185 },
+      { toughImage: toughFoodCImage, tenderImage: tenderFoodCImage, x: -180, z: 270 }
     ];
+
+    // @public (read-only) individual food items
+    this.food = [];
+    for ( let i = 0; i < foodConfig.length; i++ ) {
+      const config = foodConfig[ i ];
+      this.food.push( new Food( config.toughImage, config.tenderImage, modelViewTransform, this.isToughProperty, {
+        position: modelViewTransform.getGroundPosition( config.x, config.z ),
+        tandem: options.tandem.createTandem( `food${i}` )
+      } ) );
+    }
 
     // When food is limited, hide half of the food
     this.isLimitedProperty.link( isLimited => {

@@ -49,8 +49,8 @@ class FoodNode extends SpriteNode {
       // Red dot at the origin
       const originNode = new Circle( 4, { fill: 'red' } );
 
-      // Show the label corresponding to the specification in https://github.com/phetsims/natural-selection/issues/17.
-      const debugLabelNode = new Text( food.debugLabel, {
+      // Show the tandem name
+      const debugLabelNode = new Text( food.tandem.name, {
         font: new PhetFont( 32 ),
         fill: 'black',
         centerX: toughFoodNode.centerX,

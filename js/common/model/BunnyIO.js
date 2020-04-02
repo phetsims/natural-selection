@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * BunnyIO is the IO type for Bunny. It is the interface that PhET-iO uses for serialization and deserialization.
+ * BunnyIO is the IO type for Bunny.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,11 +10,8 @@ import validate from '../../../../axon/js/validate.js';
 import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
-import SpriteIO from './SpriteIO.js';
 
-// NOTE: This extends SpriteIO for symmetry with the non-IO class hierarchy, but uses nothing from SpriteIO and
-// would work if it extends ObjectIO.
-class BunnyIO extends SpriteIO {
+class BunnyIO extends ObjectIO {
 
   /**
    * Serializes a Bunny to a state object.

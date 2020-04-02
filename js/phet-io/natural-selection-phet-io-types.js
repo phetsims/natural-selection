@@ -202,7 +202,7 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
-      "supertype": "SpriteIO",
+      "supertype": "ObjectIO",
       "typeName": "BunnyIO"
     },
     "BunnyNodeIO": {
@@ -399,6 +399,14 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "methods": {},
       "supertype": "ObjectIO",
       "typeName": "FontIO"
+    },
+    "FoodIO": {
+      "documentation": "TODO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ReferenceIO",
+      "typeName": "FoodIO"
     },
     "FunctionIO()=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> VoidIO<br><strong>Return Type:</strong> VoidIO",
@@ -1854,14 +1862,6 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "supertype": "ReferenceIO",
       "typeName": "ScreenIO"
     },
-    "SpriteIO": {
-      "documentation": "TODO",
-      "events": [],
-      "methodOrder": [],
-      "methods": {},
-      "supertype": "ReferenceIO",
-      "typeName": "SpriteIO"
-    },
     "StringIO": {
       "documentation": "Wrapper for the built-in JS string type",
       "events": [],
@@ -1955,7 +1955,7 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
-      "supertype": "SpriteIO",
+      "supertype": "ReferenceIO",
       "typeName": "WolvesIO"
     }
   };
