@@ -21,8 +21,8 @@ const naturalSelection = new Namespace( 'naturalSelection' );
  * @returns {null|PhetioObject}
  */
 naturalSelection.getElement = phetioID => {
-  if ( phet.phetIo ) {
-    return phet.phetIo.phetioEngine.phetioObjectMap[ phetioID ];
+  if ( phet.phetio ) {
+    return phet.phetio.phetioEngine.phetioObjectMap[ phetioID ];
   }
   else {
     console.warn( 'PhET-iO is not initialized' );
