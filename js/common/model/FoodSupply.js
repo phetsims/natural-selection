@@ -45,11 +45,15 @@ class FoodSupply {
       tandem: options.tandem.createTandem( 'isLimitedProperty' )
     } );
 
-    // {Array} Description of food, where each element contains:
-    // {HTMLImageElement} toughImage - image used for tough food
-    // {HTMLImageElement} tenderImage - image used for tender food
-    // {number} x - x position in model coordinates
-    // {number} z - z position in model coordinates
+    // {Array} Description of food, where each element is:
+    // {
+    //   {HTMLImageElement} toughImage - image used for tough food
+    //   {HTMLImageElement} tenderImage - image used for tender food
+    //   {number} x - x position in model coordinates
+    //   {number} z - z position in model coordinates
+    // }
+    //
+    // A, B, C suffix for images comes from https://github.com/phetsims/natural-selection/issues/17
     const foodConfig = [
       { toughImage: toughFoodAImage, tenderImage: tenderFoodAImage, x: -65, z: 210 },
       { toughImage: toughFoodAImage, tenderImage: tenderFoodAImage, x: 155, z: 160 },
