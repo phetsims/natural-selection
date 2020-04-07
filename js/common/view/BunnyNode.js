@@ -54,7 +54,7 @@ class BunnyNode extends SpriteNode {
     const selectionRectangle = new Rectangle( image.bounds.dilated( 10 ), {
       stroke: 'blue',
       lineWidth: 5,
-      cornerRadius: 20,
+      cornerRadius: 10,
       center: image.center
     } );
 
