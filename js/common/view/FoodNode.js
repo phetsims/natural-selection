@@ -48,7 +48,7 @@ class FoodNode extends SpriteNode {
     if ( phet.chipper.queryParameters.dev ) {
 
       // Red dot at the origin
-      const originNode = new Circle( 4, { fill: 'red' } );
+      const originNode = new Circle( 2, { fill: 'red' } );
 
       // Show the tandem name
       const debugLabelNode = new Text( food.tandem.name, {

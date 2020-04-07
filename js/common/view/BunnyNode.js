@@ -65,7 +65,7 @@ class BunnyNode extends SpriteNode {
 
     // Red dot at the origin
     if ( phet.chipper.queryParameters.dev ) {
-      options.children.push( new Circle( 4, { fill: 'red' } ) );
+      options.children.push( new Circle( 2, { fill: 'red' } ) );
     }
 
     super( bunny, options );
