@@ -15,8 +15,6 @@ import NaturalSelectionColors from './NaturalSelectionColors.js';
 import NaturalSelectionQueryParameters from './NaturalSelectionQueryParameters.js';
 
 // constants
-
-// For things with a corner radius
 const CORNER_RADIUS = 5;
 
 const NaturalSelectionConstants = {
