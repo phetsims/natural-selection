@@ -15,6 +15,9 @@ import naturalSelection from '../../naturalSelection.js';
 import Food from '../model/Food.js';
 import SpriteNode from './SpriteNode.js';
 
+// constants
+const IMAGE_SCALE = 0.5; // how much the food PNG images are scaled
+
 class FoodNode extends SpriteNode {
 
   /**
@@ -25,18 +28,16 @@ class FoodNode extends SpriteNode {
 
     assert && assert( food instanceof Food, 'invalid food' );
 
-    options = merge( {
-
-      // SpriteNode options
-      scaleFactor: 0.5 // scale applied in addition to modelViewTransform scale
-    }, options );
+    options = merge( {}, options );
 
     const toughFoodNode = new Image( food.toughImage, {
+      scale: IMAGE_SCALE,
       centerX: 0,
       bottom: 0
     } );
 
     const tenderFoodNode = new Image( food.tenderImage, {
+      scale: IMAGE_SCALE,
       centerX: toughFoodNode.centerX,
       bottom: toughFoodNode.bottom
     } );
@@ -51,7 +52,7 @@ class FoodNode extends SpriteNode {
 
       // Show the tandem name
       const debugLabelNode = new Text( food.tandem.name, {
-        font: new PhetFont( 32 ),
+        font: new PhetFont( 16 ),
         fill: 'black',
         centerX: toughFoodNode.centerX,
         top: toughFoodNode.bottom + 5

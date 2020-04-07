@@ -7,7 +7,6 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import naturalSelection from '../../naturalSelection.js';
 import Sprite from '../model/Sprite.js';
@@ -23,12 +22,6 @@ class SpriteNode extends Node {
 
     assert && assert( sprite instanceof Sprite, 'invalid sprite' );
 
-    options = merge( {
-      scaleFactor: 1  // scale applied in addition to modelViewTransform scale
-    }, options );
-
-    assert && assert( sprite instanceof Sprite, 'invalid sprite' );
-
     super( options );
 
     // @public (read-only)
@@ -38,7 +31,7 @@ class SpriteNode extends Node {
     const multilink = Property.multilink( [ sprite.positionProperty, sprite.directionProperty ], ( position, direction ) => {
       this.resetTransform();
       this.translation = sprite.modelViewTransform.modelToViewPosition( position );
-      const scale = options.scaleFactor * sprite.modelViewTransform.getViewScale( position.z );
+      const scale = sprite.modelViewTransform.getViewScale( position.z );
       this.setScaleMagnitude( scale * SpriteDirection.toSign( direction ), scale );
     } );
 

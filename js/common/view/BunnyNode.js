@@ -16,8 +16,12 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import bunnyWhiteFurStraightEarsShortTeethImage from '../../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
+import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import BunnyNodeIO from './BunnyNodeIO.js';
 import SpriteNode from './SpriteNode.js';
+
+// constants
+const IMAGE_SCALE = 0.4; // how much the bunny PNG images are scaled
 
 class BunnyNode extends SpriteNode {
 
@@ -33,9 +37,6 @@ class BunnyNode extends SpriteNode {
 
     options = merge( {
 
-      // SpriteNode options
-      scaleFactor: 0.4, // scale applied in addition to modelViewTransform scale
-
       // Node options
       cursor: 'pointer',
 
@@ -46,15 +47,16 @@ class BunnyNode extends SpriteNode {
     }, options );
 
     const image = new Image( bunnyWhiteFurStraightEarsShortTeethImage, {
+      scale: IMAGE_SCALE,
       centerX: 0,
       bottom: 0
     } );
 
     // Rectangle that appears around this Node when bunny is selected
-    const selectionRectangle = new Rectangle( image.bounds.dilated( 10 ), {
+    const selectionRectangle = new Rectangle( image.bounds.dilated( 5 ), {
       stroke: 'blue',
-      lineWidth: 5,
-      cornerRadius: 10,
+      lineWidth: 2.5,
+      cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
       center: image.center
     } );
 
