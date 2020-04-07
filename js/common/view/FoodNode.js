@@ -52,7 +52,7 @@ class FoodNode extends SpriteNode {
 
       // Show the tandem name
       const debugLabelNode = new Text( food.tandem.name, {
-        font: new PhetFont( 16 ),
+        font: new PhetFont( 12 ),
         fill: 'black',
         centerX: toughFoodNode.centerX,
         top: toughFoodNode.bottom + 5
