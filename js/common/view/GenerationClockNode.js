@@ -76,18 +76,16 @@ class GenerationClockNode extends Node {
     super( options );
 
     // Display the current generation number below the generation clock.
-    if ( phet.chipper.queryParameters.dev ) {
-      const generationNode = new Text( '', {
-        font: new PhetFont( 18 ),
-        fill: 'red',
-        top: fullCircle.bottom + 3
-      } );
-      this.addChild( generationNode );
-      generationClock.currentGenerationProperty.link( currentGeneration => {
-        generationNode.text = currentGeneration;
-        generationNode.centerX = fullCircle.centerX;
-      } );
-    }
+    const generationNode = new Text( '', {
+      font: new PhetFont( 16 ),
+      fill: 'black',
+      top: fullCircle.bottom + 3
+    } );
+    this.addChild( generationNode );
+    generationClock.currentGenerationProperty.link( currentGeneration => {
+      generationNode.text = currentGeneration;
+      generationNode.centerX = fullCircle.centerX;
+    } );
 
     // Reveal part of the clock. unlink is unnecessary, exists for the lifetime of the sim.
     generationClock.percentTimeProperty.link( percentTime => {
