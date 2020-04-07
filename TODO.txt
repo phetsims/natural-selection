@@ -5,5 +5,5 @@ IO
 DESIGN
 Make graphs wider by making control panels narrower?
 Animate contents of Proportions view when switching generations?
-Move playback control near generation clock?
+Move time controls near generation clock?
 If the Add a Mate, Play, or Play Again button is pressed while the clock is paused, should it be unpaused?
