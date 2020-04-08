@@ -20,6 +20,8 @@ import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
+import GenePool from './GenePool.js';
+import Genotype from './Genotype.js';
 import Sprite from './Sprite.js';
 import SpriteDirection from './SpriteDirection.js';
 
@@ -33,9 +35,13 @@ class Bunny extends Sprite {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
+   * @param {GenePool} genePool
    * @param {Object} [options]
    */
-  constructor( modelViewTransform, options ) {
+  constructor( modelViewTransform, genePool, options ) {
+
+    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
+    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
 
     options = merge( {
 
@@ -50,6 +56,7 @@ class Bunny extends Sprite {
     }, options );
 
     assert && assert( Utils.isInteger( options.generation ) && options.generation >= 0, `invalid generation: ${options.generation}` );
+    assert && assert( ( options.father && options.mother ) || ( !options.father && !options.mother ), 'bunny cannot have 1 parent' );
 
     super( modelViewTransform, options );
 
@@ -77,6 +84,30 @@ class Bunny extends Sprite {
 
     // @private {Vector3|null} the change in position when the bunny hops
     this.hopDelta = null;
+
+    // @public (read-only) genotypes for each trait
+    this.furGenotype = null;
+    this.earsGenotype = null;
+    this.teethGenotype = null;
+    if ( this.father && this.mother ) {
+
+      // we have both parents, so combine genotypes using Mendelian inheritance
+      this.furGenotype = Genotype.combine( this.father.furGenotype, this.mother.furGenotype ) ;
+      this.earsGenotype = Genotype.combine( this.father.earsGenotype, this.mother.earsGenotype ) ;
+      this.teethGenotype = Genotype.combine( this.father.teethGenotype, this.mother.teethGenotype ) ;
+    }
+    else {
+
+      // this bunny gets the genotype for generation 0
+      this.furGenotype = genePool.createFurGenotype0();
+      this.earsGenotype = genePool.createEarsGenotype0();
+      this.teethGenotype = genePool.createTeethGenotype0();
+    }
+
+    // set the "cached" phenotypes so that if they change we can notify listeners
+    this.furPhenotype = this.furGenotype.getPhenotype();
+    this.teethPhenotype = this.teethGenotype.getPhenotype();
+    this.earsGenotype = this.earsGenotype.getPhenotype();
 
     // @private
     this.disposeBunny = () => {
@@ -243,7 +274,7 @@ class Bunny extends Sprite {
   toStateObject() {
     return {
       generation: NumberIO.toStateObject( this.generation ),
-      father: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.father ), // TODO: make sure this is renamed to BunnyIO
+      father: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.father ),
       mother: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.mother ),
       stepsCount: NumberIO.toStateObject( this.stepsCount ),
       restSteps: NumberIO.toStateObject( this.restSteps ),
