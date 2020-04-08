@@ -157,11 +157,11 @@ class EnvironmentNode extends Node {
       // If the bunny is disposed or dies, remove listener and delete the associated BunnyNode.
       const cleanupListener = disposedBunny => {
         if ( disposedBunny === bunny ) {
-          environmentModel.bunnyGroup.removeMemberDisposedListener( cleanupListener );
+          environmentModel.bunnyGroup.bunnyDisposedEmitter.removeListener( cleanupListener );
           this.bunnyNodeGroup.disposeMember( bunnyNode );
         }
       };
-      environmentModel.bunnyGroup.addMemberDisposedListener( cleanupListener );
+      environmentModel.bunnyGroup.bunnyDisposedEmitter.addListener( cleanupListener );
       bunny.isAliveProperty.lazyLink( () => cleanupListener( bunny ) );
     };
 
@@ -169,7 +169,7 @@ class EnvironmentNode extends Node {
     environmentModel.bunnyGroup.forEach( bunny => createBunnyNode( bunny ) );
 
     // When a Bunny is added to the model, create the corresponding BunnyNode.
-    environmentModel.bunnyGroup.addMemberCreatedListener( bunny => createBunnyNode( bunny ) );
+    environmentModel.bunnyGroup.bunnyCreatedEmitter.addListener( bunny => createBunnyNode( bunny ) );
 
     // @private
     this.environmentModel = environmentModel;

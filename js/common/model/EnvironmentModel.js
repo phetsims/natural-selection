@@ -22,6 +22,7 @@ import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Environments from './Environments.js';
 import FoodSupply from './FoodSupply.js';
+import GenePool from './GenePool.js';
 import GenerationClock from './GenerationClock.js';
 import SpriteDirection from './SpriteDirection.js';
 import Wolves from './Wolves.js';
@@ -72,8 +73,11 @@ class EnvironmentModel extends PhetioObject {
       ( wolvesEnabled, foodIsTough, foodIsLimited ) => ( wolvesEnabled || foodIsTough || foodIsLimited )
     );
 
+    // @pubic (read-only) pool of genes for the bunny population
+    this.genePool = new GenePool();
+
     // @public (read-only) {PhetioGroup} to create Bunny instances
-    this.bunnyGroup = new BunnyGroup( this.modelViewTransform, {
+    this.bunnyGroup = new BunnyGroup( this.modelViewTransform, this.genePool, {
       tandem: tandem.createTandem( 'bunnyGroup' )
     } );
 
@@ -100,6 +104,8 @@ class EnvironmentModel extends PhetioObject {
     this.wolves.reset();
     this.foodSupply.reset();
     this.selectedBunnyProperty.reset();
+
+    this.genePool.reset();
 
     // dispose of all bunnies and reinitialize
     this.bunnyGroup.clear();

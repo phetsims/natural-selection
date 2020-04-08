@@ -20,6 +20,8 @@ import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
+import GenePool from './GenePool.js';
+import Genotype from './Genotype.js';
 import Sprite from './Sprite.js';
 import SpriteDirection from './SpriteDirection.js';
 
@@ -33,9 +35,13 @@ class Bunny extends Sprite {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
+   * @param {GenePool} genePool
    * @param {Object} [options]
    */
-  constructor( modelViewTransform, options ) {
+  constructor( modelViewTransform, genePool, options ) {
+
+    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
+    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
 
     options = merge( {
 
@@ -50,6 +56,7 @@ class Bunny extends Sprite {
     }, options );
 
     assert && assert( Utils.isInteger( options.generation ) && options.generation >= 0, `invalid generation: ${options.generation}` );
+    assert && assert( ( options.father && options.mother ) || ( !options.father && !options.mother ), 'bunny cannot have 1 parent' );
 
     super( modelViewTransform, options );
 
@@ -77,6 +84,9 @@ class Bunny extends Sprite {
 
     // @private {Vector3|null} the change in position when the bunny hops
     this.hopDelta = null;
+
+    // @public (read-only) the genetic information for this bunny
+    this.genotype = new Genotype( this.father, this.mother, genePool );
 
     // @private
     this.disposeBunny = () => {
@@ -243,7 +253,7 @@ class Bunny extends Sprite {
   toStateObject() {
     return {
       generation: NumberIO.toStateObject( this.generation ),
-      father: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.father ), // TODO: make sure this is renamed to BunnyIO
+      father: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.father ),
       mother: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.mother ),
       stepsCount: NumberIO.toStateObject( this.stepsCount ),
       restSteps: NumberIO.toStateObject( this.restSteps ),
