@@ -7,6 +7,7 @@
  */
 
 import Namespace from '../../phet-core/js/Namespace.js';
+import Tandem from '../../tandem/js/Tandem.js';
 
 const naturalSelection = new Namespace( 'naturalSelection' );
 
@@ -21,7 +22,7 @@ const naturalSelection = new Namespace( 'naturalSelection' );
  * @returns {null|PhetioObject}
  */
 naturalSelection.getElement = phetioID => {
-  if ( phet.phetio ) {
+  if ( Tandem.PHET_IO_ENABLED ) {
     return phet.phetio.phetioEngine.phetioObjectMap[ phetioID ];
   }
   else {
