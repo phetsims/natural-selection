@@ -1,7 +1,5 @@
 // Copyright 2020, University of Colorado Boulder
 
-import naturalSelection from '../../naturalSelection.js';
-
 /**
  * Genes come in pairs, called alleles, and each pair is located in a specific position (or locus) on a chromosome.
  * If the two alleles at a locus are identical to each other, they are homozygous; if they are different from one
@@ -9,6 +7,10 @@ import naturalSelection from '../../naturalSelection.js';
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
+
+import naturalSelection from '../../naturalSelection.js';
+import Allele from './Allele.js';
+import Gene from './Gene.js';
 
 class GenePair {
 
@@ -18,6 +20,10 @@ class GenePair {
    * @param {Allele} motherAllele - the allele that is inherited from the mother
    */
   constructor( gene, fatherAllele, motherAllele ) {
+
+    assert && assert( gene instanceof Gene, 'invalid gene' );
+    assert && assert( fatherAllele instanceof Allele, 'invalid fatherAllele' );
+    assert && assert( motherAllele instanceof Allele, 'invalid motherAllele' );
 
     // @public (read-only)
     this.gene = gene;
@@ -84,7 +90,10 @@ class GenePair {
    * @static
    */
   static combine( fatherGenePair, motherGenePair ) {
+    assert && assert( fatherGenePair instanceof GenePair, 'invalid fatherGenePair' );
+    assert && assert( motherGenePair instanceof GenePair, 'invalid motherGenePair' );
     assert && assert( fatherGenePair.gene === motherGenePair.gene, 'gene mismatch' );
+
     return new GenePair( fatherGenePair.gene, fatherGenePair.getNextChildAllele(), motherGenePair.getNextChildAllele() );
   }
 }

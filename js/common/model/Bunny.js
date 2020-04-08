@@ -20,8 +20,8 @@ import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
-import GenePair from './GenePair.js';
 import GenePool from './GenePool.js';
+import Genotype from './Genotype.js';
 import Sprite from './Sprite.js';
 import SpriteDirection from './SpriteDirection.js';
 
@@ -85,24 +85,8 @@ class Bunny extends Sprite {
     // @private {Vector3|null} the change in position when the bunny hops
     this.hopDelta = null;
 
-    // @public (read-only) gene pairs for each trait
-    this.furGenePair = null;
-    this.earsGenePair = null;
-    this.teethGenePair = null;
-    if ( this.father && this.mother ) {
-
-      // we have both parents, so combine genotypes using Mendelian inheritance
-      this.furGenePair = GenePair.combine( this.father.furGenePair, this.mother.furGenePair ) ;
-      this.earsGenePair = GenePair.combine( this.father.earsGenePair, this.mother.earsGenePair ) ;
-      this.teethGenePair = GenePair.combine( this.father.teethGenePair, this.mother.teethGenePair ) ;
-    }
-    else {
-
-      // this bunny gets the genotype for generation 0
-      this.furGenePair = genePool.createFurGenePair0();
-      this.earsGenePair = genePool.createEarsGenePair0();
-      this.teethGenePair = genePool.createTeethGenePair0();
-    }
+    // @public (read-only) the genetic information for this bunny
+    this.genotype = new Genotype( this.father, this.mother, genePool );
 
     // @private
     this.disposeBunny = () => {

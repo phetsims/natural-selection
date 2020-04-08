@@ -23,8 +23,11 @@ class Gene {
    */
   constructor( name, normalAllele, mutantAllele, dominantSymbol, recessiveSymbol ) {
 
+    assert && assert( typeof name === 'string', 'invalid name' );
     assert && assert( normalAllele instanceof Allele, 'invalid normalAllele' );
     assert && assert( mutantAllele instanceof Allele, 'invalid mutantAllele' );
+    assert && assert( typeof dominantSymbol === 'string', 'invalid dominantSymbol' );
+    assert && assert( typeof recessiveSymbol === 'string', 'invalid recessiveSymbol' );
 
     // @public (read-only)
     this.name = name;
