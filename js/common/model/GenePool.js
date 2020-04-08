@@ -10,7 +10,7 @@ import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import Allele from './Allele.js';
 import Gene from './Gene.js';
-import Genotype from './Genotype.js';
+import GenePair from './GenePair.js';
 
 class GenePool {
 
@@ -39,30 +39,30 @@ class GenePool {
   }
 
   /**
-   * Create the default fur genotype for generation 0 bunnies that have no parents.
-   * @returns {Genotype}
+   * Create the default fur gene pair for generation 0 bunnies that have no parents.
+   * @returns {GenePair}
    * @public
    */
-  createFurGenotype0() {
-    return new Genotype( this.furGene, Allele.WHITE_FUR, Allele.WHITE_FUR );
+  createFurGenePair0() {
+    return new GenePair( this.furGene, Allele.WHITE_FUR, Allele.WHITE_FUR );
   }
 
   /**
-   * Create the default ears genotype for generation 0 bunnies that have no parents.
-   * @returns {Genotype}
+   * Create the default ears gene pair for generation 0 bunnies that have no parents.
+   * @returns {GenePair}
    * @public
    */
-  createEarsGenotype0() {
-    return new Genotype( this.earsGene, Allele.STRAIGHT_EARS, Allele.STRAIGHT_EARS );
+  createEarsGenePair0() {
+    return new GenePair( this.earsGene, Allele.STRAIGHT_EARS, Allele.STRAIGHT_EARS );
   }
 
   /**
-   * Create the default teeth genotype for generation 0 bunnies that have no parents.
-   * @returns {Genotype}
+   * Create the default teeth gene pair for generation 0 bunnies that have no parents.
+   * @returns {GenePair}
    * @public
    */
-  createTeethGenotype0() {
-    return new Genotype( this.teethGene, Allele.SHORT_TEETH, Allele.SHORT_TEETH );
+  createTeethGenePair0() {
+    return new GenePair( this.teethGene, Allele.SHORT_TEETH, Allele.SHORT_TEETH );
   }
 }
 
