@@ -30,7 +30,7 @@ class GenePair {
   }
 
   /**
-   * Is this gene pair homozygous?
+   * Is this gene pair homozygous (same alleles)?
    * @returns {boolean}
    */
   isHomozygous() {
@@ -38,7 +38,7 @@ class GenePair {
   }
 
   /**
-   * Is this gene pair heterozygous?
+   * Is this gene pair heterozygous (different alleles)?
    * @returns {boolean}
    */
   isHeterozygous() {
