@@ -65,6 +65,9 @@ class Bunny extends Sprite {
     this.father = options.father;
     this.mother = options.mother;
 
+    // @public (read-only) the genetic information for this bunny
+    this.genotype = new Genotype( this.father, this.mother, genePool );
+
     // @public (read-only)
     this.isAliveProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'isAliveProperty' ),
@@ -84,9 +87,6 @@ class Bunny extends Sprite {
 
     // @private {Vector3|null} the change in position when the bunny hops
     this.hopDelta = null;
-
-    // @public (read-only) the genetic information for this bunny
-    this.genotype = new Genotype( this.father, this.mother, genePool );
 
     // @private
     this.disposeBunny = () => {
