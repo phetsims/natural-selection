@@ -3418,7 +3418,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO<NullableIO<ReferenceIO>>"
+      "phetioTypeName": "PropertyIO<NullableIO<ReferenceIO<BunnyIO>>>"
     },
     "naturalSelection.labScreen.model.environmentModel.wolves.enabledProperty": {
       "phetioDocumentation": "",

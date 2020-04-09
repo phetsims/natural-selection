@@ -186,7 +186,7 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
-      "supertype": "ReferenceIO",
+      "supertype": "ReferenceIO<ObjectIO>",
       "typeName": "AlleleIO"
     },
     "ArrayIO<StringIO>": {
@@ -218,7 +218,7 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
-      "supertype": "ReferenceIO",
+      "supertype": "ReferenceIO<ObjectIO>",
       "typeName": "BunnyNodeIO"
     },
     "DerivedPropertyIO<BooleanIO>": {
@@ -413,7 +413,7 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
-      "supertype": "ReferenceIO",
+      "supertype": "ReferenceIO<ObjectIO>",
       "typeName": "FoodIO"
     },
     "FunctionIO()=>VoidIO": {
@@ -531,18 +531,18 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "FunctionIO(NullableIO<NumberIO>,NullableIO<NullableIO<NumberIO>>)=>VoidIO"
     },
-    "FunctionIO(NullableIO<ReferenceIO>,NullableIO<NullableIO<ReferenceIO>>)=>VoidIO": {
-      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO<ReferenceIO>, NullableIO<NullableIO<ReferenceIO>><br><strong>Return Type:</strong> VoidIO",
+    "FunctionIO(NullableIO<ReferenceIO<BunnyIO>>,NullableIO<NullableIO<ReferenceIO<BunnyIO>>>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO<ReferenceIO<BunnyIO>>, NullableIO<NullableIO<ReferenceIO<BunnyIO>>><br><strong>Return Type:</strong> VoidIO",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "NullableIO<ReferenceIO>",
-        "NullableIO<NullableIO<ReferenceIO>>",
+        "NullableIO<ReferenceIO<BunnyIO>>",
+        "NullableIO<NullableIO<ReferenceIO<BunnyIO>>>",
         "VoidIO"
       ],
       "supertype": "ObjectIO",
-      "typeName": "FunctionIO(NullableIO<ReferenceIO>,NullableIO<NullableIO<ReferenceIO>>)=>VoidIO"
+      "typeName": "FunctionIO(NullableIO<ReferenceIO<BunnyIO>>,NullableIO<NullableIO<ReferenceIO<BunnyIO>>>)=>VoidIO"
     },
     "FunctionIO(NullableIO<SceneryEventIO>)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO<SceneryEventIO><br><strong>Return Type:</strong> VoidIO",
@@ -678,7 +678,7 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
-      "supertype": "ReferenceIO",
+      "supertype": "ReferenceIO<ObjectIO>",
       "typeName": "GeneIO"
     },
     "GenePairIO": {
@@ -834,16 +834,16 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "NullableIO<NullableIO<NumberIO>>"
     },
-    "NullableIO<NullableIO<ReferenceIO>>": {
+    "NullableIO<NullableIO<ReferenceIO<BunnyIO>>>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "NullableIO<ReferenceIO>"
+        "NullableIO<ReferenceIO<BunnyIO>>"
       ],
       "supertype": "ObjectIO",
-      "typeName": "NullableIO<NullableIO<ReferenceIO>>"
+      "typeName": "NullableIO<NullableIO<ReferenceIO<BunnyIO>>>"
     },
     "NullableIO<NullableIO<StringIO>>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
@@ -878,16 +878,16 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "NullableIO<RangeIO>"
     },
-    "NullableIO<ReferenceIO>": {
+    "NullableIO<ReferenceIO<BunnyIO>>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "parameterTypes": [
-        "ReferenceIO"
+        "ReferenceIO<BunnyIO>"
       ],
       "supertype": "ObjectIO",
-      "typeName": "NullableIO<ReferenceIO>"
+      "typeName": "NullableIO<ReferenceIO<BunnyIO>>"
     },
     "NullableIO<SceneryEventIO>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
@@ -1614,7 +1614,7 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "PropertyIO<NullableIO<NumberIO>>"
     },
-    "PropertyIO<NullableIO<ReferenceIO>>": {
+    "PropertyIO<NullableIO<ReferenceIO<BunnyIO>>>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
       "events": [
         "changed"
@@ -1627,19 +1627,19 @@ window.phet.preloads.phetio.phetioTypes = assert &&
         "getValue": {
           "documentation": "Gets the current value.",
           "parameterTypes": [],
-          "returnType": "NullableIO<ReferenceIO>"
+          "returnType": "NullableIO<ReferenceIO<BunnyIO>>"
         },
         "lazyLink": {
           "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO(NullableIO<ReferenceIO>,NullableIO<NullableIO<ReferenceIO>>)=>VoidIO"
+            "FunctionIO(NullableIO<ReferenceIO<BunnyIO>>,NullableIO<NullableIO<ReferenceIO<BunnyIO>>>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
         "link": {
           "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
           "parameterTypes": [
-            "FunctionIO(NullableIO<ReferenceIO>,NullableIO<NullableIO<ReferenceIO>>)=>VoidIO"
+            "FunctionIO(NullableIO<ReferenceIO<BunnyIO>>,NullableIO<NullableIO<ReferenceIO<BunnyIO>>>)=>VoidIO"
           ],
           "returnType": "VoidIO"
         },
@@ -1647,16 +1647,16 @@ window.phet.preloads.phetio.phetioTypes = assert &&
           "documentation": "Sets the value of the Property. If the value differs from the previous value, listeners are notified with the new value.",
           "invocableForReadOnlyElements": false,
           "parameterTypes": [
-            "NullableIO<ReferenceIO>"
+            "NullableIO<ReferenceIO<BunnyIO>>"
           ],
           "returnType": "VoidIO"
         }
       },
       "parameterTypes": [
-        "NullableIO<ReferenceIO>"
+        "NullableIO<ReferenceIO<BunnyIO>>"
       ],
       "supertype": "ObjectIO",
-      "typeName": "PropertyIO<NullableIO<ReferenceIO>>"
+      "typeName": "PropertyIO<NullableIO<ReferenceIO<BunnyIO>>>"
     },
     "PropertyIO<NullableIO<StringIO>>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
@@ -1930,13 +1930,21 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "RangeIO"
     },
-    "ReferenceIO": {
-      "documentation": "Uses reference identity for toStateObject/fromStateObject and validates based on its parameter IO Type.",
+    "ReferenceIO<BunnyIO>": {
+      "documentation": "Uses reference identity for serializing and deserializing, and validates based on its parameter IO Type.",
       "events": [],
       "methodOrder": [],
       "methods": {},
       "supertype": "ObjectIO",
-      "typeName": "ReferenceIO"
+      "typeName": "ReferenceIO<BunnyIO>"
+    },
+    "ReferenceIO<ObjectIO>": {
+      "documentation": "Uses reference identity for serializing and deserializing, and validates based on its parameter IO Type.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ObjectIO",
+      "typeName": "ReferenceIO<ObjectIO>"
     },
     "RichTextIO": {
       "documentation": "The tandem IO type for the scenery RichText node",
@@ -1970,7 +1978,7 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
-      "supertype": "ReferenceIO",
+      "supertype": "ReferenceIO<ObjectIO>",
       "typeName": "ScreenIO"
     },
     "StringIO": {
@@ -2066,7 +2074,7 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
-      "supertype": "ReferenceIO",
+      "supertype": "ReferenceIO<ObjectIO>",
       "typeName": "WolvesIO"
     }
   };
