@@ -20,7 +20,7 @@ class BunnyIO extends ObjectIO {
    * @returns {Object}
    */
   static toStateObject( bunny ) {
-    validate( bunny, this.validator ); //TODO how is this better than assert instanceof ?
+    validate( bunny, this.validator ); //TODO https://github.com/phetsims/tandem/issues/163 how is this better than assert instanceof ?
     return bunny.toStateObject();
   }
 
