@@ -21,8 +21,8 @@ import naturalSelection from '../../naturalSelection.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
-import GenotypeIO from './GenetypeIO.js';
 import Genotype from './Genotype.js';
+import GenotypeIO from './GenotypeIO.js';
 import Sprite from './Sprite.js';
 import SpriteDirection from './SpriteDirection.js';
 

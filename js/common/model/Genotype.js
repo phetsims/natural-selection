@@ -15,7 +15,7 @@ import Bunny from './Bunny.js';
 import GenePair from './GenePair.js';
 import GenePairIO from './GenePairIO.js';
 import GenePool from './GenePool.js';
-import GenotypeIO from './GenetypeIO.js';
+import GenotypeIO from './GenotypeIO.js';
 
 class Genotype extends PhetioObject {
 
