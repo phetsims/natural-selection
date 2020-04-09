@@ -1,6 +1,9 @@
 TODO list for natural-selection
 
-IO
+iO
+Figure out why GenotypeIO, GenePairIO, GeneIO, AlleleIO are not working in Launch and State Wrapper
+Understand ObjectIO fromStateObject, stateToArgsForConstructor, setValue
+Clean up param names in ObjectIO
 
 DESIGN
 Make graphs wider by making control panels narrower?
