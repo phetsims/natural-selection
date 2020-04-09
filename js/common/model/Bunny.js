@@ -310,14 +310,30 @@ class Bunny extends Sprite {
    */
   setValue( state ) {
     required( state );
+
     this.generation = required( state.generation );
+    assert && assert( typeof this.generation === 'number', 'invalid generation' );
+
     this.father = required( state.father );
+    assert && assert( this.father instanceof Bunny || this.father === null, 'invalid father' );
+
     this.mother = required( state.mother );
+    assert && assert( this.mother instanceof Bunny || this.mother === null, 'invalid mother' );
+
     this.genotype.setValue( state.genotype );
+    assert && assert( this.genotype instanceof Genotype, 'invalid genotype' );
+
     this.stepsCount = required( state.stepsCount );
+    assert && assert( typeof this.stepsCount === 'number', 'invalid stepsCount' );
+
     this.restSteps = required( state.restSteps );
+    assert && assert( typeof this.restSteps === 'number', 'invalid restSteps' );
+
     this.hopSteps = required( state.hopSteps );
+    assert && assert( typeof this.hopSteps === 'number', 'invalid hopSteps' );
+
     this.hopDelta = required( state.hopDelta );
+    assert && assert( this.hopDelta instanceof Vector3, 'invalid hopDelta' );
   }
 }
 

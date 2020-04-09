@@ -159,11 +159,21 @@ class GenePair extends PhetioObject {
    */
   setValue( state ) {
     required( state );
+
     this.gene = required( state.gene );
+    assert && assert( this.gene instanceof Gene, 'invalid gene' );
+
     this.fatherAllele = required( state.fatherAllele );
+    assert && assert( this.fatherAllele instanceof Allele, 'invalid fatherAllele' );
+
     this.motherAllele = required( state.motherAllele );
+    assert && assert( this.motherAllele instanceof Allele, 'invalid motherAllele' );
+
     this.childAlleles = required( state.childAlleles );
+    assert && assert( Array.isArray( this.childAlleles ), 'invalid childAlleles' );
+
     this.childAllelesIndex = required( state.childAllelesIndex );
+    assert && assert( typeof this.childAllelesIndex === 'number', 'invalid childAllelesIndex' );
   }
 }
 
