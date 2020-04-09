@@ -123,9 +123,9 @@ class Genotype extends PhetioObject {
    */
   setValue( state ) {
     required( state );
-    this.furGenePair = required( state.furGenePair );
-    this.earsGenePair = required( state.earsGenePair );
-    this.teethGenePair = required( state.teethGenePair );
+    this.furGenePair.setValue( state.furGenePair );
+    this.earsGenePair.setValue( state.earsGenePair );
+    this.teethGenePair.setValue( state.teethGenePair );
   }
 }
 

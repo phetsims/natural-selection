@@ -313,7 +313,7 @@ class Bunny extends Sprite {
     this.generation = required( state.generation );
     this.father = required( state.father );
     this.mother = required( state.mother );
-    this.genotype = required( state.genotype );
+    this.genotype.setValue( state.genotype );
     this.stepsCount = required( state.stepsCount );
     this.restSteps = required( state.restSteps );
     this.hopSteps = required( state.hopSteps );
