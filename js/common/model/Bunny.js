@@ -21,6 +21,7 @@ import naturalSelection from '../../naturalSelection.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
+import GenotypeIO from './GenetypeIO.js';
 import Genotype from './Genotype.js';
 import Sprite from './Sprite.js';
 import SpriteDirection from './SpriteDirection.js';
@@ -65,8 +66,11 @@ class Bunny extends Sprite {
     this.father = options.father;
     this.mother = options.mother;
 
-    // @public (read-only) the genetic information for this bunny
-    this.genotype = new Genotype( this.father, this.mother, genePool );
+    // @public (read-only)
+    this.genotype = new Genotype( this.father, this.mother, genePool, {
+      tandem: options.tandem.createTandem( 'genotype' ),
+      phetioDocumentation: 'the genetic information for this bunny'
+    } );
 
     // @public (read-only)
     this.isAliveProperty = new BooleanProperty( true, {
@@ -90,6 +94,7 @@ class Bunny extends Sprite {
 
     // @private
     this.disposeBunny = () => {
+      this.genotype.dispose();
       this.isAliveProperty.dispose();
     };
   }
@@ -255,6 +260,7 @@ class Bunny extends Sprite {
       generation: NumberIO.toStateObject( this.generation ),
       father: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.father ),
       mother: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.mother ),
+      genotype: GenotypeIO.toStateObject( this.genotype ),
       stepsCount: NumberIO.toStateObject( this.stepsCount ),
       restSteps: NumberIO.toStateObject( this.restSteps ),
       hopSteps: NumberIO.toStateObject( this.hopSteps ),
@@ -263,7 +269,7 @@ class Bunny extends Sprite {
   }
 
   /**
-   * Deserializes the state needed by stateToArgsForConstructor.
+   * Deserializes the state needed by BunnyIO.stateToArgsForConstructor and BunnyIO.setValue.
    * @param {Object} stateObject - return value from toStateObject
    * @returns {Object}
    * @public for use by BunnyIO only
@@ -273,6 +279,7 @@ class Bunny extends Sprite {
       generation: NumberIO.fromStateObject( stateObject.generation ),
       father: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.father ),
       mother: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.mother ),
+      genotype: GenotypeIO.fromStateObject( stateObject.genotype ),
       stepsCount: NumberIO.fromStateObject( stateObject.stepsCount ),
       restSteps: NumberIO.fromStateObject( stateObject.restSteps ),
       hopSteps: NumberIO.fromStateObject( stateObject.hopSteps ),
@@ -306,6 +313,7 @@ class Bunny extends Sprite {
     this.generation = required( state.generation );
     this.father = required( state.father );
     this.mother = required( state.mother );
+    this.genotype = required( state.genotype );
     this.stepsCount = required( state.stepsCount );
     this.restSteps = required( state.restSteps );
     this.hopSteps = required( state.hopSteps );

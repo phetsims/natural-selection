@@ -8,29 +8,48 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import merge from '../../../../phet-core/js/merge.js';
+import required from '../../../../phet-core/js/required.js';
+import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
+import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
+import AlleleIO from './AlleleIO.js';
 import Gene from './Gene.js';
+import GeneIO from './GeneIO.js';
+import GenePairIO from './GenePairIO.js';
 
-class GenePair {
+class GenePair extends PhetioObject {
 
   /**
    * @param {Gene} gene - the associated gene
    * @param {Allele} fatherAllele - the allele that is inherited from the father
    * @param {Allele} motherAllele - the allele that is inherited from the mother
+   * @param {Object} [options]
    */
-  constructor( gene, fatherAllele, motherAllele ) {
+  constructor( gene, fatherAllele, motherAllele, options ) {
 
     assert && assert( gene instanceof Gene, 'invalid gene' );
     assert && assert( fatherAllele instanceof Allele, 'invalid fatherAllele' );
     assert && assert( motherAllele instanceof Allele, 'invalid motherAllele' );
+
+    options = merge( {
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      phetioType: GenePairIO
+    }, options );
+
+    super( options );
 
     // @public (read-only)
     this.gene = gene;
     this.fatherAllele = fatherAllele;
     this.motherAllele = motherAllele;
 
-    // @private alleles that will be passed on to children
+    // @private {Allele[]} alleles that will be passed on to children
     this.childAlleles = phet.joist.random.shuffle( [ fatherAllele, fatherAllele, motherAllele, motherAllele ] );
     this.childAllelesIndex = 0;
   }
@@ -85,16 +104,66 @@ class GenePair {
    * of the two alleles.
    * @param {GenePair} fatherGenePair
    * @param {GenePair} motherGenePair
+   * @param {Object} [options] - GenePair constructor options
    * @returns {GenePair}
    * @public
    * @static
    */
-  static combine( fatherGenePair, motherGenePair ) {
+  static combine( fatherGenePair, motherGenePair, options ) {
     assert && assert( fatherGenePair instanceof GenePair, 'invalid fatherGenePair' );
     assert && assert( motherGenePair instanceof GenePair, 'invalid motherGenePair' );
     assert && assert( fatherGenePair.gene === motherGenePair.gene, 'gene mismatch' );
 
-    return new GenePair( fatherGenePair.gene, fatherGenePair.getNextChildAllele(), motherGenePair.getNextChildAllele() );
+    return new GenePair( fatherGenePair.gene, fatherGenePair.getNextChildAllele(), motherGenePair.getNextChildAllele(), options );
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Methods used by GenePairIO to save and restore state
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Serializes a GenePair to a state object.
+   * @returns {Object}
+   * @public
+   */
+  toStateObject() {
+    return {
+      gene: GeneIO.toStateObject( this.gene ),
+      fatherAllele: AlleleIO.toStateObject( this.fatherAllele ),
+      motherAllele: AlleleIO.toStateObject( this.motherAllele ),
+      childAlleles: ArrayIO( AlleleIO ).toStateObject( this.childAlleles ),
+      childAllelesIndex: NumberIO.toStateObject( this.childAllelesIndex )
+    };
+  }
+
+  /**
+   * Deserializes the state needed by GenePairIO.setValue.
+   * @param {Object} stateObject
+   * @returns {Object}
+   * @public
+   */
+  static fromStateObject( stateObject ) {
+    return {
+      gene: GeneIO.fromStateObject( stateObject.gene ),
+      fatherAllele: AlleleIO.fromStateObject( stateObject.fatherAllele ),
+      motherAllele: AlleleIO.fromStateObject( stateObject.motherAllele ),
+      childAlleles: ArrayIO( AlleleIO ).fromStateObject( stateObject.childAlleles ),
+      childAllelesIndex: NumberIO.fromStateObject( stateObject.childAllelesIndex )
+    };
+  }
+
+  /**
+   * Restores GenePair state after instantiation.
+   * @param {Object} state
+   * @public
+   */
+  setValue( state ) {
+    required( state );
+    this.gene = required( state.gene );
+    this.fatherAllele = required( state.fatherAllele );
+    this.motherAllele = required( state.motherAllele );
+    this.childAlleles = required( state.childAlleles );
+    this.childAllelesIndex = required( state.childAllelesIndex );
   }
 }
 

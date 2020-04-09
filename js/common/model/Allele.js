@@ -6,28 +6,41 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import merge from '../../../../phet-core/js/merge.js';
+import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import AlleleIO from './AlleleIO.js';
 
-class Allele {
+class Allele extends PhetioObject {
 
   /**
    * @param {string} name - name of the allele
+   * @param {Object} [options]
    */
-  constructor( name ) {
+  constructor( name, options ) {
+
+    options = merge( {
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      phetioType: AlleleIO
+    }, options );
+
+    super( options );
 
     // @public (read-only)
     this.name = name;
   }
-}
 
-// the Alleles for this sim
-Allele.WHITE_FUR = new Allele( naturalSelectionStrings.whiteFur );
-Allele.BROWN_FUR = new Allele( naturalSelectionStrings.brownFur );
-Allele.FLOPPY_EARS = new Allele( naturalSelectionStrings.floppyEars );
-Allele.STRAIGHT_EARS = new Allele( naturalSelectionStrings.straightEars );
-Allele.SHORT_TEETH = new Allele( naturalSelectionStrings.shortTeeth );
-Allele.LONG_TEETH = new Allele( naturalSelectionStrings.longTeeth );
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    throw new Error( 'dispose is not supported' );
+  }
+}
 
 naturalSelection.register( 'Allele', Allele );
 export default Allele;

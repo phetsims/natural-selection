@@ -20,12 +20,12 @@ class BunnyIO extends ObjectIO {
    * @returns {Object}
    */
   static toStateObject( bunny ) {
-    validate( bunny, this.validator );
+    validate( bunny, this.validator ); //TODO how is this better than assert instanceof ?
     return bunny.toStateObject();
   }
 
   /**
-   * Deserializes the state needed by stateToArgsForConstructor.
+   * Deserializes the state needed by stateToArgsForConstructor and setValue.
    * @param {Object} stateObject
    * @returns {Object}
    */
@@ -48,6 +48,7 @@ class BunnyIO extends ObjectIO {
    * @param {Object} state
    */
   static setValue( bunny, state ) {
+    validate( bunny, this.validator );
     bunny.setValue( state );
   }
 }

@@ -181,6 +181,14 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "ActionIO<Vector2IO, EventIO>"
     },
+    "AlleleIO": {
+      "documentation": "TODO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ReferenceIO",
+      "typeName": "AlleleIO"
+    },
     "ArrayIO<StringIO>": {
       "documentation": "A wrapper for the built-in JS array type, with the element type specified.",
       "events": [],
@@ -471,6 +479,19 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "FunctionIO(EnumerationIO(POPULATION|PROPORTIONS|PEDIGREE),NullableIO<EnumerationIO(POPULATION|PROPORTIONS|PEDIGREE)>)=>VoidIO"
     },
+    "FunctionIO(NullableIO<AlleleIO>,NullableIO<NullableIO<AlleleIO>>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO<AlleleIO>, NullableIO<NullableIO<AlleleIO>><br><strong>Return Type:</strong> VoidIO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "NullableIO<AlleleIO>",
+        "NullableIO<NullableIO<AlleleIO>>",
+        "VoidIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "FunctionIO(NullableIO<AlleleIO>,NullableIO<NullableIO<AlleleIO>>)=>VoidIO"
+    },
     "FunctionIO(NullableIO<BooleanIO>,NullableIO<NullableIO<BooleanIO>>)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO<BooleanIO>, NullableIO<NullableIO<BooleanIO>><br><strong>Return Type:</strong> VoidIO",
       "events": [],
@@ -652,6 +673,30 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "FunctionIO(Vector3IO,NullableIO<Vector3IO>)=>VoidIO"
     },
+    "GeneIO": {
+      "documentation": "TODO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ReferenceIO",
+      "typeName": "GeneIO"
+    },
+    "GenePairIO": {
+      "documentation": "TODO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ObjectIO",
+      "typeName": "GenePairIO"
+    },
+    "GenotypeIO": {
+      "documentation": "TODO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ObjectIO",
+      "typeName": "GenotypeIO"
+    },
     "LinkedElementIO": {
       "documentation": "A LinkedElement",
       "events": [],
@@ -678,6 +723,17 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       },
       "supertype": "ObjectIO",
       "typeName": "NodeIO"
+    },
+    "NullableIO<AlleleIO>": {
+      "documentation": "A wrapper to wrap another IOType, adding support for null.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "AlleleIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "NullableIO<AlleleIO>"
     },
     "NullableIO<BooleanIO>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
@@ -733,6 +789,17 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "NullableIO<FocusIO>"
+    },
+    "NullableIO<NullableIO<AlleleIO>>": {
+      "documentation": "A wrapper to wrap another IOType, adding support for null.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "NullableIO<AlleleIO>"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "NullableIO<NullableIO<AlleleIO>>"
     },
     "NullableIO<NullableIO<BooleanIO>>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
@@ -1370,6 +1437,50 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "PropertyIO<EnumerationIO(POPULATION|PROPORTIONS|PEDIGREE)>"
+    },
+    "PropertyIO<NullableIO<AlleleIO>>": {
+      "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
+      "events": [
+        "changed"
+      ],
+      "methodOrder": [
+        "link",
+        "lazyLink"
+      ],
+      "methods": {
+        "getValue": {
+          "documentation": "Gets the current value.",
+          "parameterTypes": [],
+          "returnType": "NullableIO<AlleleIO>"
+        },
+        "lazyLink": {
+          "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO(NullableIO<AlleleIO>,NullableIO<NullableIO<AlleleIO>>)=>VoidIO"
+          ],
+          "returnType": "VoidIO"
+        },
+        "link": {
+          "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO(NullableIO<AlleleIO>,NullableIO<NullableIO<AlleleIO>>)=>VoidIO"
+          ],
+          "returnType": "VoidIO"
+        },
+        "setValue": {
+          "documentation": "Sets the value of the Property. If the value differs from the previous value, listeners are notified with the new value.",
+          "invocableForReadOnlyElements": false,
+          "parameterTypes": [
+            "NullableIO<AlleleIO>"
+          ],
+          "returnType": "VoidIO"
+        }
+      },
+      "parameterTypes": [
+        "NullableIO<AlleleIO>"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "PropertyIO<NullableIO<AlleleIO>>"
     },
     "PropertyIO<NullableIO<BooleanIO>>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",

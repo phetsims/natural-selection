@@ -74,7 +74,9 @@ class EnvironmentModel extends PhetioObject {
     );
 
     // @pubic (read-only) pool of genes for the bunny population
-    this.genePool = new GenePool();
+    this.genePool = new GenePool( {
+      tandem: tandem.createTandem( 'genePool' )
+    } );
 
     // @public (read-only) {PhetioGroup} to create Bunny instances
     this.bunnyGroup = new BunnyGroup( this.modelViewTransform, this.genePool, {
