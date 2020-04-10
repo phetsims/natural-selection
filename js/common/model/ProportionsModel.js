@@ -9,9 +9,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Range from '../../../../dot/js/Range.js';
-import RangeIO from '../../../../dot/js/RangeIO.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -49,12 +47,7 @@ class ProportionsModel extends PhetioObject {
     // DerivedProperty because we need to use NumberProperty.setValueAndRange to update generationProperty's
     // value and range atomically. See https://github.com/phetsims/axon/issues/289
     this.generationRangeProperty = new Property( new Range( 0, 0 ), {
-
-      // Must be instrumented because we're using setValueAndRange.
-      // If we don't instrument, then save/restore state will fail when the sim is reset.
-      tandem: tandem.createTandem( 'generationRangeProperty' ),
-      phetioType: PropertyIO( RangeIO ),
-      phetioReadOnly: true
+      // Do not instrument
     } );
 
     // @public the generation that is displayed by the Proportions graph
