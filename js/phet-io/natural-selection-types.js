@@ -300,7 +300,18 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "documentation": "A dialog panel",
       "events": [],
       "methodOrder": [],
-      "methods": {},
+      "methods": {
+        "moveBackward": {
+          "documentation": "Move this node one index backward in each of its parents.  If the node is already at the back, this is a no-op.",
+          "parameterTypes": [],
+          "returnType": "VoidIO"
+        },
+        "moveForward": {
+          "documentation": "Move this node one index forward in each of its parents.  If the node is already at the front, this is a no-op.",
+          "parameterTypes": [],
+          "returnType": "VoidIO"
+        }
+      },
       "supertype": "NodeIO",
       "typeName": "DialogIO"
     },
@@ -951,7 +962,35 @@ window.phet.preloads.phetio.phetioTypes = assert &&
         "changed"
       ],
       "methodOrder": [],
-      "methods": {},
+      "methods": {
+        "getValue": {
+          "documentation": "Gets the current value.",
+          "parameterTypes": [],
+          "returnType": "NumberIO"
+        },
+        "lazyLink": {
+          "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO(NumberIO,NullableIO<NumberIO>)=>VoidIO"
+          ],
+          "returnType": "VoidIO"
+        },
+        "link": {
+          "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO(NumberIO,NullableIO<NumberIO>)=>VoidIO"
+          ],
+          "returnType": "VoidIO"
+        },
+        "setValue": {
+          "documentation": "Sets the value of the Property. If the value differs from the previous value, listeners are notified with the new value.",
+          "invocableForReadOnlyElements": false,
+          "parameterTypes": [
+            "NumberIO"
+          ],
+          "returnType": "VoidIO"
+        }
+      },
       "parameterTypes": [
         "NumberIO"
       ],
@@ -1932,7 +1971,18 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "documentation": "The tandem IO type for the scenery RichText node",
       "events": [],
       "methodOrder": [],
-      "methods": {},
+      "methods": {
+        "moveBackward": {
+          "documentation": "Move this node one index backward in each of its parents.  If the node is already at the back, this is a no-op.",
+          "parameterTypes": [],
+          "returnType": "VoidIO"
+        },
+        "moveForward": {
+          "documentation": "Move this node one index forward in each of its parents.  If the node is already at the front, this is a no-op.",
+          "parameterTypes": [],
+          "returnType": "VoidIO"
+        }
+      },
       "supertype": "NodeIO",
       "typeName": "RichTextIO"
     },
@@ -2004,7 +2054,18 @@ window.phet.preloads.phetio.phetioTypes = assert &&
         "toggled"
       ],
       "methodOrder": [],
-      "methods": {},
+      "methods": {
+        "moveBackward": {
+          "documentation": "Move this node one index backward in each of its parents.  If the node is already at the back, this is a no-op.",
+          "parameterTypes": [],
+          "returnType": "VoidIO"
+        },
+        "moveForward": {
+          "documentation": "Move this node one index forward in each of its parents.  If the node is already at the front, this is a no-op.",
+          "parameterTypes": [],
+          "returnType": "VoidIO"
+        }
+      },
       "supertype": "NodeIO",
       "typeName": "ToggleButtonIO"
     },
