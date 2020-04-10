@@ -55,7 +55,7 @@ class Genotype extends PhetioObject {
       phetioDocumentation: 'gene pair that determines teeth trait'
     };
 
-    // @public (read-only) gene pairs for each trait, initialize below
+    // @public (read-only) {GenePair} gene pairs for each trait, initialized below
     this.furGenePair = null;
     this.earsGenePair = null;
     this.teethGenePair = null;
@@ -74,6 +74,8 @@ class Genotype extends PhetioObject {
       this.earsGenePair = genePool.createEarsGenePair0( earsGenePairOptions );
       this.teethGenePair = genePool.createTeethGenePair0( teethGenePairOptions );
     }
+
+    this.validateInstance();
   }
 
   /**
@@ -123,14 +125,19 @@ class Genotype extends PhetioObject {
    */
   setValue( state ) {
     required( state );
-
     this.furGenePair.setValue( state.furGenePair );
-    assert && assert( this.furGenePair instanceof GenePair, 'invalid furGenePair' );
-
     this.earsGenePair.setValue( state.earsGenePair );
-    assert && assert( this.earsGenePair instanceof GenePair, 'invalid earsGenePair' );
-
     this.teethGenePair.setValue( state.teethGenePair );
+    this.validateInstance();
+  }
+
+  /**
+   * Performs validation of this instance. This should be called at the end of construction and deserialization.
+   * @private
+   */
+  validateInstance() {
+    assert && assert( this.furGenePair instanceof GenePair, 'invalid furGenePair' );
+    assert && assert( this.earsGenePair instanceof GenePair, 'invalid earsGenePair' );
     assert && assert( this.teethGenePair instanceof GenePair, 'invalid teethGenePair' );
   }
 }
