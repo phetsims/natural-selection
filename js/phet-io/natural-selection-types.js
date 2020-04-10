@@ -186,6 +186,9 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
+      "parameterTypes": [
+        "ObjectIO"
+      ],
       "supertype": "ReferenceIO<ObjectIO>",
       "typeName": "AlleleIO"
     },
@@ -194,6 +197,9 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
+      "parameterTypes": [
+        "StringIO"
+      ],
       "supertype": "ObjectIO",
       "typeName": "ArrayIO<StringIO>"
     },
@@ -218,6 +224,9 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
+      "parameterTypes": [
+        "ObjectIO"
+      ],
       "supertype": "ReferenceIO<ObjectIO>",
       "typeName": "BunnyNodeIO"
     },
@@ -402,6 +411,9 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
+      "parameterTypes": [
+        "ObjectIO"
+      ],
       "supertype": "ReferenceIO<ObjectIO>",
       "typeName": "FoodIO"
     },
@@ -667,6 +679,9 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
+      "parameterTypes": [
+        "ObjectIO"
+      ],
       "supertype": "ReferenceIO<ObjectIO>",
       "typeName": "GeneIO"
     },
@@ -1896,6 +1911,9 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
+      "parameterTypes": [
+        "BunnyIO"
+      ],
       "supertype": "ObjectIO",
       "typeName": "ReferenceIO<BunnyIO>"
     },
@@ -1904,6 +1922,9 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
+      "parameterTypes": [
+        "ObjectIO"
+      ],
       "supertype": "ObjectIO",
       "typeName": "ReferenceIO<ObjectIO>"
     },
@@ -1928,6 +1949,9 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
+      "parameterTypes": [
+        "ObjectIO"
+      ],
       "supertype": "ReferenceIO<ObjectIO>",
       "typeName": "ScreenIO"
     },
@@ -2013,6 +2037,9 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "events": [],
       "methodOrder": [],
       "methods": {},
+      "parameterTypes": [
+        "ObjectIO"
+      ],
       "supertype": "ReferenceIO<ObjectIO>",
       "typeName": "WolvesIO"
     }
