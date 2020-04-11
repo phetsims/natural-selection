@@ -134,6 +134,7 @@ class Row extends VBox {
       // VBox options
       align: 'left',
       spacing: 8,
+      excludeInvisibleChildrenFromBounds: false,
 
       // phet-io
       tandem: Tandem.REQUIRED
