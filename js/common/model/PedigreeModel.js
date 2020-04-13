@@ -7,6 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -15,46 +16,46 @@ class PedigreeModel extends PhetioObject {
 
   /**
    * @param {Property.<Bunny|null>} selectedBunnyProperty
-   * @param {Tandem} tandem
+   * @param {Object} [options]
    */
-  constructor( selectedBunnyProperty, tandem ) {
+  constructor( selectedBunnyProperty, options ) {
 
-    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
-
-    super( {
+    options = merge( {
 
       // phet-io
-      tandem: tandem,
+      tandem: Tandem.REQUIRED,
       phetioState: false, // to prevent serialization, because we don't have an IO type
       phetioDocumentation: 'portion of the model that deals with the Pedigree graph'
-    } );
+    }, options );
+
+    super( options );
 
     // @public
     this.selectedBunnyProperty = selectedBunnyProperty;
 
     // @public visibility of the alleles for each gene in the Pedigree tree
     this.furAllelesVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'furAllelesVisibleProperty' )
+      tandem: options.tandem.createTandem( 'furAllelesVisibleProperty' )
     } );
     this.earsAllelesVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'earsAllelesVisibleProperty' )
+      tandem: options.tandem.createTandem( 'earsAllelesVisibleProperty' )
     } );
     this.teethAllelesVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'teethAllelesVisibleProperty' )
+      tandem: options.tandem.createTandem( 'teethAllelesVisibleProperty' )
     } );
 
     // @public whether a mutation exists for each trait
     // Checkboxes in the Alleles panel are disabled until a mutation exists.
     this.furMutationExistsProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'furMutationExistsProperty' ),
+      tandem: options.tandem.createTandem( 'furMutationExistsProperty' ),
       phetioReadOnly: true
     } );
     this.earsMutationExistsProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'earsMutationExistsProperty' ),
+      tandem: options.tandem.createTandem( 'earsMutationExistsProperty' ),
       phetioReadOnly: true
     } );
     this.teethMutationExistsProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'teethMutationExistsProperty' ),
+      tandem: options.tandem.createTandem( 'teethMutationExistsProperty' ),
       phetioReadOnly: true
     } );
   }

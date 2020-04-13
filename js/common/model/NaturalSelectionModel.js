@@ -29,27 +29,29 @@ class NaturalSelectionModel {
     } );
 
     // @public (read-only)
-    this.environmentModel = new EnvironmentModel( tandem.createTandem( 'environmentModel' ) );
+    this.environmentModel = new EnvironmentModel( {
+      tandem: tandem.createTandem( 'environmentModel' )
+    } );
 
     // @public (read-only)
     this.populationModel = new PopulationModel(
       this.environmentModel.generationClock.generationsProperty,
-      this.isPlayingProperty,
-      tandem.createTandem( 'populationModel' )
+      this.isPlayingProperty, {
+        tandem: tandem.createTandem( 'populationModel' )
+      }
     );
 
     // @public (read-only)
     this.proportionsModel = new ProportionsModel(
       this.environmentModel.generationClock.currentGenerationProperty,
-      this.isPlayingProperty,
-      tandem.createTandem( 'proportionsModel' )
-    );
+      this.isPlayingProperty, {
+        tandem: tandem.createTandem( 'proportionsModel' )
+      } );
 
     // @public (read-only)
-    this.pedigreeModel = new PedigreeModel(
-      this.environmentModel.selectedBunnyProperty,
-      tandem.createTandem( 'pedigreeModel' )
-    );
+    this.pedigreeModel = new PedigreeModel( this.environmentModel.selectedBunnyProperty, {
+      tandem: tandem.createTandem( 'pedigreeModel' )
+    } );
   }
 
   /**

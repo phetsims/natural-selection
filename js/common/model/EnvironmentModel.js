@@ -10,6 +10,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import PropertyIO from '../../../../axon/js/PropertyIO.js';
+import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
@@ -30,23 +31,23 @@ import Wolves from './Wolves.js';
 class EnvironmentModel extends PhetioObject {
 
   /**
-   * @param {Tandem} tandem
+   * @param {Object} [options]
    */
-  constructor( tandem ) {
+  constructor( options ) {
 
-    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
-
-    super( {
+    options = merge( {
 
       // phet-io
-      tandem: tandem,
-      phetioState: false, // to prevent serialization, because we don't have an IO type
+      tandem: Tandem.REQUIRED,
+      phetioState: false, // to prevent serialization, because there is no associated IO Type
       phetioDocumentation: 'portion of the model that deals with the environment'
-    } );
+    }, options );
+
+    super( options );
 
     // @public (read-only)
     this.generationClock = new GenerationClock( {
-      tandem: tandem.createTandem( 'generationClock' )
+      tandem: options.tandem.createTandem( 'generationClock' )
     } );
 
     // @public
@@ -54,17 +55,17 @@ class EnvironmentModel extends PhetioObject {
 
     // @public
     this.environmentProperty = new EnumerationProperty( Environments, Environments.EQUATOR, {
-      tandem: tandem.createTandem( 'environmentProperty' )
+      tandem: options.tandem.createTandem( 'environmentProperty' )
     } );
 
     // @public (read-only)
     this.wolves = new Wolves( this.modelViewTransform, {
-      tandem: tandem.createTandem( 'wolves' )
+      tandem: options.tandem.createTandem( 'wolves' )
     } );
 
     // @public (read-only)
     this.foodSupply = new FoodSupply( this.modelViewTransform, {
-      tandem: tandem.createTandem( 'foodSupply' )
+      tandem: options.tandem.createTandem( 'foodSupply' )
     } );
 
     // @public whether any environmental factor is enabled
@@ -75,17 +76,17 @@ class EnvironmentModel extends PhetioObject {
 
     // @pubic (read-only) pool of genes for the bunny population
     this.genePool = new GenePool( {
-      tandem: tandem.createTandem( 'genePool' )
+      tandem: options.tandem.createTandem( 'genePool' )
     } );
 
     // @public (read-only) {PhetioGroup} to create Bunny instances
     this.bunnyGroup = new BunnyGroup( this.modelViewTransform, this.genePool, {
-      tandem: tandem.createTandem( 'bunnyGroup' )
+      tandem: options.tandem.createTandem( 'bunnyGroup' )
     } );
 
     // @public {Property.<Bunny|null>} a reference to a Bunny instance in bunnyGroup, null if no selection
     this.selectedBunnyProperty = new Property( null, {
-      tandem: tandem.createTandem( 'selectedBunnyProperty' ),
+      tandem: options.tandem.createTandem( 'selectedBunnyProperty' ),
       phetioType: PropertyIO( NullableIO( ReferenceIO( BunnyIO ) ) ),
       phetioDocumentation: 'bunny selected in environmentNode, whose pedigree is displayed by pedigreeNode'
     } );

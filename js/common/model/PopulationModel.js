@@ -15,6 +15,7 @@ import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Range from '../../../../dot/js/Range.js';
 import RangeIO from '../../../../dot/js/RangeIO.js';
 import Utils from '../../../../dot/js/Utils.js';
+import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -46,21 +47,22 @@ class PopulationModel extends PhetioObject {
   /**
    * @param {Property.<number>} generationsProperty
    * @param {Property.<boolean>} isPlayingProperty
-   * @param {Tandem} tandem
+   * @param {Object} [options]
    */
-  constructor( generationsProperty, isPlayingProperty, tandem ) {
+  constructor( generationsProperty, isPlayingProperty, options ) {
 
     assert && assert( generationsProperty instanceof Property, 'invalid generationsProperty' );
     assert && assert( isPlayingProperty instanceof Property, 'invalid isPlayingProperty' );
-    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
-    super( {
+    options = merge( {
 
       // phet-io
-      tandem: tandem,
+      tandem: Tandem.REQUIRED,
       phetioState: false, // to prevent serialization, because we don't have an IO type
       phetioDocumentation: 'portion of the model that deals with the Population graph'
-    } );
+    }, options );
+
+    super( options );
 
     // @public
     this.generationsProperty = generationsProperty;
@@ -68,32 +70,32 @@ class PopulationModel extends PhetioObject {
 
     // @public
     this.dataProbe = new DataProbe( {
-      tandem: tandem.createTandem( 'dataProbe' )
+      tandem: options.tandem.createTandem( 'dataProbe' )
     } );
 
     // @public visibility of the total population plot on the graph and data probe
     this.totalVisibleProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'totalVisibleProperty' )
+      tandem: options.tandem.createTandem( 'totalVisibleProperty' )
     } );
 
     // @public visibility of the plot for each allele on the graph and data probe
     this.whiteFurVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'whiteFurVisibleProperty' )
+      tandem: options.tandem.createTandem( 'whiteFurVisibleProperty' )
     } );
     this.brownFurVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'brownFurVisibleProperty' )
+      tandem: options.tandem.createTandem( 'brownFurVisibleProperty' )
     } );
     this.straightEarsVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'straightEarsVisibleProperty' )
+      tandem: options.tandem.createTandem( 'straightEarsVisibleProperty' )
     } );
     this.floppyEarsVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'floppyEarsVisibleProperty' )
+      tandem: options.tandem.createTandem( 'floppyEarsVisibleProperty' )
     } );
     this.shortTeethVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'shortTeethVisibleProperty' )
+      tandem: options.tandem.createTandem( 'shortTeethVisibleProperty' )
     } );
     this.longTeethVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'longTeethVisibleProperty' )
+      tandem: options.tandem.createTandem( 'longTeethVisibleProperty' )
     } );
 
     // @public (read-only) spacing between x-axis tick marks, in generations
@@ -102,7 +104,7 @@ class PopulationModel extends PhetioObject {
     // @public range of the x-axis, in generations
     this.xRangeProperty = new Property( new Range( 0, 5 ), {
       isValidValue: xRange => ( xRange.min >= 0 ),
-      tandem: tandem.createTandem( 'xRangeProperty' ),
+      tandem: options.tandem.createTandem( 'xRangeProperty' ),
       phetioType: PropertyIO( RangeIO ),
       phetioStudioControl: false, //TODO range is dynamic, and changes on every clock tick
       phetioHighFrequency: true,
@@ -113,7 +115,7 @@ class PopulationModel extends PhetioObject {
     this.yRangeIndexProperty = new NumberProperty( Y_MAXIMUMS_INDEX_DEFAULT, {
       numberType: 'Integer',
       range: new Range( 0, Y_MAXIMUMS.length - 1 ),
-      tandem: tandem.createTandem( 'yRangeIndexProperty' ),
+      tandem: options.tandem.createTandem( 'yRangeIndexProperty' ),
       phetioDocumentation: 'index into an array of ranges for the y axis, larger values are larger ranges'
     } );
 
@@ -123,7 +125,7 @@ class PopulationModel extends PhetioObject {
       yRangeIndex => new Range( Y_MINIMUM, Y_MAXIMUMS[ yRangeIndex ] ), {
         isValidValue: yRange => ( yRange.min >= 0 ),
         phetioType: DerivedPropertyIO( RangeIO ),
-        tandem: tandem.createTandem( 'yRangeProperty' ),
+        tandem: options.tandem.createTandem( 'yRangeProperty' ),
         phetioDocumentation: 'range of the y axis, in number of bunnies'
       } );
 

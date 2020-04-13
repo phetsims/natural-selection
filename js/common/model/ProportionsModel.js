@@ -10,6 +10,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
+import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -19,28 +20,29 @@ class ProportionsModel extends PhetioObject {
   /**
    * @param {Property.<number>} currentGenerationProperty
    * @param {Property.<boolean>} isPlayingProperty
-   * @param {Tandem} tandem
+   * @param {Object} [options]
    */
-  constructor( currentGenerationProperty, isPlayingProperty, tandem ) {
+  constructor( currentGenerationProperty, isPlayingProperty, options ) {
 
     assert && assert( currentGenerationProperty instanceof Property, 'invalid currentGenerationProperty' );
     assert && assert( isPlayingProperty instanceof Property, 'invalid isPlayingProperty' );
-    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
-    super( {
+    options = merge( {
 
       // phet-io
-      tandem: tandem,
+      tandem: Tandem.REQUIRED,
       phetioState: false, // to prevent serialization, because we don't have an IO type
       phetioDocumentation: 'portion of the model that deals with the Proportions graph'
-    } );
+    }, options );
+
+    super( options );
 
     // @public
     this.currentGenerationProperty = currentGenerationProperty;
 
     // @public
     this.valuesVisibleProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'valuesVisibleProperty' )
+      tandem: options.tandem.createTandem( 'valuesVisibleProperty' )
     } );
 
     // @private Range of generationProperty changes as the number of generations increases. This cannot be a
@@ -54,7 +56,7 @@ class ProportionsModel extends PhetioObject {
     this.generationProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       range: this.generationRangeProperty,
-      tandem: tandem.createTandem( 'generationProperty' ),
+      tandem: options.tandem.createTandem( 'generationProperty' ),
       phetioStudioControl: false // range is dynamic
     } );
 
