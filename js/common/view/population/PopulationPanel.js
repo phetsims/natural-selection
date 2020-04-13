@@ -12,8 +12,8 @@ import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import Checkbox from '../../../../../sun/js/Checkbox.js';
 import HSeparator from '../../../../../sun/js/HSeparator.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
-import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import naturalSelection from '../../../naturalSelection.js';
+import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
@@ -56,7 +56,7 @@ class PopulationPanel extends NaturalSelectionPanel {
         // Brown Fur
         new PopulationLegendCheckbox( populationModel.brownFurVisibleProperty, naturalSelectionStrings.brownFur, {
           color: NaturalSelectionColors.FUR,
-          isMutation: true,
+          isMutant: true,
           tandem: options.tandem.createTandem( 'brownFurCheckbox' )
         } ),
 
@@ -69,7 +69,7 @@ class PopulationPanel extends NaturalSelectionPanel {
         // Floppy Ears
         new PopulationLegendCheckbox( populationModel.floppyEarsVisibleProperty, naturalSelectionStrings.floppyEars, {
           color: NaturalSelectionColors.EARS,
-          isMutation: true,
+          isMutant: true,
           tandem: options.tandem.createTandem( 'floppyEarsCheckbox' )
         } ),
 
@@ -82,7 +82,7 @@ class PopulationPanel extends NaturalSelectionPanel {
         // Long Teeth
         new PopulationLegendCheckbox( populationModel.longTeethVisibleProperty, naturalSelectionStrings.longTeeth, {
           color: NaturalSelectionColors.TEETH,
-          isMutation: true,
+          isMutant: true,
           tandem: options.tandem.createTandem( 'longTeethCheckbox' )
         } ),
 

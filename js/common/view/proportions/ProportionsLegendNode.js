@@ -97,10 +97,12 @@ class TraitLegendNode extends VBox {
 
     options = merge( {
       children: [
-        new AlleleLegendNode( normalName, color, false /* isMutation */, {
+        new AlleleLegendNode( normalName, color, {
+          isMutant: false,
           tandem: options.tandem.createTandem( normalTandemName )
         } ),
-        new AlleleLegendNode( mutationName, color, true /* isMutation */, {
+        new AlleleLegendNode( mutationName, color, {
+          isMutant: true,
           tandem: options.tandem.createTandem( mutationTandemName )
         } )
       ]
@@ -127,12 +129,13 @@ class AlleleLegendNode extends HBox {
   /**
    * @param {string} name
    * @param {Color|string} color
-   * @param {boolean} isMutation
    * @param {Object} [options]
    */
-  constructor( name, color, isMutation, options ) {
+  constructor( name, color, options ) {
 
     options = merge( {
+
+      isMutant: false, // true = mutant allele, false = normal allele
 
       // HBox options
       spacing: 5
@@ -142,10 +145,9 @@ class AlleleLegendNode extends HBox {
       fill: color,
       stroke: color
     };
-    const rectangleNode = isMutation ?
+    const rectangleNode = options.isMutant ?
                           new HatchingRectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, rectangleOptions ) :
                           new Rectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, rectangleOptions );
-
 
     const textNode = new Text( name, {
       font: NaturalSelectionConstants.PROPORTIONS_LEGEND_FONT,
