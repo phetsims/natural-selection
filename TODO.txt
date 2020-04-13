@@ -1,7 +1,6 @@
 TODO list for natural-selection
 
 FEATURES
-adaptive layout
 make bunnies mate
 add counts to EnvironmentModel
 
