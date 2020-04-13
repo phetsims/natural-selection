@@ -7,6 +7,9 @@ This document is a high-level description of the model used in PhET's _Natural S
 * trait - a characteristic or feature that can be passed from one generation to another
 * gene - a message for a particular trait, made up of DNA
 * alleles - the different variations of a gene
+* mutant allele - TODO
+* normal allele - TODO
+* gene pair - TODO
 * genotype - the total of all the genetic messages in an organism; the total blueprint for the organism
 * phenotype - the way the organism appears and functions because of its genes; what is built from the genotype
 * selection agent - any factor, environmental or otherwise, that affects fertility or mortality
@@ -18,10 +21,11 @@ This document is a high-level description of the model used in PhET's _Natural S
 different allele on the other copy of the chromosome. The first allele is termed dominant and the second 
 recessive. Dominance is not inherent to either an allele or its phenotype. Dominance is a relationship between 
 two alleles and their associated phenotypes. 
+* homozygous - When an organism has two copies of the same allele, it is said to be homozygous for that gene.
+* heterozygous - When an organism has two different alleles, it is said to be heterozygous for that gene.
 
-* A dominant allele hides a recessive allele and determines the organism's appearance.
-* When an organism has two copies of the same allele, it is said to be homozygous for that gene. 
-* When an organism has two different alleles, we can say it is heterozygous for that gene.
+* A dominant allele hides a recessive allele and determines the organism's appearance. Dominant and 
+recessive is a relationship that is only relevant in the context of 2 alleles.
 
 * mutation - changes in traits resulting from changes in DNA
 * Mendelian Genetics (Gregor Mendel), https://en.wikipedia.org/wiki/Mendelian_inheritance
