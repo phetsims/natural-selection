@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * GenotypeIO is the IO type for Genotype.
+ * GenotypeIO is the IO Type for Genotype.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

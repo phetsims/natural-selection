@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * GenePairIO is the IO type for GenePair.
+ * GenePairIO is the IO Type for GenePair.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

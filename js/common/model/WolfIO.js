@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * WolfIO is the IO type for Wolf.
+ * WolfIO is the IO Type for Wolf.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * AlleleIO is the IO type for Allele.
+ * AlleleIO is the IO Type for Allele.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

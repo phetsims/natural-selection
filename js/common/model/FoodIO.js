@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * FoodIO is the IO type for Food.
+ * FoodIO is the IO Type for Food.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

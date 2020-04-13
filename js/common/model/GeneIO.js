@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * GeneIO is the IO type for Gene.
+ * GeneIO is the IO Type for Gene.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

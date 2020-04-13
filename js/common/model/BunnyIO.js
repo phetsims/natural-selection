@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * BunnyIO is the IO type for Bunny.
+ * BunnyIO is the IO Type for Bunny.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
