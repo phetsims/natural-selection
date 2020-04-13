@@ -71,8 +71,6 @@ class NaturalSelectionScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'addMutationsPanel' )
     } );
 
-    const mutationAlertsNode = new MutationAlertsNode( addMutationsPanel );
-
     const environmentalFactorsPanel = new EnvironmentalFactorsPanel( model.environmentModel, {
       fixedWidth: rightOfViewportWidth,
       tandem: options.tandem.createTandem( 'environmentalFactorsPanel' )
@@ -84,6 +82,8 @@ class NaturalSelectionScreenView extends ScreenView {
       left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
       top: environmentNode.top
     } );
+
+    const mutationAlertsNode = new MutationAlertsNode( addMutationsPanel );
 
     // The graphs and their related controls fill the space below the viewport.
     const graphAreaSize = new Dimension2(

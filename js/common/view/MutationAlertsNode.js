@@ -28,7 +28,6 @@ class MutationAlertsNode extends Node {
 
     // Fur
     const furAlert = new MutationComingNode( {
-      rightCenter: addMutationsPanel.getFurLeftCenter().addXY( X_OFFSET, 0 ),
       visible: false,
       cancelButtonListener: () => {
         addMutationsPanel.resetFur();
@@ -38,7 +37,6 @@ class MutationAlertsNode extends Node {
 
     // Ears
     const earsAlert = new MutationComingNode( {
-      rightCenter: addMutationsPanel.getEarsLeftCenter().addXY( X_OFFSET, 0 ),
       visible: false,
       cancelButtonListener: () => {
         addMutationsPanel.resetEars();
@@ -48,7 +46,6 @@ class MutationAlertsNode extends Node {
 
     // Teeth
     const teethAlert = new MutationComingNode( {
-      rightCenter: addMutationsPanel.getTeethLeftCenter().addXY( X_OFFSET, 0 ),
       visible: false,
       cancelButtonListener: () => {
         addMutationsPanel.resetTeeth();
@@ -67,14 +64,20 @@ class MutationAlertsNode extends Node {
     this.teethAlert = teethAlert;
 
     addMutationsPanel.furMutationEmitter.addListener( () => {
+      const globalPoint = addMutationsPanel.getFurLeftCenter().addXY( X_OFFSET, 0 );
+      furAlert.rightCenter = furAlert.globalToParentPoint( globalPoint );
       furAlert.visible = true;
     } );
 
     addMutationsPanel.earsMutationEmitter.addListener( () => {
+      const globalPoint = addMutationsPanel.getEarsLeftCenter().addXY( X_OFFSET, 0 );
+      earsAlert.rightCenter = earsAlert.globalToParentPoint( globalPoint );
       earsAlert.visible = true;
     } );
 
     addMutationsPanel.teethMutationEmitter.addListener( () => {
+      const globalPoint = addMutationsPanel.getTeethLeftCenter().addXY( X_OFFSET, 0 );
+      teethAlert.rightCenter = teethAlert.globalToParentPoint( globalPoint );
       teethAlert.visible = true;
     } );
   }
