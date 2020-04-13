@@ -11,6 +11,7 @@ import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
+import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionModel from '../model/NaturalSelectionModel.js';
@@ -67,8 +68,6 @@ class NaturalSelectionScreenView extends ScreenView {
 
     const addMutationsPanel = new AddMutationsPanel( {
       fixedWidth: rightOfViewportWidth,
-      left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-      top: environmentNode.top,
       tandem: options.tandem.createTandem( 'addMutationsPanel' )
     } );
 
@@ -76,9 +75,14 @@ class NaturalSelectionScreenView extends ScreenView {
 
     const environmentalFactorsPanel = new EnvironmentalFactorsPanel( model.environmentModel, {
       fixedWidth: rightOfViewportWidth,
-      left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-      top: addMutationsPanel.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING,
       tandem: options.tandem.createTandem( 'environmentalFactorsPanel' )
+    } );
+
+    const panelsParent = new VBox( {
+      children: [ addMutationsPanel, environmentalFactorsPanel ],
+      spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+      left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+      top: environmentNode.top
     } );
 
     // The graphs and their related controls fill the space below the viewport.
@@ -155,8 +159,7 @@ class NaturalSelectionScreenView extends ScreenView {
     // layering
     this.children = [
       environmentNode,
-      addMutationsPanel,
-      environmentalFactorsPanel,
+      panelsParent,
       graphsRadioButtonGroup,
       timeControlNode,
       populationNode,
