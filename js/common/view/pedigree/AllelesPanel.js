@@ -2,6 +2,8 @@
 
 /**
  * AllelesPanel is the panel that contains controls for showing alleles in the 'Pedigree' graph.
+ * Each row in the panel corresponds to one trait.  Until the gene for a trait has mutated, its row is disabled.
+ * When a row is enabled, it shows the icon and abbreviation for the normal allele and the mutant allele.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -23,8 +25,8 @@ import longTeethImage from '../../../../images/longTeeth_png.js';
 import shortTeethImage from '../../../../images/shortTeeth_png.js';
 import straightEarsImage from '../../../../images/straightEars_png.js';
 import whiteFurImage from '../../../../images/whiteFur_png.js';
-import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import naturalSelection from '../../../naturalSelection.js';
+import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import PedigreeModel from '../../model/PedigreeModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
@@ -65,8 +67,7 @@ class AllelesPanel extends NaturalSelectionPanel {
           brownFurImage, whiteFurImage,
           pedigreeModel.furAllelesVisibleProperty, pedigreeModel.furMutationExistsProperty,
           alleleAlignGroup, {
-            tandem: options.tandem.createTandem( 'furRow' ),
-            phetioReadOnly: true
+            tandem: options.tandem.createTandem( 'furRow' )
           }
         ),
 
@@ -76,8 +77,7 @@ class AllelesPanel extends NaturalSelectionPanel {
           straightEarsImage, floppyEarsImage,
           pedigreeModel.earsAllelesVisibleProperty, pedigreeModel.earsMutationExistsProperty,
           alleleAlignGroup, {
-            tandem: options.tandem.createTandem( 'earsRow' ),
-            phetioReadOnly: true
+            tandem: options.tandem.createTandem( 'earsRow' )
           }
         ),
 
@@ -87,8 +87,7 @@ class AllelesPanel extends NaturalSelectionPanel {
           longTeethImage, shortTeethImage,
           pedigreeModel.teethAllelesVisibleProperty, pedigreeModel.teethMutationExistsProperty,
           alleleAlignGroup, {
-            tandem: options.tandem.createTandem( 'teethRow' ),
-            phetioReadOnly: true
+            tandem: options.tandem.createTandem( 'teethRow' )
           }
         )
       ]
@@ -119,14 +118,14 @@ class Row extends VBox {
    * @param {string} labelString
    * @param {string} dominantString
    * @param {string} recessiveString
-   * @param {HTMLImageElement} mutationIcon
-   * @param {HTMLImageElement} nonMutationIcon
+   * @param {HTMLImageElement} mutantIcon
+   * @param {HTMLImageElement} normalIcon
    * @param {Property.<boolean>} visibleProperty
    * @param {Property.<boolean>} enabledProperty
    * @param {AlignGroup} alignGroup
    * @param {Object} [options]
    */
-  constructor( labelString, dominantString, recessiveString, mutationIcon, nonMutationIcon,
+  constructor( labelString, dominantString, recessiveString, mutantIcon, normalIcon,
                visibleProperty, enabledProperty, alignGroup, options ) {
 
     options = merge( {
@@ -164,23 +163,23 @@ class Row extends VBox {
     };
     const textImageSpacing = 6;
 
-    // Mutation abbreviation and icon
-    const mutationText = new Text( dominantString, textOptions );
-    const mutationImage = new Image( mutationIcon, imageOptions );
-    const mutationHBox = new HBox( {
-      children: [ mutationText, mutationImage ],
+    // mutant allele abbreviation and icon
+    const mutantText = new Text( dominantString, textOptions );
+    const mutantImage = new Image( mutantIcon, imageOptions );
+    const mutantHBox = new HBox( {
+      children: [ mutantText, mutantImage ],
       spacing: textImageSpacing
     } );
-    const mutationAlignBox = new AlignBox( mutationHBox, alignBoxOptions );
+    const mutantAlignBox = new AlignBox( mutantHBox, alignBoxOptions );
 
-    // Non-mutation abbreviation and icon
-    const nonMutationText = new Text( recessiveString, textOptions );
-    const nonMutationImage = new Image( nonMutationIcon, imageOptions );
-    const nonMutationHBox = new HBox( {
-      children: [ nonMutationText, nonMutationImage ],
+    // Normal allele abbreviation and icon
+    const normalText = new Text( recessiveString, textOptions );
+    const normalImage = new Image( normalIcon, imageOptions );
+    const normalHBox = new HBox( {
+      children: [ normalText, normalImage ],
       spacing: textImageSpacing
     } );
-    const nonMutationAlignBox = new AlignBox( nonMutationHBox, alignBoxOptions );
+    const normalAlignBox = new AlignBox( normalHBox, alignBoxOptions );
 
     // Indent the abbreviations and icons
     const hBox = new HBox( {
@@ -189,7 +188,7 @@ class Row extends VBox {
         new HStrut( 8 ),
         new HBox( {
           spacing: 12,
-          children: [ mutationAlignBox, nonMutationAlignBox ]
+          children: [ mutantAlignBox, normalAlignBox ]
         } )
       ]
     } );
