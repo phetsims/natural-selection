@@ -1,7 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Allele is a variation of a gene.
+ * Allele is a variant form of a gene.  In this sim, allele (a gene variant) and phenotype (expression of that gene)
+ * are synonymous. For example, 'White Fur' is used to describe both the allele and the phenotype.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
