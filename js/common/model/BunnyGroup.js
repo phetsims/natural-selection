@@ -8,11 +8,13 @@
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
 import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import Bunny from './Bunny.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -57,6 +59,14 @@ class BunnyGroup extends PhetioGroup {
 
     super( createMember, defaultArguments, options );
 
+    // @public (read-only)
+    this.numberOfBunniesProperty = new NumberProperty( 0, {
+      numberType: 'Integer',
+      tandem: options.tandem.createTandem( 'numberOfBunniesProperty' ),
+      phetioReadOnly: true,
+      phetioDocumentation: 'the total number of bunnies, alive and dead'
+    } );
+
     // @public notify when a bunny is created, a nicer API than addMemberCreatedListener
     this.bunnyCreatedEmitter = new Emitter( {
       parameters: [ { valueType: Bunny } ]
@@ -72,6 +82,12 @@ class BunnyGroup extends PhetioGroup {
       parameters: [ { valueType: Bunny } ]
     } );
 
+    // @public notifies when all bunnies have died
+    this.allBunniesHaveDiedEmitter = new Emitter();
+
+    // @public notifies when bunnies have taken over the world, exceeding the maximum population size
+    this.bunniesHaveTakenOverTheWorldEmitter = new Emitter();
+
     // When a bunny is created...
     this.addMemberCreatedListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
@@ -80,18 +96,81 @@ class BunnyGroup extends PhetioGroup {
       const isAliveListener = isAlive => {
         if ( !isAlive ) {
           bunny.isAliveProperty.unlink( isAliveListener );
+
           this.bunnyDiedEmitter.emit( bunny );
+
+          if ( this.getNumberOfLivingBunnies() === 0 ) {
+            this.allBunniesHaveDiedEmitter.emit();
+          }
         }
       };
-      bunny.isAliveProperty.link( isAliveListener );
+      bunny.isAliveProperty.lazyLink( isAliveListener );
 
+      this.numberOfBunniesProperty.value = this.length;
       this.bunnyCreatedEmitter.emit( bunny );
+
+      // Notify if bunnies have taken over the world
+      if ( this.getNumberOfLivingBunnies() > NaturalSelectionConstants.MAX_BUNNIES ) {
+        this.bunniesHaveTakenOverTheWorldEmitter.emit();
+      }
     } );
 
     // When a bunny is disposed...
     this.addMemberDisposedListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
+      this.numberOfBunniesProperty.value = this.length;
       this.bunnyDisposedEmitter.emit( bunny );
+    } );
+  }
+
+  /**
+   * Resets the group.
+   */
+  reset() {
+    this.clear();
+  }
+
+  /**
+   * Gets the number of living bunnies.
+   * @returns {number}
+   */
+  getNumberOfLivingBunnies() {
+    let numberOfLivingBunnies = 0;
+    this.forEach( bunny => {
+      if ( bunny.isAlive ) {
+        numberOfLivingBunnies++;
+      }
+    } );
+    return numberOfLivingBunnies;
+  }
+
+  /**
+   * Moves all bunnies that are alive.
+   * @param {number} dt - time step, in seconds
+   * @public
+   */
+  moveBunnies( dt ) {
+    this.forEach( bunny => {
+      if ( bunny.isAlive ) {
+        bunny.step( dt );
+      }
+    } );
+  }
+
+  /**
+   * Ages all bunnies that are alive. Bunnies that have reached their maximum age will die.
+   * @public
+   */
+  ageBunnies() {
+    this.forEach( bunny => {
+      if ( bunny.isAlive ) {
+        bunny.ageProperty.value++;
+        if ( bunny.ageProperty.value === NaturalSelectionConstants.MAX_BUNNY_AGE ) {
+          bunny.die();
+        }
+        assert && assert( bunny.ageProperty.value <= NaturalSelectionConstants.MAX_BUNNY_AGE,
+          `bunny age exceeded max: ${bunny.ageProperty.value}` );
+      }
     } );
   }
 }

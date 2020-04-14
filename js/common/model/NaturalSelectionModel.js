@@ -29,7 +29,7 @@ class NaturalSelectionModel {
     } );
 
     // @public (read-only)
-    this.environmentModel = new EnvironmentModel( {
+    this.environmentModel = new EnvironmentModel( this.isPlayingProperty, {
       tandem: tandem.createTandem( 'environmentModel' )
     } );
 
@@ -78,28 +78,17 @@ class NaturalSelectionModel {
   }
 
   /**
-   * Resets the initial bunny population. Other settings are preserved.
-   * @public
-   */
-  playAgain() {
-    this.environmentModel.playAgain();
-    //TODO other things?
-  }
-
-  /**
    * Steps the model.
    * @param {number} dt - time step, in seconds
    * @public
    * @override
    */
   step( dt ) {
-    if ( this.isPlayingProperty.value ) {
-      this.stepOnce( dt );
-    }
+    this.stepOnce( dt );
   }
 
   /**
-   * Steps the model one time step.
+   * Steps the model one time step. Used by the time controls Step button.
    * @public
    */
   stepOnce( dt ) {

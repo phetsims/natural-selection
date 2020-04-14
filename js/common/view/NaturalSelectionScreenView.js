@@ -17,6 +17,7 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionModel from '../model/NaturalSelectionModel.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import AddMutationsPanel from './AddMutationsPanel.js';
+import DiedDialog from './DiedDialog.js';
 import EnvironmentalFactorsPanel from './EnvironmentalFactorsPanel.js';
 import EnvironmentNode from './EnvironmentNode.js';
 import Graphs from './Graphs.js';
@@ -26,9 +27,7 @@ import NaturalSelectionViewProperties from './NaturalSelectionViewProperties.js'
 import PedigreeNode from './pedigree/PedigreeNode.js';
 import PopulationNode from './population/PopulationNode.js';
 import ProportionsNode from './proportions/ProportionsNode.js';
-
-// import DiedDialog from './DiedDialog';
-// import WorldDialog from './WorldDialog';
+import WorldDialog from './WorldDialog.js';
 
 class NaturalSelectionScreenView extends ScreenView {
 
@@ -49,11 +48,6 @@ class NaturalSelectionScreenView extends ScreenView {
     }, options );
 
     super( options );
-
-    // Dialogs, displayed when the 'game' ends because bunnies have taken over the world, or all bunnies have died.
-    //TODO
-    // const diedDialog = new DiedDialog();
-    // const worldDialog = new WorldDialog();
 
     const environmentNode = new EnvironmentNode( model.environmentModel, {
       left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
@@ -177,6 +171,29 @@ class NaturalSelectionScreenView extends ScreenView {
       populationNode.reset();
       //TODO
     };
+
+    // Dialogs, displayed when the 'game' ends because bunnies have taken over the world, or all bunnies have died.
+    // Both dialogs stop the sim clock, then start reset the model when hidden.
+    const dialogOptions = {
+      showCallback: () => {
+        model.isPlayingProperty.value = false;
+      },
+      hideCallback: () => {
+        model.reset();
+        environmentNode.reset();
+      }
+    };
+    const diedDialog = new DiedDialog( dialogOptions );
+    const worldDialog = new WorldDialog( dialogOptions );
+
+    model.environmentModel.bunnyGroup.allBunniesHaveDiedEmitter.addListener( () => {
+      console.log( 'allBunniesHaveDiedEmitter fired' );//XXX
+      diedDialog.show();
+    } );
+    model.environmentModel.bunnyGroup.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
+      console.log( 'bunniesHaveTakenOverTheWorldEmitter fired' );//XXX
+      worldDialog.show();
+    } );
 
     // @private
     this.model = model;

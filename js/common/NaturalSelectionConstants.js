@@ -24,6 +24,9 @@ const NaturalSelectionConstants = {
   // number of bunnies required to 'take over the world'
   MAX_BUNNIES: NaturalSelectionQueryParameters.maxBunnies,
 
+  // bunnies die when the reach this age, in generations
+  MAX_BUNNY_AGE: 5,
+
   // clock
   SECONDS_PER_GENERATION: NaturalSelectionQueryParameters.secondsPerGeneration,
   SECONDS_PER_STEP: NaturalSelectionQueryParameters.secondsPerStep, // dt per press of the Step button

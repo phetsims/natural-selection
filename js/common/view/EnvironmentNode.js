@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PressListener from '../../../../scenery/js/listeners/PressListener.js';
@@ -23,7 +24,6 @@ import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
 import EnvironmentRadioButtonGroup from './EnvironmentRadioButtonGroup.js';
 import FoodNode from './FoodNode.js';
 import GenerationClockNode from './GenerationClockNode.js';
-import PlayAgainButton from './PlayAgainButton.js';
 import PlayButton from './PlayButton.js';
 import SpriteNode from './SpriteNode.js';
 
@@ -91,16 +91,6 @@ class EnvironmentNode extends Node {
       tandem: options.tandem.createTandem( 'playButton' )
     } );
 
-    // 'Play Again' push button
-    const playAgainButton = new PlayAgainButton( {
-      center: addAMateButton.center,
-      listener: () => {
-        playAgainButton.visible = false;
-        //TODO
-      },
-      tandem: options.tandem.createTandem( 'playAgainButton' )
-    } );
-
     // Parent for all SpriteNodes, clipped to the viewport
     const spritesNode = new Node( {
       children: [],
@@ -122,19 +112,18 @@ class EnvironmentNode extends Node {
       generationClockNode,
       environmentRadioButtonGroup,
       addAMateButton,
-      playButton,
-      playAgainButton
+      playButton
     ];
 
     super( options );
 
-    // @private
-    this.initializeButtons = () => {
-      addAMateButton.visible = ( environmentModel.bunnyGroup.length === 1 );
-      playButton.visible = ( environmentModel.bunnyGroup.length > 1 );
-      playAgainButton.visible = false;
-    };
-    this.initializeButtons();
+    // Show the correct button to start the 'game'. Dispose not needd.
+    Property.multilink(
+      [ environmentModel.bunnyGroup.numberOfBunniesProperty, environmentModel.generationClock.isRunningProperty ],
+      ( numberOfBunnies, isRunning ) => {
+        addAMateButton.visible = !isRunning && ( numberOfBunnies === 1 );
+        playButton.visible = !isRunning && ( numberOfBunnies > 1 );
+      } );
 
     // Create a link to the model that this Node displays
     this.addLinkedElement( environmentModel, {
@@ -192,7 +181,7 @@ class EnvironmentNode extends Node {
    * @public
    */
   reset() {
-    this.initializeButtons();
+    //TODO
   }
 
   /**

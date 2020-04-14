@@ -7,6 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
@@ -72,6 +73,14 @@ class Bunny extends Sprite {
       phetioDocumentation: 'the genetic information for this bunny'
     } );
 
+    // @public
+    this.ageProperty = new NumberProperty( 0, {
+      numberType: 'Integer',
+      tandem: options.tandem.createTandem( 'ageProperty' ),
+      phetioDocumentation: 'age of the bunny, in generations',
+      phetioReadOnly: true
+    } );
+
     // @public (read-only)
     this.isAliveProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'isAliveProperty' ),
@@ -95,6 +104,7 @@ class Bunny extends Sprite {
     // @private
     this.disposeBunny = () => {
       this.genotype.dispose();
+      this.ageProperty.dispose();
       this.isAliveProperty.dispose();
     };
 
@@ -129,10 +139,18 @@ class Bunny extends Sprite {
   }
 
   /**
+   * Is this Bunny alive?
+   * @returns {boolean}
+   */
+  get isAlive() {
+    return this.isAliveProperty.value;
+  }
+
+  /**
    * Kills this bunny, forever and ever. (This sim does not support reincarnation or other forms of 'pooling' :)
    * @public
    */
-  kill() {
+  die() {
     assert && assert( this.isAliveProperty.value, 'bunny is already dead' );
     this.isAliveProperty.value = false;
   }

@@ -102,6 +102,8 @@ const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
 
 assert && assert( NaturalSelectionQueryParameters.secondsPerStep < NaturalSelectionQueryParameters.secondsPerGeneration,
   'secondsPerStep must be < secondsPerGeneration' );
+assert && assert( NaturalSelectionQueryParameters.population < NaturalSelectionQueryParameters.maxBunnies,
+  'population must be < maxBunnies' );
 
 // log the values of all sim-specific query parameters
 phet.log && phet.log( 'query parameters: ' + JSON.stringify( NaturalSelectionQueryParameters, null, 2 ) );

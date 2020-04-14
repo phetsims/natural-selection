@@ -17,7 +17,6 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
-import Bunny from './Bunny.js';
 import BunnyGroup from './BunnyGroup.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -31,9 +30,10 @@ import Wolves from './Wolves.js';
 class EnvironmentModel extends PhetioObject {
 
   /**
+   * {Property.<boolean>} isPlayingProperty
    * @param {Object} [options]
    */
-  constructor( options ) {
+  constructor( isPlayingProperty, options ) {
 
     options = merge( {
 
@@ -44,6 +44,9 @@ class EnvironmentModel extends PhetioObject {
     }, options );
 
     super( options );
+
+    // @private
+    this.isPlayingProperty = isPlayingProperty;
 
     // @public (read-only)
     this.generationClock = new GenerationClock( {
@@ -92,6 +95,9 @@ class EnvironmentModel extends PhetioObject {
     } );
 
     this.initializeBunnyPopulation();
+
+    // Bunnies have a birthday on each cycle of the generation clock.
+    this.generationClock.currentGenerationProperty.lazyLink( () => this.bunnyGroup.ageBunnies() );
   }
 
   /**
@@ -111,7 +117,7 @@ class EnvironmentModel extends PhetioObject {
     this.genePool.reset();
 
     // dispose of all bunnies and reinitialize
-    this.bunnyGroup.clear();
+    this.bunnyGroup.reset();
     this.initializeBunnyPopulation();
   }
 
@@ -129,27 +135,14 @@ class EnvironmentModel extends PhetioObject {
    * @public
    */
   step( dt ) {
+    if ( this.isPlayingProperty.value ) {
 
-    // step the generation clock
-    this.generationClock.step( dt );
+      // step the generation clock
+      this.generationClock.step( dt );
 
-    // step the bunnies
-    const numberOfBunnies = this.bunnyGroup.length;
-    for ( let i = 0; i < numberOfBunnies; i++ ) {
-      this.bunnyGroup.get( i ).step( dt );
+      // move the bunnies
+      this.bunnyGroup.moveBunnies( dt );
     }
-  }
-
-  /**
-   * Resets the initial bunny population. Other settings are preserved.
-   * @public
-   */
-  playAgain() {
-    phet.log && phet.log( 'EnvironmentModel.playAgain' );
-
-    // dispose of all bunnies and reinitialize
-    this.bunnyGroup.clear();
-    this.initializeBunnyPopulation();
   }
 
   //TODO read query parameters and create initial population
@@ -168,16 +161,6 @@ class EnvironmentModel extends PhetioObject {
         direction: SpriteDirection.getRandom()
       } );
     }
-  }
-
-  /**
-   * Removes a bunny from the collection.
-   * @param {Bunny} bunny
-   * @private
-   */
-  removeBunny( bunny ) {
-    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-    this.bunnyGroup.disposeMember( bunny );
   }
 }
 
