@@ -54,7 +54,7 @@ class BunnyGroup extends PhetioGroup {
       } ) );
     };
 
-    // defaultArguments, passed to createMember during API harvest (when running 'grunt update').
+    // defaultArguments, passed to createMember during API harvest (when running 'grunt generate-phet-io-api-files').
     const defaultArguments = [ {} ];
 
     super( createMember, defaultArguments, options );
