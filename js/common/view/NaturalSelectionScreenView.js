@@ -187,11 +187,9 @@ class NaturalSelectionScreenView extends ScreenView {
     const worldDialog = new WorldDialog( dialogOptions );
 
     model.environmentModel.bunnyGroup.allBunniesHaveDiedEmitter.addListener( () => {
-      console.log( 'allBunniesHaveDiedEmitter fired' );//XXX
       diedDialog.show();
     } );
     model.environmentModel.bunnyGroup.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
-      console.log( 'bunniesHaveTakenOverTheWorldEmitter fired' );//XXX
       worldDialog.show();
     } );
 
