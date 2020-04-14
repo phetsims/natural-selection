@@ -180,8 +180,6 @@ class EnvironmentModel extends PhetioObject {
       position: this.modelViewTransform.getRandomGroundPosition(),
       direction: SpriteDirection.getRandom()
     } );
-
-    this.generationClock.isRunningProperty.value = true;
   }
 }
 

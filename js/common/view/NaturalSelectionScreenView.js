@@ -161,8 +161,8 @@ class NaturalSelectionScreenView extends ScreenView {
       listener: () => {
         addAMateButton.visible = false;
         model.environmentModel.addAMate();
+        model.environmentModel.generationClock.isRunningProperty.value = true;
       },
-      visible: ( model.environmentModel.bunnyGroup.numberOfBunniesProperty.value === 1 ),
       tandem: playButtonGroupTandem.createTandem( 'addAMateButton' )
     } );
 
@@ -172,27 +172,31 @@ class NaturalSelectionScreenView extends ScreenView {
         playButton.visible = false;
         model.environmentModel.generationClock.isRunningProperty.value = true;
       },
-      visible: ( model.environmentModel.bunnyGroup.numberOfBunniesProperty.value > 1 ),
       center: addAMateButton.center,
       tandem: playButtonGroupTandem.createTandem( 'playButton' )
     } );
+
+    // Set the state of UI components based on whether the user is reviewing the final state of the game.
+    // While reviewing, some UI components are disabled.
+    const setReviewingFinalState = isReviewing => {
+
+      // visibility of push buttons
+      addAMateButton.visible = !isReviewing && ( model.environmentModel.bunnyGroup.numberOfBunniesProperty.value === 1 );
+      playButton.visible = !isReviewing && ( model.environmentModel.bunnyGroup.numberOfBunniesProperty.value > 1 );
+      playAgainButton.visible = isReviewing;
+
+      // enabled state of controls
+      addMutationsPanel.setContentEnabled( !isReviewing );
+      environmentalFactorsPanel.setContentEnabled( !isReviewing );
+      timeControlNode.enabledProperty.value = !isReviewing;
+    };
 
     // 'Play Again' push button, displayed after the game ends, while the user is reviewing the final state
     const playAgainButton = new PlayAgainButton( {
       listener: () => {
         model.reset();
-
-        // set state of buttons
-        playAgainButton.visible = false;
-        addAMateButton.visible = ( model.environmentModel.bunnyGroup.numberOfBunniesProperty.value === 1 );
-        playButton.visible = ( model.environmentModel.bunnyGroup.numberOfBunniesProperty.value > 1 );
-
-        // enable things that were disabled when the 'game' ended
-        addMutationsPanel.setContentEnabled( true );
-        environmentalFactorsPanel.setContentEnabled( true );
-        timeControlNode.enabledProperty.value = true;
+        setReviewingFinalState( false );
       },
-      visible: false,
       center: addAMateButton.center,
       tandem: playButtonGroupTandem.createTandem( 'playAgainButton' )
     } );
@@ -225,7 +229,7 @@ class NaturalSelectionScreenView extends ScreenView {
       addMutationsPanel.reset();
       mutationAlertsNode.reset();
       populationNode.reset();
-      //TODO
+      setReviewingFinalState( false );
     };
 
     // Dialogs, displayed when the 'game' ends because bunnies have taken over the world, or all bunnies have died.
@@ -233,10 +237,12 @@ class NaturalSelectionScreenView extends ScreenView {
 
       // When the dialog is shown...
       showCallback: () => {
+
+        // pause the sim
         model.isPlayingProperty.value = false;
-        addMutationsPanel.setContentEnabled( false );
-        environmentalFactorsPanel.setContentEnabled( false );
-        timeControlNode.enabledProperty.value = false;
+
+        // put the UI in the state where the user is reviewing the final state of the game
+        setReviewingFinalState( true );
       },
 
       // When the dialog is hidden...
@@ -257,6 +263,8 @@ class NaturalSelectionScreenView extends ScreenView {
     // @private
     this.model = model;
     this.environmentNode = environmentNode;
+
+    setReviewingFinalState( false );
   }
 
   /**
