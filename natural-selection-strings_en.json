@@ -125,6 +125,9 @@
   "play": {
     "value": "Play"
   },
+  "playAgain": {
+    "value": "Play Again"
+  },
   "bunniesHaveTakenOverTheWorld": {
     "value": "Bunnies have taken over the world!"
   },

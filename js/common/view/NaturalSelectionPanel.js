@@ -10,6 +10,7 @@
 import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Panel from '../../../../sun/js/Panel.js';
+import SunConstants from '../../../../sun/js/SunConstants.js';
 import naturalSelection from '../../naturalSelection.js';
 
 class NaturalSelectionPanel extends Panel {
@@ -39,6 +40,19 @@ class NaturalSelectionPanel extends Panel {
     }
 
     super( content, options );
+
+    // @private
+    this.content = content;
+  }
+
+  /**
+   * Enable or disable the entire Panel content.
+   * @param {boolean} enabled
+   * @public
+   */
+  setContentEnabled( enabled ) {
+    this.content.pickable = enabled;
+    this.content.opacity = enabled ? 1 : SunConstants.DISABLED_OPACITY;
   }
 }
 

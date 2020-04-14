@@ -11,11 +11,13 @@ import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionModel from '../model/NaturalSelectionModel.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import AddAMateButton from './AddAMateButton.js';
 import AddMutationsPanel from './AddMutationsPanel.js';
 import DiedDialog from './DiedDialog.js';
 import EnvironmentalFactorsPanel from './EnvironmentalFactorsPanel.js';
@@ -25,6 +27,8 @@ import GraphsRadioButtonGroup from './GraphsRadioButtonGroup.js';
 import MutationAlertsNode from './MutationAlertsNode.js';
 import NaturalSelectionViewProperties from './NaturalSelectionViewProperties.js';
 import PedigreeNode from './pedigree/PedigreeNode.js';
+import PlayAgainButton from './PlayAgainButton.js';
+import PlayButton from './PlayButton.js';
 import PopulationNode from './population/PopulationNode.js';
 import ProportionsNode from './proportions/ProportionsNode.js';
 import WorldDialog from './WorldDialog.js';
@@ -150,9 +154,61 @@ class NaturalSelectionScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
+    const playButtonGroupTandem = options.tandem.createTandem( 'playButtonGroup' );
+
+    // 'Add a Mate' push button, for when the initial population consists of a single bunny
+    const addAMateButton = new AddAMateButton( {
+      listener: () => {
+        addAMateButton.visible = false;
+        model.environmentModel.addAMate();
+      },
+      visible: ( model.environmentModel.bunnyGroup.numberOfBunniesProperty.value === 1 ),
+      tandem: playButtonGroupTandem.createTandem( 'addAMateButton' )
+    } );
+
+    // 'Play' push button, for when the initial population consists of more than one bunny
+    const playButton = new PlayButton( {
+      listener: () => {
+        playButton.visible = false;
+        model.environmentModel.generationClock.isRunningProperty.value = true;
+      },
+      visible: ( model.environmentModel.bunnyGroup.numberOfBunniesProperty.value > 1 ),
+      center: addAMateButton.center,
+      tandem: playButtonGroupTandem.createTandem( 'playButton' )
+    } );
+
+    // 'Play Again' push button, displayed after the game ends, while the user is reviewing the final state
+    const playAgainButton = new PlayAgainButton( {
+      listener: () => {
+        model.reset();
+
+        // set state of buttons
+        playAgainButton.visible = false;
+        addAMateButton.visible = ( model.environmentModel.bunnyGroup.numberOfBunniesProperty.value === 1 );
+        playButton.visible = ( model.environmentModel.bunnyGroup.numberOfBunniesProperty.value > 1 );
+
+        // enable things that were disabled when the 'game' ended
+        addMutationsPanel.setContentEnabled( true );
+        environmentalFactorsPanel.setContentEnabled( true );
+        timeControlNode.enabledProperty.value = true;
+      },
+      visible: false,
+      center: addAMateButton.center,
+      tandem: playButtonGroupTandem.createTandem( 'playAgainButton' )
+    } );
+
+    // Parent for the 3 buttons that are related to playing the 'game'
+    const playButtonGroup = new Node( {
+      children: [ addAMateButton, playButton, playAgainButton ],
+      centerX: environmentNode.centerX,
+      bottom: environmentNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
+      tandem: playButtonGroupTandem
+    } );
+
     // layering
     this.children = [
       environmentNode,
+      playButtonGroup,
       panelsParent,
       graphsRadioButtonGroup,
       timeControlNode,
@@ -173,14 +229,19 @@ class NaturalSelectionScreenView extends ScreenView {
     };
 
     // Dialogs, displayed when the 'game' ends because bunnies have taken over the world, or all bunnies have died.
-    // Both dialogs stop the sim clock, then start reset the model when hidden.
     const dialogOptions = {
+
+      // When the dialog is shown...
       showCallback: () => {
         model.isPlayingProperty.value = false;
+        addMutationsPanel.setContentEnabled( false );
+        environmentalFactorsPanel.setContentEnabled( false );
+        timeControlNode.enabledProperty.value = false;
       },
+
+      // When the dialog is hidden...
       hideCallback: () => {
-        model.reset();
-        environmentNode.reset();
+        playAgainButton.visible = true;
       }
     };
     const diedDialog = new DiedDialog( dialogOptions );

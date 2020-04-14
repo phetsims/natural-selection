@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PressListener from '../../../../scenery/js/listeners/PressListener.js';
@@ -15,16 +14,13 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModel from '../model/EnvironmentModel.js';
-import SpriteDirection from '../model/SpriteDirection.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import AddAMateButton from './AddAMateButton.js';
 import BunnyNodeGroup from './BunnyNodeGroup.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
 import EnvironmentRadioButtonGroup from './EnvironmentRadioButtonGroup.js';
 import FoodNode from './FoodNode.js';
 import GenerationClockNode from './GenerationClockNode.js';
-import PlayButton from './PlayButton.js';
 import SpriteNode from './SpriteNode.js';
 
 class EnvironmentNode extends Node {
@@ -69,28 +65,6 @@ class EnvironmentNode extends Node {
       tandem: options.tandem.createTandem( 'environmentRadioButtonGroup' )
     } );
 
-    // 'Add a Mate' push button
-    const addAMateButton = new AddAMateButton( {
-      listener: () => {
-        addAMateButton.visible = false;
-        this.addAMate();
-        environmentModel.generationClock.isRunningProperty.value = true;
-      },
-      centerX: frameNode.centerX,
-      bottom: frameNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
-      tandem: options.tandem.createTandem( 'addAMateButton' )
-    } );
-
-    // 'Play' push button
-    const playButton = new PlayButton( {
-      listener: () => {
-        playButton.visible = false;
-        environmentModel.generationClock.isRunningProperty.value = true;
-      },
-      center: addAMateButton.center,
-      tandem: options.tandem.createTandem( 'playButton' )
-    } );
-
     // Parent for all SpriteNodes, clipped to the viewport
     const spritesNode = new Node( {
       children: [],
@@ -110,20 +84,10 @@ class EnvironmentNode extends Node {
       spritesNode,
       frameNode,
       generationClockNode,
-      environmentRadioButtonGroup,
-      addAMateButton,
-      playButton
+      environmentRadioButtonGroup
     ];
 
     super( options );
-
-    // Show the correct button to start the 'game'. Dispose not needd.
-    Property.multilink(
-      [ environmentModel.bunnyGroup.numberOfBunniesProperty, environmentModel.generationClock.isRunningProperty ],
-      ( numberOfBunnies, isRunning ) => {
-        addAMateButton.visible = !isRunning && ( numberOfBunnies === 1 );
-        playButton.visible = !isRunning && ( numberOfBunnies > 1 );
-      } );
 
     // Create a link to the model that this Node displays
     this.addLinkedElement( environmentModel, {
@@ -203,24 +167,6 @@ class EnvironmentNode extends Node {
       this.spritesNode.children,
       child => child.sprite.positionProperty.value.z
     ).reverse();
-  }
-
-  /**
-   * Adds a mate for a lone bunny.
-   * @private
-   */
-  addAMate() {
-
-    assert && assert( this.environmentModel.bunnyGroup.length === 1, 'there should only be 1 bunny' );
-
-    const generation = this.environmentModel.generationClock.currentGenerationProperty.value;
-    assert && assert( generation === 0, `unexpected generation for addAMate: ${generation}` );
-
-    this.environmentModel.bunnyGroup.createNextMember( {
-      generation: generation,
-      position: this.environmentModel.modelViewTransform.getRandomGroundPosition(),
-      direction: SpriteDirection.getRandom()
-    } );
   }
 }
 

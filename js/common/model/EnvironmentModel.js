@@ -162,6 +162,27 @@ class EnvironmentModel extends PhetioObject {
       } );
     }
   }
+
+  /**
+   * Adds a mate for a lone bunny.
+   * @private
+   */
+  addAMate() {
+
+    assert && assert( this.bunnyGroup.length === 1, 'there should only be 1 bunny' );
+    assert && assert( !this.generationClock.isRunningProperty.value, 'the generation clock should not be running' );
+
+    const generation = this.generationClock.currentGenerationProperty.value;
+    assert && assert( generation === 0, `unexpected generation for addAMate: ${generation}` );
+
+    this.bunnyGroup.createNextMember( {
+      generation: generation,
+      position: this.modelViewTransform.getRandomGroundPosition(),
+      direction: SpriteDirection.getRandom()
+    } );
+
+    this.generationClock.isRunningProperty.value = true;
+  }
 }
 
 naturalSelection.register( 'EnvironmentModel', EnvironmentModel );
