@@ -3,6 +3,7 @@ TODO list for natural-selection
 FEATURES
 make bunnies mate
 add counts to EnvironmentModel
+When the game ends, or the sim is stepped, the generation clock may not be at exactly 12:00
 
 PhET-iO
 
