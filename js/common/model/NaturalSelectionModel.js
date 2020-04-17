@@ -7,12 +7,14 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModel from './EnvironmentModel.js';
 import PedigreeModel from './PedigreeModel.js';
 import PopulationModel from './PopulationModel.js';
 import ProportionsModel from './ProportionsModel.js';
+import SimulationState from './SimulationState.js';
 
 class NaturalSelectionModel {
 
@@ -26,6 +28,12 @@ class NaturalSelectionModel {
     // @public whether the sim is playing
     this.isPlayingProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'isPlayingProperty' )
+    } );
+
+    // @public
+    this.simulationStateProperty = new EnumerationProperty( SimulationState, SimulationState.STAGED, {
+      tandem: tandem.createTandem( 'simulationStateProperty' ),
+      phetioReadOnly: true
     } );
 
     // @public (read-only)
@@ -52,6 +60,31 @@ class NaturalSelectionModel {
     this.pedigreeModel = new PedigreeModel( this.environmentModel.selectedBunnyProperty, {
       tandem: tandem.createTandem( 'pedigreeModel' )
     } );
+
+    // When the simulation state changes, adjust the model.
+    this.simulationStateProperty.link( simulationState => {
+      phet.log && phet.log( `simulationState=${simulationState}` );
+
+      // SimulationState indicates a state CHANGE, it does not describe a full state.
+      // Do nothing when PhET-iO is restoring state, or saved state will be overwritten.
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+        if ( simulationState === SimulationState.STAGED ) {
+          this.isPlayingProperty.value = true;
+          this.environmentModel.generationClock.isRunningProperty.value = false;
+        }
+        else if ( simulationState === SimulationState.ACTIVE ) {
+          this.isPlayingProperty.value = true;
+          this.environmentModel.generationClock.isRunningProperty.value = true;
+        }
+        else if ( simulationState === SimulationState.COMPLETED ) {
+          this.isPlayingProperty.value = false;
+          this.environmentModel.generationClock.isRunningProperty.value = false;
+        }
+        else {
+          throw new Error( `unsupported simulationState: ${simulationState}` );
+        }
+      }
+    } );
   }
 
   /**
@@ -60,14 +93,15 @@ class NaturalSelectionModel {
    */
   reset() {
 
-    // Properties
-    this.isPlayingProperty.reset();
-
     // sub-models
     this.environmentModel.reset();
     this.populationModel.reset();
     this.proportionsModel.reset();
     this.pedigreeModel.reset();
+
+    // Properties that apply to the entire model
+    this.isPlayingProperty.reset();
+    this.simulationStateProperty.reset();
   }
 
   /**

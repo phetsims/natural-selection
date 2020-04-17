@@ -382,6 +382,14 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "EnumerationIO(POPULATION|PROPORTIONS|PEDIGREE)"
     },
+    "EnumerationIO(STAGED|ACTIVE|COMPLETED)": {
+      "documentation": "Possible values: STAGED,ACTIVE,COMPLETED.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ObjectIO",
+      "typeName": "EnumerationIO(STAGED|ACTIVE|COMPLETED)"
+    },
     "EventIO": {
       "documentation": "A DOM Event",
       "events": [],
@@ -479,6 +487,19 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "FunctionIO(EnumerationIO(POPULATION|PROPORTIONS|PEDIGREE),NullableIO<EnumerationIO(POPULATION|PROPORTIONS|PEDIGREE)>)=>VoidIO"
+    },
+    "FunctionIO(EnumerationIO(STAGED|ACTIVE|COMPLETED),NullableIO<EnumerationIO(STAGED|ACTIVE|COMPLETED)>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> EnumerationIO(STAGED|ACTIVE|COMPLETED), NullableIO<EnumerationIO(STAGED|ACTIVE|COMPLETED)><br><strong>Return Type:</strong> VoidIO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EnumerationIO(STAGED|ACTIVE|COMPLETED)",
+        "NullableIO<EnumerationIO(STAGED|ACTIVE|COMPLETED)>",
+        "VoidIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "FunctionIO(EnumerationIO(STAGED|ACTIVE|COMPLETED),NullableIO<EnumerationIO(STAGED|ACTIVE|COMPLETED)>)=>VoidIO"
     },
     "FunctionIO(NullableIO<AlleleIO>,NullableIO<NullableIO<AlleleIO>>)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> NullableIO<AlleleIO>, NullableIO<NullableIO<AlleleIO>><br><strong>Return Type:</strong> VoidIO",
@@ -782,6 +803,17 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "NullableIO<EnumerationIO(POPULATION|PROPORTIONS|PEDIGREE)>"
+    },
+    "NullableIO<EnumerationIO(STAGED|ACTIVE|COMPLETED)>": {
+      "documentation": "A wrapper to wrap another IOType, adding support for null.",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "EnumerationIO(STAGED|ACTIVE|COMPLETED)"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "NullableIO<EnumerationIO(STAGED|ACTIVE|COMPLETED)>"
     },
     "NullableIO<FocusIO>": {
       "documentation": "A wrapper to wrap another IOType, adding support for null.",
@@ -1413,6 +1445,50 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       ],
       "supertype": "ObjectIO",
       "typeName": "PropertyIO<EnumerationIO(POPULATION|PROPORTIONS|PEDIGREE)>"
+    },
+    "PropertyIO<EnumerationIO(STAGED|ACTIVE|COMPLETED)>": {
+      "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",
+      "events": [
+        "changed"
+      ],
+      "methodOrder": [
+        "link",
+        "lazyLink"
+      ],
+      "methods": {
+        "getValue": {
+          "documentation": "Gets the current value.",
+          "parameterTypes": [],
+          "returnType": "EnumerationIO(STAGED|ACTIVE|COMPLETED)"
+        },
+        "lazyLink": {
+          "documentation": "Adds a listener which will be called when the value changes. This method is like \"link\", but without the current-value callback on registration. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO(EnumerationIO(STAGED|ACTIVE|COMPLETED),NullableIO<EnumerationIO(STAGED|ACTIVE|COMPLETED)>)=>VoidIO"
+          ],
+          "returnType": "VoidIO"
+        },
+        "link": {
+          "documentation": "Adds a listener which will be called when the value changes. On registration, the listener is also called with the current value. The listener takes two arguments, the new value and the previous value.",
+          "parameterTypes": [
+            "FunctionIO(EnumerationIO(STAGED|ACTIVE|COMPLETED),NullableIO<EnumerationIO(STAGED|ACTIVE|COMPLETED)>)=>VoidIO"
+          ],
+          "returnType": "VoidIO"
+        },
+        "setValue": {
+          "documentation": "Sets the value of the Property. If the value differs from the previous value, listeners are notified with the new value.",
+          "invocableForReadOnlyElements": false,
+          "parameterTypes": [
+            "EnumerationIO(STAGED|ACTIVE|COMPLETED)"
+          ],
+          "returnType": "VoidIO"
+        }
+      },
+      "parameterTypes": [
+        "EnumerationIO(STAGED|ACTIVE|COMPLETED)"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "PropertyIO<EnumerationIO(STAGED|ACTIVE|COMPLETED)>"
     },
     "PropertyIO<NullableIO<AlleleIO>>": {
       "documentation": "Observable values that send out notifications when the value changes. This differs from the traditional listener pattern in that added listeners also receive a callback with the current value when the listeners are registered. This is a widely-used pattern in PhET-iO simulations.",

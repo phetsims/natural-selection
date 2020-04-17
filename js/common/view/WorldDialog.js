@@ -1,6 +1,6 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
-//TODO adjust margins, spacing, and maxWidth after integration final artwork
+//TODO adjust margins, spacing, and maxWidth after integrating final artwork
 /**
  * WorldDialog is displayed when all the bunnies have taken over the world.
  *
@@ -13,8 +13,8 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Dialog from '../../../../sun/js/Dialog.js';
 import worldImage from '../../../images/world_png.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import naturalSelection from '../../naturalSelection.js';
+import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
 class WorldDialog extends Dialog {

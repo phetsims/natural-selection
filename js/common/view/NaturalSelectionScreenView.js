@@ -11,13 +11,12 @@ import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionModel from '../model/NaturalSelectionModel.js';
+import SimulationState from '../model/SimulationState.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import AddAMateButton from './AddAMateButton.js';
 import AddMutationsPanel from './AddMutationsPanel.js';
 import DiedDialog from './DiedDialog.js';
 import EnvironmentalFactorsPanel from './EnvironmentalFactorsPanel.js';
@@ -27,8 +26,7 @@ import GraphsRadioButtonGroup from './GraphsRadioButtonGroup.js';
 import MutationAlertsNode from './MutationAlertsNode.js';
 import NaturalSelectionViewProperties from './NaturalSelectionViewProperties.js';
 import PedigreeNode from './pedigree/PedigreeNode.js';
-import PlayAgainButton from './PlayAgainButton.js';
-import PlayButton from './PlayButton.js';
+import PlayButtonGroup from './PlayButtonGroup.js';
 import PopulationNode from './population/PopulationNode.js';
 import ProportionsNode from './proportions/ProportionsNode.js';
 import WorldDialog from './WorldDialog.js';
@@ -134,7 +132,7 @@ class NaturalSelectionScreenView extends ScreenView {
         stepForwardButtonOptions: {
 
           //TODO Should this step such that generationClock.timeProperty.value is a multiple of SECONDS_PER_STEP?
-          listener: () =>  {
+          listener: () => {
             model.stepOnce( NaturalSelectionConstants.SECONDS_PER_STEP );
             this.stepOnce( NaturalSelectionConstants.SECONDS_PER_STEP );
           }
@@ -157,60 +155,16 @@ class NaturalSelectionScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
-    const playButtonGroupTandem = options.tandem.createTandem( 'playButtonGroup' );
-
-    // 'Add a Mate' push button, for when the initial population consists of a single bunny
-    const addAMateButton = new AddAMateButton( {
-      listener: () => {
-        addAMateButton.visible = false;
-        model.environmentModel.addAMate();
-        model.environmentModel.generationClock.isRunningProperty.value = true;
-      },
-      tandem: playButtonGroupTandem.createTandem( 'addAMateButton' )
-    } );
-
-    // 'Play' push button, for when the initial population consists of more than one bunny
-    const playButton = new PlayButton( {
-      listener: () => {
-        playButton.visible = false;
-        model.environmentModel.generationClock.isRunningProperty.value = true;
-      },
-      center: addAMateButton.center,
-      tandem: playButtonGroupTandem.createTandem( 'playButton' )
-    } );
-
-    // Set the state of UI components based on whether the user is reviewing the final state of the game.
-    // While reviewing, some UI components are disabled.
-    const setReviewingFinalState = isReviewing => {
-
-      // visibility of push buttons
-      addAMateButton.visible = !isReviewing && ( model.environmentModel.bunnyGroup.numberOfBunniesProperty.value === 1 );
-      playButton.visible = !isReviewing && ( model.environmentModel.bunnyGroup.numberOfBunniesProperty.value > 1 );
-      playAgainButton.visible = isReviewing;
-
-      // enabled state of controls
-      addMutationsPanel.setContentEnabled( !isReviewing );
-      environmentalFactorsPanel.setContentEnabled( !isReviewing );
-      timeControlNode.enabledProperty.value = !isReviewing;
-    };
-
-    // 'Play Again' push button, displayed after the game ends, while the user is reviewing the final state
-    const playAgainButton = new PlayAgainButton( {
-      listener: () => {
-        model.reset();
-        setReviewingFinalState( false );
-      },
-      center: addAMateButton.center,
-      tandem: playButtonGroupTandem.createTandem( 'playAgainButton' )
-    } );
-
-    // Parent for the 3 buttons that are related to playing the 'game'
-    const playButtonGroup = new Node( {
-      children: [ addAMateButton, playButton, playAgainButton ],
-      centerX: environmentNode.centerX,
-      bottom: environmentNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
-      tandem: playButtonGroupTandem
-    } );
+    // The different buttons that can be used to make the simulation begin playing.
+    const playButtonGroup = new PlayButtonGroup(
+      model.simulationStateProperty,
+      model.environmentModel.bunnyGroup.numberOfBunniesProperty, {
+        addAMate: () => model.environmentModel.addAMate(),
+        playAgain: () => model.reset(),
+        centerX: environmentNode.centerX,
+        bottom: environmentNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
+        tandem: options.tandem.createTandem( 'playButtonGroup' )
+      } );
 
     // layering
     this.children = [
@@ -232,42 +186,47 @@ class NaturalSelectionScreenView extends ScreenView {
       addMutationsPanel.reset();
       mutationAlertsNode.reset();
       populationNode.reset();
-      setReviewingFinalState( false );
     };
 
-    // Dialogs, displayed when the 'game' ends because bunnies have taken over the world, or all bunnies have died.
-    const dialogOptions = {
-
-      // When the dialog is shown...
-      showCallback: () => {
-
-        // pause the sim
-        model.isPlayingProperty.value = false;
-
-        // put the UI in the state where the user is reviewing the final state of the game
-        setReviewingFinalState( true );
-      },
-
-      // When the dialog is hidden...
-      hideCallback: () => {
-        playAgainButton.visible = true;
+    // The state of the simulation determines which UI controls are enabled. 
+    model.simulationStateProperty.link( simulationState => {
+      if ( simulationState === SimulationState.STAGED ) {
+        addMutationsPanel.setContentEnabled( true );
+        environmentalFactorsPanel.setContentEnabled( true );
+        timeControlNode.enabledProperty.value = true;
       }
-    };
-    const diedDialog = new DiedDialog( dialogOptions );
-    const worldDialog = new WorldDialog( dialogOptions );
+      else if ( simulationState === SimulationState.ACTIVE ) {
+        addMutationsPanel.setContentEnabled( true );
+        environmentalFactorsPanel.setContentEnabled( true );
+        timeControlNode.enabledProperty.value = true;
+      }
+      else if ( simulationState === SimulationState.COMPLETED ) {
+        addMutationsPanel.setContentEnabled( false );
+        environmentalFactorsPanel.setContentEnabled( false );
+        timeControlNode.enabledProperty.value = false;
+      }
+      else {
+        throw new Error( `invalid simulationState: ${simulationState}` );
+      }
+    } );
 
+    // Display a dialog when all bunnies have died.
+    const diedDialog = new DiedDialog();
     model.environmentModel.bunnyGroup.allBunniesHaveDiedEmitter.addListener( () => {
       diedDialog.show();
+      model.simulationStateProperty.value = SimulationState.COMPLETED;
     } );
+
+    // Display a dialog when bunnies have taken over the world.
+    const worldDialog = new WorldDialog();
     model.environmentModel.bunnyGroup.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
       worldDialog.show();
+      model.simulationStateProperty.value = SimulationState.COMPLETED;
     } );
 
     // @private
     this.model = model;
     this.environmentNode = environmentNode;
-
-    setReviewingFinalState( false );
   }
 
   /**
