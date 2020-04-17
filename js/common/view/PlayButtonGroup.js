@@ -13,7 +13,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import SimulationState from '../model/SimulationState.js';
+import SimulationMode from '../model/SimulationMode.js';
 import AddAMateButton from './AddAMateButton.js';
 import PlayAgainButton from './PlayAgainButton.js';
 import PlayButton from './PlayButton.js';
@@ -21,12 +21,12 @@ import PlayButton from './PlayButton.js';
 class PlayButtonGroup extends Node {
 
   /**
-   * @param {EnumerationProperty.<SimulationState>} simulationStateProperty
+   * @param {EnumerationProperty.<SimulationMode>} simulationModeProperty
    * @param {Property.<number>} numberOfBunniesProperty
    * @param {Object} [options]
    */
-  constructor( simulationStateProperty, numberOfBunniesProperty, options ) {
-    assert && assert( simulationStateProperty instanceof EnumerationProperty, 'invalid simulationStateProperty' );
+  constructor( simulationModeProperty, numberOfBunniesProperty, options ) {
+    assert && assert( simulationModeProperty instanceof EnumerationProperty, 'invalid simulationModeProperty' );
     assert && assert( numberOfBunniesProperty instanceof Property, 'invalid numberOfBunniesProperty' );
 
     options = merge( {
@@ -44,7 +44,7 @@ class PlayButtonGroup extends Node {
     const addAMateButton = new AddAMateButton( {
       listener: () => {
         options.addAMate();
-        simulationStateProperty.value = SimulationState.ACTIVE;
+        simulationModeProperty.value = SimulationMode.ACTIVE;
       },
       tandem: options.tandem.createTandem( 'addAMateButton' )
     } );
@@ -53,7 +53,7 @@ class PlayButtonGroup extends Node {
     const playButton = new PlayButton( {
       listener: () => {
         options.play();
-        simulationStateProperty.value = SimulationState.ACTIVE;
+        simulationModeProperty.value = SimulationMode.ACTIVE;
       },
       center: addAMateButton.center,
       tandem: options.tandem.createTandem( 'playButton' )
@@ -63,7 +63,7 @@ class PlayButtonGroup extends Node {
     const playAgainButton = new PlayAgainButton( {
       listener: () => {
         options.playAgain();
-        simulationStateProperty.value = SimulationState.STAGED;
+        simulationModeProperty.value = SimulationMode.STAGED;
       },
       center: addAMateButton.center,
       tandem: options.tandem.createTandem( 'playAgainButton' )
@@ -75,25 +75,25 @@ class PlayButtonGroup extends Node {
     super( options );
 
     Property.multilink(
-      [ simulationStateProperty, numberOfBunniesProperty ],
-      ( simulationState, numberOfBunnies ) => {
-        if ( simulationState === SimulationState.STAGED ) {
+      [ simulationModeProperty, numberOfBunniesProperty ],
+      ( simulationMode, numberOfBunnies ) => {
+        if ( simulationMode === SimulationMode.STAGED ) {
           addAMateButton.visible = ( numberOfBunnies === 1 );
           playButton.visible = ( numberOfBunnies > 1 );
           playAgainButton.visible = false;
         }
-        else if ( simulationState === SimulationState.ACTIVE ) {
+        else if ( simulationMode === SimulationMode.ACTIVE ) {
           addAMateButton.visible = false;
           playButton.visible = false;
           playAgainButton.visible = false;
         }
-        else if ( simulationState === SimulationState.COMPLETED ) {
+        else if ( simulationMode === SimulationMode.COMPLETED ) {
           addAMateButton.visible = false;
           playButton.visible = false;
           playAgainButton.visible = true;
         }
         else {
-          throw new Error( `unsupported simulationState: ${simulationState}` );
+          throw new Error( `unsupported simulationMode: ${simulationMode}` );
         }
 
         assert && assert(

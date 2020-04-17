@@ -15,7 +15,7 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionModel from '../model/NaturalSelectionModel.js';
-import SimulationState from '../model/SimulationState.js';
+import SimulationMode from '../model/SimulationMode.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import AddMutationsPanel from './AddMutationsPanel.js';
 import DiedDialog from './DiedDialog.js';
@@ -157,7 +157,7 @@ class NaturalSelectionScreenView extends ScreenView {
 
     // The different buttons that can be used to make the simulation begin playing.
     const playButtonGroup = new PlayButtonGroup(
-      model.simulationStateProperty,
+      model.simulationModeProperty,
       model.environmentModel.bunnyGroup.numberOfBunniesProperty, {
         addAMate: () => model.environmentModel.addAMate(),
         playAgain: () => model.reset(),
@@ -188,25 +188,25 @@ class NaturalSelectionScreenView extends ScreenView {
       populationNode.reset();
     };
 
-    // The state of the simulation determines which UI controls are enabled. 
-    model.simulationStateProperty.link( simulationState => {
-      if ( simulationState === SimulationState.STAGED ) {
+    // Simulation mode determines which UI controls are enabled.
+    model.simulationModeProperty.link( simulationMode => {
+      if ( simulationMode === SimulationMode.STAGED ) {
         addMutationsPanel.setContentEnabled( true );
         environmentalFactorsPanel.setContentEnabled( true );
         timeControlNode.enabledProperty.value = true;
       }
-      else if ( simulationState === SimulationState.ACTIVE ) {
+      else if ( simulationMode === SimulationMode.ACTIVE ) {
         addMutationsPanel.setContentEnabled( true );
         environmentalFactorsPanel.setContentEnabled( true );
         timeControlNode.enabledProperty.value = true;
       }
-      else if ( simulationState === SimulationState.COMPLETED ) {
+      else if ( simulationMode === SimulationMode.COMPLETED ) {
         addMutationsPanel.setContentEnabled( false );
         environmentalFactorsPanel.setContentEnabled( false );
         timeControlNode.enabledProperty.value = false;
       }
       else {
-        throw new Error( `invalid simulationState: ${simulationState}` );
+        throw new Error( `invalid simulationMode: ${simulationMode}` );
       }
     } );
 
@@ -214,14 +214,14 @@ class NaturalSelectionScreenView extends ScreenView {
     const diedDialog = new DiedDialog();
     model.environmentModel.bunnyGroup.allBunniesHaveDiedEmitter.addListener( () => {
       diedDialog.show();
-      model.simulationStateProperty.value = SimulationState.COMPLETED;
+      model.simulationModeProperty.value = SimulationMode.COMPLETED;
     } );
 
     // Display a dialog when bunnies have taken over the world.
     const worldDialog = new WorldDialog();
     model.environmentModel.bunnyGroup.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
       worldDialog.show();
-      model.simulationStateProperty.value = SimulationState.COMPLETED;
+      model.simulationModeProperty.value = SimulationMode.COMPLETED;
     } );
 
     // @private

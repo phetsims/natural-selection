@@ -14,7 +14,7 @@ import EnvironmentModel from './EnvironmentModel.js';
 import PedigreeModel from './PedigreeModel.js';
 import PopulationModel from './PopulationModel.js';
 import ProportionsModel from './ProportionsModel.js';
-import SimulationState from './SimulationState.js';
+import SimulationMode from './SimulationMode.js';
 
 class NaturalSelectionModel {
 
@@ -31,8 +31,8 @@ class NaturalSelectionModel {
     } );
 
     // @public
-    this.simulationStateProperty = new EnumerationProperty( SimulationState, SimulationState.STAGED, {
-      tandem: tandem.createTandem( 'simulationStateProperty' ),
+    this.simulationModeProperty = new EnumerationProperty( SimulationMode, SimulationMode.STAGED, {
+      tandem: tandem.createTandem( 'simulationModeProperty' ),
       phetioReadOnly: true
     } );
 
@@ -62,26 +62,26 @@ class NaturalSelectionModel {
     } );
 
     // When the simulation state changes, adjust the model.
-    this.simulationStateProperty.link( simulationState => {
-      phet.log && phet.log( `simulationState=${simulationState}` );
+    this.simulationModeProperty.link( simulationMode => {
+      phet.log && phet.log( `simulationMode=${simulationMode}` );
 
-      // SimulationState indicates a state CHANGE, it does not describe a full state.
+      // SimulationMode indicates which mode the simulation is in. It does not describe a full state of that mode.
       // Do nothing when PhET-iO is restoring state, or saved state will be overwritten.
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
-        if ( simulationState === SimulationState.STAGED ) {
+        if ( simulationMode === SimulationMode.STAGED ) {
           this.isPlayingProperty.value = true;
           this.environmentModel.generationClock.isRunningProperty.value = false;
         }
-        else if ( simulationState === SimulationState.ACTIVE ) {
+        else if ( simulationMode === SimulationMode.ACTIVE ) {
           this.isPlayingProperty.value = true;
           this.environmentModel.generationClock.isRunningProperty.value = true;
         }
-        else if ( simulationState === SimulationState.COMPLETED ) {
+        else if ( simulationMode === SimulationMode.COMPLETED ) {
           this.isPlayingProperty.value = false;
           this.environmentModel.generationClock.isRunningProperty.value = false;
         }
         else {
-          throw new Error( `unsupported simulationState: ${simulationState}` );
+          throw new Error( `unsupported simulationMode: ${simulationMode}` );
         }
       }
     } );
@@ -101,7 +101,7 @@ class NaturalSelectionModel {
 
     // Properties that apply to the entire model
     this.isPlayingProperty.reset();
-    this.simulationStateProperty.reset();
+    this.simulationModeProperty.reset();
   }
 
   /**
