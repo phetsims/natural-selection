@@ -1,6 +1,7 @@
 TODO list for natural-selection
 
 FEATURES
+encapsulate Add A Mate, Play, Play Again buttons
 make bunnies mate
 add counts to EnvironmentModel
 When the game ends, or the sim is stepped, the generation clock may not be at exactly 12:00
