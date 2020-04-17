@@ -89,7 +89,7 @@ class BunnyGroup extends PhetioGroup {
     this.bunniesHaveTakenOverTheWorldEmitter = new Emitter();
 
     // When a bunny is created...
-    this.addMemberCreatedListener( bunny => {
+    this.elementCreatedEmitter.addListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
       // When a bunny dies...
@@ -116,7 +116,7 @@ class BunnyGroup extends PhetioGroup {
     } );
 
     // When a bunny is disposed...
-    this.addMemberDisposedListener( bunny => {
+    this.elementDisposedEmitter.addListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
       this.numberOfBunniesProperty.value = this.length;
       this.bunnyDisposedEmitter.emit( bunny );
