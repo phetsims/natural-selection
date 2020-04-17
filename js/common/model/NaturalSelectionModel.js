@@ -29,7 +29,7 @@ class NaturalSelectionModel {
     } );
 
     // @public (read-only)
-    this.environmentModel = new EnvironmentModel( this.isPlayingProperty, {
+    this.environmentModel = new EnvironmentModel( {
       tandem: tandem.createTandem( 'environmentModel' )
     } );
 
@@ -84,11 +84,14 @@ class NaturalSelectionModel {
    * @override
    */
   step( dt ) {
-    this.stepOnce( dt );
+    if ( this.isPlayingProperty.value ) {
+      this.stepOnce( dt );
+    }
   }
 
   /**
    * Steps the model one time step. Used by the time controls Step button.
+   * @param {number} dt - time step, in seconds
    * @public
    */
   stepOnce( dt ) {

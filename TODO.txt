@@ -1,7 +1,6 @@
 TODO list for natural-selection
 
 FEATURES
-Step button is broken
 make bunnies mate
 add counts to EnvironmentModel
 

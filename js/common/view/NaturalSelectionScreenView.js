@@ -134,7 +134,10 @@ class NaturalSelectionScreenView extends ScreenView {
         stepForwardButtonOptions: {
 
           //TODO Should this step such that generationClock.timeProperty.value is a multiple of SECONDS_PER_STEP?
-          listener: () => model.stepOnce( NaturalSelectionConstants.SECONDS_PER_STEP )
+          listener: () =>  {
+            model.stepOnce( NaturalSelectionConstants.SECONDS_PER_STEP );
+            this.stepOnce( NaturalSelectionConstants.SECONDS_PER_STEP );
+          }
         }
       },
       left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
@@ -283,13 +286,23 @@ class NaturalSelectionScreenView extends ScreenView {
   }
 
   /**
+   * Steps the view.
    * @param {number} dt - time step, in seconds
    * @public
    */
   step( dt ) {
     if ( this.model.isPlayingProperty.value ) {
-      this.environmentNode.step( dt );
+      this.stepOnce( dt );
     }
+  }
+
+  /**
+   * Steps the view one time step. Used by the time controls Step button.
+   * @param {number} dt - time step, in seconds
+   * @public
+   */
+  stepOnce( dt ) {
+    this.environmentNode.step( dt );
   }
 }
 

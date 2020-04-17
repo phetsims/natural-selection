@@ -30,10 +30,9 @@ import Wolves from './Wolves.js';
 class EnvironmentModel extends PhetioObject {
 
   /**
-   * {Property.<boolean>} isPlayingProperty
    * @param {Object} [options]
    */
-  constructor( isPlayingProperty, options ) {
+  constructor( options ) {
 
     options = merge( {
 
@@ -44,9 +43,6 @@ class EnvironmentModel extends PhetioObject {
     }, options );
 
     super( options );
-
-    // @private
-    this.isPlayingProperty = isPlayingProperty;
 
     // @public (read-only)
     this.generationClock = new GenerationClock( {
@@ -135,14 +131,12 @@ class EnvironmentModel extends PhetioObject {
    * @public
    */
   step( dt ) {
-    if ( this.isPlayingProperty.value ) {
 
-      // step the generation clock
-      this.generationClock.step( dt );
+    // step the generation clock
+    this.generationClock.step( dt );
 
-      // move the bunnies
-      this.bunnyGroup.moveBunnies( dt );
-    }
+    // move the bunnies
+    this.bunnyGroup.moveBunnies( dt );
   }
 
   //TODO read query parameters and create initial population
