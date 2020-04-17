@@ -104,14 +104,14 @@ class EnvironmentNode extends Node {
       assert && assert( !bunny.isDisposed, 'bunny is disposed' );
 
       // Create the BunnyNode
-      const bunnyNode = this.bunnyNodeGroup.createCorrespondingGroupMember( bunny, bunny );
+      const bunnyNode = this.bunnyNodeGroup.createCorrespondingGroupElement( bunny, bunny );
       spritesNode.addChild( bunnyNode );
 
       // If the bunny is disposed or dies, remove listener and delete the associated BunnyNode.
       const cleanupListener = disposedBunny => {
         if ( disposedBunny === bunny ) {
           environmentModel.bunnyGroup.bunnyDisposedEmitter.removeListener( cleanupListener );
-          this.bunnyNodeGroup.disposeMember( bunnyNode );
+          this.bunnyNodeGroup.disposeElement( bunnyNode );
         }
       };
       environmentModel.bunnyGroup.bunnyDisposedEmitter.addListener( cleanupListener );

@@ -155,7 +155,7 @@ class EnvironmentModel extends PhetioObject {
     assert && assert( this.bunnyGroup.length === 0, 'bunnies already exist' );
 
     for ( let i = 0; i < NaturalSelectionQueryParameters.population; i++ ) {
-      this.bunnyGroup.createNextMember( {
+      this.bunnyGroup.createNextElement( {
         generation: 0,
         position: this.modelViewTransform.getRandomGroundPosition(),
         direction: SpriteDirection.getRandom()
@@ -175,7 +175,7 @@ class EnvironmentModel extends PhetioObject {
     const generation = this.generationClock.currentGenerationProperty.value;
     assert && assert( generation === 0, `unexpected generation for addAMate: ${generation}` );
 
-    this.bunnyGroup.createNextMember( {
+    this.bunnyGroup.createNextElement( {
       generation: generation,
       position: this.modelViewTransform.getRandomGroundPosition(),
       direction: SpriteDirection.getRandom()

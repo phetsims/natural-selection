@@ -34,7 +34,7 @@ class BunnyIO extends ObjectIO {
   }
 
   /**
-   * Creates the args to BunnyGroup.createNextMember that creates Bunny instances.
+   * Creates the args to BunnyGroup.createNextElement that creates Bunny instances.
    * @param state
    * @returns {Object[]}
    */
