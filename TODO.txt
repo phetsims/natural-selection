@@ -1,12 +1,12 @@
 TODO list for natural-selection
 
 FEATURES
+Step button is broken
 make bunnies mate
 add counts to EnvironmentModel
 
 PhET-iO
 
 DESIGN
-Make graphs wider by making control panels narrower?
 Move time controls near generation clock?
 If the Add a Mate, Play, or Play Again button is pressed while the clock is paused, should it be unpaused?
