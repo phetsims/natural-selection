@@ -44,20 +44,20 @@ class BunnyGroup extends PhetioGroup {
      * Called to instantiate a Bunny. Note that modelViewTransform and genePool are passed via closure, so we don't
      * have to create it as part of defaultArguments, and don't have to deal with serializing it in BunnyIO.
      * @param {Tandem} tandem - PhetioGroup requires tandem to be the first param
-     * @param {Object} bunnyOptions - options to Bunny constructor, not actually optional, because createMember
+     * @param {Object} bunnyOptions - options to Bunny constructor, not actually optional, because createElement
      *                                must have a fixed number of args
      * @returns {Bunny}
      */
-    const createMember = ( tandem, bunnyOptions ) => {
+    const createElement = ( tandem, bunnyOptions ) => {
       return new Bunny( modelViewTransform, genePool, merge( {}, bunnyOptions, {
         tandem: tandem
       } ) );
     };
 
-    // defaultArguments, passed to createMember during API harvest (when running 'grunt generate-phet-io-api-files').
+    // defaultArguments, passed to createElement during API harvest (when running 'grunt generate-phet-io-api-files').
     const defaultArguments = [ {} ];
 
-    super( createMember, defaultArguments, options );
+    super( createElement, defaultArguments, options );
 
     // @public (read-only)
     this.numberOfBunniesProperty = new NumberProperty( 0, {

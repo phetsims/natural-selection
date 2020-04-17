@@ -45,17 +45,17 @@ class BunnyNodeGroup extends PhetioGroup {
      * @param {Bunny} bunny
      * @returns {Bunny}
      */
-    const createMember = ( tandem, bunny ) => {
+    const createElement = ( tandem, bunny ) => {
       return new BunnyNode( bunny, selectedBunnyProperty, {
         tandem: tandem
       } );
     };
 
-    // defaultArguments, passed to createMember during API harvest (when running 'grunt generate-phet-io-api-files').
+    // defaultArguments, passed to createElement during API harvest (when running 'grunt generate-phet-io-api-files').
     // Note that bunnyGroup.archetype is null except during API harvest.
     const defaultArguments = [ bunnyGroup.archetype ];
 
-    super( createMember, defaultArguments, options );
+    super( createElement, defaultArguments, options );
   }
 }
 
