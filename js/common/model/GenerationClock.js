@@ -113,8 +113,8 @@ class GenerationClock extends PhetioObject {
   }
 
   /**
-   * Sets timeProperty, the time that the generation clock has been running, in seconds.
-   * As time advances, the clock will always snap to the 12:00 position, which is when bunny mating and dying occurs.
+   * Sets timeProperty, the time that the generation clock has been running, in seconds. As time passed through the
+   * 12:00 position, it will always snap to the 12:00 position, which is when bunny mating and dying occurs.
    * @param {number} dt - the time step, in seconds
    * @private
    */
