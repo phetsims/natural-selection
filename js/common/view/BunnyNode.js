@@ -17,6 +17,7 @@ import bunnyWhiteFurStraightEarsShortTeethImage from '../../../images/bunny-whit
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import BunnyNodeIO from './BunnyNodeIO.js';
 import SpriteNode from './SpriteNode.js';
 
@@ -64,7 +65,7 @@ class BunnyNode extends SpriteNode {
     options.children = [ selectionRectangle, image ];
 
     // Red dot at the origin
-    if ( phet.chipper.queryParameters.dev ) {
+    if ( NaturalSelectionQueryParameters.showSpriteInfo ) {
       options.children.push( new Circle( 2, { fill: 'red' } ) );
     }
 

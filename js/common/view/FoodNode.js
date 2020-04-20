@@ -13,6 +13,7 @@ import Image from '../../../../scenery/js/nodes/Image.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../naturalSelection.js';
 import Food from '../model/Food.js';
+import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import SpriteNode from './SpriteNode.js';
 
 // constants
@@ -45,7 +46,7 @@ class FoodNode extends SpriteNode {
     assert && assert( !options.children, 'FoodNode sets children' );
     options.children = [ toughFoodNode, tenderFoodNode ];
 
-    if ( phet.chipper.queryParameters.dev ) {
+    if ( NaturalSelectionQueryParameters.showSpriteInfo ) {
 
       // Red dot at the origin
       const originNode = new Circle( 2, { fill: 'red' } );

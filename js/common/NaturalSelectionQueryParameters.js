@@ -92,6 +92,16 @@ const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
     type: 'number',
     defaultValue: 1000,
     isValidValue: maxBunnies => ( maxBunnies > 0 && Utils.isInteger( maxBunnies ) )
+  },
+
+  // Adds debugging information to sprites (bunnies, wolves, food)
+  showSpriteInfo: {
+    type: 'flag'
+  },
+
+  // Draws a red line where the horizon is located.
+  showHorizon: {
+    type: 'flag'
   }
 } );
 
