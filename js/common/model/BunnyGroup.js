@@ -237,7 +237,7 @@ class BunnyGroup extends PhetioGroup {
    * @returns {Bunny}
    * @public
    */
-    createBunny( father, mother, generation ) {
+  createBunny( father, mother, generation ) {
     assert && assert( father instanceof Bunny || father === null, 'invalid father' );
     assert && assert( mother instanceof Bunny || mother === null, 'invalid mother' );
     assert && assert( typeof generation === 'number', 'invalid generation' );
