@@ -629,6 +629,18 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "FunctionIO(RangeIO,NullableIO<RangeIO>)=>VoidIO"
     },
+    "FunctionIO(ReferenceIO<BunnyIO>)=>VoidIO": {
+      "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> ReferenceIO<BunnyIO><br><strong>Return Type:</strong> VoidIO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "parameterTypes": [
+        "ReferenceIO<BunnyIO>",
+        "VoidIO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "FunctionIO(ReferenceIO<BunnyIO>)=>VoidIO"
+    },
     "FunctionIO(ScreenIO,NullableIO<ScreenIO>)=>VoidIO": {
       "documentation": "Wrapper for the built-in JS function type.<br><strong>Arguments:</strong> ScreenIO, NullableIO<ScreenIO><br><strong>Return Type:</strong> VoidIO",
       "events": [],
@@ -997,6 +1009,40 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "methods": {},
       "supertype": null,
       "typeName": "ObjectIO"
+    },
+    "ObservableArrayIO<ReferenceIO<BunnyIO>>": {
+      "documentation": "An array that sends notifications when its values have changed.",
+      "events": [
+        "itemAdded",
+        "itemRemoved"
+      ],
+      "methodOrder": [],
+      "methods": {
+        "addItemAddedListener": {
+          "documentation": "Add a listener that is called when an item is added to the observable array.",
+          "parameterTypes": [
+            "FunctionIO(ReferenceIO<BunnyIO>)=>VoidIO"
+          ],
+          "returnType": "VoidIO"
+        },
+        "addItemRemovedListener": {
+          "documentation": "Add a listener that is called when an item is removed from the observable array.",
+          "parameterTypes": [
+            "FunctionIO(ReferenceIO<BunnyIO>)=>VoidIO"
+          ],
+          "returnType": "VoidIO"
+        },
+        "getLength": {
+          "documentation": "Get the number of elements in the observable array",
+          "parameterTypes": [],
+          "returnType": "NumberIO"
+        }
+      },
+      "parameterTypes": [
+        "ReferenceIO<BunnyIO>"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "ObservableArrayIO<ReferenceIO<BunnyIO>>"
     },
     "PhetButtonIO": {
       "documentation": "The PhET Button in the bottom right of the screen",

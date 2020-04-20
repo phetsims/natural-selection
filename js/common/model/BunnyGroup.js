@@ -9,10 +9,13 @@
 
 import Emitter from '../../../../axon/js/Emitter.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import ObservableArray from '../../../../axon/js/ObservableArray.js';
+import ObservableArrayIO from '../../../../axon/js/ObservableArrayIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
 import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import Bunny from './Bunny.js';
@@ -60,11 +63,23 @@ class BunnyGroup extends PhetioGroup {
     super( createElement, defaultArguments, options );
 
     // @public (read-only)
-    this.numberOfBunniesProperty = new NumberProperty( 0, {
+    this.totalNumberOfBunniesProperty = new NumberProperty( 0, {
       numberType: 'Integer',
-      tandem: options.tandem.createTandem( 'numberOfBunniesProperty' ),
+      tandem: options.tandem.createTandem( 'totalNumberOfBunniesProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'the total number of bunnies, alive and dead'
+    } );
+
+    // @public (read-only) {ObservableArray.<Bunny>} the live bunnies in the group
+    this.liveBunnies = new ObservableArray( {
+      tandem: options.tandem.createTandem( 'liveBunnies' ),
+      phetioType: ObservableArrayIO( ReferenceIO( BunnyIO ) )
+    } );
+
+    // @public (read-only) {ObservableArray.<Bunny>} the dead bunnies in the group
+    this.deadBunnies = new ObservableArray( {
+      tandem: options.tandem.createTandem( 'deadBunnies' ),
+      phetioType: ObservableArrayIO( ReferenceIO( BunnyIO ) )
     } );
 
     // @public notify when a bunny is created, a nicer API than addMemberCreatedListener
@@ -97,20 +112,23 @@ class BunnyGroup extends PhetioGroup {
         if ( !isAlive ) {
           bunny.isAliveProperty.unlink( isAliveListener );
 
+          this.liveBunnies.remove( bunny );
+          this.deadBunnies.push( bunny );
           this.bunnyDiedEmitter.emit( bunny );
 
-          if ( this.getNumberOfLivingBunnies() === 0 ) {
+          if ( this.liveBunnies.lengthProperty.value === 0 ) {
             this.allBunniesHaveDiedEmitter.emit();
           }
         }
       };
       bunny.isAliveProperty.lazyLink( isAliveListener );
 
-      this.numberOfBunniesProperty.value = this.length;
+      this.liveBunnies.push( bunny );
+      this.totalNumberOfBunniesProperty.value = this.length;
       this.bunnyCreatedEmitter.emit( bunny );
 
       // Notify if bunnies have taken over the world
-      if ( this.getNumberOfLivingBunnies() > NaturalSelectionConstants.MAX_BUNNIES ) {
+      if ( this.liveBunnies.lengthProperty.value > NaturalSelectionConstants.MAX_BUNNIES ) {
         this.bunniesHaveTakenOverTheWorldEmitter.emit();
       }
     } );
@@ -118,7 +136,9 @@ class BunnyGroup extends PhetioGroup {
     // When a bunny is disposed...
     this.elementDisposedEmitter.addListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-      this.numberOfBunniesProperty.value = this.length;
+      this.liveBunnies.contains( bunny ) && this.liveBunnies.remove( bunny );
+      this.deadBunnies.contains( bunny ) && this.deadBunnies.remove( bunny );
+      this.totalNumberOfBunniesProperty.value = this.length;
       this.bunnyDisposedEmitter.emit( bunny );
     } );
   }
@@ -131,29 +151,13 @@ class BunnyGroup extends PhetioGroup {
   }
 
   /**
-   * Gets the number of living bunnies.
-   * @returns {number}
-   */
-  getNumberOfLivingBunnies() {
-    let numberOfLivingBunnies = 0;
-    this.forEach( bunny => {
-      if ( bunny.isAlive ) {
-        numberOfLivingBunnies++;
-      }
-    } );
-    return numberOfLivingBunnies;
-  }
-
-  /**
    * Moves all bunnies that are alive.
    * @param {number} dt - time step, in seconds
    * @public
    */
   moveBunnies( dt ) {
-    this.forEach( bunny => {
-      if ( bunny.isAlive ) {
-        bunny.step( dt );
-      }
+    this.liveBunnies.forEach( bunny => {
+      bunny.step( dt );
     } );
   }
 
@@ -162,15 +166,13 @@ class BunnyGroup extends PhetioGroup {
    * @public
    */
   ageBunnies() {
-    this.forEach( bunny => {
-      if ( bunny.isAlive ) {
-        bunny.ageProperty.value++;
-        if ( bunny.ageProperty.value === NaturalSelectionConstants.MAX_BUNNY_AGE ) {
-          bunny.die();
-        }
-        assert && assert( bunny.ageProperty.value <= NaturalSelectionConstants.MAX_BUNNY_AGE,
-          `bunny age exceeded max: ${bunny.ageProperty.value}` );
+    this.liveBunnies.forEach( bunny => {
+      bunny.ageProperty.value++;
+      if ( bunny.ageProperty.value === NaturalSelectionConstants.MAX_BUNNY_AGE ) {
+        bunny.die();
       }
+      assert && assert( bunny.ageProperty.value <= NaturalSelectionConstants.MAX_BUNNY_AGE,
+        `bunny age exceeded max: ${bunny.ageProperty.value}` );
     } );
   }
 }

@@ -156,7 +156,7 @@ class NaturalSelectionScreenView extends ScreenView {
     // The different buttons that can be used to make the simulation begin playing.
     const playButtonGroup = new PlayButtonGroup(
       model.simulationModeProperty,
-      model.environmentModel.bunnyGroup.numberOfBunniesProperty, {
+      model.environmentModel.bunnyGroup.totalNumberOfBunniesProperty, {
         addAMate: () => model.environmentModel.addAMate(),
         playAgain: () => model.reset(),
         centerX: environmentNode.centerX,
