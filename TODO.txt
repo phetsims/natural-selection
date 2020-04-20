@@ -12,7 +12,6 @@ Wolves
 
 FEATURES
 add counts to EnvironmentModel
-When the game ends, or the sim is stepped, the generation clock may not be at exactly 12:00
 
 PhET-iO
 

@@ -19,6 +19,9 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
+// const
+const TIME_FLOATING_POINT_ERROR = 0.0001; // to compensate for floating-point error in time computation, in seconds
+
 class GenerationClock extends PhetioObject {
 
   /**
@@ -105,7 +108,31 @@ class GenerationClock extends PhetioObject {
    */
   step( dt ) {
     if ( this.isRunningProperty.value ) {
+      this.stepTime( dt );
+    }
+  }
+
+  /**
+   * Sets timeProperty, the time that the generation clock has been running, in seconds.
+   * As time advances, the clock will always snap to the 12:00 position, which is when bunny mating and dying occurs.
+   * @param {number} dt - the time step, in seconds
+   * @private
+   */
+  stepTime( dt ) {
+
+    const currentTime = this.timeProperty.value;
+    const steppedTime = currentTime + dt + TIME_FLOATING_POINT_ERROR;
+
+    const currentGeneration = Math.floor( currentTime / NaturalSelectionConstants.SECONDS_PER_GENERATION );
+    const steppedGeneration = Math.floor( steppedTime / NaturalSelectionConstants.SECONDS_PER_GENERATION );
+
+    if ( currentGeneration === steppedGeneration ) {
+      // not 12:00
       this.timeProperty.value += dt;
+    }
+    else {
+      // snap to 12:00
+      this.timeProperty.value = steppedGeneration * NaturalSelectionConstants.SECONDS_PER_GENERATION;
     }
   }
 }
