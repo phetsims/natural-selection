@@ -9,6 +9,7 @@
  */
 
 import NumberProperty from '../../../../../axon/js/NumberProperty.js';
+import Property from '../../../../../axon/js/Property.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
@@ -76,7 +77,8 @@ class ProportionsGraphNode extends Node {
     // Rows
     const startRow = new Row( naturalSelectionStrings.startOfGeneration, proportionsModel.startCountProperty,
       labelColumnAlignGroup, barColumnsAlignGroup, proportionsModel.valuesVisibleProperty );
-    const currentRow = new Row( naturalSelectionStrings.endOfGeneration, proportionsModel.endCountProperty,
+    // const currentRow = new Row( naturalSelectionStrings.endOfGeneration, proportionsModel.endCountProperty,
+    const currentRow = new Row( naturalSelectionStrings.currently, proportionsModel.endCountProperty,
       labelColumnAlignGroup, barColumnsAlignGroup, proportionsModel.valuesVisibleProperty );
     const rows = new VBox( {
       spacing: 30,
@@ -106,6 +108,18 @@ class ProportionsGraphNode extends Node {
     options.children = [ backgroundNode, content ];
 
     super( options );
+
+    // Change the label for the bottom row, depending on whether we're displaying the current generation.
+    Property.multilink(
+      [ proportionsModel.currentGenerationProperty, proportionsModel.generationProperty ],
+      ( currentGeneration, generation ) => {
+        if ( currentGeneration === generation ) {
+          currentRow.setLabel( naturalSelectionStrings.currently );
+        }
+        else {
+          currentRow.setLabel( naturalSelectionStrings.endOfGeneration );
+        }
+      } );
   }
 
   /**
@@ -175,6 +189,17 @@ class Row extends HBox {
         countNode.text = StringUtils.fillIn( naturalSelectionStrings.countBunnies, { count: count } );
       }
     } );
+
+    // @private
+    this.labelNode = labelNode;
+  }
+
+  /**
+   * Sets the label for the row.
+   * @param {string} labelString
+   */
+  setLabel( labelString ) {
+    this.labelNode.text = labelString;
   }
 
   /**
