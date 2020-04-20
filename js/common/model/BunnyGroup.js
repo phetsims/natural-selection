@@ -165,7 +165,7 @@ class BunnyGroup extends PhetioGroup {
    * Ages all bunnies that are alive. Bunnies that have reached their maximum age will die.
    * @public
    */
-  ageBunnies() {
+  ageAllBunnies() {
     this.liveBunnies.forEach( bunny => {
       bunny.ageProperty.value++;
       if ( bunny.ageProperty.value === NaturalSelectionConstants.MAX_BUNNY_AGE ) {
@@ -174,6 +174,33 @@ class BunnyGroup extends PhetioGroup {
       assert && assert( bunny.ageProperty.value <= NaturalSelectionConstants.MAX_BUNNY_AGE,
         `bunny age exceeded max: ${bunny.ageProperty.value}` );
     } );
+  }
+
+  /**
+   * Randomly pairs up bunnies and mates them. If there is an odd number of bunnies, then one of them will not mate.
+   * @param {number} generation
+   * @public
+   */
+  mateAllBunnies( generation ) {
+    assert && assert( typeof generation === 'number', 'invalid generation' );
+    const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
+    for ( let i = 1; i < bunnies.length; i = i + 2 ) {
+      this.mateBunnies( bunnies[ i - 1 ], bunnies[ i ], generation );
+    }
+  }
+
+  /**
+   * Mates 2 bunnies.
+   * @param {Bunny} bunny1
+   * @param {Bunny} bunny2
+   * @param {number} generation
+   */
+  mateBunnies( bunny1, bunny2, generation ) {
+    assert && assert( bunny1 instanceof Bunny, 'invalid bunny1' );
+    assert && assert( bunny2 instanceof Bunny, 'invalid bunny2' );
+    assert && assert( typeof generation === 'number', 'invalid generation' );
+
+    //TODO
   }
 }
 

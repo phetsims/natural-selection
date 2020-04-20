@@ -92,8 +92,15 @@ class EnvironmentModel extends PhetioObject {
 
     this.initializeBunnyPopulation();
 
-    // Bunnies have a birthday on each cycle of the generation clock.
-    this.generationClock.currentGenerationProperty.lazyLink( () => this.bunnyGroup.ageBunnies() );
+    // When the generation changes...
+    this.generationClock.currentGenerationProperty.lazyLink( currentGeneration => {
+
+      // Every bunny has a birthday.
+      this.bunnyGroup.ageAllBunnies();
+
+      // Every bunny mates (happy birthday!)
+      this.bunnyGroup.mateAllBunnies( currentGeneration );
+    } );
   }
 
   /**
