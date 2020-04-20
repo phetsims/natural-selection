@@ -127,7 +127,7 @@ class GenerationClock extends PhetioObject {
     const steppedGeneration = Math.floor( steppedTime / NaturalSelectionConstants.SECONDS_PER_GENERATION );
 
     if ( currentGeneration === steppedGeneration ) {
-      // not 12:00
+      // we have not passed 12:00 on this step
       this.timeProperty.value += dt;
     }
     else {
