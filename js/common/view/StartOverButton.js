@@ -14,7 +14,7 @@ import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-class PlayAgainButton extends RectangularPushButton {
+class StartOverButton extends RectangularPushButton {
 
   /**
    * @param {Object} [options]
@@ -31,7 +31,7 @@ class PlayAgainButton extends RectangularPushButton {
     }, options );
 
     assert && assert( !options.content, 'PlayAgainButton sets content' );
-    options.content = new Text( naturalSelectionStrings.playAgain, {
+    options.content = new Text( naturalSelectionStrings.startOver, {
       font: NaturalSelectionConstants.PUSH_BUTTON_FONT,
       maxWidth: 150 // determined empirically
     } );
@@ -40,5 +40,5 @@ class PlayAgainButton extends RectangularPushButton {
   }
 }
 
-naturalSelection.register( 'PlayAgainButton', PlayAgainButton );
-export default PlayAgainButton;
+naturalSelection.register( 'PlayAgainButton', StartOverButton );
+export default StartOverButton;

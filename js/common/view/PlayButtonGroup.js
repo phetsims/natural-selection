@@ -15,8 +15,8 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import SimulationMode from '../model/SimulationMode.js';
 import AddAMateButton from './AddAMateButton.js';
-import PlayAgainButton from './PlayAgainButton.js';
 import PlayButton from './PlayButton.js';
+import StartOverButton from './StartOverButton.js';
 
 class PlayButtonGroup extends Node {
 
@@ -59,18 +59,18 @@ class PlayButtonGroup extends Node {
       tandem: options.tandem.createTandem( 'playButton' )
     } );
 
-    // 'Play Again' push button, displayed after the game ends, while the user is reviewing the final state
-    const playAgainButton = new PlayAgainButton( {
+    // 'Start Over' push button, displayed after the game ends, while the user is reviewing the final state
+    const startOverButton = new StartOverButton( {
       listener: () => {
         options.playAgain();
         simulationModeProperty.value = SimulationMode.STAGED;
       },
       center: addAMateButton.center,
-      tandem: options.tandem.createTandem( 'playAgainButton' )
+      tandem: options.tandem.createTandem( 'startOverButton' )
     } );
 
     assert && assert( !options.children, 'PushButtonGroup sets children' );
-    options.children = [ addAMateButton, playButton, playAgainButton ];
+    options.children = [ addAMateButton, playButton, startOverButton ];
 
     super( options );
 
@@ -80,24 +80,24 @@ class PlayButtonGroup extends Node {
         if ( simulationMode === SimulationMode.STAGED ) {
           addAMateButton.visible = ( totalNumberOfBunnies === 1 );
           playButton.visible = ( totalNumberOfBunnies > 1 );
-          playAgainButton.visible = false;
+          startOverButton.visible = false;
         }
         else if ( simulationMode === SimulationMode.ACTIVE ) {
           addAMateButton.visible = false;
           playButton.visible = false;
-          playAgainButton.visible = false;
+          startOverButton.visible = false;
         }
         else if ( simulationMode === SimulationMode.COMPLETED ) {
           addAMateButton.visible = false;
           playButton.visible = false;
-          playAgainButton.visible = true;
+          startOverButton.visible = true;
         }
         else {
           throw new Error( `unsupported simulationMode: ${simulationMode}` );
         }
 
         assert && assert(
-          _.filter( [ addAMateButton, playButton, playAgainButton ], button => button.visible ).length <= 1,
+          _.filter( [ addAMateButton, playButton, startOverButton ], button => button.visible ).length <= 1,
           'at most 1 button should be visible'
         );
       }
