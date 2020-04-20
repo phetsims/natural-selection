@@ -1,7 +1,5 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
-//TODO create a UI per generation, so that we can 'wipe' between them
-//TODO change "Currently" to "End of Generation" after environmental factors have been applied
 /**
  * ProportionGraphNode displays the Proportions graph.
  *
