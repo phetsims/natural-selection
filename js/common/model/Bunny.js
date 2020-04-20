@@ -47,9 +47,9 @@ class Bunny extends Sprite {
 
     options = merge( {
 
-      generation: 0, // {number} generation that this Bunny belongs to
       father: null, // {Bunny|null} the Bunny's father, null if no father
       mother: null, // {Bunny|null} the Bunny's mother, null if no mother
+      generation: 0, // {number} generation that this Bunny belongs to
 
       // phet-io
       tandem: Tandem.REQUIRED,

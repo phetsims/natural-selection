@@ -84,6 +84,8 @@ class GenerationClock extends PhetioObject {
 
     // @public (read-only) the portion of the clock cycle when environmental factors are active
     this.environmentalFactorPercentRange = new Range( 0.25, 0.75 );
+    
+    phet.log && this.currentGenerationProperty.link( currentGeneration => phet.log( `currentGeneration=${currentGeneration}` ) );
   }
 
   /**

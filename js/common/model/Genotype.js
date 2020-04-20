@@ -63,9 +63,9 @@ class Genotype extends PhetioObject {
     if ( father && mother ) {
 
       // we have both parents, so determine the child's genotype using Mendelian inheritance
-      this.furGenePair = GenePair.combine( father.furGenePair, mother.furGenePair, furGenePairOptions );
-      this.earsGenePair = GenePair.combine( father.earsGenePair, mother.earsGenePair, earsGenePairOptions );
-      this.teethGenePair = GenePair.combine( father.teethGenePair, mother.teethGenePair, teethGenePairOptions );
+      this.furGenePair = GenePair.combine( father.genotype.furGenePair, mother.genotype.furGenePair, furGenePairOptions );
+      this.earsGenePair = GenePair.combine( father.genotype.earsGenePair, mother.genotype.earsGenePair, earsGenePairOptions );
+      this.teethGenePair = GenePair.combine( father.genotype.teethGenePair, mother.genotype.teethGenePair, teethGenePairOptions );
     }
     else {
 

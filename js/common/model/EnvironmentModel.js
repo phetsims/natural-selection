@@ -95,11 +95,20 @@ class EnvironmentModel extends PhetioObject {
     // When the generation changes...
     this.generationClock.currentGenerationProperty.lazyLink( currentGeneration => {
 
-      // Every bunny has a birthday.
-      this.bunnyGroup.ageAllBunnies();
+      if ( currentGeneration !== 0 ) {
 
-      // Every bunny mates (happy birthday!)
-      this.bunnyGroup.mateAllBunnies( currentGeneration );
+        // Bunnies have a birthday.
+        this.bunnyGroup.ageAllBunnies();
+
+        // Bunnies mate (happy birthday!)
+        this.bunnyGroup.mateAllBunnies( currentGeneration );
+
+        phet.log && phet.log(
+          `total=${this.bunnyGroup.totalNumberOfBunniesProperty.value} ` +
+          `live=${this.bunnyGroup.liveBunnies.length} ` +
+          `dead=${this.bunnyGroup.deadBunnies.length} `
+        );
+      }
     } );
   }
 
@@ -153,7 +162,7 @@ class EnvironmentModel extends PhetioObject {
    */
   initializeBunnyPopulation() {
     phet.log && phet.log( 'EnvironmentModel.initializeBunnyPopulation' );
-    assert && assert( this.bunnyGroup.length === 0, 'bunnies already exist' );
+    assert && assert( this.bunnyGroup.totalNumberOfBunniesProperty.value === 0, 'bunnies already exist' );
 
     for ( let i = 0; i < NaturalSelectionQueryParameters.population; i++ ) {
       this.bunnyGroup.createNextElement( {
@@ -169,18 +178,9 @@ class EnvironmentModel extends PhetioObject {
    * @private
    */
   addAMate() {
-
-    assert && assert( this.bunnyGroup.length === 1, 'there should only be 1 bunny' );
-    assert && assert( !this.generationClock.isRunningProperty.value, 'the generation clock should not be running' );
-
-    const generation = this.generationClock.currentGenerationProperty.value;
-    assert && assert( generation === 0, `unexpected generation for addAMate: ${generation}` );
-
-    this.bunnyGroup.createNextElement( {
-      generation: generation,
-      position: this.modelViewTransform.getRandomGroundPosition(),
-      direction: SpriteDirection.getRandom()
-    } );
+    assert && assert( this.bunnyGroup.totalNumberOfBunniesProperty.value === 1, 'there should only be 1 bunny' );
+    assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
+    this.bunnyGroup.createBunny( null, null, 0 );
   }
 }
 

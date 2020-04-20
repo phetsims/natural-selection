@@ -11,6 +11,7 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import ObservableArrayIO from '../../../../axon/js/ObservableArrayIO.js';
+import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
 import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
@@ -22,6 +23,10 @@ import Bunny from './Bunny.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
+import SpriteDirection from './SpriteDirection.js';
+
+// constants
+const LITTER_SIZE = 4; // number of bunnies born each time a pair mates
 
 class BunnyGroup extends PhetioGroup {
 
@@ -61,6 +66,9 @@ class BunnyGroup extends PhetioGroup {
     const defaultArguments = [ {} ];
 
     super( createElement, defaultArguments, options );
+
+    // @private flag to denote whether we're in the process of resetting the BunnyGroup
+    this.isResetting = false;
 
     // @public (read-only)
     this.totalNumberOfBunniesProperty = new NumberProperty( 0, {
@@ -111,14 +119,9 @@ class BunnyGroup extends PhetioGroup {
       const isAliveListener = isAlive => {
         if ( !isAlive ) {
           bunny.isAliveProperty.unlink( isAliveListener );
-
           this.liveBunnies.remove( bunny );
           this.deadBunnies.push( bunny );
           this.bunnyDiedEmitter.emit( bunny );
-
-          if ( this.liveBunnies.lengthProperty.value === 0 ) {
-            this.allBunniesHaveDiedEmitter.emit();
-          }
         }
       };
       bunny.isAliveProperty.lazyLink( isAliveListener );
@@ -126,11 +129,6 @@ class BunnyGroup extends PhetioGroup {
       this.liveBunnies.push( bunny );
       this.totalNumberOfBunniesProperty.value = this.length;
       this.bunnyCreatedEmitter.emit( bunny );
-
-      // Notify if bunnies have taken over the world
-      if ( this.liveBunnies.lengthProperty.value > NaturalSelectionConstants.MAX_BUNNIES ) {
-        this.bunniesHaveTakenOverTheWorldEmitter.emit();
-      }
     } );
 
     // When a bunny is disposed...
@@ -141,13 +139,20 @@ class BunnyGroup extends PhetioGroup {
       this.totalNumberOfBunniesProperty.value = this.length;
       this.bunnyDisposedEmitter.emit( bunny );
     } );
+
+    // @private
+    this.modelViewTransform = modelViewTransform;
+    this.genePool = genePool;
   }
 
   /**
    * Resets the group.
    */
   reset() {
+    this.isResetting = true;
     this.clear();
+    assert && this.assertCountsInSync();
+    this.isResetting = false;
   }
 
   /**
@@ -166,14 +171,23 @@ class BunnyGroup extends PhetioGroup {
    * @public
    */
   ageAllBunnies() {
+    let numberDied = 0;
     this.liveBunnies.forEach( bunny => {
       bunny.ageProperty.value++;
       if ( bunny.ageProperty.value === NaturalSelectionConstants.MAX_BUNNY_AGE ) {
         bunny.die();
+        numberDied++;
       }
       assert && assert( bunny.ageProperty.value <= NaturalSelectionConstants.MAX_BUNNY_AGE,
         `bunny age exceeded max: ${bunny.ageProperty.value}` );
     } );
+    assert && this.assertCountsInSync();
+
+    phet.log && phet.log( `${numberDied} bunnies died` );
+
+    if ( !this.isResetting && this.liveBunnies.lengthProperty.value === 0 ) {
+      this.allBunniesHaveDiedEmitter.emit();
+    }
   }
 
   /**
@@ -183,24 +197,69 @@ class BunnyGroup extends PhetioGroup {
    */
   mateAllBunnies( generation ) {
     assert && assert( typeof generation === 'number', 'invalid generation' );
+
+    let numberBorn = 0;
     const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
     for ( let i = 1; i < bunnies.length; i = i + 2 ) {
-      this.mateBunnies( bunnies[ i - 1 ], bunnies[ i ], generation );
+      this.mateBunnies( bunnies[ i - 1 ], bunnies[ i ], generation, LITTER_SIZE );
+      numberBorn += LITTER_SIZE;
+    }
+    assert && this.assertCountsInSync();
+
+    phet.log && phet.log( `${numberBorn} bunnies born` );
+
+    // Notify if bunnies have taken over the world
+    if ( this.liveBunnies.lengthProperty.value > NaturalSelectionConstants.MAX_BUNNIES ) {
+      this.bunniesHaveTakenOverTheWorldEmitter.emit();
     }
   }
 
   /**
    * Mates 2 bunnies.
-   * @param {Bunny} bunny1
-   * @param {Bunny} bunny2
+   * @param {Bunny} father
+   * @param {Bunny} mother
    * @param {number} generation
+   * @param {number} litterSize
    */
-  mateBunnies( bunny1, bunny2, generation ) {
-    assert && assert( bunny1 instanceof Bunny, 'invalid bunny1' );
-    assert && assert( bunny2 instanceof Bunny, 'invalid bunny2' );
+  mateBunnies( father, mother, generation, litterSize ) {
+    assert && assert( typeof litterSize === 'number' && Utils.isInteger( litterSize ), 'invalid litterSize' );
+
+    for ( let i = 0; i < litterSize; i++ ) {
+      this.createBunny( father, mother, generation );
+    }
+  }
+
+  /**
+   * Creates a Bunny.
+   * @param {Bunny} father
+   * @param {Bunny} mother
+   * @param {number} generation
+   * @returns {Bunny}
+   * @public
+   */
+    createBunny( father, mother, generation ) {
+    assert && assert( father instanceof Bunny || father === null, 'invalid father' );
+    assert && assert( mother instanceof Bunny || mother === null, 'invalid mother' );
     assert && assert( typeof generation === 'number', 'invalid generation' );
 
-    //TODO
+    return this.createNextElement( {
+      father: father,
+      mother: mother,
+      generation: generation,
+      position: this.modelViewTransform.getRandomGroundPosition(),
+      direction: SpriteDirection.getRandom()
+    } );
+  }
+
+  /**
+   * Asserts that collection counts are in-sync.
+   * @private
+   */
+  assertCountsInSync() {
+    const live = this.liveBunnies.length;
+    const dead = this.deadBunnies.length;
+    const total = this.totalNumberOfBunniesProperty.value;
+    assert( live + dead === total, `bunny counts are out of sync, live=${live}, dead=${dead}, total=${total}` );
   }
 }
 
