@@ -94,20 +94,8 @@ class EnvironmentModel extends PhetioObject {
 
     // When the generation changes...
     this.generationClock.currentGenerationProperty.lazyLink( currentGeneration => {
-
       if ( currentGeneration !== 0 ) {
-
-        // Bunnies have a birthday.
-        this.bunnyGroup.ageAllBunnies();
-
-        // Bunnies mate (happy birthday!)
-        this.bunnyGroup.mateAllBunnies( currentGeneration );
-
-        phet.log && phet.log(
-          `total=${this.bunnyGroup.totalNumberOfBunniesProperty.value} ` +
-          `live=${this.bunnyGroup.liveBunnies.length} ` +
-          `dead=${this.bunnyGroup.deadBunnies.length} `
-        );
+        this.bunnyGroup.stepGeneration( currentGeneration );
       }
     } );
   }
