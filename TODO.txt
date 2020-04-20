@@ -1,7 +1,16 @@
 TODO list for natural-selection
 
+PHASES
+Modes
+Mating
+Mutations
+Pedigree graph
+Population graph
+Proportions graph
+Food
+Wolves
+
 FEATURES
-make bunnies mate
 add counts to EnvironmentModel
 When the game ends, or the sim is stepped, the generation clock may not be at exactly 12:00
 
@@ -9,4 +18,3 @@ PhET-iO
 
 DESIGN
 Move time controls near generation clock?
-If the Add a Mate, Play, or Play Again button is pressed while the clock is paused, should it be unpaused?
