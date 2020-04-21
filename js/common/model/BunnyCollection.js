@@ -28,7 +28,7 @@ import SpriteDirection from './SpriteDirection.js';
 // constants
 const LITTER_SIZE = 4; // number of bunnies born each time a pair mates
 
-class BunnyGroup extends PhetioGroup {
+class BunnyCollection extends PhetioGroup {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
@@ -314,5 +314,5 @@ class BunnyGroup extends PhetioGroup {
   }
 }
 
-naturalSelection.register( 'BunnyGroup', BunnyGroup );
-export default BunnyGroup;
+naturalSelection.register( 'BunnyCollection', BunnyCollection );
+export default BunnyCollection;

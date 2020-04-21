@@ -156,7 +156,7 @@ class NaturalSelectionScreenView extends ScreenView {
     // The different buttons that can be used to make the simulation begin playing.
     const playButtonGroup = new PlayButtonGroup(
       model.simulationModeProperty,
-      model.environmentModel.bunnyGroup.totalNumberOfBunniesProperty, {
+      model.environmentModel.bunnies.totalNumberOfBunniesProperty, {
         addAMate: () => model.environmentModel.addAMate(),
         playAgain: () => model.reset(),
         centerX: environmentNode.centerX,
@@ -210,7 +210,7 @@ class NaturalSelectionScreenView extends ScreenView {
 
     // Display a dialog when all bunnies have died.
     const diedDialog = new DiedDialog();
-    model.environmentModel.bunnyGroup.allBunniesHaveDiedEmitter.addListener( () => {
+    model.environmentModel.bunnies.allBunniesHaveDiedEmitter.addListener( () => {
       diedDialog.show();
       model.simulationModeProperty.value = SimulationMode.COMPLETED;
     } );
@@ -220,11 +220,11 @@ class NaturalSelectionScreenView extends ScreenView {
       showCallback: () => {
 
         // so we don't leave bunnies captured in mid-hop
-        model.environmentModel.bunnyGroup.groundAllBunnies();
+        model.environmentModel.bunnies.groundAllBunnies();
         environmentNode.sortSprites();
       }
     });
-    model.environmentModel.bunnyGroup.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
+    model.environmentModel.bunnies.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
       worldDialog.show();
       model.simulationModeProperty.value = SimulationMode.COMPLETED;
     } );

@@ -95,7 +95,7 @@ class EnvironmentNode extends Node {
     } );
 
     // @private PhetioGroup for managing dynamic BunnyNode instances
-    this.bunnyNodeGroup = new BunnyNodeGroup( environmentModel.bunnyGroup, environmentModel.selectedBunnyProperty, {
+    this.bunnyNodeGroup = new BunnyNodeGroup( environmentModel.bunnies, environmentModel.selectedBunnyProperty, {
       tandem: options.tandem.createTandem( 'bunnyNodeGroup' )
     } );
 
@@ -110,19 +110,19 @@ class EnvironmentNode extends Node {
       // If the bunny is disposed or dies, remove listener and delete the associated BunnyNode.
       const cleanupListener = disposedBunny => {
         if ( disposedBunny === bunny ) {
-          environmentModel.bunnyGroup.bunnyDisposedEmitter.removeListener( cleanupListener );
+          environmentModel.bunnies.bunnyDisposedEmitter.removeListener( cleanupListener );
           this.bunnyNodeGroup.disposeElement( bunnyNode );
         }
       };
-      environmentModel.bunnyGroup.bunnyDisposedEmitter.addListener( cleanupListener );
+      environmentModel.bunnies.bunnyDisposedEmitter.addListener( cleanupListener );
       bunny.isAliveProperty.lazyLink( () => cleanupListener( bunny ) );
     };
 
     // Create a BunnyNode for each Bunny in the initial population.
-    environmentModel.bunnyGroup.forEach( bunny => createBunnyNode( bunny ) );
+    environmentModel.bunnies.forEach( bunny => createBunnyNode( bunny ) );
 
     // When a Bunny is added to the model, create the corresponding BunnyNode.
-    environmentModel.bunnyGroup.bunnyCreatedEmitter.addListener( bunny => createBunnyNode( bunny ) );
+    environmentModel.bunnies.bunnyCreatedEmitter.addListener( bunny => createBunnyNode( bunny ) );
 
     // @private
     this.environmentModel = environmentModel;

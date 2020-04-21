@@ -17,7 +17,7 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
-import BunnyGroup from './BunnyGroup.js';
+import BunnyCollection from './BunnyCollection.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Environments from './Environments.js';
@@ -77,12 +77,12 @@ class EnvironmentModel extends PhetioObject {
       tandem: options.tandem.createTandem( 'genePool' )
     } );
 
-    // @public (read-only) {PhetioGroup} to create Bunny instances
-    this.bunnyGroup = new BunnyGroup( this.modelViewTransform, this.genePool, {
+    // @public (read-only) the collection of Bunny instances
+    this.bunnies = new BunnyCollection( this.modelViewTransform, this.genePool, {
       tandem: options.tandem.createTandem( 'bunnyGroup' )
     } );
 
-    // @public {Property.<Bunny|null>} a reference to a Bunny instance in bunnyGroup, null if no selection
+    // @public {Property.<Bunny|null>} a reference to a Bunny instance in BunnyCollection, null if no selection
     this.selectedBunnyProperty = new Property( null, {
       tandem: options.tandem.createTandem( 'selectedBunnyProperty' ),
       phetioType: PropertyIO( NullableIO( ReferenceIO( BunnyIO ) ) ),
@@ -94,7 +94,7 @@ class EnvironmentModel extends PhetioObject {
     // When the generation changes...
     this.generationClock.currentGenerationProperty.lazyLink( currentGeneration => {
       if ( currentGeneration !== 0 ) {
-        this.bunnyGroup.stepGeneration( currentGeneration );
+        this.bunnies.stepGeneration( currentGeneration );
       }
     } );
   }
@@ -116,7 +116,7 @@ class EnvironmentModel extends PhetioObject {
     this.genePool.reset();
 
     // dispose of all bunnies and reinitialize
-    this.bunnyGroup.reset();
+    this.bunnies.reset();
     this.initializeBunnyPopulation();
   }
 
@@ -139,7 +139,7 @@ class EnvironmentModel extends PhetioObject {
     this.generationClock.step( dt );
 
     // move the bunnies
-    this.bunnyGroup.moveBunnies( dt );
+    this.bunnies.moveBunnies( dt );
   }
 
   //TODO read query parameters and create initial population
@@ -149,11 +149,11 @@ class EnvironmentModel extends PhetioObject {
    */
   initializeBunnyPopulation() {
     phet.log && phet.log( 'EnvironmentModel.initializeBunnyPopulation' );
-    assert && assert( this.bunnyGroup.totalNumberOfBunniesProperty.value === 0, 'bunnies already exist' );
+    assert && assert( this.bunnies.totalNumberOfBunniesProperty.value === 0, 'bunnies already exist' );
     assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
 
     for ( let i = 0; i < NaturalSelectionQueryParameters.population; i++ ) {
-      this.bunnyGroup.createBunnyZero();
+      this.bunnies.createBunnyZero();
     }
   }
 
@@ -162,10 +162,10 @@ class EnvironmentModel extends PhetioObject {
    * @private
    */
   addAMate() {
-    assert && assert( this.bunnyGroup.totalNumberOfBunniesProperty.value === 1, 'there should only be 1 bunny' );
+    assert && assert( this.bunnies.totalNumberOfBunniesProperty.value === 1, 'there should only be 1 bunny' );
     assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
 
-    this.bunnyGroup.createBunnyZero();
+    this.bunnies.createBunnyZero();
   }
 }
 
