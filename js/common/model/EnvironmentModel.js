@@ -24,7 +24,6 @@ import Environments from './Environments.js';
 import FoodSupply from './FoodSupply.js';
 import GenePool from './GenePool.js';
 import GenerationClock from './GenerationClock.js';
-import SpriteDirection from './SpriteDirection.js';
 import Wolves from './Wolves.js';
 
 class EnvironmentModel extends PhetioObject {
@@ -151,13 +150,10 @@ class EnvironmentModel extends PhetioObject {
   initializeBunnyPopulation() {
     phet.log && phet.log( 'EnvironmentModel.initializeBunnyPopulation' );
     assert && assert( this.bunnyGroup.totalNumberOfBunniesProperty.value === 0, 'bunnies already exist' );
+    assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
 
     for ( let i = 0; i < NaturalSelectionQueryParameters.population; i++ ) {
-      this.bunnyGroup.createNextElement( {
-        generation: 0,
-        position: this.modelViewTransform.getRandomGroundPosition(),
-        direction: SpriteDirection.getRandom()
-      } );
+      this.bunnyGroup.createBunnyZero();
     }
   }
 
@@ -168,7 +164,8 @@ class EnvironmentModel extends PhetioObject {
   addAMate() {
     assert && assert( this.bunnyGroup.totalNumberOfBunniesProperty.value === 1, 'there should only be 1 bunny' );
     assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
-    this.bunnyGroup.createBunny( null, null, 0 );
+
+    this.bunnyGroup.createBunnyZero();
   }
 }
 

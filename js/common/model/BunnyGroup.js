@@ -278,6 +278,23 @@ class BunnyGroup extends PhetioGroup {
   }
 
   /**
+   * Creates a generation-0 Bunny.
+   * @returns {Bunny}
+   * @public
+   */
+  createBunnyZero() {
+    this.createBunny( null, null, 0 );
+  }
+
+  /**
+   * Disposes a Bunny.
+   * @param {Bunny} bunny
+   */
+  disposeBunny( bunny ) {
+    this.disposeElement( bunny );
+  }
+
+  /**
    * Asserts that collection counts are in-sync.
    * @private
    */
