@@ -73,7 +73,6 @@ class NaturalSelectionModel {
           this.environmentModel.generationClock.isRunningProperty.value = false;
         }
         else if ( simulationMode === SimulationMode.ACTIVE ) {
-          this.isPlayingProperty.value = true;
           this.environmentModel.generationClock.isRunningProperty.value = true;
         }
         else if ( simulationMode === SimulationMode.COMPLETED ) {
