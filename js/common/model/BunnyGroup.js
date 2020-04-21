@@ -90,17 +90,17 @@ class BunnyGroup extends PhetioGroup {
       phetioType: ObservableArrayIO( ReferenceIO( BunnyIO ) )
     } );
 
-    // @public notify when a bunny is created, a nicer API than addMemberCreatedListener
+    // @public notify when a bunny has been created
     this.bunnyCreatedEmitter = new Emitter( {
       parameters: [ { valueType: Bunny } ]
     } );
 
-    // @public notify when a bunny is disposed, a nicer API than addMemberDisposedListener
+    // @public notify when a bunny has been disposed
     this.bunnyDisposedEmitter = new Emitter( {
       parameters: [ { valueType: Bunny } ]
     } );
 
-    // @public notify when a bunny dies
+    // @public notify when has bunny died
     this.bunnyDiedEmitter = new Emitter( {
       parameters: [ { valueType: Bunny } ]
     } );
