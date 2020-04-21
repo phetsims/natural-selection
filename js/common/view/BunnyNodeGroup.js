@@ -17,7 +17,6 @@ import BunnyCollection from '../model/BunnyCollection.js';
 import BunnyNode from './BunnyNode.js';
 import BunnyNodeIO from './BunnyNodeIO.js';
 
-//TODO https://github.com/phetsims/tandem/issues/158 rename to BunnyNodeReferenceIO ?
 class BunnyNodeGroup extends PhetioGroup {
 
   /**
