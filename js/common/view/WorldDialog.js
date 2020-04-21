@@ -28,7 +28,7 @@ class WorldDialog extends Dialog {
       fill: 'black',
       closeButtonColor: 'white',
       topMargin: 25,
-      scale: NaturalSelectionConstants.DIALOG_SCALE //TODO workaround for https://github.com/phetsims/joist/issues/586
+      scale: NaturalSelectionConstants.DIALOG_SCALE
     }, options );
 
     const worldNode = new Image( worldImage, {
