@@ -2757,7 +2757,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ObjectIO"
     },
-    "naturalSelection.labScreen.model.environmentModel.bunnyGroup": {
+    "naturalSelection.labScreen.model.environmentModel.bunnies.bunnyGroup": {
       "phetioDocumentation": "TODO",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2770,7 +2770,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PhetioGroupIO<BunnyIO>"
     },
-    "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype": {
+    "naturalSelection.labScreen.model.environmentModel.bunnies.bunnyGroup.archetype": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2783,7 +2783,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "BunnyIO"
     },
-    "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype.ageProperty": {
+    "naturalSelection.labScreen.model.environmentModel.bunnies.bunnyGroup.archetype.ageProperty": {
       "phetioDocumentation": "age of the bunny, in generations",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2796,7 +2796,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype.directionProperty": {
+    "naturalSelection.labScreen.model.environmentModel.bunnies.bunnyGroup.archetype.directionProperty": {
       "phetioDocumentation": "direction that the sprite is facing",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2809,7 +2809,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
-    "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype.genotype": {
+    "naturalSelection.labScreen.model.environmentModel.bunnies.bunnyGroup.archetype.genotype": {
       "phetioDocumentation": "the genetic information for this bunny",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2822,7 +2822,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "GenotypeIO"
     },
-    "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype.genotype.earsGenePair": {
+    "naturalSelection.labScreen.model.environmentModel.bunnies.bunnyGroup.archetype.genotype.earsGenePair": {
       "phetioDocumentation": "gene pair that determines ears trait",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2835,7 +2835,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "GenePairIO"
     },
-    "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype.genotype.furGenePair": {
+    "naturalSelection.labScreen.model.environmentModel.bunnies.bunnyGroup.archetype.genotype.furGenePair": {
       "phetioDocumentation": "gene pair that determines fur trait",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2848,7 +2848,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "GenePairIO"
     },
-    "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype.genotype.teethGenePair": {
+    "naturalSelection.labScreen.model.environmentModel.bunnies.bunnyGroup.archetype.genotype.teethGenePair": {
       "phetioDocumentation": "gene pair that determines teeth trait",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2861,7 +2861,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "GenePairIO"
     },
-    "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype.isAliveProperty": {
+    "naturalSelection.labScreen.model.environmentModel.bunnies.bunnyGroup.archetype.isAliveProperty": {
       "phetioDocumentation": "whether the bunny is alive",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2874,7 +2874,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "naturalSelection.labScreen.model.environmentModel.bunnyGroup.archetype.positionProperty": {
+    "naturalSelection.labScreen.model.environmentModel.bunnies.bunnyGroup.archetype.positionProperty": {
       "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2887,7 +2887,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<Vector3IO>"
     },
-    "naturalSelection.labScreen.model.environmentModel.bunnyGroup.deadBunnies": {
+    "naturalSelection.labScreen.model.environmentModel.bunnies.deadBunnies": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2900,7 +2900,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ObservableArrayIO<ReferenceIO<BunnyIO>>"
     },
-    "naturalSelection.labScreen.model.environmentModel.bunnyGroup.deadBunnies.lengthProperty": {
+    "naturalSelection.labScreen.model.environmentModel.bunnies.deadBunnies.lengthProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2913,7 +2913,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.labScreen.model.environmentModel.bunnyGroup.liveBunnies": {
+    "naturalSelection.labScreen.model.environmentModel.bunnies.liveBunnies": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2926,7 +2926,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ObservableArrayIO<ReferenceIO<BunnyIO>>"
     },
-    "naturalSelection.labScreen.model.environmentModel.bunnyGroup.liveBunnies.lengthProperty": {
+    "naturalSelection.labScreen.model.environmentModel.bunnies.liveBunnies.lengthProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2939,7 +2939,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "naturalSelection.labScreen.model.environmentModel.bunnyGroup.totalNumberOfBunniesProperty": {
+    "naturalSelection.labScreen.model.environmentModel.bunnies.totalNumberOfBunniesProperty": {
       "phetioDocumentation": "the total number of bunnies, alive and dead",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",

@@ -79,7 +79,7 @@ class EnvironmentModel extends PhetioObject {
 
     // @public (read-only) the collection of Bunny instances
     this.bunnies = new BunnyCollection( this.modelViewTransform, this.genePool, {
-      tandem: options.tandem.createTandem( 'bunnyGroup' )
+      tandem: options.tandem.createTandem( 'bunnies' )
     } );
 
     // @public {Property.<Bunny|null>} a reference to a Bunny instance in BunnyCollection, null if no selection

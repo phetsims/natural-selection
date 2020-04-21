@@ -21,13 +21,13 @@ import BunnyNodeIO from './BunnyNodeIO.js';
 class BunnyNodeGroup extends PhetioGroup {
 
   /**
-   * @param {BunnyCollection} bunnyGroup
+   * @param {BunnyCollection} bunnyCollection
    * @param {Property.<Bunny>} selectedBunnyProperty
    * @param {Object} [options]
    */
-  constructor( bunnyGroup, selectedBunnyProperty, options ) {
+  constructor( bunnyCollection, selectedBunnyProperty, options ) {
 
-    assert && assert( bunnyGroup instanceof BunnyCollection, 'invalid bunnyGroup' );
+    assert && assert( bunnyCollection instanceof BunnyCollection, 'invalid bunnyCollection' );
     assert && assert( selectedBunnyProperty instanceof Property, 'invalid selectedBunnyProperty' );
 
     options = merge( {
@@ -51,9 +51,10 @@ class BunnyNodeGroup extends PhetioGroup {
       } );
     };
 
+    //TODO replace bunnyCollection.getArchetype() with new Bunny() ?
     // defaultArguments, passed to createElement during API harvest (when running 'grunt generate-phet-io-api-files').
-    // Note that bunnyGroup.archetype is non-null only during API harvest.
-    const defaultArguments = [ bunnyGroup.archetype ];
+    // Note that bunnyCollection.getArchetype is non-null only during API harvest.
+    const defaultArguments = [ bunnyCollection.getArchetype() ];
 
     super( createElement, defaultArguments, options );
   }

@@ -119,7 +119,7 @@ class EnvironmentNode extends Node {
     };
 
     // Create a BunnyNode for each Bunny in the initial population.
-    environmentModel.bunnies.forEach( bunny => createBunnyNode( bunny ) );
+    environmentModel.bunnies.liveBunnies.forEach( bunny => createBunnyNode( bunny ) );
 
     // When a Bunny is added to the model, create the corresponding BunnyNode.
     environmentModel.bunnies.bunnyCreatedEmitter.addListener( bunny => createBunnyNode( bunny ) );

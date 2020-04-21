@@ -1,8 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * BunnyGroup is the PhetioGroup for Bunny.  It manages dynamic instances of Bunny.
- * All Bunny instances are created and disposed via this group.
+ * BunnyCollection is the collection of Bunny instances, with methods for managing that collection.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -13,13 +12,12 @@ import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import ObservableArrayIO from '../../../../axon/js/ObservableArrayIO.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
-import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
-import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import Bunny from './Bunny.js';
+import BunnyGroup from './BunnyGroup.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
@@ -28,7 +26,7 @@ import SpriteDirection from './SpriteDirection.js';
 // constants
 const LITTER_SIZE = 4; // number of bunnies born each time a pair mates
 
-class BunnyCollection extends PhetioGroup {
+class BunnyCollection {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
@@ -43,30 +41,15 @@ class BunnyCollection extends PhetioGroup {
     options = merge( {
 
       // phet-io
-      tandem: Tandem.REQUIRED,
-      phetioType: PhetioGroupIO( BunnyIO ),
-      phetioDocumentation: 'TODO'
+      tandem: Tandem.REQUIRED
     }, options );
 
-    /**
-     * Called to instantiate a Bunny. Note that modelViewTransform and genePool are passed via closure, so we don't
-     * have to create it as part of defaultArguments, and don't have to deal with serializing it in BunnyIO.
-     * @param {Tandem} tandem - PhetioGroup requires tandem to be the first param
-     * @param {Object} bunnyOptions - options to Bunny constructor, not actually optional, because createElement
-     *                                must have a fixed number of args
-     * @returns {Bunny}
-     */
-    const createElement = ( tandem, bunnyOptions ) => {
-      return new Bunny( modelViewTransform, genePool, merge( {}, bunnyOptions, {
-        tandem: tandem
-      } ) );
-    };
+    // @private the PhetioGroup that manages Bunny instances as dynamic PhET-iO elements
+    this.bunnyGroup = new BunnyGroup( modelViewTransform, genePool, {
+      tandem: options.tandem.createTandem( 'bunnyGroup' )
+    } );
 
-    // defaultArguments, passed to createElement during API harvest (when running 'grunt generate-phet-io-api-files').
-    const defaultArguments = [ {} ];
-
-    super( createElement, defaultArguments, options );
-
+    //TODO delete this?
     // @private flag to denote whether we're in the process of resetting the BunnyGroup
     this.isResetting = false;
 
@@ -112,7 +95,7 @@ class BunnyCollection extends PhetioGroup {
     this.bunniesHaveTakenOverTheWorldEmitter = new Emitter();
 
     // When a bunny is created...
-    this.elementCreatedEmitter.addListener( bunny => {
+    this.bunnyGroup.elementCreatedEmitter.addListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
       // When a bunny dies...
@@ -127,16 +110,16 @@ class BunnyCollection extends PhetioGroup {
       bunny.isAliveProperty.lazyLink( isAliveListener );
 
       this.liveBunnies.push( bunny );
-      this.totalNumberOfBunniesProperty.value = this.length;
+      this.totalNumberOfBunniesProperty.value = this.bunnyGroup.length;
       this.bunnyCreatedEmitter.emit( bunny );
     } );
 
     // When a bunny is disposed...
-    this.elementDisposedEmitter.addListener( bunny => {
+    this.bunnyGroup.elementDisposedEmitter.addListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
       this.liveBunnies.contains( bunny ) && this.liveBunnies.remove( bunny );
       this.deadBunnies.contains( bunny ) && this.deadBunnies.remove( bunny );
-      this.totalNumberOfBunniesProperty.value = this.length;
+      this.totalNumberOfBunniesProperty.value = this.bunnyGroup.length;
       this.bunnyDisposedEmitter.emit( bunny );
     } );
 
@@ -153,6 +136,14 @@ class BunnyCollection extends PhetioGroup {
     this.clear();
     assert && this.assertCountsInSync();
     this.isResetting = false;
+  }
+
+  /**
+   * Gets the archetype for the PhetioGroup.
+   * @returns {PhetioObject}
+   */
+  getArchetype() {
+    return this.bunnyGroup.archetype;
   }
 
   /**
@@ -192,7 +183,8 @@ class BunnyCollection extends PhetioGroup {
   ageAllBunnies() {
 
     let numberDied = 0;
-    this.liveBunnies.forEach( bunny => {
+    const bunnies = this.liveBunnies.getArray().splice(); // this may modify the array, so operate on a copy
+    bunnies.forEach( bunny => {
 
       // bunny is one generation older
       bunny.ageProperty.value++;
@@ -268,7 +260,7 @@ class BunnyCollection extends PhetioGroup {
     assert && assert( mother instanceof Bunny || mother === null, 'invalid mother' );
     assert && assert( typeof generation === 'number', 'invalid generation' );
 
-    return this.createNextElement( {
+    return this.bunnyGroup.createNextElement( {
       father: father,
       mother: mother,
       generation: generation,
@@ -291,7 +283,7 @@ class BunnyCollection extends PhetioGroup {
    * @param {Bunny} bunny
    */
   disposeBunny( bunny ) {
-    this.disposeElement( bunny );
+    this.bunnyGroup.disposeElement( bunny );
   }
 
   /**
