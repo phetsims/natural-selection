@@ -51,7 +51,6 @@ class BunnyNodeGroup extends PhetioGroup {
       } );
     };
 
-    //TODO replace bunnyCollection.getArchetype() with new Bunny() ?
     // defaultArguments, passed to createElement during API harvest (when running 'grunt generate-phet-io-api-files').
     // Note that bunnyCollection.getArchetype is non-null only during API harvest.
     const defaultArguments = [ bunnyCollection.getArchetype() ];
