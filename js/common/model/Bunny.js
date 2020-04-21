@@ -197,7 +197,6 @@ class Bunny extends Sprite {
     this.hopDelta = getHopDelta( hopDistance, hopHeight, this.directionProperty.value );
 
     // Reverse delta x if the hop would exceed x boundaries
-    //TODO bunnies only reverse direction when they hit the left/right edges, should they change direction randomly?
     const hopEndX = this.positionProperty.value.x + this.hopDelta.x;
     if ( hopEndX <= this.getMinimumX() || hopEndX >= this.getMaximumX() ) {
       this.hopDelta.setX( -this.hopDelta.x );

@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
-//TODO temporary view of one item of food
 /**
+ * FoodNode is one item of food, which can toggle between 'tender' and 'tough'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
