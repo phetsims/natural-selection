@@ -49,10 +49,6 @@ class BunnyCollection {
       tandem: options.tandem.createTandem( 'bunnyGroup' )
     } );
 
-    //TODO delete this?
-    // @private flag to denote whether we're in the process of resetting the BunnyGroup
-    this.isResetting = false;
-
     // @public (read-only)
     this.totalNumberOfBunniesProperty = new NumberProperty( 0, {
       numberType: 'Integer',
@@ -132,10 +128,8 @@ class BunnyCollection {
    * Resets the group.
    */
   reset() {
-    this.isResetting = true;
-    this.clear();
+    this.bunnyGroup.clear();
     assert && this.assertCountsInSync();
-    this.isResetting = false;
   }
 
   /**
@@ -201,7 +195,7 @@ class BunnyCollection {
     phet.log && phet.log( `${numberDied} bunnies died` );
 
     // Notify if all bunnies have died.
-    if ( !this.isResetting && this.liveBunnies.lengthProperty.value === 0 ) {
+    if ( this.liveBunnies.lengthProperty.value === 0 ) {
       this.allBunniesHaveDiedEmitter.emit();
     }
   }
