@@ -227,6 +227,21 @@ class Bunny extends Sprite {
   }
 
   /**
+   * Interrupts a bunny's hop, and moves it immediately to the ground.
+   * @public
+   */
+  interruptHop() {
+
+    // move bunny to the ground
+    const position = this.positionProperty.value;
+    const y = this.modelViewTransform.getGroundY( position.z );
+    this.positionProperty.value = new Vector3( position.x, y, position.z );
+
+    // to force reinitialization of hop sequence on next step
+    this.hopDelta = null;
+  }
+
+  /**
    * Gets the minimum x coordinate for a bunny's position.
    * @returns {number}
    * @private

@@ -287,6 +287,14 @@ class BunnyGroup extends PhetioGroup {
     const total = this.totalNumberOfBunniesProperty.value;
     assert( live + dead === total, `bunny counts are out of sync, live=${live}, dead=${dead}, total=${total}` );
   }
+
+  /**
+   * Moves all live bunnies to the ground, so that we don't have bunnies paused mid-hop.
+   * @public
+   */
+  groundAllBunnies() {
+    this.liveBunnies.forEach( bunny => bunny.interruptHop() );
+  }
 }
 
 naturalSelection.register( 'BunnyGroup', BunnyGroup );

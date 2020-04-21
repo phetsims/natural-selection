@@ -216,7 +216,14 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     // Display a dialog when bunnies have taken over the world.
-    const worldDialog = new WorldDialog();
+    const worldDialog = new WorldDialog( {
+      showCallback: () => {
+
+        // so we don't leave bunnies captured in mid-hop
+        model.environmentModel.bunnyGroup.groundAllBunnies();
+        environmentNode.sortSprites();
+      }
+    });
     model.environmentModel.bunnyGroup.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
       worldDialog.show();
       model.simulationModeProperty.value = SimulationMode.COMPLETED;

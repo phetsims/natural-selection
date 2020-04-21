@@ -1,14 +1,14 @@
 TODO list for natural-selection
 
 PHASES
-Modes
-Mating
-Mutations
-Pedigree graph
-Population graph
-Proportions graph
-Food
-Wolves
+- [x] Modes
+- [x] Mating
+- [ ] Mutations
+- [ ] Pedigree graph
+- [ ] Population graph
+- [ ] Proportions graph
+- [ ] Food
+- [ ] Wolves
 
 FEATURES
 add counts to EnvironmentModel
