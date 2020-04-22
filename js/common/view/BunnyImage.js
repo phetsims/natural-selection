@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * BunnyImage creates an Image node that corresponds to a Bunny's phenotype (how the bunny looks).
+ * BunnyImage creates an Image node that corresponds to a Bunny's phenotype (appearance).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
