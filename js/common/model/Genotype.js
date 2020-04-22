@@ -36,7 +36,8 @@ class Genotype extends PhetioObject {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: GenotypeIO
+      phetioType: GenotypeIO,
+      phetioDocumentation: 'the genetic blueprint for a bunny'
     }, options );
 
     super( options );

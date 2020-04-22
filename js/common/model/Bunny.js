@@ -70,14 +70,12 @@ class Bunny extends Sprite {
 
     // @public (read-only)
     this.genotype = new Genotype( this.father, this.mother, genePool, {
-      tandem: options.tandem.createTandem( 'genotype' ),
-      phetioDocumentation: 'the genetic information for this bunny'
+      tandem: options.tandem.createTandem( 'genotype' )
     } );
 
     // @public (read-only)
     this.phenotype = new Phenotype( this.genotype, {
-      tandem: options.tandem.createTandem( 'phenotype' ),
-      phetioDocumentation: 'appearance of this bunny, the manifestation of its genotype'
+      tandem: options.tandem.createTandem( 'phenotype' )
     } );
 
     // @public

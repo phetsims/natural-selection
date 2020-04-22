@@ -2758,7 +2758,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "ObjectIO"
     },
     "naturalSelection.labScreen.model.environmentModel.bunnies.bunnyGroup": {
-      "phetioDocumentation": "TODO",
+      "phetioDocumentation": "manages dynamic PhET-iO elements of type Bunny",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2810,7 +2810,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(LEFT|RIGHT)>"
     },
     "naturalSelection.labScreen.model.environmentModel.bunnies.bunnyGroup.archetype.genotype": {
-      "phetioDocumentation": "the genetic information for this bunny",
+      "phetioDocumentation": "the genetic blueprint for a bunny",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2875,7 +2875,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "naturalSelection.labScreen.model.environmentModel.bunnies.bunnyGroup.archetype.phenotype": {
-      "phetioDocumentation": "appearance of this bunny, the manifestation of its genotype",
+      "phetioDocumentation": "the appearance of the bunny, the manifestation of its genotype",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -5137,7 +5137,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NodeIO"
     },
     "naturalSelection.labScreen.view.environmentNode.bunnyNodeGroup": {
-      "phetioDocumentation": "TODO",
+      "phetioDocumentation": "manages dynamic PhET-iO elements of type BunnyNode",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,

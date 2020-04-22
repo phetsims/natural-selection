@@ -28,7 +28,8 @@ class Phenotype extends PhetioObject {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: PhenotypeIO
+      phetioType: PhenotypeIO,
+      phetioDocumentation: 'the appearance of the bunny, the manifestation of its genotype'
     }, options );
 
     super( options );
