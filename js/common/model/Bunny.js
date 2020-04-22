@@ -7,6 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Emitter from '../../../../axon/js/Emitter.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -106,6 +107,9 @@ class Bunny extends Sprite {
     // @private {Vector3|null} the change in position when the bunny hops
     this.hopDelta = null;
 
+    // @private fires when the Bunny has been disposed
+    this.disposedEmitter = new Emitter();
+
     // @private
     this.disposeBunny = () => {
       this.genotype.dispose();
@@ -132,6 +136,8 @@ class Bunny extends Sprite {
   dispose() {
     super.dispose();
     this.disposeBunny();
+    this.disposedEmitter.emit();
+    this.disposedEmitter.dispose();
   }
 
   /**
