@@ -151,14 +151,6 @@ class Bunny extends Sprite {
   }
 
   /**
-   * Is this Bunny alive?
-   * @returns {boolean}
-   */
-  get isAlive() {
-    return this.isAliveProperty.value;
-  }
-
-  /**
    * Kills this bunny, forever and ever. (This sim does not support reincarnation or other forms of 'pooling' :)
    * @public
    */
@@ -168,7 +160,7 @@ class Bunny extends Sprite {
   }
 
   /**
-   * This is the motion cycle for a bunny. Each bunny rests, then hops, ad nauseam.
+   * Moves the Bunny around. This is the motion cycle for a bunny. Each bunny rests, hops, rests, hops, ...
    * @private
    */
   moveAround() {
@@ -238,7 +230,8 @@ class Bunny extends Sprite {
   }
 
   /**
-   * Interrupts a bunny's hop, and moves it immediately to the ground.
+   * Interrupts a bunny's hop, and moves it immediately to the ground. This is used to prevent bunnies from being
+   * stuck up in the air mid-hop when the simulation ends.
    * @public
    */
   interruptHop() {
