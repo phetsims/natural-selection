@@ -77,7 +77,7 @@ class Bunny extends Sprite {
     // @public (read-only)
     this.phenotype = new Phenotype( this.genotype, {
       tandem: options.tandem.createTandem( 'phenotype' ),
-      phetioDocumentation: 'how the bunny looks, the manifestation of its genotype'
+      phetioDocumentation: 'appearance of this bunny, the manifestation of its genotype'
     } );
 
     // @public
