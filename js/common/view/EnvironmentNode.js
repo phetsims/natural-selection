@@ -100,30 +100,15 @@ class EnvironmentNode extends Node {
     } );
 
     const createBunnyNode = bunny => {
-      assert && assert( bunny.isAliveProperty.value, 'bunny is dead' );
-      assert && assert( !bunny.isDisposed, 'bunny is disposed' );
-
-      // Create the BunnyNode
-      const bunnyNode = this.bunnyNodeGroup.createCorrespondingGroupElement( bunny, bunny );
+      const bunnyNode = this.bunnyNodeGroup.createBunnyNode( bunny );
       spritesNode.addChild( bunnyNode );
-
-      // If the bunny dies or is disposed, dispose the associated BunnyNode. We could also listen to
-      // bunnies.bunnyDiedEmitter and bunnies.bunnyDisposedEmitter, but that would get significantly
-      // more expensive as the number of bunnies increases.
-      const disposeBunnyNode = () => {
-        bunny.isAliveProperty.unlink( disposeBunnyNode );
-        bunny.disposedEmitter.removeListener( disposeBunnyNode );
-        this.bunnyNodeGroup.disposeElement( bunnyNode );
-      };
-      bunny.isAliveProperty.lazyLink( disposeBunnyNode );
-      bunny.disposedEmitter.addListener( disposeBunnyNode );
     };
 
     // Create a BunnyNode for each Bunny in the initial population.
-    environmentModel.bunnies.liveBunnies.forEach( bunny => createBunnyNode( bunny ) );
+    environmentModel.bunnies.liveBunnies.forEach( createBunnyNode );
 
     // When a Bunny is added to the model, create the corresponding BunnyNode.
-    environmentModel.bunnies.bunnyCreatedEmitter.addListener( bunny => createBunnyNode( bunny ) );
+    environmentModel.bunnies.bunnyCreatedEmitter.addListener( createBunnyNode );
 
     // @private
     this.environmentModel = environmentModel;
