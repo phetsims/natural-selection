@@ -121,9 +121,9 @@ class Phenotype extends PhetioObject {
    */
   setValue( state ) {
     required( state );
-    this.furAllele = state.furAllele;
-    this.earsAllele = state.earsAllele;
-    this.teethAllele = state.teethAllele;
+    this.furAllele = required( state.furAllele );
+    this.earsAllele = required( state.earsAllele );
+    this.teethAllele = required( state.teethAllele );
     this.validateInstance();
   }
 
