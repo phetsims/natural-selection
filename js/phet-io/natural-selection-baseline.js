@@ -2874,6 +2874,19 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
+    "naturalSelection.labScreen.model.environmentModel.bunnies.bunnyGroup.archetype.phenotype": {
+      "phetioDocumentation": "how the bunny looks, the manifestation of its genotype",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PhenotypeIO"
+    },
     "naturalSelection.labScreen.model.environmentModel.bunnies.bunnyGroup.archetype.positionProperty": {
       "phetioDocumentation": "position in the 3D model coordinate frame",
       "phetioDynamicElement": false,

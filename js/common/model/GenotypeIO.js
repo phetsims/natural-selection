@@ -17,6 +17,8 @@ class GenotypeIO extends ObjectIO {
    * Serializes a Genotype to a state object.
    * @param {GenotypeIO} genotype
    * @returns {Object}
+   * @public
+   * @override
    */
   static toStateObject( genotype ) {
     validate( genotype, this.validator );
@@ -27,6 +29,8 @@ class GenotypeIO extends ObjectIO {
    * Deserializes the state needed by GenotypeIO.setValue.
    * @param {Object} stateObject
    * @returns {Object}
+   * @public
+   * @override
    */
   static fromStateObject( stateObject ) {
     return Genotype.fromStateObject( stateObject );
@@ -36,6 +40,8 @@ class GenotypeIO extends ObjectIO {
    * Restores Genotype state after instantiation.
    * @param {Genotype} genotype
    * @param {Object} state
+   * @public
+   * @override
    */
   static setValue( genotype, state ) {
     validate( genotype, this.validator );

@@ -122,6 +122,7 @@ class Genotype extends PhetioObject {
   /**
    * Restores Genotype state after instantiation.
    * @param {Object} state
+   * @public
    */
   setValue( state ) {
     required( state );

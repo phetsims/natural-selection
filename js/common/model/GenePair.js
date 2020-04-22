@@ -85,11 +85,11 @@ class GenePair extends PhetioObject {
   }
 
   /**
-   * Returns the allele that determines how this genotype manifests as phenotype.
+   * Returns the allele that determines the bunny's appearance. This is how genotype manifests as phenotype.
    * @returns {Allele}
    * @public
    */
-  getPhenotype() {
+  getVisibleAllele() {
     if ( this.isHomozygous() ) {
       return this.fatherAllele;
     }

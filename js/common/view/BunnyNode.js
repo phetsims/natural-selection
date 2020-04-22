@@ -10,14 +10,13 @@ import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PressListener from '../../../../scenery/js/listeners/PressListener.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
-import Image from '../../../../scenery/js/nodes/Image.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import bunnyWhiteFurStraightEarsShortTeethImage from '../../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
+import BunnyImage from './BunnyImage.js';
 import BunnyNodeIO from './BunnyNodeIO.js';
 import SpriteNode from './SpriteNode.js';
 
@@ -47,7 +46,7 @@ class BunnyNode extends SpriteNode {
       phetioType: BunnyNodeIO
     }, options );
 
-    const image = new Image( bunnyWhiteFurStraightEarsShortTeethImage, {
+    const image = new BunnyImage( bunny, {
       scale: IMAGE_SCALE,
       centerX: 0,
       bottom: 0

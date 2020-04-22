@@ -15,9 +15,10 @@ class BunnyIO extends ObjectIO {
 
   /**
    * Serializes a Bunny to a state object.
-   *
    * @param {Bunny} bunny
    * @returns {Object}
+   * @public
+   * @override
    */
   static toStateObject( bunny ) {
     validate( bunny, this.validator );
@@ -28,6 +29,8 @@ class BunnyIO extends ObjectIO {
    * Deserializes the state needed by stateToArgsForConstructor and setValue.
    * @param {Object} stateObject
    * @returns {Object}
+   * @public
+   * @override
    */
   static fromStateObject( stateObject ) {
     return Bunny.fromStateObject( stateObject );
@@ -37,6 +40,8 @@ class BunnyIO extends ObjectIO {
    * Creates the args to BunnyGroup.createNextElement that creates Bunny instances.
    * @param state
    * @returns {Object[]}
+   * @public
+   * @override
    */
   static stateToArgsForConstructor( state ) {
     return Bunny.stateToArgsForConstructor( state );

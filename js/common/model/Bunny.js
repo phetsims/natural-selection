@@ -24,6 +24,7 @@ import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 import Genotype from './Genotype.js';
 import GenotypeIO from './GenotypeIO.js';
+import Phenotype from './Phenotype.js';
 import Sprite from './Sprite.js';
 import SpriteDirection from './SpriteDirection.js';
 
@@ -73,6 +74,12 @@ class Bunny extends Sprite {
       phetioDocumentation: 'the genetic information for this bunny'
     } );
 
+    // @public (read-only)
+    this.phenotype = new Phenotype( this.genotype, {
+      tandem: options.tandem.createTandem( 'phenotype' ),
+      phetioDocumentation: 'how the bunny looks, the manifestation of its genotype'
+    } );
+
     // @public
     this.ageProperty = new NumberProperty( 0, {
       numberType: 'Integer',
@@ -104,6 +111,7 @@ class Bunny extends Sprite {
     // @private
     this.disposeBunny = () => {
       this.genotype.dispose();
+      this.phenotype.dispose();
       this.ageProperty.dispose();
       this.isAliveProperty.dispose();
     };

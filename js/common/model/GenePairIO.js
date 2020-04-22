@@ -17,6 +17,8 @@ class GenePairIO extends ObjectIO {
    * Serializes a GenePair to a state object.
    * @param {GenePairIO} genePair
    * @returns {Object}
+   * @public
+   * @override
    */
   static toStateObject( genePair ) {
     validate( genePair, this.validator );
@@ -27,6 +29,8 @@ class GenePairIO extends ObjectIO {
    * Deserializes the state needed by GenePairIO.setValue.
    * @param {Object} stateObject
    * @returns {Object}
+   * @public
+   * @override
    */
   static fromStateObject( stateObject ) {
     return GenePair.fromStateObject( stateObject );
@@ -36,6 +40,8 @@ class GenePairIO extends ObjectIO {
    * Restores GenePair state after instantiation.
    * @param {GenePair} genePair
    * @param {Object} state
+   * @public
+   * @override
    */
   static setValue( genePair, state ) {
     validate( genePair, this.validator );

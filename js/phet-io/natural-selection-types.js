@@ -1044,6 +1044,14 @@ window.phet.preloads.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "ObservableArrayIO<ReferenceIO<BunnyIO>>"
     },
+    "PhenotypeIO": {
+      "documentation": "TODO",
+      "events": [],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "ObjectIO",
+      "typeName": "PhenotypeIO"
+    },
     "PhetButtonIO": {
       "documentation": "The PhET Button in the bottom right of the screen",
       "events": [],
