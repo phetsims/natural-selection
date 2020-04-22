@@ -107,15 +107,17 @@ class EnvironmentNode extends Node {
       const bunnyNode = this.bunnyNodeGroup.createCorrespondingGroupElement( bunny, bunny );
       spritesNode.addChild( bunnyNode );
 
-      // If the bunny is disposed or dies, remove listener and delete the associated BunnyNode.
-      const cleanupListener = disposedBunny => {
-        if ( disposedBunny === bunny ) {
-          environmentModel.bunnies.bunnyDisposedEmitter.removeListener( cleanupListener );
+      // If the bunny dies or is disposed, delete the associated BunnyNode.
+      //TODO it would be more efficient to listen to the specific bunny
+      const disposeBunnyNode = someBunny => {
+        if ( someBunny === bunny ) {
+          environmentModel.bunnies.bunnyDiedEmitter.removeListener( disposeBunnyNode );
+          environmentModel.bunnies.bunnyDisposedEmitter.removeListener( disposeBunnyNode );
           this.bunnyNodeGroup.disposeElement( bunnyNode );
         }
       };
-      environmentModel.bunnies.bunnyDisposedEmitter.addListener( cleanupListener );
-      bunny.isAliveProperty.lazyLink( () => cleanupListener( bunny ) );
+      environmentModel.bunnies.bunnyDiedEmitter.addListener( disposeBunnyNode );
+      environmentModel.bunnies.bunnyDisposedEmitter.addListener( disposeBunnyNode );
     };
 
     // Create a BunnyNode for each Bunny in the initial population.
