@@ -99,6 +99,7 @@ class EnvironmentNode extends Node {
       tandem: options.tandem.createTandem( 'bunnyNodeGroup' )
     } );
 
+    // Creates a BunnyNode and adds it to the scenegraph
     const createBunnyNode = bunny => {
       const bunnyNode = this.bunnyNodeGroup.createBunnyNode( bunny );
       spritesNode.addChild( bunnyNode );
