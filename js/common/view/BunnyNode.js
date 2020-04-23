@@ -70,13 +70,11 @@ class BunnyNode extends SpriteNode {
 
     super( bunny, options );
 
+    // Press on the bunny to select it.
     const pressListener = new PressListener( {
-
-      // Select this bunny
       press: () => {
         selectedBunnyProperty.value = bunny;
       },
-
       tandem: options.tandem.createTandem( 'pressListener' )
     } );
     this.addInputListener( pressListener );
