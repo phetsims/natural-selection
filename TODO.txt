@@ -2,6 +2,7 @@ TODO list for natural-selection
 
 PERFORMANCE
 pre-allocate all BunnyNode instances (60% time, 30% in new PressListener)
+Instead of a PressListener per Bunny, how about 1 PressListener on EnvironmentNode?
 
 PHASES
 - [x] Modes
