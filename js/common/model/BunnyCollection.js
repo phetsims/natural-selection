@@ -90,35 +90,6 @@ class BunnyCollection {
     // @public notifies when bunnies have taken over the world, exceeding the maximum population size
     this.bunniesHaveTakenOverTheWorldEmitter = new Emitter();
 
-    // When a bunny is created...
-    this.bunnyGroup.elementCreatedEmitter.addListener( bunny => {
-      assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-
-      // When a bunny dies...
-      const isAliveListener = isAlive => {
-        if ( !isAlive ) {
-          bunny.isAliveProperty.unlink( isAliveListener );
-          this.liveBunnies.remove( bunny );
-          this.deadBunnies.push( bunny );
-          this.bunnyDiedEmitter.emit( bunny );
-        }
-      };
-      bunny.isAliveProperty.lazyLink( isAliveListener );
-
-      this.liveBunnies.push( bunny );
-      this.totalNumberOfBunniesProperty.value = this.bunnyGroup.length;
-      this.bunnyCreatedEmitter.emit( bunny );
-    } );
-
-    // When a bunny is disposed...
-    this.bunnyGroup.elementDisposedEmitter.addListener( bunny => {
-      assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-      this.liveBunnies.contains( bunny ) && this.liveBunnies.remove( bunny );
-      this.deadBunnies.contains( bunny ) && this.deadBunnies.remove( bunny );
-      this.totalNumberOfBunniesProperty.value = this.bunnyGroup.length;
-      this.bunnyDisposedEmitter.emit( bunny );
-    } );
-
     // @private
     this.modelViewTransform = modelViewTransform;
     this.genePool = genePool;
@@ -129,6 +100,10 @@ class BunnyCollection {
    */
   reset() {
     this.bunnyGroup.clear();
+
+    this.liveBunnies.clear();
+    this.deadBunnies.clear();
+    this.totalNumberOfBunniesProperty.value = 0;
     assert && this.assertCountsInSync();
   }
 
@@ -175,9 +150,8 @@ class BunnyCollection {
    * @private
    */
   ageAllBunnies() {
-
     let numberDied = 0;
-    const bunnies = this.liveBunnies.getArray().splice(); // this may modify the array, so operate on a copy
+    const bunnies = this.liveBunnies.getArray().slice(); // this may modify the array, so operate on a copy
     bunnies.forEach( bunny => {
 
       // bunny is one generation older
@@ -254,13 +228,32 @@ class BunnyCollection {
     assert && assert( mother instanceof Bunny || mother === null, 'invalid mother' );
     assert && assert( typeof generation === 'number', 'invalid generation' );
 
-    return this.bunnyGroup.createNextElement( {
+    const bunny = this.bunnyGroup.createNextElement( {
       father: father,
       mother: mother,
       generation: generation,
       position: this.modelViewTransform.getRandomGroundPosition(),
       direction: SpriteDirection.getRandom()
     } );
+
+    // When the bunny dies...
+    ( bunny => {
+      const isAliveListener = isAlive => {
+        if ( !isAlive ) {
+          bunny.isAliveProperty.unlink( isAliveListener );
+          this.liveBunnies.remove( bunny );
+          this.deadBunnies.push( bunny );
+          this.bunnyDiedEmitter.emit( bunny );
+        }
+      };
+      bunny.isAliveProperty.lazyLink( isAliveListener );
+    } )( bunny );
+
+    this.liveBunnies.push( bunny );
+    this.totalNumberOfBunniesProperty.value++;
+    this.bunnyCreatedEmitter.emit( bunny );
+
+    return bunny;
   }
 
   /**
@@ -277,7 +270,13 @@ class BunnyCollection {
    * @param {Bunny} bunny
    */
   disposeBunny( bunny ) {
+
     this.bunnyGroup.disposeElement( bunny );
+
+    this.liveBunnies.contains( bunny ) && this.liveBunnies.remove( bunny );
+    this.deadBunnies.contains( bunny ) && this.deadBunnies.remove( bunny );
+    this.totalNumberOfBunniesProperty.value--;
+    this.bunnyDisposedEmitter.emit( bunny );
   }
 
   /**
