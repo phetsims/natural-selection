@@ -124,7 +124,7 @@ class EnvironmentNode extends Node {
     // for the lifetime of the sim.
     spritesNode.addInputListener( new PressListener( {
       press: event => {
-        const bunnyNode = _.find( event.trail.nodes, node => node instanceof BunnyNode );
+        const bunnyNode = _.findLast( event.trail.nodes, node => node instanceof BunnyNode );
         if ( bunnyNode ) {
           environmentModel.selectedBunnyProperty.value = bunnyNode.bunny;
         }
