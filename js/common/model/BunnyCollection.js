@@ -128,12 +128,12 @@ class BunnyCollection {
    * Resets the group.
    */
   reset() {
-    this.bunnyGroup.clear();
+    this.bunnyGroup.clear(); // calls dispose for all Bunny instances
     assert && this.assertCountsInSync();
   }
 
   /**
-   * Gets the archetype for the PhetioGroup.
+   * Gets the archetype for the PhetioGroup. This is non-null only during API harvest.
    * @returns {PhetioObject}
    */
   getArchetype() {
