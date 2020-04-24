@@ -1,10 +1,11 @@
 TODO list for natural-selection
 
 PERFORMANCE
-pre-allocate all BunnyNode instances? (58% time, 31% in new PressListener)
+merge Genotype fields into Bunny?
+merge Phenotype fields into Bunny?
 static instances for GenePairs? There are only 12 unique instances.
 static instances for Phenotype? There are only 8 unique instances.
-merge Genotype fields into Bunny?
+pre-allocate all BunnyNode instances? (58% time, 31% in new PressListener)
 
 PHASES
 - [x] Modes
