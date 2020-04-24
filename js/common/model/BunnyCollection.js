@@ -99,7 +99,7 @@ class BunnyCollection {
    * Resets the group.
    */
   reset() {
-    this.bunnyGroup.clear();
+    this.bunnyGroup.clear(); // handles dispose of a Bunny instances
 
     this.liveBunnies.clear();
     this.deadBunnies.clear();
@@ -108,7 +108,7 @@ class BunnyCollection {
   }
 
   /**
-   * Gets the archetype for the PhetioGroup.
+   * Gets the archetype for the PhetioGroup. This is non-null only during API harvest.
    * @returns {PhetioObject}
    */
   getArchetype() {
