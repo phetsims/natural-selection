@@ -99,7 +99,7 @@ class BunnyCollection {
    * Resets the group.
    */
   reset() {
-    this.bunnyGroup.clear(); // handles dispose of a Bunny instances
+    this.bunnyGroup.clear(); // calls dispose for all Bunny instances
 
     this.liveBunnies.clear();
     this.deadBunnies.clear();
