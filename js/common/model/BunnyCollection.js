@@ -249,6 +249,7 @@ class BunnyCollection {
       bunny.isAliveProperty.lazyLink( isAliveListener );
     } )( bunny );
 
+    // This could be done in a listener to bunnyGroup.elementCreatedEmitter, but it's more efficient to do here.
     this.liveBunnies.push( bunny );
     this.totalNumberOfBunniesProperty.value++;
     this.bunnyCreatedEmitter.emit( bunny );
@@ -273,6 +274,7 @@ class BunnyCollection {
 
     this.bunnyGroup.disposeElement( bunny );
 
+    // This could be done in a listener to bunnyGroup.elementDisposedEmitter, but it's more efficient to do here.
     this.liveBunnies.contains( bunny ) && this.liveBunnies.remove( bunny );
     this.deadBunnies.contains( bunny ) && this.deadBunnies.remove( bunny );
     this.totalNumberOfBunniesProperty.value--;
