@@ -53,6 +53,7 @@ class BunnyNode extends SpriteNode {
 
     // Rectangle that appears around this Node when bunny is selected
     const selectionRectangle = new Rectangle( image.bounds.dilated( 5 ), {
+      fill: 'rgba( 0, 0, 0, 0.25 )',
       stroke: 'blue',
       lineWidth: 2.5,
       cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
