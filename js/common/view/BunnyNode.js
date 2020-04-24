@@ -8,7 +8,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
-import PressListener from '../../../../scenery/js/listeners/PressListener.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -70,15 +69,6 @@ class BunnyNode extends SpriteNode {
 
     super( bunny, options );
 
-    // Press on the bunny to select it.
-    const pressListener = new PressListener( {
-      press: () => {
-        selectedBunnyProperty.value = bunny;
-      },
-      tandem: options.tandem.createTandem( 'pressListener' )
-    } );
-    this.addInputListener( pressListener );
-
     // Indicate that this bunny is selected
     const selectedBunnyListener = someBunny => {
       selectionRectangle.visible = ( someBunny === bunny );
@@ -87,9 +77,11 @@ class BunnyNode extends SpriteNode {
 
     // @private
     this.disposeBunnyNode = () => {
-      pressListener.dispose();
       selectedBunnyProperty.unlink( selectedBunnyListener );
     };
+
+    // @private
+    this.bunny = bunny;
   }
 
   /**

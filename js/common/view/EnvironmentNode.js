@@ -16,6 +16,7 @@ import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModel from '../model/EnvironmentModel.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import BunnyNode from './BunnyNode.js';
 import BunnyNodeGroup from './BunnyNodeGroup.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
 import EnvironmentRadioButtonGroup from './EnvironmentRadioButtonGroup.js';
@@ -118,13 +119,26 @@ class EnvironmentNode extends Node {
     assert && assert( _.every( this.spritesNode.children, child => child instanceof SpriteNode ),
       'every child of spritesNode must be an instanceof SpriteNode' );
 
-    // Press on the background to clear the selected bunny.
+    // Pressing on a bunny selects it. Creating a PressListener for every BunnyNode was found to be expensive because
+    // there are a large number of them, so a single listener is used here. No need to removeInputListener, exists
+    // for the lifetime of the sim.
+    spritesNode.addInputListener( new PressListener( {
+      press: event => {
+        const bunnyNode = _.find( event.trail.nodes, node => node instanceof BunnyNode );
+        if ( bunnyNode ) {
+          environmentModel.selectedBunnyProperty.value = bunnyNode.bunny;
+        }
+      },
+      tandem: options.tandem.createTandem( 'bunniesPressListener' )
+    } ) );
+
+    // Pressing on the background clears the selected bunny.
     // No need to removeInputListener, exists for the lifetime of the sim.
     backgroundNode.addInputListener( new PressListener( {
       press: () => {
         environmentModel.selectedBunnyProperty.value = null;
       },
-      tandem: options.tandem.createTandem( 'pressListener' )
+      tandem: options.tandem.createTandem( 'backgroundPressListener' )
     } ) );
   }
 
