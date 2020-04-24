@@ -105,6 +105,7 @@ class BunnyCollection {
     this.liveBunnies.clear();
     this.deadBunnies.clear();
     this.totalNumberOfBunniesProperty.value = 0;
+
     assert && this.assertCountsInSync();
   }
 
