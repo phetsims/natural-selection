@@ -69,12 +69,12 @@ class Bunny extends Sprite {
     this.father = options.father;
     this.mother = options.mother;
 
-    // @public (read-only)
+    // @public (read-only) the bunny's genetic blueprint
     this.genotype = new Genotype( this.father, this.mother, genePool, {
       tandem: options.tandem.createTandem( 'genotype' )
     } );
 
-    // @public (read-only)
+    // @public (read-only) the bunny's appearance, the manifestation of its genotype
     this.phenotype = new Phenotype( this.genotype, {
       tandem: options.tandem.createTandem( 'phenotype' )
     } );
