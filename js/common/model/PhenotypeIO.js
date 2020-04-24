@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * PhenotypeIO is the IO Type for Phenotype.
+ * PhenotypeIO is the IO Type for Phenotype. It delegates most of its implementation to Phenotype.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

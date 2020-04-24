@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * BunnyIO is the IO Type for Bunny.
+ * BunnyIO is the IO Type for Bunny. It delegates most of its implementation to Bunny.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
