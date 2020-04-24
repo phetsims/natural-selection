@@ -216,7 +216,6 @@ class BunnyCollection {
       this.mateBunnies( bunnies[ i - 1 ], bunnies[ i ], generation, LITTER_SIZE );
       numberBorn += LITTER_SIZE;
     }
-    assert && this.assertCountsInSync();
 
     phet.log && phet.log( `${numberBorn} bunnies born` );
 
@@ -288,7 +287,9 @@ class BunnyCollection {
     const live = this.liveBunnies.length;
     const dead = this.deadBunnies.length;
     const total = this.totalNumberOfBunniesProperty.value;
-    assert( live + dead === total, `bunny counts are out of sync, live=${live}, dead=${dead}, total=${total}` );
+    const bunnyGroupLength = this.bunnyGroup.length;
+    assert( live + dead === total && total === bunnyGroupLength,
+      `bunny counts are out of sync, live=${live}, dead=${dead}, total=${total} bunnyGroupLength=${bunnyGroupLength}` );
   }
 
   /**
