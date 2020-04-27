@@ -94,6 +94,11 @@ const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
     isValidValue: maxBunnies => ( maxBunnies > 0 && Utils.isInteger( maxBunnies ) )
   },
 
+  // Adds a red dot at the origin of some objects (bunnies, wolves, food)
+  showOrigin: {
+    type: 'flag'
+  },
+
   // Adds debugging information to sprites (bunnies, wolves, food)
   showSpriteInfo: {
     type: 'flag'

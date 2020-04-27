@@ -46,21 +46,19 @@ class FoodNode extends SpriteNode {
     assert && assert( !options.children, 'FoodNode sets children' );
     options.children = [ toughFoodNode, tenderFoodNode ];
 
+    // Red dot at the origin
+    if ( NaturalSelectionQueryParameters.showOrigin ) {
+      options.children.push( new Circle( 2, { fill: 'red' } ) );
+    }
+
+    // Show the tandem name
     if ( NaturalSelectionQueryParameters.showSpriteInfo ) {
-
-      // Red dot at the origin
-      const originNode = new Circle( 2, { fill: 'red' } );
-
-      // Show the tandem name
-      const debugLabelNode = new Text( food.tandem.name, {
+      options.children.push( new Text( food.tandem.name, {
         font: new PhetFont( 12 ),
         fill: 'black',
         centerX: toughFoodNode.centerX,
         top: toughFoodNode.bottom + 5
-      } );
-
-      options.children.push( originNode );
-      options.children.push( debugLabelNode );
+      } ) );
     }
 
     super( food, options );

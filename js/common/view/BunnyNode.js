@@ -65,7 +65,7 @@ class BunnyNode extends SpriteNode {
     options.children = [ selectionRectangle, image ];
 
     // Red dot at the origin
-    if ( NaturalSelectionQueryParameters.showSpriteInfo ) {
+    if ( NaturalSelectionQueryParameters.showOrigin ) {
       options.children.push( new Circle( 2, { fill: 'red' } ) );
     }
 
