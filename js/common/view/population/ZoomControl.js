@@ -102,8 +102,8 @@ class ZoomControl extends LayoutBox {
    * @override
    */
   dispose() {
-    super.dispose();
     this.disposeZoomControl();
+    super.dispose();
   }
 }
 

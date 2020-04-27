@@ -46,8 +46,8 @@ class SpriteNode extends Node {
    * @override
    */
   dispose() {
-    super.dispose();
     this.disposeSpriteNode();
+    super.dispose();
   }
 }
 

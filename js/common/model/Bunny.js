@@ -134,8 +134,8 @@ class Bunny extends Sprite {
    * @override
    */
   dispose() {
-    super.dispose();
     this.disposeBunny();
+    super.dispose();
     this.disposedEmitter.emit();
     this.disposedEmitter.dispose();
   }

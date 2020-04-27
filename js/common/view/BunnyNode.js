@@ -91,8 +91,8 @@ class BunnyNode extends SpriteNode {
    * @override
    */
   dispose() {
-    super.dispose();
     this.disposeBunnyNode();
+    super.dispose();
   }
 }
 

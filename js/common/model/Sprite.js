@@ -80,8 +80,8 @@ class Sprite extends PhetioObject {
    * @override
    */
   dispose() {
-    super.dispose();
     this.disposeSprite();
+    super.dispose();
   }
 }
 

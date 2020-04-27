@@ -76,6 +76,13 @@ class Genotype extends PhetioObject {
       this.teethGenePair = genePool.createTeethGenePair0( teethGenePairOptions );
     }
 
+    // @private
+    this.disposeGenotype = () => {
+      this.furGenePair.dispose();
+      this.earsGenePair.dispose();
+      this.teethGenePair.dispose();
+    };
+
     this.validateInstance();
   }
 
@@ -83,10 +90,8 @@ class Genotype extends PhetioObject {
    * @public
    */
   dispose() {
+    this.disposeGenotype();
     super.dispose();
-    this.furGenePair.dispose();
-    this.earsGenePair.dispose();
-    this.teethGenePair.dispose();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
