@@ -177,7 +177,7 @@ class BunnyCollection {
   ageAllBunnies() {
 
     let numberDied = 0;
-    const bunnies = this.liveBunnies.getArrayCopy(); // this may modify the array, so operate on a copy
+    const bunnies = this.liveBunnies.getArrayCopy(); // liveBunnies will change if any bunnies die, so operate on a copy
     bunnies.forEach( bunny => {
 
       // bunny is one generation older
