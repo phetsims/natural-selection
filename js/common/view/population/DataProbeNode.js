@@ -31,7 +31,7 @@ import DataProbeDragListener from './DataProbeDragListener.js';
 
 // constants
 const BAR_COLOR = 'rgb( 120, 120, 120 )';
-const NUMBER_DISPLAY_RANGE = new Range( 0, NaturalSelectionConstants.MAX_BUNNIES );
+const NUMBER_DISPLAY_RANGE = new Range( 0, NaturalSelectionConstants.MAX_POPULATION );
 const NUMBER_DISPLAY_FONT = new PhetFont( 12 );
 const NUMBER_DISPLAY_LINE_WIDTH = 2;
 const NUMBER_DISPLAY_LINE_DASH = [ 3, 3 ];

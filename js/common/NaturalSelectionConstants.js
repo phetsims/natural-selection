@@ -21,20 +21,33 @@ const NaturalSelectionConstants = {
 
   // Model ===========================================================================================================
 
+  // number of bunnies in the initial (generation zero) population
+  INITIAL_POPULATION: NaturalSelectionQueryParameters.population,
+
   // number of bunnies required to 'take over the world'
-  MAX_BUNNIES: NaturalSelectionQueryParameters.maxBunnies,
+  MAX_POPULATION: NaturalSelectionQueryParameters.maxBunnies,
 
   // bunnies die when they reach this age, in generations
-  MAX_BUNNY_AGE: 5,
+  MAX_AGE: NaturalSelectionQueryParameters.maxAge,
 
   // number of bunnies in each litter
-  LITTER_SIZE: 4,
+  LITTER_SIZE: NaturalSelectionQueryParameters.litterSize,
 
-  // clock
+  // seconds per generation, one revolution of the generation clock
   SECONDS_PER_GENERATION: NaturalSelectionQueryParameters.secondsPerGeneration,
-  SECONDS_PER_STEP: NaturalSelectionQueryParameters.secondsPerStep, // dt per press of the Step button
+
+  // dt when the Step button is pressed, in seconds
+  SECONDS_PER_STEP: NaturalSelectionQueryParameters.secondsPerStep,
 
   // View ============================================================================================================N
+
+  // Whether the concept of alleles is present in the UI
+  ALLELES_VISIBLE: NaturalSelectionQueryParameters.allelesVisible,
+
+  // Debugging flags
+  SHOW_ORIGIN: NaturalSelectionQueryParameters.showOrigin,
+  SHOW_SPRITE_INFO: NaturalSelectionQueryParameters.showSpriteInfo,
+  SHOW_HORIZON: NaturalSelectionQueryParameters.showHorizon,
 
   // ScreenView
   SCREEN_VIEW_X_MARGIN: 15, // margins at left and right edges of the ScreenView
@@ -107,6 +120,14 @@ const NaturalSelectionConstants = {
   PROPORTIONS_LEGEND_FONT: new PhetFont( 16 ),
   DIALOG_FONT: new PhetFont( 16 )
 };
+
+// Validation
+assert && assert( NaturalSelectionConstants.SECONDS_PER_STEP < NaturalSelectionConstants.SECONDS_PER_GENERATION,
+  'SECONDS_PER_STEP must be < SECONDS_PER_GENERATION' );
+assert && assert( NaturalSelectionConstants.INITIAL_POPULATION < NaturalSelectionConstants.MAX_POPULATION,
+  'INITIAL_POPULATION must be < MAX_POPULATION' );
+
+//TODO https://github.com/phetsims/natural-selection/issues/49, validate mutations and population, call QueryStringMachine.addWarning
 
 naturalSelection.register( 'NaturalSelectionConstants', NaturalSelectionConstants );
 export default NaturalSelectionConstants;

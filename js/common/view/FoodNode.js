@@ -12,7 +12,7 @@ import Image from '../../../../scenery/js/nodes/Image.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../naturalSelection.js';
 import Food from '../model/Food.js';
-import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
+import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import OriginNode from './OriginNode.js';
 import SpriteNode from './SpriteNode.js';
 
@@ -47,12 +47,12 @@ class FoodNode extends SpriteNode {
     options.children = [ toughFoodNode, tenderFoodNode ];
 
     // Red dot at the origin
-    if ( NaturalSelectionQueryParameters.showOrigin ) {
+    if ( NaturalSelectionConstants.SHOW_ORIGIN ) {
       options.children.push( new OriginNode() );
     }
 
     // Show the tandem name
-    if ( NaturalSelectionQueryParameters.showSpriteInfo ) {
+    if ( NaturalSelectionConstants.SHOW_SPRITE_INFO ) {
       options.children.push( new Text( food.tandem.name, {
         font: new PhetFont( 12 ),
         fill: 'black',

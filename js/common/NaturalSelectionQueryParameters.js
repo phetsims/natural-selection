@@ -4,11 +4,6 @@
  * Query parameters that are specific to this simulation.
  * Running with ?log will print these query parameters and their values to the console at startup.
  *
- * Running with ?dev shows the following things that are specific to this sim:
- * - generation number is shown below the generation clock in GenerationClockNode
- * - horizon line is shown in EnvironmentNode
- * - a red dot is rendered at the origin of various objects (bunnies, food, wolves,...)
- *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
@@ -94,6 +89,22 @@ const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
     isValidValue: maxBunnies => ( maxBunnies > 0 && Utils.isInteger( maxBunnies ) )
   },
 
+  // The number of bunnies per litter.
+  // For internal use only.
+  maxAge: {
+    type: 'number',
+    defaultValue: 5,
+    isValidValue: maxAge => ( maxAge > 0 && Utils.isInteger( maxAge ) )
+  },
+
+  // The number of bunnies per litter.
+  // For internal use only.
+  litterSize: {
+    type: 'number',
+    defaultValue: 4,
+    isValidValue: litterSize => ( litterSize > 0 && Utils.isInteger( litterSize ) )
+  },
+
   // Adds a red dot at the origin of some objects (bunnies, wolves, food)
   showOrigin: {
     type: 'flag'
@@ -111,14 +122,6 @@ const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
 } );
 
 // check dependencies between query parameters
-
-// Check that population is valid for mutations, see https://github.com/phetsims/natural-selection/issues/9
-//TODO https://github.com/phetsims/natural-selection/issues/49, validate mutations and population, call QueryStringMachine.addWarning
-
-assert && assert( NaturalSelectionQueryParameters.secondsPerStep < NaturalSelectionQueryParameters.secondsPerGeneration,
-  'secondsPerStep must be < secondsPerGeneration' );
-assert && assert( NaturalSelectionQueryParameters.population < NaturalSelectionQueryParameters.maxBunnies,
-  'population must be < maxBunnies' );
 
 // log the values of all sim-specific query parameters
 phet.log && phet.log( 'query parameters: ' + JSON.stringify( NaturalSelectionQueryParameters, null, 2 ) );

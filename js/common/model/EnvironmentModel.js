@@ -16,7 +16,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
+import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import BunnyCollection from './BunnyCollection.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -152,7 +152,7 @@ class EnvironmentModel extends PhetioObject {
     assert && assert( this.bunnies.totalNumberOfBunniesProperty.value === 0, 'bunnies already exist' );
     assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
 
-    for ( let i = 0; i < NaturalSelectionQueryParameters.population; i++ ) {
+    for ( let i = 0; i < NaturalSelectionConstants.INITIAL_POPULATION; i++ ) {
       this.bunnies.createBunnyZero();
     }
   }

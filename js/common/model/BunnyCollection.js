@@ -181,11 +181,11 @@ class BunnyCollection {
 
       // bunny is one generation older
       bunny.ageProperty.value++;
-      assert && assert( bunny.ageProperty.value <= NaturalSelectionConstants.MAX_BUNNY_AGE,
-        `bunny age ${bunny.ageProperty.value} exceeded maximum ${NaturalSelectionConstants.MAX_BUNNY_AGE}` );
+      assert && assert( bunny.ageProperty.value <= NaturalSelectionConstants.MAX_AGE,
+        `bunny age ${bunny.ageProperty.value} exceeded maximum ${NaturalSelectionConstants.MAX_AGE}` );
 
       // bunny dies if it exceeds the maximum age
-      if ( bunny.ageProperty.value === NaturalSelectionConstants.MAX_BUNNY_AGE ) {
+      if ( bunny.ageProperty.value === NaturalSelectionConstants.MAX_AGE ) {
         bunny.die();
         diedCount++;
       }
@@ -220,7 +220,7 @@ class BunnyCollection {
     phet.log && phet.log( `${bornCount} bunnies born` );
 
     // Notify if bunnies have taken over the world.
-    if ( this.liveBunnies.lengthProperty.value > NaturalSelectionConstants.MAX_BUNNIES ) {
+    if ( this.liveBunnies.lengthProperty.value > NaturalSelectionConstants.MAX_POPULATION ) {
       this.bunniesHaveTakenOverTheWorldEmitter.emit();
     }
   }

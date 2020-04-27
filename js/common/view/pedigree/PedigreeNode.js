@@ -13,7 +13,6 @@ import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import PedigreeModel from '../../model/PedigreeModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
-import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 import AllelesPanel from './AllelesPanel.js';
 import PedigreeGraphNode from './PedigreeGraphNode.js';
 
@@ -43,7 +42,7 @@ class PedigreeNode extends HBox {
     // Divy up the width
     // If ?allelesVisible=false, the control panel is omitted, and the graph fills the width.
     const controlPanelWidth = 0.2 * size.width;
-    const graphWidth = NaturalSelectionQueryParameters.allelesVisible ?
+    const graphWidth = NaturalSelectionConstants.ALLELES_VISIBLE ?
                        size.width - controlPanelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING :
                        size.width;
 
@@ -66,7 +65,7 @@ class PedigreeNode extends HBox {
     } );
 
     assert && assert( !options.children, 'PedigreeNode sets children' );
-    options.children = NaturalSelectionQueryParameters.allelesVisible ?
+    options.children = NaturalSelectionConstants.ALLELES_VISIBLE ?
       [ allelesPanel, pedigreeGraphNode ] :
       [ pedigreeGraphNode ];
 

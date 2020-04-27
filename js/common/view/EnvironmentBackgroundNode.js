@@ -17,7 +17,7 @@ import arcticBackgroundImage from '../../../images/arcticBackground_png.js';
 import equatorBackgroundImage from '../../../images/equatorBackground_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import Environments from '../model/Environments.js';
-import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
+import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
 class EnvironmentBackgroundNode extends Node {
 
@@ -49,7 +49,7 @@ class EnvironmentBackgroundNode extends Node {
     super( options );
 
     // Horizon line, for debugging. Bunnies cannot go further from the viewer than this line.
-    if ( NaturalSelectionQueryParameters.showHorizon ) {
+    if ( NaturalSelectionConstants.SHOW_HORIZON ) {
       const horizonLine = new Line( 0, yHorizon, size.width, yHorizon, {
         stroke: 'red',
         lineWidth: 1

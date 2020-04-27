@@ -13,7 +13,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import BunnyImageCache from './BunnyImageCache.js';
 import BunnyNodeIO from './BunnyNodeIO.js';
 import OriginNode from './OriginNode.js';
@@ -65,7 +64,7 @@ class BunnyNode extends SpriteNode {
     options.children = [ selectionRectangle, image ];
 
     // Red dot at the origin
-    if ( NaturalSelectionQueryParameters.showOrigin ) {
+    if ( NaturalSelectionConstants.SHOW_ORIGIN ) {
       options.children.push( new OriginNode() );
     }
 
