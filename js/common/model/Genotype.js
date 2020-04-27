@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Genotype is the genetic information that determines a bunny's traits.
+ * Genotype is the genetic blueprint for a Bunny.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
