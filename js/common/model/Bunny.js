@@ -138,6 +138,7 @@ class Bunny extends Sprite {
     super.dispose();
     this.disposedEmitter.emit();
     this.disposedEmitter.dispose();
+    this.disposedEmitter = null; // in case we try to call dispose twice
   }
 
   /**
