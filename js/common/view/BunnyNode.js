@@ -15,7 +15,7 @@ import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
-import BunnyImage from './BunnyImage.js';
+import BunnyImageCache from './BunnyImageCache.js';
 import BunnyNodeIO from './BunnyNodeIO.js';
 import SpriteNode from './SpriteNode.js';
 
@@ -45,7 +45,7 @@ class BunnyNode extends SpriteNode {
       phetioType: BunnyNodeIO
     }, options );
 
-    const image = new BunnyImage( bunny, {
+    const image = BunnyImageCache.getWrappedImage( bunny, {
       scale: IMAGE_SCALE,
       centerX: 0,
       bottom: 0
@@ -81,6 +81,9 @@ class BunnyNode extends SpriteNode {
     this.disposeBunnyNode = () => {
       selectedBunnyProperty.unlink( selectedBunnyListener );
     };
+
+    // @private
+    this.bunny = bunny;
   }
 
   /**
