@@ -67,7 +67,7 @@ const BunnyImageCache = {
    */
   getWrappedImage( bunny, options ) {
 
-    assert( !options || !options.children, 'getWrappedImage sets children' );
+    assert && assert( !options || !options.children, 'getWrappedImage sets children' );
 
     options = merge( {
       children: [ BunnyImageCache.getImage( bunny ) ]
