@@ -51,6 +51,8 @@ class BunnyIO extends ObjectIO {
    * Restores Bunny state after instantiation.
    * @param {Bunny} bunny
    * @param {Object} state
+   * @public
+   * @override
    */
   static setValue( bunny, state ) {
     validate( bunny, this.validator );

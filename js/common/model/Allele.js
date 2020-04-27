@@ -21,6 +21,8 @@ class Allele extends PhetioObject {
    */
   constructor( name, options ) {
 
+    assert && assert( typeof name === 'string', 'invalid name' );
+
     options = merge( {
 
       // phet-io

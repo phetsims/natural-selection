@@ -123,6 +123,7 @@ class BunnyCollection {
 
   /**
    * Resets the group.
+   * @public
    */
   reset() {
     this.bunnyGroup.clear(); // calls dispose for all Bunny instances
@@ -132,6 +133,7 @@ class BunnyCollection {
   /**
    * Gets the archetype for the PhetioGroup. This is non-null only during API harvest.
    * @returns {PhetioObject}
+   * @public
    */
   getArchetype() {
     return this.bunnyGroup.archetype;
@@ -274,6 +276,7 @@ class BunnyCollection {
   /**
    * Disposes a Bunny.
    * @param {Bunny} bunny
+   * @public
    */
   disposeBunny( bunny ) {
     this.bunnyGroup.disposeElement( bunny );

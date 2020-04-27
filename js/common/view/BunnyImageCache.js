@@ -20,6 +20,7 @@ import bunnyWhiteFurFloppyEarsShortTeethImage from '../../../images/bunny-whiteF
 import bunnyWhiteFurStraightEarsLongTeethImage from '../../../images/bunny-whiteFur-straightEars-longTeeth_png.js';
 import bunnyWhiteFurStraightEarsShortTeethImage from '../../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
 import naturalSelection from '../../naturalSelection.js';
+import Bunny from '../model/Bunny.js';
 
 // The cache is a map, which maps phenotype key to an Image instance.
 // The phenotype key pattern is '{{hasWhiteFur}}-{{hasStraightEars}}-{{hasShortTeeth}}', where each value is a boolean.
@@ -49,6 +50,7 @@ const BunnyImageCache = {
    * @public
    */
   getImage( bunny ) {
+    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
     // create the key by inspecting the phenotype
     const key = `${bunny.phenotype.hasWhiteFur()}-${bunny.phenotype.hasStraightEars()}-${bunny.phenotype.hasShortTeeth()}`;

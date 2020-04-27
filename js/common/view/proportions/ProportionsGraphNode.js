@@ -143,6 +143,12 @@ class Row extends HBox {
    */
   constructor( labelString, countProperty, valueAlignGroup, barColumnsAlignGroup, valuesVisibleProperty ) {
 
+    assert && assert( typeof labelString === 'string', 'invalid labelString' );
+    assert && assert( countProperty instanceof Property, 'invalid countProperty' );
+    assert && assert( valueAlignGroup instanceof AlignGroup, 'invalid valueAlignGroup' );
+    assert && assert( barColumnsAlignGroup instanceof AlignGroup, 'invalid barColumnsAlignGroup' );
+    assert && assert( valuesVisibleProperty instanceof Property, 'invalid valuesVisibleProperty' );
+
     const labelNode = new Text( labelString, {
       font: LABEL_FONT,
       maxWidth: 120 // determined empirically

@@ -26,8 +26,8 @@ import longTeethImage from '../../../images/longTeeth_png.js';
 import shortTeethImage from '../../../images/shortTeeth_png.js';
 import straightEarsImage from '../../../images/straightEars_png.js';
 import whiteFurImage from '../../../images/whiteFur_png.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import naturalSelection from '../../naturalSelection.js';
+import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import MutationIconNode from './MutationIconNode.js';
@@ -184,6 +184,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
    * @private
    */
   getRowGlobalLeftCenter( row ) {
+    assert && assert( row instanceof Node, 'invalid row' );
     return row.parentToGlobalPoint( new Vector2( row.left, row.centerY ) );
   }
 

@@ -12,6 +12,7 @@ import HBox from '../../../../../scenery/js/nodes/HBox.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../../scenery/js/nodes/VBox.js';
+import Color from '../../../../../scenery/js/util/Color.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
@@ -93,6 +94,12 @@ class TraitLegendNode extends VBox {
    */
   constructor( color, normalName, normalTandemName, mutationName, mutationTandemName, options ) {
 
+    assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
+    assert && assert( typeof normalName === 'string', 'invalid normalName' );
+    assert && assert( typeof normalTandemName === 'string', 'invalid normalTandemName' );
+    assert && assert( typeof mutationName === 'string', 'invalid mutationName' );
+    assert && assert( typeof mutationTandemName === 'string', 'invalid mutationTandemName' );
+
     assert && assert( options && options.tandem, 'missing required tandem' );
 
     options = merge( {
@@ -132,6 +139,9 @@ class AlleleLegendNode extends HBox {
    * @param {Object} [options]
    */
   constructor( name, color, options ) {
+
+    assert && assert( typeof name === 'string', 'invalid name' );
+    assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
 
     options = merge( {
 

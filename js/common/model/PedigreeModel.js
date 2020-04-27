@@ -7,6 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -19,6 +20,8 @@ class PedigreeModel extends PhetioObject {
    * @param {Object} [options]
    */
   constructor( selectedBunnyProperty, options ) {
+
+    assert && assert( selectedBunnyProperty instanceof Property, 'invalid selectedBunnyProperty' );
 
     options = merge( {
 

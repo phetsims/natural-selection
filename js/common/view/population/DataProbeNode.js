@@ -221,7 +221,7 @@ class DataProbeNode extends Node {
 /**
  * Creates a NumberDisplay whose background is filled with a solid color.
  * @param {Property.<number>} numberProperty
- * @param color
+ * @param {Color|string} color
  * @returns {NumberDisplay}
  */
 function createSolidNumberDisplay( numberProperty, color ) {
@@ -241,7 +241,7 @@ function createSolidNumberDisplay( numberProperty, color ) {
 /**
  * Creates a NumberDisplay whose background is stroked with a dashed line.
  * @param {Property.<number>} numberProperty
- * @param color
+ * @param {Color|string} color
  * @returns {NumberDisplay}
  */
 function createDashedNumberDisplay( numberProperty, color ) {

@@ -44,8 +44,8 @@ class Bunny extends Sprite {
    */
   constructor( genePool, modelViewTransform, options ) {
 
-    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
+    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
     options = merge( {
 

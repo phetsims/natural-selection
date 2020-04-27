@@ -9,6 +9,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PressListener from '../../../../scenery/js/listeners/PressListener.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -22,6 +23,8 @@ class BunnyPressListener extends PressListener  {
    * @param {Object} [options]
    */
   constructor( selectedBunnyProperty, options ) {
+
+    assert && assert( selectedBunnyProperty instanceof Property, 'invalid selectedBunnyProperty' );
 
     options = merge( {
 

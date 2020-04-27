@@ -88,6 +88,7 @@ class Genotype extends PhetioObject {
 
   /**
    * @public
+   * @override
    */
   dispose() {
     this.disposeGenotype();

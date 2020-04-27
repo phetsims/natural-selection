@@ -9,6 +9,7 @@
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Sprite from './Sprite.js';
 import WolfIO from './WolfIO.js';
 
@@ -19,6 +20,8 @@ class Wolf extends Sprite {
    * @param {Object} [options]
    */
   constructor( modelViewTransform, options ) {
+
+    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
     options = merge( {
 

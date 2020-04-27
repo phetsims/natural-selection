@@ -26,6 +26,7 @@ class PlayButtonGroup extends Node {
    * @param {Object} [options]
    */
   constructor( simulationModeProperty, totalNumberOfBunniesProperty, options ) {
+
     assert && assert( simulationModeProperty instanceof EnumerationProperty, 'invalid simulationModeProperty' );
     assert && assert( totalNumberOfBunniesProperty instanceof Property, 'invalid totalNumberOfBunniesProperty' );
 

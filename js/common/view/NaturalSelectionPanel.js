@@ -51,6 +51,7 @@ class NaturalSelectionPanel extends Panel {
    * @public
    */
   setContentEnabled( enabled ) {
+    assert && assert( typeof enabled === 'boolean', 'invalid enabled' );
     this.content.pickable = enabled;
     this.content.opacity = enabled ? 1 : SunConstants.DISABLED_OPACITY;
   }

@@ -54,7 +54,6 @@ class GenePool {
 
   /**
    * @public
-   * @override
    */
   dispose() {
     throw new Error( 'dispose is not supported' );

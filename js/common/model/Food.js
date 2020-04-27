@@ -26,9 +26,9 @@ class Food extends Sprite {
    */
   constructor( toughImage, tenderImage, modelViewTransform, isToughProperty, options ) {
 
-    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
     assert && assert( toughImage instanceof HTMLImageElement, 'invalid toughImage' );
     assert && assert( tenderImage instanceof HTMLImageElement, 'invalid tenderImage' );
+    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
     assert && assert( isToughProperty instanceof Property, 'invalid isToughProperty' );
 
     options = merge( {

@@ -14,6 +14,7 @@ import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
 import AlleleInstances from './AlleleInstances.js';
 import AlleleIO from './AlleleIO.js';
+import Genotype from './Genotype.js';
 import PhenotypeIO from './PhenotypeIO.js';
 
 class Phenotype extends PhetioObject {
@@ -23,6 +24,8 @@ class Phenotype extends PhetioObject {
    * @param {Object} [options]
    */
   constructor( genotype, options ) {
+
+    assert && assert( genotype instanceof Genotype, 'invalid genotype' );
 
     options = merge( {
 
