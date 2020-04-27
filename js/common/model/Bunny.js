@@ -38,11 +38,11 @@ const HOP_HEIGHT_RANGE = new Range( 30, 50 );   // how high above the ground a b
 class Bunny extends Sprite {
 
   /**
-   * @param {EnvironmentModelViewTransform} modelViewTransform
    * @param {GenePool} genePool
+   * @param {EnvironmentModelViewTransform} modelViewTransform
    * @param {Object} [options]
    */
-  constructor( modelViewTransform, genePool, options ) {
+  constructor( genePool, modelViewTransform, options ) {
 
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );

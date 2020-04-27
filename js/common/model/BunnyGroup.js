@@ -20,14 +20,14 @@ import GenePool from './GenePool.js';
 class BunnyGroup extends PhetioGroup {
 
   /**
-   * @param {EnvironmentModelViewTransform} modelViewTransform
    * @param {GenePool} genePool
+   * @param {EnvironmentModelViewTransform} modelViewTransform
    * @param {Object} [options]
    */
-  constructor( modelViewTransform, genePool, options ) {
+  constructor( genePool, modelViewTransform, options ) {
 
-    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
+    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
     options = merge( {
 
@@ -38,7 +38,7 @@ class BunnyGroup extends PhetioGroup {
     }, options );
 
     /**
-     * Called to instantiate a Bunny. Note that modelViewTransform and genePool are passed via closure, so we don't
+     * Called to instantiate a Bunny. Note that genePool and modelViewTransform are passed via closure, so we don't
      * have to create it as part of defaultArguments, and don't have to deal with serializing it in BunnyIO.
      * @param {Tandem} tandem - PhetioGroup requires tandem to be the first param
      * @param {Object} bunnyOptions - options to Bunny constructor, not actually optional, because createElement
@@ -46,7 +46,7 @@ class BunnyGroup extends PhetioGroup {
      * @returns {Bunny}
      */
     const createElement = ( tandem, bunnyOptions ) => {
-      return new Bunny( modelViewTransform, genePool, merge( {}, bunnyOptions, {
+      return new Bunny( genePool, modelViewTransform, merge( {}, bunnyOptions, {
         tandem: tandem
       } ) );
     };

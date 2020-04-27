@@ -45,7 +45,7 @@ class BunnyCollection {
     }, options );
 
     // @private the PhetioGroup that manages Bunny instances as dynamic PhET-iO elements
-    this.bunnyGroup = new BunnyGroup( modelViewTransform, genePool, {
+    this.bunnyGroup = new BunnyGroup( genePool, modelViewTransform, {
       tandem: options.tandem.createTandem( 'bunnyGroup' )
     } );
 
