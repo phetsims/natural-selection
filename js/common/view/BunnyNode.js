@@ -8,7 +8,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
-import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -17,6 +16,7 @@ import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import BunnyImageCache from './BunnyImageCache.js';
 import BunnyNodeIO from './BunnyNodeIO.js';
+import OriginNode from './OriginNode.js';
 import SpriteNode from './SpriteNode.js';
 
 // constants
@@ -66,7 +66,7 @@ class BunnyNode extends SpriteNode {
 
     // Red dot at the origin
     if ( NaturalSelectionQueryParameters.showOrigin ) {
-      options.children.push( new Circle( 2, { fill: 'red' } ) );
+      options.children.push( new OriginNode() );
     }
 
     super( bunny, options );

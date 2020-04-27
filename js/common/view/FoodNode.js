@@ -8,12 +8,12 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../naturalSelection.js';
 import Food from '../model/Food.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
+import OriginNode from './OriginNode.js';
 import SpriteNode from './SpriteNode.js';
 
 // constants
@@ -48,7 +48,7 @@ class FoodNode extends SpriteNode {
 
     // Red dot at the origin
     if ( NaturalSelectionQueryParameters.showOrigin ) {
-      options.children.push( new Circle( 2, { fill: 'red' } ) );
+      options.children.push( new OriginNode() );
     }
 
     // Show the tandem name
