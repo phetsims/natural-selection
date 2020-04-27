@@ -25,7 +25,7 @@ const NaturalSelectionConstants = {
   INITIAL_POPULATION: NaturalSelectionQueryParameters.population,
 
   // number of bunnies required to 'take over the world'
-  MAX_POPULATION: NaturalSelectionQueryParameters.maxBunnies,
+  MAX_POPULATION: NaturalSelectionQueryParameters.maxPopulation,
 
   // bunnies die when they reach this age, in generations
   MAX_AGE: NaturalSelectionQueryParameters.maxAge,

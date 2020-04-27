@@ -83,10 +83,10 @@ const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
 
   // The number of bunnies required to 'take over the world'.
   // For internal use only.
-  maxBunnies: {
+  maxPopulation: {
     type: 'number',
     defaultValue: 1000,
-    isValidValue: maxBunnies => ( maxBunnies > 0 && Utils.isInteger( maxBunnies ) )
+    isValidValue: maxPopulation => ( maxPopulation > 0 && Utils.isInteger( maxPopulation ) )
   },
 
   // The number of bunnies per litter.
