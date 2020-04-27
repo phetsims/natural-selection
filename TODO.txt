@@ -24,4 +24,3 @@ PhET-iO
 
 DESIGN
 Move time controls near generation clock?
-Should selected BunnyNode be moved to front? Only while paused?

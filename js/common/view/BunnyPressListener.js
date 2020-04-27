@@ -34,6 +34,7 @@ class BunnyPressListener extends PressListener  {
       const bunnyNode = _.findLast( event.trail.nodes, node => node instanceof BunnyNode );
       if ( bunnyNode ) {
         selectedBunnyProperty.value = bunnyNode.bunny;
+        bunnyNode.moveToFront();
       }
     };
 
