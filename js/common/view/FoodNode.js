@@ -68,8 +68,7 @@ class FoodNode extends SpriteNode {
       this.visible = visible;
     } );
 
-    //TODO use ToggleNode
-    // Toggle the look of the food between tender and tough.
+    // Set the appearance of the food to tender or tough.
     food.isToughProperty.link( isTough => {
       toughFoodNode.visible = isTough;
       tenderFoodNode.visible = !isTough;
