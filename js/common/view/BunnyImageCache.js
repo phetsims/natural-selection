@@ -21,9 +21,10 @@ import bunnyWhiteFurStraightEarsLongTeethImage from '../../../images/bunny-white
 import bunnyWhiteFurStraightEarsShortTeethImage from '../../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
 import naturalSelection from '../../naturalSelection.js';
 
-// Maps phenotype key to an image. The phenotype key pattern is '{{hasWhiteFur}}-{{hasStraightEars}}-{{hasShortTeeth}}',
-// where each value is a boolean. See getImage.
-const BUNNY_IMAGE_MAP = {
+// The cache is a map, which maps phenotype key to an Image instance.
+// The phenotype key pattern is '{{hasWhiteFur}}-{{hasStraightEars}}-{{hasShortTeeth}}', where each value is a boolean.
+// See getImage for how the key is assembled.
+const CACHE = {
   'true-true-true': new Image( bunnyWhiteFurStraightEarsShortTeethImage ),
   'true-true-false': new Image( bunnyWhiteFurStraightEarsLongTeethImage ),
   'true-false-true': new Image( bunnyWhiteFurFloppyEarsShortTeethImage ),
@@ -33,9 +34,9 @@ const BUNNY_IMAGE_MAP = {
   'false-false-true': new Image( bunnyBrownFurFloppyEarsShortTeethImage ),
   'false-false-false': new Image( bunnyBrownFurFloppyEarsLongTeethImage )
 };
-assert && assert( _.keys( BUNNY_IMAGE_MAP ).length === 8, 'BUNNY_IMAGE_MAP is incomplete' );
-assert && assert( _.every( _.keys( BUNNY_IMAGE_MAP ), key => key.match( /(true|false)-(true|false)-(true|false)/ ) ),
-  'BUNNY_IMAGE_MAP has an invalid key' );
+assert && assert( _.keys( CACHE ).length === 8, 'CACHE is incomplete' );
+assert && assert( _.every( _.keys( CACHE ), key => key.match( /(true|false)-(true|false)-(true|false)/ ) ),
+  'CACHE has an invalid key' );
 
 const BunnyImageCache = {
 
@@ -53,7 +54,7 @@ const BunnyImageCache = {
     const key = `${bunny.phenotype.hasWhiteFur()}-${bunny.phenotype.hasStraightEars()}-${bunny.phenotype.hasShortTeeth()}`;
 
     // look up the image in the map
-    return BUNNY_IMAGE_MAP[ key ];
+    return CACHE[ key ];
   },
 
   /**
