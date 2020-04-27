@@ -176,7 +176,7 @@ class BunnyCollection {
    */
   ageAllBunnies() {
 
-    let numberDied = 0;
+    let diedCount = 0;
 
     // liveBunnies will change if any bunnies die, so operate on a copy
     const bunnies = this.liveBunnies.getArrayCopy();
@@ -190,11 +190,11 @@ class BunnyCollection {
       // bunny dies if it exceeds the maximum age
       if ( bunny.ageProperty.value === NaturalSelectionConstants.MAX_BUNNY_AGE ) {
         bunny.die();
-        numberDied++;
+        diedCount++;
       }
     } );
 
-    phet.log && phet.log( `${numberDied} bunnies died` );
+    phet.log && phet.log( `${diedCount} bunnies died` );
 
     // Notify if all bunnies have died.
     if ( this.liveBunnies.lengthProperty.value === 0 ) {
@@ -209,17 +209,18 @@ class BunnyCollection {
    */
   mateAllBunnies( generation ) {
 
+    let bornCount = 0;
+    
     // Shuffle the collection of live bunnies so that mating is random.
     const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
 
     // Mate adjacent pairs from the collection.
-    let numberBorn = 0;
     for ( let i = 1; i < bunnies.length; i = i + 2 ) {
       this.mateBunnies( bunnies[ i - 1 ], bunnies[ i ], generation, LITTER_SIZE );
-      numberBorn += LITTER_SIZE;
+      bornCount += LITTER_SIZE;
     }
 
-    phet.log && phet.log( `${numberBorn} bunnies born` );
+    phet.log && phet.log( `${bornCount} bunnies born` );
 
     // Notify if bunnies have taken over the world.
     if ( this.liveBunnies.lengthProperty.value > NaturalSelectionConstants.MAX_BUNNIES ) {
