@@ -16,7 +16,7 @@ import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModel from '../model/EnvironmentModel.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import BunnyNode from './BunnyNode.js';
+import BunnyImage from './BunnyImage.js';
 import BunnyNodeGroup from './BunnyNodeGroup.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
 import EnvironmentRadioButtonGroup from './EnvironmentRadioButtonGroup.js';
@@ -124,9 +124,9 @@ class EnvironmentNode extends Node {
     // for the lifetime of the sim.
     spritesNode.addInputListener( new PressListener( {
       press: event => {
-        const bunnyNode = _.findLast( event.trail.nodes, node => node instanceof BunnyNode );
-        if ( bunnyNode ) {
-          environmentModel.selectedBunnyProperty.value = bunnyNode.bunny;
+        const bunnyImage = _.findLast( event.trail.nodes, node => node instanceof BunnyImage );
+        if ( bunnyImage ) {
+          environmentModel.selectedBunnyProperty.value = bunnyImage.bunny;
         }
       },
       tandem: options.tandem.createTandem( 'bunniesPressListener' )

@@ -57,7 +57,8 @@ class BunnyNode extends SpriteNode {
       stroke: 'blue',
       lineWidth: 2.5,
       cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
-      center: image.center
+      center: image.center,
+      pickable: false
     } );
 
     assert && assert( !options.children, 'BunnyNode sets children' );
@@ -80,9 +81,6 @@ class BunnyNode extends SpriteNode {
     this.disposeBunnyNode = () => {
       selectedBunnyProperty.unlink( selectedBunnyListener );
     };
-
-    // @private
-    this.bunny = bunny;
   }
 
   /**

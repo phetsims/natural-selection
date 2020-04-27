@@ -25,6 +25,9 @@ class BunnyImage extends Image {
    */
   constructor( bunny, options ) {
     super( getHTMLImageElement( bunny ), options );
+
+    // @public (read-only)
+    this.bunny = bunny;
   }
 }
 
