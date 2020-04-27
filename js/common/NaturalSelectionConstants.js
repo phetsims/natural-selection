@@ -27,6 +27,9 @@ const NaturalSelectionConstants = {
   // bunnies die when they reach this age, in generations
   MAX_BUNNY_AGE: 5,
 
+  // number of bunnies in each litter
+  LITTER_SIZE: 4,
+
   // clock
   SECONDS_PER_GENERATION: NaturalSelectionQueryParameters.secondsPerGeneration,
   SECONDS_PER_STEP: NaturalSelectionQueryParameters.secondsPerStep, // dt per press of the Step button

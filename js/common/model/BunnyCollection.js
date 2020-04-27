@@ -23,9 +23,6 @@ import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 import SpriteDirection from './SpriteDirection.js';
 
-// constants
-const LITTER_SIZE = 4; // number of bunnies born each time a pair mates
-
 class BunnyCollection {
 
   /**
@@ -216,8 +213,8 @@ class BunnyCollection {
 
     // Mate adjacent pairs from the collection.
     for ( let i = 1; i < bunnies.length; i = i + 2 ) {
-      this.mateBunnies( bunnies[ i - 1 ], bunnies[ i ], generation, LITTER_SIZE );
-      bornCount += LITTER_SIZE;
+      this.mateBunnies( bunnies[ i - 1 ], bunnies[ i ], generation, NaturalSelectionConstants.LITTER_SIZE );
+      bornCount += NaturalSelectionConstants.LITTER_SIZE;
     }
 
     phet.log && phet.log( `${bornCount} bunnies born` );
