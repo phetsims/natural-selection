@@ -21,6 +21,8 @@ const NaturalSelectionUtils = {
    * @public
    */
   colorToGrayscale( color ) {
+    assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
+
     const sceneryColor = Color.toColor( color );
 
     // per ITU-R BT.709
@@ -39,7 +41,9 @@ const NaturalSelectionUtils = {
    * @public
    */
   isDarkColor( color, luminance ) {
-    assert && assert( luminance === undefined || ( luminance >= 0 && luminance <= 255 ), `invalid luminance: ${luminance}` );
+    assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
+    assert && assert( luminance === undefined || ( typeof luminance === 'number' && ( luminance >= 0 && luminance <= 255 ) ),
+      `invalid luminance: ${luminance}` );
     return NaturalSelectionUtils.colorToGrayscale( color ).red < ( luminance === undefined ? 186 : luminance );
   },
 
