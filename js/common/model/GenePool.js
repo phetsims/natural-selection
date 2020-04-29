@@ -55,6 +55,17 @@ class GenePool {
   }
 
   /**
+   * Resets mutationComingProperty for all genes in the pool. This is called after a mating cycle has completed, and
+   * mutations have been applied.
+   * @public
+   */
+  resetMutationComing() {
+    this.furGene.mutationComingProperty.reset();
+    this.earsGene.mutationComingProperty.reset();
+    this.teethGene.mutationComingProperty.reset();
+  }
+
+  /**
    * @public
    */
   dispose() {

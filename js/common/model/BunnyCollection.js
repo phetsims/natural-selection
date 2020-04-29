@@ -270,6 +270,8 @@ class BunnyCollection {
     assert && assert( bornCount === numberToBeBorn, 'unexpected number of bunnies were born' );
     phet.log && phet.log( `${bornCount} bunnies born` );
 
+    this.genePool.resetMutationComing();
+
     // Notify if bunnies have taken over the world.
     if ( this.liveBunnies.lengthProperty.value > NaturalSelectionConstants.MAX_POPULATION ) {
       this.bunniesHaveTakenOverTheWorldEmitter.emit();
