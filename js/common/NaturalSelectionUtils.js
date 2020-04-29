@@ -13,9 +13,9 @@ import naturalSelection from '../naturalSelection.js';
 const NaturalSelectionUtils = {
 
   /**
-   * Gets the luminance of a color, per standard ITU-R BT.709
-   * Green contributes the most to the intensity perceived by humans, and blue light the least.
-   * This works correctly if color is grayscale because the scaling factors sum to 1.
+   * Gets the luminance of a color, per ITU-R recommendation BT.709, https://en.wikipedia.org/wiki/Rec._709.
+   * Green contributes the most to the intensity perceived by humans, and blue the least.
+   * This algorithm works correctly if with a grayscale because the RGB coefficients sum to 1.
    * @param {Color|string} color
    * @returns {number} - a value in the range [0,255]
    * @public
