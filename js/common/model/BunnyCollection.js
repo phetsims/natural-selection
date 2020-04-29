@@ -246,31 +246,51 @@ class BunnyCollection {
     const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
 
     const numberToBeBorn = Math.floor( bunnies.length / 2 ) * NaturalSelectionConstants.LITTER_SIZE;
+    const indicies = [];
+    for ( let i = 0; i < numberToBeBorn; i++ ) {
+      indicies.push( i );
+    }
 
-    //TODO from Java version
-    // const numberToMutate = 1 + Math.floor( numberToBeBorn / 7 );
+    //TODO magic numbers from Java version
+    const numberToMutate = 1 + Math.floor( numberToBeBorn / 7 );
+
+    // Determine which mutations should be applied, then reset the gene pool.
+    const furMutation = this.genePool.furGene.mutationComingProperty.value ? this.genePool.furGene.mutantAllele : null;
+    const earsMutation = this.genePool.earsGene.mutationComingProperty.value ? this.genePool.earsGene.mutantAllele : null;
+    const teethMutation = this.genePool.teethGene.mutationComingProperty.value ? this.genePool.teethGene.mutantAllele : null;
+    this.genePool.resetMutationComing();
+
+    //TODO make these sets of indices mutually exclusive
+    // Randomly select indices for the new bunnies that will be mutated
+    const furIndices = furMutation ? _.sampleSize( indicies, numberToMutate ) : null;
+    const earsIndices = earsMutation ? _.sampleSize( indicies, numberToMutate ) : null;
+    const teethIndices = teethMutation ? _.sampleSize( indicies, numberToMutate ) : null;
 
     // Mate adjacent pairs from the collection.
     for ( let i = 1; i < bunnies.length; i = i + 2 ) {
+
       const father = bunnies[ i ];
       const mother = bunnies[ i - 1 ];
+
       for ( let j = 0; j < NaturalSelectionConstants.LITTER_SIZE; j++ ) {
+
         this.createBunny( {
           father: father,
           mother: mother,
           generation: generation,
           genotypeOptions: {
-            //TODO furMutation, earsMutation, teethMutation
+            furMutation: ( furIndices && furIndices.indexOf( bornCount ) >= 0 ) ? furMutation : null,
+            earsMutation: ( earsIndices && earsIndices.indexOf( bornCount ) >= 0 ) ? earsMutation : null,
+            teethMutation: ( teethIndices && teethIndices.indexOf( bornCount ) >= 0 ) ? teethMutation : null
           }
         } );
+
         bornCount++;
       }
     }
 
     assert && assert( bornCount === numberToBeBorn, 'unexpected number of bunnies were born' );
     phet.log && phet.log( `${bornCount} bunnies born` );
-
-    this.genePool.resetMutationComing();
 
     // Notify if bunnies have taken over the world.
     if ( this.liveBunnies.lengthProperty.value > NaturalSelectionConstants.MAX_POPULATION ) {
