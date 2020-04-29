@@ -141,6 +141,46 @@ class BunnyCollection {
   }
 
   /**
+   * Creates a Bunny.
+   * @param {Bunny} father
+   * @param {Bunny} mother
+   * @param {number} generation
+   * @returns {Bunny}
+   * @public
+   */
+  createBunny( father, mother, generation ) {
+    assert && assert( father instanceof Bunny || father === null, 'invalid father' );
+    assert && assert( mother instanceof Bunny || mother === null, 'invalid mother' );
+    assert && assert( typeof generation === 'number', 'invalid generation' );
+
+    return this.bunnyGroup.createNextElement( {
+      father: father,
+      mother: mother,
+      generation: generation,
+      position: this.modelViewTransform.getRandomGroundPosition(),
+      direction: SpriteDirection.getRandom()
+    } );
+  }
+
+  /**
+   * Creates a generation-0 Bunny.
+   * @returns {Bunny}
+   * @public
+   */
+  createBunnyZero() {
+    this.createBunny( null, null, 0 );
+  }
+
+  /**
+   * Disposes a Bunny.
+   * @param {Bunny} bunny
+   * @public
+   */
+  disposeBunny( bunny ) {
+    this.bunnyGroup.disposeElement( bunny );
+  }
+
+  /**
    * Moves all bunnies that are alive.
    * @param {number} dt - time step, in seconds
    * @public
@@ -241,46 +281,6 @@ class BunnyCollection {
     for ( let i = 0; i < litterSize; i++ ) {
       this.createBunny( father, mother, generation );
     }
-  }
-
-  /**
-   * Creates a Bunny.
-   * @param {Bunny} father
-   * @param {Bunny} mother
-   * @param {number} generation
-   * @returns {Bunny}
-   * @public
-   */
-  createBunny( father, mother, generation ) {
-    assert && assert( father instanceof Bunny || father === null, 'invalid father' );
-    assert && assert( mother instanceof Bunny || mother === null, 'invalid mother' );
-    assert && assert( typeof generation === 'number', 'invalid generation' );
-
-    return this.bunnyGroup.createNextElement( {
-      father: father,
-      mother: mother,
-      generation: generation,
-      position: this.modelViewTransform.getRandomGroundPosition(),
-      direction: SpriteDirection.getRandom()
-    } );
-  }
-
-  /**
-   * Creates a generation-0 Bunny.
-   * @returns {Bunny}
-   * @public
-   */
-  createBunnyZero() {
-    this.createBunny( null, null, 0 );
-  }
-
-  /**
-   * Disposes a Bunny.
-   * @param {Bunny} bunny
-   * @public
-   */
-  disposeBunny( bunny ) {
-    this.bunnyGroup.disposeElement( bunny );
   }
 
   /**
