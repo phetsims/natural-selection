@@ -20,7 +20,6 @@ import BunnyGroup from './BunnyGroup.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
-import SpriteDirection from './SpriteDirection.js';
 
 class BunnyCollection {
 
@@ -141,24 +140,12 @@ class BunnyCollection {
 
   /**
    * Creates a Bunny.
-   * @param {Bunny} father
-   * @param {Bunny} mother
-   * @param {number} generation
+   * @param {Object} [options] - options to Bunny constructor
    * @returns {Bunny}
    * @public
    */
-  createBunny( father, mother, generation ) {
-    assert && assert( father instanceof Bunny || father === null, 'invalid father' );
-    assert && assert( mother instanceof Bunny || mother === null, 'invalid mother' );
-    assert && assert( typeof generation === 'number', 'invalid generation' );
-
-    return this.bunnyGroup.createNextElement( {
-      father: father,
-      mother: mother,
-      generation: generation,
-      position: this.modelViewTransform.getRandomGroundPosition(),
-      direction: SpriteDirection.getRandom()
-    } );
+  createBunny( options ) {
+    return this.bunnyGroup.createNextElement( options );
   }
 
   /**
@@ -167,7 +154,11 @@ class BunnyCollection {
    * @public
    */
   createBunnyZero() {
-    this.createBunny( null, null, 0 );
+    this.createBunny( {
+      father: null,
+      mother: null,
+      generation: 0
+    } );
   }
 
   /**
@@ -243,6 +234,7 @@ class BunnyCollection {
 
   /**
    * Randomly pairs up bunnies and mates them. If there is an odd number of bunnies, then one of them will not mate.
+   * Mutations (if any) are applied as the bunnies are born.
    * @param {number} generation
    * @private
    */
@@ -253,16 +245,26 @@ class BunnyCollection {
     // Shuffle the collection of live bunnies so that mating is random.
     const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
 
+    const numberToBeBorn = Math.floor( bunnies.length / 2 ) * NaturalSelectionConstants.LITTER_SIZE;
+
+    //TODO from Java version
+    // const numberToMutate = 1 + Math.floor( numberToBeBorn / 7 );
+
     // Mate adjacent pairs from the collection.
     for ( let i = 1; i < bunnies.length; i = i + 2 ) {
       const father = bunnies[ i ];
       const mother = bunnies[ i - 1 ];
       for ( let j = 0; j < NaturalSelectionConstants.LITTER_SIZE; j++ ) {
-        this.createBunny( father, mother, generation );
+        this.createBunny( {
+          father: father,
+          mother: mother,
+          generation: generation
+        } );
+        bornCount++;
       }
-      bornCount += NaturalSelectionConstants.LITTER_SIZE;
     }
 
+    assert && assert( bornCount === numberToBeBorn, 'unexpected number of bunnies were born' );
     phet.log && phet.log( `${bornCount} bunnies born` );
 
     // Notify if bunnies have taken over the world.

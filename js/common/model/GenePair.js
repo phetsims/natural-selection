@@ -50,6 +50,9 @@ class GenePair extends PhetioObject {
     this.motherAllele = motherAllele;
 
     // @private {Allele[]} alleles that will be passed on to children
+    // This supports Mendelian inheritance, where father and mother gene pairs are combined to produce a child's
+    // gene pair. That is, gametes are created by random segregation, and heterozygous individuals produce gametes
+    // with an equal frequency of the two alleles.
     this.childAlleles = phet.joist.random.shuffle( [ fatherAllele, fatherAllele, motherAllele, motherAllele ] );
     this.childAllelesIndex = 0;
 
@@ -101,22 +104,30 @@ class GenePair extends PhetioObject {
   }
 
   /**
-   * Combines father and mother gene pairs to produce a child's gene pair, using Mendelian inheritance.  That is,
-   * gametes are created by random segregation, and heterozygous individuals produce gametes with an equal frequency
-   * of the two alleles.
-   * @param {GenePair} fatherGenePair
-   * @param {GenePair} motherGenePair
+   * Creates a GenePair by inheriting from parents or applying an optional mutation.
+   * @param {Gene} gene
+   * @param {GenePair|null} fatherGenePair
+   * @param {GenePair|null} motherGenePair
    * @param {Object} [options] - GenePair constructor options
    * @returns {GenePair}
    * @public
    * @static
    */
-  static combine( fatherGenePair, motherGenePair, options ) {
-    assert && assert( fatherGenePair instanceof GenePair, 'invalid fatherGenePair' );
-    assert && assert( motherGenePair instanceof GenePair, 'invalid motherGenePair' );
-    assert && assert( fatherGenePair.gene === motherGenePair.gene, 'gene mismatch' );
+  static fromParents( gene, fatherGenePair, motherGenePair, options ) {
+    assert && assert( gene instanceof Gene, 'invalid gene' );
+    assert && assert( fatherGenePair instanceof GenePair || fatherGenePair === null, 'invalid fatherGenePair' );
+    assert && assert( motherGenePair instanceof GenePair || motherGenePair === null, 'invalid motherGenePair' );
 
-    return new GenePair( fatherGenePair.gene, fatherGenePair.getNextChildAllele(), motherGenePair.getNextChildAllele(), options );
+    options = merge( {
+      mutation: null // {Allele|null} mutation to be applied, null if no mutation
+    }, options );
+
+    assert && assert( !options.mutation || gene.mutantAllele === options.mutation, 'invalid mutation' );
+
+    return new GenePair( gene,
+      getInheritedAllele( fatherGenePair, gene.normalAllele, options.mutation ),
+      getInheritedAllele( motherGenePair, gene.normalAllele, options.mutation ),
+      options );
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -180,6 +191,37 @@ class GenePair extends PhetioObject {
     assert && assert( Array.isArray( this.childAlleles ), 'invalid childAlleles' );
     assert && assert( typeof this.childAllelesIndex === 'number', 'invalid childAllelesIndex' );
   }
+}
+
+/**
+ * Gets the allele to be inherited.
+ * @param {GenePair|null} parentGenePair - the parent's gene pair, null if no parent
+ * @param {Allele} normalAllele
+ * @param {Allele|null} mutation - mutation to be applied, null if no mutation
+ * @returns {Allele}
+ */
+function getInheritedAllele( parentGenePair, normalAllele, mutation ) {
+  assert && assert( parentGenePair instanceof GenePair || parentGenePair === null, 'invalid parentGenePair' );
+  assert && assert( normalAllele instanceof Allele, 'invalid normalAllele' );
+  assert && assert( mutation instanceof Allele || mutation === null, 'invalid mutation' );
+
+  let allele = null;
+  if ( mutation ) {
+
+    // mutation overrides inheritance
+    allele = mutation;
+  }
+  else if ( parentGenePair ) {
+
+    // inherit an allele from the parent
+    allele = parentGenePair.getNextChildAllele();
+  }
+  else {
+
+    // default to normal allele, if there was no mutation and no parent
+    allele = normalAllele;
+  }
+  return allele;
 }
 
 naturalSelection.register( 'GenePair', GenePair );

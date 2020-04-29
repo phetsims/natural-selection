@@ -20,19 +20,24 @@ import GenotypeIO from './GenotypeIO.js';
 class Genotype extends PhetioObject {
 
   /**
+   * @param {GenePool} genePool
    * @param {Bunny|null} father
    * @param {Bunny|null} mother
-   * @param {GenePool} genePool
    * @param {Object} [options]
    */
-  constructor( father, mother, genePool, options ) {
+  constructor( genePool, father, mother, options ) {
 
+    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( father instanceof Bunny || father === null, 'invalid father' );
     assert && assert( mother instanceof Bunny || mother === null, 'invalid mother' );
     assert && assert( ( father && mother ) || ( !father && !mother ), 'bunny cannot have 1 parent' );
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
 
     options = merge( {
+
+      // {Allele|null} mutations to be applied
+      furMutation: null,
+      earsMutation: null,
+      teethMutation: null,
 
       // phet-io
       tandem: Tandem.REQUIRED,
@@ -42,39 +47,32 @@ class Genotype extends PhetioObject {
 
     super( options );
 
-    // GenePair options
-    const furGenePairOptions = {
-      tandem: options.tandem.createTandem( 'furGenePair' ),
-      phetioDocumentation: 'gene pair that determines fur trait'
-    };
-    const earsGenePairOptions = {
+    // @public (read-only)
+    this.furGenePair = GenePair.fromParents( genePool.furGene,
+      father ? father.genotype.furGenePair : null,
+      mother ? mother.genotype.furGenePair : null, {
+        mutation: options.furMutation,
+        tandem: options.tandem.createTandem( 'furGenePair' ),
+        phetioDocumentation: 'gene pair that determines fur trait'
+      } );
+
+    // @public (read-only)
+    this.earsGenePair = GenePair.fromParents( genePool.earsGene,
+      father ? father.genotype.earsGenePair : null,
+      mother ? mother.genotype.earsGenePair : null, {
+      mutation: options.earsMutation,
       tandem: options.tandem.createTandem( 'earsGenePair' ),
       phetioDocumentation: 'gene pair that determines ears trait'
-    };
-    const teethGenePairOptions = {
+    } );
+
+    // @public (read-only)
+    this.teethGenePair = GenePair.fromParents( genePool.teethGene,
+      father ? father.genotype.teethGenePair : null,
+      mother ? mother.genotype.teethGenePair : null, {
+      mutation: options.teethMutation,
       tandem: options.tandem.createTandem( 'teethGenePair' ),
       phetioDocumentation: 'gene pair that determines teeth trait'
-    };
-
-    // @public (read-only) {GenePair} gene pairs for each trait, initialized below
-    this.furGenePair = null;
-    this.earsGenePair = null;
-    this.teethGenePair = null;
-
-    if ( father && mother ) {
-
-      // we have both parents, so determine the child's genotype using Mendelian inheritance
-      this.furGenePair = GenePair.combine( father.genotype.furGenePair, mother.genotype.furGenePair, furGenePairOptions );
-      this.earsGenePair = GenePair.combine( father.genotype.earsGenePair, mother.genotype.earsGenePair, earsGenePairOptions );
-      this.teethGenePair = GenePair.combine( father.genotype.teethGenePair, mother.genotype.teethGenePair, teethGenePairOptions );
-    }
-    else {
-
-      // no parents, so this bunny gets the genotype for generation 0
-      this.furGenePair = genePool.createFurGenePair0( furGenePairOptions );
-      this.earsGenePair = genePool.createEarsGenePair0( earsGenePairOptions );
-      this.teethGenePair = genePool.createTeethGenePair0( teethGenePairOptions );
-    }
+    } );
 
     // @private
     this.disposeGenotype = () => {
