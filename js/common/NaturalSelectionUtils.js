@@ -13,49 +13,54 @@ import naturalSelection from '../naturalSelection.js';
 const NaturalSelectionUtils = {
 
   /**
-   * Converts a color to a grayscale color.
+   * Gets the luminance of a color, per standard ITU-R BT.709
    * Green contributes the most to the intensity perceived by humans, and blue light the least.
-   * This works correctly if color is already grayscale because the scaling factors sum to 1.
+   * This works correctly if color is grayscale because the scaling factors sum to 1.
+   * @param {Color|string} color
+   * @returns {number} - a value in the range [0,255]
+   * @public
+   */
+  getLuminance( color ) {
+    assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
+    const sceneryColor = Color.toColor( color );
+    const luminance = ( sceneryColor.red * 0.2126 + sceneryColor.green * 0.7152 + sceneryColor.blue * 0.0722 );
+    assert && assert( luminance >= 0 && luminance <= 255, `unexpected luminance: ${luminance}` );
+    return luminance;
+  },
+
+  /**
+   * Converts a color to grayscale.
    * @param {Color|string} color
    * @returns {Color}
    * @public
    */
-  colorToGrayscale( color ) {
-    assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
-
-    const sceneryColor = Color.toColor( color );
-
-    // per ITU-R BT.709
-    const luminance = ( sceneryColor.red * 0.2126 + sceneryColor.green * 0.7152 + sceneryColor.blue * 0.0722 );
-    assert && assert( luminance >= 0 && luminance <= 255, `unexpected luminance: ${luminance}` );
-
-    // grayscale colors have identical RGB component values
+  toGrayscale( color ) {
+    const luminance = NaturalSelectionUtils.getLuminance( color );
     return new Color( luminance, luminance, luminance );
   },
 
   /**
    * Determines whether a color is 'dark'.
    * @param {Color|string} color
-   * @param {number} [luminance] - colors with luminance (grayscale value) < this value are dark, range [0,255], default 186
+   * @param {number} [luminanceThreshold] - colors with luminance < this value are dark, range [0,255], default 186
    * @returns {boolean}
    * @public
    */
-  isDarkColor( color, luminance ) {
-    assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
-    assert && assert( luminance === undefined || ( typeof luminance === 'number' && ( luminance >= 0 && luminance <= 255 ) ),
-      `invalid luminance: ${luminance}` );
-    return NaturalSelectionUtils.colorToGrayscale( color ).red < ( luminance === undefined ? 186 : luminance );
+  isDarkColor( color, luminanceThreshold = 186 ) {
+    assert && assert( typeof luminanceThreshold === 'number' && luminanceThreshold >= 0 && luminanceThreshold <= 255,
+      'invalid luminanceThreshold' );
+    return ( NaturalSelectionUtils.getLuminance( color ) < luminanceThreshold );
   },
 
   /**
    * Determines whether a color is 'light'.
    * @param {Color|string} color
-   * @param {number} [luminance] - colors with luminance (grayscale value) >= this value are light, range [0,255], default 186
+   * @param {number} [luminanceThreshold] - colors with luminance >= this value are light, range [0,255], default 186
    * @returns {boolean}
    * @public
    */
-  isLightColor( color, luminance ) {
-    return !NaturalSelectionUtils.isDarkColor( color, luminance );
+  isLightColor( color, luminanceThreshold ) {
+    return !NaturalSelectionUtils.isDarkColor( color, luminanceThreshold );
   },
 
   /**
