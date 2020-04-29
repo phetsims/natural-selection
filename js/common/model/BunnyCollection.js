@@ -241,18 +241,15 @@ class BunnyCollection {
   mateAllBunnies( generation ) {
 
     let bornCount = 0;
-    
+
     // Shuffle the collection of live bunnies so that mating is random.
     const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
 
+    // The number of bunnies that we expect to be born.
     const numberToBeBorn = Math.floor( bunnies.length / 2 ) * NaturalSelectionConstants.LITTER_SIZE;
-    const indicies = [];
-    for ( let i = 0; i < numberToBeBorn; i++ ) {
-      indicies.push( i );
-    }
 
-    //TODO magic numbers from Java version
-    const numberToMutate = 1 + Math.floor( numberToBeBorn / 7 );
+    // When a mutation is applied, this is the number of bunnies that will receive that mutation.
+    const numberToMutate = 1 + Math.floor( numberToBeBorn / 7 ); //TODO magic numbers from Java version
 
     // Determine which mutations should be applied, then reset the gene pool.
     const furMutation = this.genePool.furGene.mutationComingProperty.value ? this.genePool.furGene.mutantAllele : null;
@@ -260,11 +257,19 @@ class BunnyCollection {
     const teethMutation = this.genePool.teethGene.mutationComingProperty.value ? this.genePool.teethGene.mutantAllele : null;
     this.genePool.resetMutationComing();
 
-    //TODO make these sets of indices mutually exclusive
-    // Randomly select indices for the new bunnies that will be mutated
-    const furIndices = furMutation ? _.sampleSize( indicies, numberToMutate ) : null;
-    const earsIndices = earsMutation ? _.sampleSize( indicies, numberToMutate ) : null;
-    const teethIndices = teethMutation ? _.sampleSize( indicies, numberToMutate ) : null;
+    // Create indices of the new bunnies, for the purpose of applying mutations.
+    const indices = [];
+    for ( let i = 0; i < numberToBeBorn; i++ ) {
+      indices.push( i );
+    }
+
+    // Randomly select indices for the new bunnies that will be mutated.
+    // Arrays of indices are mutually exclusive, so that no bunny receives more than 1 mutation.
+    const furIndices = furMutation ? _.sampleSize( indices, numberToMutate ) : [];
+    _.pullAll( indices, furIndices );
+    const earsIndices = earsMutation ? _.sampleSize( indices, numberToMutate ) : [];
+    _.pullAll( indices, earsIndices );
+    const teethIndices = teethMutation ? _.sampleSize( indices, numberToMutate ) : [];
 
     // Mate adjacent pairs from the collection.
     for ( let i = 1; i < bunnies.length; i = i + 2 ) {
@@ -279,9 +284,9 @@ class BunnyCollection {
           mother: mother,
           generation: generation,
           genotypeOptions: {
-            furMutation: ( furIndices && furIndices.indexOf( bornCount ) >= 0 ) ? furMutation : null,
-            earsMutation: ( earsIndices && earsIndices.indexOf( bornCount ) >= 0 ) ? earsMutation : null,
-            teethMutation: ( teethIndices && teethIndices.indexOf( bornCount ) >= 0 ) ? teethMutation : null
+            furMutation: ( furMutation && furIndices.indexOf( bornCount ) >= 0 ) ? furMutation : null,
+            earsMutation: ( earsMutation && earsIndices.indexOf( bornCount ) >= 0 ) ? earsMutation : null,
+            teethMutation: ( teethMutation && teethIndices.indexOf( bornCount ) >= 0 ) ? teethMutation : null
           }
         } );
 

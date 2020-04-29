@@ -45,9 +45,8 @@ class Genotype extends PhetioObject {
       phetioDocumentation: 'the genetic blueprint for a bunny'
     }, options );
 
-    //TODO uncomment this when mutations have been made mutually exclusive
-    // assert && assert( _.filter( [ options.furMutation, options.earsMutation, options.teethMutation ],
-    //   mutation => mutation ).length <= 1, 'at most 1 mutation can be specified' );
+    assert && assert( _.filter( [ options.furMutation, options.earsMutation, options.teethMutation ],
+      mutation => mutation ).length <= 1, 'at most 1 mutation can be specified' );
 
     super( options );
 
