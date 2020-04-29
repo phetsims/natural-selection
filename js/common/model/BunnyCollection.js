@@ -10,7 +10,6 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import ObservableArrayIO from '../../../../axon/js/ObservableArrayIO.js';
-import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
@@ -256,7 +255,11 @@ class BunnyCollection {
 
     // Mate adjacent pairs from the collection.
     for ( let i = 1; i < bunnies.length; i = i + 2 ) {
-      this.mateBunnies( bunnies[ i - 1 ], bunnies[ i ], generation, NaturalSelectionConstants.LITTER_SIZE );
+      const father = bunnies[ i ];
+      const mother = bunnies[ i - 1 ];
+      for ( let j = 0; j < NaturalSelectionConstants.LITTER_SIZE; j++ ) {
+        this.createBunny( father, mother, generation );
+      }
       bornCount += NaturalSelectionConstants.LITTER_SIZE;
     }
 
@@ -265,21 +268,6 @@ class BunnyCollection {
     // Notify if bunnies have taken over the world.
     if ( this.liveBunnies.lengthProperty.value > NaturalSelectionConstants.MAX_POPULATION ) {
       this.bunniesHaveTakenOverTheWorldEmitter.emit();
-    }
-  }
-
-  /**
-   * Mates a pair of bunnies.
-   * @param {Bunny} father
-   * @param {Bunny} mother
-   * @param {number} generation
-   * @param {number} litterSize
-   */
-  mateBunnies( father, mother, generation, litterSize ) {
-    assert && assert( typeof litterSize === 'number' && Utils.isInteger( litterSize ), 'invalid litterSize' );
-
-    for ( let i = 0; i < litterSize; i++ ) {
-      this.createBunny( father, mother, generation );
     }
   }
 
