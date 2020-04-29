@@ -258,7 +258,10 @@ class BunnyCollection {
         this.createBunny( {
           father: father,
           mother: mother,
-          generation: generation
+          generation: generation,
+          genotypeOptions: {
+            //TODO furMutation, earsMutation, teethMutation
+          }
         } );
         bornCount++;
       }

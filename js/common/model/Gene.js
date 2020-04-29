@@ -7,14 +7,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
@@ -66,13 +64,11 @@ class Gene extends PhetioObject {
       phetioReadOnly: true
     } );
 
-    // @public {DerivedProperty.<boolean>} has this gene mutated?
-    this.hasMutatedProperty = new DerivedProperty(
-      [ this.dominantAlleleProperty ],
-      dominantAllele => ( dominantAllele !== null ), {
-        tandem: options.tandem.createTandem( 'hasMutatedProperty' ),
-        phetioType: DerivedPropertyIO( BooleanIO )
-      } );
+    // @public is a mutation coming in the next generation of bunnies?
+    this.mutationComingProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'mutationComingProperty' ),
+      phetioReadOnly: true
+    } );
   }
 
   /**
@@ -80,6 +76,7 @@ class Gene extends PhetioObject {
    */
   reset() {
     this.dominantAlleleProperty.reset();
+    this.mutationComingProperty.reset();
   }
 
   /**

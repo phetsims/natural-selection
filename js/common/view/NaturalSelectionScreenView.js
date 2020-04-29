@@ -62,7 +62,7 @@ class NaturalSelectionScreenView extends ScreenView {
                                  ( 2 * NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN ) -
                                  NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
-    const addMutationsPanel = new AddMutationsPanel( {
+    const addMutationsPanel = new AddMutationsPanel( model.environmentModel.genePool, {
       fixedWidth: rightOfViewportWidth,
       tandem: options.tandem.createTandem( 'addMutationsPanel' )
     } );
@@ -79,7 +79,7 @@ class NaturalSelectionScreenView extends ScreenView {
       top: environmentNode.top
     } );
 
-    const mutationAlertsNode = new MutationAlertsNode( addMutationsPanel );
+    const mutationAlertsNode = new MutationAlertsNode( model.environmentModel.genePool, addMutationsPanel );
 
     // The graphs and their related controls fill the space below the viewport.
     const graphAreaSize = new Dimension2(
@@ -178,11 +178,10 @@ class NaturalSelectionScreenView extends ScreenView {
       mutationAlertsNode
     ];
 
+    //TODO verify that these resets are needed
     // @private
     this.resetNaturalSelectionScreenView = () => {
       environmentNode.reset();
-      addMutationsPanel.reset();
-      mutationAlertsNode.reset();
       populationNode.reset();
     };
 

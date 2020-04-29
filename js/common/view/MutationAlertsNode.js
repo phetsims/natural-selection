@@ -9,6 +9,7 @@
 import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import naturalSelection from '../../naturalSelection.js';
+import GenePool from '../model/GenePool.js';
 import AddMutationsPanel from './AddMutationsPanel.js';
 import MutationComingNode from './MutationComingNode.js';
 
@@ -18,11 +19,13 @@ const X_OFFSET = -5;
 class MutationAlertsNode extends Node {
 
   /**
+   * @param {GenePool} genePool
    * @param {AddMutationsPanel} addMutationsPanel
    * @param {Object} [options]
    */
-  constructor( addMutationsPanel, options ) {
+  constructor( genePool, addMutationsPanel, options ) {
 
+    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( addMutationsPanel instanceof AddMutationsPanel, 'invalid addMutationsPanel' );
 
     options = merge( {}, options );
@@ -31,8 +34,8 @@ class MutationAlertsNode extends Node {
     const furAlert = new MutationComingNode( {
       visible: false,
       cancelButtonListener: () => {
-        addMutationsPanel.resetFur();
-        furAlert.visible = false;
+        genePool.furGene.dominantAlleleProperty.value = null;
+        genePool.furGene.mutationComingProperty.value = false;
       }
     } );
 
@@ -40,8 +43,8 @@ class MutationAlertsNode extends Node {
     const earsAlert = new MutationComingNode( {
       visible: false,
       cancelButtonListener: () => {
-        addMutationsPanel.resetEars();
-        earsAlert.visible = false;
+        genePool.earsGene.dominantAlleleProperty.value = null;
+        genePool.earsGene.mutationComingProperty.value = false;
       }
     } );
 
@@ -49,8 +52,8 @@ class MutationAlertsNode extends Node {
     const teethAlert = new MutationComingNode( {
       visible: false,
       cancelButtonListener: () => {
-        addMutationsPanel.resetTeeth();
-        teethAlert.visible = false;
+        genePool.teethGene.dominantAlleleProperty.value = null;
+        genePool.teethGene.mutationComingProperty.value = false;
       }
     } );
 
@@ -59,37 +62,31 @@ class MutationAlertsNode extends Node {
 
     super( options );
 
-    // @private
-    this.furAlert = furAlert;
-    this.earsAlert = earsAlert;
-    this.teethAlert = teethAlert;
-
-    addMutationsPanel.furMutationEmitter.addListener( () => {
-      const globalPoint = addMutationsPanel.getFurLeftCenter().addXY( X_OFFSET, 0 );
-      furAlert.rightCenter = furAlert.globalToParentPoint( globalPoint );
-      furAlert.visible = true;
+    genePool.furGene.mutationComingProperty.link( mutationComing => {
+      if ( mutationComing ) {
+        const globalPoint = addMutationsPanel.getFurLeftCenter().addXY( X_OFFSET, 0 );
+        furAlert.rightCenter = furAlert.globalToParentPoint( globalPoint );
+        furAlert.visible = true;
+      }
+      furAlert.visible = mutationComing;
     } );
 
-    addMutationsPanel.earsMutationEmitter.addListener( () => {
-      const globalPoint = addMutationsPanel.getEarsLeftCenter().addXY( X_OFFSET, 0 );
-      earsAlert.rightCenter = earsAlert.globalToParentPoint( globalPoint );
-      earsAlert.visible = true;
+    genePool.earsGene.mutationComingProperty.link( mutationComing => {
+      if ( mutationComing ) {
+        const globalPoint = addMutationsPanel.getEarsLeftCenter().addXY( X_OFFSET, 0 );
+        earsAlert.rightCenter = earsAlert.globalToParentPoint( globalPoint );
+
+      }
+      earsAlert.visible = mutationComing;
     } );
 
-    addMutationsPanel.teethMutationEmitter.addListener( () => {
-      const globalPoint = addMutationsPanel.getTeethLeftCenter().addXY( X_OFFSET, 0 );
-      teethAlert.rightCenter = teethAlert.globalToParentPoint( globalPoint );
-      teethAlert.visible = true;
+    genePool.teethGene.mutationComingProperty.link( mutationComing => {
+      if ( mutationComing ) {
+        const globalPoint = addMutationsPanel.getTeethLeftCenter().addXY( X_OFFSET, 0 );
+        teethAlert.rightCenter = teethAlert.globalToParentPoint( globalPoint );
+      }
+      teethAlert.visible = mutationComing;
     } );
-  }
-
-  /**
-   * @public
-   */
-  reset() {
-    this.furAlert.visible = false;
-    this.earsAlert.visible = false;
-    this.teethAlert.visible = false;
   }
 
   /**
