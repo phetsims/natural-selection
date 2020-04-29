@@ -136,6 +136,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
   /**
    * Gets the left center of the 'Fur' row in the global coordinate frame.
+   * Used to position the MutationAlertsNode that corresponds to fur.
    * @returns {Vector2}
    * @public
    */
@@ -145,6 +146,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
   /**
    * Gets the left center of the 'Ears' row in the global coordinate frame.
+   * Used to position the MutationAlertsNode that corresponds to ears.
    * @returns {Vector2}
    * @public
    */
@@ -154,6 +156,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
   /**
    * Gets the left center of the 'Teeth' row in the global coordinate frame.
+   * Used to position the MutationAlertsNode that corresponds to teeth.
    * @returns {Vector2}
    * @public
    */
@@ -163,6 +166,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
   /**
    * Gets the left center of a row in the global coordinate frame.
+   * Used to position a MutationAlertsNode.
    * @param {Node} row
    * @returns {Vector2}
    * @private
