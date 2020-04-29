@@ -64,24 +64,31 @@ const NaturalSelectionUtils = {
   },
 
   /**
-   * Prints the time that it took to execute someFunction to the console.
-   * For example, if you want to time this:
-   *   this.bunnies.stepGeneration( currentGeneration )
-   * Wrap it in timeIt, like this:
-   *   timeIt( 'stepGeneration', () => this.bunnies.stepGeneration( currentGeneration ) );
-   * Console output will look like this:
-   *   stepGeneration took 56.68500000001586 ms
-   *
-   * @param {string} name
+   * Determines the time that it takes to execute someFunction.
    * @param {function} someFunction - a function with no parameters and no return value
    * @returns {number} the time to complete someFunction, in ms
    * @public
    */
-  timeIt( name, someFunction ) {
+  time( someFunction ) {
     const tBefore = performance.now();
     someFunction();
-    const tAfter = performance.now();
-    console.log( `${name} took ${tAfter - tBefore} ms` );
+    return performance.now() - tBefore;
+  },
+
+  /**
+   * Logs the time that it takes to execute someFunction.
+   * For example, if you want to time this:
+   *   this.step( dt )
+   * Wrap it like this:
+   *   logTime( 'step', () => this.step( dt ) );
+   * Console output will look like this:
+   *   step took 56.68500000001586 ms
+   *
+   * @param {string} name
+   * @param {function} someFunction - a function with no parameters and no return value
+   */
+  logTime( name, someFunction ) {
+    console.log( `${name} took ${NaturalSelectionUtils.time( someFunction )} ms` );
   }
 };
 
