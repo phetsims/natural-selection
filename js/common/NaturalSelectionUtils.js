@@ -36,6 +36,7 @@ const NaturalSelectionUtils = {
    * @param {Color|string} color
    * @param {number} [luminance] - colors with luminance (grayscale value) < this value are dark, range [0,255], default 186
    * @returns {boolean}
+   * @public
    */
   isDarkColor( color, luminance ) {
     assert && assert( luminance === undefined || ( luminance >= 0 && luminance <= 255 ), `invalid luminance: ${luminance}` );
@@ -47,6 +48,7 @@ const NaturalSelectionUtils = {
    * @param {Color|string} color
    * @param {number} [luminance] - colors with luminance (grayscale value) >= this value are light, range [0,255], default 186
    * @returns {boolean}
+   * @public
    */
   isLightColor( color, luminance ) {
     return !NaturalSelectionUtils.isDarkColor( color, luminance );
@@ -64,6 +66,7 @@ const NaturalSelectionUtils = {
    * @param {string} name
    * @param {function} someFunction - a function with no parameters and no return value
    * @returns {number} the time to complete someFunction, in ms
+   * @public
    */
   timeIt( name, someFunction ) {
     const tBefore = performance.now();
