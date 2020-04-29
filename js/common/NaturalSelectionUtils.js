@@ -78,7 +78,7 @@ const NaturalSelectionUtils = {
   /**
    * Logs the time that it takes to execute someFunction.
    * For example, if you want to time this:
-   *   this.step( dt )
+   *   this.step( dt );
    * Wrap it like this:
    *   logTime( 'step', () => this.step( dt ) );
    * Console output will look like this:
