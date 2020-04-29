@@ -17,7 +17,7 @@ const NaturalSelectionUtils = {
    * Green contributes the most to the intensity perceived by humans, and blue light the least.
    * This works correctly if color is already grayscale because the scaling factors sum to 1.
    * @param {Color|string} color
-   * @returns {number}
+   * @returns {Color}
    * @public
    */
   colorToGrayscale( color ) {
