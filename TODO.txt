@@ -3,7 +3,7 @@ TODO list for natural-selection
 PHASES
 - [x] Modes
 - [x] Mating
-- [ ] Mutations
+- [x] Mutations
 - [ ] Pedigree graph
 - [ ] Population graph
 - [ ] Proportions graph
