@@ -49,6 +49,26 @@ const NaturalSelectionUtils = {
    */
   isLightColor( color, luminance ) {
     return !NaturalSelectionUtils.isDarkColor( color, luminance );
+  },
+
+  /**
+   * Prints the time that it took to execute someFunction to the console.
+   * For example, if you want to time this:
+   *   this.bunnies.stepGeneration( currentGeneration )
+   * Wrap it in timeIt, like this:
+   *   timeIt( 'stepGeneration', () => this.bunnies.stepGeneration( currentGeneration ) );
+   * Console output will look like this:
+   *   stepGeneration took 56.68500000001586 ms
+   *
+   * @param {string} name
+   * @param {function} someFunction - a function with no parameters and no return value
+   * @returns {number} the time to complete someFunction, in ms
+   */
+  timeIt( name, someFunction ) {
+    const tBefore = performance.now();
+    someFunction();
+    const tAfter = performance.now();
+    console.log( `${name} took ${tAfter - tBefore} ms` );
   }
 };
 
