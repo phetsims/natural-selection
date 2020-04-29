@@ -1,5 +1,6 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
+//TODO should any of these be migrated to common?
 /**
  * NaturalSelectionUtils is a collection of utility functions used by this sim.
  *
