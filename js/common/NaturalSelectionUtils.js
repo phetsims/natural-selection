@@ -89,6 +89,21 @@ const NaturalSelectionUtils = {
    */
   logTime( name, someFunction ) {
     console.log( `${name} took ${NaturalSelectionUtils.time( someFunction )} ms` );
+  },
+
+  /**
+   * Removes n items from an array.
+   * @param {Array} array
+   * @param {number} n
+   * @returns {Array}
+   */
+  removeSample( array, n ) {
+    assert && assert( array.length >= n, 'array does not contain enough elements' );
+
+    //TODO https://github.com/phetsims/natural-selection/issues/65 replace _.sampleSize with phet.joist.random.sampleSize
+    const elements = _.sampleSize( array, n );
+    _.pullAll( array, elements );
+    return elements;
   }
 };
 
