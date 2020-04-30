@@ -11,8 +11,8 @@ import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
-import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import naturalSelection from '../../../naturalSelection.js';
+import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import DataProbeNode from './DataProbeNode.js';
@@ -40,7 +40,8 @@ class PopulationGraphNode extends Node {
       graphHeight: 100,
 
       // phet-io
-      tandem: Tandem.REQUIRED
+      tandem: Tandem.REQUIRED,
+      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     }, options );
 
     // invisible rectangle that defines the bounds of this Node
@@ -50,24 +51,38 @@ class PopulationGraphNode extends Node {
     const generationScrollControl = new GenerationScrollControl(
       populationModel.xRangeProperty, populationModel.generationsProperty, populationModel.isPlayingProperty, {
         labelString: naturalSelectionStrings.generation,
-        tandem: options.tandem.createTandem( 'generationScrollControl' )
+        tandem: options.tandem.createTandem( 'generationScrollControl' ),
+        phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
       } );
 
-    // Population (y-axis) zoom control
-    const populationZoomControl = new ZoomControl( populationModel.yRangeIndexProperty, {
-      orientation: 'vertical',
-      zoomLevelMin: populationModel.yRangeIndexProperty.range.min,
-      zoomLevelMax: populationModel.yRangeIndexProperty.range.max,
-      left: boundsRectangle.left,
-      top: boundsRectangle.top,
-      tandem: options.tandem.createTandem( 'populationZoomControl' )
+    // Wrap generationScrollControl because we'll be observing its boundsProperty.
+    const generationScrollControlWrapper = new Node( {
+      children: [ generationScrollControl ]
     } );
 
     // y-axis (Population) label
     const yAxisLabelNode = new Text( naturalSelectionStrings.population, {
       font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
       rotation: -Math.PI / 2,
-      maxWidth: 90 // determined empirically
+      maxWidth: 90, // determined empirically
+      tandem: options.tandem.createTandem( 'yAxisLabelNode' ),
+      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
+    } );
+
+    // Wrap yAxisLabelNode because we'll be observing its boundsProperty.
+    const yAxisLabelNodeWrapper = new Node( {
+      children: [ yAxisLabelNode ]
+    } );
+
+    // Population (y-axis) zoom control
+    const yZoomControl = new ZoomControl( populationModel.yRangeIndexProperty, {
+      orientation: 'vertical',
+      zoomLevelMin: populationModel.yRangeIndexProperty.range.min,
+      zoomLevelMax: populationModel.yRangeIndexProperty.range.max,
+      left: boundsRectangle.left,
+      top: boundsRectangle.top,
+      tandem: options.tandem.createTandem( 'yZoomControl' ),
+      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     } );
 
     //TODO fudge factors to fix wonky layout, need to account for tick marks
@@ -77,21 +92,15 @@ class PopulationGraphNode extends Node {
 
     //TODO better names for these
     // XY plot
-    const plotWidth = options.graphWidth - populationZoomControl.width - ZOOM_CONTROL_X_OFFSET - FUDGE_WIDTH;
+    const plotWidth = options.graphWidth - yZoomControl.width - ZOOM_CONTROL_X_OFFSET - FUDGE_WIDTH;
     const plotHeight = options.graphHeight - generationScrollControl.height - X_AXIS_LABEL_OFFSET - FUDGE_HEIGHT;
 
     const backgroundNode = new PopulationGraphBackgroundNode( populationModel, {
       backgroundWidth: plotWidth,
       backgroundHeight: plotHeight,
-      left: populationZoomControl.right + ZOOM_CONTROL_X_OFFSET + FUDGE_X_SPACING,
+      left: yZoomControl.right + ZOOM_CONTROL_X_OFFSET + FUDGE_X_SPACING,
       y: boundsRectangle.top
     } );
-
-    // center x-axis control under the graph
-    generationScrollControl.centerX = backgroundNode.x + ( plotWidth / 2 );
-    generationScrollControl.top = backgroundNode.bottom + X_AXIS_LABEL_OFFSET;
-    yAxisLabelNode.right = populationZoomControl.right + ZOOM_CONTROL_X_OFFSET - Y_AXIS_LABEL_OFFSET;
-    yAxisLabelNode.centerY = backgroundNode.y + ( plotHeight / 2 );
 
     const dataProbeNode = new DataProbeNode( populationModel, backgroundNode.x, plotWidth, plotHeight, {
       x: backgroundNode.x,
@@ -102,12 +111,24 @@ class PopulationGraphNode extends Node {
     assert && assert( !options.children, 'PopulationGraphNode sets children' );
     options.children = [
       boundsRectangle, backgroundNode,
-      generationScrollControl,
-      populationZoomControl, yAxisLabelNode,
+      generationScrollControlWrapper,
+      yZoomControl, yAxisLabelNodeWrapper,
       dataProbeNode
     ];
 
     super( options );
+
+    // center x-axis control under the graph
+    generationScrollControl.boundsProperty.link( () => {
+      generationScrollControl.centerX = backgroundNode.x + ( plotWidth / 2 );
+      generationScrollControl.top = backgroundNode.bottom + X_AXIS_LABEL_OFFSET;
+    } );
+
+    // center y-axis label to left of graph
+    yAxisLabelNode.boundsProperty.link( () => {
+      yAxisLabelNode.right = yZoomControl.right + ZOOM_CONTROL_X_OFFSET - Y_AXIS_LABEL_OFFSET;
+      yAxisLabelNode.centerY = backgroundNode.y + ( plotHeight / 2 );
+    } );
 
     // @private
     this.dataProbeNode = dataProbeNode;

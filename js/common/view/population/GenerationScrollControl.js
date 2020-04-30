@@ -53,7 +53,9 @@ class GenerationScrollControl extends HBox {
     // label
     const labelNode = new Text( options.labelString, {
       font: options.font,
-      maxWidth: 120 // determined empirically
+      maxWidth: 250, // determined empirically
+      tandem: options.tandem.createTandem( 'labelNode' ),
+      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     } );
 
     // back button
