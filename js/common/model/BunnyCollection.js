@@ -265,7 +265,7 @@ class BunnyCollection {
 
     // Randomly select indices for the new bunnies that will be mutated.
     // Arrays of indices are mutually exclusive, so that no bunny receives more than 1 mutation.
-    //TODO add something like _.sampleSize to phet.joist.random
+    //TODO https://github.com/phetsims/natural-selection/issues/65 replace _.sampleSize with phet.joist.random.sampleSize
     const furIndices = furMutation ? _.sampleSize( indices, numberToMutate ) : [];
     _.pullAll( indices, furIndices );
     const earsIndices = earsMutation ? _.sampleSize( indices, numberToMutate ) : [];
