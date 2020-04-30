@@ -26,7 +26,8 @@ class BunnyNodeCollection extends PhetioObject {
     options = merge( {
 
       // phet-io
-      tandem: Tandem.REQUIRED
+      tandem: Tandem.REQUIRED,
+      phetioState: false
     }, options );
 
     super( options );
