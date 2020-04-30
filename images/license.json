@@ -193,10 +193,10 @@
   },
   "world.png": {
     "text": [
-      "Copyright 2019 University of Colorado Boulder"
+      "Copyright 2020 University of Colorado Boulder"
     ],
     "projectURL": "http://phet.colorado.edu",
     "license": "contact phethelp@colorado.edu",
-    "notes": "TODO copied from Java version"
+    "notes": "created by Amanda McGarry"
   }
 }
