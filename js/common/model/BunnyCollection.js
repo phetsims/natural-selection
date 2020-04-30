@@ -9,7 +9,6 @@
 
 import Emitter from '../../../../axon/js/Emitter.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import ObservableArrayIO from '../../../../axon/js/ObservableArrayIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -18,6 +17,7 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import Bunny from './Bunny.js';
+import BunnyArray from './BunnyArray.js';
 import BunnyGroup from './BunnyGroup.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -54,14 +54,15 @@ class BunnyCollection {
       phetioDocumentation: 'the total number of bunnies, alive and dead'
     } );
 
-    // @public (read-only) {ObservableArray.<Bunny>} the live bunnies in the group
-    this.liveBunnies = new ObservableArray( {
+    // @public (read-only) the live bunnies in the group
+    this.liveBunnies = new BunnyArray( {
       tandem: options.tandem.createTandem( 'liveBunnies' ),
       phetioType: ObservableArrayIO( ReferenceIO( BunnyIO ) )
     } );
 
-    // @public (read-only) {ObservableArray.<Bunny>} the dead bunnies in the group
-    this.deadBunnies = new ObservableArray( {
+    // @public (read-only) the dead bunnies in the group
+    //TODO this gives us counts for dead bunnies, which we may not want in production
+    this.deadBunnies = new BunnyArray( {
       tandem: options.tandem.createTandem( 'deadBunnies' ),
       phetioType: ObservableArrayIO( ReferenceIO( BunnyIO ) )
     } );
