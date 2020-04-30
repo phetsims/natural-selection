@@ -4,9 +4,9 @@ PHASES
 - [x] Modes
 - [x] Mating
 - [x] Mutations
-- [ ] Pedigree graph
 - [ ] Population graph
 - [ ] Proportions graph
+- [ ] Pedigree graph
 - [ ] Food
 - [ ] Wolves
 - [ ] Intro screen
