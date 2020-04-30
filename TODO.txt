@@ -9,6 +9,7 @@ FEATURE MILESTONES
 - [ ] Pedigree graph
 - [ ] Food
 - [ ] Wolves
+- [ ] query parameters
 - [ ] Intro screen
 
 FEATURES
