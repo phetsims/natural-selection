@@ -274,9 +274,7 @@ class Row extends HBox {
           centerX: dominantButton.width / 2,
           centerY: dominantButton.height / 2
         } )
-      ],
-      tandem: options.tandem.createTandem( 'standardAlleleNode' ),
-      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
+      ]
     } );
     const standardAlleleWrapper = new AlignBox( standardAlleleNode, {
       group: buttonColumnsAlignGroup,
@@ -299,9 +297,7 @@ class Row extends HBox {
           centerX: dominantButton.width / 2,
           centerY: dominantButton.height / 2
         } )
-      ],
-      tandem: options.tandem.createTandem( 'mutantAlleleNode' ),
-      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
+      ]
     } );
     const mutantAlleleWrapper = new AlignBox( mutantAlleleNode, {
       group: buttonColumnsAlignGroup,
