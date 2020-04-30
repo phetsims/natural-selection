@@ -124,9 +124,11 @@ const NaturalSelectionConstants = {
   DIALOG_FONT: new PhetFont( 16 )
 };
 
-// Validation
+// All 3 mutations can be applied simultaneously. Mutation is mutually-exclusive by trait - a bunny can have at most 1
+// mutation. And we have 3 mutations, for fur, ears, teeth. So at most 1/3 of the population can get a specific mutation.
 assert && assert( NaturalSelectionConstants.MUTATION_PERCENTAGE > 0 && NaturalSelectionConstants.MUTATION_PERCENTAGE <= 1/3,
   'MUTATION_PERCENTAGE must be > 0 and <= 1/numberOfTraits' );
+
 assert && assert( NaturalSelectionConstants.SECONDS_PER_STEP < NaturalSelectionConstants.SECONDS_PER_GENERATION,
   'SECONDS_PER_STEP must be < SECONDS_PER_GENERATION' );
 assert && assert( NaturalSelectionConstants.INITIAL_POPULATION < NaturalSelectionConstants.MAX_POPULATION,
