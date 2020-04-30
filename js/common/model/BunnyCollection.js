@@ -129,8 +129,8 @@ class BunnyCollection {
   }
 
   /**
-   * Gets the archetype for the PhetioGroup. This is defined during API harvest via ?phetioPrintAPI and when running
-   * studio via ?phetioCreateArchetypes.
+   * Gets the archetype for the PhetioGroup.
+   * This is non-null during API harvest via ?phetioPrintAPI, and when running Studio with ?phetioCreateArchetypes.
    * @returns {Bunny|null}
    * @public
    */
