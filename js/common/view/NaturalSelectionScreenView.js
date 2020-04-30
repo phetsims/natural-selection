@@ -191,16 +191,19 @@ class NaturalSelectionScreenView extends ScreenView {
         addMutationsPanel.setContentEnabled( true );
         environmentalFactorsPanel.setContentEnabled( true );
         timeControlNode.enabledProperty.value = true;
+        environmentNode.environmentRadioButtonGroup.enabledProperty.value = true;
       }
       else if ( simulationMode === SimulationMode.ACTIVE ) {
         addMutationsPanel.setContentEnabled( true );
         environmentalFactorsPanel.setContentEnabled( true );
         timeControlNode.enabledProperty.value = true;
+        environmentNode.environmentRadioButtonGroup.enabledProperty.value = true;
       }
       else if ( simulationMode === SimulationMode.COMPLETED ) {
         addMutationsPanel.setContentEnabled( false );
         environmentalFactorsPanel.setContentEnabled( false );
         timeControlNode.enabledProperty.value = false;
+        environmentNode.environmentRadioButtonGroup.enabledProperty.value = false;
       }
       else {
         throw new Error( `invalid simulationMode: ${simulationMode}` );

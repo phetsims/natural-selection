@@ -132,6 +132,9 @@ class EnvironmentNode extends Node {
       },
       tandem: options.tandem.createTandem( 'backgroundPressListener' )
     } ) );
+
+    // @public (read-only)
+    this.environmentRadioButtonGroup = environmentRadioButtonGroup;
   }
 
   /**
