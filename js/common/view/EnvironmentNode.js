@@ -95,14 +95,14 @@ class EnvironmentNode extends Node {
       tandem: options.tandem.createTandem( 'environmentModel' )
     } );
 
-    // @private manages dynamic BunnyNode instances
-    this.bunnyNodeCollection = new BunnyNodeCollection( environmentModel.bunnyCollection, environmentModel.selectedBunnyProperty, {
+    // manages dynamic BunnyNode instances
+    const bunnyNodeCollection = new BunnyNodeCollection( environmentModel.bunnyCollection, environmentModel.selectedBunnyProperty, {
       tandem: options.tandem.createTandem( 'bunnyNodeCollection' )
     } );
 
     // Creates a BunnyNode and adds it to the scenegraph
     const createBunnyNode = bunny => {
-      const bunnyNode = this.bunnyNodeCollection.createBunnyNode( bunny );
+      const bunnyNode = bunnyNodeCollection.createBunnyNode( bunny );
       spritesNode.addChild( bunnyNode );
     };
 
