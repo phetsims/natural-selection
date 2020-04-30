@@ -16,7 +16,7 @@ import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModel from '../model/EnvironmentModel.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import BunnyNodeGroup from './BunnyNodeGroup.js';
+import BunnyNodeCollection from './BunnyNodeCollection.js';
 import BunnyPressListener from './BunnyPressListener.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
 import EnvironmentRadioButtonGroup from './EnvironmentRadioButtonGroup.js';
@@ -95,22 +95,22 @@ class EnvironmentNode extends Node {
       tandem: options.tandem.createTandem( 'environmentModel' )
     } );
 
-    // @private PhetioGroup for managing dynamic BunnyNode instances
-    this.bunnyNodeGroup = new BunnyNodeGroup( environmentModel.bunnies, environmentModel.selectedBunnyProperty, {
-      tandem: options.tandem.createTandem( 'bunnyNodeGroup' )
+    // @private manages dynamic BunnyNode instances
+    this.bunnyNodeCollection = new BunnyNodeCollection( environmentModel.bunnyCollection, environmentModel.selectedBunnyProperty, {
+      tandem: options.tandem.createTandem( 'bunnyNodeCollection' )
     } );
 
     // Creates a BunnyNode and adds it to the scenegraph
     const createBunnyNode = bunny => {
-      const bunnyNode = this.bunnyNodeGroup.createBunnyNode( bunny );
+      const bunnyNode = this.bunnyNodeCollection.createBunnyNode( bunny );
       spritesNode.addChild( bunnyNode );
     };
 
     // Create a BunnyNode for each Bunny in the initial population.
-    environmentModel.bunnies.liveBunnies.forEach( createBunnyNode );
+    environmentModel.bunnyCollection.liveBunnies.forEach( createBunnyNode );
 
     // When a Bunny is added to the model, create the corresponding BunnyNode.
-    environmentModel.bunnies.bunnyCreatedEmitter.addListener( createBunnyNode );
+    environmentModel.bunnyCollection.bunnyCreatedEmitter.addListener( createBunnyNode );
 
     // @private
     this.environmentModel = environmentModel;

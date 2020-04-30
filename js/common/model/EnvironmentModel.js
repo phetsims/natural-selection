@@ -78,8 +78,8 @@ class EnvironmentModel extends PhetioObject {
     } );
 
     // @public (read-only) the collection of Bunny instances
-    this.bunnies = new BunnyCollection( this.modelViewTransform, this.genePool, {
-      tandem: options.tandem.createTandem( 'bunnies' )
+    this.bunnyCollection = new BunnyCollection( this.modelViewTransform, this.genePool, {
+      tandem: options.tandem.createTandem( 'bunnyCollection' )
     } );
 
     // @public {Property.<Bunny|null>} a reference to a Bunny instance in BunnyCollection, null if no selection
@@ -94,7 +94,7 @@ class EnvironmentModel extends PhetioObject {
     // When the generation changes...
     this.generationClock.currentGenerationProperty.lazyLink( currentGeneration => {
       if ( currentGeneration !== 0 ) {
-        this.bunnies.stepGeneration( currentGeneration );
+        this.bunnyCollection.stepGeneration( currentGeneration );
       }
     } );
   }
@@ -116,7 +116,7 @@ class EnvironmentModel extends PhetioObject {
     this.genePool.reset();
 
     // dispose of all bunnies and reinitialize
-    this.bunnies.reset();
+    this.bunnyCollection.reset();
     this.initializeBunnyPopulation();
   }
 
@@ -139,7 +139,7 @@ class EnvironmentModel extends PhetioObject {
     this.generationClock.step( dt );
 
     // move the bunnies
-    this.bunnies.moveBunnies( dt );
+    this.bunnyCollection.moveBunnies( dt );
   }
 
   //TODO read query parameters and create initial population
@@ -149,11 +149,11 @@ class EnvironmentModel extends PhetioObject {
    */
   initializeBunnyPopulation() {
     phet.log && phet.log( 'EnvironmentModel.initializeBunnyPopulation' );
-    assert && assert( this.bunnies.totalNumberOfBunniesProperty.value === 0, 'bunnies already exist' );
+    assert && assert( this.bunnyCollection.totalNumberOfBunniesProperty.value === 0, 'bunnies already exist' );
     assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
 
     for ( let i = 0; i < NaturalSelectionConstants.INITIAL_POPULATION; i++ ) {
-      this.bunnies.createBunnyZero();
+      this.bunnyCollection.createBunnyZero();
     }
   }
 
@@ -162,10 +162,10 @@ class EnvironmentModel extends PhetioObject {
    * @private
    */
   addAMate() {
-    assert && assert( this.bunnies.totalNumberOfBunniesProperty.value === 1, 'there should only be 1 bunny' );
+    assert && assert( this.bunnyCollection.totalNumberOfBunniesProperty.value === 1, 'there should only be 1 bunny' );
     assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
 
-    this.bunnies.createBunnyZero();
+    this.bunnyCollection.createBunnyZero();
   }
 }
 
