@@ -1,6 +1,6 @@
 TODO list for natural-selection
 
-IMPLEMENTATION ROADMAP
+FEATURE MILESTONES
 - [x] Modes
 - [x] Mating
 - [x] Mutations
