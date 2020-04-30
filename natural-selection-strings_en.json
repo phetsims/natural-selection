@@ -145,5 +145,8 @@
   },
   "selectABunny": {
     "value": "Select a Bunny"
+  },
+  "none": {
+    "value": "None"
   }
 }

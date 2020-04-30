@@ -11,8 +11,8 @@ import merge from '../../../../phet-core/js/merge.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VerticalAquaRadioButtonGroup from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import naturalSelection from '../../naturalSelection.js';
+import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import Graphs from './Graphs.js';
 
@@ -63,6 +63,13 @@ class GraphsRadioButtonGroup extends VerticalAquaRadioButtonGroup {
         value: Graphs.PEDIGREE,
         node: new Text( naturalSelectionStrings.pedigree, TEXT_OPTIONS ),
         tandemName: 'pedigreeRadioButton'
+      },
+
+      // None
+      {
+        value: Graphs.NONE,
+        node: new Text( naturalSelectionStrings.none, TEXT_OPTIONS ),
+        tandemName: 'noneRadioButton'
       }
     ];
 
