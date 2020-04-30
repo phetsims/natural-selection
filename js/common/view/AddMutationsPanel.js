@@ -236,7 +236,8 @@ class Row extends HBox {
       content: new AlignBox( new Image( mutationIcon, {
         scale: BUTTON_ICON_SCALE
       } ), { group: iconAlignGroup } ),
-      tandem: options.tandem.createTandem( 'dominantButton' )
+      tandem: options.tandem.createTandem( 'dominantButton' ),
+      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     } );
     const dominantButtonWrapper = new AlignBox( dominantButton, {
       group: buttonColumnsAlignGroup,
@@ -250,7 +251,8 @@ class Row extends HBox {
       content: new AlignBox( new Image( mutationIcon, {
         scale: BUTTON_ICON_SCALE
       } ), { group: iconAlignGroup } ),
-      tandem: options.tandem.createTandem( 'recessiveButton' )
+      tandem: options.tandem.createTandem( 'recessiveButton' ),
+      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     } );
     const recessiveButtonWrapper = new AlignBox( recessiveButton, {
       group: buttonColumnsAlignGroup,
@@ -258,7 +260,7 @@ class Row extends HBox {
     } );
 
     // icon for the standard allele
-    const standardNode = new Node( {
+    const standardAlleleNode = new Node( {
       children: [
         new Rectangle( 0, 0, dominantButton.width, dominantButton.height, {
           cornerRadius: BUTTON_CORNER_RADIUS,
@@ -272,15 +274,17 @@ class Row extends HBox {
           centerX: dominantButton.width / 2,
           centerY: dominantButton.height / 2
         } )
-      ]
+      ],
+      tandem: options.tandem.createTandem( 'standardAlleleNode' ),
+      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     } );
-    const standardNodeWrapper = new AlignBox( standardNode, {
+    const standardAlleleWrapper = new AlignBox( standardAlleleNode, {
       group: buttonColumnsAlignGroup,
       xAlign: BUTTON_COLUMNS_X_ALIGN
     } );
     
     // icon for the mutant allele
-    const mutantNode = new Node( {
+    const mutantAlleleNode = new Node( {
       children: [
         new Rectangle( 0, 0, dominantButton.width, dominantButton.height, {
           cornerRadius: BUTTON_CORNER_RADIUS,
@@ -295,9 +299,11 @@ class Row extends HBox {
           centerX: dominantButton.width / 2,
           centerY: dominantButton.height / 2
         } )
-      ]
+      ],
+      tandem: options.tandem.createTandem( 'mutantAlleleNode' ),
+      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     } );
-    const mutantNodeWrapper = new AlignBox( mutantNode, {
+    const mutantAlleleWrapper = new AlignBox( mutantAlleleNode, {
       group: buttonColumnsAlignGroup,
       xAlign: BUTTON_COLUMNS_X_ALIGN
     } );
@@ -317,7 +323,7 @@ class Row extends HBox {
 
       // make the mutation dominant and the non-mutation recessive
       gene.dominantAlleleProperty.value = gene.mutantAllele;
-      this.children = [ labelNodeWrapper, mutantNodeWrapper, standardNodeWrapper ];
+      this.children = [ labelNodeWrapper, mutantAlleleWrapper, standardAlleleWrapper ];
 
       // signal that a mutation is coming in the next generation
       gene.mutationComingProperty.value = true;
@@ -328,7 +334,7 @@ class Row extends HBox {
 
       // make the mutation dominant and the non-mutation recessive
       gene.dominantAlleleProperty.value = gene.normalAllele;
-      this.children = [ labelNodeWrapper, standardNodeWrapper, mutantNodeWrapper ];
+      this.children = [ labelNodeWrapper, standardAlleleWrapper, mutantAlleleWrapper ];
 
       // signal that a mutation is coming in the next generation
       gene.mutationComingProperty.value = true;
