@@ -8,6 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../../axon/js/Property.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AlignBox from '../../../../../scenery/js/nodes/AlignBox.js';
 import AlignGroup from '../../../../../scenery/js/nodes/AlignGroup.js';
@@ -17,7 +18,6 @@ import Image from '../../../../../scenery/js/nodes/Image.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import Checkbox from '../../../../../sun/js/Checkbox.js';
-import SunConstants from '../../../../../sun/js/SunConstants.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import brownFurImage from '../../../../images/brownFur_png.js';
 import floppyEarsImage from '../../../../images/floppyEars_png.js';
@@ -27,6 +27,7 @@ import straightEarsImage from '../../../../images/straightEars_png.js';
 import whiteFurImage from '../../../../images/whiteFur_png.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import Gene from '../../model/Gene.js';
 import PedigreeModel from '../../model/PedigreeModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
@@ -54,17 +55,16 @@ class AllelesPanel extends NaturalSelectionPanel {
       spacing: 25,
       children: [
 
-        // Alleles - plural since we're always showing at least 2 alleles
+        // Alleles - title is plural, since we're always showing at least 2 alleles
         new Text( naturalSelectionStrings.alleles, {
           font: NaturalSelectionConstants.TITLE_FONT,
           maxWidth: 125, // determined empirically
-          tandem: options.tandem.createTandem( 'title' )
+          tandem: options.tandem.createTandem( 'titleNode' )
         } ),
 
         // Fur
         new Row(
           pedigreeModel.genePool.furGene,
-          naturalSelectionStrings.fur, naturalSelectionStrings.furDominant, naturalSelectionStrings.furRecessive,
           whiteFurImage, brownFurImage,
           pedigreeModel.furAllelesVisibleProperty,
           alleleAlignGroup, {
@@ -75,7 +75,6 @@ class AllelesPanel extends NaturalSelectionPanel {
         // Ears
         new Row(
           pedigreeModel.genePool.earsGene,
-          naturalSelectionStrings.ears, naturalSelectionStrings.earsDominant, naturalSelectionStrings.earsRecessive,
           straightEarsImage, floppyEarsImage,
           pedigreeModel.earsAllelesVisibleProperty,
           alleleAlignGroup, {
@@ -86,7 +85,6 @@ class AllelesPanel extends NaturalSelectionPanel {
         // Teeth
         new Row(
           pedigreeModel.genePool.teethGene,
-          naturalSelectionStrings.teeth, naturalSelectionStrings.teethDominant, naturalSelectionStrings.teethRecessive,
           shortTeethImage, longTeethImage,
           pedigreeModel.teethAllelesVisibleProperty,
           alleleAlignGroup, {
@@ -119,18 +117,19 @@ class Row extends VBox {
 
   /**
    * @param {Gene} gene
-   * @param {string} labelString
-   * @param {string} dominantString
-   * @param {string} recessiveString
-   *
    * @param {HTMLImageElement} normalAlleleImage
-   *  @param {HTMLImageElement} mutantAlleleImage
+   * @param {HTMLImageElement} mutantAlleleImage
    * @param {Property.<boolean>} visibleProperty
    * @param {AlignGroup} alignGroup
    * @param {Object} [options]
    */
-  constructor( gene, labelString, dominantString, recessiveString, normalAlleleImage, mutantAlleleImage,
-               visibleProperty, alignGroup, options ) {
+  constructor( gene, normalAlleleImage, mutantAlleleImage, visibleProperty, alignGroup, options ) {
+
+    assert && assert( gene instanceof Gene, 'invalid gene' );
+    assert && assert( normalAlleleImage instanceof HTMLImageElement, 'invalid normalAlleleImage' );
+    assert && assert( mutantAlleleImage instanceof HTMLImageElement, 'invalid mutantAlleleImage' );
+    assert && assert( visibleProperty instanceof Property, 'invalid visibleProperty' );
+    assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
     options = merge( {
 
@@ -143,56 +142,40 @@ class Row extends VBox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const labelNode = new Text( labelString, {
+    const labelNode = new Text( gene.name, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 100 // determined empirically
     } );
+
     const checkbox = new Checkbox( labelNode, visibleProperty,
       merge( {
-        tandem: options.tandem.createTandem( 'checkbox' )
+        tandem: options.tandem.createTandem( 'checkbox' ),
+        phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
       }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
     );
 
-    // common options
-    const textOptions = {
-      font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 12 // determined empirically
-    };
-    const imageOptions = {
-      scale: 0.5 // determined empirically
-    };
+    // Dominant allele
+    const dominantAlleleNode = new AlleleNode( gene.dominantSymbol, normalAlleleImage );
+
+    // Recessive allele
+    const recessiveAlleleNode = new AlleleNode( gene.recessiveSymbol, mutantAlleleImage );
+
     const alignBoxOptions = {
       group: alignGroup,
       xAlign: 'left'
     };
-    const textImageSpacing = 6;
 
-    // Dominant allele abbreviation and icon
-    const dominantText = new Text( dominantString, textOptions );
-    const dominantImage = new Image( normalAlleleImage, imageOptions );
-    const dominantHBox = new HBox( {
-      children: [ dominantText, dominantImage ],
-      spacing: textImageSpacing
-    } );
-    const dominantAlignBox = new AlignBox( dominantHBox, alignBoxOptions );
-
-    // Recessive allele abbreviation and icon
-    const recessiveText = new Text( recessiveString, textOptions );
-    const recessiveImage = new Image( mutantAlleleImage, imageOptions );
-    const recessiveHBox = new HBox( {
-      children: [ recessiveText, recessiveImage ],
-      spacing: textImageSpacing
-    } );
-    const recessiveAlignBox = new AlignBox( recessiveHBox, alignBoxOptions );
-
-    // Indent the abbreviations and icons
+    // Dominant allele on the left, recessive on the right, to match 'Add Mutations' panel
     const hBox = new HBox( {
       spacing: 0,
       children: [
-        new HStrut( 8 ),
+        new HStrut( 8 ), // indent
         new HBox( {
           spacing: 12,
-          children: [ dominantAlignBox, recessiveAlignBox ]
+          children: [
+            new AlignBox( dominantAlleleNode, alignBoxOptions ),
+            new AlignBox( recessiveAlleleNode, alignBoxOptions )
+          ]
         } )
       ]
     } );
@@ -204,21 +187,25 @@ class Row extends VBox {
 
     gene.dominantAlleleProperty.link( dominantAllele => {
 
-      const enabled = !!dominantAllele;
+      const hasMutation = !!dominantAllele;
 
-      // Disable this row
-      this.opacity = enabled ? 1 : SunConstants.DISABLED_OPACITY;
-      checkbox.pickable = enabled;
+      // Disable the checkbox when there is no mutation
+      checkbox.enabled = hasMutation;
 
-      // Don't show allele abbreviation and icon when disabled
-      hBox.visible = enabled;
-      
+      // Don't show allele abbreviation and icon when there is no mutation
+      hBox.visible = hasMutation;
+
+      // Corresponding alleles should not be visible when the row is disabled.
+      if ( !hasMutation ) {
+        visibleProperty.value = false;
+      }
+
       if ( dominantAllele ) {
 
         // Show the correct allele icons for dominant vs recessive
         const mutantIsDominant = ( dominantAllele === gene.mutantAllele );
-        dominantImage.image = mutantIsDominant ? mutantAlleleImage : normalAlleleImage;
-        recessiveImage.image = mutantIsDominant ? normalAlleleImage : mutantAlleleImage;
+        dominantAlleleNode.image = mutantIsDominant ? mutantAlleleImage : normalAlleleImage;
+        recessiveAlleleNode.image = mutantIsDominant ? normalAlleleImage : mutantAlleleImage;
       }
     } );
   }
@@ -229,6 +216,53 @@ class Row extends VBox {
    */
   dispose() {
     assert && assert( false, 'Row does not support dispose' );
+  }
+}
+
+/**
+ * AlleleNode displays the symbol and icon for an allele.
+ */
+class AlleleNode extends HBox {
+
+  /**
+   * @param {string} symbol - the symbol used for the allele
+   * @param {HTMLImageElement} image
+   * @param {Object} [options]
+   */
+  constructor( symbol, image, options ) {
+
+    assert && assert( typeof symbol === 'string', 'invalid symbol' );
+    assert && assert( image instanceof HTMLImageElement, 'invalid image' );
+
+    options = merge( {
+      spacing: 6
+    }, options );
+
+    const textNode = new Text( symbol, {
+      font: NaturalSelectionConstants.CHECKBOX_FONT,
+      maxWidth: 12 // determined empirically
+    } );
+
+    const imageNode = new Image( image, {
+      scale: 0.5 // determined empirically
+    } );
+
+    assert && assert( !options.children, 'AlleleNode sets children' );
+    options.children = [ textNode, imageNode ];
+
+    super( options );
+
+    // @private
+    this.imageNode = imageNode;
+  }
+
+  /**
+   * Sets the allele image for this node.
+   * @param {HTMLImageElement} value
+   */
+  set image( value ) {
+    assert && assert( value instanceof HTMLImageElement, 'invalid value' );
+    this.imageNode.image = value;
   }
 }
 
