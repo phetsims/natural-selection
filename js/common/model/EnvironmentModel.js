@@ -118,6 +118,9 @@ class EnvironmentModel extends PhetioObject {
     // dispose of all bunnies and reinitialize
     this.bunnyCollection.reset();
     this.initializeBunnyPopulation();
+
+    assert && assert( this.bunnyCollection.liveBunnies.length === 0, 'expected 0 live bunnies' );
+    assert && assert( this.bunnyCollection.deadBunnies.length === 0, 'expected 0 dead bunnies' );
   }
 
   /**
@@ -149,7 +152,7 @@ class EnvironmentModel extends PhetioObject {
    */
   initializeBunnyPopulation() {
     phet.log && phet.log( 'EnvironmentModel.initializeBunnyPopulation' );
-    assert && assert( this.bunnyCollection.totalNumberOfBunniesProperty.value === 0, 'bunnies already exist' );
+    assert && assert( this.bunnyCollection.liveBunnies.length === 0, 'bunnies already exist' );
     assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
 
     for ( let i = 0; i < NaturalSelectionConstants.INITIAL_POPULATION; i++ ) {
@@ -162,7 +165,7 @@ class EnvironmentModel extends PhetioObject {
    * @private
    */
   addAMate() {
-    assert && assert( this.bunnyCollection.totalNumberOfBunniesProperty.value === 1, 'there should only be 1 bunny' );
+    assert && assert( this.bunnyCollection.liveBunnies.length === 1, 'there should only be 1 live bunny' );
     assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
 
     this.bunnyCollection.createBunnyZero();

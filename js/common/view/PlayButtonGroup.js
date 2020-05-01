@@ -22,13 +22,13 @@ class PlayButtonGroup extends Node {
 
   /**
    * @param {EnumerationProperty.<SimulationMode>} simulationModeProperty
-   * @param {Property.<number>} totalNumberOfBunniesProperty
+   * @param {Property.<number>} bunnyCountProperty
    * @param {Object} [options]
    */
-  constructor( simulationModeProperty, totalNumberOfBunniesProperty, options ) {
+  constructor( simulationModeProperty, bunnyCountProperty, options ) {
 
     assert && assert( simulationModeProperty instanceof EnumerationProperty, 'invalid simulationModeProperty' );
-    assert && assert( totalNumberOfBunniesProperty instanceof Property, 'invalid totalNumberOfBunniesProperty' );
+    assert && assert( bunnyCountProperty instanceof Property, 'invalid bunnyCountProperty' );
 
     options = merge( {
 
@@ -76,11 +76,11 @@ class PlayButtonGroup extends Node {
     super( options );
 
     Property.multilink(
-      [ simulationModeProperty, totalNumberOfBunniesProperty ],
-      ( simulationMode, totalNumberOfBunnies ) => {
+      [ simulationModeProperty, bunnyCountProperty ],
+      ( simulationMode, bunnyCount ) => {
         if ( simulationMode === SimulationMode.STAGED ) {
-          addAMateButton.visible = ( totalNumberOfBunnies === 1 );
-          playButton.visible = ( totalNumberOfBunnies > 1 );
+          addAMateButton.visible = ( bunnyCount === 1 );
+          playButton.visible = ( bunnyCount > 1 );
           startOverButton.visible = false;
         }
         else if ( simulationMode === SimulationMode.ACTIVE ) {

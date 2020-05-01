@@ -8,7 +8,6 @@
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ObservableArrayIO from '../../../../axon/js/ObservableArrayIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -44,14 +43,6 @@ class BunnyCollection {
     // @private the PhetioGroup that manages Bunny instances as dynamic PhET-iO elements
     this.bunnyGroup = new BunnyGroup( genePool, modelViewTransform, {
       tandem: options.tandem.createTandem( 'bunnyGroup' )
-    } );
-
-    // @public (read-only)
-    this.totalNumberOfBunniesProperty = new NumberProperty( 0, {
-      numberType: 'Integer',
-      tandem: options.tandem.createTandem( 'totalNumberOfBunniesProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'the total number of bunnies, alive and dead'
     } );
 
     // @public (read-only) the live bunnies in the group
@@ -104,7 +95,6 @@ class BunnyCollection {
       bunny.isAliveProperty.lazyLink( isAliveListener );
 
       this.liveBunnies.push( bunny );
-      this.totalNumberOfBunniesProperty.value++;
       this.bunnyCreatedEmitter.emit( bunny );
     } );
 
@@ -113,7 +103,6 @@ class BunnyCollection {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
       this.liveBunnies.contains( bunny ) && this.liveBunnies.remove( bunny );
       this.deadBunnies.contains( bunny ) && this.deadBunnies.remove( bunny );
-      this.totalNumberOfBunniesProperty.value--;
       this.bunnyDisposedEmitter.emit( bunny );
     } );
 
@@ -200,7 +189,7 @@ class BunnyCollection {
     this.mateAllBunnies( generation );
 
     assert && this.assertCountsInSync();
-    phet.log && phet.log( `live=${this.liveBunnies.length} dead=${this.deadBunnies.length} total=${this.totalNumberOfBunniesProperty.value}` );
+    phet.log && phet.log( `live=${this.liveBunnies.length} dead=${this.deadBunnies.length} total=${this.bunnyGroup.countProperty.value}` );
   }
 
   /**
@@ -317,7 +306,7 @@ class BunnyCollection {
   assertCountsInSync() {
     const live = this.liveBunnies.length;
     const dead = this.deadBunnies.length;
-    const total = this.totalNumberOfBunniesProperty.value;
+    const total = live + dead;
     const bunnyGroupLength = this.bunnyGroup.length;
     assert( live + dead === total && total === bunnyGroupLength,
       `bunny counts are out of sync, live=${live}, dead=${dead}, total=${total} bunnyGroupLength=${bunnyGroupLength}` );
