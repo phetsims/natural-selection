@@ -13,6 +13,7 @@ FEATURE MILESTONES
 - [ ] Intro screen
 
 FEATURES
+move color and images into Gene
 add counts to EnvironmentModel
 
 PERFORMANCE
