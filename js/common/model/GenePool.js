@@ -31,7 +31,7 @@ class GenePool {
       } );
 
     // @pubic (read-only)
-    this.earsGene = new Gene( naturalSelectionStrings.fur,
+    this.earsGene = new Gene( naturalSelectionStrings.ears,
       AlleleInstances.STRAIGHT_EARS, AlleleInstances.FLOPPY_EARS,
       naturalSelectionStrings.earsDominant, naturalSelectionStrings.earsRecessive, {
         tandem: options.tandem.createTandem( 'earsGene' )
