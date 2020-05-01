@@ -118,9 +118,6 @@ class EnvironmentModel extends PhetioObject {
     // dispose of all bunnies and reinitialize
     this.bunnyCollection.reset();
     this.initializeBunnyPopulation();
-
-    assert && assert( this.bunnyCollection.liveBunnies.length === 0, 'expected 0 live bunnies' );
-    assert && assert( this.bunnyCollection.deadBunnies.length === 0, 'expected 0 dead bunnies' );
   }
 
   /**

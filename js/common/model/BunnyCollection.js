@@ -117,7 +117,7 @@ class BunnyCollection {
    */
   reset() {
     this.bunnyGroup.clear(); // calls dispose for all Bunny instances
-    assert && this.assertCountsInSync();
+    assert && this.assertValidCounts();
   }
 
   /**
@@ -188,7 +188,7 @@ class BunnyCollection {
     // Bunnies mate (happy birthday!)
     this.mateAllBunnies( generation );
 
-    assert && this.assertCountsInSync();
+    assert && this.assertValidCounts();
     phet.log && phet.log( `live=${this.liveBunnies.length} dead=${this.deadBunnies.length} total=${this.bunnyGroup.countProperty.value}` );
   }
 
@@ -300,10 +300,10 @@ class BunnyCollection {
   }
 
   /**
-   * Asserts that collection counts are in-sync.
+   * Asserts that collection counts are in-sync with the BunnyGroup.
    * @private
    */
-  assertCountsInSync() {
+  assertValidCounts() {
     const live = this.liveBunnies.length;
     const dead = this.deadBunnies.length;
     const total = live + dead;
