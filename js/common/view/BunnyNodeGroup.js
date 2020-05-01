@@ -67,7 +67,7 @@ class BunnyNodeGroup extends PhetioGroup {
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
     // Create the BunnyNode
-    const bunnyNode = this.createCorrespondingGroupElement( bunny, bunny );
+    const bunnyNode = this.createCorrespondingGroupElement( bunny.tandem.name, bunny );
 
     // If the bunny dies or is disposed, dispose of the associated BunnyNode. We could also listen to
     // BunnyCollection.bunnyDiedEmitter and BunnyCollection.bunnyDisposedEmitter, but that would get
