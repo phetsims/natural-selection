@@ -116,8 +116,6 @@ class PopulationGraphNode extends Node {
       dataProbeNode
     ];
 
-    super( options );
-
     // center x-axis control under the graph
     generationScrollControl.boundsProperty.link( () => {
       generationScrollControl.centerX = backgroundNode.x + ( plotWidth / 2 );
@@ -129,6 +127,8 @@ class PopulationGraphNode extends Node {
       yAxisLabelNode.right = yZoomControl.right + ZOOM_CONTROL_X_OFFSET - Y_AXIS_LABEL_OFFSET;
       yAxisLabelNode.centerY = backgroundNode.y + ( plotHeight / 2 );
     } );
+
+    super( options );
 
     // @private
     this.dataProbeNode = dataProbeNode;
