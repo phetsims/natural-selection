@@ -97,15 +97,15 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     } );
 
     // A row for each trait
-    const furRow = new Row( genePool.furGene, naturalSelectionStrings.fur, NaturalSelectionColors.FUR,
+    const furRow = new Row( genePool.furGene, NaturalSelectionColors.FUR,
       whiteFurImage, brownFurImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
         tandem: options.tandem.createTandem( 'furRow' )
       } );
-    const earsRow = new Row( genePool.earsGene, naturalSelectionStrings.ears, NaturalSelectionColors.EARS,
+    const earsRow = new Row( genePool.earsGene, NaturalSelectionColors.EARS,
       straightEarsImage, floppyEarsImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
         tandem: options.tandem.createTandem( 'earsRow' )
       } );
-    const teethRow = new Row( genePool.teethGene, naturalSelectionStrings.teeth, NaturalSelectionColors.TEETH,
+    const teethRow = new Row( genePool.teethGene, NaturalSelectionColors.TEETH,
       shortTeethImage, longTeethImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
         tandem: options.tandem.createTandem( 'teethRow' )
       } );
@@ -197,7 +197,6 @@ class Row extends HBox {
   //TODO use config parameter here?
   /**
    * @param {Gene} gene
-   * @param {string} traitName
    * @param {Color|string} traitColor
    * @param {HTMLImageElement} normalAlleleImage
    * @param {HTMLImageElement} mutantAlleleImage
@@ -206,12 +205,11 @@ class Row extends HBox {
    * @param {AlignGroup} buttonColumnsAlignGroup - sets uniform width for columns that contain buttons
    * @param {Object} [options]
    */
-  constructor( gene, traitName, traitColor, normalAlleleImage, mutantAlleleImage,
+  constructor( gene, traitColor, normalAlleleImage, mutantAlleleImage,
                iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
                options ) {
 
     assert && assert( gene instanceof Gene, 'invalid Gene' );
-    assert && assert( typeof traitName === 'string', 'invalid traitName' );
     assert && assert( traitColor instanceof Color || typeof traitColor === 'string', 'invalid traitColor' );
     assert && assert( normalAlleleImage instanceof HTMLImageElement, 'invalid normalAlleleImage' );
     assert && assert( mutantAlleleImage instanceof HTMLImageElement, 'invalid mutantAlleleImage' );
@@ -229,7 +227,7 @@ class Row extends HBox {
     }, options );
 
     // label that indicates the trait name, to the left of the push buttons
-    const labelNode = new Text( traitName, {
+    const labelNode = new Text( gene.name, {
       font: NaturalSelectionConstants.ADD_MUTATION_TRAIT_FONT,
       maxWidth: 50 // determined empirically
     } );

@@ -66,6 +66,8 @@ class ProportionsGraphNode extends Node {
       spacing: COLUMNS_SPACING,
       children: [
         new AlignBox( new Text( '', columnLabelOptions ), { group: barColumnsAlignGroup } ),
+
+        //TODO get names from Gene.name
         new AlignBox( new Text( naturalSelectionStrings.fur, columnLabelOptions ), { group: barColumnsAlignGroup } ),
         new AlignBox( new Text( naturalSelectionStrings.ears, columnLabelOptions ), { group: barColumnsAlignGroup } ),
         new AlignBox( new Text( naturalSelectionStrings.teeth, columnLabelOptions ), { group: barColumnsAlignGroup } )
