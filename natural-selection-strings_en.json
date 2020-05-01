@@ -71,6 +71,9 @@
   "addMutations": {
     "value": "Add Mutations"
   },
+  "addMutation": {
+    "value": "Add Mutation"
+  },
   "alleles": {
     "value": "Alleles"
   },
