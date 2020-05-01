@@ -54,7 +54,7 @@ class AllelesPanel extends NaturalSelectionPanel {
       spacing: 25,
       children: [
 
-        // Alleles
+        // Alleles - plural since we're always showing at least 2 alleles
         new Text( naturalSelectionStrings.alleles, {
           font: NaturalSelectionConstants.TITLE_FONT,
           maxWidth: 125, // determined empirically
