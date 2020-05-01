@@ -69,7 +69,6 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     // All elements in the button columns (including column headings) have the same effective width.
     const buttonColumnsAlignGroup = new AlignGroup();
 
-    //TODO title should be singular 'Add Mutation' when there is only 1 mutation in the panel
     // title is text + icon
     const titleNode = new Text( naturalSelectionStrings.addMutations, {
       font: NaturalSelectionConstants.TITLE_FONT,
@@ -117,8 +116,10 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
     // Set the panel's title to singular or plural, depending on how many rows are visible.
     rows.boundsProperty.link( () => {
-      const numberOfVisibileRows = _.filter( rows.children, child => child.visible ).length;
-      titleNode.text = ( numberOfVisibileRows === 1 ) ? naturalSelectionStrings.addMutation : naturalSelectionStrings.addMutations;
+      const visibleCount = _.filter( rows.children, child => child.visible ).length;
+      titleNode.text = ( visibleCount === 1 ) ?
+                       naturalSelectionStrings.addMutation :
+                       naturalSelectionStrings.addMutations;
     } );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
