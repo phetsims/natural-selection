@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * TODO
+ * MutationAlertsNode manages the position and visibility of 'Mutation Coming' alerts.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -32,7 +32,6 @@ class MutationAlertsNode extends Node {
 
     // Fur
     const furAlert = new MutationComingNode( {
-      visible: false,
       cancelButtonListener: () => {
         genePool.furGene.dominantAlleleProperty.value = null;
         genePool.furGene.mutationComingProperty.value = false;
@@ -41,7 +40,6 @@ class MutationAlertsNode extends Node {
 
     // Ears
     const earsAlert = new MutationComingNode( {
-      visible: false,
       cancelButtonListener: () => {
         genePool.earsGene.dominantAlleleProperty.value = null;
         genePool.earsGene.mutationComingProperty.value = false;
@@ -50,7 +48,6 @@ class MutationAlertsNode extends Node {
 
     // Teeth
     const teethAlert = new MutationComingNode( {
-      visible: false,
       cancelButtonListener: () => {
         genePool.teethGene.dominantAlleleProperty.value = null;
         genePool.teethGene.mutationComingProperty.value = false;
@@ -62,29 +59,32 @@ class MutationAlertsNode extends Node {
 
     super( options );
 
+    // Position the alerts to the left of their associated rows.
+    // Rows in the Add Mutations panel can be hidden via PhET-iO.
+    // If that happens while an alert is visible, adjust the positions of the alerts.
+    addMutationsPanel.boundsProperty.link( () => {
+
+      // Fur
+      let globalPoint = addMutationsPanel.getFurLeftCenter().addXY( X_OFFSET, 0 );
+      furAlert.rightCenter = furAlert.globalToParentPoint( globalPoint );
+
+      // Ears
+      globalPoint = addMutationsPanel.getEarsLeftCenter().addXY( X_OFFSET, 0 );
+      earsAlert.rightCenter = earsAlert.globalToParentPoint( globalPoint );
+
+      // Teeth
+      globalPoint = addMutationsPanel.getTeethLeftCenter().addXY( X_OFFSET, 0 );
+      teethAlert.rightCenter = teethAlert.globalToParentPoint( globalPoint );
+    } );
+
+    // When a mutation is coming, make its associated alert visible.
     genePool.furGene.mutationComingProperty.link( mutationComing => {
-      if ( mutationComing ) {
-        const globalPoint = addMutationsPanel.getFurLeftCenter().addXY( X_OFFSET, 0 );
-        furAlert.rightCenter = furAlert.globalToParentPoint( globalPoint );
-        furAlert.visible = true;
-      }
       furAlert.visible = mutationComing;
     } );
-
     genePool.earsGene.mutationComingProperty.link( mutationComing => {
-      if ( mutationComing ) {
-        const globalPoint = addMutationsPanel.getEarsLeftCenter().addXY( X_OFFSET, 0 );
-        earsAlert.rightCenter = earsAlert.globalToParentPoint( globalPoint );
-
-      }
       earsAlert.visible = mutationComing;
     } );
-
     genePool.teethGene.mutationComingProperty.link( mutationComing => {
-      if ( mutationComing ) {
-        const globalPoint = addMutationsPanel.getTeethLeftCenter().addXY( X_OFFSET, 0 );
-        teethAlert.rightCenter = teethAlert.globalToParentPoint( globalPoint );
-      }
       teethAlert.visible = mutationComing;
     } );
   }
