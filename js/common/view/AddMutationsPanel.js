@@ -219,7 +219,7 @@ class Row extends HBox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // label that indicates the trait name, to the left of buttons
+    // label that indicates the trait name, to the left of the push buttons
     const labelNode = new Text( traitName, {
       font: NaturalSelectionConstants.ADD_MUTATION_TRAIT_FONT,
       maxWidth: 50 // determined empirically
@@ -229,34 +229,18 @@ class Row extends HBox {
       xAlign: LABEL_COLUMN_X_ALIGN
     } );
 
-    // dominant push button
-    const dominantButton = new RectangularPushButton( {
-      baseColor: NaturalSelectionColors.ADD_MUTATION_BUTTONS,
-      cornerRadius: BUTTON_CORNER_RADIUS,
-      content: new AlignBox( new Image( mutantAlleleImage, {
-        scale: BUTTON_ICON_SCALE
-      } ), { group: iconAlignGroup } ),
-      tandem: options.tandem.createTandem( 'dominantButton' ),
-      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
-    } );
-    const dominantButtonWrapper = new AlignBox( dominantButton, {
-      group: buttonColumnsAlignGroup,
-      xAlign: BUTTON_COLUMNS_X_ALIGN
+    // dominant push button, makes the mutant allele dominant
+    const dominantButton = new MutationButton( mutantAlleleImage, iconAlignGroup, {
+      listener: () => {
+        gene.dominantAlleleProperty.value = gene.mutantAllele;
+      }
     } );
 
-    // recessive push button
-    const recessiveButton = new RectangularPushButton( {
-      baseColor: NaturalSelectionColors.ADD_MUTATION_BUTTONS,
-      cornerRadius: BUTTON_CORNER_RADIUS,
-      content: new AlignBox( new Image( mutantAlleleImage, {
-        scale: BUTTON_ICON_SCALE
-      } ), { group: iconAlignGroup } ),
-      tandem: options.tandem.createTandem( 'recessiveButton' ),
-      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
-    } );
-    const recessiveButtonWrapper = new AlignBox( recessiveButton, {
-      group: buttonColumnsAlignGroup,
-      xAlign: BUTTON_COLUMNS_X_ALIGN
+    // recessive push button, makes the mutant allele recessive
+    const recessiveButton = new MutationButton( mutantAlleleImage, iconAlignGroup, {
+      listener: () => {
+        gene.dominantAlleleProperty.value = gene.normalAllele;
+      }
     } );
 
     // icon for the dominant allele
@@ -278,11 +262,7 @@ class Row extends HBox {
         } )
       ]
     } );
-    const dominantAlleleWrapper = new AlignBox( dominantAlleleNode, {
-      group: buttonColumnsAlignGroup,
-      xAlign: BUTTON_COLUMNS_X_ALIGN
-    } );
-    
+
     // icon for the recessive allele
     const recessiveAlleleIcon = new Image( mutantAlleleImage, {
       scale: BUTTON_ICON_SCALE
@@ -302,19 +282,25 @@ class Row extends HBox {
         } )
       ]
     } );
-    const recessiveAlleleWrapper = new AlignBox( recessiveAlleleNode, {
+
+    const alignBoxOptions = {
       group: buttonColumnsAlignGroup,
       xAlign: BUTTON_COLUMNS_X_ALIGN
-    } );
+    };
 
     assert && assert( !options.children, 'Row sets children' );
     options.children = [
       labelNodeWrapper,
       new Node( {
-        children: [ dominantAlleleWrapper, dominantButtonWrapper ]
+        children: [
+          new AlignBox( dominantAlleleNode, alignBoxOptions ),
+          new AlignBox( dominantButton, alignBoxOptions ) ]
       } ),
       new Node( {
-        children: [ recessiveAlleleWrapper, recessiveButtonWrapper ]
+        children: [
+          new AlignBox( recessiveAlleleNode, alignBoxOptions ),
+          new AlignBox( recessiveButton, alignBoxOptions )
+        ]
       } )
     ];
 
@@ -326,6 +312,10 @@ class Row extends HBox {
       dominantAlleleNode.visible = recessiveAlleleNode.visible = ( dominantAllele !== null );
 
       if ( dominantAllele ) {
+
+        // signal that a mutation is coming in the next generation
+        gene.mutationComingProperty.value = true;
+
         if ( dominantAllele === gene.normalAllele ) {
           dominantAlleleIcon.image = normalAlleleImage;
           recessiveAlleleIcon.image = mutantAlleleImage;
@@ -340,26 +330,39 @@ class Row extends HBox {
         }
       }
     } );
+  }
+}
 
-    // When the dominant button is pressed...
-    dominantButton.addListener( () => {
+/**
+ * MutationButton is a push button used to apply a mutation.
+ */
+class MutationButton extends RectangularPushButton {
 
-      // make the mutation dominant and the non-mutation recessive
-      gene.dominantAlleleProperty.value = gene.mutantAllele;
+  /**
+   * @param {HTMLImageElement} mutantAlleleImage
+   * @param {AlignGroup} iconAlignGroup
+   * @param options
+   */
+  constructor( mutantAlleleImage, iconAlignGroup, options ) {
 
-      // signal that a mutation is coming in the next generation
-      gene.mutationComingProperty.value = true;
+    assert && assert( mutantAlleleImage instanceof HTMLImageElement, 'invalid mutantAlleleImage' );
+    assert && assert( iconAlignGroup instanceof AlignGroup, 'invalid iconAlignGroup' );
+
+    options = merge( {
+      baseColor: NaturalSelectionColors.ADD_MUTATION_BUTTONS,
+      cornerRadius: BUTTON_CORNER_RADIUS,
+      tandem: Tandem.REQUIRED,
+      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
+    }, options );
+
+    const imageNode = new Image( mutantAlleleImage, {
+      scale: BUTTON_ICON_SCALE
     } );
 
-    // When the recessive button is pressed...
-    recessiveButton.addListener( () => {
+    assert && assert( !options.content, 'MutationButton sets content' );
+    options.content = new AlignBox( imageNode, { group: iconAlignGroup } );
 
-      // make the mutation dominant and the non-mutation recessive
-      gene.dominantAlleleProperty.value = gene.normalAllele;
-
-      // signal that a mutation is coming in the next generation
-      gene.mutationComingProperty.value = true;
-    } );
+    super( options );
   }
 }
 
