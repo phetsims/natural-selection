@@ -104,7 +104,7 @@ class BunnyCollection {
       bunny.isAliveProperty.lazyLink( isAliveListener );
 
       this.liveBunnies.push( bunny );
-      this.totalNumberOfBunniesProperty.value = this.bunnyGroup.length;
+      this.totalNumberOfBunniesProperty.value++;
       this.bunnyCreatedEmitter.emit( bunny );
     } );
 
@@ -113,7 +113,7 @@ class BunnyCollection {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
       this.liveBunnies.contains( bunny ) && this.liveBunnies.remove( bunny );
       this.deadBunnies.contains( bunny ) && this.deadBunnies.remove( bunny );
-      this.totalNumberOfBunniesProperty.value = this.bunnyGroup.length;
+      this.totalNumberOfBunniesProperty.value--;
       this.bunnyDisposedEmitter.emit( bunny );
     } );
 
