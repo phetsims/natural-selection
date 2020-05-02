@@ -19,12 +19,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import brownFurImage from '../../../images/brownFur_png.js';
-import floppyEarsImage from '../../../images/floppyEars_png.js';
-import longTeethImage from '../../../images/longTeeth_png.js';
-import shortTeethImage from '../../../images/shortTeeth_png.js';
-import straightEarsImage from '../../../images/straightEars_png.js';
-import whiteFurImage from '../../../images/whiteFur_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import Gene from '../model/Gene.js';
@@ -96,16 +90,13 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     } );
 
     // A row for each trait
-    const furRow = new Row( genePool.furGene, whiteFurImage, brownFurImage,
-      iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
+    const furRow = new Row( genePool.furGene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
         tandem: options.tandem.createTandem( 'furRow' )
       } );
-    const earsRow = new Row( genePool.earsGene, straightEarsImage, floppyEarsImage,
-      iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
+    const earsRow = new Row( genePool.earsGene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
         tandem: options.tandem.createTandem( 'earsRow' )
       } );
-    const teethRow = new Row( genePool.teethGene, shortTeethImage, longTeethImage,
-      iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
+    const teethRow = new Row( genePool.teethGene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
         tandem: options.tandem.createTandem( 'teethRow' )
       } );
 
@@ -193,23 +184,16 @@ class AddMutationsPanel extends NaturalSelectionPanel {
  */
 class Row extends HBox {
 
-  //TODO use config parameter here?
   /**
    * @param {Gene} gene
-   * @param {HTMLImageElement} normalAlleleImage
-   * @param {HTMLImageElement} mutantAlleleImage
    * @param {AlignGroup} iconsAlignGroup - sets uniform width and height for icons
    * @param {AlignGroup} labelColumnAlignGroup - sets uniform width for column that contains labels
    * @param {AlignGroup} buttonColumnsAlignGroup - sets uniform width for columns that contain buttons
    * @param {Object} [options]
    */
-  constructor( gene, normalAlleleImage, mutantAlleleImage,
-               iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
-               options ) {
+  constructor( gene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, options ) {
 
     assert && assert( gene instanceof Gene, 'invalid Gene' );
-    assert && assert( normalAlleleImage instanceof HTMLImageElement, 'invalid normalAlleleImage' );
-    assert && assert( mutantAlleleImage instanceof HTMLImageElement, 'invalid mutantAlleleImage' );
     assert && assert( iconsAlignGroup instanceof AlignGroup, 'invalid iconsAlignGroup' );
     assert && assert( labelColumnAlignGroup instanceof AlignGroup, 'invalid labelColumnAlignGroup' );
     assert && assert( buttonColumnsAlignGroup instanceof AlignGroup, 'invalid buttonColumnsAlignGroup' );
@@ -234,7 +218,7 @@ class Row extends HBox {
     } );
 
     // dominant push button, makes the mutant allele dominant
-    const dominantButton = new MutationButton( mutantAlleleImage, iconsAlignGroup, {
+    const dominantButton = new MutationButton( gene.mutantAllele.image, iconsAlignGroup, {
       listener: () => {
         gene.dominantAlleleProperty.value = gene.mutantAllele;
       },
@@ -242,7 +226,7 @@ class Row extends HBox {
     } );
 
     // recessive push button, makes the mutant allele recessive
-    const recessiveButton = new MutationButton( mutantAlleleImage, iconsAlignGroup, {
+    const recessiveButton = new MutationButton( gene.mutantAllele.image, iconsAlignGroup, {
       listener: () => {
         gene.dominantAlleleProperty.value = gene.normalAllele;
       },
@@ -256,10 +240,10 @@ class Row extends HBox {
     };
 
     // icon for the dominant allele
-    const dominantAlleleIcon = new AlleleIcon( mutantAlleleImage, iconsAlignGroup, alleleIconOptions );
+    const dominantAlleleIcon = new AlleleIcon( gene.normalAllele.image, iconsAlignGroup, alleleIconOptions );
 
     // icon for the recessive allele
-    const recessiveAlleleIcon = new AlleleIcon( mutantAlleleImage, iconsAlignGroup, alleleIconOptions );
+    const recessiveAlleleIcon = new AlleleIcon( gene.normalAllele.image, iconsAlignGroup, alleleIconOptions );
 
     const alignBoxOptions = {
       group: buttonColumnsAlignGroup,
@@ -301,11 +285,11 @@ class Row extends HBox {
         const mutationIsDominant = ( dominantAllele === gene.mutantAllele );
 
         // Adjust the dominant icon
-        dominantAlleleIcon.image = mutationIsDominant ? mutantAlleleImage : normalAlleleImage;
+        dominantAlleleIcon.image = mutationIsDominant ? gene.mutantAllele.image : gene.normalAllele.image;
         dominantAlleleIcon.lineDash = mutationIsDominant ? MUTATANT_ALLELE_LINE_DASH : NORMAL_ALLELE_LINE_DASH;
 
         // Adjust the recessive icon
-        recessiveAlleleIcon.image = mutationIsDominant ? normalAlleleImage : mutantAlleleImage;
+        recessiveAlleleIcon.image = mutationIsDominant ? gene.normalAllele.image : gene.mutantAllele.image;
         recessiveAlleleIcon.lineDash = mutationIsDominant ? NORMAL_ALLELE_LINE_DASH : MUTATANT_ALLELE_LINE_DASH;
       }
     } );

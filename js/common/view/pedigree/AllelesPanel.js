@@ -19,12 +19,6 @@ import Text from '../../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import Checkbox from '../../../../../sun/js/Checkbox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
-import brownFurImage from '../../../../images/brownFur_png.js';
-import floppyEarsImage from '../../../../images/floppyEars_png.js';
-import longTeethImage from '../../../../images/longTeeth_png.js';
-import shortTeethImage from '../../../../images/shortTeeth_png.js';
-import straightEarsImage from '../../../../images/straightEars_png.js';
-import whiteFurImage from '../../../../images/whiteFur_png.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
@@ -63,34 +57,19 @@ class AllelesPanel extends NaturalSelectionPanel {
         } ),
 
         // Fur
-        new Row(
-          pedigreeModel.genePool.furGene,
-          whiteFurImage, brownFurImage,
-          pedigreeModel.furAllelesVisibleProperty,
-          alleleAlignGroup, {
-            tandem: options.tandem.createTandem( 'furRow' )
-          }
-        ),
+        new Row( pedigreeModel.genePool.furGene, pedigreeModel.furAllelesVisibleProperty, alleleAlignGroup, {
+          tandem: options.tandem.createTandem( 'furRow' )
+        } ),
 
         // Ears
-        new Row(
-          pedigreeModel.genePool.earsGene,
-          straightEarsImage, floppyEarsImage,
-          pedigreeModel.earsAllelesVisibleProperty,
-          alleleAlignGroup, {
-            tandem: options.tandem.createTandem( 'earsRow' )
-          }
-        ),
+        new Row( pedigreeModel.genePool.earsGene, pedigreeModel.earsAllelesVisibleProperty, alleleAlignGroup, {
+          tandem: options.tandem.createTandem( 'earsRow' )
+        } ),
 
         // Teeth
-        new Row(
-          pedigreeModel.genePool.teethGene,
-          shortTeethImage, longTeethImage,
-          pedigreeModel.teethAllelesVisibleProperty,
-          alleleAlignGroup, {
-            tandem: options.tandem.createTandem( 'teethRow' )
-          }
-        )
+        new Row( pedigreeModel.genePool.teethGene, pedigreeModel.teethAllelesVisibleProperty, alleleAlignGroup, {
+          tandem: options.tandem.createTandem( 'teethRow' )
+        } )
       ]
     } ) );
 
@@ -117,17 +96,13 @@ class Row extends VBox {
 
   /**
    * @param {Gene} gene
-   * @param {HTMLImageElement} normalAlleleImage
-   * @param {HTMLImageElement} mutantAlleleImage
    * @param {Property.<boolean>} visibleProperty
    * @param {AlignGroup} alignGroup
    * @param {Object} [options]
    */
-  constructor( gene, normalAlleleImage, mutantAlleleImage, visibleProperty, alignGroup, options ) {
+  constructor( gene, visibleProperty, alignGroup, options ) {
 
     assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && assert( normalAlleleImage instanceof HTMLImageElement, 'invalid normalAlleleImage' );
-    assert && assert( mutantAlleleImage instanceof HTMLImageElement, 'invalid mutantAlleleImage' );
     assert && assert( visibleProperty instanceof Property, 'invalid visibleProperty' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
@@ -155,10 +130,10 @@ class Row extends VBox {
     );
 
     // Dominant allele
-    const dominantAlleleNode = new AlleleNode( gene.dominantSymbol, normalAlleleImage );
+    const dominantAlleleNode = new AlleleNode( gene.dominantSymbol, gene.normalAllele.image );
 
     // Recessive allele
-    const recessiveAlleleNode = new AlleleNode( gene.recessiveSymbol, mutantAlleleImage );
+    const recessiveAlleleNode = new AlleleNode( gene.recessiveSymbol, gene.mutantAllele.image );
 
     const alignBoxOptions = {
       group: alignGroup,
@@ -204,8 +179,8 @@ class Row extends VBox {
 
         // Show the correct allele icons for dominant vs recessive
         const mutantIsDominant = ( dominantAllele === gene.mutantAllele );
-        dominantAlleleNode.image = mutantIsDominant ? mutantAlleleImage : normalAlleleImage;
-        recessiveAlleleNode.image = mutantIsDominant ? normalAlleleImage : mutantAlleleImage;
+        dominantAlleleNode.image = mutantIsDominant ? gene.mutantAllele.image : gene.normalAllele.image;
+        recessiveAlleleNode.image = mutantIsDominant ? gene.normalAllele.image : gene.mutantAllele.image;
       }
     } );
   }

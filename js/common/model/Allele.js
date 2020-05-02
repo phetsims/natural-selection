@@ -17,11 +17,13 @@ class Allele extends PhetioObject {
 
   /**
    * @param {string} name - name of the allele
+   * @param {HTMLImageElement} image - image used to represent the allele in the UI
    * @param {Object} [options]
    */
-  constructor( name, options ) {
+  constructor( name, image, options ) {
 
     assert && assert( typeof name === 'string', 'invalid name' );
+    assert && assert( image instanceof HTMLImageElement, 'invalid image' );
 
     options = merge( {
 
@@ -34,6 +36,7 @@ class Allele extends PhetioObject {
 
     // @public (read-only)
     this.name = name;
+    this.image = image;
   }
 
   /**
