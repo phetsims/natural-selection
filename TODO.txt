@@ -13,7 +13,7 @@ FEATURE MILESTONES
 - [ ] Intro screen
 
 FEATURES
-move color and images into Gene
+get rid of some submodels, move some Properties into view?
 add counts to EnvironmentModel
 add DerivedProperty recessiveAlleleProperty to Gene?
 
