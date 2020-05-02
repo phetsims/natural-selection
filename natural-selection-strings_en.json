@@ -59,6 +59,9 @@
   "environmentalFactors": {
     "value": "Environmental Factors"
   },
+  "environmentalFactor": {
+    "value": "Environmental Factor"
+  },
   "wolves": {
     "value": "Wolves"
   },
@@ -70,6 +73,9 @@
   },
   "addMutations": {
     "value": "Add Mutations"
+  },
+  "addMutation": {
+    "value": "Add Mutation"
   },
   "alleles": {
     "value": "Alleles"

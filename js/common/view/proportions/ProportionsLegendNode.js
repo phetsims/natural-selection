@@ -44,6 +44,7 @@ class ProportionsLegendNode extends VBox {
     assert && assert( !options.children, 'ProportionsLegendNode sets children' );
     options.children = [
 
+      //TODO get colors and strings from Genes
       // Fur
       new TraitLegendNode( NaturalSelectionColors.FUR,
         naturalSelectionStrings.whiteFur, 'whiteFurLegendNode',

@@ -8,6 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../../axon/js/Property.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AlignBox from '../../../../../scenery/js/nodes/AlignBox.js';
 import AlignGroup from '../../../../../scenery/js/nodes/AlignGroup.js';
@@ -17,16 +18,10 @@ import Image from '../../../../../scenery/js/nodes/Image.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import Checkbox from '../../../../../sun/js/Checkbox.js';
-import SunConstants from '../../../../../sun/js/SunConstants.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
-import brownFurImage from '../../../../images/brownFur_png.js';
-import floppyEarsImage from '../../../../images/floppyEars_png.js';
-import longTeethImage from '../../../../images/longTeeth_png.js';
-import shortTeethImage from '../../../../images/shortTeeth_png.js';
-import straightEarsImage from '../../../../images/straightEars_png.js';
-import whiteFurImage from '../../../../images/whiteFur_png.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import Gene from '../../model/Gene.js';
 import PedigreeModel from '../../model/PedigreeModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
@@ -54,42 +49,27 @@ class AllelesPanel extends NaturalSelectionPanel {
       spacing: 25,
       children: [
 
-        // Alleles
+        // Alleles - title is plural, since we're always showing at least 2 alleles
         new Text( naturalSelectionStrings.alleles, {
           font: NaturalSelectionConstants.TITLE_FONT,
           maxWidth: 125, // determined empirically
-          tandem: options.tandem.createTandem( 'title' )
+          tandem: options.tandem.createTandem( 'titleNode' )
         } ),
 
         // Fur
-        new Row(
-          naturalSelectionStrings.fur, naturalSelectionStrings.furDominant, naturalSelectionStrings.furRecessive,
-          brownFurImage, whiteFurImage,
-          pedigreeModel.furAllelesVisibleProperty, pedigreeModel.furMutationExistsProperty,
-          alleleAlignGroup, {
-            tandem: options.tandem.createTandem( 'furRow' )
-          }
-        ),
+        new Row( pedigreeModel.genePool.furGene, pedigreeModel.furAllelesVisibleProperty, alleleAlignGroup, {
+          tandem: options.tandem.createTandem( 'furRow' )
+        } ),
 
         // Ears
-        new Row(
-          naturalSelectionStrings.ears, naturalSelectionStrings.earsDominant, naturalSelectionStrings.earsRecessive,
-          straightEarsImage, floppyEarsImage,
-          pedigreeModel.earsAllelesVisibleProperty, pedigreeModel.earsMutationExistsProperty,
-          alleleAlignGroup, {
-            tandem: options.tandem.createTandem( 'earsRow' )
-          }
-        ),
+        new Row( pedigreeModel.genePool.earsGene, pedigreeModel.earsAllelesVisibleProperty, alleleAlignGroup, {
+          tandem: options.tandem.createTandem( 'earsRow' )
+        } ),
 
         // Teeth
-        new Row(
-          naturalSelectionStrings.teeth, naturalSelectionStrings.teethDominant, naturalSelectionStrings.teethRecessive,
-          longTeethImage, shortTeethImage,
-          pedigreeModel.teethAllelesVisibleProperty, pedigreeModel.teethMutationExistsProperty,
-          alleleAlignGroup, {
-            tandem: options.tandem.createTandem( 'teethRow' )
-          }
-        )
+        new Row( pedigreeModel.genePool.teethGene, pedigreeModel.teethAllelesVisibleProperty, alleleAlignGroup, {
+          tandem: options.tandem.createTandem( 'teethRow' )
+        } )
       ]
     } ) );
 
@@ -115,18 +95,16 @@ class AllelesPanel extends NaturalSelectionPanel {
 class Row extends VBox {
 
   /**
-   * @param {string} labelString
-   * @param {string} dominantString
-   * @param {string} recessiveString
-   * @param {HTMLImageElement} mutantIcon
-   * @param {HTMLImageElement} normalIcon
+   * @param {Gene} gene
    * @param {Property.<boolean>} visibleProperty
-   * @param {Property.<boolean>} enabledProperty
    * @param {AlignGroup} alignGroup
    * @param {Object} [options]
    */
-  constructor( labelString, dominantString, recessiveString, mutantIcon, normalIcon,
-               visibleProperty, enabledProperty, alignGroup, options ) {
+  constructor( gene, visibleProperty, alignGroup, options ) {
+
+    assert && assert( gene instanceof Gene, 'invalid gene' );
+    assert && assert( visibleProperty instanceof Property, 'invalid visibleProperty' );
+    assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
     options = merge( {
 
@@ -139,56 +117,40 @@ class Row extends VBox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const labelNode = new Text( labelString, {
+    const labelNode = new Text( gene.name, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 100 // determined empirically
     } );
+
     const checkbox = new Checkbox( labelNode, visibleProperty,
       merge( {
-        tandem: options.tandem.createTandem( 'checkbox' )
+        tandem: options.tandem.createTandem( 'checkbox' ),
+        phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
       }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
     );
 
-    // common options
-    const textOptions = {
-      font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 12 // determined empirically
-    };
-    const imageOptions = {
-      scale: 0.5 // determined empirically
-    };
+    // Dominant allele
+    const dominantAlleleNode = new AlleleNode( gene.dominantSymbol, gene.normalAllele.image );
+
+    // Recessive allele
+    const recessiveAlleleNode = new AlleleNode( gene.recessiveSymbol, gene.mutantAllele.image );
+
     const alignBoxOptions = {
       group: alignGroup,
       xAlign: 'left'
     };
-    const textImageSpacing = 6;
 
-    // mutant allele abbreviation and icon
-    const mutantText = new Text( dominantString, textOptions );
-    const mutantImage = new Image( mutantIcon, imageOptions );
-    const mutantHBox = new HBox( {
-      children: [ mutantText, mutantImage ],
-      spacing: textImageSpacing
-    } );
-    const mutantAlignBox = new AlignBox( mutantHBox, alignBoxOptions );
-
-    // Normal allele abbreviation and icon
-    const normalText = new Text( recessiveString, textOptions );
-    const normalImage = new Image( normalIcon, imageOptions );
-    const normalHBox = new HBox( {
-      children: [ normalText, normalImage ],
-      spacing: textImageSpacing
-    } );
-    const normalAlignBox = new AlignBox( normalHBox, alignBoxOptions );
-
-    // Indent the abbreviations and icons
+    // Dominant allele on the left, recessive on the right, to match 'Add Mutations' panel
     const hBox = new HBox( {
       spacing: 0,
       children: [
-        new HStrut( 8 ),
+        new HStrut( 8 ), // indent
         new HBox( {
           spacing: 12,
-          children: [ mutantAlignBox, normalAlignBox ]
+          children: [
+            new AlignBox( dominantAlleleNode, alignBoxOptions ),
+            new AlignBox( recessiveAlleleNode, alignBoxOptions )
+          ]
         } )
       ]
     } );
@@ -198,16 +160,28 @@ class Row extends VBox {
 
     super( options );
 
-    enabledProperty.link( enabled => {
+    gene.dominantAlleleProperty.link( dominantAllele => {
 
-      // Disable this row
-      this.opacity = enabled ? 1 : SunConstants.DISABLED_OPACITY;
-      checkbox.pickable = enabled;
+      const hasMutation = !!dominantAllele;
 
-      // don't show allele abbreviation and icon when disabled
-      hBox.visible = enabled;
+      // Disable the checkbox when there is no mutation
+      checkbox.enabled = hasMutation;
 
-      //TODO when enabled, set order of icons so that dominant is on the left
+      // Don't show allele abbreviation and icon when there is no mutation
+      hBox.visible = hasMutation;
+
+      // Corresponding alleles should not be visible when the row is disabled.
+      if ( !hasMutation ) {
+        visibleProperty.value = false;
+      }
+
+      if ( dominantAllele ) {
+
+        // Show the correct allele icons for dominant vs recessive
+        const mutantIsDominant = ( dominantAllele === gene.mutantAllele );
+        dominantAlleleNode.image = mutantIsDominant ? gene.mutantAllele.image : gene.normalAllele.image;
+        recessiveAlleleNode.image = mutantIsDominant ? gene.normalAllele.image : gene.mutantAllele.image;
+      }
     } );
   }
 
@@ -217,6 +191,53 @@ class Row extends VBox {
    */
   dispose() {
     assert && assert( false, 'Row does not support dispose' );
+  }
+}
+
+/**
+ * AlleleNode displays the symbol and icon for an allele.
+ */
+class AlleleNode extends HBox {
+
+  /**
+   * @param {string} symbol - the symbol used for the allele
+   * @param {HTMLImageElement} image
+   * @param {Object} [options]
+   */
+  constructor( symbol, image, options ) {
+
+    assert && assert( typeof symbol === 'string', 'invalid symbol' );
+    assert && assert( image instanceof HTMLImageElement, 'invalid image' );
+
+    options = merge( {
+      spacing: 6
+    }, options );
+
+    const textNode = new Text( symbol, {
+      font: NaturalSelectionConstants.CHECKBOX_FONT,
+      maxWidth: 12 // determined empirically
+    } );
+
+    const imageNode = new Image( image, {
+      scale: 0.5 // determined empirically
+    } );
+
+    assert && assert( !options.children, 'AlleleNode sets children' );
+    options.children = [ textNode, imageNode ];
+
+    super( options );
+
+    // @private
+    this.imageNode = imageNode;
+  }
+
+  /**
+   * Sets the allele image for this node.
+   * @param {HTMLImageElement} value
+   */
+  set image( value ) {
+    assert && assert( value instanceof HTMLImageElement, 'invalid value' );
+    this.imageNode.image = value;
   }
 }
 

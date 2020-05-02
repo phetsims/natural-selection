@@ -12,15 +12,18 @@ import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import GenePool from './GenePool.js';
 
 class PedigreeModel extends PhetioObject {
 
   /**
+   * @param {GenePool} genePool
    * @param {Property.<Bunny|null>} selectedBunnyProperty
    * @param {Object} [options]
    */
-  constructor( selectedBunnyProperty, options ) {
+  constructor( genePool, selectedBunnyProperty, options ) {
 
+    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( selectedBunnyProperty instanceof Property, 'invalid selectedBunnyProperty' );
 
     options = merge( {
@@ -34,9 +37,10 @@ class PedigreeModel extends PhetioObject {
     super( options );
 
     // @public
+    this.genePool = genePool;
     this.selectedBunnyProperty = selectedBunnyProperty;
 
-    // @public visibility of the alleles for each gene in the Pedigree tree
+    // @public visibility of the alleles for each trait in the Pedigree tree
     this.furAllelesVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'furAllelesVisibleProperty' )
     } );
@@ -45,21 +49,6 @@ class PedigreeModel extends PhetioObject {
     } );
     this.teethAllelesVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'teethAllelesVisibleProperty' )
-    } );
-
-    // @public whether a mutation exists for each trait
-    // Checkboxes in the Alleles panel are disabled until a mutation exists.
-    this.furMutationExistsProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'furMutationExistsProperty' ),
-      phetioReadOnly: true
-    } );
-    this.earsMutationExistsProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'earsMutationExistsProperty' ),
-      phetioReadOnly: true
-    } );
-    this.teethMutationExistsProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'teethMutationExistsProperty' ),
-      phetioReadOnly: true
     } );
   }
 
@@ -70,10 +59,6 @@ class PedigreeModel extends PhetioObject {
     this.furAllelesVisibleProperty.reset();
     this.earsAllelesVisibleProperty.reset();
     this.teethAllelesVisibleProperty.reset();
-
-    this.furMutationExistsProperty.reset();
-    this.earsMutationExistsProperty.reset();
-    this.teethMutationExistsProperty.reset();
   }
 
   /**

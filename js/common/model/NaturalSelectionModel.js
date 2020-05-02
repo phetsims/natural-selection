@@ -57,7 +57,7 @@ class NaturalSelectionModel {
       } );
 
     // @public (read-only)
-    this.pedigreeModel = new PedigreeModel( this.environmentModel.selectedBunnyProperty, {
+    this.pedigreeModel = new PedigreeModel( this.environmentModel.genePool, this.environmentModel.selectedBunnyProperty, {
       tandem: tandem.createTandem( 'pedigreeModel' )
     } );
 

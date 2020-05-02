@@ -13,7 +13,9 @@ FEATURE MILESTONES
 - [ ] Intro screen
 
 FEATURES
+get rid of some submodels, move some Properties into view?
 add counts to EnvironmentModel
+add DerivedProperty recessiveAlleleProperty to Gene?
 
 PERFORMANCE
 merge Genotype fields into Bunny?

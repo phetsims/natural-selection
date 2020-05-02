@@ -11,8 +11,8 @@ import merge from '../../../../phet-core/js/merge.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import naturalSelection from '../../naturalSelection.js';
+import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import EnvironmentModel from '../model/EnvironmentModel.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import LimitedFoodCheckbox from './LimitedFoodCheckbox.js';
@@ -36,15 +36,14 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       tandem: Tandem.REQUIRED
     }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
-    const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-      children: [
+    const titleNode = new Text( naturalSelectionStrings.environmentalFactors, {
+      font: NaturalSelectionConstants.TITLE_FONT,
+      maxWidth: 175, // determined empirically,
+      tandem: options.tandem.createTandem( 'titleNode' )
+    } );
 
-        // title
-        new Text( naturalSelectionStrings.environmentalFactors, {
-          font: NaturalSelectionConstants.TITLE_FONT,
-          maxWidth: 175, // determined empirically,
-          tandem: options.tandem.createTandem( 'environmentalFactorsText' )
-        } ),
+    const checkboxes = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+      children: [
 
         // Wolves
         new WolvesCheckbox( environmentModel.wolves.enabledProperty, {
@@ -63,7 +62,19 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       ]
     } ) );
 
+    const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+      children: [ titleNode, checkboxes ]
+    } ) );
+
     super( content, options );
+
+    // Set the panel's title to singular or plural, depending on how many checkboxes are visible.
+    checkboxes.boundsProperty.link( () => {
+      const visibleCount = _.filter( checkboxes.children, child => child.visible ).length;
+      titleNode.text = ( visibleCount === 1 ) ?
+                       naturalSelectionStrings.environmentalFactor :
+                       naturalSelectionStrings.environmentalFactors;
+    } );
   }
 
   /**

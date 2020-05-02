@@ -17,15 +17,8 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
-import Color from '../../../../scenery/js/util/Color.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import brownFurImage from '../../../images/brownFur_png.js';
-import floppyEarsImage from '../../../images/floppyEars_png.js';
-import longTeethImage from '../../../images/longTeeth_png.js';
-import shortTeethImage from '../../../images/shortTeeth_png.js';
-import straightEarsImage from '../../../images/straightEars_png.js';
-import whiteFurImage from '../../../images/whiteFur_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import Gene from '../model/Gene.js';
@@ -41,6 +34,8 @@ const BUTTON_ICON_SCALE = 0.5;
 const LABEL_COLUMN_X_ALIGN = 'left';
 const BUTTON_COLUMNS_X_ALIGN = 'center';
 const BUTTON_CORNER_RADIUS = 4;
+const NORMAL_ALLELE_LINE_DASH = [];
+const MUTATANT_ALLELE_LINE_DASH = [ 3, 3 ];
 
 class AddMutationsPanel extends NaturalSelectionPanel {
 
@@ -58,16 +53,15 @@ class AddMutationsPanel extends NaturalSelectionPanel {
       tandem: Tandem.REQUIRED
     }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
-    // All button icons have the same effective width and height.
+    // All allele icons have the same effective width and height.
     const iconsAlignGroup = new AlignGroup();
 
-    // All elements in the label column have the same effective width.
+    // All elements in the label column (including the column heading) have the same effective width.
     const labelColumnAlignGroup = new AlignGroup( { matchVertical: false } );
 
     // All elements in the button columns (including column headings) have the same effective width.
     const buttonColumnsAlignGroup = new AlignGroup();
 
-    //TODO title should be singular 'Add Mutation' when there is only 1 mutation in the panel
     // title is text + icon
     const titleNode = new Text( naturalSelectionStrings.addMutations, {
       font: NaturalSelectionConstants.TITLE_FONT,
@@ -96,22 +90,27 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     } );
 
     // A row for each trait
-    const furRow = new Row( genePool.furGene, naturalSelectionStrings.fur, NaturalSelectionColors.FUR,
-      brownFurImage, whiteFurImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
+    const furRow = new Row( genePool.furGene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
         tandem: options.tandem.createTandem( 'furRow' )
       } );
-    const earsRow = new Row( genePool.earsGene, naturalSelectionStrings.ears, NaturalSelectionColors.EARS,
-      floppyEarsImage, straightEarsImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
+    const earsRow = new Row( genePool.earsGene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
         tandem: options.tandem.createTandem( 'earsRow' )
       } );
-    const teethRow = new Row( genePool.teethGene, naturalSelectionStrings.teeth, NaturalSelectionColors.TEETH,
-      longTeethImage, shortTeethImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
+    const teethRow = new Row( genePool.teethGene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
         tandem: options.tandem.createTandem( 'teethRow' )
       } );
 
     const rows = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: [ furRow, earsRow, teethRow ]
     } ) );
+
+    // Set the panel's title to singular or plural, depending on how many rows are visible.
+    rows.boundsProperty.link( () => {
+      const visibleCount = _.filter( rows.children, child => child.visible ).length;
+      titleNode.text = ( visibleCount === 1 ) ?
+                       naturalSelectionStrings.addMutation :
+                       naturalSelectionStrings.addMutations;
+    } );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       spacing: 2,
@@ -185,28 +184,17 @@ class AddMutationsPanel extends NaturalSelectionPanel {
  */
 class Row extends HBox {
 
-  //TODO use config parameter here?
   /**
    * @param {Gene} gene
-   * @param {string} traitName
-   * @param {Color|string} traitColor
-   * @param {HTMLImageElement} mutationIcon
-   * @param {HTMLImageElement} nonMutationIcon
-   * @param {AlignGroup} iconAlignGroup
-   * @param {AlignGroup} labelColumnAlignGroup
-   * @param {AlignGroup} buttonColumnsAlignGroup
+   * @param {AlignGroup} iconsAlignGroup - sets uniform width and height for icons
+   * @param {AlignGroup} labelColumnAlignGroup - sets uniform width for column that contains labels
+   * @param {AlignGroup} buttonColumnsAlignGroup - sets uniform width for columns that contain buttons
    * @param {Object} [options]
    */
-  constructor( gene, traitName, traitColor, mutationIcon, nonMutationIcon,
-               iconAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
-               options ) {
+  constructor( gene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, options ) {
 
     assert && assert( gene instanceof Gene, 'invalid Gene' );
-    assert && assert( typeof traitName === 'string', 'invalid traitName' );
-    assert && assert( traitColor instanceof Color || typeof traitColor === 'string', 'invalid traitColor' );
-    assert && assert( mutationIcon instanceof HTMLImageElement, 'invalid mutationIcon' );
-    assert && assert( nonMutationIcon instanceof HTMLImageElement, 'invalid nonMutationIcon' );
-    assert && assert( iconAlignGroup instanceof AlignGroup, 'invalid iconAlignGroup' );
+    assert && assert( iconsAlignGroup instanceof AlignGroup, 'invalid iconsAlignGroup' );
     assert && assert( labelColumnAlignGroup instanceof AlignGroup, 'invalid labelColumnAlignGroup' );
     assert && assert( buttonColumnsAlignGroup instanceof AlignGroup, 'invalid buttonColumnsAlignGroup' );
 
@@ -219,8 +207,8 @@ class Row extends HBox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // label that indicates the trait name, to the left of buttons
-    const labelNode = new Text( traitName, {
+    // label that indicates the trait name, to the left of the push buttons
+    const labelNode = new Text( gene.name, {
       font: NaturalSelectionConstants.ADD_MUTATION_TRAIT_FONT,
       maxWidth: 50 // determined empirically
     } );
@@ -229,112 +217,188 @@ class Row extends HBox {
       xAlign: LABEL_COLUMN_X_ALIGN
     } );
 
-    // dominant push button
-    const dominantButton = new RectangularPushButton( {
-      baseColor: NaturalSelectionColors.ADD_MUTATION_BUTTONS,
-      cornerRadius: BUTTON_CORNER_RADIUS,
-      content: new AlignBox( new Image( mutationIcon, {
-        scale: BUTTON_ICON_SCALE
-      } ), { group: iconAlignGroup } ),
-      tandem: options.tandem.createTandem( 'dominantButton' ),
-      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
-    } );
-    const dominantButtonWrapper = new AlignBox( dominantButton, {
-      group: buttonColumnsAlignGroup,
-      xAlign: BUTTON_COLUMNS_X_ALIGN
+    // dominant push button, makes the mutant allele dominant
+    const dominantButton = new MutationButton( gene.mutantAllele.image, iconsAlignGroup, {
+      listener: () => {
+        gene.dominantAlleleProperty.value = gene.mutantAllele;
+      },
+      tandem: options.tandem.createTandem( 'dominantButton' )
     } );
 
-    // recessive push button
-    const recessiveButton = new RectangularPushButton( {
-      baseColor: NaturalSelectionColors.ADD_MUTATION_BUTTONS,
-      cornerRadius: BUTTON_CORNER_RADIUS,
-      content: new AlignBox( new Image( mutationIcon, {
-        scale: BUTTON_ICON_SCALE
-      } ), { group: iconAlignGroup } ),
-      tandem: options.tandem.createTandem( 'recessiveButton' ),
-      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
-    } );
-    const recessiveButtonWrapper = new AlignBox( recessiveButton, {
-      group: buttonColumnsAlignGroup,
-      xAlign: BUTTON_COLUMNS_X_ALIGN
+    // recessive push button, makes the mutant allele recessive
+    const recessiveButton = new MutationButton( gene.mutantAllele.image, iconsAlignGroup, {
+      listener: () => {
+        gene.dominantAlleleProperty.value = gene.normalAllele;
+      },
+      tandem: options.tandem.createTandem( 'recessiveButton' )
     } );
 
-    // icon for the standard allele
-    const standardAlleleNode = new Node( {
-      children: [
-        new Rectangle( 0, 0, dominantButton.width, dominantButton.height, {
-          cornerRadius: BUTTON_CORNER_RADIUS,
-          stroke: traitColor,
-          lineWidth: 2
-        } ),
-        new AlignBox( new Image( nonMutationIcon, {
-          scale: BUTTON_ICON_SCALE
-        } ), {
-          group: iconAlignGroup,
-          centerX: dominantButton.width / 2,
-          centerY: dominantButton.height / 2
-        } )
-      ]
-    } );
-    const standardAlleleWrapper = new AlignBox( standardAlleleNode, {
+    const alleleIconOptions = {
+      stroke: gene.color,
+      width: dominantButton.width,
+      height: dominantButton.height
+    };
+
+    // icon for the dominant allele
+    const dominantAlleleIcon = new AlleleIcon( gene.normalAllele.image, iconsAlignGroup, alleleIconOptions );
+
+    // icon for the recessive allele
+    const recessiveAlleleIcon = new AlleleIcon( gene.normalAllele.image, iconsAlignGroup, alleleIconOptions );
+
+    const alignBoxOptions = {
       group: buttonColumnsAlignGroup,
       xAlign: BUTTON_COLUMNS_X_ALIGN
-    } );
-    
-    // icon for the mutant allele
-    const mutantAlleleNode = new Node( {
-      children: [
-        new Rectangle( 0, 0, dominantButton.width, dominantButton.height, {
-          cornerRadius: BUTTON_CORNER_RADIUS,
-          stroke: traitColor,
-          lineWidth: 2,
-          lineDash: [ 3, 3 ]
-        } ),
-        new AlignBox( new Image( mutationIcon, {
-          scale: BUTTON_ICON_SCALE
-        } ), {
-          group: iconAlignGroup,
-          centerX: dominantButton.width / 2,
-          centerY: dominantButton.height / 2
-        } )
-      ]
-    } );
-    const mutantAlleleWrapper = new AlignBox( mutantAlleleNode, {
-      group: buttonColumnsAlignGroup,
-      xAlign: BUTTON_COLUMNS_X_ALIGN
-    } );
+    };
 
     assert && assert( !options.children, 'Row sets children' );
-    options.children = [ labelNodeWrapper, dominantButtonWrapper, recessiveButtonWrapper ];
+    options.children = [
+      labelNodeWrapper,
+      new Node( {
+        children: [
+          new AlignBox( dominantAlleleIcon, alignBoxOptions ),
+          new AlignBox( dominantButton, alignBoxOptions ) ]
+      } ),
+      new Node( {
+        children: [
+          new AlignBox( recessiveAlleleIcon, alignBoxOptions ),
+          new AlignBox( recessiveButton, alignBoxOptions )
+        ]
+      } )
+    ];
 
     super( options );
 
     gene.dominantAlleleProperty.link( dominantAllele => {
-      dominantButton.visible = recessiveButton.visible = ( dominantAllele === null );
-      this.children = [ labelNodeWrapper, dominantButtonWrapper, recessiveButtonWrapper ];
-    } );
 
-    // When the dominant button is pressed...
-    dominantButton.addListener( () => {
+      const hasDominantAllele = !!dominantAllele;
 
-      // make the mutation dominant and the non-mutation recessive
-      gene.dominantAlleleProperty.value = gene.mutantAllele;
-      this.children = [ labelNodeWrapper, mutantAlleleWrapper, standardAlleleWrapper ];
+      // Show buttons or icons, depending on whether a selection has been made.
+      dominantButton.visible = recessiveButton.visible = !hasDominantAllele;
+      dominantAlleleIcon.visible = recessiveAlleleIcon.visible = hasDominantAllele;
 
       // signal that a mutation is coming in the next generation
-      gene.mutationComingProperty.value = true;
+      gene.mutationComingProperty.value = hasDominantAllele;
+
+      // If a selection has been made...
+      if ( hasDominantAllele ) {
+
+        const mutationIsDominant = ( dominantAllele === gene.mutantAllele );
+
+        // Adjust the dominant icon
+        dominantAlleleIcon.image = mutationIsDominant ? gene.mutantAllele.image : gene.normalAllele.image;
+        dominantAlleleIcon.lineDash = mutationIsDominant ? MUTATANT_ALLELE_LINE_DASH : NORMAL_ALLELE_LINE_DASH;
+
+        // Adjust the recessive icon
+        recessiveAlleleIcon.image = mutationIsDominant ? gene.normalAllele.image : gene.mutantAllele.image;
+        recessiveAlleleIcon.lineDash = mutationIsDominant ? NORMAL_ALLELE_LINE_DASH : MUTATANT_ALLELE_LINE_DASH;
+      }
     } );
 
-    // When the recessive button is pressed...
-    recessiveButton.addListener( () => {
-
-      // make the mutation dominant and the non-mutation recessive
-      gene.dominantAlleleProperty.value = gene.normalAllele;
-      this.children = [ labelNodeWrapper, standardAlleleWrapper, mutantAlleleWrapper ];
-
-      // signal that a mutation is coming in the next generation
-      gene.mutationComingProperty.value = true;
+    // If a Row is made invisible via PhET-iO while a mutation is scheduled, cancel the mutation.
+    this.visibleProperty.link( visible => {
+      if ( gene.mutationComingProperty.value ) {
+        gene.dominantAlleleProperty.value = null;
+      }
     } );
+  }
+}
+
+/**
+ * MutationButton is a push button used to apply a mutation.
+ */
+class MutationButton extends RectangularPushButton {
+
+  /**
+   * @param {HTMLImageElement} mutantAlleleImage - the image on the button
+   * @param {AlignGroup} iconsAlignGroup - sets uniform width and height for icons
+   * @param options
+   */
+  constructor( mutantAlleleImage, iconsAlignGroup, options ) {
+
+    assert && assert( mutantAlleleImage instanceof HTMLImageElement, 'invalid mutantAlleleImage' );
+    assert && assert( iconsAlignGroup instanceof AlignGroup, 'invalid iconsAlignGroup' );
+
+    options = merge( {
+      baseColor: NaturalSelectionColors.ADD_MUTATION_BUTTONS,
+      cornerRadius: BUTTON_CORNER_RADIUS,
+      tandem: Tandem.REQUIRED,
+      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
+    }, options );
+
+    const imageNode = new Image( mutantAlleleImage, {
+      scale: BUTTON_ICON_SCALE
+    } );
+
+    assert && assert( !options.content, 'MutationButton sets content' );
+    options.content = new AlignBox( imageNode, { group: iconsAlignGroup } );
+
+    super( options );
+  }
+}
+
+/**
+ * AlleleIcon shows an icon that represents an allele.
+ */
+class AlleleIcon extends Node {
+
+  /**
+   * @param image - the default image on the icon
+   * @param iconsAlignGroup - sets uniform width and height for icons
+   * @param {Object} [options]
+   */
+  constructor( image, iconsAlignGroup, options ) {
+
+    assert && assert( image instanceof HTMLImageElement, 'invalid image' );
+    assert && assert( iconsAlignGroup instanceof AlignGroup, 'invalid iconsAlignGroup' );
+
+    options = merge( {
+      width: 100,
+      height: 100,
+      stroke: 'black'
+    }, options );
+
+    const imageNode = new Image( image, {
+      scale: BUTTON_ICON_SCALE
+    } );
+
+    const outlineRectangle = new Rectangle( 0, 0, options.width, options.height, {
+      cornerRadius: BUTTON_CORNER_RADIUS,
+      stroke: options.stroke,
+      lineWidth: 2
+    } );
+
+    assert && assert( !options.children, 'AlleleIcon sets children' );
+    options.children = [
+      outlineRectangle,
+      new AlignBox( imageNode, {
+        group: iconsAlignGroup,
+        center: outlineRectangle.center
+      } )
+    ];
+
+    super( options );
+
+    // @private
+    this.imageNode = imageNode;
+    this.outlineRectangle = outlineRectangle;
+  }
+
+  /**
+   * Sets the image that appears on this icon.
+   * @param {HTMLImageElement} value
+   */
+  set image( value ) {
+    assert && assert( value instanceof HTMLImageElement, 'invalid value' );
+    this.imageNode.image = value;
+  }
+
+  /**
+   * Sets the lineDash for the icon's outline rectangle.
+   * @param {Array} value
+   */
+  set lineDash( value ) {
+    assert && assert( Array.isArray( value ), 'invalid value' );
+    this.outlineRectangle.lineDash = value;
   }
 }
 
