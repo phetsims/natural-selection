@@ -17,7 +17,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
-import Color from '../../../../scenery/js/util/Color.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import brownFurImage from '../../../images/brownFur_png.js';
@@ -97,16 +96,16 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     } );
 
     // A row for each trait
-    const furRow = new Row( genePool.furGene, NaturalSelectionColors.FUR,
-      whiteFurImage, brownFurImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
+    const furRow = new Row( genePool.furGene, whiteFurImage, brownFurImage,
+      iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
         tandem: options.tandem.createTandem( 'furRow' )
       } );
-    const earsRow = new Row( genePool.earsGene, NaturalSelectionColors.EARS,
-      straightEarsImage, floppyEarsImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
+    const earsRow = new Row( genePool.earsGene, straightEarsImage, floppyEarsImage,
+      iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
         tandem: options.tandem.createTandem( 'earsRow' )
       } );
-    const teethRow = new Row( genePool.teethGene, NaturalSelectionColors.TEETH,
-      shortTeethImage, longTeethImage, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
+    const teethRow = new Row( genePool.teethGene, shortTeethImage, longTeethImage,
+      iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
         tandem: options.tandem.createTandem( 'teethRow' )
       } );
 
@@ -197,7 +196,6 @@ class Row extends HBox {
   //TODO use config parameter here?
   /**
    * @param {Gene} gene
-   * @param {Color|string} traitColor
    * @param {HTMLImageElement} normalAlleleImage
    * @param {HTMLImageElement} mutantAlleleImage
    * @param {AlignGroup} iconsAlignGroup - sets uniform width and height for icons
@@ -205,12 +203,11 @@ class Row extends HBox {
    * @param {AlignGroup} buttonColumnsAlignGroup - sets uniform width for columns that contain buttons
    * @param {Object} [options]
    */
-  constructor( gene, traitColor, normalAlleleImage, mutantAlleleImage,
+  constructor( gene, normalAlleleImage, mutantAlleleImage,
                iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup,
                options ) {
 
     assert && assert( gene instanceof Gene, 'invalid Gene' );
-    assert && assert( traitColor instanceof Color || typeof traitColor === 'string', 'invalid traitColor' );
     assert && assert( normalAlleleImage instanceof HTMLImageElement, 'invalid normalAlleleImage' );
     assert && assert( mutantAlleleImage instanceof HTMLImageElement, 'invalid mutantAlleleImage' );
     assert && assert( iconsAlignGroup instanceof AlignGroup, 'invalid iconsAlignGroup' );
@@ -253,7 +250,7 @@ class Row extends HBox {
     } );
 
     const alleleIconOptions = {
-      traitColor: traitColor,
+      stroke: gene.color,
       width: dominantButton.width,
       height: dominantButton.height
     };
@@ -373,7 +370,7 @@ class AlleleIcon extends Node {
     options = merge( {
       width: 100,
       height: 100,
-      traitColor: 'black'
+      stroke: 'black'
     }, options );
 
     const imageNode = new Image( image, {
@@ -382,7 +379,7 @@ class AlleleIcon extends Node {
 
     const outlineRectangle = new Rectangle( 0, 0, options.width, options.height, {
       cornerRadius: BUTTON_CORNER_RADIUS,
-      stroke: options.traitColor,
+      stroke: options.stroke,
       lineWidth: 2
     } );
 

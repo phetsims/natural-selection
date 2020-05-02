@@ -15,6 +15,7 @@ FEATURE MILESTONES
 FEATURES
 move color and images into Gene
 add counts to EnvironmentModel
+add DerivedProperty recessiveAlleleProperty to Gene?
 
 PERFORMANCE
 merge Genotype fields into Bunny?

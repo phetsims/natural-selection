@@ -41,6 +41,7 @@ class PopulationPanel extends NaturalSelectionPanel {
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: [
 
+        //TODO get color from Gene
         // Total
         new PopulationLegendCheckbox( populationModel.totalVisibleProperty, naturalSelectionStrings.total, {
           color: NaturalSelectionColors.TOTAL_POPULATION,

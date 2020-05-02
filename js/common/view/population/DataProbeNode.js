@@ -95,6 +95,7 @@ class DataProbeNode extends Node {
     } );
 
     // NumberDisplay instances
+    //TODO get color from Gene
     const totalDisplay = createSolidNumberDisplay( dataProbe.totalPopulationProperty, NaturalSelectionColors.TOTAL_POPULATION );
     const whiteFurDisplay = createSolidNumberDisplay( dataProbe.whiteFurPopulationProperty, NaturalSelectionColors.FUR );
     const brownFurDisplay = createDashedNumberDisplay( dataProbe.brownFurPopulationProperty, NaturalSelectionColors.FUR );

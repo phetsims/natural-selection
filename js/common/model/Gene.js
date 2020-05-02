@@ -11,6 +11,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import merge from '../../../../phet-core/js/merge.js';
+import Color from '../../../../scenery/js/util/Color.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
@@ -27,15 +28,17 @@ class Gene extends PhetioObject {
    * @param {Allele} mutantAllele - the non-standard 'mutant' variant of the gene
    * @param {string} dominantSymbol - the symbol used to label the dominant allele
    * @param {string} recessiveSymbol - the symbol used to label the recessive allele
+   * @param {Color|string} color - the color used to color-code things associated with this gene
    * @param {Object} [options]
    */
-  constructor( name, normalAllele, mutantAllele, dominantSymbol, recessiveSymbol, options ) {
+  constructor( name, normalAllele, mutantAllele, dominantSymbol, recessiveSymbol, color, options ) {
 
     assert && assert( typeof name === 'string', 'invalid name' );
     assert && assert( normalAllele instanceof Allele, 'invalid normalAllele' );
     assert && assert( mutantAllele instanceof Allele, 'invalid mutantAllele' );
     assert && assert( typeof dominantSymbol === 'string', 'invalid dominantSymbol' );
     assert && assert( typeof recessiveSymbol === 'string', 'invalid recessiveSymbol' );
+    assert && assert( color instanceof Color || typeof color === 'string', 'invalid recessiveSymbol' );
 
     options = merge( {
 
@@ -50,10 +53,9 @@ class Gene extends PhetioObject {
     this.name = name;
     this.normalAllele = normalAllele;
     this.mutantAllele = mutantAllele;
-
-    // @public (read-only) symbols used to label the alleles
     this.dominantSymbol = dominantSymbol;
     this.recessiveSymbol = recessiveSymbol;
+    this.color = color;
 
     // @public {Allele|null} the dominate allele, null until the gene has mutated.  Until a mutation occurs, 
     // only the normal allele exists in the population, and the concepts of dominant and recessive are meaningless.
