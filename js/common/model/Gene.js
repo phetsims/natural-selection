@@ -28,7 +28,7 @@ class Gene extends PhetioObject {
    * @param {Allele} mutantAllele - the non-standard 'mutant' variant of the gene
    * @param {string} dominantSymbol - the symbol used to label the dominant allele
    * @param {string} recessiveSymbol - the symbol used to label the recessive allele
-   * @param {Color|string} color - the color used to color-code things associated with this gene
+   * @param {Color|string} color - the color used to color-code things associated with this gene in the UI
    * @param {Object} [options]
    */
   constructor( name, normalAllele, mutantAllele, dominantSymbol, recessiveSymbol, color, options ) {
