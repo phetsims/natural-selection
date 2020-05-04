@@ -130,6 +130,7 @@ class EnvironmentNode extends Node {
       press: () => {
         environmentModel.selectedBunnyProperty.value = null;
       },
+      pressCursor: 'default',
       tandem: options.tandem.createTandem( 'backgroundPressListener' )
     } ) );
 
