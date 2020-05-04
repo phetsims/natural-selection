@@ -16,7 +16,10 @@ import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import Allele from './Allele.js';
+import AlleleInstances from './AlleleInstances.js';
 import AlleleIO from './AlleleIO.js';
 import GeneIO from './GeneIO.js';
 
@@ -87,6 +90,45 @@ class Gene extends PhetioObject {
    */
   dispose() {
     throw new Error( 'dispose is not supported' );
+  }
+
+  /**
+   * Create a gene for fur.
+   * @param {Object} [options] - options for Gene constructor
+   * @returns {Gene}
+   */
+  static createFurGene( options ) {
+    return new Gene( naturalSelectionStrings.fur,
+      AlleleInstances.WHITE_FUR, AlleleInstances.BROWN_FUR,
+      naturalSelectionStrings.furDominant, naturalSelectionStrings.furRecessive,
+      NaturalSelectionColors.FUR,
+      options );
+  }
+
+  /**
+   * Create a gene for ears.
+   * @param {Object} [options] - options for Gene constructor
+   * @returns {Gene}
+   */
+  static createEarsGene( options ) {
+    return new Gene( naturalSelectionStrings.ears,
+      AlleleInstances.STRAIGHT_EARS, AlleleInstances.FLOPPY_EARS,
+      naturalSelectionStrings.earsDominant, naturalSelectionStrings.earsRecessive,
+      NaturalSelectionColors.EARS,
+      options );
+  }
+
+  /**
+   * Create a gene for teeth.
+   * @param {Object} [options] - options for Gene constructor
+   * @returns {Gene}
+   */
+  static createTeethGene( options ) {
+    return new Gene( naturalSelectionStrings.teeth,
+      AlleleInstances.SHORT_TEETH, AlleleInstances.LONG_TEETH,
+      naturalSelectionStrings.teethDominant, naturalSelectionStrings.teethRecessive,
+      NaturalSelectionColors.TEETH,
+      options );
   }
 }
 

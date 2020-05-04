@@ -9,9 +9,6 @@
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
-import NaturalSelectionColors from '../NaturalSelectionColors.js';
-import AlleleInstances from './AlleleInstances.js';
 import Gene from './Gene.js';
 
 class GenePool {
@@ -25,28 +22,19 @@ class GenePool {
     }, options );
 
     // @pubic (read-only)
-    this.furGene = new Gene( naturalSelectionStrings.fur,
-      AlleleInstances.WHITE_FUR, AlleleInstances.BROWN_FUR,
-      naturalSelectionStrings.furDominant, naturalSelectionStrings.furRecessive,
-      NaturalSelectionColors.FUR, {
-        tandem: options.tandem.createTandem( 'furGene' )
-      } );
+    this.furGene = Gene.createFurGene( {
+      tandem: options.tandem.createTandem( 'furGene' )
+    } );
 
     // @pubic (read-only)
-    this.earsGene = new Gene( naturalSelectionStrings.ears,
-      AlleleInstances.STRAIGHT_EARS, AlleleInstances.FLOPPY_EARS,
-      naturalSelectionStrings.earsDominant, naturalSelectionStrings.earsRecessive,
-      NaturalSelectionColors.EARS, {
-        tandem: options.tandem.createTandem( 'earsGene' )
-      } );
+    this.earsGene = Gene.createEarsGene( {
+      tandem: options.tandem.createTandem( 'earsGene' )
+    } );
 
     // @pubic (read-only)
-    this.teethGene = new Gene( naturalSelectionStrings.teeth,
-      AlleleInstances.SHORT_TEETH, AlleleInstances.LONG_TEETH,
-      naturalSelectionStrings.teethDominant, naturalSelectionStrings.teethRecessive,
-      NaturalSelectionColors.TEETH, {
-        tandem: options.tandem.createTandem( 'teethGene' )
-      } );
+    this.teethGene = Gene.createTeethGene( {
+      tandem: options.tandem.createTandem( 'teethGene' )
+    } );
   }
 
   /**
