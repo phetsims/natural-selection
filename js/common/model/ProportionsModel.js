@@ -14,16 +14,19 @@ import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import GenePool from './GenePool.js';
 
 class ProportionsModel extends PhetioObject {
 
   /**
+   * @param {GenePool} genePool
    * @param {Property.<number>} currentGenerationProperty
    * @param {Property.<boolean>} isPlayingProperty
    * @param {Object} [options]
    */
-  constructor( currentGenerationProperty, isPlayingProperty, options ) {
+  constructor( genePool, currentGenerationProperty, isPlayingProperty, options ) {
 
+    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( currentGenerationProperty instanceof Property, 'invalid currentGenerationProperty' );
     assert && assert( isPlayingProperty instanceof Property, 'invalid isPlayingProperty' );
 
@@ -38,6 +41,7 @@ class ProportionsModel extends PhetioObject {
     super( options );
 
     // @public
+    this.genePool = genePool;
     this.currentGenerationProperty = currentGenerationProperty;
 
     // @public

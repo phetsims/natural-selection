@@ -20,6 +20,7 @@ import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import DataProbe from './DataProbe.js';
+import GenePool from './GenePool.js';
 
 // constants
 
@@ -45,12 +46,14 @@ assert && assert( _.every( value => Utils.isInteger( value ) ), 'Y_TICK_SPACINGS
 class PopulationModel extends PhetioObject {
 
   /**
+   * @param {GenePool} genePool
    * @param {Property.<number>} generationsProperty
    * @param {Property.<boolean>} isPlayingProperty
    * @param {Object} [options]
    */
-  constructor( generationsProperty, isPlayingProperty, options ) {
+  constructor( genePool, generationsProperty, isPlayingProperty, options ) {
 
+    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( generationsProperty instanceof Property, 'invalid generationsProperty' );
     assert && assert( isPlayingProperty instanceof Property, 'invalid isPlayingProperty' );
 
@@ -65,6 +68,7 @@ class PopulationModel extends PhetioObject {
     super( options );
 
     // @public
+    this.genePool = genePool;
     this.generationsProperty = generationsProperty;
     this.isPlayingProperty = isPlayingProperty;
 

@@ -43,6 +43,7 @@ class NaturalSelectionModel {
 
     // @public (read-only)
     this.populationModel = new PopulationModel(
+      this.environmentModel.genePool,
       this.environmentModel.generationClock.generationsProperty,
       this.isPlayingProperty, {
         tandem: tandem.createTandem( 'populationModel' )
@@ -51,15 +52,18 @@ class NaturalSelectionModel {
 
     // @public (read-only)
     this.proportionsModel = new ProportionsModel(
+      this.environmentModel.genePool,
       this.environmentModel.generationClock.currentGenerationProperty,
       this.isPlayingProperty, {
         tandem: tandem.createTandem( 'proportionsModel' )
       } );
 
     // @public (read-only)
-    this.pedigreeModel = new PedigreeModel( this.environmentModel.genePool, this.environmentModel.selectedBunnyProperty, {
-      tandem: tandem.createTandem( 'pedigreeModel' )
-    } );
+    this.pedigreeModel = new PedigreeModel(
+      this.environmentModel.genePool,
+      this.environmentModel.selectedBunnyProperty, {
+        tandem: tandem.createTandem( 'pedigreeModel' )
+      } );
 
     // When the simulation state changes, adjust the model.
     this.simulationModeProperty.link( simulationMode => {

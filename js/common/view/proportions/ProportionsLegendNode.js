@@ -1,13 +1,14 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * ProportionsLegendNode is a legend item in the control panel for the Proportions graph.
- * It showings the fill style used for an allele.
+ * ProportionsLegendNode displays the legend in the control panel for the Proportions graph.
+ * It showings the color-coding and fill styles used for each allele.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import merge from '../../../../../phet-core/js/merge.js';
+import required from '../../../../../phet-core/js/required.js';
 import HBox from '../../../../../scenery/js/nodes/HBox.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
@@ -15,8 +16,8 @@ import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import Color from '../../../../../scenery/js/util/Color.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
-import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
-import NaturalSelectionColors from '../../NaturalSelectionColors.js';
+import Gene from '../../model/Gene.js';
+import GenePool from '../../model/GenePool.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import HatchingRectangle from '../HatchingRectangle.js';
 
@@ -27,9 +28,12 @@ const RECTANGLE_HEIGHT = 15;
 class ProportionsLegendNode extends VBox {
 
   /**
+   * @param {GenePool} genePool
    * @param {Object} [options]
    */
-  constructor( options ) {
+  constructor( genePool, options ) {
+
+    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
 
     options = merge( {
       align: 'left',
@@ -44,26 +48,25 @@ class ProportionsLegendNode extends VBox {
     assert && assert( !options.children, 'ProportionsLegendNode sets children' );
     options.children = [
 
-      //TODO get colors and strings from Genes
       // Fur
-      new TraitLegendNode( NaturalSelectionColors.FUR,
-        naturalSelectionStrings.whiteFur, 'whiteFurLegendNode',
-        naturalSelectionStrings.brownFur, 'brownFurLegendNode', {
-          tandem: options.tandem.createTandem( 'furLegendNode' )
-        } ),
+      new GeneLegendNode( genePool.furGene, {
+        tandem: options.tandem.createTandem( 'furLegendNode' ),
+        normalTandemName: 'whiteFurLegendNode',
+        mutantTandemName: 'brownFurLegendNode'
+      } ),
 
       // Ears
-      new TraitLegendNode( NaturalSelectionColors.EARS,
-        naturalSelectionStrings.straightEars, 'straightEarsLegendNode',
-        naturalSelectionStrings.floppyEars, 'floppyEarsLegendNode', {
-          tandem: options.tandem.createTandem( 'earsLegendNode' )
+      new GeneLegendNode( genePool.earsGene, {
+          tandem: options.tandem.createTandem( 'earsLegendNode' ),
+          normalTandemName: 'straightEarsLegendNode',
+          mutantTandemName: 'floppyEarsLegendNode'
         } ),
 
       // Teeth
-      new TraitLegendNode( NaturalSelectionColors.TEETH,
-        naturalSelectionStrings.shortTeeth, 'shortTeethLegendNode',
-        naturalSelectionStrings.longTeeth, 'longTeethLegendNode', {
-          tandem: options.tandem.createTandem( 'teethLegendNode' )
+      new GeneLegendNode( genePool.teethGene, {
+          tandem: options.tandem.createTandem( 'teethLegendNode' ),
+          normalTandemName: 'shortTeethLegendNode',
+          mutantTandemName: 'longTeethLegendNode'
         } )
     ];
 
@@ -80,38 +83,37 @@ class ProportionsLegendNode extends VBox {
 }
 
 /**
- * TraitLegendNode is the legend for one trait. It shows the color and fill-style used for both the normal allele and
+ * GeneLegendNode is the legend for one gene. It shows the color and fill-style used for both the normal allele and
  * the mutation allele.
  */
-class TraitLegendNode extends VBox {
+class GeneLegendNode extends VBox {
 
   /**
-   * @param {Color|string } color - color for the trait
-   * @param {string} normalName - name of the normal allele
-   * @param {string} normalTandemName - tandem name of the normal allele
-   * @param {string} mutationName - name of the mutation allele
-   * @param {string} mutationTandemName - tandem name of the mutation allele
+   * @param {Gene} gene
    * @param {Object} [options]
    */
-  constructor( color, normalName, normalTandemName, mutationName, mutationTandemName, options ) {
+  constructor( gene, options ) {
 
-    assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
-    assert && assert( typeof normalName === 'string', 'invalid normalName' );
-    assert && assert( typeof normalTandemName === 'string', 'invalid normalTandemName' );
-    assert && assert( typeof mutationName === 'string', 'invalid mutationName' );
-    assert && assert( typeof mutationTandemName === 'string', 'invalid mutationTandemName' );
-
-    assert && assert( options && options.tandem, 'missing required tandem' );
+    assert && assert( gene instanceof Gene, 'invalid gene' );
 
     options = merge( {
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      normalTandemName: required( null ), // tandem name for the normal allele
+      mutantTandemName: required( null ) // tandem name for the mutant allele
+    }, options );
+
+    assert && assert( !options.children, 'GeneLegendNode sets children' );
+    options = merge( {
       children: [
-        new AlleleLegendNode( normalName, color, {
-          isMutant: false,
-          tandem: options.tandem.createTandem( normalTandemName )
+        new AlleleLegendNode( gene.normalAllele.name, gene.color, {
+          useHatchingFill: false,
+          tandem: options.tandem.createTandem( options.normalTandemName )
         } ),
-        new AlleleLegendNode( mutationName, color, {
-          isMutant: true,
-          tandem: options.tandem.createTandem( mutationTandemName )
+        new AlleleLegendNode( gene.mutantAllele.name, gene.color, {
+          useHatchingFill: true,
+          tandem: options.tandem.createTandem( options.mutantTandemName )
         } )
       ]
     }, NaturalSelectionConstants.VBOX_OPTIONS, options );
@@ -124,7 +126,7 @@ class TraitLegendNode extends VBox {
    * @override
    */
   dispose() {
-    assert && assert( false, 'TraitLegendNode does not support dispose' );
+    assert && assert( false, 'GeneLegendNode does not support dispose' );
   }
 }
 
@@ -146,7 +148,7 @@ class AlleleLegendNode extends HBox {
 
     options = merge( {
 
-      isMutant: false, // true = mutant allele, false = normal allele
+      useHatchingFill: false, // true = hatching fill, false = solid fill
 
       // HBox options
       spacing: 5
@@ -156,7 +158,7 @@ class AlleleLegendNode extends HBox {
       fill: color,
       stroke: color
     };
-    const rectangleNode = options.isMutant ?
+    const rectangleNode = options.useHatchingFill ?
                           new HatchingRectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, rectangleOptions ) :
                           new Rectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, rectangleOptions );
 
