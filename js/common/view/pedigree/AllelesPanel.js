@@ -170,10 +170,9 @@ class Row extends VBox {
       // Don't show allele abbreviation and icon when there is no mutation
       hBox.visible = hasMutation;
 
+      // Automatically make the alleles visible.
       // Corresponding alleles should not be visible when the row is disabled.
-      if ( !hasMutation ) {
-        visibleProperty.value = false;
-      }
+      visibleProperty.value = hasMutation;
 
       if ( dominantAllele ) {
 
