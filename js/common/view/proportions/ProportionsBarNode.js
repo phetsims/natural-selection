@@ -28,7 +28,7 @@ class ProportionsBarNode extends Node {
   /**
    * @param {Color|string} color
    * @param {Property.<number>} normalCountProperty
-   * @param {Property.<number>} mutantCountProperty TODO rename to normalCountProperty
+   * @param {Property.<number>} mutantCountProperty
    * @param {Property.<boolean>} valuesVisibleProperty
    * @param {Object} [options]
    */

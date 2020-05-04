@@ -67,18 +67,15 @@ class ProportionsGraphNode extends Node {
       spacing: COLUMNS_SPACING,
       children: [
         new AlignBox( new Text( '', columnLabelOptions ), { group: barColumnsAlignGroup } ),
-
-        //TODO get names from Gene.name
-        new AlignBox( new Text( naturalSelectionStrings.fur, columnLabelOptions ), { group: barColumnsAlignGroup } ),
-        new AlignBox( new Text( naturalSelectionStrings.ears, columnLabelOptions ), { group: barColumnsAlignGroup } ),
-        new AlignBox( new Text( naturalSelectionStrings.teeth, columnLabelOptions ), { group: barColumnsAlignGroup } )
+        new AlignBox( new Text( proportionsModel.genePool.furGene.name, columnLabelOptions ), { group: barColumnsAlignGroup } ),
+        new AlignBox( new Text( proportionsModel.genePool.earsGene.name, columnLabelOptions ), { group: barColumnsAlignGroup } ),
+        new AlignBox( new Text( proportionsModel.genePool.teethGene.name, columnLabelOptions ), { group: barColumnsAlignGroup } )
       ]
     } );
 
     // Rows
     const startRow = new Row( naturalSelectionStrings.startOfGeneration, proportionsModel.startCountProperty,
       labelColumnAlignGroup, barColumnsAlignGroup, proportionsModel.valuesVisibleProperty );
-    // const currentRow = new Row( naturalSelectionStrings.endOfGeneration, proportionsModel.endCountProperty,
     const currentRow = new Row( naturalSelectionStrings.currently, proportionsModel.endCountProperty,
       labelColumnAlignGroup, barColumnsAlignGroup, proportionsModel.valuesVisibleProperty );
     const rows = new VBox( {
