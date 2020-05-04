@@ -7,13 +7,13 @@
  */
 
 import merge from '../../../../../phet-core/js/merge.js';
+import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
-import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import BunnyImageCache from '../BunnyImageCache.js';
 import MutationIconNode from '../MutationIconNode.js';
-import OriginNode from '../OriginNode.js';
 
 class PedigreeBunnyNode extends Node {
 
@@ -42,9 +42,31 @@ class PedigreeBunnyNode extends Node {
 
     super( options );
 
-    if ( NaturalSelectionConstants.SHOW_ORIGIN ) {
-      this.addChild( new OriginNode() );
-    }
+    //TODO add OriginNode
+
+    const isAliveListener = isAlive => {
+      if ( !isAlive ) {
+        bunny.isAliveProperty.unlink( isAliveListener );
+        this.addChild( new Text( '\u274c', {
+          font: new PhetFont( 60 ),
+          left: wrappedImageNode.left,
+          top: wrappedImageNode.top
+        } ) );
+      }
+    };
+    bunny.isAliveProperty.link( isAliveListener );
+
+    // @private
+    this.disposePedigreeBunnyNode = () => {
+      if ( bunny.isAliveProperty.hasListener( isAliveListener ) ) {
+        bunny.isAliveProperty.unlink( isAliveListener );
+      }
+    };
+  }
+
+  dispose() {
+    this.disposePedigreeBunnyNode();
+    super.dispose();
   }
 }
 
