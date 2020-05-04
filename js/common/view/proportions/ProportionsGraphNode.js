@@ -21,6 +21,7 @@ import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import GenePool from '../../model/GenePool.js';
 import ProportionsModel from '../../model/ProportionsModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import ProportionsBarNode from './ProportionsBarNode.js';
@@ -74,10 +75,12 @@ class ProportionsGraphNode extends Node {
     } );
 
     // Rows
-    const startRow = new Row( naturalSelectionStrings.startOfGeneration, proportionsModel.startCountProperty,
-      labelColumnAlignGroup, barColumnsAlignGroup, proportionsModel.valuesVisibleProperty );
-    const currentRow = new Row( naturalSelectionStrings.currently, proportionsModel.endCountProperty,
-      labelColumnAlignGroup, barColumnsAlignGroup, proportionsModel.valuesVisibleProperty );
+    const startRow = new Row( proportionsModel.genePool, naturalSelectionStrings.startOfGeneration,
+      proportionsModel.startCountProperty, labelColumnAlignGroup, barColumnsAlignGroup,
+      proportionsModel.valuesVisibleProperty );
+    const currentRow = new Row( proportionsModel.genePool, naturalSelectionStrings.currently,
+      proportionsModel.endCountProperty, labelColumnAlignGroup, barColumnsAlignGroup,
+      proportionsModel.valuesVisibleProperty );
     const rows = new VBox( {
       spacing: 30,
       align: 'left',
@@ -135,14 +138,16 @@ class ProportionsGraphNode extends Node {
 class Row extends HBox {
 
   /**
+   * @param {GenePool} genePool
    * @param {string} labelString
    * @param {Property.<number>} countProperty
    * @param {AlignGroup} valueAlignGroup
    * @param {AlignGroup} barColumnsAlignGroup
    * @param {Property.<boolean>} valuesVisibleProperty
    */
-  constructor( labelString, countProperty, valueAlignGroup, barColumnsAlignGroup, valuesVisibleProperty ) {
+  constructor( genePool, labelString, countProperty, valueAlignGroup, barColumnsAlignGroup, valuesVisibleProperty ) {
 
+    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( typeof labelString === 'string', 'invalid labelString' );
     assert && assert( countProperty instanceof Property, 'invalid countProperty' );
     assert && assert( valueAlignGroup instanceof AlignGroup, 'invalid valueAlignGroup' );
@@ -170,10 +175,9 @@ class Row extends HBox {
     } );
 
     //TODO temporary Properties
-    //TODO get color from Gene
-    const furBarNode = new ProportionsBarNode( NaturalSelectionColors.FUR, new NumberProperty( 990 ), new NumberProperty( 1 ), valuesVisibleProperty );
-    const earsBarNode = new ProportionsBarNode( NaturalSelectionColors.EARS, new NumberProperty( 40 ), new NumberProperty( 60 ), valuesVisibleProperty );
-    const teethBarNode = new ProportionsBarNode( NaturalSelectionColors.TEETH, new NumberProperty( 100 ), new NumberProperty( 0 ), valuesVisibleProperty );
+    const furBarNode = new ProportionsBarNode( genePool.furGene.color, new NumberProperty( 990 ), new NumberProperty( 1 ), valuesVisibleProperty );
+    const earsBarNode = new ProportionsBarNode( genePool.earsGene.color, new NumberProperty( 40 ), new NumberProperty( 60 ), valuesVisibleProperty );
+    const teethBarNode = new ProportionsBarNode( genePool.teethGene.color, new NumberProperty( 100 ), new NumberProperty( 0 ), valuesVisibleProperty );
 
     super( {
       spacing: COLUMNS_SPACING,
