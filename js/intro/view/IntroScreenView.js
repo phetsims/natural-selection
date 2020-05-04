@@ -1,5 +1,6 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
+//TODO hide Ears, Teeth, and Limited Food features
 /**
  * IntroView is the view for the 'Intro' screen.
  *
