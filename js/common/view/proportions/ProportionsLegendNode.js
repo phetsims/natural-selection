@@ -108,11 +108,10 @@ class GeneLegendNode extends VBox {
     options = merge( {
       children: [
         new AlleleLegendNode( gene.normalAllele.name, gene.color, {
-          useHatchingFill: false,
           tandem: options.tandem.createTandem( options.normalTandemName )
         } ),
         new AlleleLegendNode( gene.mutantAllele.name, gene.color, {
-          useHatchingFill: true,
+          isMutant: true,
           tandem: options.tandem.createTandem( options.mutantTandemName )
         } )
       ]
@@ -148,7 +147,8 @@ class AlleleLegendNode extends HBox {
 
     options = merge( {
 
-      useHatchingFill: false, // true = hatching fill, false = solid fill
+      // whether the allele is mutant, affects the fill style used
+      isMutant: false,
 
       // HBox options
       spacing: 5
@@ -158,7 +158,7 @@ class AlleleLegendNode extends HBox {
       fill: color,
       stroke: color
     };
-    const rectangleNode = options.useHatchingFill ?
+    const rectangleNode = options.isMutant ?
                           new HatchingRectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, rectangleOptions ) :
                           new Rectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, rectangleOptions );
 

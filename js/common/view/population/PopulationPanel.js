@@ -38,10 +38,13 @@ class PopulationPanel extends NaturalSelectionPanel {
       tandem: Tandem.REQUIRED
     }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
+    const furGene = populationModel.genePool.furGene;
+    const earsGene = populationModel.genePool.earsGene;
+    const teethGene = populationModel.genePool.teethGene;
+
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: [
 
-        //TODO get color from Gene
         // Total
         new PopulationLegendCheckbox( populationModel.totalVisibleProperty, naturalSelectionStrings.total, {
           color: NaturalSelectionColors.TOTAL_POPULATION,
@@ -49,40 +52,40 @@ class PopulationPanel extends NaturalSelectionPanel {
         } ),
 
         // White Fur
-        new PopulationLegendCheckbox( populationModel.whiteFurVisibleProperty, naturalSelectionStrings.whiteFur, {
-          color: NaturalSelectionColors.FUR,
-          tandem: options.tandem.createTandem( 'whiteFurCheckbox' )
-        } ),
+        new PopulationLegendCheckbox( populationModel.whiteFurVisibleProperty, furGene.normalAllele.name, {
+            color: furGene.color,
+            tandem: options.tandem.createTandem( 'whiteFurCheckbox' )
+          } ),
 
         // Brown Fur
-        new PopulationLegendCheckbox( populationModel.brownFurVisibleProperty, naturalSelectionStrings.brownFur, {
-          color: NaturalSelectionColors.FUR,
+        new PopulationLegendCheckbox( populationModel.brownFurVisibleProperty, furGene.mutantAllele.name, {
+          color: furGene.color,
           isMutant: true,
           tandem: options.tandem.createTandem( 'brownFurCheckbox' )
         } ),
 
         // Straight Ears
-        new PopulationLegendCheckbox( populationModel.straightEarsVisibleProperty, naturalSelectionStrings.straightEars, {
-          color: NaturalSelectionColors.EARS,
+        new PopulationLegendCheckbox( populationModel.straightEarsVisibleProperty, earsGene.normalAllele.name, {
+          color: earsGene.color,
           tandem: options.tandem.createTandem( 'straightEarsCheckbox' )
         } ),
 
         // Floppy Ears
-        new PopulationLegendCheckbox( populationModel.floppyEarsVisibleProperty, naturalSelectionStrings.floppyEars, {
-          color: NaturalSelectionColors.EARS,
+        new PopulationLegendCheckbox( populationModel.floppyEarsVisibleProperty, earsGene.mutantAllele.name, {
+          color: earsGene.color,
           isMutant: true,
           tandem: options.tandem.createTandem( 'floppyEarsCheckbox' )
         } ),
 
         // Short Teeth
-        new PopulationLegendCheckbox( populationModel.shortTeethVisibleProperty, naturalSelectionStrings.shortTeeth, {
-          color: NaturalSelectionColors.TEETH,
+        new PopulationLegendCheckbox( populationModel.shortTeethVisibleProperty, teethGene.normalAllele.name, {
+          color: teethGene.color,
           tandem: options.tandem.createTandem( 'shortTeethCheckbox' )
         } ),
 
         // Long Teeth
-        new PopulationLegendCheckbox( populationModel.longTeethVisibleProperty, naturalSelectionStrings.longTeeth, {
-          color: NaturalSelectionColors.TEETH,
+        new PopulationLegendCheckbox( populationModel.longTeethVisibleProperty, teethGene.mutantAllele.name, {
+          color: teethGene.color,
           isMutant: true,
           tandem: options.tandem.createTandem( 'longTeethCheckbox' )
         } ),
