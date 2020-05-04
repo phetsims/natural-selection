@@ -16,7 +16,7 @@ import BunnyImageCache from '../BunnyImageCache.js';
 // constants
 const PARENTS_SCALE = 0.8; // how much the parents are scaled relative to the child
 
-class PedigreeTreeNode extends Node {
+class PedigreeBranchNode extends Node {
 
   /**
    * @param {Bunny} bunny
@@ -43,7 +43,7 @@ class PedigreeTreeNode extends Node {
     let motherNode = null;
     if ( depth > 0 && bunny.father && bunny.mother ) {
 
-      fatherNode = new PedigreeTreeNode( bunny.father, depth - 1, {
+      fatherNode = new PedigreeBranchNode( bunny.father, depth - 1, {
         parentsXSpacing: 0.6 * options.parentsXSpacing,
         parentsYSpacing: 0.6 * options.parentsYSpacing,
         scale: PARENTS_SCALE,
@@ -52,7 +52,7 @@ class PedigreeTreeNode extends Node {
       } );
       children.push( fatherNode );
 
-      motherNode = new PedigreeTreeNode( bunny.mother, depth - 1, {
+      motherNode = new PedigreeBranchNode( bunny.mother, depth - 1, {
         parentsXSpacing: 0.7 * options.parentsXSpacing,
         parentsYSpacing: 0.7 * options.parentsYSpacing,
         scale: PARENTS_SCALE,
@@ -73,13 +73,13 @@ class PedigreeTreeNode extends Node {
       children.push( tPath );
     }
 
-    assert && assert( !options.children, 'PedigreeTreeNode sets children' );
+    assert && assert( !options.children, 'PedigreeBranchNode sets children' );
     options.children = children;
 
     super( options );
 
     // @private
-    this.disposePedigreeTreeNode = () => {
+    this.disposePedigreeBranchNode = () => {
       bunnyNode.dispose();
       fatherNode && fatherNode.dispose();
       motherNode && motherNode.dispose();
@@ -91,10 +91,10 @@ class PedigreeTreeNode extends Node {
    * @override
    */
   dispose() {
-    this.disposePedigreeTreeNode();
+    this.disposePedigreeBranchNode();
     super.dispose();
   }
 }
 
-naturalSelection.register( 'PedigreeTreeNode', PedigreeTreeNode );
-export default PedigreeTreeNode;
+naturalSelection.register( 'PedigreeBranchNode', PedigreeBranchNode );
+export default PedigreeBranchNode;

@@ -16,7 +16,7 @@ import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import PedigreeModel from '../../model/PedigreeModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
-import PedigreeTreeNode from './PedigreeTreeNode.js';
+import PedigreeBranchNode from './PedigreeBranchNode.js';
 
 // constants
 const TREE_DEPTH = 4;
@@ -59,22 +59,22 @@ class PedigreeGraphNode extends Node {
 
     super( options );
 
-    let treeNode = null;
+    let branchNode = null;
 
     pedigreeModel.selectedBunnyProperty.link( bunny => {
       selectABunnyText.visible = !bunny;
 
-      if ( treeNode ) {
-        treeNode.dispose();
-        treeNode = null;
+      if ( branchNode ) {
+        branchNode.dispose();
+        branchNode = null;
       }
 
       if ( bunny ) {
-        treeNode = new PedigreeTreeNode( bunny, TREE_DEPTH, {
+        branchNode = new PedigreeBranchNode( bunny, TREE_DEPTH, {
           scale: SELECTED_BUNNY_SCALE,
           center: rectangle.center
         } );
-        this.addChild( treeNode );
+        this.addChild( branchNode );
       }
     } );
   }
