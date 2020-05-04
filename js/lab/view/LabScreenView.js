@@ -10,7 +10,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import NaturalSelectionScreenView from '../../common/view/NaturalSelectionScreenView.js';
 import naturalSelection from '../../naturalSelection.js';
 import LabModel from '../model/LabModel.js';
-import LabViewProperties from './LabViewProperties.js';
 
 class LabScreenView extends NaturalSelectionScreenView {
 
@@ -23,27 +22,11 @@ class LabScreenView extends NaturalSelectionScreenView {
     assert && assert( model instanceof LabModel, 'invalid model' );
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
-    const viewProperties = new LabViewProperties( tandem.createTandem( 'viewProperties' ) );
-
-    super( model, viewProperties, {
+    super( model, {
 
       // phet-io
       tandem: tandem
     } );
-
-    //TODO
-
-    // @private
-    this.viewProperties = viewProperties;
-  }
-
-  /**
-   * @public
-   * @override
-   */
-  reset() {
-    super.reset();
-    this.viewProperties.reset();
   }
 
   /**
@@ -52,16 +35,6 @@ class LabScreenView extends NaturalSelectionScreenView {
    */
   dispose() {
     assert && assert( false, 'LabScreenView does not support dispose' );
-  }
-
-  /**
-   * @param {number} dt - time step, in seconds
-   * @public
-   * @override
-   */
-  step( dt ) {
-    super.step( dt );
-    //TODO
   }
 }
 

@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -24,7 +25,6 @@ import EnvironmentNode from './EnvironmentNode.js';
 import Graphs from './Graphs.js';
 import GraphsRadioButtonGroup from './GraphsRadioButtonGroup.js';
 import MutationAlertsNode from './MutationAlertsNode.js';
-import NaturalSelectionViewProperties from './NaturalSelectionViewProperties.js';
 import PedigreeNode from './pedigree/PedigreeNode.js';
 import PlayButtonGroup from './PlayButtonGroup.js';
 import PopulationNode from './population/PopulationNode.js';
@@ -35,13 +35,11 @@ class NaturalSelectionScreenView extends ScreenView {
 
   /**
    * @param {NaturalSelectionModel} model
-   * @param {NaturalSelectionViewProperties} viewProperties
    * @param {Object} [options]
    */
-  constructor( model, viewProperties, options ) {
+  constructor( model, options ) {
 
     assert && assert( model instanceof NaturalSelectionModel, 'invalid model' );
-    assert && assert( viewProperties instanceof NaturalSelectionViewProperties, 'invalid viewProperties' );
 
     options = merge( {
 
@@ -90,37 +88,46 @@ class NaturalSelectionScreenView extends ScreenView {
     const graphAreaLeft = environmentNode.left;
     const graphAreaTop = environmentNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING;
 
+    // Organize everything related to graphs under this tandem
+    const graphsTandem = options.tandem.createTandem( 'graphs' );
+
     // Population
     const populationNode = new PopulationNode( model.populationModel, graphAreaSize, {
       left: graphAreaLeft,
       y: graphAreaTop,
-      tandem: options.tandem.createTandem( 'populationNode' )
+      tandem: graphsTandem.createTandem( 'populationNode' )
     } );
 
     // Proportions
     const proportionsNode = new ProportionsNode( model.proportionsModel, graphAreaSize, {
       left: graphAreaLeft,
       top: graphAreaTop,
-      tandem: options.tandem.createTandem( 'proportionsNode' )
+      tandem: graphsTandem.createTandem( 'proportionsNode' )
     } );
 
     // Pedigree
     const pedigreeNode = new PedigreeNode( model.pedigreeModel, graphAreaSize, {
       left: graphAreaLeft,
       top: graphAreaTop,
-      tandem: options.tandem.createTandem( 'pedigreeNode' )
+      tandem: graphsTandem.createTandem( 'pedigreeNode' )
     } );
 
-    // Population, Proportions, Pedigree radio buttons
-    const graphsRadioButtonGroup = new GraphsRadioButtonGroup( viewProperties.graphProperty, {
+    // @public
+    this.selectedGraphProperty = new EnumerationProperty( Graphs, Graphs.POPULATION, {
+      tandem: graphsTandem.createTandem( 'selectedGraphProperty' ),
+      phetioDocumentation: 'the graph that is selected via graphsRadioButtonGroup'
+    } );
+
+    // Radio buttons for selecting a graph
+    const graphsRadioButtonGroup = new GraphsRadioButtonGroup( this.selectedGraphProperty, {
       maxWidth: rightOfViewportWidth,
       left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
       centerY: populationNode.centerY,
-      tandem: options.tandem.createTandem( 'graphsRadioButtonGroup' )
+      tandem: graphsTandem.createTandem( 'graphsRadioButtonGroup' )
     } );
 
-    // Visibility of graphs is mutually exclusive
-    viewProperties.graphProperty.link( graph => {
+    // Visibility of graphs
+    this.selectedGraphProperty.link( graph => {
       populationNode.visible = ( graph === Graphs.POPULATION );
       proportionsNode.visible = ( graph === Graphs.PROPORTIONS );
       pedigreeNode.visible = ( graph === Graphs.PEDIGREE );
@@ -181,6 +188,7 @@ class NaturalSelectionScreenView extends ScreenView {
     //TODO verify that these resets are needed
     // @private
     this.resetNaturalSelectionScreenView = () => {
+      this.selectedGraphProperty.reset();
       environmentNode.reset();
       populationNode.reset();
     };

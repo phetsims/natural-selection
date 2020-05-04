@@ -23,16 +23,6 @@ class LabModel extends NaturalSelectionModel {
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
     super( tandem );
-    //TODO
-  }
-
-  /**
-   * @public
-   * @override
-   */
-  reset() {
-    super.reset();
-    //TODO
   }
 
   /**
@@ -41,16 +31,6 @@ class LabModel extends NaturalSelectionModel {
    */
   dispose() {
     assert && assert( false, 'LabModel does not support dispose' );
-  }
-
-  /**
-   * @param {number} dt - time step, in seconds
-   * @public
-   * @override
-   */
-  step( dt ) {
-    super.step( dt );
-    //TODO
   }
 }
 

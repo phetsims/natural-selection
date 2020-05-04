@@ -10,6 +10,7 @@ import merge from '../../../../../phet-core/js/merge.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import PedigreeModel from '../../model/PedigreeModel.js';
@@ -28,7 +29,11 @@ class PedigreeGraphNode extends Node {
 
     options = merge( {
       graphWidth: 100,
-      graphHeight: 100
+      graphHeight: 100,
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     }, options );
 
     //TODO placeholder

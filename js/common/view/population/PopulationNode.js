@@ -32,7 +32,8 @@ class PopulationNode extends Node {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioDocumentation: 'the Population graph and its control panel'
+      phetioDocumentation: 'the Population graph and its control panel',
+      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     }, options );
 
     // Divy up the width

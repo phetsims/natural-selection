@@ -36,7 +36,8 @@ class PedigreeNode extends HBox {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioDocumentation: 'the Pedigree graph and its control panel'
+      phetioDocumentation: 'the Pedigree graph and its control panel',
+      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     }, options );
 
     // Divy up the width

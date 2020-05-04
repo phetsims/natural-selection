@@ -46,7 +46,8 @@ class ProportionsGraphNode extends Node {
       graphHeight: 100,
 
       // phet-io
-      tandem: Tandem.REQUIRED
+      tandem: Tandem.REQUIRED,
+      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     }, options );
 
     const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
