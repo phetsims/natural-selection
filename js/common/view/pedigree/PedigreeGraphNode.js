@@ -65,7 +65,8 @@ class PedigreeGraphNode extends Node {
       selectABunnyText.visible = !bunny;
 
       if ( treeNode ) {
-        this.removeChild( treeNode );
+        treeNode.dispose();
+        treeNode = null;
       }
 
       if ( bunny ) {

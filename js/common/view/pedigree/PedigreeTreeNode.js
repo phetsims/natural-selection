@@ -32,15 +32,18 @@ class PedigreeTreeNode extends Node {
       parentsYOffset: 175
     }, options );
 
-    const bunnyNode = BunnyImageCache.getImage( bunny, {
+    const bunnyNode = new Node( {
+      children: [ BunnyImageCache.getImage( bunny ) ],
       centerX: 0,
       bottom: 0
     } );
     children.push( bunnyNode );
 
+    let fatherNode = null;
+    let motherNode = null;
     if ( depth > 0 && bunny.father && bunny.mother ) {
 
-      const fatherNode = new PedigreeTreeNode( bunny.father, depth - 1, {
+      fatherNode = new PedigreeTreeNode( bunny.father, depth - 1, {
         parentsXSpacing: 0.6 * options.parentsXSpacing,
         parentsYSpacing: 0.6 * options.parentsYSpacing,
         scale: PARENTS_SCALE,
@@ -49,7 +52,7 @@ class PedigreeTreeNode extends Node {
       } );
       children.push( fatherNode );
 
-      const motherNode = new PedigreeTreeNode( bunny.mother, depth - 1, {
+      motherNode = new PedigreeTreeNode( bunny.mother, depth - 1, {
         parentsXSpacing: 0.7 * options.parentsXSpacing,
         parentsYSpacing: 0.7 * options.parentsYSpacing,
         scale: PARENTS_SCALE,
@@ -74,6 +77,22 @@ class PedigreeTreeNode extends Node {
     options.children = children;
 
     super( options );
+
+    // @private
+    this.disposePedigreeTreeNode = () => {
+      bunnyNode.dispose();
+      fatherNode && fatherNode.dispose();
+      motherNode && motherNode.dispose();
+    };
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    this.disposePedigreeTreeNode();
+    super.dispose();
   }
 }
 
