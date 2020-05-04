@@ -11,7 +11,7 @@ import merge from '../../../../../phet-core/js/merge.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../../scenery/js/nodes/Path.js';
 import naturalSelection from '../../../naturalSelection.js';
-import BunnyImageCache from '../BunnyImageCache.js';
+import PedigreeBunnyNode from './PedigreeBunnyNode.js';
 
 // constants
 const PARENTS_SCALE = 0.8; // how much the parents are scaled relative to the child
@@ -32,8 +32,7 @@ class PedigreeBranchNode extends Node {
       parentsYOffset: 175
     }, options );
 
-    const bunnyNode = new Node( {
-      children: [ BunnyImageCache.getImage( bunny ) ],
+    const bunnyNode = new PedigreeBunnyNode( bunny, {
       centerX: 0,
       bottom: 0
     } );

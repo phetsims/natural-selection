@@ -30,11 +30,10 @@ class MutationIconNode extends Node {
     } );
 
     // DNA icon centered in the circle
-    const icon = new FontAwesomeNode( 'dna_solid', {
-      maxWidth: circle.width * 0.8,
-      maxHeight: circle.height * 0.8,
-      center: circle.center
-    } );
+    const icon = new FontAwesomeNode( 'dna_solid' );
+    const scale = ( 0.6 * circle.height ) / Math.max( icon.width, icon.height );
+    icon.setScaleMagnitude( scale );
+    icon.center = circle.center;
 
     assert && assert( !options.children, 'MutationIconNode sets children' );
     options.children = [ circle, icon ];

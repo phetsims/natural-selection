@@ -50,6 +50,9 @@ class Genotype extends PhetioObject {
 
     super( options );
 
+    // @public (read-only) is the first a member of the generation that first received a mutation?
+    this.isFirstGenerationMutant = ( options.furMutation || options.earsMutation || options.teethMutation );
+
     // @public (read-only)
     this.furGenePair = GenePair.fromParents( genePool.furGene,
       father ? father.genotype.furGenePair : null,

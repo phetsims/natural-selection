@@ -44,36 +44,26 @@ const BunnyImageCache = {
   /**
    * Gets the cached Image that matches a bunny's phenotype. Instead of a big if-then-else statement for each
    * permutation of traits, this implementation converts the phenotype to a string key, and maps that key to an Image.
-   *
-   * @param {Bunny} bunny
-   * @returns {HTMLImageElement}
-   * @public
-   */
-  getImage( bunny ) {
-    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-
-    // create the key by inspecting the phenotype
-    const key = `${bunny.phenotype.hasWhiteFur()}-${bunny.phenotype.hasStraightEars()}-${bunny.phenotype.hasShortTeeth()}`;
-
-    // look up the image in the map
-    return CACHE[ key ];
-  },
-
-  /**
-   * Similar to getImage, but a convenience method that wraps the cached bunny Image in a Node.
-   * Use this method if you need to transform the image.
-   *
+   * Since this Image is used in multiple places in scenery's DAG, the Image is wrapped in a Node, so that it can be
+   * transformed without causing subtle (or not-so-subtle) problems.
    * @param {Bunny} bunny
    * @param {Object} [options] - applied to Node wrapper
    * @returns {Node}
    */
   getWrappedImage( bunny, options ) {
 
-    assert && assert( !options || !options.children, 'getWrappedImage sets children' );
+    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
-    options = merge( {
-      children: [ BunnyImageCache.getImage( bunny ) ]
-    }, options );
+    options = merge( {}, options );
+
+    // create the key by inspecting the phenotype
+    const key = `${bunny.phenotype.hasWhiteFur()}-${bunny.phenotype.hasStraightEars()}-${bunny.phenotype.hasShortTeeth()}`;
+
+    // look up the image in the map
+    const image = CACHE[ key ];
+
+    assert && assert( !options.children, 'getWrappedImage sets children' );
+    options.children = [ image ];
 
     return new Node( options );
   }

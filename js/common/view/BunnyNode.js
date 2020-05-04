@@ -44,24 +44,24 @@ class BunnyNode extends SpriteNode {
       phetioType: BunnyNodeIO
     }, options );
 
-    const image = BunnyImageCache.getWrappedImage( bunny, {
+    const wrappedImage = BunnyImageCache.getWrappedImage( bunny, {
       scale: IMAGE_SCALE,
       centerX: 0,
       bottom: 0
     } );
 
     // Rectangle that appears around this Node when bunny is selected
-    const selectionRectangle = new Rectangle( image.bounds.dilated( 5 ), {
+    const selectionRectangle = new Rectangle( wrappedImage.bounds.dilated( 5 ), {
       fill: 'rgba( 0, 0, 0, 0.25 )',
       stroke: 'blue',
       lineWidth: 2.5,
       cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
-      center: image.center,
+      center: wrappedImage.center,
       pickable: false
     } );
 
     assert && assert( !options.children, 'BunnyNode sets children' );
-    options.children = [ selectionRectangle, image ];
+    options.children = [ selectionRectangle, wrappedImage ];
 
     // Red dot at the origin
     if ( NaturalSelectionConstants.SHOW_ORIGIN ) {
