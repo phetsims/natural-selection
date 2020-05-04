@@ -19,9 +19,7 @@ class LabModel extends NaturalSelectionModel {
    * @param {Tandem} tandem
    */
   constructor( tandem ) {
-
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
-
     super( tandem );
   }
 

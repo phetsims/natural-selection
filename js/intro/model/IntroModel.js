@@ -7,28 +7,20 @@
  */
 
 import Tandem from '../../../../tandem/js/Tandem.js';
+import NaturalSelectionModel from '../../common/model/NaturalSelectionModel.js';
 import naturalSelection from '../../naturalSelection.js';
 
 /**
  * @constructor
  */
-class IntroModel {
+class IntroModel extends NaturalSelectionModel {
 
   /**
    * @param {Tandem} tandem
    */
   constructor( tandem ) {
-
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
-    //TODO
-  }
-
-  /**
-   * Resets the model.
-   * @public
-   */
-  reset() {
-    //TODO
+    super( tandem );
   }
 
   /**
@@ -37,15 +29,6 @@ class IntroModel {
    */
   dispose() {
     assert && assert( false, 'IntroModel does not support dispose' );
-  }
-
-  /**
-   * Steps the model.
-   * @param {number} dt - time step, in seconds
-   * @public
-   */
-  step( dt ) {
-    //TODO
   }
 }
 
