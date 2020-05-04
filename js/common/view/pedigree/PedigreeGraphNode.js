@@ -42,20 +42,19 @@ class PedigreeGraphNode extends Node {
       phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     }, options );
 
-    //TODO placeholder
-    const rectangle = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
+    const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
       fill: NaturalSelectionColors.PEDIGREE_GRAPH_FILL,
       stroke: NaturalSelectionColors.PANEL_STROKE
     } );
 
     const selectABunnyText = new Text( naturalSelectionStrings.selectABunny, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
-      centerX: rectangle.centerX,
-      centerY: rectangle.top + ( rectangle.height / 6 )
+      centerX: backgroundNode.centerX,
+      centerY: backgroundNode.top + ( backgroundNode.height / 6 )
     } );
 
     assert && assert( !options.children, 'PedigreeGraphNode sets children' );
-    options.children = [ rectangle, selectABunnyText ];
+    options.children = [ backgroundNode, selectABunnyText ];
 
     super( options );
 
@@ -71,8 +70,9 @@ class PedigreeGraphNode extends Node {
 
       if ( bunny ) {
         branchNode = new PedigreeBranchNode( bunny, TREE_DEPTH, {
+          bunnyIsSelected: true,
           scale: SELECTED_BUNNY_SCALE,
-          center: rectangle.center
+          center: backgroundNode.center
         } );
         this.addChild( branchNode );
       }

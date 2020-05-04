@@ -28,11 +28,13 @@ class PedigreeBranchNode extends Node {
     const children = [];
 
     options = merge( {
+      bunnyIsSelected: false,
       parentsXSpacing: 350,
       parentsYOffset: 175
     }, options );
 
     const bunnyNode = new PedigreeBunnyNode( bunny, {
+      isSelected: options.bunnyIsSelected,
       centerX: 0,
       bottom: 0
     } );
