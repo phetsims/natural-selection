@@ -93,7 +93,7 @@ class Gene extends PhetioObject {
   }
 
   /**
-   * Create a gene for fur.
+   * Creates a gene for fur.
    * @param {Object} [options] - options for Gene constructor
    * @returns {Gene}
    */
@@ -106,7 +106,7 @@ class Gene extends PhetioObject {
   }
 
   /**
-   * Create a gene for ears.
+   * Creates a gene for ears.
    * @param {Object} [options] - options for Gene constructor
    * @returns {Gene}
    */
@@ -119,7 +119,7 @@ class Gene extends PhetioObject {
   }
 
   /**
-   * Create a gene for teeth.
+   * Creates a gene for teeth.
    * @param {Object} [options] - options for Gene constructor
    * @returns {Gene}
    */
