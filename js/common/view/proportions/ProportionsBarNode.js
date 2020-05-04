@@ -27,15 +27,15 @@ class ProportionsBarNode extends Node {
 
   /**
    * @param {Color|string} color
-   * @param {Property.<number>} nonMutantCountCountProperty
+   * @param {Property.<number>} normalCountProperty
    * @param {Property.<number>} mutantCountProperty TODO rename to normalCountProperty
    * @param {Property.<boolean>} valuesVisibleProperty
    * @param {Object} [options]
    */
-  constructor( color, nonMutantCountCountProperty, mutantCountProperty, valuesVisibleProperty, options ) {
+  constructor( color, normalCountProperty, mutantCountProperty, valuesVisibleProperty, options ) {
 
     assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
-    assert && assert( nonMutantCountCountProperty instanceof Property, 'invalid nonMutantCountCountProperty' );
+    assert && assert( normalCountProperty instanceof Property, 'invalid normalCountProperty' );
     assert && assert( mutantCountProperty instanceof Property, 'invalid mutantCountProperty' );
     assert && assert( valuesVisibleProperty instanceof Property, 'invalid valuesVisibleProperty' );
 
@@ -45,7 +45,7 @@ class ProportionsBarNode extends Node {
     }, options );
 
     // Portions of the bar for non-mutant and mutant counts. Only the mutantRectangle will be resized.
-    const nonMutantRectangle = new Rectangle( 0, 0, options.barWidth, options.barHeight, {
+    const normalRectangle = new Rectangle( 0, 0, options.barWidth, options.barHeight, {
       fill: color,
       stroke: color
     } );
@@ -60,25 +60,25 @@ class ProportionsBarNode extends Node {
       bottom: -4,
       maxWidth: 40 // determined empirically
     };
-    const nonMutantPercentageNode = new Text( '', percentageOptions );
+    const normalPercentageNode = new Text( '', percentageOptions );
     const mutantPercentageNode = new Text( '', percentageOptions );
 
     assert && assert( !options.children, 'ProportionsBarNode sets children' );
-    options.children = [ nonMutantRectangle, mutantRectangle, nonMutantPercentageNode, mutantPercentageNode ];
+    options.children = [ normalRectangle, mutantRectangle, normalPercentageNode, mutantPercentageNode ];
 
     super( options );
 
     // @private
-    this.nonMutantRectangle = nonMutantRectangle;
+    this.normalRectangle = normalRectangle;
     this.mutantRectangle = mutantRectangle;
-    this.nonMutantPercentageNode = nonMutantPercentageNode;
+    this.normalPercentageNode = normalPercentageNode;
     this.mutantPercentageNode = mutantPercentageNode;
     this.barWidth = options.barWidth;
 
     //TODO this will result in bogus intermediate states
-    Property.multilink( [ nonMutantCountCountProperty, mutantCountProperty, valuesVisibleProperty ],
-      ( nonMutantCountCount, mutantCount, valuesVisible ) =>
-        this.update( nonMutantCountCount, mutantCount, valuesVisible )
+    Property.multilink( [ normalCountProperty, mutantCountProperty, valuesVisibleProperty ],
+      ( normalCount, mutantCount, valuesVisible ) =>
+        this.update( normalCount, mutantCount, valuesVisible )
     );
   }
 
@@ -92,23 +92,23 @@ class ProportionsBarNode extends Node {
 
   /**
    * Updates this node. Note that only mutantRectangle is resized.
-   * @param {number} nonMutantCountCount
+   * @param {number} normalCount
    * @param {number} mutantCount
    * @param {boolean} valuesVisible
    * @private
    */
-  update( nonMutantCountCount, mutantCount, valuesVisible ) {
+  update( normalCount, mutantCount, valuesVisible ) {
 
-    const total = nonMutantCountCount + mutantCount;
+    const total = normalCount + mutantCount;
 
-    const nonMutantPercentage = 100 * nonMutantCountCount / total;
+    const normalPercentage = 100 * normalCount / total;
     const mutantPercentage = 100 * mutantCount / total;
 
     // hide zero-length bar
     this.mutantRectangle.visible = ( mutantPercentage > 0 );
 
     // hide N% values
-    this.nonMutantPercentageNode.visible = ( valuesVisible && nonMutantPercentage > 0 );
+    this.normalPercentageNode.visible = ( valuesVisible && normalPercentage > 0 );
     this.mutantPercentageNode.visible = ( valuesVisible && mutantPercentage > 0 );
 
     // update the mutant portion of the bar and the N% values
@@ -118,16 +118,16 @@ class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.01 * this.barWidth;
 
       // > 99% non-mutant, < 1% mutant
-      this.nonMutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercent, { value: 99 } );
+      this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercent, { value: 99 } );
       this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercent, { value: 1 } );
     }
-    else if ( nonMutantPercentage > 0 && nonMutantPercentage < 1 ) {
+    else if ( normalPercentage > 0 && normalPercentage < 1 ) {
 
       // 99% mutant
       this.mutantRectangle.rectWidth = 0.99 * this.barWidth;
 
       // < 1% non-mutant, > 99% mutant
-      this.nonMutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercent, { value: 1 } );
+      this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercent, { value: 1 } );
       this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercent, { value: 99 } );
     }
     else {
@@ -135,36 +135,36 @@ class ProportionsBarNode extends Node {
       // round both percentages to the nearest integer
       this.mutantRectangle.rectWidth = ( Utils.roundSymmetric( mutantPercentage ) / 100 ) * this.barWidth;
 
-      this.nonMutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercent, {
-        value: Utils.roundSymmetric( nonMutantPercentage )
+      this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercent, {
+        value: Utils.roundSymmetric( normalPercentage )
       } );
       this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercent, {
         value: Utils.roundSymmetric( mutantPercentage )
       } );
     }
-    this.mutantRectangle.right = this.nonMutantRectangle.right;
+    this.mutantRectangle.right = this.normalRectangle.right;
 
     // center N% above its portion of the bar
-    if ( nonMutantPercentage > 0 ) {
-      this.nonMutantPercentageNode.centerX = ( nonMutantPercentage / 100 ) * ( this.barWidth / 2 );
+    if ( normalPercentage > 0 ) {
+      this.normalPercentageNode.centerX = ( normalPercentage / 100 ) * ( this.barWidth / 2 );
     }
     if ( mutantPercentage > 0 ) {
       this.mutantPercentageNode.centerX = this.barWidth - ( ( mutantPercentage / 100 ) * ( this.barWidth / 2 ) );
     }
 
     // horizontally constrain N% to left and right edges of bars
-    if ( this.nonMutantPercentageNode.left < this.nonMutantRectangle.left ) {
-      this.nonMutantPercentageNode.left = this.nonMutantRectangle.left;
+    if ( this.normalPercentageNode.left < this.normalRectangle.left ) {
+      this.normalPercentageNode.left = this.normalRectangle.left;
     }
-    else if ( this.nonMutantPercentageNode.right > this.nonMutantRectangle.right ) {
-      this.nonMutantPercentageNode.right = this.nonMutantRectangle.right;
+    else if ( this.normalPercentageNode.right > this.normalRectangle.right ) {
+      this.normalPercentageNode.right = this.normalRectangle.right;
     }
 
-    if ( this.mutantPercentageNode.left < this.nonMutantRectangle.left ) {
-      this.mutantPercentageNode.left = this.nonMutantRectangle.left;
+    if ( this.mutantPercentageNode.left < this.normalRectangle.left ) {
+      this.mutantPercentageNode.left = this.normalRectangle.left;
     }
-    else if ( this.mutantPercentageNode.right > this.nonMutantRectangle.right ) {
-      this.mutantPercentageNode.right = this.nonMutantRectangle.right;
+    else if ( this.mutantPercentageNode.right > this.normalRectangle.right ) {
+      this.mutantPercentageNode.right = this.normalRectangle.right;
     }
   }
 }
