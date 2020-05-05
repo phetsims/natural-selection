@@ -1,6 +1,5 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
-//TODO hide Ears, Teeth, and Limited Food features
 /**
  * IntroView is the view for the 'Intro' screen.
  *
@@ -29,7 +28,7 @@ class IntroScreenView extends NaturalSelectionScreenView {
       tandem: tandem
     } );
 
-    //TODO hide elements that are not part of the Intro screen, by setting visibleProperty.value = false
+    //TODO hide elements Ears, Teeth, and Limited Food features, by setting visibleProperty.value = false
     // naturalSelection.labScreen.view.addMutationsPanel.earsRow
     // naturalSelection.labScreen.view.addMutationsPanel.teethRow
     // naturalSelection.labScreen.view.environmentalFactorsPanel.limitedFoodCheckbox
