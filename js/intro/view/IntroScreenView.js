@@ -28,6 +28,20 @@ class IntroScreenView extends NaturalSelectionScreenView {
       // phet-io
       tandem: tandem
     } );
+
+    //TODO hide elements that are not part of the Intro screen, by setting visibleProperty.value = false
+    // naturalSelection.labScreen.view.addMutationsPanel.earsRow
+    // naturalSelection.labScreen.view.addMutationsPanel.teethRow
+    // naturalSelection.labScreen.view.environmentalFactorsPanel.limitedFoodCheckbox
+    // naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.earsRow
+    // naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.teethRow
+    // naturalSelection.labScreen.view.graphs.populationNode.populationPanel.straightEarsCheckbox
+    // naturalSelection.labScreen.view.graphs.populationNode.populationPanel.floppyEarsCheckbox
+    // naturalSelection.labScreen.view.graphs.populationNode.populationPanel.shortTeethCheckbox
+    // naturalSelection.labScreen.view.graphs.populationNode.populationPanel.longTeethCheckbox
+    // naturalSelection.labScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.earsLegendNode
+    // naturalSelection.labScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.teethLegendNode
+    // ... and the Ears and Teeth columns in ProportionsGraphNode
   }
 
   /**
