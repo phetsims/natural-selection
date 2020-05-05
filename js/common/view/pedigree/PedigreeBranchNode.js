@@ -1,5 +1,6 @@
 // Copyright 2020, University of Colorado Boulder
 
+//TODO this is a rough version, needs lots of work
 /**
  * TODO
  *
@@ -17,6 +18,8 @@ import PedigreeBunnyNode from './PedigreeBunnyNode.js';
 
 // constants
 const PARENTS_SCALE = 0.8; // how much the parents are scaled relative to the child
+const X_SPACING_SCALE = 0.6;
+const Y_SPACING_SCALE = 0.6;
 
 class PedigreeBranchNode extends Node {
 
@@ -58,8 +61,8 @@ class PedigreeBranchNode extends Node {
 
       fatherNode = new PedigreeBranchNode( bunny.father, depth - 1,
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
-          parentsXSpacing: 0.6 * options.parentsXSpacing,
-          parentsYSpacing: 0.6 * options.parentsYSpacing,
+          parentsXSpacing: X_SPACING_SCALE * options.parentsXSpacing,
+          parentsYSpacing: Y_SPACING_SCALE * options.parentsYSpacing,
           scale: PARENTS_SCALE,
           centerX: bunnyNode.centerX - options.parentsXSpacing,
           bottom: bunnyNode.bottom - options.parentsYOffset
@@ -68,8 +71,8 @@ class PedigreeBranchNode extends Node {
 
       motherNode = new PedigreeBranchNode( bunny.mother, depth - 1,
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
-          parentsXSpacing: 0.7 * options.parentsXSpacing,
-          parentsYSpacing: 0.7 * options.parentsYSpacing,
+          parentsXSpacing: X_SPACING_SCALE * options.parentsXSpacing,
+          parentsYSpacing: Y_SPACING_SCALE * options.parentsYSpacing,
           scale: PARENTS_SCALE,
           centerX: bunnyNode.centerX + options.parentsXSpacing,
           bottom: bunnyNode.bottom - options.parentsYOffset
@@ -77,12 +80,12 @@ class PedigreeBranchNode extends Node {
       children.push( motherNode );
 
       const tShape = new Shape()
-        .moveTo( fatherNode.x + 50, fatherNode.y )
-        .lineTo( motherNode.x - 50, fatherNode.y )
-        .moveTo( bunnyNode.centerX, fatherNode.y )
-        .lineTo( bunnyNode.centerX, fatherNode.y + 15 );
+        .moveTo( fatherNode.x + 65, fatherNode.y - 35 )
+        .lineTo( motherNode.x - 65, fatherNode.y - 35 )
+        .moveTo( bunnyNode.centerX, fatherNode.y - 35 )
+        .lineTo( bunnyNode.centerX, fatherNode.y + 20 );
       const tPath = new Path( tShape, {
-        lineWidth: 1,
+        lineWidth: 2,
         stroke: 'black'
       } );
       children.push( tPath );
