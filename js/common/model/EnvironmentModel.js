@@ -88,6 +88,9 @@ class EnvironmentModel extends PhetioObject {
       phetioType: PropertyIO( NullableIO( ReferenceIO( BunnyIO ) ) ),
       phetioDocumentation: 'bunny selected in environmentNode, whose pedigree is displayed by pedigreeNode'
     } );
+    phet.log && this.selectedBunnyProperty.link( selectedBunny => {
+      phet.log( `selectedBunny=${selectedBunny}` );
+    } );
 
     this.initializeBunnyPopulation();
 
