@@ -2,7 +2,7 @@
 
 //TODO this is a rough version, needs lots of work
 /**
- * TODO
+ * PedigreeBranchNode is a branch of the Pedigree graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * TODO
+ * PedigreeBunnyNode is the representation of a Bunny in the Pedigree graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
