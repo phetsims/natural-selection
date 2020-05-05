@@ -28,7 +28,7 @@ class IntroScreenView extends NaturalSelectionScreenView {
       tandem: tandem
     } );
 
-    //TODO hide elements Ears, Teeth, and Limited Food features, by setting visibleProperty.value = false
+    //TODO hide Ears, Teeth, and Limited Food features, by setting visibleProperty for associated PhET-iO elements
     // naturalSelection.labScreen.view.addMutationsPanel.earsRow
     // naturalSelection.labScreen.view.addMutationsPanel.teethRow
     // naturalSelection.labScreen.view.environmentalFactorsPanel.limitedFoodCheckbox
@@ -40,7 +40,8 @@ class IntroScreenView extends NaturalSelectionScreenView {
     // naturalSelection.labScreen.view.graphs.populationNode.populationPanel.longTeethCheckbox
     // naturalSelection.labScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.earsLegendNode
     // naturalSelection.labScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.teethLegendNode
-    // ... and the Ears and Teeth columns in ProportionsGraphNode
+    // naturalSelection.labScreen.view.graphs.proportionsNode.proportionsGraphNode.earsColumn
+    // naturalSelection.labScreen.view.graphs.proportionsNode.proportionsGraphNode.teethColumn
   }
 
   /**
