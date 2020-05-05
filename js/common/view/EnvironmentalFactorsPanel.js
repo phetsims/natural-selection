@@ -13,7 +13,8 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
-import EnvironmentModel from '../model/EnvironmentModel.js';
+import FoodSupply from '../model/FoodSupply.js';
+import Wolves from '../model/Wolves.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import LimitedFoodCheckbox from './LimitedFoodCheckbox.js';
 import NaturalSelectionPanel from './NaturalSelectionPanel.js';
@@ -23,12 +24,14 @@ import WolvesCheckbox from './WolvesCheckbox.js';
 class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
 
   /**
-   * @param {EnvironmentModel} environmentModel
+   * @param {Wolves} wolves
+   * @param {FoodSupply} foodSupply
    * @param {Object} [options]
    */
-  constructor( environmentModel, options ) {
+  constructor( wolves, foodSupply, options ) {
 
-    assert && assert( environmentModel instanceof EnvironmentModel, 'invalid environmentModel' );
+    assert && assert( wolves instanceof Wolves, 'invalid wolves' );
+    assert && assert( foodSupply instanceof FoodSupply, 'invalid foodSupply' );
 
     options = merge( {
 
@@ -46,17 +49,17 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       children: [
 
         // Wolves
-        new WolvesCheckbox( environmentModel.wolves.enabledProperty, {
+        new WolvesCheckbox( wolves.enabledProperty, {
           tandem: options.tandem.createTandem( 'wolvesCheckbox' )
         } ),
 
         // Tough Food
-        new ToughFoodCheckbox( environmentModel.foodSupply.isToughProperty, {
+        new ToughFoodCheckbox( foodSupply.isToughProperty, {
           tandem: options.tandem.createTandem( 'toughFoodCheckbox' )
         } ),
 
         // Limited Food
-        new LimitedFoodCheckbox( environmentModel.foodSupply.isLimitedProperty, {
+        new LimitedFoodCheckbox( foodSupply.isLimitedProperty, {
           tandem: options.tandem.createTandem( 'limitedFoodCheckbox' )
         } )
       ]

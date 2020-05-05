@@ -13,7 +13,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import EnvironmentModel from '../model/EnvironmentModel.js';
+import NaturalSelectionModel from '../model/NaturalSelectionModel.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import BunnyCountsNode from './BunnyCountsNode.js';
@@ -23,28 +23,27 @@ import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
 import EnvironmentRadioButtonGroup from './EnvironmentRadioButtonGroup.js';
 import FoodNode from './FoodNode.js';
 import GenerationClockNode from './GenerationClockNode.js';
-import SpriteNode from './SpriteNode.js';
 
 class EnvironmentNode extends Node {
 
   /**
-   * @param {EnvironmentModel} environmentModel
+   * @param {NaturalSelectionModel} model
    * @param {Object} [options]
    */
-  constructor( environmentModel, options ) {
+  constructor( model, options ) {
 
-    assert && assert( environmentModel instanceof EnvironmentModel, 'invalid environmentModel' );
+    assert && assert( model instanceof NaturalSelectionModel, 'invalid model' );
 
     options = merge( {
-      size: environmentModel.modelViewTransform.viewSize,
-      yHorizon: environmentModel.modelViewTransform.yHorizonView,
+      size: model.modelViewTransform.viewSize,
+      yHorizon: model.modelViewTransform.yHorizonView,
 
       // phet-io
       tandem: Tandem.REQUIRED,
       phetioDocumentation: 'the area of the screen that displays what is happening in the environment'
     }, options );
 
-    const backgroundNode = new EnvironmentBackgroundNode( environmentModel.environmentProperty, options.size,
+    const backgroundNode = new EnvironmentBackgroundNode( model.environmentProperty, options.size,
       options.yHorizon );
 
     // Frame around the viewport, to provide a nice crisp border, and for layout of UI components.
@@ -53,15 +52,15 @@ class EnvironmentNode extends Node {
     } );
 
     // Generation clock
-    const generationClockNode = new GenerationClockNode( environmentModel.generationClock,
-      environmentModel.environmentalFactorEnabledProperty, {
+    const generationClockNode = new GenerationClockNode( model.generationClock,
+      model.environmentalFactorEnabledProperty, {
         centerX: frameNode.centerX,
         top: frameNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
         tandem: options.tandem.createTandem( 'generationClockNode' )
       } );
 
     // Environment radio buttons
-    const environmentRadioButtonGroup = new EnvironmentRadioButtonGroup( environmentModel.environmentProperty, {
+    const environmentRadioButtonGroup = new EnvironmentRadioButtonGroup( model.environmentProperty, {
       right: frameNode.right - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_X_MARGIN,
       top: frameNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
       tandem: options.tandem.createTandem( 'environmentRadioButtonGroup' )
@@ -74,7 +73,7 @@ class EnvironmentNode extends Node {
     } );
 
     // Add food items
-    const food = environmentModel.foodSupply.food;
+    const food = model.foodSupply.food;
     for ( let i = 0; i < food.length; i++ ) {
       spritesNode.addChild( new FoodNode( food[ i ] ) );
     }
@@ -94,20 +93,15 @@ class EnvironmentNode extends Node {
     // Show counts in the upper-left corner
     if ( NaturalSelectionConstants.SHOW_INFO ) {
       this.addChild( new BunnyCountsNode(
-        environmentModel.bunnyCollection.liveBunnies.lengthProperty,
-        environmentModel.bunnyCollection.deadBunnies.lengthProperty, {
+        model.bunnyCollection.liveBunnies.lengthProperty,
+        model.bunnyCollection.deadBunnies.lengthProperty, {
           left: backgroundNode.left + 5,
           top: backgroundNode.top + 5
         } ) );
     }
 
-    // Create a link to the model that this Node displays
-    this.addLinkedElement( environmentModel, {
-      tandem: options.tandem.createTandem( 'environmentModel' )
-    } );
-
     // manages dynamic BunnyNode instances
-    const bunnyNodeCollection = new BunnyNodeCollection( environmentModel.bunnyCollection, environmentModel.selectedBunnyProperty, {
+    const bunnyNodeCollection = new BunnyNodeCollection( model.bunnyCollection, model.selectedBunnyProperty, {
       tandem: options.tandem.createTandem( 'bunnyNodeCollection' )
     } );
 
@@ -118,20 +112,13 @@ class EnvironmentNode extends Node {
     };
 
     // Create a BunnyNode for each Bunny in the initial population.
-    environmentModel.bunnyCollection.liveBunnies.forEach( createBunnyNode );
+    model.bunnyCollection.liveBunnies.forEach( createBunnyNode );
 
     // When a Bunny is added to the model, create the corresponding BunnyNode.
-    environmentModel.bunnyCollection.bunnyCreatedEmitter.addListener( createBunnyNode );
-
-    // @private
-    this.environmentModel = environmentModel;
-    this.spritesNode = spritesNode;
-
-    assert && assert( _.every( this.spritesNode.children, child => child instanceof SpriteNode ),
-      'every child of spritesNode must be an instanceof SpriteNode' );
+    model.bunnyCollection.bunnyCreatedEmitter.addListener( createBunnyNode );
 
     // Press on a bunny to select it. No need to removeInputListener, exists for the lifetime of the sim.
-    spritesNode.addInputListener( new BunnyPressListener( environmentModel.selectedBunnyProperty, {
+    spritesNode.addInputListener( new BunnyPressListener( model.selectedBunnyProperty, {
       tandem: options.tandem.createTandem( 'bunnyPressListener' )
     } ) );
 
@@ -139,7 +126,7 @@ class EnvironmentNode extends Node {
     // No need to removeInputListener, exists for the lifetime of the sim.
     backgroundNode.addInputListener( new PressListener( {
       press: () => {
-        environmentModel.selectedBunnyProperty.value = null;
+        model.selectedBunnyProperty.value = null;
       },
       pressCursor: 'default',
       tandem: options.tandem.createTandem( 'backgroundPressListener' )
@@ -147,6 +134,9 @@ class EnvironmentNode extends Node {
 
     // @public (read-only)
     this.environmentRadioButtonGroup = environmentRadioButtonGroup;
+
+    // @private
+    this.spritesNode = spritesNode;
   }
 
   /**

@@ -16,7 +16,7 @@ const naturalSelection = new Namespace( 'naturalSelection' );
  * Intended to be used as a debugging tool, to inspect a PhET-iO element in the console.
  * Do not use this to access elements via code!
  *
- * Example: phet.naturalSelection.getElement( 'naturalSelection.labScreen.model.environmentModel.bunnyGroup.bunny_0' )
+ * Example: phet.naturalSelection.getElement( 'naturalSelection.labScreen' )
  *
  * @param {string} phetioID
  * @returns {null|PhetioObject}

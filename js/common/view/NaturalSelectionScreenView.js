@@ -49,7 +49,7 @@ class NaturalSelectionScreenView extends ScreenView {
 
     super( options );
 
-    const environmentNode = new EnvironmentNode( model.environmentModel, {
+    const environmentNode = new EnvironmentNode( model, {
       left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: options.tandem.createTandem( 'environmentNode' )
@@ -60,12 +60,12 @@ class NaturalSelectionScreenView extends ScreenView {
                                  ( 2 * NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN ) -
                                  NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
-    const addMutationsPanel = new AddMutationsPanel( model.environmentModel.genePool, {
+    const addMutationsPanel = new AddMutationsPanel( model.genePool, {
       fixedWidth: rightOfViewportWidth,
       tandem: options.tandem.createTandem( 'addMutationsPanel' )
     } );
 
-    const environmentalFactorsPanel = new EnvironmentalFactorsPanel( model.environmentModel, {
+    const environmentalFactorsPanel = new EnvironmentalFactorsPanel( model.wolves, model.foodSupply, {
       fixedWidth: rightOfViewportWidth,
       tandem: options.tandem.createTandem( 'environmentalFactorsPanel' )
     } );
@@ -77,7 +77,7 @@ class NaturalSelectionScreenView extends ScreenView {
       top: environmentNode.top
     } );
 
-    const mutationAlertsNode = new MutationAlertsNode( model.environmentModel.genePool, addMutationsPanel );
+    const mutationAlertsNode = new MutationAlertsNode( model.genePool, addMutationsPanel );
 
     // The graphs and their related controls fill the space below the viewport.
     const graphAreaSize = new Dimension2(
@@ -106,8 +106,7 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     // Pedigree
-    const pedigreeNode = new PedigreeNode( model.environmentModel.genePool,
-      model.environmentModel.selectedBunnyProperty, model.pedigreeModel, graphAreaSize, {
+    const pedigreeNode = new PedigreeNode( model.genePool, model.selectedBunnyProperty, model.pedigreeModel, graphAreaSize, {
         left: graphAreaLeft,
         top: graphAreaTop,
         tandem: graphsTandem.createTandem( 'pedigreeNode' )
@@ -164,8 +163,8 @@ class NaturalSelectionScreenView extends ScreenView {
     // The different buttons that can be used to make the simulation begin playing.
     const playButtonGroup = new PlayButtonGroup(
       model.simulationModeProperty,
-      model.environmentModel.bunnyCollection.liveBunnies.lengthProperty, {
-        addAMate: () => model.environmentModel.addAMate(),
+      model.bunnyCollection.liveBunnies.lengthProperty, {
+        addAMate: () => model.addAMate(),
         startOver: () => model.startOver(),
         centerX: environmentNode.centerX,
         bottom: environmentNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
@@ -221,7 +220,7 @@ class NaturalSelectionScreenView extends ScreenView {
 
     // Display a dialog when all bunnies have died.
     const diedDialog = new DiedDialog();
-    model.environmentModel.bunnyCollection.allBunniesHaveDiedEmitter.addListener( () => {
+    model.bunnyCollection.allBunniesHaveDiedEmitter.addListener( () => {
       diedDialog.show();
       model.simulationModeProperty.value = SimulationMode.COMPLETED;
     } );
@@ -231,11 +230,11 @@ class NaturalSelectionScreenView extends ScreenView {
       showCallback: () => {
 
         // so we don't leave bunnies captured in mid-hop
-        model.environmentModel.bunnyCollection.groundAllBunnies();
+        model.bunnyCollection.groundAllBunnies();
         environmentNode.sortSprites();
       }
     });
-    model.environmentModel.bunnyCollection.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
+    model.bunnyCollection.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
       worldDialog.show();
       model.simulationModeProperty.value = SimulationMode.COMPLETED;
     } );
