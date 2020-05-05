@@ -122,7 +122,7 @@ class PedigreeBunnyNode extends Node {
 }
 
 /**
- * Gets the allele abbreviations for a Bunny's genotype.
+ * Gets the allele abbreviations that describe a Bunny's genotype, e.g. 'FfEEtt'.
  * @param {Bunny} bunny
  * @param {boolean} furAllelesVisible
  * @param {boolean} earsAllelesVisible
