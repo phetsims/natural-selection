@@ -93,16 +93,20 @@ class NaturalSelectionModel {
    * @public
    */
   reset() {
-
-    // sub-models
-    this.environmentModel.reset();
+    this.startOver();
     this.populationModel.reset();
     this.proportionsModel.reset();
     this.pedigreeModel.reset();
+  }
 
-    // Properties that apply to the entire model
-    this.isPlayingProperty.reset();
+  /**
+   * Similar to reset, but does not reset the graphs.
+   * @public
+   */
+  startOver() {
+    this.environmentModel.reset();
     this.simulationModeProperty.reset();
+    this.isPlayingProperty.reset(); // see https://github.com/phetsims/natural-selection/issues/55
   }
 
   /**

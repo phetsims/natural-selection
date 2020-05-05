@@ -166,7 +166,7 @@ class NaturalSelectionScreenView extends ScreenView {
       model.simulationModeProperty,
       model.environmentModel.bunnyCollection.liveBunnies.lengthProperty, {
         addAMate: () => model.environmentModel.addAMate(),
-        startOver: () => model.reset(),
+        startOver: () => model.startOver(),
         centerX: environmentNode.centerX,
         bottom: environmentNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
         tandem: options.tandem.createTandem( 'playButtonGroup' )
