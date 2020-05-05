@@ -35,7 +35,7 @@ class PlayButtonGroup extends Node {
       // {function} callbacks for the buttons, no parameters, no return values
       addAMate: () => {},
       play: () => {},
-      playAgain: () => {},
+      startOver: () => {},
 
       // phet-io
       tandem: Tandem.REQUIRED
@@ -63,7 +63,7 @@ class PlayButtonGroup extends Node {
     // 'Start Over' push button, displayed after the game ends, while the user is reviewing the final state
     const startOverButton = new StartOverButton( {
       listener: () => {
-        options.playAgain();
+        options.startOver();
         simulationModeProperty.value = SimulationMode.STAGED;
       },
       center: addAMateButton.center,
