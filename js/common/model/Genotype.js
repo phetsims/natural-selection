@@ -99,6 +99,18 @@ class Genotype extends PhetioObject {
     super.dispose();
   }
 
+  /**
+   * Converts a Genotype to its abbreviation, e.g. 'FfEEtt'.
+   * This is intended for debugging only. Do not rely on the format!
+   * @returns {string}
+   * @public
+   */
+  toAbbreviation() {
+    return this.furGenePair.getAllelesAbbreviation() +
+           this.earsGenePair.getAllelesAbbreviation() +
+           this.teethGenePair.getAllelesAbbreviation();
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   // Methods used by GenotypeIO to save and restore state
   //--------------------------------------------------------------------------------------------------------------------

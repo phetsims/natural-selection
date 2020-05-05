@@ -292,15 +292,16 @@ class Bunny extends Sprite {
   }
 
   /**
-   * Converts Bunny to a string, for debugging only. Do not rely on the format of this string!
+   * Converts Bunny to a string.
+   * This is intended for debugging only. Do not rely on the format of this string!
    * @returns {string}
    * @public
    */
   toString() {
-    return `${this.tandem.name}, generation=${this.generation} age=${this.ageProperty.value}, ` +
-           `genotype=${this.genotype.furGenePair.getAllelesAbbreviation()}` +
-           `${this.genotype.earsGenePair.getAllelesAbbreviation()}` +
-           `${this.genotype.teethGenePair.getAllelesAbbreviation()}, ` +
+    return `${this.tandem.name}, ` +
+           `generation=${this.generation}, ` +
+           `age=${this.ageProperty.value}, ` +
+           `genotype=${this.genotype.toAbbreviation()}, ` +
            `father=${this.father ? this.father.tandem.name : null}, ` +
            `mother=${this.mother ? this.mother.tandem.name : null}`;
   }
