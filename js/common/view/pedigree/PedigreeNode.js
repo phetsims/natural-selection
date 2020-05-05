@@ -6,12 +6,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import BooleanProperty from '../../../../../axon/js/BooleanProperty.js';
+import Property from '../../../../../axon/js/Property.js';
 import Dimension2 from '../../../../../dot/js/Dimension2.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import HBox from '../../../../../scenery/js/nodes/HBox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
-import PedigreeModel from '../../model/PedigreeModel.js';
+import GenePool from '../../model/GenePool.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import AllelesPanel from './AllelesPanel.js';
 import PedigreeGraphNode from './PedigreeGraphNode.js';
@@ -19,13 +21,15 @@ import PedigreeGraphNode from './PedigreeGraphNode.js';
 class PedigreeNode extends HBox {
 
   /**
-   * @param {PedigreeModel} pedigreeModel
+   * @param {GenePool} genePool
+   * @param {Property.<Bunny|null>} selectedBunnyProperty
    * @param {Dimension2} size - dimensions of the rectangle available for this Node and its children
    * @param {Object} [options]
    */
-  constructor( pedigreeModel, size, options ) {
+  constructor( genePool, selectedBunnyProperty, size, options ) {
 
-    assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
+    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
+    assert && assert( selectedBunnyProperty instanceof Property, 'invalid selectedBunnyProperty' );
     assert && assert( size instanceof Dimension2, 'invalid size' );
 
     options = merge( {
@@ -40,6 +44,17 @@ class PedigreeNode extends HBox {
       phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     }, options );
 
+    // @public visibility of the alleles for each trait in the Pedigree tree
+    const furAllelesVisibleProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'furAllelesVisibleProperty' )
+    } );
+    const earsAllelesVisibleProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'earsAllelesVisibleProperty' )
+    } );
+    const teethAllelesVisibleProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'teethAllelesVisibleProperty' )
+    } );
+
     // Divy up the width
     // If ?allelesVisible=false, the control panel is omitted, and the graph fills the width.
     const controlPanelWidth = 0.2 * size.width;
@@ -50,20 +65,22 @@ class PedigreeNode extends HBox {
     // Because it's instrumented for PhET-iO, the AllelesPanel must be instantiated regardless of the value
     // of ?allelesVisible. If ?allelesVisible=false, it will not be added to the scenegraph, but will
     // still appear in the Studio element tree.
-    const allelesPanel = new AllelesPanel( pedigreeModel, {
-      fixedWidth: controlPanelWidth,
-      maxHeight: size.height,
-      tandem: options.tandem.createTandem( 'allelesPanel' ),
-      phetioDocumentation: 'Note that if query parameter allelesVisible=false is specified, this panel will be ' +
-                           'created but will not be added to the UI. It will appear in the API and Studio tree, ' +
-                           'but changes to its elements and metadata will have no affect.'
-    } );
+    const allelesPanel = new AllelesPanel( genePool,
+      furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
+        fixedWidth: controlPanelWidth,
+        maxHeight: size.height,
+        tandem: options.tandem.createTandem( 'allelesPanel' ),
+        phetioDocumentation: 'Note that if query parameter allelesVisible=false is specified, this panel will be ' +
+                             'created but will not be added to the UI. It will appear in the API and Studio tree, ' +
+                             'but changes to its elements and metadata will have no affect.'
+      } );
 
-    const pedigreeGraphNode = new PedigreeGraphNode( pedigreeModel, {
-      graphWidth: graphWidth,
-      graphHeight: size.height,
-      tandem: options.tandem.createTandem( 'pedigreeGraphNode' )
-    } );
+    const pedigreeGraphNode = new PedigreeGraphNode( selectedBunnyProperty,
+      furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
+        graphWidth: graphWidth,
+        graphHeight: size.height,
+        tandem: options.tandem.createTandem( 'pedigreeGraphNode' )
+      } );
 
     assert && assert( !options.children, 'PedigreeNode sets children' );
     options.children = NaturalSelectionConstants.ALLELES_VISIBLE ?
@@ -71,11 +88,13 @@ class PedigreeNode extends HBox {
       [ pedigreeGraphNode ];
 
     super( options );
+  }
 
-    // Create a link to the model that this Node displays
-    this.addLinkedElement( pedigreeModel, {
-      tandem: options.tandem.createTandem( 'pedigreeModel' )
-    } );
+  /**
+   * @public
+   */
+  reset() {
+    this.resetPedigreeNode();
   }
 
   /**

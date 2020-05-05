@@ -106,11 +106,12 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     // Pedigree
-    const pedigreeNode = new PedigreeNode( model.pedigreeModel, graphAreaSize, {
-      left: graphAreaLeft,
-      top: graphAreaTop,
-      tandem: graphsTandem.createTandem( 'pedigreeNode' )
-    } );
+    const pedigreeNode = new PedigreeNode(
+      model.environmentModel.genePool, model.environmentModel.selectedBunnyProperty, graphAreaSize, {
+        left: graphAreaLeft,
+        top: graphAreaTop,
+        tandem: graphsTandem.createTandem( 'pedigreeNode' )
+      } );
 
     // @public
     this.selectedGraphProperty = new EnumerationProperty( Graphs, Graphs.POPULATION, {
@@ -191,6 +192,7 @@ class NaturalSelectionScreenView extends ScreenView {
       this.selectedGraphProperty.reset();
       environmentNode.reset();
       populationNode.reset();
+      pedigreeNode.reset();
     };
 
     // Simulation mode determines which UI controls are enabled.

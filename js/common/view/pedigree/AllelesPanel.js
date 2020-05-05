@@ -22,19 +22,25 @@ import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
-import PedigreeModel from '../../model/PedigreeModel.js';
+import GenePool from '../../model/GenePool.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
 
 class AllelesPanel extends NaturalSelectionPanel {
 
   /**
-   * @param {PedigreeModel} pedigreeModel
+   * @param {GenePool} genePool
+   * @param {Property.<boolean>} furAllelesVisibleProperty
+   * @param {Property.<boolean>} earsAllelesVisibleProperty
+   * @param {Property.<boolean>} teethAllelesVisibleProperty
    * @param {Object} [options]
    */
-  constructor( pedigreeModel, options ) {
+  constructor( genePool, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
 
-    assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
+    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
+    assert && assert( furAllelesVisibleProperty instanceof Property, 'invalid furAllelesVisibleProperty' );
+    assert && assert( earsAllelesVisibleProperty instanceof Property, 'invalid earsAllelesVisibleProperty' );
+    assert && assert( teethAllelesVisibleProperty instanceof Property, 'invalid teethAllelesVisibleProperty' );
 
     options = merge( {
 
@@ -57,17 +63,17 @@ class AllelesPanel extends NaturalSelectionPanel {
         } ),
 
         // Fur
-        new Row( pedigreeModel.genePool.furGene, pedigreeModel.furAllelesVisibleProperty, alleleAlignGroup, {
+        new Row( genePool.furGene, furAllelesVisibleProperty, alleleAlignGroup, {
           tandem: options.tandem.createTandem( 'furRow' )
         } ),
 
         // Ears
-        new Row( pedigreeModel.genePool.earsGene, pedigreeModel.earsAllelesVisibleProperty, alleleAlignGroup, {
+        new Row( genePool.earsGene, earsAllelesVisibleProperty, alleleAlignGroup, {
           tandem: options.tandem.createTandem( 'earsRow' )
         } ),
 
         // Teeth
-        new Row( pedigreeModel.genePool.teethGene, pedigreeModel.teethAllelesVisibleProperty, alleleAlignGroup, {
+        new Row( genePool.teethGene, teethAllelesVisibleProperty, alleleAlignGroup, {
           tandem: options.tandem.createTandem( 'teethRow' )
         } )
       ]

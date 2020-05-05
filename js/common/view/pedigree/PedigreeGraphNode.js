@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../../axon/js/Property.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
@@ -13,7 +14,6 @@ import Text from '../../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
-import PedigreeModel from '../../model/PedigreeModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import PedigreeBranchNode from './PedigreeBranchNode.js';
@@ -24,14 +24,19 @@ const SELECTED_BUNNY_SCALE = 0.35;
 
 class PedigreeGraphNode extends Node {
 
-
   /**
-   * @param {PedigreeModel} pedigreeModel
+   * @param {Property.<Bunny|null>} selectedBunnyProperty
+   * @param {Property.<boolean>} furAllelesVisibleProperty
+   * @param {Property.<boolean>} earsAllelesVisibleProperty
+   * @param {Property.<boolean>} teethAllelesVisibleProperty
    * @param {Object} [options]
    */
-  constructor( pedigreeModel, options ) {
+  constructor( selectedBunnyProperty, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
 
-    assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
+    assert && assert( selectedBunnyProperty instanceof Property, 'invalid selectedBunnyProperty' );
+    assert && assert( furAllelesVisibleProperty instanceof Property, 'invalid furAllelesVisibleProperty' );
+    assert && assert( earsAllelesVisibleProperty instanceof Property, 'invalid earsAllelesVisibleProperty' );
+    assert && assert( teethAllelesVisibleProperty instanceof Property, 'invalid teethAllelesVisibleProperty' );
 
     options = merge( {
       graphWidth: 100,
@@ -61,7 +66,7 @@ class PedigreeGraphNode extends Node {
     // {PedigreeBranchNode|null} The branch of the Pedigree tree that is currently displayed.
     let branchNode = null;
 
-    pedigreeModel.selectedBunnyProperty.link( bunny => {
+    selectedBunnyProperty.link( bunny => {
       selectABunnyText.visible = !bunny;
 
       if ( branchNode ) {
@@ -71,9 +76,9 @@ class PedigreeGraphNode extends Node {
 
       if ( bunny ) {
         branchNode = new PedigreeBranchNode( bunny, TREE_DEPTH,
-          pedigreeModel.furAllelesVisibleProperty,
-          pedigreeModel.earsAllelesVisibleProperty,
-          pedigreeModel.teethAllelesVisibleProperty, {
+          furAllelesVisibleProperty,
+          earsAllelesVisibleProperty,
+          teethAllelesVisibleProperty, {
             bunnyIsSelected: true,
             scale: SELECTED_BUNNY_SCALE,
             center: backgroundNode.center
