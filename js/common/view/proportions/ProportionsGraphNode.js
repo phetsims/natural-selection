@@ -132,6 +132,7 @@ class ProportionsGraphNode extends Node {
   }
 }
 
+//TODO this needs to be restructured as Column, so that we can show/hide the column for a trait
 /**
  * Row is a row in the Proportions graph.
  */
