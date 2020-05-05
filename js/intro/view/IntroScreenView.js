@@ -28,7 +28,8 @@ class IntroScreenView extends NaturalSelectionScreenView {
       tandem: tandem
     } );
 
-    //TODO hide Ears, Teeth, and Limited Food features, by setting visibleProperty for associated PhET-iO elements
+    //TODO see https://github.com/phetsims/natural-selection/issues/70
+    // hide Ears, Teeth, and Limited Food features, by setting visibleProperty for associated PhET-iO elements
     // naturalSelection.labScreen.view.addMutationsPanel.earsRow
     // naturalSelection.labScreen.view.addMutationsPanel.teethRow
     // naturalSelection.labScreen.view.environmentalFactorsPanel.limitedFoodCheckbox
