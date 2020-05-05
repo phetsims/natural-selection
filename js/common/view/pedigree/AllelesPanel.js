@@ -160,28 +160,30 @@ class Row extends VBox {
 
     super( options );
 
-    gene.dominantAlleleProperty.link( dominantAllele => {
+    if ( NaturalSelectionConstants.ALLELES_VISIBLE ) {
+      gene.dominantAlleleProperty.link( dominantAllele => {
 
-      const hasMutation = !!dominantAllele;
+        const hasMutation = !!dominantAllele;
 
-      // Disable the checkbox when there is no mutation
-      checkbox.enabled = hasMutation;
+        // Disable the checkbox when there is no mutation
+        checkbox.enabled = hasMutation;
 
-      // Don't show allele abbreviation and icon when there is no mutation
-      hBox.visible = hasMutation;
+        // Don't show allele abbreviation and icon when there is no mutation
+        hBox.visible = hasMutation;
 
-      // Automatically make the alleles visible.
-      // Corresponding alleles should not be visible when the row is disabled.
-      visibleProperty.value = hasMutation && NaturalSelectionConstants.ALLELES_VISIBLE;
+        // Automatically make the alleles visible.
+        // Corresponding alleles should not be visible when the row is disabled.
+        visibleProperty.value = hasMutation;
 
-      if ( dominantAllele ) {
+        if ( dominantAllele ) {
 
-        // Show the correct allele icons for dominant vs recessive
-        const mutantIsDominant = ( dominantAllele === gene.mutantAllele );
-        dominantAlleleNode.image = mutantIsDominant ? gene.mutantAllele.image : gene.normalAllele.image;
-        recessiveAlleleNode.image = mutantIsDominant ? gene.normalAllele.image : gene.mutantAllele.image;
-      }
-    } );
+          // Show the correct allele icons for dominant vs recessive
+          const mutantIsDominant = ( dominantAllele === gene.mutantAllele );
+          dominantAlleleNode.image = mutantIsDominant ? gene.mutantAllele.image : gene.normalAllele.image;
+          recessiveAlleleNode.image = mutantIsDominant ? gene.normalAllele.image : gene.mutantAllele.image;
+        }
+      } );
+    }
   }
 
   /**
