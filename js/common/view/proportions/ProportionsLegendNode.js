@@ -45,32 +45,36 @@ class ProportionsLegendNode extends VBox {
     assert && assert( options.spacing, 'ProportionsLegendNode sets spacing' );
     options.spacing = 25;
 
+    const furLegendNode = new GeneLegendNode( genePool.furGene, {
+      tandem: options.tandem.createTandem( 'furLegendNode' ),
+      normalTandemName: 'whiteFurLegendNode',
+      mutantTandemName: 'brownFurLegendNode'
+    } );
+
+    const earsLegendNode = new GeneLegendNode( genePool.earsGene, {
+      tandem: options.tandem.createTandem( 'earsLegendNode' ),
+      normalTandemName: 'straightEarsLegendNode',
+      mutantTandemName: 'floppyEarsLegendNode'
+    } );
+
+    const teethLegendNode = new GeneLegendNode( genePool.teethGene, {
+      tandem: options.tandem.createTandem( 'teethLegendNode' ),
+      normalTandemName: 'shortTeethLegendNode',
+      mutantTandemName: 'longTeethLegendNode'
+    } );
+
     assert && assert( !options.children, 'ProportionsLegendNode sets children' );
     options.children = [
-
-      // Fur
-      new GeneLegendNode( genePool.furGene, {
-        tandem: options.tandem.createTandem( 'furLegendNode' ),
-        normalTandemName: 'whiteFurLegendNode',
-        mutantTandemName: 'brownFurLegendNode'
-      } ),
-
-      // Ears
-      new GeneLegendNode( genePool.earsGene, {
-          tandem: options.tandem.createTandem( 'earsLegendNode' ),
-          normalTandemName: 'straightEarsLegendNode',
-          mutantTandemName: 'floppyEarsLegendNode'
-        } ),
-
-      // Teeth
-      new GeneLegendNode( genePool.teethGene, {
-          tandem: options.tandem.createTandem( 'teethLegendNode' ),
-          normalTandemName: 'shortTeethLegendNode',
-          mutantTandemName: 'longTeethLegendNode'
-        } )
+      furLegendNode,
+      earsLegendNode,
+      teethLegendNode
     ];
 
     super( options );
+
+    // @public for configuring Intro screen only
+    this.earsLegendNode = earsLegendNode;
+    this.teethLegendNode = teethLegendNode;
   }
 
   /**

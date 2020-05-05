@@ -239,6 +239,13 @@ class NaturalSelectionScreenView extends ScreenView {
       model.simulationModeProperty.value = SimulationMode.COMPLETED;
     } );
 
+    // @protected for configuring Intro screen only
+    this.addMutationsPanel = addMutationsPanel;
+    this.environmentalFactorsPanel = environmentalFactorsPanel;
+    this.populationNode = populationNode;
+    this.proportionsNode = proportionsNode;
+    this.pedigreeNode = pedigreeNode;
+
     // @private
     this.model = model;
     this.environmentNode = environmentNode;

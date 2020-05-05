@@ -64,6 +64,9 @@ class ProportionsNode extends HBox {
     this.addLinkedElement( proportionsModel, {
       tandem: options.tandem.createTandem( 'proportionsModel' )
     } );
+
+    // @public for configuring Intro screen only
+    this.proportionsPanel = proportionsPanel;
   }
 
   /**

@@ -30,19 +30,19 @@ class IntroScreenView extends NaturalSelectionScreenView {
 
     //TODO see https://github.com/phetsims/natural-selection/issues/70
     // hide Ears, Teeth, and Limited Food features, by setting visibleProperty for associated PhET-iO elements
-    // naturalSelection.labScreen.view.addMutationsPanel.earsRow
-    // naturalSelection.labScreen.view.addMutationsPanel.teethRow
-    // naturalSelection.labScreen.view.environmentalFactorsPanel.limitedFoodCheckbox
-    // naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.earsRow
-    // naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.teethRow
-    // naturalSelection.labScreen.view.graphs.populationNode.populationPanel.straightEarsCheckbox
-    // naturalSelection.labScreen.view.graphs.populationNode.populationPanel.floppyEarsCheckbox
-    // naturalSelection.labScreen.view.graphs.populationNode.populationPanel.shortTeethCheckbox
-    // naturalSelection.labScreen.view.graphs.populationNode.populationPanel.longTeethCheckbox
-    // naturalSelection.labScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.earsLegendNode
-    // naturalSelection.labScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.teethLegendNode
-    // naturalSelection.labScreen.view.graphs.proportionsNode.proportionsGraphNode.earsColumn
-    // naturalSelection.labScreen.view.graphs.proportionsNode.proportionsGraphNode.teethColumn
+    this.addMutationsPanel.earsRow.visibleProperty.value = false;
+    this.addMutationsPanel.teethRow.visibleProperty.value = false;
+    this.environmentalFactorsPanel.limitedFoodCheckbox.visibleProperty.value = false;
+    this.populationNode.populationPanel.straightEarsCheckbox.visibleProperty.value = false;
+    this.populationNode.populationPanel.floppyEarsCheckbox.visibleProperty.value = false;
+    this.populationNode.populationPanel.shortTeethCheckbox.visibleProperty.value = false;
+    this.populationNode.populationPanel.longTeethCheckbox.visibleProperty.value = false;
+    this.proportionsNode.proportionsPanel.legendNode.earsLegendNode.visibleProperty.value = false;
+    this.proportionsNode.proportionsPanel.legendNode.teethLegendNode.visibleProperty.value = false;
+    // this.proportionsNode.proportionsGraphNode.earsColumn
+    // this.proportionsNode.proportionsGraphNode.teethColumn
+    this.pedigreeNode.allelesPanel.earsRow.visibleProperty.value = false;
+    this.pedigreeNode.allelesPanel.teethRow.visibleProperty.value = false;
   }
 
   /**

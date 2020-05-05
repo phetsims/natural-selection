@@ -45,24 +45,20 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       tandem: options.tandem.createTandem( 'titleNode' )
     } );
 
+    const wolvesCheckbox = new WolvesCheckbox( wolves.enabledProperty, {
+      tandem: options.tandem.createTandem( 'wolvesCheckbox' )
+    } );
+
+    const toughFoodCheckbox = new ToughFoodCheckbox( foodSupply.isToughProperty, {
+      tandem: options.tandem.createTandem( 'toughFoodCheckbox' )
+    } );
+
+    const limitedFoodCheckbox =         new LimitedFoodCheckbox( foodSupply.isLimitedProperty, {
+      tandem: options.tandem.createTandem( 'limitedFoodCheckbox' )
+    } );
+
     const checkboxes = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-      children: [
-
-        // Wolves
-        new WolvesCheckbox( wolves.enabledProperty, {
-          tandem: options.tandem.createTandem( 'wolvesCheckbox' )
-        } ),
-
-        // Tough Food
-        new ToughFoodCheckbox( foodSupply.isToughProperty, {
-          tandem: options.tandem.createTandem( 'toughFoodCheckbox' )
-        } ),
-
-        // Limited Food
-        new LimitedFoodCheckbox( foodSupply.isLimitedProperty, {
-          tandem: options.tandem.createTandem( 'limitedFoodCheckbox' )
-        } )
-      ]
+      children: [ wolvesCheckbox, toughFoodCheckbox, limitedFoodCheckbox ]
     } ) );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
@@ -78,6 +74,9 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
                        naturalSelectionStrings.environmentalFactor :
                        naturalSelectionStrings.environmentalFactors;
     } );
+
+    // @public for configuring Intro screen only
+    this.limitedFoodCheckbox = limitedFoodCheckbox;
   }
 
   /**

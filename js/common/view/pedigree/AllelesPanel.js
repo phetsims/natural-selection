@@ -51,35 +51,35 @@ class AllelesPanel extends NaturalSelectionPanel {
     // To make the abbreviation + icon for all alleles the same effective size
     const alleleAlignGroup = new AlignGroup();
 
+    // Alleles - title is plural, since we're always showing at least 2 alleles
+    const titleNode = new Text( naturalSelectionStrings.alleles, {
+      font: NaturalSelectionConstants.TITLE_FONT,
+      maxWidth: 125, // determined empirically
+      tandem: options.tandem.createTandem( 'titleNode' )
+    } );
+
+    const furRow = new Row( genePool.furGene, furAllelesVisibleProperty, alleleAlignGroup, {
+      tandem: options.tandem.createTandem( 'furRow' )
+    } );
+
+    const earsRow = new Row( genePool.earsGene, earsAllelesVisibleProperty, alleleAlignGroup, {
+      tandem: options.tandem.createTandem( 'earsRow' )
+    } );
+
+    const teethRow = new Row( genePool.teethGene, teethAllelesVisibleProperty, alleleAlignGroup, {
+      tandem: options.tandem.createTandem( 'teethRow' )
+    } );
+
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       spacing: 25,
-      children: [
-
-        // Alleles - title is plural, since we're always showing at least 2 alleles
-        new Text( naturalSelectionStrings.alleles, {
-          font: NaturalSelectionConstants.TITLE_FONT,
-          maxWidth: 125, // determined empirically
-          tandem: options.tandem.createTandem( 'titleNode' )
-        } ),
-
-        // Fur
-        new Row( genePool.furGene, furAllelesVisibleProperty, alleleAlignGroup, {
-          tandem: options.tandem.createTandem( 'furRow' )
-        } ),
-
-        // Ears
-        new Row( genePool.earsGene, earsAllelesVisibleProperty, alleleAlignGroup, {
-          tandem: options.tandem.createTandem( 'earsRow' )
-        } ),
-
-        // Teeth
-        new Row( genePool.teethGene, teethAllelesVisibleProperty, alleleAlignGroup, {
-          tandem: options.tandem.createTandem( 'teethRow' )
-        } )
-      ]
+      children: [ titleNode, furRow, earsRow, teethRow ]
     } ) );
 
     super( content, options );
+
+    // @public for configuring Intro screen only
+    this.earsRow = earsRow;
+    this.teethRow = teethRow;
   }
 
   /**

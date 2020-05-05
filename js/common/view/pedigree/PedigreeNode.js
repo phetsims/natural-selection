@@ -79,6 +79,9 @@ class PedigreeNode extends HBox {
       [ pedigreeGraphNode ];
 
     super( options );
+
+    // @public for configuring Intro screen only
+    this.allelesPanel = allelesPanel;
   }
 
   /**

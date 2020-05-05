@@ -59,13 +59,16 @@ class PopulationNode extends Node {
 
     super( options );
 
-    // @private
-    this.populationGraphNode = populationGraphNode;
-
     // Create a link to the model that this Node displays
     this.addLinkedElement( populationModel, {
       tandem: options.tandem.createTandem( 'populationModel' )
     } );
+
+    // @public for configuring Intro screen only
+    this.populationPanel = populationPanel;
+
+    // @private
+    this.populationGraphNode = populationGraphNode;
   }
 
   /**

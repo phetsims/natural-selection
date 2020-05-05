@@ -38,35 +38,38 @@ class ProportionsPanel extends NaturalSelectionPanel {
       tandem: Tandem.REQUIRED
     }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
+    const legendNode = new ProportionsLegendNode( proportionsModel.genePool, {
+      tandem: options.tandem.createTandem( 'legendNode' )
+    } );
+
+    const separator =  new HSeparator( options.fixedWidth - 2 * options.xMargin, {
+      stroke: NaturalSelectionColors.SEPARATOR_STROKE,
+      tandem: options.tandem.createTandem( 'separator' )
+    } );
+
+    const valuesCheckbox = new Checkbox(
+      new Text( naturalSelectionStrings.values, {
+        font: NaturalSelectionConstants.CHECKBOX_FONT,
+        maxWidth: 100 // determined empirically
+      } ),
+      proportionsModel.valuesVisibleProperty,
+      merge( {
+        tandem: options.tandem.createTandem( 'valuesCheckbox' )
+      }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
+    );
+
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: [
-
-        // Legend for alleles
-        new ProportionsLegendNode( proportionsModel.genePool, {
-          tandem: options.tandem.createTandem( 'legendNode' )
-        } ),
-
-        // ---------
-        new HSeparator( options.fixedWidth - 2 * options.xMargin, {
-          stroke: NaturalSelectionColors.SEPARATOR_STROKE,
-          tandem: options.tandem.createTandem( 'separator' )
-        } ),
-
-        // Values checkbox
-        new Checkbox(
-          new Text( naturalSelectionStrings.values, {
-            font: NaturalSelectionConstants.CHECKBOX_FONT,
-            maxWidth: 100 // determined empirically
-          } ),
-          proportionsModel.valuesVisibleProperty,
-          merge( {
-            tandem: options.tandem.createTandem( 'valuesCheckbox' )
-          }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
-        )
+        legendNode,
+        separator,
+        valuesCheckbox
       ]
     } ) );
 
     super( content, options );
+
+    // @public for configuring Intro screen only
+    this.legendNode = legendNode;
   }
 
   /**
