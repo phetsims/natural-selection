@@ -58,6 +58,7 @@ class PedigreeGraphNode extends Node {
 
     super( options );
 
+    // {PedigreeBranchNode|null} The branch of the Pedigree tree that is currently displayed.
     let branchNode = null;
 
     pedigreeModel.selectedBunnyProperty.link( bunny => {
