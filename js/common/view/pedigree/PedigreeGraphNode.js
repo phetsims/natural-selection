@@ -69,11 +69,14 @@ class PedigreeGraphNode extends Node {
       }
 
       if ( bunny ) {
-        branchNode = new PedigreeBranchNode( bunny, TREE_DEPTH, {
-          bunnyIsSelected: true,
-          scale: SELECTED_BUNNY_SCALE,
-          center: backgroundNode.center
-        } );
+        branchNode = new PedigreeBranchNode( bunny, TREE_DEPTH,
+          pedigreeModel.furAllelesVisibleProperty,
+          pedigreeModel.earsAllelesVisibleProperty,
+          pedigreeModel.teethAllelesVisibleProperty, {
+            bunnyIsSelected: true,
+            scale: SELECTED_BUNNY_SCALE,
+            center: backgroundNode.center
+          } );
         this.addChild( branchNode );
       }
     } );

@@ -6,11 +6,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../../axon/js/Property.js';
 import Shape from '../../../../../kite/js/Shape.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../../scenery/js/nodes/Path.js';
 import naturalSelection from '../../../naturalSelection.js';
+import Bunny from '../../model/Bunny.js';
 import PedigreeBunnyNode from './PedigreeBunnyNode.js';
 
 // constants
@@ -21,9 +23,18 @@ class PedigreeBranchNode extends Node {
   /**
    * @param {Bunny} bunny
    * @param {number} depth
+   * @param {Property.<boolean>} furAllelesVisibleProperty
+   * @param {Property.<boolean>} earsAllelesVisibleProperty
+   * @param {Property.<boolean>} teethAllelesVisibleProperty
    * @param {Object} [options]
    */
-  constructor( bunny, depth, options ) {
+  constructor( bunny, depth, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
+
+    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
+    assert && assert( typeof depth === 'number', 'invalid depth' );
+    assert && assert( furAllelesVisibleProperty instanceof Property, 'invalid furAllelesVisibleProperty' );
+    assert && assert( earsAllelesVisibleProperty instanceof Property, 'invalid earsAllelesVisibleProperty' );
+    assert && assert( teethAllelesVisibleProperty instanceof Property, 'invalid teethAllelesVisibleProperty' );
 
     const children = [];
 
@@ -33,40 +44,43 @@ class PedigreeBranchNode extends Node {
       parentsYOffset: 175
     }, options );
 
-    const bunnyNode = new PedigreeBunnyNode( bunny, {
-      isSelected: options.bunnyIsSelected,
-      centerX: 0,
-      bottom: 0
-    } );
+    const bunnyNode = new PedigreeBunnyNode( bunny,
+      furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
+        isSelected: options.bunnyIsSelected,
+        centerX: 0,
+        bottom: 0
+      } );
     children.push( bunnyNode );
 
     let fatherNode = null;
     let motherNode = null;
     if ( depth > 0 && bunny.father && bunny.mother ) {
 
-      fatherNode = new PedigreeBranchNode( bunny.father, depth - 1, {
-        parentsXSpacing: 0.6 * options.parentsXSpacing,
-        parentsYSpacing: 0.6 * options.parentsYSpacing,
-        scale: PARENTS_SCALE,
-        centerX: bunnyNode.centerX - options.parentsXSpacing,
-        bottom: bunnyNode.bottom - options.parentsYOffset
-      } );
+      fatherNode = new PedigreeBranchNode( bunny.father, depth - 1,
+        furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
+          parentsXSpacing: 0.6 * options.parentsXSpacing,
+          parentsYSpacing: 0.6 * options.parentsYSpacing,
+          scale: PARENTS_SCALE,
+          centerX: bunnyNode.centerX - options.parentsXSpacing,
+          bottom: bunnyNode.bottom - options.parentsYOffset
+        } );
       children.push( fatherNode );
 
-      motherNode = new PedigreeBranchNode( bunny.mother, depth - 1, {
-        parentsXSpacing: 0.7 * options.parentsXSpacing,
-        parentsYSpacing: 0.7 * options.parentsYSpacing,
-        scale: PARENTS_SCALE,
-        centerX: bunnyNode.centerX + options.parentsXSpacing,
-        bottom: bunnyNode.bottom - options.parentsYOffset
-      } );
+      motherNode = new PedigreeBranchNode( bunny.mother, depth - 1,
+        furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
+          parentsXSpacing: 0.7 * options.parentsXSpacing,
+          parentsYSpacing: 0.7 * options.parentsYSpacing,
+          scale: PARENTS_SCALE,
+          centerX: bunnyNode.centerX + options.parentsXSpacing,
+          bottom: bunnyNode.bottom - options.parentsYOffset
+        } );
       children.push( motherNode );
 
       const tShape = new Shape()
-        .moveTo( bunnyNode.centerX, bunnyNode.top )
-        .lineTo( bunnyNode.centerX, fatherNode.bottom )
-        .moveTo( fatherNode.centerX, fatherNode.bottom )
-        .lineTo( motherNode.centerX, fatherNode.bottom );
+        .moveTo( fatherNode.x + 50, fatherNode.y )
+        .lineTo( motherNode.x - 50, fatherNode.y )
+        .moveTo( bunnyNode.centerX, fatherNode.y )
+        .lineTo( bunnyNode.centerX, fatherNode.y + 15 );
       const tPath = new Path( tShape, {
         lineWidth: 1,
         stroke: 'black'

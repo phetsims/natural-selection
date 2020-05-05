@@ -104,6 +104,22 @@ class GenePair extends PhetioObject {
   }
 
   /**
+   * Gets the abbreviation of the alleles in this gene pair. If there is no dominant gene, then an abbreviation is
+   * meaningless, and the empty string is returned.
+   * @returns {string}
+   */
+  getAllelesAbbreviation() {
+    let s = '';
+    const gene = this.gene;
+    const dominantAllele = gene.dominantAlleleProperty.value;
+    if ( dominantAllele ) {
+      s = ( this.fatherAllele === dominantAllele ) ? gene.dominantSymbol : gene.recessiveSymbol;
+      s += ( this.motherAllele === dominantAllele ) ? gene.dominantSymbol : gene.recessiveSymbol;
+    }
+    return s;
+  }
+
+  /**
    * Creates a GenePair by inheriting from parents or applying an optional mutation.
    * @param {Gene} gene
    * @param {GenePair|null} fatherGenePair

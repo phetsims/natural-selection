@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../../axon/js/Property.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
@@ -21,23 +22,34 @@ class PedigreeBunnyNode extends Node {
 
   /**
    * @param {Bunny} bunny
+   * @param {Property.<boolean>} furAllelesVisibleProperty
+   * @param {Property.<boolean>} earsAllelesVisibleProperty
+   * @param {Property.<boolean>} teethAllelesVisibleProperty
    * @param {Object} [options]
    */
-  constructor( bunny, options ) {
+  constructor( bunny, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
+    assert && assert( furAllelesVisibleProperty instanceof Property, 'invalid furAllelesVisibleProperty' );
+    assert && assert( earsAllelesVisibleProperty instanceof Property, 'invalid earsAllelesVisibleProperty' );
+    assert && assert( teethAllelesVisibleProperty instanceof Property, 'invalid teethAllelesVisibleProperty' );
 
     options = merge( {
       isSelected: false
     }, options );
 
-    const wrappedImage = BunnyImageCache.getWrappedImage( bunny );
+    const children = [];
 
-    assert && assert( !options.children, 'PedigreeBunnyNode sets children' );
-    options.children = [ wrappedImage ];
+    const wrappedImage = BunnyImageCache.getWrappedImage( bunny );
+    children.push( wrappedImage );
+
+    const allelesNode = new Text( '', {
+      font: new PhetFont( 40 )
+    } );
+    children.push( allelesNode );
 
     if ( bunny.genotype.isFirstGenerationMutant ) {
-      options.children.push( new MutationIconNode( {
+      children.push( new MutationIconNode( {
         radius: 30,
         left: wrappedImage.left,
         bottom: wrappedImage.bottom
@@ -57,8 +69,11 @@ class PedigreeBunnyNode extends Node {
         center: wrappedImage.center,
         pickable: false
       } );
-      options.children.unshift( selectionRectangle );
+      children.unshift( selectionRectangle );
     }
+
+    assert && assert( !options.children, 'PedigreeBunnyNode sets children' );
+    options.children = children;
 
     super( options );
 
@@ -76,18 +91,66 @@ class PedigreeBunnyNode extends Node {
     };
     bunny.isAliveProperty.link( isAliveListener );
 
+    Property.multilink(
+      [ furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty ],
+      ( furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) => {
+        allelesNode.visible = ( furAllelesVisible || earsAllelesVisible || teethAllelesVisible );
+        allelesNode.text = getAllelesString( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible );
+        allelesNode.centerX = wrappedImage.centerX;
+        allelesNode.top = wrappedImage.bottom + 5;
+      } );
+
     // @private
     this.disposePedigreeBunnyNode = () => {
       if ( bunny.isAliveProperty.hasListener( isAliveListener ) ) {
         bunny.isAliveProperty.unlink( isAliveListener );
       }
     };
+
+    // If logging is enabled, pressing on a bunny logs its details to the console.
+    if ( phet.log ) {
+      this.addInputListener( {
+        down: () => phet.log( bunny.toString() )
+      } );
+    }
   }
 
   dispose() {
     this.disposePedigreeBunnyNode();
     super.dispose();
   }
+}
+
+/**
+ * Gets the allele abbreviations for a Bunny's genotype.
+ * @param {Bunny} bunny
+ * @param {boolean} furAllelesVisible
+ * @param {boolean} earsAllelesVisible
+ * @param {boolean} teethAllelesVisible
+ * @returns {string}
+ */
+function getAllelesString( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) {
+
+  assert && assert( bunny instanceof Bunny, 'invalid bunny' );
+  assert && assert( typeof furAllelesVisible === 'boolean', 'invalid furAllelesVisible' );
+  assert && assert( typeof earsAllelesVisible === 'boolean', 'invalid earsAllelesVisible' );
+  assert && assert( typeof teethAllelesVisible === 'boolean', 'invalid teethAllelesVisible' );
+
+  let allelesString = '';
+
+  if ( furAllelesVisible ) {
+    allelesString += bunny.genotype.furGenePair.getAllelesAbbreviation();
+  }
+
+  if ( earsAllelesVisible ) {
+    allelesString += bunny.genotype.earsGenePair.getAllelesAbbreviation();
+  }
+
+  if ( teethAllelesVisible ) {
+    allelesString += bunny.genotype.teethGenePair.getAllelesAbbreviation();
+  }
+
+  return allelesString;
 }
 
 naturalSelection.register( 'PedigreeBunnyNode', PedigreeBunnyNode );
