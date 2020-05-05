@@ -16,6 +16,7 @@ import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModel from '../model/EnvironmentModel.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import BunnyCountsNode from './BunnyCountsNode.js';
 import BunnyNodeCollection from './BunnyNodeCollection.js';
 import BunnyPressListener from './BunnyPressListener.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
@@ -89,6 +90,16 @@ class EnvironmentNode extends Node {
     ];
 
     super( options );
+
+    // Show counts in the upper-left corner
+    if ( NaturalSelectionConstants.SHOW_INFO ) {
+      this.addChild( new BunnyCountsNode(
+        environmentModel.bunnyCollection.liveBunnies.lengthProperty,
+        environmentModel.bunnyCollection.deadBunnies.lengthProperty, {
+          left: backgroundNode.left + 5,
+          top: backgroundNode.top + 5
+        } ) );
+    }
 
     // Create a link to the model that this Node displays
     this.addLinkedElement( environmentModel, {

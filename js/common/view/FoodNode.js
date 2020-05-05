@@ -51,8 +51,8 @@ class FoodNode extends SpriteNode {
       options.children.push( new OriginNode() );
     }
 
-    // Show the tandem name
-    if ( NaturalSelectionConstants.SHOW_SPRITE_INFO ) {
+    // Show the tandem name centered below the food
+    if ( NaturalSelectionConstants.SHOW_INFO ) {
       options.children.push( new Text( food.tandem.name, {
         font: new PhetFont( 12 ),
         fill: 'black',

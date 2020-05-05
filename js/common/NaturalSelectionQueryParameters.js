@@ -110,8 +110,8 @@ const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
     type: 'flag'
   },
 
-  // Adds debugging information to sprites (bunnies, wolves, food)
-  showSpriteInfo: {
+  // Adds various debugging info to the UI
+  showInfo: {
     type: 'flag'
   },
 
