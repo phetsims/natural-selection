@@ -11,6 +11,7 @@ import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModel from './EnvironmentModel.js';
+import PedigreeModel from './PedigreeModel.js';
 import PopulationModel from './PopulationModel.js';
 import ProportionsModel from './ProportionsModel.js';
 import SimulationMode from './SimulationMode.js';
@@ -57,6 +58,11 @@ class NaturalSelectionModel {
         tandem: tandem.createTandem( 'proportionsModel' )
       } );
 
+    // @public (read-only)
+    this.pedigreeModel = new PedigreeModel( {
+        tandem: tandem.createTandem( 'pedigreeModel' )
+      } );
+
     // When the simulation state changes, adjust the model.
     this.simulationModeProperty.link( simulationMode => {
       phet.log && phet.log( `simulationMode=${simulationMode}` );
@@ -92,6 +98,7 @@ class NaturalSelectionModel {
     this.environmentModel.reset();
     this.populationModel.reset();
     this.proportionsModel.reset();
+    this.pedigreeModel.reset();
 
     // Properties that apply to the entire model
     this.isPlayingProperty.reset();
