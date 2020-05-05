@@ -172,7 +172,7 @@ class Row extends VBox {
 
       // Automatically make the alleles visible.
       // Corresponding alleles should not be visible when the row is disabled.
-      visibleProperty.value = hasMutation;
+      visibleProperty.value = hasMutation && NaturalSelectionConstants.ALLELES_VISIBLE;
 
       if ( dominantAllele ) {
 
