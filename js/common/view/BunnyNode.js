@@ -95,4 +95,5 @@ class BunnyNode extends SpriteNode {
   }
 }
 
-export default naturalSelection.register( 'BunnyNode', BunnyNode );
+naturalSelection.register( 'BunnyNode', BunnyNode );
+export default BunnyNode;
