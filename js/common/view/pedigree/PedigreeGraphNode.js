@@ -55,7 +55,8 @@ class PedigreeGraphNode extends Node {
     const selectABunnyText = new Text( naturalSelectionStrings.selectABunny, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
       centerX: backgroundNode.centerX,
-      centerY: backgroundNode.top + ( backgroundNode.height / 6 )
+      centerY: backgroundNode.top + ( backgroundNode.height / 6 ),
+      maxWidth: 0.5 * backgroundNode.width
     } );
 
     assert && assert( !options.children, 'PedigreeGraphNode sets children' );

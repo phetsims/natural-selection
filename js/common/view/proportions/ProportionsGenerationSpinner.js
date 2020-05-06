@@ -36,8 +36,9 @@ class ProportionsGenerationSpinner extends NumberSpinner {
       xSpacing: 10,
       valuePattern: naturalSelectionStrings.generationValue,
       valueAlign: 'center',
+      valueMaxWidth: 250, // determined empirically
       font: NaturalSelectionConstants.PROPORTIONS_GENERATION_CONTROL_FONT,
-      backgroundMinWidth: 100, // set empirically
+      backgroundMinWidth: 100, // determined empirically
 
       // phet-io
       tandem: Tandem.REQUIRED
