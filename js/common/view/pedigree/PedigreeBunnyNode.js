@@ -44,7 +44,8 @@ class PedigreeBunnyNode extends Node {
     children.push( wrappedImage );
 
     const allelesNode = new Text( '', {
-      font: new PhetFont( 40 )
+      font: new PhetFont( 40 ),
+      maxWidth: wrappedImage.width
     } );
     children.push( allelesNode );
 
