@@ -264,7 +264,7 @@ class NaturalSelectionScreenView extends ScreenView {
       populationNode.populationPanel.whiteFurCheckbox.visibleProperty.value = visible;
       populationNode.populationPanel.brownFurCheckbox.visibleProperty.value = visible;
       proportionsNode.proportionsPanel.legendNode.furLegendNode.visibleProperty.value = visible;
-      //TODO this.proportionsNode.proportionsGraphNode.furColumn.visibleProperty.value = visible;
+      proportionsNode.proportionsGraphNode.furColumn.visibleProperty.value = visible;
       pedigreeNode.allelesPanel.furRow.visibleProperty.value = visible;
     } );
 
@@ -278,7 +278,7 @@ class NaturalSelectionScreenView extends ScreenView {
       populationNode.populationPanel.straightEarsCheckbox.visibleProperty.value = visible;
       populationNode.populationPanel.floppyEarsCheckbox.visibleProperty.value = visible;
       proportionsNode.proportionsPanel.legendNode.earsLegendNode.visibleProperty.value = visible;
-      //TODO this.proportionsNode.proportionsGraphNode.earsColumn.visibleProperty.value = visible;
+      proportionsNode.proportionsGraphNode.earsColumn.visibleProperty.value = visible;
       pedigreeNode.allelesPanel.earsRow.visibleProperty.value = visible;
     } );
 
@@ -292,7 +292,7 @@ class NaturalSelectionScreenView extends ScreenView {
       populationNode.populationPanel.shortTeethCheckbox.visibleProperty.value = visible;
       populationNode.populationPanel.longTeethCheckbox.visibleProperty.value = visible;
       proportionsNode.proportionsPanel.legendNode.teethLegendNode.visibleProperty.value = visible;
-      //TODO this.proportionsNode.proportionsGraphNode.teethColumn.visibleProperty.value = visible
+      proportionsNode.proportionsGraphNode.teethColumn.visibleProperty.value = visible;
       pedigreeNode.allelesPanel.teethRow.visibleProperty.value = visible;
     } );
   }

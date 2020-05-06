@@ -67,6 +67,7 @@ class ProportionsNode extends HBox {
 
     // @public for configuring ScreenViews only
     this.proportionsPanel = proportionsPanel;
+    this.proportionsGraphNode = proportionsGraphNode;
   }
 
   /**

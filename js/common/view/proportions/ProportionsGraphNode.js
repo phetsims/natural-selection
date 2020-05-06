@@ -21,16 +21,20 @@ import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
-import GenePool from '../../model/GenePool.js';
+import Gene from '../../model/Gene.js';
 import ProportionsModel from '../../model/ProportionsModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import ProportionsBarNode from './ProportionsBarNode.js';
 import PopulationGenerationSpinner from './ProportionsGenerationSpinner.js';
 
 // constants
-const COLUMNS_SPACING = 20;
-const LABEL_FONT = new PhetFont( 14 );
-const VALUE_FONT = new PhetFont( 14 );
+const ROW_SPACING = 30;
+const COLUMN_SPACING = 20;
+const ROW_LABEL_FONT = new PhetFont( 14 );
+const COLUMN_LABEL_FONT = new PhetFont( 14 );
+const ROW_LABELS_X_ALIGN = 'left';
+const COLUMN_LABELS_X_ALIGN = 'center';
+const CELLS_Y_ALIGN = 'bottom';
 
 class ProportionsGraphNode extends Node {
 
@@ -56,47 +60,46 @@ class ProportionsGraphNode extends Node {
       stroke: NaturalSelectionColors.PANEL_STROKE
     } );
 
-    // cells in the column the contains row labels (the first column) will all have the same effective size
-    const labelColumnAlignGroup = new AlignGroup();
+    const startRowLabel = new RowLabel( naturalSelectionStrings.startOfGeneration, proportionsModel.startCountProperty );
+    const endRowLabel = new RowLabel( naturalSelectionStrings.endOfGeneration, proportionsModel.endCountProperty );
 
-    // cells in the columns that contain bars will all have the same effective width
-    const barColumnsAlignGroup = new AlignGroup( { matchVertical: false } );
+    // For layout purposes, consider the graph to be a 2D grid. All cells will have the same effective size.
+    const cellAlignGroup = new AlignGroup();
 
-    // Column labels
-    const columnLabelOptions = {
-      font: LABEL_FONT,
-      maxWidth: 120 // determined empirically
+    // Layout of the first column, which contains row labels
+    const alignBoxOptions = {
+      group: cellAlignGroup,
+      xAlign: ROW_LABELS_X_ALIGN,
+      yAlign: CELLS_Y_ALIGN
     };
-    const columnLabels = new HBox( {
-      spacing: COLUMNS_SPACING,
+    const labelsColumn = new VBox( {
+      spacing: ROW_SPACING,
       children: [
-        new AlignBox( new Text( '', columnLabelOptions ), { group: barColumnsAlignGroup } ),
-        new AlignBox( new Text( proportionsModel.genePool.furGene.name, columnLabelOptions ), { group: barColumnsAlignGroup } ),
-        new AlignBox( new Text( proportionsModel.genePool.earsGene.name, columnLabelOptions ), { group: barColumnsAlignGroup } ),
-        new AlignBox( new Text( proportionsModel.genePool.teethGene.name, columnLabelOptions ), { group: barColumnsAlignGroup } )
+        new AlignBox( new Text( '', { font: ROW_LABEL_FONT } ), alignBoxOptions ), // no label for top row (column headings)
+        new AlignBox( startRowLabel, alignBoxOptions ),
+        new AlignBox( endRowLabel, alignBoxOptions )
       ]
     } );
 
-    // Rows
-    const startRow = new Row( proportionsModel.genePool, naturalSelectionStrings.startOfGeneration,
-      proportionsModel.startCountProperty, labelColumnAlignGroup, barColumnsAlignGroup,
-      proportionsModel.valuesVisibleProperty );
-    const currentRow = new Row( proportionsModel.genePool, naturalSelectionStrings.currently,
-      proportionsModel.endCountProperty, labelColumnAlignGroup, barColumnsAlignGroup,
-      proportionsModel.valuesVisibleProperty );
-    const rows = new VBox( {
-      spacing: 30,
-      align: 'left',
-      children: [ startRow, currentRow ]
+    // Columns that contain bars
+    const furColumn = new Column( proportionsModel.genePool.furGene, proportionsModel.valuesVisibleProperty, cellAlignGroup, {
+      tandem: options.tandem.createTandem( 'furColumn' )
+    } );
+    const earsColumn = new Column( proportionsModel.genePool.earsGene, proportionsModel.valuesVisibleProperty, cellAlignGroup, {
+      tandem: options.tandem.createTandem( 'earsColumn' )
+    } );
+    const teethColumn = new Column( proportionsModel.genePool.teethGene, proportionsModel.valuesVisibleProperty, cellAlignGroup, {
+      tandem: options.tandem.createTandem( 'teethColumn' )
     } );
 
-    // Column labels above rows
-    const graph = new VBox( {
-      spacing: 20,
-      align: 'left',
-      children: [ columnLabels, rows ]
+    // Layout the columns
+    const columns = new HBox( {
+      spacing: COLUMN_SPACING,
+      align: 'center',
+      children: [ labelsColumn, furColumn, earsColumn, teethColumn ]
     } );
 
+    // Spinner for selecting which generation is displayed
     const generationSpinner = new PopulationGenerationSpinner( proportionsModel.generationProperty, {
       tandem: options.tandem.createTandem( 'generationSpinner' )
     } );
@@ -104,8 +107,7 @@ class ProportionsGraphNode extends Node {
     const content = new VBox( {
       align: 'center',
       spacing: 35,
-      children: [ graph, generationSpinner ],
-      center: backgroundNode.center
+      children: [ columns, generationSpinner ]
     } );
 
     assert && assert( !options.children, 'ProportionGraphNode sets children' );
@@ -113,17 +115,28 @@ class ProportionsGraphNode extends Node {
 
     super( options );
 
-    // Change the label for the bottom row, depending on whether we're displaying the current generation.
+    // Center on the background. Columns may be removed via PhET-iO, so observe bounds.
+    content.boundsProperty.link( () => {
+      content.center = backgroundNode.center;
+    } );
+
+    // Change the label for the bottom row, depending on whether we're displaying the current generation or the
+    // end state of a previous generation.
     Property.multilink(
       [ proportionsModel.currentGenerationProperty, proportionsModel.generationProperty ],
       ( currentGeneration, generation ) => {
         if ( currentGeneration === generation ) {
-          currentRow.setLabel( naturalSelectionStrings.currently );
+          endRowLabel.setTopText( naturalSelectionStrings.currently );
         }
         else {
-          currentRow.setLabel( naturalSelectionStrings.endOfGeneration );
+          endRowLabel.setTopText( naturalSelectionStrings.endOfGeneration );
         }
       } );
+
+    // @public for configuring ScreenViews only
+    this.furColumn = furColumn;
+    this.earsColumn = earsColumn;
+    this.teethColumn = teethColumn;
   }
 
   /**
@@ -135,84 +148,59 @@ class ProportionsGraphNode extends Node {
   }
 }
 
-//TODO this needs to be restructured as Column, so that we can show/hide the column for a trait
 /**
- * Row is a row in the Proportions graph.
+ * RowLabel is the label for a row of the Proportions graph.
  */
-class Row extends HBox {
+class RowLabel extends VBox {
 
   /**
-   * @param {GenePool} genePool
-   * @param {string} labelString
+   *
+   * @param {string} topString
    * @param {Property.<number>} countProperty
-   * @param {AlignGroup} valueAlignGroup
-   * @param {AlignGroup} barColumnsAlignGroup
-   * @param {Property.<boolean>} valuesVisibleProperty
+   * @param {Object} [options]
    */
-  constructor( genePool, labelString, countProperty, valueAlignGroup, barColumnsAlignGroup, valuesVisibleProperty ) {
+  constructor( topString, countProperty, options ) {
 
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( typeof labelString === 'string', 'invalid labelString' );
-    assert && assert( countProperty instanceof Property, 'invalid countProperty' );
-    assert && assert( valueAlignGroup instanceof AlignGroup, 'invalid valueAlignGroup' );
-    assert && assert( barColumnsAlignGroup instanceof AlignGroup, 'invalid barColumnsAlignGroup' );
-    assert && assert( valuesVisibleProperty instanceof Property, 'invalid valuesVisibleProperty' );
-
-    const labelNode = new Text( labelString, {
-      font: LABEL_FONT,
-      maxWidth: 120 // determined empirically
-    } );
-
-    // {{count}} bunnies
-    const countNode = new Text( '', {
-      font: VALUE_FONT,
-      maxWidth: 120 // determined empirically
-    } );
-
-    const valueVBox = new VBox( {
+    options = merge( {
       spacing: 2,
-      align: 'left',
-      children: [
-        labelNode,
-        countNode
-      ]
-    } );
+      align: 'left'
+    }, options );
 
-    //TODO temporary Properties
-    const furBarNode = new ProportionsBarNode( genePool.furGene.color, new NumberProperty( 990 ), new NumberProperty( 1 ), valuesVisibleProperty );
-    const earsBarNode = new ProportionsBarNode( genePool.earsGene.color, new NumberProperty( 40 ), new NumberProperty( 60 ), valuesVisibleProperty );
-    const teethBarNode = new ProportionsBarNode( genePool.teethGene.color, new NumberProperty( 100 ), new NumberProperty( 0 ), valuesVisibleProperty );
+    const textOptions = {
+      font: ROW_LABEL_FONT,
+      maxWidth: 120 // determined empirically
+    };
 
-    super( {
-      spacing: COLUMNS_SPACING,
-      align: 'bottom', //TODO this looks lousy for ?stringTest=long
-      children: [
-        new AlignBox( valueVBox, { group: valueAlignGroup, xAlign: 'left' } ),
-        new AlignBox( furBarNode, { group: barColumnsAlignGroup, xAlign: 'center' } ),
-        new AlignBox( earsBarNode, { group: barColumnsAlignGroup, xAlign: 'center' } ),
-        new AlignBox( teethBarNode, { group: barColumnsAlignGroup, xAlign: 'center' } )
-      ]
-    } );
+    // The 2 lines of text are separate Text nodes so that we don't have to deal with 'bunny' (singular) versus
+    // 'bunnies' (plural) in multiple translated strings.
+    const topText = new Text( topString, textOptions );
+    const bottomText = new Text( '', textOptions );
 
+    assert && assert( !options.children, 'RowLabel sets children' );
+    options.children = [ topText, bottomText ];
+
+    super( options );
+
+    // Update the count on the bottom line, and handle singular (1 bunny) vs plural (10 bunnies)
     countProperty.link( count => {
       if ( count === 1 ) {
-        countNode.text = naturalSelectionStrings.oneBunny;
+        bottomText.text = naturalSelectionStrings.oneBunny;
       }
       else {
-        countNode.text = StringUtils.fillIn( naturalSelectionStrings.countBunnies, { count: count } );
+        bottomText.text = StringUtils.fillIn( naturalSelectionStrings.countBunnies, { count: count } );
       }
     } );
 
     // @private
-    this.labelNode = labelNode;
+    this.topText = topText;
   }
 
   /**
-   * Sets the label for the row.
-   * @param {string} labelString
+   * Sets the top line of text.
+   * @param {string} topString
    */
-  setLabel( labelString ) {
-    this.labelNode.text = labelString;
+  setTopText( topString ) {
+    this.topText.text = topString;
   }
 
   /**
@@ -220,7 +208,65 @@ class Row extends HBox {
    * @override
    */
   dispose() {
-    assert && assert( false, 'Row does not support dispose' );
+    assert && assert( false, 'RowLabel does not support dispose' );
+  }
+}
+
+/**
+ * Column is a column in the Proportions graph.
+ */
+class Column extends VBox {
+
+  /**
+   * @param {Gene} gene
+   * @param {Property.<boolean>} valuesVisibleProperty
+   * @param {AlignGroup} alignGroup
+   * @param {Object} [options]
+   */
+  constructor( gene, valuesVisibleProperty, alignGroup, options ) {
+
+    assert && assert( gene instanceof Gene, 'invalid gene' );
+    assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
+
+    options = merge( {
+      spacing: ROW_SPACING,
+      align: 'bottom',
+
+      // phet-io
+      tandem: Tandem.REQUIRED
+    }, options );
+
+    const labelNode = new Text( gene.name, {
+      font: COLUMN_LABEL_FONT,
+      maxWidth: 120 // determined empirically
+    } );
+
+    //TODO temporary Properties: normalCountStartProperty, mutantCountStartProperty, normalCountEndProperty, mutantCountEndProperty
+    const startBarNode = new ProportionsBarNode( gene.color, new NumberProperty( 990 ), new NumberProperty( 1 ), valuesVisibleProperty );
+    const endBarNode = new ProportionsBarNode( gene.color, new NumberProperty( 990 ), new NumberProperty( 1 ), valuesVisibleProperty );
+
+    const alignBoxOptions = {
+      group: alignGroup,
+      xAlign: COLUMN_LABELS_X_ALIGN,
+      yAlign: CELLS_Y_ALIGN
+    };
+
+    assert && assert( !options.children, 'Column sets children' );
+    options.children = [
+      new AlignBox( labelNode, alignBoxOptions ),
+      new AlignBox( startBarNode, alignBoxOptions ),
+      new AlignBox( endBarNode, alignBoxOptions )
+    ];
+
+    super( options );
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'Column does not support dispose' );
   }
 }
 
