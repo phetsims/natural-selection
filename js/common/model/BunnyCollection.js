@@ -307,7 +307,7 @@ class BunnyCollection {
     const live = this.liveBunnies.length;
     const dead = this.deadBunnies.length;
     const total = live + dead;
-    const bunnyGroupLength = this.bunnyGroup.length;
+    const bunnyGroupLength = this.bunnyGroup.count;
     assert( live + dead === total && total === bunnyGroupLength,
       `bunny counts are out of sync, live=${live}, dead=${dead}, total=${total} bunnyGroupLength=${bunnyGroupLength}` );
   }
