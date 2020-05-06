@@ -160,8 +160,12 @@ class GenePair extends PhetioObject {
       gene: GeneIO.toStateObject( this.gene ),
       fatherAllele: AlleleIO.toStateObject( this.fatherAllele ),
       motherAllele: AlleleIO.toStateObject( this.motherAllele ),
-      childAlleles: ArrayIO( AlleleIO ).toStateObject( this.childAlleles ),
-      childAllelesIndex: NumberIO.toStateObject( this.childAllelesIndex )
+
+      // state that is not part of the public API, and will not be shown in Studio
+      private: {
+        childAlleles: ArrayIO( AlleleIO ).toStateObject( this.childAlleles ),
+        childAllelesIndex: NumberIO.toStateObject( this.childAllelesIndex )
+      }
     };
   }
 
@@ -176,8 +180,8 @@ class GenePair extends PhetioObject {
       gene: GeneIO.fromStateObject( stateObject.gene ),
       fatherAllele: AlleleIO.fromStateObject( stateObject.fatherAllele ),
       motherAllele: AlleleIO.fromStateObject( stateObject.motherAllele ),
-      childAlleles: ArrayIO( AlleleIO ).fromStateObject( stateObject.childAlleles ),
-      childAllelesIndex: NumberIO.fromStateObject( stateObject.childAllelesIndex )
+      childAlleles: ArrayIO( AlleleIO ).fromStateObject( stateObject.private.childAlleles ),
+      childAllelesIndex: NumberIO.fromStateObject( stateObject.private.childAllelesIndex )
     };
   }
 

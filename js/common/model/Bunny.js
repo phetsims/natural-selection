@@ -323,10 +323,14 @@ class Bunny extends Sprite {
       father: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.father ),
       mother: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.mother ),
       genotype: GenotypeIO.toStateObject( this.genotype ),
-      stepsCount: NumberIO.toStateObject( this.stepsCount ),
-      restSteps: NumberIO.toStateObject( this.restSteps ),
-      hopSteps: NumberIO.toStateObject( this.hopSteps ),
-      hopDelta: NullableIO( Vector3IO ).toStateObject( this.hopDelta )
+
+      // state that is not part of the public API, and will not be shown in Studio
+      private: {
+        stepsCount: NumberIO.toStateObject( this.stepsCount ),
+        restSteps: NumberIO.toStateObject( this.restSteps ),
+        hopSteps: NumberIO.toStateObject( this.hopSteps ),
+        hopDelta: NullableIO( Vector3IO ).toStateObject( this.hopDelta )
+      }
     };
   }
 
@@ -342,10 +346,10 @@ class Bunny extends Sprite {
       father: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.father ),
       mother: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.mother ),
       genotype: GenotypeIO.fromStateObject( stateObject.genotype ),
-      stepsCount: NumberIO.fromStateObject( stateObject.stepsCount ),
-      restSteps: NumberIO.fromStateObject( stateObject.restSteps ),
-      hopSteps: NumberIO.fromStateObject( stateObject.hopSteps ),
-      hopDelta: NullableIO( Vector3IO ).fromStateObject( stateObject.hopDelta )
+      stepsCount: NumberIO.fromStateObject( stateObject.private.stepsCount ),
+      restSteps: NumberIO.fromStateObject( stateObject.private.restSteps ),
+      hopSteps: NumberIO.fromStateObject( stateObject.private.hopSteps ),
+      hopDelta: NullableIO( Vector3IO ).fromStateObject( stateObject.private.hopDelta )
     };
   }
 
