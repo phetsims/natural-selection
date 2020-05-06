@@ -63,32 +63,49 @@ class ProportionsGraphNode extends Node {
     const startRowLabel = new RowLabel( naturalSelectionStrings.startOfGeneration, proportionsModel.startCountProperty );
     const endRowLabel = new RowLabel( naturalSelectionStrings.endOfGeneration, proportionsModel.endCountProperty );
 
+    // All column labels have the same effective width.
+    const columnLabelsAlignGroup = new AlignGroup();
+
     // For layout purposes, consider the graph to be a 2D grid. All cells will have the same effective size.
-    const cellAlignGroup = new AlignGroup();
+    const barsAlignGroup = new AlignGroup();
 
     // Layout of the first column, which contains row labels
-    const alignBoxOptions = {
-      group: cellAlignGroup,
-      xAlign: ROW_LABELS_X_ALIGN,
-      yAlign: CELLS_Y_ALIGN
-    };
     const labelsColumn = new VBox( {
       spacing: ROW_SPACING,
       children: [
-        new AlignBox( new Text( '', { font: ROW_LABEL_FONT } ), alignBoxOptions ), // no label for top row (column headings)
-        new AlignBox( startRowLabel, alignBoxOptions ),
-        new AlignBox( endRowLabel, alignBoxOptions )
+
+        // no label for top row (column headings)
+        new AlignBox( new Text( '', { font: ROW_LABEL_FONT } ), {
+          alignGroup: columnLabelsAlignGroup,
+          xAlign: ROW_LABELS_X_ALIGN,
+          yAlign: CELLS_Y_ALIGN
+        } ),
+
+        //TODO it feels odd to have row labels use barsAlignGroup
+        new AlignBox( startRowLabel, {
+          group: barsAlignGroup,
+          xAlign: ROW_LABELS_X_ALIGN,
+          yAlign: CELLS_Y_ALIGN
+        } ),
+        new AlignBox( endRowLabel, {
+          group: barsAlignGroup,
+          xAlign: ROW_LABELS_X_ALIGN,
+          yAlign: CELLS_Y_ALIGN
+        } )
       ]
     } );
 
     // Columns that contain bars
-    const furColumn = new Column( proportionsModel.genePool.furGene, proportionsModel.valuesVisibleProperty, cellAlignGroup, {
+    const furColumn = new Column( proportionsModel.genePool.furGene, proportionsModel.valuesVisibleProperty,
+      columnLabelsAlignGroup, barsAlignGroup, {
       tandem: options.tandem.createTandem( 'furColumn' )
     } );
-    const earsColumn = new Column( proportionsModel.genePool.earsGene, proportionsModel.valuesVisibleProperty, cellAlignGroup, {
+    const earsColumn = new Column( proportionsModel.genePool.earsGene, proportionsModel.valuesVisibleProperty,
+      columnLabelsAlignGroup, barsAlignGroup, {
       tandem: options.tandem.createTandem( 'earsColumn' )
     } );
-    const teethColumn = new Column( proportionsModel.genePool.teethGene, proportionsModel.valuesVisibleProperty, cellAlignGroup, {
+    const teethColumn = new Column( proportionsModel.genePool.teethGene, proportionsModel.valuesVisibleProperty,
+      columnLabelsAlignGroup, barsAlignGroup, {
       tandem: options.tandem.createTandem( 'teethColumn' )
     } );
 
@@ -220,17 +237,18 @@ class Column extends VBox {
   /**
    * @param {Gene} gene
    * @param {Property.<boolean>} valuesVisibleProperty
-   * @param {AlignGroup} alignGroup
+   * @param {AlignGroup} columnLabelsAlignGroup
+   * @param {AlignGroup} barsAlignGroup
    * @param {Object} [options]
    */
-  constructor( gene, valuesVisibleProperty, alignGroup, options ) {
+  constructor( gene, valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, options ) {
 
     assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
+    assert && assert( barsAlignGroup instanceof AlignGroup, 'invalid barsAlignGroup' );
 
     options = merge( {
       spacing: ROW_SPACING,
-      align: 'bottom',
+      align: 'center',
 
       // phet-io
       tandem: Tandem.REQUIRED
@@ -245,17 +263,23 @@ class Column extends VBox {
     const startBarNode = new ProportionsBarNode( gene.color, new NumberProperty( 990 ), new NumberProperty( 1 ), valuesVisibleProperty );
     const endBarNode = new ProportionsBarNode( gene.color, new NumberProperty( 990 ), new NumberProperty( 1 ), valuesVisibleProperty );
 
-    const alignBoxOptions = {
-      group: alignGroup,
-      xAlign: COLUMN_LABELS_X_ALIGN,
-      yAlign: CELLS_Y_ALIGN
-    };
-
     assert && assert( !options.children, 'Column sets children' );
     options.children = [
-      new AlignBox( labelNode, alignBoxOptions ),
-      new AlignBox( startBarNode, alignBoxOptions ),
-      new AlignBox( endBarNode, alignBoxOptions )
+      new AlignBox( labelNode, {
+        group: columnLabelsAlignGroup,
+        xAlign: COLUMN_LABELS_X_ALIGN,
+        yAlign: CELLS_Y_ALIGN
+      } ),
+      new AlignBox( startBarNode, {
+        group: barsAlignGroup,
+        xAlign: COLUMN_LABELS_X_ALIGN,
+        yAlign: CELLS_Y_ALIGN
+      } ),
+      new AlignBox( endBarNode, {
+        group: barsAlignGroup,
+        xAlign: COLUMN_LABELS_X_ALIGN,
+        yAlign: CELLS_Y_ALIGN
+      } )
     ];
 
     super( options );
