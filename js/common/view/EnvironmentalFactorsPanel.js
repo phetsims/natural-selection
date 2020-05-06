@@ -34,7 +34,7 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     assert && assert( foodSupply instanceof FoodSupply, 'invalid foodSupply' );
 
     options = merge( {
-      limitedFoodCheckVisible: true,
+      toughFoodCheckboxVisible: true,
 
       // phet-io
       tandem: Tandem.REQUIRED
@@ -51,11 +51,11 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     } );
 
     const toughFoodCheckbox = new ToughFoodCheckbox( foodSupply.isToughProperty, {
+      visible: options.toughFoodCheckboxVisible,
       tandem: options.tandem.createTandem( 'toughFoodCheckbox' )
     } );
 
     const limitedFoodCheckbox = new LimitedFoodCheckbox( foodSupply.isLimitedProperty, {
-      visible: options.limitedFoodCheckVisible,
       tandem: options.tandem.createTandem( 'limitedFoodCheckbox' )
     } );
 

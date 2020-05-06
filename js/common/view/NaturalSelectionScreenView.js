@@ -48,7 +48,7 @@ class NaturalSelectionScreenView extends ScreenView {
       furVisible: true,
       earsVisible: true,
       teethVisible: true,
-      limitedFoodCheckVisible: true,
+      toughFoodCheckboxVisible: true,
 
       // phet-io
       tandem: Tandem.REQUIRED
@@ -73,7 +73,7 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     const environmentalFactorsPanel = new EnvironmentalFactorsPanel( model.wolves, model.foodSupply, {
-      limitedFoodCheckVisible: options.limitedFoodCheckVisible,
+      toughFoodCheckboxVisible: options.toughFoodCheckboxVisible,
       fixedWidth: rightOfViewportWidth,
       tandem: options.tandem.createTandem( 'environmentalFactorsPanel' )
     } );

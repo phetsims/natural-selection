@@ -28,7 +28,7 @@ class IntroScreenView extends NaturalSelectionScreenView {
       // See see https://github.com/phetsims/natural-selection/issues/70.
       earsVisible: false,
       teethVisible: false,
-      limitedFoodCheckVisible: false,
+      toughFoodCheckboxVisible: false,
 
       // phet-io
       tandem: tandem
