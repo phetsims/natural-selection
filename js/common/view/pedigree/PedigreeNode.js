@@ -80,7 +80,7 @@ class PedigreeNode extends HBox {
 
     super( options );
 
-    // @public for configuring Intro screen only
+    // @public for configuring ScreenViews only
     this.allelesPanel = allelesPanel;
   }
 

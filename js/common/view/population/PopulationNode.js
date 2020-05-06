@@ -64,7 +64,7 @@ class PopulationNode extends Node {
       tandem: options.tandem.createTandem( 'populationModel' )
     } );
 
-    // @public for configuring Intro screen only
+    // @public for configuring ScreenViews only
     this.populationPanel = populationPanel;
 
     // @private

@@ -113,7 +113,9 @@ class PopulationPanel extends NaturalSelectionPanel {
 
     super( content, options );
 
-    // @public for configuring Intro screen only
+    // @public for configuring ScreenViews only
+    this.whiteFurCheckbox = whiteFurCheckbox;
+    this.brownFurCheckbox = brownFurCheckbox;
     this.straightEarsCheckbox = straightEarsCheckbox;
     this.floppyEarsCheckbox = floppyEarsCheckbox;
     this.shortTeethCheckbox = shortTeethCheckbox;

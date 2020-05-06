@@ -24,24 +24,15 @@ class IntroScreenView extends NaturalSelectionScreenView {
 
     super( model, {
 
+      // Hide the user-interface for the Ears, Teeth, and Limited Food features.
+      // See see https://github.com/phetsims/natural-selection/issues/70.
+      earsVisible: false,
+      teethVisible: false,
+      limitedFoodCheckVisible: false,
+
       // phet-io
       tandem: tandem
     } );
-
-    //TODO see https://github.com/phetsims/natural-selection/issues/70
-    // hide Ears, Teeth, and Limited Food features, by setting visibleProperty for associated UI components
-    this.addMutationsPanel.teethRow.visibleProperty.value = false;
-    this.environmentalFactorsPanel.limitedFoodCheckbox.visibleProperty.value = false;
-    this.populationNode.populationPanel.straightEarsCheckbox.visibleProperty.value = false;
-    this.populationNode.populationPanel.floppyEarsCheckbox.visibleProperty.value = false;
-    this.populationNode.populationPanel.shortTeethCheckbox.visibleProperty.value = false;
-    this.populationNode.populationPanel.longTeethCheckbox.visibleProperty.value = false;
-    this.proportionsNode.proportionsPanel.legendNode.earsLegendNode.visibleProperty.value = false;
-    this.proportionsNode.proportionsPanel.legendNode.teethLegendNode.visibleProperty.value = false;
-    // this.proportionsNode.proportionsGraphNode.earsColumn
-    // this.proportionsNode.proportionsGraphNode.teethColumn
-    this.pedigreeNode.allelesPanel.earsRow.visibleProperty.value = false;
-    this.pedigreeNode.allelesPanel.teethRow.visibleProperty.value = false;
   }
 
   /**

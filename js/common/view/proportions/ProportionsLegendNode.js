@@ -72,7 +72,8 @@ class ProportionsLegendNode extends VBox {
 
     super( options );
 
-    // @public for configuring Intro screen only
+    // @public for configuring ScreenViews only
+    this.furLegendNode = furLegendNode;
     this.earsLegendNode = earsLegendNode;
     this.teethLegendNode = teethLegendNode;
   }

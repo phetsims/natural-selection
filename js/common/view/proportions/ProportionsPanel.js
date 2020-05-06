@@ -68,7 +68,7 @@ class ProportionsPanel extends NaturalSelectionPanel {
 
     super( content, options );
 
-    // @public for configuring Intro screen only
+    // @public for configuring ScreenViews only
     this.legendNode = legendNode;
   }
 

@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
@@ -43,6 +44,12 @@ class NaturalSelectionScreenView extends ScreenView {
 
     options = merge( {
 
+      // whether the user-interface for these features is visible
+      furVisible: true,
+      earsVisible: true,
+      teethVisible: true,
+      limitedFoodCheckVisible: true,
+
       // phet-io
       tandem: Tandem.REQUIRED
     }, options );
@@ -66,6 +73,7 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     const environmentalFactorsPanel = new EnvironmentalFactorsPanel( model.wolves, model.foodSupply, {
+      limitedFoodCheckVisible: options.limitedFoodCheckVisible,
       fixedWidth: rightOfViewportWidth,
       tandem: options.tandem.createTandem( 'environmentalFactorsPanel' )
     } );
@@ -107,10 +115,10 @@ class NaturalSelectionScreenView extends ScreenView {
 
     // Pedigree
     const pedigreeNode = new PedigreeNode( model.genePool, model.selectedBunnyProperty, model.pedigreeModel, graphAreaSize, {
-        left: graphAreaLeft,
-        top: graphAreaTop,
-        tandem: graphsTandem.createTandem( 'pedigreeNode' )
-      } );
+      left: graphAreaLeft,
+      top: graphAreaTop,
+      tandem: graphsTandem.createTandem( 'pedigreeNode' )
+    } );
 
     // @public
     this.selectedGraphProperty = new EnumerationProperty( Graphs, Graphs.POPULATION, {
@@ -233,22 +241,60 @@ class NaturalSelectionScreenView extends ScreenView {
         model.bunnyCollection.groundAllBunnies();
         environmentNode.sortSprites();
       }
-    });
+    } );
     model.bunnyCollection.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
       worldDialog.show();
       model.simulationModeProperty.value = SimulationMode.COMPLETED;
     } );
 
-    // @protected for configuring Intro screen only
-    this.addMutationsPanel = addMutationsPanel;
-    this.environmentalFactorsPanel = environmentalFactorsPanel;
-    this.populationNode = populationNode;
-    this.proportionsNode = proportionsNode;
-    this.pedigreeNode = pedigreeNode;
-
     // @private
     this.model = model;
     this.environmentNode = environmentNode;
+
+    // Tandem for organizing the Properties related to visibility of genes in the user interface.
+    const genesTandem = options.tandem.createTandem( 'genes' );
+
+    // PhET-iO only Property, see https://github.com/phetsims/natural-selection/issues/70
+    const furVisibleProperty = new BooleanProperty( options.furVisible, {
+      tandem: genesTandem.createTandem( 'furVisibleProperty' ),
+      phetioDocumentation: 'sets the visibility of all user-interface components related to Fur for this screen'
+    } );
+    furVisibleProperty.link( visible => {
+      addMutationsPanel.furRow.visibleProperty.value = visible;
+      populationNode.populationPanel.whiteFurCheckbox.visibleProperty.value = visible;
+      populationNode.populationPanel.brownFurCheckbox.visibleProperty.value = visible;
+      proportionsNode.proportionsPanel.legendNode.furLegendNode.visibleProperty.value = visible;
+      //TODO this.proportionsNode.proportionsGraphNode.furColumn.visibleProperty.value = visible;
+      pedigreeNode.allelesPanel.furRow.visibleProperty.value = visible;
+    } );
+
+    // PhET-iO only Property, see https://github.com/phetsims/natural-selection/issues/70
+    const earsVisibleProperty = new BooleanProperty( options.earsVisible, {
+      tandem: genesTandem.createTandem( 'earsVisibleProperty' ),
+      phetioDocumentation: 'sets the visibility of all user-interface components related to Ears for this screen'
+    } );
+    earsVisibleProperty.link( visible => {
+      addMutationsPanel.earsRow.visibleProperty.value = visible;
+      populationNode.populationPanel.straightEarsCheckbox.visibleProperty.value = visible;
+      populationNode.populationPanel.floppyEarsCheckbox.visibleProperty.value = visible;
+      proportionsNode.proportionsPanel.legendNode.earsLegendNode.visibleProperty.value = visible;
+      //TODO this.proportionsNode.proportionsGraphNode.earsColumn.visibleProperty.value = visible;
+      pedigreeNode.allelesPanel.earsRow.visibleProperty.value = visible;
+    } );
+
+    // PhET-iO only Property, see https://github.com/phetsims/natural-selection/issues/70
+    const teethVisibleProperty = new BooleanProperty( options.teethVisible, {
+      tandem: genesTandem.createTandem( 'teethVisibleProperty' ),
+      phetioDocumentation: 'sets the visibility of all user-interface components related to Teeth for this screen'
+    } );
+    teethVisibleProperty.link( visible => {
+      addMutationsPanel.teethRow.visibleProperty.value = visible;
+      populationNode.populationPanel.shortTeethCheckbox.visibleProperty.value = visible;
+      populationNode.populationPanel.longTeethCheckbox.visibleProperty.value = visible;
+      proportionsNode.proportionsPanel.legendNode.teethLegendNode.visibleProperty.value = visible;
+      //TODO this.proportionsNode.proportionsGraphNode.teethColumn.visibleProperty.value = visible
+      pedigreeNode.allelesPanel.teethRow.visibleProperty.value = visible;
+    } );
   }
 
   /**

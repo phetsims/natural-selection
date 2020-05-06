@@ -122,7 +122,8 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     // @private
     this.furRow = furRow;
 
-    // @public for configuring Intro screen only
+    // @public for configuring ScreenViews only
+    this.furRow = furRow;
     this.earsRow = earsRow;
     this.teethRow = teethRow;
   }

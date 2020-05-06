@@ -77,7 +77,8 @@ class AllelesPanel extends NaturalSelectionPanel {
 
     super( content, options );
 
-    // @public for configuring Intro screen only
+    // @public for configuring ScreenViews only
+    this.furRow = furRow;
     this.earsRow = earsRow;
     this.teethRow = teethRow;
   }

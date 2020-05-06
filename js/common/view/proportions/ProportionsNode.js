@@ -65,7 +65,7 @@ class ProportionsNode extends HBox {
       tandem: options.tandem.createTandem( 'proportionsModel' )
     } );
 
-    // @public for configuring Intro screen only
+    // @public for configuring ScreenViews only
     this.proportionsPanel = proportionsPanel;
   }
 
