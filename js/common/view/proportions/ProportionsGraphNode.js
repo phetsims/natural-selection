@@ -56,7 +56,10 @@ class ProportionsGraphNode extends Node {
       stroke: NaturalSelectionColors.PANEL_STROKE
     } );
 
+    // cells in the column the contains row labels (the first column) will all have the same effective size
     const labelColumnAlignGroup = new AlignGroup();
+
+    // cells in the columns that contain bars will all have the same effective width
     const barColumnsAlignGroup = new AlignGroup( { matchVertical: false } );
 
     // Column labels
