@@ -213,7 +213,7 @@ class RowLabel extends VBox {
 }
 
 /**
- * Column is a column in the Proportions graph.
+ * Column is a column in the Proportions graph. It contains a heading and 2 bars.
  */
 class Column extends VBox {
 
