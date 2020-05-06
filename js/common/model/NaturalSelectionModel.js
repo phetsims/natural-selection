@@ -44,6 +44,7 @@ class NaturalSelectionModel {
     // @public
     this.simulationModeProperty = new EnumerationProperty( SimulationMode, SimulationMode.STAGED, {
       tandem: tandem.createTandem( 'simulationModeProperty' ),
+      phetioDocumentation: 'do not use this Property, it is not part of the public PhET-iO API',
       phetioReadOnly: true
     } );
 
