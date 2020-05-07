@@ -26,3 +26,8 @@ PhET-iO
 
 DESIGN
 Move time controls near generation clock?
+
+CT CUSTOM TESTS
+?secondsPerGeneration=1
+?allelesVisible=false
+?population,mutations
