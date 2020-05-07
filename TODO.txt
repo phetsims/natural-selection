@@ -10,7 +10,7 @@ FEATURE MILESTONES
 - [ ] Food
 - [ ] Wolves
 - [ ] query parameters
-- [ ] Intro screen
+- [x] Intro screen
 
 FEATURES
 get rid of some submodels, move some Properties into view?
