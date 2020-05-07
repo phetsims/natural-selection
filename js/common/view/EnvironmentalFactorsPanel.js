@@ -51,7 +51,6 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     } );
 
     const toughFoodCheckbox = new ToughFoodCheckbox( foodSupply.isToughProperty, {
-      visible: options.toughFoodCheckboxVisible,
       tandem: options.tandem.createTandem( 'toughFoodCheckbox' )
     } );
 
@@ -68,6 +67,9 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     } ) );
 
     super( content, options );
+
+    //TODO workaround for https://github.com/phetsims/sun/issues/594, this should be passed via options
+    toughFoodCheckbox.visible = options.toughFoodCheckboxVisible;
 
     // Set the panel's title to singular or plural, depending on how many checkboxes are visible.
     checkboxes.boundsProperty.link( () => {
