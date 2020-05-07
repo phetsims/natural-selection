@@ -39,6 +39,7 @@ class PedigreeNode extends HBox {
       // HBox options
       spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
       align: 'center',
+      excludeInvisibleChildrenFromBounds: false,
 
       // phet-io
       tandem: Tandem.REQUIRED,
