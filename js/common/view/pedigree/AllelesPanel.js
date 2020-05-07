@@ -131,8 +131,7 @@ class Row extends VBox {
 
     const checkbox = new Checkbox( labelNode, visibleProperty,
       merge( {
-        tandem: options.tandem.createTandem( 'checkbox' ),
-        phetioReadOnly: true
+        tandem: options.tandem.createTandem( 'checkbox' )
       }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
     );
 
