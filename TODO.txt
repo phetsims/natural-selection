@@ -4,13 +4,13 @@ FEATURE MILESTONES
 - [x] Modes
 - [x] Mating
 - [x] Mutations
-- [ ] Population graph
-- [ ] Proportions graph
-- [ ] Pedigree graph
-- [ ] Food
-- [ ] Wolves
-- [ ] query parameters
 - [x] Intro screen
+- [ ] query parameters - 2 weeks
+- [ ] Pedigree graph - 1 week
+- [ ] Population graph - 3 weeks
+- [ ] Proportions graph - 2 weeks
+- [ ] Wolves - 1 week
+- [ ] Food - 1 week
 
 FEATURES
 get rid of some submodels, move some Properties into view?
