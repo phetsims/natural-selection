@@ -7,13 +7,13 @@
  */
 
 import Sim from '../../joist/js/Sim.js';
-import SimLauncher from '../../joist/js/SimLauncher.js';
+import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import IntroScreen from './intro/IntroScreen.js';
 import LabScreen from './lab/LabScreen.js';
 import naturalSelectionStrings from './naturalSelectionStrings.js';
 
-SimLauncher.launch( () => {
+simLauncher.launch( () => {
 
   const screens = [
     new IntroScreen( Tandem.ROOT.createTandem( 'introScreen' ) ),
