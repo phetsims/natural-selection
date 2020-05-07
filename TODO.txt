@@ -14,7 +14,6 @@ FEATURE MILESTONES
 
 FEATURES
 get rid of some submodels, move some Properties into view?
-add counts to EnvironmentModel
 
 PERFORMANCE
 merge Genotype fields into Bunny?
