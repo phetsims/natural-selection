@@ -28,4 +28,3 @@ PhET-iO
 
 DESIGN
 Move time controls near generation clock?
-Bunny 'long teeth' may be too subtle
