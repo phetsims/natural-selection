@@ -6,10 +6,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
 import GenePair from './GenePair.js';
@@ -79,6 +82,20 @@ class Genotype extends PhetioObject {
       tandem: options.tandem.createTandem( 'teethGenePair' ),
       phetioDocumentation: 'gene pair that determines teeth trait'
     } );
+
+    // @public PhET-iO only, not used in the sim
+    // eslint-disable-next-line no-new
+    new DerivedProperty(
+      [ genePool.furGene.dominantAlleleProperty, genePool.earsGene.dominantAlleleProperty, genePool.teethGene.dominantAlleleProperty ],
+      ( furDominantAllele, earsDominantAllele, teethDominantAllele ) => {
+        return this.furGenePair.getAllelesAbbreviation() +
+               this.earsGenePair.getAllelesAbbreviation() +
+               this.teethGenePair.getAllelesAbbreviation();
+      }, {
+        tandem: options.tandem.createTandem( 'geneotypeAbbreviationProperty' ),
+        phetioType: DerivedPropertyIO( StringIO ),
+        phetioDocumentation: 'the abbreviation that describes the genotype, the empty string if there are no dominant alleles'
+      } );
 
     // @private
     this.disposeGenotype = () => {
