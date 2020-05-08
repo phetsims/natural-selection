@@ -1,6 +1,7 @@
 ## TODO list for natural-selection
 
-FEATURE MILESTONES
+# Feature Milestones
+
 - [x] Modes 4/23/2020
 - [x] Mating 4/30/2020
 - [x] Mutations 4/30/2020
@@ -12,18 +13,22 @@ FEATURE MILESTONES
 - [ ] Wolves - 1 week
 - [ ] Food - 1 week
 
-FEATURES
-get rid of some submodels, move some Properties into view?
+# Features
 
-PERFORMANCE
-pre-allocate all BunnyNode instances? (58% time, 31% in new PressListener)
+* get rid of some submodels, move some Properties into view?
 
-PhET-iO
+# Performance
 
-DESIGN
-Move time controls near generation clock?
+* pre-allocate all BunnyNode instances? (58% time, 31% in new PressListener)
 
-CT CUSTOM TESTS
-?secondsPerGeneration=1
-?allelesVisible=false
-?population,mutations
+# PhET-iO
+
+# Design
+
+* Move time controls near generation clock?
+
+# CT Custom Tests
+
+* ?secondsPerGeneration=1
+* ?allelesVisible=false`
+* ?population=...,mutations=...
