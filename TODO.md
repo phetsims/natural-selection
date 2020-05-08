@@ -29,8 +29,9 @@
 
 * Co-locate generation clock and time controls?
 
-## CT Custom Tests
+## Testing
 
-* ?secondsPerGeneration=1
-* ?allelesVisible=false`
-* ?population=...,mutations=...
+* CT: ?secondsPerGeneration=1
+* CT: ?allelesVisible=false`
+* CT: ?population=...,mutations=...
+* Update PhET-iO design doc for QA
