@@ -69,30 +69,29 @@ class Genotype extends PhetioObject {
     this.earsGenePair = GenePair.fromParents( genePool.earsGene,
       father ? father.genotype.earsGenePair : null,
       mother ? mother.genotype.earsGenePair : null, {
-      mutation: options.earsMutation,
-      tandem: options.tandem.createTandem( 'earsGenePair' ),
-      phetioDocumentation: 'gene pair that determines ears trait'
-    } );
+        mutation: options.earsMutation,
+        tandem: options.tandem.createTandem( 'earsGenePair' ),
+        phetioDocumentation: 'gene pair that determines ears trait'
+      } );
 
     // @public (read-only)
     this.teethGenePair = GenePair.fromParents( genePool.teethGene,
       father ? father.genotype.teethGenePair : null,
       mother ? mother.genotype.teethGenePair : null, {
-      mutation: options.teethMutation,
-      tandem: options.tandem.createTandem( 'teethGenePair' ),
-      phetioDocumentation: 'gene pair that determines teeth trait'
-    } );
+        mutation: options.teethMutation,
+        tandem: options.tandem.createTandem( 'teethGenePair' ),
+        phetioDocumentation: 'gene pair that determines teeth trait'
+      } );
 
     // @public PhET-iO only, not used in the sim
-    // eslint-disable-next-line no-new
-    new DerivedProperty(
+    const genotypeAbbreviationProperty = new DerivedProperty(
       [ genePool.furGene.dominantAlleleProperty, genePool.earsGene.dominantAlleleProperty, genePool.teethGene.dominantAlleleProperty ],
-      ( furDominantAllele, earsDominantAllele, teethDominantAllele ) => {
+      () => {
         return this.furGenePair.getAllelesAbbreviation() +
                this.earsGenePair.getAllelesAbbreviation() +
                this.teethGenePair.getAllelesAbbreviation();
       }, {
-        tandem: options.tandem.createTandem( 'geneotypeAbbreviationProperty' ),
+        tandem: options.tandem.createTandem( 'genotypeAbbreviationProperty' ),
         phetioType: DerivedPropertyIO( StringIO ),
         phetioDocumentation: 'the abbreviation that describes the genotype, the empty string if there are no dominant alleles'
       } );
@@ -102,6 +101,7 @@ class Genotype extends PhetioObject {
       this.furGenePair.dispose();
       this.earsGenePair.dispose();
       this.teethGenePair.dispose();
+      genotypeAbbreviationProperty.dispose();
     };
 
     this.validateInstance();
