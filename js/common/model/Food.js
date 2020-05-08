@@ -46,14 +46,16 @@ class Food {
       tandem: options.tandem.createTandem( 'isLimitedProperty' )
     } );
 
-    // {Array} Description of shrubs, where each element has these fields:
-    //   {HTMLImageElement} tenderImage - image used for tender shrubs
-    //   {HTMLImageElement} toughImage - image used for tough shrubs
-    //   {number} x - x position in model coordinates
-    //   {number} z - z position in model coordinates
+    // {ShrubConfig[]} describes the collection of shrubs
     //
-    // A, B, C suffix for images comes from https://github.com/phetsims/natural-selection/issues/17
-    const shrubsConfig = [
+    // @typedef ShrubConfig
+    // @property {HTMLImageElement} tenderImage - image used for tender shrubs
+    // @property {HTMLImageElement} toughImage - image used for tough shrubs
+    // @property {number} x - x position in model coordinates
+    // @property {number} z - z position in model coordinates
+    //
+    // A, B, C labeling of images comes from https://github.com/phetsims/natural-selection/issues/17
+    const shrubConfigs = [
       { tenderImage: shrubTenderAImage, toughImage: shrubToughAImage, x:  -65, z: 210 },
       { tenderImage: shrubTenderAImage, toughImage: shrubToughAImage, x:  155, z: 160 },
       { tenderImage: shrubTenderBImage, toughImage: shrubToughBImage, x: -155, z: 160 },
@@ -62,19 +64,19 @@ class Food {
       { tenderImage: shrubTenderCImage, toughImage: shrubToughCImage, x: -180, z: 270 }
     ];
 
-    // @public (read-only) individual food items
+    // @public (read-only) {Shrub[]} the collection of Shrubs
     this.shrubs = [];
-    for ( let i = 0; i < shrubsConfig.length; i++ ) {
-      const shrubConfig = shrubsConfig[ i ];
+    shrubConfigs.forEach( shrubConfig => {
       this.shrubs.push( new Shrub( shrubConfig.tenderImage, shrubConfig.toughImage, modelViewTransform, this.isToughProperty, {
         position: modelViewTransform.getGroundPosition( shrubConfig.x, shrubConfig.z )
       } ) );
-    }
+    } );
 
-    // When food is limited, hide half of the food
+    // When food is limited, hide half of the food (odd-indexed Shrubs)
+    assert && assert( this.shrubs.length % 2 === 0, 'an even number of Shrubs is required' );
     this.isLimitedProperty.link( isLimited => {
-      for ( let i = 0; i < this.shrubs.length; i++ ) {
-        this.shrubs[ i ].visibleProperty.value = ( i % 2 === 0 || !isLimited );
+      for ( let i = 1; i < this.shrubs.length; i = i + 2 ) {
+        this.shrubs[ i ].visibleProperty.value = !isLimited;
       }
     } );
   }
