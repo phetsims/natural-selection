@@ -16,8 +16,8 @@ import Sprite from './Sprite.js';
 class Shrub extends Sprite {
 
   /**
-   * @param {HTMLImageElement} tenderImage
-   * @param {HTMLImageElement} toughImage
+   * @param {HTMLImageElement} tenderImage - image used when the shrub is tender
+   * @param {HTMLImageElement} toughImage - image used when the shrub is tough
    * @param {EnvironmentModelViewTransform} modelViewTransform
    * @param {Property.<boolean>} isToughProperty
    * @param {Object} [options]
