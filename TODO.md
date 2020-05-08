@@ -1,6 +1,6 @@
-## TODO list for natural-selection
+# TODO list for natural-selection
 
-# Feature Milestones
+## Feature Milestones
 
 - [x] Modes 4/23/2020
 - [x] Mating 4/30/2020
@@ -13,21 +13,21 @@
 - [ ] Wolves - 1 week
 - [ ] Food - 1 week
 
-# Features
+## Features
 
 * get rid of some submodels, move some Properties into view?
 
-# Performance
+## Performance
 
 * pre-allocate all BunnyNode instances? (58% time, 31% in new PressListener)
 
-# PhET-iO
+## PhET-iO
 
-# Design
+## Design
 
 * Move time controls near generation clock?
 
-# CT Custom Tests
+## CT Custom Tests
 
 * ?secondsPerGeneration=1
 * ?allelesVisible=false`
