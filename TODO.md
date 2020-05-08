@@ -2,6 +2,10 @@
 
 ## Feature Milestones
 
+| Feature | Time Remaining | Completed |
+| --- | --- | --- |
+| Modes | 0 | 4/23/2020 |
+
 - [x] Modes 4/23/2020
 - [x] Mating 4/30/2020
 - [x] Mutations 4/30/2020
