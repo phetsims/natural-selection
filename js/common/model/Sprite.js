@@ -37,7 +37,7 @@ class Sprite extends PhetioObject {
       direction: SpriteDirection.RIGHT, // initial direction of motion
 
       // phet-io
-      tandem: Tandem.REQUIRED
+      tandem: Tandem.OPTIONAL
     }, options );
 
     super( options );

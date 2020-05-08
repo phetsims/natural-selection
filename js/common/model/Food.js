@@ -68,8 +68,7 @@ class Food {
     for ( let i = 0; i < shrubsConfig.length; i++ ) {
       const shrubConfig = shrubsConfig[ i ];
       this.shrubs.push( new Shrub( shrubConfig.toughImage, shrubConfig.tenderImage, modelViewTransform, this.isToughProperty, {
-        position: modelViewTransform.getGroundPosition( shrubConfig.x, shrubConfig.z ),
-        tandem: options.tandem.createTandem( `shrub${i}` )
+        position: modelViewTransform.getGroundPosition( shrubConfig.x, shrubConfig.z )
       } ) );
     }
 

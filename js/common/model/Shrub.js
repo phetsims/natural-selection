@@ -9,10 +9,8 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
-import ShrubIO from './ShrubIO.js';
 import Sprite from './Sprite.js';
 
 class Shrub extends Sprite {
@@ -31,12 +29,7 @@ class Shrub extends Sprite {
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
     assert && assert( isToughProperty instanceof Property, 'invalid isToughProperty' );
 
-    options = merge( {
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
-      phetioType: ShrubIO
-    }, options );
+    options = merge( {}, options );
 
     super( modelViewTransform, options );
 
@@ -46,11 +39,7 @@ class Shrub extends Sprite {
     this.isToughProperty = isToughProperty;
 
     // @public whether the shrub is visible, used to hide shrubs when the food supply is limited
-    this.visibleProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'visibleProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'whether the shrub is visible'
-    } );
+    this.visibleProperty = new BooleanProperty( true );
   }
 
   /**
