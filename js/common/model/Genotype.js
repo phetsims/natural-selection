@@ -84,14 +84,14 @@ class Genotype extends PhetioObject {
     } );
 
     // @public PhET-iO only, not used in the sim
-    const geneotypeAbbreviationProperty = new DerivedProperty(
+    const genotypeAbbreviationProperty = new DerivedProperty(
       [ genePool.furGene.dominantAlleleProperty, genePool.earsGene.dominantAlleleProperty, genePool.teethGene.dominantAlleleProperty ],
       ( furDominantAllele, earsDominantAllele, teethDominantAllele ) => {
         return this.furGenePair.getAllelesAbbreviation() +
                this.earsGenePair.getAllelesAbbreviation() +
                this.teethGenePair.getAllelesAbbreviation();
       }, {
-        tandem: options.tandem.createTandem( 'geneotypeAbbreviationProperty' ),
+        tandem: options.tandem.createTandem( 'genotypeAbbreviationProperty' ),
         phetioType: DerivedPropertyIO( StringIO ),
         phetioDocumentation: 'the abbreviation that describes the genotype, the empty string if there are no dominant alleles'
       } );
@@ -101,7 +101,7 @@ class Genotype extends PhetioObject {
       this.furGenePair.dispose();
       this.earsGenePair.dispose();
       this.teethGenePair.dispose();
-      geneotypeAbbreviationProperty.dispose();
+      genotypeAbbreviationProperty.dispose();
     };
 
     this.validateInstance();
