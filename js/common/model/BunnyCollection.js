@@ -107,7 +107,6 @@ class BunnyCollection {
     } );
 
     // @private
-    this.modelViewTransform = modelViewTransform;
     this.genePool = genePool;
   }
 
