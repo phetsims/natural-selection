@@ -16,16 +16,16 @@ import Sprite from './Sprite.js';
 class Shrub extends Sprite {
 
   /**
-   * @param {HTMLImageElement} toughImage
    * @param {HTMLImageElement} tenderImage
+   * @param {HTMLImageElement} toughImage
    * @param {EnvironmentModelViewTransform} modelViewTransform
    * @param {Property.<boolean>} isToughProperty
    * @param {Object} [options]
    */
-  constructor( toughImage, tenderImage, modelViewTransform, isToughProperty, options ) {
+  constructor( tenderImage, toughImage, modelViewTransform, isToughProperty, options ) {
 
-    assert && assert( toughImage instanceof HTMLImageElement, 'invalid toughImage' );
     assert && assert( tenderImage instanceof HTMLImageElement, 'invalid tenderImage' );
+    assert && assert( toughImage instanceof HTMLImageElement, 'invalid toughImage' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
     assert && assert( isToughProperty instanceof Property, 'invalid isToughProperty' );
 
@@ -34,8 +34,8 @@ class Shrub extends Sprite {
     super( modelViewTransform, options );
 
     // @public (read-only)
-    this.toughImage = toughImage;
     this.tenderImage = tenderImage;
+    this.toughImage = toughImage;
     this.isToughProperty = isToughProperty;
 
     // @public whether the shrub is visible, used to hide shrubs when the food supply is limited

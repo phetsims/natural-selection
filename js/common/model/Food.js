@@ -45,29 +45,27 @@ class Food {
       tandem: options.tandem.createTandem( 'isLimitedProperty' )
     } );
 
-    // {Array} Description of shrubs, where each element is for the form:
-    // {
-    //   {HTMLImageElement} toughImage - image used for tough shrubs
+    // {Array} Description of shrubs, where each element has these fields:
     //   {HTMLImageElement} tenderImage - image used for tender shrubs
+    //   {HTMLImageElement} toughImage - image used for tough shrubs
     //   {number} x - x position in model coordinates
     //   {number} z - z position in model coordinates
-    // }
     //
     // A, B, C suffix for images comes from https://github.com/phetsims/natural-selection/issues/17
     const shrubsConfig = [
-      { toughImage: shrubToughAImage, tenderImage: shrubTenderAImage, x: -65, z: 210 },
-      { toughImage: shrubToughAImage, tenderImage: shrubTenderAImage, x: 155, z: 160 },
-      { toughImage: shrubToughBImage, tenderImage: shrubTenderBImage, x: -155, z: 160 },
-      { toughImage: shrubToughBImage, tenderImage: shrubTenderBImage, x: 200, z: 250 },
-      { toughImage: shrubToughCImage, tenderImage: shrubTenderCImage, x: 60, z: 185 },
-      { toughImage: shrubToughCImage, tenderImage: shrubTenderCImage, x: -180, z: 270 }
+      { tenderImage: shrubTenderAImage, toughImage: shrubToughAImage, x:  -65, z: 210 },
+      { tenderImage: shrubTenderAImage, toughImage: shrubToughAImage, x:  155, z: 160 },
+      { tenderImage: shrubTenderBImage, toughImage: shrubToughBImage, x: -155, z: 160 },
+      { tenderImage: shrubTenderBImage, toughImage: shrubToughBImage, x:  200, z: 250 },
+      { tenderImage: shrubTenderCImage, toughImage: shrubToughCImage, x:   60, z: 185 },
+      { tenderImage: shrubTenderCImage, toughImage: shrubToughCImage, x: -180, z: 270 }
     ];
 
     // @public (read-only) individual food items
     this.shrubs = [];
     for ( let i = 0; i < shrubsConfig.length; i++ ) {
       const shrubConfig = shrubsConfig[ i ];
-      this.shrubs.push( new Shrub( shrubConfig.toughImage, shrubConfig.tenderImage, modelViewTransform, this.isToughProperty, {
+      this.shrubs.push( new Shrub( shrubConfig.tenderImage, shrubConfig.toughImage, modelViewTransform, this.isToughProperty, {
         position: modelViewTransform.getGroundPosition( shrubConfig.x, shrubConfig.z )
       } ) );
     }
