@@ -127,15 +127,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Megan Lai"
   },
-  "toughFoodIcon.png": {
-    "text": [
-      "Copyright 2019 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": "created by Megan Lai"
-  },
-  "tenderFoodA.png": {
+  "tenderShrubA.png": {
     "text": [
       "Copyright 2020 University of Colorado Boulder"
     ],
@@ -143,7 +135,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Amanda McGarry"
   },
-  "tenderFoodB.png": {
+  "tenderShrubB.png": {
     "text": [
       "Copyright 2020 University of Colorado Boulder"
     ],
@@ -151,7 +143,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Amanda McGarry"
   },
-  "tenderFoodC.png": {
+  "tenderShrubC.png": {
     "text": [
       "Copyright 2020 University of Colorado Boulder"
     ],
@@ -159,7 +151,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Amanda McGarry"
   },
-  "toughFoodA.png": {
+  "toughShrubA.png": {
     "text": [
       "Copyright 2020 University of Colorado Boulder"
     ],
@@ -167,7 +159,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Amanda McGarry"
   },
-  "toughFoodB.png": {
+  "toughShrubB.png": {
     "text": [
       "Copyright 2020 University of Colorado Boulder"
     ],
@@ -175,7 +167,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Amanda McGarry"
   },
-  "toughFoodC.png": {
+  "toughShrubC.png": {
     "text": [
       "Copyright 2020 University of Colorado Boulder"
     ],

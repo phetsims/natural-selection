@@ -9,12 +9,12 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import tenderFoodAImage from '../../../images/tenderFoodA_png.js';
-import tenderFoodBImage from '../../../images/tenderFoodB_png.js';
-import tenderFoodCImage from '../../../images/tenderFoodC_png.js';
-import toughFoodAImage from '../../../images/toughFoodA_png.js';
-import toughFoodBImage from '../../../images/toughFoodB_png.js';
-import toughFoodCImage from '../../../images/toughFoodC_png.js';
+import tenderShrubAImage from '../../../images/tenderShrubA_png.js';
+import tenderShrubBImage from '../../../images/tenderShrubB_png.js';
+import tenderShrubCImage from '../../../images/tenderShrubC_png.js';
+import toughShrubAImage from '../../../images/toughShrubA_png.js';
+import toughShrubBImage from '../../../images/toughShrubB_png.js';
+import toughShrubCImage from '../../../images/toughShrubC_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Shrub from './Shrub.js';
@@ -55,12 +55,12 @@ class Food {
     //
     // A, B, C suffix for images comes from https://github.com/phetsims/natural-selection/issues/17
     const shrubsConfig = [
-      { toughImage: toughFoodAImage, tenderImage: tenderFoodAImage, x: -65, z: 210 },
-      { toughImage: toughFoodAImage, tenderImage: tenderFoodAImage, x: 155, z: 160 },
-      { toughImage: toughFoodBImage, tenderImage: tenderFoodBImage, x: -155, z: 160 },
-      { toughImage: toughFoodBImage, tenderImage: tenderFoodBImage, x: 200, z: 250 },
-      { toughImage: toughFoodCImage, tenderImage: tenderFoodCImage, x: 60, z: 185 },
-      { toughImage: toughFoodCImage, tenderImage: tenderFoodCImage, x: -180, z: 270 }
+      { toughImage: toughShrubAImage, tenderImage: tenderShrubAImage, x: -65, z: 210 },
+      { toughImage: toughShrubAImage, tenderImage: tenderShrubAImage, x: 155, z: 160 },
+      { toughImage: toughShrubBImage, tenderImage: tenderShrubBImage, x: -155, z: 160 },
+      { toughImage: toughShrubBImage, tenderImage: tenderShrubBImage, x: 200, z: 250 },
+      { toughImage: toughShrubCImage, tenderImage: tenderShrubCImage, x: 60, z: 185 },
+      { toughImage: toughShrubCImage, tenderImage: tenderShrubCImage, x: -180, z: 270 }
     ];
 
     // @public (read-only) individual food items
