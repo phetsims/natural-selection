@@ -40,8 +40,8 @@ class BunnyCollection {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // @private the PhetioGroup that manages Bunny instances as dynamic PhET-iO elements
-    this.bunnyGroup = new BunnyGroup( genePool, modelViewTransform, {
+    // the PhetioGroup that manages Bunny instances as dynamic PhET-iO elements
+    const bunnyGroup = new BunnyGroup( genePool, modelViewTransform, {
       tandem: options.tandem.createTandem( 'bunnyGroup' )
     } );
 
@@ -80,7 +80,7 @@ class BunnyCollection {
     this.bunniesHaveTakenOverTheWorldEmitter = new Emitter();
 
     // When a bunny is created...
-    this.bunnyGroup.elementCreatedEmitter.addListener( bunny => {
+    bunnyGroup.elementCreatedEmitter.addListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
       // When a bunny dies...
@@ -99,15 +99,16 @@ class BunnyCollection {
     } );
 
     // When a bunny is disposed...
-    this.bunnyGroup.elementDisposedEmitter.addListener( bunny => {
+    bunnyGroup.elementDisposedEmitter.addListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
       this.liveBunnies.contains( bunny ) && this.liveBunnies.remove( bunny );
       this.deadBunnies.contains( bunny ) && this.deadBunnies.remove( bunny );
       this.bunnyDisposedEmitter.emit( bunny );
     } );
 
-    // @private
+    // @private fields needed by methods
     this.genePool = genePool;
+    this.bunnyGroup = bunnyGroup;
   }
 
   /**
