@@ -189,6 +189,7 @@ class EnvironmentModelViewTransform {
   /**
    * Gets the minimum z model coordinate for the ground trapezoid.
    * @returns {number}
+   * @public
    */
   getMinimumZ() {
     return this.zNearModel;
@@ -197,6 +198,7 @@ class EnvironmentModelViewTransform {
   /**
    * Gets the maximum z model coordinate for the ground trapezoid.
    * @returns {number}
+   * @public
    */
   getMaximumZ() {
     return this.zFarModel;

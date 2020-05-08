@@ -215,6 +215,7 @@ class RowLabel extends VBox {
   /**
    * Sets the top line of text.
    * @param {string} topString
+   * @public
    */
   setTopText( topString ) {
     this.topText.text = topString;

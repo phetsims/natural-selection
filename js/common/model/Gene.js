@@ -96,6 +96,7 @@ class Gene extends PhetioObject {
    * Creates a gene for fur.
    * @param {Object} [options] - options for Gene constructor
    * @returns {Gene}
+   * @public
    */
   static createFurGene( options ) {
     return new Gene( naturalSelectionStrings.fur,
@@ -109,6 +110,7 @@ class Gene extends PhetioObject {
    * Creates a gene for ears.
    * @param {Object} [options] - options for Gene constructor
    * @returns {Gene}
+   * @public
    */
   static createEarsGene( options ) {
     return new Gene( naturalSelectionStrings.ears,
@@ -122,6 +124,7 @@ class Gene extends PhetioObject {
    * Creates a gene for teeth.
    * @param {Object} [options] - options for Gene constructor
    * @returns {Gene}
+   * @public
    */
   static createTeethGene( options ) {
     return new Gene( naturalSelectionStrings.teeth,

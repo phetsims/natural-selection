@@ -42,6 +42,7 @@ class BunnyNodeCollection extends PhetioObject {
    * Creates a BunnyNode for a Bunny. Wires up a callback to handle disposal when the Bunny dies or is disposed.
    * @param {Bunny} bunny
    * @returns {BunnyNode}
+   * @public
    */
   createBunnyNode( bunny ) {
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );

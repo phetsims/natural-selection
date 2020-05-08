@@ -116,6 +116,10 @@ class PedigreeBunnyNode extends Node {
     }
   }
 
+  /**
+   * @public
+   * @override
+   */
   dispose() {
     this.disposePedigreeBunnyNode();
     super.dispose();

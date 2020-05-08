@@ -62,6 +62,7 @@ class GenePair extends PhetioObject {
   /**
    * Is this gene pair homozygous (same alleles)?
    * @returns {boolean}
+   * @public
    */
   isHomozygous() {
     return ( this.fatherAllele === this.motherAllele );
@@ -70,6 +71,7 @@ class GenePair extends PhetioObject {
   /**
    * Is this gene pair heterozygous (different alleles)?
    * @returns {boolean}
+   * @public
    */
   isHeterozygous() {
     return ( this.fatherAllele !== this.motherAllele );
@@ -107,6 +109,7 @@ class GenePair extends PhetioObject {
    * Gets the abbreviation of the alleles in this gene pair. If there is no dominant gene, then an abbreviation is
    * meaningless, and the empty string is returned.
    * @returns {string}
+   * @public
    */
   getAllelesAbbreviation() {
     let s = '';
@@ -127,7 +130,6 @@ class GenePair extends PhetioObject {
    * @param {Object} [options] - GenePair constructor options
    * @returns {GenePair}
    * @public
-   * @static
    */
   static fromParents( gene, fatherGenePair, motherGenePair, options ) {
     assert && assert( gene instanceof Gene, 'invalid gene' );
