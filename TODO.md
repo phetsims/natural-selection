@@ -3,19 +3,17 @@
 ## Feature Milestones
 
 | Feature | Time Remaining | Completed |
-| --- | --- | --- |
+| --- | :---: | ---: |
 | Modes | 0 | 4/23/2020 |
-
-- [x] Modes 4/23/2020
-- [x] Mating 4/30/2020
-- [x] Mutations 4/30/2020
-- [x] Intro screen 5/7/2020
-- [ ] query parameters - 2 weeks
-- [ ] Pedigree graph - 1 week
-- [ ] Population graph - 3 weeks
-- [ ] Proportions graph - 2 weeks
-- [ ] Wolves - 1 week
-- [ ] Food - 1 week
+| Mating | 0 | 4/30/2020 |
+| Mutations | 0 | 4/30/2020 |
+| Intro screen | 0 | 5/7/2020 |
+| query parameters | 2 weeks | |
+| Pedigree graph | 1 week | |
+| Proportions graph | 2 weeks | | 
+| Population graph | 3 weeks | |
+| Wolves | 1 week | |
+| Food | 1 week | | 
 
 ## Features
 
