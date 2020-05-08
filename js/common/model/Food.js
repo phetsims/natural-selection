@@ -1,7 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Food is the model of the food supply.  It controls the type and quantity of food available to the bunnies.
+ * Food is the model of the food supply, a collection of Shrubs.
+ * It controls the type (tender or tough) and quantity of food that is available.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
