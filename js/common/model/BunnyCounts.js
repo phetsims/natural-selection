@@ -18,7 +18,7 @@ class BunnyCounts {
    */
   constructor( options ) {
 
-    // @public (read-only)
+    // @public
     this.totalCountProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'totalCountProperty' ),
@@ -26,7 +26,7 @@ class BunnyCounts {
       phetioDocumentation: 'the total number of bunnies'
     } );
 
-    // @public (read-only)
+    // @public
     this.brownFurCountProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'brownFurCountProperty' ),
@@ -34,7 +34,7 @@ class BunnyCounts {
       phetioDocumentation: 'the total number of bunnies that have brown fur'
     } );
 
-    // @public (read-only)
+    // @public
     this.whiteFurCountProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'whiteFurCountProperty' ),
@@ -42,7 +42,7 @@ class BunnyCounts {
       phetioDocumentation: 'the total number of bunnies that have white fur'
     } );
 
-    // @public (read-only)
+    // @public
     this.straightEarsCountProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'straightEarsCountProperty' ),
@@ -50,7 +50,7 @@ class BunnyCounts {
       phetioDocumentation: 'the total number of bunnies that have straight ears'
     } );
 
-    // @public (read-only)
+    // @public
     this.floppyEarsCountProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'floppyEarsCountProperty' ),
@@ -58,7 +58,7 @@ class BunnyCounts {
       phetioDocumentation: 'the total number of bunnies that have floppy ears'
     } );
 
-    // @public (read-only)
+    // @public
     this.shortTeethCountProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'shortTeethCountProperty' ),
@@ -66,7 +66,7 @@ class BunnyCounts {
       phetioDocumentation: 'the total number of bunnies that have short teeth'
     } );
 
-    // @public (read-only)
+    // @public
     this.longTeethCountProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'longTeethCountProperty' ),
