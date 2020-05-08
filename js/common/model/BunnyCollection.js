@@ -305,7 +305,7 @@ class BunnyCollection {
    */
   assertValidCounts() {
 
-    // TODO: ideally this assertion could work when state setting too, https://github.com/phetsims/natural-selection/issues/72
+    // TODO temporary workaround so that we can test with State wrapper, see https://github.com/phetsims/natural-selection/issues/72
     if ( phet.joist.sim.isSettingPhetioStateProperty.value ) {
       return;
     }
