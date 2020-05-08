@@ -13,7 +13,7 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
-import FoodSupply from '../model/FoodSupply.js';
+import Food from '../model/Food.js';
 import Wolves from '../model/Wolves.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import LimitedFoodCheckbox from './LimitedFoodCheckbox.js';
@@ -25,13 +25,13 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
 
   /**
    * @param {Wolves} wolves
-   * @param {FoodSupply} foodSupply
+   * @param {Food} food
    * @param {Object} [options]
    */
-  constructor( wolves, foodSupply, options ) {
+  constructor( wolves, food, options ) {
 
     assert && assert( wolves instanceof Wolves, 'invalid wolves' );
-    assert && assert( foodSupply instanceof FoodSupply, 'invalid foodSupply' );
+    assert && assert( food instanceof Food, 'invalid food' );
 
     options = merge( {
       toughFoodCheckboxVisible: true,
@@ -50,11 +50,11 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       tandem: options.tandem.createTandem( 'wolvesCheckbox' )
     } );
 
-    const toughFoodCheckbox = new ToughFoodCheckbox( foodSupply.isToughProperty, {
+    const toughFoodCheckbox = new ToughFoodCheckbox( food.isToughProperty, {
       tandem: options.tandem.createTandem( 'toughFoodCheckbox' )
     } );
 
-    const limitedFoodCheckbox = new LimitedFoodCheckbox( foodSupply.isLimitedProperty, {
+    const limitedFoodCheckbox = new LimitedFoodCheckbox( food.isLimitedProperty, {
       tandem: options.tandem.createTandem( 'limitedFoodCheckbox' )
     } );
 

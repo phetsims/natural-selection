@@ -21,8 +21,8 @@ import BunnyNodeCollection from './BunnyNodeCollection.js';
 import BunnyPressListener from './BunnyPressListener.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
 import EnvironmentRadioButtonGroup from './EnvironmentRadioButtonGroup.js';
-import FoodNode from './FoodNode.js';
 import GenerationClockNode from './GenerationClockNode.js';
+import ShrubNode from './ShrubNode.js';
 
 class EnvironmentNode extends Node {
 
@@ -72,11 +72,10 @@ class EnvironmentNode extends Node {
       clipArea: Shape.rect( 0, 0, options.size.width, options.size.height )
     } );
 
-    // Add food items
-    const food = model.foodSupply.food;
-    for ( let i = 0; i < food.length; i++ ) {
-      spritesNode.addChild( new FoodNode( food[ i ] ) );
-    }
+    // Add shrubs
+    model.food.shrubs.forEach( shrub => {
+      spritesNode.addChild( new ShrubNode( shrub ) );
+    } );
 
     // layering
     assert && assert( !options.children, 'EnvironmentNode sets children' );

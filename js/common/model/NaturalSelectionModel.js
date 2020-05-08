@@ -20,7 +20,7 @@ import BunnyCollection from './BunnyCollection.js';
 import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Environments from './Environments.js';
-import FoodSupply from './FoodSupply.js';
+import Food from './Food.js';
 import GenePool from './GenePool.js';
 import GenerationClock from './GenerationClock.js';
 import PedigreeModel from './PedigreeModel.js';
@@ -90,14 +90,14 @@ class NaturalSelectionModel {
     } );
 
     // @public (read-only)
-    this.foodSupply = new FoodSupply( this.modelViewTransform, {
-      tandem: tandem.createTandem( 'foodSupply' )
+    this.food = new Food( this.modelViewTransform, {
+      tandem: tandem.createTandem( 'food' )
     } );
 
     // @public whether any environmental factor is enabled
     this.environmentalFactorEnabledProperty = new DerivedProperty(
-      [ this.wolves.enabledProperty, this.foodSupply.isToughProperty, this.foodSupply.isLimitedProperty ],
-      ( wolvesEnabled, foodIsTough, foodIsLimited ) => ( wolvesEnabled || foodIsTough || foodIsLimited )
+      [ this.wolves.enabledProperty, this.food.isToughProperty, this.food.isLimitedProperty ],
+      ( wolvesEnabled, isTough, isLimited ) => ( wolvesEnabled || isTough || isLimited )
     );
 
     // @public (read-only)
@@ -157,7 +157,7 @@ class NaturalSelectionModel {
     // environmental factors
     this.environmentProperty.reset();
     this.wolves.reset();
-    this.foodSupply.reset();
+    this.food.reset();
 
     // graph models
     this.populationModel.reset();

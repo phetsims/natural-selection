@@ -72,7 +72,7 @@ class NaturalSelectionScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'addMutationsPanel' )
     } );
 
-    const environmentalFactorsPanel = new EnvironmentalFactorsPanel( model.wolves, model.foodSupply, {
+    const environmentalFactorsPanel = new EnvironmentalFactorsPanel( model.wolves, model.food, {
       toughFoodCheckboxVisible: options.toughFoodCheckboxVisible,
       fixedWidth: rightOfViewportWidth,
       tandem: options.tandem.createTandem( 'environmentalFactorsPanel' )
