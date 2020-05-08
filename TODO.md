@@ -15,7 +15,7 @@
 | Wolves | 1 week | |
 | Food | 1 week | | 
 
-## Features
+## Implementation
 
 * get rid of some submodels, move some Properties into view?
 
