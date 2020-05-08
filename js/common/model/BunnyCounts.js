@@ -27,19 +27,19 @@ class BunnyCounts {
     } );
 
     // @public
-    this.brownFurCountProperty = new NumberProperty( 0, {
-      numberType: 'Integer',
-      tandem: options.tandem.createTandem( 'brownFurCountProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'the total number of bunnies that have brown fur'
-    } );
-
-    // @public
     this.whiteFurCountProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'whiteFurCountProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'the total number of bunnies that have white fur'
+    } );
+
+    // @public
+    this.brownFurCountProperty = new NumberProperty( 0, {
+      numberType: 'Integer',
+      tandem: options.tandem.createTandem( 'brownFurCountProperty' ),
+      phetioReadOnly: true,
+      phetioDocumentation: 'the total number of bunnies that have brown fur'
     } );
 
     // @public
