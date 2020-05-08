@@ -27,7 +27,7 @@
 
 ## Design
 
-* Move time controls near generation clock?
+* Co-locate generation clock and time controls?
 
 ## CT Custom Tests
 
