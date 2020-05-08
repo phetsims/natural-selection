@@ -12,7 +12,7 @@ import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
-import toughShrubCImage from '../../../images/toughShrubC_png.js';
+import shrubToughCImage from '../../../images/shrub-tough-C_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -34,7 +34,7 @@ class ToughFoodCheckbox extends Checkbox {
       maxWidth: 110 // determined empirically
     } );
 
-    const icon = new Image( toughShrubCImage, { scale: 0.2 } );
+    const icon = new Image( shrubToughCImage, { scale: 0.2 } );
 
     const content = new HBox( {
       spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING,
