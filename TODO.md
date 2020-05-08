@@ -1,10 +1,10 @@
-TODO list for natural-selection
+## TODO list for natural-selection
 
 FEATURE MILESTONES
-- [x] Modes
-- [x] Mating
-- [x] Mutations
-- [x] Intro screen
+- [x] Modes 4/23/2020
+- [x] Mating 4/30/2020
+- [x] Mutations 4/30/2020
+- [x] Intro screen 5/7/2020
 - [ ] query parameters - 2 weeks
 - [ ] Pedigree graph - 1 week
 - [ ] Population graph - 3 weeks
