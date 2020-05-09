@@ -76,16 +76,6 @@ class Bunny extends Sprite {
     this.father = options.father;
     this.mother = options.mother;
 
-    // @public (read-only) the bunny's genetic blueprint
-    this.genotype = new Genotype( genePool, this.father, this.mother, merge( {}, options.genotypeOptions, {
-      tandem: options.tandem.createTandem( 'genotype' )
-    } ) );
-
-    // @public (read-only) the bunny's appearance, the manifestation of its genotype
-    this.phenotype = new Phenotype( this.genotype, {
-      tandem: options.tandem.createTandem( 'phenotype' )
-    } );
-
     // @public
     this.ageProperty = new NumberProperty( 0, {
       numberType: 'Integer',
@@ -101,6 +91,16 @@ class Bunny extends Sprite {
       phetioReadOnly: true
     } );
     this.isAliveProperty.lazyLink( isAlive => { assert && assert( !isAlive, 'bunny cannot be resurrected' ); } );
+
+    // @public (read-only) the bunny's genetic blueprint
+    this.genotype = new Genotype( genePool, this.father, this.mother, merge( {}, options.genotypeOptions, {
+      tandem: options.tandem.createTandem( 'genotype' )
+    } ) );
+
+    // @public (read-only) the bunny's appearance, the manifestation of its genotype
+    this.phenotype = new Phenotype( this.genotype, {
+      tandem: options.tandem.createTandem( 'phenotype' )
+    } );
 
     // @private {number} number of times that step has been called in the current rest + hop cycle
     this.stepsCount = 0;
