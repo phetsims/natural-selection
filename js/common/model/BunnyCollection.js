@@ -81,22 +81,31 @@ class BunnyCollection {
     // @public notifies when bunnies have taken over the world, exceeding the maximum population size
     this.bunniesHaveTakenOverTheWorldEmitter = new Emitter();
 
-    // When a bunny is created...
+    // When a bunny is created or restored via PhET-iO
     bunnyGroup.elementCreatedEmitter.addListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
-      // When a bunny dies...
-      const isAliveListener = isAlive => {
-        if ( !isAlive ) {
-          bunny.isAliveProperty.unlink( isAliveListener );
-          this.liveBunnies.remove( bunny );
-          this.deadBunnies.push( bunny );
-          this.bunnyDiedEmitter.emit( bunny );
-        }
-      };
-      bunny.isAliveProperty.lazyLink( isAliveListener );
+      if ( bunny.isAliveProperty.value ) {
 
-      this.liveBunnies.push( bunny );
+        // When a bunny dies...
+        const isAliveListener = isAlive => {
+          if ( !isAlive ) {
+            bunny.isAliveProperty.unlink( isAliveListener );
+            this.liveBunnies.remove( bunny );
+            this.deadBunnies.push( bunny );
+            this.bunnyDiedEmitter.emit( bunny );
+          }
+        };
+        bunny.isAliveProperty.lazyLink( isAliveListener );
+
+        this.liveBunnies.push( bunny );
+      }
+      else {
+        assert && assert( phet.joist.sim.isSettingPhetioStateProperty.value,
+          'a dead bunny should only be created when restoring PhET-iO state' );
+        this.deadBunnies.push( bunny );
+      }
+
       this.bunnyCreatedEmitter.emit( bunny );
     } );
 
@@ -208,8 +217,8 @@ class BunnyCollection {
 
       // bunny is one generation older
       bunny.ageProperty.value++;
-      // assert && assert( bunny.ageProperty.value <= NaturalSelectionConstants.MAX_AGE,
-      //   `bunny age ${bunny.ageProperty.value} exceeded maximum ${NaturalSelectionConstants.MAX_AGE}` );
+      assert && assert( bunny.ageProperty.value <= NaturalSelectionConstants.MAX_AGE,
+        `${bunny.tandem.name} age=${bunny.ageProperty.value} exceeds maxAge=${NaturalSelectionConstants.MAX_AGE}` );
 
       // bunny dies if it exceeds the maximum age
       if ( bunny.ageProperty.value === NaturalSelectionConstants.MAX_AGE ) {
