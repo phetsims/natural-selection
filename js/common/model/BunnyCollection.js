@@ -218,12 +218,12 @@ class BunnyCollection {
     bunnies.forEach( bunny => {
 
       // bunny is one generation older
-      bunny.ageProperty.value++;
-      assert && assert( bunny.ageProperty.value <= NaturalSelectionConstants.MAX_AGE,
-        `${bunny.tandem.name} age=${bunny.ageProperty.value} exceeds maxAge=${NaturalSelectionConstants.MAX_AGE}` );
+      bunny.age++;
+      assert && assert( bunny.age <= NaturalSelectionConstants.MAX_AGE,
+        `${bunny.tandem.name} age=${bunny.age} exceeds maxAge=${NaturalSelectionConstants.MAX_AGE}` );
 
       // bunny dies if it exceeds the maximum age
-      if ( bunny.ageProperty.value === NaturalSelectionConstants.MAX_AGE ) {
+      if ( bunny.age === NaturalSelectionConstants.MAX_AGE ) {
         bunny.die();
         diedCount++;
       }

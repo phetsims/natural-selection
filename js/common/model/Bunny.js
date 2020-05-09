@@ -8,7 +8,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
@@ -73,16 +72,9 @@ class Bunny extends Sprite {
 
     // @public (read-only)
     this.generation = options.generation;
+    this.age = 0;
     this.father = options.father;
     this.mother = options.mother;
-
-    // @public
-    this.ageProperty = new NumberProperty( 0, {
-      numberType: 'Integer',
-      tandem: options.tandem.createTandem( 'ageProperty' ),
-      phetioDocumentation: 'age of the bunny, in generations',
-      phetioReadOnly: true
-    } );
 
     // @public (read-only)
     this.isAliveProperty = new BooleanProperty( true, {
@@ -119,10 +111,9 @@ class Bunny extends Sprite {
 
     // @private
     this.disposeBunny = () => {
+      this.isAliveProperty.dispose();
       this.genotype.dispose();
       this.phenotype.dispose();
-      this.ageProperty.dispose();
-      this.isAliveProperty.dispose();
     };
 
     this.validateInstance();
@@ -300,7 +291,7 @@ class Bunny extends Sprite {
   toString() {
     return `${this.tandem.name}, ` +
            `generation=${this.generation}, ` +
-           `age=${this.ageProperty.value}, ` +
+           `age=${this.age}, ` +
            `genotype=${this.genotype.toAbbreviation()}, ` +
            `father=${this.father ? this.father.tandem.name : null}, ` +
            `mother=${this.mother ? this.mother.tandem.name : null}`;
@@ -320,6 +311,7 @@ class Bunny extends Sprite {
   toStateObject() {
     return {
       generation: NumberIO.toStateObject( this.generation ),
+      age: NumberIO.toStateObject( this.age ),
       father: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.father ),
       mother: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.mother ),
       genotype: GenotypeIO.toStateObject( this.genotype ),
@@ -343,6 +335,7 @@ class Bunny extends Sprite {
   static fromStateObject( stateObject ) {
     return {
       generation: NumberIO.fromStateObject( stateObject.generation ),
+      age: NumberIO.fromStateObject( stateObject.age ),
       father: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.father ),
       mother: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.mother ),
       genotype: GenotypeIO.fromStateObject( stateObject.genotype ),
@@ -377,6 +370,7 @@ class Bunny extends Sprite {
   setValue( state ) {
     required( state );
     this.generation = required( state.generation );
+    this.age = required( state.age );
     this.father = required( state.father );
     this.mother = required( state.mother );
     this.genotype.setValue( state.genotype );
