@@ -97,8 +97,8 @@ class Bunny extends Sprite {
     // @public (read-only)
     this.isAliveProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'isAliveProperty' ),
-      phetioReadOnly: true,
-      phetioDocumentation: 'whether the bunny is alive'
+      phetioDocumentation: 'whether the bunny is alive',
+      phetioReadOnly: true
     } );
     this.isAliveProperty.lazyLink( isAlive => { assert && assert( !isAlive, 'bunny cannot be resurrected' ); } );
 
