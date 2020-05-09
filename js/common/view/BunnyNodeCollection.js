@@ -50,15 +50,13 @@ class BunnyNodeCollection extends PhetioObject {
     // Create the BunnyNode
     const bunnyNode = this.bunnyNodeGroup.createCorrespondingGroupElement( bunny.tandem.name, bunny );
 
-    // If the bunny dies or is disposed, dispose of the associated BunnyNode. We could also listen to
-    // BunnyCollection.bunnyDiedEmitter and BunnyCollection.bunnyDisposedEmitter, but that would get
-    // significantly more expensive as the number of bunnies increases.
+    // If the bunny dies or is disposed, dispose of the associated BunnyNode.
     const disposeBunnyNode = () => {
-      bunny.isAliveProperty.unlink( disposeBunnyNode );
+      bunny.diedEmitter.removeListener( disposeBunnyNode );
       bunny.disposedEmitter.removeListener( disposeBunnyNode );
       this.bunnyNodeGroup.disposeElement( bunnyNode );
     };
-    bunny.isAliveProperty.lazyLink( disposeBunnyNode );
+    bunny.diedEmitter.addListener( disposeBunnyNode );
     bunny.disposedEmitter.addListener( disposeBunnyNode );
 
     return bunnyNode;

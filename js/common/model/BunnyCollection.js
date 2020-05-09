@@ -65,15 +65,7 @@ class BunnyCollection {
       parameters: [ { valueType: Bunny } ]
     } );
 
-    // @public notify when a bunny has been disposed
-    this.bunnyDisposedEmitter = new Emitter( {
-      parameters: [ { valueType: Bunny } ]
-    } );
-
-    // @public notify when has bunny died
-    this.bunnyDiedEmitter = new Emitter( {
-      parameters: [ { valueType: Bunny } ]
-    } );
+    // NOTE: BunnyCollection has no bunnyDiedEmitter or bunnyDisposedEmitter. Bunny has those Emitters.
 
     // @public notifies when all bunnies have died
     this.allBunniesHaveDiedEmitter = new Emitter();
@@ -85,18 +77,15 @@ class BunnyCollection {
     bunnyGroup.elementCreatedEmitter.addListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
-      if ( bunny.isAliveProperty.value ) {
+      if ( bunny.isAlive ) {
 
         // When a bunny dies...
-        const isAliveListener = isAlive => {
-          if ( !isAlive ) {
-            bunny.isAliveProperty.unlink( isAliveListener );
-            this.liveBunnies.remove( bunny );
-            this.deadBunnies.push( bunny );
-            this.bunnyDiedEmitter.emit( bunny );
-          }
+        const diedListener = () => {
+          bunny.diedEmitter.removeListener( diedListener );
+          this.liveBunnies.remove( bunny );
+          this.deadBunnies.push( bunny );
         };
-        bunny.isAliveProperty.lazyLink( isAliveListener );
+        bunny.diedEmitter.addListener( diedListener );
 
         this.liveBunnies.push( bunny );
       }
@@ -114,7 +103,6 @@ class BunnyCollection {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
       this.liveBunnies.contains( bunny ) && this.liveBunnies.remove( bunny );
       this.deadBunnies.contains( bunny ) && this.deadBunnies.remove( bunny );
-      this.bunnyDisposedEmitter.emit( bunny );
     } );
 
     // @private fields needed by methods
@@ -208,7 +196,7 @@ class BunnyCollection {
    * @private
    */
   ageAllBunnies() {
-    assert && assert( _.every( this.liveBunnies.getArray(), bunny => bunny.isAliveProperty.value ),
+    assert && assert( _.every( this.liveBunnies.getArray(), bunny => bunny.isAlive ),
       'liveBunnies contains one or more dead bunnies' );
 
     let diedCount = 0;

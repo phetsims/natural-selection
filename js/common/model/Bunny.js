@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -15,6 +14,7 @@ import Vector3IO from '../../../../dot/js/Vector3IO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
@@ -74,17 +74,10 @@ class Bunny extends Sprite {
     this.generation = options.generation;
     this.father = options.father;
     this.mother = options.mother;
+    this.isAlive = true;
 
     // @public
     this.age = 0;
-
-    // @public (read-only)
-    this.isAliveProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'isAliveProperty' ),
-      phetioDocumentation: 'whether the bunny is alive',
-      phetioReadOnly: true
-    } );
-    this.isAliveProperty.lazyLink( isAlive => { assert && assert( !isAlive, 'bunny cannot be resurrected' ); } );
 
     // @public (read-only) the bunny's genetic blueprint
     this.genotype = new Genotype( genePool, this.father, this.mother, merge( {}, options.genotypeOptions, {
@@ -108,14 +101,17 @@ class Bunny extends Sprite {
     // @private {Vector3|null} the change in position when the bunny hops
     this.hopDelta = null;
 
-    // @private fires when the Bunny has been disposed
+    // @public fires when the Bunny has died
+    this.diedEmitter = new Emitter();
+
+    // @public fires when the Bunny has been disposed
     this.disposedEmitter = new Emitter();
 
     // @private
     this.disposeBunny = () => {
-      this.isAliveProperty.dispose();
       this.genotype.dispose();
       this.phenotype.dispose();
+      this.diedEmitter.dispose();
     };
 
     this.validateInstance();
@@ -146,7 +142,7 @@ class Bunny extends Sprite {
    * @public
    */
   step( dt ) {
-    if ( this.isAliveProperty.value ) {
+    if ( this.isAlive ) {
       this.moveAround();
     }
   }
@@ -156,8 +152,9 @@ class Bunny extends Sprite {
    * @public
    */
   die() {
-    assert && assert( this.isAliveProperty.value, 'bunny is already dead' );
-    this.isAliveProperty.value = false;
+    assert && assert( this.isAlive, 'bunny is already dead' );
+    this.isAlive = false;
+    this.diedEmitter.emit();
   }
 
   /**
@@ -314,6 +311,7 @@ class Bunny extends Sprite {
     return {
       generation: NumberIO.toStateObject( this.generation ),
       age: NumberIO.toStateObject( this.age ),
+      isAlive: BooleanIO.toStateObject( this.isAlive ),
       father: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.father ),
       mother: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.mother ),
       genotype: GenotypeIO.toStateObject( this.genotype ),
@@ -338,6 +336,7 @@ class Bunny extends Sprite {
     return {
       generation: NumberIO.fromStateObject( stateObject.generation ),
       age: NumberIO.fromStateObject( stateObject.age ),
+      isAlive: BooleanIO.fromStateObject( stateObject.isAlive ),
       father: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.father ),
       mother: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.mother ),
       genotype: GenotypeIO.fromStateObject( stateObject.genotype ),
@@ -373,6 +372,7 @@ class Bunny extends Sprite {
     required( state );
     this.generation = required( state.generation );
     this.age = required( state.age );
+    this.isAlive = required( state.isAlive );
     this.father = required( state.father );
     this.mother = required( state.mother );
     this.genotype.setValue( state.genotype );
