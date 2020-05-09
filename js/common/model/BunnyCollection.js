@@ -210,8 +210,6 @@ class BunnyCollection {
   ageAllBunnies() {
     assert && assert( _.every( this.liveBunnies.getArray(), bunny => bunny.isAliveProperty.value ),
       'liveBunnies contains one or more dead bunnies' );
-    assert && assert( _.every( this.deadBunnies.getArray(), bunny => !bunny.isAliveProperty.value ),
-      'deadBunnies contains one or more live bunnies' );
 
     let diedCount = 0;
 
