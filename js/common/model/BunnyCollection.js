@@ -48,14 +48,16 @@ class BunnyCollection {
     // @public (read-only) the live bunnies in the group
     this.liveBunnies = new BunnyArray( {
       tandem: options.tandem.createTandem( 'liveBunnies' ),
-      phetioType: ObservableArrayIO( ReferenceIO( BunnyIO ) )
+      phetioType: ObservableArrayIO( ReferenceIO( BunnyIO ) ),
+      phetioState: false
     } );
 
     // @public (read-only) the dead bunnies in the group
     //TODO this gives us counts for dead bunnies, which we may not want in production
     this.deadBunnies = new BunnyArray( {
       tandem: options.tandem.createTandem( 'deadBunnies' ),
-      phetioType: ObservableArrayIO( ReferenceIO( BunnyIO ) )
+      phetioType: ObservableArrayIO( ReferenceIO( BunnyIO ) ),
+      phetioState: false
     } );
 
     // @public notify when a bunny has been created
@@ -206,8 +208,8 @@ class BunnyCollection {
 
       // bunny is one generation older
       bunny.ageProperty.value++;
-      assert && assert( bunny.ageProperty.value <= NaturalSelectionConstants.MAX_AGE,
-        `bunny age ${bunny.ageProperty.value} exceeded maximum ${NaturalSelectionConstants.MAX_AGE}` );
+      // assert && assert( bunny.ageProperty.value <= NaturalSelectionConstants.MAX_AGE,
+      //   `bunny age ${bunny.ageProperty.value} exceeded maximum ${NaturalSelectionConstants.MAX_AGE}` );
 
       // bunny dies if it exceeds the maximum age
       if ( bunny.ageProperty.value === NaturalSelectionConstants.MAX_AGE ) {
