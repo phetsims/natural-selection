@@ -13,7 +13,6 @@ import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
 import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import Bunny from '../model/Bunny.js';
 import BunnyCollection from '../model/BunnyCollection.js';
 import BunnyNode from './BunnyNode.js';
 import BunnyNodeIO from './BunnyNodeIO.js';
@@ -56,32 +55,6 @@ class BunnyNodeGroup extends PhetioGroup {
     const defaultArguments = [ bunnyCollection.getArchetype() ];
 
     super( createElement, defaultArguments, options );
-  }
-
-  /**
-   * Creates a BunnyNode for a Bunny. Wires up a callback to handle disposal when the Bunny dies or is disposed.
-   * @param {Bunny} bunny
-   * @returns {BunnyNode}
-   * @public
-   */
-  createBunnyNode( bunny ) {
-    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-
-    // Create the BunnyNode
-    const bunnyNode = this.createCorrespondingGroupElement( bunny.tandem.name, bunny );
-
-    // If the bunny dies or is disposed, dispose of the associated BunnyNode. We could also listen to
-    // BunnyCollection.bunnyDiedEmitter and BunnyCollection.bunnyDisposedEmitter, but that would get
-    // significantly more expensive as the number of bunnies increases.
-    const disposeBunnyNode = () => {
-      bunny.isAliveProperty.unlink( disposeBunnyNode );
-      bunny.disposedEmitter.removeListener( disposeBunnyNode );
-      this.disposeElement( bunnyNode );
-    };
-    bunny.isAliveProperty.lazyLink( disposeBunnyNode );
-    bunny.disposedEmitter.addListener( disposeBunnyNode );
-
-    return bunnyNode;
   }
 }
 
