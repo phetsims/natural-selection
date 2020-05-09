@@ -72,9 +72,11 @@ class Bunny extends Sprite {
 
     // @public (read-only)
     this.generation = options.generation;
-    this.age = 0;
     this.father = options.father;
     this.mother = options.mother;
+
+    // @public
+    this.age = 0;
 
     // @public (read-only)
     this.isAliveProperty = new BooleanProperty( true, {
