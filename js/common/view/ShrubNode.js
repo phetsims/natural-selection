@@ -18,6 +18,7 @@ import SpriteNode from './SpriteNode.js';
 
 // constants
 const IMAGE_SCALE = 0.5; // how much the shrub PNG images are scaled
+const TANDEM_NAME_FONT = new PhetFont( 12 );
 
 class ShrubNode extends SpriteNode {
 
@@ -54,7 +55,7 @@ class ShrubNode extends SpriteNode {
     // Show the tandem name centered below the shrub
     if ( NaturalSelectionConstants.SHOW_INFO ) {
       options.children.push( new Text( shrub.tandem.name, {
-        font: new PhetFont( 12 ),
+        font: TANDEM_NAME_FONT,
         fill: 'black',
         centerX: toughShrubNode.centerX,
         top: toughShrubNode.bottom + 5

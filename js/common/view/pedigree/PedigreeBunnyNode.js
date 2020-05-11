@@ -19,6 +19,10 @@ import BunnyImageCache from '../BunnyImageCache.js';
 import MutationIconNode from '../MutationIconNode.js';
 import OriginNode from '../OriginNode.js';
 
+// constants
+const ALLELES_FONT = new PhetFont( 40 );
+const DEAD_SYMBOL_FONT = new PhetFont( 60 );
+
 class PedigreeBunnyNode extends Node {
 
   /**
@@ -48,7 +52,7 @@ class PedigreeBunnyNode extends Node {
     children.push( wrappedImage );
 
     const allelesNode = new Text( '', {
-      font: new PhetFont( 40 ),
+      font: ALLELES_FONT,
       maxWidth: wrappedImage.width
     } );
     children.push( allelesNode );
@@ -90,7 +94,7 @@ class PedigreeBunnyNode extends Node {
       if ( !isAlive ) {
         bunny.diedEmitter.removeListener( diedListener );
         this.addChild( new Text( '\u274c', {
-          font: new PhetFont( 60 ),
+          font: DEAD_SYMBOL_FONT,
           left: wrappedImage.left,
           top: wrappedImage.top
         } ) );

@@ -23,6 +23,7 @@ const START_ANGLE = -Math.PI / 2; // 12:00
 const RADIUS = 18;
 const STROKE = 'black';
 const LINE_WIDTH = 1;
+const GENERATION_FONT = new PhetFont( 16 );
 
 class GenerationClockNode extends Node {
 
@@ -77,7 +78,7 @@ class GenerationClockNode extends Node {
 
     // Display the current generation number below the generation clock.
     const generationNode = new Text( '', {
-      font: new PhetFont( 16 ),
+      font: GENERATION_FONT,
       fill: 'black',
       top: fullCircle.bottom + 3
     } );
