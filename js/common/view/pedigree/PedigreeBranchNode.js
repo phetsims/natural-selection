@@ -65,7 +65,7 @@ class PedigreeBranchNode extends Node {
           xSpacing: X_SPACING_SCALE * options.xSpacing,
           parentsYSpacing: Y_SPACING_SCALE * options.parentsYSpacing,
           scale: PARENTS_SCALE,
-          centerX: bunnyNode.centerX - options.xSpacing,
+          x: bunnyNode.centerX - options.xSpacing,
           bottom: bunnyNode.bottom - options.ySpacing
         } );
       children.push( fatherNode );
@@ -75,7 +75,7 @@ class PedigreeBranchNode extends Node {
           xSpacing: X_SPACING_SCALE * options.xSpacing,
           parentsYSpacing: Y_SPACING_SCALE * options.parentsYSpacing,
           scale: PARENTS_SCALE,
-          centerX: bunnyNode.centerX + options.xSpacing,
+          x: bunnyNode.centerX + options.xSpacing,
           bottom: bunnyNode.bottom - options.ySpacing
         } );
       children.push( motherNode );
