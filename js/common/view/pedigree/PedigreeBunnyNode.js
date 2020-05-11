@@ -17,6 +17,7 @@ import Bunny from '../../model/Bunny.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import BunnyImageCache from '../BunnyImageCache.js';
 import MutationIconNode from '../MutationIconNode.js';
+import OriginNode from '../OriginNode.js';
 
 class PedigreeBunnyNode extends Node {
 
@@ -40,7 +41,10 @@ class PedigreeBunnyNode extends Node {
 
     const children = [];
 
-    const wrappedImage = BunnyImageCache.getWrappedImage( bunny );
+    const wrappedImage = BunnyImageCache.getWrappedImage( bunny, {
+      centerX: 0,
+      bottom: 0
+    } );
     children.push( wrappedImage );
 
     const allelesNode = new Text( '', {
@@ -69,6 +73,10 @@ class PedigreeBunnyNode extends Node {
         pickable: false
       } );
       children.unshift( selectionRectangle );
+    }
+
+    if ( NaturalSelectionConstants.SHOW_ORIGIN ) {
+      children.push( new OriginNode( 4 ) );
     }
 
     assert && assert( !options.children, 'PedigreeBunnyNode sets children' );

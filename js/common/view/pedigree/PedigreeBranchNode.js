@@ -50,9 +50,7 @@ class PedigreeBranchNode extends Node {
 
     const bunnyNode = new PedigreeBunnyNode( bunny,
       furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
-        isSelected: options.bunnyIsSelected,
-        centerX: 0,
-        bottom: 0
+        isSelected: options.bunnyIsSelected
       } );
     children.push( bunnyNode );
 
