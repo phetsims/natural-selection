@@ -91,6 +91,8 @@ class PedigreeBunnyNode extends Node {
     const diedListener = isAlive => {
       if ( !isAlive ) {
         bunny.diedEmitter.removeListener( diedListener );
+
+        // Unicode red cross mark
         this.addChild( new Text( '\u274c', {
           font: DEAD_SYMBOL_FONT,
           left: wrappedImage.left,
