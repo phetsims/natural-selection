@@ -99,7 +99,6 @@ class PedigreeGraphNode extends Node {
           ( backgroundNode.height - 2 * Y_MARGIN ) / branchNode.height
         );
         if ( scale < 1 ) {
-          console.warn( `scaling Pedigree by ${scale}` );
           branchNode.setScaleMagnitude( scale );
         }
       }
