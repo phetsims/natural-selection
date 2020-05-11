@@ -1,7 +1,9 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * PedigreeBranchNode is a branch of the Pedigree graph.
+ * PedigreeBranchNode is a branch of the Pedigree graph.  It connects a child bunny to 2 parent bunnies via a T shape.
+ * The parents are in turn instances of PedigreeBranchNode, so this is a recursively-defined structure.  If the bunny
+ * has no parents, or we have reached the desired depth of the tree, then only the bunny is shown.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -21,6 +23,9 @@ const DEFAULT_X_SPACING = 390; // x spacing between parents
 const DEFAULT_Y_SPACING = 170; // y spacing between child and parents
 const X_SPACING_SCALE = 0.55; // how much x spacing is scale for each generation
 const Y_SPACING_SCALE = 0.7; // how much y spacing is scale for each generation
+const T_HEIGHT = 20; // the height of the T that connects child to parents
+const T_X_OFFSET = 70; // x offset of the T from the parent bunny's origin
+const T_Y_OFFSET = 35; // y offset of the T from the parent bunny's origin
 
 class PedigreeBranchNode extends Node {
 
@@ -80,10 +85,10 @@ class PedigreeBranchNode extends Node {
 
       //TODO factor out constants
       const tShape = new Shape()
-        .moveTo( fatherNode.x + 70, fatherNode.y - 35 )
-        .lineTo( motherNode.x - 70, fatherNode.y - 35 )
-        .moveTo( bunnyNode.centerX, fatherNode.y - 35 )
-        .lineTo( bunnyNode.centerX, fatherNode.y + 20 );
+        .moveTo( fatherNode.x + T_X_OFFSET, fatherNode.y - T_Y_OFFSET )
+        .lineTo( motherNode.x - T_X_OFFSET, fatherNode.y - T_Y_OFFSET )
+        .moveTo( bunnyNode.centerX, fatherNode.y - T_Y_OFFSET )
+        .lineTo( bunnyNode.centerX, fatherNode.y + T_HEIGHT );
       const tPath = new Path( tShape, {
         lineWidth: 2,
         stroke: 'black'
