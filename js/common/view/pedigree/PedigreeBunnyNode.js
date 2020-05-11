@@ -80,9 +80,9 @@ class PedigreeBunnyNode extends Node {
 
     //TODO add OriginNode
 
-    const isAliveListener = isAlive => {
+    const diedListener = isAlive => {
       if ( !isAlive ) {
-        bunny.isAliveProperty.unlink( isAliveListener );
+        bunny.diedEmitter.removeListener( diedListener );
         this.addChild( new Text( '\u274c', {
           font: new PhetFont( 60 ),
           left: wrappedImage.left,
@@ -90,7 +90,7 @@ class PedigreeBunnyNode extends Node {
         } ) );
       }
     };
-    bunny.isAliveProperty.link( isAliveListener );
+    bunny.diedEmitter.addListener( diedListener );
 
     Property.multilink(
       [ furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty ],
@@ -103,8 +103,8 @@ class PedigreeBunnyNode extends Node {
 
     // @private
     this.disposePedigreeBunnyNode = () => {
-      if ( bunny.isAliveProperty.hasListener( isAliveListener ) ) {
-        bunny.isAliveProperty.unlink( isAliveListener );
+      if ( bunny.diedEmitter.hasListener( diedListener ) ) {
+        bunny.diedEmitter.removeListener( diedListener );
       }
     };
 
