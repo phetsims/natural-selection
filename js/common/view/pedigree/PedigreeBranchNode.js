@@ -1,6 +1,5 @@
 // Copyright 2020, University of Colorado Boulder
 
-//TODO this is a rough version, needs lots of work
 /**
  * PedigreeBranchNode is a branch of the Pedigree graph.
  *
@@ -17,9 +16,9 @@ import Bunny from '../../model/Bunny.js';
 import PedigreeBunnyNode from './PedigreeBunnyNode.js';
 
 // constants
-const PARENTS_SCALE = 0.8; // how much the parents are scaled relative to the child
+const PARENTS_SCALE = 0.9; // how much the parents are scaled relative to the child
 const X_SPACING_SCALE = 0.6;
-const Y_SPACING_SCALE = 0.6;
+const Y_SPACING_SCALE = 0.7;
 
 class PedigreeBranchNode extends Node {
 
@@ -43,8 +42,8 @@ class PedigreeBranchNode extends Node {
 
     options = merge( {
       bunnyIsSelected: false,
-      parentsXSpacing: 350,
-      parentsYOffset: 175
+      parentsXSpacing: 400,
+      parentsYOffset: 200
     }, options );
 
     const bunnyNode = new PedigreeBunnyNode( bunny,
@@ -57,7 +56,7 @@ class PedigreeBranchNode extends Node {
 
     let fatherNode = null;
     let motherNode = null;
-    if ( depth > 0 && bunny.father && bunny.mother ) {
+    if ( depth > 1 && bunny.father && bunny.mother ) {
 
       fatherNode = new PedigreeBranchNode( bunny.father, depth - 1,
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
