@@ -21,6 +21,8 @@ import PedigreeBranchNode from './PedigreeBranchNode.js';
 // constants
 const TREE_DEPTH = 4;
 const SELECTED_BUNNY_SCALE = 0.4;
+const X_MARGIN = 5;
+const Y_MARGIN = 5;
 
 class PedigreeGraphNode extends Node {
 
@@ -76,16 +78,30 @@ class PedigreeGraphNode extends Node {
       }
 
       if ( bunny ) {
+
+        // Create the graph
         branchNode = new PedigreeBranchNode( bunny, TREE_DEPTH,
           furAllelesVisibleProperty,
           earsAllelesVisibleProperty,
           teethAllelesVisibleProperty, {
             bunnyIsSelected: true,
             scale: SELECTED_BUNNY_SCALE,
+
+            // centered at the bottom of the background
             x: backgroundNode.centerX,
-            centerY: backgroundNode.centerY
+            bottom: backgroundNode.bottom - Y_MARGIN
           } );
         this.addChild( branchNode );
+
+        // Ensure that the graph fits inside the background
+        const scale = _.min(
+          ( backgroundNode.width - 2 * X_MARGIN ) / branchNode.width,
+          ( backgroundNode.height - 2 * Y_MARGIN ) / branchNode.height
+        );
+        if ( scale < 1 ) {
+          console.warn( `scaling Pedigree by ${scale}` );
+          branchNode.setScaleMagnitude( scale );
+        }
       }
     } );
   }

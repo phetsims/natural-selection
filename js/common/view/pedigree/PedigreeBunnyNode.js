@@ -108,7 +108,7 @@ class PedigreeBunnyNode extends Node {
         allelesNode.visible = ( furAllelesVisible || earsAllelesVisible || teethAllelesVisible );
         allelesNode.text = getAllelesString( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible );
         allelesNode.centerX = wrappedImage.centerX;
-        allelesNode.top = wrappedImage.bottom + 5;
+        allelesNode.top = wrappedImage.bottom + 12;
       } );
 
     // @private
