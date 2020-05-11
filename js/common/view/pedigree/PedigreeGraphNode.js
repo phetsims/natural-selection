@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * PedigreeGraphNode displays the pedigree for an individual.
+ * PedigreeGraphNode displays the pedigree for an individual. Origin at bottom center.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -82,7 +82,8 @@ class PedigreeGraphNode extends Node {
           teethAllelesVisibleProperty, {
             bunnyIsSelected: true,
             scale: SELECTED_BUNNY_SCALE,
-            center: backgroundNode.center
+            x: backgroundNode.centerX,
+            centerY: backgroundNode.centerY
           } );
         this.addChild( branchNode );
       }
