@@ -17,8 +17,10 @@ import PedigreeBunnyNode from './PedigreeBunnyNode.js';
 
 // constants
 const PARENTS_SCALE = 0.9; // how much the parents are scaled relative to the child
-const X_SPACING_SCALE = 0.6;
-const Y_SPACING_SCALE = 0.7;
+const DEFAULT_X_SPACING = 390; // x spacing between parents
+const DEFAULT_Y_SPACING = 180; // y spacing between child and parents
+const X_SPACING_SCALE = 0.55; // how much x spacing is scale for each generation
+const Y_SPACING_SCALE = 0.7; // how much y spacing is scale for each generation
 
 class PedigreeBranchNode extends Node {
 
@@ -42,8 +44,8 @@ class PedigreeBranchNode extends Node {
 
     options = merge( {
       bunnyIsSelected: false,
-      parentsXSpacing: 400,
-      parentsYOffset: 200
+      xSpacing: DEFAULT_X_SPACING,
+      ySpacing: DEFAULT_Y_SPACING
     }, options );
 
     const bunnyNode = new PedigreeBunnyNode( bunny,
@@ -60,27 +62,28 @@ class PedigreeBranchNode extends Node {
 
       fatherNode = new PedigreeBranchNode( bunny.father, depth - 1,
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
-          parentsXSpacing: X_SPACING_SCALE * options.parentsXSpacing,
+          xSpacing: X_SPACING_SCALE * options.xSpacing,
           parentsYSpacing: Y_SPACING_SCALE * options.parentsYSpacing,
           scale: PARENTS_SCALE,
-          centerX: bunnyNode.centerX - options.parentsXSpacing,
-          bottom: bunnyNode.bottom - options.parentsYOffset
+          centerX: bunnyNode.centerX - options.xSpacing,
+          bottom: bunnyNode.bottom - options.ySpacing
         } );
       children.push( fatherNode );
 
       motherNode = new PedigreeBranchNode( bunny.mother, depth - 1,
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
-          parentsXSpacing: X_SPACING_SCALE * options.parentsXSpacing,
+          xSpacing: X_SPACING_SCALE * options.xSpacing,
           parentsYSpacing: Y_SPACING_SCALE * options.parentsYSpacing,
           scale: PARENTS_SCALE,
-          centerX: bunnyNode.centerX + options.parentsXSpacing,
-          bottom: bunnyNode.bottom - options.parentsYOffset
+          centerX: bunnyNode.centerX + options.xSpacing,
+          bottom: bunnyNode.bottom - options.ySpacing
         } );
       children.push( motherNode );
 
+      //TODO factor out constants
       const tShape = new Shape()
-        .moveTo( fatherNode.x + 65, fatherNode.y - 35 )
-        .lineTo( motherNode.x - 65, fatherNode.y - 35 )
+        .moveTo( fatherNode.x + 70, fatherNode.y - 35 )
+        .lineTo( motherNode.x - 70, fatherNode.y - 35 )
         .moveTo( bunnyNode.centerX, fatherNode.y - 35 )
         .lineTo( bunnyNode.centerX, fatherNode.y + 20 );
       const tPath = new Path( tShape, {

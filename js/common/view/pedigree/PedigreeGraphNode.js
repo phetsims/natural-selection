@@ -20,7 +20,7 @@ import PedigreeBranchNode from './PedigreeBranchNode.js';
 
 // constants
 const TREE_DEPTH = 4;
-const SELECTED_BUNNY_SCALE = 0.35;
+const SELECTED_BUNNY_SCALE = 0.4;
 
 class PedigreeGraphNode extends Node {
 
