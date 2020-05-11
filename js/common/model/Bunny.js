@@ -291,6 +291,7 @@ class Bunny extends Sprite {
     return `${this.tandem.name}, ` +
            `generation=${this.generation}, ` +
            `age=${this.age}, ` +
+           `isAlive=${this.isAlive}, ` +
            `genotype=${this.genotype.toAbbreviation()}, ` +
            `father=${this.father ? this.father.tandem.name : null}, ` +
            `mother=${this.mother ? this.mother.tandem.name : null}`;

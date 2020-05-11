@@ -88,8 +88,6 @@ class PedigreeBunnyNode extends Node {
 
     super( options );
 
-    //TODO add OriginNode
-
     const diedListener = isAlive => {
       if ( !isAlive ) {
         bunny.diedEmitter.removeListener( diedListener );
@@ -101,6 +99,7 @@ class PedigreeBunnyNode extends Node {
       }
     };
     bunny.diedEmitter.addListener( diedListener );
+    diedListener( bunny.isAlive );
 
     Property.multilink(
       [ furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty ],
