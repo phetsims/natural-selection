@@ -21,7 +21,7 @@ import OriginNode from '../OriginNode.js';
 
 // constants
 const ALLELES_FONT = new PhetFont( 40 );
-const DEAD_SYMBOL_FONT = new PhetFont( 60 );
+const DEAD_SYMBOL_FONT = new PhetFont( 50 );
 
 class PedigreeBunnyNode extends Node {
 
