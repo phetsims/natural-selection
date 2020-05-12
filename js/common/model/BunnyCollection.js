@@ -295,7 +295,7 @@ class BunnyCollection {
     phet.log && phet.log( `${bornCount} bunnies born` );
 
     // Notify if bunnies have taken over the world.
-    if ( this.liveBunnies.lengthProperty.value > NaturalSelectionConstants.MAX_POPULATION ) {
+    if ( this.liveBunnies.lengthProperty.value >= NaturalSelectionConstants.MAX_POPULATION ) {
       this.bunniesHaveTakenOverTheWorldEmitter.emit();
     }
   }
