@@ -237,6 +237,7 @@ class NaturalSelectionModel {
   }
 
   //TODO #9, this needs to catch errors when assertions are disabled, and fallback to 1 bunny
+  //TODO #9, no i18n herein because query parameters must be specified in English
   /**
    * Initializes the generation-zero bunny population.
    * @private
