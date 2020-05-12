@@ -32,6 +32,6 @@
 ## Testing
 
 * CT: ?secondsPerGeneration=1
-* CT: ?allelesVisible=false`
+* CT: ?allelesVisible=false
 * CT: ?population=...,mutations=...
 * Update PhET-iO design doc for QA
