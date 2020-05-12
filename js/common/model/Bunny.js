@@ -52,7 +52,6 @@ class Bunny extends Sprite {
       mother: null, // {Bunny|null} the Bunny's mother, null if no mother
       generation: 0, // {number} generation that this Bunny belongs to
 
-      genotype: null, // {Genotype|null}
       genotypeOptions: null, // {Object} options to Genotype constructor, including mutations
 
       // phet-io
@@ -64,7 +63,6 @@ class Bunny extends Sprite {
     // Validate options
     assert && assert( Utils.isInteger( options.generation ) && options.generation >= 0, `invalid generation: ${options.generation}` );
     assert && assert( ( options.father && options.mother ) || ( !options.father && !options.mother ), 'bunny cannot have 1 parent' );
-    assert && assert( !( options.genotype && options.genotypeOptions ), 'genotype and genotypeOptions are mutually exclusive' );
 
     // Default to random position and direction
     options.position = options.position || modelViewTransform.getRandomGroundPosition();
@@ -82,10 +80,10 @@ class Bunny extends Sprite {
     this.age = 0;
 
     // @public (read-only) the bunny's genetic blueprint
-    this.genotype = options.genotype ||
-                    new Genotype( genePool, this.father, this.mother, merge( {}, options.genotypeOptions, {
-                      tandem: options.tandem.createTandem( 'genotype' )
-                    } ) );
+    this.genotype = new Genotype( genePool, this.father, this.mother,
+      merge( {}, options.genotypeOptions, {
+        tandem: options.tandem.createTandem( 'genotype' )
+      } ) );
 
     // @public (read-only) the bunny's appearance, the manifestation of its genotype
     this.phenotype = new Phenotype( this.genotype, {
