@@ -68,6 +68,14 @@ class Gene extends PhetioObject {
       tandem: options.tandem.createTandem( 'dominantAlleleProperty' ),
       phetioReadOnly: true
     } );
+    phet.log && this.dominantAlleleProperty.link( dominantAllele => {
+      if ( dominantAllele ) {
+        phet.log( `${this.name}: ${dominantAllele.name} is dominant` );
+      }
+      else {
+        phet.log( `${this.name}: no dominant allele` );
+      }
+    } );
 
     // @public is a mutation coming in the next generation of bunnies?
     this.mutationComingProperty = new BooleanProperty( false, {

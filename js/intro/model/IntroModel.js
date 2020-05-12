@@ -8,6 +8,7 @@
 
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NaturalSelectionModel from '../../common/model/NaturalSelectionModel.js';
+import NaturalSelectionQueryParameters from '../../common/NaturalSelectionQueryParameters.js';
 import naturalSelection from '../../naturalSelection.js';
 
 /**
@@ -20,7 +21,11 @@ class IntroModel extends NaturalSelectionModel {
    */
   constructor( tandem ) {
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
-    super( tandem );
+    super( {
+      initialMutations: NaturalSelectionQueryParameters.introMutations,
+      initialPopulation: NaturalSelectionQueryParameters.introPopulation,
+      tandem: tandem
+    } );
   }
 
   /**

@@ -223,7 +223,9 @@ class Row extends HBox {
     // dominant push button, makes the mutant allele dominant
     const dominantButton = new MutationButton( gene.mutantAllele.image, iconsAlignGroup, {
       listener: () => {
+        assert && assert( !gene.dominantAlleleProperty.value, 'unexpected dominantAlleleProperty value' );
         gene.dominantAlleleProperty.value = gene.mutantAllele;
+        gene.mutationComingProperty.value = true;
       },
       tandem: options.tandem.createTandem( 'dominantButton' )
     } );
@@ -231,7 +233,9 @@ class Row extends HBox {
     // recessive push button, makes the mutant allele recessive
     const recessiveButton = new MutationButton( gene.mutantAllele.image, iconsAlignGroup, {
       listener: () => {
+        assert && assert( !gene.dominantAlleleProperty.value, 'unexpected dominantAlleleProperty value' );
         gene.dominantAlleleProperty.value = gene.normalAllele;
+        gene.mutationComingProperty.value = true;
       },
       tandem: options.tandem.createTandem( 'recessiveButton' )
     } );
@@ -279,9 +283,6 @@ class Row extends HBox {
       dominantButton.visible = recessiveButton.visible = !hasDominantAllele;
       dominantAlleleIcon.visible = recessiveAlleleIcon.visible = hasDominantAllele;
 
-      // signal that a mutation is coming in the next generation
-      gene.mutationComingProperty.value = hasDominantAllele;
-
       // If a selection has been made...
       if ( hasDominantAllele ) {
 
@@ -299,7 +300,7 @@ class Row extends HBox {
 
     // If a Row is made invisible via PhET-iO while a mutation is scheduled, cancel the mutation.
     this.visibleProperty.link( visible => {
-      if ( gene.mutationComingProperty.value ) {
+      if ( !visible && gene.mutationComingProperty.value ) {
         gene.dominantAlleleProperty.value = null;
       }
     } );

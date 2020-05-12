@@ -142,14 +142,24 @@ class BunnyCollection {
   /**
    * Creates a generation-0 Bunny.
    * @returns {Bunny}
+   * @param {Object} [options]
    * @public
    */
-  createBunnyZero() {
-    this.createBunny( {
+  createBunnyZero( options ) {
+
+    if ( options ) {
+      assert && assert( !options.father, 'createBunnyZero sets father' );
+      assert && assert( !options.mother, 'createBunnyZero sets mother' );
+      assert && assert( options.generation === undefined, 'createBunnyZero sets generation' );
+    }
+
+    options = merge( {
       father: null,
       mother: null,
       generation: 0
-    } );
+    }, options );
+
+    this.createBunny( options );
   }
 
   /**

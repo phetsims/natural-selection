@@ -25,39 +25,44 @@ const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
     public: true
   },
 
-  // Specifies the mutations that appear in the initial population of bunnies. The value determines which
-  // alleles abbreviations can appear in the population query parameter.
+  // Specifies the mutations that appear in the initial population of bunnies for the Intro screen.
+  // The value determines which mutant alleles are present, whether they are dominant or recessive,
+  // and which allele abbreviations can appear in the population query-parameter value.
   // See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
-  //TODO https://github.com/phetsims/natural-selection/issues/9 how to specify mutations per screen?
-  mutations: {
+  introMutations: {
+    type: 'string',
+    defaultValue: '',
+    public: true
+  },
+
+  // Specifies the initial population of bunnies for the Intro screen. The value of the mutations query parameter
+  // determines which alleles abbreviations can appear in this query parameter's value.
+  // See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
+  introPopulation: {
     type: 'array',
     elementSchema: {
       type: 'string'
     },
-    defaultValue: [],
-    isValidValue: mutations => true, //TODO https://github.com/phetsims/natural-selection/issues/9
+    defaultValue: [ '1' ],
     public: true
   },
 
-  // Specifies the initial population of bunnies. The value of the mutations query parameter determines which
-  // alleles abbreviations can appear in this query parameter's value.
-  // See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
-  //TODO https://github.com/phetsims/natural-selection/issues/9 how to specify population per screen?
-  // population: {
-  //   type: 'array',
-  //   elementSchema: {
-  //     type: 'string'
-  //   },
-  //   defaultValue: [ '1' ],
-  //   isValidValue: population => true, //TODO https://github.com/phetsims/natural-selection/issues/9
-  //   public: true
-  // },
+  // Specifies the mutations that appear in the initial population of bunnies for the Lab screen.
+  // See introMutations.
+  labMutations: {
+    type: 'string',
+    defaultValue: '',
+    public: true
+  },
 
-  //TODO https://github.com/phetsims/natural-selection/issues/9 for now, ignore mutations and specify the initial number of bunnies
-  population: {
-    type: 'number',
-    defaultValue: 1,
-    isValidValue: population => ( population > 0 && Utils.isInteger( population ) ),
+  // Specifies the initial population of bunnies for the Lab screen.
+  // See introPopulation.
+  labPopulation: {
+    type: 'array',
+    elementSchema: {
+      type: 'string'
+    },
+    defaultValue: [ '1' ],
     public: true
   },
 
@@ -121,7 +126,9 @@ const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
   }
 } );
 
-// check dependencies between query parameters
+// validate query parameters
+assert && assert( NaturalSelectionQueryParameters.secondsPerStep < NaturalSelectionQueryParameters.secondsPerGeneration,
+  'secondsPerStep must be < secondsPerGeneration' );
 
 // log the values of all sim-specific query parameters
 phet.log && phet.log( 'query parameters: ' + JSON.stringify( NaturalSelectionQueryParameters, null, 2 ) );

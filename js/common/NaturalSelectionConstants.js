@@ -21,9 +21,6 @@ const NaturalSelectionConstants = {
 
   // Model ===========================================================================================================
 
-  // number of bunnies in the initial (generation zero) population
-  INITIAL_POPULATION: NaturalSelectionQueryParameters.population,
-
   // number of bunnies required to 'take over the world'
   MAX_POPULATION: NaturalSelectionQueryParameters.maxPopulation,
 
@@ -131,8 +128,6 @@ assert && assert( NaturalSelectionConstants.MUTATION_PERCENTAGE > 0 && NaturalSe
 
 assert && assert( NaturalSelectionConstants.SECONDS_PER_STEP < NaturalSelectionConstants.SECONDS_PER_GENERATION,
   'SECONDS_PER_STEP must be < SECONDS_PER_GENERATION' );
-assert && assert( NaturalSelectionConstants.INITIAL_POPULATION < NaturalSelectionConstants.MAX_POPULATION,
-  'INITIAL_POPULATION must be < MAX_POPULATION' );
 
 //TODO https://github.com/phetsims/natural-selection/issues/49, validate mutations and population, call QueryStringMachine.addWarning
 
