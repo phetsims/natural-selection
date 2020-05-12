@@ -21,7 +21,7 @@
 
 ## Performance
 
-* pre-allocate all BunnyNode instances? (58% time, 31% in new PressListener)
+* pre-allocate all BunnyNode instances?
 
 ## PhET-iO
 
