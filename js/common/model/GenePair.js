@@ -45,7 +45,7 @@ class GenePair extends PhetioObject {
     super( options );
 
     // @public (read-only)
-    this.gene = gene; //TODO is this needed?
+    this.gene = gene;
     this.fatherAllele = fatherAllele;
     this.motherAllele = motherAllele;
 
