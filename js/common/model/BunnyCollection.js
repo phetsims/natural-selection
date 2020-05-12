@@ -320,6 +320,7 @@ class BunnyCollection {
     if ( phet.joist.sim.isSettingPhetioStateProperty.value ) {
       return;
     }
+
     const live = this.liveBunnies.length;
     const dead = this.deadBunnies.length;
     const total = live + dead;
