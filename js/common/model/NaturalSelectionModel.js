@@ -237,7 +237,7 @@ class NaturalSelectionModel {
   }
 
   /**
-   * Initializes the 'generation 0' bunny population.
+   * Initializes the generation-zero bunny population.
    * @private
    */
   initializeBunnyPopulation() {
