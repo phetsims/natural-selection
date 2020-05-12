@@ -301,7 +301,9 @@ class Bunny extends Sprite {
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  // Methods used by BunnyIO to save and restore state
+  // Below here are methods used by BunnyIO to save and restore PhET-iO state.
+  // NOTE! If you add a field to Bunny that is not itself a PhET-iO element, you will like need to add it to
+  // toStateObject, fromStateObject, setValue, and validateInstance.
   //--------------------------------------------------------------------------------------------------------------------
 
   /**

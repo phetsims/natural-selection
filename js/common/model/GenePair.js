@@ -149,7 +149,9 @@ class GenePair extends PhetioObject {
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  // Methods used by GenePairIO to save and restore state
+  // Below here are methods used by GenePairIO to save and restore PhET-iO state.
+  // NOTE! If you add a field to GenePair that is not itself a PhET-iO element, you will like need to add it to
+  // toStateObject, fromStateObject, setValue, and validateInstance.
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
