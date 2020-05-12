@@ -53,7 +53,7 @@ class Genotype extends PhetioObject {
 
     super( options );
 
-    // @public (read-only) is the first a member of the generation that first received a mutation?
+    // @public (read-only) is this a member of the generation that first received a mutation?
     this.isFirstGenerationMutant = ( options.furMutation || options.earsMutation || options.teethMutation );
 
     // @public (read-only)
