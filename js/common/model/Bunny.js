@@ -393,6 +393,8 @@ class Bunny extends Sprite {
    */
   validateInstance() {
     assert && assert( typeof this.generation === 'number', 'invalid generation' );
+    assert && assert( typeof this.age === 'number', 'invalid age' );
+    assert && assert( typeof this.isAlive === 'boolean', 'invalid isAlive' );
     assert && assert( this.father instanceof Bunny || this.father === null, 'invalid father' );
     assert && assert( this.mother instanceof Bunny || this.mother === null, 'invalid mother' );
     assert && assert( this.genotype instanceof Genotype, 'invalid genotype' );
