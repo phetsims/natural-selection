@@ -80,7 +80,7 @@ class NaturalSelectionModel {
     this.bunnyCollection = new BunnyCollection( this.modelViewTransform, this.genePool, {
       tandem: options.tandem.createTandem( 'bunnyCollection' )
     } );
-    this.initializeBunnyPopulation();
+    this.initializeGenerationZero();
 
     // @public {Property.<Bunny|null>} a reference to a Bunny instance in BunnyCollection, null if no selection
     this.selectedBunnyProperty = new Property( null, {
@@ -189,7 +189,7 @@ class NaturalSelectionModel {
     this.genePool.reset();
     this.selectedBunnyProperty.reset();
     this.bunnyCollection.reset();
-    this.initializeBunnyPopulation();
+    this.initializeGenerationZero();
   }
 
   /**
@@ -236,13 +236,14 @@ class NaturalSelectionModel {
     this.bunnyCollection.createBunnyZero();
   }
 
+  //TODO #9, this needs to catch errors when assertions are disabled, and fallback to 1 bunny
   /**
    * Initializes the generation-zero bunny population.
    * @private
    */
-  initializeBunnyPopulation() {
+  initializeGenerationZero() {
 
-    phet.log && phet.log( 'EnvironmentModel.initializeBunnyPopulation' );
+    phet.log && phet.log( 'EnvironmentModel.initializeGenerationZero' );
     assert && assert( this.bunnyCollection.liveBunnies.length === 0, 'bunnies already exist' );
     assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
 
