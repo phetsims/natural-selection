@@ -140,10 +140,10 @@ class Row extends VBox {
     );
 
     // Dominant allele
-    const dominantAlleleNode = new AlleleNode( gene.dominantSymbol, gene.normalAllele.image );
+    const dominantAlleleNode = new AlleleNode( gene.dominantAbbreviationTranslated, gene.normalAllele.image );
 
     // Recessive allele
-    const recessiveAlleleNode = new AlleleNode( gene.recessiveSymbol, gene.mutantAllele.image );
+    const recessiveAlleleNode = new AlleleNode( gene.dominantAbbreviationTranslated, gene.mutantAllele.image );
 
     const alignBoxOptions = {
       group: alignGroup,
@@ -206,25 +206,25 @@ class Row extends VBox {
 }
 
 /**
- * AlleleNode displays the symbol and icon for an allele.
+ * AlleleNode displays the abbreviation and icon for an allele.
  */
 class AlleleNode extends HBox {
 
   /**
-   * @param {string} symbol - the symbol used for the allele
+   * @param {string} abbreviation - the abbreviation used for the allele
    * @param {HTMLImageElement} image
    * @param {Object} [options]
    */
-  constructor( symbol, image, options ) {
+  constructor( abbreviation, image, options ) {
 
-    assert && assert( typeof symbol === 'string', 'invalid symbol' );
+    assert && assert( typeof abbreviation === 'string', 'invalid abbreviation' );
     assert && assert( image instanceof HTMLImageElement, 'invalid image' );
 
     options = merge( {
       spacing: 6
     }, options );
 
-    const textNode = new Text( symbol, {
+    const textNode = new Text( abbreviation, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 12 // determined empirically
     } );

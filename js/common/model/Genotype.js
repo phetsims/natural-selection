@@ -84,7 +84,7 @@ class Genotype extends PhetioObject {
       phetioDocumentation: 'gene pair that determines teeth trait'
     } );
 
-    // @public PhET-iO only, not used in brand=phet
+    // @public the translated abbreviation of the Genotype. PhET-iO only, not used in brand=phet
     const abbreviationProperty = new DerivedProperty(
       [ genePool.furGene.dominantAlleleProperty, genePool.earsGene.dominantAlleleProperty, genePool.teethGene.dominantAlleleProperty ],
       () => {
@@ -120,13 +120,14 @@ class Genotype extends PhetioObject {
   /**
    * Converts a Genotype to its abbreviation, e.g. 'FfEEtt'.
    * This is intended for debugging only. Do not rely on the format!
+   * @param {boolean} translated - true = translated (default), false = not translated
    * @returns {string}
    * @public
    */
-  toAbbreviation() {
-    return this.furGenePair.getAllelesAbbreviation() +
-           this.earsGenePair.getAllelesAbbreviation() +
-           this.teethGenePair.getAllelesAbbreviation();
+  toAbbreviation( translated = true ) {
+    return this.furGenePair.getAllelesAbbreviation( translated ) +
+           this.earsGenePair.getAllelesAbbreviation( translated ) +
+           this.teethGenePair.getAllelesAbbreviation( translated );
   }
 
   //--------------------------------------------------------------------------------------------------------------------

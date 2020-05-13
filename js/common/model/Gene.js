@@ -29,19 +29,24 @@ class Gene extends PhetioObject {
    * @param {string} name
    * @param {Allele} normalAllele - the standard 'normal' or 'wild type' variant of the gene
    * @param {Allele} mutantAllele - the non-standard 'mutant' variant of the gene
-   * @param {string} dominantSymbol - the symbol used to label the dominant allele
-   * @param {string} recessiveSymbol - the symbol used to label the recessive allele
+   * @param {string} dominantAbbreviationEnglish - the untranslated (English) abbreviation of the dominant allele
+   * @param {string} dominantAbbreviationTranslated - the translated abbreviation of the dominant allele
+   * @param {string} recessiveAbbreviationEnglish - the untranslated (English) abbreviation of the recessive allele
+   * @param {string} recessiveAbbreviationTranslated - the translated abbreviation of the recessive allele
    * @param {Color|string} color - the color used to color-code things associated with this gene in the UI
    * @param {Object} [options]
    */
-  constructor( name, normalAllele, mutantAllele, dominantSymbol, recessiveSymbol, color, options ) {
+  constructor( name, normalAllele, mutantAllele, dominantAbbreviationEnglish, dominantAbbreviationTranslated,
+               recessiveAbbreviationEnglish, recessiveAbbreviationTranslated, color, options ) {
 
     assert && assert( typeof name === 'string', 'invalid name' );
     assert && assert( normalAllele instanceof Allele, 'invalid normalAllele' );
     assert && assert( mutantAllele instanceof Allele, 'invalid mutantAllele' );
-    assert && assert( typeof dominantSymbol === 'string', 'invalid dominantSymbol' );
-    assert && assert( typeof recessiveSymbol === 'string', 'invalid recessiveSymbol' );
-    assert && assert( color instanceof Color || typeof color === 'string', 'invalid recessiveSymbol' );
+    assert && assert( typeof dominantAbbreviationEnglish === 'string', 'invalid dominantAbbreviationEnglish' );
+    assert && assert( typeof dominantAbbreviationTranslated === 'string', 'invalid dominantAbbreviationTranslated' );
+    assert && assert( typeof recessiveAbbreviationEnglish === 'string', 'invalid recessiveAbbreviationEnglish' );
+    assert && assert( typeof recessiveAbbreviationTranslated === 'string', 'invalid recessiveAbbreviationTranslated' );
+    assert && assert( color instanceof Color || typeof color === 'string', 'invalid recessiveAbbreviationTranslated' );
 
     options = merge( {
 
@@ -56,8 +61,10 @@ class Gene extends PhetioObject {
     this.name = name;
     this.normalAllele = normalAllele;
     this.mutantAllele = mutantAllele;
-    this.dominantSymbol = dominantSymbol;
-    this.recessiveSymbol = recessiveSymbol;
+    this.dominantAbbreviationEnglish = dominantAbbreviationEnglish;
+    this.dominantAbbreviationTranslated = dominantAbbreviationTranslated;
+    this.recessiveAbbreviationEnglish = recessiveAbbreviationEnglish;
+    this.recessiveAbbreviationTranslated = recessiveAbbreviationTranslated;
     this.color = color;
 
     // @public {Allele|null} the dominate allele, null until the gene has mutated.  Until a mutation occurs, 
@@ -109,7 +116,8 @@ class Gene extends PhetioObject {
   static createFurGene( options ) {
     return new Gene( naturalSelectionStrings.fur,
       AlleleInstances.WHITE_FUR, AlleleInstances.BROWN_FUR,
-      naturalSelectionStrings.furDominant, naturalSelectionStrings.furRecessive,
+      'F', naturalSelectionStrings.furDominant,
+      'f', naturalSelectionStrings.furRecessive,
       NaturalSelectionColors.FUR,
       options );
   }
@@ -123,7 +131,8 @@ class Gene extends PhetioObject {
   static createEarsGene( options ) {
     return new Gene( naturalSelectionStrings.ears,
       AlleleInstances.STRAIGHT_EARS, AlleleInstances.FLOPPY_EARS,
-      naturalSelectionStrings.earsDominant, naturalSelectionStrings.earsRecessive,
+      'E', naturalSelectionStrings.earsDominant,
+      'e', naturalSelectionStrings.earsRecessive,
       NaturalSelectionColors.EARS,
       options );
   }
@@ -137,7 +146,8 @@ class Gene extends PhetioObject {
   static createTeethGene( options ) {
     return new Gene( naturalSelectionStrings.teeth,
       AlleleInstances.SHORT_TEETH, AlleleInstances.LONG_TEETH,
-      naturalSelectionStrings.teethDominant, naturalSelectionStrings.teethRecessive,
+      'T', naturalSelectionStrings.teethDominant,
+      't', naturalSelectionStrings.teethRecessive,
       NaturalSelectionColors.TEETH,
       options );
   }
