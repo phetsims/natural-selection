@@ -36,15 +36,16 @@ class GenePool {
     this.teethGene = Gene.createTeethGene( {
       tandem: options.tandem.createTandem( 'teethGene' )
     } );
+
+    // @public (read-only) for situations where it's possible to iterate over genes
+    this.genes = [ this.furGene, this.earsGene, this.teethGene ];
   }
 
   /**
    * @public
    */
   reset() {
-    this.furGene.reset();
-    this.earsGene.reset();
-    this.teethGene.reset();
+    this.genes.forEach( gene => gene.reset() );
   }
 
   /**
@@ -53,9 +54,7 @@ class GenePool {
    * @public
    */
   resetMutationComing() {
-    this.furGene.mutationComingProperty.reset();
-    this.earsGene.mutationComingProperty.reset();
-    this.teethGene.mutationComingProperty.reset();
+    this.genes.forEach( gene => gene.mutationComingProperty.reset() );
   }
 
   /**
