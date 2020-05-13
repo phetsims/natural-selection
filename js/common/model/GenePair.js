@@ -122,32 +122,6 @@ class GenePair extends PhetioObject {
     return s;
   }
 
-  /**
-   * Creates a GenePair by inheriting from parents or applying an optional mutation.
-   * @param {Gene} gene
-   * @param {GenePair|null} fatherGenePair
-   * @param {GenePair|null} motherGenePair
-   * @param {Object} [options] - GenePair constructor options
-   * @returns {GenePair}
-   * @public
-   */
-  static fromParents( gene, fatherGenePair, motherGenePair, options ) {
-    assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && assert( fatherGenePair instanceof GenePair || fatherGenePair === null, 'invalid fatherGenePair' );
-    assert && assert( motherGenePair instanceof GenePair || motherGenePair === null, 'invalid motherGenePair' );
-
-    options = merge( {
-      mutation: null // {Allele|null} mutation to be applied, null if no mutation
-    }, options );
-
-    assert && assert( !options.mutation || gene.mutantAllele === options.mutation, 'invalid mutation' );
-
-    return new GenePair( gene,
-      getInheritedAllele( fatherGenePair, gene.normalAllele, options.mutation ),
-      getInheritedAllele( motherGenePair, gene.normalAllele, options.mutation ),
-      options );
-  }
-
   //--------------------------------------------------------------------------------------------------------------------
   // Below here are methods used by GenePairIO to save and restore PhET-iO state.
   // NOTE! If you add a field to GenePair that is not itself a PhET-iO element, you will like need to add it to
@@ -215,37 +189,6 @@ class GenePair extends PhetioObject {
     assert && assert( Array.isArray( this.childAlleles ), 'invalid childAlleles' );
     assert && assert( typeof this.childAllelesIndex === 'number', 'invalid childAllelesIndex' );
   }
-}
-
-/**
- * Gets the allele to be inherited.
- * @param {GenePair|null} parentGenePair - the parent's gene pair, null if no parent
- * @param {Allele} normalAllele
- * @param {Allele|null} mutation - mutation to be applied, null if no mutation
- * @returns {Allele}
- */
-function getInheritedAllele( parentGenePair, normalAllele, mutation ) {
-  assert && assert( parentGenePair instanceof GenePair || parentGenePair === null, 'invalid parentGenePair' );
-  assert && assert( normalAllele instanceof Allele, 'invalid normalAllele' );
-  assert && assert( mutation instanceof Allele || mutation === null, 'invalid mutation' );
-
-  let allele = null;
-  if ( mutation ) {
-
-    // mutation overrides inheritance
-    allele = mutation;
-  }
-  else if ( parentGenePair ) {
-
-    // inherit an allele from the parent
-    allele = parentGenePair.getNextChildAllele();
-  }
-  else {
-
-    // default to normal allele, if there was no mutation and no parent
-    allele = normalAllele;
-  }
-  return allele;
 }
 
 naturalSelection.register( 'GenePair', GenePair );

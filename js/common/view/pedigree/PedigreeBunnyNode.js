@@ -57,7 +57,7 @@ class PedigreeBunnyNode extends Node {
     } );
     children.push( allelesNode );
 
-    if ( bunny.isOriginalMutant ) {
+    if ( bunny.genotype.isOriginalMutant ) {
       children.push( new MutationIconNode( {
         radius: 30,
         left: wrappedImage.left,

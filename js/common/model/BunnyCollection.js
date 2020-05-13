@@ -243,7 +243,7 @@ class BunnyCollection {
    */
   mateAllBunnies( generation ) {
 
-    let bornCount = 0;
+    let bornIndex = 0;
 
     // Shuffle the collection of live bunnies so that mating is random.
     const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
@@ -255,17 +255,17 @@ class BunnyCollection {
     const numberToMutate = 1 + Math.floor( NaturalSelectionConstants.MUTATION_PERCENTAGE * numberToBeBorn );
 
     // Determine which mutations should be applied, then reset the gene pool.
-    const furMutation = this.genePool.furGene.mutationComingProperty.value ? this.genePool.furGene.mutantAllele : null;
-    const earsMutation = this.genePool.earsGene.mutationComingProperty.value ? this.genePool.earsGene.mutantAllele : null;
-    const teethMutation = this.genePool.teethGene.mutationComingProperty.value ? this.genePool.teethGene.mutantAllele : null;
+    const mutateFur = this.genePool.furGene.mutationComingProperty.value;
+    const mutateEars = this.genePool.earsGene.mutationComingProperty.value;
+    const mutateTeeth = this.genePool.teethGene.mutationComingProperty.value;
     this.genePool.resetMutationComing();
 
     // Randomly select indices for the new bunnies that will be mutated.
     // Mutations are mutually exclusive, no bunny receives more than 1 mutation.
-    let furIndices = null;
-    let earsIndices = null;
-    let teethIndices = null;
-    if ( furMutation || earsMutation || teethMutation ) {
+    let furIndices = [];
+    let earsIndices = [];
+    let teethIndices = [];
+    if ( mutateFur || mutateEars || mutateTeeth ) {
 
       // Create indices of the new bunnies, for the purpose of applying mutations.
       const indices = [];
@@ -273,10 +273,20 @@ class BunnyCollection {
         indices.push( i );
       }
 
-      furIndices = furMutation ? NaturalSelectionUtils.removeSample( indices, numberToMutate ) : null;
-      earsIndices = earsMutation ? NaturalSelectionUtils.removeSample( indices, numberToMutate ) : null;
-      teethIndices = teethMutation ? NaturalSelectionUtils.removeSample( indices, numberToMutate ) : null;
+      // Select indices for each mutation that will be applied.
+      if ( mutateFur ) {
+        furIndices = NaturalSelectionUtils.removeSample( indices, numberToMutate );
+      }
+      if ( mutateEars ) {
+        earsIndices = NaturalSelectionUtils.removeSample( indices, numberToMutate );
+      }
+      if ( mutateTeeth ) {
+        teethIndices = NaturalSelectionUtils.removeSample( indices, numberToMutate );
+      }
     }
+    assert && assert( Array.isArray( furIndices ), 'expected an array' );
+    assert && assert( Array.isArray( earsIndices ), 'expected an array' );
+    assert && assert( Array.isArray( teethIndices ), 'expected an array' );
 
     // Mate adjacent pairs from the collection, applying mutations where appropriate.
     for ( let i = 1; i < bunnies.length; i = i + 2 ) {
@@ -291,18 +301,18 @@ class BunnyCollection {
           mother: mother,
           generation: generation,
           genotypeOptions: {
-            furMutation: ( furIndices && furIndices.indexOf( bornCount ) >= 0 ) ? furMutation : null,
-            earsMutation: ( earsIndices && earsIndices.indexOf( bornCount ) >= 0 ) ? earsMutation : null,
-            teethMutation: ( teethIndices && teethIndices.indexOf( bornCount ) >= 0 ) ? teethMutation : null
+            mutateFur: ( furIndices.indexOf( bornIndex ) !== -1 ),
+            mutateEars: ( earsIndices.indexOf( bornIndex ) !== -1 ),
+            mutateTeeth: ( teethIndices.indexOf( bornIndex ) !== -1 )
           }
         } );
 
-        bornCount++;
+        bornIndex++;
       }
     }
 
-    assert && assert( bornCount === numberToBeBorn, 'unexpected number of bunnies were born' );
-    phet.log && phet.log( `${bornCount} bunnies born` );
+    assert && assert( bornIndex === numberToBeBorn, 'unexpected number of bunnies were born' );
+    phet.log && phet.log( `${bornIndex} bunnies born` );
 
     // Notify if bunnies have taken over the world.
     if ( this.liveBunnies.lengthProperty.value >= NaturalSelectionConstants.MAX_POPULATION ) {
