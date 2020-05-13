@@ -237,7 +237,7 @@ class NaturalSelectionModel {
   }
 
   //TODO #9, detect errors when assertions are disabled, display error dialog, fallback?
-  //TODO #9, can we do the parsing once, then keep a description that is used to initialize and reset?
+  //TODO #9, do the parsing once, build a description that is used to initialize and reset
   /**
    * Initializes the generation-zero bunny population. This relies on the value of query parameters that were used to
    * set this.initialMutations and this.initialPopulation. Those query parameters are specified using untranslated
