@@ -49,7 +49,7 @@ class GenePairIO extends ObjectIO {
   }
 }
 
-GenePairIO.documentation = 'TODO';
+GenePairIO.documentation = 'TODO https://github.com/phetsims/phet-io/issues/1643';
 GenePairIO.validator = { isValidValue: value => value instanceof GenePair };
 GenePairIO.typeName = 'GenePairIO';
 ObjectIO.validateSubtype( GenePairIO );

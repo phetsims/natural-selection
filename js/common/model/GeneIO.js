@@ -13,7 +13,7 @@ import Gene from './Gene.js';
 
 class GeneIO extends ReferenceIO( ObjectIO ) {}
 
-GeneIO.documentation = 'TODO';
+GeneIO.documentation = 'TODO https://github.com/phetsims/phet-io/issues/1643';
 GeneIO.validator = { isValidValue: value => value instanceof Gene };
 GeneIO.typeName = 'GeneIO';
 ObjectIO.validateSubtype( GeneIO );

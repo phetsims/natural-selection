@@ -13,7 +13,7 @@ import BunnyNode from './BunnyNode.js';
 
 class BunnyNodeIO extends ReferenceIO( ObjectIO ) {}
 
-BunnyNodeIO.documentation = 'TODO';
+BunnyNodeIO.documentation = 'TODO https://github.com/phetsims/phet-io/issues/1643';
 BunnyNodeIO.validator = { isValidValue: value => value instanceof BunnyNode };
 BunnyNodeIO.typeName = 'BunnyNodeIO';
 ObjectIO.validateSubtype( BunnyNodeIO );
