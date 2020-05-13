@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * SpriteDirection is the direction that a Sprite is facing.
+ * SpriteDirection is the direction that a Sprite (bunny, wolf,...) is facing.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
