@@ -1,7 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * BunnyCounts contains the various counts that describe the collection of living bunnies.
+ * BunnyCounts contains the counts that describe the collection of living bunnies.  There is a count of each
+ * allele, and a total count.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -45,14 +45,14 @@ class BunnyCollection {
       tandem: options.tandem.createTandem( 'bunnyGroup' )
     } );
 
-    // @public (read-only) the live bunnies in the group
+    // @public (read-only) the live bunnies in bunnyGroup
     this.liveBunnies = new BunnyArray( {
       tandem: options.tandem.createTandem( 'liveBunnies' ),
       phetioType: ObservableArrayIO( ReferenceIO( BunnyIO ) ),
       phetioState: false
     } );
 
-    // @public (read-only) the dead bunnies in the group
+    // @public (read-only) the dead bunnies in bunnyGroup
     //TODO this gives us counts for dead bunnies, which we may not want in production
     this.deadBunnies = new BunnyArray( {
       tandem: options.tandem.createTandem( 'deadBunnies' ),

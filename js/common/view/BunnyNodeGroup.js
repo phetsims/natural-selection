@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * BunnyNodeGroup is the PhetioGroup for BunnyNode.  It manages dynamic instances of BunnyNode.
+ * BunnyNodeGroup is the PhetioGroup for BunnyNode.  It manages dynamic instances of BunnyNode, as required by PhET-iO.
  * All BunnyNode instances are created and disposed via this group.
  *
  * @author Chris Malley (PixelZoom, Inc.)

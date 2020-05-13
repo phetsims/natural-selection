@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * WolvesCheckbox is a checkbox for enabling the 'wolves' environmental factor.
+ * WolvesCheckbox is a checkbox for enabling the 'Wolves' environmental factor.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -13,8 +13,8 @@ import Image from '../../../../scenery/js/nodes/Image.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import wolfImage from '../../../images/wolf_png.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import naturalSelection from '../../naturalSelection.js';
+import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
 class WolvesCheckbox extends Checkbox {

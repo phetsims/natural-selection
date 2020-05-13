@@ -1,7 +1,9 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * Bunny is the model of a bunny.
+ * Bunny is the model of a bunny. Every bunny has a Genotype (genetic blueprint) and Phenotype (appearance).
+ * All bunnies except generation-zero have 2 parents, referred to as 'father' and 'mother', although bunnies
+ * are sexless. Generation-zero bunnies have no parents.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

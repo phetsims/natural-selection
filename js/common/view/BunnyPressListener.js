@@ -4,7 +4,8 @@
  * BunnyPressListener is the scenery input listener for selecting a bunny.
  *
  * Creating a PressListener for every BunnyNode was found to be expensive because there are a large number of them,
- * so a single listener is added the parent of BunnyNode instances.
+ * so a single listener is added to the parent of BunnyNode instances.  This listener therefore walks the scenery
+ * event Trail to identify the BunnyNode that was pressed.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -34,6 +35,8 @@ class BunnyPressListener extends PressListener  {
 
     assert && assert( !options.press, 'BunnySelectionListener sets press' );
     options.press = event => {
+
+      // Find the BunnyNode closest to the foreground that was pressed.
       const bunnyNode = _.findLast( event.trail.nodes, node => node instanceof BunnyNode );
       if ( bunnyNode ) {
         selectedBunnyProperty.value = bunnyNode.bunny;

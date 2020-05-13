@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * ToughFoodCheckbox is a checkbox for enabling the 'tough food' environmental factor.
+ * ToughFoodCheckbox is a checkbox for enabling the 'Tough Food' environmental factor.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

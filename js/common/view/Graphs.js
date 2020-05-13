@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * Graphs is an enumeration of the graph types that are available in the sim.
+ * Graphs is an enumeration of the graph choices that are available in the sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

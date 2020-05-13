@@ -2,7 +2,7 @@
 
 //TODO adjust margins, spacing, and maxWidth after integrating final artwork
 /**
- * WorldDialog is displayed when all the bunnies have taken over the world.
+ * WorldDialog is displayed when bunnies have exceeded their maximum population and have "taken over the world".
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
