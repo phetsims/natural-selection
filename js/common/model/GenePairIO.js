@@ -15,7 +15,7 @@ class GenePairIO extends ObjectIO {
 
   /**
    * Serializes a GenePair to a state object.
-   * @param {GenePairIO} genePair
+   * @param {GenePair} genePair
    * @returns {Object}
    * @public
    * @override
