@@ -12,7 +12,6 @@ import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
@@ -53,9 +52,6 @@ class Genotype extends PhetioObject {
       mutation => mutation ).length <= 1, 'at most 1 mutation can be specified' );
 
     super( options );
-
-    // @public (read-only) is this the genotype for a member of the first generation to receive a mutation?
-    this.isFirstGenerationMutant = !!( options.furMutation || options.earsMutation || options.teethMutation );
 
     // @public (read-only)
     this.furGenePair = GenePair.fromParents( genePool.furGene,
@@ -142,7 +138,6 @@ class Genotype extends PhetioObject {
    */
   toStateObject() {
     return {
-      isFirstGenerationMutant: BooleanIO.toStateObject( this.isFirstGenerationMutant ),
       furGenePair: GenePairIO.toStateObject( this.furGenePair ),
       earsGenePair: GenePairIO.toStateObject( this.earsGenePair ),
       teethGenePair: GenePairIO.toStateObject( this.teethGenePair )
@@ -157,7 +152,6 @@ class Genotype extends PhetioObject {
    */
   static fromStateObject( stateObject ) {
     return {
-      isFirstGenerationMutant: BooleanIO.fromStateObject( stateObject.isFirstGenerationMutant ),
       furGenePair: GenePairIO.fromStateObject( stateObject.furGenePair ),
       earsGenePair: GenePairIO.fromStateObject( stateObject.earsGenePair ),
       teethGenePair: GenePairIO.fromStateObject( stateObject.teethGenePair )
@@ -171,7 +165,6 @@ class Genotype extends PhetioObject {
    */
   setValue( state ) {
     required( state );
-    this.isFirstGenerationMutant = required( state.isFirstGenerationMutant );
     this.furGenePair.setValue( state.furGenePair );
     this.earsGenePair.setValue( state.earsGenePair );
     this.teethGenePair.setValue( state.teethGenePair );
@@ -183,7 +176,6 @@ class Genotype extends PhetioObject {
    * @private
    */
   validateInstance() {
-    assert && assert( typeof this.isFirstGenerationMutant === 'boolean', 'invalid isFirstGenerationMutant' );
     assert && assert( this.furGenePair instanceof GenePair, 'invalid furGenePair' );
     assert && assert( this.earsGenePair instanceof GenePair, 'invalid earsGenePair' );
     assert && assert( this.teethGenePair instanceof GenePair, 'invalid teethGenePair' );

@@ -52,7 +52,14 @@ class Bunny extends Sprite {
       mother: null, // {Bunny|null} the Bunny's mother, null if no mother
       generation: 0, // {number} generation that this Bunny belongs to
 
-      genotypeOptions: null, // {Object} options to Genotype constructor, including mutations
+      // {Object} options to Genotype constructor
+      genotypeOptions: {
+
+        // {Allele|null} mutations to be applied
+        furMutation: null,
+        earsMutation: null,
+        teethMutation: null
+      },
 
       // phet-io
       tandem: Tandem.REQUIRED,
@@ -75,6 +82,9 @@ class Bunny extends Sprite {
     this.father = options.father;
     this.mother = options.mother;
     this.isAlive = true;
+    
+    // @public (read-only) is this bunny the first to receive some mutation?
+    this.isOriginalMutant = !!( options.genotypeOptions.furMutation || options.genotypeOptions.earsMutation || options.genotypeOptions.teethMutation );
 
     // @public
     this.age = 0;
@@ -293,6 +303,7 @@ class Bunny extends Sprite {
            `generation=${this.generation}, ` +
            `age=${this.age}, ` +
            `isAlive=${this.isAlive}, ` +
+           `isOriginalMutant=${this.isOriginalMutant}, ` +
            `genotype=${this.genotype.toAbbreviation()}, ` +
            `father=${this.father ? this.father.tandem.name : null}, ` +
            `mother=${this.mother ? this.mother.tandem.name : null}`;
@@ -316,6 +327,7 @@ class Bunny extends Sprite {
       generation: NumberIO.toStateObject( this.generation ),
       age: NumberIO.toStateObject( this.age ),
       isAlive: BooleanIO.toStateObject( this.isAlive ),
+      isOriginalMutant: BooleanIO.toStateObject( this.isOriginalMutant ),
       father: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.father ),
       mother: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.mother ),
       genotype: GenotypeIO.toStateObject( this.genotype ),
@@ -341,6 +353,7 @@ class Bunny extends Sprite {
       generation: NumberIO.fromStateObject( stateObject.generation ),
       age: NumberIO.fromStateObject( stateObject.age ),
       isAlive: BooleanIO.fromStateObject( stateObject.isAlive ),
+      isOriginalMutant: BooleanIO.fromStateObject( stateObject.isOriginalMutant ),
       father: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.father ),
       mother: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.mother ),
       genotype: GenotypeIO.fromStateObject( stateObject.genotype ),
@@ -377,6 +390,7 @@ class Bunny extends Sprite {
     this.generation = required( state.generation );
     this.age = required( state.age );
     this.isAlive = required( state.isAlive );
+    this.isOriginalMutant = required( state.isOriginalMutant );
     this.father = required( state.father );
     this.mother = required( state.mother );
     this.genotype.setValue( state.genotype );
@@ -395,6 +409,7 @@ class Bunny extends Sprite {
     assert && assert( typeof this.generation === 'number', 'invalid generation' );
     assert && assert( typeof this.age === 'number', 'invalid age' );
     assert && assert( typeof this.isAlive === 'boolean', 'invalid isAlive' );
+    assert && assert( typeof this.isOriginalMutant === 'boolean', 'invalid isOriginalMutant' );
     assert && assert( this.father instanceof Bunny || this.father === null, 'invalid father' );
     assert && assert( this.mother instanceof Bunny || this.mother === null, 'invalid mother' );
     assert && assert( this.genotype instanceof Genotype, 'invalid genotype' );
