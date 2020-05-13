@@ -1,7 +1,8 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * Graphs is an enumeration of the graph choices that are available in the sim.
+ * GraphChoice is an enumeration of the graph choices that are available.
+ * The user selects one of these choices via GraphChoiceRadioButtonGroup.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
