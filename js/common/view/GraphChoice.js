@@ -9,7 +9,7 @@
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import naturalSelection from '../../naturalSelection.js';
 
-const Graphs = Enumeration.byKeys( [ 'POPULATION', 'PROPORTIONS', 'PEDIGREE', 'NONE' ] );
+const GraphChoice = Enumeration.byKeys( [ 'POPULATION', 'PROPORTIONS', 'PEDIGREE', 'NONE' ] );
 
-naturalSelection.register( 'Graphs', Graphs );
-export default Graphs;
+naturalSelection.register( 'GraphChoice', GraphChoice );
+export default GraphChoice;

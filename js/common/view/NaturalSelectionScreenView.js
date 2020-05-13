@@ -23,8 +23,8 @@ import AddMutationsPanel from './AddMutationsPanel.js';
 import DiedDialog from './DiedDialog.js';
 import EnvironmentalFactorsPanel from './EnvironmentalFactorsPanel.js';
 import EnvironmentNode from './EnvironmentNode.js';
-import Graphs from './Graphs.js';
-import GraphsRadioButtonGroup from './GraphsRadioButtonGroup.js';
+import GraphChoice from './GraphChoice.js';
+import GraphChoiceRadioButtonGroup from './GraphChoiceRadioButtonGroup.js';
 import MutationAlertsNode from './MutationAlertsNode.js';
 import PedigreeNode from './pedigree/PedigreeNode.js';
 import PlayButtonGroup from './PlayButtonGroup.js';
@@ -121,24 +121,24 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     // @public
-    this.selectedGraphProperty = new EnumerationProperty( Graphs, Graphs.POPULATION, {
-      tandem: graphsTandem.createTandem( 'selectedGraphProperty' ),
-      phetioDocumentation: 'the graph that is selected via graphsRadioButtonGroup'
+    this.graphChoiceProperty = new EnumerationProperty( GraphChoice, GraphChoice.POPULATION, {
+      tandem: graphsTandem.createTandem( 'graphChoiceProperty' ),
+      phetioDocumentation: 'the graph choice made via graphChoiceRadioButtonGroup'
     } );
 
-    // Radio buttons for selecting a graph
-    const graphsRadioButtonGroup = new GraphsRadioButtonGroup( this.selectedGraphProperty, {
+    // Radio buttons for choosing a graph
+    const graphChoiceRadioButtonGroup = new GraphChoiceRadioButtonGroup( this.graphChoiceProperty, {
       maxWidth: rightOfViewportWidth,
       left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
       centerY: populationNode.centerY,
-      tandem: graphsTandem.createTandem( 'graphsRadioButtonGroup' )
+      tandem: graphsTandem.createTandem( 'graphChoiceRadioButtonGroup' )
     } );
 
     // Visibility of graphs
-    this.selectedGraphProperty.link( graph => {
-      populationNode.visible = ( graph === Graphs.POPULATION );
-      proportionsNode.visible = ( graph === Graphs.PROPORTIONS );
-      pedigreeNode.visible = ( graph === Graphs.PEDIGREE );
+    this.graphChoiceProperty.link( graph => {
+      populationNode.visible = ( graph === GraphChoice.POPULATION );
+      proportionsNode.visible = ( graph === GraphChoice.PROPORTIONS );
+      pedigreeNode.visible = ( graph === GraphChoice.PEDIGREE );
     } );
 
     // Play/pause/step time controls
@@ -184,7 +184,7 @@ class NaturalSelectionScreenView extends ScreenView {
       environmentNode,
       playButtonGroup,
       panelsParent,
-      graphsRadioButtonGroup,
+      graphChoiceRadioButtonGroup,
       timeControlNode,
       populationNode,
       proportionsNode,
@@ -196,7 +196,7 @@ class NaturalSelectionScreenView extends ScreenView {
     //TODO verify that these resets are needed
     // @private
     this.resetNaturalSelectionScreenView = () => {
-      this.selectedGraphProperty.reset();
+      this.graphChoiceProperty.reset();
       environmentNode.reset();
       populationNode.reset();
     };

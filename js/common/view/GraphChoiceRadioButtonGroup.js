@@ -14,7 +14,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import Graphs from './Graphs.js';
+import GraphChoice from './GraphChoice.js';
 
 // constants
 const TEXT_OPTIONS = {
@@ -22,15 +22,15 @@ const TEXT_OPTIONS = {
   maxWidth: 175 // determined empirically
 };
 
-class GraphsRadioButtonGroup extends VerticalAquaRadioButtonGroup {
+class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
 
   /**
-   * @param {EnumerationProperty.<Graphs>} graphProperty
+   * @param {EnumerationProperty.<GraphChoice>} graphChoiceProperty
    * @param {Object} [options]
    */
-  constructor( graphProperty, options ) {
+  constructor( graphChoiceProperty, options ) {
 
-    assert && assert( graphProperty instanceof EnumerationProperty, 'invalid graphProperty' );
+    assert && assert( graphChoiceProperty instanceof EnumerationProperty, 'invalid graphChoiceProperty' );
 
     options = merge( {
       radius: 8,
@@ -46,34 +46,34 @@ class GraphsRadioButtonGroup extends VerticalAquaRadioButtonGroup {
 
       // Population
       {
-        value: Graphs.POPULATION,
+        value: GraphChoice.POPULATION,
         node: new Text( naturalSelectionStrings.population, TEXT_OPTIONS ),
         tandemName: 'populationRadioButton'
       },
 
       // Proportions
       {
-        value: Graphs.PROPORTIONS,
+        value: GraphChoice.PROPORTIONS,
         node: new Text( naturalSelectionStrings.proportions, TEXT_OPTIONS ),
         tandemName: 'proportionsRadioButton'
       },
 
       // Pedigree
       {
-        value: Graphs.PEDIGREE,
+        value: GraphChoice.PEDIGREE,
         node: new Text( naturalSelectionStrings.pedigree, TEXT_OPTIONS ),
         tandemName: 'pedigreeRadioButton'
       },
 
       // None
       {
-        value: Graphs.NONE,
+        value: GraphChoice.NONE,
         node: new Text( naturalSelectionStrings.none, TEXT_OPTIONS ),
         tandemName: 'noneRadioButton'
       }
     ];
 
-    super( graphProperty, items, options );
+    super( graphChoiceProperty, items, options );
   }
 
   /**
@@ -85,5 +85,5 @@ class GraphsRadioButtonGroup extends VerticalAquaRadioButtonGroup {
   }
 }
 
-naturalSelection.register( 'GraphsRadioButtonGroup', GraphsRadioButtonGroup );
-export default GraphsRadioButtonGroup;
+naturalSelection.register( 'GraphChoiceRadioButtonGroup', GraphChoiceRadioButtonGroup );
+export default GraphChoiceRadioButtonGroup;
