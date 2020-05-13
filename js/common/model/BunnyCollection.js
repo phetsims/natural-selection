@@ -140,7 +140,7 @@ class BunnyCollection {
   }
 
   /**
-   * Creates a generation-0 Bunny.
+   * Creates a generation-zero Bunny.
    * @returns {Bunny}
    * @param {Object} [options]
    * @public
