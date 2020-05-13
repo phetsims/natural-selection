@@ -236,10 +236,12 @@ class NaturalSelectionModel {
     this.bunnyCollection.createBunnyZero();
   }
 
-  //TODO #9, this needs to catch errors when assertions are disabled, and fallback to 1 bunny
-  //TODO #9, no i18n herein because query parameters must be specified in English
+  //TODO #9, detect errors when assertions are disabled, display error dialog, fallback?
+  //TODO #9, can we do the parsing once, then keep a description that is used to initialize and reset?
   /**
-   * Initializes the generation-zero bunny population.
+   * Initializes the generation-zero bunny population. This relies on the value of query parameters that were used to
+   * set this.initialMutations and this.initialPopulation. Those query parameters are specified using untranslated
+   * (English) strings, per https://github.com/phetsims/natural-selection/issues/9.
    * @private
    */
   initializeGenerationZero() {
@@ -252,10 +254,9 @@ class NaturalSelectionModel {
 
       // If there are no mutations, then population must be a positive integer
       const countString = this.initialPopulation[ 0 ];
-      assert && assert( !isNaN( countString ), 'population must be a number' );
+      assert && assert( !isNaN( countString ), `population must be a number: ${countString}` );
       const count = parseFloat( countString );
-      assert && assert( Utils.isInteger( count ), 'population must be an integer' );
-      assert && assert( count > 0, 'population must be > 0' );
+      assert && assert( Utils.isInteger( count ) && count > 0, `population must be a positive integer: ${count}` );
 
       // Create a set of bunnies with no mutations.
       for ( let i = 0; i < count; i++ ) {
@@ -267,42 +268,35 @@ class NaturalSelectionModel {
       // Split mutations into individual characters, e.g. 'FeT' -> [ 'F', 'e', 'T' ]
       const mutationChars = this.initialMutations.split( '' );
 
-      // Valid mutations.
-      assert && assert( _.every( mutationChars, char => [ 'F', 'f', 'E', 'e', 'T', 't' ].indexOf( char ) !== -1 ),
+      // Compile a list of all allele abbreviations
+      const alleleAbbreviations = [];
+
+      const genes = this.genePool.genes;
+      genes.forEach( gene => {
+
+        const dominantAbbreviation = gene.dominantAbbreviationEnglish;
+        const recessiveAbbreviation = gene.recessiveAbbreviationEnglish;
+        alleleAbbreviations.push( dominantAbbreviation );
+        alleleAbbreviations.push( recessiveAbbreviation );
+
+        // Dominant and recessive abbreviations for the same gene are mutually exclusive
+        assert && assert( !( mutationChars.indexOf( dominantAbbreviation ) !== -1 && mutationChars.indexOf( recessiveAbbreviation ) !== -1 ),
+          `${dominantAbbreviation} and ${recessiveAbbreviation} are mutually exclusive: ${this.initialMutations}` );
+
+        // If one of the abbreviations is specified, then make the mutant gene dominant or recessive
+        if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 ) {
+          gene.dominantAlleleProperty.value = gene.mutantAllele;
+        }
+        else if ( mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
+          gene.dominantAlleleProperty.value = gene.normalAllele;
+        }
+      } );
+
+      // Check for non-allele characters
+      assert && assert( _.every( mutationChars, char => alleleAbbreviations.indexOf( char ) !== -1 ),
         `invalid character in mutations: ${this.initialMutations}` );
 
-      // Dominant and recessive chars for the same gene are mutually exclusive
-      assert && assert( !( mutationChars.indexOf( 'F' ) !== -1 && mutationChars.indexOf( 'f' ) !== -1 ),
-        `F and f are mutually exclusive: ${this.initialMutations}` );
-      assert && assert( !( mutationChars.indexOf( 'E' ) !== -1 && mutationChars.indexOf( 'e' ) !== -1 ),
-        `E and e are mutually exclusive: ${this.initialMutations}` );
-      assert && assert( !( mutationChars.indexOf( 'T' ) !== -1 && mutationChars.indexOf( 't' ) !== -1 ),
-        `T and t are mutually exclusive: ${this.initialMutations}` );
-
-      // If 'F' or 'f' is specified, then make the mutant Fur gene dominant or recessive
-      if ( mutationChars.indexOf( 'F' ) !== -1 ) {
-        this.genePool.furGene.dominantAlleleProperty.value = this.genePool.furGene.mutantAllele;
-      }
-      else if ( mutationChars.indexOf( 'f' ) !== -1 ) {
-        this.genePool.furGene.dominantAlleleProperty.value = this.genePool.furGene.normalAllele;
-      }
-
-      // If 'E' or 'e' is specified, then make the mutant Ears gene dominant or recessive
-      if ( mutationChars.indexOf( 'E' ) !== -1 ) {
-        this.genePool.earsGene.dominantAlleleProperty.value = this.genePool.earsGene.mutantAllele;
-      }
-      else if ( mutationChars.indexOf( 'e' ) !== -1 ) {
-        this.genePool.earsGene.dominantAlleleProperty.value = this.genePool.earsGene.normalAllele;
-      }
-
-      // If 'T' or 't' is specified, then make the mutant Teeth gene dominant or recessive
-      if ( mutationChars.indexOf( 'T' ) !== -1 ) {
-        this.genePool.teethGene.dominantAlleleProperty.value = this.genePool.teethGene.mutantAllele;
-      }
-      else if ( mutationChars.indexOf( 't' ) !== -1 ) {
-        this.genePool.teethGene.dominantAlleleProperty.value = this.genePool.teethGene.normalAllele;
-      }
-
+      // The total number of bunnies to be created
       let totalCount = 0;
 
       // The population is described as expressions that indicate the number of bunnies per genotype, e.g. '35:FeT'.
@@ -312,37 +306,35 @@ class NaturalSelectionModel {
         // Get an entry from the array, e.g. '35:FFeEtt'
         const expression = this.initialPopulation[ i ];
 
-        // Split into 2 tokens based on the ':' separator, e.g. '35:FFeEtt' -> '35' and 'FFeEtt'
+        // Split into 2 tokens (count and genotype) based on the ':' separator, e.g. '35:FFeEtt' -> '35' and 'FFeEtt'
         const tokens = expression.split( /[\s:]+/ );
         assert && assert( tokens.length === 2, `malformed population expression: ${expression}` );
         const countString = tokens[ 0 ];
         const genotype = tokens[ 1 ];
 
-        // Validate the count, e.g. '35'
+        // Count must be a positive integer
         assert && assert( !isNaN( countString ), `${countString} is not a number` );
         const count = parseFloat( countString );
-        assert && assert( Utils.isInteger( count ), `${count} is not an integer` );
-        assert && assert( count > 0, 'count must be > 0' );
-        totalCount += count;
-        assert && assert( totalCount < NaturalSelectionConstants.MAX_POPULATION, 'total population must be < maxPopulation' );
+        assert && assert( Utils.isInteger( count ) && count > 0, `${count} must be a positive integer` );
 
-        // Validate the genotype, e.g. 'FFeEtt'
+        // Total of all counts must be < maximum population
+        totalCount += count;
+        assert && assert( totalCount < NaturalSelectionConstants.MAX_POPULATION,
+          `total population must be < ${NaturalSelectionConstants.MAX_POPULATION}` );
+
+        // Genotype must contain 2 alleles for each gene represented in mutations
         assert && assert( genotype.length === 2 * mutationChars.length, `invalid genotype: ${genotype}` );
-        if ( mutationChars.indexOf( 'F' ) !== -1 || mutationChars.indexOf( 'f' ) !== -1 ) {
-          const countDominant = genotype.replace( /[^F]/g, '' ).length;
-          const countRecessive = genotype.replace( /[^f]/g, '' ).length;
-          assert && assert( countDominant + countRecessive === 2, `invalid genotype: ${genotype}` );
-        }
-        if ( mutationChars.indexOf( 'E' ) !== -1 || mutationChars.indexOf( 'e' ) !== -1 ) {
-          const countDominant = genotype.replace( /[^E]/g, '' ).length;
-          const countRecessive = genotype.replace( /[^e]/g, '' ).length;
-          assert && assert( countDominant + countRecessive === 2, `invalid genotype: ${genotype}` );
-        }
-        if ( mutationChars.indexOf( 'T' ) !== -1 || mutationChars.indexOf( 't' ) !== -1 ) {
-          const countDominant = genotype.replace( /[^T]/g, '' ).length;
-          const countRecessive = genotype.replace( /[^t]/g, '' ).length;
-          assert && assert( countDominant + countRecessive === 2, `invalid genotype: ${genotype}` );
-        }
+        assert && genes.forEach( gene => {
+
+          const dominantAbbreviation = gene.dominantAbbreviationEnglish;
+          const recessiveAbbreviation = gene.recessiveAbbreviationEnglish;
+
+          if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 || mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
+            const countDominant = _.filter( genotype.split( '' ), char => char === dominantAbbreviation ).length;
+            const countRecessive = _.filter( genotype.split( '' ), char => char === recessiveAbbreviation ).length;
+            assert && assert( countDominant + countRecessive === 2, `invalid genotype: ${genotype}` );
+          }
+        } );
 
         // Create a set of bunnies with this genotype.
         for ( let i = 0; i < count; i++ ) {
