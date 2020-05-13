@@ -96,7 +96,7 @@ class Phenotype extends PhetioObject {
   /**
    * Serializes a Phenotype to a state object.
    * @returns {Object}
-   * @public
+   * @public for use by PhenotypeIO only
    */
   toStateObject() {
     return {
@@ -110,7 +110,7 @@ class Phenotype extends PhetioObject {
    * Deserializes the state needed by PhenotypeIO.setValue.
    * @param {Object} stateObject
    * @returns {Object}
-   * @public
+   * @public for use by PhenotypeIO only
    */
   static fromStateObject( stateObject ) {
     return {
@@ -123,7 +123,7 @@ class Phenotype extends PhetioObject {
   /**
    * Restores Phenotype state after instantiation.
    * @param {Object} state
-   * @public
+   * @public for use by PhenotypeIO only
    */
   setValue( state ) {
     required( state );

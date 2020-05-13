@@ -131,7 +131,7 @@ class GenePair extends PhetioObject {
   /**
    * Serializes a GenePair to a state object.
    * @returns {Object}
-   * @public
+   * @public for use by GenePairIO only
    */
   toStateObject() {
     return {
@@ -151,7 +151,7 @@ class GenePair extends PhetioObject {
    * Deserializes the state needed by GenePairIO.setValue.
    * @param {Object} stateObject
    * @returns {Object}
-   * @public
+   * @public for use by GenePairIO only
    */
   static fromStateObject( stateObject ) {
     return {
@@ -166,7 +166,7 @@ class GenePair extends PhetioObject {
   /**
    * Restores GenePair state after instantiation.
    * @param {Object} state
-   * @public
+   * @public for use by GenePairIO only
    */
   setValue( state ) {
     required( state );

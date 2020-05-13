@@ -138,7 +138,7 @@ class Genotype extends PhetioObject {
   /**
    * Serializes a Genotype to a state object.
    * @returns {Object}
-   * @public
+   * @public for use by GenotypeIO only
    */
   toStateObject() {
     return {
@@ -153,7 +153,7 @@ class Genotype extends PhetioObject {
    * Deserializes the state needed by GenotypeIO.setValue.
    * @param {Object} stateObject
    * @returns {Object}
-   * @public
+   * @public for use by GenotypeIO only
    */
   static fromStateObject( stateObject ) {
     return {
@@ -167,7 +167,7 @@ class Genotype extends PhetioObject {
   /**
    * Restores Genotype state after instantiation.
    * @param {Object} state
-   * @public
+   * @public for use by GenotypeIO only
    */
   setValue( state ) {
     required( state );
