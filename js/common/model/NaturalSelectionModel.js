@@ -339,7 +339,7 @@ class NaturalSelectionModel {
         // Create a set of bunnies with this genotype.
         for ( let i = 0; i < count; i++ ) {
           this.bunnyCollection.createBunnyZero( {
-            //TODO specify the Bunny's genotype
+            //TODO #9 specify the Bunny's genotype
           } );
         }
       }
