@@ -1,8 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * SimulationMode enumerates the modes that the simulation can be. The mode determines which UI components are
- * available, whether the clock is running, etc.
+ * SimulationMode enumerates the simulation modes, which determine which UI components are available,
+ * whether the clock is running, etc.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
