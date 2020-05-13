@@ -17,6 +17,7 @@
 
 ## Implementation
 
+* revise Genotype to support specifying an initial population
 * get rid of some submodels, move some Properties into view?
 
 ## Performance
