@@ -48,5 +48,5 @@ class ProportionsGenerationSpinner extends NumberSpinner {
   }
 }
 
-naturalSelection.register( 'GenerationSpinner', ProportionsGenerationSpinner );
+naturalSelection.register( 'ProportionsGenerationSpinner', ProportionsGenerationSpinner );
 export default ProportionsGenerationSpinner;

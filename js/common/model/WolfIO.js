@@ -18,5 +18,5 @@ WolfIO.validator = { isValidValue: value => value instanceof Wolf };
 WolfIO.typeName = 'WolvesIO';
 ObjectIO.validateSubtype( WolfIO );
 
-naturalSelection.register( 'WolvesIO', WolfIO );
+naturalSelection.register( 'WolfIO', WolfIO );
 export default WolfIO;

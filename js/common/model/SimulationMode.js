@@ -16,5 +16,5 @@ const SimulationMode = Enumeration.byKeys( [
   'COMPLETED' // the simulation has completed and the user is reviewing results
 ] );
 
-naturalSelection.register( 'SimState', SimulationMode );
+naturalSelection.register( 'SimulationMode', SimulationMode );
 export default SimulationMode;

@@ -51,5 +51,5 @@ class BunnyPressListener extends PressListener  {
   }
 }
 
-naturalSelection.register( 'BunnySelectionListener', BunnyPressListener );
+naturalSelection.register( 'BunnyPressListener', BunnyPressListener );
 export default BunnyPressListener;

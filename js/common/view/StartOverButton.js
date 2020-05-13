@@ -40,5 +40,5 @@ class StartOverButton extends RectangularPushButton {
   }
 }
 
-naturalSelection.register( 'PlayAgainButton', StartOverButton );
+naturalSelection.register( 'StartOverButton', StartOverButton );
 export default StartOverButton;

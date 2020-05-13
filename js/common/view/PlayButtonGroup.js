@@ -108,5 +108,5 @@ class PlayButtonGroup extends Node {
   }
 }
 
-naturalSelection.register( 'PushButtonGroup', PlayButtonGroup );
+naturalSelection.register( 'PlayButtonGroup', PlayButtonGroup );
 export default PlayButtonGroup;

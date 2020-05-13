@@ -77,5 +77,5 @@ const BunnyImageCache = {
   }
 };
 
-naturalSelection.register( 'BunnyImage', BunnyImageCache );
+naturalSelection.register( 'BunnyImageCache', BunnyImageCache );
 export default BunnyImageCache;

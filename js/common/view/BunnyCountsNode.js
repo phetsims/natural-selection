@@ -52,5 +52,5 @@ class BunnyCountsNode extends VBox {
   }
 }
 
-naturalSelection.register( 'LiveDeadCountsNode', BunnyCountsNode );
+naturalSelection.register( 'BunnyCountsNode', BunnyCountsNode );
 export default BunnyCountsNode;
