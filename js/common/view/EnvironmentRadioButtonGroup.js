@@ -14,7 +14,7 @@ import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
 import FontAwesomeNode from '../../../../sun/js/FontAwesomeNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import Environments from '../model/Environments.js';
+import Environment from '../model/Environment.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
@@ -25,7 +25,7 @@ const ICON_Y_MARGIN = 6;
 class EnvironmentRadioButtonGroup extends RadioButtonGroup {
 
   /**
-   * @param {EnumerationProperty.<Environments>} environmentProperty
+   * @param {EnumerationProperty.<Environment>} environmentProperty
    * @param {Object} [options]
    */
   constructor( environmentProperty, options ) {
@@ -75,8 +75,8 @@ class EnvironmentRadioButtonGroup extends RadioButtonGroup {
 
     // description of the buttons
     const content = [
-      { value: Environments.EQUATOR, node: equatorButtonContent, tandemName: 'equatorRadioButton' },
-      { value: Environments.ARCTIC, node: arcticButtonContent, tandemName: 'arcticRadioButton' }
+      { value: Environment.EQUATOR, node: equatorButtonContent, tandemName: 'equatorRadioButton' },
+      { value: Environment.ARCTIC, node: arcticButtonContent, tandemName: 'arcticRadioButton' }
     ];
 
     super( environmentProperty, content, options );

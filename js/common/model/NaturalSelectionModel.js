@@ -20,8 +20,8 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import BunnyCollection from './BunnyCollection.js';
 import BunnyIO from './BunnyIO.js';
+import Environment from './Environment.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
-import Environments from './Environments.js';
 import Food from './Food.js';
 import GenePool from './GenePool.js';
 import GenerationClock from './GenerationClock.js';
@@ -93,7 +93,7 @@ class NaturalSelectionModel {
     } );
 
     // @public
-    this.environmentProperty = new EnumerationProperty( Environments, Environments.EQUATOR, {
+    this.environmentProperty = new EnumerationProperty( Environment, Environment.EQUATOR, {
       tandem: options.tandem.createTandem( 'environmentProperty' )
     } );
 

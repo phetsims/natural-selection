@@ -16,13 +16,13 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import arcticBackgroundImage from '../../../images/arcticBackground_png.js';
 import equatorBackgroundImage from '../../../images/equatorBackground_png.js';
 import naturalSelection from '../../naturalSelection.js';
-import Environments from '../model/Environments.js';
+import Environment from '../model/Environment.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
 class EnvironmentBackgroundNode extends Node {
 
   /**
-   * @param {EnumerationProperty.<Environments>} environmentProperty
+   * @param {EnumerationProperty.<Environment>} environmentProperty
    * @param {Dimension2} size - dimensions of the backgrounds, in view coordinates
    * @param {number} yHorizon - y coordinate of the horizon, in view coordinates
    * @param {Object} [options]
@@ -58,8 +58,8 @@ class EnvironmentBackgroundNode extends Node {
     }
 
     environmentProperty.link( climate => {
-      equatorBackground.visible = ( climate === Environments.EQUATOR );
-      arcticBackground.visible = ( climate === Environments.ARCTIC );
+      equatorBackground.visible = ( climate === Environment.EQUATOR );
+      arcticBackground.visible = ( climate === Environment.ARCTIC );
     } );
   }
 
