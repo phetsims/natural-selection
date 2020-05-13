@@ -2,6 +2,7 @@
 
 /**
  * GenePool is the pool of genes for the bunny population.
+ * There is one instance of GenePool per screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

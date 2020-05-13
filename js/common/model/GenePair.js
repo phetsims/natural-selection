@@ -1,6 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
+ * GenePair is a pair of alleles for a specific Gene.
+ *
  * Genes come in pairs, called alleles, and each pair is located in a specific position (or locus) on a chromosome.
  * If the two alleles at a locus are identical to each other, they are homozygous; if they are different from one
  * another, they are heterozygous.
