@@ -31,6 +31,7 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
   constructor( graphChoiceProperty, options ) {
 
     assert && assert( graphChoiceProperty instanceof EnumerationProperty, 'invalid graphChoiceProperty' );
+    assert && assert( GraphChoice.includes( graphChoiceProperty.value ), 'invalid graphChoiceProperty.value' );
 
     options = merge( {
       radius: 8,

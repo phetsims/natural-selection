@@ -30,6 +30,7 @@ class EnvironmentBackgroundNode extends Node {
   constructor( environmentProperty, size, yHorizon, options ) {
 
     assert && assert( environmentProperty instanceof EnumerationProperty, 'invalid environmentProperty' );
+    assert && assert( Environment.includes( environmentProperty.value ), 'invalid environmentProperty.value' );
     assert && assert( size instanceof Dimension2, 'invalid size' );
     assert && assert( typeof yHorizon === 'number', 'invalid yHorizon' );
 

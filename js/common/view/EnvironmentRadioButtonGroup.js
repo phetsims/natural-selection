@@ -31,6 +31,7 @@ class EnvironmentRadioButtonGroup extends RadioButtonGroup {
   constructor( environmentProperty, options ) {
 
     assert && assert( environmentProperty instanceof EnumerationProperty, 'invalid environmentProperty' );
+    assert && assert( Environment.includes( environmentProperty.value ), 'invalid environmentProperty.value' );
 
     options = merge( {}, {
 

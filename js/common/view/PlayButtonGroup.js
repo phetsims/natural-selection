@@ -28,6 +28,7 @@ class PlayButtonGroup extends Node {
   constructor( simulationModeProperty, bunnyCountProperty, options ) {
 
     assert && assert( simulationModeProperty instanceof EnumerationProperty, 'invalid simulationModeProperty' );
+    assert && assert( SimulationMode.includes( simulationModeProperty.value ), 'invalid simulationModeProperty.value' );
     assert && assert( bunnyCountProperty instanceof Property, 'invalid bunnyCountProperty' );
 
     options = merge( {
