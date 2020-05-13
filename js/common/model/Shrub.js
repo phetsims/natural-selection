@@ -28,6 +28,7 @@ class Shrub extends Sprite {
     assert && assert( toughImage instanceof HTMLImageElement, 'invalid toughImage' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
     assert && assert( isToughProperty instanceof Property, 'invalid isToughProperty' );
+    assert && assert( typeof isToughProperty.value === 'boolean', 'invalid isToughProperty.value' );
 
     options = merge( {}, options );
 

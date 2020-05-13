@@ -26,6 +26,7 @@ class WolvesCheckbox extends Checkbox {
   constructor( wolvesEnabledProperty, options ) {
 
     assert && assert( wolvesEnabledProperty instanceof Property, 'invalid wolvesEnabledProperty' );
+    assert && assert( typeof wolvesEnabledProperty.value === 'boolean', 'invalid wolvesEnabledProperty.value' );
 
     options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 

@@ -36,8 +36,11 @@ class PedigreeBunnyNode extends Node {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
     assert && assert( furAllelesVisibleProperty instanceof Property, 'invalid furAllelesVisibleProperty' );
+    assert && assert( typeof furAllelesVisibleProperty.value === 'boolean', 'invalid furAllelesVisibleProperty.value' );
     assert && assert( earsAllelesVisibleProperty instanceof Property, 'invalid earsAllelesVisibleProperty' );
+    assert && assert( typeof earsAllelesVisibleProperty.value === 'boolean', 'invalid earsAllelesVisibleProperty.value' );
     assert && assert( teethAllelesVisibleProperty instanceof Property, 'invalid teethAllelesVisibleProperty' );
+    assert && assert( typeof teethAllelesVisibleProperty.value === 'boolean', 'invalid teethAllelesVisibleProperty.value' );
 
     options = merge( {
       isSelected: false

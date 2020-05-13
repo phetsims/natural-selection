@@ -12,6 +12,7 @@ import merge from '../../../../../phet-core/js/merge.js';
 import HBox from '../../../../../scenery/js/nodes/HBox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
+import Bunny from '../../model/Bunny.js';
 import GenePool from '../../model/GenePool.js';
 import PedigreeModel from '../../model/PedigreeModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
@@ -31,6 +32,8 @@ class PedigreeNode extends HBox {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( selectedBunnyProperty instanceof Property, 'invalid selectedBunnyProperty' );
+    assert && assert( selectedBunnyProperty.value instanceof Bunny || selectedBunnyProperty.value === null,
+      'invalid selectedBunnyProperty.value' );
     assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
     assert && assert( size instanceof Dimension2, 'invalid size' );
 

@@ -23,6 +23,7 @@ class LimitedFoodCheckbox extends Checkbox {
   constructor( limitedFoodProperty, options ) {
 
     assert && assert( limitedFoodProperty instanceof Property, 'invalid limitedFoodProperty' );
+    assert && assert( typeof limitedFoodProperty.value === 'boolean', 'invalid limitedFoodProperty.value' );
 
     options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 

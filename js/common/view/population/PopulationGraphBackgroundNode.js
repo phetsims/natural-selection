@@ -9,6 +9,7 @@
  */
 
 import Property from '../../../../../axon/js/Property.js';
+import Range from '../../../../../dot/js/Range.js';
 import Shape from '../../../../../kite/js/Shape.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
@@ -149,6 +150,7 @@ class VerticalLines extends Node {
   constructor( xRangeProperty, options ) {
 
     assert && assert( xRangeProperty instanceof Property, 'invalid xRangeProperty' );
+    assert && assert( xRangeProperty.value instanceof Range, 'invalid xRangeProperty.value' );
 
     options = merge( {
       xSpacingModel: 1, // spacing between lines, in model coordinates

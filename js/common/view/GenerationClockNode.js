@@ -36,6 +36,7 @@ class GenerationClockNode extends Node {
 
     assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
     assert && assert( environmentalFactorEnabledProperty instanceof Property, 'invalid environmentalFactorEnabledProperty' );
+    assert && assert( typeof environmentalFactorEnabledProperty.value === 'boolean', 'invalid environmentalFactorEnabledProperty.value' );
 
     options = merge( {
 

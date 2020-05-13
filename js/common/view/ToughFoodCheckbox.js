@@ -26,6 +26,7 @@ class ToughFoodCheckbox extends Checkbox {
   constructor( isToughProperty, options ) {
     
     assert && assert( isToughProperty instanceof Property, 'invalid isToughProperty' );
+    assert && assert( typeof isToughProperty.value === 'boolean', 'invalid isToughProperty.value' );
 
     options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 

@@ -27,13 +27,14 @@ const LINE_LENGTH = NUMBER_OF_DASHES * LINE_DASH[ 0 ] + ( NUMBER_OF_DASHES - 1 )
 class PopulationLegendCheckbox extends Checkbox {
 
   /**
-   * @param {Property.<boolean>} property - Property to show/hide the associated plot on the Population graph
+   * @param {Property.<boolean>} plotVisibleProperty - Property to show/hide the associated plot on the Population graph
    * @param {string} name - the allele name
    * @param {Object} [options]
    */
-  constructor( property, name, options ) {
+  constructor( plotVisibleProperty, name, options ) {
 
-    assert && assert( property instanceof Property, 'invalid property' );
+    assert && assert( plotVisibleProperty instanceof Property, 'invalid plotVisibleProperty' );
+    assert && assert( typeof plotVisibleProperty.value === 'boolean', 'invalid plotVisibleProperty.value' );
     assert && assert( typeof name === 'string', 'invalid name' );
 
     options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
@@ -59,7 +60,7 @@ class PopulationLegendCheckbox extends Checkbox {
       children: [ lineNode, nameNode ]
     } );
 
-    super( content, property, options );
+    super( content, plotVisibleProperty, options );
   }
 
   /**

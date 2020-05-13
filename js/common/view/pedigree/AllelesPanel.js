@@ -39,8 +39,11 @@ class AllelesPanel extends NaturalSelectionPanel {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( furAllelesVisibleProperty instanceof Property, 'invalid furAllelesVisibleProperty' );
+    assert && assert( typeof furAllelesVisibleProperty.value === 'boolean', 'invalid furAllelesVisibleProperty.value' );
     assert && assert( earsAllelesVisibleProperty instanceof Property, 'invalid earsAllelesVisibleProperty' );
+    assert && assert( typeof earsAllelesVisibleProperty.value === 'boolean', 'invalid earsAllelesVisibleProperty.value' );
     assert && assert( teethAllelesVisibleProperty instanceof Property, 'invalid teethAllelesVisibleProperty' );
+    assert && assert( typeof teethAllelesVisibleProperty.value === 'boolean', 'invalid teethAllelesVisibleProperty.value' );
 
     options = merge( {
 
@@ -111,6 +114,7 @@ class Row extends VBox {
 
     assert && assert( gene instanceof Gene, 'invalid gene' );
     assert && assert( visibleProperty instanceof Property, 'invalid visibleProperty' );
+    assert && assert( typeof visibleProperty.value === 'boolean', 'invalid visibleProperty.value' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
     options = merge( {

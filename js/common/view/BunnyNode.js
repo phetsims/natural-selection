@@ -25,13 +25,15 @@ class BunnyNode extends SpriteNode {
 
   /**
    * @param {Bunny} bunny
-   * @param {Property.<Bunny>} selectedBunnyProperty
+   * @param {Property.<Bunny|null>} selectedBunnyProperty
    * @param {Object} [options]
    */
   constructor( bunny, selectedBunnyProperty, options ) {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
     assert && assert( selectedBunnyProperty instanceof Property, 'invalid selectedBunnyProperty' );
+    assert && assert( selectedBunnyProperty.value instanceof Bunny || selectedBunnyProperty.value === null,
+      'invalid selectedBunnyProperty.value' );
 
     options = merge( {
 

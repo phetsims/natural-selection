@@ -10,6 +10,7 @@
 import Property from '../../../../../axon/js/Property.js';
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import Range from '../../../../../dot/js/Range.js';
+import Vector2 from '../../../../../dot/js/Vector2.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import DragListener from '../../../../../scenery/js/listeners/DragListener.js';
 import naturalSelection from '../../../naturalSelection.js';
@@ -24,6 +25,7 @@ class DataProbeDragListener extends DragListener {
   constructor( positionProperty, xRange, options ) {
 
     assert && assert( positionProperty instanceof Property, 'invalid positionProperty' );
+    assert && assert( positionProperty.value instanceof Vector2, 'invalid positionProperty.value' );
     assert && assert( xRange instanceof Range, 'invalid xRange' );
 
     options = merge( {}, options );

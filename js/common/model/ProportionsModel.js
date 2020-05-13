@@ -28,7 +28,9 @@ class ProportionsModel extends PhetioObject {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( currentGenerationProperty instanceof Property, 'invalid currentGenerationProperty' );
+    assert && assert( typeof currentGenerationProperty.value === 'number', 'invalid currentGenerationProperty.value' );
     assert && assert( isPlayingProperty instanceof Property, 'invalid isPlayingProperty' );
+    assert && assert( typeof isPlayingProperty.value === 'boolean', 'invalid isPlayingProperty.value' );
 
     options = merge( {
 

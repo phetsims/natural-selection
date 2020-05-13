@@ -55,7 +55,9 @@ class PopulationModel extends PhetioObject {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( generationsProperty instanceof Property, 'invalid generationsProperty' );
+    assert && assert( typeof generationsProperty.value === 'number', 'invalid generationsProperty.value' );
     assert && assert( isPlayingProperty instanceof Property, 'invalid isPlayingProperty' );
+    assert && assert( typeof isPlayingProperty.value === 'boolean', 'invalid isPlayingProperty.value' );
 
     options = merge( {
 
