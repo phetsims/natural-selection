@@ -106,7 +106,7 @@ const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
   // For internal use only.
   litterSize: {
     type: 'number',
-    defaultValue: 1,
+    defaultValue: 4,
     isValidValue: litterSize => ( litterSize > 0 && Utils.isInteger( litterSize ) )
   },
 
