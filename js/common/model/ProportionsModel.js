@@ -7,9 +7,12 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
+import RangeIO from '../../../../dot/js/RangeIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -51,17 +54,18 @@ class ProportionsModel extends PhetioObject {
       tandem: options.tandem.createTandem( 'valuesVisibleProperty' )
     } );
 
-    // @private Range of generationProperty changes as the number of generations increases. This cannot be a
-    // DerivedProperty because we need to use NumberProperty.setValueAndRange to update generationProperty's
-    // value and range atomically. See https://github.com/phetsims/axon/issues/289
-    this.generationRangeProperty = new Property( new Range( 0, 0 ), {
-      // Do not instrument
-    } );
+    // Range of generationProperty changes as the number of generations increases.
+    const generationRangeProperty = new DerivedProperty(
+      [ currentGenerationProperty ],
+      currentGeneration => new Range( 0, currentGeneration ), {
+        tandem: options.tandem.createTandem( 'generationRangeProperty' ),
+        phetioType: DerivedPropertyIO( RangeIO )
+      } );
 
     // @public the generation that is displayed by the Proportions graph
     this.generationProperty = new NumberProperty( 0, {
       numberType: 'Integer',
-      range: this.generationRangeProperty,
+      range: generationRangeProperty,
       tandem: options.tandem.createTandem( 'generationProperty' ),
       phetioStudioControl: false // range is dynamic
     } );
@@ -82,16 +86,6 @@ class ProportionsModel extends PhetioObject {
         isPlayingProperty.value = false;
       }
     } );
-
-    // When the sim starts playing or the current generation changes, show the current generation immediately.
-    Property.multilink(
-      [ isPlayingProperty, currentGenerationProperty ],
-      ( isPlaying, currentGeneration ) => {
-        if ( isPlaying ) {
-          this.generationProperty.setValueAndRange( currentGeneration, new Range( 0, currentGeneration ) );
-        }
-      }
-    );
   }
 
   /**
@@ -99,7 +93,7 @@ class ProportionsModel extends PhetioObject {
    */
   reset() {
     this.valuesVisibleProperty.reset();
-    this.generationProperty.resetValueAndRange(); // because we are using setValueAndRange
+    this.generationProperty.reset();
   }
 
   /**
