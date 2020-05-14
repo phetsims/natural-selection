@@ -90,7 +90,7 @@ const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
   // For internal use only.
   maxPopulation: {
     type: 'number',
-    defaultValue: 1000,
+    defaultValue: 750,
     isValidValue: maxPopulation => ( maxPopulation > 0 && Utils.isInteger( maxPopulation ) )
   },
 
