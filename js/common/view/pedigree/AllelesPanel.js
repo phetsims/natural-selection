@@ -143,7 +143,7 @@ class Row extends VBox {
     const dominantAlleleNode = new AlleleNode( gene.dominantAbbreviationTranslated, gene.normalAllele.image );
 
     // Recessive allele
-    const recessiveAlleleNode = new AlleleNode( gene.dominantAbbreviationTranslated, gene.mutantAllele.image );
+    const recessiveAlleleNode = new AlleleNode( gene.recessiveAbbreviationTranslated, gene.mutantAllele.image );
 
     const alignBoxOptions = {
       group: alignGroup,
