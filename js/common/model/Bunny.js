@@ -27,6 +27,7 @@ import GenePool from './GenePool.js';
 import Genotype from './Genotype.js';
 import GenotypeIO from './GenotypeIO.js';
 import Phenotype from './Phenotype.js';
+import PhenotypeIO from './PhenotypeIO.js';
 import Sprite from './Sprite.js';
 import SpriteDirection from './SpriteDirection.js';
 
@@ -322,6 +323,7 @@ class Bunny extends Sprite {
       father: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.father ),
       mother: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.mother ),
       genotype: GenotypeIO.toStateObject( this.genotype ),
+      phenotype: PhenotypeIO.toStateObject( this.phenotype ),
 
       // state that is not part of the public API, and will not be shown in Studio
       private: {
@@ -347,6 +349,7 @@ class Bunny extends Sprite {
       father: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.father ),
       mother: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.mother ),
       genotype: GenotypeIO.fromStateObject( stateObject.genotype ),
+      phenotype: PhenotypeIO.fromStateObject( stateObject.phenotype ),
       stepsCount: NumberIO.fromStateObject( stateObject.private.stepsCount ),
       restSteps: NumberIO.fromStateObject( stateObject.private.restSteps ),
       hopSteps: NumberIO.fromStateObject( stateObject.private.hopSteps ),
@@ -383,6 +386,7 @@ class Bunny extends Sprite {
     this.father = required( state.father );
     this.mother = required( state.mother );
     this.genotype.setValue( state.genotype );
+    this.phenotype.setValue( state.phenotype );
     this.stepsCount = required( state.stepsCount );
     this.restSteps = required( state.restSteps );
     this.hopSteps = required( state.hopSteps );
@@ -401,6 +405,7 @@ class Bunny extends Sprite {
     assert && assert( this.father instanceof Bunny || this.father === null, 'invalid father' );
     assert && assert( this.mother instanceof Bunny || this.mother === null, 'invalid mother' );
     assert && assert( this.genotype instanceof Genotype, 'invalid genotype' );
+    assert && assert( this.phenotype instanceof Phenotype, 'invalid phenotype' );
     assert && assert( typeof this.stepsCount === 'number', 'invalid stepsCount' );
     assert && assert( typeof this.restSteps === 'number', 'invalid restSteps' );
     assert && assert( typeof this.hopSteps === 'number', 'invalid hopSteps' );
