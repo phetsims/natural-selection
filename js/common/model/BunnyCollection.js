@@ -325,12 +325,6 @@ class BunnyCollection {
    * @private
    */
   assertValidCounts() {
-
-    // TODO temporary workaround so that we can test with State wrapper, see https://github.com/phetsims/natural-selection/issues/72
-    if ( phet.joist.sim.isSettingPhetioStateProperty.value ) {
-      return;
-    }
-
     const live = this.liveBunnies.length;
     const dead = this.deadBunnies.length;
     const total = live + dead;

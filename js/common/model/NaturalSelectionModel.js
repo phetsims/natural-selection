@@ -130,7 +130,9 @@ class NaturalSelectionModel {
 
     // When the generation changes...
     this.generationClock.currentGenerationProperty.lazyLink( currentGeneration => {
-      if ( currentGeneration !== 0 ) {
+
+      // When setting state, we don't need to step the generation, as down stream elements of that call are already stateful
+      if ( currentGeneration !== 0 && !phet.joist.sim.isSettingPhetioStateProperty.value ) {
         this.bunnyCollection.stepGeneration( currentGeneration );
       }
     } );

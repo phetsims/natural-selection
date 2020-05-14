@@ -106,8 +106,12 @@ class EnvironmentNode extends Node {
 
     // Creates a BunnyNode and adds it to the scenegraph
     const createBunnyNode = bunny => {
-      const bunnyNode = bunnyNodeCollection.createBunnyNode( bunny );
-      spritesNode.addChild( bunnyNode );
+
+      // This is to support PhET-iO state, since there dead bunnies can be created already dead.
+      if ( bunny.isAlive ) {
+        const bunnyNode = bunnyNodeCollection.createBunnyNode( bunny );
+        spritesNode.addChild( bunnyNode );
+      }
     };
 
     // Create a BunnyNode for each Bunny in the initial population.
