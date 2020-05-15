@@ -12,7 +12,6 @@ import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import Bunny from './Bunny.js';
 import BunnyArray from './BunnyArray.js';
 import BunnyArrayIO from './BunnyArrayIO.js';
@@ -266,20 +265,23 @@ class BunnyCollection {
     if ( mutateFur || mutateEars || mutateTeeth ) {
 
       // Create indices of the new bunnies, for the purpose of applying mutations.
-      const indices = [];
+      let indices = [];
       for ( let i = 0; i < numberToBeBorn; i++ ) {
         indices.push( i );
       }
 
-      // Select indices for each mutation that will be applied.
+      // Randomly shuffle the indices, so that we can just take how many we need from the beginning of the array.
+      indices = phet.joist.random.shuffle( indices );
+
+      // Select indices for each mutation that will be applied by taking indies from the beginning of the array.
       if ( mutateFur ) {
-        furIndices = NaturalSelectionUtils.removeSample( indices, numberToMutate );
+        furIndices = indices.splice( 0, numberToMutate );
       }
       if ( mutateEars ) {
-        earsIndices = NaturalSelectionUtils.removeSample( indices, numberToMutate );
+        earsIndices = indices.splice( 0, numberToMutate );
       }
       if ( mutateTeeth ) {
-        teethIndices = NaturalSelectionUtils.removeSample( indices, numberToMutate );
+        teethIndices = indices.splice( 0, numberToMutate );
       }
     }
     assert && assert( Array.isArray( furIndices ), 'expected an array' );

@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Utils from '../../../dot/js/Utils.js';
 import Color from '../../../scenery/js/util/Color.js';
 import naturalSelection from '../naturalSelection.js';
 
@@ -106,23 +105,6 @@ const NaturalSelectionUtils = {
       isSorted = ( item >= array[ i - 1 ] );
     }
     return isSorted;
-  },
-
-  /**
-   * Removes n random items from an array.
-   * @param {Array} array
-   * @param {number} n
-   * @returns {Array}
-   */
-  removeSample( array, n ) {
-    assert && assert( Array.isArray( array ), 'invalid array' );
-    assert && assert( !isNaN( n ) && Utils.isInteger( n ) && n > 0, 'n must be a positive integer' );
-    assert && assert( array.length >= n, 'array does not contain enough elements' );
-
-    //TODO https://github.com/phetsims/natural-selection/issues/65 replace _.sampleSize with phet.joist.random.sampleSize
-    const elements = _.sampleSize( array, n );
-    _.pullAll( array, elements );
-    return elements;
   }
 };
 
