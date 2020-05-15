@@ -86,7 +86,6 @@ class PedigreeBranchNode extends Node {
         } );
       children.push( motherNode );
 
-      //TODO factor out constants
       const tShape = new Shape()
         .moveTo( fatherNode.x + T_X_OFFSET, fatherNode.y - T_Y_OFFSET )
         .lineTo( motherNode.x - T_X_OFFSET, fatherNode.y - T_Y_OFFSET )

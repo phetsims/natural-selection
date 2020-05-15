@@ -1,6 +1,5 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
-//TODO if grid lines will be at same positions as tick marks, could use 1 instance of VerticalLines and HorizontalLines
 /**
  * PopulationGraphBackgroundNode is the background for the Population graph, including dynamic grid lines and
  * tick marks.
