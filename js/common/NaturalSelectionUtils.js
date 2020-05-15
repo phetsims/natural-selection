@@ -92,6 +92,15 @@ const NaturalSelectionUtils = {
   },
 
   /**
+   * Determines if an array is sorted in ascending order.
+   * @param {number[]} array
+   * @returns {boolean}
+   */
+  isSorted( array ) {
+    return array.reduce( ( accumulator, item ) => accumulator && item && item >= accumulator );
+  },
+
+  /**
    * Removes n items from an array.
    * @param {Array} array
    * @param {number} n

@@ -19,6 +19,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import DataProbe from './DataProbe.js';
 import GenePool from './GenePool.js';
 
@@ -36,7 +37,7 @@ const Y_MINIMUM = 0;
 // Maximum population values for the y-axis range.
 const Y_MAXIMUMS = [ 5, 14, 30, 50, 70, 100, 140, 200, 240, 350, 500, 1000, 2000, 3000, 5000 ];
 assert && assert( _.every( value => Utils.isInteger( value ) ), 'Y_MAXIMUMS must contain integer values' );
-//TODO assert that Y_MAXIMUMS values are in ascending order
+assert && assert( NaturalSelectionUtils.isSorted( Y_MAXIMUMS ), 'Y_MAXIMUMS must be sorted in ascending order' );
 
 // Spacing of tick marks for each value of Y_MAXIMUMS.
 const Y_TICK_SPACINGS = [ 1, 2, 5, 10, 10, 20, 20, 40, 40, 50, 100, 200, 400, 500, 1000 ];
