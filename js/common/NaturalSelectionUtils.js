@@ -97,7 +97,13 @@ const NaturalSelectionUtils = {
    * @returns {boolean}
    */
   isSorted( array ) {
-    return array.reduce( ( accumulator, item ) => accumulator && item && item >= accumulator );
+    let isSorted = true;
+    for ( let i = 1; i < array.length && isSorted; i++ ) {
+      const item = array[ i ];
+      assert && assert( !isNaN( item ), `item is not a number: ${item}` );
+      isSorted = ( item >= array[ i - 1 ] );
+    }
+    return isSorted;
   },
 
   /**
