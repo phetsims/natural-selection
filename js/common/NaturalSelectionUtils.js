@@ -101,7 +101,7 @@ const NaturalSelectionUtils = {
     let isSorted = true;
     for ( let i = 1; i < array.length && isSorted; i++ ) {
       const item = array[ i ];
-      assert && assert( !isNaN( item ), `item is not a number: ${item}` );
+      assert && assert( typeof item === 'number', `item is not a number: ${item}` );
       isSorted = ( item >= array[ i - 1 ] );
     }
     return isSorted;

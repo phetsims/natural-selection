@@ -307,18 +307,19 @@ class NaturalSelectionModel {
       // The total number of bunnies to be created
       let totalCount = 0;
 
-      // The population is described as expressions that indicate the number of bunnies per genotype, e.g. '35:FeT'.
+      // The population is described as expressions that indicate the number of bunnies per genotype, e.g. '35FeT'.
       assert && assert( this.initialPopulation.length > 0, 'at least 1 population expression is required' );
       for ( let i = 0; i < this.initialPopulation.length; i++ ) {
 
-        // Get an entry from the array, e.g. '35:FFeEtt'
+        // Get an expression from the array, e.g. '35FFeEtt'
         const expression = this.initialPopulation[ i ];
 
-        // Split into 2 tokens (count and genotype) based on the ':' separator, e.g. '35:FFeEtt' -> '35' and 'FFeEtt'
-        const tokens = expression.split( /[\s:]+/ );
-        assert && assert( tokens.length === 2, `malformed population expression: ${expression}` );
-        const countString = tokens[ 0 ];
-        const genotype = tokens[ 1 ];
+        // Split the expression into 2 tokens (count and genotype) e.g. '35FFeEtt' -> '35' and 'FFeEtt'
+        const firstLetterIndex = expression.search( /[a-zA-Z]/ );
+        assert && assert( firstLetterIndex !== -1 && firstLetterIndex < expression.length - 1,
+          `malformed population expression: ${expression}` );
+        const countString = expression.substring( 0, firstLetterIndex );
+        const genotype = expression.substring( firstLetterIndex );
 
         // Count must be a positive integer
         assert && assert( !isNaN( countString ), `${countString} is not a number` );
@@ -345,6 +346,7 @@ class NaturalSelectionModel {
         } );
 
         // Create a set of bunnies with this genotype.
+        phet && phet.log( `creating ${count} bunnies with genotype ${genotype}` );
         for ( let i = 0; i < count; i++ ) {
           this.bunnyCollection.createBunnyZero( {
             //TODO #9 specify the Bunny's genotype
