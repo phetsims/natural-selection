@@ -114,7 +114,7 @@ class PopulationModel extends PhetioObject {
       isValidValue: xRange => ( xRange.min >= 0 ),
       tandem: options.tandem.createTandem( 'xRangeProperty' ),
       phetioType: PropertyIO( RangeIO ),
-      phetioStudioControl: false, //TODO range is dynamic, and changes on every clock tick
+      phetioReadOnly: true, // range is dynamic, and changes on every clock tick
       phetioHighFrequency: true,
       phetioDocumentation: 'range of the x axis, in generations'
     } );

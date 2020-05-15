@@ -67,7 +67,7 @@ class ProportionsModel extends PhetioObject {
       numberType: 'Integer',
       range: generationRangeProperty,
       tandem: options.tandem.createTandem( 'generationProperty' ),
-      phetioStudioControl: false // range is dynamic
+      phetioReadOnly: true // range is dynamic
     } );
 
     //TODO phet-io instrumentation

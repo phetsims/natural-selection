@@ -44,7 +44,8 @@ class DataProbe extends PhetioObject {
     // @public the generation (x) value
     this.generationProperty = new NumberProperty( 0, {
       tandem: options.tandem.createTandem( 'generationProperty' ),
-      phetioStudioControl: false //TODO range is dynamic
+      phetioReadOnly: true // range is dynamic
+      //TODO range needed?
     } );
 
     const populationPropertyOptions = {
