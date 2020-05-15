@@ -167,17 +167,13 @@ class NaturalSelectionModel {
    * @public
    */
   reset() {
+
     this.startOver();
 
     // environmental factors
     this.environmentProperty.reset();
     this.wolves.reset();
     this.food.reset();
-
-    // graph models
-    this.populationModel.reset();
-    this.proportionsModel.reset();
-    this.pedigreeModel.reset();
   }
 
   /**
@@ -185,6 +181,16 @@ class NaturalSelectionModel {
    * @public
    */
   startOver() {
+
+    // Ordering dependency!
+    // ProportionsModel.generationRangeProperty is derived from generationClock.currentGenerationProperty, so
+    // proportionsModel must be reset before generationClock.
+    // See https://github.com/phetsims/natural-selection/issues/78
+
+    this.populationModel.reset();
+    this.proportionsModel.reset();
+    this.pedigreeModel.reset();
+
     this.simulationModeProperty.reset();
     this.isPlayingProperty.reset(); // see https://github.com/phetsims/natural-selection/issues/55
     this.generationClock.reset();
