@@ -109,7 +109,7 @@ const NaturalSelectionUtils = {
   },
 
   /**
-   * Removes n items from an array.
+   * Removes n random items from an array.
    * @param {Array} array
    * @param {number} n
    * @returns {Array}
