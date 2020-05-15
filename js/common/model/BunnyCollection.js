@@ -8,17 +8,15 @@
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';
-import ObservableArrayIO from '../../../../axon/js/ObservableArrayIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import Bunny from './Bunny.js';
 import BunnyArray from './BunnyArray.js';
+import BunnyArrayIO from './BunnyArrayIO.js';
 import BunnyGroup from './BunnyGroup.js';
-import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 
@@ -48,7 +46,7 @@ class BunnyCollection {
     // @public (read-only) the live bunnies in bunnyGroup
     this.liveBunnies = new BunnyArray( {
       tandem: options.tandem.createTandem( 'liveBunnies' ),
-      phetioType: ObservableArrayIO( ReferenceIO( BunnyIO ) ),
+      phetioType: BunnyArrayIO,
       phetioState: false
     } );
 
@@ -56,7 +54,7 @@ class BunnyCollection {
     //TODO this gives us allele counts for dead bunnies, which we may not want in production
     this.deadBunnies = new BunnyArray( {
       tandem: options.tandem.createTandem( 'deadBunnies' ),
-      phetioType: ObservableArrayIO( ReferenceIO( BunnyIO ) ),
+      phetioType: BunnyArrayIO,
       phetioState: false
     } );
 
