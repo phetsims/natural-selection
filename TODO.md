@@ -17,7 +17,10 @@
 
 ## Implementation
 
-* revise Genotype to support specifying an initial population
+* new Genotype( gene, fatherFurAllele, motherFurAllele,..., options )
+* Genotype.withParents( gene, father, mother, options );
+* call getNextChildAllele() before mutating GenePair
+
 * get rid of some submodels, move some Properties into view?
 
 ## Performance
