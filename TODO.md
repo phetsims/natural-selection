@@ -19,7 +19,7 @@
 
 * new Genotype( gene, fatherFurAllele, motherFurAllele,..., options )
 * Genotype.withParents( gene, father, mother, options );
-* call getNextChildAllele() before mutating GenePair
+* call getNextChildAllele() before mutating GenePair, add GenePair.mutate
 
 * get rid of some submodels, move some Properties into view?
 
