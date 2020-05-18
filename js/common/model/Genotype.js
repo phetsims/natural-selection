@@ -63,19 +63,19 @@ class Genotype extends PhetioObject {
 
     super( options );
 
-    // @public (read-only) {GenePair} for fur
+    // @public (read-only)
     this.furGenePair = new GenePair( genePool.furGene, fatherFurAllele, motherFurAllele, {
       tandem: options.tandem.createTandem( 'furGenePair' ),
       phetioDocumentation: 'gene pair that determines fur trait'
     } );
 
-    // @public (read-only) {GenePair} for ears
+    // @public (read-only)
     this.earsGenePair = new GenePair( genePool.earsGene, fatherEarsAllele, motherEarsAllele, {
       tandem: options.tandem.createTandem( 'earsGenePair' ),
       phetioDocumentation: 'gene pair that determines ears trait'
     } );
 
-    // @public (read-only) {GenePair} for teeth
+    // @public (read-only)
     this.teethGenePair = new GenePair( genePool.teethGene, fatherTeethAllele, motherTeethAllele, {
       tandem: options.tandem.createTandem( 'teethGenePair' ),
       phetioDocumentation: 'gene pair that determines teeth trait'
