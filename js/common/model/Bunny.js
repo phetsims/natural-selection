@@ -55,8 +55,8 @@ class Bunny extends Sprite {
       mother: null, // {Bunny|null} the Bunny's mother, null if no mother
       generation: 0, // {number} generation that this Bunny belongs to
 
-      // {string} abbreviation of the genotype, e.g. 'FfEEtt'. Required if no parents.
-      genotypeString: null,
+      // {Alleles|null} alleles for the genotype
+      alleles: null,
 
       // {Object|null} options to Genotype constructor
       genotypeOptions: null,
@@ -70,7 +70,7 @@ class Bunny extends Sprite {
     // Validate options
     assert && assert( Utils.isInteger( options.generation ) && options.generation >= 0, `invalid generation: ${options.generation}` );
     assert && assert( ( options.father && options.mother ) || ( !options.father && !options.mother ), 'bunny cannot have 1 parent' );
-    assert && assert( !( options.father && options.genotypeString !== null ), 'father and genotypeString are mutually exclusive' );
+    assert && assert( !( options.father && options.alleles ), 'father and alleles are mutually exclusive' );
 
     // Default to random position and direction
     options.position = options.position || modelViewTransform.getRandomGroundPosition();
@@ -98,14 +98,14 @@ class Bunny extends Sprite {
       // genotype is inherited from parents
       this.genotype = Genotype.withParents( genePool, this.father, this.mother, genotypeOptions );
     }
-    else if ( options.genotypeString ) {
+    else if ( options.alleles ) {
 
-      // genotype is described by its string abbreviation, like 'FfEEtt'
-      this.genotype = Genotype.withAbbreviation( genePool, options.genotypeString, genotypeOptions );
+      // genotype is described by a set of alleles
+      this.genotype = Genotype.withAbbreviation( genePool, options.alleles, genotypeOptions );
     }
     else {
 
-      // no parents and no genotype description, so default to normal alleles for all genes
+      // no parents or alleles were provided, so default to normal alleles for all genes
       this.genotype = Genotype.withNormalAlleles( genePool, genotypeOptions );
     }
 

@@ -70,8 +70,8 @@ class NaturalSelectionModel {
       tandem: options.tandem.createTandem( 'genePool' )
     } );
 
-    // @private
-    this.initialPopulation = PopulationParser.parse( this.genePool, mutationsQueryParameterValue, populationQueryParameterValue );
+    // @private {BunnyVariety[]} describes the initial population
+    this.initialBunnyVarieties = PopulationParser.parse( this.genePool, mutationsQueryParameterValue, populationQueryParameterValue );
 
     // @public (read-only) the collection of Bunny instances
     this.bunnyCollection = new BunnyCollection( this.modelViewTransform, this.genePool, {
@@ -251,11 +251,12 @@ class NaturalSelectionModel {
     assert && assert( this.bunnyCollection.liveBunnies.length === 0, 'bunnies already exist' );
     assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
 
-    this.initialPopulation.forEach( description => {
-      phet && phet.log( `creating ${description.count} bunnies with genotype ${description.genotypeString}` );
-      for ( let i = 0; i < description.count; i++ ) {
+    // for each {BunnyVariety} in the initial population ...
+    this.initialBunnyVarieties.forEach( variety => {
+      phet && phet.log( `creating ${variety.count} bunnies with genotype ${variety.genotypeString}` );
+      for ( let i = 0; i < variety.count; i++ ) {
         this.bunnyCollection.createBunnyZero( {
-          genotypeString: description.genotypeString
+          alleles: variety.alleles
         } );
       }
     } );
