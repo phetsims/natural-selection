@@ -38,7 +38,7 @@ class Genotype extends PhetioObject {
                fatherTeethAllele, motherTeethAllele, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( fatherFurAllele instanceof Allele, 'invalid father' );
+    assert && assert( fatherFurAllele instanceof Allele, 'invalid fatherFurAllele' );
     assert && assert( motherFurAllele instanceof Allele, 'invalid motherFurAllele' );
     assert && assert( fatherEarsAllele instanceof Allele, 'invalid fatherEarsAllele' );
     assert && assert( motherEarsAllele instanceof Allele, 'invalid motherEarsAllele' );
