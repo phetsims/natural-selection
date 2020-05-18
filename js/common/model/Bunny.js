@@ -55,7 +55,7 @@ class Bunny extends Sprite {
       mother: null, // {Bunny|null} the Bunny's mother, null if no mother
       generation: 0, // {number} generation that this Bunny belongs to
 
-      // {string} abbreviation of the genotype, e.g. 'FfEEtt'
+      // {string} abbreviation of the genotype, e.g. 'FfEEtt'. Required if no parents.
       genotypeString: null,
 
       // {Object|null} options to Genotype constructor
@@ -70,7 +70,7 @@ class Bunny extends Sprite {
     // Validate options
     assert && assert( Utils.isInteger( options.generation ) && options.generation >= 0, `invalid generation: ${options.generation}` );
     assert && assert( ( options.father && options.mother ) || ( !options.father && !options.mother ), 'bunny cannot have 1 parent' );
-    assert && assert( !( options.father && options.genotypeString ), 'father/mother and genotypeString are mutually-exclusive' );
+    assert && assert( !( options.father && options.genotypeString !== null ), 'father and genotypeString are mutually exclusive' );
 
     // Default to random position and direction
     options.position = options.position || modelViewTransform.getRandomGroundPosition();
@@ -95,7 +95,7 @@ class Bunny extends Sprite {
     this.genotype = null;
     if ( this.father && this.mother ) {
 
-      // inherit from parents
+      // genotype is inherited from parents
       this.genotype = Genotype.withParents( genePool, this.father, this.mother, genotypeOptions );
     }
     else if ( options.genotypeString ) {

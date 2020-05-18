@@ -21,9 +21,7 @@ class LabModel extends NaturalSelectionModel {
    */
   constructor( tandem ) {
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
-    super( {
-      initialMutations: NaturalSelectionQueryParameters.labMutations,
-      initialPopulation: NaturalSelectionQueryParameters.labPopulation,
+    super( NaturalSelectionQueryParameters.labMutations, NaturalSelectionQueryParameters.labPopulation, {
       tandem: tandem
     } );
   }

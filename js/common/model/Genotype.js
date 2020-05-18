@@ -178,7 +178,9 @@ class Genotype extends PhetioObject {
    * @public
    */
   static withAbbreviation( genePool, genotypeString, options ) {
-    phet.log && phet.log( `Genotype.withAbbreviation ${genotypeString}` );
+
+    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
+    assert && assert( typeof genotypeString === 'string', 'invalid genotypeString' );
 
     const furGene = genePool.furGene;
     const earsGene = genePool.earsGene;

@@ -21,9 +21,7 @@ class IntroModel extends NaturalSelectionModel {
    */
   constructor( tandem ) {
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
-    super( {
-      initialMutations: NaturalSelectionQueryParameters.introMutations,
-      initialPopulation: NaturalSelectionQueryParameters.introPopulation,
+    super( NaturalSelectionQueryParameters.introMutations, NaturalSelectionQueryParameters.introPopulation, {
       tandem: tandem
     } );
   }

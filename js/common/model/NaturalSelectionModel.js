@@ -11,13 +11,11 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import PropertyIO from '../../../../axon/js/PropertyIO.js';
-import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import BunnyCollection from './BunnyCollection.js';
 import BunnyIO from './BunnyIO.js';
 import Environment from './Environment.js';
@@ -27,6 +25,7 @@ import GenePool from './GenePool.js';
 import GenerationClock from './GenerationClock.js';
 import PedigreeModel from './PedigreeModel.js';
 import PopulationModel from './PopulationModel.js';
+import PopulationParser from './PopulationParser.js';
 import ProportionsModel from './ProportionsModel.js';
 import SimulationMode from './SimulationMode.js';
 import Wolves from './Wolves.js';
@@ -34,22 +33,17 @@ import Wolves from './Wolves.js';
 class NaturalSelectionModel {
 
   /**
+   * @param {string} mutationsQueryParameterValue
+   * @param {string[]} populationQueryParameterValue
    * @param {Object} [options]
    */
-  constructor( options ) {
+  constructor( mutationsQueryParameterValue, populationQueryParameterValue, options ) {
 
     options = merge( {
-
-      initialMutations: '', // value of the ?mutations query parameter
-      initialPopulation: [ '1' ], // value of the ?population query parameter
 
       // phet-io
       tandem: Tandem.REQUIRED
     }, options );
-
-    // @private
-    this.initialPopulation = options.initialPopulation;
-    this.initialMutations = options.initialMutations;
 
     // @public
     this.modelViewTransform = new EnvironmentModelViewTransform();
@@ -75,6 +69,9 @@ class NaturalSelectionModel {
     this.genePool = new GenePool( {
       tandem: options.tandem.createTandem( 'genePool' )
     } );
+
+    // @private
+    this.initialPopulation = PopulationParser.parse( this.genePool, mutationsQueryParameterValue, populationQueryParameterValue );
 
     // @public (read-only) the collection of Bunny instances
     this.bunnyCollection = new BunnyCollection( this.modelViewTransform, this.genePool, {
@@ -244,12 +241,8 @@ class NaturalSelectionModel {
     this.bunnyCollection.createBunnyZero();
   }
 
-  //TODO #9, detect errors when assertions are disabled, display error dialog, fallback?
-  //TODO #9, do the parsing once, build a description that is used to initialize and reset
   /**
-   * Initializes the generation-zero bunny population. This relies on the value of query parameters that were used to
-   * set this.initialMutations and this.initialPopulation. Those query parameters are specified using untranslated
-   * (English) strings, per https://github.com/phetsims/natural-selection/issues/9.
+   * Initializes the generation-zero bunny population.
    * @private
    */
   initializeGenerationZero() {
@@ -258,104 +251,14 @@ class NaturalSelectionModel {
     assert && assert( this.bunnyCollection.liveBunnies.length === 0, 'bunnies already exist' );
     assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
 
-    if ( this.initialMutations.length === 0 ) {
-
-      // If there are no mutations, then population must be a positive integer
-      const countString = this.initialPopulation[ 0 ];
-      assert && assert( !isNaN( countString ), `population must be a number: ${countString}` );
-      const count = parseFloat( countString );
-      assert && assert( Utils.isInteger( count ) && count > 0, `population must be a positive integer: ${count}` );
-
-      // Create a set of bunnies with no mutations.
-      for ( let i = 0; i < count; i++ ) {
-        this.bunnyCollection.createBunnyZero();
-      }
-    }
-    else {
-
-      // Split mutations into individual characters, e.g. 'FeT' -> [ 'F', 'e', 'T' ]
-      const mutationChars = this.initialMutations.split( '' );
-
-      // Compile a list of all allele abbreviations
-      const alleleAbbreviations = [];
-
-      const genes = this.genePool.genes;
-      genes.forEach( gene => {
-
-        const dominantAbbreviation = gene.dominantAbbreviationEnglish;
-        const recessiveAbbreviation = gene.recessiveAbbreviationEnglish;
-        alleleAbbreviations.push( dominantAbbreviation );
-        alleleAbbreviations.push( recessiveAbbreviation );
-
-        // Dominant and recessive abbreviations for the same gene are mutually exclusive
-        assert && assert( !( mutationChars.indexOf( dominantAbbreviation ) !== -1 && mutationChars.indexOf( recessiveAbbreviation ) !== -1 ),
-          `${dominantAbbreviation} and ${recessiveAbbreviation} are mutually exclusive: ${this.initialMutations}` );
-
-        // If one of the abbreviations is specified, then make the mutant gene dominant or recessive
-        if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 ) {
-          gene.dominantAlleleProperty.value = gene.mutantAllele;
-        }
-        else if ( mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
-          gene.dominantAlleleProperty.value = gene.normalAllele;
-        }
-      } );
-
-      // Check for non-allele characters
-      assert && assert( _.every( mutationChars, char => alleleAbbreviations.indexOf( char ) !== -1 ),
-        `invalid character in mutations: ${this.initialMutations}` );
-
-      // The total number of bunnies to be created
-      let totalCount = 0;
-
-      // The population is described as expressions that indicate the number of bunnies per genotype, e.g. '35FeT'.
-      assert && assert( this.initialPopulation.length > 0, 'at least 1 population expression is required' );
-      for ( let i = 0; i < this.initialPopulation.length; i++ ) {
-
-        // Get an expression from the array, e.g. '35FFeEtt'
-        const expression = this.initialPopulation[ i ];
-
-        // Split the expression into 2 tokens (count and genotype) e.g. '35FFeEtt' -> '35' and 'FFeEtt'
-        const firstLetterIndex = expression.search( /[a-zA-Z]/ );
-        assert && assert( firstLetterIndex !== -1 && firstLetterIndex < expression.length - 1,
-          `malformed population expression: ${expression}` );
-        const countString = expression.substring( 0, firstLetterIndex );
-        const genotypeString = expression.substring( firstLetterIndex );
-
-        // Count must be a positive integer
-        assert && assert( !isNaN( countString ), `${countString} is not a number` );
-        const count = parseFloat( countString );
-        assert && assert( Utils.isInteger( count ) && count > 0, `${count} must be a positive integer` );
-
-        // Total of all counts must be < maximum population
-        totalCount += count;
-        assert && assert( totalCount < NaturalSelectionConstants.MAX_POPULATION,
-          `total population must be < ${NaturalSelectionConstants.MAX_POPULATION}` );
-
-        // Genotype must contain 2 alleles for each gene represented in mutations
-        assert && assert( genotypeString.length === 2 * mutationChars.length, `invalid genotypeString: ${genotypeString}` );
-        assert && genes.forEach( gene => {
-
-          const dominantAbbreviation = gene.dominantAbbreviationEnglish;
-          const recessiveAbbreviation = gene.recessiveAbbreviationEnglish;
-
-          if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 || mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
-            const countDominant = _.filter( genotypeString.split( '' ), char => char === dominantAbbreviation ).length;
-            const countRecessive = _.filter( genotypeString.split( '' ), char => char === recessiveAbbreviation ).length;
-            assert && assert( countDominant + countRecessive === 2, `invalid genotypeString: ${genotypeString}` );
-          }
+    this.initialPopulation.forEach( description => {
+      phet && phet.log( `creating ${description.count} bunnies with genotype ${description.genotypeString}` );
+      for ( let i = 0; i < description.count; i++ ) {
+        this.bunnyCollection.createBunnyZero( {
+          genotypeString: description.genotypeString
         } );
-
-        // Create a set of bunnies with this genotype.
-        phet && phet.log( `creating ${count} bunnies with genotype ${genotypeString}` );
-        for ( let i = 0; i < count; i++ ) {
-          this.bunnyCollection.createBunnyZero( {
-            genotypeString: genotypeString
-          } );
-        }
       }
-
-      assert && assert( totalCount > 0, 'total population must be > 0' );
-    }
+    } );
   }
 }
 
