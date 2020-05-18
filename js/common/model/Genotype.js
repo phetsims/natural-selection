@@ -81,7 +81,8 @@ class Genotype extends PhetioObject {
       phetioDocumentation: 'gene pair that determines teeth trait'
     } );
 
-    // After we've created gene pairs, apply mutations.
+    // After gene pairs have been created, apply mutations. This ensures that an allele is inherited and then modified,
+    // so that the distribution of alleles in the population is correct.
     if ( options.mutateFur ) {
       this.furGenePair.mutate( genePool.furGene.mutantAllele );
     }
