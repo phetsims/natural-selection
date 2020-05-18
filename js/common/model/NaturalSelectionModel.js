@@ -349,9 +349,7 @@ class NaturalSelectionModel {
         phet && phet.log( `creating ${count} bunnies with genotype ${genotypeString}` );
         for ( let i = 0; i < count; i++ ) {
           this.bunnyCollection.createBunnyZero( {
-            alleles: {
-              //TODO #9 specify alleles
-            }
+            genotypeString: genotypeString
           } );
         }
       }

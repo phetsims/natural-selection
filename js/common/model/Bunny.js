@@ -55,9 +55,8 @@ class Bunny extends Sprite {
       mother: null, // {Bunny|null} the Bunny's mother, null if no mother
       generation: 0, // {number} generation that this Bunny belongs to
 
-      // {Alleles|null} the alleles that make up the Bunny's genotype. Used for generation-zero bunnies that have no
-      // parents and can therefore not inherit alleles. See Genotype.withAlleles
-      alleles: null,
+      // {string} abbreviation of the genotype, e.g. 'FfEEtt'
+      genotypeString: null,
 
       // {Object|null} options to Genotype constructor
       genotypeOptions: null,
@@ -71,7 +70,7 @@ class Bunny extends Sprite {
     // Validate options
     assert && assert( Utils.isInteger( options.generation ) && options.generation >= 0, `invalid generation: ${options.generation}` );
     assert && assert( ( options.father && options.mother ) || ( !options.father && !options.mother ), 'bunny cannot have 1 parent' );
-    assert && assert( !( options.father && options.alleles ), 'father/mother and alleles are mutually-exclusive' );
+    assert && assert( !( options.father && options.genotypeString ), 'father/mother and genotypeString are mutually-exclusive' );
 
     // Default to random position and direction
     options.position = options.position || modelViewTransform.getRandomGroundPosition();
@@ -99,10 +98,15 @@ class Bunny extends Sprite {
       // inherit from parents
       this.genotype = Genotype.withParents( genePool, this.father, this.mother, genotypeOptions );
     }
+    else if ( options.genotypeString ) {
+
+      // genotype is described by its string abbreviation, like 'FfEEtt'
+      this.genotype = Genotype.withAbbreviation( genePool, options.genotypeString, genotypeOptions );
+    }
     else {
 
-      // no parents, so use specific alleles
-      this.genotype = Genotype.withAlleles( genePool, options.alleles, genotypeOptions );
+      // no parents and no genotype description, so default to normal alleles for all genes
+      this.genotype = Genotype.withNormalAlleles( genePool, genotypeOptions );
     }
 
     // @public (read-only) the bunny's appearance, the manifestation of its genotype

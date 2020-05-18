@@ -167,32 +167,188 @@ class Genotype extends PhetioObject {
       options );
   }
 
+  //TODO this is currently brute force
   /**
-   * Creates a Genotype using a specific set of alleles. Any allele that is not specified will default to the
-   * normal allele for its associated gene.
+   * Creates a Genotype based on a genotype abbreviation string, e.g. 'FfEEtt'.
+   * This is used when the initial population has been described using query parameters.
    * @param {GenePool} genePool
-   * @param {Alleles} alleles
+   * @param {string} genotypeString - assumed to have been validated by the caller
    * @param {Object} [options]
    * @returns {Genotype}
    * @public
-   *
-   * @typedef Alleles
-   * @property {Allele|undefined} fatherFurAllele
-   * @property {Allele|undefined} motherFurAllele
-   * @property {Allele|undefined} fatherEarsAllele
-   * @property {Allele|undefined} motherEarsAllele
-   * @property {Allele|undefined} fatherTeethAllele
-   * @property {Allele|undefined} motherTeethAllele
    */
-  static withAlleles( genePool, alleles, options ) {
-    alleles = alleles || {};
+  static withAbbreviation( genePool, genotypeString, options ) {
+    phet.log && phet.log( `Genotype.withAbbreviation ${genotypeString}` );
+
+    const furGene = genePool.furGene;
+    const earsGene = genePool.earsGene;
+    const teethGene = genePool.teethGene;
+
+    let fatherFurAllele = null;
+    let motherFurAllele = null;
+    let fatherEarsAllele = null;
+    let motherEarsAllele = null;
+    let fatherTeethAllele = null;
+    let motherTeethAllele = null;
+
+    const alleleAbbreviations = genotypeString.split( '' );
+    alleleAbbreviations.forEach( alleleAbbreviation => {
+
+      if ( alleleAbbreviation === furGene.dominantAbbreviationEnglish ) {
+        assert && assert( furGene.dominantAlleleProperty.value, 'expected a value for furGene.dominantAlleleProperty' );
+
+        // F
+        if ( furGene.dominantAlleleProperty.value === furGene.mutantAllele ) {
+          if ( fatherFurAllele ) {
+            motherFurAllele = furGene.mutantAllele;
+          }
+          else {
+            fatherFurAllele = furGene.mutantAllele;
+          }
+        }
+        else {
+          if ( fatherFurAllele ) {
+            motherFurAllele = furGene.normalAllele;
+          }
+          else {
+            fatherFurAllele = furGene.normalAllele;
+          }
+        }
+      }
+      else if ( alleleAbbreviation === furGene.recessiveAbbreviationEnglish ) {
+        assert && assert( furGene.dominantAlleleProperty.value, 'expected a value for furGene.dominantAlleleProperty' );
+
+        // f
+        if ( furGene.dominantAlleleProperty.value === furGene.mutantAllele ) {
+          if ( fatherFurAllele ) {
+            motherFurAllele = furGene.normalAllele;
+          }
+          else {
+            fatherFurAllele = furGene.normalAllele;
+          }
+        }
+        else {
+          if ( fatherFurAllele ) {
+            motherFurAllele = furGene.mutantAllele;
+          }
+          else {
+            fatherFurAllele = furGene.mutantAllele;
+          }
+        }
+      }
+      else if ( alleleAbbreviation === earsGene.dominantAbbreviationEnglish ) {
+        assert && assert( earsGene.dominantAlleleProperty.value, 'expected a value for earsGene.dominantAlleleProperty' );
+
+        // E
+        if ( earsGene.dominantAlleleProperty.value === earsGene.mutantAllele ) {
+          if ( fatherEarsAllele ) {
+            motherEarsAllele = earsGene.mutantAllele;
+          }
+          else {
+            fatherEarsAllele = earsGene.mutantAllele;
+          }
+        }
+        else {
+          if ( fatherEarsAllele ) {
+            motherEarsAllele = earsGene.normalAllele;
+          }
+          else {
+            fatherEarsAllele = earsGene.normalAllele;
+          }
+        }
+      }
+      else if ( alleleAbbreviation === earsGene.recessiveAbbreviationEnglish ) {
+        assert && assert( earsGene.dominantAlleleProperty.value, 'expected a value for earsGene.dominantAlleleProperty' );
+
+        // e
+        if ( earsGene.dominantAlleleProperty.value === earsGene.mutantAllele ) {
+          if ( fatherEarsAllele ) {
+            motherEarsAllele = earsGene.normalAllele;
+          }
+          else {
+            fatherEarsAllele = earsGene.normalAllele;
+          }
+        }
+        else {
+          if ( fatherEarsAllele) {
+            motherEarsAllele = earsGene.mutantAllele;
+          }
+          else {
+            fatherEarsAllele = earsGene.mutantAllele;
+          }
+        }
+      }
+      else if ( alleleAbbreviation === teethGene.dominantAbbreviationEnglish ) {
+        assert && assert( teethGene.dominantAlleleProperty.value, 'expected a value for teethGene.dominantAlleleProperty' );
+
+        // T
+        if ( teethGene.dominantAlleleProperty.value === teethGene.mutantAllele ) {
+          if ( fatherTeethAllele ) {
+            motherTeethAllele = teethGene.mutantAllele;
+          }
+          else {
+            fatherTeethAllele = teethGene.mutantAllele;
+          }
+        }
+        else {
+          if ( fatherTeethAllele ) {
+            motherTeethAllele = teethGene.normalAllele;
+          }
+          else {
+            fatherTeethAllele = teethGene.normalAllele;
+          }
+        }
+      }
+      else if ( alleleAbbreviation === teethGene.recessiveAbbreviationEnglish ) {
+        assert && assert( teethGene.dominantAlleleProperty.value, 'expected a value for teethGene.dominantAlleleProperty' );
+
+        // t
+        if ( teethGene.dominantAlleleProperty.value === teethGene.mutantAllele ) {
+          if ( fatherTeethAllele ) {
+            motherTeethAllele = teethGene.normalAllele;
+          }
+          else {
+            fatherTeethAllele = teethGene.normalAllele;
+          }
+        }
+        else {
+          if ( fatherTeethAllele) {
+            motherTeethAllele = teethGene.mutantAllele;
+          }
+          else {
+            fatherTeethAllele = teethGene.mutantAllele;
+          }
+        }
+      }
+    } );
+
+    // Default to the normal allele for any alleles that were not specified
+    fatherFurAllele = fatherFurAllele || furGene.normalAllele;
+    motherFurAllele = motherFurAllele || furGene.normalAllele;
+    fatherEarsAllele = fatherEarsAllele || earsGene.normalAllele;
+    motherEarsAllele = motherEarsAllele || earsGene.normalAllele;
+    fatherTeethAllele = fatherTeethAllele || teethGene.normalAllele;
+    motherTeethAllele = motherTeethAllele || teethGene.normalAllele;
+
     return new Genotype( genePool,
-      alleles.fatherFurAllele || genePool.furGene.normalAllele,
-      alleles.motherFurAllele || genePool.furGene.normalAllele,
-      alleles.fatherEarsAllele|| genePool.earsGene.normalAllele,
-      alleles.motherEarsAllele || genePool.earsGene.normalAllele,
-      alleles.fatherTeethAllele || genePool.teethGene.normalAllele,
-      alleles.motherTeethAllele || genePool.teethGene.normalAllele,
+      fatherFurAllele, motherFurAllele,
+      fatherEarsAllele, motherEarsAllele,
+      fatherTeethAllele, motherTeethAllele,
+      options );
+  }
+
+  /**
+   * Creates a Genotype using the normal allele for every gene. This is typically used for a generation-zero
+   * bunny that has no parents, and can therefore not inherit genes.
+   * @param genePool
+   * @param options
+   * @returns {Genotype}
+   */
+  static withNormalAlleles( genePool, options ) {
+    return new Genotype( genePool,
+      genePool.furGene.normalAllele, genePool.furGene.normalAllele,
+      genePool.earsGene.normalAllele, genePool.earsGene.normalAllele,
+      genePool.teethGene.normalAllele, genePool.teethGene.normalAllele,
       options );
   }
 
