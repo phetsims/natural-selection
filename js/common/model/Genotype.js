@@ -34,7 +34,8 @@ class Genotype extends PhetioObject {
    * @param {Allele} motherTeethAllele
    * @param {Object} [options]
    */
-  constructor( genePool, fatherFurAllele, motherFurAllele, fatherEarsAllele, motherEarsAllele, fatherTeethAllele, motherTeethAllele, options ) {
+  constructor( genePool, fatherFurAllele, motherFurAllele, fatherEarsAllele, motherEarsAllele,
+               fatherTeethAllele, motherTeethAllele, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( fatherFurAllele instanceof Allele, 'invalid father' );
