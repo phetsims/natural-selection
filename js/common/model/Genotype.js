@@ -143,10 +143,10 @@ class Genotype extends PhetioObject {
   }
 
   /**
-   * Creates a Genotype for specific parents, or for a generation-zero bunny with no parents.
+   * Creates a Genotype by inheriting from specific parents.
    * @param {GenePool} genePool
-   * @param {Bunny|null} father
-   * @param {Bunny|null} mother
+   * @param {Bunny} father
+   * @param {Bunny} mother
    * @param {Object} [options] - Genotype constructor options
    * @returns {Genotype}
    * @public
@@ -154,33 +154,46 @@ class Genotype extends PhetioObject {
   static withParents( genePool, father, mother, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( father instanceof Bunny || father === null, 'invalid father' );
-    assert && assert( mother instanceof Bunny || mother === null, 'invalid mother' );
-    assert && assert( ( father && mother ) || ( !father && !mother ), 'bunny cannot have 1 parent' );
+    assert && assert( father instanceof Bunny, 'invalid father' );
+    assert && assert( mother instanceof Bunny, 'invalid mother' );
 
-    let genotype = null;
-    if ( father && mother ) {
+    const fatherGenotype = father.genotype;
+    const motherGenotype = mother.genotype;
 
-      const fatherGenotype = father.genotype;
-      const motherGenotype = mother.genotype;
+    return new Genotype( genePool,
+      fatherGenotype.furGenePair.getNextChildAllele(), motherGenotype.furGenePair.getNextChildAllele(),
+      fatherGenotype.earsGenePair.getNextChildAllele(), motherGenotype.earsGenePair.getNextChildAllele(),
+      fatherGenotype.teethGenePair.getNextChildAllele(), motherGenotype.teethGenePair.getNextChildAllele(),
+      options );
+  }
 
-      genotype = new Genotype( genePool,
-        fatherGenotype.furGenePair.getNextChildAllele(), motherGenotype.furGenePair.getNextChildAllele(),
-        fatherGenotype.earsGenePair.getNextChildAllele(), motherGenotype.earsGenePair.getNextChildAllele(),
-        fatherGenotype.teethGenePair.getNextChildAllele(), motherGenotype.teethGenePair.getNextChildAllele(),
-        options );
-    }
-    else {
-
-      // Generation-zero bunny with no parents
-      genotype = new Genotype( genePool,
-        genePool.furGene.normalAllele, genePool.furGene.normalAllele,
-        genePool.earsGene.normalAllele, genePool.earsGene.normalAllele,
-        genePool.teethGene.normalAllele, genePool.teethGene.normalAllele,
-        options );
-    }
-
-    return genotype;
+  /**
+   * Creates a Genotype using a specific set of alleles. Any allele that is not specified will default to the
+   * normal allele for its associated gene.
+   * @param {GenePool} genePool
+   * @param {Alleles} alleles
+   * @param {Object} [options]
+   * @returns {Genotype}
+   * @public
+   *
+   * @typedef Alleles
+   * @property {Allele|undefined} fatherFurAllele
+   * @property {Allele|undefined} motherFurAllele
+   * @property {Allele|undefined} fatherEarsAllele
+   * @property {Allele|undefined} motherEarsAllele
+   * @property {Allele|undefined} fatherTeethAllele
+   * @property {Allele|undefined} motherTeethAllele
+   */
+  static withAlleles( genePool, alleles, options ) {
+    alleles = alleles || {};
+    return new Genotype( genePool,
+      alleles.fatherFurAllele || genePool.furGene.normalAllele,
+      alleles.motherFurAllele || genePool.furGene.normalAllele,
+      alleles.fatherEarsAllele|| genePool.earsGene.normalAllele,
+      alleles.motherEarsAllele || genePool.earsGene.normalAllele,
+      alleles.fatherTeethAllele || genePool.teethGene.normalAllele,
+      alleles.motherTeethAllele || genePool.teethGene.normalAllele,
+      options );
   }
 
   //--------------------------------------------------------------------------------------------------------------------

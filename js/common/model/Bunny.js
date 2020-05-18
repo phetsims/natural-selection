@@ -55,7 +55,11 @@ class Bunny extends Sprite {
       mother: null, // {Bunny|null} the Bunny's mother, null if no mother
       generation: 0, // {number} generation that this Bunny belongs to
 
-      // {Object} options to Genotype constructor
+      // {Alleles|null} the alleles that make up the Bunny's genotype. Used for generation-zero bunnies that have no
+      // parents and can therefore not inherit alleles. See Genotype.withAlleles
+      alleles: null,
+
+      // {Object|null} options to Genotype constructor
       genotypeOptions: null,
 
       // phet-io
@@ -67,6 +71,7 @@ class Bunny extends Sprite {
     // Validate options
     assert && assert( Utils.isInteger( options.generation ) && options.generation >= 0, `invalid generation: ${options.generation}` );
     assert && assert( ( options.father && options.mother ) || ( !options.father && !options.mother ), 'bunny cannot have 1 parent' );
+    assert && assert( !( options.father && options.alleles ), 'father/mother and alleles are mutually-exclusive' );
 
     // Default to random position and direction
     options.position = options.position || modelViewTransform.getRandomGroundPosition();
@@ -83,11 +88,22 @@ class Bunny extends Sprite {
     // @public
     this.age = 0;
 
+    const genotypeOptions = merge( {}, options.genotypeOptions, {
+      tandem: options.tandem.createTandem( 'genotype' )
+    } );
+
     // @public (read-only) the bunny's genetic blueprint
-    this.genotype = Genotype.withParents( genePool, this.father, this.mother,
-      merge( {}, options.genotypeOptions, {
-        tandem: options.tandem.createTandem( 'genotype' )
-      } ) );
+    this.genotype = null;
+    if ( this.father && this.mother ) {
+
+      // inherit from parents
+      this.genotype = Genotype.withParents( genePool, this.father, this.mother, genotypeOptions );
+    }
+    else {
+
+      // no parents, so use specific alleles
+      this.genotype = Genotype.withAlleles( genePool, options.alleles, genotypeOptions );
+    }
 
     // @public (read-only) the bunny's appearance, the manifestation of its genotype
     this.phenotype = new Phenotype( this.genotype, {

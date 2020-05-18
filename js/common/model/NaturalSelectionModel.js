@@ -319,7 +319,7 @@ class NaturalSelectionModel {
         assert && assert( firstLetterIndex !== -1 && firstLetterIndex < expression.length - 1,
           `malformed population expression: ${expression}` );
         const countString = expression.substring( 0, firstLetterIndex );
-        const genotype = expression.substring( firstLetterIndex );
+        const genotypeString = expression.substring( firstLetterIndex );
 
         // Count must be a positive integer
         assert && assert( !isNaN( countString ), `${countString} is not a number` );
@@ -332,24 +332,26 @@ class NaturalSelectionModel {
           `total population must be < ${NaturalSelectionConstants.MAX_POPULATION}` );
 
         // Genotype must contain 2 alleles for each gene represented in mutations
-        assert && assert( genotype.length === 2 * mutationChars.length, `invalid genotype: ${genotype}` );
+        assert && assert( genotypeString.length === 2 * mutationChars.length, `invalid genotypeString: ${genotypeString}` );
         assert && genes.forEach( gene => {
 
           const dominantAbbreviation = gene.dominantAbbreviationEnglish;
           const recessiveAbbreviation = gene.recessiveAbbreviationEnglish;
 
           if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 || mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
-            const countDominant = _.filter( genotype.split( '' ), char => char === dominantAbbreviation ).length;
-            const countRecessive = _.filter( genotype.split( '' ), char => char === recessiveAbbreviation ).length;
-            assert && assert( countDominant + countRecessive === 2, `invalid genotype: ${genotype}` );
+            const countDominant = _.filter( genotypeString.split( '' ), char => char === dominantAbbreviation ).length;
+            const countRecessive = _.filter( genotypeString.split( '' ), char => char === recessiveAbbreviation ).length;
+            assert && assert( countDominant + countRecessive === 2, `invalid genotypeString: ${genotypeString}` );
           }
         } );
 
         // Create a set of bunnies with this genotype.
-        phet && phet.log( `creating ${count} bunnies with genotype ${genotype}` );
+        phet && phet.log( `creating ${count} bunnies with genotype ${genotypeString}` );
         for ( let i = 0; i < count; i++ ) {
           this.bunnyCollection.createBunnyZero( {
-            //TODO #9 specify the Bunny's genotype
+            alleles: {
+              //TODO #9 specify alleles
+            }
           } );
         }
       }
