@@ -15,8 +15,8 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import Allele from './Allele.js';
 import Bunny from './Bunny.js';
-import Gene from './Gene.js';
 import GenePair from './GenePair.js';
 import GenePairIO from './GenePairIO.js';
 import GenePool from './GenePool.js';
@@ -26,16 +26,23 @@ class Genotype extends PhetioObject {
 
   /**
    * @param {GenePool} genePool
-   * @param {Bunny|null} father
-   * @param {Bunny|null} mother
+   * @param {Allele} fatherFurAllele
+   * @param {Allele} motherFurAllele
+   * @param {Allele} fatherEarsAllele
+   * @param {Allele} motherEarsAllele
+   * @param {Allele} fatherTeethAllele
+   * @param {Allele} motherTeethAllele
    * @param {Object} [options]
    */
-  constructor( genePool, father, mother, options ) {
+  constructor( genePool, fatherFurAllele, motherFurAllele, fatherEarsAllele, motherEarsAllele, fatherTeethAllele, motherTeethAllele, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( father instanceof Bunny || father === null, 'invalid father' );
-    assert && assert( mother instanceof Bunny || mother === null, 'invalid mother' );
-    assert && assert( ( father && mother ) || ( !father && !mother ), 'bunny cannot have 1 parent' );
+    assert && assert( fatherFurAllele instanceof Allele, 'invalid father' );
+    assert && assert( motherFurAllele instanceof Allele, 'invalid motherFurAllele' );
+    assert && assert( fatherEarsAllele instanceof Allele, 'invalid fatherEarsAllele' );
+    assert && assert( motherEarsAllele instanceof Allele, 'invalid motherEarsAllele' );
+    assert && assert( fatherTeethAllele instanceof Allele, 'invalid fatherTeethAllele' );
+    assert && assert( motherTeethAllele instanceof Allele, 'invalid motherTeethAllele' );
 
     options = merge( {
 
@@ -55,34 +62,37 @@ class Genotype extends PhetioObject {
 
     super( options );
 
-    // @public (read-only) whether this is the Genotype for a Bunny that is the first to receive some mutation
-    this.isOriginalMutant = !!( options.mutateFur || options.mutateEars || options.mutateTeeth );
-
-    // Parent gene pairs, null if the Bunny had no parents
-    const fatherFurGenePair = father ? father.genotype.furGenePair : null;
-    const motherFurGenePair = mother ? mother.genotype.furGenePair : null;
-    const fatherEarsGenePair = father ? father.genotype.earsGenePair : null;
-    const motherEarsGenePair = mother ? mother.genotype.earsGenePair : null;
-    const fatherTeethGenePair = father ? father.genotype.teethGenePair : null;
-    const motherTeethGenePair = mother ? mother.genotype.teethGenePair : null;
-
     // @public (read-only) {GenePair} for fur
-    this.furGenePair = createChildGenePair( genePool.furGene, options.mutateFur, fatherFurGenePair, motherFurGenePair, {
+    this.furGenePair = new GenePair( genePool.furGene, fatherFurAllele, motherFurAllele, {
       tandem: options.tandem.createTandem( 'furGenePair' ),
       phetioDocumentation: 'gene pair that determines fur trait'
     } );
 
     // @public (read-only) {GenePair} for ears
-    this.earsGenePair = createChildGenePair( genePool.earsGene, options.mutateEars, fatherEarsGenePair, motherEarsGenePair, {
+    this.earsGenePair = new GenePair( genePool.earsGene, fatherEarsAllele, motherEarsAllele, {
       tandem: options.tandem.createTandem( 'earsGenePair' ),
       phetioDocumentation: 'gene pair that determines ears trait'
     } );
 
     // @public (read-only) {GenePair} for teeth
-    this.teethGenePair = createChildGenePair( genePool.teethGene, options.mutateTeeth, fatherTeethGenePair, motherTeethGenePair, {
+    this.teethGenePair = new GenePair( genePool.teethGene, fatherTeethAllele, motherTeethAllele, {
       tandem: options.tandem.createTandem( 'teethGenePair' ),
       phetioDocumentation: 'gene pair that determines teeth trait'
     } );
+
+    // After we've created gene pairs, apply mutations.
+    if ( options.mutateFur ) {
+      this.furGenePair.mutate( genePool.furGene.mutantAllele );
+    }
+    if ( options.mutateEars ) {
+      this.earsGenePair.mutate( genePool.earsGene.mutantAllele );
+    }
+    if ( options.mutateTeeth ) {
+      this.teethGenePair.mutate( genePool.teethGene.mutantAllele );
+    }
+
+    // @public (read-only) identifies an 'original mutant', an individual where a mutation occurred
+    this.isOriginalMutant = ( options.mutateFur || options.mutateEars || options.mutateTeeth );
 
     // @public the translated abbreviation of the Genotype. PhET-iO only, not used in brand=phet
     const abbreviationProperty = new DerivedProperty(
@@ -128,6 +138,47 @@ class Genotype extends PhetioObject {
     return this.furGenePair.getAllelesAbbreviation( translated ) +
            this.earsGenePair.getAllelesAbbreviation( translated ) +
            this.teethGenePair.getAllelesAbbreviation( translated );
+  }
+
+  /**
+   * Creates a Genotype for specific parents, or for a generation-zero bunny with no parents.
+   * @param {GenePool} genePool
+   * @param {Bunny|null} father
+   * @param {Bunny|null} mother
+   * @param {Object} [options] - Genotype constructor options
+   * @returns {Genotype}
+   * @public
+   */
+  static withParents( genePool, father, mother, options ) {
+
+    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
+    assert && assert( father instanceof Bunny || father === null, 'invalid father' );
+    assert && assert( mother instanceof Bunny || mother === null, 'invalid mother' );
+    assert && assert( ( father && mother ) || ( !father && !mother ), 'bunny cannot have 1 parent' );
+
+    let genotype = null;
+    if ( father && mother ) {
+
+      const fatherGenotype = father.genotype;
+      const motherGenotype = mother.genotype;
+
+      genotype = new Genotype( genePool,
+        fatherGenotype.furGenePair.getNextChildAllele(), motherGenotype.furGenePair.getNextChildAllele(),
+        fatherGenotype.earsGenePair.getNextChildAllele(), motherGenotype.earsGenePair.getNextChildAllele(),
+        fatherGenotype.teethGenePair.getNextChildAllele(), motherGenotype.teethGenePair.getNextChildAllele(),
+        options );
+    }
+    else {
+
+      // Generation-zero bunny with no parents
+      genotype = new Genotype( genePool,
+        genePool.furGene.normalAllele, genePool.furGene.normalAllele,
+        genePool.earsGene.normalAllele, genePool.earsGene.normalAllele,
+        genePool.teethGene.normalAllele, genePool.teethGene.normalAllele,
+        options );
+    }
+
+    return genotype;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -188,39 +239,6 @@ class Genotype extends PhetioObject {
     assert && assert( this.furGenePair instanceof GenePair, 'invalid furGenePair' );
     assert && assert( this.earsGenePair instanceof GenePair, 'invalid earsGenePair' );
     assert && assert( this.teethGenePair instanceof GenePair, 'invalid teethGenePair' );
-  }
-}
-
-/**
- * Creates the GenePair for a child Bunny.
- * @param {Gene} gene - the GenePair is associated with this Gene
- * @param {boolean} mutate - whether to mutate the gene
- * @param {GenePair|null} fatherGenePair - null if the Bunny had no father
- * @param {GenePair|null} motherGenePair - null if the Bunny had no mother
- * @param {Object} [options] - options to GenePair construct
- * @returns {GenePair}
- */
-function createChildGenePair( gene, mutate, fatherGenePair, motherGenePair, options ) {
-  assert && assert( gene instanceof Gene, 'invalid gene' );
-  assert && assert( typeof mutate === 'boolean', 'invalid mutate' );
-  assert && assert( fatherGenePair instanceof GenePair || fatherGenePair === null, 'invalid fatherGenePair' );
-  assert && assert( motherGenePair instanceof GenePair || motherGenePair === null, 'invalid motherGenePair' );
-  assert && assert( ( fatherGenePair && motherGenePair ) || ( !fatherGenePair && !motherGenePair ), 'bunny cannot have 1 parent' );
-
-  if ( mutate ) {
-
-    // The gene has mutated. Set both alleles to the mutant allele, so that the mutation will appear in the phenotype.
-    return new GenePair( gene, gene.mutantAllele, gene.mutantAllele, options );
-  }
-  else if ( fatherGenePair && motherGenePair ) {
-
-    // Inherit alleles from the parents (Mendelian inheritance)
-    return new GenePair( gene, fatherGenePair.getNextChildAllele(), motherGenePair.getNextChildAllele(), options );
-  }
-  else {
-
-    // There were no parents (generation-zero Bunny), so use the gene's normal alleles.
-    return new GenePair( gene, gene.normalAllele, gene.normalAllele, options );
   }
 }
 

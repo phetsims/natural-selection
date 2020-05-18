@@ -52,13 +52,27 @@ class GenePair extends PhetioObject {
     this.motherAllele = motherAllele;
 
     // @private {Allele[]} alleles that will be passed on to children
-    // This supports Mendelian inheritance, where father and mother gene pairs are combined to produce a child's
-    // gene pair. That is, gametes are created by random segregation, and heterozygous individuals produce gametes
-    // with an equal frequency of the two alleles.
     this.childAlleles = phet.joist.random.shuffle( [ fatherAllele, fatherAllele, motherAllele, motherAllele ] );
     this.childAllelesIndex = 0;
 
     this.validateInstance();
+  }
+
+  /**
+   * Mutates the gene pair.
+   * @param {Allele} mutantAllele
+   */
+  mutate( mutantAllele ) {
+
+    // Both alleles are set to the mutant allele, so that the mutation will appear in the phenotype regardless of
+    // whether the mutation is dominant or recessive.  This differs from reality, where mutation would occur for one
+    // of the inherited alleles.
+    this.fatherAllele = mutantAllele;
+    this.motherAllele = mutantAllele;
+
+    // The only allele that will be passed on is the mutant.
+    this.childAlleles = [ mutantAllele ];
+    this.childAllelesIndex = 0;
   }
 
   /**
@@ -80,7 +94,9 @@ class GenePair extends PhetioObject {
   }
 
   /**
-   * Gets the next allele for a child.
+   * Gets the next allele for a child. This simulates Mendelian inheritance, where father and mother gene pairs are
+   * combined to produce a child's gene pair. That is, gametes are created by random segregation, and heterozygous
+   * individuals produce gametes with an equal frequency of the two alleles.
    * @returns {Allele}
    * @public
    */
@@ -92,7 +108,7 @@ class GenePair extends PhetioObject {
   }
 
   /**
-   * Returns the allele that determines the bunny's appearance. This is how genotype manifests as phenotype.
+   * Gets the allele that determines the bunny's appearance. This is how genotype manifests as phenotype.
    * @returns {Allele}
    * @public
    */
