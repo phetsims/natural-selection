@@ -33,5 +33,5 @@
 
 * CT: ?secondsPerGeneration=1
 * CT: ?allelesVisible=false
-* CT: ?population=...,mutations=...
+* CT: ?labMutations=FeT&labPopulation=5FFEETT,5FfEeTt,5ffeett
 * Update PhET-iO design doc for QA
