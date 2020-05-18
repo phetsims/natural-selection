@@ -61,15 +61,18 @@ const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
   // that allele must appear exactly twice in introPopulation.
   //
   // Valid examples:
-  //   introMutations=F&introPopulation=Ff
-  //   introMutations=FeT&introPopulation=FFeETt
+  //   introMutations=F&introPopulation=5FF
+  //   introMutations=F&introPopulation=5FF,5Ff,5ff
+  //   introMutations=FeT&introPopulation=5FFeETt
+  //   introMutations=FeT&introPopulation=5FFeETt,5ffeett
   //
   // Invalid examples:
-  //   introMutations=F&introPopulation=FfEe - Ears ('E', 'e') does not appear in introMutations
-  //   introMutations=FE&introPopulation=Ff - Ears ('E', 'e') is missing from introPopulation
-  //   introMutations=FE&introPopulation=FEe - Fur ('F', 'f') must appear exactly twice in introPopulation
-  //   introMutations=F&introPopulation=FfF - Fur ('F', 'f') must appear exactly twice in introPopulation
-  //   introMutations=F&introPopulation=FFx - 'x' is not a valid character
+  //   introMutations=F&introPopulation=FfEe - missing count
+  //   introMutations=F&introPopulation=20FfEe - Ears ('E', 'e') does not appear in introMutations
+  //   introMutations=FE&introPopulation=10Ff - Ears ('E', 'e') is missing from introPopulation
+  //   introMutations=FE&introPopulation=10FEe - Fur ('F', 'f') must appear exactly twice in introPopulation
+  //   introMutations=F&introPopulation=10FfF - Fur ('F', 'f') must appear exactly twice in introPopulation
+  //   introMutations=F&introPopulation=10FFx - 'x' is not a valid character
   //
   introPopulation: {
     type: 'array',
