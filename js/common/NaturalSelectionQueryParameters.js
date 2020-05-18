@@ -26,18 +26,51 @@ const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
   },
 
   // Specifies the mutations that appear in the initial population of bunnies for the Intro screen.
+  // See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
+  //
   // The value determines which mutant alleles are present, whether they are dominant or recessive,
   // and which allele abbreviations can appear in the population query-parameter value.
-  // See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
+  //
+  // Valid characters for the mutations are as follows:
+  //   Fur:   'F' = dominant, 'f' = recessive
+  //   Ears:  'E' = dominant, 'e' = recessive
+  //   Teeth: 'T' = dominant, 't' = recessive
+  //
+  // The string can contain characters for zero or more mutations. Each mutation may appear only once.
+  //
+  // Valid examples:
+  //   introMutations=F
+  //   introMutations=f
+  //   introMutations=fTe
+  //
+  // Invalid examples:
+  //   introMutations=FfEt - fur mutation appears twice ('F' and 'f')
+  //   introMutations=Fx - 'x' is not a valid character
+  //
   introMutations: {
     type: 'string',
     defaultValue: '',
     public: true
   },
 
-  // Specifies the initial population of bunnies for the Intro screen. The value of the mutations query parameter
-  // determines which alleles abbreviations can appear in this query parameter's value.
+  // Specifies the initial population of bunnies for the Intro screen.
   // See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
+  //
+  // The value of introMutations determines which alleles abbreviations can appear in this query parameter's value.
+  // If a mutation is present in the mutations query parameter, then the dominant and/or recessive abbreviations for
+  // that allele must appear exactly twice in introPopulation.
+  //
+  // Valid examples:
+  //   introMutations=F&introPopulation=Ff
+  //   introMutations=FeT&introPopulation=FFeETt
+  //
+  // Invalid examples:
+  //   introMutations=F&introPopulation=FfEe - Ears ('E', 'e') does not appear in introMutations
+  //   introMutations=FE&introPopulation=Ff - Ears ('E', 'e') is missing from introPopulation
+  //   introMutations=FE&introPopulation=FEe - Fur ('F', 'f') must appear exactly twice in introPopulation
+  //   introMutations=F&introPopulation=FfF - Fur ('F', 'f') must appear exactly twice in introPopulation
+  //   introMutations=F&introPopulation=FFx - 'x' is not a valid character
+  //
   introPopulation: {
     type: 'array',
     elementSchema: {
