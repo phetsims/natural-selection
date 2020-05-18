@@ -25,6 +25,7 @@ const PopulationParser = {
    * @param {string} mutations - value of the mutations query parameter
    * @param {string[]} population - value of the population query parameter
    * @returns {PopulationDescription[]}
+   * @public
    */
   parse( genePool, mutations, population ) {
 
