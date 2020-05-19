@@ -2,7 +2,7 @@
 
 /**
  * AddMutationsPanel is the panel that contains controls used to add mutations.
- * For each trait, you can select whether its mutation will be dominant or recessive.
+ * For each gene type, you can select whether its mutation will be dominant or recessive.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -89,7 +89,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
       ]
     } );
 
-    // A row for each trait
+    // A row for each gene type
     const furRow = new Row( genePool.furGene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
         tandem: options.tandem.createTandem( 'furRow' )
       } );
@@ -210,9 +210,9 @@ class Row extends HBox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // label that indicates the trait name, to the left of the push buttons
+    // label that indicates the gene type, to the left of the push buttons
     const labelNode = new Text( gene.name, {
-      font: NaturalSelectionConstants.ADD_MUTATION_TRAIT_FONT,
+      font: NaturalSelectionConstants.ADD_MUTATION_GENE_FONT,
       maxWidth: 50 // determined empirically
     } );
     const labelNodeWrapper = new AlignBox( labelNode, {

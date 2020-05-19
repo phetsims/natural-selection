@@ -22,7 +22,7 @@ const NaturalSelectionColors = {
   // ScreenView
   SCREEN_VIEW_BACKGROUND: SCREEN_VIEW_BACKGROUND,
 
-  // traits
+  // Genes
   FUR: 'rgb( 27, 158, 119 )',
   EARS: 'rgb( 217, 95, 2 )',
   TEETH: 'rgb( 117, 112, 179 )',

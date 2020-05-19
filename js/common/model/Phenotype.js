@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Phenotype is the set of observable traits of a bunny, how its genotype manifests.
+ * Phenotype describes the appearance of a Bunny, how its genotype manifests.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

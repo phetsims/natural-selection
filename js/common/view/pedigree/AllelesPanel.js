@@ -2,7 +2,7 @@
 
 /**
  * AllelesPanel is the panel that contains controls for showing alleles in the 'Pedigree' graph.
- * Each row in the panel corresponds to one trait.  Until the gene for a trait has mutated, its row is disabled.
+ * Each row in the panel corresponds to one gene type.  Until a gene has mutated, its row is disabled.
  * When a row is enabled, it shows the icon and abbreviation for the normal allele and the mutant allele.
  *
  * @author Chris Malley (PixelZoom, Inc.)

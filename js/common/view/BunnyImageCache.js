@@ -51,7 +51,7 @@ const BunnyImageCache = {
 
   /**
    * Gets the cached Image that matches a bunny's phenotype. Instead of a big if-then-else statement for each
-   * permutation of traits, this implementation converts the phenotype to a string key, and maps that key to an Image.
+   * permutation of gene type, this implementation converts the phenotype to a string key, and maps that key to an Image.
    * Since this Image is used in multiple places in scenery's DAG, the Image is wrapped in a Node, so that it can be
    * transformed without causing subtle (or not-so-subtle) problems.
    * @param {Bunny} bunny

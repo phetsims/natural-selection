@@ -66,19 +66,19 @@ class Genotype extends PhetioObject {
     // @public (read-only)
     this.furGenePair = new GenePair( genePool.furGene, fatherFurAllele, motherFurAllele, {
       tandem: options.tandem.createTandem( 'furGenePair' ),
-      phetioDocumentation: 'gene pair that determines fur trait'
+      phetioDocumentation: 'gene pair that determines the fur trait'
     } );
 
     // @public (read-only)
     this.earsGenePair = new GenePair( genePool.earsGene, fatherEarsAllele, motherEarsAllele, {
       tandem: options.tandem.createTandem( 'earsGenePair' ),
-      phetioDocumentation: 'gene pair that determines ears trait'
+      phetioDocumentation: 'gene pair that determines the ears trait'
     } );
 
     // @public (read-only)
     this.teethGenePair = new GenePair( genePool.teethGene, fatherTeethAllele, motherTeethAllele, {
       tandem: options.tandem.createTandem( 'teethGenePair' ),
-      phetioDocumentation: 'gene pair that determines teeth trait'
+      phetioDocumentation: 'gene pair that determines the teeth trait'
     } );
 
     // After gene pairs have been created, apply mutations. This ensures that an allele is inherited and then modified,
