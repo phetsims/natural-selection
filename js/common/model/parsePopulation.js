@@ -76,8 +76,11 @@ function parsePopulation( genePool, mutationsQueryParameterName, populationQuery
       `${populationQueryParameterName}=${NaturalSelectionQueryParameters[ populationQueryParameterName ]}`
     );
 
-    // Use default as the fallback
-    genePool.reset(); // to reset dominantAlleleProperty values
+    // Revert to defaults
+    genePool.genes.forEach( gene => {
+      gene.dominantAlleleProperty.setInitialValue( null );
+      gene.dominantAlleleProperty.reset();
+    } );
     initialBunnyVarieties = parsePrivate( genePool,
       NaturalSelectionQueryParameters.SCHEMA[ mutationsQueryParameterName ].defaultValue,
       NaturalSelectionQueryParameters.SCHEMA[ populationQueryParameterName ].defaultValue );
