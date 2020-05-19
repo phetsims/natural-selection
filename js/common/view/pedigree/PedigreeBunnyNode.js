@@ -125,7 +125,7 @@ class PedigreeBunnyNode extends Node {
     // If logging is enabled, pressing on a bunny logs its details to the console.
     if ( phet.log ) {
       this.addInputListener( {
-        down: () => phet.log( bunny.toString() )
+        down: () => phet.log( `Pedigree press: ${bunny.toString()}` )
       } );
     }
   }
