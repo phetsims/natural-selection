@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * PopulationParser parses the values of the mutation and population query parameters, validates the values,
+ * Parses the values of the mutation and population query parameters, validates the values,
  * and converts them to a data structure that can be used to initialize the population.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -32,55 +32,58 @@ import GenePool from './GenePool.js';
  * @property {Allele} motherTeethAllele
  */
 
-const PopulationParser = {
+/**
+ * Parses query parameters that describe the initial population. See NaturalSelectionQueryParameters.
+ * If an error is encountered in a query parameter value, that error is added as a warning to QueryStringMachine.
+ * @param {GenePool} genePool
+ * @param {string} mutationsQueryParameterName
+ * @param {string} populationQueryParameterName
+ * @returns {BunnyVariety[]}
+ * @public
+ */
+function parsePopulation( genePool, mutationsQueryParameterName, populationQueryParameterName ) {
 
-  /**
-   * Parses query parameters that describe the initial population. See NaturalSelectionQueryParameters.
-   * If an error is encountered in a query parameter value, that error is added as a warning to QueryStringMachine.
-   * @param {GenePool} genePool
-   * @param {string} mutationsQueryParameterName
-   * @param {string} populationQueryParameterName
-   * @returns {BunnyVariety[]}
-   * @public
-   */
-  parse( genePool, mutationsQueryParameterName, populationQueryParameterName ) {
+  assert && assert( genePool instanceof GenePool, 'invalid genePool' );
+  assert && assert( typeof mutationsQueryParameterName === 'string', 'invalid mutationsQueryParameterName' );
+  assert && assert( typeof populationQueryParameterName === 'string', 'invalid populationQueryParameterName' );
 
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( typeof mutationsQueryParameterName === 'string', 'invalid mutationsQueryParameterName' );
-    assert && assert( typeof populationQueryParameterName === 'string', 'invalid populationQueryParameterName' );
+  let initialBunnyVarieties = null; // {BunnyVariety[]}
+  try {
 
-    let initialBunnyVarieties = null; // {BunnyVariety[]}
-    try {
-
-      // Parse the query parameters to create a description of the initial population
-      initialBunnyVarieties = parsePrivate( genePool,
-        NaturalSelectionQueryParameters[ mutationsQueryParameterName ],
-        NaturalSelectionQueryParameters[ populationQueryParameterName ] );
-    }
-    catch ( error ) {
-
-      // Add warnings that QueryStringMachine will display after the sim has fully started
-      QueryStringMachine.addWarning( mutationsQueryParameterName,
-        NaturalSelectionQueryParameters[ mutationsQueryParameterName ],
-        NaturalSelectionQueryParameters.SCHEMA[ mutationsQueryParameterName ].defaultValue,
-        error.message );
-      QueryStringMachine.addWarning( populationQueryParameterName,
-        NaturalSelectionQueryParameters[ populationQueryParameterName ],
-        NaturalSelectionQueryParameters.SCHEMA[ populationQueryParameterName ].defaultValue,
-        error.message );
-
-      // Use default as the fallback
-      initialBunnyVarieties = parsePrivate( genePool,
-        NaturalSelectionQueryParameters.SCHEMA[ mutationsQueryParameterName ].defaultValue,
-        NaturalSelectionQueryParameters.SCHEMA[ populationQueryParameterName ].defaultValue );
-    }
-    return initialBunnyVarieties;
+    // Parse the query parameters to create a description of the initial population
+    initialBunnyVarieties = parsePrivate( genePool,
+      NaturalSelectionQueryParameters[ mutationsQueryParameterName ],
+      NaturalSelectionQueryParameters[ populationQueryParameterName ] );
   }
-};
+  catch( error ) {
+
+    console.error(
+      `${mutationsQueryParameterName}=${NaturalSelectionQueryParameters[ mutationsQueryParameterName ]} ` +
+      `${populationQueryParameterName}=${NaturalSelectionQueryParameters[ populationQueryParameterName ]} ` +
+      `error=${error.message}`
+    );
+
+    // Add warnings that QueryStringMachine will display after the sim has fully started
+    QueryStringMachine.addWarning( mutationsQueryParameterName,
+      NaturalSelectionQueryParameters[ mutationsQueryParameterName ],
+      NaturalSelectionQueryParameters.SCHEMA[ mutationsQueryParameterName ].defaultValue,
+      error.message );
+    QueryStringMachine.addWarning( populationQueryParameterName,
+      NaturalSelectionQueryParameters[ populationQueryParameterName ],
+      NaturalSelectionQueryParameters.SCHEMA[ populationQueryParameterName ].defaultValue,
+      error.message );
+
+    // Use default as the fallback
+    initialBunnyVarieties = parsePrivate( genePool,
+      NaturalSelectionQueryParameters.SCHEMA[ mutationsQueryParameterName ].defaultValue,
+      NaturalSelectionQueryParameters.SCHEMA[ populationQueryParameterName ].defaultValue );
+  }
+  return initialBunnyVarieties;
+}
 
 /**
- * The 'guts' of the above parse function. Since we have no control over the query parameter values, an error in the
- * query parameter values, or the relationship between the values, results in a thrown Error.
+ * The 'guts' of the parsePopulation function. Since we have no control over the query parameter values, an error
+ * in the query parameter values, or the relationship between the values, results in a thrown Error.
  * @param {GenePool} genePool
  * @param {string} mutations - value of the mutations query parameter
  * @param {string[]} population - value of the population query parameter
@@ -278,5 +281,5 @@ function verify( predicate, message ) {
   }
 }
 
-naturalSelection.register( 'PopulationParser', PopulationParser );
-export default PopulationParser;
+naturalSelection.register( 'parsePopulation', parsePopulation );
+export default parsePopulation;

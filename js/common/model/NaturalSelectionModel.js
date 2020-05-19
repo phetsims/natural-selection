@@ -23,9 +23,9 @@ import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Food from './Food.js';
 import GenePool from './GenePool.js';
 import GenerationClock from './GenerationClock.js';
+import parsePopulation from './parsePopulation.js';
 import PedigreeModel from './PedigreeModel.js';
 import PopulationModel from './PopulationModel.js';
-import PopulationParser from './PopulationParser.js';
 import ProportionsModel from './ProportionsModel.js';
 import SimulationMode from './SimulationMode.js';
 import Wolves from './Wolves.js';
@@ -71,7 +71,7 @@ class NaturalSelectionModel {
     } );
 
     // @private {BunnyVariety[]} describes the initial population
-    this.initialBunnyVarieties = PopulationParser.parse( this.genePool, mutationsQueryParameterName, populationQueryParameterName );
+    this.initialBunnyVarieties = parsePopulation( this.genePool, mutationsQueryParameterName, populationQueryParameterName );
 
     // @public (read-only) the collection of Bunny instances
     this.bunnyCollection = new BunnyCollection( this.modelViewTransform, this.genePool, {
