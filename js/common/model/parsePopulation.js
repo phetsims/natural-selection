@@ -62,7 +62,9 @@ function parsePopulation( genePool, mutationsQueryParameterName, populationQuery
 
     // Parse the query parameters to create a description of the initial population
     initialBunnyVarieties = parsePrivate( genePool,
+      mutationsQueryParameterName,
       NaturalSelectionQueryParameters[ mutationsQueryParameterName ],
+      populationQueryParameterName,
       NaturalSelectionQueryParameters[ populationQueryParameterName ] );
   }
   catch( error ) {
@@ -90,7 +92,9 @@ function parsePopulation( genePool, mutationsQueryParameterName, populationQuery
       gene.dominantAlleleProperty.reset();
     } );
     initialBunnyVarieties = parsePrivate( genePool,
+      mutationsQueryParameterName,
       NaturalSelectionQueryParameters.SCHEMA[ mutationsQueryParameterName ].defaultValue,
+      populationQueryParameterName,
       NaturalSelectionQueryParameters.SCHEMA[ populationQueryParameterName ].defaultValue );
   }
   return initialBunnyVarieties;
@@ -100,27 +104,33 @@ function parsePopulation( genePool, mutationsQueryParameterName, populationQuery
  * The 'guts' of the parsePopulation function. Since we have no control over the query parameter values, an error
  * in the query parameter values (or the relationship between the values) results in a thrown Error.
  * @param {GenePool} genePool
- * @param {string} mutations - value of the mutations query parameter
- * @param {string[]} population - value of the population query parameter
+ * @param {string} mutationsName - name of the mutations query parameter, used in error messages
+ * @param {string} mutationsValue - value of the mutations query parameter
+ * @param {string} populationName - name of the population query parameter, used in error messages
+ * @param {string[]} populationValue - value of the population query parameter
  * @returns {BunnyVariety[]}
  * @throws {Error}
  * @private
  */
-function parsePrivate( genePool, mutations, population ) {
+function parsePrivate( genePool, mutationsName, mutationsValue, populationName, populationValue ) {
 
   assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-  assert && assert( typeof mutations === 'string', 'invalid mutations' );
-  assert && assert( Array.isArray( population ), 'invalid population' );
+  assert && assert( typeof mutationsName === 'string', 'invalid mutationsName' );
+  assert && assert( typeof mutationsValue === 'string', 'invalid mutationsValue' );
+  assert && assert( typeof populationName === 'string', 'invalid populationName' );
+  assert && assert( Array.isArray( populationValue ), 'invalid populationValue' );
 
   const initialPopulation = []; // {BunnyVariety[]}
 
-  if ( mutations.length === 0 ) {
+  if ( mutationsValue.length === 0 ) {
 
     // If there are no mutations, then population must be a positive integer
-    const countString = population[ 0 ];
-    verify( !isNaN( countString ), `population must be a number: ${countString}` );
+    const countErrorMessage = `${populationName} must be a positive integer`;
+    verify( populationValue.length === 1, countErrorMessage );
+    const countString = populationValue[ 0 ];
+    verify( !isNaN( countString ), countErrorMessage );
     const count = parseFloat( countString );
-    verify( Utils.isInteger( count ) && count > 0, `population must be a positive integer: ${count}` );
+    verify( Utils.isInteger( count ) && count > 0, countErrorMessage );
     const genotypeString = '';
 
     initialPopulation.push( {
@@ -132,7 +142,7 @@ function parsePrivate( genePool, mutations, population ) {
   else {
 
     // Split mutations into individual characters, e.g. 'FeT' -> [ 'F', 'e', 'T' ]
-    const mutationChars = mutations.split( '' );
+    const mutationChars = mutationsValue.split( '' );
 
     // Compile a list of all allele abbreviations
     const alleleAbbreviations = [];
@@ -146,7 +156,7 @@ function parsePrivate( genePool, mutations, population ) {
 
       // Dominant and recessive abbreviations for the same gene are mutually exclusive
       verify( !( mutationChars.indexOf( dominantAbbreviation ) !== -1 && mutationChars.indexOf( recessiveAbbreviation ) !== -1 ),
-        `${dominantAbbreviation} and ${recessiveAbbreviation} are mutually exclusive: ${mutations}` );
+        `${mutationsName}: ${dominantAbbreviation} and ${recessiveAbbreviation} are mutually exclusive` );
 
       // If one of the abbreviations is specified, then make the mutant gene dominant or recessive.
       // This changes both the value and initialValue of dominantAlleleProperty, because this is the initial population,
@@ -163,36 +173,39 @@ function parsePrivate( genePool, mutations, population ) {
 
     // Check for non-allele characters
     verify( _.every( mutationChars, char => alleleAbbreviations.indexOf( char ) !== -1 ),
-      `invalid character in mutations: ${mutations}` );
+      `${mutationsName}: ${mutationsValue} contains an invalid character` );
 
     // The total number of bunnies to be created
     let totalCount = 0;
 
     // The population is described as expressions that indicate the number of bunnies per genotype, e.g. '35FeT'.
-    verify( population.length > 0, 'at least 1 population expression is required' );
-    for ( let i = 0; i < population.length; i++ ) {
+    verify( populationValue.length > 0, `${populationName} value is required` );
+    for ( let i = 0; i < populationValue.length; i++ ) {
 
       // Get an expression from the array, e.g. '35FFeEtt'
-      const expression = population[ i ];
+      const expression = populationValue[ i ];
 
       // Split the expression into 2 tokens (count and genotype) e.g. '35FFeEtt' -> '35' and 'FFeEtt'
       const firstLetterIndex = expression.search( /[a-zA-Z]/ );
-      verify( firstLetterIndex > 0 && firstLetterIndex < expression.length - 1, `invalid population expression: ${expression}` );
+      verify( firstLetterIndex !== -1, `${populationName}: ${expression} is missing a genotype` );
+
       const countString = expression.substring( 0, firstLetterIndex );
       const genotypeString = expression.substring( firstLetterIndex );
 
       // Count must be a positive integer
-      verify( !isNaN( countString ), `${countString} is not a number` );
+      const countErrorMessage = `${populationName}: ${expression} must start with a positive integer`;
+      verify( !isNaN( countString ), countErrorMessage );
       const count = parseFloat( countString );
-      verify( Utils.isInteger( count ) && count > 0, `${count} must be a positive integer` );
+      verify( Utils.isInteger( count ) && count > 0, countErrorMessage );
 
       // Total of all counts must be < maximum population
       totalCount += count;
       verify( totalCount < NaturalSelectionConstants.MAX_POPULATION,
-        `total population must be < ${NaturalSelectionConstants.MAX_POPULATION}` );
+        `${populationName}: the total population must be < ${NaturalSelectionConstants.MAX_POPULATION}` );
 
       // Genotype must contain 2 alleles for each gene represented in mutations
-      verify( genotypeString.length === 2 * mutationChars.length, `invalid genotypeString: ${genotypeString}` );
+      const genotypeErrorMessage = `${populationName}: ${genotypeString} is an invalid genotype`;
+      verify( genotypeString.length === 2 * mutationChars.length, genotypeErrorMessage );
       assert && genePool.genes.forEach( gene => {
 
         const dominantAbbreviation = gene.dominantAbbreviationEnglish;
@@ -201,7 +214,7 @@ function parsePrivate( genePool, mutations, population ) {
         if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 || mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
           const countDominant = _.filter( genotypeString.split( '' ), char => char === dominantAbbreviation ).length;
           const countRecessive = _.filter( genotypeString.split( '' ), char => char === recessiveAbbreviation ).length;
-          verify( countDominant + countRecessive === 2, `invalid genotypeString: ${genotypeString}` );
+          verify( countDominant + countRecessive === 2, genotypeErrorMessage );
         }
       } );
 
@@ -211,7 +224,7 @@ function parsePrivate( genePool, mutations, population ) {
         genotypeString: genotypeString // for debugging
       } );
     }
-    verify( totalCount > 0, 'total population must be > 0' );
+    verify( totalCount > 0, `${populationName}: the total population must be > 0` );
   }
 
   return initialPopulation;
