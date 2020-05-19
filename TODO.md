@@ -19,6 +19,17 @@
 
 * get rid of some submodels, move some Properties into view?
 
+* Divide the death part of the generation clock into discrete chunks, maybe at 5,6,7,8:00
+
+Food:
+* with limited food, some proportion of the population dies, regardless of teeth allele
+* with tough food, some portion of the population dies, but more of shortTeeth die
+* with neither, no bunnies die of food-related causes
+* punt on clustering around food for now
+
+Wolves:
+* number of wolves is dynamic, proportional to number of bunnies (PhetioGroup)
+
 ## Performance
 
 * pre-allocate all BunnyNode instances?
@@ -36,11 +47,13 @@
 ## Relevant Java Code
 
 Food:
-- Bunny.getNewHopDirection, moveAround, hunger
-- Famine
-- NaturalSelectionModel.startFamine, endFamine, prematureEndFamine
+* Bunny.getNewHopDirection, moveAround, hunger
+* Famine
+* NaturalSelectionModel.startFamine, endFamine, prematureEndFamine
+* bunnyHungerThreshold, bunnyMaxHunger: see notes in DeveloperSettingsPanel
 
 Wolves:
-- Wolf
-- Frenzy
-- NaturalSelectionModel.startFrenzy, endFrenzy, prematureEndFrenzy
+* Wolf
+* Frenzy
+* NaturalSelectionModel.startFrenzy, endFrenzy, prematureEndFrenzy
+* bunniesPerWolves: see notes in DeveloperSettingsPanel
