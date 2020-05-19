@@ -25,55 +25,16 @@ const SCHEMA = {
     public: true
   },
 
-  // Specifies the mutations that appear in the initial population of bunnies for the Intro screen.
-  // See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
-  //
-  // The value determines which mutant alleles are present, whether they are dominant or recessive,
-  // and which allele abbreviations can appear in the population query-parameter value.
-  //
-  // Valid characters for the mutations are as follows:
-  //   Fur:   'F' = dominant, 'f' = recessive
-  //   Ears:  'E' = dominant, 'e' = recessive
-  //   Teeth: 'T' = dominant, 't' = recessive
-  //
-  // The string can contain characters for zero or more mutations. Each mutation may appear only once.
-  //
-  // Valid examples:
-  //   introMutations=F
-  //   introMutations=f
-  //   introMutations=fTe
-  //
-  // Invalid examples:
-  //   introMutations=FfEt - fur mutation appears twice ('F' and 'f')
-  //   introMutations=Fx - 'x' is not a valid character
-  //
+  // Specifies the mutations that appear in the initial population of bunnies for the Lab screen.
+  // See labMutations.
   introMutations: {
     type: 'string',
     defaultValue: '',
     public: true
   },
 
-  // Specifies the initial population of bunnies for the Intro screen.
-  // See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
-  //
-  // The value of introMutations determines which alleles abbreviations can appear in this query parameter's value.
-  // If a mutation is present in the mutations query parameter, then the dominant and/or recessive abbreviations for
-  // that allele must appear exactly twice in introPopulation.
-  //
-  // Valid examples:
-  //   introMutations=F&introPopulation=5FF
-  //   introMutations=F&introPopulation=5FF,5Ff,5ff
-  //   introMutations=FeT&introPopulation=5FFeETt
-  //   introMutations=FeT&introPopulation=5FFeETt,5ffeett
-  //
-  // Invalid examples:
-  //   introMutations=F&introPopulation=FfEe - missing count
-  //   introMutations=F&introPopulation=20FfEe - Ears ('E', 'e') does not appear in introMutations
-  //   introMutations=FE&introPopulation=10Ff - Ears ('E', 'e') is missing from introPopulation
-  //   introMutations=FE&introPopulation=10FEe - Fur ('F', 'f') must appear exactly twice in introPopulation
-  //   introMutations=F&introPopulation=10FfF - Fur ('F', 'f') must appear exactly twice in introPopulation
-  //   introMutations=F&introPopulation=10FFx - 'x' is not a valid character
-  //
+  // Specifies the initial population of bunnies for the Lab screen.
+  // See labPopulation.
   introPopulation: {
     type: 'array',
     elementSchema: {
@@ -84,7 +45,27 @@ const SCHEMA = {
   },
 
   // Specifies the mutations that appear in the initial population of bunnies for the Lab screen.
-  // See introMutations.
+  // See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
+  //
+  // The value determines which mutant alleles are present, whether they are dominant or recessive,
+  // and which allele abbreviations can appear in the labPopulation query-parameter value.
+  //
+  // Valid characters for the mutations are as follows:
+  //   Fur:   'F' = dominant, 'f' = recessive
+  //   Ears:  'E' = dominant, 'e' = recessive
+  //   Teeth: 'T' = dominant, 't' = recessive
+  //
+  // The string can contain characters for zero or more mutations. Each mutation may appear only once.
+  //
+  // Valid examples:
+  //   labMutations=F
+  //   labMutations=f
+  //   labMutations=fTe
+  //
+  // Invalid examples:
+  //   labMutations=FfEt - fur mutation appears twice ('F' and 'f')
+  //   labMutations=Fx - 'x' is not a valid character
+  //
   labMutations: {
     type: 'string',
     defaultValue: '',
@@ -92,7 +73,26 @@ const SCHEMA = {
   },
 
   // Specifies the initial population of bunnies for the Lab screen.
-  // See introPopulation.
+  // See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
+  //
+  // The value of labMutations determines which alleles abbreviations can appear in this query parameter's value.
+  // If a mutation is present in the labMutations query parameter, then the dominant and/or recessive abbreviations
+  // for that allele must appear exactly twice in labPopulation.
+  //
+  // Valid examples:
+  //   labMutations=F&labPopulation=5FF
+  //   labMutations=F&labPopulation=5FF,5Ff,5ff
+  //   labMutations=FeT&labPopulation=5FFeETt
+  //   labMutations=FeT&labPopulation=5FFeETt,5ffeett
+  //
+  // Invalid examples:
+  //   labMutations=F&labPopulation=FfEe - missing count
+  //   labMutations=F&labPopulation=20FfEe - Ears ('E', 'e') does not appear in labMutations
+  //   labMutations=FE&labPopulation=10Ff - Ears ('E', 'e') is missing from labPopulation
+  //   labMutations=FE&labPopulation=10FEe - Fur ('F', 'f') must appear exactly twice in labPopulation
+  //   labMutations=F&labPopulation=10FfF - Fur ('F', 'f') must appear exactly twice in labPopulation
+  //   labMutations=F&labPopulation=10FFx - 'x' is not a valid character
+  //
   labPopulation: {
     type: 'array',
     elementSchema: {
