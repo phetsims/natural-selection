@@ -138,12 +138,15 @@ function parsePrivate( genePool, mutations, population ) {
       verify( !( mutationChars.indexOf( dominantAbbreviation ) !== -1 && mutationChars.indexOf( recessiveAbbreviation ) !== -1 ),
         `${dominantAbbreviation} and ${recessiveAbbreviation} are mutually exclusive: ${mutations}` );
 
-      // If one of the abbreviations is specified, then make the mutant gene dominant or recessive
+      // If one of the abbreviations is specified, then make the mutant gene dominant or recessive.
+      // This changes the both the value and initialValue of dominantAlleleProperty, so that reset works as desired.
       if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 ) {
         gene.dominantAlleleProperty.value = gene.mutantAllele;
+        gene.dominantAlleleProperty.setInitialValue( gene.dominantAlleleProperty.value );
       }
       else if ( mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
         gene.dominantAlleleProperty.value = gene.normalAllele;
+        gene.dominantAlleleProperty.setInitialValue( gene.dominantAlleleProperty.value );
       }
     } );
 
