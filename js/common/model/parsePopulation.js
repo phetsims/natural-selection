@@ -1,10 +1,15 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Parses the values of the mutation and population query parameters, validates the values,
- * and converts them to a data structure that can be used to initialize the population.
+ * Parses and validates the values of the mutations and population query parameters.
+ *  See NaturalSelectionQueryParameters for format of the values that are being parsed.
+ *
+ * The mutations value sets the initial value of dominantAlleleProperty for genes, see Gene.js.
+ * The population value is converted to a data structure that is used to initialize the population,
+ * see NaturalSelectionModel.js.
+ *
  * If errors are encountered while parsing, they are reported via QueryStringMachine.addWarning,
- * and the sim falls back to defaults.
+ * and the sim reverts to default values.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
