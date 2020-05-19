@@ -247,7 +247,7 @@ class Bunny extends Sprite {
     const x = this.positionProperty.value.x + ( this.hopDelta.x / this.hopSteps );
     const z = this.positionProperty.value.z + ( this.hopDelta.z / this.hopSteps );
     const hopHeightFraction = ( this.stepsCount - this.restSteps ) / this.hopSteps;
-    //TODO I don't understand the last part of this
+    //TODO I don't understand the last part of this, from Bunny.java moveAround
     const y = this.modelViewTransform.getGroundY( z ) + this.hopDelta.y * 2 * ( -hopHeightFraction * hopHeightFraction + hopHeightFraction );
     this.positionProperty.value = new Vector3( x, y, z );
   }
