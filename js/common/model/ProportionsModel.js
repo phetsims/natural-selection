@@ -10,6 +10,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import RangeIO from '../../../../dot/js/RangeIO.js';
@@ -51,7 +52,8 @@ class ProportionsModel extends PhetioObject {
 
     // @public
     this.valuesVisibleProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'valuesVisibleProperty' )
+      tandem: options.tandem.createTandem( 'valuesVisibleProperty' ),
+      phetioDocumentation: 'determines whether values are visible on the bars in the Proportions graph'
     } );
 
     // Range of generationProperty changes as the number of generations increases.
@@ -70,14 +72,16 @@ class ProportionsModel extends PhetioObject {
       phetioReadOnly: true // range is dynamic
     } );
 
-    //TODO phet-io instrumentation
-    //TODO these should be derived from other model state
-    // @public
-    this.startCountProperty = new NumberProperty( 1, {
-      numberType: 'Integer'
+    // @public data for the current generation
+    this.currentGenerationDataProperty = new Property( null, {
+      // tandem: options.tandem.createTandem( 'currentGenerationDataProperty' ), TODO phetioType?
+      phetioDocumentation: 'Proportions data for the current generation'
     } );
-    this.endCountProperty = new NumberProperty( 50, {
-      numberType: 'Integer'
+
+    // @public
+    this.previousGenerationsDataArray = new ObservableArray( {
+      // tandem: options.tandem.createTandem( 'previousGenerationsDataArray' ), TODO phetioType?
+      phetioDocumentation: 'Proportions data for previous generations, indexed by generation number'
     } );
 
     // Pause the sim when a generation other than the current generation is being viewed.

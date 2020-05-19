@@ -108,6 +108,7 @@ class ProportionsBarNode extends Node {
     const mutantPercentage = 100 * mutantCount / total;
 
     // hide zero-length bar
+    this.normalRectangle.visible = ( normalPercentage > 0 );
     this.mutantRectangle.visible = ( mutantPercentage > 0 );
 
     // hide N% values
@@ -135,9 +136,14 @@ class ProportionsBarNode extends Node {
     }
     else {
 
-      // round both percentages to the nearest integer
-      this.mutantRectangle.rectWidth = ( Utils.roundSymmetric( mutantPercentage ) / 100 ) * this.barWidth;
+      if ( this.mutantRectangle.visible ) {
+        this.mutantRectangle.rectWidth = ( Utils.roundSymmetric( mutantPercentage ) / 100 ) * this.barWidth;
+      }
+      else {
+        this.mutantRectangle.rectWidth = 1; // small non-zero, for layout
+      }
 
+      // round both percentages to the nearest integer
       this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercent, {
         value: Utils.roundSymmetric( normalPercentage )
       } );

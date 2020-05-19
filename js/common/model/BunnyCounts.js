@@ -1,8 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * BunnyCounts contains the counts that describe the collection of living bunnies.  There is a count of each
- * allele, and a total count.
+ * BunnyCounts contains the counts that describe the phenotypes of a collection of bunnies.
+ * There is a count for each allele, and a total count.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -32,7 +32,7 @@ class BunnyCounts {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'whiteFurCountProperty' ),
       phetioReadOnly: true,
-      phetioDocumentation: 'the total number of bunnies that have white fur'
+      phetioDocumentation: 'the number of bunnies that have white fur'
     } );
 
     // @public
@@ -40,7 +40,7 @@ class BunnyCounts {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'brownFurCountProperty' ),
       phetioReadOnly: true,
-      phetioDocumentation: 'the total number of bunnies that have brown fur'
+      phetioDocumentation: 'the number of bunnies that have brown fur'
     } );
 
     // @public
@@ -48,7 +48,7 @@ class BunnyCounts {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'straightEarsCountProperty' ),
       phetioReadOnly: true,
-      phetioDocumentation: 'the total number of bunnies that have straight ears'
+      phetioDocumentation: 'the number of bunnies that have straight ears'
     } );
 
     // @public
@@ -56,7 +56,7 @@ class BunnyCounts {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'floppyEarsCountProperty' ),
       phetioReadOnly: true,
-      phetioDocumentation: 'the total number of bunnies that have floppy ears'
+      phetioDocumentation: 'the number of bunnies that have floppy ears'
     } );
 
     // @public
@@ -64,7 +64,7 @@ class BunnyCounts {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'shortTeethCountProperty' ),
       phetioReadOnly: true,
-      phetioDocumentation: 'the total number of bunnies that have short teeth'
+      phetioDocumentation: 'the number of bunnies that have short teeth'
     } );
 
     // @public
@@ -72,44 +72,90 @@ class BunnyCounts {
       numberType: 'Integer',
       tandem: options.tandem.createTandem( 'longTeethCountProperty' ),
       phetioReadOnly: true,
-      phetioDocumentation: 'the total number of bunnies that have long teeth'
+      phetioDocumentation: 'the number of bunnies that have long teeth'
     } );
   }
 
   /**
-   * Adjusts the counts for a specified bunny.
+   * Adds a bunny's contribution to the counts.
    * @param {Bunny} bunny
    * @public
    */
-  updateCounts( bunny ) {
+  add( bunny ) {
+    this.updateCounts( bunny, 1 );
+  }
+
+  /**
+   * Subtracts a bunny's contribution from the counts.
+   * @param {Bunny} bunny
+   * @public
+   */
+  subtract( bunny ) {
+    this.updateCounts( bunny, -1 );
+  }
+
+  /**
+   * Adjusts the counts based on a bunny's phenotype.
+   * @param {Bunny} bunny
+   * @param {number} delta
+   * @private
+   */
+  updateCounts( bunny, delta ) {
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
+    assert && assert( delta === 1 || delta === -1, 'invalid delta' );
 
     // total count
-    this.totalCountProperty.value++;
+    this.totalCountProperty.value += delta;
 
     // fur counts
     if ( bunny.phenotype.hasWhiteFur() ) {
-      this.whiteFurCountProperty.value++;
+      this.whiteFurCountProperty.value += delta;
     }
     else {
-      this.brownFurCountProperty.value++;
+      this.brownFurCountProperty.value += delta;
     }
 
     // ears counts
     if ( bunny.phenotype.hasStraightEars() ) {
-      this.straightEarsCountProperty.value++;
+      this.straightEarsCountProperty.value += delta;
     }
     else {
-      this.floppyEarsCountProperty.value++;
+      this.floppyEarsCountProperty.value += delta;
     }
 
     // teeth counts
     if ( bunny.phenotype.hasShortTeeth() ) {
-      this.shortTeethCountProperty.value++;
+      this.shortTeethCountProperty.value += delta;
     }
     else {
-      this.longTeethCountProperty.value++;
+      this.longTeethCountProperty.value += delta;
     }
+  }
+
+  /**
+   * Creates a snapshot of the counts.
+   * @returns {BunnyCountsSnapshot}
+   * @public
+   *
+   * @typedef BunnyCountsSnapshot
+   * @properties {number} totalCount
+   * @properties {number} whiteFurCount
+   * @properties {number} brownFurCount
+   * @properties {number} straightEarsCount
+   * @properties {number} floppyEarsCount
+   * @properties {number} shortTeethCount
+   * @properties {number} longTeethCount
+   */
+  getSnapshot() {
+    return {
+      totalCount: this.totalCountProperty.value,
+      whiteFurCount: this.whiteFurCountProperty.value,
+      brownFurCount: this.brownFurCountProperty.value,
+      straightEarsCount: this.straightEarsCountProperty.value,
+      floppyEarsCount: this.floppyEarsCountProperty.value,
+      shortTeethCount: this.shortTeethCountProperty.value,
+      longTeethCount: this.longTeethCountProperty.value
+    };
   }
 }
 

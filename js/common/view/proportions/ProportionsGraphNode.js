@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import NumberProperty from '../../../../../axon/js/NumberProperty.js';
 import Property from '../../../../../axon/js/Property.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
@@ -21,6 +20,7 @@ import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import BunnyCounts from '../../model/BunnyCounts.js';
 import Gene from '../../model/Gene.js';
 import ProportionsModel from '../../model/ProportionsModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
@@ -60,8 +60,34 @@ class ProportionsGraphNode extends Node {
       stroke: NaturalSelectionColors.PANEL_STROKE
     } );
 
-    const startRowLabel = new RowLabel( naturalSelectionStrings.startOfGeneration, proportionsModel.startCountProperty );
-    const endRowLabel = new RowLabel( naturalSelectionStrings.endOfGeneration, proportionsModel.endCountProperty );
+    // Counts for the 'Start of Generation' row
+    const startCounts = new BunnyCounts( {
+      tandem: options.tandem.createTandem( 'startCounts' )
+    } );
+
+    // Counts for the 'End of Generation' row
+    const endCounts = new BunnyCounts( {
+      tandem: options.tandem.createTandem( 'endCounts' )
+    } );
+
+    //TODO add some dummy data, to see bars and percentages
+    startCounts.totalCountProperty.value = 8;
+    startCounts.whiteFurCountProperty.value = 4;
+    startCounts.brownFurCountProperty.value = 4;
+    startCounts.straightEarsCountProperty.value = 4;
+    startCounts.floppyEarsCountProperty.value = 4;
+    startCounts.shortTeethCountProperty.value = 4;
+    startCounts.longTeethCountProperty.value = 4;
+    endCounts.totalCountProperty.value = 8;
+    endCounts.whiteFurCountProperty.value = 2;
+    endCounts.brownFurCountProperty.value = 6;
+    endCounts.straightEarsCountProperty.value = 2;
+    endCounts.floppyEarsCountProperty.value = 6;
+    endCounts.shortTeethCountProperty.value = 2;
+    endCounts.longTeethCountProperty.value = 6;
+
+    const startRowLabel = new RowLabel( naturalSelectionStrings.startOfGeneration, startCounts.totalCountProperty );
+    const endRowLabel = new RowLabel( naturalSelectionStrings.endOfGeneration, endCounts.totalCountProperty );
 
     // All column labels have the same effective width.
     const columnLabelsAlignGroup = new AlignGroup();
@@ -96,16 +122,22 @@ class ProportionsGraphNode extends Node {
     } );
 
     // Columns that contain bars
-    const furColumn = new Column( proportionsModel.genePool.furGene, proportionsModel.valuesVisibleProperty,
-      columnLabelsAlignGroup, barsAlignGroup, {
+    const furColumn = new Column( proportionsModel.genePool.furGene,
+      startCounts.whiteFurCountProperty, startCounts.brownFurCountProperty,
+      endCounts.whiteFurCountProperty, endCounts.brownFurCountProperty,
+      proportionsModel.valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, {
       tandem: options.tandem.createTandem( 'furColumn' )
     } );
-    const earsColumn = new Column( proportionsModel.genePool.earsGene, proportionsModel.valuesVisibleProperty,
-      columnLabelsAlignGroup, barsAlignGroup, {
+    const earsColumn = new Column( proportionsModel.genePool.earsGene,
+      startCounts.straightEarsCountProperty, startCounts.floppyEarsCountProperty,
+      endCounts.straightEarsCountProperty, endCounts.floppyEarsCountProperty,
+      proportionsModel.valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, {
       tandem: options.tandem.createTandem( 'earsColumn' )
     } );
-    const teethColumn = new Column( proportionsModel.genePool.teethGene, proportionsModel.valuesVisibleProperty,
-      columnLabelsAlignGroup, barsAlignGroup, {
+    const teethColumn = new Column( proportionsModel.genePool.teethGene,
+      startCounts.shortTeethCountProperty, startCounts.longTeethCountProperty,
+      endCounts.shortTeethCountProperty, endCounts.longTeethCountProperty,
+      proportionsModel.valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, {
       tandem: options.tandem.createTandem( 'teethColumn' )
     } );
 
@@ -137,7 +169,7 @@ class ProportionsGraphNode extends Node {
       content.center = backgroundNode.center;
     } );
 
-    // Change the label for the bottom row, depending on whether we're displaying the current generation or the
+    // Change the label for the bottom row, depending on whether it's displaying the current generation or the
     // end state of a previous generation.
     Property.multilink(
       [ proportionsModel.currentGenerationProperty, proportionsModel.generationProperty ],
@@ -237,14 +269,29 @@ class Column extends VBox {
 
   /**
    * @param {Gene} gene
+   * @param {Property.<number>} startNormalCountProperty
+   * @param {Property.<number>} startMutantCountProperty
+   * @param {Property.<number>} endNormalCountProperty
+   * @param {Property.<number>} endMutantCountProperty
    * @param {Property.<boolean>} valuesVisibleProperty
    * @param {AlignGroup} columnLabelsAlignGroup
    * @param {AlignGroup} barsAlignGroup
    * @param {Object} [options]
    */
-  constructor( gene, valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, options ) {
+  constructor( gene, startNormalCountProperty, startMutantCountProperty, endNormalCountProperty, endMutantCountProperty,
+               valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, options ) {
 
     assert && assert( gene instanceof Gene, 'invalid gene' );
+    assert && assert( startNormalCountProperty instanceof Property, 'invalid startNormalCountProperty' );
+    assert && assert( typeof startNormalCountProperty.value === 'number', 'invalid startNormalCountProperty.value' );
+    assert && assert( startNormalCountProperty instanceof Property, 'invalid startNormalCountProperty' );
+    assert && assert( typeof startMutantCountProperty.value === 'number', 'invalid startMutantCountProperty.value' );
+    assert && assert( endNormalCountProperty instanceof Property, 'invalid endNormalCountProperty' );
+    assert && assert( typeof endNormalCountProperty.value === 'number', 'invalid endNormalCountProperty.value' );
+    assert && assert( endMutantCountProperty instanceof Property, 'invalid endMutantCountProperty' );
+    assert && assert( typeof endMutantCountProperty.value === 'number', 'invalid endMutantCountProperty.value' );
+    assert && assert( valuesVisibleProperty instanceof Property, 'invalid valuesVisibleProperty' );
+    assert && assert( typeof valuesVisibleProperty.value === 'boolean', 'invalid valuesVisibleProperty.value' );
     assert && assert( barsAlignGroup instanceof AlignGroup, 'invalid barsAlignGroup' );
 
     options = merge( {
@@ -260,9 +307,8 @@ class Column extends VBox {
       maxWidth: 120 // determined empirically
     } );
 
-    //TODO temporary Properties: normalCountStartProperty, mutantCountStartProperty, normalCountEndProperty, mutantCountEndProperty
-    const startBarNode = new ProportionsBarNode( gene.color, new NumberProperty( 990 ), new NumberProperty( 1 ), valuesVisibleProperty );
-    const endBarNode = new ProportionsBarNode( gene.color, new NumberProperty( 990 ), new NumberProperty( 1 ), valuesVisibleProperty );
+    const startBarNode = new ProportionsBarNode( gene.color, startNormalCountProperty, startMutantCountProperty, valuesVisibleProperty );
+    const endBarNode = new ProportionsBarNode( gene.color, endNormalCountProperty, endMutantCountProperty, valuesVisibleProperty );
 
     assert && assert( !options.children, 'Column sets children' );
     options.children = [
