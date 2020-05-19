@@ -2,14 +2,16 @@
 
 /**
  * Parses and validates the values of the mutations and population query parameters.
- *  See NaturalSelectionQueryParameters for format of the values that are being parsed.
+ * See NaturalSelectionQueryParameters for the format of the values that are being parsed.
+ * See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
  *
- * The mutations value sets the initial value of dominantAlleleProperty for genes, see Gene.js.
- * The population value is converted to a data structure that is used to initialize the population,
- * see NaturalSelectionModel.js.
- *
- * If errors are encountered while parsing, they are reported via QueryStringMachine.addWarning,
- * and the sim reverts to default values.
+ * Responsibilities:
+ * - Parses and validates the query-parameter values
+ * - Reports problems via QueryStringMachine.addWarning and to console.error
+ * - Sets the dominantAlleleProperty for genes that are represented in the mutations value. See Gene.js.
+ * - Builds a data structure that is used to initialize and reset the initial population. See typedef BunnyVariety
+ *   and NaturalSelectionModel.js
+ * - Reverts to defaults if there is a problem with query-parameter values
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -21,7 +23,7 @@ import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.
 import GenePool from './GenePool.js';
 
 /**
- * Information needed to create a variety of Bunny.
+ * Information needed to create a variety of Bunny. This information is parsed out of the query-parameter values.
  * @typedef BunnyVariety
  * @property {number} count - how many Bunny instances to create
  * @property {Alleles} alleles - alleles in this variety's genotype
@@ -29,7 +31,8 @@ import GenePool from './GenePool.js';
  */
 
 /**
- * A complete set of Alleles needed to describe the genotype for a variety of Bunny.
+ * A complete set of Alleles needed to describe the genotype for a variety of Bunny. This information is parsed
+ * out of the query-parameter values. Any gene not represented in the mutations value will default to the normal allele.
  * @typedef Alleles
  * @property {Allele} fatherFurAllele
  * @property {Allele} motherFurAllele
@@ -64,7 +67,7 @@ function parsePopulation( genePool, mutationsQueryParameterName, populationQuery
   }
   catch( error ) {
 
-    // Add warnings that QueryStringMachine will display after the sim has fully started
+    // Add warnings that QueryStringMachine will display after the sim has fully started.
     QueryStringMachine.addWarning( mutationsQueryParameterName,
       NaturalSelectionQueryParameters[ mutationsQueryParameterName ],
       NaturalSelectionQueryParameters.SCHEMA[ mutationsQueryParameterName ].defaultValue,
@@ -74,14 +77,14 @@ function parsePopulation( genePool, mutationsQueryParameterName, populationQuery
       NaturalSelectionQueryParameters.SCHEMA[ populationQueryParameterName ].defaultValue,
       error.message );
 
-    // Print error to the console, since QueryStringMachine doesn't current show the error message.
+    // Print error to the console, since QueryStringMachine doesn't currently show the error message.
     console.error(
       `Query parameter error: ${error.message}\n` +
       `${mutationsQueryParameterName}=${NaturalSelectionQueryParameters[ mutationsQueryParameterName ]}\n` +
       `${populationQueryParameterName}=${NaturalSelectionQueryParameters[ populationQueryParameterName ]}`
     );
 
-    // Revert to defaults
+    // Revert to defaults.
     genePool.genes.forEach( gene => {
       gene.dominantAlleleProperty.setInitialValue( null );
       gene.dominantAlleleProperty.reset();
@@ -95,7 +98,7 @@ function parsePopulation( genePool, mutationsQueryParameterName, populationQuery
 
 /**
  * The 'guts' of the parsePopulation function. Since we have no control over the query parameter values, an error
- * in the query parameter values, or the relationship between the values, results in a thrown Error.
+ * in the query parameter values (or the relationship between the values) results in a thrown Error.
  * @param {GenePool} genePool
  * @param {string} mutations - value of the mutations query parameter
  * @param {string[]} population - value of the population query parameter
@@ -134,8 +137,7 @@ function parsePrivate( genePool, mutations, population ) {
     // Compile a list of all allele abbreviations
     const alleleAbbreviations = [];
 
-    const genes = genePool.genes;
-    genes.forEach( gene => {
+    genePool.genes.forEach( gene => {
 
       const dominantAbbreviation = gene.dominantAbbreviationEnglish;
       const recessiveAbbreviation = gene.recessiveAbbreviationEnglish;
@@ -147,7 +149,8 @@ function parsePrivate( genePool, mutations, population ) {
         `${dominantAbbreviation} and ${recessiveAbbreviation} are mutually exclusive: ${mutations}` );
 
       // If one of the abbreviations is specified, then make the mutant gene dominant or recessive.
-      // This changes the both the value and initialValue of dominantAlleleProperty, so that reset works as desired.
+      // This changes both the value and initialValue of dominantAlleleProperty, because this is the initial population,
+      // and we want dominantAlleleProperty.reset behave correctly.
       if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 ) {
         gene.dominantAlleleProperty.value = gene.mutantAllele;
         gene.dominantAlleleProperty.setInitialValue( gene.dominantAlleleProperty.value );
@@ -174,8 +177,7 @@ function parsePrivate( genePool, mutations, population ) {
 
       // Split the expression into 2 tokens (count and genotype) e.g. '35FFeEtt' -> '35' and 'FFeEtt'
       const firstLetterIndex = expression.search( /[a-zA-Z]/ );
-      verify( firstLetterIndex !== -1 && firstLetterIndex < expression.length - 1,
-        `malformed population expression: ${expression}` );
+      verify( firstLetterIndex > 0 && firstLetterIndex < expression.length - 1, `invalid population expression: ${expression}` );
       const countString = expression.substring( 0, firstLetterIndex );
       const genotypeString = expression.substring( firstLetterIndex );
 
@@ -191,7 +193,7 @@ function parsePrivate( genePool, mutations, population ) {
 
       // Genotype must contain 2 alleles for each gene represented in mutations
       verify( genotypeString.length === 2 * mutationChars.length, `invalid genotypeString: ${genotypeString}` );
-      assert && genes.forEach( gene => {
+      assert && genePool.genes.forEach( gene => {
 
         const dominantAbbreviation = gene.dominantAbbreviationEnglish;
         const recessiveAbbreviation = gene.recessiveAbbreviationEnglish;
@@ -285,7 +287,7 @@ function abbreviationToAllele( alleleAbbreviation, gene, allelesPair ) {
 }
 
 /**
- * Verifies whether an expression is true. If it's not true, throw an Error with message.
+ * Verifies that a predicate is true. If it's not true, throw an Error that includes the specified message.
  * @param {boolean} predicate
  * @param {string} message
  * @throws {Error}
