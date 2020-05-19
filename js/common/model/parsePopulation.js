@@ -57,12 +57,6 @@ function parsePopulation( genePool, mutationsQueryParameterName, populationQuery
   }
   catch( error ) {
 
-    console.error(
-      `Query parameter error: ${error.message}\n` +
-      `${mutationsQueryParameterName}=${NaturalSelectionQueryParameters[ mutationsQueryParameterName ]}\n` +
-      `${populationQueryParameterName}=${NaturalSelectionQueryParameters[ populationQueryParameterName ]}`
-    );
-
     // Add warnings that QueryStringMachine will display after the sim has fully started
     QueryStringMachine.addWarning( mutationsQueryParameterName,
       NaturalSelectionQueryParameters[ mutationsQueryParameterName ],
@@ -72,6 +66,13 @@ function parsePopulation( genePool, mutationsQueryParameterName, populationQuery
       NaturalSelectionQueryParameters[ populationQueryParameterName ],
       NaturalSelectionQueryParameters.SCHEMA[ populationQueryParameterName ].defaultValue,
       error.message );
+
+    // Print error to the console, since QueryStringMachine doesn't current show the error message.
+    console.error(
+      `Query parameter error: ${error.message}\n` +
+      `${mutationsQueryParameterName}=${NaturalSelectionQueryParameters[ mutationsQueryParameterName ]}\n` +
+      `${populationQueryParameterName}=${NaturalSelectionQueryParameters[ populationQueryParameterName ]}`
+    );
 
     // Use default as the fallback
     initialBunnyVarieties = parsePrivate( genePool,
