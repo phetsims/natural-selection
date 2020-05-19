@@ -253,7 +253,7 @@ class NaturalSelectionModel {
 
     // for each {BunnyVariety} in the initial population ...
     this.initialBunnyVarieties.forEach( variety => {
-      phet && phet.log( `creating ${variety.count} bunnies with genotype ${variety.genotypeString}` );
+      phet.log && phet.log( `creating ${variety.count} bunnies with genotype ${variety.genotypeString}` );
       for ( let i = 0; i < variety.count; i++ ) {
         this.bunnyCollection.createBunnyZero( {
           alleles: variety.alleles
