@@ -9,7 +9,7 @@
 | Mutations | 0 | 4/30/2020 |
 | Intro screen | 0 | 5/7/2020 |
 | Pedigree graph | 0 | 5/11/2020 |
-| query parameters | 2 weeks | |
+| query parameters | 0 | 5/18/2020 |
 | Proportions graph | 2 weeks | | 
 | Population graph | 3 weeks | |
 | Wolves | 1 week | |
