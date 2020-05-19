@@ -3,6 +3,8 @@
 /**
  * Parses the values of the mutation and population query parameters, validates the values,
  * and converts them to a data structure that can be used to initialize the population.
+ * If errors are encountered while parsing, they are reported via QueryStringMachine.addWarning,
+ * and the sim falls back to defaults.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
