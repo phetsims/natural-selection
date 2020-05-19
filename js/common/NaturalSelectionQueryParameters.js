@@ -10,7 +10,7 @@
 import Utils from '../../../dot/js/Utils.js';
 import naturalSelection from '../naturalSelection.js';
 
-const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
+const SCHEMA = {
 
   //------------------------------------------------------------------------------------------------------------------
   // Public facing
@@ -160,7 +160,11 @@ const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
   showHorizon: {
     type: 'flag'
   }
-} );
+};
+
+const NaturalSelectionQueryParameters = QueryStringMachine.getAll( SCHEMA );
+
+NaturalSelectionQueryParameters.SCHEMA = SCHEMA;
 
 // validate query parameters
 assert && assert( NaturalSelectionQueryParameters.secondsPerStep < NaturalSelectionQueryParameters.secondsPerGeneration,

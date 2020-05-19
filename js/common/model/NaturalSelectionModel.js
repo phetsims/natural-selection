@@ -33,11 +33,11 @@ import Wolves from './Wolves.js';
 class NaturalSelectionModel {
 
   /**
-   * @param {string} mutationsQueryParameterValue
-   * @param {string[]} populationQueryParameterValue
+   * @param {string} mutationsQueryParameterName
+   * @param {string} populationQueryParameterName
    * @param {Object} [options]
    */
-  constructor( mutationsQueryParameterValue, populationQueryParameterValue, options ) {
+  constructor( mutationsQueryParameterName, populationQueryParameterName, options ) {
 
     options = merge( {
 
@@ -71,7 +71,7 @@ class NaturalSelectionModel {
     } );
 
     // @private {BunnyVariety[]} describes the initial population
-    this.initialBunnyVarieties = PopulationParser.parse( this.genePool, mutationsQueryParameterValue, populationQueryParameterValue );
+    this.initialBunnyVarieties = PopulationParser.parse( this.genePool, mutationsQueryParameterName, populationQueryParameterName );
 
     // @public (read-only) the collection of Bunny instances
     this.bunnyCollection = new BunnyCollection( this.modelViewTransform, this.genePool, {

@@ -8,7 +8,6 @@
 
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NaturalSelectionModel from '../../common/model/NaturalSelectionModel.js';
-import NaturalSelectionQueryParameters from '../../common/NaturalSelectionQueryParameters.js';
 import naturalSelection from '../../naturalSelection.js';
 
 /**
@@ -21,7 +20,7 @@ class LabModel extends NaturalSelectionModel {
    */
   constructor( tandem ) {
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
-    super( NaturalSelectionQueryParameters.labMutations, NaturalSelectionQueryParameters.labPopulation, {
+    super( 'labMutations', 'labPopulation', {
       tandem: tandem
     } );
   }

@@ -10,6 +10,7 @@
 import Utils from '../../../../dot/js/Utils.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import GenePool from './GenePool.js';
 
 /**
@@ -34,120 +35,167 @@ import GenePool from './GenePool.js';
 const PopulationParser = {
 
   /**
+   * Parses query parameters that describe the initial population. See NaturalSelectionQueryParameters.
+   * If an error is encountered in a query parameter value, that error is added as a warning to QueryStringMachine.
    * @param {GenePool} genePool
-   * @param {string} mutations - value of the mutations query parameter
-   * @param {string[]} population - value of the population query parameter
+   * @param {string} mutationsQueryParameterName
+   * @param {string} populationQueryParameterName
    * @returns {BunnyVariety[]}
    * @public
    */
-  parse( genePool, mutations, population ) {
+  parse( genePool, mutationsQueryParameterName, populationQueryParameterName ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( typeof mutations === 'string', 'invalid mutations' );
-    assert && assert( Array.isArray( population ), 'invalid population' );
+    assert && assert( typeof mutationsQueryParameterName === 'string', 'invalid mutationsQueryParameterName' );
+    assert && assert( typeof populationQueryParameterName === 'string', 'invalid populationQueryParameterName' );
 
-    // {PopulationDescription[]} Data structure that describes the initial population
-    const initialPopulation = [];
+    let initialBunnyVarieties = null; // {BunnyVariety[]}
+    try {
 
-    if ( mutations.length === 0 ) {
-
-      // If there are no mutations, then population must be a positive integer
-      const countString = population[ 0 ];
-      assert && assert( !isNaN( countString ), `population must be a number: ${countString}` );
-      const count = parseFloat( countString );
-      assert && assert( Utils.isInteger( count ) && count > 0, `population must be a positive integer: ${count}` );
-
-      initialPopulation.push( {
-        count: count,
-        genotypeString: ''
-      } );
+      // Parse the query parameters to create a description of the initial population
+      initialBunnyVarieties = parsePrivate( genePool,
+        NaturalSelectionQueryParameters[ mutationsQueryParameterName ],
+        NaturalSelectionQueryParameters[ populationQueryParameterName ] );
     }
-    else {
+    catch ( error ) {
 
-      // Split mutations into individual characters, e.g. 'FeT' -> [ 'F', 'e', 'T' ]
-      const mutationChars = mutations.split( '' );
+      // Add warnings that QueryStringMachine will display after the sim has fully started
+      QueryStringMachine.addWarning( mutationsQueryParameterName,
+        NaturalSelectionQueryParameters[ mutationsQueryParameterName ],
+        NaturalSelectionQueryParameters.SCHEMA[ mutationsQueryParameterName ].defaultValue,
+        error.message );
+      QueryStringMachine.addWarning( populationQueryParameterName,
+        NaturalSelectionQueryParameters[ populationQueryParameterName ],
+        NaturalSelectionQueryParameters.SCHEMA[ populationQueryParameterName ].defaultValue,
+        error.message );
 
-      // Compile a list of all allele abbreviations
-      const alleleAbbreviations = [];
+      // Use default as the fallback
+      initialBunnyVarieties = parsePrivate( genePool,
+        NaturalSelectionQueryParameters.SCHEMA[ mutationsQueryParameterName ].defaultValue,
+        NaturalSelectionQueryParameters.SCHEMA[ populationQueryParameterName ].defaultValue );
+    }
+    return initialBunnyVarieties;
+  }
+};
 
-      const genes = genePool.genes;
-      genes.forEach( gene => {
+/**
+ * The 'guts' of the above parse function. Since we have no control over the query parameter values, an error in the
+ * query parameter values, or the relationship between the values, results in a thrown Error.
+ * @param {GenePool} genePool
+ * @param {string} mutations - value of the mutations query parameter
+ * @param {string[]} population - value of the population query parameter
+ * @returns {BunnyVariety[]}
+ * @throws {Error}
+ * @private
+ */
+function parsePrivate( genePool, mutations, population ) {
+
+  assert && assert( genePool instanceof GenePool, 'invalid genePool' );
+  assert && assert( typeof mutations === 'string', 'invalid mutations' );
+  assert && assert( Array.isArray( population ), 'invalid population' );
+
+  const initialPopulation = []; // {BunnyVariety[]}
+
+  if ( mutations.length === 0 ) {
+
+    // If there are no mutations, then population must be a positive integer
+    const countString = population[ 0 ];
+    verify( !isNaN( countString ), `population must be a number: ${countString}` );
+    const count = parseFloat( countString );
+    verify( Utils.isInteger( count ) && count > 0, `population must be a positive integer: ${count}` );
+    const genotypeString = '';
+
+    initialPopulation.push( {
+      count: count,
+      alleles: genotypeToAlleles( genePool, genotypeString ),
+      genotypeString: genotypeString
+    } );
+  }
+  else {
+
+    // Split mutations into individual characters, e.g. 'FeT' -> [ 'F', 'e', 'T' ]
+    const mutationChars = mutations.split( '' );
+
+    // Compile a list of all allele abbreviations
+    const alleleAbbreviations = [];
+
+    const genes = genePool.genes;
+    genes.forEach( gene => {
+
+      const dominantAbbreviation = gene.dominantAbbreviationEnglish;
+      const recessiveAbbreviation = gene.recessiveAbbreviationEnglish;
+      alleleAbbreviations.push( dominantAbbreviation );
+      alleleAbbreviations.push( recessiveAbbreviation );
+
+      // Dominant and recessive abbreviations for the same gene are mutually exclusive
+      verify( !( mutationChars.indexOf( dominantAbbreviation ) !== -1 && mutationChars.indexOf( recessiveAbbreviation ) !== -1 ),
+        `${dominantAbbreviation} and ${recessiveAbbreviation} are mutually exclusive: ${mutations}` );
+
+      // If one of the abbreviations is specified, then make the mutant gene dominant or recessive
+      if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 ) {
+        gene.dominantAlleleProperty.value = gene.mutantAllele;
+      }
+      else if ( mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
+        gene.dominantAlleleProperty.value = gene.normalAllele;
+      }
+    } );
+
+    // Check for non-allele characters
+    verify( _.every( mutationChars, char => alleleAbbreviations.indexOf( char ) !== -1 ),
+      `invalid character in mutations: ${mutations}` );
+
+    // The total number of bunnies to be created
+    let totalCount = 0;
+
+    // The population is described as expressions that indicate the number of bunnies per genotype, e.g. '35FeT'.
+    verify( population.length > 0, 'at least 1 population expression is required' );
+    for ( let i = 0; i < population.length; i++ ) {
+
+      // Get an expression from the array, e.g. '35FFeEtt'
+      const expression = population[ i ];
+
+      // Split the expression into 2 tokens (count and genotype) e.g. '35FFeEtt' -> '35' and 'FFeEtt'
+      const firstLetterIndex = expression.search( /[a-zA-Z]/ );
+      verify( firstLetterIndex !== -1 && firstLetterIndex < expression.length - 1,
+        `malformed population expression: ${expression}` );
+      const countString = expression.substring( 0, firstLetterIndex );
+      const genotypeString = expression.substring( firstLetterIndex );
+
+      // Count must be a positive integer
+      verify( !isNaN( countString ), `${countString} is not a number` );
+      const count = parseFloat( countString );
+      verify( Utils.isInteger( count ) && count > 0, `${count} must be a positive integer` );
+
+      // Total of all counts must be < maximum population
+      totalCount += count;
+      verify( totalCount < NaturalSelectionConstants.MAX_POPULATION,
+        `total population must be < ${NaturalSelectionConstants.MAX_POPULATION}` );
+
+      // Genotype must contain 2 alleles for each gene represented in mutations
+      verify( genotypeString.length === 2 * mutationChars.length, `invalid genotypeString: ${genotypeString}` );
+      assert && genes.forEach( gene => {
 
         const dominantAbbreviation = gene.dominantAbbreviationEnglish;
         const recessiveAbbreviation = gene.recessiveAbbreviationEnglish;
-        alleleAbbreviations.push( dominantAbbreviation );
-        alleleAbbreviations.push( recessiveAbbreviation );
 
-        // Dominant and recessive abbreviations for the same gene are mutually exclusive
-        assert && assert( !( mutationChars.indexOf( dominantAbbreviation ) !== -1 && mutationChars.indexOf( recessiveAbbreviation ) !== -1 ),
-          `${dominantAbbreviation} and ${recessiveAbbreviation} are mutually exclusive: ${mutations}` );
-
-        // If one of the abbreviations is specified, then make the mutant gene dominant or recessive
-        if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 ) {
-          gene.dominantAlleleProperty.value = gene.mutantAllele;
-        }
-        else if ( mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
-          gene.dominantAlleleProperty.value = gene.normalAllele;
+        if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 || mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
+          const countDominant = _.filter( genotypeString.split( '' ), char => char === dominantAbbreviation ).length;
+          const countRecessive = _.filter( genotypeString.split( '' ), char => char === recessiveAbbreviation ).length;
+          verify( countDominant + countRecessive === 2, `invalid genotypeString: ${genotypeString}` );
         }
       } );
 
-      // Check for non-allele characters
-      assert && assert( _.every( mutationChars, char => alleleAbbreviations.indexOf( char ) !== -1 ),
-        `invalid character in mutations: ${mutations}` );
-
-      // The total number of bunnies to be created
-      let totalCount = 0;
-
-      // The population is described as expressions that indicate the number of bunnies per genotype, e.g. '35FeT'.
-      assert && assert( population.length > 0, 'at least 1 population expression is required' );
-      for ( let i = 0; i < population.length; i++ ) {
-
-        // Get an expression from the array, e.g. '35FFeEtt'
-        const expression = population[ i ];
-
-        // Split the expression into 2 tokens (count and genotype) e.g. '35FFeEtt' -> '35' and 'FFeEtt'
-        const firstLetterIndex = expression.search( /[a-zA-Z]/ );
-        assert && assert( firstLetterIndex !== -1 && firstLetterIndex < expression.length - 1,
-          `malformed population expression: ${expression}` );
-        const countString = expression.substring( 0, firstLetterIndex );
-        const genotypeString = expression.substring( firstLetterIndex );
-
-        // Count must be a positive integer
-        assert && assert( !isNaN( countString ), `${countString} is not a number` );
-        const count = parseFloat( countString );
-        assert && assert( Utils.isInteger( count ) && count > 0, `${count} must be a positive integer` );
-
-        // Total of all counts must be < maximum population
-        totalCount += count;
-        assert && assert( totalCount < NaturalSelectionConstants.MAX_POPULATION,
-          `total population must be < ${NaturalSelectionConstants.MAX_POPULATION}` );
-
-        // Genotype must contain 2 alleles for each gene represented in mutations
-        assert && assert( genotypeString.length === 2 * mutationChars.length, `invalid genotypeString: ${genotypeString}` );
-        assert && genes.forEach( gene => {
-
-          const dominantAbbreviation = gene.dominantAbbreviationEnglish;
-          const recessiveAbbreviation = gene.recessiveAbbreviationEnglish;
-
-          if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 || mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
-            const countDominant = _.filter( genotypeString.split( '' ), char => char === dominantAbbreviation ).length;
-            const countRecessive = _.filter( genotypeString.split( '' ), char => char === recessiveAbbreviation ).length;
-            assert && assert( countDominant + countRecessive === 2, `invalid genotypeString: ${genotypeString}` );
-          }
-        } );
-
-        initialPopulation.push( {
-          count: count,
-          alleles: genotypeToAlleles( genePool, genotypeString ),
-          genotypeString: genotypeString // for debugging
-        } );
-      }
-      assert && assert( totalCount > 0, 'total population must be > 0' );
+      initialPopulation.push( {
+        count: count,
+        alleles: genotypeToAlleles( genePool, genotypeString ),
+        genotypeString: genotypeString // for debugging
+      } );
     }
-
-    return initialPopulation;
+    verify( totalCount > 0, 'total population must be > 0' );
   }
-};
+
+  return initialPopulation;
+}
 
 /**
  * Converts a genotype string to a set of alleles that describe the genotype. Alleles not present in the string
@@ -215,6 +263,18 @@ function abbreviationToAllele( alleleAbbreviation, gene, allelesPair ) {
       assert && assert( !allelesPair.motherAllele, 'motherAllele should be null' );
       allelesPair.motherAllele = allele;
     }
+  }
+}
+
+/**
+ * Verifies whether an expression is true. If it's not true, throw an Error with message.
+ * @param {boolean} predicate
+ * @param {string} message
+ * @throws {Error}
+ */
+function verify( predicate, message ) {
+  if ( !predicate ) {
+    throw new Error( message );
   }
 }
 
