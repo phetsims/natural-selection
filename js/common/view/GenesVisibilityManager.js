@@ -12,6 +12,10 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import AddMutationsPanel from './AddMutationsPanel.js';
+import PedigreeNode from './pedigree/PedigreeNode.js';
+import PopulationNode from './population/PopulationNode.js';
+import ProportionsNode from './proportions/ProportionsNode.js';
 
 class GenesVisibilityManager {
 
@@ -23,6 +27,11 @@ class GenesVisibilityManager {
    * @param {Object} [options]
    */
   constructor( addMutationsPanel, populationNode, proportionsNode, pedigreeNode, options ) {
+
+    assert && assert( addMutationsPanel instanceof AddMutationsPanel, 'invalid addMutationsPanel' );
+    assert && assert( populationNode instanceof PopulationNode, 'invalid populationNode' );
+    assert && assert( proportionsNode instanceof ProportionsNode, 'invalid proportionsNode' );
+    assert && assert( pedigreeNode instanceof PedigreeNode, 'invalid pedigreeNode' );
 
     options = merge( {
 
