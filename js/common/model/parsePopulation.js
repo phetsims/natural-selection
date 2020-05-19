@@ -58,9 +58,9 @@ function parsePopulation( genePool, mutationsQueryParameterName, populationQuery
   catch( error ) {
 
     console.error(
-      `${mutationsQueryParameterName}=${NaturalSelectionQueryParameters[ mutationsQueryParameterName ]} ` +
-      `${populationQueryParameterName}=${NaturalSelectionQueryParameters[ populationQueryParameterName ]} ` +
-      `error=${error.message}`
+      `Query parameter error: ${error.message}\n` +
+      `${mutationsQueryParameterName}=${NaturalSelectionQueryParameters[ mutationsQueryParameterName ]}\n` +
+      `${populationQueryParameterName}=${NaturalSelectionQueryParameters[ populationQueryParameterName ]}`
     );
 
     // Add warnings that QueryStringMachine will display after the sim has fully started
