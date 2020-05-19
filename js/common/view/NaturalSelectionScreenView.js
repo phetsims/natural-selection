@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
@@ -23,6 +22,7 @@ import AddMutationsPanel from './AddMutationsPanel.js';
 import DiedDialog from './DiedDialog.js';
 import EnvironmentalFactorsPanel from './EnvironmentalFactorsPanel.js';
 import EnvironmentNode from './EnvironmentNode.js';
+import GenesVisibilityManager from './GenesVisibilityManager.js';
 import GraphChoice from './GraphChoice.js';
 import GraphChoiceRadioButtonGroup from './GraphChoiceRadioButtonGroup.js';
 import MutationAlertsNode from './MutationAlertsNode.js';
@@ -251,58 +251,12 @@ class NaturalSelectionScreenView extends ScreenView {
     this.model = model;
     this.environmentNode = environmentNode;
 
-    // Tandem for organizing the Properties related to visibility of genes in the user interface.
-    const genesTandem = options.tandem.createTandem( 'genes' );
-
-    // Determines whether Fur is visible in the UI.
-    // This Property exists for PhET-iO only, see https://github.com/phetsims/natural-selection/issues/70
-    const furVisibleProperty = new BooleanProperty( options.furVisible, {
-      tandem: genesTandem.createTandem( 'furVisibleProperty' ),
-      phetioDocumentation: 'sets the visibility of all user-interface components related to Fur for this screen'
-    } );
-
-    // Set visibility of all UI components related to Fur
-    furVisibleProperty.link( visible => {
-      addMutationsPanel.furRow.visibleProperty.value = visible;
-      populationNode.populationPanel.whiteFurCheckbox.visibleProperty.value = visible;
-      populationNode.populationPanel.brownFurCheckbox.visibleProperty.value = visible;
-      proportionsNode.proportionsPanel.legendNode.furLegendNode.visibleProperty.value = visible;
-      proportionsNode.proportionsGraphNode.furColumn.visibleProperty.value = visible;
-      pedigreeNode.allelesPanel.furRow.visibleProperty.value = visible;
-    } );
-
-    // Determines whether Ears is visible in the UI.
-    // This Property exists for PhET-iO only, see https://github.com/phetsims/natural-selection/issues/70
-    const earsVisibleProperty = new BooleanProperty( options.earsVisible, {
-      tandem: genesTandem.createTandem( 'earsVisibleProperty' ),
-      phetioDocumentation: 'sets the visibility of all user-interface components related to Ears for this screen'
-    } );
-
-    // Set visibility of all UI components related to Ears
-    earsVisibleProperty.link( visible => {
-      addMutationsPanel.earsRow.visibleProperty.value = visible;
-      populationNode.populationPanel.straightEarsCheckbox.visibleProperty.value = visible;
-      populationNode.populationPanel.floppyEarsCheckbox.visibleProperty.value = visible;
-      proportionsNode.proportionsPanel.legendNode.earsLegendNode.visibleProperty.value = visible;
-      proportionsNode.proportionsGraphNode.earsColumn.visibleProperty.value = visible;
-      pedigreeNode.allelesPanel.earsRow.visibleProperty.value = visible;
-    } );
-
-    // Determines whether Teeth is visible in the UI.
-    // This Property exists for PhET-iO only, see https://github.com/phetsims/natural-selection/issues/70
-    const teethVisibleProperty = new BooleanProperty( options.teethVisible, {
-      tandem: genesTandem.createTandem( 'teethVisibleProperty' ),
-      phetioDocumentation: 'sets the visibility of all user-interface components related to Teeth for this screen'
-    } );
-
-    // Set visibility of all UI components related to Teeth
-    teethVisibleProperty.link( visible => {
-      addMutationsPanel.teethRow.visibleProperty.value = visible;
-      populationNode.populationPanel.shortTeethCheckbox.visibleProperty.value = visible;
-      populationNode.populationPanel.longTeethCheckbox.visibleProperty.value = visible;
-      proportionsNode.proportionsPanel.legendNode.teethLegendNode.visibleProperty.value = visible;
-      proportionsNode.proportionsGraphNode.teethColumn.visibleProperty.value = visible;
-      pedigreeNode.allelesPanel.teethRow.visibleProperty.value = visible;
+    /* eslint-disable no-new */
+    new GenesVisibilityManager( addMutationsPanel, populationNode, proportionsNode, pedigreeNode, {
+      furVisible: options.furVisible,
+      earsVisible: options.earsVisible,
+      teethVisible: options.teethVisible,
+      tandem: options.tandem.createTandem( 'genes' )
     } );
   }
 
