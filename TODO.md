@@ -32,3 +32,15 @@
 ## Testing
 
 * Update PhET-iO design doc for QA
+
+## Relevant Java Code
+
+Food:
+- Bunny.getNewHopDirection, moveAround, hunger
+- Famine
+- NaturalSelectionModel.startFamine, endFamine, prematureEndFamine
+
+Wolves:
+- Wolf
+- Frenzy
+- NaturalSelectionModel.startFrenzy, endFrenzy, prematureEndFrenzy
