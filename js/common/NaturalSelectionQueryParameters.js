@@ -66,6 +66,11 @@ const SCHEMA = {
   //   labMutations=FfEt - fur mutation appears twice ('F' and 'f')
   //   labMutations=Fx - 'x' is not a valid character
   //
+  // NOTE: PhET-iO allows you show/hide any of the 3 genes in both screens. It is up to the user to specify
+  // only the genes that are visible for the screen. For example, the sim will happily accept 'labMutations=FeT',
+  // then allow you to hide Fur in the Lab screen.  Or it will accept 'introMutations=T' and assume that PhET-iO
+  // will be making Teeth visible in the Intro screen.
+  //
   labMutations: {
     type: 'string',
     defaultValue: '',
