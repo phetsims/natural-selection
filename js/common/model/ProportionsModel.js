@@ -39,7 +39,7 @@ class ProportionsModel extends PhetioObject {
       // phet-io
       tandem: Tandem.REQUIRED,
       phetioState: false, // to prevent serialization, because we don't have an IO type
-      phetioDocumentation: 'model elements that are specific to the Proportions graph'
+      phetioDocumentation: 'model elements that are specific to the Proportions feature'
     }, options );
 
     super( options );
