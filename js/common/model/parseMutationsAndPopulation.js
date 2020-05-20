@@ -1,15 +1,15 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Parses and validates the values of the mutations and population query parameters.
- * See NaturalSelectionQueryParameters for the format of the values that are being parsed.
- * See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
+ * Parses and validates the values of query parameters that describe the mutations, phenotypes, and distribution
+ * of the initial population. See NaturalSelectionQueryParameters for the format of the values that are being parsed.
+ * See https://github.com/phetsims/natural-selection/issues/9 for design specification and history.
  *
  * Responsibilities:
  * - Parses and validates the query-parameter values
  * - Reports problems via QueryStringMachine.addWarning and to console.error
  * - Sets the dominantAlleleProperty for genes that are represented in the mutations value. See Gene.js.
- * - Builds a data structure that is used to initialize and reset the initial population. See typedef BunnyVariety
+ * - Builds a data structure that is used to initialize and reset the population. See typedef BunnyVariety
  *   and NaturalSelectionModel.js
  * - Reverts to defaults if there is a problem with query-parameter values
  *
@@ -43,15 +43,18 @@ import GenePool from './GenePool.js';
  */
 
 /**
- * Parses query parameters that describe the initial population. See NaturalSelectionQueryParameters.
- * If an error is encountered in a query parameter value, that error is added as a warning to QueryStringMachine.
+ * Parses query parameters that describe the initial population. Because these query parameters are dependent on
+ * each other, if an error is encountered in either value, a warning is added to QueryStringMachine for both query
+ * parameters, and they revert to default values. We do not attempt to infer which query parameter is in error,
+ * and leave it up to the user to decide.
+ *
  * @param {GenePool} genePool
  * @param {string} mutationsName - name of the mutations query parameter
  * @param {string} populationName - name of the population query parameter
  * @returns {BunnyVariety[]}
  * @public
  */
-function parsePopulation( genePool, mutationsName, populationName ) {
+function parseMutationsAndPopulation( genePool, mutationsName, populationName ) {
 
   assert && assert( genePool instanceof GenePool, 'invalid genePool' );
   assert && assert( typeof mutationsName === 'string', 'invalid mutationsName' );
@@ -63,7 +66,8 @@ function parsePopulation( genePool, mutationsName, populationName ) {
 
   let initialBunnyVarieties = null; // {BunnyVariety[]}
   try {
-    initialBunnyVarieties = parsePrivate( genePool, mutationsName, mutationsValue, populationName, populationValue );
+    const mutationChars = parseMutations( genePool, mutationsName, mutationsValue );
+    initialBunnyVarieties = parsePopulation( genePool, mutationChars, populationName, populationValue );
   }
   catch( error ) {
 
@@ -87,34 +91,87 @@ function parsePopulation( genePool, mutationsName, populationName ) {
       gene.dominantAlleleProperty.setInitialValue( null );
       gene.dominantAlleleProperty.reset();
     } );
-    initialBunnyVarieties = parsePrivate( genePool, mutationsName, mutationsDefaultValue, populationName, populationDefaultValue );
+    const mutationChars = parseMutations( genePool, mutationsName, mutationsDefaultValue );
+    initialBunnyVarieties = parsePopulation( genePool, mutationChars, populationName, populationDefaultValue );
   }
   return initialBunnyVarieties;
 }
 
 /**
- * The 'guts' of the parsePopulation function. Since we have no control over the query parameter values, an error
- * in the query parameter values (or the relationship between the values) results in a thrown Error.
+ * Parses the query-parameter value that describes mutations. Sets the dominantAlleleProperty for any genes that are
+ * present. See NaturalSelectionQueryParameters.labMutations for details on the format of this value.
+ *
  * @param {GenePool} genePool
  * @param {string} mutationsName - name of the mutations query parameter, used in error messages
  * @param {string} mutationsValue - value of the mutations query parameter
- * @param {string} populationName - name of the population query parameter, used in error messages
- * @param {string[]} populationValue - value of the population query parameter
- * @returns {BunnyVariety[]}
+ * @returns {string[]} array of allele abbreviations
  * @throws {Error}
- * @private
  */
-function parsePrivate( genePool, mutationsName, mutationsValue, populationName, populationValue ) {
+function parseMutations( genePool, mutationsName, mutationsValue ) {
 
   assert && assert( genePool instanceof GenePool, 'invalid genePool' );
   assert && assert( typeof mutationsName === 'string', 'invalid mutationsName' );
   assert && assert( typeof mutationsValue === 'string', 'invalid mutationsValue' );
+
+  // Split mutations into individual characters, e.g. 'FeT' -> [ 'F', 'e', 'T' ]
+  const mutationChars = mutationsValue.split( '' );
+
+  // Compile a list of all allele abbreviations
+  const alleleAbbreviations = [];
+
+  genePool.genes.forEach( gene => {
+
+    const dominantAbbreviation = gene.dominantAbbreviationEnglish;
+    const recessiveAbbreviation = gene.recessiveAbbreviationEnglish;
+    alleleAbbreviations.push( dominantAbbreviation );
+    alleleAbbreviations.push( recessiveAbbreviation );
+
+    // Dominant and recessive abbreviations for the same gene are mutually exclusive
+    verify( !( mutationChars.indexOf( dominantAbbreviation ) !== -1 && mutationChars.indexOf( recessiveAbbreviation ) !== -1 ),
+      `${mutationsName}: ${dominantAbbreviation} and ${recessiveAbbreviation} are mutually exclusive` );
+
+    // If one of the abbreviations is specified, then make the mutant gene dominant or recessive.
+    // This changes both the value and initialValue of dominantAlleleProperty, because this is the initial population,
+    // and we want dominantAlleleProperty.reset behave correctly.
+    if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 ) {
+      gene.dominantAlleleProperty.value = gene.mutantAllele;
+      gene.dominantAlleleProperty.setInitialValue( gene.dominantAlleleProperty.value );
+    }
+    else if ( mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
+      gene.dominantAlleleProperty.value = gene.normalAllele;
+      gene.dominantAlleleProperty.setInitialValue( gene.dominantAlleleProperty.value );
+    }
+  } );
+
+  // Check for non-allele characters
+  verify( _.every( mutationChars, char => alleleAbbreviations.indexOf( char ) !== -1 ),
+    `${mutationsName}: ${mutationsValue} contains an invalid character` );
+
+  return mutationChars;
+}
+
+/**
+ * Parses the query-parameter value that describes phenotypes and distribution of those phenotypes in the initial
+ * population. Builds a data structure used to initialize and reset the population.
+ * See NaturalSelectionQueryParameters.labPopulation for details on the format of this value.
+ *
+ * @param {GenePool} genePool
+ * @param {string[]} mutationChars - array of allele abbreviations
+ * @param {string} populationName - name of the population query parameter, used in error messages
+ * @param {string[]} populationValue - value of the population query parameter
+ * @returns {BunnyVariety[]}
+ * @throws {Error}
+ */
+function parsePopulation( genePool, mutationChars, populationName, populationValue ) {
+
+  assert && assert( genePool instanceof GenePool, 'invalid genePool' );
+  assert && assert( Array.isArray( mutationChars ), 'invalid mutationChars' );
   assert && assert( typeof populationName === 'string', 'invalid populationName' );
   assert && assert( Array.isArray( populationValue ), 'invalid populationValue' );
 
   const initialPopulation = []; // {BunnyVariety[]}
 
-  if ( mutationsValue.length === 0 ) {
+  if ( mutationChars.length === 0 ) {
 
     // If there are no mutations, then population must be a positive integer
     const countErrorMessage = `${populationName} must be a positive integer`;
@@ -132,40 +189,6 @@ function parsePrivate( genePool, mutationsName, mutationsValue, populationName, 
     } );
   }
   else {
-
-    // Split mutations into individual characters, e.g. 'FeT' -> [ 'F', 'e', 'T' ]
-    const mutationChars = mutationsValue.split( '' );
-
-    // Compile a list of all allele abbreviations
-    const alleleAbbreviations = [];
-
-    genePool.genes.forEach( gene => {
-
-      const dominantAbbreviation = gene.dominantAbbreviationEnglish;
-      const recessiveAbbreviation = gene.recessiveAbbreviationEnglish;
-      alleleAbbreviations.push( dominantAbbreviation );
-      alleleAbbreviations.push( recessiveAbbreviation );
-
-      // Dominant and recessive abbreviations for the same gene are mutually exclusive
-      verify( !( mutationChars.indexOf( dominantAbbreviation ) !== -1 && mutationChars.indexOf( recessiveAbbreviation ) !== -1 ),
-        `${mutationsName}: ${dominantAbbreviation} and ${recessiveAbbreviation} are mutually exclusive` );
-
-      // If one of the abbreviations is specified, then make the mutant gene dominant or recessive.
-      // This changes both the value and initialValue of dominantAlleleProperty, because this is the initial population,
-      // and we want dominantAlleleProperty.reset behave correctly.
-      if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 ) {
-        gene.dominantAlleleProperty.value = gene.mutantAllele;
-        gene.dominantAlleleProperty.setInitialValue( gene.dominantAlleleProperty.value );
-      }
-      else if ( mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
-        gene.dominantAlleleProperty.value = gene.normalAllele;
-        gene.dominantAlleleProperty.setInitialValue( gene.dominantAlleleProperty.value );
-      }
-    } );
-
-    // Check for non-allele characters
-    verify( _.every( mutationChars, char => alleleAbbreviations.indexOf( char ) !== -1 ),
-      `${mutationsName}: ${mutationsValue} contains an invalid character` );
 
     // The total number of bunnies to be created
     let totalCount = 0;
@@ -225,10 +248,10 @@ function parsePrivate( genePool, mutationsName, mutationsValue, populationName, 
 /**
  * Converts a genotype string to a set of alleles that describe the genotype. Alleles not present in the string
  * default to the normal allele for their associated gene.
+ *
  * @param {GenePool} genePool
  * @param {string} genotypeString
  * @returns {Alleles}
- * @private
  */
 function genotypeToAlleles( genePool, genotypeString ) {
 
@@ -266,6 +289,7 @@ function genotypeToAlleles( genePool, genotypeString ) {
 
 /**
  * Converts an allele abbreviation to an allele, and puts it in allelesPair.
+ *
  * @param {string} alleleAbbreviation
  * @param {Gene} gene
  * @param {fatherAllele:Allele, motherAllele:Allele} allelesPair
@@ -303,5 +327,5 @@ function verify( predicate, message ) {
   }
 }
 
-naturalSelection.register( 'parsePopulation', parsePopulation );
-export default parsePopulation;
+naturalSelection.register( 'parseMutationsAndPopulation', parseMutationsAndPopulation );
+export default parseMutationsAndPopulation;
