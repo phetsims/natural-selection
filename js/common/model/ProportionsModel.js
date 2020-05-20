@@ -58,9 +58,7 @@ class ProportionsModel extends PhetioObject {
     // DerivedProperty because we need to use NumberProperty.setValueAndRange to update generationProperty's
     // value and range atomically, and a DerivedProperty cannot be set directly.
     // See https://github.com/phetsims/axon/issues/289
-    this.generationRangeProperty = new Property( new Range( 0, 0 ), {
-      // Do not instrument!
-    } );
+    this.generationRangeProperty = new Property( new Range( 0, 0 ) );
 
     // @public the generation that is displayed by the Proportions graph
     this.generationProperty = new NumberProperty( 0, {
