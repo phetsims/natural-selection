@@ -307,8 +307,12 @@ class Column extends VBox {
       maxWidth: 120 // determined empirically
     } );
 
-    const startBarNode = new ProportionsBarNode( gene.color, startNormalCountProperty, startMutantCountProperty, valuesVisibleProperty );
-    const endBarNode = new ProportionsBarNode( gene.color, endNormalCountProperty, endMutantCountProperty, valuesVisibleProperty );
+    const startBarNode = new ProportionsBarNode( gene.color, startNormalCountProperty, startMutantCountProperty, valuesVisibleProperty, {
+      tandem: options.tandem.createTandem( 'startBarNode' )
+    } );
+    const endBarNode = new ProportionsBarNode( gene.color, endNormalCountProperty, endMutantCountProperty, valuesVisibleProperty, {
+      tandem: options.tandem.createTandem( 'endBarNode' )
+    } );
 
     assert && assert( !options.children, 'Column sets children' );
     options.children = [

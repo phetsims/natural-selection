@@ -16,6 +16,7 @@ import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import Color from '../../../../../scenery/js/util/Color.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import HatchingRectangle from '../HatchingRectangle.js';
@@ -44,7 +45,11 @@ class ProportionsBarNode extends Node {
 
     options = merge( {
       barWidth: 120,
-      barHeight: 30
+      barHeight: 30,
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      phetioReadOnly: true
     }, options );
 
     // Portions of the bar for non-mutant and mutant counts. Only the mutantRectangle will be resized.
@@ -63,8 +68,12 @@ class ProportionsBarNode extends Node {
       bottom: -4,
       maxWidth: 40 // determined empirically
     };
-    const normalPercentageNode = new Text( '', percentageOptions );
-    const mutantPercentageNode = new Text( '', percentageOptions );
+    const normalPercentageNode = new Text( '', merge( {}, percentageOptions, {
+      tandem: options.tandem.createTandem( 'normalPercentageNode' )
+    } ) );
+    const mutantPercentageNode = new Text( '', merge( {}, percentageOptions, {
+      tandem: options.tandem.createTandem( 'mutantPercentageNode' )
+    } ) );
 
     assert && assert( !options.children, 'ProportionsBarNode sets children' );
     options.children = [ normalRectangle, mutantRectangle, normalPercentageNode, mutantPercentageNode ];
