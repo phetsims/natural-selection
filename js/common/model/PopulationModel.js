@@ -116,25 +116,25 @@ class PopulationModel extends PhetioObject {
       phetioType: PropertyIO( RangeIO ),
       phetioReadOnly: true, // range is dynamic, and changes on every clock tick
       phetioHighFrequency: true,
-      phetioDocumentation: 'range of the x axis, in generations'
+      phetioDocumentation: 'range of the x (Generation) axis'
     } );
 
     // @public index into Y_MAXIMUMS, determines the y-axis range
-    this.yRangeIndexProperty = new NumberProperty( Y_MAXIMUMS_INDEX_DEFAULT, {
+    this.yZoomLevelProperty = new NumberProperty( Y_MAXIMUMS_INDEX_DEFAULT, {
       numberType: 'Integer',
       range: new Range( 0, Y_MAXIMUMS.length - 1 ),
-      tandem: options.tandem.createTandem( 'yRangeIndexProperty' ),
-      phetioDocumentation: 'index into an array of ranges for the y axis, larger values are larger ranges'
+      tandem: options.tandem.createTandem( 'yZoomLevelProperty' ),
+      phetioDocumentation: 'Controls the range of the y axis. Larger values are larger ranges.'
     } );
 
     // @public range of the y-axis, in population
     this.yRangeProperty = new DerivedProperty(
-      [ this.yRangeIndexProperty ],
-      yRangeIndex => new Range( Y_MINIMUM, Y_MAXIMUMS[ yRangeIndex ] ), {
+      [ this.yZoomLevelProperty ],
+      yZoomLevel => new Range( Y_MINIMUM, Y_MAXIMUMS[ yZoomLevel ] ), {
         isValidValue: yRange => ( yRange.min >= 0 ),
         phetioType: DerivedPropertyIO( RangeIO ),
         tandem: options.tandem.createTandem( 'yRangeProperty' ),
-        phetioDocumentation: 'range of the y axis, in number of bunnies'
+        phetioDocumentation: 'range of the y (Population) axis'
       } );
 
     // Scrolls the x-axis so that xRangeProperty.max is 'now'.
@@ -172,7 +172,7 @@ class PopulationModel extends PhetioObject {
     this.longTeethVisibleProperty.reset();
 
     this.xRangeProperty.reset();
-    this.yRangeIndexProperty.reset();
+    this.yZoomLevelProperty.reset();
   }
 
   /**
@@ -189,7 +189,7 @@ class PopulationModel extends PhetioObject {
    * @public
    */
   getYTickSpacing() {
-    return Y_TICK_SPACINGS[ this.yRangeIndexProperty.value ];
+    return Y_TICK_SPACINGS[ this.yZoomLevelProperty.value ];
   }
 }
 

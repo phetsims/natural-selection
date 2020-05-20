@@ -75,10 +75,10 @@ class PopulationGraphNode extends Node {
     } );
 
     // Population (y-axis) zoom control
-    const yZoomControl = new ZoomControl( populationModel.yRangeIndexProperty, {
+    const yZoomControl = new ZoomControl( populationModel.yZoomLevelProperty, {
       orientation: 'vertical',
-      zoomLevelMin: populationModel.yRangeIndexProperty.range.min,
-      zoomLevelMax: populationModel.yRangeIndexProperty.range.max,
+      zoomLevelMin: populationModel.yZoomLevelProperty.range.min,
+      zoomLevelMax: populationModel.yZoomLevelProperty.range.max,
       left: boundsRectangle.left,
       top: boundsRectangle.top,
       tandem: options.tandem.createTandem( 'yZoomControl' ),
