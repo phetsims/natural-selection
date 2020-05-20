@@ -69,7 +69,7 @@ class ProportionsModel extends PhetioObject {
       phetioReadOnly: true // range is dynamic
     } );
 
-    // @public data for the current generation
+    // @public
     this.currentGenerationDataProperty = new Property( null, {
       // tandem: options.tandem.createTandem( 'currentGenerationDataProperty' ), TODO phetioType?
       phetioDocumentation: 'Proportions data for the current generation'
