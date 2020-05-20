@@ -122,7 +122,6 @@ class ProportionsModel extends PhetioObject {
         }
       }
     );
-
   }
 
   /**
