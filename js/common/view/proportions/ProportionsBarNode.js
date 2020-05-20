@@ -52,7 +52,8 @@ class ProportionsBarNode extends Node {
       phetioReadOnly: true
     }, options );
 
-    // Portions of the bar for non-mutant and mutant counts. Only the mutantRectangle will be resized.
+    // Portions of the bar for normal and mutant counts. normalRectangle remains a fixed size. mutantRectangle
+    // will be resized and is on top of normalRectangle.
     const normalRectangle = new Rectangle( 0, 0, options.barWidth, options.barHeight, {
       fill: color,
       stroke: color
@@ -87,7 +88,6 @@ class ProportionsBarNode extends Node {
     this.mutantPercentageNode = mutantPercentageNode;
     this.barWidth = options.barWidth;
 
-    //TODO this will result in bogus intermediate states
     Property.multilink( [ normalCountProperty, mutantCountProperty, valuesVisibleProperty ],
       ( normalCount, mutantCount, valuesVisible ) =>
         this.update( normalCount, mutantCount, valuesVisible )
