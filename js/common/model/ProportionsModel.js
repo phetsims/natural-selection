@@ -131,6 +131,8 @@ class ProportionsModel extends PhetioObject {
   reset() {
     this.valuesVisibleProperty.reset();
     this.generationProperty.resetValueAndRange();
+    this.currentGenerationDataProperty.reset();
+    this.previousGenerationsDataArray.clear();
   }
 
   /**
