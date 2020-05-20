@@ -110,22 +110,19 @@ class NaturalSelectionModel {
       ( wolvesEnabled, isTough, isLimited ) => ( wolvesEnabled || isTough || isLimited )
     );
 
-    // Organize everything related to graphs under this tandem
-    const graphsTandem = options.tandem.createTandem( 'graphs' );
-
     // @public (read-only)
     this.populationModel = new PopulationModel( this.genePool, this.generationClock.generationsProperty, this.isPlayingProperty, {
-      tandem: graphsTandem.createTandem( 'populationModel' )
+      tandem: options.tandem.createTandem( 'populationModel' )
     } );
 
     // @public (read-only)
     this.proportionsModel = new ProportionsModel( this.genePool, this.generationClock.currentGenerationProperty, this.isPlayingProperty, {
-      tandem: graphsTandem.createTandem( 'proportionsModel' )
+      tandem: options.tandem.createTandem( 'proportionsModel' )
     } );
 
     // @public (read-only)
     this.pedigreeModel = new PedigreeModel( {
-      tandem: graphsTandem.createTandem( 'pedigreeModel' )
+      tandem: options.tandem.createTandem( 'pedigreeModel' )
     } );
 
     // When the generation changes...
