@@ -54,7 +54,8 @@ class ProportionsModel extends PhetioObject {
       phetioDocumentation: 'determines whether values are visible on the bars in the Proportions graph'
     } );
 
-    // @private Range of generationProperty changes as the number of generations increases. This cannot be a
+    // @private Range of generationProperty changes as the number of generations increases. Our first instinct is
+    // that this should be a DerivedProperty, derived from currentGenerationProperty. But this cannot be a
     // DerivedProperty because we need to use NumberProperty.setValueAndRange to update generationProperty's
     // value and range atomically, and a DerivedProperty cannot be set directly.
     // See https://github.com/phetsims/axon/issues/289
