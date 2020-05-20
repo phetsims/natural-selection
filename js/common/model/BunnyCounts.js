@@ -8,6 +8,8 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 
 import Bunny from './Bunny.js';
@@ -18,6 +20,12 @@ class BunnyCounts {
    * @param {Object} [options]
    */
   constructor( options ) {
+
+    options = merge( {
+
+      // phet-io
+      tandem: Tandem.REQUIRED
+    }, options );
 
     // @public
     this.totalCountProperty = new NumberProperty( 0, {
