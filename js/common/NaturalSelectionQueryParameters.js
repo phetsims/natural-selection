@@ -184,7 +184,7 @@ NaturalSelectionQueryParameters.getValue = function( key ) {
  * @returns {*}
  */
 NaturalSelectionQueryParameters.getDefaultValue = function( key ) {
-  return SCHEMA[ key ].defaultValue;
+  return SCHEMA[ key ].defaultValue
 };
 
 // validate query parameters
