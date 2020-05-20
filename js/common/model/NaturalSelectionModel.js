@@ -179,22 +179,19 @@ class NaturalSelectionModel {
    */
   startOver() {
 
-    // Ordering dependency!
-    // ProportionsModel.generationRangeProperty is derived from generationClock.currentGenerationProperty, so
-    // proportionsModel must be reset before generationClock.
-    // See https://github.com/phetsims/natural-selection/issues/78
+    this.simulationModeProperty.reset();
+    this.isPlayingProperty.reset(); // see https://github.com/phetsims/natural-selection/issues/55
+    this.generationClock.reset();
+
+    this.genePool.reset();
+
+    this.selectedBunnyProperty.reset();
+    this.bunnyCollection.reset();
+    this.initializeGenerationZero();
 
     this.populationModel.reset();
     this.proportionsModel.reset();
     this.pedigreeModel.reset();
-
-    this.simulationModeProperty.reset();
-    this.isPlayingProperty.reset(); // see https://github.com/phetsims/natural-selection/issues/55
-    this.generationClock.reset();
-    this.genePool.reset();
-    this.selectedBunnyProperty.reset();
-    this.bunnyCollection.reset();
-    this.initializeGenerationZero();
   }
 
   /**

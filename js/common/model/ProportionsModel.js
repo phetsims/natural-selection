@@ -7,13 +7,10 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
-import RangeIO from '../../../../dot/js/RangeIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -57,18 +54,18 @@ class ProportionsModel extends PhetioObject {
       phetioDocumentation: 'determines whether values are visible on the bars in the Proportions graph'
     } );
 
-    // Range of generationProperty changes as the number of generations increases.
-    const generationRangeProperty = new DerivedProperty(
-      [ currentGenerationProperty ],
-      currentGeneration => new Range( 0, currentGeneration ), {
-        tandem: options.tandem.createTandem( 'generationRangeProperty' ),
-        phetioType: DerivedPropertyIO( RangeIO )
-      } );
+    // @private Range of generationProperty changes as the number of generations increases. This cannot be a
+    // DerivedProperty because we need to use NumberProperty.setValueAndRange to update generationProperty's
+    // value and range atomically, and a DerivedProperty cannot be set directly.
+    // See https://github.com/phetsims/axon/issues/289
+    this.generationRangeProperty = new Property( new Range( 0, 0 ), {
+      // Do not instrument!
+    } );
 
     // @public the generation that is displayed by the Proportions graph
     this.generationProperty = new NumberProperty( 0, {
       numberType: 'Integer',
-      range: generationRangeProperty,
+      range: this.generationRangeProperty,
       tandem: options.tandem.createTandem( 'generationProperty' ),
       phetioReadOnly: true // range is dynamic
     } );
@@ -117,6 +114,17 @@ class ProportionsModel extends PhetioObject {
     this.endCounts.floppyEarsCountProperty.value = 6;
     this.endCounts.shortTeethCountProperty.value = 2;
     this.endCounts.longTeethCountProperty.value = 6;
+
+    // When the sim starts playing or the current generation changes, show the current generation immediately.
+    Property.multilink(
+      [ isPlayingProperty, currentGenerationProperty ],
+      ( isPlaying, currentGeneration ) => {
+        if ( isPlaying ) {
+          this.generationProperty.setValueAndRange( currentGeneration, new Range( 0, currentGeneration ) );
+        }
+      }
+    );
+
   }
 
   /**
@@ -124,7 +132,7 @@ class ProportionsModel extends PhetioObject {
    */
   reset() {
     this.valuesVisibleProperty.reset();
-    this.generationProperty.reset();
+    this.generationProperty.resetValueAndRange();
   }
 
   /**
