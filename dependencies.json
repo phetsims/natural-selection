@@ -1,11 +1,11 @@
 {
-  "comment": "# natural-selection 1.0.0-dev.41 Tue May 19 2020 10:26:56 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.0.0-dev.42 Wed May 20 2020 15:30:57 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "0b7a48c6b9ba48af48ae7419bd30c280c785f2cc",
     "branch": "master"
   },
   "axon": {
-    "sha": "49c898f14a4a9fed6aeb046d0fa45777e2a815ce",
+    "sha": "433e4f9e3252fce1a28ba2ec3977b22b46cf112c",
     "branch": "master"
   },
   "brand": {
@@ -13,7 +13,7 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "ebe0e90278d6a440705817644bfcf444ae05f8ac",
+    "sha": "1d57d503ac6e5b3c890362ac81e94f2ce0be2196",
     "branch": "master"
   },
   "dot": {
@@ -21,7 +21,7 @@
     "branch": "master"
   },
   "joist": {
-    "sha": "f65c5a183d013ef3dee700a1b0d2b5b2c629071c",
+    "sha": "7da335bb90d1c5909b6d9d7b3d90108a1b219f42",
     "branch": "master"
   },
   "kite": {
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "natural-selection": {
-    "sha": "64c7d1aec0e3ab43fda52ee45ecb88c42131d7cc",
+    "sha": "55647431bed366deca4dddf5e58417d4d6a1662d",
     "branch": "master"
   },
   "phet-core": {
@@ -57,11 +57,11 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "37b7daeb8dfa1be9ee9796584b6799cfad0921ea",
+    "sha": "ebc36aeb1d40dee667732df5ea758458481c7273",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "5e96d42582ca83b7cdd447a52d90fcafe1019695",
+    "sha": "65d2e1a66e1e99faab47e241542290a65f392ea9",
     "branch": "master"
   },
   "sherpa": {
@@ -69,7 +69,7 @@
     "branch": "master"
   },
   "studio": {
-    "sha": "a8eeb9f52b05bbf4451049017e1a1db4d68b8771",
+    "sha": "c1093e73c17a4758ccfaaff19fc94f33ef9faba1",
     "branch": "master"
   },
   "sun": {
@@ -77,11 +77,11 @@
     "branch": "master"
   },
   "tambo": {
-    "sha": "97349e4cb46591c1a3a7795c5020530c1710e53c",
+    "sha": "80200670c31831fc0f877bd104933cee4d974fe6",
     "branch": "master"
   },
   "tandem": {
-    "sha": "0659b3b753bf25725817f16c1595f9a5363df929",
+    "sha": "d5f6cecc013156b04c34a46b37ac8339dc86ba70",
     "branch": "master"
   },
   "utterance-queue": {
