@@ -74,8 +74,8 @@ class ProportionsGraphNode extends Node {
     // All column labels have the same effective width.
     const columnLabelsAlignGroup = new AlignGroup();
 
-    // For layout purposes, consider the graph to be a 2D grid. All cells will have the same effective size.
-    const barsAlignGroup = new AlignGroup();
+    // Consider the graph to be a 2D grid. All cells below the column labels will have the same effective size.
+    const cellsAlignGroup = new AlignGroup();
 
     // Layout of the first column, which contains row labels
     const labelsColumn = new VBox( {
@@ -89,14 +89,13 @@ class ProportionsGraphNode extends Node {
           yAlign: CELLS_Y_ALIGN
         } ),
 
-        //TODO it feels odd to have row labels use barsAlignGroup
         new AlignBox( startRowLabel, {
-          group: barsAlignGroup,
+          group: cellsAlignGroup,
           xAlign: ROW_LABELS_X_ALIGN,
           yAlign: CELLS_Y_ALIGN
         } ),
         new AlignBox( endRowLabel, {
-          group: barsAlignGroup,
+          group: cellsAlignGroup,
           xAlign: ROW_LABELS_X_ALIGN,
           yAlign: CELLS_Y_ALIGN
         } )
@@ -107,19 +106,19 @@ class ProportionsGraphNode extends Node {
     const furColumn = new Column( genePool.furGene,
       startCounts.whiteFurCountProperty, startCounts.brownFurCountProperty,
       endCounts.whiteFurCountProperty, endCounts.brownFurCountProperty,
-      valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, {
+      valuesVisibleProperty, columnLabelsAlignGroup, cellsAlignGroup, {
         tandem: options.tandem.createTandem( 'furColumn' )
       } );
     const earsColumn = new Column( genePool.earsGene,
       startCounts.straightEarsCountProperty, startCounts.floppyEarsCountProperty,
       endCounts.straightEarsCountProperty, endCounts.floppyEarsCountProperty,
-      valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, {
+      valuesVisibleProperty, columnLabelsAlignGroup, cellsAlignGroup, {
         tandem: options.tandem.createTandem( 'earsColumn' )
       } );
     const teethColumn = new Column( genePool.teethGene,
       startCounts.shortTeethCountProperty, startCounts.longTeethCountProperty,
       endCounts.shortTeethCountProperty, endCounts.longTeethCountProperty,
-      valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, {
+      valuesVisibleProperty, columnLabelsAlignGroup, cellsAlignGroup, {
         tandem: options.tandem.createTandem( 'teethColumn' )
       } );
 
