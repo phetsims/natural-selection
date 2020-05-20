@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Parses and validates the values of query parameters that describe the mutations, phenotypes, and distribution
+ * Parses and validates the values of query parameters that describe the mutations, genotypes, and distribution
  * of the initial population. See NaturalSelectionQueryParameters for the format of the values that are being parsed.
  * See https://github.com/phetsims/natural-selection/issues/9 for design specification and history.
  *
@@ -151,7 +151,7 @@ function parseMutations( genePool, mutationsName, mutationsValue ) {
 }
 
 /**
- * Parses the query-parameter value that describes phenotypes and distribution of those phenotypes in the initial
+ * Parses the query-parameter value that describes genotypes and distribution of those genotypes in the initial
  * population. Builds a data structure used to initialize and reset the population.
  * See NaturalSelectionQueryParameters.labPopulation for details on the format of this value.
  *

@@ -10,6 +10,7 @@
 import Utils from '../../../dot/js/Utils.js';
 import naturalSelection from '../naturalSelection.js';
 
+// The schema that describes the query parameters for this simulation
 const SCHEMA = {
 
   //------------------------------------------------------------------------------------------------------------------
@@ -77,7 +78,7 @@ const SCHEMA = {
     public: true
   },
 
-  // Specifies the initial population of bunnies for the Lab screen.
+  // Specifies the genotypes and their distribution in the initial population for the Lab screen.
   // See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
   //
   // The value of labMutations determines which alleles abbreviations can appear in this query parameter's value.
