@@ -45,8 +45,8 @@ class ProportionsModel extends PhetioObject {
     super( options );
 
     // @public
-    this.genePool = genePool;
-    this.currentGenerationProperty = currentGenerationProperty;
+    this.genePool = genePool; //TODO delete if not used by ProportionsModel
+    this.currentGenerationProperty = currentGenerationProperty; //TODO delete if not used by ProportionsModel
 
     // @public
     this.valuesVisibleProperty = new BooleanProperty( true, {
