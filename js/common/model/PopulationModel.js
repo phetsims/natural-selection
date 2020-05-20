@@ -35,12 +35,12 @@ const Y_MAXIMUMS_INDEX_DEFAULT = 3;
 const Y_MINIMUM = 0;
 
 // Maximum population values for the y-axis range.
-const Y_MAXIMUMS = [ 5, 14, 30, 50, 70, 100, 140, 200, 240, 350, 500, 1000, 2000, 3000, 5000 ];
+const Y_MAXIMUMS = [ 5, 14, 30, 50, 70, 100, 140, 200, 240, 350, 500, 1000, 1400, 2000, 2500 ];
 assert && assert( _.every( value => Utils.isInteger( value ) && value > 0 ), 'Y_MAXIMUMS must contain positive integer values' );
 assert && assert( NaturalSelectionUtils.isSorted( Y_MAXIMUMS ), 'Y_MAXIMUMS must be sorted in ascending order' );
 
 // Spacing of tick marks for each value of Y_MAXIMUMS.
-const Y_TICK_SPACINGS = [ 1, 2, 5, 10, 10, 20, 20, 40, 40, 50, 100, 200, 400, 500, 1000 ];
+const Y_TICK_SPACINGS = [ 1, 2, 5, 10, 10, 20, 20, 40, 40, 50, 100, 100, 200, 200, 500 ];
 assert && assert( Y_TICK_SPACINGS.length === Y_MAXIMUMS.length, 'incorrect number of Y_TICK_SPACINGS' );
 assert && assert( _.every( value => Utils.isInteger( value ) && value > 0 ), 'Y_TICK_SPACINGS must contain positive integer values' );
 assert && assert( NaturalSelectionUtils.isSorted( Y_TICK_SPACINGS ), 'Y_TICK_SPACINGS must be sorted in ascending order' );
@@ -124,7 +124,7 @@ class PopulationModel extends PhetioObject {
       numberType: 'Integer',
       range: new Range( 0, Y_MAXIMUMS.length - 1 ),
       tandem: options.tandem.createTandem( 'yZoomLevelProperty' ),
-      phetioDocumentation: 'Controls the range of the y axis. Larger values are larger ranges.'
+      phetioDocumentation: 'Zooms in and out by selecting a pre-set y-axis range. The larger the value, the larger the y-axis range.'
     } );
 
     // @public range of the y-axis, in population
