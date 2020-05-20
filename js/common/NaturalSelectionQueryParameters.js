@@ -169,7 +169,23 @@ const SCHEMA = {
 
 const NaturalSelectionQueryParameters = QueryStringMachine.getAll( SCHEMA );
 
-NaturalSelectionQueryParameters.SCHEMA = SCHEMA;
+/**
+ * Gets the value for a query parameter.
+ * @param {string} key - the query parameter key
+ * @returns {*}
+ */
+NaturalSelectionQueryParameters.getValue = function( key ) {
+  return NaturalSelectionQueryParameters[ key ];
+};
+
+/**
+ * Gets the default value for a query parameter.
+ * @param {string} key - the query parameter key
+ * @returns {*}
+ */
+NaturalSelectionQueryParameters.getDefaultValue = function( key ) {
+  return SCHEMA[ key ].defaultValue
+};
 
 // validate query parameters
 assert && assert( NaturalSelectionQueryParameters.secondsPerStep < NaturalSelectionQueryParameters.secondsPerGeneration,

@@ -46,44 +46,40 @@ import GenePool from './GenePool.js';
  * Parses query parameters that describe the initial population. See NaturalSelectionQueryParameters.
  * If an error is encountered in a query parameter value, that error is added as a warning to QueryStringMachine.
  * @param {GenePool} genePool
- * @param {string} mutationsQueryParameterName
- * @param {string} populationQueryParameterName
+ * @param {string} mutationsName - name of the mutations query parameter
+ * @param {string} populationName - name of the population query parameter
  * @returns {BunnyVariety[]}
  * @public
  */
-function parsePopulation( genePool, mutationsQueryParameterName, populationQueryParameterName ) {
+function parsePopulation( genePool, mutationsName, populationName ) {
 
   assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-  assert && assert( typeof mutationsQueryParameterName === 'string', 'invalid mutationsQueryParameterName' );
-  assert && assert( typeof populationQueryParameterName === 'string', 'invalid populationQueryParameterName' );
+  assert && assert( typeof mutationsName === 'string', 'invalid mutationsName' );
+  assert && assert( typeof populationName === 'string', 'invalid populationName' );
+
+  // Get the query parameter values
+  const mutationsValue = NaturalSelectionQueryParameters.getValue( mutationsName );
+  const populationValue = NaturalSelectionQueryParameters.getValue( populationName );
 
   let initialBunnyVarieties = null; // {BunnyVariety[]}
   try {
-
-    // Parse the query parameters to create a description of the initial population
-    initialBunnyVarieties = parsePrivate( genePool,
-      mutationsQueryParameterName,
-      NaturalSelectionQueryParameters[ mutationsQueryParameterName ],
-      populationQueryParameterName,
-      NaturalSelectionQueryParameters[ populationQueryParameterName ] );
+    initialBunnyVarieties = parsePrivate( genePool, mutationsName, mutationsValue, populationName, populationValue );
   }
   catch( error ) {
 
-    // Add warnings that QueryStringMachine will display after the sim has fully started.
-    QueryStringMachine.addWarning( mutationsQueryParameterName,
-      NaturalSelectionQueryParameters[ mutationsQueryParameterName ],
-      NaturalSelectionQueryParameters.SCHEMA[ mutationsQueryParameterName ].defaultValue,
-      error.message );
-    QueryStringMachine.addWarning( populationQueryParameterName,
-      NaturalSelectionQueryParameters[ populationQueryParameterName ],
-      NaturalSelectionQueryParameters.SCHEMA[ populationQueryParameterName ].defaultValue,
-      error.message );
+    // Get the query parameter default values
+    const mutationsDefaultValue = NaturalSelectionQueryParameters.getDefaultValue( mutationsName );
+    const populationDefaultValue = NaturalSelectionQueryParameters.getDefaultValue( populationName );
 
-    // Print error to the console, since QueryStringMachine doesn't currently show the error message.
+    // Add warnings that QueryStringMachine will display after the sim has fully started.
+    QueryStringMachine.addWarning( mutationsName, mutationsValue, mutationsDefaultValue, error.message );
+    QueryStringMachine.addWarning( populationName, populationValue, populationDefaultValue, error.message );
+
+    // Print an error to the console, since QueryStringMachine doesn't currently show the error message.
     console.error(
       `Query parameter error: ${error.message}\n` +
-      `${mutationsQueryParameterName}=${NaturalSelectionQueryParameters[ mutationsQueryParameterName ]}\n` +
-      `${populationQueryParameterName}=${NaturalSelectionQueryParameters[ populationQueryParameterName ]}`
+      `${mutationsName}=${mutationsValue}\n` +
+      `${populationName}=${populationValue}`
     );
 
     // Revert to defaults.
@@ -91,11 +87,7 @@ function parsePopulation( genePool, mutationsQueryParameterName, populationQuery
       gene.dominantAlleleProperty.setInitialValue( null );
       gene.dominantAlleleProperty.reset();
     } );
-    initialBunnyVarieties = parsePrivate( genePool,
-      mutationsQueryParameterName,
-      NaturalSelectionQueryParameters.SCHEMA[ mutationsQueryParameterName ].defaultValue,
-      populationQueryParameterName,
-      NaturalSelectionQueryParameters.SCHEMA[ populationQueryParameterName ].defaultValue );
+    initialBunnyVarieties = parsePrivate( genePool, mutationsName, mutationsDefaultValue, populationName, populationDefaultValue );
   }
   return initialBunnyVarieties;
 }
