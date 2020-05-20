@@ -20,7 +20,6 @@ import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
-import BunnyCounts from '../../model/BunnyCounts.js';
 import Gene from '../../model/Gene.js';
 import ProportionsModel from '../../model/ProportionsModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
@@ -55,38 +54,21 @@ class ProportionsGraphNode extends Node {
       phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     }, options );
 
+    // To make this code easier to read
+    const genePool = proportionsModel.genePool;
+    const startCounts = proportionsModel.startCounts;
+    const endCounts = proportionsModel.endCounts;
+    const valuesVisibleProperty = proportionsModel.valuesVisibleProperty;
+
     const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
       fill: NaturalSelectionColors.PROPORTIONS_GRAPH_FILL,
       stroke: NaturalSelectionColors.PANEL_STROKE
     } );
 
-    // Counts for the 'Start of Generation' row
-    const startCounts = new BunnyCounts( {
-      tandem: options.tandem.createTandem( 'startCounts' )
-    } );
-
-    // Counts for the 'End of Generation' row
-    const endCounts = new BunnyCounts( {
-      tandem: options.tandem.createTandem( 'endCounts' )
-    } );
-
-    //TODO add some dummy data, to see bars and percentages
-    startCounts.totalCountProperty.value = 8;
-    startCounts.whiteFurCountProperty.value = 4;
-    startCounts.brownFurCountProperty.value = 4;
-    startCounts.straightEarsCountProperty.value = 4;
-    startCounts.floppyEarsCountProperty.value = 4;
-    startCounts.shortTeethCountProperty.value = 4;
-    startCounts.longTeethCountProperty.value = 4;
-    endCounts.totalCountProperty.value = 8;
-    endCounts.whiteFurCountProperty.value = 2;
-    endCounts.brownFurCountProperty.value = 6;
-    endCounts.straightEarsCountProperty.value = 2;
-    endCounts.floppyEarsCountProperty.value = 6;
-    endCounts.shortTeethCountProperty.value = 2;
-    endCounts.longTeethCountProperty.value = 6;
-
+    // 'Start of Generation...'
     const startRowLabel = new RowLabel( naturalSelectionStrings.startOfGeneration, startCounts.totalCountProperty );
+
+    // 'End of Generation...' or 'Currently...'
     const endRowLabel = new RowLabel( naturalSelectionStrings.endOfGeneration, endCounts.totalCountProperty );
 
     // All column labels have the same effective width.
@@ -122,24 +104,24 @@ class ProportionsGraphNode extends Node {
     } );
 
     // Columns that contain bars
-    const furColumn = new Column( proportionsModel.genePool.furGene,
+    const furColumn = new Column( genePool.furGene,
       startCounts.whiteFurCountProperty, startCounts.brownFurCountProperty,
       endCounts.whiteFurCountProperty, endCounts.brownFurCountProperty,
-      proportionsModel.valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, {
-      tandem: options.tandem.createTandem( 'furColumn' )
-    } );
-    const earsColumn = new Column( proportionsModel.genePool.earsGene,
+      valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, {
+        tandem: options.tandem.createTandem( 'furColumn' )
+      } );
+    const earsColumn = new Column( genePool.earsGene,
       startCounts.straightEarsCountProperty, startCounts.floppyEarsCountProperty,
       endCounts.straightEarsCountProperty, endCounts.floppyEarsCountProperty,
-      proportionsModel.valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, {
-      tandem: options.tandem.createTandem( 'earsColumn' )
-    } );
-    const teethColumn = new Column( proportionsModel.genePool.teethGene,
+      valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, {
+        tandem: options.tandem.createTandem( 'earsColumn' )
+      } );
+    const teethColumn = new Column( genePool.teethGene,
       startCounts.shortTeethCountProperty, startCounts.longTeethCountProperty,
       endCounts.shortTeethCountProperty, endCounts.longTeethCountProperty,
-      proportionsModel.valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, {
-      tandem: options.tandem.createTandem( 'teethColumn' )
-    } );
+      valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, {
+        tandem: options.tandem.createTandem( 'teethColumn' )
+      } );
 
     // Layout the columns
     const columns = new HBox( {
@@ -199,12 +181,13 @@ class ProportionsGraphNode extends Node {
 
 /**
  * RowLabel is the label for a row of the Proportions graph.
+ * The label consists of 2 lines of text, with a dynamic count on the second line.
  */
 class RowLabel extends VBox {
 
   /**
    *
-   * @param {string} topString
+   * @param {string} topString - string for the top line of text
    * @param {Property.<number>} countProperty
    * @param {Object} [options]
    */

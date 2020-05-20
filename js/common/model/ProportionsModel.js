@@ -18,6 +18,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import BunnyCounts from './BunnyCounts.js';
 import GenePool from './GenePool.js';
 
 class ProportionsModel extends PhetioObject {
@@ -90,6 +91,32 @@ class ProportionsModel extends PhetioObject {
         isPlayingProperty.value = false;
       }
     } );
+
+    // @public counts for 'Start of Generation'
+    this.startCounts = new BunnyCounts( {
+      tandem: options.tandem.createTandem( 'startCounts' )
+    } );
+
+    // @public counts for 'End of Generation'
+    this.endCounts = new BunnyCounts( {
+      tandem: options.tandem.createTandem( 'endCounts' )
+    } );
+
+    //TODO add some dummy data, to see bars and percentages
+    this.startCounts.totalCountProperty.value = 8;
+    this.startCounts.whiteFurCountProperty.value = 4;
+    this.startCounts.brownFurCountProperty.value = 4;
+    this.startCounts.straightEarsCountProperty.value = 4;
+    this.startCounts.floppyEarsCountProperty.value = 4;
+    this.startCounts.shortTeethCountProperty.value = 4;
+    this.startCounts.longTeethCountProperty.value = 4;
+    this.endCounts.totalCountProperty.value = 8;
+    this.endCounts.whiteFurCountProperty.value = 2;
+    this.endCounts.brownFurCountProperty.value = 6;
+    this.endCounts.straightEarsCountProperty.value = 2;
+    this.endCounts.floppyEarsCountProperty.value = 6;
+    this.endCounts.shortTeethCountProperty.value = 2;
+    this.endCounts.longTeethCountProperty.value = 6;
   }
 
   /**
