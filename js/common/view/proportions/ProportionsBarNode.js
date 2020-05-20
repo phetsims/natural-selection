@@ -120,7 +120,7 @@ class ProportionsBarNode extends Node {
     this.normalRectangle.visible = ( normalPercentage > 0 );
     this.mutantRectangle.visible = ( mutantPercentage > 0 );
 
-    // hide N% values
+    // hide N% values, when values are not visible, or when values are zero
     this.normalPercentageNode.visible = ( valuesVisible && normalPercentage > 0 );
     this.mutantPercentageNode.visible = ( valuesVisible && mutantPercentage > 0 );
 
