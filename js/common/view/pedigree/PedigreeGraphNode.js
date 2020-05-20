@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../../axon/js/Property.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
@@ -14,7 +13,7 @@ import Text from '../../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
-import Bunny from '../../model/Bunny.js';
+import PedigreeModel from '../../model/PedigreeModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import PedigreeBranchNode from './PedigreeBranchNode.js';
@@ -28,23 +27,12 @@ const Y_MARGIN = 5;
 class PedigreeGraphNode extends Node {
 
   /**
-   * @param {Property.<Bunny|null>} selectedBunnyProperty
-   * @param {Property.<boolean>} furAllelesVisibleProperty
-   * @param {Property.<boolean>} earsAllelesVisibleProperty
-   * @param {Property.<boolean>} teethAllelesVisibleProperty
+   * @param {PedigreeModel} pedigreeModel
    * @param {Object} [options]
    */
-  constructor( selectedBunnyProperty, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
+  constructor( pedigreeModel, options ) {
 
-    assert && assert( selectedBunnyProperty instanceof Property, 'invalid selectedBunnyProperty' );
-    assert && assert( selectedBunnyProperty.value instanceof Bunny || selectedBunnyProperty.value === null,
-      'invalid selectedBunnyProperty.value' );
-    assert && assert( furAllelesVisibleProperty instanceof Property, 'invalid furAllelesVisibleProperty' );
-    assert && assert( typeof furAllelesVisibleProperty.value === 'boolean', 'invalid furAllelesVisibleProperty.value' );
-    assert && assert( earsAllelesVisibleProperty instanceof Property, 'invalid earsAllelesVisibleProperty' );
-    assert && assert( typeof earsAllelesVisibleProperty.value === 'boolean', 'invalid earsAllelesVisibleProperty.value' );
-    assert && assert( teethAllelesVisibleProperty instanceof Property, 'invalid teethAllelesVisibleProperty' );
-    assert && assert( typeof teethAllelesVisibleProperty.value === 'boolean', 'invalid teethAllelesVisibleProperty.value' );
+    assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
 
     options = merge( {
       graphWidth: 100,
@@ -75,7 +63,7 @@ class PedigreeGraphNode extends Node {
     // {PedigreeBranchNode|null} The branch of the Pedigree tree that is currently displayed.
     let branchNode = null;
 
-    selectedBunnyProperty.link( bunny => {
+    pedigreeModel.selectedBunnyProperty.link( bunny => {
       selectABunnyText.visible = !bunny;
 
       if ( branchNode ) {
@@ -87,9 +75,9 @@ class PedigreeGraphNode extends Node {
 
         // Create the graph
         branchNode = new PedigreeBranchNode( bunny, TREE_DEPTH,
-          furAllelesVisibleProperty,
-          earsAllelesVisibleProperty,
-          teethAllelesVisibleProperty, {
+          pedigreeModel.furAllelesVisibleProperty,
+          pedigreeModel.earsAllelesVisibleProperty,
+          pedigreeModel.teethAllelesVisibleProperty, {
             bunnyIsSelected: true,
             scale: SELECTED_BUNNY_SCALE,
 

@@ -114,7 +114,7 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     // Pedigree
-    const pedigreeNode = new PedigreeNode( model.genePool, model.selectedBunnyProperty, model.pedigreeModel, graphAreaSize, {
+    const pedigreeNode = new PedigreeNode( model.genePool, model.pedigreeModel, graphAreaSize, {
       left: graphAreaLeft,
       top: graphAreaTop,
       tandem: graphsTandem.createTandem( 'pedigreeNode' )

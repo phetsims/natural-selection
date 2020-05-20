@@ -100,7 +100,7 @@ class EnvironmentNode extends Node {
     }
 
     // manages dynamic BunnyNode instances
-    const bunnyNodeCollection = new BunnyNodeCollection( model.bunnyCollection, model.selectedBunnyProperty, {
+    const bunnyNodeCollection = new BunnyNodeCollection( model.bunnyCollection, model.pedigreeModel.selectedBunnyProperty, {
       tandem: options.tandem.createTandem( 'bunnyNodeCollection' )
     } );
 
@@ -121,7 +121,7 @@ class EnvironmentNode extends Node {
     model.bunnyCollection.bunnyCreatedEmitter.addListener( createBunnyNode );
 
     // Press on a bunny to select it. No need to removeInputListener, exists for the lifetime of the sim.
-    spritesNode.addInputListener( new BunnyPressListener( model.selectedBunnyProperty, {
+    spritesNode.addInputListener( new BunnyPressListener( model.pedigreeModel.selectedBunnyProperty, {
       tandem: options.tandem.createTandem( 'bunnyPressListener' )
     } ) );
 
@@ -129,7 +129,7 @@ class EnvironmentNode extends Node {
     // No need to removeInputListener, exists for the lifetime of the sim.
     backgroundNode.addInputListener( new PressListener( {
       press: () => {
-        model.selectedBunnyProperty.value = null;
+        model.pedigreeModel.selectedBunnyProperty.value = null;
       },
       pressCursor: 'default',
       tandem: options.tandem.createTandem( 'backgroundPressListener' )

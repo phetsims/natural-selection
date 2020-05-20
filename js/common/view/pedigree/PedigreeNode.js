@@ -6,13 +6,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../../axon/js/Property.js';
 import Dimension2 from '../../../../../dot/js/Dimension2.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import HBox from '../../../../../scenery/js/nodes/HBox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
-import Bunny from '../../model/Bunny.js';
 import GenePool from '../../model/GenePool.js';
 import PedigreeModel from '../../model/PedigreeModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
@@ -23,17 +21,13 @@ class PedigreeNode extends HBox {
 
   /**
    * @param {GenePool} genePool
-   * @param {Property.<Bunny|null>} selectedBunnyProperty
    * @param {PedigreeModel} pedigreeModel
    * @param {Dimension2} size - dimensions of the rectangle available for this Node and its children
    * @param {Object} [options]
    */
-  constructor( genePool, selectedBunnyProperty, pedigreeModel, size, options ) {
+  constructor( genePool, pedigreeModel, size, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( selectedBunnyProperty instanceof Property, 'invalid selectedBunnyProperty' );
-    assert && assert( selectedBunnyProperty.value instanceof Bunny || selectedBunnyProperty.value === null,
-      'invalid selectedBunnyProperty.value' );
     assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
     assert && assert( size instanceof Dimension2, 'invalid size' );
 
@@ -70,8 +64,7 @@ class PedigreeNode extends HBox {
                              'but changes to its elements and metadata will have no affect.'
       } );
 
-    const pedigreeGraphNode = new PedigreeGraphNode( selectedBunnyProperty, pedigreeModel.furAllelesVisibleProperty,
-      pedigreeModel.earsAllelesVisibleProperty, pedigreeModel.teethAllelesVisibleProperty, {
+    const pedigreeGraphNode = new PedigreeGraphNode( pedigreeModel, {
         graphWidth: graphWidth,
         graphHeight: size.height,
         tandem: options.tandem.createTandem( 'pedigreeGraphNode' )

@@ -9,15 +9,10 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import NullableIO from '../../../../tandem/js/types/NullableIO.js';
-import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import BunnyCollection from './BunnyCollection.js';
-import BunnyIO from './BunnyIO.js';
 import Environment from './Environment.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Food from './Food.js';
@@ -78,16 +73,6 @@ class NaturalSelectionModel {
       tandem: options.tandem.createTandem( 'bunnyCollection' )
     } );
     this.initializeGenerationZero();
-
-    // @public {Property.<Bunny|null>} a reference to a Bunny instance in BunnyCollection, null if no selection
-    this.selectedBunnyProperty = new Property( null, {
-      tandem: options.tandem.createTandem( 'selectedBunnyProperty' ),
-      phetioType: PropertyIO( NullableIO( ReferenceIO( BunnyIO ) ) ),
-      phetioDocumentation: 'bunny selected in environmentNode, whose pedigree is displayed by pedigreeNode'
-    } );
-    phet.log && this.selectedBunnyProperty.link( selectedBunny => {
-      phet.log( `selectedBunny=${selectedBunny}` );
-    } );
 
     // @public
     this.environmentProperty = new EnumerationProperty( Environment, Environment.EQUATOR, {
@@ -185,7 +170,6 @@ class NaturalSelectionModel {
 
     this.genePool.reset();
 
-    this.selectedBunnyProperty.reset();
     this.bunnyCollection.reset();
     this.initializeGenerationZero();
 
