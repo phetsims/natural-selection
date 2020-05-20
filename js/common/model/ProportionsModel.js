@@ -121,8 +121,7 @@ class ProportionsModel extends PhetioObject {
         if ( isPlaying ) {
           this.generationProperty.setValueAndRange( currentGeneration, new Range( 0, currentGeneration ) );
         }
-      }
-    );
+      } );
   }
 
   /**
