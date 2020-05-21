@@ -99,15 +99,15 @@ class ProportionsModel extends PhetioObject {
       }
 
       if ( generation === this.currentGenerationProperty.value ) {
-        this.startCounts.setSnapshot( this.currentGenerationStartSnapshotProperty.value );
+        this.startCounts.setValues( this.currentGenerationStartSnapshotProperty.value );
 
         //TODO endCounts need to update dynamically, wired to bunnyCollection.liveBunnies.counts
-        this.endCounts.setSnapshot( this.currentGenerationStartSnapshotProperty.value );
+        this.endCounts.setValues( this.currentGenerationStartSnapshotProperty.value );
       }
       else {
         const data = this.previousGenerationsDataArray.get( generation );
-        this.startCounts.setSnapshot( data.startSnapshot );
-        this.endCounts.setSnapshot( data.endSnapshot );
+        this.startCounts.setValues( data.startSnapshot );
+        this.endCounts.setValues( data.endSnapshot );
       }
     } );
 

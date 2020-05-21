@@ -197,11 +197,11 @@ class BunnyCounts {
   }
 
   /**
-   * Sets the count values to match a specified snapshot.
+   * Sets all count values to match a specified snapshot.
    * @param {BunnyCountsSnapshot} snapshot
    * @public
    */
-  setSnapshot( snapshot ) {
+  setValues( snapshot ) {
     this.totalCountProperty.value = snapshot.totalCount;
     this.whiteFurCountProperty.value = snapshot.whiteFurCount;
     this.brownFurCountProperty.value = snapshot.brownFurCount;
