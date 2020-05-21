@@ -130,7 +130,5 @@ assert && assert( NaturalSelectionConstants.MUTATION_PERCENTAGE > 0 && NaturalSe
 assert && assert( NaturalSelectionConstants.SECONDS_PER_STEP < NaturalSelectionConstants.SECONDS_PER_GENERATION,
   'SECONDS_PER_STEP must be < SECONDS_PER_GENERATION' );
 
-//TODO https://github.com/phetsims/natural-selection/issues/49, validate mutations and population, call QueryStringMachine.addWarning
-
 naturalSelection.register( 'NaturalSelectionConstants', NaturalSelectionConstants );
 export default NaturalSelectionConstants;
