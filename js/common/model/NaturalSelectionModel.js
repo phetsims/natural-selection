@@ -98,9 +98,10 @@ class NaturalSelectionModel {
     );
 
     // @public (read-only)
-    this.populationModel = new PopulationModel( this.genePool, this.generationClock.generationsProperty, this.isPlayingProperty, {
-      tandem: options.tandem.createTandem( 'populationModel' )
-    } );
+    this.populationModel = new PopulationModel( this.genePool, this.generationClock.generationsProperty,
+      this.isPlayingProperty, {
+        tandem: options.tandem.createTandem( 'populationModel' )
+      } );
 
     // @public (read-only)
     this.proportionsModel = new ProportionsModel( this.genePool, this.generationClock.currentGenerationProperty,
