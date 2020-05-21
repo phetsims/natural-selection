@@ -109,7 +109,7 @@ const NaturalSelectionUtils = {
   },
 
   /**
-   * Asserts that object is a Property whose value is a specified primitive type.
+   * Asserts that an object is a Property whose value is a specified primitive type.
    * Used for type-checking of method arguments.
    * @param {*} object
    * @param {string} type
@@ -120,7 +120,7 @@ const NaturalSelectionUtils = {
   },
 
   /**
-   * Asserts that object is a Property whose value is an instance of a specific class.
+   * Asserts that an object is a Property whose value is an instance of a specific class.
    * Used for type-checking of method arguments.
    * @param {*} object
    * @param {constructor} type
@@ -131,7 +131,7 @@ const NaturalSelectionUtils = {
   },
 
   /**
-   * Asserts that object is a Property whose value passes a specified predicate. Used for validating method arguments.
+   * Asserts that an object is a Property whose value passes a specified predicate.
    * Used for type-checking of method arguments.
    * @param {*} object
    * @param {function(value:*):boolean} predicate
