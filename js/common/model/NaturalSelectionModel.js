@@ -233,7 +233,7 @@ class NaturalSelectionModel {
     assert && assert( this.bunnyCollection.liveBunnies.length === 0, 'bunnies already exist' );
     assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
 
-    // for each {BunnyVariety} in the initial population ...
+    // For each {BunnyVariety} in the initial population, create bunnies of that variety.
     this.initialBunnyVarieties.forEach( variety => {
       phet.log && phet.log( `creating ${variety.count} bunnies with genotype '${variety.genotypeString}'` );
       for ( let i = 0; i < variety.count; i++ ) {
