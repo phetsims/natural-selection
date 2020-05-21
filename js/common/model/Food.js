@@ -38,12 +38,14 @@ class Food {
 
     // @public
     this.isToughProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'isToughProperty' )
+      tandem: options.tandem.createTandem( 'isToughProperty' ),
+      phetioDocumentation: 'whether the food supply is tough (true) or tender (false)'
     } );
 
     // @public
     this.isLimitedProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'isLimitedProperty' )
+      tandem: options.tandem.createTandem( 'isLimitedProperty' ),
+      phetioDocumentation: 'whether the food supply is limited'
     } );
 
     // {ShrubConfig[]} describes the collection of shrubs

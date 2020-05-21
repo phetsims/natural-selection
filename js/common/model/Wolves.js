@@ -40,7 +40,7 @@ class Wolves {
       } ) );
     }
 
-    // @public
+    // @public TODO rename to activeProperty? areHuntingProperty?
     this.enabledProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'enabledProperty' )
     } );
