@@ -1,5 +1,6 @@
 // Copyright 2020, University of Colorado Boulder
 
+//TODO delete this after the Population graph is completed
 /**
  * BunnyCountsNode is a debugging node used to display the counts of live, dead, and total bunnies.
  * Since this is for debugging, i18n is not required.

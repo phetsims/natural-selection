@@ -1,8 +1,9 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * AddMutationsPanel is the panel that contains controls used to add mutations.
- * For each gene type, you can select whether its mutation will be dominant or recessive.
+ * AddMutationsPanel is the panel that contains controls used to add mutations. For each gene type, press a push button
+ * to selected where its mutation will be dominant or recessive. The push buttons then disappear, and are replaced with
+ * icons that show which allele is dominant, and which allele is recessive.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -390,6 +391,7 @@ class AlleleIcon extends Node {
   /**
    * Sets the image that appears on this icon.
    * @param {HTMLImageElement} value
+   * @public
    */
   set image( value ) {
     assert && assert( value instanceof HTMLImageElement, 'invalid value' );
@@ -399,6 +401,7 @@ class AlleleIcon extends Node {
   /**
    * Sets the lineDash for the icon's outline rectangle.
    * @param {Array} value
+   * @public
    */
   set lineDash( value ) {
     assert && assert( Array.isArray( value ), 'invalid value' );
