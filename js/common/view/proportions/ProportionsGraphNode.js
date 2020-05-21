@@ -22,7 +22,9 @@ import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
 import ProportionsModel from '../../model/ProportionsModel.js';
+import SimulationMode from '../../model/SimulationMode.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
+import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import ProportionsBarNode from './ProportionsBarNode.js';
 import PopulationGenerationSpinner from './ProportionsGenerationSpinner.js';
@@ -141,8 +143,16 @@ class ProportionsGraphNode extends Node {
       children: [ columns, generationSpinner ]
     } );
 
+    // 'No Data', visible when we have no data to display.
+    const noDataText = new Text( naturalSelectionStrings.noData, {
+      font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
+      centerX: backgroundNode.centerX,
+      centerY: backgroundNode.top + ( backgroundNode.height / 6 ),
+      maxWidth: 0.5 * backgroundNode.width
+    } );
+
     assert && assert( !options.children, 'ProportionGraphNode sets children' );
-    options.children = [ backgroundNode, content ];
+    options.children = [ backgroundNode, noDataText, content ];
 
     super( options );
 
@@ -163,6 +173,12 @@ class ProportionsGraphNode extends Node {
           endRowLabel.setTopText( naturalSelectionStrings.endOfGeneration );
         }
       } );
+
+    // If the simulation hasn't started, there's no data to display, so hide the content and display 'No Data'.
+    proportionsModel.simulationModeProperty.link( simulationMode => {
+      noDataText.visible = ( simulationMode === SimulationMode.STAGED );
+      content.visible = !noDataText.visible;
+    } );
 
     // @public for configuring ScreenViews only
     this.furColumn = furColumn;

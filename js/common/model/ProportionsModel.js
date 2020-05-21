@@ -7,6 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
@@ -26,13 +27,15 @@ class ProportionsModel extends PhetioObject {
    * @param {GenePool} genePool
    * @param {Property.<number>} currentGenerationProperty
    * @param {Property.<boolean>} isPlayingProperty
+   * @param {EnumerationProperty.<SimulationMode>} simulationModeProperty
    * @param {Object} [options]
    */
-  constructor( genePool, currentGenerationProperty, isPlayingProperty, options ) {
+  constructor( genePool, currentGenerationProperty, isPlayingProperty, simulationModeProperty, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && NaturalSelectionUtils.assertPropertyTypeof( currentGenerationProperty, 'number' );
     assert && NaturalSelectionUtils.assertPropertyTypeof( isPlayingProperty, 'boolean' );
+    assert && assert( simulationModeProperty instanceof EnumerationProperty );
 
     options = merge( {
 
@@ -47,6 +50,7 @@ class ProportionsModel extends PhetioObject {
     // @public
     this.genePool = genePool; //TODO delete if not used by ProportionsModel
     this.currentGenerationProperty = currentGenerationProperty; //TODO delete if not used by ProportionsModel
+    this.simulationModeProperty = simulationModeProperty; //TODO delete if not used by ProportionsModel
 
     // @public
     this.valuesVisibleProperty = new BooleanProperty( true, {

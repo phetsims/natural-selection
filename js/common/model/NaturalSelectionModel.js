@@ -103,9 +103,10 @@ class NaturalSelectionModel {
     } );
 
     // @public (read-only)
-    this.proportionsModel = new ProportionsModel( this.genePool, this.generationClock.currentGenerationProperty, this.isPlayingProperty, {
-      tandem: options.tandem.createTandem( 'proportionsModel' )
-    } );
+    this.proportionsModel = new ProportionsModel( this.genePool, this.generationClock.currentGenerationProperty,
+      this.isPlayingProperty, this.simulationModeProperty, {
+        tandem: options.tandem.createTandem( 'proportionsModel' )
+      } );
 
     // @public (read-only)
     this.pedigreeModel = new PedigreeModel( {
