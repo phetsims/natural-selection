@@ -114,13 +114,38 @@ class NaturalSelectionModel {
       tandem: options.tandem.createTandem( 'pedigreeModel' )
     } );
 
+    // When the simulation state changes...
     this.simulationModeProperty.link( simulationMode => {
+      phet.log && phet.log( `simulationMode=${simulationMode}` );
+
+      //TODO skip if isSettingPhetioStateProperty ?
       if ( simulationMode === SimulationMode.ACTIVE ) {
 
         // When the simulation begins, record the first 'start of generation' data for the Proportions graph.
         const currentGeneration = this.generationClock.currentGenerationProperty.value;
         this.proportionsModel.recordStartData( currentGeneration, this.bunnyCollection.createCountsSnapshot()
         );
+      }
+
+      // SimulationMode indicates which mode the simulation is in. It does not describe a full state of that mode.
+      // Do nothing when PhET-iO is restoring state, or saved state will be overwritten.
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+
+        // Adjust the sim playback and generation clock
+        if ( simulationMode === SimulationMode.STAGED ) {
+          this.isPlayingProperty.value = true;
+          this.generationClock.isRunningProperty.value = false;
+        }
+        else if ( simulationMode === SimulationMode.ACTIVE ) {
+          this.generationClock.isRunningProperty.value = true;
+        }
+        else if ( simulationMode === SimulationMode.COMPLETED ) {
+          this.isPlayingProperty.value = false;
+          this.generationClock.isRunningProperty.value = false;
+        }
+        else {
+          throw new Error( `unsupported simulationMode: ${simulationMode}` );
+        }
       }
     } );
 
@@ -139,32 +164,8 @@ class NaturalSelectionModel {
         }
 
         // Record 'start of generation' data for the current generation.
-        //TODO disable if isSettingPhetioStateProperty?
+        //TODO skip if isSettingPhetioStateProperty?
         this.proportionsModel.recordStartData( currentGeneration, this.bunnyCollection.createCountsSnapshot() );
-      }
-    } );
-
-    // When the simulation state changes, adjust the model.
-    this.simulationModeProperty.link( simulationMode => {
-      phet.log && phet.log( `simulationMode=${simulationMode}` );
-
-      // SimulationMode indicates which mode the simulation is in. It does not describe a full state of that mode.
-      // Do nothing when PhET-iO is restoring state, or saved state will be overwritten.
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
-        if ( simulationMode === SimulationMode.STAGED ) {
-          this.isPlayingProperty.value = true;
-          this.generationClock.isRunningProperty.value = false;
-        }
-        else if ( simulationMode === SimulationMode.ACTIVE ) {
-          this.generationClock.isRunningProperty.value = true;
-        }
-        else if ( simulationMode === SimulationMode.COMPLETED ) {
-          this.isPlayingProperty.value = false;
-          this.generationClock.isRunningProperty.value = false;
-        }
-        else {
-          throw new Error( `unsupported simulationMode: ${simulationMode}` );
-        }
       }
     } );
   }
