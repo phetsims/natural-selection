@@ -33,7 +33,8 @@ class GenerationClock extends PhetioObject {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioState: false // to prevent serialization, because we don't have an IO type
+      phetioState: false, // to prevent serialization, because we don't have an IO type
+      phetioDocumentation: 'the clock that marks the duration of a generation'
     }, options );
 
     super( options );

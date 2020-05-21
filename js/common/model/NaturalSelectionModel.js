@@ -40,10 +40,10 @@ class NaturalSelectionModel {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // @public
+    // @public the transform between 3D model coordinates and 2D view coordinates
     this.modelViewTransform = new EnvironmentModelViewTransform();
 
-    // @public
+    // @public see SimulationMode
     this.simulationModeProperty = new EnumerationProperty( SimulationMode, SimulationMode.STAGED, {
       tandem: options.tandem.createTandem( 'simulationModeProperty' ),
       phetioDocumentation: 'for internal PhET use only', // see https://github.com/phetsims/phet-io/issues/1660
@@ -52,7 +52,8 @@ class NaturalSelectionModel {
 
     // @public whether the sim is playing
     this.isPlayingProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'isPlayingProperty' )
+      tandem: options.tandem.createTandem( 'isPlayingProperty' ),
+      phetioDocumentation: 'whether time is advancing in the simulation, controlled by the Play/Pause buttons'
     } );
 
     // @public (read-only)

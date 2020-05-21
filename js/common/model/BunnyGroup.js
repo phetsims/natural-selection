@@ -34,7 +34,7 @@ class BunnyGroup extends PhetioGroup {
       // phet-io
       tandem: Tandem.REQUIRED,
       phetioType: PhetioGroupIO( BunnyIO ),
-      phetioDocumentation: 'manages dynamic PhET-iO elements of type Bunny'
+      phetioDocumentation: 'manages dynamic PhET-iO elements of type Bunny, including live and dead bunnies'
     }, options );
 
     /**
