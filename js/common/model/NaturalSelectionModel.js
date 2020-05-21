@@ -118,7 +118,7 @@ class NaturalSelectionModel {
     this.simulationModeProperty.link( simulationMode => {
       phet.log && phet.log( `simulationMode=${simulationMode}` );
 
-      //TODO skip if isSettingPhetioStateProperty ?
+      //TODO #57 skip if isSettingPhetioStateProperty?
       if ( simulationMode === SimulationMode.ACTIVE ) {
 
         // When the simulation begins, record the first 'start of generation' data for the Proportions graph.
@@ -155,7 +155,7 @@ class NaturalSelectionModel {
       if ( currentGeneration !== 0 ) {
 
         // Record 'end of generation' data for the previous generation.
-        //TODO disable if isSettingPhetioStateProperty?
+        //TODO #57 skip if isSettingPhetioStateProperty?
         this.proportionsModel.recordEndData( currentGeneration - 1, this.bunnyCollection.createCountsSnapshot() );
 
         // When restoring PhET-iO state, don't step the generation, as downstream elements of that call are already stateful.
@@ -164,7 +164,7 @@ class NaturalSelectionModel {
         }
 
         // Record 'start of generation' data for the current generation.
-        //TODO skip if isSettingPhetioStateProperty?
+        //TODO #57 skip if isSettingPhetioStateProperty?
         this.proportionsModel.recordStartData( currentGeneration, this.bunnyCollection.createCountsSnapshot() );
       }
     } );
