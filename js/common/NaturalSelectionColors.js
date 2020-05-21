@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * Colors used in this sim.
+ * NaturalSelectionColors defines colors used throughout this simulation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -2,7 +2,7 @@
 
 //TODO should any of these be migrated to common?
 /**
- * NaturalSelectionUtils is a collection of utility functions used by this sim.
+ * NaturalSelectionUtils defines utility functions that are specific to this simulation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -15,7 +15,7 @@ const NaturalSelectionUtils = {
   /**
    * Gets the luminance of a color, per ITU-R recommendation BT.709, https://en.wikipedia.org/wiki/Rec._709.
    * Green contributes the most to the intensity perceived by humans, and blue the least.
-   * This algorithm works correctly if with a grayscale because the RGB coefficients sum to 1.
+   * This algorithm works correctly with a grayscale color because the RGB coefficients sum to 1.
    * @param {Color|string} color
    * @returns {number} - a value in the range [0,255]
    * @public
@@ -64,7 +64,7 @@ const NaturalSelectionUtils = {
   },
 
   /**
-   * Determines the time that it takes to execute someFunction.
+   * Determines the time that it takes to execute a specified function.
    * @param {function} someFunction - a function with no parameters and no return value
    * @returns {number} the time to complete someFunction, in ms
    * @public
@@ -76,7 +76,7 @@ const NaturalSelectionUtils = {
   },
 
   /**
-   * Logs the time that it takes to execute someFunction.
+   * Logs the time that it takes to execute a specified function.
    * For example, if you want to time this:
    *   this.step( dt );
    * Wrap it like this:
@@ -92,7 +92,7 @@ const NaturalSelectionUtils = {
   },
 
   /**
-   * Determines if an array is sorted in ascending order.
+   * Determines whether an array is sorted in ascending order.
    * @param {number[]} array
    * @returns {boolean}
    */
