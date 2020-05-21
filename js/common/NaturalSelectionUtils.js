@@ -109,14 +109,26 @@ const NaturalSelectionUtils = {
   },
 
   /**
+   * Asserts that an object is a Property whose value satisfies a specified predicate.
+   * Used for type-checking of method arguments.
+   * @param {*} object
+   * @param {function(value:*):boolean} predicate
+   * @public
+   */
+  assertPropertyPredicate( object, predicate ) {
+    assert( object instanceof Property, 'object is not a Property' );
+    assert( predicate( object.value ), 'Property.value failed predicate' );
+  },
+
+  /**
    * Asserts that an object is a Property whose value is a specified primitive type.
    * Used for type-checking of method arguments.
    * @param {*} object
    * @param {string} type
+   * @public
    */
   assertPropertyTypeof( object, type ) {
-    assert( object instanceof Property, 'object is not a Property' );
-    assert( typeof object.value === type, 'Property.value has incorrect type' );
+    NaturalSelectionUtils.assertPropertyPredicate( object, value => typeof value === type );
   },
 
   /**
@@ -124,21 +136,10 @@ const NaturalSelectionUtils = {
    * Used for type-checking of method arguments.
    * @param {*} object
    * @param {constructor} type
+   * @public
    */
   assertPropertyInstanceof( object, type ) {
-    assert( object instanceof Property, 'object is not a Property' );
-    assert( object.value instanceof type, 'Property.value has incorrect type' );
-  },
-
-  /**
-   * Asserts that an object is a Property whose value passes a specified predicate.
-   * Used for type-checking of method arguments.
-   * @param {*} object
-   * @param {function(value:*):boolean} predicate
-   */
-  assertPropertyPredicate( object, predicate ) {
-    assert( object instanceof Property, 'object is not a Property' );
-    assert( predicate( object.value ), 'Property.value failed predicate' );
+    NaturalSelectionUtils.assertPropertyPredicate( object, value => value instanceof type );
   }
 };
 
