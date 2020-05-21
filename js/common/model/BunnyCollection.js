@@ -118,7 +118,7 @@ class BunnyCollection {
 
   /**
    * Gets the archetype for the PhetioGroup.
-   * This is non-null when window.phet.preloads.phetio.createArchetypes is true
+   * This is non-null when window.phet.preloads.phetio.createArchetypes is true.
    * @returns {Bunny|null}
    * @public
    */
