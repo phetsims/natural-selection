@@ -41,7 +41,7 @@ class PedigreeModel extends PhetioObject {
       phetioDocumentation: 'the bunny whose pedigree is displayed, null if no bunny is selected'
     } );
     phet.log && this.selectedBunnyProperty.link( selectedBunny => {
-      phet.log( `selectedBunny=${selectedBunny}` );
+      phet.log && phet.log( `selectedBunny=${selectedBunny}` );
     } );
 
     // @public visibility of the alleles for each gene type in the Pedigree tree

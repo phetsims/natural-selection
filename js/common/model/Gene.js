@@ -77,10 +77,10 @@ class Gene extends PhetioObject {
     } );
     phet.log && this.dominantAlleleProperty.link( dominantAllele => {
       if ( dominantAllele ) {
-        phet.log( `${this.name}: ${dominantAllele.name} is dominant` );
+        phet.log && phet.log( `${this.name}: ${dominantAllele.name} is dominant` );
       }
       else {
-        phet.log( `${this.name}: no dominant allele` );
+        phet.log && phet.log( `${this.name}: no dominant allele` );
       }
     } );
 
