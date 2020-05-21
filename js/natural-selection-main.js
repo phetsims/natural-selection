@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * Main entry point for the sim.
+ * Main entry point for the simulation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
