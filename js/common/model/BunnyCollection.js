@@ -339,6 +339,15 @@ class BunnyCollection {
   groundAllBunnies() {
     this.liveBunnies.forEach( bunny => bunny.interruptHop() );
   }
+
+  /**
+   * Creates a snapshot of the live bunny counts.
+   * @returns {BunnyCountsSnapshot}
+   * @public
+   */
+  createCountsSnapshot() {
+    return this.liveBunnies.counts.createSnapshot();
+  }
 }
 
 naturalSelection.register( 'BunnyCollection', BunnyCollection );

@@ -18,6 +18,7 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
 import GenePool from './GenePool.js';
+import ProportionsData from './ProportionsData.js';
 
 class ProportionsModel extends PhetioObject {
 
@@ -68,25 +69,6 @@ class ProportionsModel extends PhetioObject {
       phetioReadOnly: true // range is dynamic
     } );
 
-    // @public
-    this.currentGenerationDataProperty = new Property( null, {
-      // tandem: options.tandem.createTandem( 'currentGenerationDataProperty' ), TODO phetioType?
-      phetioDocumentation: 'Proportions data for the current generation'
-    } );
-
-    // @public
-    this.previousGenerationsDataArray = new ObservableArray( {
-      // tandem: options.tandem.createTandem( 'previousGenerationsDataArray' ), TODO phetioType?
-      phetioDocumentation: 'Proportions data for previous generations, indexed by generation number'
-    } );
-
-    // Pause the sim when a generation other than the current generation is being viewed.
-    this.generationProperty.link( generation => {
-      if ( generation !== currentGenerationProperty.value ) {
-        isPlayingProperty.value = false;
-      }
-    } );
-
     // @public counts for 'Start of Generation'
     this.startCounts = new BunnyCounts( {
       tandem: options.tandem.createTandem( 'startCounts' )
@@ -97,21 +79,37 @@ class ProportionsModel extends PhetioObject {
       tandem: options.tandem.createTandem( 'endCounts' )
     } );
 
-    //TODO add some dummy data, to see bars and percentages
-    this.startCounts.totalCountProperty.value = 8;
-    this.startCounts.whiteFurCountProperty.value = 4;
-    this.startCounts.brownFurCountProperty.value = 4;
-    this.startCounts.straightEarsCountProperty.value = 4;
-    this.startCounts.floppyEarsCountProperty.value = 4;
-    this.startCounts.shortTeethCountProperty.value = 4;
-    this.startCounts.longTeethCountProperty.value = 4;
-    this.endCounts.totalCountProperty.value = 8;
-    this.endCounts.whiteFurCountProperty.value = 2;
-    this.endCounts.brownFurCountProperty.value = 6;
-    this.endCounts.straightEarsCountProperty.value = 2;
-    this.endCounts.floppyEarsCountProperty.value = 6;
-    this.endCounts.shortTeethCountProperty.value = 2;
-    this.endCounts.longTeethCountProperty.value = 6;
+    // @public
+    this.currentGenerationStartSnapshotProperty = new Property( this.startCounts.createSnapshot(), {
+      // tandem: options.tandem.createTandem( 'currentGenerationStartSnapshotProperty' ), TODO phetioType?
+      phetioDocumentation: 'Proportions data at the start of the current generation'
+    } );
+
+    // @public
+    this.previousGenerationsDataArray = new ObservableArray( {
+      // tandem: options.tandem.createTandem( 'previousGenerationsDataArray' ), TODO phetioType?
+      phetioDocumentation: 'Proportions data for previous generations, indexed by generation number'
+    } );
+
+    this.generationProperty.link( generation => {
+
+      // Pause the sim when a generation other than the current generation is being viewed.
+      if ( generation !== currentGenerationProperty.value ) {
+        isPlayingProperty.value = false;
+      }
+
+      if ( generation === this.currentGenerationProperty.value ) {
+        this.startCounts.setSnapshot( this.currentGenerationStartSnapshotProperty.value );
+
+        //TODO endCounts need to update dynamically, wired to bunnyCollection.liveBunnies.counts
+        this.endCounts.setSnapshot( this.currentGenerationStartSnapshotProperty.value );
+      }
+      else {
+        const data = this.previousGenerationsDataArray.get( generation );
+        this.startCounts.setSnapshot( data.startSnapshot );
+        this.endCounts.setSnapshot( data.endSnapshot );
+      }
+    } );
 
     // When the sim starts playing or the current generation changes, show the current generation immediately.
     Property.multilink(
@@ -129,7 +127,9 @@ class ProportionsModel extends PhetioObject {
   reset() {
     this.valuesVisibleProperty.reset();
     this.generationProperty.resetValueAndRange();
-    this.currentGenerationDataProperty.reset();
+    this.startCounts.reset();
+    this.endCounts.reset();
+    this.currentGenerationStartSnapshotProperty.reset();
     this.previousGenerationsDataArray.clear();
   }
 
@@ -139,6 +139,37 @@ class ProportionsModel extends PhetioObject {
    */
   dispose() {
     assert && assert( false, 'ProportionsModel does not support dispose' );
+  }
+
+  /**
+   * Records the start data for the current generation.
+   * @param {generation} generation
+   * @param {BunnyCountsSnapshot} startSnapshot
+   */
+  recordStartData( generation, startSnapshot ) {
+    assert && assert( generation === this.currentGenerationProperty.value, `${generation} is not the current generation` );
+    this.currentGenerationStartSnapshotProperty.value = startSnapshot;
+    phet.log && phet.log( `ProportionsModel recorded start data for generation ${generation}` );
+  }
+
+  /**
+   * Records the end data for the previous generation, using what was formerly the current generation start data.
+   * @param {number} generation
+   * @param {BunnyCountsSnapshot} endSnapshot
+   * @public
+   */
+  recordEndData( generation, endSnapshot ) {
+    assert && assert( generation === this.currentGenerationProperty.value - 1, `${generation} is not the previous generation` );
+    assert && assert( this.previousGenerationsDataArray.length === generation, `data already exists for generation ${generation}` );
+
+    const data = new ProportionsData( generation,
+      this.currentGenerationStartSnapshotProperty.value,
+      endSnapshot );
+    this.previousGenerationsDataArray.push( data );
+
+    this.currentGenerationStartSnapshotProperty.value = null;
+
+    phet.log && phet.log( `ProportionsModel recorded end data for generation ${generation}` );
   }
 }
 

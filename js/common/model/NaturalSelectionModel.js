@@ -112,12 +112,33 @@ class NaturalSelectionModel {
       tandem: options.tandem.createTandem( 'pedigreeModel' )
     } );
 
+    this.simulationModeProperty.link( simulationMode => {
+      if ( simulationMode === SimulationMode.ACTIVE ) {
+
+        // When the simulation begins, record the first 'start of generation' data for the Proportions graph.
+        const currentGeneration = this.generationClock.currentGenerationProperty.value;
+        this.proportionsModel.recordStartData( currentGeneration, this.bunnyCollection.createCountsSnapshot()
+        );
+      }
+    } );
+
     // When the generation changes...
     this.generationClock.currentGenerationProperty.lazyLink( currentGeneration => {
 
-      // When restoring PhET-iO state, don't step the generation, as down stream elements of that call are already stateful.
-      if ( currentGeneration !== 0 && !phet.joist.sim.isSettingPhetioStateProperty.value ) {
-        this.bunnyCollection.stepGeneration( currentGeneration );
+      if ( currentGeneration !== 0 ) {
+
+        // Record 'end of generation' data for the previous generation.
+        //TODO disable if isSettingPhetioStateProperty?
+        this.proportionsModel.recordEndData( currentGeneration - 1, this.bunnyCollection.createCountsSnapshot() );
+
+        // When restoring PhET-iO state, don't step the generation, as downstream elements of that call are already stateful.
+        if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+          this.bunnyCollection.stepGeneration( currentGeneration );
+        }
+
+        // Record 'start of generation' data for the current generation.
+        //TODO disable if isSettingPhetioStateProperty?
+        this.proportionsModel.recordStartData( currentGeneration, this.bunnyCollection.createCountsSnapshot() );
       }
     } );
 

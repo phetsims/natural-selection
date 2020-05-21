@@ -85,6 +85,20 @@ class BunnyCounts {
   }
 
   /**
+   * @public
+   */
+  reset() {
+    this.totalCountProperty.reset();
+    this.whiteFurCountProperty.reset();
+    this.brownFurCountProperty.reset();
+    this.straightEarsCountProperty.reset();
+    this.floppyEarsCountProperty.reset();
+    this.shortTeethCountProperty.reset();
+    this.longTeethCountProperty.reset();
+    assert && this.validateCounts();
+  }
+
+  /**
    * Adds a bunny's contribution to the counts.
    * @param {Bunny} bunny
    * @public
@@ -138,6 +152,22 @@ class BunnyCounts {
     else {
       this.longTeethCountProperty.value += delta;
     }
+
+    assert && this.validateCounts();
+  }
+
+  /**
+   * Validates the counts. The sum of the counts for a gene's alleles should equal the total count.
+   * @private
+   */
+  validateCounts() {
+    const totalCount = this.totalCountProperty.value;
+    assert && assert( this.whiteFurCountProperty.value + this.brownFurCountProperty.value === totalCount,
+      'fur counts are out of sync' );
+    assert && assert( this.straightEarsCountProperty.value + this.floppyEarsCountProperty.value === totalCount,
+      'ears counts are out of sync' );
+    assert && assert( this.shortTeethCountProperty.value + this.longTeethCountProperty.value === totalCount,
+      'teeth counts are out of sync' );
   }
 
   /**
@@ -154,7 +184,7 @@ class BunnyCounts {
    * @properties {number} shortTeethCount
    * @properties {number} longTeethCount
    */
-  getSnapshot() {
+  createSnapshot() {
     return {
       totalCount: this.totalCountProperty.value,
       whiteFurCount: this.whiteFurCountProperty.value,
@@ -164,6 +194,21 @@ class BunnyCounts {
       shortTeethCount: this.shortTeethCountProperty.value,
       longTeethCount: this.longTeethCountProperty.value
     };
+  }
+
+  /**
+   * Sets the count values to match a specified snapshot.
+   * @param {BunnyCountsSnapshot} snapshot
+   * @public
+   */
+  setSnapshot( snapshot ) {
+    this.totalCountProperty.value = snapshot.totalCount;
+    this.whiteFurCountProperty.value = snapshot.whiteFurCount;
+    this.brownFurCountProperty.value = snapshot.brownFurCount;
+    this.straightEarsCountProperty.value = snapshot.straightEarsCount;
+    this.floppyEarsCountProperty.value = snapshot.floppyEarsCount;
+    this.shortTeethCountProperty.value = snapshot.shortTeethCount;
+    this.longTeethCountProperty.value = snapshot.longTeethCount;
   }
 }
 

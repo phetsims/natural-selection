@@ -32,8 +32,15 @@ class BunnyArray extends ObservableArray {
       tandem: options.tandem.createTandem( 'counts' )
     } );
 
-    this.addItemAddedListener( bunny => this.counts.add( bunny ) );
-    this.addItemRemovedListener( bunny => this.counts.subtract( bunny ) );
+    this.addItemAddedListener( bunny => {
+      this.counts.add( bunny );
+      assert && assert( this.counts.totalCountProperty.value === this.length, 'counts out of sync' );
+    } );
+
+    this.addItemRemovedListener( bunny => {
+      this.counts.subtract( bunny );
+      assert && assert( this.counts.totalCountProperty.value === this.length, 'counts out of sync' );
+    } );
   }
 }
 
