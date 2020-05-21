@@ -23,6 +23,7 @@ import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
 import ProportionsModel from '../../model/ProportionsModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
+import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import ProportionsBarNode from './ProportionsBarNode.js';
 import PopulationGenerationSpinner from './ProportionsGenerationSpinner.js';
 
@@ -264,16 +265,11 @@ class Column extends VBox {
                valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, options ) {
 
     assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && assert( startNormalCountProperty instanceof Property, 'invalid startNormalCountProperty' );
-    assert && assert( typeof startNormalCountProperty.value === 'number', 'invalid startNormalCountProperty.value' );
-    assert && assert( startNormalCountProperty instanceof Property, 'invalid startNormalCountProperty' );
-    assert && assert( typeof startMutantCountProperty.value === 'number', 'invalid startMutantCountProperty.value' );
-    assert && assert( endNormalCountProperty instanceof Property, 'invalid endNormalCountProperty' );
-    assert && assert( typeof endNormalCountProperty.value === 'number', 'invalid endNormalCountProperty.value' );
-    assert && assert( endMutantCountProperty instanceof Property, 'invalid endMutantCountProperty' );
-    assert && assert( typeof endMutantCountProperty.value === 'number', 'invalid endMutantCountProperty.value' );
-    assert && assert( valuesVisibleProperty instanceof Property, 'invalid valuesVisibleProperty' );
-    assert && assert( typeof valuesVisibleProperty.value === 'boolean', 'invalid valuesVisibleProperty.value' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( startNormalCountProperty, 'number' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( startNormalCountProperty, 'number' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( endNormalCountProperty, 'number' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( endMutantCountProperty, 'number' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( valuesVisibleProperty, 'boolean' );
     assert && assert( barsAlignGroup instanceof AlignGroup, 'invalid barsAlignGroup' );
 
     options = merge( {

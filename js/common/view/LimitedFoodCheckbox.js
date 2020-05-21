@@ -6,13 +6,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 class LimitedFoodCheckbox extends Checkbox {
 
@@ -22,8 +22,7 @@ class LimitedFoodCheckbox extends Checkbox {
    */
   constructor( limitedFoodProperty, options ) {
 
-    assert && assert( limitedFoodProperty instanceof Property, 'invalid limitedFoodProperty' );
-    assert && assert( typeof limitedFoodProperty.value === 'boolean', 'invalid limitedFoodProperty.value' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( limitedFoodProperty, 'boolean' );
 
     options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 

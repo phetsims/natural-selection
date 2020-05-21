@@ -7,9 +7,9 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Sprite from './Sprite.js';
 
@@ -27,8 +27,7 @@ class Shrub extends Sprite {
     assert && assert( tenderImage instanceof HTMLImageElement, 'invalid tenderImage' );
     assert && assert( toughImage instanceof HTMLImageElement, 'invalid toughImage' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
-    assert && assert( isToughProperty instanceof Property, 'invalid isToughProperty' );
-    assert && assert( typeof isToughProperty.value === 'boolean', 'invalid isToughProperty.value' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( isToughProperty, 'boolean' );
 
     options = merge( {}, options );
 

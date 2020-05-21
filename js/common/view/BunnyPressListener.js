@@ -10,12 +10,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PressListener from '../../../../scenery/js/listeners/PressListener.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyNode from './BunnyNode.js';
 
 class BunnyPressListener extends PressListener  {
@@ -26,9 +26,8 @@ class BunnyPressListener extends PressListener  {
    */
   constructor( selectedBunnyProperty, options ) {
 
-    assert && assert( selectedBunnyProperty instanceof Property, 'invalid selectedBunnyProperty' );
-    assert && assert( selectedBunnyProperty.value instanceof Bunny || selectedBunnyProperty.value === null,
-      'invalid selectedBunnyProperty.value' );
+    assert && NaturalSelectionUtils.assertPropertyPredicate( selectedBunnyProperty,
+        value => value instanceof Bunny || value === null );
 
     options = merge( {
 

@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -17,6 +16,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import GenerationClock from '../model/GenerationClock.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 // constants
 const START_ANGLE = -Math.PI / 2; // 12:00
@@ -35,8 +35,7 @@ class GenerationClockNode extends Node {
   constructor( generationClock, environmentalFactorEnabledProperty, options ) {
 
     assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
-    assert && assert( environmentalFactorEnabledProperty instanceof Property, 'invalid environmentalFactorEnabledProperty' );
-    assert && assert( typeof environmentalFactorEnabledProperty.value === 'boolean', 'invalid environmentalFactorEnabledProperty.value' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( environmentalFactorEnabledProperty, 'boolean' );
 
     options = merge( {
 

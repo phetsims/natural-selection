@@ -14,6 +14,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import SimulationMode from '../model/SimulationMode.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import AddAMateButton from './AddAMateButton.js';
 import PlayButton from './PlayButton.js';
 import StartOverButton from './StartOverButton.js';
@@ -29,8 +30,7 @@ class PlayButtonGroup extends Node {
 
     assert && assert( simulationModeProperty instanceof EnumerationProperty, 'invalid simulationModeProperty' );
     assert && assert( SimulationMode.includes( simulationModeProperty.value ), 'invalid simulationModeProperty.value' );
-    assert && assert( bunnyCountProperty instanceof Property, 'invalid bunnyCountProperty' );
-    assert && assert( typeof bunnyCountProperty.value === 'number', 'invalid bunnyCountProperty.value' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( bunnyCountProperty, 'number' );
 
     options = merge( {
 

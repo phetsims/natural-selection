@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
@@ -16,6 +15,7 @@ import wolfImage from '../../../images/wolf_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 class WolvesCheckbox extends Checkbox {
 
@@ -25,8 +25,7 @@ class WolvesCheckbox extends Checkbox {
    */
   constructor( wolvesEnabledProperty, options ) {
 
-    assert && assert( wolvesEnabledProperty instanceof Property, 'invalid wolvesEnabledProperty' );
-    assert && assert( typeof wolvesEnabledProperty.value === 'boolean', 'invalid wolvesEnabledProperty.value' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( wolvesEnabledProperty, 'boolean' );
 
     options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 

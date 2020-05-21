@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../../axon/js/Property.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import HBox from '../../../../../scenery/js/nodes/HBox.js';
 import Line from '../../../../../scenery/js/nodes/Line.js';
@@ -15,6 +14,7 @@ import Text from '../../../../../scenery/js/nodes/Text.js';
 import Checkbox from '../../../../../sun/js/Checkbox.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
+import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 
 // constants
 const LINE_DASH = [ 3, 3 ];
@@ -33,8 +33,7 @@ class PopulationLegendCheckbox extends Checkbox {
    */
   constructor( plotVisibleProperty, name, options ) {
 
-    assert && assert( plotVisibleProperty instanceof Property, 'invalid plotVisibleProperty' );
-    assert && assert( typeof plotVisibleProperty.value === 'boolean', 'invalid plotVisibleProperty.value' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( plotVisibleProperty, 'boolean' );
     assert && assert( typeof name === 'string', 'invalid name' );
 
     options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {

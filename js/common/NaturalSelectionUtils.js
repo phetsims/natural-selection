@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../axon/js/Property.js';
 import Color from '../../../scenery/js/util/Color.js';
 import naturalSelection from '../naturalSelection.js';
 
@@ -105,6 +106,39 @@ const NaturalSelectionUtils = {
       isSorted = ( item >= array[ i - 1 ] );
     }
     return isSorted;
+  },
+
+  /**
+   * Asserts that object is a Property whose value is a specified primitive type.
+   * Used for type-checking of method arguments.
+   * @param {*} object
+   * @param {string} type
+   */
+  assertPropertyTypeof( object, type ) {
+    assert( object instanceof Property, 'object is not a Property' );
+    assert( typeof object.value === type, 'Property.value has incorrect type' );
+  },
+
+  /**
+   * Asserts that object is a Property whose value is an instance of a specific class.
+   * Used for type-checking of method arguments.
+   * @param {*} object
+   * @param {constructor} type
+   */
+  assertPropertyInstanceof( object, type ) {
+    assert( object instanceof Property, 'object is not a Property' );
+    assert( object.value instanceof type, 'Property.value has incorrect type' );
+  },
+
+  /**
+   * Asserts that object is a Property whose value passes a specified predicate. Used for validating method arguments.
+   * Used for type-checking of method arguments.
+   * @param {*} object
+   * @param {function(value:*):boolean} predicate
+   */
+  assertPropertyPredicate( object, predicate ) {
+    assert( object instanceof Property, 'object is not a Property' );
+    assert( predicate( object.value ), 'Property.value failed predicate' );
   }
 };
 

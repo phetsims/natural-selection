@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../../axon/js/Property.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AlignBox from '../../../../../scenery/js/nodes/AlignBox.js';
 import AlignGroup from '../../../../../scenery/js/nodes/AlignGroup.js';
@@ -24,6 +23,7 @@ import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
+import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
 
 class AllelesPanel extends NaturalSelectionPanel {
@@ -38,12 +38,9 @@ class AllelesPanel extends NaturalSelectionPanel {
   constructor( genePool, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( furAllelesVisibleProperty instanceof Property, 'invalid furAllelesVisibleProperty' );
-    assert && assert( typeof furAllelesVisibleProperty.value === 'boolean', 'invalid furAllelesVisibleProperty.value' );
-    assert && assert( earsAllelesVisibleProperty instanceof Property, 'invalid earsAllelesVisibleProperty' );
-    assert && assert( typeof earsAllelesVisibleProperty.value === 'boolean', 'invalid earsAllelesVisibleProperty.value' );
-    assert && assert( teethAllelesVisibleProperty instanceof Property, 'invalid teethAllelesVisibleProperty' );
-    assert && assert( typeof teethAllelesVisibleProperty.value === 'boolean', 'invalid teethAllelesVisibleProperty.value' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( furAllelesVisibleProperty, 'boolean' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( earsAllelesVisibleProperty, 'boolean' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( teethAllelesVisibleProperty, 'boolean' );
 
     options = merge( {
 
@@ -113,8 +110,7 @@ class Row extends VBox {
   constructor( gene, visibleProperty, alignGroup, options ) {
 
     assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && assert( visibleProperty instanceof Property, 'invalid visibleProperty' );
-    assert && assert( typeof visibleProperty.value === 'boolean', 'invalid visibleProperty.value' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( visibleProperty, 'boolean' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
     options = merge( {

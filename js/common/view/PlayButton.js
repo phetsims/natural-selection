@@ -9,8 +9,8 @@
 import merge from '../../../../phet-core/js/merge.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import naturalSelection from '../../naturalSelection.js';
+import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 

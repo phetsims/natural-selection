@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../../axon/js/Property.js';
 import Range from '../../../../../dot/js/Range.js';
 import Shape from '../../../../../kite/js/Shape.js';
 import merge from '../../../../../phet-core/js/merge.js';
@@ -19,6 +18,7 @@ import Text from '../../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../../naturalSelection.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
+import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 
 // constants
 const GRID_LINES_LINE_WIDTH = 1;
@@ -148,8 +148,7 @@ class VerticalLines extends Node {
    */
   constructor( xRangeProperty, options ) {
 
-    assert && assert( xRangeProperty instanceof Property, 'invalid xRangeProperty' );
-    assert && assert( xRangeProperty.value instanceof Range, 'invalid xRangeProperty.value' );
+    assert && NaturalSelectionUtils.assertPropertyInstanceof( xRangeProperty, Range );
 
     options = merge( {
       xSpacingModel: 1, // spacing between lines, in model coordinates

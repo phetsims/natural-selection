@@ -6,13 +6,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyImageCache from './BunnyImageCache.js';
 import BunnyNodeIO from './BunnyNodeIO.js';
 import OriginNode from './OriginNode.js';
@@ -31,9 +31,8 @@ class BunnyNode extends SpriteNode {
   constructor( bunny, selectedBunnyProperty, options ) {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-    assert && assert( selectedBunnyProperty instanceof Property, 'invalid selectedBunnyProperty' );
-    assert && assert( selectedBunnyProperty.value instanceof Bunny || selectedBunnyProperty.value === null,
-      'invalid selectedBunnyProperty.value' );
+    assert && NaturalSelectionUtils.assertPropertyPredicate( selectedBunnyProperty,
+        value => value instanceof Bunny || value === null );
 
     options = merge( {
 

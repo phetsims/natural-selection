@@ -19,6 +19,7 @@ import Color from '../../../../../scenery/js/util/Color.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import HatchingRectangle from '../HatchingRectangle.js';
 
 // constants
@@ -36,12 +37,9 @@ class ProportionsBarNode extends Node {
   constructor( color, normalCountProperty, mutantCountProperty, valuesVisibleProperty, options ) {
 
     assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
-    assert && assert( normalCountProperty instanceof Property, 'invalid normalCountProperty' );
-    assert && assert( typeof normalCountProperty.value === 'number', 'invalid normalCountProperty.value' );
-    assert && assert( mutantCountProperty instanceof Property, 'invalid mutantCountProperty' );
-    assert && assert( typeof mutantCountProperty.value === 'number', 'invalid mutantCountProperty.value' );
-    assert && assert( valuesVisibleProperty instanceof Property, 'invalid valuesVisibleProperty' );
-    assert && assert( typeof valuesVisibleProperty.value === 'boolean', 'invalid valuesVisibleProperty.value' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( normalCountProperty, 'number' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( mutantCountProperty, 'number' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( valuesVisibleProperty, 'boolean' );
 
     options = merge( {
       barWidth: 120,

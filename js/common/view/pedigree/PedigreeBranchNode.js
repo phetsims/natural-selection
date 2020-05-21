@@ -8,13 +8,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../../axon/js/Property.js';
 import Shape from '../../../../../kite/js/Shape.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../../scenery/js/nodes/Path.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
+import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import PedigreeBunnyNode from './PedigreeBunnyNode.js';
 
 // constants
@@ -41,12 +41,9 @@ class PedigreeBranchNode extends Node {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
     assert && assert( typeof depth === 'number', 'invalid depth' );
-    assert && assert( furAllelesVisibleProperty instanceof Property, 'invalid furAllelesVisibleProperty' );
-    assert && assert( typeof furAllelesVisibleProperty.value === 'boolean', 'invalid furAllelesVisibleProperty.value' );
-    assert && assert( earsAllelesVisibleProperty instanceof Property, 'invalid earsAllelesVisibleProperty' );
-    assert && assert( typeof earsAllelesVisibleProperty.value === 'boolean', 'invalid earsAllelesVisibleProperty.value' );
-    assert && assert( teethAllelesVisibleProperty instanceof Property, 'invalid teethAllelesVisibleProperty' );
-    assert && assert( typeof teethAllelesVisibleProperty.value === 'boolean', 'invalid teethAllelesVisibleProperty.value' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( furAllelesVisibleProperty, 'boolean' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( earsAllelesVisibleProperty, 'boolean' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( teethAllelesVisibleProperty, 'boolean' );
 
     const children = [];
 

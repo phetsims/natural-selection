@@ -19,6 +19,7 @@ import ArrowButton from '../../../../../sun/js/buttons/ArrowButton.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
+import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 
 class GenerationScrollControl extends HBox {
 
@@ -30,12 +31,9 @@ class GenerationScrollControl extends HBox {
    */
   constructor( rangeProperty, maxProperty, isPlayingProperty, options ) {
 
-    assert && assert( rangeProperty instanceof Property, 'invalid rangeProperty' );
-    assert && assert( rangeProperty.value instanceof Range, 'invalid rangeProperty.value' );
-    assert && assert( maxProperty instanceof Property, 'invalid maxProperty' );
-    assert && assert( typeof maxProperty.value === 'number', 'invalid maxProperty.value' );
-    assert && assert( isPlayingProperty instanceof Property, 'invalid isPlayingProperty' );
-    assert && assert( typeof isPlayingProperty.value === 'boolean', 'invalid isPlayingProperty.value' );
+    assert && NaturalSelectionUtils.assertPropertyInstanceof( rangeProperty, Range );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( maxProperty, 'number' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( isPlayingProperty, 'boolean' );
 
     options = merge( {
 

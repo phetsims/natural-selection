@@ -15,6 +15,7 @@ import Text from '../../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
+import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import BunnyImageCache from '../BunnyImageCache.js';
 import MutationIconNode from '../MutationIconNode.js';
 import OriginNode from '../OriginNode.js';
@@ -35,12 +36,9 @@ class PedigreeBunnyNode extends Node {
   constructor( bunny, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-    assert && assert( furAllelesVisibleProperty instanceof Property, 'invalid furAllelesVisibleProperty' );
-    assert && assert( typeof furAllelesVisibleProperty.value === 'boolean', 'invalid furAllelesVisibleProperty.value' );
-    assert && assert( earsAllelesVisibleProperty instanceof Property, 'invalid earsAllelesVisibleProperty' );
-    assert && assert( typeof earsAllelesVisibleProperty.value === 'boolean', 'invalid earsAllelesVisibleProperty.value' );
-    assert && assert( teethAllelesVisibleProperty instanceof Property, 'invalid teethAllelesVisibleProperty' );
-    assert && assert( typeof teethAllelesVisibleProperty.value === 'boolean', 'invalid teethAllelesVisibleProperty.value' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( furAllelesVisibleProperty, 'boolean' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( earsAllelesVisibleProperty, 'boolean' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( teethAllelesVisibleProperty, 'boolean' );
 
     options = merge( {
       isSelected: false
