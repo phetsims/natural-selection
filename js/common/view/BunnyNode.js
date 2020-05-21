@@ -11,8 +11,8 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
+import SelectedBunnyProperty from '../model/SelectedBunnyProperty.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyImageCache from './BunnyImageCache.js';
 import BunnyNodeIO from './BunnyNodeIO.js';
 import OriginNode from './OriginNode.js';
@@ -25,14 +25,13 @@ class BunnyNode extends SpriteNode {
 
   /**
    * @param {Bunny} bunny
-   * @param {Property.<Bunny|null>} selectedBunnyProperty
+   * @param {SelectedBunnyProperty} selectedBunnyProperty
    * @param {Object} [options]
    */
   constructor( bunny, selectedBunnyProperty, options ) {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-    assert && NaturalSelectionUtils.assertPropertyPredicate( selectedBunnyProperty,
-        value => value instanceof Bunny || value === null );
+    assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty );
 
     options = merge( {
 

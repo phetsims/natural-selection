@@ -7,15 +7,11 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import NullableIO from '../../../../tandem/js/types/NullableIO.js';
-import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import BunnyIO from './BunnyIO.js';
+import SelectedBunnyProperty from './SelectedBunnyProperty.js';
 
 class PedigreeModel extends PhetioObject {
 
@@ -34,11 +30,9 @@ class PedigreeModel extends PhetioObject {
 
     super( options );
 
-    // @public {Property.<Bunny|null>}
-    this.selectedBunnyProperty = new Property( null, {
-      tandem: options.tandem.createTandem( 'selectedBunnyProperty' ),
-      phetioType: PropertyIO( NullableIO( ReferenceIO( BunnyIO ) ) ),
-      phetioDocumentation: 'the bunny whose pedigree is displayed, null if no bunny is selected'
+    // @public
+    this.selectedBunnyProperty = new SelectedBunnyProperty( {
+      tandem: options.tandem.createTandem( 'selectedBunnyProperty' )
     } );
     phet.log && this.selectedBunnyProperty.link( selectedBunny => {
       phet.log && phet.log( `selectedBunny=${selectedBunny}` );

@@ -12,9 +12,8 @@ import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
 import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import Bunny from '../model/Bunny.js';
 import BunnyCollection from '../model/BunnyCollection.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import SelectedBunnyProperty from '../model/SelectedBunnyProperty.js';
 import BunnyNode from './BunnyNode.js';
 import BunnyNodeIO from './BunnyNodeIO.js';
 
@@ -22,14 +21,13 @@ class BunnyNodeGroup extends PhetioGroup {
 
   /**
    * @param {BunnyCollection} bunnyCollection
-   * @param {Property.<Bunny|null>} selectedBunnyProperty
+   * @param {SelectedBunnyProperty} selectedBunnyProperty
    * @param {Object} [options]
    */
   constructor( bunnyCollection, selectedBunnyProperty, options ) {
 
     assert && assert( bunnyCollection instanceof BunnyCollection, 'invalid bunnyCollection' );
-    assert && NaturalSelectionUtils.assertPropertyPredicate( selectedBunnyProperty,
-        value => value instanceof Bunny || value === null );
+    assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty );
 
     options = merge( {
 

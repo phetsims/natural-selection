@@ -14,20 +14,18 @@ import merge from '../../../../phet-core/js/merge.js';
 import PressListener from '../../../../scenery/js/listeners/PressListener.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import Bunny from '../model/Bunny.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import SelectedBunnyProperty from '../model/SelectedBunnyProperty.js';
 import BunnyNode from './BunnyNode.js';
 
 class BunnyPressListener extends PressListener  {
 
   /**
-   * @param {Property.<Bunny|null>} selectedBunnyProperty
+   * @param {SelectedBunnyProperty} selectedBunnyProperty
    * @param {Object} [options]
    */
   constructor( selectedBunnyProperty, options ) {
 
-    assert && NaturalSelectionUtils.assertPropertyPredicate( selectedBunnyProperty,
-        value => value instanceof Bunny || value === null );
+    assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty );
 
     options = merge( {
 
