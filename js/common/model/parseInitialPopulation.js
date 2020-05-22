@@ -84,6 +84,8 @@ function parseInitialPopulation( genePool, mutationsName, populationName ) {
 
     // Revert mutations that may have been configured by parseMutations.
     genePool.genes.forEach( gene => {
+
+      //TODO setInitialValue is annotated @public (PhetioStateEngine), can we change to @public?
       gene.dominantAlleleProperty.setInitialValue( null );
       gene.dominantAlleleProperty.reset();
     } );
