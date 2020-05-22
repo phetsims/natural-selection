@@ -76,8 +76,8 @@ function parseInitialPopulation( genePool, mutationsName, populationName ) {
     const populationDefaultValue = NaturalSelectionQueryParameters.getDefaultValue( populationName );
 
     // Add warnings that QueryStringMachine will display after the sim has fully started.
-    QueryStringMachine.addWarning( mutationsName, mutationsValue, mutationsDefaultValue, error.message );
-    QueryStringMachine.addWarning( populationName, populationValue, populationDefaultValue, error.message );
+    QueryStringMachine.addWarning( mutationsName, mutationsValue, error.message );
+    QueryStringMachine.addWarning( populationName, populationValue, error.message );
 
     // Print an error to the console, since QueryStringMachine doesn't currently show the error message.
     console.error(
