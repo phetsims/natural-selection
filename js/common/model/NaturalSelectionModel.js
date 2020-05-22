@@ -98,9 +98,10 @@ class NaturalSelectionModel {
     );
 
     // @public (read-only)
-    this.populationModel = new PopulationModel( this.genePool, this.generationClock.generationsProperty, this.isPlayingProperty, {
-      tandem: options.tandem.createTandem( 'populationModel' )
-    } );
+    this.populationModel = new PopulationModel( this.genePool, this.generationClock.generationsProperty,
+      this.isPlayingProperty, {
+        tandem: options.tandem.createTandem( 'populationModel' )
+      } );
 
     // @public (read-only)
     this.proportionsModel = new ProportionsModel( this.genePool, this.generationClock.currentGenerationProperty,
@@ -113,7 +114,11 @@ class NaturalSelectionModel {
       tandem: options.tandem.createTandem( 'pedigreeModel' )
     } );
 
+    // When the simulation state changes...
     this.simulationModeProperty.link( simulationMode => {
+      phet.log && phet.log( `simulationMode=${simulationMode}` );
+
+      //TODO #57 skip if isSettingPhetioStateProperty?
       if ( simulationMode === SimulationMode.ACTIVE ) {
 
         // When the simulation begins, record the first 'start of generation' data for the Proportions graph.
@@ -121,35 +126,12 @@ class NaturalSelectionModel {
         this.proportionsModel.recordStartData( currentGeneration, this.bunnyCollection.createCountsSnapshot()
         );
       }
-    } );
-
-    // When the generation changes...
-    this.generationClock.currentGenerationProperty.lazyLink( currentGeneration => {
-
-      if ( currentGeneration !== 0 ) {
-
-        // Record 'end of generation' data for the previous generation.
-        //TODO disable if isSettingPhetioStateProperty?
-        this.proportionsModel.recordEndData( currentGeneration - 1, this.bunnyCollection.createCountsSnapshot() );
-
-        // When restoring PhET-iO state, don't step the generation, as downstream elements of that call are already stateful.
-        if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
-          this.bunnyCollection.stepGeneration( currentGeneration );
-        }
-
-        // Record 'start of generation' data for the current generation.
-        //TODO disable if isSettingPhetioStateProperty?
-        this.proportionsModel.recordStartData( currentGeneration, this.bunnyCollection.createCountsSnapshot() );
-      }
-    } );
-
-    // When the simulation state changes, adjust the model.
-    this.simulationModeProperty.link( simulationMode => {
-      phet.log && phet.log( `simulationMode=${simulationMode}` );
 
       // SimulationMode indicates which mode the simulation is in. It does not describe a full state of that mode.
       // Do nothing when PhET-iO is restoring state, or saved state will be overwritten.
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+
+        // Adjust the sim playback and generation clock
         if ( simulationMode === SimulationMode.STAGED ) {
           this.isPlayingProperty.value = true;
           this.generationClock.isRunningProperty.value = false;
@@ -164,6 +146,26 @@ class NaturalSelectionModel {
         else {
           throw new Error( `unsupported simulationMode: ${simulationMode}` );
         }
+      }
+    } );
+
+    // When the generation changes...
+    this.generationClock.currentGenerationProperty.lazyLink( currentGeneration => {
+
+      if ( currentGeneration !== 0 ) {
+
+        // Record 'end of generation' data for the previous generation.
+        //TODO #57 skip if isSettingPhetioStateProperty?
+        this.proportionsModel.recordEndData( currentGeneration - 1, this.bunnyCollection.createCountsSnapshot() );
+
+        // When restoring PhET-iO state, don't step the generation, as downstream elements of that call are already stateful.
+        if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+          this.bunnyCollection.stepGeneration( currentGeneration );
+        }
+
+        // Record 'start of generation' data for the current generation.
+        //TODO #57 skip if isSettingPhetioStateProperty?
+        this.proportionsModel.recordStartData( currentGeneration, this.bunnyCollection.createCountsSnapshot() );
       }
     } );
   }

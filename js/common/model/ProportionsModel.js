@@ -48,9 +48,9 @@ class ProportionsModel extends PhetioObject {
     super( options );
 
     // @public
-    this.genePool = genePool; //TODO delete if not used by ProportionsModel
-    this.currentGenerationProperty = currentGenerationProperty; //TODO delete if not used by ProportionsModel
-    this.simulationModeProperty = simulationModeProperty; //TODO delete if not used by ProportionsModel
+    this.genePool = genePool; //TODO #57 delete if not used by ProportionsModel
+    this.currentGenerationProperty = currentGenerationProperty; //TODO #57 delete if not used by ProportionsModel
+    this.simulationModeProperty = simulationModeProperty; //TODO #57 delete if not used by ProportionsModel
 
     // @public
     this.valuesVisibleProperty = new BooleanProperty( true, {
@@ -85,33 +85,20 @@ class ProportionsModel extends PhetioObject {
 
     // @public
     this.currentGenerationStartSnapshotProperty = new Property( this.startCounts.createSnapshot(), {
-      // tandem: options.tandem.createTandem( 'currentGenerationStartSnapshotProperty' ), TODO phetioType?
+      // tandem: options.tandem.createTandem( 'currentGenerationStartSnapshotProperty' ), TODO #57 phetioType?
       phetioDocumentation: 'Proportions data at the start of the current generation'
     } );
 
     // @public
     this.previousGenerationsDataArray = new ObservableArray( {
-      // tandem: options.tandem.createTandem( 'previousGenerationsDataArray' ), TODO phetioType?
+      // tandem: options.tandem.createTandem( 'previousGenerationsDataArray' ), TODO #57 phetioType?
       phetioDocumentation: 'Proportions data for previous generations, indexed by generation number'
     } );
 
+    // Pause the sim when a generation other than the current generation is being viewed.
     this.generationProperty.link( generation => {
-
-      // Pause the sim when a generation other than the current generation is being viewed.
       if ( generation !== currentGenerationProperty.value ) {
         isPlayingProperty.value = false;
-      }
-
-      if ( generation === this.currentGenerationProperty.value ) {
-        this.startCounts.setValues( this.currentGenerationStartSnapshotProperty.value );
-
-        //TODO endCounts need to update dynamically, wired to bunnyCollection.liveBunnies.counts
-        this.endCounts.setValues( this.currentGenerationStartSnapshotProperty.value );
-      }
-      else {
-        const data = this.previousGenerationsDataArray.get( generation );
-        this.startCounts.setValues( data.startSnapshot );
-        this.endCounts.setValues( data.endSnapshot );
       }
     } );
 
@@ -121,6 +108,29 @@ class ProportionsModel extends PhetioObject {
       ( isPlaying, currentGeneration ) => {
         if ( isPlaying ) {
           this.generationProperty.setValueAndRange( currentGeneration, new Range( 0, currentGeneration ) );
+        }
+      } );
+
+    //TODO #57 There's an ordering problem here. currentGenerationStartSnapshotProperty will be set by another
+    // currentGenerationProperty listener in NaturalSelectionModel, via a call to recordStartData.  So the
+    // value of currentGenerationStartSnapshotProperty may or may not be correct here.
+    Property.multilink(
+      [ this.generationProperty, this.currentGenerationProperty ],
+      ( generation, currentGeneration ) => {
+        if ( generation === currentGeneration ) {
+
+          // Show dynamic data for the current generation.
+          this.startCounts.setValues( this.currentGenerationStartSnapshotProperty.value );
+
+          //TODO #57 endCounts need to update dynamically, wired to bunnyCollection.liveBunnies.counts
+          this.endCounts.setValues( this.currentGenerationStartSnapshotProperty.value );
+        }
+        else {
+
+          // Show static data for a previous generation.
+          const data = this.previousGenerationsDataArray.get( generation );
+          this.startCounts.setValues( data.startSnapshot );
+          this.endCounts.setValues( data.endSnapshot );
         }
       } );
   }
