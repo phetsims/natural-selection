@@ -187,6 +187,8 @@ class BunnyCounts {
    * @public
    */
   setValues( snapshot ) {
+    assert && assert( snapshot instanceof BunnyCountsSnapshot, 'invalid snapshot' );
+
     this.totalCountProperty.value = snapshot.totalCount;
     this.whiteFurCountProperty.value = snapshot.whiteFurCount;
     this.brownFurCountProperty.value = snapshot.brownFurCount;
