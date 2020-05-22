@@ -17,7 +17,7 @@
 
 ## Implementation
 
-* ProportionsModel: wire up 'Currently' counts liveBunnyCounts
+* ProportionsModel: wire up 'Currently' endCounts to liveBunnyCounts
 
 * get rid of some submodels, move some Properties into view?
 
