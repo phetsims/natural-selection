@@ -24,13 +24,15 @@ import ProportionsData from './ProportionsData.js';
 class ProportionsModel extends PhetioObject {
 
   /**
+   * @param {BunnyCounts} liveBunnyCounts - counts of live bunnies, used for dynamic 'Currently' data
    * @param {Property.<number>} currentGenerationProperty
    * @param {Property.<boolean>} isPlayingProperty
    * @param {EnumerationProperty.<SimulationMode>} simulationModeProperty
    * @param {Object} [options]
    */
-  constructor( currentGenerationProperty, isPlayingProperty, simulationModeProperty, options ) {
+  constructor( liveBunnyCounts, currentGenerationProperty, isPlayingProperty, simulationModeProperty, options ) {
 
+    assert && assert( liveBunnyCounts instanceof BunnyCounts, 'invalid bunnyCounts' );
     assert && NaturalSelectionUtils.assertPropertyTypeof( currentGenerationProperty, 'number' );
     assert && NaturalSelectionUtils.assertPropertyTypeof( isPlayingProperty, 'boolean' );
     assert && assert( simulationModeProperty instanceof EnumerationProperty );

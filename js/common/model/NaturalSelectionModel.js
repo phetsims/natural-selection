@@ -98,14 +98,19 @@ class NaturalSelectionModel {
     );
 
     // @public (read-only)
-    this.populationModel = new PopulationModel( this.genePool, this.generationClock.generationsProperty,
+    this.populationModel = new PopulationModel(
+      this.genePool,
+      this.generationClock.generationsProperty,
       this.isPlayingProperty, {
         tandem: options.tandem.createTandem( 'populationModel' )
       } );
 
     // @public (read-only)
-    this.proportionsModel = new ProportionsModel( this.generationClock.currentGenerationProperty,
-      this.isPlayingProperty, this.simulationModeProperty, {
+    this.proportionsModel = new ProportionsModel(
+      this.bunnyCollection.liveBunnies.counts,
+      this.generationClock.currentGenerationProperty,
+      this.isPlayingProperty,
+      this.simulationModeProperty, {
         tandem: options.tandem.createTandem( 'proportionsModel' )
       } );
 
