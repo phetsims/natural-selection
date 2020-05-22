@@ -113,21 +113,19 @@ class ProportionsModel extends PhetioObject {
         }
       } );
 
-    //TODO #57 There's an ordering problem here. currentGenerationStartSnapshotProperty will be set by another
-    // currentGenerationProperty listener in NaturalSelectionModel, via a call to recordStartData.  So the
-    // value of currentGenerationStartSnapshotProperty may or may not be correct here.
+    // Show data for current or previous generation
     Property.multilink(
-      [ this.generationProperty, currentGenerationProperty ],
-      ( generation, currentGeneration ) => {
-        if ( generation === currentGeneration ) {
+      [ this.generationProperty, currentGenerationStartSnapshotProperty ],
+      ( generation, currentGenerationStartSnapshot ) => {
+        if ( generation === currentGenerationProperty.value && currentGenerationStartSnapshot ) {
 
-          // // Show dynamic data for the current generation.
-          // this.startCounts.setValues( currentGenerationStartSnapshotProperty.value );
-          //
-          // //TODO #57 endCounts need to update dynamically, wired to bunnyCollection.liveBunnies.counts
-          // this.endCounts.setValues( currentGenerationStartSnapshotProperty.value );
+          // Show dynamic data for the current generation.
+          this.startCounts.setValues( currentGenerationStartSnapshotProperty.value );
+
+          //TODO #57 wire endCounts to liveBunnyCounts, so that they update dynamically
+          this.endCounts.setValues( currentGenerationStartSnapshotProperty.value );
         }
-        else {
+        else if ( generation <= previousGenerationsDataArray.length - 1 ){
 
           // Show static data for a previous generation.
           const data = previousGenerationsDataArray.get( generation );
