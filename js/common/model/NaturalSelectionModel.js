@@ -128,8 +128,10 @@ class NaturalSelectionModel {
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
 
         // When the simulation begins, record the first 'start of generation' data for the Proportions graph.
-        const currentGeneration = this.generationClock.currentGenerationProperty.value;
-        this.proportionsModel.recordStartData( currentGeneration, this.bunnyCollection.createCountsSnapshot() );
+        if ( simulationMode === SimulationMode.ACTIVE ) {
+          const currentGeneration = this.generationClock.currentGenerationProperty.value;
+          this.proportionsModel.recordStartData( currentGeneration, this.bunnyCollection.createCountsSnapshot() );
+        }
 
         // Adjust the sim playback and generation clock
         if ( simulationMode === SimulationMode.STAGED ) {
