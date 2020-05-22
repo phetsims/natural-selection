@@ -30,7 +30,8 @@ class BunnyCounts {
     // Shared options
     const numberPropertyOptions = {
       numberType: 'Integer',
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioState: false // because counts will be restored as BunnyGroup is restored
     };
 
     // @public
