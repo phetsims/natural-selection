@@ -308,7 +308,7 @@ class BunnyCollection {
    * Moves all live bunnies to the ground, so that we don't have bunnies paused mid-hop.
    * @public
    */
-  groundAllBunnies() {
+  moveBunniesToGround() {
     this.liveBunnies.forEach( bunny => bunny.interruptHop() );
   }
 

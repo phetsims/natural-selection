@@ -239,7 +239,7 @@ class NaturalSelectionScreenView extends ScreenView {
       showCallback: () => {
 
         // so we don't leave bunnies captured in mid-hop
-        model.bunnyCollection.groundAllBunnies();
+        model.bunnyCollection.moveBunniesToGround();
         environmentNode.sortSprites();
       }
     } );
