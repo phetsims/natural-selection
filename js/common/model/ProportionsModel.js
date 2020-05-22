@@ -115,10 +115,19 @@ class ProportionsModel extends PhetioObject {
         }
       } );
 
+    const updateEndCounts = () => {
+      this.endCounts.setValues( liveBunnyCounts.createSnapshot() );
+    };
+
     // Determine what data to display
     Property.multilink(
       [ this.generationProperty, currentGenerationStartSnapshotProperty ],
       ( generation, currentGenerationStartSnapshot ) => {
+
+        if ( liveBunnyCounts.totalCountProperty.hasListener( updateEndCounts ) ) {
+          liveBunnyCounts.totalCountProperty.unlink( updateEndCounts );
+        }
+
         if ( currentGenerationStartSnapshot ) {
 
           // We have data. Decide whether to display data for the current generation or a previous generation.
@@ -126,10 +135,10 @@ class ProportionsModel extends PhetioObject {
 
             // Show dynamic data for the current generation.
             this.startCounts.setValues( currentGenerationStartSnapshotProperty.value );
-            this.endCounts.setValues( currentGenerationStartSnapshotProperty.value );
 
-            //TODO #57 add a listener to liveBunnyCounts.totalCountProperty, which does:
-            // this.endCounts.setValues(  liveBunnyCounts.createSnapshot() );
+            // Update endCounts when there's a change to the liveBunnyCounts. And any change to liveBunnyCounts will
+            // result in a change to totalCountProperty.
+            liveBunnyCounts.totalCountProperty.link( updateEndCounts );
           }
           else {
 

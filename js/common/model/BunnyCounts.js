@@ -28,18 +28,15 @@ class BunnyCounts {
       tandem: Tandem.REQUIRED
     }, options );
 
+    //TODO #57 instead of 7 NumberProperty instances, have 1 Property that contains a BunnyCountsSnapshot, so
+    // that all counts can be updated atomically.  Rename this something like BunnyCountsProperty.
+
     // Shared options
     const numberPropertyOptions = {
       numberType: 'Integer',
       phetioReadOnly: true,
       phetioState: false // because counts will be restored as BunnyGroup is restored
     };
-
-    // @public
-    this.totalCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
-      tandem: options.tandem.createTandem( 'totalCountProperty' ),
-      phetioDocumentation: 'the total number of bunnies'
-    }  ) );
 
     // @public
     this.whiteFurCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
@@ -76,6 +73,13 @@ class BunnyCounts {
       tandem: options.tandem.createTandem( 'longTeethCountProperty' ),
       phetioDocumentation: 'the number of bunnies that have long teeth'
     } ) );
+
+    //TODO #57 this is currently last because something is observing it, and expects that the other counts were update
+    // @public
+    this.totalCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
+      tandem: options.tandem.createTandem( 'totalCountProperty' ),
+      phetioDocumentation: 'the total number of bunnies'
+    }  ) );
   }
 
   /**
@@ -119,8 +123,6 @@ class BunnyCounts {
   updateCounts( bunny, delta ) {
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
     assert && assert( delta === 1 || delta === -1, 'invalid delta' );
-
-    //TODO #57 defer notification until all Properties have been updated
 
     // total count
     this.totalCountProperty.value += delta;
