@@ -156,7 +156,7 @@ class NaturalSelectionModel {
       if ( currentGeneration !== 0 && !phet.joist.sim.isSettingPhetioStateProperty.value ) {
         phet.log && phet.log( `generation=${currentGeneration}` );
 
-        // Record 'end of generation' data for the previous generation before bunnies are aged or mate.
+        // Record 'end of generation' counts for the previous generation before bunnies are aged or mate.
         this.proportionsModel.recordEndData( currentGeneration - 1, this.bunnyCollection.createCountsSnapshot() );
 
         // Age bunnies, some may die of old age.
@@ -165,9 +165,7 @@ class NaturalSelectionModel {
         // Mate bunnies
         this.bunnyCollection.mateBunnies( currentGeneration );
 
-        phet.log && phet.log( `live=${this.bunnyCollection.liveBunnies.length} dead=${this.bunnyCollection.deadBunnies.length}` );
-
-        // Record 'start of generation' data for the current generation after bunnies mate. The delta between
+        // Record 'start of generation' counts for the current generation after bunnies mate. The delta between
         // 'End of generation N' and 'Start of generation N+1' will be the population change due to births + deaths.
         this.proportionsModel.recordStartData( currentGeneration, this.bunnyCollection.createCountsSnapshot() );
       }

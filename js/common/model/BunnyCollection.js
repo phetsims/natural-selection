@@ -206,7 +206,7 @@ class BunnyCollection {
     } );
 
     assert && this.assertValidCounts();
-    phet.log && phet.log( `${diedCount} bunnies died` );
+    phet.log && phet.log( `${diedCount} bunnies died, total dead = ${this.deadBunnies.length}` );
 
     // Notify if all bunnies have died.
     if ( this.liveBunnies.lengthProperty.value === 0 ) {
@@ -296,7 +296,7 @@ class BunnyCollection {
 
     assert && this.assertValidCounts();
     assert && assert( bornIndex === numberToBeBorn, 'unexpected number of bunnies were born' );
-    phet.log && phet.log( `${bornIndex} bunnies born` );
+    phet.log && phet.log( `${bornIndex} bunnies born, total live = ${this.liveBunnies.length}` );
 
     // Notify if bunnies have taken over the world.
     if ( this.liveBunnies.lengthProperty.value >= NaturalSelectionConstants.MAX_POPULATION ) {
