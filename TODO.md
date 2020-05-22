@@ -17,7 +17,7 @@
 
 ## Implementation
 
-* ProportionsModel: wire up 'Currently' endCounts to liveBunnyCounts
+* Change BunnyCounts to BunnyCountsProperty whose value is like BunnyCountsSnapshot
 
 * get rid of some submodels, move some Properties into view?
 
