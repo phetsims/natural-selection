@@ -169,18 +169,15 @@ class BunnyCollection {
   }
 
   /**
-   * Moves all bunnies that are alive.
-   * @param {number} dt - time step, in seconds
+   * Moves all live bunnies.
    * @public
    */
-  moveBunnies( dt ) {
-    this.liveBunnies.forEach( bunny => {
-      bunny.step( dt );
-    } );
+  moveBunnies() {
+    this.liveBunnies.forEach( bunny => bunny.move() );
   }
 
   /**
-   * Ages all bunnies that are alive. Bunnies that have reached their maximum age will die.
+   * Ages all live bunnies. Bunnies that reach their maximum age will die.
    * @public
    */
   ageBunnies() {
@@ -215,7 +212,8 @@ class BunnyCollection {
   }
 
   /**
-   * Randomly pairs up bunnies and mates them. If there is an odd number of bunnies, then one of them will not mate.
+   * Mates all live bunnies by randomly pairing them up. Any bunny can mate with any other bunny, regardless of their
+   * age or previous hereditary relationship. If there is an odd number of bunnies, then one of them will not mate.
    * Mutations (if any) are applied as the bunnies are born.
    * @param {number} generation
    * @public

@@ -238,7 +238,7 @@ class NaturalSelectionModel {
     this.generationClock.step( dt );
 
     // move the bunnies
-    this.bunnyCollection.moveBunnies( dt );
+    this.bunnyCollection.moveBunnies();
   }
 
   /**

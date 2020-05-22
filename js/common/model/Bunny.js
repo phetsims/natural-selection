@@ -163,16 +163,6 @@ class Bunny extends Sprite {
   }
 
   /**
-   * @param {number} dt - time step, in seconds
-   * @public
-   */
-  step( dt ) {
-    if ( this.isAlive ) {
-      this.moveAround();
-    }
-  }
-
-  /**
    * Kills this bunny, forever and ever. (This sim does not support reincarnation or other forms of 'pooling' :)
    * @public
    */
@@ -182,12 +172,13 @@ class Bunny extends Sprite {
     this.diedEmitter.emit();
   }
 
+  //TODO As in the Java version, this is based on number of steps. Should it use dt?
   /**
    * Moves the Bunny around. This is the motion cycle for a bunny. Each bunny rests, hops, rests, hops, ...
-   * @private
+   * @public
    */
-  moveAround() {
-    //TODO this is based on number of steps, should it use dt?
+  move() {
+    assert && assert( this.isAlive, 'dead bunny cannot move' );
 
     this.stepsCount++;
 
