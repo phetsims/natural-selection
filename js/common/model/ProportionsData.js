@@ -6,7 +6,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import BunnyCountsSnapshotIO from './BunnyCountsSnapshotIO.js';
 
 class ProportionsData {
 
@@ -21,6 +23,37 @@ class ProportionsData {
     this.generation = generation;
     this.startSnapshot = startSnapshot;
     this.endSnapshot = endSnapshot;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Below here are methods used by ProportionsDataIO to save and restore PhET-iO state.
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Serializes a ProportionsData.
+   * @returns {Object}
+   * @public for use by ProportionsDataIO only
+   */
+  toStateObject() {
+    return {
+      generation: NumberIO.toStateObject( this.generation ),
+      startSnapshot: BunnyCountsSnapshotIO.toStateObject( this.startSnapshot ),
+      endSnapshot: BunnyCountsSnapshotIO.toStateObject( this.endSnapshot )
+    };
+  }
+
+  /**
+   * Deserializes a ProportionsData.
+   * @param {Object} stateObject - return value from toStateObject
+   * @returns {ProportionsData}
+   * @public for use by ProportionsDataIO only
+   */
+  static fromStateObject( stateObject ) {
+    return new ProportionsData(
+      NumberIO.fromStateObject( stateObject.generation ),
+      BunnyCountsSnapshotIO.fromStateObject( stateObject.startSnapshot ),
+      BunnyCountsSnapshotIO.fromStateObject( stateObject.endSnapshot )
+    );
   }
 }
 

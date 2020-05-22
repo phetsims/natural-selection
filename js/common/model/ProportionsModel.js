@@ -11,15 +11,20 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
+import ObservableArrayIO from '../../../../axon/js/ObservableArrayIO.js';
 import Property from '../../../../axon/js/Property.js';
+import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
+import BunnyCountsSnapshotIO from './BunnyCountsSnapshotIO.js';
 import ProportionsData from './ProportionsData.js';
+import ProportionsDataIO from './ProportionsDataIO.js';
 
 class ProportionsModel extends PhetioObject {
 
@@ -66,7 +71,7 @@ class ProportionsModel extends PhetioObject {
     // @public the generation that is displayed by the Proportions graph
     this.generationProperty = new NumberProperty( 0, {
       numberType: 'Integer',
-      range: this.generationRangeProperty,
+      range: this.generationRangeProperty, //TODO replace with new Range( 0, 0 )
       tandem: options.tandem.createTandem( 'generationProperty' ),
       phetioReadOnly: true // range is dynamic
     } );
@@ -87,17 +92,16 @@ class ProportionsModel extends PhetioObject {
       tandem: options.tandem.createTandem( 'endCounts' )
     } );
 
-    // @public
-    this.currentGenerationStartSnapshotProperty = new Property( this.startCounts.createSnapshot(), {
-      // tandem: options.tandem.createTandem( 'currentGenerationStartSnapshotProperty' ), TODO #57 phetioType?
-      phetioDocumentation: 'Proportions data at the start of the current generation'
+    const currentGenerationStartSnapshotProperty = new Property( null, {
+      tandem: options.tandem.createTandem( 'currentGenerationStartSnapshotProperty' ),
+      phetioType: PropertyIO( NullableIO( BunnyCountsSnapshotIO ) ),
+      phetioDocumentation: 'Counts at the start of the current generation'
     } );
 
-    // @public
-    this.previousGenerationsDataArray = new ObservableArray( {
-      // tandem: options.tandem.createTandem( 'previousGenerationsDataArray' ),
-      // phetioType: ObservableArrayIO( ProportionsDataIO ), //TODO #57 phetioType?
-      phetioDocumentation: 'Proportions data for previous generations, indexed by generation number'
+    const previousGenerationsDataArray = new ObservableArray( {
+      tandem: options.tandem.createTandem( 'previousGenerationsDataArray' ),
+      phetioType: ObservableArrayIO( ProportionsDataIO ),
+      phetioDocumentation: 'Counts for previous generations, indexed by generation number'
     } );
 
     // Pause the sim when a generation other than the current generation is being viewed.
@@ -124,20 +128,24 @@ class ProportionsModel extends PhetioObject {
       ( generation, currentGeneration ) => {
         if ( generation === currentGeneration ) {
 
-          // Show dynamic data for the current generation.
-          this.startCounts.setValues( this.currentGenerationStartSnapshotProperty.value );
-
-          //TODO #57 endCounts need to update dynamically, wired to bunnyCollection.liveBunnies.counts
-          this.endCounts.setValues( this.currentGenerationStartSnapshotProperty.value );
+          // // Show dynamic data for the current generation.
+          // this.startCounts.setValues( currentGenerationStartSnapshotProperty.value );
+          //
+          // //TODO #57 endCounts need to update dynamically, wired to bunnyCollection.liveBunnies.counts
+          // this.endCounts.setValues( currentGenerationStartSnapshotProperty.value );
         }
         else {
 
           // Show static data for a previous generation.
-          const data = this.previousGenerationsDataArray.get( generation );
+          const data = previousGenerationsDataArray.get( generation );
           this.startCounts.setValues( data.startSnapshot );
           this.endCounts.setValues( data.endSnapshot );
         }
       } );
+
+    // @private
+    this.currentGenerationStartSnapshotProperty = currentGenerationStartSnapshotProperty;
+    this.previousGenerationsDataArray = previousGenerationsDataArray;
   }
 
   /**
