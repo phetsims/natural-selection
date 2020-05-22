@@ -85,6 +85,8 @@ class ProportionsModel extends PhetioObject {
       tandem: options.tandem.createTandem( 'endCounts' )
     } );
 
+    // 'Start' data for the current generation. This is null until the sim enters SimulationMode.ACTIVE.
+    // While in SimulationMode.ACTIVE it will always have a value.
     const currentGenerationStartSnapshotProperty = new Property( null, {
       tandem: options.tandem.createTandem( 'currentGenerationStartSnapshotProperty' ),
       phetioType: PropertyIO( NullableIO( BunnyCountsSnapshotIO ) ),
@@ -131,6 +133,12 @@ class ProportionsModel extends PhetioObject {
           const data = previousGenerationsDataArray.get( generation );
           this.startCounts.setValues( data.startSnapshot );
           this.endCounts.setValues( data.endSnapshot );
+        }
+        else {
+
+          // There is no data, so reset the counts
+          this.startCounts.reset();
+          this.endCounts.reset();
         }
       } );
 

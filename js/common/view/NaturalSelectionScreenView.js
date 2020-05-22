@@ -107,7 +107,7 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     // Proportions
-    const proportionsNode = new ProportionsNode( model.proportionsModel, model.genePool, model.simulationModeProperty,
+    const proportionsNode = new ProportionsNode( model.proportionsModel, model.genePool,
       graphAreaSize, {
         left: graphAreaLeft,
         top: graphAreaTop,

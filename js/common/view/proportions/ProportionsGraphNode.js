@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../../axon/js/EnumerationProperty.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
@@ -23,7 +22,6 @@ import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
 import ProportionsModel from '../../model/ProportionsModel.js';
-import SimulationMode from '../../model/SimulationMode.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
@@ -44,14 +42,12 @@ class ProportionsGraphNode extends Node {
   /**
    * @param {ProportionsModel} proportionsModel
    * @param {GenePool} genePool
-   * @param {EnumerationProperty.<SimulationMode>} simulationModeProperty
    * @param {Object} [options]
    */
-  constructor( proportionsModel, genePool, simulationModeProperty, options ) {
+  constructor( proportionsModel, genePool, options ) {
 
     assert && assert( proportionsModel instanceof ProportionsModel, 'invalid proportionsModel' );
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( simulationModeProperty instanceof EnumerationProperty, 'invalid simulationModeProperty' );
 
     options = merge( {
       graphWidth: 100,
@@ -176,10 +172,9 @@ class ProportionsGraphNode extends Node {
       }
     } );
 
-    //TODO #57 can this be done without simulationModeProperty? maybe currentGenerationStartSnapshotProperty?
-    // If the simulation hasn't started, there's no data to display, so hide the content and display 'No Data'.
-    simulationModeProperty.link( simulationMode => {
-      noDataText.visible = ( simulationMode === SimulationMode.STAGED );
+    // If there is no data to display, hide the content and display 'No Data'.
+    proportionsModel.startCounts.totalCountProperty.link( totalCount => {
+      noDataText.visible = ( totalCount === 0 );
       content.visible = !noDataText.visible;
     } );
 
