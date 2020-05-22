@@ -305,19 +305,6 @@ class BunnyCollection {
   }
 
   /**
-   * Asserts that collection counts are in-sync with the BunnyGroup.
-   * @private
-   */
-  assertValidCounts() {
-    const live = this.liveBunnies.length;
-    const dead = this.deadBunnies.length;
-    const total = live + dead;
-    const bunnyGroupLength = this.bunnyGroup.count;
-    assert( live + dead === total && total === bunnyGroupLength,
-      `bunny counts are out of sync, live=${live}, dead=${dead}, total=${total} bunnyGroupLength=${bunnyGroupLength}` );
-  }
-
-  /**
    * Moves all live bunnies to the ground, so that we don't have bunnies paused mid-hop.
    * @public
    */
@@ -332,6 +319,19 @@ class BunnyCollection {
    */
   createCountsSnapshot() {
     return this.liveBunnies.counts.createSnapshot();
+  }
+
+  /**
+   * Asserts that collection counts are in-sync with the BunnyGroup.
+   * @private
+   */
+  assertValidCounts() {
+    const live = this.liveBunnies.length;
+    const dead = this.deadBunnies.length;
+    const total = live + dead;
+    const bunnyGroupLength = this.bunnyGroup.count;
+    assert( live + dead === total && total === bunnyGroupLength,
+      `bunny counts are out of sync, live=${live}, dead=${dead}, total=${total} bunnyGroupLength=${bunnyGroupLength}` );
   }
 }
 
