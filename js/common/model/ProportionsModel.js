@@ -95,7 +95,8 @@ class ProportionsModel extends PhetioObject {
 
     // @public
     this.previousGenerationsDataArray = new ObservableArray( {
-      // tandem: options.tandem.createTandem( 'previousGenerationsDataArray' ), TODO #57 phetioType?
+      // tandem: options.tandem.createTandem( 'previousGenerationsDataArray' ),
+      // phetioType: ObservableArrayIO( ProportionsDataIO ), //TODO #57 phetioType?
       phetioDocumentation: 'Proportions data for previous generations, indexed by generation number'
     } );
 

@@ -14,9 +14,8 @@ class ProportionsData {
    * @param {number} generation
    * @param {BunnyCountsSnapshot} startSnapshot
    * @param {BunnyCountsSnapshot} endSnapshot
-   * @param {Object} [options] TODO delete if not needed for PhET-iO instrumentation
    */
-  constructor( generation, startSnapshot, endSnapshot, options ) {
+  constructor( generation, startSnapshot, endSnapshot ) {
 
     // @public (read-only)
     this.generation = generation;

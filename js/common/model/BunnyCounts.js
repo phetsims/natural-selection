@@ -13,6 +13,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 
 import Bunny from './Bunny.js';
+import BunnyCountsSnapshot from './BunnyCountsSnapshot.js';
 
 class BunnyCounts {
 
@@ -167,18 +168,9 @@ class BunnyCounts {
    * Creates a snapshot of the counts.
    * @returns {BunnyCountsSnapshot}
    * @public
-   *
-   * @typedef BunnyCountsSnapshot
-   * @properties {number} totalCount
-   * @properties {number} whiteFurCount
-   * @properties {number} brownFurCount
-   * @properties {number} straightEarsCount
-   * @properties {number} floppyEarsCount
-   * @properties {number} shortTeethCount
-   * @properties {number} longTeethCount
    */
   createSnapshot() {
-    return {
+    return new BunnyCountsSnapshot( {
       totalCount: this.totalCountProperty.value,
       whiteFurCount: this.whiteFurCountProperty.value,
       brownFurCount: this.brownFurCountProperty.value,
@@ -186,7 +178,7 @@ class BunnyCounts {
       floppyEarsCount: this.floppyEarsCountProperty.value,
       shortTeethCount: this.shortTeethCountProperty.value,
       longTeethCount: this.longTeethCountProperty.value
-    };
+    } );
   }
 
   /**
