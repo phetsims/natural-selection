@@ -61,17 +61,10 @@ class ProportionsModel extends PhetioObject {
       phetioDocumentation: 'determines whether values are visible on the bars in the Proportions graph'
     } );
 
-    // @private Range of generationProperty changes as the number of generations increases. Our first instinct is
-    // that this should be a DerivedProperty, derived from currentGenerationProperty. But this cannot be a
-    // DerivedProperty because we need to use NumberProperty.setValueAndRange to update generationProperty's
-    // value and range atomically, and a DerivedProperty cannot be set directly.
-    // See https://github.com/phetsims/axon/issues/289
-    this.generationRangeProperty = new Property( new Range( 0, 0 ) );
-
     // @public the generation that is displayed by the Proportions graph
     this.generationProperty = new NumberProperty( 0, {
       numberType: 'Integer',
-      range: this.generationRangeProperty, //TODO replace with new Range( 0, 0 )
+      range: new Range( 0, 0 ), // dynamically adjusted by calling setValueAndRange
       tandem: options.tandem.createTandem( 'generationProperty' ),
       phetioReadOnly: true // range is dynamic
     } );
@@ -153,7 +146,7 @@ class ProportionsModel extends PhetioObject {
    */
   reset() {
     this.valuesVisibleProperty.reset();
-    this.generationProperty.resetValueAndRange();
+    this.generationProperty.resetValueAndRange(); // because we're using setValueAndRange
     this.startCounts.reset();
     this.endCounts.reset();
     this.currentGenerationStartSnapshotProperty.reset();
