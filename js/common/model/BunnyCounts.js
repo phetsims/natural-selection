@@ -27,61 +27,53 @@ class BunnyCounts {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // @public
-    this.totalCountProperty = new NumberProperty( 0, {
+    // Shared options
+    const numberPropertyOptions = {
       numberType: 'Integer',
+      phetioReadOnly: true
+    };
+
+    // @public
+    this.totalCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
       tandem: options.tandem.createTandem( 'totalCountProperty' ),
-      phetioReadOnly: true,
       phetioDocumentation: 'the total number of bunnies'
-    } );
+    }  ) );
 
     // @public
-    this.whiteFurCountProperty = new NumberProperty( 0, {
-      numberType: 'Integer',
+    this.whiteFurCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
       tandem: options.tandem.createTandem( 'whiteFurCountProperty' ),
-      phetioReadOnly: true,
       phetioDocumentation: 'the number of bunnies that have white fur'
-    } );
+    } ) );
 
     // @public
-    this.brownFurCountProperty = new NumberProperty( 0, {
-      numberType: 'Integer',
+    this.brownFurCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
       tandem: options.tandem.createTandem( 'brownFurCountProperty' ),
-      phetioReadOnly: true,
       phetioDocumentation: 'the number of bunnies that have brown fur'
-    } );
+    } ) );
 
     // @public
-    this.straightEarsCountProperty = new NumberProperty( 0, {
-      numberType: 'Integer',
+    this.straightEarsCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
       tandem: options.tandem.createTandem( 'straightEarsCountProperty' ),
-      phetioReadOnly: true,
       phetioDocumentation: 'the number of bunnies that have straight ears'
-    } );
+    } ) );
 
     // @public
-    this.floppyEarsCountProperty = new NumberProperty( 0, {
-      numberType: 'Integer',
+    this.floppyEarsCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
       tandem: options.tandem.createTandem( 'floppyEarsCountProperty' ),
-      phetioReadOnly: true,
       phetioDocumentation: 'the number of bunnies that have floppy ears'
-    } );
+    } ) );
 
     // @public
-    this.shortTeethCountProperty = new NumberProperty( 0, {
-      numberType: 'Integer',
+    this.shortTeethCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
       tandem: options.tandem.createTandem( 'shortTeethCountProperty' ),
-      phetioReadOnly: true,
       phetioDocumentation: 'the number of bunnies that have short teeth'
-    } );
+    } ) );
 
     // @public
-    this.longTeethCountProperty = new NumberProperty( 0, {
-      numberType: 'Integer',
+    this.longTeethCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
       tandem: options.tandem.createTandem( 'longTeethCountProperty' ),
-      phetioReadOnly: true,
       phetioDocumentation: 'the number of bunnies that have long teeth'
-    } );
+    } ) );
   }
 
   /**
