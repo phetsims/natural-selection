@@ -19,21 +19,18 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
-import GenePool from './GenePool.js';
 import ProportionsData from './ProportionsData.js';
 
 class ProportionsModel extends PhetioObject {
 
   /**
-   * @param {GenePool} genePool
    * @param {Property.<number>} currentGenerationProperty
    * @param {Property.<boolean>} isPlayingProperty
    * @param {EnumerationProperty.<SimulationMode>} simulationModeProperty
    * @param {Object} [options]
    */
-  constructor( genePool, currentGenerationProperty, isPlayingProperty, simulationModeProperty, options ) {
+  constructor( currentGenerationProperty, isPlayingProperty, simulationModeProperty, options ) {
 
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && NaturalSelectionUtils.assertPropertyTypeof( currentGenerationProperty, 'number' );
     assert && NaturalSelectionUtils.assertPropertyTypeof( isPlayingProperty, 'boolean' );
     assert && assert( simulationModeProperty instanceof EnumerationProperty );

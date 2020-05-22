@@ -104,7 +104,7 @@ class NaturalSelectionModel {
       } );
 
     // @public (read-only)
-    this.proportionsModel = new ProportionsModel( this.genePool, this.generationClock.currentGenerationProperty,
+    this.proportionsModel = new ProportionsModel( this.generationClock.currentGenerationProperty,
       this.isPlayingProperty, this.simulationModeProperty, {
         tandem: options.tandem.createTandem( 'proportionsModel' )
       } );
