@@ -71,10 +71,6 @@ function parseInitialPopulation( genePool, mutationsName, populationName ) {
   }
   catch( error ) {
 
-    // Get the query parameter default values
-    const mutationsDefaultValue = NaturalSelectionQueryParameters.getDefaultValue( mutationsName );
-    const populationDefaultValue = NaturalSelectionQueryParameters.getDefaultValue( populationName );
-
     // Add warnings that QueryStringMachine will display after the sim has fully started.
     QueryStringMachine.addWarning( mutationsName, mutationsValue, error.message );
     QueryStringMachine.addWarning( populationName, populationValue, error.message );
@@ -86,13 +82,17 @@ function parseInitialPopulation( genePool, mutationsName, populationName ) {
       `${populationName}=${populationValue}`
     );
 
-    // Revert to defaults.
+    // Revert mutations that may have been configured by parseMutations.
     genePool.genes.forEach( gene => {
       gene.dominantAlleleProperty.setInitialValue( null );
       gene.dominantAlleleProperty.reset();
     } );
-    const mutationChars = parseMutations( genePool, mutationsName, mutationsDefaultValue );
-    initialBunnyVarieties = parsePopulation( genePool, mutationChars, populationName, populationDefaultValue );
+
+    // Built the data structure for the default initial population.
+    const mutationChars = parseMutations( genePool, mutationsName,
+      NaturalSelectionQueryParameters.getDefaultValue( mutationsName ) );
+    initialBunnyVarieties = parsePopulation( genePool, mutationChars, populationName,
+      NaturalSelectionQueryParameters.getDefaultValue( populationName ) );
   }
   return initialBunnyVarieties;
 }
