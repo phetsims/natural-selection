@@ -115,24 +115,28 @@ class ProportionsModel extends PhetioObject {
         }
       } );
 
-    // Show data for current or previous generation
+    // Determine what data to display
     Property.multilink(
       [ this.generationProperty, currentGenerationStartSnapshotProperty ],
       ( generation, currentGenerationStartSnapshot ) => {
-        if ( generation === currentGenerationProperty.value && currentGenerationStartSnapshot ) {
+        if ( currentGenerationStartSnapshot ) {
 
-          // Show dynamic data for the current generation.
-          this.startCounts.setValues( currentGenerationStartSnapshotProperty.value );
+          // We have data. Decide whether to display current or previous generation data.
+          if ( generation === currentGenerationProperty.value ) {
 
-          //TODO #57 wire endCounts to liveBunnyCounts, so that they update dynamically
-          this.endCounts.setValues( currentGenerationStartSnapshotProperty.value );
-        }
-        else if ( generation <= previousGenerationsDataArray.length - 1 ){
+            // Show dynamic data for the current generation.
+            this.startCounts.setValues( currentGenerationStartSnapshotProperty.value );
 
-          // Show static data for a previous generation.
-          const data = previousGenerationsDataArray.get( generation );
-          this.startCounts.setValues( data.startSnapshot );
-          this.endCounts.setValues( data.endSnapshot );
+            //TODO #57 wire endCounts to liveBunnyCounts, so that they update dynamically
+            this.endCounts.setValues( currentGenerationStartSnapshotProperty.value );
+          }
+          else {
+
+            // Show static data for a previous generation.
+            const data = previousGenerationsDataArray.get( generation );
+            this.startCounts.setValues( data.startSnapshot );
+            this.endCounts.setValues( data.endSnapshot );
+          }
         }
         else {
 
