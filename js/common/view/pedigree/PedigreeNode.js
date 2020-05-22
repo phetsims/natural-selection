@@ -20,15 +20,15 @@ import PedigreeGraphNode from './PedigreeGraphNode.js';
 class PedigreeNode extends HBox {
 
   /**
-   * @param {GenePool} genePool
    * @param {PedigreeModel} pedigreeModel
+   * @param {GenePool} genePool
    * @param {Dimension2} size - dimensions of the rectangle available for this Node and its children
    * @param {Object} [options]
    */
-  constructor( genePool, pedigreeModel, size, options ) {
+  constructor( pedigreeModel, genePool, size, options ) {
 
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
+    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( size instanceof Dimension2, 'invalid size' );
 
     options = merge( {

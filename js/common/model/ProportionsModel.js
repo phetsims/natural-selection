@@ -7,6 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
@@ -47,10 +48,8 @@ class ProportionsModel extends PhetioObject {
 
     super( options );
 
-    // @public
-    this.genePool = genePool; //TODO #57 delete if not used by ProportionsModel
-    this.currentGenerationProperty = currentGenerationProperty; //TODO #57 delete if not used by ProportionsModel
-    this.simulationModeProperty = simulationModeProperty; //TODO #57 delete if not used by ProportionsModel
+    // @private
+    this.currentGenerationProperty = currentGenerationProperty;
 
     // @public
     this.valuesVisibleProperty = new BooleanProperty( true, {
@@ -72,6 +71,12 @@ class ProportionsModel extends PhetioObject {
       tandem: options.tandem.createTandem( 'generationProperty' ),
       phetioReadOnly: true // range is dynamic
     } );
+
+    // @public whether the Proportions graph is displaying the current generation
+    this.isDisplayingCurrentGenerationProperty = new DerivedProperty(
+      [ this.generationProperty, currentGenerationProperty ],
+      ( generation, currentGeneration ) => ( generation === currentGeneration )
+    );
 
     // @public counts for 'Start of Generation'
     this.startCounts = new BunnyCounts( {
@@ -115,7 +120,7 @@ class ProportionsModel extends PhetioObject {
     // currentGenerationProperty listener in NaturalSelectionModel, via a call to recordStartData.  So the
     // value of currentGenerationStartSnapshotProperty may or may not be correct here.
     Property.multilink(
-      [ this.generationProperty, this.currentGenerationProperty ],
+      [ this.generationProperty, currentGenerationProperty ],
       ( generation, currentGeneration ) => {
         if ( generation === currentGeneration ) {
 

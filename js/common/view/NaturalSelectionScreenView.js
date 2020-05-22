@@ -107,14 +107,15 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     // Proportions
-    const proportionsNode = new ProportionsNode( model.proportionsModel, graphAreaSize, {
-      left: graphAreaLeft,
-      top: graphAreaTop,
-      tandem: graphsTandem.createTandem( 'proportionsNode' )
-    } );
+    const proportionsNode = new ProportionsNode( model.proportionsModel, model.genePool, model.simulationModeProperty,
+      graphAreaSize, {
+        left: graphAreaLeft,
+        top: graphAreaTop,
+        tandem: graphsTandem.createTandem( 'proportionsNode' )
+      } );
 
     // Pedigree
-    const pedigreeNode = new PedigreeNode( model.genePool, model.pedigreeModel, graphAreaSize, {
+    const pedigreeNode = new PedigreeNode( model.pedigreeModel, model.genePool, graphAreaSize, {
       left: graphAreaLeft,
       top: graphAreaTop,
       tandem: graphsTandem.createTandem( 'pedigreeNode' )

@@ -6,11 +6,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import EnumerationProperty from '../../../../../axon/js/EnumerationProperty.js';
 import Dimension2 from '../../../../../dot/js/Dimension2.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import HBox from '../../../../../scenery/js/nodes/HBox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
+import GenePool from '../../model/GenePool.js';
 import ProportionsModel from '../../model/ProportionsModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import ProportionsGraphNode from './ProportionsGraphNode.js';
@@ -20,12 +22,16 @@ class ProportionsNode extends HBox {
 
   /**
    * @param {ProportionsModel} proportionsModel
+   * @param {GenePool} genePool
+   * @param {EnumerationProperty.<SimulationMode>} simulationModeProperty
    * @param {Dimension2} size - dimensions of the rectangle available for this Node and its children
    * @param {Object} [options]
    */
-  constructor( proportionsModel, size, options ) {
+  constructor( proportionsModel, genePool, simulationModeProperty, size, options ) {
 
     assert && assert( proportionsModel instanceof ProportionsModel, 'invalid proportionsModel' );
+    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
+    assert && assert( simulationModeProperty instanceof EnumerationProperty, 'invalid simulationModeProperty' );
     assert && assert( size instanceof Dimension2, 'invalid size' );
 
     options = merge( {
@@ -43,13 +49,13 @@ class ProportionsNode extends HBox {
     const panelWidth = 0.2 * size.width;
     const graphWidth = size.width - panelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
-    const proportionsPanel = new ProportionsPanel( proportionsModel, {
+    const proportionsPanel = new ProportionsPanel( genePool, proportionsModel.valuesVisibleProperty, {
       fixedWidth: panelWidth,
       maxHeight: size.height,
       tandem: options.tandem.createTandem( 'proportionsPanel' )
     } );
 
-    const proportionsGraphNode = new ProportionsGraphNode( proportionsModel, {
+    const proportionsGraphNode = new ProportionsGraphNode( proportionsModel, genePool, simulationModeProperty, {
       graphWidth: graphWidth,
       graphHeight: size.height,
       tandem: options.tandem.createTandem( 'proportionsGraphNode' )
