@@ -121,7 +121,7 @@ class ProportionsModel extends PhetioObject {
       ( generation, currentGenerationStartSnapshot ) => {
         if ( currentGenerationStartSnapshot ) {
 
-          // We have data. Decide whether to display current or previous generation data.
+          // We have data. Decide whether to display data for the current generation or a previous generation.
           if ( generation === currentGenerationProperty.value ) {
 
             // Show dynamic data for the current generation.
