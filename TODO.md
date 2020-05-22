@@ -17,6 +17,8 @@
 
 ## Implementation
 
+* ProportionsModel: wire up 'Currently' counts liveBunnyCounts
+
 * get rid of some submodels, move some Properties into view?
 
 * Divide the death part of the generation clock into discrete chunks, maybe at 5,6,7,8:00
