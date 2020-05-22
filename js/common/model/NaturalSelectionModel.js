@@ -215,6 +215,7 @@ class NaturalSelectionModel {
     assert && assert( false, 'NaturalSelectionModel does not support dispose' );
   }
 
+  //TODO do I need to do something for dt=0 here?
   /**
    * Steps the model.
    * @param {number} dt - time step, in seconds
