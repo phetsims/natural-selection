@@ -120,6 +120,8 @@ class BunnyCounts {
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
     assert && assert( delta === 1 || delta === -1, 'invalid delta' );
 
+    //TODO #57 defer notification until all Properties have been updated
+
     // total count
     this.totalCountProperty.value += delta;
 

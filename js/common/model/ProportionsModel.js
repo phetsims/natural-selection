@@ -126,9 +126,10 @@ class ProportionsModel extends PhetioObject {
 
             // Show dynamic data for the current generation.
             this.startCounts.setValues( currentGenerationStartSnapshotProperty.value );
-
-            //TODO #57 wire endCounts to liveBunnyCounts, so that they update dynamically
             this.endCounts.setValues( currentGenerationStartSnapshotProperty.value );
+
+            //TODO #57 add a listener to liveBunnyCounts.totalCountProperty, which does:
+            // this.endCounts.setValues(  liveBunnyCounts.createSnapshot() );
           }
           else {
 
