@@ -123,18 +123,13 @@ class NaturalSelectionModel {
     this.simulationModeProperty.link( simulationMode => {
       phet.log && phet.log( `simulationMode=${simulationMode}` );
 
-      //TODO #57 skip if isSettingPhetioStateProperty?
-      if ( simulationMode === SimulationMode.ACTIVE ) {
+      // SimulationMode indicates which mode the simulation is in. It does not describe a full state of that mode.
+      // So do nothing when PhET-iO is restoring state, or saved state will be overwritten.
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
 
         // When the simulation begins, record the first 'start of generation' data for the Proportions graph.
         const currentGeneration = this.generationClock.currentGenerationProperty.value;
-        this.proportionsModel.recordStartData( currentGeneration, this.bunnyCollection.createCountsSnapshot()
-        );
-      }
-
-      // SimulationMode indicates which mode the simulation is in. It does not describe a full state of that mode.
-      // Do nothing when PhET-iO is restoring state, or saved state will be overwritten.
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+        this.proportionsModel.recordStartData( currentGeneration, this.bunnyCollection.createCountsSnapshot() );
 
         // Adjust the sim playback and generation clock
         if ( simulationMode === SimulationMode.STAGED ) {
@@ -157,19 +152,23 @@ class NaturalSelectionModel {
     // When the generation changes...
     this.generationClock.currentGenerationProperty.lazyLink( currentGeneration => {
 
-      if ( currentGeneration !== 0 ) {
+      // When restoring PhET-iO state, skip this code, because downstream elements are already stateful.
+      if ( currentGeneration !== 0 && !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+        phet.log && phet.log( `generation=${currentGeneration}` );
 
-        // Record 'end of generation' data for the previous generation.
-        //TODO #57 skip if isSettingPhetioStateProperty?
+        // Record 'end of generation' data for the previous generation before bunnies are aged or mate.
         this.proportionsModel.recordEndData( currentGeneration - 1, this.bunnyCollection.createCountsSnapshot() );
 
-        // When restoring PhET-iO state, don't step the generation, as downstream elements of that call are already stateful.
-        if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
-          this.bunnyCollection.stepGeneration( currentGeneration );
-        }
+        // Age bunnies, some may die of old age.
+        this.bunnyCollection.ageBunnies();
 
-        // Record 'start of generation' data for the current generation.
-        //TODO #57 skip if isSettingPhetioStateProperty?
+        // Mate bunnies
+        this.bunnyCollection.mateBunnies( currentGeneration );
+
+        phet.log && phet.log( `live=${this.bunnyCollection.liveBunnies.length} dead=${this.bunnyCollection.deadBunnies.length}` );
+
+        // Record 'start of generation' data for the current generation after bunnies mate. The delta between
+        // 'End of generation N' and 'Start of generation N+1' will be the population change due to births + deaths.
         this.proportionsModel.recordStartData( currentGeneration, this.bunnyCollection.createCountsSnapshot() );
       }
     } );

@@ -12,6 +12,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import Bunny from './Bunny.js';
 import BunnyArray from './BunnyArray.js';
 import BunnyArrayIO from './BunnyArrayIO.js';
@@ -179,29 +180,10 @@ class BunnyCollection {
   }
 
   /**
-   * Do everything that occurs when the generation changes.
-   * @param {number} generation
+   * Ages all bunnies that are alive. Bunnies that have reached their maximum age will die.
    * @public
    */
-  stepGeneration( generation ) {
-    assert && assert( typeof generation === 'number', 'invalid generation' );
-    phet.log && phet.log( `generation=${generation}` );
-
-    // Bunnies have a birthday.
-    this.ageAllBunnies();
-
-    // Bunnies mate (happy birthday!)
-    this.mateAllBunnies( generation );
-
-    assert && this.assertValidCounts();
-    phet.log && phet.log( `live=${this.liveBunnies.length} dead=${this.deadBunnies.length} total=${this.bunnyGroup.countProperty.value}` );
-  }
-
-  /**
-   * Ages all bunnies that are alive. Bunnies that have reached their maximum age will die.
-   * @private
-   */
-  ageAllBunnies() {
+  ageBunnies() {
     assert && assert( _.every( this.liveBunnies.getArray(), bunny => bunny.isAlive ),
       'liveBunnies contains one or more dead bunnies' );
 
@@ -223,6 +205,7 @@ class BunnyCollection {
       }
     } );
 
+    assert && this.assertValidCounts();
     phet.log && phet.log( `${diedCount} bunnies died` );
 
     // Notify if all bunnies have died.
@@ -235,9 +218,10 @@ class BunnyCollection {
    * Randomly pairs up bunnies and mates them. If there is an odd number of bunnies, then one of them will not mate.
    * Mutations (if any) are applied as the bunnies are born.
    * @param {number} generation
-   * @private
+   * @public
    */
-  mateAllBunnies( generation ) {
+  mateBunnies( generation ) {
+    assert && NaturalSelectionUtils.assertGeneration( generation );
 
     let bornIndex = 0;
 
@@ -310,6 +294,7 @@ class BunnyCollection {
       }
     }
 
+    assert && this.assertValidCounts();
     assert && assert( bornIndex === numberToBeBorn, 'unexpected number of bunnies were born' );
     phet.log && phet.log( `${bornIndex} bunnies born` );
 

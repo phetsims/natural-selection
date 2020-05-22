@@ -150,6 +150,14 @@ const NaturalSelectionUtils = {
    */
   assertPropertyInstanceof( object, type ) {
     NaturalSelectionUtils.assertPropertyPredicate( object, value => value instanceof type );
+  },
+
+  /**
+   * Asserts that a value is a valid generation number.
+   * @param {*} value
+   */
+  assertGeneration( value ) {
+    assert && assert( typeof value === 'number' && Utils.isInteger( value ) && value >= 0, `invalid generation: ${value}` );
   }
 };
 

@@ -6,9 +6,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Utils from '../../../../dot/js/Utils.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCountsSnapshot from './BunnyCountsSnapshot.js';
 import BunnyCountsSnapshotIO from './BunnyCountsSnapshotIO.js';
 
@@ -21,7 +21,7 @@ class ProportionsData {
    */
   constructor( generation, startSnapshot, endSnapshot ) {
 
-    assert && assert( typeof generation === 'number' && Utils.isInteger( generation ) && generation >= 0, 'invalid generation' );
+    assert && NaturalSelectionUtils.assertGeneration( generation );
     assert && assert( startSnapshot instanceof BunnyCountsSnapshot, 'invalid startSnapshot' );
     assert && assert( endSnapshot instanceof BunnyCountsSnapshot, 'invalid endSnapshot' );
 
