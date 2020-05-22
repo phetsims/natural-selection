@@ -151,7 +151,7 @@ class GenePair extends PhetioObject {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes a GenePair to a state object.
+   * Serializes this GenePair instance.
    * @returns {Object}
    * @public for use by GenePairIO only
    */

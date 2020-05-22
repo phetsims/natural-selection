@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Utils from '../../../../dot/js/Utils.js';
 import required from '../../../../phet-core/js/required.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -25,6 +26,8 @@ class BunnyCountsSnapshot {
     this.floppyEarsCount = required( config.floppyEarsCount );
     this.shortTeethCount = required( config.shortTeethCount );
     this.longTeethCount = required( config.longTeethCount );
+
+    this.validateInstance();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -32,7 +35,7 @@ class BunnyCountsSnapshot {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes a BunnyCountsSnapshot.
+   * Serializes this BunnyCountsSnapshot instance.
    * @returns {Object}
    * @public for use by BunnyCountsSnapshotIO only
    */
@@ -49,7 +52,7 @@ class BunnyCountsSnapshot {
   }
 
   /**
-   * Deserializes a BunnyCountsSnapshot.
+   * Deserializes a BunnyCountsSnapshot instance.
    * @param {Object} stateObject - return value from toStateObject
    * @returns {BunnyCountsSnapshot}
    * @public for use by BunnyCountsSnapshotIO only
@@ -65,6 +68,29 @@ class BunnyCountsSnapshot {
       longTeethCount: NumberIO.fromStateObject( stateObject.longTeethCount )
     } );
   }
+
+  /**
+   * Performs validation of this instance.
+   * @private
+   */
+  validateInstance() {
+    assert && assert( isValidCount( this.totalCount ), 'invalid totalCount' );
+    assert && assert( isValidCount( this.whiteFurCount ), 'invalid whiteFurCount' );
+    assert && assert( isValidCount( this.brownFurCount ), 'invalid brownFurCount' );
+    assert && assert( isValidCount( this.straightEarsCount ), 'invalid straightEarsCount' );
+    assert && assert( isValidCount( this.floppyEarsCount ), 'invalid floppyEarsCount' );
+    assert && assert( isValidCount( this.shortTeethCount ), 'invalid shortTeethCount' );
+    assert && assert( isValidCount( this.longTeethCount ), 'invalid longTeethCount' );
+  }
+}
+
+/**
+ * Determines whether a value is a valid count.
+ * @param {*} value
+ * @returns {boolean}
+ */
+function isValidCount( value ) {
+  return ( typeof value === 'number' && Utils.isInteger( value ) && value >= 0 );
 }
 
 naturalSelection.register( 'BunnyCountsSnapshot', BunnyCountsSnapshot );

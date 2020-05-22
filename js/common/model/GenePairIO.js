@@ -14,7 +14,7 @@ import GenePair from './GenePair.js';
 class GenePairIO extends ObjectIO {
 
   /**
-   * Serializes a GenePair to a state object.
+   * Serializes a GenePair instance.
    * @param {GenePair} genePair
    * @returns {Object}
    * @public
@@ -26,7 +26,7 @@ class GenePairIO extends ObjectIO {
   }
 
   /**
-   * Deserializes the state needed by GenePairIO.setValue.
+   * Deserializes a GenePair instance.
    * @param {Object} stateObject
    * @returns {Object}
    * @public

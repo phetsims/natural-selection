@@ -14,7 +14,7 @@ import Phenotype from './Phenotype.js';
 class PhenotypeIO extends ObjectIO {
 
   /**
-   * Serializes a Genotype to a state object.
+   * Serializes a Phenotype instance.
    * @param {PhenotypeIO} phenotype
    * @returns {Object}
    * @public
@@ -26,7 +26,7 @@ class PhenotypeIO extends ObjectIO {
   }
 
   /**
-   * Deserializes the state needed by PhenotypeIO.setValue.
+   * Deserializes a Phenotype instance.
    * @param {Object} stateObject
    * @returns {Object}
    * @public

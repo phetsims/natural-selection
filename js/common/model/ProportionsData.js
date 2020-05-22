@@ -8,6 +8,7 @@
 
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import BunnyCountsSnapshot from './BunnyCountsSnapshot.js';
 import BunnyCountsSnapshotIO from './BunnyCountsSnapshotIO.js';
 
 class ProportionsData {
@@ -18,6 +19,10 @@ class ProportionsData {
    * @param {BunnyCountsSnapshot} endSnapshot
    */
   constructor( generation, startSnapshot, endSnapshot ) {
+
+    assert && assert( typeof generation === 'number', 'invalid generation' );
+    assert && assert( startSnapshot instanceof BunnyCountsSnapshot, 'invalid startSnapshot' );
+    assert && assert( endSnapshot instanceof BunnyCountsSnapshot, 'invalid endSnapshot' );
 
     // @public (read-only)
     this.generation = generation;
@@ -30,7 +35,7 @@ class ProportionsData {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes a ProportionsData.
+   * Serializes this ProportionsData instance.
    * @returns {Object}
    * @public for use by ProportionsDataIO only
    */
@@ -43,7 +48,7 @@ class ProportionsData {
   }
 
   /**
-   * Deserializes a ProportionsData.
+   * Deserializes a ProportionsData instance.
    * @param {Object} stateObject - return value from toStateObject
    * @returns {ProportionsData}
    * @public for use by ProportionsDataIO only

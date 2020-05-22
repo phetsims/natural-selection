@@ -94,7 +94,7 @@ class Phenotype extends PhetioObject {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes a Phenotype to a state object.
+   * Serializes this Phenotype instance.
    * @returns {Object}
    * @public for use by PhenotypeIO only
    */

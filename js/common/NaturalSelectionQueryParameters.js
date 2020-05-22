@@ -9,6 +9,7 @@
 
 import Utils from '../../../dot/js/Utils.js';
 import naturalSelection from '../naturalSelection.js';
+import NaturalSelectionUtils from './NaturalSelectionUtils.js';
 
 // The schema that describes the query parameters for this simulation
 const SCHEMA = {
@@ -141,7 +142,7 @@ const SCHEMA = {
   maxAge: {
     type: 'number',
     defaultValue: 5,
-    isValidValue: maxAge => ( maxAge > 0 && Utils.isInteger( maxAge ) )
+    isValidValue: maxAge => NaturalSelectionUtils.isPositiveInteger( maxAge )
   },
 
   // The number of bunnies per litter.
@@ -149,7 +150,7 @@ const SCHEMA = {
   litterSize: {
     type: 'number',
     defaultValue: 4,
-    isValidValue: litterSize => ( litterSize > 0 && Utils.isInteger( litterSize ) )
+    isValidValue: litterSize => NaturalSelectionUtils.isPositiveInteger( litterSize )
   },
 
   // Adds a red dot at the origin of some objects (bunnies, wolves, food)

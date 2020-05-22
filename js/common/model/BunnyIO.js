@@ -14,7 +14,7 @@ import Bunny from './Bunny.js';
 class BunnyIO extends ObjectIO {
 
   /**
-   * Serializes a Bunny to a state object.
+   * Serializes a Bunny instance.
    * @param {Bunny} bunny
    * @returns {Object}
    * @public
@@ -26,7 +26,7 @@ class BunnyIO extends ObjectIO {
   }
 
   /**
-   * Deserializes the state needed by stateToArgsForConstructor and setValue.
+   * Deserializes a Bunny instance.
    * @param {Object} stateObject
    * @returns {Object}
    * @public

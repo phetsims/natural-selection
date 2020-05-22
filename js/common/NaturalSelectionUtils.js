@@ -8,6 +8,7 @@
  */
 
 import Property from '../../../axon/js/Property.js';
+import Utils from '../../../dot/js/Utils.js';
 import Color from '../../../scenery/js/util/Color.js';
 import naturalSelection from '../naturalSelection.js';
 
@@ -106,6 +107,15 @@ const NaturalSelectionUtils = {
       isSorted = ( item >= array[ i - 1 ] );
     }
     return isSorted;
+  },
+
+  /**
+   * Determines whether a value is a positive integer.
+   * @param {*} value
+   * @returns {boolean}
+   */
+  isPositiveInteger( value ) {
+    return ( typeof value === 'number' && Utils.isInteger( value ) && value > 0 );
   },
 
   /**

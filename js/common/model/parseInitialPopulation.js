@@ -16,10 +16,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Utils from '../../../../dot/js/Utils.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import GenePool from './GenePool.js';
 
 /**
@@ -179,7 +179,7 @@ function parsePopulation( genePool, mutationChars, populationName, populationVal
     const countString = populationValue[ 0 ];
     verify( !isNaN( countString ), countErrorMessage );
     const count = parseFloat( countString );
-    verify( Utils.isInteger( count ) && count > 0, countErrorMessage );
+    verify( NaturalSelectionUtils.isPositiveInteger( count ), countErrorMessage );
     const genotypeString = '';
 
     initialPopulation.push( {
@@ -211,7 +211,7 @@ function parsePopulation( genePool, mutationChars, populationName, populationVal
       const countErrorMessage = `${populationName}: ${expression} must start with a positive integer`;
       verify( !isNaN( countString ), countErrorMessage );
       const count = parseFloat( countString );
-      verify( Utils.isInteger( count ) && count > 0, countErrorMessage );
+      verify( NaturalSelectionUtils.isPositiveInteger( count ), countErrorMessage );
 
       // Total of all counts must be < maximum population
       totalCount += count;
