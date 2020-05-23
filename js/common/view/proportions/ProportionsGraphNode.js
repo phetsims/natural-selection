@@ -221,7 +221,7 @@ class RowLabel extends VBox {
   constructor( topString, count, options ) {
 
     assert && assert( typeof topString === 'string', 'invalid topString' );
-    assert && NaturalSelectionUtils.assertCount( count, 'invalid count' );
+    assert && NaturalSelectionUtils.assertCount( count );
 
     options = merge( {
       spacing: 2,
@@ -274,7 +274,7 @@ class RowLabel extends VBox {
    * @public
    */
   setCount( count ) {
-    assert && NaturalSelectionUtils.assertCount( count, 'invalid count' );
+    assert && NaturalSelectionUtils.assertCount( count );
     this.bottomText.text = StringUtils.fillIn( naturalSelectionStrings.countBunnies, { count: count } );
   }
 }
@@ -299,10 +299,10 @@ class Column extends VBox {
                valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, options ) {
 
     assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && NaturalSelectionUtils.assertCount( startNormalCount, 'invalid startNormalCount' );
-    assert && NaturalSelectionUtils.assertCount( startMutantCount, 'invalid startMutantCount' );
-    assert && NaturalSelectionUtils.assertCount( endNormalCount, 'invalid endNormalCount' );
-    assert && NaturalSelectionUtils.assertCount( endMutantCount, 'invalid endMutantCount' );
+    assert && NaturalSelectionUtils.assertCount( startNormalCount );
+    assert && NaturalSelectionUtils.assertCount( startMutantCount );
+    assert && NaturalSelectionUtils.assertCount( endNormalCount );
+    assert && NaturalSelectionUtils.assertCount( endMutantCount );
     assert && NaturalSelectionUtils.assertPropertyTypeof( valuesVisibleProperty, 'boolean' );
     assert && assert( barsAlignGroup instanceof AlignGroup, 'invalid barsAlignGroup' );
 
@@ -367,8 +367,8 @@ class Column extends VBox {
    * @public
    */
   setStartCounts( normalCount, mutantCount ) {
-    assert && NaturalSelectionUtils.assertCount( normalCount, 'invalid normalCount' );
-    assert && NaturalSelectionUtils.assertCount( mutantCount, 'invalid mutantCount' );
+    assert && NaturalSelectionUtils.assertCount( normalCount );
+    assert && NaturalSelectionUtils.assertCount( mutantCount );
 
     this.startBarNode.setCounts( normalCount, mutantCount );
   }
@@ -380,8 +380,8 @@ class Column extends VBox {
    * @public
    */
   setEndCounts( normalCount, mutantCount ) {
-    assert && NaturalSelectionUtils.assertCount( normalCount, 'invalid normalCount' );
-    assert && NaturalSelectionUtils.assertCount( mutantCount, 'invalid mutantCount' );
+    assert && NaturalSelectionUtils.assertCount( normalCount );
+    assert && NaturalSelectionUtils.assertCount( mutantCount );
 
     this.endBarNode.setCounts( normalCount, mutantCount );
   }

@@ -162,13 +162,12 @@ const NaturalSelectionUtils = {
   },
 
   /**
-   * Asserts that a value is a valid count.
+   * Asserts that a value is a valid count of bunnies.
    * @param {*} value
-   * @param {string} message
    * @public
    */
-  assertCount( value, message ) {
-    assert && assert( typeof value === 'number' && Utils.isInteger( value ) && value >= 0, message );
+  assertCount( value ) {
+    assert && assert( typeof value === 'number' && Utils.isInteger( value ) && value >= 0, `invalid count: ${value}` );
   }
 };
 
