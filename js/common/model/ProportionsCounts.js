@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * ProportionsData is the data structure that describes the bunny population at the start and end of a generation.
+ * ProportionsCounts is the data structure that describes the bunny population at the start and end of a generation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -12,7 +12,7 @@ import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
 import BunnyCountsIO from './BunnyCountsIO.js';
 
-class ProportionsData {
+class ProportionsCounts {
 
   /**
    * @param {number} generation
@@ -32,13 +32,13 @@ class ProportionsData {
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  // Below here are methods used by ProportionsDataIO to save and restore PhET-iO state.
+  // Below here are methods used by ProportionsCountsIO to save and restore PhET-iO state.
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes this ProportionsData instance.
+   * Serializes this ProportionsCounts instance.
    * @returns {Object}
-   * @public for use by ProportionsDataIO only
+   * @public for use by ProportionsCountsIO only
    */
   toStateObject() {
     return {
@@ -49,13 +49,13 @@ class ProportionsData {
   }
 
   /**
-   * Deserializes a ProportionsData instance.
+   * Deserializes a ProportionsCounts instance.
    * @param {Object} stateObject - return value from toStateObject
-   * @returns {ProportionsData}
-   * @public for use by ProportionsDataIO only
+   * @returns {ProportionsCounts}
+   * @public for use by ProportionsCountsIO only
    */
   static fromStateObject( stateObject ) {
-    return new ProportionsData(
+    return new ProportionsCounts(
       NumberIO.fromStateObject( stateObject.generation ),
       BunnyCountsIO.fromStateObject( stateObject.startCounts ),
       BunnyCountsIO.fromStateObject( stateObject.endCounts )
@@ -63,5 +63,5 @@ class ProportionsData {
   }
 }
 
-naturalSelection.register( 'ProportionsData', ProportionsData );
-export default ProportionsData;
+naturalSelection.register( 'ProportionsCounts', ProportionsCounts );
+export default ProportionsCounts;

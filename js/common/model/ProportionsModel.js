@@ -23,8 +23,8 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
 import BunnyCountsIO from './BunnyCountsIO.js';
-import ProportionsData from './ProportionsData.js';
-import ProportionsDataIO from './ProportionsDataIO.js';
+import ProportionsCounts from './ProportionsCounts.js';
+import ProportionsCountsIO from './ProportionsCountsIO.js';
 
 class ProportionsModel extends PhetioObject {
 
@@ -93,9 +93,9 @@ class ProportionsModel extends PhetioObject {
       phetioDocumentation: 'Counts at the start of the current generation'
     } );
 
-    const previousGenerationsData = new ObservableArray( {
-      tandem: options.tandem.createTandem( 'previousGenerationsData' ),
-      phetioType: ObservableArrayIO( ProportionsDataIO ),
+    const previousCounts = new ObservableArray( {
+      tandem: options.tandem.createTandem( 'previousCounts' ),
+      phetioType: ObservableArrayIO( ProportionsCountsIO ),
       phetioDocumentation: 'Counts for previous generations, indexed by generation number'
     } );
 
@@ -142,9 +142,10 @@ class ProportionsModel extends PhetioObject {
           else {
 
             // Show static data for a previous generation.
-            const data = previousGenerationsData.get( generation );
-            this.startCountsProperty.value = data.startCounts;
-            this.endCountsProperty.value = data.endCounts;
+            const counts = previousCounts.get( generation );
+            assert && assert( counts.generation === generation, 'unexpected generation' );
+            this.startCountsProperty.value = counts.startCounts;
+            this.endCountsProperty.value = counts.endCounts;
           }
         }
         else {
@@ -162,7 +163,7 @@ class ProportionsModel extends PhetioObject {
 
     // @private
     this.currentStartCountsProperty = currentStartCountsProperty;
-    this.previousGenerationsData = previousGenerationsData;
+    this.previousCounts = previousCounts;
   }
 
   /**
@@ -174,7 +175,7 @@ class ProportionsModel extends PhetioObject {
     this.startCountsProperty.reset();
     this.endCountsProperty.reset();
     this.currentStartCountsProperty.reset();
-    this.previousGenerationsData.clear();
+    this.previousCounts.clear();
   }
 
   /**
@@ -204,11 +205,10 @@ class ProportionsModel extends PhetioObject {
    */
   recordEndCounts( generation, endCounts ) {
     assert && assert( generation === this.currentGenerationProperty.value - 1, `${generation} is not the previous generation` );
-    assert && assert( this.previousGenerationsData.length === generation, `data already exists for generation ${generation}` );
+    assert && assert( this.previousCounts.length === generation, `data already exists for generation ${generation}` );
 
     const startCounts = this.currentStartCountsProperty.value;
-    const data = new ProportionsData( generation, startCounts, endCounts );
-    this.previousGenerationsData.push( data );
+    this.previousCounts.push( new ProportionsCounts( generation, startCounts, endCounts ) );
 
     this.currentStartCountsProperty.value = null;
 
