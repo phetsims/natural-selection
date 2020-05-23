@@ -2,6 +2,7 @@
 
 /**
  * ProportionsCounts is the data structure that describes the bunny population at the start and end of a generation.
+ * This is static, immutable data.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
