@@ -10,14 +10,12 @@
 | Intro screen | 0 | 5/7/2020 |
 | Pedigree graph | 0 | 5/11/2020 |
 | query parameters | 0 | 5/18/2020 |
-| Proportions graph | 1.5 weeks | | 
+| Proportions graph | 1 week | | 
 | Population graph | 3 weeks | |
 | Food | 1 week | | 
 | Wolves | 1 week | |
 
 ## Implementation
-
-* get rid of some submodels, move some Properties into view?
 
 * Divide the death part of the generation clock into discrete chunks, maybe at 5,6,7,8:00
 
