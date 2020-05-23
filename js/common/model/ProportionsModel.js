@@ -133,15 +133,15 @@ class ProportionsModel extends PhetioObject {
           // We have data. Decide whether to display data for the current generation or a previous generation.
           if ( generation === currentGenerationProperty.value ) {
 
-            // Show dynamic data for the current generation.
+            // Show static counts for the start of the current generation.
             this.startCountsProperty.value = currentStartCountsProperty.value;
 
-            // Update endCounts when there's a change to the liveBunnyCountsProperty.
+            // Show dynamic counts for the 'Currently' state of the current generation.
             liveBunnyCountsProperty.link( updateEndCounts );
           }
           else {
 
-            // Show static data for a previous generation.
+            // Show static counts for a previous generation.
             const counts = previousCounts.get( generation );
             assert && assert( counts.generation === generation, 'unexpected generation' );
             this.startCountsProperty.value = counts.startCounts;
