@@ -9,26 +9,26 @@
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
-import BunnyCountsSnapshot from './BunnyCountsSnapshot.js';
-import BunnyCountsSnapshotIO from './BunnyCountsSnapshotIO.js';
+import BunnyCounts from './BunnyCounts.js';
+import BunnyCountsIO from './BunnyCountsIO.js';
 
 class ProportionsData {
 
   /**
    * @param {number} generation
-   * @param {BunnyCountsSnapshot} startSnapshot
-   * @param {BunnyCountsSnapshot} endSnapshot
+   * @param {BunnyCounts} startCounts
+   * @param {BunnyCounts} endCounts
    */
-  constructor( generation, startSnapshot, endSnapshot ) {
+  constructor( generation, startCounts, endCounts ) {
 
     assert && NaturalSelectionUtils.assertGeneration( generation );
-    assert && assert( startSnapshot instanceof BunnyCountsSnapshot, 'invalid startSnapshot' );
-    assert && assert( endSnapshot instanceof BunnyCountsSnapshot, 'invalid endSnapshot' );
+    assert && assert( startCounts instanceof BunnyCounts, 'invalid startCounts' );
+    assert && assert( endCounts instanceof BunnyCounts, 'invalid endCounts' );
 
     // @public (read-only)
     this.generation = generation;
-    this.startSnapshot = startSnapshot;
-    this.endSnapshot = endSnapshot;
+    this.startCounts = startCounts;
+    this.endCounts = endCounts;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -43,8 +43,8 @@ class ProportionsData {
   toStateObject() {
     return {
       generation: NumberIO.toStateObject( this.generation ),
-      startSnapshot: BunnyCountsSnapshotIO.toStateObject( this.startSnapshot ),
-      endSnapshot: BunnyCountsSnapshotIO.toStateObject( this.endSnapshot )
+      startCounts: BunnyCountsIO.toStateObject( this.startCounts ),
+      endCounts: BunnyCountsIO.toStateObject( this.endCounts )
     };
   }
 
@@ -57,8 +57,8 @@ class ProportionsData {
   static fromStateObject( stateObject ) {
     return new ProportionsData(
       NumberIO.fromStateObject( stateObject.generation ),
-      BunnyCountsSnapshotIO.fromStateObject( stateObject.startSnapshot ),
-      BunnyCountsSnapshotIO.fromStateObject( stateObject.endSnapshot )
+      BunnyCountsIO.fromStateObject( stateObject.startCounts ),
+      BunnyCountsIO.fromStateObject( stateObject.endCounts )
     );
   }
 }

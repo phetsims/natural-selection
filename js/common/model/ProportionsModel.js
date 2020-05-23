@@ -22,22 +22,22 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
-import BunnyCountsSnapshotIO from './BunnyCountsSnapshotIO.js';
+import BunnyCountsIO from './BunnyCountsIO.js';
 import ProportionsData from './ProportionsData.js';
 import ProportionsDataIO from './ProportionsDataIO.js';
 
 class ProportionsModel extends PhetioObject {
 
   /**
-   * @param {BunnyCounts} liveBunnyCounts - counts of live bunnies, used for dynamic 'Currently' data
+   * @param {Property.<BunnyCounts>} liveBunnyCountsProperty - counts of live bunnies, used for dynamic 'Currently' data
    * @param {Property.<number>} currentGenerationProperty
    * @param {Property.<boolean>} isPlayingProperty
    * @param {EnumerationProperty.<SimulationMode>} simulationModeProperty
    * @param {Object} [options]
    */
-  constructor( liveBunnyCounts, currentGenerationProperty, isPlayingProperty, simulationModeProperty, options ) {
+  constructor( liveBunnyCountsProperty, currentGenerationProperty, isPlayingProperty, simulationModeProperty, options ) {
 
-    assert && assert( liveBunnyCounts instanceof BunnyCounts, 'invalid bunnyCounts' );
+    assert && assert( liveBunnyCountsProperty instanceof Property, 'invalid bunnyCounts' );
     assert && NaturalSelectionUtils.assertPropertyTypeof( currentGenerationProperty, 'number' );
     assert && NaturalSelectionUtils.assertPropertyTypeof( isPlayingProperty, 'boolean' );
     assert && assert( simulationModeProperty instanceof EnumerationProperty );
@@ -76,25 +76,25 @@ class ProportionsModel extends PhetioObject {
     );
 
     // @public counts for 'Start of Generation'
-    this.startCounts = new BunnyCounts( {
-      tandem: options.tandem.createTandem( 'startCounts' )
+    this.startCountsProperty = new Property( BunnyCounts.ZERO.copy(), {
+      valueType: BunnyCounts
     } );
 
     // @public counts for 'End of Generation'
-    this.endCounts = new BunnyCounts( {
-      tandem: options.tandem.createTandem( 'endCounts' )
+    this.endCountsProperty = new Property( BunnyCounts.ZERO.copy(), {
+      valueType: BunnyCounts
     } );
 
-    // 'Start' data for the current generation. This is null until the sim enters SimulationMode.ACTIVE.
+    // 'Start' counts for the current generation. This is null until the sim enters SimulationMode.ACTIVE.
     // While in SimulationMode.ACTIVE it will always have a value.
-    const currentGenerationStartSnapshotProperty = new Property( null, {
-      tandem: options.tandem.createTandem( 'currentGenerationStartSnapshotProperty' ),
-      phetioType: PropertyIO( NullableIO( BunnyCountsSnapshotIO ) ),
+    const currentStartCountsProperty = new Property( null, {
+      tandem: options.tandem.createTandem( 'currentStartCountsProperty' ),
+      phetioType: PropertyIO( NullableIO( BunnyCountsIO ) ),
       phetioDocumentation: 'Counts at the start of the current generation'
     } );
 
-    const previousGenerationsDataArray = new ObservableArray( {
-      tandem: options.tandem.createTandem( 'previousGenerationsDataArray' ),
+    const previousGenerationsData = new ObservableArray( {
+      tandem: options.tandem.createTandem( 'previousGenerationsData' ),
       phetioType: ObservableArrayIO( ProportionsDataIO ),
       phetioDocumentation: 'Counts for previous generations, indexed by generation number'
     } );
@@ -116,49 +116,48 @@ class ProportionsModel extends PhetioObject {
       } );
 
     const updateEndCounts = () => {
-      this.endCounts.setValues( liveBunnyCounts.createSnapshot() );
+      this.endCountsProperty.value = liveBunnyCountsProperty.value;
     };
 
     // Determine what data to display
     Property.multilink(
-      [ this.generationProperty, currentGenerationStartSnapshotProperty ],
-      ( generation, currentGenerationStartSnapshot ) => {
+      [ this.generationProperty, currentStartCountsProperty ],
+      ( generation, currentStartCounts ) => {
 
-        if ( liveBunnyCounts.totalCountProperty.hasListener( updateEndCounts ) ) {
-          liveBunnyCounts.totalCountProperty.unlink( updateEndCounts );
+        if ( liveBunnyCountsProperty.hasListener( updateEndCounts ) ) {
+          liveBunnyCountsProperty.unlink( updateEndCounts );
         }
 
-        if ( currentGenerationStartSnapshot ) {
+        if ( currentStartCounts ) {
 
           // We have data. Decide whether to display data for the current generation or a previous generation.
           if ( generation === currentGenerationProperty.value ) {
 
             // Show dynamic data for the current generation.
-            this.startCounts.setValues( currentGenerationStartSnapshotProperty.value );
+            this.startCountsProperty.value = currentStartCountsProperty.value;
 
-            // Update endCounts when there's a change to the liveBunnyCounts. And any change to liveBunnyCounts will
-            // result in a change to totalCountProperty.
-            liveBunnyCounts.totalCountProperty.link( updateEndCounts );
+            // Update endCounts when there's a change to the liveBunnyCountsProperty.
+            liveBunnyCountsProperty.link( updateEndCounts );
           }
           else {
 
             // Show static data for a previous generation.
-            const data = previousGenerationsDataArray.get( generation );
-            this.startCounts.setValues( data.startSnapshot );
-            this.endCounts.setValues( data.endSnapshot );
+            const data = previousGenerationsData.get( generation );
+            this.startCountsProperty.value = data.startCounts;
+            this.endCountsProperty.value = data.endCounts;
           }
         }
         else {
 
           // There is no data, so reset the counts
-          this.startCounts.reset();
-          this.endCounts.reset();
+          this.startCountsProperty.reset();
+          this.endCountsProperty.reset();
         }
       } );
 
     // @private
-    this.currentGenerationStartSnapshotProperty = currentGenerationStartSnapshotProperty;
-    this.previousGenerationsDataArray = previousGenerationsDataArray;
+    this.currentStartCountsProperty = currentStartCountsProperty;
+    this.previousGenerationsData = previousGenerationsData;
   }
 
   /**
@@ -167,10 +166,10 @@ class ProportionsModel extends PhetioObject {
   reset() {
     this.valuesVisibleProperty.reset();
     this.generationProperty.resetValueAndRange(); // because we're using setValueAndRange
-    this.startCounts.reset();
-    this.endCounts.reset();
-    this.currentGenerationStartSnapshotProperty.reset();
-    this.previousGenerationsDataArray.clear();
+    this.startCountsProperty.reset();
+    this.endCountsProperty.reset();
+    this.currentStartCountsProperty.reset();
+    this.previousGenerationsData.clear();
   }
 
   /**
@@ -182,34 +181,33 @@ class ProportionsModel extends PhetioObject {
   }
 
   /**
-   * Records the start data for the current generation.
+   * Records start counts for the current generation.
    * @param {generation} generation
-   * @param {BunnyCountsSnapshot} startSnapshot
+   * @param {BunnyCounts} bunnyCounts
    */
-  recordStartData( generation, startSnapshot ) {
+  recordStartCounts( generation, bunnyCounts ) {
     assert && assert( generation === this.currentGenerationProperty.value, `${generation} is not the current generation` );
-    this.currentGenerationStartSnapshotProperty.value = startSnapshot;
-    phet.log && phet.log( `ProportionsModel recorded start data for generation ${generation}` );
+    this.currentStartCountsProperty.value = bunnyCounts;
+    phet.log && phet.log( `ProportionsModel recorded start counts for generation ${generation}` );
   }
 
   /**
-   * Records the end data for the previous generation, using what was formerly the current generation start data.
+   * Records end counts for the previous generation, using what was formerly the current generation start data.
    * @param {number} generation
-   * @param {BunnyCountsSnapshot} endSnapshot
+   * @param {BunnyCounts} endCounts
    * @public
    */
-  recordEndData( generation, endSnapshot ) {
+  recordEndCounts( generation, endCounts ) {
     assert && assert( generation === this.currentGenerationProperty.value - 1, `${generation} is not the previous generation` );
-    assert && assert( this.previousGenerationsDataArray.length === generation, `data already exists for generation ${generation}` );
+    assert && assert( this.previousGenerationsData.length === generation, `data already exists for generation ${generation}` );
 
-    const data = new ProportionsData( generation,
-      this.currentGenerationStartSnapshotProperty.value,
-      endSnapshot );
-    this.previousGenerationsDataArray.push( data );
+    const startCounts = this.currentStartCountsProperty.value;
+    const data = new ProportionsData( generation, startCounts, endCounts );
+    this.previousGenerationsData.push( data );
 
-    this.currentGenerationStartSnapshotProperty.value = null;
+    this.currentStartCountsProperty.value = null;
 
-    phet.log && phet.log( `ProportionsModel recorded end data for generation ${generation}` );
+    phet.log && phet.log( `ProportionsModel recorded end counts for generation ${generation}` );
   }
 }
 

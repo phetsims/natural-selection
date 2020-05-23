@@ -107,7 +107,7 @@ class NaturalSelectionModel {
 
     // @public (read-only)
     this.proportionsModel = new ProportionsModel(
-      this.bunnyCollection.liveBunnies.counts,
+      this.bunnyCollection.liveBunnies.countsProperty,
       this.generationClock.currentGenerationProperty,
       this.isPlayingProperty,
       this.simulationModeProperty, {
@@ -130,7 +130,7 @@ class NaturalSelectionModel {
         // When the simulation begins, record the first 'start of generation' data for the Proportions graph.
         if ( simulationMode === SimulationMode.ACTIVE ) {
           const currentGeneration = this.generationClock.currentGenerationProperty.value;
-          this.proportionsModel.recordStartData( currentGeneration, this.bunnyCollection.createCountsSnapshot() );
+          this.proportionsModel.recordStartCounts( currentGeneration, this.bunnyCollection.getLiveBunnyCounts() );
         }
 
         // Adjust the sim playback and generation clock
@@ -159,7 +159,7 @@ class NaturalSelectionModel {
         phet.log && phet.log( `generation=${currentGeneration}` );
 
         // Record 'end of generation' counts for the previous generation before bunnies are aged or mate.
-        this.proportionsModel.recordEndData( currentGeneration - 1, this.bunnyCollection.createCountsSnapshot() );
+        this.proportionsModel.recordEndCounts( currentGeneration - 1, this.bunnyCollection.getLiveBunnyCounts() );
 
         // Age bunnies, some may die of old age.
         this.bunnyCollection.ageBunnies();
@@ -169,7 +169,7 @@ class NaturalSelectionModel {
 
         // Record 'start of generation' counts for the current generation after bunnies mate. The delta between
         // 'End of generation N' and 'Start of generation N+1' will be the population change due to births + deaths.
-        this.proportionsModel.recordStartData( currentGeneration, this.bunnyCollection.createCountsSnapshot() );
+        this.proportionsModel.recordStartCounts( currentGeneration, this.bunnyCollection.getLiveBunnyCounts() );
       }
     } );
   }

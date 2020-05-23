@@ -155,9 +155,20 @@ const NaturalSelectionUtils = {
   /**
    * Asserts that a value is a valid generation number.
    * @param {*} value
+   * @public
    */
   assertGeneration( value ) {
     assert && assert( typeof value === 'number' && Utils.isInteger( value ) && value >= 0, `invalid generation: ${value}` );
+  },
+
+  /**
+   * Asserts that a value is a valid count.
+   * @param {*} value
+   * @param {string} message
+   * @public
+   */
+  assertCount( value, message ) {
+    assert && assert( typeof value === 'number' && Utils.isInteger( value ) && value >= 0, message );
   }
 };
 

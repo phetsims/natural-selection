@@ -311,12 +311,12 @@ class BunnyCollection {
   }
 
   /**
-   * Creates a snapshot of the live bunny counts.
-   * @returns {BunnyCountsSnapshot}
+   * Gets the live bunny counts.
+   * @returns {BunnyCounts}
    * @public
    */
-  createCountsSnapshot() {
-    return this.liveBunnies.counts.createSnapshot();
+  getLiveBunnyCounts() {
+    return this.liveBunnies.countsProperty.value;
   }
 
   /**

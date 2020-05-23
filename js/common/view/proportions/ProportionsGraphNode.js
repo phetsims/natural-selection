@@ -59,8 +59,8 @@ class ProportionsGraphNode extends Node {
     }, options );
 
     // To make this code easier to read
-    const startCounts = proportionsModel.startCounts;
-    const endCounts = proportionsModel.endCounts;
+    const startCounts = proportionsModel.startCountsProperty.value;
+    const endCounts = proportionsModel.endCountsProperty.value;
     const valuesVisibleProperty = proportionsModel.valuesVisibleProperty;
 
     const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
@@ -69,10 +69,10 @@ class ProportionsGraphNode extends Node {
     } );
 
     // 'Start of Generation...'
-    const startRowLabel = new RowLabel( naturalSelectionStrings.startOfGeneration, startCounts.totalCountProperty );
+    const startRowLabel = new RowLabel( naturalSelectionStrings.startOfGeneration, startCounts.totalCount );
 
     // 'End of Generation...' or 'Currently...'
-    const endRowLabel = new RowLabel( naturalSelectionStrings.endOfGeneration, endCounts.totalCountProperty );
+    const endRowLabel = new RowLabel( naturalSelectionStrings.endOfGeneration, endCounts.totalCount );
 
     // All column labels have the same effective width.
     const columnLabelsAlignGroup = new AlignGroup();
@@ -107,20 +107,20 @@ class ProportionsGraphNode extends Node {
 
     // Columns that contain bars
     const furColumn = new Column( genePool.furGene,
-      startCounts.whiteFurCountProperty, startCounts.brownFurCountProperty,
-      endCounts.whiteFurCountProperty, endCounts.brownFurCountProperty,
+      startCounts.whiteFurCount, startCounts.brownFurCount,
+      endCounts.whiteFurCount, endCounts.brownFurCount,
       valuesVisibleProperty, columnLabelsAlignGroup, cellsAlignGroup, {
         tandem: options.tandem.createTandem( 'furColumn' )
       } );
     const earsColumn = new Column( genePool.earsGene,
-      startCounts.straightEarsCountProperty, startCounts.floppyEarsCountProperty,
-      endCounts.straightEarsCountProperty, endCounts.floppyEarsCountProperty,
+      startCounts.straightEarsCount, startCounts.floppyEarsCount,
+      endCounts.straightEarsCount, endCounts.floppyEarsCount,
       valuesVisibleProperty, columnLabelsAlignGroup, cellsAlignGroup, {
         tandem: options.tandem.createTandem( 'earsColumn' )
       } );
     const teethColumn = new Column( genePool.teethGene,
-      startCounts.shortTeethCountProperty, startCounts.longTeethCountProperty,
-      endCounts.shortTeethCountProperty, endCounts.longTeethCountProperty,
+      startCounts.shortTeethCount, startCounts.longTeethCount,
+      endCounts.shortTeethCount, endCounts.longTeethCount,
       valuesVisibleProperty, columnLabelsAlignGroup, cellsAlignGroup, {
         tandem: options.tandem.createTandem( 'teethColumn' )
       } );
@@ -172,10 +172,23 @@ class ProportionsGraphNode extends Node {
       }
     } );
 
-    // If there is no data to display, hide the content and display 'No Data'.
-    proportionsModel.startCounts.totalCountProperty.link( totalCount => {
-      noDataText.visible = ( totalCount === 0 );
+    proportionsModel.startCountsProperty.link( startCounts => {
+
+      // If there is no data to display, hide the content and display 'No Data'.
+      noDataText.visible = ( startCounts.totalCount === 0 );
       content.visible = !noDataText.visible;
+
+      startRowLabel.setCount( startCounts.totalCount );
+      furColumn.setStartCounts( startCounts.whiteFurCount, startCounts.brownFurCount );
+      earsColumn.setStartCounts( startCounts.straightEarsCount, startCounts.floppyEarsCount );
+      teethColumn.setStartCounts( startCounts.shortTeethCount, startCounts.longTeethCount );
+    } );
+
+    proportionsModel.endCountsProperty.link( endCounts => {
+      endRowLabel.setCount( endCounts.totalCount );
+      furColumn.setEndCounts( endCounts.whiteFurCount, endCounts.brownFurCount );
+      earsColumn.setEndCounts( endCounts.straightEarsCount, endCounts.floppyEarsCount );
+      teethColumn.setEndCounts( endCounts.shortTeethCount, endCounts.longTeethCount );
     } );
 
     // @public for configuring ScreenViews only
@@ -202,10 +215,13 @@ class RowLabel extends VBox {
   /**
    *
    * @param {string} topString - string for the top line of text
-   * @param {Property.<number>} countProperty
+   * @param {number} count
    * @param {Object} [options]
    */
-  constructor( topString, countProperty, options ) {
+  constructor( topString, count, options ) {
+
+    assert && assert( typeof topString === 'string', 'invalid topString' );
+    assert && NaturalSelectionUtils.assertCount( count, 'invalid count' );
 
     options = merge( {
       spacing: 2,
@@ -227,27 +243,11 @@ class RowLabel extends VBox {
 
     super( options );
 
-    // Update the count on the bottom line, and handle singular (1 bunny) vs plural (10 bunnies)
-    countProperty.link( count => {
-      if ( count === 1 ) {
-        bottomText.text = naturalSelectionStrings.oneBunny;
-      }
-      else {
-        bottomText.text = StringUtils.fillIn( naturalSelectionStrings.countBunnies, { count: count } );
-      }
-    } );
-
     // @private
     this.topText = topText;
-  }
+    this.bottomText = bottomText;
 
-  /**
-   * Sets the top line of text.
-   * @param {string} topString
-   * @public
-   */
-  setTopText( topString ) {
-    this.topText.text = topString;
+    this.setCount( count );
   }
 
   /**
@@ -256,6 +256,26 @@ class RowLabel extends VBox {
    */
   dispose() {
     assert && assert( false, 'RowLabel does not support dispose' );
+  }
+
+  /**
+   * Sets the top line of text.
+   * @param {string} topString
+   * @public
+   */
+  setTopText( topString ) {
+    assert && assert( typeof topString === 'string', 'invalid topString' );
+    this.topText.text = topString;
+  }
+
+  /**
+   * Sets the count in the bottom line of text.
+   * @param {number} count
+   * @public
+   */
+  setCount( count ) {
+    assert && NaturalSelectionUtils.assertCount( count, 'invalid count' );
+    this.bottomText.text = StringUtils.fillIn( naturalSelectionStrings.countBunnies, { count: count } );
   }
 }
 
@@ -266,23 +286,23 @@ class Column extends VBox {
 
   /**
    * @param {Gene} gene
-   * @param {Property.<number>} startNormalCountProperty
-   * @param {Property.<number>} startMutantCountProperty
-   * @param {Property.<number>} endNormalCountProperty
-   * @param {Property.<number>} endMutantCountProperty
+   * @param {number} startNormalCount
+   * @param {number} startMutantCount
+   * @param {number} endNormalCount
+   * @param {number} endMutantCount
    * @param {Property.<boolean>} valuesVisibleProperty
    * @param {AlignGroup} columnLabelsAlignGroup
    * @param {AlignGroup} barsAlignGroup
    * @param {Object} [options]
    */
-  constructor( gene, startNormalCountProperty, startMutantCountProperty, endNormalCountProperty, endMutantCountProperty,
+  constructor( gene, startNormalCount, startMutantCount, endNormalCount, endMutantCount,
                valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, options ) {
 
     assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( startNormalCountProperty, 'number' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( startNormalCountProperty, 'number' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( endNormalCountProperty, 'number' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( endMutantCountProperty, 'number' );
+    assert && NaturalSelectionUtils.assertCount( startNormalCount, 'invalid startNormalCount' );
+    assert && NaturalSelectionUtils.assertCount( startMutantCount, 'invalid startMutantCount' );
+    assert && NaturalSelectionUtils.assertCount( endNormalCount, 'invalid endNormalCount' );
+    assert && NaturalSelectionUtils.assertCount( endMutantCount, 'invalid endMutantCount' );
     assert && NaturalSelectionUtils.assertPropertyTypeof( valuesVisibleProperty, 'boolean' );
     assert && assert( barsAlignGroup instanceof AlignGroup, 'invalid barsAlignGroup' );
 
@@ -299,10 +319,10 @@ class Column extends VBox {
       maxWidth: 120 // determined empirically
     } );
 
-    const startBarNode = new ProportionsBarNode( gene.color, startNormalCountProperty, startMutantCountProperty, valuesVisibleProperty, {
+    const startBarNode = new ProportionsBarNode( gene.color, startNormalCount, startMutantCount, valuesVisibleProperty, {
       tandem: options.tandem.createTandem( 'startBarNode' )
     } );
-    const endBarNode = new ProportionsBarNode( gene.color, endNormalCountProperty, endMutantCountProperty, valuesVisibleProperty, {
+    const endBarNode = new ProportionsBarNode( gene.color, endNormalCount, endMutantCount, valuesVisibleProperty, {
       tandem: options.tandem.createTandem( 'endBarNode' )
     } );
 
@@ -326,6 +346,10 @@ class Column extends VBox {
     ];
 
     super( options );
+
+    // @private
+    this.startBarNode = startBarNode;
+    this.endBarNode = endBarNode;
   }
 
   /**
@@ -334,6 +358,32 @@ class Column extends VBox {
    */
   dispose() {
     assert && assert( false, 'Column does not support dispose' );
+  }
+
+  /**
+   * Sets the counts for the 'start' bar.
+   * @param {number} normalCount
+   * @param {number} mutantCount
+   * @public
+   */
+  setStartCounts( normalCount, mutantCount ) {
+    assert && NaturalSelectionUtils.assertCount( normalCount, 'invalid normalCount' );
+    assert && NaturalSelectionUtils.assertCount( mutantCount, 'invalid mutantCount' );
+
+    this.startBarNode.setCounts( normalCount, mutantCount );
+  }
+
+  /**
+   * Sets the counts for the 'end' bar.
+   * @param {number} normalCount
+   * @param {number} mutantCount
+   * @public
+   */
+  setEndCounts( normalCount, mutantCount ) {
+    assert && NaturalSelectionUtils.assertCount( normalCount, 'invalid normalCount' );
+    assert && NaturalSelectionUtils.assertCount( mutantCount, 'invalid mutantCount' );
+
+    this.endBarNode.setCounts( normalCount, mutantCount );
   }
 }
 

@@ -17,8 +17,6 @@
 
 ## Implementation
 
-* Change BunnyCounts to BunnyCountsProperty whose value is like BunnyCountsSnapshot
-
 * get rid of some submodels, move some Properties into view?
 
 * Divide the death part of the generation clock into discrete chunks, maybe at 5,6,7,8:00

@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../../axon/js/Property.js';
 import Utils from '../../../../../dot/js/Utils.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
@@ -29,16 +28,16 @@ class ProportionsBarNode extends Node {
 
   /**
    * @param {Color|string} color
-   * @param {Property.<number>} normalCountProperty
-   * @param {Property.<number>} mutantCountProperty
+   * @param {number} normalCount
+   * @param {number} mutantCount
    * @param {Property.<boolean>} valuesVisibleProperty
    * @param {Object} [options]
    */
-  constructor( color, normalCountProperty, mutantCountProperty, valuesVisibleProperty, options ) {
+  constructor( color, normalCount, mutantCount, valuesVisibleProperty, options ) {
 
     assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( normalCountProperty, 'number' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( mutantCountProperty, 'number' );
+    assert && NaturalSelectionUtils.assertCount( normalCount, 'invalid normalCount' );
+    assert && NaturalSelectionUtils.assertCount( mutantCount, 'invalid mutantCount' );
     assert && NaturalSelectionUtils.assertPropertyTypeof( valuesVisibleProperty, 'boolean' );
 
     options = merge( {
@@ -85,11 +84,11 @@ class ProportionsBarNode extends Node {
     this.normalPercentageNode = normalPercentageNode;
     this.mutantPercentageNode = mutantPercentageNode;
     this.barWidth = options.barWidth;
+    this.normalCount = normalCount;
+    this.mutantCount = mutantCount;
+    this.valuesVisibleProperty = valuesVisibleProperty;
 
-    Property.multilink( [ normalCountProperty, mutantCountProperty, valuesVisibleProperty ],
-      ( normalCount, mutantCount, valuesVisible ) =>
-        this.update( normalCount, mutantCount, valuesVisible )
-    );
+    this.valuesVisibleProperty.link( () => this.setCounts( this.normalCount, this.mutantCount ) );
   }
 
   /**
@@ -101,13 +100,14 @@ class ProportionsBarNode extends Node {
   }
 
   /**
-   * Updates this node. Note that only mutantRectangle is resized.
+   * Sets the counts. Resizes the bars and displays the counts as percentages.
    * @param {number} normalCount
    * @param {number} mutantCount
-   * @param {boolean} valuesVisible
-   * @private
+   * @public
    */
-  update( normalCount, mutantCount, valuesVisible ) {
+  setCounts( normalCount, mutantCount ) {
+    assert && NaturalSelectionUtils.assertCount( normalCount, 'invalid normalCount' );
+    assert && NaturalSelectionUtils.assertCount( mutantCount, 'invalid mutantCount' );
 
     const total = normalCount + mutantCount;
 
@@ -119,8 +119,8 @@ class ProportionsBarNode extends Node {
     this.mutantRectangle.visible = ( mutantPercentage > 0 );
 
     // hide N% values, when values are not visible, or when values are zero
-    this.normalPercentageNode.visible = ( valuesVisible && normalPercentage > 0 );
-    this.mutantPercentageNode.visible = ( valuesVisible && mutantPercentage > 0 );
+    this.normalPercentageNode.visible = ( this.valuesVisibleProperty.value && normalPercentage > 0 );
+    this.mutantPercentageNode.visible = ( this.valuesVisibleProperty.value && mutantPercentage > 0 );
 
     // update the mutant portion of the bar and the N% values
     if ( mutantPercentage > 0 && mutantPercentage < 1 ) {

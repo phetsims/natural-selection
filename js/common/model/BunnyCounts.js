@@ -1,206 +1,177 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * BunnyCounts contains the counts that describe the phenotypes of a collection of bunnies.
- * There is a count for each allele, and a total count.
+ * BunnyCounts is a data structure that contains the counts that describe the phenotypes of a collection of bunnies.
+ * There is a count for each allele, and a total count. The data structure is immutable, atomic, and describes the
+ * population at a point in time.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import Utils from '../../../../dot/js/Utils.js';
+import required from '../../../../phet-core/js/required.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 
 import Bunny from './Bunny.js';
-import BunnyCountsSnapshot from './BunnyCountsSnapshot.js';
 
 class BunnyCounts {
 
   /**
-   * @param {Object} [options]
+   * @param {Object} config
    */
-  constructor( options ) {
+  constructor( config ) {
 
-    options = merge( {
+    // @public (read-only) {number}
+    this.totalCount = required( config.totalCount );
+    this.whiteFurCount = required( config.whiteFurCount );
+    this.brownFurCount = required( config.brownFurCount );
+    this.straightEarsCount = required( config.straightEarsCount );
+    this.floppyEarsCount = required( config.floppyEarsCount );
+    this.shortTeethCount = required( config.shortTeethCount );
+    this.longTeethCount = required( config.longTeethCount );
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
-
-    //TODO #57 instead of 7 NumberProperty instances, have 1 Property that contains a BunnyCountsSnapshot, so
-    // that all counts can be updated atomically.  Rename this something like BunnyCountsProperty.
-
-    // Shared options
-    const numberPropertyOptions = {
-      numberType: 'Integer',
-      phetioReadOnly: true,
-      phetioState: false // because counts will be restored as BunnyGroup is restored
-    };
-
-    // @public
-    this.whiteFurCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
-      tandem: options.tandem.createTandem( 'whiteFurCountProperty' ),
-      phetioDocumentation: 'the number of bunnies that have white fur'
-    } ) );
-
-    // @public
-    this.brownFurCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
-      tandem: options.tandem.createTandem( 'brownFurCountProperty' ),
-      phetioDocumentation: 'the number of bunnies that have brown fur'
-    } ) );
-
-    // @public
-    this.straightEarsCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
-      tandem: options.tandem.createTandem( 'straightEarsCountProperty' ),
-      phetioDocumentation: 'the number of bunnies that have straight ears'
-    } ) );
-
-    // @public
-    this.floppyEarsCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
-      tandem: options.tandem.createTandem( 'floppyEarsCountProperty' ),
-      phetioDocumentation: 'the number of bunnies that have floppy ears'
-    } ) );
-
-    // @public
-    this.shortTeethCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
-      tandem: options.tandem.createTandem( 'shortTeethCountProperty' ),
-      phetioDocumentation: 'the number of bunnies that have short teeth'
-    } ) );
-
-    // @public
-    this.longTeethCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
-      tandem: options.tandem.createTandem( 'longTeethCountProperty' ),
-      phetioDocumentation: 'the number of bunnies that have long teeth'
-    } ) );
-
-    //TODO #57 this is currently last because something is observing it, and expects that the other counts were update
-    // @public
-    this.totalCountProperty = new NumberProperty( 0, merge( {}, numberPropertyOptions, {
-      tandem: options.tandem.createTandem( 'totalCountProperty' ),
-      phetioDocumentation: 'the total number of bunnies'
-    }  ) );
-  }
-
-  /**
-   * @public
-   */
-  reset() {
-    this.totalCountProperty.reset();
-    this.whiteFurCountProperty.reset();
-    this.brownFurCountProperty.reset();
-    this.straightEarsCountProperty.reset();
-    this.floppyEarsCountProperty.reset();
-    this.shortTeethCountProperty.reset();
-    this.longTeethCountProperty.reset();
-    assert && this.validateCounts();
+    this.validateInstance();
   }
 
   /**
    * Adds a bunny's contribution to the counts.
    * @param {Bunny} bunny
+   * @returns {BunnyCounts}
    * @public
    */
-  add( bunny ) {
-    this.updateCounts( bunny, 1 );
+  plus( bunny ) {
+    return this.updateCounts( bunny, 1 );
   }
 
   /**
    * Subtracts a bunny's contribution from the counts.
    * @param {Bunny} bunny
+   * @returns {BunnyCounts}
    * @public
    */
-  subtract( bunny ) {
-    this.updateCounts( bunny, -1 );
+  minus( bunny ) {
+    return this.updateCounts( bunny, -1 );
   }
 
   /**
    * Adjusts the counts based on a bunny's phenotype.
    * @param {Bunny} bunny
    * @param {number} delta
+   * @returns {BunnyCounts}
    * @private
    */
   updateCounts( bunny, delta ) {
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
     assert && assert( delta === 1 || delta === -1, 'invalid delta' );
 
-    // total count
-    this.totalCountProperty.value += delta;
-
-    // fur counts
-    if ( bunny.phenotype.hasWhiteFur() ) {
-      this.whiteFurCountProperty.value += delta;
-    }
-    else {
-      this.brownFurCountProperty.value += delta;
-    }
-
-    // ears counts
-    if ( bunny.phenotype.hasStraightEars() ) {
-      this.straightEarsCountProperty.value += delta;
-    }
-    else {
-      this.floppyEarsCountProperty.value += delta;
-    }
-
-    // teeth counts
-    if ( bunny.phenotype.hasShortTeeth() ) {
-      this.shortTeethCountProperty.value += delta;
-    }
-    else {
-      this.longTeethCountProperty.value += delta;
-    }
-
-    assert && this.validateCounts();
+    return new BunnyCounts( {
+      totalCount: this.totalCount + delta,
+      whiteFurCount: this.whiteFurCount + ( bunny.phenotype.hasWhiteFur() ? delta : 0 ),
+      brownFurCount: this.brownFurCount + ( bunny.phenotype.hasBrownFur() ? delta : 0 ),
+      straightEarsCount: this.straightEarsCount + ( bunny.phenotype.hasStraightEars() ? delta : 0 ),
+      floppyEarsCount: this.floppyEarsCount + ( bunny.phenotype.hasFloppyEars() ? delta : 0 ),
+      shortTeethCount: this.shortTeethCount + ( bunny.phenotype.hasShortTeeth() ? delta : 0 ),
+      longTeethCount: this.longTeethCount + ( bunny.phenotype.hasLongTeeth() ? delta : 0 )
+    } );
   }
 
+  //TODO delete if unused
   /**
-   * Validates the counts. The sum of the counts for a gene's alleles should equal the total count.
-   * @private
-   */
-  validateCounts() {
-    const totalCount = this.totalCountProperty.value;
-    assert && assert( this.whiteFurCountProperty.value + this.brownFurCountProperty.value === totalCount,
-      'fur counts are out of sync' );
-    assert && assert( this.straightEarsCountProperty.value + this.floppyEarsCountProperty.value === totalCount,
-      'ears counts are out of sync' );
-    assert && assert( this.shortTeethCountProperty.value + this.longTeethCountProperty.value === totalCount,
-      'teeth counts are out of sync' );
-  }
-
-  /**
-   * Creates a snapshot of the counts.
-   * @returns {BunnyCountsSnapshot}
+   * Creates a copy of this BunnyCounts instance.
+   * @returns {BunnyCounts}
    * @public
    */
-  createSnapshot() {
-    return new BunnyCountsSnapshot( {
-      totalCount: this.totalCountProperty.value,
-      whiteFurCount: this.whiteFurCountProperty.value,
-      brownFurCount: this.brownFurCountProperty.value,
-      straightEarsCount: this.straightEarsCountProperty.value,
-      floppyEarsCount: this.floppyEarsCountProperty.value,
-      shortTeethCount: this.shortTeethCountProperty.value,
-      longTeethCount: this.longTeethCountProperty.value
+  copy() {
+    return new BunnyCounts( {
+      totalCount: this.totalCount,
+      whiteFurCount: this.whiteFurCount,
+      brownFurCount: this.brownFurCount,
+      straightEarsCount: this.straightEarsCount,
+      floppyEarsCount: this.floppyEarsCount,
+      shortTeethCount: this.shortTeethCount,
+      longTeethCount: this.longTeethCount
+    } );
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Below here are methods used by BunnyCountsIO to save and restore PhET-iO state.
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Serializes this BunnyCounts instance.
+   * @returns {Object}
+   * @public for use by BunnyCountsIO only
+   */
+  toStateObject() {
+    return {
+      totalCount: NumberIO.toStateObject( this.totalCount ),
+      whiteFurCount: NumberIO.toStateObject( this.whiteFurCount ),
+      brownFurCount: NumberIO.toStateObject( this.brownFurCount ),
+      straightEarsCount: NumberIO.toStateObject( this.straightEarsCount ),
+      floppyEarsCount: NumberIO.toStateObject( this.floppyEarsCount ),
+      shortTeethCount: NumberIO.toStateObject( this.shortTeethCount ),
+      longTeethCount: NumberIO.toStateObject( this.longTeethCount )
+    };
+  }
+
+  /**
+   * Deserializes a BunnyCounts instance.
+   * @param {Object} stateObject - return value from toStateObject
+   * @returns {BunnyCounts}
+   * @public for use by BunnyCountsIO only
+   */
+  static fromStateObject( stateObject ) {
+    return new BunnyCounts( {
+      totalCount: NumberIO.fromStateObject( stateObject.totalCount ),
+      whiteFurCount: NumberIO.fromStateObject( stateObject.whiteFurCount ),
+      brownFurCount: NumberIO.fromStateObject( stateObject.brownFurCount ),
+      straightEarsCount: NumberIO.fromStateObject( stateObject.straightEarsCount ),
+      floppyEarsCount: NumberIO.fromStateObject( stateObject.floppyEarsCount ),
+      shortTeethCount: NumberIO.fromStateObject( stateObject.shortTeethCount ),
+      longTeethCount: NumberIO.fromStateObject( stateObject.longTeethCount )
     } );
   }
 
   /**
-   * Sets all count values to match a specified snapshot.
-   * @param {BunnyCountsSnapshot} snapshot
-   * @public
+   * Performs validation of this instance.
+   * @private
    */
-  setValues( snapshot ) {
-    assert && assert( snapshot instanceof BunnyCountsSnapshot, 'invalid snapshot' );
+  validateInstance() {
+    assert && assert( isValidCount( this.totalCount ), 'invalid totalCount' );
+    assert && assert( isValidCount( this.whiteFurCount ), 'invalid whiteFurCount' );
+    assert && assert( isValidCount( this.brownFurCount ), 'invalid brownFurCount' );
+    assert && assert( isValidCount( this.straightEarsCount ), 'invalid straightEarsCount' );
+    assert && assert( isValidCount( this.floppyEarsCount ), 'invalid floppyEarsCount' );
+    assert && assert( isValidCount( this.shortTeethCount ), 'invalid shortTeethCount' );
+    assert && assert( isValidCount( this.longTeethCount ), 'invalid longTeethCount' );
 
-    this.totalCountProperty.value = snapshot.totalCount;
-    this.whiteFurCountProperty.value = snapshot.whiteFurCount;
-    this.brownFurCountProperty.value = snapshot.brownFurCount;
-    this.straightEarsCountProperty.value = snapshot.straightEarsCount;
-    this.floppyEarsCountProperty.value = snapshot.floppyEarsCount;
-    this.shortTeethCountProperty.value = snapshot.shortTeethCount;
-    this.longTeethCountProperty.value = snapshot.longTeethCount;
+    assert && assert( this.whiteFurCount + this.brownFurCount === this.totalCount,
+      'fur counts are out of sync' );
+    assert && assert( this.straightEarsCount + this.floppyEarsCount === this.totalCount,
+      'ears counts are out of sync' );
+    assert && assert( this.shortTeethCount + this.longTeethCount === this.totalCount,
+      'teeth counts are out of sync' );
   }
+}
+
+BunnyCounts.ZERO = new BunnyCounts( {
+  totalCount: 0,
+  whiteFurCount: 0,
+  brownFurCount: 0,
+  straightEarsCount: 0,
+  floppyEarsCount: 0,
+  shortTeethCount: 0,
+  longTeethCount: 0
+} );
+
+/**
+ * Determines whether a value is a valid count.
+ * @param {*} value
+ * @returns {boolean}
+ */
+function isValidCount( value ) {
+  return ( typeof value === 'number' && Utils.isInteger( value ) && value >= 0 );
 }
 
 naturalSelection.register( 'BunnyCounts', BunnyCounts );
