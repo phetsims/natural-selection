@@ -32,7 +32,7 @@ class BunnyArray extends ObservableArray {
 
     // @public (read-only)
     this.countsProperty = new Property( BunnyCounts.ZERO.copy(), {
-      tandem: options.tandem.createTandem( 'counts' ),
+      tandem: options.tandem.createTandem( 'countsProperty' ),
       phetioType: PropertyIO( BunnyCountsIO ),
       phetioState: false // because counts will be restored as Bunny instances are restored to BunnyGroup
     } );
