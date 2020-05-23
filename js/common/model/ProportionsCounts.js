@@ -1,8 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * ProportionsCounts is the data structure that describes the bunny population at the start and end of a generation.
- * This is static, immutable data.
+ * ProportionsCounts is a data structure used by the Proportions model. It describes the bunny population at
+ * the start and end of a generation. This is static, immutable data.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
