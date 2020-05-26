@@ -10,7 +10,7 @@
 | Intro screen | 0 | 5/7/2020 |
 | Pedigree graph | 0 | 5/11/2020 |
 | query parameters | 0 | 5/18/2020 |
-| Proportions graph | 1 week | | 
+| Proportions graph | 0 | 5/26/2020 | 
 | Population graph | 3 weeks | |
 | Food | 1 week | | 
 | Wolves | 1 week | |
