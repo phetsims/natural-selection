@@ -176,7 +176,7 @@ class Food {
         for ( let i = 0; i < numberToKill; i++ ) {
           bunnies[ i ].die( CauseOfDeath.LIMITED_FOOD );
         }
-        phet.log( `${numberToKill} bunnies died of starvation` );
+        phet.log && phet.log( `${numberToKill} bunnies died of starvation` );
       }
     }
   }
