@@ -17,6 +17,7 @@ import Bunny from './Bunny.js';
 import BunnyArray from './BunnyArray.js';
 import BunnyArrayIO from './BunnyArrayIO.js';
 import BunnyGroup from './BunnyGroup.js';
+import CauseOfDeath from './CauseOfDeath.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 
@@ -197,7 +198,7 @@ class BunnyCollection {
 
       // bunny dies if it exceeds the maximum age
       if ( bunny.age === NaturalSelectionConstants.MAX_AGE ) {
-        bunny.die();
+        bunny.die( CauseOfDeath.OLD_AGE );
         diedCount++;
       }
     } );

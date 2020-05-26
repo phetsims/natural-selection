@@ -19,6 +19,7 @@ import shrubToughBImage from '../../../images/shrub-tough-B_png.js';
 import shrubToughCImage from '../../../images/shrub-tough-C_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import CauseOfDeath from './CauseOfDeath.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Shrub from './Shrub.js';
 
@@ -129,6 +130,7 @@ class Food {
       if ( this.isToughProperty.value ) {
 
         // Kill off some of each type of bunny, but a higher percentage of bunnies with short teeth.
+        const causeOfDeath = this.isLimitedProperty.value ? CauseOfDeath.TOUGH_LIMITED_FOOD : CauseOfDeath.TOUGH_FOOD;
 
         // Kill off bunnies with long teeth.
         const bunniesLongTeeth = _.filter( bunnies, bunny => bunny.phenotype.hasLongTeeth() );
@@ -141,7 +143,7 @@ class Food {
         const numberToKillLongTeeth = Math.ceil( percentToKillLongTeeth * bunniesLongTeeth.length );
         assert && assert( numberToKillLongTeeth <= bunniesLongTeeth.length, 'invalid numberToKillLongTeeth' );
         for ( let i = 0; i < numberToKillLongTeeth; i++ ) {
-          bunniesLongTeeth[ i ].die();
+          bunniesLongTeeth[ i ].die( causeOfDeath );
         }
         phet.log( `${numberToKillLongTeeth} bunnies with long teeth died of starvation` );
 
@@ -153,7 +155,7 @@ class Food {
         const numberToKillShortTeeth = Math.ceil( percentToKillShortTeeth * bunniesShortTeeth.length );
         assert && assert( numberToKillShortTeeth <= bunniesShortTeeth.length, 'invalid numberToKillShortTeeth' );
         for ( let i = 0; i < numberToKillShortTeeth; i++ ) {
-          bunniesShortTeeth[ i ].die();
+          bunniesShortTeeth[ i ].die( causeOfDeath );
         }
         phet.log( `${numberToKillShortTeeth} bunnies with short teeth died of starvation` );
       }
@@ -165,7 +167,7 @@ class Food {
         const numberToKill = Math.ceil( percentToKill * bunnies.length );
         assert && assert( numberToKill <= bunnies.length, 'invalid numberToKill' );
         for ( let i = 0; i < numberToKill; i++ ) {
-          bunnies[ i ].die();
+          bunnies[ i ].die( CauseOfDeath.LIMITED_FOOD );
         }
         phet.log( `${numberToKill} bunnies died of starvation` );
       }

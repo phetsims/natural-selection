@@ -12,6 +12,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import CauseOfDeath from './CauseOfDeath.js';
 import Environment from './Environment.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Wolf from './Wolf.js';
@@ -94,7 +95,7 @@ class Wolves {
       const numberToKillWhiteFur = Math.ceil( percentToKillWhiteFur * bunniesWhiteFur.length );
       assert && assert( numberToKillWhiteFur <= bunniesWhiteFur.length, 'invalid numberToKillWhiteFur' );
       for ( let i = 0; i < numberToKillWhiteFur; i++ ) {
-        bunniesWhiteFur[ i ].die();
+        bunniesWhiteFur[ i ].die( CauseOfDeath.WOLF );
       }
       phet.log( `${numberToKillWhiteFur} bunnies with white fur were eaten by wolves` );
 
@@ -104,7 +105,7 @@ class Wolves {
       const numberToKillBrownFur = Math.ceil( percentToKillBrownFur * bunniesBrownFur.length );
       assert && assert( numberToKillBrownFur <= bunniesBrownFur.length, 'invalid numberToKillBrownFur' );
       for ( let i = 0; i < numberToKillBrownFur; i++ ) {
-        bunniesBrownFur[ i ].die();
+        bunniesBrownFur[ i ].die( CauseOfDeath.WOLF );
       }
       phet.log( `${numberToKillBrownFur} bunnies with brown fur were eaten by wolves` );
     }
