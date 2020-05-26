@@ -173,18 +173,26 @@ class NaturalSelectionModel {
       }
     } );
 
-    //TODO Temporarily do this all at once, at 6:00 on the generation clock.
     // Apply environmental factors.
     this.generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
-      if ( previousPercentTime < 0.5 && currentPercentTime >= 0.5 ) {
-        this.food.apply( this.bunnyCollection.liveBunnies.getArray() );
-        this.wolves.apply( this.bunnyCollection.liveBunnies.getArray(), this.environmentProperty.value );
 
-        //TODO this should probably be handled by BunnyCollection
-        // Notify if all bunnies have died.
-        if ( this.bunnyCollection.liveBunnies.length === 0 ) {
-          this.bunnyCollection.allBunniesHaveDiedEmitter.emit();
-        }
+      //TODO Temporarily apply environmental factors all at once, rather then spread out over 3:00-9:00.
+      // Apply wolves and food at different times, so we can see them separately on the Population graph.
+      const wolvesPercentTime = 1/3;
+      const foodPercentTime = 2/3;
+
+      if ( previousPercentTime < wolvesPercentTime && currentPercentTime >= wolvesPercentTime ) {
+        this.wolves.apply( this.bunnyCollection.liveBunnies.getArray(), this.environmentProperty.value );
+      }
+
+      if ( previousPercentTime < foodPercentTime && currentPercentTime >= foodPercentTime ) {
+        this.food.apply( this.bunnyCollection.liveBunnies.getArray() );
+      }
+
+      //TODO this should probably be handled by BunnyCollection
+      // Notify if all bunnies have died.
+      if ( this.bunnyCollection.liveBunnies.length === 0 ) {
+        this.bunnyCollection.allBunniesHaveDiedEmitter.emit();
       }
     } );
   }
