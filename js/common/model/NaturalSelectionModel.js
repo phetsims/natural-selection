@@ -172,6 +172,15 @@ class NaturalSelectionModel {
         this.proportionsModel.recordStartCounts( currentGeneration, this.bunnyCollection.getLiveBunnyCounts() );
       }
     } );
+
+    //TODO Temporarily do this all at once, at 6:00 on the generation clock.
+    // Apply environmental factors.
+    this.generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
+      if ( previousPercentTime < 0.5 && currentPercentTime >= 0.5 ) {
+        this.food.apply( this.bunnyCollection.liveBunnies.getArray() );
+        this.wolves.apply( this.bunnyCollection.liveBunnies.getArray(), this.environmentProperty.value );
+      }
+    } );
   }
 
   /**
