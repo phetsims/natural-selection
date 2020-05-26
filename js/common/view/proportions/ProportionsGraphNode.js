@@ -172,18 +172,21 @@ class ProportionsGraphNode extends Node {
       }
     } );
 
+    // If there is no data to display, hide the content and display 'No Data'.
+    proportionsModel.hasDataProperty.link( hasData => {
+      content.visible = hasData;
+      noDataText.visible = !hasData;
+    } );
+
+    // Update the displayed 'Start' counts.
     proportionsModel.startCountsProperty.link( startCounts => {
-
-      // If there is no data to display, hide the content and display 'No Data'.
-      noDataText.visible = ( startCounts.totalCount === 0 );
-      content.visible = !noDataText.visible;
-
       startRowLabel.setCount( startCounts.totalCount );
       furColumn.setStartCounts( startCounts.whiteFurCount, startCounts.brownFurCount );
       earsColumn.setStartCounts( startCounts.straightEarsCount, startCounts.floppyEarsCount );
       teethColumn.setStartCounts( startCounts.shortTeethCount, startCounts.longTeethCount );
     } );
 
+    // Update the displayed 'End' counts.
     proportionsModel.endCountsProperty.link( endCounts => {
       endRowLabel.setCount( endCounts.totalCount );
       furColumn.setEndCounts( endCounts.whiteFurCount, endCounts.brownFurCount );

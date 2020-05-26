@@ -179,6 +179,12 @@ class NaturalSelectionModel {
       if ( previousPercentTime < 0.5 && currentPercentTime >= 0.5 ) {
         this.food.apply( this.bunnyCollection.liveBunnies.getArray() );
         this.wolves.apply( this.bunnyCollection.liveBunnies.getArray(), this.environmentProperty.value );
+
+        //TODO this should probably be handled by BunnyCollection
+        // Notify if all bunnies have died.
+        if ( this.bunnyCollection.liveBunnies.length === 0 ) {
+          this.bunnyCollection.allBunniesHaveDiedEmitter.emit();
+        }
       }
     } );
   }

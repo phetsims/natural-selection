@@ -99,6 +99,9 @@ class ProportionsModel extends PhetioObject {
       phetioDocumentation: 'Counts for previous generations, indexed by generation number'
     } );
 
+    // @public Whether the model has data to display.
+    this.hasDataProperty = new DerivedProperty( [ currentStartCountsProperty ], currentStartCounts => !!currentStartCounts );
+
     // Pause the sim when a generation other than the current generation is being viewed.
     this.generationProperty.link( generation => {
       if ( generation !== currentGenerationProperty.value ) {
@@ -195,6 +198,7 @@ class ProportionsModel extends PhetioObject {
     assert && assert( generation === this.currentGenerationProperty.value, `${generation} is not the current generation` );
     this.currentStartCountsProperty.value = bunnyCounts;
     phet.log && phet.log( `ProportionsModel recorded start counts for generation ${generation}` );
+    phet.log && phet.log( `with total = ${this.currentStartCountsProperty.value.totalCount}` );//XXX
   }
 
   /**
@@ -209,8 +213,6 @@ class ProportionsModel extends PhetioObject {
 
     const startCounts = this.currentStartCountsProperty.value;
     this.previousCounts.push( new ProportionsCounts( generation, startCounts, endCounts ) );
-
-    this.currentStartCountsProperty.value = null;
 
     phet.log && phet.log( `ProportionsModel recorded end counts for generation ${generation}` );
   }
