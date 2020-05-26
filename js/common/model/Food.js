@@ -152,7 +152,7 @@ class Food {
         for ( let i = 0; i < numberToKillLongTeeth; i++ ) {
           bunniesLongTeeth[ i ].die( causeOfDeath );
         }
-        phet.log( `${numberToKillLongTeeth} bunnies with long teeth died of starvation` );
+        phet.log && phet.log( `${numberToKillLongTeeth} bunnies with long teeth died of starvation` );
 
         // Kill off bunnies with short teeth.
         const bunniesShortTeeth = _.filter( bunnies, bunny => bunny.phenotype.hasShortTeeth() );
@@ -164,7 +164,7 @@ class Food {
         for ( let i = 0; i < numberToKillShortTeeth; i++ ) {
           bunniesShortTeeth[ i ].die( causeOfDeath );
         }
-        phet.log( `${numberToKillShortTeeth} bunnies with short teeth died of starvation` );
+        phet.log && phet.log( `${numberToKillShortTeeth} bunnies with short teeth died of starvation` );
       }
       else if ( this.isLimitedProperty.value ) {
 

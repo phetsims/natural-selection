@@ -101,7 +101,7 @@ class Wolves {
       for ( let i = 0; i < numberToKillWhiteFur; i++ ) {
         bunniesWhiteFur[ i ].die( CauseOfDeath.WOLF );
       }
-      phet.log( `${numberToKillWhiteFur} bunnies with white fur were eaten by wolves` );
+      phet.log && phet.log( `${numberToKillWhiteFur} bunnies with white fur were eaten by wolves` );
 
       // Kill off bunnies with brown fur.
       const bunniesBrownFur = _.filter( bunnies, bunny => bunny.phenotype.hasBrownFur() );
@@ -111,7 +111,7 @@ class Wolves {
       for ( let i = 0; i < numberToKillBrownFur; i++ ) {
         bunniesBrownFur[ i ].die( CauseOfDeath.WOLF );
       }
-      phet.log( `${numberToKillBrownFur} bunnies with brown fur were eaten by wolves` );
+      phet.log && phet.log( `${numberToKillBrownFur} bunnies with brown fur were eaten by wolves` );
     }
   }
 }
