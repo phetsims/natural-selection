@@ -11,6 +11,7 @@ import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import CauseOfDeath from './CauseOfDeath.js';
 import Environment from './Environment.js';
@@ -20,11 +21,14 @@ import Wolf from './Wolf.js';
 // constants
 const NUMBER_OF_WOLVES = 8; //TODO this must be proportional to the number of bunnies, not constant
 
-// Percentage of bunnies to kill regardless of bunny's fur color.
-const WOLVES_PERCENT_TO_KILL = new Range( 0.05, 0.05 );
+// Wolves will kill at least this percentage of the bunnies, regardless of their fur color.
+const WOLVES_PERCENT_TO_KILL = new Range(
+  NaturalSelectionQueryParameters.wolvesPercentToKill[ 0 ],
+  NaturalSelectionQueryParameters.wolvesPercentToKill[ 1 ]
+);
 
 // Multiplier for when the bunny's fur color does not match the environment, applied to WOLVES_PERCENT_TO_KILL.
-const WOLVES_ENVIRONMENT_MULTIPLIER = 3;
+const WOLVES_ENVIRONMENT_MULTIPLIER = NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier;
 
 class Wolves {
 

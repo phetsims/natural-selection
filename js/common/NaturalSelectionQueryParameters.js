@@ -153,6 +153,57 @@ const SCHEMA = {
     isValidValue: litterSize => NaturalSelectionUtils.isPositiveInteger( litterSize )
   },
 
+  // Wolves will kill at least this percentage of the bunnies, regardless of their fur color.
+  // For internal use only.
+  wolvesPercentToKill: {
+    type: 'array',
+    elementSchema: { type: 'number' },
+    defaultValue: [ 0.05, 0.05 ], // min, max
+    isValidValue: array => isPercentRange( array )
+  },
+
+  // Multiplier for when the bunny's fur color does not match the environment, applied to wolvesPercentToKill.
+  // For internal use only.
+  wolvesEnvironmentMultiplier: {
+    type: 'number',
+    defaultValue: 3,
+    isValidValue: value => ( value > 0 )
+  },
+
+  // Limited tender food will cause this percentage of bunnies to die of starvation, regardless of their teeth genes.
+  // For internal use only.
+  limitedFoodPercentToKill: {
+    type: 'array',
+    elementSchema: { type: 'number' },
+    defaultValue: [ 0.1, 0.1 ], // min, max
+    isValidValue: array => isPercentRange( array )
+  },
+
+  // Tough unlimited food will cause this percentage of bunnies to die of starvation, regardless of their teeth genes.
+  // For internal use only.
+  toughFoodPercentToKill: {
+    type: 'array',
+    elementSchema: { type: 'number' },
+    defaultValue: [ 0.05, 0.05 ], // min, max
+    isValidValue: array => isPercentRange( array )
+  },
+
+  // Multiplier for when limited food is combined with tough food, applied to toughFoodPercentToKill.
+  // For internal use only.
+  limitedFoodMultiplier: {
+    type: 'number',
+    defaultValue: 2,
+    isValidValue: value => ( value > 0 )
+  },
+
+  // Multiplier for bunnies with short teeth when food is tough, applied to toughFoodPercentToKill.
+  // For internal use only.
+  shortTeethMultiplier: {
+    type: 'number',
+    defaultValue: 3,
+    isValidValue: value => ( value > 0 )
+  },
+
   // Adds a red dot at the origin of some objects (bunnies, wolves, food)
   showOrigin: {
     type: 'flag'
@@ -189,9 +240,27 @@ NaturalSelectionQueryParameters.getDefaultValue = function( key ) {
   return SCHEMA[ key ].defaultValue;
 };
 
+/**
+ * Is the query parameter value a min/max range for a percentage?
+ * @param {*} array
+ * @returns {boolean}
+ */
+function isPercentRange( array ) {
+  return ( Array.isArray( array ) && ( array.length === 2 ) && ( array[ 0 ] <= array[ 1 ] ) &&
+           _.every( array, element => ( element > 0 && element < 1 ) )
+  );
+}
+
 // validate query parameters
 assert && assert( NaturalSelectionQueryParameters.secondsPerStep < NaturalSelectionQueryParameters.secondsPerGeneration,
   'secondsPerStep must be < secondsPerGeneration' );
+assert && assert( NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier *
+                  NaturalSelectionQueryParameters.wolvesPercentToKill[ 1 ] < 1,
+  'wolvesEnvironmentMultiplier * wolvesPercentToKill.max must be < 1' );
+assert && assert( NaturalSelectionQueryParameters.limitedFoodMultiplier *
+                  NaturalSelectionQueryParameters.shortTeethMultiplier *
+                  NaturalSelectionQueryParameters.toughFoodPercentToKill[ 1 ] < 1,
+  'limitedFoodMultiplier * shortTeethMultiplier * toughFoodPercentToKill.max must be < 1' );
 
 // log the values of all sim-specific query parameters
 phet.log && phet.log( 'query parameters: ' + JSON.stringify( NaturalSelectionQueryParameters, null, 2 ) );
