@@ -97,7 +97,8 @@ class PedigreeBunnyNode extends Node {
         this.addChild( new Text( '\u274c', {
           font: DEAD_SYMBOL_FONT,
           left: wrappedImage.left,
-          top: wrappedImage.top
+          // top: wrappedImage.top + 20
+          bottom: wrappedImage.centerY
         } ) );
       }
     };
