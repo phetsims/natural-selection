@@ -168,6 +168,20 @@ const NaturalSelectionUtils = {
    */
   assertCount( value ) {
     assert && assert( typeof value === 'number' && Utils.isInteger( value ) && value >= 0, `invalid count: ${value}` );
+  },
+
+  /**
+   * Gets the next random double in a Range.
+   * @param {Range} range
+   * @returns {number}
+   */
+  nextInRange( range ) {
+    if ( range.min === range.max ) {
+      return range.max;
+    }
+    else {
+      return phet.joist.random.nextDoubleBetween( range.min, range.max );
+    }
   }
 };
 

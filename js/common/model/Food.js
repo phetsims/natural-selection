@@ -8,6 +8,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import shrubTenderAImage from '../../../images/shrub-tender-A_png.js';
@@ -17,8 +18,23 @@ import shrubToughAImage from '../../../images/shrub-tough-A_png.js';
 import shrubToughBImage from '../../../images/shrub-tough-B_png.js';
 import shrubToughCImage from '../../../images/shrub-tough-C_png.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Shrub from './Shrub.js';
+
+// constants
+
+// Percentage of bunnies to kill regardless of teeth genes when there is limited tender food.
+const LIMITED_TENDER_FOOD_PERCENT_TO_KILL = new Range( 0.10, 0.10 );
+
+// Percentage of bunnies to kill regardless of teeth genes when there is tough food.
+const TOUGH_FOOD_PERCENT_TO_KILL = new Range( 0.05, 0.05 );
+
+// Tough food multiplier for limited food, applied to TOUGH_FOOD_PERCENT_TO_KILL.
+const TOUGH_LIMITED_FOOD_MULTIPLIER = 2;
+
+// Tough food multiplier for short teeth, applied to TOUGH_FOOD_PERCENT_TO_KILL.
+const TOUGH_FOOD_SHORT_TEETH_MULTIPLIER = 3;
 
 class Food {
 
@@ -116,10 +132,13 @@ class Food {
 
         // Kill off bunnies with long teeth.
         const bunniesLongTeeth = _.filter( bunnies, bunny => bunny.phenotype.hasLongTeeth() );
-        const percentageToKillLongTeeth = this.isLimitedProperty.value ? 0.10 : 0.05;
-        assert && assert( percentageToKillLongTeeth > 0 && percentageToKillLongTeeth < 1,
-          `invalid percentageToKillLongTeeth: ${percentageToKillLongTeeth}` );
-        const numberToKillLongTeeth = Math.ceil( percentageToKillLongTeeth * bunniesLongTeeth.length );
+        let percentToKillLongTeeth = NaturalSelectionUtils.nextInRange( TOUGH_FOOD_PERCENT_TO_KILL );
+        if ( this.isLimitedProperty.value ) {
+          percentToKillLongTeeth *= TOUGH_LIMITED_FOOD_MULTIPLIER;
+        }
+        assert && assert( percentToKillLongTeeth > 0 && percentToKillLongTeeth < 1,
+          `invalid percentToKillLongTeeth: ${percentToKillLongTeeth}` );
+        const numberToKillLongTeeth = Math.ceil( percentToKillLongTeeth * bunniesLongTeeth.length );
         assert && assert( numberToKillLongTeeth <= bunniesLongTeeth.length, 'invalid numberToKillLongTeeth' );
         for ( let i = 0; i < numberToKillLongTeeth; i++ ) {
           bunniesLongTeeth[ i ].die();
@@ -128,10 +147,10 @@ class Food {
 
         // Kill off bunnies with short teeth.
         const bunniesShortTeeth = _.filter( bunnies, bunny => bunny.phenotype.hasShortTeeth() );
-        const percentageToKillShortTeeth = 3 * percentageToKillLongTeeth;
-        assert && assert( percentageToKillShortTeeth > 0 && percentageToKillShortTeeth < 1,
-          `invalid percentageToKillShortTeeth: ${percentageToKillShortTeeth}` );
-        const numberToKillShortTeeth = Math.ceil( percentageToKillShortTeeth * bunniesShortTeeth.length );
+        const percentToKillShortTeeth = TOUGH_FOOD_SHORT_TEETH_MULTIPLIER * percentToKillLongTeeth;
+        assert && assert( percentToKillShortTeeth > 0 && percentToKillShortTeeth < 1,
+          `invalid percentToKillShortTeeth: ${percentToKillShortTeeth}` );
+        const numberToKillShortTeeth = Math.ceil( percentToKillShortTeeth * bunniesShortTeeth.length );
         assert && assert( numberToKillShortTeeth <= bunniesShortTeeth.length, 'invalid numberToKillShortTeeth' );
         for ( let i = 0; i < numberToKillShortTeeth; i++ ) {
           bunniesShortTeeth[ i ].die();
@@ -141,9 +160,9 @@ class Food {
       else if ( this.isLimitedProperty.value ) {
 
         // Kill off a percentage of all bunnies, regardless of their Teeth genes.
-        const percentageToKill = 0.10;
-        assert && assert( percentageToKill > 0 && percentageToKill < 1, `invalid percentageToKill: ${percentageToKill}` );
-        const numberToKill = Math.ceil( percentageToKill * bunnies.length );
+        const percentToKill = NaturalSelectionUtils.nextInRange( LIMITED_TENDER_FOOD_PERCENT_TO_KILL );
+        assert && assert( percentToKill > 0 && percentToKill < 1, `invalid percentToKill: ${percentToKill}` );
+        const numberToKill = Math.ceil( percentToKill * bunnies.length );
         assert && assert( numberToKill <= bunnies.length, 'invalid numberToKill' );
         for ( let i = 0; i < numberToKill; i++ ) {
           bunnies[ i ].die();
