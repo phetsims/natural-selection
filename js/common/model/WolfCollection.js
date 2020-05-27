@@ -1,12 +1,15 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2020, University of Colorado Boulder
 
 /**
- * Wolves is the model of a pack of wolves.
+ * WolfCollection is the collection of Wolf instances, with methods for managing that collection.
+ * It encapsulates WolfGroup (the PhetioGroup), hiding it from the rest of the sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Emitter from '../../../../axon/js/Emitter.js';
+import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -17,6 +20,8 @@ import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import CauseOfDeath from './CauseOfDeath.js';
 import Environment from './Environment.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
+import Wolf from './Wolf.js';
+import WolfGroup from './WolfGroup.js';
 
 // constants
 const MIN_WOLVES = NaturalSelectionQueryParameters.minWolves;
@@ -31,14 +36,16 @@ const WOLVES_PERCENT_TO_KILL = new Range(
 // Multiplier for when the bunny's fur color does not match the environment, applied to WOLVES_PERCENT_TO_KILL.
 const WOLVES_ENVIRONMENT_MULTIPLIER = NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier;
 
-class Wolves {
+class WolfCollection {
 
   /**
+   * @param {ObservableArray.<Bunny>} liveBunnies
    * @param {EnvironmentModelViewTransform} modelViewTransform
    * @param {Object} [options]
    */
-  constructor( modelViewTransform, options ) {
+  constructor( liveBunnies, modelViewTransform, options ) {
 
+    assert && assert( liveBunnies instanceof ObservableArray, 'invalid liveBunnies' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
     options = merge( {
@@ -47,46 +54,83 @@ class Wolves {
       tandem: Tandem.REQUIRED
     }, options );
 
-    //TODO PhetioGroup for Wolf instances
+    // @private
+    this.liveBunnies = liveBunnies;
 
-    // @public TODO rename to activeProperty? areHuntingProperty?
+    // @private the PhetioGroup that manages Wolf instances as dynamic PhET-iO elements
+    this.wolfGroup = new WolfGroup( modelViewTransform, {
+      tandem: options.tandem.createTandem( 'wolfGroup' )
+    } );
+
+    // @public notify when a Wolf has been created
+    this.wolfCreatedEmitter = new Emitter( {
+      parameters: [ { valueType: Wolf } ]
+    } );
+
+    // @public
     this.enabledProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'enabledProperty' )
+    } );
+
+    // When the group creates a Wolf, notify listeners
+    this.wolfGroup.elementCreatedEmitter.addListener( wolf => {
+      this.wolfCreatedEmitter.emit( wolf );
+    } );
+
+    //TODO this is temporary, should only create wolves during death interval
+    this.enabledProperty.lazyLink( enabled => {
+      if ( enabled ) {
+        const numberOfWolves = Math.max( MIN_WOLVES, Utils.roundSymmetric( liveBunnies.length / BUNNIES_PER_WOLF ) );
+        phet.log && phet.log( `Creating ${numberOfWolves} wolves` );
+        for ( let i = 0; i < numberOfWolves; i++ ) {
+          this.wolfGroup.createNextElement();
+        }
+      }
+      else {
+        phet.log && phet.log( `Disposing of ${this.wolfGroup.count} wolves` );
+        this.wolfGroup.clear();
+      }
     } );
   }
 
   /**
+   * Resets the group.
    * @public
    */
   reset() {
-    this.enabledProperty.reset();
+    this.wolfGroup.clear(); // calls dispose for all Wolf instances
   }
 
   /**
+   * Gets the archetype for the PhetioGroup.
+   * @returns {Wolf|null} non-null only during API harvest
    * @public
    */
-  dispose() {
-    assert && assert( false, 'Wolves does not support dispose' );
+  getArchetype() {
+    return this.wolfGroup.archetype;
   }
 
   /**
+   * Steps all wolves.
+   * @param {number} dt - time step, in seconds
+   */
+  step( dt ) {
+    this.wolfGroup.step( dt );
+  }
+
+  //TODO this is temporary, wolves should eat throughout the death interval, not all at once
+  /**
    * Applies this environmental factor.
-   * @param {Bunny[]} bunnies
    * @param {Environment} environment
    * @public
    */
-  apply( bunnies, environment ) {
-    assert && assert( Array.isArray( bunnies ), 'invalid bunnies' );
+  apply( environment ) {
     assert && assert( Environment.includes( environment ), 'invalid environment' );
 
-    if ( bunnies.length > 0 && this.enabledProperty.value ) {
-
-      //TODO create Wolf instances dynamically
-      const numberOfWolves = Math.max( MIN_WOLVES, Utils.roundSymmetric( bunnies.length / BUNNIES_PER_WOLF ) );
-      phet.log && phet.log( `Deploying ${numberOfWolves} wolves` );
+    if ( this.liveBunnies.length > 0 && this.enabledProperty.value ) {
 
       // Kill off some of each type of bunny, but a higher percentage of bunnies that don't blend into the environment.
-      bunnies = phet.joist.random.shuffle( bunnies );
+      const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
       const percentToKillMatch = NaturalSelectionUtils.nextInRange( WOLVES_PERCENT_TO_KILL );
       assert && assert( percentToKillMatch > 0 && percentToKillMatch < 1, `invalid percentToKillMatch: ${percentToKillMatch}` );
       const percentToKillNoMatch = WOLVES_ENVIRONMENT_MULTIPLIER * percentToKillMatch;
@@ -115,5 +159,5 @@ class Wolves {
   }
 }
 
-naturalSelection.register( 'Wolves', Wolves );
-export default Wolves;
+naturalSelection.register( 'WolfCollection', WolfCollection );
+export default WolfCollection;

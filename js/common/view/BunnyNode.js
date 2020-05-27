@@ -19,7 +19,7 @@ import OriginNode from './OriginNode.js';
 import SpriteNode from './SpriteNode.js';
 
 // constants
-const IMAGE_SCALE = 0.4; // how much the bunny PNG images are scaled
+const IMAGE_SCALE = 0.4; // how much the bunny PNG image is scaled
 
 class BunnyNode extends SpriteNode {
 

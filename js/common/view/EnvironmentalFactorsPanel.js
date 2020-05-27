@@ -13,9 +13,8 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
-import Food from '../model/Food.js';
-import Wolves from '../model/Wolves.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import LimitedFoodCheckbox from './LimitedFoodCheckbox.js';
 import NaturalSelectionPanel from './NaturalSelectionPanel.js';
 import ToughFoodCheckbox from './ToughFoodCheckbox.js';
@@ -24,14 +23,16 @@ import WolvesCheckbox from './WolvesCheckbox.js';
 class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
 
   /**
-   * @param {Wolves} wolves
-   * @param {Food} food
+   * @param {Property.<boolean>} wolvesEnabledProperty
+   * @param {Property.<boolean>} foodIsToughProperty
+   * @param {Property.<boolean>} foodIsLimitedProperty
    * @param {Object} [options]
    */
-  constructor( wolves, food, options ) {
+  constructor( wolvesEnabledProperty, foodIsToughProperty, foodIsLimitedProperty, options ) {
 
-    assert && assert( wolves instanceof Wolves, 'invalid wolves' );
-    assert && assert( food instanceof Food, 'invalid food' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( wolvesEnabledProperty, 'boolean' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( foodIsToughProperty, 'boolean' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( foodIsLimitedProperty, 'boolean' );
 
     options = merge( {
       toughFoodCheckboxVisible: true,
@@ -46,15 +47,15 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       tandem: options.tandem.createTandem( 'titleNode' )
     } );
 
-    const wolvesCheckbox = new WolvesCheckbox( wolves.enabledProperty, {
+    const wolvesCheckbox = new WolvesCheckbox( wolvesEnabledProperty, {
       tandem: options.tandem.createTandem( 'wolvesCheckbox' )
     } );
 
-    const toughFoodCheckbox = new ToughFoodCheckbox( food.isToughProperty, {
+    const toughFoodCheckbox = new ToughFoodCheckbox( foodIsToughProperty, {
       tandem: options.tandem.createTandem( 'toughFoodCheckbox' )
     } );
 
-    const limitedFoodCheckbox = new LimitedFoodCheckbox( food.isLimitedProperty, {
+    const limitedFoodCheckbox = new LimitedFoodCheckbox( foodIsLimitedProperty, {
       tandem: options.tandem.createTandem( 'limitedFoodCheckbox' )
     } );
 

@@ -72,11 +72,12 @@ class NaturalSelectionScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'addMutationsPanel' )
     } );
 
-    const environmentalFactorsPanel = new EnvironmentalFactorsPanel( model.wolves, model.food, {
-      toughFoodCheckboxVisible: options.toughFoodCheckboxVisible,
-      fixedWidth: rightOfViewportWidth,
-      tandem: options.tandem.createTandem( 'environmentalFactorsPanel' )
-    } );
+    const environmentalFactorsPanel = new EnvironmentalFactorsPanel( model.wolfCollection.enabledProperty,
+      model.food.isToughProperty, model.food.isLimitedProperty, {
+        toughFoodCheckboxVisible: options.toughFoodCheckboxVisible,
+        fixedWidth: rightOfViewportWidth,
+        tandem: options.tandem.createTandem( 'environmentalFactorsPanel' )
+      } );
 
     const panelsParent = new VBox( {
       children: [ addMutationsPanel, environmentalFactorsPanel ],

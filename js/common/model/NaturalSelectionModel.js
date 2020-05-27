@@ -23,7 +23,7 @@ import PedigreeModel from './PedigreeModel.js';
 import PopulationModel from './PopulationModel.js';
 import ProportionsModel from './ProportionsModel.js';
 import SimulationMode from './SimulationMode.js';
-import Wolves from './Wolves.js';
+import WolfCollection from './WolfCollection.js';
 
 class NaturalSelectionModel {
 
@@ -82,8 +82,8 @@ class NaturalSelectionModel {
     } );
 
     // @public (read-only)
-    this.wolves = new Wolves( this.modelViewTransform, {
-      tandem: options.tandem.createTandem( 'wolves' )
+    this.wolfCollection = new WolfCollection( this.bunnyCollection.liveBunnies, this.modelViewTransform, {
+      tandem: options.tandem.createTandem( 'wolfCollection' )
     } );
 
     // @public (read-only)
@@ -93,7 +93,7 @@ class NaturalSelectionModel {
 
     // @public whether any environmental factor is enabled
     this.environmentalFactorEnabledProperty = new DerivedProperty(
-      [ this.wolves.enabledProperty, this.food.isToughProperty, this.food.isLimitedProperty ],
+      [ this.wolfCollection.enabledProperty, this.food.isToughProperty, this.food.isLimitedProperty ],
       ( wolvesEnabled, isTough, isLimited ) => ( wolvesEnabled || isTough || isLimited )
     );
 
@@ -182,7 +182,7 @@ class NaturalSelectionModel {
       const foodPercentTime = 2/3;
 
       if ( previousPercentTime < wolvesPercentTime && currentPercentTime >= wolvesPercentTime ) {
-        this.wolves.apply( this.bunnyCollection.liveBunnies.getArray(), this.environmentProperty.value );
+        this.wolfCollection.apply( this.environmentProperty.value );
       }
 
       if ( previousPercentTime < foodPercentTime && currentPercentTime >= foodPercentTime ) {
@@ -207,7 +207,7 @@ class NaturalSelectionModel {
 
     // environmental factors
     this.environmentProperty.reset();
-    this.wolves.reset();
+    this.wolfCollection.reset();
     this.food.reset();
   }
 

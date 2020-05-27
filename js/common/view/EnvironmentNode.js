@@ -23,6 +23,7 @@ import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
 import EnvironmentRadioButtonGroup from './EnvironmentRadioButtonGroup.js';
 import GenerationClockNode from './GenerationClockNode.js';
 import ShrubNode from './ShrubNode.js';
+import WolfNodeCollection from './WolfNodeCollection.js';
 
 class EnvironmentNode extends Node {
 
@@ -119,6 +120,20 @@ class EnvironmentNode extends Node {
 
     // When a Bunny is added to the model, create the corresponding BunnyNode.
     model.bunnyCollection.bunnyCreatedEmitter.addListener( createBunnyNode );
+
+    // manages dynamic WolfNode instances
+    const wolfNodeCollection = new WolfNodeCollection( model.wolfCollection, {
+      tandem: options.tandem.createTandem( 'wolfNodeCollection' )
+    } );
+
+    // Creates a WolfNode and adds it to the scenegraph
+    model.wolfCollection.wolfCreatedEmitter.addListener( wolf => {
+      const wolfNode = wolfNodeCollection.createWolfNode( wolf );
+      spritesNode.addChild( wolfNode );
+      if ( !model.isPlayingProperty ) {
+        this.sortSprites();
+      }
+    } );
 
     // Press on a bunny to select it. No need to removeInputListener, exists for the lifetime of the sim.
     spritesNode.addInputListener( new BunnyPressListener( model.pedigreeModel.selectedBunnyProperty, {
