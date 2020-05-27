@@ -8,6 +8,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Range from '../../../../dot/js/Range.js';
+import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -16,10 +17,10 @@ import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import CauseOfDeath from './CauseOfDeath.js';
 import Environment from './Environment.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
-import Wolf from './Wolf.js';
 
 // constants
-const NUMBER_OF_WOLVES = 8; //TODO this must be proportional to the number of bunnies, not constant
+const MIN_WOLVES = NaturalSelectionQueryParameters.minWolves;
+const BUNNIES_PER_WOLF = NaturalSelectionQueryParameters.bunniesPerWolf;
 
 // Wolves will kill at least this percentage of the bunnies, regardless of their fur color.
 const WOLVES_PERCENT_TO_KILL = new Range(
@@ -46,13 +47,7 @@ class Wolves {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // @public (read-only)
-    this.wolves = [];
-    for ( let i = 0; i < NUMBER_OF_WOLVES; i++ ) {
-      this.wolves.push( new Wolf( modelViewTransform, {
-        tandem: options.tandem.createTandem( `wolf${i}` )
-      } ) );
-    }
+    //TODO PhetioGroup for Wolf instances
 
     // @public TODO rename to activeProperty? areHuntingProperty?
     this.enabledProperty = new BooleanProperty( false, {
@@ -85,6 +80,10 @@ class Wolves {
     assert && assert( Environment.includes( environment ), 'invalid environment' );
 
     if ( bunnies.length > 0 && this.enabledProperty.value ) {
+
+      //TODO create Wolf instances dynamically
+      const numberOfWolves = Math.max( MIN_WOLVES, Utils.roundSymmetric( bunnies.length / BUNNIES_PER_WOLF ) );
+      phet.log && phet.log( `Deploying ${numberOfWolves} wolves` );
 
       // Kill off some of each type of bunny, but a higher percentage of bunnies that don't blend into the environment.
       bunnies = phet.joist.random.shuffle( bunnies );

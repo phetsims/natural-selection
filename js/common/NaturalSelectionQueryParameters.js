@@ -118,7 +118,7 @@ const SCHEMA = {
   secondsPerGeneration: {
     type: 'number',
     defaultValue: 10,
-    isValidValue: secondsPerGeneration => ( secondsPerGeneration > 0 )
+    isValidValue: value => ( value > 0 )
   },
 
   // Seconds of real time per each press of the Step button.
@@ -126,7 +126,7 @@ const SCHEMA = {
   secondsPerStep: {
     type: 'number',
     defaultValue: 0.1,
-    isValidValue: secondsPerStep => ( secondsPerStep > 0 )
+    isValidValue: value => ( value > 0 )
   },
 
   // The number of bunnies required to 'take over the world'.
@@ -134,7 +134,7 @@ const SCHEMA = {
   maxPopulation: {
     type: 'number',
     defaultValue: 750,
-    isValidValue: maxPopulation => ( maxPopulation > 0 && Utils.isInteger( maxPopulation ) )
+    isValidValue: value => ( value > 0 && Utils.isInteger( value ) )
   },
 
   // The number of bunnies per litter.
@@ -142,7 +142,7 @@ const SCHEMA = {
   maxAge: {
     type: 'number',
     defaultValue: 5,
-    isValidValue: maxAge => NaturalSelectionUtils.isPositiveInteger( maxAge )
+    isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
   },
 
   // The number of bunnies per litter.
@@ -150,7 +150,7 @@ const SCHEMA = {
   litterSize: {
     type: 'number',
     defaultValue: 4,
-    isValidValue: litterSize => NaturalSelectionUtils.isPositiveInteger( litterSize )
+    isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
   },
 
   // Wolves will kill at least this percentage of the bunnies, regardless of their fur color.
@@ -167,7 +167,7 @@ const SCHEMA = {
   wolvesEnvironmentMultiplier: {
     type: 'number',
     defaultValue: 3,
-    isValidValue: value => ( value > 0 )
+    isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
   },
 
   // Limited tender food will cause this percentage of bunnies to die of starvation, regardless of their teeth genes.
@@ -193,7 +193,7 @@ const SCHEMA = {
   limitedFoodMultiplier: {
     type: 'number',
     defaultValue: 2,
-    isValidValue: value => ( value > 0 )
+    isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
   },
 
   // Multiplier for bunnies with short teeth when food is tough, applied to toughFoodPercentToKill.
@@ -201,7 +201,24 @@ const SCHEMA = {
   shortTeethMultiplier: {
     type: 'number',
     defaultValue: 3,
-    isValidValue: value => ( value > 0 )
+    isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
+  },
+
+  // The minimum number of wolves
+  // For internal use only.
+  minWolves: {
+    type: 'number',
+    defaultValue: 5,
+    isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
+  },
+
+  // The number of bunnies per wolf. Wolves are created based on the size of the bunny population.
+  // The formula is: numberOfWolves = Math.max( ?minWolves, numberOfBunnies / ?bunniesPerWolf )
+  // For internal use only.
+  bunniesPerWolf: {
+    type: 'number',
+    defaultValue: 10,
+    isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
   },
 
   // Adds a red dot at the origin of some objects (bunnies, wolves, food)
