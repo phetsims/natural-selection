@@ -64,10 +64,10 @@ class Wolf extends Sprite {
   }
 
   /**
-   *
-   * @param dt
+   * Moves the Wolf around.
+   * @public
    */
-  step( dt ) {
+  move() {
     //TODO
   }
 

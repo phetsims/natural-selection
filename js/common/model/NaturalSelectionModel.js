@@ -263,6 +263,9 @@ class NaturalSelectionModel {
 
     // move the bunnies
     this.bunnyCollection.moveBunnies();
+
+    // move the wolves
+    this.wolfCollection.moveWolves();
   }
 
   /**

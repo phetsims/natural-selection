@@ -111,11 +111,11 @@ class WolfCollection {
   }
 
   /**
-   * Steps all wolves.
-   * @param {number} dt - time step, in seconds
+   * Moves all wolves.
+   * @public
    */
-  step( dt ) {
-    this.wolfGroup.step( dt );
+   moveWolves() {
+    this.wolfGroup.forEach( wolf => wolf.move() );
   }
 
   //TODO this is temporary, wolves should eat throughout the death interval, not all at once
