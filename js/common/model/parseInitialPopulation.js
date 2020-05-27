@@ -132,14 +132,14 @@ function parseMutations( genePool, mutationsName, mutationsValue ) {
 
     // If one of the abbreviations is specified, then make the mutant gene dominant or recessive.
     // This changes both the value and initialValue of dominantAlleleProperty, because this is the initial population,
-    // and we want dominantAlleleProperty.reset behave correctly.
+    // and we want dominantAlleleProperty.reset to behave correctly.
     if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 ) {
       gene.dominantAlleleProperty.value = gene.mutantAllele;
-      gene.dominantAlleleProperty.setInitialValue( gene.dominantAlleleProperty.value );
+      gene.dominantAlleleProperty.setInitialValue( gene.mutantAllele );
     }
     else if ( mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
       gene.dominantAlleleProperty.value = gene.normalAllele;
-      gene.dominantAlleleProperty.setInitialValue( gene.dominantAlleleProperty.value );
+      gene.dominantAlleleProperty.setInitialValue( gene.normalAllele );
     }
   } );
 
