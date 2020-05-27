@@ -26,7 +26,7 @@ Food:
 * punt on clustering around food for now
 
 Wolves:
-* number of wolves is dynamic, proportional to number of bunnies (PhetioGroup)
+* scale wolves based on position.z
 
 ## Performance
 
