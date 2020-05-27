@@ -7,6 +7,7 @@
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';
+import Vector3 from '../../../../dot/js/Vector3.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -68,7 +69,33 @@ class Wolf extends Sprite {
    * @public
    */
   move() {
-    //TODO
+
+    //TODO I don't understand the use of cos, sin, and swap -- same as Bunny.getHopDelta
+    const angle = phet.joist.random.nextDoubleBetween( 0, 2 * Math.PI );
+    const a = 3 * Math.cos( angle );
+    const b = 3 * Math.sin( angle );
+
+    const swap = ( Math.abs( a ) < Math.abs( b ) );
+
+    // Reverse direction if motion would exceed x boundaries
+    const dx = Math.abs( swap ? b : a ) * SpriteDirection.toSign( this.directionProperty.value );
+    let x = this.positionProperty.value.x + dx;
+    if ( x <= this.getMinimumX() || x >= this.getMaximumX() ) {
+      x = this.positionProperty.value.x - dx;
+      this.directionProperty.value = SpriteDirection.opposite( this.directionProperty.value );
+    }
+
+    // wolves never leave the ground
+    const y = this.positionProperty.value.y;
+
+    // Reverse direction if motion would exceed x boundaries
+    const dz = ( swap ? a : b );
+    let z = this.positionProperty.value.z + dz;
+    if ( z <= this.getMinimumZ() || z >= this.getMaximumZ() ) {
+      z = this.positionProperty.value.z - dz;
+    }
+
+    this.positionProperty.value = new Vector3( x, y, z );
   }
 
   //--------------------------------------------------------------------------------------------------------------------

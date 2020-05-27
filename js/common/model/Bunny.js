@@ -265,44 +265,6 @@ class Bunny extends Sprite {
   }
 
   /**
-   * Gets the minimum x coordinate for a bunny's position.
-   * @returns {number}
-   * @private
-   */
-  getMinimumX() {
-    return this.modelViewTransform.getMinimumX( this.positionProperty.value.z ) +
-           EnvironmentModelViewTransform.X_MARGIN_MODEL;
-  }
-
-  /**
-   * Gets the maximum x coordinate for a bunny's position.
-   * @returns {number}
-   * @private
-   */
-  getMaximumX() {
-    return this.modelViewTransform.getMaximumX( this.positionProperty.value.z ) -
-           EnvironmentModelViewTransform.X_MARGIN_MODEL;
-  }
-
-  /**
-   * Gets the minimum z coordinate for a bunny's position.
-   * @returns {number}
-   * @private
-   */
-  getMinimumZ() {
-    return this.modelViewTransform.getMinimumZ() + EnvironmentModelViewTransform.Z_MARGIN_MODEL;
-  }
-
-  /**
-   * Gets the maximum z coordinate for a bunny's position.
-   * @returns {number}
-   * @private
-   */
-  getMaximumZ() {
-    return this.modelViewTransform.getMaximumZ() - EnvironmentModelViewTransform.Z_MARGIN_MODEL;
-  }
-
-  /**
    * Converts Bunny to a string.
    * This is intended for debugging only. Do not rely on the format of this string!
    * @returns {string}
