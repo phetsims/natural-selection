@@ -77,18 +77,22 @@ class WolfCollection {
       this.wolfCreatedEmitter.emit( wolf );
     } );
 
-    //TODO this is temporary, should only create wolves during death interval
     this.enabledProperty.lazyLink( enabled => {
-      if ( enabled ) {
-        const numberOfWolves = Math.max( MIN_WOLVES, Utils.roundSymmetric( liveBunnies.length / BUNNIES_PER_WOLF ) );
-        phet.log && phet.log( `Creating ${numberOfWolves} wolves` );
-        for ( let i = 0; i < numberOfWolves; i++ ) {
-          this.wolfGroup.createNextElement();
+
+      //TODO This is temporary, should only create wolves during death interval, and should not call createNextElement
+      // when enabledProperty state is being restored.
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+        if ( enabled ) {
+          const numberOfWolves = Math.max( MIN_WOLVES, Utils.roundSymmetric( liveBunnies.length / BUNNIES_PER_WOLF ) );
+          phet.log && phet.log( `Creating ${numberOfWolves} wolves` );
+          for ( let i = 0; i < numberOfWolves; i++ ) {
+            this.wolfGroup.createNextElement();
+          }
         }
-      }
-      else {
-        phet.log && phet.log( `Disposing of ${this.wolfGroup.count} wolves` );
-        this.wolfGroup.clear();
+        else {
+          phet.log && phet.log( `Disposing of ${this.wolfGroup.count} wolves` );
+          this.wolfGroup.clear();
+        }
       }
     } );
   }
