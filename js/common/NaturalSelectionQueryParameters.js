@@ -188,19 +188,19 @@ const SCHEMA = {
     isValidValue: array => isPercentRange( array )
   },
 
-  // Multiplier for when limited food is combined with tough food, applied to toughFoodPercentToKill.
-  // For internal use only.
-  limitedFoodMultiplier: {
-    type: 'number',
-    defaultValue: 2,
-    isValidValue: value => ( value > 1 )
-  },
-
   // Multiplier for bunnies with short teeth when food is tough, applied to toughFoodPercentToKill.
   // For internal use only.
   shortTeethMultiplier: {
     type: 'number',
     defaultValue: 3,
+    isValidValue: value => ( value > 1 )
+  },
+
+  // Multiplier for when limited food is combined with tough food, applied to toughFoodPercentToKill.
+  // For internal use only.
+  limitedFoodMultiplier: {
+    type: 'number',
+    defaultValue: 2,
     isValidValue: value => ( value > 1 )
   },
 
