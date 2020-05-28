@@ -198,7 +198,6 @@ class ProportionsModel extends PhetioObject {
     assert && assert( generation === this.currentGenerationProperty.value, `${generation} is not the current generation` );
     this.currentStartCountsProperty.value = bunnyCounts;
     phet.log && phet.log( `ProportionsModel recorded start counts for generation ${generation}` );
-    phet.log && phet.log( `with total = ${this.currentStartCountsProperty.value.totalCount}` );//XXX
   }
 
   /**
