@@ -103,6 +103,7 @@ class WolfCollection {
    */
   reset() {
     this.wolfGroup.clear(); // calls dispose for all Wolf instances
+    this.enabledProperty.reset();
   }
 
   /**

@@ -198,7 +198,7 @@ class NaturalSelectionModel {
   }
 
   /**
-   * Resets the entire model.
+   * Resets the entire model when the 'Reset All' button is pressed.
    * @public
    */
   reset() {
@@ -207,12 +207,10 @@ class NaturalSelectionModel {
 
     // environmental factors
     this.environmentProperty.reset();
-    this.wolfCollection.reset();
-    this.food.reset();
   }
 
   /**
-   * Similar to reset, but does not reset environmental factors or graphs.
+   * Resets the part of the model that is reset when the 'Start Over' button is pressed.
    * @public
    */
   startOver() {
@@ -225,6 +223,9 @@ class NaturalSelectionModel {
 
     this.bunnyCollection.reset();
     this.initializeGenerationZero();
+
+    this.wolfCollection.reset();
+    this.food.reset();
 
     this.populationModel.reset();
     this.proportionsModel.reset();
