@@ -224,6 +224,7 @@ class NaturalSelectionModel {
     this.bunnyCollection.reset();
     this.initializeGenerationZero();
 
+    // See https://github.com/phetsims/natural-selection/issues/91
     this.wolfCollection.reset();
     this.food.reset();
 
