@@ -153,7 +153,13 @@ const SCHEMA = {
     isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
   },
 
-  // Wolves will kill at least this percentage of the bunnies, regardless of their fur color.
+  // This query parameter determines the percentages of bunnies that will be eaten by wolves.
+  // A value is randomly chosen from this range.
+  //
+  // Bunnies whose fur color matches the environment will be eaten at the rate specified by wolvesPercentToKill.
+  // Bunnies whose fur color does NOT match the environment will be eaten at the rate of wolvesEnvironmentMultiplier *
+  // wolvesPercentToKill.
+  //
   // For internal use only.
   wolvesPercentToKill: {
     type: 'array',
@@ -170,7 +176,9 @@ const SCHEMA = {
     isValidValue: value => ( value > 1 )
   },
 
-  // Limited tender food will cause this percentage of bunnies to die of starvation, regardless of their teeth genes.
+  // This query parameter determines the percentages of bunnies that will die of starvation when food is tender.
+  // A value is randomly chosen from this range.
+  // Bunnies will die at this rate regardless of their teeth alleles.
   // For internal use only.
   limitedFoodPercentToKill: {
     type: 'array',
@@ -179,7 +187,13 @@ const SCHEMA = {
     isValidValue: array => isPercentRange( array )
   },
 
-  // Tough unlimited food will cause this percentage of bunnies to die of starvation, regardless of their teeth genes.
+  // This query parameter determines the percentages of bunnies that will die of starvation when food is tough.
+  // A value is randomly chosen from this range.
+  //
+  // Bunnies with long teeth will die at the rate specified by toughFoodPercentToKill.
+  // Bunnies with short teeth will die at the rate of toughFoodPercentToKill * ?shortTeethMultiplier.
+  // If food is also limited, then the values for both types of bunny will be multiplied by ?limitedFoodMultiplier.
+  //
   // For internal use only.
   toughFoodPercentToKill: {
     type: 'array',
