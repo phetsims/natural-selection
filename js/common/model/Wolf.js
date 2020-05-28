@@ -74,22 +74,25 @@ class Wolf extends Sprite {
     const angle = phet.joist.random.nextDoubleBetween( 0, 2 * Math.PI );
     const a = 3 * Math.cos( angle );
     const b = 3 * Math.sin( angle );
-
     const swap = ( Math.abs( a ) < Math.abs( b ) );
 
-    // Reverse direction if motion would exceed x boundaries
+    let z = this.positionProperty.value.z;
+
     const dx = Math.abs( swap ? b : a ) * SpriteDirection.toSign( this.directionProperty.value );
     let x = this.positionProperty.value.x + dx;
+
+    // Reverse direction if motion would exceed x boundaries
     if ( x <= this.getMinimumX() || x >= this.getMaximumX() ) {
       x = this.positionProperty.value.x - dx;
       this.directionProperty.value = SpriteDirection.opposite( this.directionProperty.value );
-    }
 
-    // Reverse direction if motion would exceed x boundaries
-    const dz = ( swap ? a : b );
-    let z = this.positionProperty.value.z + dz;
-    if ( z <= this.getMinimumZ() || z >= this.getMaximumZ() ) {
-      z = this.positionProperty.value.z - dz;
+      // Change z when direction changes.
+      // Reverse direction if motion would exceed z boundaries
+      const dz = ( swap ? a : b );
+      z = this.positionProperty.value.z + dz;
+      if ( z <= this.getMinimumZ() || z >= this.getMaximumZ() ) {
+        z = this.positionProperty.value.z - dz;
+      }
     }
 
     // wolves never leave the ground
