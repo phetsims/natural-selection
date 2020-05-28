@@ -109,6 +109,9 @@ class ProportionsBarNode extends Node {
     assert && NaturalSelectionUtils.assertCount( normalCount );
     assert && NaturalSelectionUtils.assertCount( mutantCount );
 
+    this.normalCount = normalCount;
+    this.mutantCount = mutantCount;
+
     const total = normalCount + mutantCount;
 
     const normalPercentage = 100 * normalCount / total;
