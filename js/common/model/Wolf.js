@@ -85,15 +85,15 @@ class Wolf extends Sprite {
       this.directionProperty.value = SpriteDirection.opposite( this.directionProperty.value );
     }
 
-    // wolves never leave the ground
-    const y = this.positionProperty.value.y;
-
     // Reverse direction if motion would exceed x boundaries
     const dz = ( swap ? a : b );
     let z = this.positionProperty.value.z + dz;
     if ( z <= this.getMinimumZ() || z >= this.getMaximumZ() ) {
       z = this.positionProperty.value.z - dz;
     }
+
+    // wolves never leave the ground
+    const y = this.modelViewTransform.getGroundY( z );
 
     this.positionProperty.value = new Vector3( x, y, z );
   }
