@@ -109,6 +109,17 @@ class ProportionsModel extends PhetioObject {
       }
     } );
 
+    // @public visibility of the column for each trait in the graph
+    this.furVisibleProperty = new BooleanProperty( true, {
+      tandem: options.tandem.createTandem( 'furVisibleProperty' )
+    } );
+    this.earsVisibleProperty = new BooleanProperty( true, {
+      tandem: options.tandem.createTandem( 'earsVisibleProperty' )
+    } );
+    this.teethVisibleProperty = new BooleanProperty( true, {
+      tandem: options.tandem.createTandem( 'teethVisibleProperty' )
+    } );
+
     // When the sim starts playing or the current generation changes, show the current generation immediately.
     Property.multilink(
       [ isPlayingProperty, currentGenerationProperty ],
@@ -179,6 +190,9 @@ class ProportionsModel extends PhetioObject {
     this.endCountsProperty.reset();
     this.currentStartCountsProperty.reset();
     this.previousCounts.clear();
+    this.furVisibleProperty.reset();
+    this.earsVisibleProperty.reset();
+    this.teethVisibleProperty.reset();
   }
 
   /**

@@ -15,23 +15,23 @@ import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import GenePool from '../../model/GenePool.js';
+import ProportionsModel from '../../model/ProportionsModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
-import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
 import ProportionsLegendNode from './ProportionsLegendNode.js';
 
 class ProportionsPanel extends NaturalSelectionPanel {
 
   /**
+   * @param {ProportionsModel} proportionsModel
    * @param {GenePool} genePool
-   * @param {Property.<boolean>} valuesVisibleProperty
    * @param {Object} [options]
    */
-  constructor( genePool, valuesVisibleProperty, options ) {
+  constructor( proportionsModel, genePool, options ) {
 
+    assert && assert( proportionsModel instanceof ProportionsModel, 'invalid proportionsModel' );
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( valuesVisibleProperty, 'boolean' );
 
     options = merge( {
       fixedWidth: 100,
@@ -41,13 +41,8 @@ class ProportionsPanel extends NaturalSelectionPanel {
       tandem: Tandem.REQUIRED
     }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
-    const legendNode = new ProportionsLegendNode( genePool, {
+    const legendNode = new ProportionsLegendNode( proportionsModel, genePool, {
       tandem: options.tandem.createTandem( 'legendNode' )
-    } );
-
-    const separator =  new HSeparator( options.fixedWidth - 2 * options.xMargin, {
-      stroke: NaturalSelectionColors.SEPARATOR_STROKE,
-      tandem: options.tandem.createTandem( 'separator' )
     } );
 
     const valuesCheckbox = new Checkbox(
@@ -55,11 +50,17 @@ class ProportionsPanel extends NaturalSelectionPanel {
         font: NaturalSelectionConstants.CHECKBOX_FONT,
         maxWidth: 100 // determined empirically
       } ),
-      valuesVisibleProperty,
+      proportionsModel.valuesVisibleProperty,
       merge( {
         tandem: options.tandem.createTandem( 'valuesCheckbox' )
       }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
     );
+
+    const separatorWidth = _.max( [ legendNode.width, valuesCheckbox.width, options.fixedWidth - 2 * options.xMargin ] );
+    const separator =  new HSeparator( separatorWidth, {
+      stroke: NaturalSelectionColors.SEPARATOR_STROKE,
+      tandem: options.tandem.createTandem( 'separator' )
+    } );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: [

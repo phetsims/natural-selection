@@ -8,17 +8,19 @@
  */
 
 import merge from '../../../../../phet-core/js/merge.js';
-import required from '../../../../../phet-core/js/required.js';
 import HBox from '../../../../../scenery/js/nodes/HBox.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import Color from '../../../../../scenery/js/util/Color.js';
+import Checkbox from '../../../../../sun/js/Checkbox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
+import ProportionsModel from '../../model/ProportionsModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
+import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import HatchingRectangle from '../HatchingRectangle.js';
 
 // constants
@@ -28,11 +30,13 @@ const RECTANGLE_HEIGHT = 15;
 class ProportionsLegendNode extends VBox {
 
   /**
+   * @param {ProportionsModel} proportionsModel
    * @param {GenePool} genePool
    * @param {Object} [options]
    */
-  constructor( genePool, options ) {
+  constructor( proportionsModel, genePool, options ) {
 
+    assert && assert( proportionsModel instanceof ProportionsModel, 'invalid proportionsModel' );
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
 
     options = merge( {
@@ -45,22 +49,16 @@ class ProportionsLegendNode extends VBox {
     assert && assert( options.spacing, 'ProportionsLegendNode sets spacing' );
     options.spacing = 25;
 
-    const furLegendNode = new GeneLegendNode( genePool.furGene, {
-      tandem: options.tandem.createTandem( 'furLegendNode' ),
-      normalTandemName: 'whiteFurLegendNode',
-      mutantTandemName: 'brownFurLegendNode'
+    const furLegendNode = new GeneCheckbox( genePool.furGene, proportionsModel.furVisibleProperty, {
+      tandem: options.tandem.createTandem( 'furLegendNode' )
     } );
 
-    const earsLegendNode = new GeneLegendNode( genePool.earsGene, {
-      tandem: options.tandem.createTandem( 'earsLegendNode' ),
-      normalTandemName: 'straightEarsLegendNode',
-      mutantTandemName: 'floppyEarsLegendNode'
+    const earsLegendNode = new GeneCheckbox( genePool.earsGene, proportionsModel.earsVisibleProperty, {
+      tandem: options.tandem.createTandem( 'earsLegendNode' )
     } );
 
-    const teethLegendNode = new GeneLegendNode( genePool.teethGene, {
-      tandem: options.tandem.createTandem( 'teethLegendNode' ),
-      normalTandemName: 'shortTeethLegendNode',
-      mutantTandemName: 'longTeethLegendNode'
+    const teethLegendNode = new GeneCheckbox( genePool.teethGene, proportionsModel.teethVisibleProperty, {
+      tandem: options.tandem.createTandem( 'teethLegendNode' )
     } );
 
     assert && assert( !options.children, 'ProportionsLegendNode sets children' );
@@ -88,41 +86,39 @@ class ProportionsLegendNode extends VBox {
 }
 
 /**
- * GeneLegendNode is the legend for one gene. It shows the color and fill-style used for both the normal allele and
- * the mutation allele.
+ * GeneCheckbox is a checkbox for showing and hiding a gene in the Proportions graph. It is labeled with a legend
+ * that shows the colors and fill-styles used for the normal allele and the mutation allele.
  */
-class GeneLegendNode extends VBox {
+class GeneCheckbox extends Checkbox {
 
   /**
    * @param {Gene} gene
+   * @param {Property.<boolean>} property
    * @param {Object} [options]
    */
-  constructor( gene, options ) {
+  constructor( gene, property, options ) {
 
     assert && assert( gene instanceof Gene, 'invalid gene' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( property, 'boolean' );
 
     options = merge( {
 
       // phet-io
-      tandem: Tandem.REQUIRED,
-      normalTandemName: required( null ), // tandem name for the normal allele
-      mutantTandemName: required( null ) // tandem name for the mutant allele
+      tandem: Tandem.REQUIRED
+    }, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+      spacing: 8
     }, options );
 
-    assert && assert( !options.children, 'GeneLegendNode sets children' );
-    options = merge( {
-      children: [
-        new AlleleLegendNode( gene.normalAllele.name, gene.color, {
-          tandem: options.tandem.createTandem( options.normalTandemName )
-        } ),
-        new AlleleLegendNode( gene.mutantAllele.name, gene.color, {
-          isMutant: true,
-          tandem: options.tandem.createTandem( options.mutantTandemName )
-        } )
-      ]
-    }, NaturalSelectionConstants.VBOX_OPTIONS, options );
+    assert && assert( !options.children, 'GeneCheckbox sets children' );
 
-    super( options );
+    const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+      children: [
+        new AlleleLegendNode( gene.normalAllele.name, gene.color ),
+        new AlleleLegendNode( gene.mutantAllele.name, gene.color, { isMutant: true} )
+      ]
+    } ) );
+
+    super( content, property, options );
   }
 
   /**
@@ -130,7 +126,7 @@ class GeneLegendNode extends VBox {
    * @override
    */
   dispose() {
-    assert && assert( false, 'GeneLegendNode does not support dispose' );
+    assert && assert( false, 'GeneCheckbox does not support dispose' );
   }
 }
 

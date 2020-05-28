@@ -46,7 +46,7 @@ class ProportionsNode extends HBox {
     const panelWidth = 0.2 * size.width;
     const graphWidth = size.width - panelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
-    const proportionsPanel = new ProportionsPanel( genePool, proportionsModel.valuesVisibleProperty, {
+    const proportionsPanel = new ProportionsPanel( proportionsModel, genePool, {
       fixedWidth: panelWidth,
       maxHeight: size.height,
       tandem: options.tandem.createTandem( 'proportionsPanel' )
