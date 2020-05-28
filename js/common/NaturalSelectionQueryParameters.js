@@ -167,7 +167,7 @@ const SCHEMA = {
   wolvesEnvironmentMultiplier: {
     type: 'number',
     defaultValue: 3,
-    isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
+    isValidValue: value => ( value > 1 )
   },
 
   // Limited tender food will cause this percentage of bunnies to die of starvation, regardless of their teeth genes.
@@ -193,7 +193,7 @@ const SCHEMA = {
   limitedFoodMultiplier: {
     type: 'number',
     defaultValue: 2,
-    isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
+    isValidValue: value => ( value > 1 )
   },
 
   // Multiplier for bunnies with short teeth when food is tough, applied to toughFoodPercentToKill.
@@ -201,7 +201,7 @@ const SCHEMA = {
   shortTeethMultiplier: {
     type: 'number',
     defaultValue: 3,
-    isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
+    isValidValue: value => ( value > 1 )
   },
 
   // The minimum number of wolves
