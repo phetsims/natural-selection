@@ -7,15 +7,20 @@
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';
+import Range from '../../../../dot/js/Range.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Sprite from './Sprite.js';
 import SpriteDirection from './SpriteDirection.js';
 import WolfIO from './WolfIO.js';
+
+// const
+const SPEED_RANGE = new Range( 2.75, 3.25 );
 
 class Wolf extends Sprite {
 
@@ -40,6 +45,9 @@ class Wolf extends Sprite {
     options.direction = options.direction || SpriteDirection.getRandom();
 
     super( modelViewTransform, options );
+
+    // @private
+    this.speed = NaturalSelectionUtils.nextInRange( SPEED_RANGE );
 
     // @public fires when the Bunny has been disposed
     this.disposedEmitter = new Emitter();
@@ -72,8 +80,8 @@ class Wolf extends Sprite {
 
     //TODO I don't understand the use of cos, sin, and swap -- same as Bunny.getHopDelta
     const angle = phet.joist.random.nextDoubleBetween( 0, 2 * Math.PI );
-    const a = 3 * Math.cos( angle );
-    const b = 3 * Math.sin( angle );
+    const a = this.speed * Math.cos( angle );
+    const b = this.speed * Math.sin( angle );
     const swap = ( Math.abs( a ) < Math.abs( b ) );
 
     let z = this.positionProperty.value.z;
