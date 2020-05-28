@@ -76,6 +76,15 @@ class BunnyCounts {
     } );
   }
 
+  /**
+   * Gets a string representation of this BunnyCounts. For debugging only. Do not rely on format!
+   * @returns {string}
+   * @public
+   */
+  toString() {
+    return JSON.stringify( this, null, 2 );
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   // Below here are methods used by BunnyCountsIO to save and restore PhET-iO state.
   //--------------------------------------------------------------------------------------------------------------------
