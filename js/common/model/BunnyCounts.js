@@ -76,24 +76,6 @@ class BunnyCounts {
     } );
   }
 
-  //TODO delete if unused
-  /**
-   * Creates a copy of this BunnyCounts instance.
-   * @returns {BunnyCounts}
-   * @public
-   */
-  copy() {
-    return new BunnyCounts( {
-      totalCount: this.totalCount,
-      whiteFurCount: this.whiteFurCount,
-      brownFurCount: this.brownFurCount,
-      straightEarsCount: this.straightEarsCount,
-      floppyEarsCount: this.floppyEarsCount,
-      shortTeethCount: this.shortTeethCount,
-      longTeethCount: this.longTeethCount
-    } );
-  }
-
   //--------------------------------------------------------------------------------------------------------------------
   // Below here are methods used by BunnyCountsIO to save and restore PhET-iO state.
   //--------------------------------------------------------------------------------------------------------------------
