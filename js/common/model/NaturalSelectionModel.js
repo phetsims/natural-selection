@@ -176,7 +176,7 @@ class NaturalSelectionModel {
     // Apply environmental factors.
     this.generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
 
-      if ( !phet.joist.sim.isSettingStateProperty.value ) {
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
 
         //TODO Temporarily apply environmental factors all at once, rather then spread out over 3:00-9:00.
         // Apply wolves and food at different times, so we can see them separately on the Population graph.
