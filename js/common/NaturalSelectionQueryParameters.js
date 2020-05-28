@@ -286,12 +286,12 @@ function isPercentRange( array ) {
 assert && assert( NaturalSelectionQueryParameters.secondsPerStep < NaturalSelectionQueryParameters.secondsPerGeneration,
   'secondsPerStep must be < secondsPerGeneration' );
 assert && assert( NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier *
-                  NaturalSelectionQueryParameters.wolvesPercentToKill[ 1 ] < 1,
-  'wolvesEnvironmentMultiplier * wolvesPercentToKill.max must be < 1' );
+                  NaturalSelectionQueryParameters.wolvesPercentToKill[ 1 ] <= 1,
+  'wolvesEnvironmentMultiplier * wolvesPercentToKill.max must be <= 1' );
 assert && assert( NaturalSelectionQueryParameters.limitedFoodMultiplier *
                   NaturalSelectionQueryParameters.shortTeethMultiplier *
-                  NaturalSelectionQueryParameters.toughFoodPercentToKill[ 1 ] < 1,
-  'limitedFoodMultiplier * shortTeethMultiplier * toughFoodPercentToKill.max must be < 1' );
+                  NaturalSelectionQueryParameters.toughFoodPercentToKill[ 1 ] <= 1,
+  'limitedFoodMultiplier * shortTeethMultiplier * toughFoodPercentToKill.max must be <= 1' );
 
 // log the values of all sim-specific query parameters
 phet.log && phet.log( 'query parameters: ' + JSON.stringify( NaturalSelectionQueryParameters, null, 2 ) );
