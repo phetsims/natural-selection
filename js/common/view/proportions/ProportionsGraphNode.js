@@ -109,22 +109,19 @@ class ProportionsGraphNode extends Node {
     const furColumn = new Column( genePool.furGene,
       startCounts.whiteFurCount, startCounts.brownFurCount,
       endCounts.whiteFurCount, endCounts.brownFurCount,
-      valuesVisibleProperty, proportionsModel.furVisibleProperty,
-      columnLabelsAlignGroup, cellsAlignGroup, {
+      valuesVisibleProperty, columnLabelsAlignGroup, cellsAlignGroup, {
         tandem: options.tandem.createTandem( 'furColumn' )
       } );
     const earsColumn = new Column( genePool.earsGene,
       startCounts.straightEarsCount, startCounts.floppyEarsCount,
       endCounts.straightEarsCount, endCounts.floppyEarsCount,
-      valuesVisibleProperty, proportionsModel.earsVisibleProperty,
-      columnLabelsAlignGroup, cellsAlignGroup, {
+      valuesVisibleProperty, columnLabelsAlignGroup, cellsAlignGroup, {
         tandem: options.tandem.createTandem( 'earsColumn' )
       } );
     const teethColumn = new Column( genePool.teethGene,
       startCounts.shortTeethCount, startCounts.longTeethCount,
       endCounts.shortTeethCount, endCounts.longTeethCount,
-      valuesVisibleProperty, proportionsModel.teethVisibleProperty,
-      columnLabelsAlignGroup, cellsAlignGroup, {
+      valuesVisibleProperty, columnLabelsAlignGroup, cellsAlignGroup, {
         tandem: options.tandem.createTandem( 'teethColumn' )
       } );
 
@@ -297,13 +294,12 @@ class Column extends VBox {
    * @param {number} endNormalCount
    * @param {number} endMutantCount
    * @param {Property.<boolean>} valuesVisibleProperty
-   * @param {Property.<boolean>} columnVisibleProperty
    * @param {AlignGroup} columnLabelsAlignGroup
    * @param {AlignGroup} barsAlignGroup
    * @param {Object} [options]
    */
   constructor( gene, startNormalCount, startMutantCount, endNormalCount, endMutantCount,
-               valuesVisibleProperty, columnVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, options ) {
+               valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, options ) {
 
     assert && assert( gene instanceof Gene, 'invalid gene' );
     assert && NaturalSelectionUtils.assertCount( startNormalCount );
@@ -353,10 +349,6 @@ class Column extends VBox {
     ];
 
     super( options );
-
-    columnVisibleProperty.link( columnVisible => {
-      this.visible = columnVisible;
-    } );
 
     // @private
     this.startBarNode = startBarNode;

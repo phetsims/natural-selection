@@ -14,6 +14,7 @@ import Property from '../../../../axon/js/Property.js';
 import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Range from '../../../../dot/js/Range.js';
 import RangeIO from '../../../../dot/js/RangeIO.js';
+import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -35,15 +36,13 @@ const Y_MINIMUM = 0;
 
 // Maximum population values for the y-axis range.
 const Y_MAXIMUMS = [ 5, 14, 30, 50, 70, 100, 140, 200, 240, 350, 500, 1000, 1400, 2000, 2500 ];
-assert && assert( _.every( value => NaturalSelectionUtils.isPositiveInteger( value ) ),
-  'Y_MAXIMUMS must contain positive integer values' );
+assert && assert( _.every( value => Utils.isInteger( value ) && value > 0 ), 'Y_MAXIMUMS must contain positive integer values' );
 assert && assert( NaturalSelectionUtils.isSorted( Y_MAXIMUMS ), 'Y_MAXIMUMS must be sorted in ascending order' );
 
 // Spacing of tick marks for each value of Y_MAXIMUMS.
 const Y_TICK_SPACINGS = [ 1, 2, 5, 10, 10, 20, 20, 40, 40, 50, 100, 100, 200, 200, 500 ];
 assert && assert( Y_TICK_SPACINGS.length === Y_MAXIMUMS.length, 'incorrect number of Y_TICK_SPACINGS' );
-assert && assert( _.every( value => NaturalSelectionUtils.isPositiveInteger( value ) ),
-  'Y_TICK_SPACINGS must contain positive integer values' );
+assert && assert( _.every( value => Utils.isInteger( value ) && value > 0 ), 'Y_TICK_SPACINGS must contain positive integer values' );
 assert && assert( NaturalSelectionUtils.isSorted( Y_TICK_SPACINGS ), 'Y_TICK_SPACINGS must be sorted in ascending order' );
 
 class PopulationModel extends PhetioObject {
