@@ -210,7 +210,7 @@ class NaturalSelectionModel {
   }
 
   /**
-   * Resets the part of the model that is reset when the 'Start Over' button is pressed.
+   * Resets part of the model when the 'Start Over' button is pressed.
    * @public
    */
   startOver() {
