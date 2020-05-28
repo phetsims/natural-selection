@@ -178,15 +178,15 @@ class NaturalSelectionModel {
 
       //TODO Temporarily apply environmental factors all at once, rather then spread out over 3:00-9:00.
       // Apply wolves and food at different times, so we can see them separately on the Population graph.
-      const wolvesPercentTime = 1/3;
-      const foodPercentTime = 2/3;
-
-      if ( previousPercentTime < wolvesPercentTime && currentPercentTime >= wolvesPercentTime ) {
-        this.wolfCollection.apply( this.environmentProperty.value );
-      }
+      const foodPercentTime = 1/3;
+      const wolvesPercentTime = 2/3;
 
       if ( previousPercentTime < foodPercentTime && currentPercentTime >= foodPercentTime ) {
         this.food.apply( this.bunnyCollection.liveBunnies.getArray() );
+      }
+
+      if ( previousPercentTime < wolvesPercentTime && currentPercentTime >= wolvesPercentTime ) {
+        this.wolfCollection.apply( this.environmentProperty.value );
       }
 
       //TODO this should probably be handled by BunnyCollection
