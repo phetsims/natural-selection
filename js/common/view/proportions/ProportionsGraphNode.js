@@ -16,6 +16,7 @@ import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../../scenery/js/nodes/VBox.js';
+import Checkbox from '../../../../../sun/js/Checkbox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
@@ -109,19 +110,22 @@ class ProportionsGraphNode extends Node {
     const furColumn = new Column( genePool.furGene,
       startCounts.whiteFurCount, startCounts.brownFurCount,
       endCounts.whiteFurCount, endCounts.brownFurCount,
-      valuesVisibleProperty, columnLabelsAlignGroup, cellsAlignGroup, {
+      valuesVisibleProperty, proportionsModel.furVisibleProperty,
+      columnLabelsAlignGroup, cellsAlignGroup, {
         tandem: options.tandem.createTandem( 'furColumn' )
       } );
     const earsColumn = new Column( genePool.earsGene,
       startCounts.straightEarsCount, startCounts.floppyEarsCount,
       endCounts.straightEarsCount, endCounts.floppyEarsCount,
-      valuesVisibleProperty, columnLabelsAlignGroup, cellsAlignGroup, {
+      valuesVisibleProperty, proportionsModel.earsVisibleProperty,
+      columnLabelsAlignGroup, cellsAlignGroup, {
         tandem: options.tandem.createTandem( 'earsColumn' )
       } );
     const teethColumn = new Column( genePool.teethGene,
       startCounts.shortTeethCount, startCounts.longTeethCount,
       endCounts.shortTeethCount, endCounts.longTeethCount,
-      valuesVisibleProperty, columnLabelsAlignGroup, cellsAlignGroup, {
+      valuesVisibleProperty, proportionsModel.teethVisibleProperty,
+      columnLabelsAlignGroup, cellsAlignGroup, {
         tandem: options.tandem.createTandem( 'teethColumn' )
       } );
 
@@ -294,12 +298,13 @@ class Column extends VBox {
    * @param {number} endNormalCount
    * @param {number} endMutantCount
    * @param {Property.<boolean>} valuesVisibleProperty
+   * @param {Property.<boolean>} geneVisibleProperty
    * @param {AlignGroup} columnLabelsAlignGroup
    * @param {AlignGroup} barsAlignGroup
    * @param {Object} [options]
    */
   constructor( gene, startNormalCount, startMutantCount, endNormalCount, endMutantCount,
-               valuesVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, options ) {
+               valuesVisibleProperty, geneVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, options ) {
 
     assert && assert( gene instanceof Gene, 'invalid gene' );
     assert && NaturalSelectionUtils.assertCount( startNormalCount );
@@ -321,6 +326,9 @@ class Column extends VBox {
       font: COLUMN_LABEL_FONT,
       maxWidth: 120 // determined empirically
     } );
+    const checkbox = new Checkbox( labelNode, geneVisibleProperty, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+      tandem: options.tandem.createTandem( 'checkbox' )
+    } ) );
 
     const startBarNode = new ProportionsBarNode( gene.color, startNormalCount, startMutantCount, valuesVisibleProperty, {
       tandem: options.tandem.createTandem( 'startBarNode' )
@@ -331,7 +339,7 @@ class Column extends VBox {
 
     assert && assert( !options.children, 'Column sets children' );
     options.children = [
-      new AlignBox( labelNode, {
+      new AlignBox( checkbox, {
         group: columnLabelsAlignGroup,
         xAlign: COLUMN_LABELS_X_ALIGN,
         yAlign: CELLS_Y_ALIGN
@@ -349,6 +357,10 @@ class Column extends VBox {
     ];
 
     super( options );
+
+    geneVisibleProperty.link( geneVisible => {
+      startBarNode.visible = endBarNode.visible = geneVisible;
+    } );
 
     // @private
     this.startBarNode = startBarNode;
