@@ -327,7 +327,8 @@ class Column extends VBox {
       maxWidth: 120 // determined empirically
     } );
     const checkbox = new Checkbox( labelNode, geneVisibleProperty, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-      tandem: options.tandem.createTandem( 'checkbox' )
+      tandem: options.tandem.createTandem( 'checkbox' ),
+      phetioReadOnly: true
     } ) );
 
     const startBarNode = new ProportionsBarNode( gene.color, startNormalCount, startMutantCount, valuesVisibleProperty, {
