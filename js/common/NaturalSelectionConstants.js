@@ -52,8 +52,8 @@ const NaturalSelectionConstants = {
   // ScreenView
   SCREEN_VIEW_X_MARGIN: 15, // margins at left and right edges of the ScreenView
   SCREEN_VIEW_Y_MARGIN: 15, // margins at top and bottom edges of the ScreenView
-  SCREEN_VIEW_X_SPACING: 15, // horizontal spacing between UI components in the ScreenView
-  SCREEN_VIEW_Y_SPACING: 15, // vertical spacing between UI components in the ScreenView
+  SCREEN_VIEW_X_SPACING: 10, // horizontal spacing between UI components in the ScreenView
+  SCREEN_VIEW_Y_SPACING: 10, // vertical spacing between UI components in the ScreenView
 
   // EnvironmentNode
   ENVIRONMENT_DISPLAY_X_MARGIN: 15, // margins at left and right edges of the viewport
