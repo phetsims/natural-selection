@@ -65,6 +65,7 @@ class ProportionsGraphNode extends Node {
     const valuesVisibleProperty = proportionsModel.valuesVisibleProperty;
 
     const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
+      cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
       fill: NaturalSelectionColors.PROPORTIONS_GRAPH_FILL,
       stroke: NaturalSelectionColors.PANEL_STROKE
     } );

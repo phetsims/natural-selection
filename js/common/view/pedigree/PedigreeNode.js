@@ -48,7 +48,7 @@ class PedigreeNode extends HBox {
     // If ?allelesVisible=false, the control panel is omitted, and the graph fills the width.
     const controlPanelWidth = 0.2 * size.width;
     const graphWidth = NaturalSelectionConstants.ALLELES_VISIBLE ?
-                       size.width - controlPanelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING :
+                       size.width - controlPanelWidth - options.spacing :
                        size.width;
 
     // Because it's instrumented for PhET-iO, the AllelesPanel must be instantiated regardless of the value

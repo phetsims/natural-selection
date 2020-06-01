@@ -44,6 +44,7 @@ class PedigreeGraphNode extends Node {
     }, options );
 
     const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
+      cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
       fill: NaturalSelectionColors.PEDIGREE_GRAPH_FILL,
       stroke: NaturalSelectionColors.PANEL_STROKE
     } );

@@ -44,7 +44,7 @@ class ProportionsNode extends HBox {
 
     // Divy up the width
     const panelWidth = 0.2 * size.width;
-    const graphWidth = size.width - panelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
+    const graphWidth = size.width - panelWidth - options.spacing;
 
     const proportionsPanel = new ProportionsPanel( genePool, proportionsModel.valuesVisibleProperty, {
       fixedWidth: panelWidth,
