@@ -131,7 +131,9 @@ class NaturalSelectionScreenView extends ScreenView {
     // Radio buttons for choosing a graph
     const graphChoiceRadioButtonGroup = new GraphChoiceRadioButtonGroup( this.graphChoiceProperty, {
       maxWidth: rightOfViewportWidth,
-      left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+
+      // Add PANEL_OPTIONS.xMargin so that radio buttons left-align with controls in panels above them.
+      left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING + NaturalSelectionConstants.PANEL_OPTIONS.xMargin,
       centerY: populationNode.centerY,
       tandem: graphsTandem.createTandem( 'graphChoiceRadioButtonGroup' )
     } );
