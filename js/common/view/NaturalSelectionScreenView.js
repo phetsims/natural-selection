@@ -155,7 +155,7 @@ class NaturalSelectionScreenView extends ScreenView {
           }
         }
       },
-      left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+      left: graphChoiceRadioButtonGroup.left,
       bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: options.tandem.createTandem( 'timeControlNode' )
     } );
