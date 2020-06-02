@@ -11,6 +11,7 @@ import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import BunnyCollection from './BunnyCollection.js';
 import Environment from './Environment.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -171,16 +172,14 @@ class NaturalSelectionModel {
 
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
 
-        //TODO Temporarily apply environmental factors all at once, rather then spread out over 3:00-9:00.
-        // Apply wolves and food at different times, so we can see them separately on the Population graph.
-        const foodPercentTime = 1 / 3;
-        const wolvesPercentTime = 2 / 3;
-
-        if ( previousPercentTime < foodPercentTime && currentPercentTime >= foodPercentTime ) {
+        //TODO Temporarily apply environmental factors all at once.
+        const foodRangeMin = NaturalSelectionConstants.CLOCK_FOOD_SLICE_RANGE.min;
+        if ( previousPercentTime < foodRangeMin && currentPercentTime >= foodRangeMin ) {
           this.food.apply( this.bunnyCollection.liveBunnies.getArray() );
         }
 
-        if ( previousPercentTime < wolvesPercentTime && currentPercentTime >= wolvesPercentTime ) {
+        const wolvesRangeMin = NaturalSelectionConstants.CLOCK_WOLVES_SLICE_RANGE.min;
+        if ( previousPercentTime < wolvesRangeMin && currentPercentTime >= wolvesRangeMin ) {
           this.wolfCollection.apply( this.environmentProperty.value );
         }
       }
