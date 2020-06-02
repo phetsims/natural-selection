@@ -16,6 +16,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import GenerationClock from '../model/GenerationClock.js';
+import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 // constants
@@ -24,11 +25,6 @@ const RADIUS = 18;
 const STROKE = 'black';
 const LINE_WIDTH = 1;
 const GENERATION_FONT = new PhetFont( 16 );
-
-const CLOCK_COLOR = 'rgb( 203, 120, 162 )'; // pink
-const REVEAL_COLOR = 'rgba( 255, 255, 255, 0.6 )'; // transparent white
-const FOOD_SLICE_COLOR = '#93c83d'; // green
-const WOLVES_SLICE_COLOR = 'rgb( 102, 102, 102 )'; // grey
 
 class GenerationClockNode extends Node {
 
@@ -52,21 +48,21 @@ class GenerationClockNode extends Node {
 
     // The full center of the clock.
     const fullCircle = new Circle( RADIUS, {
-      fill: CLOCK_COLOR,
+      fill: NaturalSelectionColors.CLOCK_COLOR,
       stroke: STROKE,
       lineWidth: LINE_WIDTH
     } );
 
     // The slice of the circle that denotes when food is active
-    const foodSlice = createSlice( generationClock.foodRange, FOOD_SLICE_COLOR );
+    const foodSlice = createSlice( generationClock.foodRange, NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR );
 
     // The slice of the circle that denotes when the wolves are active
-    const wolvesSlice = createSlice( generationClock.wolvesRange, WOLVES_SLICE_COLOR );
+    const wolvesSlice = createSlice( generationClock.wolvesRange, NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR );
 
     // Overlay on the clock, sweeps out an arc to reveal what's under it.
     // The portion revealed corresponds to the percentage of a revolution that has elapsed.
     const revealArc = new Path( new Shape(), {
-      fill: REVEAL_COLOR,
+      fill: NaturalSelectionColors.CLOCK_REVEAL_COLOR,
       stroke: STROKE,
       lineWidth: LINE_WIDTH
     } );
