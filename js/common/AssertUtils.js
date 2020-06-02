@@ -48,6 +48,16 @@ const AssertUtils = {
   },
 
   /**
+   * Asserts that a range meets min/max criteria.
+   * @param {Range} range
+   * @param {number} min
+   * @param {number} max
+   */
+  assertRangeInclusive( range, min, max ) {
+    assert && assert( range.min >= min && range.max <= max, `invalid range: ${range}` );
+  },
+
+  /**
    * Asserts that a value is a valid generation number.
    * @param {*} value
    * @public
@@ -63,16 +73,6 @@ const AssertUtils = {
    */
   assertCount( value ) {
     assert && assert( typeof value === 'number' && Utils.isInteger( value ) && value >= 0, `invalid count: ${value}` );
-  },
-
-  /**
-   * Asserts that a range meets min/max criteria.
-   * @param {Range} range
-   * @param {number} min
-   * @param {number} max
-   */
-  assertRangeInclusive( range, min, max ) {
-    assert && assert( range.min >= min && range.max <= max, `invalid range: ${range}` );
   }
 };
 
