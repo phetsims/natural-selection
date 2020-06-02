@@ -58,10 +58,10 @@ class GenerationClockNode extends Node {
     } );
 
     // The slice of the circle that denotes when food is active
-    const foodSlice = createSlice( RADIUS, NaturalSelectionConstants.CLOCK_FOOD_SLICE_RANGE, NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR );
+    const foodSlice = createSlice( RADIUS, NaturalSelectionConstants.CLOCK_FOOD_RANGE, NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR );
 
     // The slice of the circle that denotes when the wolves are active
-    const wolvesSlice = createSlice( RADIUS, NaturalSelectionConstants.CLOCK_WOLVES_SLICE_RANGE, NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR );
+    const wolvesSlice = createSlice( RADIUS, NaturalSelectionConstants.CLOCK_WOLVES_RANGE, NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR );
 
     // Overlay on the clock, sweeps out an arc to reveal what's under it.
     // The portion revealed corresponds to the percentage of a revolution that has elapsed.

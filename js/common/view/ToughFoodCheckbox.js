@@ -44,7 +44,7 @@ class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
       spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING
     } );
 
-    super( labelNode, isToughProperty, alignGroup, NaturalSelectionConstants.CLOCK_FOOD_SLICE_RANGE,
+    super( labelNode, isToughProperty, alignGroup, NaturalSelectionConstants.CLOCK_FOOD_RANGE,
       NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR, options );
   }
 }
