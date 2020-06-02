@@ -89,7 +89,7 @@ class WolfCollection {
             this.wolfGroup.createNextElement();
           }
         }
-        else {
+        else if ( this.wolfGroup.count > 0 ) {
           phet.log && phet.log( `Disposing of ${this.wolfGroup.count} wolves` );
           this.wolfGroup.clear();
         }

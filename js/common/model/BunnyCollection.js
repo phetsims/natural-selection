@@ -83,6 +83,9 @@ class BunnyCollection {
           bunny.diedEmitter.removeListener( diedListener );
           this.liveBunnies.remove( bunny );
           this.deadBunnies.push( bunny );
+          if ( this.liveBunnies.length === 0 ) {
+            this.allBunniesHaveDiedEmitter.emit();
+          }
         };
         bunny.diedEmitter.addListener( diedListener );
 
@@ -205,11 +208,6 @@ class BunnyCollection {
 
     assert && this.assertValidCounts();
     phet.log && phet.log( `${diedCount} bunnies died, total dead = ${this.deadBunnies.length}` );
-
-    // Notify if all bunnies have died.
-    if ( this.liveBunnies.lengthProperty.value === 0 ) {
-      this.allBunniesHaveDiedEmitter.emit();
-    }
   }
 
   /**

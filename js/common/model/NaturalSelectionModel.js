@@ -190,12 +190,6 @@ class NaturalSelectionModel {
         if ( previousPercentTime < wolvesPercentTime && currentPercentTime >= wolvesPercentTime ) {
           this.wolfCollection.apply( this.environmentProperty.value );
         }
-
-        //TODO this should probably be handled by BunnyCollection
-        // Notify if all bunnies have died.
-        if ( this.bunnyCollection.liveBunnies.length === 0 ) {
-          this.bunnyCollection.allBunniesHaveDiedEmitter.emit();
-        }
       }
     } );
   }
