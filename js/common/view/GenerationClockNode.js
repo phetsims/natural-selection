@@ -48,7 +48,11 @@ class GenerationClockNode extends Node {
 
     // The full center of the clock.
     const circle = new Circle( RADIUS, {
-      fill: NaturalSelectionColors.CLOCK_FILL,
+      fill: NaturalSelectionColors.CLOCK_FILL
+    } );
+
+    // Rim around the outside edge
+    const rimNode = new Circle( RADIUS, {
       stroke: NaturalSelectionColors.CLOCK_STROKE,
       lineWidth: LINE_WIDTH
     } );
@@ -76,7 +80,7 @@ class GenerationClockNode extends Node {
 
     // Layering order is important here!
     assert && assert( !options.children, 'GenerationClockNode sets children' );
-    options.children = [ circle, foodSlice, wolvesSlice, revealArc, generationNode ];
+    options.children = [ circle, foodSlice, wolvesSlice, revealArc, rimNode, generationNode ];
 
     super( options );
 
