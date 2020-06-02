@@ -8,6 +8,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -71,6 +72,12 @@ class Food {
       tandem: options.tandem.createTandem( 'isLimitedProperty' ),
       phetioDocumentation: 'whether the food supply is limited'
     } );
+
+    // @public whether either factor related to food is enabled
+    this.enabledProperty = new DerivedProperty(
+      [ this.isToughProperty, this.isLimitedProperty ],
+      ( isTough, isLimited ) => ( isTough || isLimited )
+    );
 
     // {ShrubConfig[]} describes the collection of shrubs
     //

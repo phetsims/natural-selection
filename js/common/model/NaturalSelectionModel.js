@@ -7,7 +7,6 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -90,12 +89,6 @@ class NaturalSelectionModel {
     this.food = new Food( this.modelViewTransform, {
       tandem: options.tandem.createTandem( 'food' )
     } );
-
-    // @public whether any environmental factor is enabled
-    this.environmentalFactorEnabledProperty = new DerivedProperty(
-      [ this.wolfCollection.enabledProperty, this.food.isToughProperty, this.food.isLimitedProperty ],
-      ( wolvesEnabled, isTough, isLimited ) => ( wolvesEnabled || isTough || isLimited )
-    );
 
     // @public (read-only)
     this.populationModel = new PopulationModel(

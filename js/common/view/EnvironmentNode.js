@@ -54,7 +54,7 @@ class EnvironmentNode extends Node {
 
     // Generation clock
     const generationClockNode = new GenerationClockNode( model.generationClock,
-      model.environmentalFactorEnabledProperty, {
+      model.food.enabledProperty, model.wolfCollection.enabledProperty, {
         centerX: frameNode.centerX,
         top: frameNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
         tandem: options.tandem.createTandem( 'generationClockNode' )

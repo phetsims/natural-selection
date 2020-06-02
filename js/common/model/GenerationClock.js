@@ -84,7 +84,8 @@ class GenerationClock extends PhetioObject {
       } );
 
     // @public (read-only) the portion of the clock cycle when environmental factors are active
-    this.environmentalFactorPercentRange = new Range( 0.25, 0.75 );
+    this.foodRange = new Range( 0.25, 0.5 );
+    this.wolvesRange = new Range( 0.5, 0.75 );
   }
 
   /**

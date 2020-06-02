@@ -25,17 +25,24 @@ const STROKE = 'black';
 const LINE_WIDTH = 1;
 const GENERATION_FONT = new PhetFont( 16 );
 
+const CLOCK_COLOR = 'rgb( 203, 120, 162 )'; // pink
+const REVEAL_COLOR = 'rgba( 255, 255, 255, 0.6 )'; // transparent white
+const FOOD_SLICE_COLOR = '#93c83d'; // green
+const WOLVES_SLICE_COLOR = 'rgb( 102, 102, 102 )'; // grey
+
 class GenerationClockNode extends Node {
 
   /**
    * @param {GenerationClock} generationClock
-   * @param {Property.<boolean>} environmentalFactorEnabledProperty
+   * @param {Property.<boolean>} foodEnabledProperty
+   * @param {Property.<boolean>} wolvesEnabledProperty
    * @param {Object} [options]
    */
-  constructor( generationClock, environmentalFactorEnabledProperty, options ) {
+  constructor( generationClock, foodEnabledProperty, wolvesEnabledProperty, options ) {
 
     assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( environmentalFactorEnabledProperty, 'boolean' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( foodEnabledProperty, 'boolean' );
+    assert && NaturalSelectionUtils.assertPropertyTypeof( wolvesEnabledProperty, 'boolean' );
 
     options = merge( {
 
@@ -45,44 +52,39 @@ class GenerationClockNode extends Node {
 
     // The full center of the clock.
     const fullCircle = new Circle( RADIUS, {
-      fill: 'rgb( 203, 120, 162 )', // pink
+      fill: CLOCK_COLOR,
       stroke: STROKE,
       lineWidth: LINE_WIDTH
     } );
 
-    // The part of the circle that denotes when the environmental factors are active, and bunnies may die.
-    // Visible only when some environmental factor is enabled.
-    const environmentalFactorStartAngle = START_ANGLE + generationClock.environmentalFactorPercentRange.min * 2 * Math.PI;
-    const environmentalFactorEndAngle = START_ANGLE + generationClock.environmentalFactorPercentRange.max * 2 * Math.PI;
-    const environmentalFactorShape = new Shape()
-      .moveTo( 0, 0 )
-      .arc( 0, 0, RADIUS, environmentalFactorStartAngle, environmentalFactorEndAngle )
-      .close();
-    const environmentalFactorPath = new Path( environmentalFactorShape, {
-      fill: 'rgb( 102, 102, 102 )' // dark gray
-    } );
+    // The slice of the circle that denotes when food is active
+    const foodSlice = createSlice( generationClock.foodRange, FOOD_SLICE_COLOR );
+
+    // The slice of the circle that denotes when the wolves are active
+    const wolvesSlice = createSlice( generationClock.wolvesRange, WOLVES_SLICE_COLOR );
 
     // Overlay on the clock, sweeps out an arc to reveal what's under it.
-    // The portion reveals corresponds to the percentage of a revolution that has elapsed.
+    // The portion revealed corresponds to the percentage of a revolution that has elapsed.
     const revealArc = new Path( new Shape(), {
-      fill: 'rgba( 255, 255, 255, 0.6 )', // transparent white
+      fill: REVEAL_COLOR,
       stroke: STROKE,
       lineWidth: LINE_WIDTH
     } );
 
-    // Layering order here is important!
-    assert && assert( !options.children, 'GenerationClockNode sets children' );
-    options.children = [ fullCircle, environmentalFactorPath, revealArc ];
-
-    super( options );
-
-    // Display the current generation number below the generation clock.
+    // The current generation number, displayed below the circle.
     const generationNode = new Text( '', {
       font: GENERATION_FONT,
       fill: 'black',
       top: fullCircle.bottom + 3
     } );
-    this.addChild( generationNode );
+
+    // Layering order is important here!
+    assert && assert( !options.children, 'GenerationClockNode sets children' );
+    options.children = [ fullCircle, foodSlice, wolvesSlice, revealArc, generationNode ];
+
+    super( options );
+
+    // Update the generation number. unlink is unnecessary, exists for the lifetime of the sim.
     generationClock.currentGenerationProperty.link( currentGeneration => {
       generationNode.text = currentGeneration;
       generationNode.centerX = fullCircle.centerX;
@@ -96,10 +98,14 @@ class GenerationClockNode extends Node {
         .close();
     } );
 
-    // Show environmentalFactorPath if some environmental factor is enabled.
-    // unlink is unnecessary, exists for the lifetime of the sim.
-    environmentalFactorEnabledProperty.link( environmentalFactorEnabled => {
-      environmentalFactorPath.visible = environmentalFactorEnabled;
+    // Makes the wolves slice visible. unlink is unnecessary, exists for the lifetime of the sim.
+    wolvesEnabledProperty.link( enabled => {
+      wolvesSlice.visible = enabled;
+    } );
+
+    // Makes the food slice visible. unlink is unnecessary, exists for the lifetime of the sim.
+    foodEnabledProperty.link( enabled => {
+      foodSlice.visible = enabled;
     } );
 
     // Create a link to the model that this Node displays
@@ -115,6 +121,24 @@ class GenerationClockNode extends Node {
   dispose() {
     assert && assert( false, 'GenerationClockNode does not support dispose' );
   }
+}
+
+/**
+ * Creates a slice of the pie that is the generation clock.
+ * @param {Range} range
+ * @param {Color|string} color
+ * @returns {Path}
+ */
+function createSlice( range, color ) {
+  const startAngle = START_ANGLE + range.min * 2 * Math.PI;
+  const endAngle = START_ANGLE + range.max * 2 * Math.PI;
+  const shape = new Shape()
+    .moveTo( 0, 0 )
+    .arc( 0, 0, RADIUS, startAngle, endAngle )
+    .close();
+  return new Path( shape, {
+    fill: color
+  } );
 }
 
 naturalSelection.register( 'GenerationClockNode', GenerationClockNode );
