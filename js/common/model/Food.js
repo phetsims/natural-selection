@@ -9,6 +9,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -19,10 +20,12 @@ import shrubToughAImage from '../../../images/shrub-tough-A_png.js';
 import shrubToughBImage from '../../../images/shrub-tough-B_png.js';
 import shrubToughCImage from '../../../images/shrub-tough-C_png.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import CauseOfDeath from './CauseOfDeath.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
+import GenerationClock from './GenerationClock.js';
 import Shrub from './Shrub.js';
 
 // constants
@@ -48,11 +51,15 @@ const SHORT_TEETH_MULTIPLIER = NaturalSelectionQueryParameters.shortTeethMultipl
 class Food {
 
   /**
+   * @param {GenerationClock} generationClock
+   *  @param {ObservableArray.<Bunny>} liveBunnies
    * @param {EnvironmentModelViewTransform} modelViewTransform
    * @param {Object} [options]
    */
-  constructor( modelViewTransform, options ) {
+  constructor( generationClock, liveBunnies, modelViewTransform, options ) {
 
+    assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
+    assert && assert( liveBunnies instanceof ObservableArray, 'invalid liveBunnies' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
     options = merge( {
@@ -110,6 +117,17 @@ class Food {
     this.isLimitedProperty.link( isLimited => {
       for ( let i = 1; i < this.shrubs.length; i = i + 2 ) {
         this.shrubs[ i ].visibleProperty.value = !isLimited;
+      }
+    } );
+
+    //TODO Temporarily apply environmental factors all at once.
+    // Starve some bunnies.
+    generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+        const foodRangeMin = NaturalSelectionConstants.CLOCK_FOOD_SLICE_RANGE.min;
+        if ( previousPercentTime < foodRangeMin && currentPercentTime >= foodRangeMin ) {
+          this.apply( liveBunnies.getArray() );
+        }
       }
     } );
   }

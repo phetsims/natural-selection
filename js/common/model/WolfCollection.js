@@ -9,17 +9,20 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import CauseOfDeath from './CauseOfDeath.js';
 import Environment from './Environment.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
+import GenerationClock from './GenerationClock.js';
 import Wolf from './Wolf.js';
 import WolfGroup from './WolfGroup.js';
 
@@ -39,12 +42,16 @@ const WOLVES_ENVIRONMENT_MULTIPLIER = NaturalSelectionQueryParameters.wolvesEnvi
 class WolfCollection {
 
   /**
+   * @param {GenerationClock} generationClock
+   * @param {EnumerationProperty.<Environment>} environmentProperty
    * @param {ObservableArray.<Bunny>} liveBunnies
    * @param {EnvironmentModelViewTransform} modelViewTransform
    * @param {Object} [options]
    */
-  constructor( liveBunnies, modelViewTransform, options ) {
+  constructor( generationClock, environmentProperty, liveBunnies, modelViewTransform, options ) {
 
+    assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
+    assert && assert( environmentProperty instanceof EnumerationProperty, 'invalid environmentProperty' );
     assert && assert( liveBunnies instanceof ObservableArray, 'invalid liveBunnies' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
@@ -92,6 +99,17 @@ class WolfCollection {
         else if ( this.wolfGroup.count > 0 ) {
           phet.log && phet.log( `Disposing of ${this.wolfGroup.count} wolves` );
           this.wolfGroup.clear();
+        }
+      }
+    } );
+
+    //TODO Temporarily apply environmental factors all at once.
+    // Eat some bunnies.
+    generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+        const wolvesRangeMin = NaturalSelectionConstants.CLOCK_WOLVES_SLICE_RANGE.min;
+        if ( previousPercentTime < wolvesRangeMin && currentPercentTime >= wolvesRangeMin ) {
+          this.apply( environmentProperty.value );
         }
       }
     } );
