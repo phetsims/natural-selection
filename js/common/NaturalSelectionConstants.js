@@ -135,5 +135,11 @@ assert && assert( NaturalSelectionConstants.MUTATION_PERCENTAGE > 0 && NaturalSe
 assert && assert( NaturalSelectionConstants.SECONDS_PER_STEP < NaturalSelectionConstants.SECONDS_PER_GENERATION,
   'SECONDS_PER_STEP must be < SECONDS_PER_GENERATION' );
 
+assert && assert( NaturalSelectionConstants.CLOCK_FOOD_SLICE_RANGE.min >= 0 && NaturalSelectionConstants.CLOCK_FOOD_SLICE_RANGE.max <= 1,
+  'CLOCK_FOOD_SLICE_RANGE must be [0,1]' );
+
+assert && assert( NaturalSelectionConstants.CLOCK_WOLVES_SLICE_RANGE.min >= 0 && NaturalSelectionConstants.CLOCK_WOLVES_SLICE_RANGE.max <= 1,
+  'CLOCK_WOLVES_SLICE_RANGE must be [0,1]' );
+
 naturalSelection.register( 'NaturalSelectionConstants', NaturalSelectionConstants );
 export default NaturalSelectionConstants;
