@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Range from '../../../dot/js/Range.js';
 import HomeScreenView from '../../../joist/js/HomeScreenView.js';
 import ScreenView from '../../../joist/js/ScreenView.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
@@ -38,6 +39,10 @@ const NaturalSelectionConstants = {
 
   // dt when the Step button is pressed, in seconds
   SECONDS_PER_STEP: NaturalSelectionQueryParameters.secondsPerStep,
+
+  // Generation Clock
+  CLOCK_FOOD_SLICE_RANGE: new Range( 0.25, 0.5 ),
+  CLOCK_WOLVES_SLICE_RANGE: new Range( 0.5, 0.75 ),
 
   // View ============================================================================================================N
 

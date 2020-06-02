@@ -8,14 +8,18 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import BracketNode from '../../../../scenery-phet/js/BracketNode.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
+import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import GenerationClockNode from './GenerationClockNode.js';
 import LimitedFoodCheckbox from './LimitedFoodCheckbox.js';
 import NaturalSelectionPanel from './NaturalSelectionPanel.js';
 import ToughFoodCheckbox from './ToughFoodCheckbox.js';
@@ -56,6 +60,20 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       tandem: options.tandem.createTandem( 'wolvesCheckbox' )
     } );
 
+    const wolvesBracket = new BracketNode( {
+      orientation: 'right',
+      bracketLength: 1.5 * wolvesCheckbox.height
+    } );
+
+    const wolvesClockIcon = GenerationClockNode.createSliceIcon( NaturalSelectionConstants.CLOCK_WOLVES_SLICE_RANGE, {
+      sliceFill: NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR
+    } );
+
+    const wolvesHBox = new HBox( {
+      children: [ wolvesCheckbox, wolvesBracket, wolvesClockIcon ],
+      spacing: 10
+    } );
+
     const toughFoodCheckbox = new ToughFoodCheckbox( foodIsToughProperty, {
       labelAlignGroup: checkboxLabelAlignGroup,
       tandem: options.tandem.createTandem( 'toughFoodCheckbox' )
@@ -66,8 +84,27 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       tandem: options.tandem.createTandem( 'limitedFoodCheckbox' )
     } );
 
+    const foodVBox = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+      children: [ toughFoodCheckbox, limitedFoodCheckbox ]
+    } ) );
+
+    const foodBracket = new BracketNode( {
+      orientation: 'right',
+      bracketLength: foodVBox.height
+    } );
+
+    const foodClockIcon = GenerationClockNode.createSliceIcon( NaturalSelectionConstants.CLOCK_FOOD_SLICE_RANGE, {
+      sliceFill: NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR
+    } );
+
+    const foodHBox = new HBox( {
+      children: [ foodVBox, foodBracket, foodClockIcon ],
+      spacing: 10
+    } );
+
     const checkboxes = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-      children: [ wolvesCheckbox, toughFoodCheckbox, limitedFoodCheckbox ]
+      children: [ wolvesHBox, foodHBox ],
+      spacing: NaturalSelectionConstants.VBOX_OPTIONS.spacing + 5
     } ) );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {

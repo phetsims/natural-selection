@@ -10,7 +10,6 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
@@ -82,10 +81,6 @@ class GenerationClock extends PhetioObject {
       time => ( time % NaturalSelectionConstants.SECONDS_PER_GENERATION ) / NaturalSelectionConstants.SECONDS_PER_GENERATION, {
         isValidValue: percentTime => ( percentTime >= 0 && percentTime <= 1 )
       } );
-
-    // @public (read-only) the portion of the clock cycle when environmental factors are active
-    this.foodRange = new Range( 0.25, 0.5 );
-    this.wolvesRange = new Range( 0.5, 0.75 );
   }
 
   /**

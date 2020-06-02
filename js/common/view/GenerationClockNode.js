@@ -17,12 +17,12 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import GenerationClock from '../model/GenerationClock.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
+import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 // constants
 const START_ANGLE = -Math.PI / 2; // 12:00
 const RADIUS = 18;
-const STROKE = 'black';
 const LINE_WIDTH = 1;
 const GENERATION_FONT = new PhetFont( 16 );
 
@@ -47,23 +47,23 @@ class GenerationClockNode extends Node {
     }, options );
 
     // The full center of the clock.
-    const fullCircle = new Circle( RADIUS, {
-      fill: NaturalSelectionColors.CLOCK_COLOR,
-      stroke: STROKE,
+    const circle = new Circle( RADIUS, {
+      fill: NaturalSelectionColors.CLOCK_FILL,
+      stroke: NaturalSelectionColors.CLOCK_STROKE,
       lineWidth: LINE_WIDTH
     } );
 
     // The slice of the circle that denotes when food is active
-    const foodSlice = createSlice( generationClock.foodRange, NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR );
+    const foodSlice = createSlice( RADIUS, NaturalSelectionConstants.CLOCK_FOOD_SLICE_RANGE, NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR );
 
     // The slice of the circle that denotes when the wolves are active
-    const wolvesSlice = createSlice( generationClock.wolvesRange, NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR );
+    const wolvesSlice = createSlice( RADIUS, NaturalSelectionConstants.CLOCK_WOLVES_SLICE_RANGE, NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR );
 
     // Overlay on the clock, sweeps out an arc to reveal what's under it.
     // The portion revealed corresponds to the percentage of a revolution that has elapsed.
     const revealArc = new Path( new Shape(), {
       fill: NaturalSelectionColors.CLOCK_REVEAL_COLOR,
-      stroke: STROKE,
+      stroke: NaturalSelectionColors.CLOCK_STROKE,
       lineWidth: LINE_WIDTH
     } );
 
@@ -71,19 +71,19 @@ class GenerationClockNode extends Node {
     const generationNode = new Text( '', {
       font: GENERATION_FONT,
       fill: 'black',
-      top: fullCircle.bottom + 3
+      top: circle.bottom + 3
     } );
 
     // Layering order is important here!
     assert && assert( !options.children, 'GenerationClockNode sets children' );
-    options.children = [ fullCircle, foodSlice, wolvesSlice, revealArc, generationNode ];
+    options.children = [ circle, foodSlice, wolvesSlice, revealArc, generationNode ];
 
     super( options );
 
     // Update the generation number. unlink is unnecessary, exists for the lifetime of the sim.
     generationClock.currentGenerationProperty.link( currentGeneration => {
       generationNode.text = currentGeneration;
-      generationNode.centerX = fullCircle.centerX;
+      generationNode.centerX = circle.centerX;
     } );
 
     // Reveal part of the clock. unlink is unnecessary, exists for the lifetime of the sim.
@@ -117,20 +117,50 @@ class GenerationClockNode extends Node {
   dispose() {
     assert && assert( false, 'GenerationClockNode does not support dispose' );
   }
+
+  /**
+   * Creates an icon with one slice of the clock filled in.
+   * @param {Range} sliceRange
+   * @param {Object} [options]
+   * @returns {Node}
+   * @public
+   */
+  static createSliceIcon( sliceRange, options ) {
+
+    options = merge( {
+      radius: 10,
+      sliceFill: 'black'
+    }, options );
+
+    const circle = new Circle( options.radius, {
+      fill: NaturalSelectionColors.CLOCK_FILL
+    } );
+
+    const sliceNode = createSlice( options.radius, sliceRange, options.sliceFill );
+
+    const rimNode = new Circle( options.radius, {
+      stroke: NaturalSelectionColors.CLOCK_STROKE
+    } );
+
+    return new Node( {
+      children: [ circle, sliceNode, rimNode ]
+    } );
+  }
 }
 
 /**
  * Creates a slice of the pie that is the generation clock.
+ * @param {number} radius
  * @param {Range} range
  * @param {Color|string} color
  * @returns {Path}
  */
-function createSlice( range, color ) {
+function createSlice( radius, range, color ) {
   const startAngle = START_ANGLE + range.min * 2 * Math.PI;
   const endAngle = START_ANGLE + range.max * 2 * Math.PI;
   const shape = new Shape()
     .moveTo( 0, 0 )
-    .arc( 0, 0, RADIUS, startAngle, endAngle )
+    .arc( 0, 0, radius, startAngle, endAngle )
     .close();
   return new Path( shape, {
     fill: color
