@@ -132,10 +132,6 @@ class GenerationClockNode extends Node {
       sliceFill: 'black'
     }, options );
 
-    const circle = new Circle( options.radius, {
-      fill: NaturalSelectionColors.CLOCK_FILL
-    } );
-
     const sliceNode = createSlice( options.radius, sliceRange, options.sliceFill );
 
     const rimNode = new Circle( options.radius, {
@@ -143,7 +139,7 @@ class GenerationClockNode extends Node {
     } );
 
     return new Node( {
-      children: [ circle, sliceNode, rimNode ]
+      children: [ sliceNode, rimNode ]
     } );
   }
 }
