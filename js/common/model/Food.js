@@ -120,13 +120,13 @@ class Food {
       }
     } );
 
-    //TODO Temporarily apply environmental factors all at once.
     // Starve some bunnies.
+    //TODO Temporarily starve all bunnies at once, instead of over CLOCK_FOOD_SLICE_RANGE
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
         const foodRangeMin = NaturalSelectionConstants.CLOCK_FOOD_SLICE_RANGE.min;
         if ( previousPercentTime < foodRangeMin && currentPercentTime >= foodRangeMin ) {
-          this.apply( liveBunnies.getArray() );
+          this.starveBunnies( liveBunnies.getArray() );
         }
       }
     } );
@@ -147,12 +147,13 @@ class Food {
     assert && assert( false, 'Food does not support dispose' );
   }
 
+  //TODO Temporarily starve all bunnies at once, instead of over CLOCK_FOOD_SLICE_RANGE
   /**
-   * Applies this environmental factor.
+   * Starves some portion of the bunny population.
    * @param {Bunny[]} bunnies
-   * @public
+   * @private
    */
-  apply( bunnies ) {
+  starveBunnies( bunnies ) {
     assert && assert( Array.isArray( bunnies ), 'invalid bunnies' );
 
     if ( bunnies.length > 0 && ( this.isLimitedProperty.value || this.isToughProperty.value ) ) {

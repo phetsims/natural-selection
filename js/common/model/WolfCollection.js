@@ -85,31 +85,39 @@ class WolfCollection {
     } );
 
     this.enabledProperty.lazyLink( enabled => {
+      if ( !enabled && this.wolfGroup.count > 0 ) {
+        phet.log && phet.log( `Disposing of ${this.wolfGroup.count} wolves` );
+        this.wolfGroup.clear();
+      }
+    } );
 
-      //TODO This is temporary, should only create wolves during death interval, and should not call createNextElement
-      // when enabledProperty state is being restored.
+    // Eat some bunnies.
+    //TODO Temporarily eat all bunnies at once, instead of over CLOCK_WOLVES_SLICE_RANGE
+    generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
-        if ( enabled ) {
+
+        // Part of the generation clock when wolves are active
+        const wolvesRangeMin = NaturalSelectionConstants.CLOCK_WOLVES_SLICE_RANGE.min;
+        const wolvesRangeMax = NaturalSelectionConstants.CLOCK_WOLVES_SLICE_RANGE.max;
+
+        if ( this.enabledProperty.value && previousPercentTime < wolvesRangeMin && currentPercentTime >= wolvesRangeMin ) {
+
+          // Create wolves
+          assert && assert( this.wolfGroup.count === 0, 'expected there to be no wolves' );
           const numberOfWolves = Math.max( MIN_WOLVES, Utils.roundSymmetric( liveBunnies.length / BUNNIES_PER_WOLF ) );
           phet.log && phet.log( `Creating ${numberOfWolves} wolves` );
           for ( let i = 0; i < numberOfWolves; i++ ) {
             this.wolfGroup.createNextElement();
           }
+
+          // Eat bunnies
+          this.eatBunnies( environmentProperty.value );
         }
-        else if ( this.wolfGroup.count > 0 ) {
+        else if ( currentPercentTime > wolvesRangeMax && this.wolfGroup.count > 0 ) {
+
+          // Dispose of all wolves
           phet.log && phet.log( `Disposing of ${this.wolfGroup.count} wolves` );
           this.wolfGroup.clear();
-        }
-      }
-    } );
-
-    //TODO Temporarily apply environmental factors all at once.
-    // Eat some bunnies.
-    generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
-        const wolvesRangeMin = NaturalSelectionConstants.CLOCK_WOLVES_SLICE_RANGE.min;
-        if ( previousPercentTime < wolvesRangeMin && currentPercentTime >= wolvesRangeMin ) {
-          this.apply( environmentProperty.value );
         }
       }
     } );
@@ -141,13 +149,13 @@ class WolfCollection {
     this.wolfGroup.forEach( wolf => wolf.move() );
   }
 
-  //TODO this is temporary, wolves should eat throughout the death interval, not all at once
+  //TODO Temporarily eat all bunnies at once, instead of over CLOCK_WOLVES_SLICE_RANGE
   /**
-   * Applies this environmental factor.
+   * Eats some portion of the bunny population.
    * @param {Environment} environment
-   * @public
+   * @private
    */
-  apply( environment ) {
+  eatBunnies( environment ) {
     assert && assert( Environment.includes( environment ), 'invalid environment' );
 
     if ( this.liveBunnies.length > 0 && this.enabledProperty.value ) {
