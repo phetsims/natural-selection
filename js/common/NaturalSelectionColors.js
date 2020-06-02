@@ -55,8 +55,8 @@ const NaturalSelectionColors = {
   // Generation Clock
   CLOCK_FILL: 'rgb( 203, 120, 162 )', // pink
   CLOCK_STROKE: 'black',
-  CLOCK_REVEAL_COLOR: 'rgba( 255, 255, 255, 0.6 )', // transparent white
-  CLOCK_FOOD_SLICE_COLOR: '#93c83d', // green
+  CLOCK_REVEAL_COLOR: 'rgba( 255, 255, 255, 0.4 )', // transparent white
+  CLOCK_FOOD_SLICE_COLOR: 'rgb( 0, 210, 0 )', // green
   CLOCK_WOLVES_SLICE_COLOR: 'rgb( 102, 102, 102 )' // grey
 };
 
