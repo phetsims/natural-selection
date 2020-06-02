@@ -71,7 +71,7 @@ class AllelesPanel extends NaturalSelectionPanel {
     } );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-      spacing: 25,
+      spacing: 28,
       children: [ titleNode, furRow, earsRow, teethRow ]
     } ) );
 
