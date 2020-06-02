@@ -13,10 +13,10 @@ import HSeparator from '../../../../../sun/js/HSeparator.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import AssertUtils from '../../AssertUtils.js';
 import GenePool from '../../model/GenePool.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
-import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import NaturalSelectionCheckbox from '../NaturalSelectionCheckbox.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
 import ProportionsLegendNode from './ProportionsLegendNode.js';
@@ -31,7 +31,7 @@ class ProportionsPanel extends NaturalSelectionPanel {
   constructor( genePool, valuesVisibleProperty, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( valuesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( valuesVisibleProperty, 'boolean' );
 
     options = merge( {
       fixedWidth: 100,

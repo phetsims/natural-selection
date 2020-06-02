@@ -10,9 +10,9 @@ import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import AssertUtils from '../AssertUtils.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentalFactorCheckbox from './EnvironmentalFactorCheckbox.js';
 
 class LimitedFoodCheckbox extends EnvironmentalFactorCheckbox {
@@ -24,7 +24,7 @@ class LimitedFoodCheckbox extends EnvironmentalFactorCheckbox {
    */
   constructor( limitedFoodProperty, alignGroup, options ) {
 
-    assert && NaturalSelectionUtils.assertPropertyTypeof( limitedFoodProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( limitedFoodProperty, 'boolean' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
     const labelNode = new Text( naturalSelectionStrings.limitedFood, {

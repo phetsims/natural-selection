@@ -16,8 +16,8 @@ import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import ColorDef from '../../../../scenery/js/util/ColorDef.js';
 import naturalSelection from '../../naturalSelection.js';
+import AssertUtils from '../AssertUtils.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import GenerationClockNode from './GenerationClockNode.js';
 import NaturalSelectionCheckbox from './NaturalSelectionCheckbox.js';
 
@@ -34,11 +34,11 @@ class EnvironmentalFactorCheckbox extends NaturalSelectionCheckbox {
   constructor( labelNode, enabledProperty, alignGroup, clockSliceRange, clockSliceColor, options ) {
 
     assert && assert( labelNode instanceof Node, 'invalid labelNode' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( enabledProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( enabledProperty, 'boolean' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
     assert && assert( clockSliceRange instanceof Range, 'invalid clockSliceRange' );
     assert && assert( ColorDef.isColorDef( clockSliceColor ), 'invalid clockSliceColor' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( enabledProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( enabledProperty, 'boolean' );
 
     const alignBox = new AlignBox( labelNode, {
       group: alignGroup,

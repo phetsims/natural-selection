@@ -9,7 +9,7 @@
 
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import AssertUtils from '../AssertUtils.js';
 import BunnyCounts from './BunnyCounts.js';
 import BunnyCountsIO from './BunnyCountsIO.js';
 
@@ -22,7 +22,7 @@ class ProportionsCounts {
    */
   constructor( generation, startCounts, endCounts ) {
 
-    assert && NaturalSelectionUtils.assertGeneration( generation );
+    assert && AssertUtils.assertGeneration( generation );
     assert && assert( startCounts instanceof BunnyCounts, 'invalid startCounts' );
     assert && assert( endCounts instanceof BunnyCounts, 'invalid endCounts' );
 

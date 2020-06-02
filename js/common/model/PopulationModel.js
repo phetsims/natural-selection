@@ -19,6 +19,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import AssertUtils from '../AssertUtils.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import DataProbe from './DataProbe.js';
 import GenePool from './GenePool.js';
@@ -56,8 +57,8 @@ class PopulationModel extends PhetioObject {
   constructor( genePool, generationsProperty, isPlayingProperty, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( generationsProperty, 'number' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( isPlayingProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( generationsProperty, 'number' );
+    assert && AssertUtils.assertPropertyTypeof( isPlayingProperty, 'boolean' );
 
     options = merge( {
 

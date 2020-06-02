@@ -20,7 +20,7 @@ import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import AssertUtils from '../AssertUtils.js';
 import BunnyCounts from './BunnyCounts.js';
 import BunnyCountsIO from './BunnyCountsIO.js';
 import ProportionsCounts from './ProportionsCounts.js';
@@ -38,8 +38,8 @@ class ProportionsModel extends PhetioObject {
   constructor( liveBunnyCountsProperty, currentGenerationProperty, isPlayingProperty, simulationModeProperty, options ) {
 
     assert && assert( liveBunnyCountsProperty instanceof Property, 'invalid bunnyCounts' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( currentGenerationProperty, 'number' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( isPlayingProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( currentGenerationProperty, 'number' );
+    assert && AssertUtils.assertPropertyTypeof( isPlayingProperty, 'boolean' );
     assert && assert( simulationModeProperty instanceof EnumerationProperty );
 
     options = merge( {

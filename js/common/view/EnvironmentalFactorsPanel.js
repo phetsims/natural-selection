@@ -14,8 +14,8 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import AssertUtils from '../AssertUtils.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import LimitedFoodCheckbox from './LimitedFoodCheckbox.js';
 import NaturalSelectionPanel from './NaturalSelectionPanel.js';
 import ToughFoodCheckbox from './ToughFoodCheckbox.js';
@@ -31,9 +31,9 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
    */
   constructor( wolvesEnabledProperty, foodIsToughProperty, foodIsLimitedProperty, options ) {
 
-    assert && NaturalSelectionUtils.assertPropertyTypeof( wolvesEnabledProperty, 'boolean' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( foodIsToughProperty, 'boolean' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( foodIsLimitedProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( wolvesEnabledProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( foodIsToughProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( foodIsLimitedProperty, 'boolean' );
 
     options = merge( {
       toughFoodCheckboxVisible: true,

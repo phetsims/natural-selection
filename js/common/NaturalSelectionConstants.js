@@ -12,9 +12,9 @@ import ScreenView from '../../../joist/js/ScreenView.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import RectangularButtonView from '../../../sun/js/buttons/RectangularButtonView.js';
 import naturalSelection from '../naturalSelection.js';
+import AssertUtils from './AssertUtils.js';
 import NaturalSelectionColors from './NaturalSelectionColors.js';
 import NaturalSelectionQueryParameters from './NaturalSelectionQueryParameters.js';
-import NaturalSelectionUtils from './NaturalSelectionUtils.js';
 
 // constants
 const CORNER_RADIUS = 5;
@@ -136,8 +136,8 @@ assert && assert( NaturalSelectionConstants.MUTATION_PERCENTAGE > 0 && NaturalSe
 assert && assert( NaturalSelectionConstants.SECONDS_PER_STEP < NaturalSelectionConstants.SECONDS_PER_GENERATION,
   'SECONDS_PER_STEP must be < SECONDS_PER_GENERATION' );
 
-assert && NaturalSelectionUtils.assertRangeInclusive( NaturalSelectionConstants.CLOCK_FOOD_SLICE_RANGE, 0, 1 );
-assert && NaturalSelectionUtils.assertRangeInclusive( NaturalSelectionConstants.CLOCK_WOLVES_SLICE_RANGE, 0, 1 );
+assert && AssertUtils.assertRangeInclusive( NaturalSelectionConstants.CLOCK_FOOD_SLICE_RANGE, 0, 1 );
+assert && AssertUtils.assertRangeInclusive( NaturalSelectionConstants.CLOCK_WOLVES_SLICE_RANGE, 0, 1 );
 
 naturalSelection.register( 'NaturalSelectionConstants', NaturalSelectionConstants );
 export default NaturalSelectionConstants;

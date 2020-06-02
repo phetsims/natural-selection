@@ -13,9 +13,9 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import wolfImage from '../../../images/wolf_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import AssertUtils from '../AssertUtils.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentalFactorCheckbox from './EnvironmentalFactorCheckbox.js';
 
 class WolvesCheckbox extends EnvironmentalFactorCheckbox {
@@ -27,7 +27,7 @@ class WolvesCheckbox extends EnvironmentalFactorCheckbox {
    */
   constructor( wolvesEnabledProperty, alignGroup, options ) {
 
-    assert && NaturalSelectionUtils.assertPropertyTypeof( wolvesEnabledProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( wolvesEnabledProperty, 'boolean' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
     const text = new Text( naturalSelectionStrings.wolves, {

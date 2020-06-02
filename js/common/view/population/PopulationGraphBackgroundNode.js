@@ -16,9 +16,9 @@ import Path from '../../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../../naturalSelection.js';
+import AssertUtils from '../../AssertUtils.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
-import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 
 // constants
 const GRID_LINES_LINE_WIDTH = 1;
@@ -148,7 +148,7 @@ class VerticalLines extends Node {
    */
   constructor( xRangeProperty, options ) {
 
-    assert && NaturalSelectionUtils.assertPropertyInstanceof( xRangeProperty, Range );
+    assert && AssertUtils.assertPropertyInstanceof( xRangeProperty, Range );
 
     options = merge( {
       xSpacingModel: 1, // spacing between lines, in model coordinates

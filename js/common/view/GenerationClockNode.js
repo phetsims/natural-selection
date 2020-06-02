@@ -15,10 +15,10 @@ import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import AssertUtils from '../AssertUtils.js';
 import GenerationClock from '../model/GenerationClock.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 // constants
 const START_ANGLE = -Math.PI / 2; // 12:00
@@ -37,8 +37,8 @@ class GenerationClockNode extends Node {
   constructor( generationClock, foodEnabledProperty, wolvesEnabledProperty, options ) {
 
     assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( foodEnabledProperty, 'boolean' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( wolvesEnabledProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( foodEnabledProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( wolvesEnabledProperty, 'boolean' );
 
     options = merge( {
 

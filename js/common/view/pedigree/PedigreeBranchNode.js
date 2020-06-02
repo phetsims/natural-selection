@@ -13,8 +13,8 @@ import merge from '../../../../../phet-core/js/merge.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../../scenery/js/nodes/Path.js';
 import naturalSelection from '../../../naturalSelection.js';
+import AssertUtils from '../../AssertUtils.js';
 import Bunny from '../../model/Bunny.js';
-import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import PedigreeBunnyNode from './PedigreeBunnyNode.js';
 
 // constants
@@ -41,9 +41,9 @@ class PedigreeBranchNode extends Node {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
     assert && assert( typeof depth === 'number', 'invalid depth' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( furAllelesVisibleProperty, 'boolean' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( earsAllelesVisibleProperty, 'boolean' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( teethAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( furAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( earsAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( teethAllelesVisibleProperty, 'boolean' );
 
     const children = [];
 

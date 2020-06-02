@@ -20,7 +20,7 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import AssertUtils from '../AssertUtils.js';
 import BunnyIO from './BunnyIO.js';
 import CauseOfDeath from './CauseOfDeath.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -69,7 +69,7 @@ class Bunny extends Sprite {
     }, options );
 
     // Validate options
-    assert && NaturalSelectionUtils.assertGeneration( options.generation );
+    assert && AssertUtils.assertGeneration( options.generation );
     assert && assert( ( options.father && options.mother ) || ( !options.father && !options.mother ), 'bunny cannot have 1 parent' );
     assert && assert( !( options.father && options.alleles ), 'father and alleles are mutually exclusive' );
 

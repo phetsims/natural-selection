@@ -19,12 +19,12 @@ import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import AssertUtils from '../../AssertUtils.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
 import ProportionsModel from '../../model/ProportionsModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
-import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import NaturalSelectionCheckbox from '../NaturalSelectionCheckbox.js';
 import ProportionsBarNode from './ProportionsBarNode.js';
 import PopulationGenerationSpinner from './ProportionsGenerationSpinner.js';
@@ -229,7 +229,7 @@ class RowLabel extends VBox {
   constructor( topString, count, options ) {
 
     assert && assert( typeof topString === 'string', 'invalid topString' );
-    assert && NaturalSelectionUtils.assertCount( count );
+    assert && AssertUtils.assertCount( count );
 
     options = merge( {
       spacing: 2,
@@ -282,7 +282,7 @@ class RowLabel extends VBox {
    * @public
    */
   setCount( count ) {
-    assert && NaturalSelectionUtils.assertCount( count );
+    assert && AssertUtils.assertCount( count );
     this.bottomText.text = StringUtils.fillIn( naturalSelectionStrings.countBunnies, { count: count } );
   }
 }
@@ -308,11 +308,11 @@ class Column extends VBox {
                valuesVisibleProperty, geneVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, options ) {
 
     assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && NaturalSelectionUtils.assertCount( startNormalCount );
-    assert && NaturalSelectionUtils.assertCount( startMutantCount );
-    assert && NaturalSelectionUtils.assertCount( endNormalCount );
-    assert && NaturalSelectionUtils.assertCount( endMutantCount );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( valuesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertCount( startNormalCount );
+    assert && AssertUtils.assertCount( startMutantCount );
+    assert && AssertUtils.assertCount( endNormalCount );
+    assert && AssertUtils.assertCount( endMutantCount );
+    assert && AssertUtils.assertPropertyTypeof( valuesVisibleProperty, 'boolean' );
     assert && assert( barsAlignGroup instanceof AlignGroup, 'invalid barsAlignGroup' );
 
     options = merge( {
@@ -384,8 +384,8 @@ class Column extends VBox {
    * @public
    */
   setStartCounts( normalCount, mutantCount ) {
-    assert && NaturalSelectionUtils.assertCount( normalCount );
-    assert && NaturalSelectionUtils.assertCount( mutantCount );
+    assert && AssertUtils.assertCount( normalCount );
+    assert && AssertUtils.assertCount( mutantCount );
 
     this.startBarNode.setCounts( normalCount, mutantCount );
   }
@@ -397,8 +397,8 @@ class Column extends VBox {
    * @public
    */
   setEndCounts( normalCount, mutantCount ) {
-    assert && NaturalSelectionUtils.assertCount( normalCount );
-    assert && NaturalSelectionUtils.assertCount( mutantCount );
+    assert && AssertUtils.assertCount( normalCount );
+    assert && AssertUtils.assertCount( mutantCount );
 
     this.endBarNode.setCounts( normalCount, mutantCount );
   }

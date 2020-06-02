@@ -18,8 +18,8 @@ import Text from '../../../../../scenery/js/nodes/Text.js';
 import ArrowButton from '../../../../../sun/js/buttons/ArrowButton.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
+import AssertUtils from '../../AssertUtils.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
-import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 
 class GenerationScrollControl extends HBox {
 
@@ -31,9 +31,9 @@ class GenerationScrollControl extends HBox {
    */
   constructor( rangeProperty, maxProperty, isPlayingProperty, options ) {
 
-    assert && NaturalSelectionUtils.assertPropertyInstanceof( rangeProperty, Range );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( maxProperty, 'number' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( isPlayingProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyInstanceof( rangeProperty, Range );
+    assert && AssertUtils.assertPropertyTypeof( maxProperty, 'number' );
+    assert && AssertUtils.assertPropertyTypeof( isPlayingProperty, 'boolean' );
 
     options = merge( {
 

@@ -11,8 +11,8 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import AssertUtils from '../AssertUtils.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import Bunny from './Bunny.js';
 import BunnyArray from './BunnyArray.js';
 import BunnyArrayIO from './BunnyArrayIO.js';
@@ -218,7 +218,7 @@ class BunnyCollection {
    * @public
    */
   mateBunnies( generation ) {
-    assert && NaturalSelectionUtils.assertGeneration( generation );
+    assert && AssertUtils.assertGeneration( generation );
 
     let bornIndex = 0;
 

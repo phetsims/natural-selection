@@ -14,7 +14,7 @@ import Vector2 from '../../../../../dot/js/Vector2.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import DragListener from '../../../../../scenery/js/listeners/DragListener.js';
 import naturalSelection from '../../../naturalSelection.js';
-import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
+import AssertUtils from '../../AssertUtils.js';
 
 class DataProbeDragListener extends DragListener {
 
@@ -25,7 +25,7 @@ class DataProbeDragListener extends DragListener {
    */
   constructor( positionProperty, xRange, options ) {
 
-    assert && NaturalSelectionUtils.assertPropertyInstanceof( positionProperty, Vector2 );
+    assert && AssertUtils.assertPropertyInstanceof( positionProperty, Vector2 );
     assert && assert( xRange instanceof Range, 'invalid xRange' );
 
     options = merge( {}, options );

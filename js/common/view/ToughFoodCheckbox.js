@@ -13,9 +13,9 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import shrubToughCImage from '../../../images/shrub-tough-C_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import AssertUtils from '../AssertUtils.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentalFactorCheckbox from './EnvironmentalFactorCheckbox.js';
 
 class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
@@ -27,7 +27,7 @@ class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
    */
   constructor( isToughProperty, alignGroup, options ) {
 
-    assert && NaturalSelectionUtils.assertPropertyTypeof( isToughProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( isToughProperty, 'boolean' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
     const text = new Text( naturalSelectionStrings.toughFood, {

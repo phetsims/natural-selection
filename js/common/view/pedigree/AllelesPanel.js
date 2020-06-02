@@ -19,10 +19,10 @@ import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import AssertUtils from '../../AssertUtils.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
-import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import NaturalSelectionCheckbox from '../NaturalSelectionCheckbox.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
 
@@ -38,9 +38,9 @@ class AllelesPanel extends NaturalSelectionPanel {
   constructor( genePool, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( furAllelesVisibleProperty, 'boolean' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( earsAllelesVisibleProperty, 'boolean' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( teethAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( furAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( earsAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( teethAllelesVisibleProperty, 'boolean' );
 
     options = merge( {
 
@@ -110,7 +110,7 @@ class Row extends VBox {
   constructor( gene, visibleProperty, alignGroup, options ) {
 
     assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && NaturalSelectionUtils.assertPropertyTypeof( visibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyTypeof( visibleProperty, 'boolean' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
     options = merge( {
