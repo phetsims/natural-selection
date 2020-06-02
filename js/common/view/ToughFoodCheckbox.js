@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
@@ -17,10 +16,9 @@ import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
-import GenerationClockNode from './GenerationClockNode.js';
-import NaturalSelectionCheckbox from './NaturalSelectionCheckbox.js';
+import EnvironmentalFactorCheckbox from './EnvironmentalFactorCheckbox.js';
 
-class ToughFoodCheckbox extends NaturalSelectionCheckbox {
+class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
 
   /**
    * @param {Property.<boolean>} isToughProperty
@@ -28,7 +26,7 @@ class ToughFoodCheckbox extends NaturalSelectionCheckbox {
    * @param {Object} [options]
    */
   constructor( isToughProperty, alignGroup, options ) {
-    
+
     assert && NaturalSelectionUtils.assertPropertyTypeof( isToughProperty, 'boolean' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
@@ -37,26 +35,17 @@ class ToughFoodCheckbox extends NaturalSelectionCheckbox {
       maxWidth: 110 // determined empirically
     } );
 
-    const icon = new Image( shrubToughCImage, { scale: 0.2 } );
+    const icon = new Image( shrubToughCImage, {
+      scale: 0.2 // determined empirically
+    } );
 
-    const labelNode = new AlignBox( new HBox( {
+    const labelNode = new HBox( {
       children: [ text, icon ],
       spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING
-    } ), {
-      group: alignGroup,
-      xAlign: 'left'
     } );
 
-    const clockSliceNode = GenerationClockNode.createSliceIcon( NaturalSelectionConstants.CLOCK_FOOD_SLICE_RANGE, {
-      sliceFill: NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR
-    } );
-
-    const content = new HBox( {
-      spacing: 2 * NaturalSelectionConstants.CHECKBOX_X_SPACING,
-      children: [ labelNode, clockSliceNode ]
-    } );
-
-    super( content, isToughProperty, options );
+    super( labelNode, isToughProperty, alignGroup, NaturalSelectionConstants.CLOCK_FOOD_SLICE_RANGE,
+      NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR, options );
   }
 }
 

@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
@@ -17,10 +16,9 @@ import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
-import GenerationClockNode from './GenerationClockNode.js';
-import NaturalSelectionCheckbox from './NaturalSelectionCheckbox.js';
+import EnvironmentalFactorCheckbox from './EnvironmentalFactorCheckbox.js';
 
-class WolvesCheckbox extends NaturalSelectionCheckbox {
+class WolvesCheckbox extends EnvironmentalFactorCheckbox {
 
   /**
    * @param {Property.<boolean>} wolvesEnabledProperty
@@ -38,27 +36,16 @@ class WolvesCheckbox extends NaturalSelectionCheckbox {
     } );
 
     const icon = new Image( wolfImage );
-    const scale = 0.064;
+    const scale = 0.064; // determined empirically
     icon.setScaleMagnitude( -scale, scale );
 
-    const labelNode = new AlignBox( new HBox( {
+    const labelNode = new HBox( {
       children: [ text, icon ],
       spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING
-    } ), {
-      group: alignGroup,
-        xAlign: 'left'
     } );
 
-    const clockSliceNode = GenerationClockNode.createSliceIcon( NaturalSelectionConstants.CLOCK_WOLVES_SLICE_RANGE, {
-      sliceFill: NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR
-    } );
-
-    const content = new HBox( {
-      spacing: 2 * NaturalSelectionConstants.CHECKBOX_X_SPACING,
-      children: [ labelNode, clockSliceNode ]
-    } );
-
-    super( content, wolvesEnabledProperty, options );
+    super( labelNode, wolvesEnabledProperty, alignGroup, NaturalSelectionConstants.CLOCK_WOLVES_SLICE_RANGE,
+      NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR, options );
   }
 }
 
