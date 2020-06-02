@@ -171,6 +171,16 @@ const NaturalSelectionUtils = {
   },
 
   /**
+   * Asserts that a range meets min/max criteria.
+   * @param {Range} range
+   * @param {number} min
+   * @param {number} max
+   */
+  assertRangeInclusive( range, min, max ) {
+    assert && assert( range.min >= min && range.max <= max, `invalid range: ${range}` );
+  },
+
+  /**
    * Gets the next random double in a Range.
    * @param {Range} range
    * @returns {number}
