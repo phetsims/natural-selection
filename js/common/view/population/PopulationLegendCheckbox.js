@@ -11,10 +11,10 @@ import merge from '../../../../../phet-core/js/merge.js';
 import HBox from '../../../../../scenery/js/nodes/HBox.js';
 import Line from '../../../../../scenery/js/nodes/Line.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
-import Checkbox from '../../../../../sun/js/Checkbox.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
+import NaturalSelectionCheckbox from '../NaturalSelectionCheckbox.js';
 
 // constants
 const LINE_DASH = [ 3, 3 ];
@@ -24,7 +24,7 @@ const NUMBER_OF_DASHES = 4;
 assert && assert( LINE_DASH.length === 2, 'unsupported LINE_DASH' );
 const LINE_LENGTH = NUMBER_OF_DASHES * LINE_DASH[ 0 ] + ( NUMBER_OF_DASHES - 1 ) * LINE_DASH[ 1 ];
 
-class PopulationLegendCheckbox extends Checkbox {
+class PopulationLegendCheckbox extends NaturalSelectionCheckbox {
 
   /**
    * @param {Property.<boolean>} plotVisibleProperty - Property to show/hide the associated plot on the Population graph
@@ -36,7 +36,7 @@ class PopulationLegendCheckbox extends Checkbox {
     assert && NaturalSelectionUtils.assertPropertyTypeof( plotVisibleProperty, 'boolean' );
     assert && assert( typeof name === 'string', 'invalid name' );
 
-    options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+    options = merge( {
       color: 'white',
       isMutant: false // true = mutant allele, false = normal allele
     }, options );

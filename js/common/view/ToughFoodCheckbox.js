@@ -6,18 +6,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import Checkbox from '../../../../sun/js/Checkbox.js';
 import shrubToughCImage from '../../../images/shrub-tough-C_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import NaturalSelectionCheckbox from './NaturalSelectionCheckbox.js';
 
-class ToughFoodCheckbox extends Checkbox {
+class ToughFoodCheckbox extends NaturalSelectionCheckbox {
 
   /**
    * @param {Property.<boolean>} isToughProperty
@@ -26,8 +25,6 @@ class ToughFoodCheckbox extends Checkbox {
   constructor( isToughProperty, options ) {
     
     assert && NaturalSelectionUtils.assertPropertyTypeof( isToughProperty, 'boolean' );
-
-    options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 
     const text = new Text( naturalSelectionStrings.toughFood, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,

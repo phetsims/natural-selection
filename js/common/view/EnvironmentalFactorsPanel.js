@@ -8,6 +8,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -47,15 +48,21 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       tandem: options.tandem.createTandem( 'titleNode' )
     } );
 
+    // To make all checkbox labels have the same effective size
+    const checkboxLabelAlignGroup = new AlignGroup();
+
     const wolvesCheckbox = new WolvesCheckbox( wolvesEnabledProperty, {
+      labelAlignGroup: checkboxLabelAlignGroup,
       tandem: options.tandem.createTandem( 'wolvesCheckbox' )
     } );
 
     const toughFoodCheckbox = new ToughFoodCheckbox( foodIsToughProperty, {
+      labelAlignGroup: checkboxLabelAlignGroup,
       tandem: options.tandem.createTandem( 'toughFoodCheckbox' )
     } );
 
     const limitedFoodCheckbox = new LimitedFoodCheckbox( foodIsLimitedProperty, {
+      labelAlignGroup: checkboxLabelAlignGroup,
       tandem: options.tandem.createTandem( 'limitedFoodCheckbox' )
     } );
 

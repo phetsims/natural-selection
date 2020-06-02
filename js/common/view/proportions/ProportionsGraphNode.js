@@ -16,7 +16,6 @@ import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../../scenery/js/nodes/VBox.js';
-import Checkbox from '../../../../../sun/js/Checkbox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
@@ -26,6 +25,7 @@ import ProportionsModel from '../../model/ProportionsModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
+import NaturalSelectionCheckbox from '../NaturalSelectionCheckbox.js';
 import ProportionsBarNode from './ProportionsBarNode.js';
 import PopulationGenerationSpinner from './ProportionsGenerationSpinner.js';
 
@@ -327,10 +327,10 @@ class Column extends VBox {
       font: COLUMN_LABEL_FONT,
       maxWidth: 120 // determined empirically
     } );
-    const checkbox = new Checkbox( labelNode, geneVisibleProperty, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+    const checkbox = new NaturalSelectionCheckbox( labelNode, geneVisibleProperty, {
       tandem: options.tandem.createTandem( 'checkbox' ),
       phetioReadOnly: true
-    } ) );
+    } );
 
     const startBarNode = new ProportionsBarNode( gene.color, startNormalCount, startMutantCount, valuesVisibleProperty, {
       tandem: options.tandem.createTandem( 'startBarNode' )

@@ -9,7 +9,6 @@
 import merge from '../../../../../phet-core/js/merge.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../../scenery/js/nodes/VBox.js';
-import Checkbox from '../../../../../sun/js/Checkbox.js';
 import HSeparator from '../../../../../sun/js/HSeparator.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
@@ -18,6 +17,7 @@ import GenePool from '../../model/GenePool.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
+import NaturalSelectionCheckbox from '../NaturalSelectionCheckbox.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
 import ProportionsLegendNode from './ProportionsLegendNode.js';
 
@@ -50,16 +50,13 @@ class ProportionsPanel extends NaturalSelectionPanel {
       tandem: options.tandem.createTandem( 'separator' )
     } );
 
-    const valuesCheckbox = new Checkbox(
-      new Text( naturalSelectionStrings.values, {
-        font: NaturalSelectionConstants.CHECKBOX_FONT,
-        maxWidth: 100 // determined empirically
-      } ),
-      valuesVisibleProperty,
-      merge( {
-        tandem: options.tandem.createTandem( 'valuesCheckbox' )
-      }, NaturalSelectionConstants.CHECKBOX_OPTIONS )
-    );
+    const valuesCheckboxLabelNode = new Text( naturalSelectionStrings.values, {
+      font: NaturalSelectionConstants.CHECKBOX_FONT,
+      maxWidth: 100 // determined empirically
+    } );
+    const valuesCheckbox = new NaturalSelectionCheckbox( valuesCheckboxLabelNode, valuesVisibleProperty, {
+      tandem: options.tandem.createTandem( 'valuesCheckbox' )
+    } );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: [
