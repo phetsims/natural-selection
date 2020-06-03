@@ -194,6 +194,7 @@ class Genotype extends PhetioObject {
    * @param genePool
    * @param options
    * @returns {Genotype}
+   * @public
    */
   static withNormalAlleles( genePool, options ) {
 

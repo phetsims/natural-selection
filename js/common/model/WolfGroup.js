@@ -57,6 +57,7 @@ class WolfGroup extends PhetioGroup {
   /**
    * Steps all wolves.
    * @param {number} dt - time step, in seconds
+   * @public
    */
   step( dt ) {
     this.forEach( wolf => wolf.step( dt ) );

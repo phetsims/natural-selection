@@ -207,6 +207,7 @@ class ProportionsModel extends PhetioObject {
    * Records start counts for the current generation.
    * @param {generation} generation
    * @param {BunnyCounts} startCounts
+   * @public
    */
   recordStartCounts( generation, startCounts ) {
     assert && assert( generation === this.currentGenerationProperty.value, `${generation} is not the current generation` );

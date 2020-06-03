@@ -67,6 +67,7 @@ class GenePair extends PhetioObject {
   /**
    * Mutates the gene pair.
    * @param {Allele} mutantAllele
+   * @public
    */
   mutate( mutantAllele ) {
 
