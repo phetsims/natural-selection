@@ -12,8 +12,9 @@
 | query parameters | 0 | 5/18/2020 |
 | Proportions graph | 0 | 5/26/2020 | 
 | Population graph | 3 weeks | |
-| Food | 1 week | | 
-| Wolves | 1 week | |
+| Food | 2 weeks | | 
+| Wolves | 2 weeks | |
+| Data pruning | 2 weeks | |
 
 ## Implementation
 
