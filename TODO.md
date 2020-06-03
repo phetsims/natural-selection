@@ -18,7 +18,8 @@
 
 ## Implementation
 
-* Divide the death part of the generation clock into discrete chunks, maybe at 5,6,7,8:00
+* Prune dead bunnies
+* Stop the sim when data limit is hit
 
 ## Performance
 
