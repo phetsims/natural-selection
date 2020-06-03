@@ -51,7 +51,13 @@ class GenePair extends PhetioObject {
     this.fatherAllele = fatherAllele;
     this.motherAllele = motherAllele;
 
-    // @private {Allele[]} alleles that will be passed on to children
+    // @private {Allele[]} alleles that will be passed on to children.
+    // This is used to simulate Mendelian inheritance. If a bunny is heterozygous (same alleles), then its alleles
+    // must be donated to offspring with equal frequency. Choosing fatherAllele vs motherAllele using random number
+    // generation would eventually produce equal frequency, but possibly not for a very long time. Putting 2 copies
+    // of each allele in childAlleles and shuffling guarantees that we will immediately have equal frequency, with
+    // some degree of randomness. If there was only 1 copy of each allele in childAlleles, we'd simply be alternating
+    // between the 2 alleles.
     this.childAlleles = phet.joist.random.shuffle( [ fatherAllele, fatherAllele, motherAllele, motherAllele ] );
     this.childAllelesIndex = 0;
 
