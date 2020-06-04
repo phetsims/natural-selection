@@ -16,49 +16,36 @@ import naturalSelection from '../naturalSelection.js';
 const AssertUtils = {
 
   /**
-   * Asserts that an object is a Property whose value satisfies a specified predicate.
-   * Used for type-checking of method arguments.
+   * Asserts that a value is a Property, whose value satisfies an optional predicate.
    * @param {Property} property
-   * @param {function(value:*):boolean} predicate
+   * @param {function(value:*):boolean} [predicate]
    * @public
    */
   assertPropertyPredicate( property, predicate ) {
     assert( property instanceof Property, 'property is not a Property' );
-    assert( predicate( property.value ), 'Property.value failed predicate' );
+    if ( predicate ) {
+      assert( predicate( property.value ), 'Property.value failed predicate' );
+    }
   },
 
   /**
-   * Asserts that an object is a Property whose value is a specified primitive type.
-   * Used for type-checking of method arguments.
+   * Asserts that a value is a Property, whose value is a specified primitive type.
    * @param {Property} property
-   * @param {string} type
+   * @param {string} primitiveType
    * @public
    */
-  assertPropertyTypeof( property, type ) {
-    AssertUtils.assertPropertyPredicate( property, value => typeof value === type );
+  assertPropertyTypeof( property, primitiveType ) {
+    AssertUtils.assertPropertyPredicate( property, value => typeof value === primitiveType );
   },
 
   /**
-   * Asserts that an object is a Property whose value is an instance of a specific class.
-   * Used for type-checking of method arguments.
+   * Asserts that a value is a Property, whose value is an instance of a specified Object type.
    * @param {Property} property
-   * @param {constructor} type
+   * @param {constructor} objectType
    * @public
    */
-  assertPropertyInstanceof( property, type ) {
-    AssertUtils.assertPropertyPredicate( property, value => value instanceof type );
-  },
-
-  /**
-   * Asserts that a range is between min and max, inclusive.
-   * @param {Range} range
-   * @param {number} min
-   * @param {number} max
-   * @public
-   */
-  assertRangeInclusive( range, min, max ) {
-    assert && assert( range instanceof Range, 'invalid range' );
-    assert && assert( range.min >= min && range.max <= max, `invalid range: ${range}` );
+  assertPropertyInstanceof( property, objectType ) {
+    AssertUtils.assertPropertyPredicate( property, value => value instanceof objectType );
   },
 
   /**
@@ -83,6 +70,18 @@ const AssertUtils = {
    */
   assertPositiveInteger( value ) {
     AssertUtils.assertInteger( value, value => value > 0 );
+  },
+
+  /**
+   * Asserts that a value is a Range, whose value is between min and max, inclusive.
+   * @param {Range} range
+   * @param {number} min
+   * @param {number} max
+   * @public
+   */
+  assertRangeBetween( range, min, max ) {
+    assert && assert( range instanceof Range, 'invalid range' );
+    assert && assert( range.min >= min && range.max <= max, `invalid range: ${range}` );
   }
 };
 
