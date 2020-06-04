@@ -49,7 +49,7 @@ const AssertUtils = {
   },
 
   /**
-   * Asserts that a range meets min/max criteria.
+   * Asserts that a range is between min and max, inclusive.
    * @param {Range} range
    * @param {number} min
    * @param {number} max
