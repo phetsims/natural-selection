@@ -22,7 +22,7 @@ const AssertUtils = {
    * @param {function(value:*):boolean} [predicate]
    * @public
    */
-  assertPropertyPredicate( property, predicate ) {
+  assertProperty( property, predicate ) {
     assert( property instanceof Property, 'property is not a Property' );
     if ( predicate ) {
       assert( predicate( property.value ), 'Property.value failed predicate' );
@@ -37,10 +37,10 @@ const AssertUtils = {
    */
   assertPropertyOf( property, type ) {
     if ( typeof type === 'string' ) {
-      AssertUtils.assertPropertyPredicate( property, value => typeof value === type );
+      AssertUtils.assertProperty( property, value => typeof value === type );
     }
     else {
-      AssertUtils.assertPropertyPredicate( property, value => value instanceof type );
+      AssertUtils.assertProperty( property, value => value instanceof type );
     }
   },
 
