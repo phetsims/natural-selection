@@ -2,7 +2,8 @@
 
 //TODO https://github.com/phetsims/natural-selection/issues/96 migrate to common?
 /**
- * AssertUtils defines utility functions that are specific to this simulation.
+ * AssertUtils is a collection of utility functions for common assertions. Many of these assertions are related to
+ * type-checking, useful in a weakly-typed language like JavaScript.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
