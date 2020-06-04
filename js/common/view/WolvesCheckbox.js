@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
@@ -13,7 +14,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import wolfImage from '../../../images/wolf_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
-import AssertUtils from '../AssertUtils.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import EnvironmentalFactorCheckbox from './EnvironmentalFactorCheckbox.js';

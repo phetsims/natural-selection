@@ -7,13 +7,13 @@
  */
 
 import merge from '../../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import HSeparator from '../../../../../sun/js/HSeparator.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
-import AssertUtils from '../../AssertUtils.js';
 import GenePool from '../../model/GenePool.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';

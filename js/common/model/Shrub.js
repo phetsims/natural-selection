@@ -8,8 +8,8 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import naturalSelection from '../../naturalSelection.js';
-import AssertUtils from '../AssertUtils.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Sprite from './Sprite.js';
 

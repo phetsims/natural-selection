@@ -8,11 +8,11 @@
  */
 
 import merge from '../../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import HBox from '../../../../../scenery/js/nodes/HBox.js';
 import Line from '../../../../../scenery/js/nodes/Line.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../../naturalSelection.js';
-import AssertUtils from '../../AssertUtils.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionCheckbox from '../NaturalSelectionCheckbox.js';
 

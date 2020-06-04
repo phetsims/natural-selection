@@ -12,9 +12,9 @@ import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import Range from '../../../../../dot/js/Range.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import merge from '../../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import DragListener from '../../../../../scenery/js/listeners/DragListener.js';
 import naturalSelection from '../../../naturalSelection.js';
-import AssertUtils from '../../AssertUtils.js';
 
 class DataProbeDragListener extends DragListener {
 

@@ -8,13 +8,13 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
-import AssertUtils from '../AssertUtils.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import LimitedFoodCheckbox from './LimitedFoodCheckbox.js';
 import NaturalSelectionPanel from './NaturalSelectionPanel.js';

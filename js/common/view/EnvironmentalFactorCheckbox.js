@@ -10,13 +10,13 @@
  */
 
 import Range from '../../../../dot/js/Range.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import ColorDef from '../../../../scenery/js/util/ColorDef.js';
 import naturalSelection from '../../naturalSelection.js';
-import AssertUtils from '../AssertUtils.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import GenerationClockNode from './GenerationClockNode.js';
 import NaturalSelectionCheckbox from './NaturalSelectionCheckbox.js';

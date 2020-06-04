@@ -8,9 +8,9 @@
  */
 
 import Utils from '../../../dot/js/Utils.js';
+import AssertUtils from '../../../phetcommon/js/AssertUtils.js';
 import Color from '../../../scenery/js/util/Color.js';
 import naturalSelection from '../naturalSelection.js';
-import AssertUtils from './AssertUtils.js';
 
 const NaturalSelectionUtils = {
 

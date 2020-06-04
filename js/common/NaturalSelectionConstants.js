@@ -9,10 +9,10 @@
 import Range from '../../../dot/js/Range.js';
 import HomeScreenView from '../../../joist/js/HomeScreenView.js';
 import ScreenView from '../../../joist/js/ScreenView.js';
+import AssertUtils from '../../../phetcommon/js/AssertUtils.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import RectangularButtonView from '../../../sun/js/buttons/RectangularButtonView.js';
 import naturalSelection from '../naturalSelection.js';
-import AssertUtils from './AssertUtils.js';
 import NaturalSelectionColors from './NaturalSelectionColors.js';
 import NaturalSelectionQueryParameters from './NaturalSelectionQueryParameters.js';
 

@@ -6,11 +6,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
-import AssertUtils from '../AssertUtils.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import EnvironmentalFactorCheckbox from './EnvironmentalFactorCheckbox.js';

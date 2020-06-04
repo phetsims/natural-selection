@@ -9,9 +9,9 @@
 
 import Emitter from '../../../../axon/js/Emitter.js';
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import AssertUtils from '../AssertUtils.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import Bunny from './Bunny.js';
 import BunnyArray from './BunnyArray.js';

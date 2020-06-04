@@ -10,10 +10,10 @@
 
 import Shape from '../../../../../kite/js/Shape.js';
 import merge from '../../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../../scenery/js/nodes/Path.js';
 import naturalSelection from '../../../naturalSelection.js';
-import AssertUtils from '../../AssertUtils.js';
 import Bunny from '../../model/Bunny.js';
 import PedigreeBunnyNode from './PedigreeBunnyNode.js';
 

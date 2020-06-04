@@ -7,9 +7,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import AssertUtils from '../AssertUtils.js';
 import BunnyCounts from './BunnyCounts.js';
 import BunnyCountsIO from './BunnyCountsIO.js';
 

@@ -9,6 +9,7 @@
  */
 
 import merge from '../../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import AlignBox from '../../../../../scenery/js/nodes/AlignBox.js';
 import AlignGroup from '../../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../../scenery/js/nodes/HBox.js';
@@ -19,7 +20,6 @@ import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
-import AssertUtils from '../../AssertUtils.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';

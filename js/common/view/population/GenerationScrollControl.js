@@ -13,12 +13,12 @@
 import Property from '../../../../../axon/js/Property.js';
 import Range from '../../../../../dot/js/Range.js';
 import merge from '../../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import HBox from '../../../../../scenery/js/nodes/HBox.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import ArrowButton from '../../../../../sun/js/buttons/ArrowButton.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
-import AssertUtils from '../../AssertUtils.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
 class GenerationScrollControl extends HBox {

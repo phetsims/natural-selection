@@ -9,6 +9,7 @@
 
 import Utils from '../../../../../dot/js/Utils.js';
 import merge from '../../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
@@ -18,7 +19,6 @@ import Color from '../../../../../scenery/js/util/Color.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
-import AssertUtils from '../../AssertUtils.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import HatchingRectangle from '../HatchingRectangle.js';
 
