@@ -236,18 +236,28 @@ const SCHEMA = {
   },
 
   // Adds a red dot at the origin of some objects (bunnies, wolves, food)
+  // For internal use only.
   showOrigin: {
     type: 'flag'
   },
 
   // Adds various debugging info to the UI
+  // For internal use only.
   showInfo: {
     type: 'flag'
   },
 
-  // Draws a red line where the horizon is located.
+  // Draws a red line where the horizon is located
+  // For internal use only.
   showHorizon: {
     type: 'flag'
+  },
+
+  // Determines whether mutants are homozygous (true) or heterozygous (false)
+  // For internal use only.
+  homozygousMutants: {
+    type: 'boolean',
+    defaultValue: true
   }
 };
 

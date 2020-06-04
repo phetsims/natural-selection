@@ -17,6 +17,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import Allele from './Allele.js';
 import AlleleIO from './AlleleIO.js';
 import Gene from './Gene.js';
@@ -51,17 +52,26 @@ class GenePair extends PhetioObject {
     this.fatherAllele = fatherAllele;
     this.motherAllele = motherAllele;
 
-    // @private {Allele[]} alleles that will be passed on to children.
-    // This is used to simulate Mendelian inheritance. If a bunny is heterozygous (same alleles), then its alleles
-    // must be donated to offspring with equal frequency. Choosing fatherAllele vs motherAllele using random number
-    // generation would eventually produce equal frequency, but possibly not for a very long time. Putting 2 copies
-    // of each allele in childAlleles and shuffling guarantees that we will immediately have equal frequency, with
-    // some degree of randomness. If there was only 1 copy of each allele in childAlleles, we'd simply be alternating
-    // between the 2 alleles.
-    this.childAlleles = phet.joist.random.shuffle( [ fatherAllele, fatherAllele, motherAllele, motherAllele ] );
+    // @private {Allele[]} alleles that will be passed on to children, initialized by updateChildAlleles
+    this.childAlleles = [];
     this.childAllelesIndex = 0;
+    this.updateChildAlleles();
 
     this.validateInstance();
+  }
+
+  /**
+   * Updates the data structure that is used to donate alleles to children.
+   * This is used to simulate Mendelian inheritance. If a bunny is heterozygous (different alleles), then its alleles
+   * must be donated to offspring with equal frequency. Choosing fatherAllele vs motherAllele using random number
+   * generation would eventually produce equal frequency, but possibly not for a very long time. Putting 2 copies
+   * of each allele in childAlleles and shuffling guarantees that we will immediately have equal frequency, with
+   * some degree of randomness. If there was only 1 copy of each allele in childAlleles, we'd simply be alternating
+   * between the 2 alleles.
+   */
+  updateChildAlleles() {
+    this.childAlleles = phet.joist.random.shuffle( [ this.fatherAllele, this.fatherAllele, this.motherAllele, this.motherAllele ] );
+    this.childAllelesIndex = 0;
   }
 
   /**
@@ -71,14 +81,26 @@ class GenePair extends PhetioObject {
    */
   mutate( mutantAllele ) {
 
-    // Both alleles are set to the mutant allele, so that the mutation will appear in the phenotype regardless of
-    // whether the mutation is dominant or recessive.  This differs from reality, where mutation would occur for one
-    // of the inherited alleles.
-    this.fatherAllele = mutantAllele;
-    this.motherAllele = mutantAllele;
+    if ( NaturalSelectionQueryParameters.homozygousMutants ) {
 
-    // The only allele that will be passed on is the mutant.
-    this.childAlleles = [ mutantAllele ];
+      // Both alleles are set to the mutant allele, so that the mutation will immediately affect appearance.
+      this.fatherAllele = mutantAllele;
+      this.motherAllele = mutantAllele;
+    }
+    else {
+
+      // The mutation is randomly applied to either the father or mother allele, but not both. If the mutant allele is
+      // recessive, the mutation will not immediately affect appearance, and will not appear in the phenotype until
+      // some later generation, when a bunny is born with 2 mutant alleles.
+      if ( phet.joist.random.nextBoolean() ) {
+        this.fatherAllele = mutantAllele;
+      }
+      else {
+        this.motherAllele = mutantAllele;
+      }
+    }
+
+    this.childAlleles = phet.joist.random.shuffle( [ this.fatherAllele, this.fatherAllele, this.motherAllele, this.motherAllele ] );
     this.childAllelesIndex = 0;
   }
 
