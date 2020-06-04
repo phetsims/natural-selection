@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.0.0-dev.47 Tue Jun 02 2020 17:17:13 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.0.0-dev.48 Thu Jun 04 2020 10:22:18 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "0b7a48c6b9ba48af48ae7419bd30c280c785f2cc",
     "branch": "master"
@@ -13,7 +13,7 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "a8d13f62b6de4a817a18b2d5fa27f1c9a5bae983",
+    "sha": "2505fbd3e63296ed0ac3895f4bbc66d56711b363",
     "branch": "master"
   },
   "dot": {
@@ -21,7 +21,7 @@
     "branch": "master"
   },
   "joist": {
-    "sha": "6d2f1e5aba852912390c0b98f9b58442a6471d7b",
+    "sha": "da0ab61e8e19bda6f0da3e8e7956441cc9353d7e",
     "branch": "master"
   },
   "kite": {
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "natural-selection": {
-    "sha": "89123772d3eb6a8878c48287e0ba0180e1e1e113",
+    "sha": "6b5d60df52d5c4d00b88e7ec507a7b1409445f9f",
     "branch": "master"
   },
   "phet-core": {
@@ -57,7 +57,7 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "fe0876abe3bfd368608849a1c0c0ba9b58d09799",
+    "sha": "ef13d21bd6dcf209044d1af81ed6cf795c579fab",
     "branch": "master"
   },
   "scenery-phet": {
@@ -69,15 +69,15 @@
     "branch": "master"
   },
   "studio": {
-    "sha": "f573af38151f982b070b7e3e0d7a9f9851b215f3",
+    "sha": "8ce4d47e32da32995d28eb4be71f593a1c902ce7",
     "branch": "master"
   },
   "sun": {
-    "sha": "a85a0ed811af4b51bad28d422f88e0cedc188fff",
+    "sha": "e3462dea941f68e8d60897c2dae2ae4458bb74bd",
     "branch": "master"
   },
   "tambo": {
-    "sha": "4389b9363e4dedbd0618f247bb784ce47ba9e478",
+    "sha": "32864632a198096e1e54b84f2fea902b5f525b20",
     "branch": "master"
   },
   "tandem": {
