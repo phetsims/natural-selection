@@ -8,6 +8,7 @@
  */
 
 import Property from '../../../axon/js/Property.js';
+import Range from '../../../dot/js/Range.js';
 import Utils from '../../../dot/js/Utils.js';
 import naturalSelection from '../naturalSelection.js';
 
@@ -54,6 +55,7 @@ const AssertUtils = {
    * @param {number} max
    */
   assertRangeInclusive( range, min, max ) {
+    assert && assert( range instanceof Range, 'invalid range' );
     assert && assert( range.min >= min && range.max <= max, `invalid range: ${range}` );
   },
 
