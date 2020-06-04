@@ -10,6 +10,7 @@
 import Utils from '../../../dot/js/Utils.js';
 import Color from '../../../scenery/js/util/Color.js';
 import naturalSelection from '../naturalSelection.js';
+import AssertUtils from './AssertUtils.js';
 
 const NaturalSelectionUtils = {
 
@@ -129,6 +130,15 @@ const NaturalSelectionUtils = {
     else {
       return phet.joist.random.nextDoubleBetween( range.min, range.max );
     }
+  },
+
+  /**
+   * Asserts that a value is a valid count of bunnies.
+   * @param {*} value
+   * @public
+   */
+  assertCount( value ) {
+    AssertUtils.assertInteger( value, value => value >= 0 );
   }
 };
 

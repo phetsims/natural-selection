@@ -61,21 +61,27 @@ const AssertUtils = {
   },
 
   /**
-   * Asserts that a value is a valid generation number.
+   * Asserts that a value is an integer that satisfies an optional predicate.
    * @param {*} value
+   * @param {function(number):boolean} [predicate]
+   * @returns {boolean}
    * @public
    */
-  assertGeneration( value ) {
-    assert && assert( typeof value === 'number' && Utils.isInteger( value ) && value >= 0, `invalid generation: ${value}` );
+  assertInteger( value, predicate ) {
+    assert && assert( typeof value === 'number' && Utils.isInteger( value ) );
+    if ( assert && predicate ) {
+      assert( predicate( value ), `value does not satisfy predicate: ${value}` );
+    }
   },
 
   /**
-   * Asserts that a value is a valid count of bunnies.
+   * Asserts that a value is a positive integer.
    * @param {*} value
+   * @returns {boolean}
    * @public
    */
-  assertCount( value ) {
-    assert && assert( typeof value === 'number' && Utils.isInteger( value ) && value >= 0, `invalid count: ${value}` );
+  assertPositiveInteger( value ) {
+    AssertUtils.assertInteger( value, value => value > 0 );
   }
 };
 

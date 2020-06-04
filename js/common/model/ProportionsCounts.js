@@ -22,7 +22,7 @@ class ProportionsCounts {
    */
   constructor( generation, startCounts, endCounts ) {
 
-    assert && AssertUtils.assertGeneration( generation );
+    assert && AssertUtils.assertInteger( generation, generation => generation >= 0 );
     assert && assert( startCounts instanceof BunnyCounts, 'invalid startCounts' );
     assert && assert( endCounts instanceof BunnyCounts, 'invalid endCounts' );
 
