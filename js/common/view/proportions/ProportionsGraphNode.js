@@ -284,7 +284,13 @@ class RowLabel extends VBox {
    */
   setCount( count ) {
     assert && NaturalSelectionUtils.assertCount( count );
-    this.bottomText.text = StringUtils.fillIn( naturalSelectionStrings.countBunnies, { count: count } );
+
+    if ( count === 1 ) {
+      this.bottomText.text = naturalSelectionStrings.oneBunny;
+    }
+    else {
+      this.bottomText.text = StringUtils.fillIn( naturalSelectionStrings.countBunnies, { count: count } );
+    }
   }
 }
 
