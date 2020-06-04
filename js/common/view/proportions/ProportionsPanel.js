@@ -31,7 +31,7 @@ class ProportionsPanel extends NaturalSelectionPanel {
   constructor( genePool, valuesVisibleProperty, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && AssertUtils.assertPropertyTypeof( valuesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( valuesVisibleProperty, 'boolean' );
 
     options = merge( {
       fixedWidth: 100,

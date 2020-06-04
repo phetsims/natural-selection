@@ -27,7 +27,7 @@ class WolvesCheckbox extends EnvironmentalFactorCheckbox {
    */
   constructor( wolvesEnabledProperty, alignGroup, options ) {
 
-    assert && AssertUtils.assertPropertyTypeof( wolvesEnabledProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( wolvesEnabledProperty, 'boolean' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
     const text = new Text( naturalSelectionStrings.wolves, {

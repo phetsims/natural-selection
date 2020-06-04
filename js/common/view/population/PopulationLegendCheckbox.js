@@ -33,7 +33,7 @@ class PopulationLegendCheckbox extends NaturalSelectionCheckbox {
    */
   constructor( plotVisibleProperty, name, options ) {
 
-    assert && AssertUtils.assertPropertyTypeof( plotVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( plotVisibleProperty, 'boolean' );
     assert && assert( typeof name === 'string', 'invalid name' );
 
     options = merge( {

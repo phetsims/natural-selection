@@ -8,6 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import ObservableArray from '../../../axon/js/ObservableArray.js';
 import Property from '../../../axon/js/Property.js';
 import Range from '../../../dot/js/Range.js';
 import Utils from '../../../dot/js/Utils.js';
@@ -31,21 +32,16 @@ const AssertUtils = {
   /**
    * Asserts that a value is a Property, whose value is a specified primitive type.
    * @param {Property} property
-   * @param {string} primitiveType
+   * @param {constructor|string} type
    * @public
    */
-  assertPropertyTypeof( property, primitiveType ) {
-    AssertUtils.assertPropertyPredicate( property, value => typeof value === primitiveType );
-  },
-
-  /**
-   * Asserts that a value is a Property, whose value is an instance of a specified Object type.
-   * @param {Property} property
-   * @param {constructor} objectType
-   * @public
-   */
-  assertPropertyInstanceof( property, objectType ) {
-    AssertUtils.assertPropertyPredicate( property, value => value instanceof objectType );
+  assertPropertyOf( property, type ) {
+    if ( typeof type === 'string' ) {
+      AssertUtils.assertPropertyPredicate( property, value => typeof value === type );
+    }
+    else {
+      AssertUtils.assertPropertyPredicate( property, value => value instanceof type );
+    }
   },
 
   /**
@@ -82,6 +78,33 @@ const AssertUtils = {
   assertRangeBetween( range, min, max ) {
     assert && assert( range instanceof Range, 'invalid range' );
     assert && assert( range.min >= min && range.max <= max, `invalid range: ${range}` );
+  },
+
+  /**
+   * Asserts that a value is an Array, with elements of a specific type.
+   * @param {Array} array
+   * @param {constructor|string} type
+   */
+  assertArrayOf( array, type ) {
+    assert && assert( Array.isArray( array ), 'array is not an Array' );
+    if ( assert ) {
+      if ( typeof type === 'string' ) {
+        assert && assert( _.every( array, element => typeof element === type ), 'array contains an invalid element' );
+      }
+      else {
+        assert && assert( _.every( array, element => element instanceof type ), 'array contains an invalid element' );
+      }
+    }
+  },
+
+  /**
+   * Asserts that a value is an ObservableArray, with elements of a specific type.
+   * @param {ObservableArray} observableArray
+   * @param {constructor|string} type
+   */
+  assertObservableArrayOf( observableArray, type ) {
+    assert && assert( observableArray instanceof ObservableArray, 'array is not an ObservableArray' );
+    assert && AssertUtils.assertArrayOf( observableArray.getArray(), type );
   }
 };
 

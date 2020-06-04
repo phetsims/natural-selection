@@ -39,7 +39,7 @@ class ProportionsBarNode extends Node {
     assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
     assert && NaturalSelectionUtils.assertCount( normalCount );
     assert && NaturalSelectionUtils.assertCount( mutantCount );
-    assert && AssertUtils.assertPropertyTypeof( valuesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( valuesVisibleProperty, 'boolean' );
 
     options = merge( {
       barWidth: 120,

@@ -313,7 +313,7 @@ class Column extends VBox {
     assert && NaturalSelectionUtils.assertCount( startMutantCount );
     assert && NaturalSelectionUtils.assertCount( endNormalCount );
     assert && NaturalSelectionUtils.assertCount( endMutantCount );
-    assert && AssertUtils.assertPropertyTypeof( valuesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( valuesVisibleProperty, 'boolean' );
     assert && assert( barsAlignGroup instanceof AlignGroup, 'invalid barsAlignGroup' );
 
     options = merge( {

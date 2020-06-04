@@ -34,11 +34,11 @@ class EnvironmentalFactorCheckbox extends NaturalSelectionCheckbox {
   constructor( labelNode, enabledProperty, alignGroup, clockSliceRange, clockSliceColor, options ) {
 
     assert && assert( labelNode instanceof Node, 'invalid labelNode' );
-    assert && AssertUtils.assertPropertyTypeof( enabledProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( enabledProperty, 'boolean' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
     assert && assert( clockSliceRange instanceof Range, 'invalid clockSliceRange' );
     assert && assert( ColorDef.isColorDef( clockSliceColor ), 'invalid clockSliceColor' );
-    assert && AssertUtils.assertPropertyTypeof( enabledProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( enabledProperty, 'boolean' );
 
     const alignBox = new AlignBox( labelNode, {
       group: alignGroup,

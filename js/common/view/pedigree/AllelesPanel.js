@@ -38,9 +38,9 @@ class AllelesPanel extends NaturalSelectionPanel {
   constructor( genePool, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && AssertUtils.assertPropertyTypeof( furAllelesVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyTypeof( earsAllelesVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyTypeof( teethAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( furAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( earsAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( teethAllelesVisibleProperty, 'boolean' );
 
     options = merge( {
 
@@ -110,7 +110,7 @@ class Row extends VBox {
   constructor( gene, visibleProperty, alignGroup, options ) {
 
     assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && AssertUtils.assertPropertyTypeof( visibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( visibleProperty, 'boolean' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
     options = merge( {

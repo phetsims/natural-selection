@@ -41,9 +41,9 @@ class PedigreeBranchNode extends Node {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
     assert && assert( typeof depth === 'number', 'invalid depth' );
-    assert && AssertUtils.assertPropertyTypeof( furAllelesVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyTypeof( earsAllelesVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyTypeof( teethAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( furAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( earsAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( teethAllelesVisibleProperty, 'boolean' );
 
     const children = [];
 

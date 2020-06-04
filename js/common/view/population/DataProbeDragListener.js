@@ -25,7 +25,7 @@ class DataProbeDragListener extends DragListener {
    */
   constructor( positionProperty, xRange, options ) {
 
-    assert && AssertUtils.assertPropertyInstanceof( positionProperty, Vector2 );
+    assert && AssertUtils.assertPropertyOf( positionProperty, Vector2 );
     assert && assert( xRange instanceof Range, 'invalid xRange' );
 
     options = merge( {}, options );

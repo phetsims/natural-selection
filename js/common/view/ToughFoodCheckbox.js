@@ -27,7 +27,7 @@ class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
    */
   constructor( isToughProperty, alignGroup, options ) {
 
-    assert && AssertUtils.assertPropertyTypeof( isToughProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( isToughProperty, 'boolean' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
     const text = new Text( naturalSelectionStrings.toughFood, {

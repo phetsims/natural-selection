@@ -31,9 +31,9 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
    */
   constructor( wolvesEnabledProperty, foodIsToughProperty, foodIsLimitedProperty, options ) {
 
-    assert && AssertUtils.assertPropertyTypeof( wolvesEnabledProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyTypeof( foodIsToughProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyTypeof( foodIsLimitedProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( wolvesEnabledProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( foodIsToughProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( foodIsLimitedProperty, 'boolean' );
 
     options = merge( {
       toughFoodCheckboxVisible: true,

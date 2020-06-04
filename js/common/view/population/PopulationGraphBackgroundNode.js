@@ -148,7 +148,7 @@ class VerticalLines extends Node {
    */
   constructor( xRangeProperty, options ) {
 
-    assert && AssertUtils.assertPropertyInstanceof( xRangeProperty, Range );
+    assert && AssertUtils.assertPropertyOf( xRangeProperty, Range );
 
     options = merge( {
       xSpacingModel: 1, // spacing between lines, in model coordinates

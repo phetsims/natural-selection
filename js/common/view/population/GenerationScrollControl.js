@@ -31,9 +31,9 @@ class GenerationScrollControl extends HBox {
    */
   constructor( rangeProperty, maxProperty, isPlayingProperty, options ) {
 
-    assert && AssertUtils.assertPropertyInstanceof( rangeProperty, Range );
-    assert && AssertUtils.assertPropertyTypeof( maxProperty, 'number' );
-    assert && AssertUtils.assertPropertyTypeof( isPlayingProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( rangeProperty, Range );
+    assert && AssertUtils.assertPropertyOf( maxProperty, 'number' );
+    assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
 
     options = merge( {
 
