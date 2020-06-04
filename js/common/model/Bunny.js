@@ -69,7 +69,7 @@ class Bunny extends Sprite {
     }, options );
 
     // Validate options
-    assert && AssertUtils.assertGeneration( options.generation );
+    assert && AssertUtils.assertInteger( options.generation, generation => generation >= 0 );
     assert && assert( ( options.father && options.mother ) || ( !options.father && !options.mother ), 'bunny cannot have 1 parent' );
     assert && assert( !( options.father && options.alleles ), 'father and alleles are mutually exclusive' );
 

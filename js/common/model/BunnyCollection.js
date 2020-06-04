@@ -218,7 +218,7 @@ class BunnyCollection {
    * @public
    */
   mateBunnies( generation ) {
-    assert && AssertUtils.assertGeneration( generation );
+    assert && AssertUtils.assertInteger( generation, generation => generation >= 0 );
 
     let bornIndex = 0;
 

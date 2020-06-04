@@ -37,8 +37,8 @@ class GenerationClockNode extends Node {
   constructor( generationClock, foodEnabledProperty, wolvesEnabledProperty, options ) {
 
     assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
-    assert && AssertUtils.assertPropertyTypeof( foodEnabledProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyTypeof( wolvesEnabledProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( foodEnabledProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( wolvesEnabledProperty, 'boolean' );
 
     options = merge( {
 

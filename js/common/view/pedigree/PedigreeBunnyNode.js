@@ -36,9 +36,9 @@ class PedigreeBunnyNode extends Node {
   constructor( bunny, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-    assert && AssertUtils.assertPropertyTypeof( furAllelesVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyTypeof( earsAllelesVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyTypeof( teethAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( furAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( earsAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( teethAllelesVisibleProperty, 'boolean' );
 
     options = merge( {
       isSelected: false

@@ -38,8 +38,8 @@ class ProportionsModel extends PhetioObject {
   constructor( liveBunnyCountsProperty, currentGenerationProperty, isPlayingProperty, simulationModeProperty, options ) {
 
     assert && assert( liveBunnyCountsProperty instanceof Property, 'invalid bunnyCounts' );
-    assert && AssertUtils.assertPropertyTypeof( currentGenerationProperty, 'number' );
-    assert && AssertUtils.assertPropertyTypeof( isPlayingProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( currentGenerationProperty, 'number' );
+    assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
     assert && assert( simulationModeProperty instanceof EnumerationProperty );
 
     options = merge( {

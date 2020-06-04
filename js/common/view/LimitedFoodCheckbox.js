@@ -24,7 +24,7 @@ class LimitedFoodCheckbox extends EnvironmentalFactorCheckbox {
    */
   constructor( limitedFoodProperty, alignGroup, options ) {
 
-    assert && AssertUtils.assertPropertyTypeof( limitedFoodProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( limitedFoodProperty, 'boolean' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
     const labelNode = new Text( naturalSelectionStrings.limitedFood, {
