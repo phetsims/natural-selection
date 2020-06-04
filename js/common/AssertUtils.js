@@ -68,7 +68,7 @@ const AssertUtils = {
    * @public
    */
   assertInteger( value, predicate ) {
-    assert && assert( typeof value === 'number' && Utils.isInteger( value ) );
+    assert && assert( typeof value === 'number' && Utils.isInteger( value ), 'invalid value' );
     if ( predicate ) {
       assert && assert( predicate( value ), `value does not satisfy predicate: ${value}` );
     }
