@@ -15,6 +15,7 @@ import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
+import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import BunnyImageCache from '../BunnyImageCache.js';
 import MutationIconNode from '../MutationIconNode.js';
@@ -71,7 +72,7 @@ class PedigreeBunnyNode extends Node {
     if ( options.isSelected ) {
       const selectionRectangle = new Rectangle( wrappedImage.bounds.dilated( 5 ), {
         fill: 'rgba( 0, 0, 0, 0.1 )',
-        stroke: 'blue',
+        stroke: NaturalSelectionColors.SELECTED_BUNNY_STROKE,
         lineWidth: 4,
         cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
         center: wrappedImage.center,

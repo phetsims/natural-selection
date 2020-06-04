@@ -12,6 +12,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
 import SelectedBunnyProperty from '../model/SelectedBunnyProperty.js';
+import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import BunnyImageCache from './BunnyImageCache.js';
 import BunnyNodeIO from './BunnyNodeIO.js';
@@ -53,7 +54,7 @@ class BunnyNode extends SpriteNode {
     // Rectangle that appears around this Node when bunny is selected
     const selectionRectangle = new Rectangle( wrappedImage.bounds.dilated( 5 ), {
       fill: 'rgba( 0, 0, 0, 0.25 )',
-      stroke: 'blue',
+      stroke: NaturalSelectionColors.SELECTED_BUNNY_STROKE,
       lineWidth: 2.5,
       cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
       center: wrappedImage.center,
