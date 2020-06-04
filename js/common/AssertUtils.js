@@ -53,6 +53,7 @@ const AssertUtils = {
    * @param {Range} range
    * @param {number} min
    * @param {number} max
+   * @public
    */
   assertRangeInclusive( range, min, max ) {
     assert && assert( range instanceof Range, 'invalid range' );
