@@ -1,6 +1,5 @@
 /* eslint-disable */
 import simLauncher from '../../joist/js/simLauncher.js';
-
 const image = new Image();
 const unlock = simLauncher.createLock( image );
 image.onload = unlock;
