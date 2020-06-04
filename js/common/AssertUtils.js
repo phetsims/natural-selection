@@ -17,35 +17,35 @@ const AssertUtils = {
   /**
    * Asserts that an object is a Property whose value satisfies a specified predicate.
    * Used for type-checking of method arguments.
-   * @param {*} object
+   * @param {Property} property
    * @param {function(value:*):boolean} predicate
    * @public
    */
-  assertPropertyPredicate( object, predicate ) {
-    assert( object instanceof Property, 'object is not a Property' );
-    assert( predicate( object.value ), 'Property.value failed predicate' );
+  assertPropertyPredicate( property, predicate ) {
+    assert( property instanceof Property, 'property is not a Property' );
+    assert( predicate( property.value ), 'Property.value failed predicate' );
   },
 
   /**
    * Asserts that an object is a Property whose value is a specified primitive type.
    * Used for type-checking of method arguments.
-   * @param {*} object
+   * @param {Property} property
    * @param {string} type
    * @public
    */
-  assertPropertyTypeof( object, type ) {
-    AssertUtils.assertPropertyPredicate( object, value => typeof value === type );
+  assertPropertyTypeof( property, type ) {
+    AssertUtils.assertPropertyPredicate( property, value => typeof value === type );
   },
 
   /**
    * Asserts that an object is a Property whose value is an instance of a specific class.
    * Used for type-checking of method arguments.
-   * @param {*} object
+   * @param {Property} property
    * @param {constructor} type
    * @public
    */
-  assertPropertyInstanceof( object, type ) {
-    AssertUtils.assertPropertyPredicate( object, value => value instanceof type );
+  assertPropertyInstanceof( property, type ) {
+    AssertUtils.assertPropertyPredicate( property, value => value instanceof type );
   },
 
   /**
@@ -62,7 +62,7 @@ const AssertUtils = {
 
   /**
    * Asserts that a value is an integer that satisfies an optional predicate.
-   * @param {*} value
+   * @param {number} value
    * @param {function(number):boolean} [predicate]
    * @returns {boolean}
    * @public
@@ -76,7 +76,7 @@ const AssertUtils = {
 
   /**
    * Asserts that a value is a positive integer.
-   * @param {*} value
+   * @param {number} value
    * @returns {boolean}
    * @public
    */
