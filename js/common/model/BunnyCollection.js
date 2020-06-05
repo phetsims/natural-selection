@@ -229,7 +229,7 @@ class BunnyCollection {
     const numberToBeBorn = Math.floor( bunnies.length / 2 ) * NaturalSelectionConstants.LITTER_SIZE;
 
     // When a mutation is applied, this is the number of bunnies that will receive that mutation.
-    const numberToMutate = 1 + Math.floor( NaturalSelectionConstants.MUTATION_PERCENTAGE * numberToBeBorn );
+    const numberToMutate = Math.max( 1, Math.floor( NaturalSelectionConstants.MUTATION_PERCENTAGE * numberToBeBorn ) );
 
     // Determine which mutations should be applied, then reset the gene pool.
     const mutateFur = this.genePool.furGene.mutationComingProperty.value;
