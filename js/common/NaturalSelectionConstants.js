@@ -33,7 +33,7 @@ const NaturalSelectionConstants = {
   LITTER_SIZE: NaturalSelectionQueryParameters.litterSize,
 
   // percentage of newborn bunnies that will receive a mutation
-  MUTATION_PERCENTAGE: 1/7, //TODO 7 is from the Java version
+  MUTATION_PERCENTAGE: NaturalSelectionQueryParameters.mutationPercentage,
 
   // seconds per generation, one revolution of the generation clock
   SECONDS_PER_GENERATION: NaturalSelectionQueryParameters.secondsPerGeneration,
