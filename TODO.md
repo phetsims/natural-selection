@@ -14,7 +14,7 @@
 | Population graph | 3 weeks | |
 | Food | 2 weeks | | 
 | Wolves | 2 weeks | |
-| Data pruning | 2 weeks | |
+| Memory pruning | 2 weeks | |
 
 ## Implementation
 
