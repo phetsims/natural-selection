@@ -18,6 +18,8 @@
 
 ## Implementation
 
+* '1000' is scaled down on data probe
+* Skip Ahead button (create issue)
 * Prune dead bunnies
 * Stop the sim when data limit is hit
 
