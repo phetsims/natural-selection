@@ -115,8 +115,14 @@ class DataProbeNode extends Node {
     // vertical layout of NumberDisplays 
     const numberDisplaysParent = new VBox( {
       spacing: 3,
-      align: 'left'
-      // children are set in multilink below
+      align: 'left',
+      children: [
+        new VStrut( 5 ), // a bit of space at the top
+        totalDisplay,
+        whiteFurDisplay, brownFurDisplay,
+        straightEarsDisplay, floppyEarsDisplay,
+        shortTeethDisplay, longTeethDisplay
+      ]
     } );
 
     assert && assert( !options.children, 'DataProbeNode sets children' );
@@ -135,11 +141,20 @@ class DataProbeNode extends Node {
       tandem: options.tandem.createTandem( 'dragListener' )
     } ) );
 
-    // visibility of the probe
+    // Visibility of the probe
     dataProbe.visibleProperty.link( dataProbeVisible => {
       this.interruptSubtreeInput(); // cancel interactions
       this.visible = dataProbeVisible;
     } );
+
+    // Visibility of NumberDisplays. VBox handles compacting the layout.
+    populationModel.totalVisibleProperty.linkAttribute( totalDisplay, 'visible' );
+    populationModel.whiteFurVisibleProperty.linkAttribute( whiteFurDisplay, 'visible' );
+    populationModel.brownFurVisibleProperty.linkAttribute( brownFurDisplay, 'visible' );
+    populationModel.straightEarsVisibleProperty.linkAttribute( straightEarsDisplay, 'visible' );
+    populationModel.floppyEarsVisibleProperty.linkAttribute( floppyEarsDisplay, 'visible' );
+    populationModel.shortTeethVisibleProperty.linkAttribute( shortTeethDisplay, 'visible' );
+    populationModel.longTeethVisibleProperty.linkAttribute( longTeethDisplay, 'visible' );
 
     // Positions the displays on the proper side of the bar.
     const updateDisplayLayout = () => {
@@ -168,43 +183,6 @@ class DataProbeNode extends Node {
       }
     } );
 
-    // To add a bit of space above the top NumberDisplay, and so that  always has at least 1 child
-    // (and thus valid bounds) for layout.
-    const vStrut = new VStrut( 5 );
-
-    // When visibility of some quantity changes, change which NumberDisplays are children of numberDisplaysParent.
-    Property.multilink( [
-        populationModel.totalVisibleProperty,
-        populationModel.whiteFurVisibleProperty,
-        populationModel.brownFurVisibleProperty,
-        populationModel.straightEarsVisibleProperty,
-        populationModel.floppyEarsVisibleProperty,
-        populationModel.shortTeethVisibleProperty,
-        populationModel.longTeethVisibleProperty
-      ],
-      (
-        totalVisible,
-        whiteFurVisible,
-        brownFurVisible,
-        straightEarsVisible,
-        floppyEarsVisible,
-        shortTeethVisible,
-        longTeethVisible
-      ) => {
-        const children = [ vStrut ];
-
-        // Order is important here. It should match the vertical order in PopulationControlPanel.
-        totalVisible && children.push( totalDisplay );
-        whiteFurVisible && children.push( whiteFurDisplay );
-        brownFurVisible && children.push( brownFurDisplay );
-        straightEarsVisible && children.push( straightEarsDisplay );
-        floppyEarsVisible && children.push( floppyEarsDisplay );
-        shortTeethVisible && children.push( shortTeethDisplay );
-        longTeethVisible && children.push( longTeethDisplay );
-        numberDisplaysParent.children = children;
-        updateDisplayLayout();
-      } );
-
     // Create a link to the model that this Node displays
     this.addLinkedElement( populationModel.dataProbe, {
       tandem: options.tandem.createTandem( 'dataProbe' )
@@ -229,7 +207,7 @@ class DataProbeNode extends Node {
 
 /**
  * Creates a NumberDisplay whose background is filled with a solid color.  This is used for normal allele counts.
- * @param {Property.<BunnyCounts>} bunnyCountsProperty
+ * @param {Property.<BunnyCounts|null>} bunnyCountsProperty
  * @param {string} bunnyCountsFieldName - name of the desired field in BunnyCounts
  * @param {Color|string} color
  * @returns {NumberDisplay}
@@ -244,7 +222,7 @@ function createSolidNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, co
 
 /**
  * Creates a NumberDisplay whose background is stroked with a dashed line. This is used for mutant allele counts.
- * @param {Property.<BunnyCounts>} bunnyCountsProperty
+ * @param {Property.<BunnyCounts|null>} bunnyCountsProperty
  * @param {string} bunnyCountsFieldName - name of the desired field in BunnyCounts
  * @param {Color|string} color
  * @returns {NumberDisplay}
@@ -259,12 +237,15 @@ function createDashedNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, c
 
 /**
  * Creates a NumberDisplay for the data probe.
- * @param {Property.<BunnyCounts>} bunnyCountsProperty
+ * @param {Property.<BunnyCounts|null>} bunnyCountsProperty
  * @param {string} bunnyCountsFieldName - name of the desired field in BunnyCounts
  * @param {Object} [options]
  * @returns {NumberDisplay}
  */
 function createNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, options ) {
+
+  assert && assert( bunnyCountsProperty instanceof Property, 'invalid bunnyCountsProperty' );
+  assert && assert( typeof bunnyCountsFieldName === 'string', 'invalid bunnyCountsFieldName' );
 
   options = merge( {
     backgroundFill: 'white'
