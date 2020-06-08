@@ -9,16 +9,15 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
-import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import BunnyCountsIO from './BunnyCountsIO.js';
 
 class DataProbe extends PhetioObject {
 
@@ -45,40 +44,16 @@ class DataProbe extends PhetioObject {
     this.generationProperty = new NumberProperty( 0, {
       tandem: options.tandem.createTandem( 'generationProperty' ),
       phetioReadOnly: true // range is dynamic
-      //TODO range needed?
     } );
 
-    const countPropertyOptions = {
-      isValidValues: value => ( value === null ) || ( typeof value === 'number' && Utils.isInteger( value ) ),
-      phetioType: PropertyIO( NullableIO( NumberIO ) ),
-      phetioReadOnly: true
-    };
-
-
-    //TODO replace *CountProperty with {Property.<BunnyCounts>} bunnyCountsProperty ?
-
     // @public counts displayed by the probe
-    this.totalCountProperty = new Property( null, merge( {
-      tandem: options.tandem.createTandem( 'totalCountProperty' )
-    }, countPropertyOptions ) );
-    this.whiteFurCountProperty = new Property( null, merge( {
-      tandem: options.tandem.createTandem( 'whiteFurCountProperty' )
-    }, countPropertyOptions ) );
-    this.brownFurCountProperty = new Property( null, merge( {
-      tandem: options.tandem.createTandem( 'brownFurCountProperty' )
-    }, countPropertyOptions ) );
-    this.straightEarsCountProperty = new Property( null, merge( {
-      tandem: options.tandem.createTandem( 'straightEarsCountProperty' )
-    }, countPropertyOptions ) );
-    this.floppyEarsCountProperty = new Property( null, merge( {
-      tandem: options.tandem.createTandem( 'floppyEarsCountProperty' )
-    }, countPropertyOptions ) );
-    this.shortTeethCountProperty = new Property( null, merge( {
-      tandem: options.tandem.createTandem( 'shortTeethCountProperty' )
-    }, countPropertyOptions ) );
-    this.longTeethCountProperty = new Property( null, merge( {
-      tandem: options.tandem.createTandem( 'longTeethCountProperty' )
-    }, countPropertyOptions ) );
+    this.countsProperty = new DerivedProperty( [ this.generationProperty ],
+
+      //TODO set BunnyCounts based on position of the data probe
+      generation => null, {
+      tandem: options.tandem.createTandem( 'countsProperty' ),
+      phetioType: DerivedPropertyIO( NullableIO( BunnyCountsIO ) )
+    } );
   }
 
   /**
@@ -87,13 +62,6 @@ class DataProbe extends PhetioObject {
   reset() {
     this.visibleProperty.reset();
     this.generationProperty.reset();
-    this.totalCountProperty.reset();
-    this.whiteFurCountProperty.reset();
-    this.brownFurCountProperty.reset();
-    this.straightEarsCountProperty.reset();
-    this.floppyEarsCountProperty.reset();
-    this.shortTeethCountProperty.reset();
-    this.longTeethCountProperty.reset();
   }
 
   /**

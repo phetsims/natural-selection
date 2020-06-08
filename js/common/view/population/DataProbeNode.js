@@ -8,6 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../../axon/js/Property.js';
 import Range from '../../../../../dot/js/Range.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
@@ -32,12 +33,20 @@ import DataProbeDragListener from './DataProbeDragListener.js';
 
 // constants
 const BAR_COLOR = 'rgb( 120, 120, 120 )';
-const NUMBER_DISPLAY_RANGE = new Range( 0, 10 * NaturalSelectionConstants.MAX_POPULATION );
-const NUMBER_DISPLAY_FONT = new PhetFont( 12 );
-const NUMBER_DISPLAY_LINE_DASH = [ 3, 3 ];
-const NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY = 0.7;
-const NUMBER_DISPLAY_DASHED_BACKGROUND_FILL = new Color( 255, 255, 255, NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY );
 const MANIPULATOR_RADIUS = 5;
+const NUMBER_DISPLAY_RANGE = new Range( 0, 10 * NaturalSelectionConstants.MAX_POPULATION );
+const NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY = 0.7;
+const NUMBER_DISPLAY_DEFAULTS = {
+  textOptions: {
+    font: new PhetFont( 12 )
+  },
+  backgroundFill: 'white',
+  backgroundStroke: 'black',
+  backgroundLineDash: [],
+  backgroundLineWidth: 2,
+  noValueString: MathSymbols.NO_VALUE,
+  noValueAlign: 'center'
+};
 
 class DataProbeNode extends Node {
 
@@ -95,13 +104,13 @@ class DataProbeNode extends Node {
 
     // NumberDisplay instances
     //TODO get color from Gene
-    const totalDisplay = createSolidNumberDisplay( dataProbe.totalCountProperty, NaturalSelectionColors.TOTAL_POPULATION );
-    const whiteFurDisplay = createSolidNumberDisplay( dataProbe.whiteFurCountProperty, NaturalSelectionColors.FUR );
-    const brownFurDisplay = createDashedNumberDisplay( dataProbe.brownFurCountProperty, NaturalSelectionColors.FUR );
-    const straightEarsDisplay = createSolidNumberDisplay( dataProbe.straightEarsCountProperty, NaturalSelectionColors.EARS );
-    const floppyEarsDisplay = createDashedNumberDisplay( dataProbe.floppyEarsCountProperty, NaturalSelectionColors.EARS );
-    const shortTeethDisplay = createSolidNumberDisplay( dataProbe.shortTeethCountProperty, NaturalSelectionColors.TEETH );
-    const longTeethDisplay = createDashedNumberDisplay( dataProbe.longTeethCountProperty, NaturalSelectionColors.TEETH );
+    const totalDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'totalCount', NaturalSelectionColors.TOTAL_POPULATION );
+    const whiteFurDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'whiteFurCount', NaturalSelectionColors.FUR );
+    const brownFurDisplay = createDashedNumberDisplay( dataProbe.countsProperty, 'brownFurCount', NaturalSelectionColors.FUR );
+    const straightEarsDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'straightEarsCount', NaturalSelectionColors.EARS );
+    const floppyEarsDisplay = createDashedNumberDisplay( dataProbe.countsProperty, 'floppyEarsCount', NaturalSelectionColors.EARS );
+    const shortTeethDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'shortTeethCount', NaturalSelectionColors.TEETH );
+    const longTeethDisplay = createDashedNumberDisplay( dataProbe.countsProperty, 'longTeethCount', NaturalSelectionColors.TEETH );
 
     // vertical layout of NumberDisplays 
     const numberDisplaysParent = new VBox( {
@@ -115,8 +124,8 @@ class DataProbeNode extends Node {
 
     super( options );
 
-    //TODO derive from dataProbe.generationProperty or make this go away
     // @private position in view coordinate frame, relative to the left edge of the graph
+    //TODO derive from dataProbe.generationProperty or make this go away
     this.positionProperty = new Property( new Vector2( originX, 0 ) );
 
     // x range in view coordinates
@@ -146,7 +155,7 @@ class DataProbeNode extends Node {
     this.positionProperty.link( position => {
       this.x = position.x;
 
-      //TODO update display values
+      //TODO update dataProbe.generationProperty, or do so in DataProbeDragListener
 
       // flip NumberDisplays around y axis at edges of graph
       if ( this.left < xRangeView.min && !displaysOnRight ) {
@@ -219,47 +228,60 @@ class DataProbeNode extends Node {
 }
 
 /**
- * Creates a NumberDisplay whose background is filled with a solid color.
- * @param {Property.<number>} numberProperty
+ * Creates a NumberDisplay whose background is filled with a solid color.  This is used for normal allele counts.
+ * @param {Property.<BunnyCounts>} bunnyCountsProperty
+ * @param {string} bunnyCountsFieldName - name of the desired field in BunnyCounts
  * @param {Color|string} color
  * @returns {NumberDisplay}
  */
-function createSolidNumberDisplay( numberProperty, color ) {
+function createSolidNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, color ) {
   const colorWithAlpha = Color.toColor( color ).withAlpha( NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY );
-  return createNumberDisplay( numberProperty, colorWithAlpha, colorWithAlpha, [] );
+  return createNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, {
+    backgroundFill: colorWithAlpha,
+    backgroundStroke: colorWithAlpha
+  } );
 }
 
 /**
- * Creates a NumberDisplay whose background is stroked with a dashed line.
- * @param {Property.<number>} numberProperty
+ * Creates a NumberDisplay whose background is stroked with a dashed line. This is used for mutant allele counts.
+ * @param {Property.<BunnyCounts>} bunnyCountsProperty
+ * @param {string} bunnyCountsFieldName - name of the desired field in BunnyCounts
  * @param {Color|string} color
  * @returns {NumberDisplay}
  */
-function createDashedNumberDisplay( numberProperty, color ) {
-  return createNumberDisplay( numberProperty, NUMBER_DISPLAY_DASHED_BACKGROUND_FILL, color, NUMBER_DISPLAY_LINE_DASH );
+function createDashedNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, color ) {
+  return createNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, {
+    backgroundFill: new Color( 255, 255, 255, NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY ),
+    backgroundStroke: color,
+    backgroundLineDash: [ 3, 3 ]
+  } );
 }
 
 /**
  * Creates a NumberDisplay for the data probe.
- * @param {Property.<number>} numberProperty
- * @param {Color|string} backgroundFill
- * @param {Color|string} backgroundStroke
- * @param {number[]} lineDash
+ * @param {Property.<BunnyCounts>} bunnyCountsProperty
+ * @param {string} bunnyCountsFieldName - name of the desired field in BunnyCounts
+ * @param {Object} [options]
  * @returns {NumberDisplay}
  */
-function createNumberDisplay( numberProperty, backgroundFill, backgroundStroke, lineDash ) {
-  return new NumberDisplay( numberProperty, NUMBER_DISPLAY_RANGE, {
-    textOptions: {
-      font: NUMBER_DISPLAY_FONT,
-      fill: NaturalSelectionUtils.isDarkColor( backgroundFill ) ? 'white' : 'black'
-    },
-    backgroundFill: backgroundFill,
-    backgroundStroke: backgroundStroke,
-    backgroundLineDash: lineDash,
-    backgroundLineWidth: 2,
-    noValueString: MathSymbols.NO_VALUE,
-    noValueAlign: 'center'
-  } );
+function createNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, options ) {
+
+  options = merge( {
+    backgroundFill: 'white'
+  }, NUMBER_DISPLAY_DEFAULTS, options );
+
+  // Set the text fill based on whether the background color is dark or light.
+  if ( !options.textOptions || options.textOptions.fill === undefined ) {
+    options.textOptions = options.textOptions || {};
+    options.textOptions.fill = NaturalSelectionUtils.isDarkColor( options.backgroundFill ) ? 'white' : 'black';
+  }
+
+  // Adapter Property, for interfacing with NumberDisplay
+  const countProperty = new DerivedProperty( [ bunnyCountsProperty ],
+    bunnyCounts => bunnyCounts ? bunnyCounts[ bunnyCountsFieldName ] : null
+  );
+
+  return new NumberDisplay( countProperty, NUMBER_DISPLAY_RANGE, options );
 }
 
 naturalSelection.register( 'DataProbeNode', DataProbeNode );
