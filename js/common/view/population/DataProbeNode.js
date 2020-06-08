@@ -95,13 +95,13 @@ class DataProbeNode extends Node {
 
     // NumberDisplay instances
     //TODO get color from Gene
-    const totalDisplay = createSolidNumberDisplay( dataProbe.totalPopulationProperty, NaturalSelectionColors.TOTAL_POPULATION );
-    const whiteFurDisplay = createSolidNumberDisplay( dataProbe.whiteFurPopulationProperty, NaturalSelectionColors.FUR );
-    const brownFurDisplay = createDashedNumberDisplay( dataProbe.brownFurPopulationProperty, NaturalSelectionColors.FUR );
-    const straightEarsDisplay = createSolidNumberDisplay( dataProbe.straightEarsPopulationProperty, NaturalSelectionColors.EARS );
-    const floppyEarsDisplay = createDashedNumberDisplay( dataProbe.floppyEarsPopulationProperty, NaturalSelectionColors.EARS );
-    const shortTeethDisplay = createSolidNumberDisplay( dataProbe.shortTeethPopulationProperty, NaturalSelectionColors.TEETH );
-    const longTeethDisplay = createDashedNumberDisplay( dataProbe.longTeethPopulationProperty, NaturalSelectionColors.TEETH );
+    const totalDisplay = createSolidNumberDisplay( dataProbe.totalCountProperty, NaturalSelectionColors.TOTAL_POPULATION );
+    const whiteFurDisplay = createSolidNumberDisplay( dataProbe.whiteFurCountProperty, NaturalSelectionColors.FUR );
+    const brownFurDisplay = createDashedNumberDisplay( dataProbe.brownFurCountProperty, NaturalSelectionColors.FUR );
+    const straightEarsDisplay = createSolidNumberDisplay( dataProbe.straightEarsCountProperty, NaturalSelectionColors.EARS );
+    const floppyEarsDisplay = createDashedNumberDisplay( dataProbe.floppyEarsCountProperty, NaturalSelectionColors.EARS );
+    const shortTeethDisplay = createSolidNumberDisplay( dataProbe.shortTeethCountProperty, NaturalSelectionColors.TEETH );
+    const longTeethDisplay = createDashedNumberDisplay( dataProbe.longTeethCountProperty, NaturalSelectionColors.TEETH );
 
     // vertical layout of NumberDisplays 
     const numberDisplaysParent = new VBox( {
@@ -257,7 +257,8 @@ function createNumberDisplay( numberProperty, backgroundFill, backgroundStroke, 
     backgroundStroke: backgroundStroke,
     backgroundLineDash: lineDash,
     backgroundLineWidth: 2,
-    noValueString: MathSymbols.NO_VALUE
+    noValueString: MathSymbols.NO_VALUE,
+    noValueAlign: 'center'
   } );
 }
 

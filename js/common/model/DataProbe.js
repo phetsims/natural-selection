@@ -48,42 +48,37 @@ class DataProbe extends PhetioObject {
       //TODO range needed?
     } );
 
-    const populationPropertyOptions = {
+    const countPropertyOptions = {
       isValidValues: value => ( value === null ) || ( typeof value === 'number' && Utils.isInteger( value ) ),
       phetioType: PropertyIO( NullableIO( NumberIO ) ),
       phetioReadOnly: true
     };
 
-    //TODO bogus values, for demo purposes
+
+    //TODO replace *CountProperty with {Property.<BunnyCounts>} bunnyCountsProperty ?
+
     // @public counts displayed by the probe
-    this.totalPopulationProperty = new Property( 1000, merge( {
-        tandem: options.tandem.createTandem( 'totalPopulationProperty' )
-      }, populationPropertyOptions )
-    );
-    this.whiteFurPopulationProperty = new Property( 600, merge( {
-        tandem: options.tandem.createTandem( 'whiteFurPopulationProperty' )
-      }, populationPropertyOptions )
-    );
-    this.brownFurPopulationProperty = new Property( 400, merge( {
-        tandem: options.tandem.createTandem( 'brownFurPopulationProperty' )
-      }, populationPropertyOptions )
-    );
-    this.straightEarsPopulationProperty = new Property( 988, merge( {
-        tandem: options.tandem.createTandem( 'straightEarsPopulationProperty' )
-      }, populationPropertyOptions )
-    );
-    this.floppyEarsPopulationProperty = new Property( 12, merge( {
-        tandem: options.tandem.createTandem( 'floppyEarsPopulationProperty' )
-      }, populationPropertyOptions )
-    );
-    this.shortTeethPopulationProperty = new Property( 1000, merge( {
-        tandem: options.tandem.createTandem( 'shortTeethPopulationProperty' )
-      }, populationPropertyOptions )
-    );
-    this.longTeethPopulationProperty = new Property( 0, merge( {
-        tandem: options.tandem.createTandem( 'longTeethPopulationProperty' )
-      }, populationPropertyOptions )
-    );
+    this.totalCountProperty = new Property( null, merge( {
+      tandem: options.tandem.createTandem( 'totalCountProperty' )
+    }, countPropertyOptions ) );
+    this.whiteFurCountProperty = new Property( null, merge( {
+      tandem: options.tandem.createTandem( 'whiteFurCountProperty' )
+    }, countPropertyOptions ) );
+    this.brownFurCountProperty = new Property( null, merge( {
+      tandem: options.tandem.createTandem( 'brownFurCountProperty' )
+    }, countPropertyOptions ) );
+    this.straightEarsCountProperty = new Property( null, merge( {
+      tandem: options.tandem.createTandem( 'straightEarsCountProperty' )
+    }, countPropertyOptions ) );
+    this.floppyEarsCountProperty = new Property( null, merge( {
+      tandem: options.tandem.createTandem( 'floppyEarsCountProperty' )
+    }, countPropertyOptions ) );
+    this.shortTeethCountProperty = new Property( null, merge( {
+      tandem: options.tandem.createTandem( 'shortTeethCountProperty' )
+    }, countPropertyOptions ) );
+    this.longTeethCountProperty = new Property( null, merge( {
+      tandem: options.tandem.createTandem( 'longTeethCountProperty' )
+    }, countPropertyOptions ) );
   }
 
   /**
@@ -92,13 +87,13 @@ class DataProbe extends PhetioObject {
   reset() {
     this.visibleProperty.reset();
     this.generationProperty.reset();
-    this.totalPopulationProperty.reset();
-    this.whiteFurPopulationProperty.reset();
-    this.brownFurPopulationProperty.reset();
-    this.straightEarsPopulationProperty.reset();
-    this.floppyEarsPopulationProperty.reset();
-    this.shortTeethPopulationProperty.reset();
-    this.longTeethPopulationProperty.reset();
+    this.totalCountProperty.reset();
+    this.whiteFurCountProperty.reset();
+    this.brownFurCountProperty.reset();
+    this.straightEarsCountProperty.reset();
+    this.floppyEarsCountProperty.reset();
+    this.shortTeethCountProperty.reset();
+    this.longTeethCountProperty.reset();
   }
 
   /**
