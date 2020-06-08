@@ -68,6 +68,7 @@ class GenePair extends PhetioObject {
    * of each allele in childAlleles and shuffling guarantees that we will immediately have equal frequency, with
    * some degree of randomness. If there was only 1 copy of each allele in childAlleles, we'd simply be alternating
    * between the 2 alleles.
+   * @private
    */
   updateChildAlleles() {
     this.childAlleles = phet.joist.random.shuffle( [ this.fatherAllele, this.fatherAllele, this.motherAllele, this.motherAllele ] );
