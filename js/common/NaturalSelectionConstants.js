@@ -42,8 +42,8 @@ const NaturalSelectionConstants = {
   SECONDS_PER_STEP: NaturalSelectionQueryParameters.secondsPerStep,
 
   // Generation Clock
-  CLOCK_FOOD_RANGE: new Range( 0.25, 0.5 ), // percentage of clock cycle when bunnies are starved by food factors
-  CLOCK_WOLVES_RANGE: new Range( 0.5, 0.75 ), // percentage of clock cycle when bunnies are eaten by wolves
+  CLOCK_FOOD_RANGE: new Range( 1/6, 3/6 ), // percentage of clock cycle when bunnies are starved by food factors
+  CLOCK_WOLVES_RANGE: new Range( 3/6, 5/6 ), // percentage of clock cycle when bunnies are eaten by wolves
 
   // View ============================================================================================================N
 
