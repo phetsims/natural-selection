@@ -13,6 +13,7 @@ import Range from '../../../../../dot/js/Range.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import Shape from '../../../../../kite/js/Shape.js';
 import merge from '../../../../../phet-core/js/merge.js';
+import MathSymbols from '../../../../../scenery-phet/js/MathSymbols.js';
 import NumberDisplay from '../../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../../../scenery-phet/js/ShadedSphereNode.js';
@@ -33,9 +34,7 @@ import DataProbeDragListener from './DataProbeDragListener.js';
 const BAR_COLOR = 'rgb( 120, 120, 120 )';
 const NUMBER_DISPLAY_RANGE = new Range( 0, NaturalSelectionConstants.MAX_POPULATION );
 const NUMBER_DISPLAY_FONT = new PhetFont( 12 );
-const NUMBER_DISPLAY_LINE_WIDTH = 2;
 const NUMBER_DISPLAY_LINE_DASH = [ 3, 3 ];
-const NUMBER_DISPLAY_NO_VALUE_STRING = '?'; //TODO what to display when there is no data
 const NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY = 0.7;
 const NUMBER_DISPLAY_DASHED_BACKGROUND_FILL = new Color( 255, 255, 255, NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY );
 const MANIPULATOR_RADIUS = 5;
@@ -227,16 +226,7 @@ class DataProbeNode extends Node {
  */
 function createSolidNumberDisplay( numberProperty, color ) {
   const colorWithAlpha = Color.toColor( color ).withAlpha( NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY );
-  return new NumberDisplay( numberProperty, NUMBER_DISPLAY_RANGE, {
-    textOptions: {
-      font: NUMBER_DISPLAY_FONT,
-      fill: NaturalSelectionUtils.isDarkColor( colorWithAlpha ) ? 'white' : 'black'
-    },
-    backgroundFill: colorWithAlpha,
-    backgroundStroke: colorWithAlpha,  // also set stroke, so all NumberDisplay have same dimensions
-    backgroundLineWidth: NUMBER_DISPLAY_LINE_WIDTH,
-    noValueString: NUMBER_DISPLAY_NO_VALUE_STRING
-  } );
+  return createNumberDisplay( numberProperty, colorWithAlpha, colorWithAlpha, [] );
 }
 
 /**
@@ -246,16 +236,28 @@ function createSolidNumberDisplay( numberProperty, color ) {
  * @returns {NumberDisplay}
  */
 function createDashedNumberDisplay( numberProperty, color ) {
+  return createNumberDisplay( numberProperty, NUMBER_DISPLAY_DASHED_BACKGROUND_FILL, color, NUMBER_DISPLAY_LINE_DASH );
+}
+
+/**
+ * Creates a NumberDisplay for the data probe.
+ * @param {Property.<number>} numberProperty
+ * @param {Color|string} backgroundFill
+ * @param {Color|string} backgroundStroke
+ * @param {number[]} lineDash
+ * @returns {NumberDisplay}
+ */
+function createNumberDisplay( numberProperty, backgroundFill, backgroundStroke, lineDash ) {
   return new NumberDisplay( numberProperty, NUMBER_DISPLAY_RANGE, {
     textOptions: {
       font: NUMBER_DISPLAY_FONT,
-      fill: NaturalSelectionUtils.isDarkColor( NUMBER_DISPLAY_DASHED_BACKGROUND_FILL ) ? 'white' : 'black'
+      fill: NaturalSelectionUtils.isDarkColor( backgroundFill ) ? 'white' : 'black'
     },
-    backgroundFill: NUMBER_DISPLAY_DASHED_BACKGROUND_FILL,
-    backgroundStroke: color,
-    backgroundLineDash: NUMBER_DISPLAY_LINE_DASH,
-    backgroundLineWidth: NUMBER_DISPLAY_LINE_WIDTH,
-    noValueString: NUMBER_DISPLAY_NO_VALUE_STRING
+    backgroundFill: backgroundFill,
+    backgroundStroke: backgroundStroke,
+    backgroundLineDash: lineDash,
+    backgroundLineWidth: 2,
+    noValueString: MathSymbols.NO_VALUE
   } );
 }
 
