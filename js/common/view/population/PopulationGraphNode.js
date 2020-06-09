@@ -95,22 +95,22 @@ class PopulationGraphNode extends Node {
     const plotWidth = options.graphWidth - yZoomControl.width - ZOOM_CONTROL_X_OFFSET - FUDGE_WIDTH;
     const plotHeight = options.graphHeight - generationScrollControl.height - X_AXIS_LABEL_OFFSET - FUDGE_HEIGHT;
 
-    const backgroundNode = new PopulationGridNode( populationModel, {
+    const gridNode = new PopulationGridNode( populationModel, {
       backgroundWidth: plotWidth,
       backgroundHeight: plotHeight,
       left: yZoomControl.right + ZOOM_CONTROL_X_OFFSET + FUDGE_X_SPACING,
       y: boundsRectangle.top
     } );
 
-    const dataProbeNode = new DataProbeNode( populationModel, backgroundNode.x, plotWidth, plotHeight, {
-      x: backgroundNode.x,
-      top: backgroundNode.y,
+    const dataProbeNode = new DataProbeNode( populationModel, gridNode.x, plotWidth, plotHeight, {
+      x: gridNode.x,
+      top: gridNode.y,
       tandem: options.tandem.createTandem( 'dataProbeNode' )
     } );
 
     assert && assert( !options.children, 'PopulationGraphNode sets children' );
     options.children = [
-      boundsRectangle, backgroundNode,
+      boundsRectangle, gridNode,
       generationScrollControlWrapper,
       yZoomControl, yAxisLabelNodeWrapper,
       dataProbeNode
@@ -118,14 +118,14 @@ class PopulationGraphNode extends Node {
 
     // center x-axis control under the graph
     generationScrollControl.boundsProperty.link( () => {
-      generationScrollControl.centerX = backgroundNode.x + ( plotWidth / 2 );
-      generationScrollControl.top = backgroundNode.bottom + X_AXIS_LABEL_OFFSET;
+      generationScrollControl.centerX = gridNode.x + ( plotWidth / 2 );
+      generationScrollControl.top = gridNode.bottom + X_AXIS_LABEL_OFFSET;
     } );
 
     // center y-axis label to left of graph
     yAxisLabelNode.boundsProperty.link( () => {
       yAxisLabelNode.right = yZoomControl.right + ZOOM_CONTROL_X_OFFSET - Y_AXIS_LABEL_OFFSET;
-      yAxisLabelNode.centerY = backgroundNode.y + ( plotHeight / 2 );
+      yAxisLabelNode.centerY = gridNode.y + ( plotHeight / 2 );
     } );
 
     super( options );
