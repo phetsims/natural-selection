@@ -98,6 +98,11 @@ class PedigreeGraphNode extends Node {
         }
       }
     } );
+
+    // Create a link to selectedBunnyProperty
+    this.addLinkedElement( pedigreeModel.selectedBunnyProperty, {
+      tandem: options.tandem.createTandem( 'selectedBunnyProperty' )
+    } );
   }
 
   /**
