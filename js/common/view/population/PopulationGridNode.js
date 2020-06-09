@@ -1,8 +1,8 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * PopulationGraphBackgroundNode is the background for the Population graph, including dynamic grid lines and
- * tick marks.
+ * PopulationGridNode is the 2D grid for the Population graph, including grid lines and tick marks.
+ * The grid scrolls horizontally as the x-axis range changes, and zooms in/out vertically as the y-axis range changes.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -27,7 +27,7 @@ const TICK_MARKS_LENGTH = 4;
 const TICK_LABEL_SPACING = 3;
 const TICK_MARKS_FONT = new PhetFont( 10 );
 
-class PopulationGraphBackgroundNode extends Node {
+class PopulationGridNode extends Node {
 
   /**
    * @param {PopulationModel} populationModel
@@ -359,5 +359,5 @@ class YTickLabels extends Node {
   }
 }
 
-naturalSelection.register( 'PopulationGraphBackgroundNode', PopulationGraphBackgroundNode );
-export default PopulationGraphBackgroundNode;
+naturalSelection.register( 'PopulationGridNode', PopulationGridNode );
+export default PopulationGridNode;

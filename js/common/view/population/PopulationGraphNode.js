@@ -17,7 +17,7 @@ import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import DataProbeNode from './DataProbeNode.js';
 import GenerationScrollControl from './GenerationScrollControl.js';
-import PopulationGraphBackgroundNode from './PopulationGraphBackgroundNode.js';
+import PopulationGridNode from './PopulationGridNode.js';
 import ZoomControl from './ZoomControl.js';
 
 // const
@@ -95,7 +95,7 @@ class PopulationGraphNode extends Node {
     const plotWidth = options.graphWidth - yZoomControl.width - ZOOM_CONTROL_X_OFFSET - FUDGE_WIDTH;
     const plotHeight = options.graphHeight - generationScrollControl.height - X_AXIS_LABEL_OFFSET - FUDGE_HEIGHT;
 
-    const backgroundNode = new PopulationGraphBackgroundNode( populationModel, {
+    const backgroundNode = new PopulationGridNode( populationModel, {
       backgroundWidth: plotWidth,
       backgroundHeight: plotHeight,
       left: yZoomControl.right + ZOOM_CONTROL_X_OFFSET + FUDGE_X_SPACING,
