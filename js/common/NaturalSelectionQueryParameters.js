@@ -241,12 +241,6 @@ const SCHEMA = {
     type: 'flag'
   },
 
-  // Adds various debugging info to the UI
-  // For internal use only.
-  showInfo: {
-    type: 'flag'
-  },
-
   // Draws a red line where the horizon is located
   // For internal use only.
   showHorizon: {

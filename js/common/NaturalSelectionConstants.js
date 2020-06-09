@@ -52,7 +52,6 @@ const NaturalSelectionConstants = {
 
   // Debugging flags
   SHOW_ORIGIN: NaturalSelectionQueryParameters.showOrigin,
-  SHOW_INFO: NaturalSelectionQueryParameters.showInfo,
   SHOW_HORIZON: NaturalSelectionQueryParameters.showHorizon,
 
   // ScreenView
