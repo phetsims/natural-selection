@@ -47,16 +47,16 @@ class EnvironmentBackgroundNode extends Node {
     assert && assert( !options.children, 'EnvironmentBackgroundNode sets children' );
     options.children = [ equatorBackground, arcticBackground ];
 
-    super( options );
-
     // Horizon line, for debugging. Bunnies cannot go further from the viewer than this line.
     if ( NaturalSelectionQueryParameters.showHorizon ) {
       const horizonLine = new Line( 0, yHorizon, size.width, yHorizon, {
         stroke: 'red',
         lineWidth: 1
       } );
-      this.addChild( horizonLine );
+      options.children.push( horizonLine );
     }
+
+    super( options );
 
     environmentProperty.link( climate => {
       equatorBackground.visible = ( climate === Environment.EQUATOR );
