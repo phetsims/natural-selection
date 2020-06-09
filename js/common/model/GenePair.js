@@ -18,6 +18,7 @@ import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import Allele from './Allele.js';
 import AlleleIO from './AlleleIO.js';
 import Gene from './Gene.js';
@@ -239,7 +240,7 @@ class GenePair extends PhetioObject {
     assert && assert( this.fatherAllele instanceof Allele, 'invalid fatherAllele' );
     assert && assert( this.motherAllele instanceof Allele, 'invalid motherAllele' );
     assert && assert( Array.isArray( this.childAlleles ), 'invalid childAlleles' );
-    assert && assert( typeof this.childAllelesIndex === 'number', 'invalid childAllelesIndex' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.childAllelesIndex ), 'invalid childAllelesIndex' );
   }
 }
 

@@ -37,8 +37,8 @@ class ProportionsBarNode extends Node {
   constructor( color, normalCount, mutantCount, valuesVisibleProperty, options ) {
 
     assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
-    assert && NaturalSelectionUtils.assertCount( normalCount );
-    assert && NaturalSelectionUtils.assertCount( mutantCount );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( normalCount ), 'invalid normalCount' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( mutantCount ), 'invalid mutantCount' );
     assert && AssertUtils.assertPropertyOf( valuesVisibleProperty, 'boolean' );
 
     options = merge( {
@@ -107,8 +107,8 @@ class ProportionsBarNode extends Node {
    * @public
    */
   setCounts( normalCount, mutantCount ) {
-    assert && NaturalSelectionUtils.assertCount( normalCount );
-    assert && NaturalSelectionUtils.assertCount( mutantCount );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( normalCount ), 'invalid normalCount' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( mutantCount ), 'invalid mutantCount' );
 
     this.normalCount = normalCount;
     this.mutantCount = mutantCount;

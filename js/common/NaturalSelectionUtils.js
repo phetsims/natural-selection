@@ -8,7 +8,6 @@
  */
 
 import Utils from '../../../dot/js/Utils.js';
-import AssertUtils from '../../../phetcommon/js/AssertUtils.js';
 import Color from '../../../scenery/js/util/Color.js';
 import naturalSelection from '../naturalSelection.js';
 
@@ -122,6 +121,15 @@ const NaturalSelectionUtils = {
   },
 
   /**
+   * Determines whether a value is a non-negative integer.
+   * @param {*} value
+   * @returns {boolean}
+   */
+  isNonNegativeInteger( value ) {
+    return ( typeof value === 'number' && Utils.isInteger( value ) && value >= 0  );
+  },
+
+  /**
    * Gets the next random double in a Range.
    * @param {Range} range
    * @returns {number}
@@ -134,15 +142,6 @@ const NaturalSelectionUtils = {
     else {
       return phet.joist.random.nextDoubleBetween( range.min, range.max );
     }
-  },
-
-  /**
-   * Asserts that a value is a valid count of bunnies.
-   * @param {*} value
-   * @public
-   */
-  assertCount( value ) {
-    AssertUtils.assertInteger( value, value => value >= 0 );
   }
 };
 

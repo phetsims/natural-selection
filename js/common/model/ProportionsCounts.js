@@ -7,9 +7,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
 import BunnyCountsIO from './BunnyCountsIO.js';
 
@@ -22,7 +22,7 @@ class ProportionsCounts {
    */
   constructor( generation, startCounts, endCounts ) {
 
-    assert && AssertUtils.assertInteger( generation, generation => generation >= 0 );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
     assert && assert( startCounts instanceof BunnyCounts, 'invalid startCounts' );
     assert && assert( endCounts instanceof BunnyCounts, 'invalid endCounts' );
 

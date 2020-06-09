@@ -8,10 +8,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Utils from '../../../../dot/js/Utils.js';
 import required from '../../../../phet-core/js/required.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 import Bunny from './Bunny.js';
 
@@ -129,13 +129,13 @@ class BunnyCounts {
    * @private
    */
   validateInstance() {
-    assert && assert( isValidCount( this.totalCount ), 'invalid totalCount' );
-    assert && assert( isValidCount( this.whiteFurCount ), 'invalid whiteFurCount' );
-    assert && assert( isValidCount( this.brownFurCount ), 'invalid brownFurCount' );
-    assert && assert( isValidCount( this.straightEarsCount ), 'invalid straightEarsCount' );
-    assert && assert( isValidCount( this.floppyEarsCount ), 'invalid floppyEarsCount' );
-    assert && assert( isValidCount( this.shortTeethCount ), 'invalid shortTeethCount' );
-    assert && assert( isValidCount( this.longTeethCount ), 'invalid longTeethCount' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.totalCount ), 'invalid totalCount' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.whiteFurCount ), 'invalid whiteFurCount' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.brownFurCount ), 'invalid brownFurCount' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.straightEarsCount ), 'invalid straightEarsCount' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.floppyEarsCount ), 'invalid floppyEarsCount' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.shortTeethCount ), 'invalid shortTeethCount' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.longTeethCount ), 'invalid longTeethCount' );
 
     assert && assert( this.whiteFurCount + this.brownFurCount === this.totalCount,
       'fur counts are out of sync' );
@@ -155,15 +155,6 @@ BunnyCounts.ZERO = new BunnyCounts( {
   shortTeethCount: 0,
   longTeethCount: 0
 } );
-
-/**
- * Determines whether a value is a valid count.
- * @param {*} value
- * @returns {boolean}
- */
-function isValidCount( value ) {
-  return ( typeof value === 'number' && Utils.isInteger( value ) && value >= 0 );
-}
 
 naturalSelection.register( 'BunnyCounts', BunnyCounts );
 export default BunnyCounts;

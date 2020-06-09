@@ -21,6 +21,7 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyIO from './BunnyIO.js';
 import CauseOfDeath from './CauseOfDeath.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -378,8 +379,8 @@ class Bunny extends Sprite {
    * @private
    */
   validateInstance() {
-    assert && assert( typeof this.generation === 'number', 'invalid generation' );
-    assert && assert( typeof this.age === 'number', 'invalid age' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.generation ), 'invalid generation' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.age ), 'invalid age' );
     assert && assert( typeof this.isAlive === 'boolean', 'invalid isAlive' );
     assert && assert( this.father instanceof Bunny || this.father === null, 'invalid father' );
     assert && assert( this.mother instanceof Bunny || this.mother === null, 'invalid mother' );
