@@ -57,9 +57,10 @@ class EnvironmentBackgroundNode extends Node {
 
     super( options );
 
-    environmentProperty.link( climate => {
-      equatorBackground.visible = ( climate === Environment.EQUATOR );
-      arcticBackground.visible = ( climate === Environment.ARCTIC );
+    // Show the background that matches the environment
+    environmentProperty.link( environment => {
+      equatorBackground.visible = ( environment === Environment.EQUATOR );
+      arcticBackground.visible = ( environment === Environment.ARCTIC );
     } );
   }
 
