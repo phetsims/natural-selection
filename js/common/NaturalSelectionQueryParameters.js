@@ -264,7 +264,9 @@ const SCHEMA = {
   // For internal use only.
   mutationPercentage: {
     type: 'number',
-    defaultValue: 1/7, //TODO from the Java version
+
+    // from the Java version, see MUTATING_BUNNY_PER_BUNNIES in NaturalSelectionDefaults.java
+    defaultValue: 1/7,
 
     // there are 3 mutations, and a bunny can have at most 1 mutation
     isValidValue: value => ( value > 0  && value <= 1/3 )
