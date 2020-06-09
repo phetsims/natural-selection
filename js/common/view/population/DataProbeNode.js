@@ -94,7 +94,7 @@ class DataProbeNode extends Node {
     barNode.mouseArea = barNode.localBounds.dilatedXY( 5, 0 );
     barNode.touchArea = barNode.localBounds.dilatedXY( 10, 0 );
 
-    // Manipulator at bottom of bar
+    // Manipulator at bottom of the bar
     const manipulator = new ShadedSphereNode( 2 * MANIPULATOR_RADIUS, {
       mouseArea: Shape.circle( 0, 0, 2 * MANIPULATOR_RADIUS ),
       touchArea: Shape.circle( 0, 0, 2 * MANIPULATOR_RADIUS ),
@@ -103,14 +103,14 @@ class DataProbeNode extends Node {
     } );
 
     // NumberDisplay instances
-    //TODO get color from Gene
+    const genePool = populationModel.genePool;
     const totalDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'totalCount', NaturalSelectionColors.TOTAL_POPULATION );
-    const whiteFurDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'whiteFurCount', NaturalSelectionColors.FUR );
-    const brownFurDisplay = createDashedNumberDisplay( dataProbe.countsProperty, 'brownFurCount', NaturalSelectionColors.FUR );
-    const straightEarsDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'straightEarsCount', NaturalSelectionColors.EARS );
-    const floppyEarsDisplay = createDashedNumberDisplay( dataProbe.countsProperty, 'floppyEarsCount', NaturalSelectionColors.EARS );
-    const shortTeethDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'shortTeethCount', NaturalSelectionColors.TEETH );
-    const longTeethDisplay = createDashedNumberDisplay( dataProbe.countsProperty, 'longTeethCount', NaturalSelectionColors.TEETH );
+    const whiteFurDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'whiteFurCount', genePool.furGene.color );
+    const brownFurDisplay = createDashedNumberDisplay( dataProbe.countsProperty, 'brownFurCount', genePool.furGene.color );
+    const straightEarsDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'straightEarsCount', genePool.earsGene.color );
+    const floppyEarsDisplay = createDashedNumberDisplay( dataProbe.countsProperty, 'floppyEarsCount', genePool.earsGene.color );
+    const shortTeethDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'shortTeethCount', genePool.teethGene.color );
+    const longTeethDisplay = createDashedNumberDisplay( dataProbe.countsProperty, 'longTeethCount', genePool.teethGene.color );
 
     // vertical layout of NumberDisplays 
     const numberDisplaysParent = new VBox( {
