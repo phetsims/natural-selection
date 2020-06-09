@@ -43,8 +43,8 @@ class ZoomControl extends LayoutBox {
         xMargin: 8,
         yMargin: 5,
         fireOnHold: true,
-        fireOnHoldDelay: 600,
-        fireOnHoldInterval: 250
+        fireOnHoldDelay: 600, // ms
+        fireOnHoldInterval: 250 // ms
       },
 
       // LayoutBox options
