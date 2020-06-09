@@ -131,7 +131,6 @@ class PopulationGraphNode extends Node {
     this.dataProbeNode = dataProbeNode;
   }
 
-  //TODO make this unnecessary
   /**
    * @public
    */

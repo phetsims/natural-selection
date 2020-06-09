@@ -71,7 +71,6 @@ class PopulationNode extends Node {
     this.populationGraphNode = populationGraphNode;
   }
 
-  //TODO make this unnecessary
   /**
    * @public
    */

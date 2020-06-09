@@ -124,7 +124,6 @@ class DataProbeNode extends Node {
     super( options );
 
     // @private position in view coordinate frame, relative to the left edge of the graph
-    //TODO derive from dataProbe.generationProperty or make this go away
     this.positionProperty = new Property( new Vector2( xRange.min, 0 ) );
 
     this.addInputListener( new DataProbeDragListener( this.positionProperty, xRange, {
@@ -160,7 +159,7 @@ class DataProbeNode extends Node {
     this.positionProperty.link( position => {
       this.x = position.x;
 
-      //TODO update dataProbe.generationProperty, or do so in DataProbeDragListener
+      //TODO update dataProbe.generationProperty
 
       // flip NumberDisplays around y axis at edges of graph
       if ( this.left < xRange.min && !displaysOnRight ) {
