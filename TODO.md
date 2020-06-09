@@ -18,12 +18,11 @@
 
 ## Implementation
 
+* fix layout workarounds in PopulationGraphNode
 * Prune dead bunnies
 * Stop the sim when data limit is hit
 
 ## Performance
-
-* pre-allocate all BunnyNode instances?
 
 ## PhET-iO
 
