@@ -42,15 +42,16 @@ class EnvironmentNode extends Node {
       phetioDocumentation: 'the area of the screen that displays what is happening in the environment'
     }, options );
 
+    // The background, which changes to match the environment
     const backgroundNode = new EnvironmentBackgroundNode( model.environmentProperty, options.size,
       options.yHorizon );
 
-    // Frame around the viewport, to provide a nice crisp border, and for layout of UI components.
+    // Frame around the background, to provide a nice crisp border.
     const frameNode = new Rectangle( 0, 0, options.size.width, options.size.height, {
       stroke: NaturalSelectionColors.PANEL_STROKE
     } );
 
-    // Parent for all SpriteNodes, clipped to the viewport
+    // Parent for all SpriteNodes, clipped to the backgroundNode
     const spritesNode = new Node( {
       children: [],
       clipArea: Shape.rect( 0, 0, options.size.width, options.size.height )
@@ -102,20 +103,6 @@ class EnvironmentNode extends Node {
     // When a Bunny is added to the model, create the corresponding BunnyNode.
     model.bunnyCollection.bunnyCreatedEmitter.addListener( createBunnyNode );
 
-    // manages dynamic WolfNode instances
-    const wolfNodeCollection = new WolfNodeCollection( model.wolfCollection, {
-      tandem: options.tandem.createTandem( 'wolfNodeCollection' )
-    } );
-
-    // Creates a WolfNode and adds it to the scenegraph
-    model.wolfCollection.wolfCreatedEmitter.addListener( wolf => {
-      const wolfNode = wolfNodeCollection.createWolfNode( wolf );
-      spritesNode.addChild( wolfNode );
-      if ( !model.isPlayingProperty ) {
-        this.sortSprites();
-      }
-    } );
-
     // Press on a bunny to select it. No need to removeInputListener, exists for the lifetime of the sim.
     spritesNode.addInputListener( new BunnyPressListener( model.pedigreeModel.selectedBunnyProperty, {
       tandem: options.tandem.createTandem( 'bunnyPressListener' )
@@ -131,6 +118,20 @@ class EnvironmentNode extends Node {
       tandem: options.tandem.createTandem( 'backgroundPressListener' )
     } ) );
 
+    // manages dynamic WolfNode instances
+    const wolfNodeCollection = new WolfNodeCollection( model.wolfCollection, {
+      tandem: options.tandem.createTandem( 'wolfNodeCollection' )
+    } );
+
+    // Creates a WolfNode and adds it to the scenegraph
+    model.wolfCollection.wolfCreatedEmitter.addListener( wolf => {
+      const wolfNode = wolfNodeCollection.createWolfNode( wolf );
+      spritesNode.addChild( wolfNode );
+      if ( !model.isPlayingProperty ) {
+        this.sortSprites();
+      }
+    } );
+
     // @private
     this.spritesNode = spritesNode;
   }
@@ -141,14 +142,6 @@ class EnvironmentNode extends Node {
    */
   dispose() {
     assert && assert( false, 'EnvironmentNode does not support dispose' );
-  }
-
-  /**
-   * @param {number} dt - time step, in seconds
-   * @public
-   */
-  step( dt ) {
-    this.sortSprites();
   }
 
   /**

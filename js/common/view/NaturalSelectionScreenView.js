@@ -314,7 +314,7 @@ class NaturalSelectionScreenView extends ScreenView {
    * @public
    */
   stepOnce( dt ) {
-    this.environmentNode.step( dt );
+    this.environmentNode.sortSprites();
   }
 }
 
