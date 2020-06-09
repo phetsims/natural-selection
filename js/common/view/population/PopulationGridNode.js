@@ -38,32 +38,34 @@ class PopulationGridNode extends Node {
     assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
 
     options = merge( {
-      backgroundWidth: 100, // width in view coordinates
-      backgroundHeight: 100 // height in view coordinates
+
+      // dimensions of the grid (sans tick marks) in view coordinates
+      gridWidth: 100,
+      gridHeight: 100
     }, options );
 
     // Background rectangle
-    const rectangleNode = new Rectangle( 0, 0, options.backgroundWidth, options.backgroundHeight, {
+    const rectangleNode = new Rectangle( 0, 0, options.gridWidth, options.gridHeight, {
       fill: NaturalSelectionColors.POPULATION_GRAPH_FILL
     } );
 
     // Grid lines for the x axis
     const xGridLines = new VerticalLines( populationModel.xRangeProperty, {
-      xAxisWidth: options.backgroundWidth,
+      xAxisWidth: options.gridWidth,
       xSpacingModel: populationModel.xAxisTickSpacing,
-      lineLength: options.backgroundHeight,
+      lineLength: options.gridHeight,
 
       stroke: NaturalSelectionColors.POPULATION_GRID_LINES_STROKE,
       lineWidth: GRID_LINES_LINE_WIDTH,
 
       // Clip to the background bounds, because we'll be horizontally translating the x grid lines
-      clipArea: Shape.rectangle( 0, 0, options.backgroundWidth, options.backgroundHeight )
+      clipArea: Shape.rectangle( 0, 0, options.gridWidth, options.gridHeight )
     } );
 
     // Grid lines for the y axis
     const yGridLines = new HorizontalLines( populationModel.yRangeProperty, () => populationModel.getYTickSpacing(), {
-      yAxisHeight: options.backgroundHeight,
-      lineLength: options.backgroundWidth,
+      yAxisHeight: options.gridHeight,
+      lineLength: options.gridWidth,
       stroke: NaturalSelectionColors.POPULATION_GRID_LINES_STROKE,
       lineWidth: GRID_LINES_LINE_WIDTH
     } );
@@ -76,7 +78,7 @@ class PopulationGridNode extends Node {
     // Tick marks for the x axis
     const xTickMarks = new VerticalLines( populationModel.xRangeProperty, {
       xSpacingModel: populationModel.xAxisTickSpacing,
-      xAxisWidth: options.backgroundWidth,
+      xAxisWidth: options.gridWidth,
       lineLength: TICK_MARKS_LENGTH,
 
       stroke: NaturalSelectionColors.POPULATION_TICK_MARKS_STROKE,
@@ -84,19 +86,19 @@ class PopulationGridNode extends Node {
       top: rectangleNode.bottom,
 
       // Clip to the tick mark bounds below the x axis, because we'll be horizontally translating the x tick marks
-      clipArea: Shape.rectangle( 0, 0, options.backgroundWidth, options.backgroundHeight + TICK_MARKS_LENGTH )
+      clipArea: Shape.rectangle( 0, 0, options.gridWidth, options.gridHeight + TICK_MARKS_LENGTH )
     } );
 
     // Tick labels for the x axis
     const xTickLabels = new XTickLabels( populationModel.xRangeProperty, {
       xSpacingModel: populationModel.xAxisTickSpacing,
-      xAxisWidth: options.backgroundWidth,
+      xAxisWidth: options.gridWidth,
       top: xTickMarks.bottom + TICK_LABEL_SPACING
     } );
 
     // Tick marks for the y axis
     const yTickMarks = new HorizontalLines( populationModel.yRangeProperty, () => populationModel.getYTickSpacing(), {
-      yAxisHeight: options.backgroundHeight,
+      yAxisHeight: options.gridHeight,
       lineLength: TICK_MARKS_LENGTH,
       stroke: NaturalSelectionColors.POPULATION_TICK_MARKS_STROKE,
       lineWidth: TICK_MARKS_LINE_WIDTH,
@@ -105,7 +107,7 @@ class PopulationGridNode extends Node {
 
     // Tick labels for the y axis
     const yTickLabels = new YTickLabels( populationModel.yRangeProperty, () => populationModel.getYTickSpacing(), {
-      yAxisHeight: options.backgroundHeight,
+      yAxisHeight: options.gridHeight,
       right: yTickMarks.left - TICK_LABEL_SPACING
     } );
 
@@ -115,7 +117,7 @@ class PopulationGridNode extends Node {
     } );
 
     // A crisp frame in the foreground, to hide overlapping of tick marks and grid lines
-    const frameNode = new Rectangle( 0, 0, options.backgroundWidth, options.backgroundHeight, {
+    const frameNode = new Rectangle( 0, 0, options.gridWidth, options.gridHeight, {
       stroke: NaturalSelectionColors.PANEL_STROKE,
       lineWidth: 1.5
     } );

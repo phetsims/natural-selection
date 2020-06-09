@@ -90,19 +90,18 @@ class PopulationGraphNode extends Node {
     const FUDGE_HEIGHT = 20;
     const FUDGE_X_SPACING = 8;
 
-    //TODO better names for these
-    // XY plot
-    const plotWidth = options.graphWidth - yZoomControl.width - ZOOM_CONTROL_X_OFFSET - FUDGE_WIDTH;
-    const plotHeight = options.graphHeight - generationScrollControl.height - X_AXIS_LABEL_OFFSET - FUDGE_HEIGHT;
+    // Dimensions of the 2D grid (sans tick marks) in view coordinates
+    const gridWidth = options.graphWidth - yZoomControl.width - ZOOM_CONTROL_X_OFFSET - FUDGE_WIDTH;
+    const gridHeight = options.graphHeight - generationScrollControl.height - X_AXIS_LABEL_OFFSET - FUDGE_HEIGHT;
 
     const gridNode = new PopulationGridNode( populationModel, {
-      backgroundWidth: plotWidth,
-      backgroundHeight: plotHeight,
+      gridWidth: gridWidth,
+      gridHeight: gridHeight,
       left: yZoomControl.right + ZOOM_CONTROL_X_OFFSET + FUDGE_X_SPACING,
       y: boundsRectangle.top
     } );
 
-    const dataProbeNode = new DataProbeNode( populationModel, gridNode.x, plotWidth, plotHeight, {
+    const dataProbeNode = new DataProbeNode( populationModel, gridNode.x, gridWidth, gridHeight, {
       x: gridNode.x,
       top: gridNode.y,
       tandem: options.tandem.createTandem( 'dataProbeNode' )
@@ -118,14 +117,14 @@ class PopulationGraphNode extends Node {
 
     // center x-axis control under the graph
     generationScrollControl.boundsProperty.link( () => {
-      generationScrollControl.centerX = gridNode.x + ( plotWidth / 2 );
+      generationScrollControl.centerX = gridNode.x + ( gridWidth / 2 );
       generationScrollControl.top = gridNode.bottom + X_AXIS_LABEL_OFFSET;
     } );
 
     // center y-axis label to left of graph
     yAxisLabelNode.boundsProperty.link( () => {
       yAxisLabelNode.right = yZoomControl.right + ZOOM_CONTROL_X_OFFSET - Y_AXIS_LABEL_OFFSET;
-      yAxisLabelNode.centerY = gridNode.y + ( plotHeight / 2 );
+      yAxisLabelNode.centerY = gridNode.y + ( gridHeight / 2 );
     } );
 
     super( options );
