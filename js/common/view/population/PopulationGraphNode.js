@@ -22,9 +22,9 @@ import PopulationGridNode from './PopulationGridNode.js';
 import ZoomControl from './ZoomControl.js';
 
 // const
-const ZOOM_CONTROL_X_OFFSET = 5;
-const X_AXIS_LABEL_OFFSET = 7;
-const Y_AXIS_LABEL_OFFSET = 7;
+const X_TICK_MARKS_HEIGHT = 20; // height of x-axis tick marks, determined empirically
+const X_AXIS_LABEL_SPACING = 7; // space between x-axis 'Generation' label/control and x-axis tick marks)
+const Y_AXIS_LABEL_SPACING = 40; // space between y zoom control and y axis (not y tick marks)
 
 class PopulationGraphNode extends Node {
 
@@ -86,20 +86,15 @@ class PopulationGraphNode extends Node {
       phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     } );
 
-    //TODO fudge factors to fix wonky layout, need to account for tick marks
-    const FUDGE_WIDTH = 27;
-    const FUDGE_HEIGHT = 20;
-    const FUDGE_X_SPACING = 8;
-
     // Dimensions of the 2D grid (sans tick marks) in view coordinates
-    const gridWidth = options.graphWidth - yZoomControl.width - ZOOM_CONTROL_X_OFFSET - FUDGE_WIDTH;
-    const gridHeight = options.graphHeight - generationScrollControl.height - X_AXIS_LABEL_OFFSET - FUDGE_HEIGHT;
+    const gridWidth = options.graphWidth - yZoomControl.width - Y_AXIS_LABEL_SPACING;
+    const gridHeight = options.graphHeight - generationScrollControl.height - X_TICK_MARKS_HEIGHT - X_AXIS_LABEL_SPACING;
 
     // the 2D grid, including tick marks
     const gridNode = new PopulationGridNode( populationModel, {
       gridWidth: gridWidth,
       gridHeight: gridHeight,
-      left: yZoomControl.right + ZOOM_CONTROL_X_OFFSET + FUDGE_X_SPACING,
+      x: yZoomControl.right + Y_AXIS_LABEL_SPACING,
       y: boundsRectangle.top
     } );
 
@@ -121,12 +116,12 @@ class PopulationGraphNode extends Node {
     // center x-axis control under the graph
     generationScrollControl.boundsProperty.link( () => {
       generationScrollControl.centerX = gridNode.x + ( gridWidth / 2 );
-      generationScrollControl.top = gridNode.bottom + X_AXIS_LABEL_OFFSET;
+      generationScrollControl.top = gridNode.bottom + X_AXIS_LABEL_SPACING;
     } );
 
     // center y-axis label to left of graph
     yAxisLabelNode.boundsProperty.link( () => {
-      yAxisLabelNode.right = yZoomControl.right + ZOOM_CONTROL_X_OFFSET - Y_AXIS_LABEL_OFFSET;
+      yAxisLabelNode.right = yZoomControl.right;
       yAxisLabelNode.centerY = gridNode.y + ( gridHeight / 2 );
     } );
 
