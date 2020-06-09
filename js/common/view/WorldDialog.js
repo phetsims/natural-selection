@@ -1,6 +1,5 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
-//TODO adjust margins, spacing, and maxWidth after integrating final artwork
 /**
  * WorldDialog is displayed when bunnies have exceeded their maximum population and have "taken over the world".
  *
