@@ -15,8 +15,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionModel from '../model/NaturalSelectionModel.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
-import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import BunnyCountsNode from './BunnyCountsNode.js';
 import BunnyNodeCollection from './BunnyNodeCollection.js';
 import BunnyPressListener from './BunnyPressListener.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
@@ -71,16 +69,6 @@ class EnvironmentNode extends Node {
     ];
 
     super( options );
-
-    // Show counts in the upper-left corner
-    if ( NaturalSelectionConstants.SHOW_INFO ) {
-      this.addChild( new BunnyCountsNode(
-        model.bunnyCollection.liveBunnies.lengthProperty,
-        model.bunnyCollection.deadBunnies.lengthProperty, {
-          left: backgroundNode.left + 5,
-          top: backgroundNode.top + 5
-        } ) );
-    }
 
     // manages dynamic BunnyNode instances
     const bunnyNodeCollection = new BunnyNodeCollection( model.bunnyCollection, model.pedigreeModel.selectedBunnyProperty, {
