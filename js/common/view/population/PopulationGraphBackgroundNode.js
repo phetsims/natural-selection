@@ -53,7 +53,7 @@ class PopulationGraphBackgroundNode extends Node {
       xSpacingModel: populationModel.xAxisTickSpacing,
       lineLength: options.backgroundHeight,
 
-      stroke: NaturalSelectionColors.GRID_LINES_STROKE,
+      stroke: NaturalSelectionColors.POPULATION_GRID_LINES_STROKE,
       lineWidth: GRID_LINES_LINE_WIDTH,
 
       // Clip to the background bounds, because we'll be horizontally translating the x grid lines
@@ -64,7 +64,7 @@ class PopulationGraphBackgroundNode extends Node {
     const yGridLines = new HorizontalLines( populationModel.yRangeProperty, () => populationModel.getYTickSpacing(), {
       yAxisHeight: options.backgroundHeight,
       lineLength: options.backgroundWidth,
-      stroke: NaturalSelectionColors.GRID_LINES_STROKE,
+      stroke: NaturalSelectionColors.POPULATION_GRID_LINES_STROKE,
       lineWidth: GRID_LINES_LINE_WIDTH
     } );
 
@@ -79,7 +79,7 @@ class PopulationGraphBackgroundNode extends Node {
       xAxisWidth: options.backgroundWidth,
       lineLength: TICK_MARKS_LENGTH,
 
-      stroke: NaturalSelectionColors.TICK_MARKS_STROKE,
+      stroke: NaturalSelectionColors.POPULATION_TICK_MARKS_STROKE,
       lineWidth: TICK_MARKS_LINE_WIDTH,
       top: rectangleNode.bottom,
 
@@ -98,7 +98,7 @@ class PopulationGraphBackgroundNode extends Node {
     const yTickMarks = new HorizontalLines( populationModel.yRangeProperty, () => populationModel.getYTickSpacing(), {
       yAxisHeight: options.backgroundHeight,
       lineLength: TICK_MARKS_LENGTH,
-      stroke: NaturalSelectionColors.TICK_MARKS_STROKE,
+      stroke: NaturalSelectionColors.POPULATION_TICK_MARKS_STROKE,
       lineWidth: TICK_MARKS_LINE_WIDTH,
       right: rectangleNode.left
     } );

@@ -14,7 +14,6 @@ import Range from '../../../../../dot/js/Range.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import Shape from '../../../../../kite/js/Shape.js';
 import merge from '../../../../../phet-core/js/merge.js';
-import MathSymbols from '../../../../../scenery-phet/js/MathSymbols.js';
 import NumberDisplay from '../../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../../../scenery-phet/js/ShadedSphereNode.js';
@@ -32,7 +31,6 @@ import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import DataProbeDragListener from './DataProbeDragListener.js';
 
 // constants
-const BAR_COLOR = 'rgb( 120, 120, 120 )';
 const MANIPULATOR_RADIUS = 5;
 const NUMBER_DISPLAY_RANGE = new Range( 0, 10 * NaturalSelectionConstants.MAX_POPULATION );
 const NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY = 0.7;
@@ -40,11 +38,7 @@ const NUMBER_DISPLAY_DEFAULTS = {
   textOptions: {
     font: new PhetFont( 12 )
   },
-  backgroundFill: 'white',
-  backgroundStroke: 'black',
-  backgroundLineDash: [],
   backgroundLineWidth: 2,
-  noValueString: MathSymbols.NO_VALUE,
   noValueAlign: 'center'
 };
 
@@ -86,7 +80,7 @@ class DataProbeNode extends Node {
 
     // Vertical bar
     const barNode = new Rectangle( 0, 0, 3, graphHeight, {
-      fill: BAR_COLOR,
+      fill: NaturalSelectionColors.DATA_PROBE_BAR_COLOR,
       opacity: 0.6,
       centerX: 0,
       y: 0
@@ -96,6 +90,7 @@ class DataProbeNode extends Node {
 
     // Manipulator at bottom of the bar
     const manipulator = new ShadedSphereNode( 2 * MANIPULATOR_RADIUS, {
+      mainColor: NaturalSelectionColors.DATA_PROBE_MANIPULATOR_COLOR,
       mouseArea: Shape.circle( 0, 0, 2 * MANIPULATOR_RADIUS ),
       touchArea: Shape.circle( 0, 0, 2 * MANIPULATOR_RADIUS ),
       centerX: barNode.centerX,
@@ -104,7 +99,7 @@ class DataProbeNode extends Node {
 
     // NumberDisplay instances
     const genePool = populationModel.genePool;
-    const totalDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'totalCount', NaturalSelectionColors.TOTAL_POPULATION );
+    const totalDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'totalCount', NaturalSelectionColors.POPULATION_TOTAL_COUNT );
     const whiteFurDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'whiteFurCount', genePool.furGene.color );
     const brownFurDisplay = createDashedNumberDisplay( dataProbe.countsProperty, 'brownFurCount', genePool.furGene.color );
     const straightEarsDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'straightEarsCount', genePool.earsGene.color );
@@ -239,7 +234,7 @@ function createDashedNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, c
  * Creates a NumberDisplay for the data probe.
  * @param {Property.<BunnyCounts|null>} bunnyCountsProperty
  * @param {string} bunnyCountsFieldName - name of the desired field in BunnyCounts
- * @param {Object} [options]
+ * @param {Object} [options] - NumberDisplay options
  * @returns {NumberDisplay}
  */
 function createNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, options ) {

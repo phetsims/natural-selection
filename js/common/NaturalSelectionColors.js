@@ -44,13 +44,17 @@ const NaturalSelectionColors = {
   EQUATOR_BUTTON_FILL: 'rgb( 207, 125, 66 )',
   ARCTIC_BUTTON_FILL: 'rgb( 54, 137, 239 )',
 
-  // Graphs
-  TOTAL_POPULATION: 'black',
+  // Population graph
   POPULATION_GRAPH_FILL: 'white',
+  POPULATION_GRID_LINES_STROKE: 'rgb( 225, 225, 225 )',
+  POPULATION_TICK_MARKS_STROKE: 'black',
+  POPULATION_TOTAL_COUNT: 'black',
+
+  // Proportions graph
   PROPORTIONS_GRAPH_FILL: 'white',
+
+  // Pedigree graph
   PEDIGREE_GRAPH_FILL: 'rgb( 207, 221, 228 )',
-  GRID_LINES_STROKE: 'rgb( 225, 225, 225 )',
-  TICK_MARKS_STROKE: 'black',
 
   // Generation Clock
   CLOCK_FILL: 'rgb( 203, 120, 162 )', // pink
@@ -58,6 +62,10 @@ const NaturalSelectionColors = {
   CLOCK_REVEAL_COLOR: 'rgba( 255, 255, 255, 0.4 )', // transparent white
   CLOCK_FOOD_SLICE_COLOR: 'rgb( 0, 210, 0 )', // green
   CLOCK_WOLVES_SLICE_COLOR: 'rgb( 102, 102, 102 )', // grey
+
+  // Data Probe
+  DATA_PROBE_BAR_COLOR: 'rgb( 120, 120, 120 )',
+  DATA_PROBE_MANIPULATOR_COLOR: 'rgb( 128, 128, 128 )',
 
   // Bunny
   SELECTED_BUNNY_STROKE: 'blue'
