@@ -75,8 +75,8 @@ class PopulationGridNode extends Node {
       children: [ xGridLines, yGridLines ]
     } );
 
-    // Tick marks for the x axis
-    const xTickMarks = new VerticalLines( populationModel.xRangeProperty, {
+    // Tick-mark lines for the x axis
+    const xTickLines = new VerticalLines( populationModel.xRangeProperty, {
       xSpacingModel: populationModel.xAxisTickSpacing,
       xAxisWidth: options.gridWidth,
       lineLength: TICK_MARKS_LENGTH,
@@ -89,15 +89,15 @@ class PopulationGridNode extends Node {
       clipArea: Shape.rectangle( 0, 0, options.gridWidth, options.gridHeight + TICK_MARKS_LENGTH )
     } );
 
-    // Tick labels for the x axis
+    // Tick-mark labels for the x axis
     const xTickLabels = new XTickLabels( populationModel.xRangeProperty, {
       xSpacingModel: populationModel.xAxisTickSpacing,
       xAxisWidth: options.gridWidth,
-      top: xTickMarks.bottom + TICK_LABEL_SPACING
+      top: xTickLines.bottom + TICK_LABEL_SPACING
     } );
 
-    // Tick marks for the y axis
-    const yTickMarks = new HorizontalLines( populationModel.yRangeProperty, () => populationModel.getYTickSpacing(), {
+    // Tick-mark lines for the y axis
+    const yTickLines = new HorizontalLines( populationModel.yRangeProperty, () => populationModel.getYTickSpacing(), {
       yAxisHeight: options.gridHeight,
       lineLength: TICK_MARKS_LENGTH,
       stroke: NaturalSelectionColors.POPULATION_TICK_MARKS_STROKE,
@@ -105,15 +105,15 @@ class PopulationGridNode extends Node {
       right: rectangleNode.left
     } );
 
-    // Tick labels for the y axis
+    // Tick-mark labels for the y axis
     const yTickLabels = new YTickLabels( populationModel.yRangeProperty, () => populationModel.getYTickSpacing(), {
       yAxisHeight: options.gridHeight,
-      right: yTickMarks.left - TICK_LABEL_SPACING
+      right: yTickLines.left - TICK_LABEL_SPACING
     } );
 
     // Group the tick marks, in case we want to be able to show/hide them in the future.
     const tickMarksNode = new Node( {
-      children: [ xTickMarks, xTickLabels, yTickMarks, yTickLabels ]
+      children: [ xTickLines, xTickLabels, yTickLines, yTickLabels ]
     } );
 
     // A crisp frame in the foreground, to hide overlapping of tick marks and grid lines
