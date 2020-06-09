@@ -1,8 +1,8 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * DataProbeNode displays y-axis values at an x-axis position.  It can be dragged along the x axis.
- * The origin is at the top center of barNode.
+ * DataProbeNode displays population (y-axis) values for a specific generation (x-axis) value.
+ * It can be dragged along the x axis. The origin is at the top center of barNode.
  * Historical information and requirements can be found in https://github.com/phetsims/natural-selection/issues/14.
  *
  * @author Chris Malley (PixelZoom, Inc.)
