@@ -46,16 +46,14 @@ class DataProbeNode extends Node {
 
   /**
    * @param {PopulationModel} populationModel
-   * @param {number} originX TODO make this go away
-   * @param {number} graphWidth
+   * @param {Range} xRange - x range, in view coordinates
    * @param {number} graphHeight
    * @param {Object} [options]
    */
-  constructor( populationModel, originX, graphWidth, graphHeight, options ) {
+  constructor( populationModel, xRange, graphHeight, options ) {
 
     assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
-    assert && assert( typeof originX === 'number', 'invalid originX' );
-    assert && assert( typeof graphWidth === 'number', 'invalid graphWidth' );
+    assert && assert( xRange instanceof Range, 'invalid xRange' );
     assert && assert( typeof graphHeight === 'number', 'invalid graphHeight' );
 
     options = merge( {
@@ -127,12 +125,9 @@ class DataProbeNode extends Node {
 
     // @private position in view coordinate frame, relative to the left edge of the graph
     //TODO derive from dataProbe.generationProperty or make this go away
-    this.positionProperty = new Property( new Vector2( originX, 0 ) );
+    this.positionProperty = new Property( new Vector2( xRange.min, 0 ) );
 
-    // x range in view coordinates
-    const xRangeView = new Range( originX, originX + graphWidth );
-
-    this.addInputListener( new DataProbeDragListener( this.positionProperty, xRangeView, {
+    this.addInputListener( new DataProbeDragListener( this.positionProperty, xRange, {
       tandem: options.tandem.createTandem( 'dragListener' )
     } ) );
 
@@ -168,11 +163,11 @@ class DataProbeNode extends Node {
       //TODO update dataProbe.generationProperty, or do so in DataProbeDragListener
 
       // flip NumberDisplays around y axis at edges of graph
-      if ( this.left < xRangeView.min && !displaysOnRight ) {
+      if ( this.left < xRange.min && !displaysOnRight ) {
         displaysOnRight = true;
         updateDisplayLayout();
       }
-      else if ( this.right > xRangeView.max && displaysOnRight ) {
+      else if ( this.right > xRange.max && displaysOnRight ) {
         displaysOnRight = false;
         updateDisplayLayout();
       }
