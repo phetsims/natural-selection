@@ -10,17 +10,22 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import ObservableArray from '../../../../axon/js/ObservableArray.js';
+import ObservableArrayIO from '../../../../axon/js/ObservableArrayIO.js';
 import Property from '../../../../axon/js/Property.js';
 import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Range from '../../../../dot/js/Range.js';
 import RangeIO from '../../../../dot/js/RangeIO.js';
 import Utils from '../../../../dot/js/Utils.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import Vector2IO from '../../../../dot/js/Vector2IO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import BunnyCounts from './BunnyCounts.js';
 import DataProbe from './DataProbe.js';
 import GenePool from './GenePool.js';
 
@@ -75,17 +80,49 @@ class PopulationModel extends PhetioObject {
     this.generationsProperty = generationsProperty;
     this.isPlayingProperty = isPlayingProperty;
 
+    // For organizing all data points in Studio
+    const dataPointsTandem = options.tandem.createTandem( 'dataPoints' );
+
+    // @public data points, for total population and the population of each allele.
+    // Vector2.x = generation, Vector2.y = population
+    this.totalPoints = new ObservableArray( {
+      tandem: dataPointsTandem.createTandem( 'totalPoints' ),
+      phetioType: ObservableArrayIO( Vector2IO )
+    } );
+    this.whiteFurPoints = new ObservableArray( {
+      tandem: dataPointsTandem.createTandem( 'whiteFurPoints' ),
+      phetioType: ObservableArrayIO( Vector2IO )
+    } );
+    this.brownFurPoints = new ObservableArray( {
+      tandem: dataPointsTandem.createTandem( 'brownFurPoints' ),
+      phetioType: ObservableArrayIO( Vector2IO )
+    } );
+    this.straightEarsPoints = new ObservableArray( {
+      tandem: dataPointsTandem.createTandem( 'straightEarsPoints' ),
+      phetioType: ObservableArrayIO( Vector2IO )
+    } );
+    this.floppyEarsPoints = new ObservableArray( {
+      tandem: dataPointsTandem.createTandem( 'floppyEarsPoints' ),
+      phetioType: ObservableArrayIO( Vector2IO )
+    } );
+    this.shortTeethPoints = new ObservableArray( {
+      tandem: dataPointsTandem.createTandem( 'shortTeethPoints' ),
+      phetioType: ObservableArrayIO( Vector2IO )
+    } );
+    this.longTeethPoints = new ObservableArray( {
+      tandem: dataPointsTandem.createTandem( 'longTeethPoints' ),
+      phetioType: ObservableArrayIO( Vector2IO )
+    } );
+
     // @public
     this.dataProbe = new DataProbe( {
       tandem: options.tandem.createTandem( 'dataProbe' )
     } );
 
-    // @public visibility of the total population plot on the graph and data probe
+    // @public visibility of each data set, on the graph and data probe
     this.totalVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'totalVisibleProperty' )
     } );
-
-    // @public visibility of the plot for each allele on the graph and data probe
     this.whiteFurVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'whiteFurVisibleProperty' )
     } );
@@ -160,6 +197,16 @@ class PopulationModel extends PhetioObject {
    * @public
    */
   reset() {
+
+    // clear data points
+    this.totalPoints.reset();
+    this.whiteFurPoints.reset();
+    this.brownFurPoints.reset();
+    this.straightEarsPoints.reset();
+    this.floppyEarsPoints.reset();
+    this.shortTeethPoints.reset();
+    this.longTeethPoints.reset();
+
     this.dataProbe.reset();
 
     this.totalVisibleProperty.reset();
@@ -189,6 +236,38 @@ class PopulationModel extends PhetioObject {
    */
   getYTickSpacing() {
     return Y_TICK_SPACINGS[ this.yZoomLevelProperty.value ];
+  }
+
+  /**
+   * Converts population counts to Vector2 points on the graph.
+   * @param {number} generation
+   * @param {BunnyCounts} counts
+   * @public
+   */
+  recordCounts( generation, counts ) {
+    assert && assert( typeof generation === 'number', 'invalid generation' );
+    assert && assert( counts instanceof BunnyCounts, 'invalid counts' );
+
+    phet.log && phet.log( `PopulationModel.recordCounts: generation=${generation} counts=${counts}` );
+    recordCount( this.totalPoints, generation, counts.totalCount );
+    recordCount( this.whiteFurPoints, generation, counts.whiteFurCount );
+    recordCount( this.brownFurPoints, generation, counts.brownFurCount );
+    recordCount( this.straightEarsPoints, generation, counts.straightEarsCount );
+    recordCount( this.floppyEarsPoints, generation, counts.floppyEarsCount );
+    recordCount( this.shortTeethPoints, generation, counts.shortTeethCount );
+    recordCount( this.longTeethPoints, generation, counts.longTeethCount );
+  }
+}
+
+/**
+ * Records a count if it differs from the previous data point.
+ * @param {ObservableArray.<Vector2>} observableArray
+ * @param {number} generation
+ * @param {number} count
+ */
+function recordCount( observableArray, generation, count ) {
+  if ( observableArray.length === 0 || observableArray.get( observableArray.length - 1 ).y !== count ) {
+    observableArray.push( new Vector2( generation, count ) );
   }
 }
 

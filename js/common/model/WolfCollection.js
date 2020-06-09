@@ -91,6 +91,11 @@ class WolfCollection {
       }
     } );
 
+    // @public emits when bunnies have been eaten
+    this.bunniesEatenEmitter = new Emitter( {
+      parameters: [ { valueType: 'number' } ] // the number of bunnies that were eaten
+    } );
+
     // Eat some bunnies.
     //TODO Temporarily eat all bunnies at once, instead of over CLOCK_WOLVES_RANGE
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
@@ -186,6 +191,11 @@ class WolfCollection {
         bunniesBrownFur[ i ].die( CauseOfDeath.WOLF );
       }
       phet.log && phet.log( `${numberToKillBrownFur} bunnies with brown fur were eaten by wolves` );
+
+      // Notify that bunnies have been eaten.
+      if ( numberToKillWhiteFur + numberToKillBrownFur > 0 ) {
+        this.bunniesEatenEmitter.emit( numberToKillWhiteFur + numberToKillBrownFur );
+      }
     }
   }
 }

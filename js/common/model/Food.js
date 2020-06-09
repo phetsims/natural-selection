@@ -9,6 +9,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Emitter from '../../../../axon/js/Emitter.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -86,6 +87,11 @@ class Food {
       ( isTough, isLimited ) => ( isTough || isLimited )
     );
 
+    // @public emits when bunnies have been starved to death
+    this.bunniesStarvedEmitter = new Emitter( {
+      parameters: [ { valueType: 'number' } ] // the number of bunnies that were starved to death
+    } );
+
     // {ShrubConfig[]} describes the collection of shrubs
     //
     // @typedef ShrubConfig
@@ -160,6 +166,8 @@ class Food {
 
       bunnies = phet.joist.random.shuffle( bunnies );
 
+      let totalStarved = 0;
+
       if ( this.isToughProperty.value ) {
 
         // Kill off some of each type of bunny, but a higher percentage of bunnies with short teeth.
@@ -179,6 +187,7 @@ class Food {
           bunniesLongTeeth[ i ].die( causeOfDeath );
         }
         phet.log && phet.log( `${numberToKillLongTeeth} bunnies with long teeth died of starvation` );
+        totalStarved += numberToKillLongTeeth;
 
         // Kill off bunnies with short teeth.
         const bunniesShortTeeth = _.filter( bunnies, bunny => bunny.phenotype.hasShortTeeth() );
@@ -191,6 +200,7 @@ class Food {
           bunniesShortTeeth[ i ].die( causeOfDeath );
         }
         phet.log && phet.log( `${numberToKillShortTeeth} bunnies with short teeth died of starvation` );
+        totalStarved += numberToKillShortTeeth;
       }
       else if ( this.isLimitedProperty.value ) {
 
@@ -203,6 +213,12 @@ class Food {
           bunnies[ i ].die( CauseOfDeath.LIMITED_FOOD );
         }
         phet.log && phet.log( `${numberToKill} bunnies died of starvation` );
+        totalStarved += numberToKill;
+      }
+
+      // Notify that bunnies have been starved to death.
+      if ( totalStarved > 0 ) {
+        this.bunniesStarvedEmitter.emit( totalStarved );
       }
     }
   }

@@ -121,10 +121,12 @@ class NaturalSelectionModel {
       // So do nothing when PhET-iO is restoring state, or saved state will be overwritten.
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
 
-        // When the simulation begins, record the first 'start of generation' data for the Proportions graph.
+        // When the simulation begins, record 'start' data for the graphs.
         if ( simulationMode === SimulationMode.ACTIVE ) {
           const currentGeneration = this.generationClock.currentGenerationProperty.value;
-          this.proportionsModel.recordStartCounts( currentGeneration, this.bunnyCollection.getLiveBunnyCounts() );
+          const counts = this.bunnyCollection.getLiveBunnyCounts();
+          this.proportionsModel.recordStartCounts( currentGeneration, counts );
+          this.populationModel.recordCounts( currentGeneration, counts );
         }
 
         // Adjust the sim playback and generation clock
@@ -152,7 +154,7 @@ class NaturalSelectionModel {
       if ( currentGeneration !== 0 && !phet.joist.sim.isSettingPhetioStateProperty.value ) {
         phet.log && phet.log( `generation=${currentGeneration}` );
 
-        // Record 'end of generation' counts for the previous generation before bunnies are aged or mate.
+        // Before bunnies are aged or mated, Record 'End of Generation' counts for the Proportions graph.
         this.proportionsModel.recordEndCounts( currentGeneration - 1, this.bunnyCollection.getLiveBunnyCounts() );
 
         // Age bunnies, some may die of old age.
@@ -161,11 +163,21 @@ class NaturalSelectionModel {
         // Mate bunnies
         this.bunnyCollection.mateBunnies( currentGeneration );
 
-        // Record 'start of generation' counts for the current generation after bunnies mate. The delta between
-        // 'End of generation N' and 'Start of generation N+1' will be the population change due to births + deaths.
-        this.proportionsModel.recordStartCounts( currentGeneration, this.bunnyCollection.getLiveBunnyCounts() );
+        // After bunnies are aged and mated, record counts for graphs.
+        const counts = this.bunnyCollection.getLiveBunnyCounts();
+        this.proportionsModel.recordStartCounts( currentGeneration, counts );
+        this.populationModel.recordCounts( currentGeneration, counts );
       }
     } );
+
+    // Record data for the Population graph when the population is changed by environmental factors.
+    const recordCounts = () => {
+      const generation = this.generationClock.generationsProperty.value;
+      const counts = this.bunnyCollection.getLiveBunnyCounts();
+      this.populationModel.recordCounts( generation, counts );
+    };
+    this.wolfCollection.bunniesEatenEmitter.addListener( recordCounts );
+    this.food.bunniesStarvedEmitter.addListener( recordCounts );
   }
 
   /**
