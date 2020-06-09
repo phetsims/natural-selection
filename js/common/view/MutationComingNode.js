@@ -73,7 +73,6 @@ class MutationComingNode extends Node {
     super( options );
   }
 
-  //TODO should this be disposed and created on demand? It's not phet-io instrumented.
   /**
    * @public
    * @override

@@ -153,7 +153,6 @@ class Food {
     assert && assert( false, 'Food does not support dispose' );
   }
 
-  //TODO Temporarily starve all bunnies at once, instead of over CLOCK_FOOD_RANGE
   /**
    * Starves some portion of the bunny population.
    * @param {Bunny[]} bunnies

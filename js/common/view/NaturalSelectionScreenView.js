@@ -216,7 +216,6 @@ class NaturalSelectionScreenView extends ScreenView {
       mutationAlertsNode
     ];
 
-    //TODO verify that these resets are needed
     // @private
     this.resetNaturalSelectionScreenView = () => {
       this.graphChoiceProperty.reset();

@@ -154,7 +154,6 @@ class WolfCollection {
     this.wolfGroup.forEach( wolf => wolf.move() );
   }
 
-  //TODO Temporarily eat all bunnies at once, instead of over CLOCK_WOLVES_RANGE
   /**
    * Eats some portion of the bunny population.
    * @param {Environment} environment
