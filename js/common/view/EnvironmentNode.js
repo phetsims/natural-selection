@@ -20,8 +20,6 @@ import BunnyCountsNode from './BunnyCountsNode.js';
 import BunnyNodeCollection from './BunnyNodeCollection.js';
 import BunnyPressListener from './BunnyPressListener.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
-import EnvironmentRadioButtonGroup from './EnvironmentRadioButtonGroup.js';
-import GenerationClockNode from './GenerationClockNode.js';
 import ShrubNode from './ShrubNode.js';
 import WolfNodeCollection from './WolfNodeCollection.js';
 
@@ -52,21 +50,6 @@ class EnvironmentNode extends Node {
       stroke: NaturalSelectionColors.PANEL_STROKE
     } );
 
-    // Generation clock
-    const generationClockNode = new GenerationClockNode( model.generationClock,
-      model.food.enabledProperty, model.wolfCollection.enabledProperty, {
-        centerX: frameNode.centerX,
-        top: frameNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
-        tandem: options.tandem.createTandem( 'generationClockNode' )
-      } );
-
-    // Environment radio buttons
-    const environmentRadioButtonGroup = new EnvironmentRadioButtonGroup( model.environmentProperty, {
-      right: frameNode.right - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_X_MARGIN,
-      top: frameNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
-      tandem: options.tandem.createTandem( 'environmentRadioButtonGroup' )
-    } );
-
     // Parent for all SpriteNodes, clipped to the viewport
     const spritesNode = new Node( {
       children: [],
@@ -83,9 +66,7 @@ class EnvironmentNode extends Node {
     options.children = [
       backgroundNode,
       spritesNode,
-      frameNode,
-      generationClockNode,
-      environmentRadioButtonGroup
+      frameNode
     ];
 
     super( options );
@@ -150,9 +131,6 @@ class EnvironmentNode extends Node {
       tandem: options.tandem.createTandem( 'backgroundPressListener' )
     } ) );
 
-    // @public (read-only)
-    this.environmentRadioButtonGroup = environmentRadioButtonGroup;
-
     // @private
     this.spritesNode = spritesNode;
   }
@@ -166,7 +144,7 @@ class EnvironmentNode extends Node {
   }
 
   /**
-   * @param dt - time step, in seconds
+   * @param {number} dt - time step, in seconds
    * @public
    */
   step( dt ) {

@@ -22,6 +22,8 @@ import AddMutationsPanel from './AddMutationsPanel.js';
 import DiedDialog from './DiedDialog.js';
 import EnvironmentalFactorsPanel from './EnvironmentalFactorsPanel.js';
 import EnvironmentNode from './EnvironmentNode.js';
+import EnvironmentRadioButtonGroup from './EnvironmentRadioButtonGroup.js';
+import GenerationClockNode from './GenerationClockNode.js';
 import GenesVisibilityManager from './GenesVisibilityManager.js';
 import GraphChoice from './GraphChoice.js';
 import GraphChoiceRadioButtonGroup from './GraphChoiceRadioButtonGroup.js';
@@ -60,6 +62,21 @@ class NaturalSelectionScreenView extends ScreenView {
       left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: options.tandem.createTandem( 'environmentNode' )
+    } );
+
+    // Generation clock
+    const generationClockNode = new GenerationClockNode( model.generationClock,
+      model.food.enabledProperty, model.wolfCollection.enabledProperty, {
+        centerX: environmentNode.centerX,
+        top: environmentNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
+        tandem: options.tandem.createTandem( 'generationClockNode' )
+      } );
+
+    // Environment radio buttons
+    const environmentRadioButtonGroup = new EnvironmentRadioButtonGroup( model.environmentProperty, {
+      right: environmentNode.right - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_X_MARGIN,
+      top: environmentNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
+      tandem: options.tandem.createTandem( 'environmentRadioButtonGroup' )
     } );
 
     // Available width to the right of environmentNode, used to size control panels
@@ -186,6 +203,8 @@ class NaturalSelectionScreenView extends ScreenView {
     // layering
     this.children = [
       environmentNode,
+      generationClockNode,
+      environmentRadioButtonGroup,
       playButtonGroup,
       panelsParent,
       graphChoiceRadioButtonGroup,
@@ -210,19 +229,19 @@ class NaturalSelectionScreenView extends ScreenView {
         addMutationsPanel.setContentEnabled( true );
         environmentalFactorsPanel.setContentEnabled( true );
         timeControlNode.enabledProperty.value = true;
-        environmentNode.environmentRadioButtonGroup.enabledProperty.value = true;
+        environmentRadioButtonGroup.enabledProperty.value = true;
       }
       else if ( simulationMode === SimulationMode.ACTIVE ) {
         addMutationsPanel.setContentEnabled( true );
         environmentalFactorsPanel.setContentEnabled( true );
         timeControlNode.enabledProperty.value = true;
-        environmentNode.environmentRadioButtonGroup.enabledProperty.value = true;
+        environmentRadioButtonGroup.enabledProperty.value = true;
       }
       else if ( simulationMode === SimulationMode.COMPLETED ) {
         addMutationsPanel.setContentEnabled( false );
         environmentalFactorsPanel.setContentEnabled( false );
         timeControlNode.enabledProperty.value = false;
-        environmentNode.environmentRadioButtonGroup.enabledProperty.value = false;
+        environmentRadioButtonGroup.enabledProperty.value = false;
       }
       else {
         throw new Error( `invalid simulationMode: ${simulationMode}` );
