@@ -94,6 +94,7 @@ class PopulationGraphNode extends Node {
     const gridWidth = options.graphWidth - yZoomControl.width - ZOOM_CONTROL_X_OFFSET - FUDGE_WIDTH;
     const gridHeight = options.graphHeight - generationScrollControl.height - X_AXIS_LABEL_OFFSET - FUDGE_HEIGHT;
 
+    // the 2D grid, including tick marks
     const gridNode = new PopulationGridNode( populationModel, {
       gridWidth: gridWidth,
       gridHeight: gridHeight,
@@ -133,6 +134,7 @@ class PopulationGraphNode extends Node {
     this.dataProbeNode = dataProbeNode;
   }
 
+  //TODO make this unnecessary
   /**
    * @public
    */

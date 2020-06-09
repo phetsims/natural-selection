@@ -202,7 +202,7 @@ class NaturalSelectionScreenView extends ScreenView {
     this.resetNaturalSelectionScreenView = () => {
       this.graphChoiceProperty.reset();
       environmentNode.reset();
-      populationNode.reset();
+      populationNode.reset(); //TODO make this unnecessary
     };
 
     // Simulation mode determines which UI controls are enabled.
