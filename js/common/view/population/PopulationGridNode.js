@@ -156,9 +156,9 @@ class VerticalLines extends Node {
       lineLength: 100 // vertical length of the lines, in view coordinates
     }, options );
 
-    // Compute the number of lines and their spacing in view coordinates
-    const numberOfLines = Math.floor( xRangeProperty.value.getLength() / options.xSpacingModel ) + 1;
-    const xSpacingView = ( options.xSpacingModel / xRangeProperty.value.getLength() ) * options.xAxisWidth;
+    // Compute the number of lines and their spacing, in view coordinates
+    const numberOfLines = getNumberOfVerticalLines( xRangeProperty.value, options.xSpacingModel );
+    const xSpacingView = getXSpacingView( xRangeProperty.value, options.xSpacingModel, options.xAxisWidth );
 
     // Create the lines
     const shape = new Shape();
@@ -213,10 +213,10 @@ class HorizontalLines extends Path {
     // Recreate the lines when the y-axis range changes.
     yRangeProperty.link( yRange => {
 
-      // Compute the number of lines and their spacing in view coordinates
+      // Compute the number of lines and their spacing, in view coordinates
       const ySpacingModel = getYSpacing();
-      const numberOfLines = Math.floor( yRange.getLength() / ySpacingModel ) + 1;
-      const ySpacingView = ( ySpacingModel / yRange.getLength() ) * options.yAxisHeight;
+      const numberOfLines = getNumberOfHorizontalLines( yRange, ySpacingModel );
+      const ySpacingView = getYSpacingView( yRange, ySpacingModel, options.yAxisHeight );
 
       // Create the grid lines
       const shape = new Shape();
@@ -241,8 +241,8 @@ class HorizontalLines extends Path {
 }
 
 /**
- * XTickLabels renders the x-axis tick mark labels. There is a static number of labels, reused and repositioned as
- * the x-axis range changes.
+ * XTickLabels renders the x-axis tick-mark labels. (The tick-mark lines are rendered by VerticalLines.)
+ * There is a static number of labels, reused and repositioned as the x-axis range changes.
  */
 class XTickLabels extends Node {
 
@@ -257,10 +257,9 @@ class XTickLabels extends Node {
       xAxisWidth: 100 // x axis width, in view coordinates
     }, options );
 
-    //TODO duplication with VerticalLines
-    // Compute the number of labels and their spacing in view coordinates
-    const numberOfLabels = Math.floor( xRangeProperty.value.getLength() / options.xSpacingModel ) + 1;
-    const xSpacingView = ( options.xSpacingModel / xRangeProperty.value.getLength() ) * options.xAxisWidth;
+    // Compute the number of labels and their spacing, in view coordinates
+    const numberOfLabels = getNumberOfVerticalLines( xRangeProperty.value, options.xSpacingModel );
+    const xSpacingView = getXSpacingView( xRangeProperty.value, options.xSpacingModel, options.xAxisWidth );
 
     // Create a fixed number of labels. Their values and positions will be adjusted by xRangeProperty listener below.
     const labelNodes = []; // {Text[]}
@@ -303,7 +302,8 @@ class XTickLabels extends Node {
 }
 
 /**
- * YTickLabels renders the y-axis tick mark labels. They are recreated on demand, when the zoom control is used.
+ * YTickLabels renders the y-axis tick-mark labels. (The tick-mark lines are rendered by HorizontalLines.)
+ * They are recreated on demand, when the zoom control is used.
  */
 class YTickLabels extends Node {
 
@@ -325,11 +325,10 @@ class YTickLabels extends Node {
     // Recreate the labels when the y-axis range changes.
     yRangeProperty.link( yRange => {
 
-      //TODO duplication with HorizontalLines
-      // Compute the number of tick marks and their spacing in view coordinates
+      // Compute the number of tick marks and their spacing, in view coordinates
       const ySpacingModel = getYSpacing();
-      const numberOfTickMarks = Math.floor( yRange.getLength() / ySpacingModel ) + 1;
-      const ySpacing = ( ySpacingModel / yRange.getLength() ) * options.yAxisHeight;
+      const numberOfTickMarks = getNumberOfHorizontalLines( yRange, ySpacingModel );
+      const ySpacingView = getYSpacingView( yRange, ySpacingModel, options.yAxisHeight );
 
       // Create the tick mark labels
       const labelNodes = [];
@@ -338,7 +337,7 @@ class YTickLabels extends Node {
         const labelNode = new Text( yRange.min + ( i * ySpacingModel ), {
           font: TICK_MARKS_FONT,
           right: 0,
-          centerY: options.yAxisHeight - ( i * ySpacing )
+          centerY: options.yAxisHeight - ( i * ySpacingView )
         } );
 
         labelNodes.push( labelNode );
@@ -357,6 +356,48 @@ class YTickLabels extends Node {
   dispose() {
     assert && assert( false, 'YTickLabels does not support dispose' );
   }
+}
+
+/**
+ * Gets the number of vertical lines in the grid.
+ * @param {Range} xRange - range of the x axis, in model coordinates
+ * @param {number} xSpacing - space between vertical grid lines, in model coordinates
+ * @returns {number}
+ */
+function getNumberOfVerticalLines( xRange, xSpacing ) {
+  return Math.floor( xRange.getLength() / xSpacing ) + 1;
+}
+
+/**
+ * Gets the spacing between vertical lines, in view coordinates.
+ * @param {Range} xRange - range of the x axis, in model coordinates
+ * @param {number} xSpacing - space between vertical grid lines, in model coordinates
+ * @param {number} xAxisWidth - width of the x axis, in view coordinates
+ * @returns {number}
+ */
+function getXSpacingView( xRange, xSpacing, xAxisWidth ) {
+  return ( xSpacing / xRange.getLength() ) * xAxisWidth;
+}
+
+/**
+ * Gets the number of horizontal lines in the grid.
+ * @param {Range} yRange - range of the y axis, in model coordinates
+ * @param {number} ySpacing - space between horizontal grid lines, in model coordinates
+ * @returns {number}
+ */
+function getNumberOfHorizontalLines( yRange, ySpacing ) {
+  return Math.floor( yRange.getLength() / ySpacing ) + 1;
+}
+
+/**
+ * Gets the spacing between horizontal lines, in view coordinates.
+ * @param {Range} yRange - range of the y axis, in model coordinates
+ * @param {number} ySpacing - space between horizontal grid lines, in model coordinates
+ * @param {number} yAxisHeight - width of the y axis, in view coordinates
+ * @returns {number}
+ */
+function getYSpacingView( yRange, ySpacing, yAxisHeight ) {
+  return ( ySpacing / yRange.getLength() ) * yAxisHeight;
 }
 
 naturalSelection.register( 'PopulationGridNode', PopulationGridNode );
