@@ -9,10 +9,10 @@
 
 import Emitter from '../../../../axon/js/Emitter.js';
 import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import Bunny from './Bunny.js';
 import BunnyArray from './BunnyArray.js';
 import BunnyArrayIO from './BunnyArrayIO.js';
@@ -218,7 +218,7 @@ class BunnyCollection {
    * @public
    */
   mateBunnies( generation ) {
-    assert && AssertUtils.assertInteger( generation, generation => generation >= 0 );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
 
     let bornIndex = 0;
 

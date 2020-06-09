@@ -14,7 +14,6 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import Vector3IO from '../../../../dot/js/Vector3IO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
@@ -70,9 +69,9 @@ class Bunny extends Sprite {
     }, options );
 
     // Validate options
-    assert && AssertUtils.assertInteger( options.generation, generation => generation >= 0 );
     assert && assert( ( options.father && options.mother ) || ( !options.father && !options.mother ), 'bunny cannot have 1 parent' );
     assert && assert( !( options.father && options.alleles ), 'father and alleles are mutually exclusive' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( options.generation ), 'invalid generation' );
 
     // Default to random position and direction
     options.position = options.position || modelViewTransform.getRandomGroundPosition();
