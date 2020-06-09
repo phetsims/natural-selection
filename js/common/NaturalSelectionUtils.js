@@ -88,6 +88,7 @@ const NaturalSelectionUtils = {
    *
    * @param {string} name
    * @param {function} someFunction - a function with no parameters and no return value
+   * @public
    */
   logTime( name, someFunction ) {
     console.log( `${name} took ${NaturalSelectionUtils.time( someFunction )} ms` );
@@ -97,6 +98,7 @@ const NaturalSelectionUtils = {
    * Determines whether an array is sorted in ascending order.
    * @param {number[]} array
    * @returns {boolean}
+   * @public
    */
   isSorted( array ) {
     assert && assert( Array.isArray( array ), 'invalid array' );
@@ -113,6 +115,7 @@ const NaturalSelectionUtils = {
    * Determines whether a value is a positive integer.
    * @param {*} value
    * @returns {boolean}
+   * @public
    */
   isPositiveInteger( value ) {
     return ( typeof value === 'number' && Utils.isInteger( value ) && value > 0 );
@@ -122,6 +125,7 @@ const NaturalSelectionUtils = {
    * Gets the next random double in a Range.
    * @param {Range} range
    * @returns {number}
+   * @public
    */
   nextInRange( range ) {
     if ( range.min === range.max ) {
