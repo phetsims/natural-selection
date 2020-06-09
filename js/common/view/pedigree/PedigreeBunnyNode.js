@@ -17,6 +17,7 @@ import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
+import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 import BunnyImageCache from '../BunnyImageCache.js';
 import MutationIconNode from '../MutationIconNode.js';
 import OriginNode from '../OriginNode.js';
@@ -81,7 +82,7 @@ class PedigreeBunnyNode extends Node {
       children.unshift( selectionRectangle );
     }
 
-    if ( NaturalSelectionConstants.SHOW_ORIGIN ) {
+    if ( NaturalSelectionQueryParameters.showOrigin ) {
       children.push( new OriginNode( 4 ) );
     }
 

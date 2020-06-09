@@ -12,7 +12,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import wolfImage from '../../../images/wolf_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import Wolf from '../model/Wolf.js';
-import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import OriginNode from './OriginNode.js';
 import SpriteNode from './SpriteNode.js';
 import WolfNodeIO from './WolfNodeIO.js';
@@ -50,7 +50,7 @@ class WolfNode extends SpriteNode {
     options.children = [ imageNode ];
 
     // Red dot at the origin
-    if ( NaturalSelectionConstants.SHOW_ORIGIN ) {
+    if ( NaturalSelectionQueryParameters.showOrigin ) {
       options.children.push( new OriginNode() );
     }
 

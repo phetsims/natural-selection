@@ -14,6 +14,7 @@ import Bunny from '../model/Bunny.js';
 import SelectedBunnyProperty from '../model/SelectedBunnyProperty.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import BunnyImageCache from './BunnyImageCache.js';
 import BunnyNodeIO from './BunnyNodeIO.js';
 import OriginNode from './OriginNode.js';
@@ -65,7 +66,7 @@ class BunnyNode extends SpriteNode {
     options.children = [ selectionRectangle, wrappedImage ];
 
     // Red dot at the origin
-    if ( NaturalSelectionConstants.SHOW_ORIGIN ) {
+    if ( NaturalSelectionQueryParameters.showOrigin ) {
       options.children.push( new OriginNode() );
     }
 

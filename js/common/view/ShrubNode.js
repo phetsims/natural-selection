@@ -10,7 +10,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import naturalSelection from '../../naturalSelection.js';
 import Shrub from '../model/Shrub.js';
-import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import OriginNode from './OriginNode.js';
 import SpriteNode from './SpriteNode.js';
 
@@ -45,7 +45,7 @@ class ShrubNode extends SpriteNode {
     options.children = [ toughShrubNode, tenderShrubNode ];
 
     // Red dot at the origin
-    if ( NaturalSelectionConstants.SHOW_ORIGIN ) {
+    if ( NaturalSelectionQueryParameters.showOrigin ) {
       options.children.push( new OriginNode() );
     }
 
