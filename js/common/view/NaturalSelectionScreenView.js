@@ -201,7 +201,6 @@ class NaturalSelectionScreenView extends ScreenView {
     // @private
     this.resetNaturalSelectionScreenView = () => {
       this.graphChoiceProperty.reset();
-      environmentNode.reset();
       populationNode.reset(); //TODO make this unnecessary
     };
 

@@ -159,13 +159,6 @@ class EnvironmentNode extends Node {
 
   /**
    * @public
-   */
-  reset() {
-    //TODO
-  }
-
-  /**
-   * @public
    * @override
    */
   dispose() {
