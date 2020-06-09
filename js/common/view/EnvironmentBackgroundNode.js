@@ -49,11 +49,10 @@ class EnvironmentBackgroundNode extends Node {
 
     // Horizon line, for debugging. Bunnies cannot go further from the viewer than this line.
     if ( NaturalSelectionQueryParameters.showHorizon ) {
-      const horizonLine = new Line( 0, yHorizon, size.width, yHorizon, {
+      options.children.push( new Line( 0, yHorizon, size.width, yHorizon, {
         stroke: 'red',
         lineWidth: 1
-      } );
-      options.children.push( horizonLine );
+      } ) );
     }
 
     super( options );
