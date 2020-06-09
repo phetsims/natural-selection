@@ -12,6 +12,8 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import wolfImage from '../../../images/wolf_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import Wolf from '../model/Wolf.js';
+import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import OriginNode from './OriginNode.js';
 import SpriteNode from './SpriteNode.js';
 import WolfNodeIO from './WolfNodeIO.js';
 
@@ -46,6 +48,11 @@ class WolfNode extends SpriteNode {
 
     assert && assert( !options.children, 'WolfNode sets children' );
     options.children = [ imageNode ];
+
+    // Red dot at the origin
+    if ( NaturalSelectionConstants.SHOW_ORIGIN ) {
+      options.children.push( new OriginNode() );
+    }
 
     super( wolf, options );
   }
