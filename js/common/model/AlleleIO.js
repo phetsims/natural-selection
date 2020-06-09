@@ -13,7 +13,7 @@ import Allele from './Allele.js';
 
 class AlleleIO extends ReferenceIO( ObjectIO ) {}
 
-AlleleIO.documentation = 'TODO https://github.com/phetsims/phet-io/issues/1643';
+AlleleIO.documentation = 'IO Type for Allele';
 AlleleIO.validator = { isValidValue: value => value instanceof Allele };
 AlleleIO.typeName = 'AlleleIO';
 ObjectIO.validateSubtype( AlleleIO );

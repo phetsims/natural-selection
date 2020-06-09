@@ -49,7 +49,7 @@ class GenotypeIO extends ObjectIO {
   }
 }
 
-GenotypeIO.documentation = 'TODO https://github.com/phetsims/phet-io/issues/1643';
+GenotypeIO.documentation = 'IO Type for Genotype';
 GenotypeIO.validator = { isValidValue: value => value instanceof Genotype };
 GenotypeIO.typeName = 'GenotypeIO';
 ObjectIO.validateSubtype( GenotypeIO );

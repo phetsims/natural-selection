@@ -15,7 +15,7 @@ import BunnyIO from './BunnyIO.js';
 
 class BunnyArrayIO extends ObservableArrayIO( ReferenceIO( BunnyIO ) ) {}
 
-BunnyArrayIO.documentation = 'TODO https://github.com/phetsims/phet-io/issues/1643';
+BunnyArrayIO.documentation = 'IO Type for BunnyArray';
 BunnyArrayIO.validator = { isValidValue: value => value instanceof BunnyArray };
 BunnyArrayIO.typeName = 'BunnyArrayIO';
 ObjectIO.validateSubtype( BunnyArrayIO );

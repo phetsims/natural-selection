@@ -60,7 +60,7 @@ class BunnyIO extends ObjectIO {
   }
 }
 
-BunnyIO.documentation = 'TODO https://github.com/phetsims/phet-io/issues/1643';
+BunnyIO.documentation = 'IO Type for Bunny';
 BunnyIO.validator = { isValidValue: value => value instanceof Bunny };
 BunnyIO.typeName = 'BunnyIO';
 ObjectIO.validateSubtype( BunnyIO );

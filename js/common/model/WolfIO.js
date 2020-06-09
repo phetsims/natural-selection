@@ -60,7 +60,7 @@ class WolfIO extends ObjectIO {
   }
 }
 
-WolfIO.documentation = 'TODO https://github.com/phetsims/phet-io/issues/1643';
+WolfIO.documentation = 'IO Type for Wolf';
 WolfIO.validator = { isValidValue: value => value instanceof Wolf };
 WolfIO.typeName = 'WolfIO';
 ObjectIO.validateSubtype( WolfIO );

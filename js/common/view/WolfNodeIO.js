@@ -13,7 +13,7 @@ import WolfNode from './WolfNode.js';
 
 class WolfNodeIO extends ReferenceIO( ObjectIO ) {}
 
-WolfNodeIO.documentation = 'TODO https://github.com/phetsims/phet-io/issues/1643';
+WolfNodeIO.documentation = 'IO Type for WolfNode';
 WolfNodeIO.validator = { isValidValue: value => value instanceof WolfNode };
 WolfNodeIO.typeName = 'WolfNodeIO';
 ObjectIO.validateSubtype( WolfNodeIO );

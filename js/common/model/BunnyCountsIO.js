@@ -38,7 +38,7 @@ class BunnyCountsIO extends ObjectIO {
   }
 }
 
-BunnyCountsIO.documentation = 'TODO https://github.com/phetsims/phet-io/issues/1643';
+BunnyCountsIO.documentation = 'IO Type for BunnyCounts';
 BunnyCountsIO.validator = { isValidValue: value => value instanceof BunnyCounts };
 BunnyCountsIO.typeName = 'BunnyCountsIO';
 ObjectIO.validateSubtype( BunnyCountsIO );

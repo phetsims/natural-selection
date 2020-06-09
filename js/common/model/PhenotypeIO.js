@@ -49,7 +49,7 @@ class PhenotypeIO extends ObjectIO {
   }
 }
 
-PhenotypeIO.documentation = 'TODO https://github.com/phetsims/phet-io/issues/1643';
+PhenotypeIO.documentation = 'IO Type for Phenotype';
 PhenotypeIO.validator = { isValidValue: value => value instanceof Phenotype };
 PhenotypeIO.typeName = 'PhenotypeIO';
 ObjectIO.validateSubtype( PhenotypeIO );

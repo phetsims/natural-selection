@@ -38,7 +38,7 @@ class ProportionsCountsIO extends ObjectIO {
   }
 }
 
-ProportionsCountsIO.documentation = 'TODO https://github.com/phetsims/phet-io/issues/1643';
+ProportionsCountsIO.documentation = 'IO Type for ProportionsCounts';
 ProportionsCountsIO.validator = { isValidValue: value => value instanceof ProportionsCounts };
 ProportionsCountsIO.typeName = 'ProportionsCountsIO';
 ObjectIO.validateSubtype( ProportionsCountsIO );
