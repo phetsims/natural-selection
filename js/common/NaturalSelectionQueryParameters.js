@@ -247,11 +247,10 @@ const SCHEMA = {
     type: 'flag'
   },
 
-  // Determines whether mutants are homozygous (true) or heterozygous (false)
+  // When a mutation is applied, the mutant is homozygous.
   // For internal use only.
   homozygousMutants: {
-    type: 'boolean',
-    defaultValue: true
+    type: 'flag'
   },
 
   // Percentage of newborn bunnies that will receive a mutation
