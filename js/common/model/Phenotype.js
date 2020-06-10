@@ -89,8 +89,6 @@ class Phenotype extends PhetioObject {
 
   //--------------------------------------------------------------------------------------------------------------------
   // Below here are methods used by PhenotypeIO to save and restore PhET-iO state.
-  // NOTE! If you add a field to Phenotype that is not itself a PhET-iO element, you will like need to add it to
-  // toStateObject, fromStateObject, setValue, and validateInstance.
   //--------------------------------------------------------------------------------------------------------------------
 
   /**

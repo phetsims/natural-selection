@@ -285,8 +285,8 @@ class Bunny extends NaturalSelectionSprite {
 
   //--------------------------------------------------------------------------------------------------------------------
   // Below here are methods used by BunnyIO to save and restore PhET-iO state.
-  // NOTE! If you add a field to Bunny that is not itself a PhET-iO element, you will likely need to add it to
-  // toStateObject, fromStateObject, setValue, and validateInstance.
+  // NOTE! If you add a field to Bunny that is not itself a PhET-iO element (e.g. a Property), then you will likely
+  // need to add that field to toStateObject, fromStateObject, setValue, and validateInstance.
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
