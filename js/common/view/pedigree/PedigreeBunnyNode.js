@@ -23,8 +23,9 @@ import MutationIconNode from '../MutationIconNode.js';
 import OriginNode from '../OriginNode.js';
 
 // constants
-const ALLELES_FONT = new PhetFont( 40 );
-const DEAD_SYMBOL_FONT = new PhetFont( 50 );
+const IMAGE_SCALE = 0.4; // how much the bunny PNG image is scaled
+const ALLELES_FONT = new PhetFont( 16 );
+const DEAD_SYMBOL_FONT = new PhetFont( 20 );
 
 class PedigreeBunnyNode extends Node {
 
@@ -49,6 +50,7 @@ class PedigreeBunnyNode extends Node {
     const children = [];
 
     const wrappedImage = BunnyImageCache.getWrappedImage( bunny, {
+      scale: IMAGE_SCALE,
       centerX: 0,
       bottom: 0
     } );
@@ -74,7 +76,7 @@ class PedigreeBunnyNode extends Node {
       const selectionRectangle = new Rectangle( wrappedImage.bounds.dilated( 5 ), {
         fill: 'rgba( 0, 0, 0, 0.1 )',
         stroke: NaturalSelectionColors.SELECTED_BUNNY_STROKE,
-        lineWidth: 4,
+        lineWidth: 2.5,
         cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
         center: wrappedImage.center,
         pickable: false
@@ -99,7 +101,6 @@ class PedigreeBunnyNode extends Node {
         this.addChild( new Text( '\u274c', {
           font: DEAD_SYMBOL_FONT,
           left: wrappedImage.left,
-          // top: wrappedImage.top + 20
           bottom: wrappedImage.centerY
         } ) );
       }

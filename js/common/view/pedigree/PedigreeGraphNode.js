@@ -20,7 +20,6 @@ import PedigreeBranchNode from './PedigreeBranchNode.js';
 
 // constants
 const TREE_DEPTH = 4;
-const SELECTED_BUNNY_SCALE = 0.4;
 const X_MARGIN = 5;
 const Y_MARGIN = 5;
 
@@ -80,7 +79,6 @@ class PedigreeGraphNode extends Node {
           pedigreeModel.earsAllelesVisibleProperty,
           pedigreeModel.teethAllelesVisibleProperty, {
             bunnyIsSelected: true,
-            scale: SELECTED_BUNNY_SCALE,
 
             // centered at the bottom of the background
             x: backgroundNode.centerX,
