@@ -94,34 +94,38 @@ class Food {
       parameters: [ { valueType: 'number' } ] // the number of bunnies that were starved to death
     } );
 
-    // {ShrubConfig[]} describes the collection of shrubs
-    //
-    // @typedef ShrubConfig
-    // @property {HTMLImageElement} tenderImage - image used for tender shrubs
-    // @property {HTMLImageElement} toughImage - image used for tough shrubs
-    // @property {number} x - x position in model coordinates
-    // @property {number} z - z position in model coordinates
-    //
-    // A, B, C labeling of images comes from https://github.com/phetsims/natural-selection/issues/17
-    const shrubConfigs = [
-      { tenderImage: shrubTenderAImage, toughImage: shrubToughAImage, x: -65, z: 210 },
-      { tenderImage: shrubTenderAImage, toughImage: shrubToughAImage, x: 155, z: 160 },
-      { tenderImage: shrubTenderBImage, toughImage: shrubToughBImage, x: -155, z: 160 },
-      { tenderImage: shrubTenderBImage, toughImage: shrubToughBImage, x: 200, z: 250 },
-      { tenderImage: shrubTenderCImage, toughImage: shrubToughCImage, x: 60, z: 185 },
-      { tenderImage: shrubTenderCImage, toughImage: shrubToughCImage, x: -180, z: 270 }
+    // @public (read-only) {Shrub[]} the collection of Shrubs
+    // Approximate positions and A, B, C labeling of images comes from
+    // https://github.com/phetsims/natural-selection/issues/17
+    this.shrubs = [
+
+      // A
+      new Shrub( shrubTenderAImage, shrubToughAImage, modelViewTransform, this.isToughProperty, {
+        position: modelViewTransform.getGroundPosition( -65, 210 )
+      } ),
+      new Shrub( shrubTenderAImage, shrubToughAImage, modelViewTransform, this.isToughProperty, {
+        position: modelViewTransform.getGroundPosition( 155, 160 )
+      } ),
+
+      // B
+      new Shrub( shrubTenderBImage, shrubToughBImage, modelViewTransform, this.isToughProperty, {
+        position: modelViewTransform.getGroundPosition( -155, 160 )
+      } ),
+      new Shrub( shrubTenderBImage, shrubToughBImage, modelViewTransform, this.isToughProperty, {
+        position: modelViewTransform.getGroundPosition( 200, 250 )
+      } ),
+
+      // C
+      new Shrub( shrubTenderCImage, shrubToughCImage, modelViewTransform, this.isToughProperty, {
+        position: modelViewTransform.getGroundPosition( 60, 185 )
+      } ),
+      new Shrub( shrubTenderCImage, shrubToughCImage, modelViewTransform, this.isToughProperty, {
+        position: modelViewTransform.getGroundPosition( -180, 270 )
+      } )
     ];
 
-    // @public (read-only) {Shrub[]} the collection of Shrubs
-    this.shrubs = [];
-    shrubConfigs.forEach( shrubConfig => {
-      this.shrubs.push( new Shrub( shrubConfig.tenderImage, shrubConfig.toughImage, modelViewTransform, this.isToughProperty, {
-        position: modelViewTransform.getGroundPosition( shrubConfig.x, shrubConfig.z )
-      } ) );
-    } );
-
     // When food is limited, hide half of the food (odd-indexed Shrubs). unlink is not necessary.
-    assert && assert( this.shrubs.length % 2 === 0, 'an even number of Shrubs is required' );
+    assert && assert( this.shrubs.length % 2 === 0, 'to hide half of the food, an even number of Shrubs is required' );
     this.isLimitedProperty.link( isLimited => {
       for ( let i = 1; i < this.shrubs.length; i = i + 2 ) {
         this.shrubs[ i ].visibleProperty.value = !isLimited;
