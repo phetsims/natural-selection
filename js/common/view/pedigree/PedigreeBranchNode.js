@@ -19,13 +19,13 @@ import PedigreeBunnyNode from './PedigreeBunnyNode.js';
 
 // constants
 const PARENTS_SCALE = 0.9; // how much the parents are scaled relative to the child
-const DEFAULT_X_SPACING = 390; // x spacing between parents
-const DEFAULT_Y_SPACING = 170; // y spacing between child and parents
+const DEFAULT_X_SPACING = 156; // x spacing between parents
+const DEFAULT_Y_SPACING = 68; // y spacing between child and parents
 const X_SPACING_SCALE = 0.55; // how much x spacing is scale for each generation
 const Y_SPACING_SCALE = 0.7; // how much y spacing is scale for each generation
-const T_HEIGHT = 20; // the height of the T that connects child to parents
-const T_X_OFFSET = 70; // x offset of the T from the parent bunny's origin
-const T_Y_OFFSET = 35; // y offset of the T from the parent bunny's origin
+const T_HEIGHT = 5; // the height of the T that connects child to parents
+const T_X_OFFSET = 28; // x offset of the T from the parent bunny's origin
+const T_Y_OFFSET = 14; // y offset of the T from the parent bunny's origin
 
 class PedigreeBranchNode extends Node {
 
@@ -89,7 +89,7 @@ class PedigreeBranchNode extends Node {
         .moveTo( bunnyNode.centerX, fatherNode.y - T_Y_OFFSET )
         .lineTo( bunnyNode.centerX, fatherNode.y + T_HEIGHT );
       const tPath = new Path( tShape, {
-        lineWidth: 2,
+        lineWidth: 1,
         stroke: 'black'
       } );
       children.push( tPath );

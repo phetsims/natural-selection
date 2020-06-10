@@ -65,7 +65,7 @@ class PedigreeBunnyNode extends Node {
 
     if ( bunny.genotype.isOriginalMutant ) {
       children.push( new MutationIconNode( {
-        radius: 30,
+        radius: 12,
         left: wrappedImage.left,
         bottom: wrappedImage.bottom
       } ) );
@@ -74,10 +74,10 @@ class PedigreeBunnyNode extends Node {
     // Rectangle that appears around the selected bunny. Similar to the rectangle in BunnyNode, but tweaked to look
     // better with the size and background color used for the Pedigree graph.
     if ( options.isSelected ) {
-      const selectionRectangle = new Rectangle( wrappedImage.bounds.dilated( 5 ), {
+      const selectionRectangle = new Rectangle( wrappedImage.bounds.dilated( 4 ), {
         fill: 'rgba( 0, 0, 0, 0.1 )',
         stroke: NaturalSelectionColors.SELECTED_BUNNY_STROKE,
-        lineWidth: 2.5,
+        lineWidth: 2,
         cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
         center: wrappedImage.center,
         pickable: false
@@ -115,7 +115,7 @@ class PedigreeBunnyNode extends Node {
         allelesNode.visible = ( furAllelesVisible || earsAllelesVisible || teethAllelesVisible );
         allelesNode.text = getAllelesString( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible );
         allelesNode.centerX = wrappedImage.centerX;
-        allelesNode.top = wrappedImage.bottom + 12;
+        allelesNode.top = wrappedImage.bottom + 5;
       } );
 
     // @private
