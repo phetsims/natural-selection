@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * PedigreeBunnyNode is the representation of a Bunny in the Pedigree graph. It ignores bunny motion, and displays
+ * PedigreeBunnyNode is the view of a bunny in the Pedigree graph. It ignores bunny motion, and displays
  * only the information that is relevant to pedigree.
  *
  * @author Chris Malley (PixelZoom, Inc.)
