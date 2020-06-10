@@ -30,7 +30,7 @@ class StartOverButton extends RectangularPushButton {
       phetioReadOnly: true // because sim state controls when this button is visible
     }, options );
 
-    assert && assert( !options.content, 'PlayAgainButton sets content' );
+    assert && assert( !options.content, 'StartOverButton sets content' );
     options.content = new Text( naturalSelectionStrings.startOver, {
       font: NaturalSelectionConstants.PUSH_BUTTON_FONT,
       maxWidth: 150 // determined empirically
