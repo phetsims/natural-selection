@@ -54,7 +54,7 @@ class BunnyNode extends NaturalSelectionSpriteNode {
     } );
 
     // Rectangle that appears around this Node when bunny is selected
-    const selectionRectangle = new Rectangle( wrappedImage.bounds.dilated( 4 ), {
+    const selectionRectangle = new Rectangle( wrappedImage.bounds.dilated( 3 ), {
       fill: 'rgba( 0, 0, 0, 0.25 )',
       stroke: NaturalSelectionColors.SELECTED_BUNNY_STROKE,
       lineWidth: 2,

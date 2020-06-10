@@ -74,7 +74,7 @@ class PedigreeBunnyNode extends Node {
     // Rectangle that appears around the selected bunny. Similar to the rectangle in BunnyNode, but tweaked to look
     // better with the size and background color used for the Pedigree graph.
     if ( options.isSelected ) {
-      const selectionRectangle = new Rectangle( wrappedImage.bounds.dilated( 4 ), {
+      const selectionRectangle = new Rectangle( wrappedImage.bounds.dilated( 3 ), {
         fill: 'rgba( 0, 0, 0, 0.1 )',
         stroke: NaturalSelectionColors.SELECTED_BUNNY_STROKE,
         lineWidth: 2,
