@@ -68,8 +68,7 @@ class BunnyCollection {
     // @public notifies when all bunnies have died. dispose is not necessary.
     this.allBunniesHaveDiedEmitter = new Emitter();
 
-    // @public notifies when bunnies have taken over the world, exceeding the maximum population size.
-    // dispose is not necessary.
+    // @public notifies when bunnies have taken over the world. dispose is not necessary.
     this.bunniesHaveTakenOverTheWorldEmitter = new Emitter();
 
     // When a bunny is created or restored via PhET-iO. removeListener is not necessary.
