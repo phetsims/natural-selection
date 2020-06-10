@@ -96,7 +96,8 @@ class Genotype extends PhetioObject {
     // @public (read-only) identifies an 'original mutant', an individual where a mutation occurred
     this.isOriginalMutant = ( options.mutateFur || options.mutateEars || options.mutateTeeth );
 
-    // @public the translated abbreviation of the Genotype. PhET-iO only, not used in brand=phet
+    // @public the translated abbreviation of the Genotype. PhET-iO only, not used in brand=phet.
+    // dispose is required.
     const abbreviationProperty = new DerivedProperty(
       [ genePool.furGene.dominantAlleleProperty, genePool.earsGene.dominantAlleleProperty, genePool.teethGene.dominantAlleleProperty ],
       () => {

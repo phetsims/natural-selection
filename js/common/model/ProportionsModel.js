@@ -69,7 +69,7 @@ class ProportionsModel extends PhetioObject {
       phetioReadOnly: true // range is dynamic
     } );
 
-    // @public whether the Proportions graph is displaying the current generation
+    // @public whether the Proportions graph is displaying the current generation. dispose is not necessary.
     this.isDisplayingCurrentGenerationProperty = new DerivedProperty(
       [ this.generationProperty, currentGenerationProperty ],
       ( generation, currentGeneration ) => ( generation === currentGeneration )
@@ -99,10 +99,10 @@ class ProportionsModel extends PhetioObject {
       phetioDocumentation: 'Counts for previous generations, indexed by generation number'
     } );
 
-    // @public Whether the model has data to display.
+    // @public Whether the model has data to display. dispose is not necessary.
     this.hasDataProperty = new DerivedProperty( [ currentStartCountsProperty ], currentStartCounts => !!currentStartCounts );
 
-    // Pause the sim when a generation other than the current generation is being viewed.
+    // Pause the sim when a generation other than the current generation is being viewed. unlink is not necessary.
     this.generationProperty.link( generation => {
       if ( generation !== currentGenerationProperty.value ) {
         isPlayingProperty.value = false;
@@ -121,6 +121,7 @@ class ProportionsModel extends PhetioObject {
     } );
 
     // When the sim starts playing or the current generation changes, show the current generation immediately.
+    // Multilink dispose is not necessary.
     Property.multilink(
       [ isPlayingProperty, currentGenerationProperty ],
       ( isPlaying, currentGeneration ) => {
@@ -133,7 +134,7 @@ class ProportionsModel extends PhetioObject {
       this.endCountsProperty.value = liveBunnyCountsProperty.value;
     };
 
-    // Determine what data to display
+    // Determine what data to display. Multilink dispose is not necessary.
     Property.multilink(
       [ this.generationProperty, currentStartCountsProperty ],
       ( generation, currentStartCounts ) => {
@@ -150,7 +151,7 @@ class ProportionsModel extends PhetioObject {
             // Show static counts for the start of the current generation.
             this.startCountsProperty.value = currentStartCountsProperty.value;
 
-            // Show dynamic counts for the 'Currently' state of the current generation.
+            // Show dynamic counts for the 'Currently' state of the current generation. unlink is handed above.
             liveBunnyCountsProperty.link( updateEndCounts );
           }
           else {

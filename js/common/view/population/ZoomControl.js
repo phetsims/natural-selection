@@ -82,7 +82,7 @@ class ZoomControl extends LayoutBox {
       zoomInButton.enabled = ( zoomLevel > zoomLevelProperty.range.min );
       zoomOutButton.enabled = ( zoomLevel < zoomLevelProperty.range.max );
     };
-    zoomLevelProperty.link( zoomLevelListener );
+    zoomLevelProperty.link( zoomLevelListener ); // unlink is required.
 
     assert && assert( !options.children, 'ZoomControl sets children' );
     options.children = [ zoomInButton, zoomOutButton ];

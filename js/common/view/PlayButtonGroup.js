@@ -77,6 +77,7 @@ class PlayButtonGroup extends Node {
 
     super( options );
 
+    // Multilink dispose is not necessary.
     Property.multilink(
       [ simulationModeProperty, bunnyCountProperty ],
       ( simulationMode, bunnyCount ) => {

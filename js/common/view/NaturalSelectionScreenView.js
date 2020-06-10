@@ -155,7 +155,7 @@ class NaturalSelectionScreenView extends ScreenView {
       tandem: graphsTandem.createTandem( 'graphChoiceRadioButtonGroup' )
     } );
 
-    // Visibility of graphs
+    // Visibility of graphs. unlink is not necessary.
     this.graphChoiceProperty.link( graph => {
       populationNode.visible = ( graph === GraphChoice.POPULATION );
       proportionsNode.visible = ( graph === GraphChoice.PROPORTIONS );
@@ -222,7 +222,7 @@ class NaturalSelectionScreenView extends ScreenView {
       populationNode.reset();
     };
 
-    // Simulation mode determines which UI controls are enabled.
+    // Simulation mode determines which UI controls are enabled. unlink is not necessary.
     model.simulationModeProperty.link( simulationMode => {
       if ( simulationMode === SimulationMode.STAGED ) {
         addMutationsPanel.setContentEnabled( true );
@@ -249,6 +249,8 @@ class NaturalSelectionScreenView extends ScreenView {
 
     // Display a dialog when all bunnies have died.
     const diedDialog = new DiedDialog();
+
+    // removeListener is not necessary.
     model.bunnyCollection.allBunniesHaveDiedEmitter.addListener( () => {
       diedDialog.show();
       model.simulationModeProperty.value = SimulationMode.COMPLETED;
@@ -263,6 +265,8 @@ class NaturalSelectionScreenView extends ScreenView {
         environmentNode.sortSprites();
       }
     } );
+
+    //  removeListener is not necessary.
     model.bunnyCollection.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
       worldDialog.show();
       model.simulationModeProperty.value = SimulationMode.COMPLETED;

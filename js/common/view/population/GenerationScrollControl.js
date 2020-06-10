@@ -89,7 +89,7 @@ class GenerationScrollControl extends HBox {
 
     super( options );
 
-    // Enable buttons
+    // Enable buttons. Multilink dispose is not necessary.
     Property.multilink(
       [ rangeProperty, maxProperty ],
       ( range, max ) => {

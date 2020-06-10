@@ -162,13 +162,13 @@ class ProportionsGraphNode extends Node {
 
     super( options );
 
-    // Center on the background. Columns may be removed via PhET-iO, so observe bounds.
+    // Center on the background. Columns may be removed via PhET-iO, so observe bounds. unlink is not necessary.
     content.boundsProperty.link( () => {
       content.center = backgroundNode.center;
     } );
 
     // Change the label for the bottom row, depending on whether it's displaying the current generation or the
-    // end state of a previous generation.
+    // end state of a previous generation. unlink is not necessary.
     proportionsModel.isDisplayingCurrentGenerationProperty.link( isDisplayingCurrentGeneration => {
       if ( isDisplayingCurrentGeneration ) {
         endRowLabel.setTopText( naturalSelectionStrings.currently );
@@ -178,13 +178,13 @@ class ProportionsGraphNode extends Node {
       }
     } );
 
-    // If there is no data to display, hide the content and display 'No Data'.
+    // If there is no data to display, hide the content and display 'No Data'. unlink is not necessary.
     proportionsModel.hasDataProperty.link( hasData => {
       content.visible = hasData;
       noDataText.visible = !hasData;
     } );
 
-    // Update the displayed 'Start' counts.
+    // Update the displayed 'Start' counts. unlink is not necessary.
     proportionsModel.startCountsProperty.link( startCounts => {
       startRowLabel.setCount( startCounts.totalCount );
       furColumn.setStartCounts( startCounts.whiteFurCount, startCounts.brownFurCount );
@@ -192,7 +192,7 @@ class ProportionsGraphNode extends Node {
       teethColumn.setStartCounts( startCounts.shortTeethCount, startCounts.longTeethCount );
     } );
 
-    // Update the displayed 'End' counts.
+    // Update the displayed 'End' counts. unlink is not necessary.
     proportionsModel.endCountsProperty.link( endCounts => {
       endRowLabel.setCount( endCounts.totalCount );
       furColumn.setEndCounts( endCounts.whiteFurCount, endCounts.brownFurCount );
@@ -367,6 +367,7 @@ class Column extends VBox {
 
     super( options );
 
+    // unlink is not necessary.
     geneVisibleProperty.link( geneVisible => {
       startBarNode.visible = endBarNode.visible = geneVisible;
     } );

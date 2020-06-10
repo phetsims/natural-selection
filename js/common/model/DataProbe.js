@@ -46,7 +46,7 @@ class DataProbe extends PhetioObject {
       phetioReadOnly: true // range is dynamic
     } );
 
-    // @public counts displayed by the probe
+    // @public counts displayed by the probe. dispose is not necessary.
     this.countsProperty = new DerivedProperty( [ this.generationProperty ],
 
       //TODO set BunnyCounts based on position of the data probe

@@ -113,13 +113,13 @@ class PopulationGraphNode extends Node {
       dataProbeNode
     ];
 
-    // center x-axis control under the graph
+    // Center x-axis control under the graph. unlink is not necessary.
     generationScrollControl.boundsProperty.link( () => {
       generationScrollControl.centerX = gridNode.x + ( gridWidth / 2 );
       generationScrollControl.top = gridNode.bottom + X_AXIS_LABEL_SPACING;
     } );
 
-    // center y-axis label to left of graph
+    // Center y-axis label to left of graph. unlink is not necessary.
     yAxisLabelNode.boundsProperty.link( () => {
       yAxisLabelNode.right = yZoomControl.right;
       yAxisLabelNode.centerY = gridNode.y + ( gridHeight / 2 );

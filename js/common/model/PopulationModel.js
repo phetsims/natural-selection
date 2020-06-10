@@ -166,7 +166,7 @@ class PopulationModel extends PhetioObject {
       phetioDocumentation: 'Zooms in and out by selecting a pre-set y-axis range. The larger the value, the larger the y-axis range.'
     } );
 
-    // @public range of the y-axis, in population
+    // @public range of the y-axis, in population. dispose is not necessary.
     this.yRangeProperty = new DerivedProperty(
       [ this.yZoomLevelProperty ],
       yZoomLevel => new Range( Y_MINIMUM, Y_MAXIMUMS[ yZoomLevel ] ), {
@@ -185,7 +185,7 @@ class PopulationModel extends PhetioObject {
       }
     };
 
-    // When generations changes...
+    // When generations changes... unlink is not necessary.
     generationsProperty.link( () => {
 
       // scroll the x-axis
@@ -194,13 +194,14 @@ class PopulationModel extends PhetioObject {
       //TODO update dataProbe if it was previously to the right of data (better place to do this?)
     } );
 
-    // When the sim starts playing, scroll the x-axis.
+    // When the sim starts playing, scroll the x-axis. unlink is not necessary.
     isPlayingProperty.link( isPlaying => {
       if ( isPlaying ) {
         scrollToNow();
       }
     } );
 
+    // unlink is not necessary.
     this.xRangeProperty.link( xRange => {
       //TODO update dataProbe.generationProperty
     } );

@@ -53,11 +53,10 @@ class WolfNodeCollection extends PhetioObject {
     const wolfNode = this.wolfNodeGroup.createCorrespondingGroupElement( wolf.tandem.name, wolf );
 
     // If the wolf is disposed, dispose of the associated WolfNode.
-    const disposeWolfNode = () => {
-      wolf.disposedEmitter.removeListener( disposeWolfNode );
+    // removeListener is not necessary, because wolf.disposeEmitter is disposed.
+    wolf.disposedEmitter.addListener( () => {
       this.wolfNodeGroup.disposeElement( wolfNode );
-    };
-    wolf.disposedEmitter.addListener( disposeWolfNode );
+    } );
 
     return wolfNode;
   }

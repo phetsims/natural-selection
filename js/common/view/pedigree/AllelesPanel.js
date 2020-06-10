@@ -165,6 +165,8 @@ class Row extends VBox {
     super( options );
 
     if ( NaturalSelectionConstants.ALLELES_VISIBLE ) {
+
+      // unlink is not necessary.
       gene.dominantAlleleProperty.link( dominantAllele => {
 
         const hasMutation = !!dominantAllele;

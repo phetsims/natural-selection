@@ -128,10 +128,10 @@ class Bunny extends NaturalSelectionSprite {
     // @private {Vector3|null} the change in position when the bunny hops
     this.hopDelta = null;
 
-    // @public fires when the Bunny has died
+    // @public fires when the Bunny has died. dispose is required.
     this.diedEmitter = new Emitter();
 
-    // @public fires when the Bunny has been disposed
+    // @public fires when the Bunny has been disposed. dispose is required.
     this.disposedEmitter = new Emitter();
 
     // @private

@@ -49,12 +49,12 @@ class Wolf extends NaturalSelectionSprite {
     // @private
     this.speed = NaturalSelectionUtils.nextInRange( SPEED_RANGE );
 
-    // @public fires when the Bunny has been disposed
+    // @public fires when the Wolf has been disposed. dispose is required.
     this.disposedEmitter = new Emitter();
 
     // @private
     this.disposeWolf = () => {
-      //TODO
+      this.disposedEmitter.dispose();
     };
 
     this.validateInstance();

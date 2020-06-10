@@ -61,8 +61,8 @@ class EnvironmentBunnyNodeCollection extends PhetioObject {
       bunny.disposedEmitter.removeListener( disposeBunnyNode );
       this.bunnyNodeGroup.disposeElement( bunnyNode );
     };
-    bunny.diedEmitter.addListener( disposeBunnyNode );
-    bunny.disposedEmitter.addListener( disposeBunnyNode );
+    bunny.diedEmitter.addListener( disposeBunnyNode ); // removeListener is not necessary.
+    bunny.disposedEmitter.addListener( disposeBunnyNode ); // removeListener is not necessary.
 
     return bunnyNode;
   }

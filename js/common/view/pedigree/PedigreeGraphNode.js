@@ -63,6 +63,7 @@ class PedigreeGraphNode extends Node {
     // {PedigreeBranchNode|null} The branch of the Pedigree tree that is currently displayed.
     let branchNode = null;
 
+    // When a bunny is selected, display its pedigree. unlink is not necessary.
     pedigreeModel.selectedBunnyProperty.link( bunny => {
       selectABunnyText.visible = !bunny;
 

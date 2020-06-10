@@ -75,6 +75,8 @@ class Gene extends PhetioObject {
       tandem: options.tandem.createTandem( 'dominantAlleleProperty' ),
       phetioReadOnly: true
     } );
+
+    // unlink is not necessary.
     phet.log && this.dominantAlleleProperty.link( dominantAllele => {
       if ( dominantAllele ) {
         phet.log && phet.log( `${this.name}: ${dominantAllele.name} is dominant` );

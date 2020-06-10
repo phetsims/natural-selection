@@ -66,13 +66,14 @@ class BunnyCollection {
 
     // NOTE: BunnyCollection has no bunnyDiedEmitter or bunnyDisposedEmitter. Bunny has those Emitters.
 
-    // @public notifies when all bunnies have died
+    // @public notifies when all bunnies have died. dispose is not necessary.
     this.allBunniesHaveDiedEmitter = new Emitter();
 
-    // @public notifies when bunnies have taken over the world, exceeding the maximum population size
+    // @public notifies when bunnies have taken over the world, exceeding the maximum population size.
+    // dispose is unnecessary.
     this.bunniesHaveTakenOverTheWorldEmitter = new Emitter();
 
-    // When a bunny is created or restored via PhET-iO
+    // When a bunny is created or restored via PhET-iO. removeListener is not necessary.
     bunnyGroup.elementCreatedEmitter.addListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
@@ -87,6 +88,9 @@ class BunnyCollection {
             this.allBunniesHaveDiedEmitter.emit();
           }
         };
+
+        // removeListener is handled by diedListener, but not necessary when bunny is disposed,
+        // because bunny.diedEmitter will be disposed.
         bunny.diedEmitter.addListener( diedListener );
 
         this.liveBunnies.push( bunny );
@@ -100,7 +104,7 @@ class BunnyCollection {
       this.bunnyCreatedEmitter.emit( bunny );
     } );
 
-    // When a bunny is disposed...
+    // When a bunny is disposed... removeListener is not necessary.
     bunnyGroup.elementDisposedEmitter.addListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
       this.liveBunnies.contains( bunny ) && this.liveBunnies.remove( bunny );

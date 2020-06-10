@@ -50,7 +50,7 @@ class GenesVisibilityManager {
       phetioDocumentation: 'sets the visibility of all user-interface components related to Fur for this screen'
     } );
 
-    // Set visibility of all UI components related to Fur
+    // Set visibility of all UI components related to Fur. unlink is not necessary.
     furVisibleProperty.link( visible => {
       addMutationsPanel.furRow.visibleProperty.value = visible;
       populationNode.populationPanel.whiteFurCheckbox.visibleProperty.value = visible;
@@ -66,7 +66,7 @@ class GenesVisibilityManager {
       phetioDocumentation: 'sets the visibility of all user-interface components related to Ears for this screen'
     } );
 
-    // Set visibility of all UI components related to Ears
+    // Set visibility of all UI components related to Ears. unlink is not necessary.
     earsVisibleProperty.link( visible => {
       addMutationsPanel.earsRow.visibleProperty.value = visible;
       populationNode.populationPanel.straightEarsCheckbox.visibleProperty.value = visible;
@@ -82,7 +82,7 @@ class GenesVisibilityManager {
       phetioDocumentation: 'sets the visibility of all user-interface components related to Teeth for this screen'
     } );
 
-    // Set visibility of all UI components related to Teeth
+    // Set visibility of all UI components related to Teeth. unlink is not necessary.
     teethVisibleProperty.link( visible => {
       addMutationsPanel.teethRow.visibleProperty.value = visible;
       populationNode.populationPanel.shortTeethCheckbox.visibleProperty.value = visible;

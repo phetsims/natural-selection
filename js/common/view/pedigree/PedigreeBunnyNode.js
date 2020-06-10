@@ -77,7 +77,7 @@ class PedigreeBunnyNode extends Node {
         } ) );
       }
     };
-    bunny.diedEmitter.addListener( diedListener );
+    bunny.diedEmitter.addListener( diedListener ); // removeListener is handled by diedListener
     diedListener( bunny.isAlive );
     
     // Update the genotype abbreviation, must be disposed

@@ -130,7 +130,7 @@ class DataProbeNode extends Node {
       tandem: options.tandem.createTandem( 'dragListener' )
     } ) );
 
-    // Visibility of the probe
+    // Visibility of the probe. unlink is not necessary.
     dataProbe.visibleProperty.link( dataProbeVisible => {
       this.interruptSubtreeInput(); // cancel interactions
       this.visible = dataProbeVisible;
@@ -156,6 +156,7 @@ class DataProbeNode extends Node {
       numberDisplaysParent.top = barNode.top;
     };
 
+    // unlink is not necessary.
     this.positionProperty.link( position => {
       this.x = position.x;
 
@@ -246,7 +247,7 @@ function createNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, options
     options.textOptions.fill = NaturalSelectionUtils.isDarkColor( options.backgroundFill ) ? 'white' : 'black';
   }
 
-  // Adapter Property, for interfacing with NumberDisplay
+  // Adapter Property, for interfacing with NumberDisplay. dispose is not necessary.
   const countProperty = new DerivedProperty( [ bunnyCountsProperty ],
     bunnyCounts => bunnyCounts ? bunnyCounts[ bunnyCountsFieldName ] : null
   );

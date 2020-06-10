@@ -54,7 +54,7 @@ class GenerationClock extends PhetioObject {
       phetioHighFrequency: true
     } );
 
-    // @public
+    // @public dispose is not necessary
     this.generationsProperty = new DerivedProperty(
       [ this.timeProperty ],
       time => time / NaturalSelectionConstants.SECONDS_PER_GENERATION, {
@@ -64,7 +64,7 @@ class GenerationClock extends PhetioObject {
         phetioHighFrequency: true
       } );
 
-    // @public
+    // @public dispose is not necessary
     this.currentGenerationProperty = new DerivedProperty(
       [ this.generationsProperty ],
       generations => Math.floor( generations ), {
@@ -75,7 +75,7 @@ class GenerationClock extends PhetioObject {
       }
     );
 
-    // @public percent of the current clock cycle that has been completed
+    // @public percent of the current clock cycle that has been completed. dispose is not necessary.
     this.percentTimeProperty = new DerivedProperty(
       [ this.timeProperty ],
       time => ( time % NaturalSelectionConstants.SECONDS_PER_GENERATION ) / NaturalSelectionConstants.SECONDS_PER_GENERATION, {

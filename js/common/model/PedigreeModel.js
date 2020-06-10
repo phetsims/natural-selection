@@ -34,6 +34,8 @@ class PedigreeModel extends PhetioObject {
     this.selectedBunnyProperty = new SelectedBunnyProperty( {
       tandem: options.tandem.createTandem( 'selectedBunnyProperty' )
     } );
+
+    // unlink is not necessary.
     phet.log && this.selectedBunnyProperty.link( selectedBunny => {
       phet.log && phet.log( `selectedBunny=${selectedBunny}` );
     } );

@@ -84,13 +84,13 @@ class GenerationClockNode extends Node {
 
     super( options );
 
-    // Update the generation number. unlink is unnecessary, exists for the lifetime of the sim.
+    // Update the generation number. unlink is unnecessary.
     generationClock.currentGenerationProperty.link( currentGeneration => {
       generationNode.text = currentGeneration;
       generationNode.centerX = circle.centerX;
     } );
 
-    // Reveal part of the clock. unlink is unnecessary, exists for the lifetime of the sim.
+    // Reveal part of the clock. unlink is unnecessary.
     generationClock.percentTimeProperty.link( percentTime => {
       revealArc.shape = new Shape()
         .moveTo( 0, 0 )
@@ -98,12 +98,12 @@ class GenerationClockNode extends Node {
         .close();
     } );
 
-    // Makes the wolves slice visible. unlink is unnecessary, exists for the lifetime of the sim.
+    // Makes the wolves slice visible. unlink is unnecessary.
     wolvesEnabledProperty.link( enabled => {
       wolvesSlice.visible = enabled;
     } );
 
-    // Makes the food slice visible. unlink is unnecessary, exists for the lifetime of the sim.
+    // Makes the food slice visible. unlink is unnecessary.
     foodEnabledProperty.link( enabled => {
       foodSlice.visible = enabled;
     } );

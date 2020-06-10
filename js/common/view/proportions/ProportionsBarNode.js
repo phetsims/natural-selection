@@ -89,6 +89,7 @@ class ProportionsBarNode extends Node {
     this.mutantCount = mutantCount;
     this.valuesVisibleProperty = valuesVisibleProperty;
 
+    // unlink is not necessary.
     this.valuesVisibleProperty.link( () => this.setCounts( this.normalCount, this.mutantCount ) );
   }
 

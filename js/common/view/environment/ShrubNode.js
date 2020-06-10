@@ -51,12 +51,12 @@ class ShrubNode extends NaturalSelectionSpriteNode {
 
     super( shrub, options );
 
-    // Show/hide shrub
+    // Show/hide shrub. unlink is not necessary.
     shrub.visibleProperty.link( visible => {
       this.visible = visible;
     } );
 
-    // Set the appearance of the shrub to tender or tough.
+    // Set the appearance of the shrub to tender or tough. unlink is not necessary.
     shrub.isToughProperty.link( isTough => {
       toughShrubNode.visible = isTough;
       tenderShrubNode.visible = !isTough;

@@ -64,11 +64,11 @@ class BunnyNode extends Node {
 
     super( options );
 
-    // Indicate that this bunny is selected
+    // Indicate that this bunny is selected.
     const selectedBunnyListener = someBunny => {
       selectionRectangle.visible = ( someBunny === bunny );
     };
-    selectedBunnyProperty.link( selectedBunnyListener );
+    selectedBunnyProperty.link( selectedBunnyListener ); // unlink is required
 
     // @private
     this.disposeBunnyNode = () => {

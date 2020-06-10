@@ -75,6 +75,7 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     super( content, options );
 
     // Set the panel's title to singular or plural, depending on how many checkboxes are visible.
+    // unlink is unnecessary.
     checkboxes.boundsProperty.link( () => {
       const visibleCount = _.filter( checkboxes.children, child => child.visible ).length;
       titleNode.text = ( visibleCount === 1 ) ?

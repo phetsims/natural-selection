@@ -113,7 +113,7 @@ class NaturalSelectionModel {
       tandem: options.tandem.createTandem( 'pedigreeModel' )
     } );
 
-    // When the simulation state changes...
+    // When the simulation state changes... unlink is not necessary.
     this.simulationModeProperty.link( simulationMode => {
       phet.log && phet.log( `simulationMode=${simulationMode}` );
 
@@ -147,7 +147,7 @@ class NaturalSelectionModel {
       }
     } );
 
-    // When the generation changes...
+    // When the generation changes... unlink is unnecessary.
     this.generationClock.currentGenerationProperty.lazyLink( currentGeneration => {
 
       // When restoring PhET-iO state, skip this code, because downstream elements are already stateful.
@@ -176,8 +176,8 @@ class NaturalSelectionModel {
       const counts = this.bunnyCollection.getLiveBunnyCounts();
       this.populationModel.recordCounts( generation, counts );
     };
-    this.wolfCollection.bunniesEatenEmitter.addListener( recordCounts );
-    this.food.bunniesStarvedEmitter.addListener( recordCounts );
+    this.wolfCollection.bunniesEatenEmitter.addListener( recordCounts ); // removeListener is not necessary.
+    this.food.bunniesStarvedEmitter.addListener( recordCounts ); // removeListener is not necessary.
   }
 
   /**

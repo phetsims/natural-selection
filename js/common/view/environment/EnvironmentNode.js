@@ -88,7 +88,7 @@ class EnvironmentNode extends Node {
     // Create a BunnyNode for each Bunny in the initial population.
     model.bunnyCollection.liveBunnies.forEach( createBunnyNode );
 
-    // When a Bunny is added to the model, create the corresponding BunnyNode.
+    // When a Bunny is added to the model, create the corresponding BunnyNode. removeListener is not necessary.
     model.bunnyCollection.bunnyCreatedEmitter.addListener( createBunnyNode );
 
     // Press on a bunny to select it. No need to removeInputListener, exists for the lifetime of the sim.
@@ -111,7 +111,7 @@ class EnvironmentNode extends Node {
       tandem: options.tandem.createTandem( 'wolfNodeCollection' )
     } );
 
-    // Creates a WolfNode and adds it to the scenegraph
+    // Creates a WolfNode and adds it to the scenegraph. removeListener is not necessary.
     model.wolfCollection.wolfCreatedEmitter.addListener( wolf => {
       const wolfNode = wolfNodeCollection.createWolfNode( wolf );
       spritesNode.addChild( wolfNode );

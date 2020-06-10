@@ -81,13 +81,13 @@ class Food {
       phetioDocumentation: 'whether the food supply is limited'
     } );
 
-    // @public whether either factor related to food is enabled
+    // @public whether either factor related to food is enabled. dispose is not necessary.
     this.enabledProperty = new DerivedProperty(
       [ this.isToughProperty, this.isLimitedProperty ],
       ( isTough, isLimited ) => ( isTough || isLimited )
     );
 
-    // @public emits when bunnies have been starved to death
+    // @public emits when bunnies have been starved to death. dispose is not necessary.
     this.bunniesStarvedEmitter = new Emitter( {
       parameters: [ { valueType: 'number' } ] // the number of bunnies that were starved to death
     } );
@@ -118,7 +118,7 @@ class Food {
       } ) );
     } );
 
-    // When food is limited, hide half of the food (odd-indexed Shrubs)
+    // When food is limited, hide half of the food (odd-indexed Shrubs). unlink is not necessary.
     assert && assert( this.shrubs.length % 2 === 0, 'an even number of Shrubs is required' );
     this.isLimitedProperty.link( isLimited => {
       for ( let i = 1; i < this.shrubs.length; i = i + 2 ) {
@@ -126,7 +126,7 @@ class Food {
       }
     } );
 
-    // Starve some bunnies.
+    // Starve some bunnies. unlink is unnecessary.
     //TODO Temporarily starve all bunnies at once, instead of over CLOCK_FOOD_RANGE
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {

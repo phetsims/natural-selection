@@ -175,7 +175,7 @@ class VerticalLines extends Node {
     assert && assert( !options.children, 'VerticalLines sets children' );
     options.children = [ path ];
 
-    // Translate the lines as time progresses
+    // Translate the lines as time progresses. unlink is not necessary.
     xRangeProperty.link( xRange => {
       path.x = -xSpacingView * ( ( xRange.max % options.xSpacingModel ) / options.xSpacingModel );
     } );
@@ -212,7 +212,7 @@ class HorizontalLines extends Path {
 
     super( new Shape() );
 
-    // Recreate the lines when the y-axis range changes.
+    // Recreate the lines when the y-axis range changes. unlink is not necessary.
     yRangeProperty.link( yRange => {
 
       // Compute the number of lines and their spacing, in view coordinates
@@ -276,7 +276,7 @@ class XTickLabels extends Node {
 
     super( options );
 
-    // Adjusts the text and position for all labels when the x-axis range changes.
+    // Adjusts the text and position for all labels when the x-axis range changes. unlink is not necessary.
     xRangeProperty.link( xRange => {
 
       const xOffsetModel = Math.floor( options.xSpacingModel * xRange.min / options.xSpacingModel );
@@ -324,7 +324,7 @@ class YTickLabels extends Node {
 
     super();
 
-    // Recreate the labels when the y-axis range changes.
+    // Recreate the labels when the y-axis range changes. unlink is not necessary.
     yRangeProperty.link( yRange => {
 
       // Compute the number of tick marks and their spacing, in view coordinates

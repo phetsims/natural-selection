@@ -62,6 +62,7 @@ class MutationAlertsNode extends Node {
     // Position the alerts to the left of their associated rows.
     // Rows in the Add Mutations panel can be hidden via PhET-iO.
     // If that happens while an alert is visible, adjust the positions of the alerts.
+    // unlink is not necessary.
     addMutationsPanel.boundsProperty.link( () => {
 
       // Fur
@@ -77,7 +78,7 @@ class MutationAlertsNode extends Node {
       teethAlert.rightCenter = teethAlert.globalToParentPoint( globalPoint );
     } );
 
-    // When a mutation is coming, make its associated alert visible.
+    // When a mutation is coming, make its associated alert visible. unlinks are not necessary.
     genePool.furGene.mutationComingProperty.link( mutationComing => {
       furAlert.visible = mutationComing;
     } );

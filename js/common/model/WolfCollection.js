@@ -69,7 +69,7 @@ class WolfCollection {
       tandem: options.tandem.createTandem( 'wolfGroup' )
     } );
 
-    // @public notify when a Wolf has been created
+    // @public notify when a Wolf has been created. dispose is not necessary.
     this.wolfCreatedEmitter = new Emitter( {
       parameters: [ { valueType: Wolf } ]
     } );
@@ -79,11 +79,12 @@ class WolfCollection {
       tandem: options.tandem.createTandem( 'enabledProperty' )
     } );
 
-    // When the group creates a Wolf, notify listeners
+    // When the group creates a Wolf, notify listeners. removeListener is not necessary.
     this.wolfGroup.elementCreatedEmitter.addListener( wolf => {
       this.wolfCreatedEmitter.emit( wolf );
     } );
 
+    // When disabled, dispose of all wolves. unlink is unnecessary.
     this.enabledProperty.lazyLink( enabled => {
       if ( !enabled && this.wolfGroup.count > 0 ) {
         phet.log && phet.log( `Disposing of ${this.wolfGroup.count} wolves` );
@@ -91,12 +92,12 @@ class WolfCollection {
       }
     } );
 
-    // @public emits when bunnies have been eaten
+    // @public emits when bunnies have been eaten. dispose is not necessary.
     this.bunniesEatenEmitter = new Emitter( {
       parameters: [ { valueType: 'number' } ] // the number of bunnies that were eaten
     } );
 
-    // Eat some bunnies.
+    // Eat some bunnies. unlink is unnecessary.
     //TODO Temporarily eat all bunnies at once, instead of over CLOCK_WOLVES_RANGE
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {

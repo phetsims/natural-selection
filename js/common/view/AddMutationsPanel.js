@@ -105,7 +105,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
       children: [ furRow, earsRow, teethRow ]
     } ) );
 
-    // Set the panel's title to singular or plural, depending on how many rows are visible.
+    // Set the panel's title to singular or plural, depending on how many rows are visible. unlink is not necessary.
     rows.boundsProperty.link( () => {
       const visibleCount = _.filter( rows.children, child => child.visible ).length;
       titleNode.text = ( visibleCount === 1 ) ?
@@ -273,6 +273,7 @@ class Row extends HBox {
 
     super( options );
 
+    // unlink is not necessary.
     gene.dominantAlleleProperty.link( dominantAllele => {
 
       const hasDominantAllele = !!dominantAllele;
@@ -297,6 +298,7 @@ class Row extends HBox {
     } );
 
     // If a Row is made invisible via PhET-iO while a mutation is scheduled, cancel the mutation.
+    // unlink is not necessary.
     this.visibleProperty.link( visible => {
       if ( !visible && gene.mutationComingProperty.value ) {
         gene.dominantAlleleProperty.value = null;
