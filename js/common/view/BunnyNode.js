@@ -17,6 +17,7 @@ import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import BunnyImageCache from './BunnyImageCache.js';
 import BunnyNodeIO from './BunnyNodeIO.js';
+import MutationIconNode from './MutationIconNode.js';
 import OriginNode from './OriginNode.js';
 import SpriteNode from './SpriteNode.js';
 
@@ -64,6 +65,14 @@ class BunnyNode extends SpriteNode {
 
     assert && assert( !options.children, 'BunnyNode sets children' );
     options.children = [ selectionRectangle, wrappedImage ];
+
+    if ( bunny.genotype.isOriginalMutant ) {
+      options.children.push( new MutationIconNode( {
+        radius: 12,
+        left: wrappedImage.left,
+        bottom: wrappedImage.bottom
+      } ) );
+    }
 
     // Red dot at the origin
     if ( NaturalSelectionQueryParameters.showOrigin ) {
