@@ -114,9 +114,7 @@ class Wolf extends NaturalSelectionSprite {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Returns the serialized information needed by WolfIO.toStateObject. Providing this method prevents
-   * WolfIO from reaching into Wolf and accessing private fields. Note that instrumented Properties do not
-   * need to be handled here, they are automatically restored by PhET-iO.
+   * Returns the serialized information needed by WolfIO.toStateObject.
    * @returns {Object}
    * @public for use by WolfIO only
    */
@@ -154,8 +152,7 @@ class Wolf extends NaturalSelectionSprite {
 
   /**
    * Restores private state for PhET-iO. This is called by WolfIO.setValue after a Wolf has been instantiated
-   * during deserialization. Providing this method prevents WolfIO from reaching into Wolf and accessing
-   * private fields.
+   * during deserialization.
    * @param {Object} state - return value of fromStateObject
    * @public for use by WolfIO only
    */

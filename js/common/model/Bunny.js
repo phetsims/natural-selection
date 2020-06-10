@@ -285,14 +285,12 @@ class Bunny extends NaturalSelectionSprite {
 
   //--------------------------------------------------------------------------------------------------------------------
   // Below here are methods used by BunnyIO to save and restore PhET-iO state.
-  // NOTE! If you add a field to Bunny that is not itself a PhET-iO element (e.g. a Property), then you will likely
-  // need to add that field to toStateObject, fromStateObject, setValue, and validateInstance.
+  // NOTE! If you add a field to Bunny that is not itself an instrumented PhET-iO element (e.g. a Property),
+  // then you will likely need to add that field to toStateObject, fromStateObject, setValue, and validateInstance.
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Returns the serialized information needed by BunnyIO.toStateObject. Providing this method prevents
-   * BunnyIO from reaching into Bunny and accessing private fields. Note that instrumented Properties do not
-   * need to be handled here, they are automatically restored by PhET-iO.
+   * Returns the serialized information needed by BunnyIO.toStateObject.
    * @returns {Object}
    * @public for use by BunnyIO only
    */
@@ -354,8 +352,7 @@ class Bunny extends NaturalSelectionSprite {
 
   /**
    * Restores private state for PhET-iO. This is called by BunnyIO.setValue after a Bunny has been instantiated
-   * during deserialization. Providing this method prevents BunnyIO from reaching into Bunny and accessing
-   * private fields.
+   * during deserialization.
    * @param {Object} state - return value of fromStateObject
    * @public for use by BunnyIO only
    */
