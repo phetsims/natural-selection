@@ -52,7 +52,6 @@ class BunnyCollection {
     } );
 
     // @public (read-only) the dead bunnies in bunnyGroup
-    //TODO this gives us allele counts for dead bunnies, which we may not want in production
     this.deadBunnies = new BunnyArray( {
       tandem: options.tandem.createTandem( 'deadBunnies' ),
       phetioType: BunnyArrayIO,
