@@ -100,9 +100,9 @@ class Genotype extends PhetioObject {
     const abbreviationProperty = new DerivedProperty(
       [ genePool.furGene.dominantAlleleProperty, genePool.earsGene.dominantAlleleProperty, genePool.teethGene.dominantAlleleProperty ],
       () => {
-        return this.furGenePair.getAllelesAbbreviation() +
-               this.earsGenePair.getAllelesAbbreviation() +
-               this.teethGenePair.getAllelesAbbreviation();
+        return this.furGenePair.getGenotypeAbbreviation() +
+               this.earsGenePair.getGenotypeAbbreviation() +
+               this.teethGenePair.getGenotypeAbbreviation();
       }, {
         tandem: options.tandem.createTandem( 'abbreviationProperty' ),
         phetioType: DerivedPropertyIO( StringIO ),
@@ -137,9 +137,9 @@ class Genotype extends PhetioObject {
    * @public
    */
   toAbbreviation( translated = true ) {
-    return this.furGenePair.getAllelesAbbreviation( translated ) +
-           this.earsGenePair.getAllelesAbbreviation( translated ) +
-           this.teethGenePair.getAllelesAbbreviation( translated );
+    return this.furGenePair.getGenotypeAbbreviation( translated ) +
+           this.earsGenePair.getGenotypeAbbreviation( translated ) +
+           this.teethGenePair.getGenotypeAbbreviation( translated );
   }
 
   /**

@@ -155,13 +155,13 @@ class GenePair extends PhetioObject {
   }
 
   /**
-   * Gets the abbreviation of the alleles in this gene pair. If there is no dominant gene,
+   * Gets the genotype abbreviation for the alleles in this gene pair. If there is no dominant gene,
    * then an abbreviation is meaningless, and the empty string is returned.
    * @param {boolean} translated - true = translated (default), false = untranslated
    * @returns {string}
    * @public
    */
-  getAllelesAbbreviation( translated = true ) {
+  getGenotypeAbbreviation( translated = true ) {
 
     const dominantAbbreviation = translated ? this.gene.dominantAbbreviationTranslated : this.gene.dominantAbbreviationEnglish;
     const recessiveAbbreviation = translated ? this.gene.recessiveAbbreviationTranslated : this.gene.recessiveAbbreviationEnglish;

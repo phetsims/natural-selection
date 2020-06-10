@@ -28,7 +28,7 @@ class NaturalSelectionSpriteNode extends Node {
     // @public (read-only)
     this.sprite = sprite;
 
-    // Position and direction
+    // Position and direction, must be disposed
     const multilink = new Multilink(
       [ sprite.positionProperty, sprite.directionProperty ],
       ( position, direction ) => {

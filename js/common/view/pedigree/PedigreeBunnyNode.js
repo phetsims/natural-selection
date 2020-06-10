@@ -21,7 +21,7 @@ import BunnyNode from '../BunnyNode.js';
 import OriginNode from '../OriginNode.js';
 
 // constants
-const ALLELES_FONT = new PhetFont( 16 );
+const GENOTYPE_FONT = new PhetFont( 16 );
 const DEAD_SYMBOL_FONT = new PhetFont( 20 );
 
 class PedigreeBunnyNode extends Node {
@@ -49,11 +49,12 @@ class PedigreeBunnyNode extends Node {
     const bunnyNode = new BunnyNode( bunny, selectedBunnyProperty );
     children.push( bunnyNode );
 
-    const allelesNode = new Text( '', {
-      font: ALLELES_FONT,
+    // Genotype abbreviation
+    const genotypeNode = new Text( '', {
+      font: GENOTYPE_FONT,
       maxWidth: bunnyNode.width
     } );
-    children.push( allelesNode );
+    children.push( genotypeNode );
 
     if ( NaturalSelectionQueryParameters.showOrigin ) {
       children.push( new OriginNode() );
@@ -78,14 +79,15 @@ class PedigreeBunnyNode extends Node {
     };
     bunny.diedEmitter.addListener( diedListener );
     diedListener( bunny.isAlive );
-
+    
+    // Update the genotype abbreviation, must be disposed
     const multilink = new Multilink(
       [ furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty ],
       ( furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) => {
-        allelesNode.visible = ( furAllelesVisible || earsAllelesVisible || teethAllelesVisible );
-        allelesNode.text = getAllelesString( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible );
-        allelesNode.centerX = bunnyNode.centerX;
-        allelesNode.top = bunnyNode.bottom + 5;
+        genotypeNode.visible = ( furAllelesVisible || earsAllelesVisible || teethAllelesVisible );
+        genotypeNode.text = getGenotypeAbbreviation( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible );
+        genotypeNode.centerX = bunnyNode.centerX;
+        genotypeNode.top = bunnyNode.bottom + 5;
       } );
 
     // @private
@@ -116,35 +118,35 @@ class PedigreeBunnyNode extends Node {
 }
 
 /**
- * Gets the allele abbreviations that describe a Bunny's genotype, e.g. 'FfEEtt'.
+ * Gets the abbreviations that describe a Bunny's genotype, e.g. 'FfEEtt'.
  * @param {Bunny} bunny
  * @param {boolean} furAllelesVisible
  * @param {boolean} earsAllelesVisible
  * @param {boolean} teethAllelesVisible
  * @returns {string}
  */
-function getAllelesString( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) {
+function getGenotypeAbbreviation( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) {
 
   assert && assert( bunny instanceof Bunny, 'invalid bunny' );
   assert && assert( typeof furAllelesVisible === 'boolean', 'invalid furAllelesVisible' );
   assert && assert( typeof earsAllelesVisible === 'boolean', 'invalid earsAllelesVisible' );
   assert && assert( typeof teethAllelesVisible === 'boolean', 'invalid teethAllelesVisible' );
 
-  let allelesString = '';
+  let genotypeString = '';
 
   if ( furAllelesVisible ) {
-    allelesString += bunny.genotype.furGenePair.getAllelesAbbreviation();
+    genotypeString += bunny.genotype.furGenePair.getGenotypeAbbreviation();
   }
 
   if ( earsAllelesVisible ) {
-    allelesString += bunny.genotype.earsGenePair.getAllelesAbbreviation();
+    genotypeString += bunny.genotype.earsGenePair.getGenotypeAbbreviation();
   }
 
   if ( teethAllelesVisible ) {
-    allelesString += bunny.genotype.teethGenePair.getAllelesAbbreviation();
+    genotypeString += bunny.genotype.teethGenePair.getGenotypeAbbreviation();
   }
 
-  return allelesString;
+  return genotypeString;
 }
 
 naturalSelection.register( 'PedigreeBunnyNode', PedigreeBunnyNode );
