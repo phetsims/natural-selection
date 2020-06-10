@@ -1,8 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * SpriteNode synchronizes its position and direction with a Sprite model element.  It converts the model's 3D
- * position to a 2D position and scale.
+ * SpriteNode is the base-class view of a Sprite model element. It synchronizes its position and direction
+ * with the Sprite, and converts the Sprite's 3D position to a 2D position and scale.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
