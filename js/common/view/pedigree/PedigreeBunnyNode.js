@@ -1,5 +1,6 @@
 // Copyright 2020, University of Colorado Boulder
 
+//TODO lots of duplication with BunnyNode
 /**
  * PedigreeBunnyNode is the representation of a Bunny in the Pedigree graph. Origin at bottom center of bunny image.
  *
