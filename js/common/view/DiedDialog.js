@@ -2,6 +2,7 @@
 
 /**
  * DiedDialog is displayed when all of the bunnies have died.
+ * It displays the message "All of the bunnies have died."
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
