@@ -68,7 +68,6 @@ class PedigreeGraphNode extends Node {
 
       if ( branchNode ) {
         branchNode.dispose();
-        console.log( 'branchNode disposed' );//TODO XXX
         branchNode = null;
       }
 
