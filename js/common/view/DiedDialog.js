@@ -33,14 +33,6 @@ class DiedDialog extends Dialog {
 
     super( messageText, options );
   }
-
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
-    assert && assert( false, 'DiedDialog does not support dispose' );
-  }
 }
 
 naturalSelection.register( 'DiedDialog', DiedDialog );

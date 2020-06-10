@@ -131,7 +131,8 @@ class AddMutationsPanel extends NaturalSelectionPanel {
    * @override
    */
   dispose() {
-    assert && assert( false, 'AddMutationsPanel does not support dispose' );
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
   }
 
   /**
@@ -304,6 +305,15 @@ class Row extends HBox {
         gene.dominantAlleleProperty.value = null;
       }
     } );
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
   }
 }
 

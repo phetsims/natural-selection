@@ -49,6 +49,15 @@ class BunnyArray extends ObservableArray {
       assert && assert( this.countsProperty.value.totalCount === this.length, 'counts out of sync' );
     } );
   }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 }
 
 naturalSelection.register( 'BunnyArray', BunnyArray );

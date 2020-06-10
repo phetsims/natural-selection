@@ -44,7 +44,8 @@ class DataProbeDragListener extends DragListener {
    * @override
    */
   dispose() {
-    assert && assert( false, 'DataProbeDragListener does not support dispose' );
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
   }
 }
 

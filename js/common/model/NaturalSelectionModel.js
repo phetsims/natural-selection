@@ -220,7 +220,7 @@ class NaturalSelectionModel {
    * @public
    */
   dispose() {
-    assert && assert( false, 'NaturalSelectionModel does not support dispose' );
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
   }
 
   //TODO do I need to do something for dt=0 here?

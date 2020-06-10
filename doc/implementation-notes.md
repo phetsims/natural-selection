@@ -21,9 +21,14 @@ All classes have a `dispose` method. Classes whose instances exist for the lifet
 be disposed, and their `dispose` implementation looks like this:
 
 ```js
-dispose() {
-  assert && assert( false, 'SomeClassName does not support dispose' );
-}
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
 ```
 
 Hypothetical model class hierarchy:

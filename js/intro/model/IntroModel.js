@@ -24,14 +24,6 @@ class IntroModel extends NaturalSelectionModel {
       tandem: tandem
     } );
   }
-
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
-    assert && assert( false, 'IntroModel does not support dispose' );
-  }
 }
 
 naturalSelection.register( 'IntroModel', IntroModel );

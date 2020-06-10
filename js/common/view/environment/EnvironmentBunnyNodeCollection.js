@@ -44,6 +44,15 @@ class EnvironmentBunnyNodeCollection extends PhetioObject {
   }
 
   /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
+  /**
    * Creates a BunnyNode for a Bunny. Wires up a callback to handle disposal when the Bunny dies or is disposed.
    * @param {Bunny} bunny
    * @returns {BunnyNode}

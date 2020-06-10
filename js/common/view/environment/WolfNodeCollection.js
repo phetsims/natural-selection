@@ -41,6 +41,15 @@ class WolfNodeCollection extends PhetioObject {
   }
 
   /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
+  /**
    * Creates a WolfNode for a Wolf. Wires up a callback to handle disposal when the Wolf is disposed.
    * @param {Wolf} wolf
    * @returns {WolfNode}

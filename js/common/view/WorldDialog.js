@@ -48,14 +48,6 @@ class WorldDialog extends Dialog {
 
     super( content, options );
   }
-
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
-    assert && assert( false, 'WorldDialog does not support dispose' );
-  }
 }
 
 naturalSelection.register( 'WorldDialog', WorldDialog );

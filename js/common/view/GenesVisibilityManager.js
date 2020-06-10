@@ -92,6 +92,13 @@ class GenesVisibilityManager {
       pedigreeNode.allelesPanel.teethRow.visibleProperty.value = visible;
     } );
   }
+
+  /**
+   * @public
+   */
+  dispose() {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
 }
 
 naturalSelection.register( 'GenesVisibilityManager', GenesVisibilityManager );

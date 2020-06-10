@@ -28,14 +28,6 @@ class LabScreenView extends NaturalSelectionScreenView {
       tandem: tandem
     } );
   }
-
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
-    assert && assert( false, 'LabScreenView does not support dispose' );
-  }
 }
 
 naturalSelection.register( 'LabScreenView', LabScreenView );

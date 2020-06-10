@@ -24,14 +24,6 @@ class LabModel extends NaturalSelectionModel {
       tandem: tandem
     } );
   }
-
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
-    assert && assert( false, 'LabModel does not support dispose' );
-  }
 }
 
 naturalSelection.register( 'LabModel', LabModel );

@@ -78,21 +78,15 @@ class ZoomControl extends LayoutBox {
     } ) );
 
     // disable a button if we reach the min or max
-    const zoomLevelListener = zoomLevel => {
+    zoomLevelProperty.link( zoomLevel => {
       zoomInButton.enabled = ( zoomLevel > zoomLevelProperty.range.min );
       zoomOutButton.enabled = ( zoomLevel < zoomLevelProperty.range.max );
-    };
-    zoomLevelProperty.link( zoomLevelListener ); // unlink is required.
+    } );
 
     assert && assert( !options.children, 'ZoomControl sets children' );
     options.children = [ zoomInButton, zoomOutButton ];
 
     super( options );
-
-    // @private
-    this.disposeZoomControl = () => {
-      zoomLevelProperty.unlink( zoomLevelListener );
-    };
   }
 
   /**
@@ -100,7 +94,7 @@ class ZoomControl extends LayoutBox {
    * @override
    */
   dispose() {
-    this.disposeZoomControl();
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 }

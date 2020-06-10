@@ -88,7 +88,8 @@ class AllelesPanel extends NaturalSelectionPanel {
    * @override
    */
   dispose() {
-    assert && assert( false, 'AllelesPanel does not support dispose' );
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
   }
 }
 
@@ -197,7 +198,8 @@ class Row extends VBox {
    * @override
    */
   dispose() {
-    assert && assert( false, 'Row does not support dispose' );
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
   }
 }
 

@@ -107,6 +107,14 @@ class PlayButtonGroup extends Node {
       }
     );
   }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'PlayButtonGroup does not support dispose' );
+  }
 }
 
 naturalSelection.register( 'PlayButtonGroup', PlayButtonGroup );

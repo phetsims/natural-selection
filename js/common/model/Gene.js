@@ -106,7 +106,8 @@ class Gene extends PhetioObject {
    * @override
    */
   dispose() {
-    throw new Error( 'dispose is not supported' );
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
   }
 
   /**

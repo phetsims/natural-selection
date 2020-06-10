@@ -34,14 +34,6 @@ class IntroScreenView extends NaturalSelectionScreenView {
       tandem: tandem
     } );
   }
-
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
-    assert && assert( false, 'IntroScreenView does not support dispose' );
-  }
 }
 
 naturalSelection.register( 'IntroScreenView', IntroScreenView );

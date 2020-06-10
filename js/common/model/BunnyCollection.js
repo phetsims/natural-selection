@@ -126,6 +126,13 @@ class BunnyCollection {
   }
 
   /**
+   * @public
+   */
+  dispose() {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
+
+  /**
    * Gets the archetype for the PhetioGroup.
    * @returns {Bunny|null} non-null only during API harvest
    * @public
