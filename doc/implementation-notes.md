@@ -13,6 +13,18 @@ In addition to this document, you are encouraged to read:
 * [PhET Software Design Patterns](https://github.com/phetsims/phet-info/blob/master/doc/phet-software-design-patterns.md)
 * [Natural Selection HTML5](https://docs.google.com/document/d/16C5TPL9LfK7JgYbo_NOP80FM5kOvCx2tMkvsZH4leQU/edit#), the design document
 
+## Memory management
+
+All uses of `link`, `addListener`, etc. are documented as to whether they need a corresponding `unlink`, `removeListener`, etc.
+
+All classes have a `dispose` method. Classes whose instances exist for the lifetime of the sim are not intended to 
+be disposed, and their `dispose` implementation looks like this:
+
+```js
+dispose() {
+  assert && assert( false, 'SomeClassName does not support dispose' );
+}
+```
 
 Hypothetical model class hierarchy:
 ```  
