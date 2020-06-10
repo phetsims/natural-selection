@@ -132,7 +132,7 @@ class Food {
       }
     } );
 
-    // Starve some bunnies. unlink is unnecessary.
+    // Starve some bunnies. unlink is not necessary.
     //TODO Temporarily starve all bunnies at once, instead of over CLOCK_FOOD_RANGE
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {

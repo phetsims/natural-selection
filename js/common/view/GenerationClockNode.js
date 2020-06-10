@@ -84,13 +84,13 @@ class GenerationClockNode extends Node {
 
     super( options );
 
-    // Update the generation number. unlink is unnecessary.
+    // Update the generation number. unlink is not necessary.
     generationClock.currentGenerationProperty.link( currentGeneration => {
       generationNode.text = currentGeneration;
       generationNode.centerX = circle.centerX;
     } );
 
-    // Reveal part of the clock. unlink is unnecessary.
+    // Reveal part of the clock. unlink is not necessary.
     generationClock.percentTimeProperty.link( percentTime => {
       revealArc.shape = new Shape()
         .moveTo( 0, 0 )
@@ -98,12 +98,12 @@ class GenerationClockNode extends Node {
         .close();
     } );
 
-    // Makes the wolves slice visible. unlink is unnecessary.
+    // Makes the wolves slice visible. unlink is not necessary.
     wolvesEnabledProperty.link( enabled => {
       wolvesSlice.visible = enabled;
     } );
 
-    // Makes the food slice visible. unlink is unnecessary.
+    // Makes the food slice visible. unlink is not necessary.
     foodEnabledProperty.link( enabled => {
       foodSlice.visible = enabled;
     } );

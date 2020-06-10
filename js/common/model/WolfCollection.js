@@ -81,7 +81,7 @@ class WolfCollection {
       this.wolfCreatedEmitter.emit( wolf );
     } );
 
-    // When disabled, dispose of all wolves. unlink is unnecessary.
+    // When disabled, dispose of all wolves. unlink is not necessary.
     this.enabledProperty.lazyLink( enabled => {
       if ( !enabled && this.wolfGroup.count > 0 ) {
         phet.log && phet.log( `Disposing of ${this.wolfGroup.count} wolves` );
@@ -94,7 +94,7 @@ class WolfCollection {
       parameters: [ { valueType: 'number' } ] // the number of bunnies that were eaten
     } );
 
-    // Eat some bunnies. unlink is unnecessary.
+    // Eat some bunnies. unlink is not necessary.
     //TODO Temporarily eat all bunnies at once, instead of over CLOCK_WOLVES_RANGE
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {

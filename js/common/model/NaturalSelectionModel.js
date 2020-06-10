@@ -147,7 +147,7 @@ class NaturalSelectionModel {
       }
     } );
 
-    // When the generation changes... unlink is unnecessary.
+    // When the generation changes... unlink is not necessary.
     this.generationClock.currentGenerationProperty.lazyLink( currentGeneration => {
 
       // When restoring PhET-iO state, skip this code, because downstream elements are already stateful.
