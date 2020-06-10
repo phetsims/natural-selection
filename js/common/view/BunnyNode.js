@@ -18,13 +18,13 @@ import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.
 import BunnyImageCache from './BunnyImageCache.js';
 import BunnyNodeIO from './BunnyNodeIO.js';
 import MutationIconNode from './MutationIconNode.js';
+import NaturalSelectionSpriteNode from './NaturalSelectionSpriteNode.js';
 import OriginNode from './OriginNode.js';
-import SpriteNode from './SpriteNode.js';
 
 // constants
 const IMAGE_SCALE = 0.4; // how much the bunny PNG image is scaled
 
-class BunnyNode extends SpriteNode {
+class BunnyNode extends NaturalSelectionSpriteNode {
 
   /**
    * @param {Bunny} bunny

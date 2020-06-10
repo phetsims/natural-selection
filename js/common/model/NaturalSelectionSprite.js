@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Sprite is the base class for a model element that will be integrated into the environment scene.
+ * NaturalSelectionSprite is the base class for a model element that will be integrated into the environment scene.
  * It has a 3D position and a direction along the x axis.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -22,7 +22,7 @@ import SpriteDirection from './SpriteDirection.js';
 // constants
 const DEFAULT_POSITION = new Vector3( 0, 0, 1 ); // z=0 is illegal, results in divide-by-zero
 
-class Sprite extends PhetioObject {
+class NaturalSelectionSprite extends PhetioObject {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
@@ -53,7 +53,7 @@ class Sprite extends PhetioObject {
       phetioDocumentation: 'position in the 3D model coordinate frame'
     } );
 
-    // @public direction that the Sprite is facing along the x axis
+    // @public direction that the sprite is facing along the x axis
     this.directionProperty = new EnumerationProperty( SpriteDirection, options.direction, {
       tandem: options.tandem.createTandem( 'directionProperty' ),
       phetioReadOnly: true,
@@ -61,7 +61,7 @@ class Sprite extends PhetioObject {
     } );
 
     // @private
-    this.disposeSprite = () => {
+    this.disposeNaturalSelectionSprite = () => {
       this.positionProperty.dispose();
       this.directionProperty.dispose();
     };
@@ -80,7 +80,7 @@ class Sprite extends PhetioObject {
    * @override
    */
   dispose() {
-    this.disposeSprite();
+    this.disposeNaturalSelectionSprite();
     super.dispose();
   }
 
@@ -123,5 +123,5 @@ class Sprite extends PhetioObject {
   }
 }
 
-naturalSelection.register( 'Sprite', Sprite );
-export default Sprite;
+naturalSelection.register( 'NaturalSelectionSprite', NaturalSelectionSprite );
+export default NaturalSelectionSprite;

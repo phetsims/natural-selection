@@ -11,9 +11,9 @@ import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
-import Sprite from './Sprite.js';
+import NaturalSelectionSprite from './NaturalSelectionSprite.js';
 
-class Shrub extends Sprite {
+class Shrub extends NaturalSelectionSprite {
 
   /**
    * @param {HTMLImageElement} tenderImage - image used when the shrub is tender

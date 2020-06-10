@@ -1,8 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * SpriteNode is the base-class view of a Sprite model element. It synchronizes its position and direction
- * with the Sprite, and converts the Sprite's 3D position to a 2D position and scale.
+ * NaturalSelectionSpriteNode is the base-class view of a NaturalSelectionSprite model element. It synchronizes its
+ * position and direction with the model, and converts the model's 3D position to a 2D position and scale.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,10 +10,10 @@
 import Multilink from '../../../../axon/js/Multilink.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import naturalSelection from '../../naturalSelection.js';
-import Sprite from '../model/Sprite.js';
+import NaturalSelectionSprite from '../model/NaturalSelectionSprite.js';
 import SpriteDirection from '../model/SpriteDirection.js';
 
-class SpriteNode extends Node {
+class NaturalSelectionSpriteNode extends Node {
 
   /**
    * @param {Sprite} sprite
@@ -21,7 +21,7 @@ class SpriteNode extends Node {
    */
   constructor( sprite, options ) {
 
-    assert && assert( sprite instanceof Sprite, 'invalid sprite' );
+    assert && assert( sprite instanceof NaturalSelectionSprite, 'invalid sprite' );
 
     super( options );
 
@@ -39,7 +39,7 @@ class SpriteNode extends Node {
       } );
 
     // @private
-    this.disposeSpriteNode = () => {
+    this.disposeNaturalSelectionSpriteNode = () => {
       multilink.dispose();
     };
   }
@@ -49,10 +49,10 @@ class SpriteNode extends Node {
    * @override
    */
   dispose() {
-    this.disposeSpriteNode();
+    this.disposeNaturalSelectionSpriteNode();
     super.dispose();
   }
 }
 
-naturalSelection.register( 'SpriteNode', SpriteNode );
-export default SpriteNode;
+naturalSelection.register( 'NaturalSelectionSpriteNode', NaturalSelectionSpriteNode );
+export default NaturalSelectionSpriteNode;

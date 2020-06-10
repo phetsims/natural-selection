@@ -27,9 +27,9 @@ import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 import Genotype from './Genotype.js';
 import GenotypeIO from './GenotypeIO.js';
+import NaturalSelectionSprite from './NaturalSelectionSprite.js';
 import Phenotype from './Phenotype.js';
 import PhenotypeIO from './PhenotypeIO.js';
-import Sprite from './Sprite.js';
 import SpriteDirection from './SpriteDirection.js';
 
 // constants
@@ -38,7 +38,7 @@ const HOP_STEPS_RANGE = new Range( 10, 20 );    // number of steps that is takes
 const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // x and z distance that a bunny hops
 const HOP_HEIGHT_RANGE = new Range( 30, 50 );   // how high above the ground a bunny hops
 
-class Bunny extends Sprite {
+class Bunny extends NaturalSelectionSprite {
 
   /**
    * @param {GenePool} genePool

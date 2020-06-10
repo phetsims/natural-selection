@@ -15,14 +15,14 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
-import Sprite from './Sprite.js';
+import NaturalSelectionSprite from './NaturalSelectionSprite.js';
 import SpriteDirection from './SpriteDirection.js';
 import WolfIO from './WolfIO.js';
 
 // const
 const SPEED_RANGE = new Range( 2.75, 3.25 );
 
-class Wolf extends Sprite {
+class Wolf extends NaturalSelectionSprite {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
