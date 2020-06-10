@@ -56,7 +56,8 @@ class Bunny extends NaturalSelectionSprite {
       mother: null, // {Bunny|null} the Bunny's mother, null if no mother
       generation: 0, // {number} generation that this Bunny belongs to
 
-      // {Alleles|null} alleles for the genotype
+      // {Alleles|null} alleles for the genotype.
+      // This is an option only when there are no parents, for configuring the initial population.
       alleles: null,
 
       // {Object|null} options to Genotype constructor
@@ -68,9 +69,11 @@ class Bunny extends NaturalSelectionSprite {
       phetioDynamicElement: true
     }, options );
 
+    const hasParents = ( options.father && options.mother );
+
     // Validate options
-    assert && assert( ( options.father && options.mother ) || ( !options.father && !options.mother ), 'bunny cannot have 1 parent' );
-    assert && assert( !( options.father && options.alleles ), 'father and alleles are mutually exclusive' );
+    assert && assert( hasParents || ( !options.father && !options.mother ), 'bunny cannot have 1 parent' );
+    assert && assert( !( hasParents && options.alleles ), 'parents and alleles are mutually exclusive' );
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( options.generation ), 'invalid generation' );
 
     // Default to random position and direction
@@ -80,9 +83,9 @@ class Bunny extends NaturalSelectionSprite {
     super( modelViewTransform, options );
 
     // @public (read-only)
-    this.generation = options.generation;
     this.father = options.father;
     this.mother = options.mother;
+    this.generation = options.generation;
     this.isAlive = true;
     this.causeOfDeath = null; // {CauseOfDeath|null}
 
@@ -95,7 +98,7 @@ class Bunny extends NaturalSelectionSprite {
 
     // @public (read-only) the bunny's genetic blueprint
     this.genotype = null;
-    if ( this.father && this.mother ) {
+    if ( hasParents ) {
 
       // genotype is inherited from parents
       this.genotype = Genotype.withParents( genePool, this.father, this.mother, genotypeOptions );
@@ -265,8 +268,7 @@ class Bunny extends NaturalSelectionSprite {
   }
 
   /**
-   * Converts Bunny to a string.
-   * This is intended for debugging only. Do not rely on the format of this string!
+   * Converts Bunny to a string. This is intended for debugging only. Do not rely on the format of this string!
    * @returns {string}
    * @public
    */
@@ -283,7 +285,7 @@ class Bunny extends NaturalSelectionSprite {
 
   //--------------------------------------------------------------------------------------------------------------------
   // Below here are methods used by BunnyIO to save and restore PhET-iO state.
-  // NOTE! If you add a field to Bunny that is not itself a PhET-iO element, you will like need to add it to
+  // NOTE! If you add a field to Bunny that is not itself a PhET-iO element, you will likely need to add it to
   // toStateObject, fromStateObject, setValue, and validateInstance.
   //--------------------------------------------------------------------------------------------------------------------
 
