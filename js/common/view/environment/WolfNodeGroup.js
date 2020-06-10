@@ -7,12 +7,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
-import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import naturalSelection from '../../naturalSelection.js';
-import WolfCollection from '../model/WolfCollection.js';
+import merge from '../../../../../phet-core/js/merge.js';
+import PhetioGroup from '../../../../../tandem/js/PhetioGroup.js';
+import PhetioGroupIO from '../../../../../tandem/js/PhetioGroupIO.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
+import naturalSelection from '../../../naturalSelection.js';
+import WolfCollection from '../../model/WolfCollection.js';
 import WolfNode from './WolfNode.js';
 import WolfNodeIO from './WolfNodeIO.js';
 

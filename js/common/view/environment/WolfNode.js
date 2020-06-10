@@ -6,15 +6,15 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import Image from '../../../../scenery/js/nodes/Image.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import wolfImage from '../../../images/wolf_png.js';
-import naturalSelection from '../../naturalSelection.js';
-import Wolf from '../model/Wolf.js';
-import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
-import NaturalSelectionSpriteNode from './NaturalSelectionSpriteNode.js';
-import OriginNode from './OriginNode.js';
+import merge from '../../../../../phet-core/js/merge.js';
+import Image from '../../../../../scenery/js/nodes/Image.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
+import wolfImage from '../../../../images/wolf_png.js';
+import naturalSelection from '../../../naturalSelection.js';
+import Wolf from '../../model/Wolf.js';
+import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
+import NaturalSelectionSpriteNode from '../NaturalSelectionSpriteNode.js';
+import OriginNode from '../OriginNode.js';
 import WolfNodeIO from './WolfNodeIO.js';
 
 // constants

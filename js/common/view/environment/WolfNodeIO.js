@@ -6,9 +6,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
-import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
-import naturalSelection from '../../naturalSelection.js';
+import ObjectIO from '../../../../../tandem/js/types/ObjectIO.js';
+import ReferenceIO from '../../../../../tandem/js/types/ReferenceIO.js';
+import naturalSelection from '../../../naturalSelection.js';
 import WolfNode from './WolfNode.js';
 
 class WolfNodeIO extends ReferenceIO( ObjectIO ) {}

@@ -15,11 +15,11 @@ import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionModel from '../../model/NaturalSelectionModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
-import ShrubNode from '../ShrubNode.js';
-import WolfNodeCollection from '../WolfNodeCollection.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
 import EnvironmentBunnyNodeCollection from './EnvironmentBunnyNodeCollection.js';
 import EnvironmentBunnyPressListener from './EnvironmentBunnyPressListener.js';
+import ShrubNode from './ShrubNode.js';
+import WolfNodeCollection from './WolfNodeCollection.js';
 
 class EnvironmentNode extends Node {
 
