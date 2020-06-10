@@ -6,8 +6,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VerticalAquaRadioButtonGroup from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -30,8 +30,7 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
    */
   constructor( graphChoiceProperty, options ) {
 
-    assert && assert( graphChoiceProperty instanceof EnumerationProperty, 'invalid graphChoiceProperty' );
-    assert && assert( GraphChoice.includes( graphChoiceProperty.value ), 'invalid graphChoiceProperty.value' );
+    assert && AssertUtils.assertEnumerationPropertyOf( graphChoiceProperty, GraphChoice );
 
     options = merge( {
       radius: 8,

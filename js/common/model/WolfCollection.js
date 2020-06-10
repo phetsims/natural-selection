@@ -9,11 +9,11 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -48,7 +48,7 @@ class WolfCollection {
   constructor( generationClock, environmentProperty, liveBunnies, modelViewTransform, options ) {
 
     assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
-    assert && assert( environmentProperty instanceof EnumerationProperty, 'invalid environmentProperty' );
+    assert && AssertUtils.assertEnumerationPropertyOf( environmentProperty, Environment );
     assert && assert( liveBunnies instanceof ObservableArray, 'invalid liveBunnies' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 

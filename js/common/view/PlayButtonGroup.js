@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
@@ -28,8 +27,7 @@ class PlayButtonGroup extends Node {
    */
   constructor( simulationModeProperty, bunnyCountProperty, options ) {
 
-    assert && assert( simulationModeProperty instanceof EnumerationProperty, 'invalid simulationModeProperty' );
-    assert && assert( SimulationMode.includes( simulationModeProperty.value ), 'invalid simulationModeProperty.value' );
+    assert && AssertUtils.assertEnumerationPropertyOf( simulationModeProperty, SimulationMode );
     assert && AssertUtils.assertPropertyOf( bunnyCountProperty, 'number' );
 
     options = merge( {

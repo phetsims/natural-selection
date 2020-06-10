@@ -6,8 +6,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
@@ -30,8 +30,7 @@ class EnvironmentRadioButtonGroup extends RadioButtonGroup {
    */
   constructor( environmentProperty, options ) {
 
-    assert && assert( environmentProperty instanceof EnumerationProperty, 'invalid environmentProperty' );
-    assert && assert( Environment.includes( environmentProperty.value ), 'invalid environmentProperty.value' );
+    assert && AssertUtils.assertEnumerationPropertyOf( environmentProperty, Environment );
 
     options = merge( {}, {
 

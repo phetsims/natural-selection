@@ -8,7 +8,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import ObservableArrayIO from '../../../../axon/js/ObservableArrayIO.js';
@@ -25,6 +24,7 @@ import BunnyCounts from './BunnyCounts.js';
 import BunnyCountsIO from './BunnyCountsIO.js';
 import ProportionsCounts from './ProportionsCounts.js';
 import ProportionsCountsIO from './ProportionsCountsIO.js';
+import SimulationMode from './SimulationMode.js';
 
 class ProportionsModel extends PhetioObject {
 
@@ -40,7 +40,7 @@ class ProportionsModel extends PhetioObject {
     assert && assert( liveBunnyCountsProperty instanceof Property, 'invalid bunnyCounts' );
     assert && AssertUtils.assertPropertyOf( currentGenerationProperty, 'number' );
     assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
-    assert && assert( simulationModeProperty instanceof EnumerationProperty );
+    assert && AssertUtils.assertEnumerationPropertyOf( simulationModeProperty, SimulationMode );
 
     options = merge( {
 
