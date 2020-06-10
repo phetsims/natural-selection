@@ -1,12 +1,13 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * SpriteNode displays a Sprite model element (which exists in 3D space) as a 2D image projected onto the screen.
+ * SpriteNode synchronizes its position and direction with a Sprite model element.  It converts the model's 3D
+ * position to a 2D position and scale.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import naturalSelection from '../../naturalSelection.js';
 import Sprite from '../model/Sprite.js';
@@ -27,13 +28,15 @@ class SpriteNode extends Node {
     // @public (read-only)
     this.sprite = sprite;
 
-    // Position and scale
-    const multilink = Property.multilink( [ sprite.positionProperty, sprite.directionProperty ], ( position, direction ) => {
-      this.resetTransform();
-      this.translation = sprite.modelViewTransform.modelToViewPosition( position );
-      const scale = sprite.modelViewTransform.getViewScale( position.z );
-      this.setScaleMagnitude( scale * SpriteDirection.toSign( direction ), scale );
-    } );
+    // Position and direction
+    const multilink = new Multilink(
+      [ sprite.positionProperty, sprite.directionProperty ],
+      ( position, direction ) => {
+        this.resetTransform();
+        this.translation = sprite.modelViewTransform.modelToViewPosition( position );
+        const scale = sprite.modelViewTransform.getViewScale( position.z );
+        this.setScaleMagnitude( scale * SpriteDirection.toSign( direction ), scale );
+      } );
 
     // @private
     this.disposeSpriteNode = () => {
