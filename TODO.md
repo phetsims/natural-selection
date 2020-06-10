@@ -18,7 +18,6 @@
 
 ## Implementation
 
-* should root bunny in Pedigree appear selected after it dies?
 * Prune dead bunnies
 * Stop the sim when data limit is hit
 
