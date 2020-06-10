@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * PlayAgainButton is the push button that is shown after all bunnies die, or bunnies take over the world.
+ * StartOverButton is the push button that is shown after all bunnies die, or bunnies take over the world.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
