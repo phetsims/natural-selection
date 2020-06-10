@@ -54,7 +54,7 @@ class Wolf extends NaturalSelectionSprite {
 
     // @private
     this.disposeWolf = () => {
-      this.disposedEmitter.dispose();
+      //TODO
     };
 
     this.validateInstance();
