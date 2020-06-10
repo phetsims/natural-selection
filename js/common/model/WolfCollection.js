@@ -26,17 +26,14 @@ import GenerationClock from './GenerationClock.js';
 import Wolf from './Wolf.js';
 import WolfGroup from './WolfGroup.js';
 
-// constants
-const MIN_WOLVES = NaturalSelectionQueryParameters.minWolves;
-const BUNNIES_PER_WOLF = NaturalSelectionQueryParameters.bunniesPerWolf;
-
 // Wolves will kill at least this percentage of the bunnies, regardless of their fur color.
-const WOLVES_PERCENT_TO_KILL = new Range(
+const WOLVES_PERCENT_TO_KILL_RANGE = new Range(
   NaturalSelectionQueryParameters.wolvesPercentToKill[ 0 ],
   NaturalSelectionQueryParameters.wolvesPercentToKill[ 1 ]
 );
 
-// Multiplier for when the bunny's fur color does not match the environment, applied to WOLVES_PERCENT_TO_KILL.
+// Multiplier for when the bunny's fur color does not match the environment, applied to the value that is
+// randomly chosen from WOLVES_PERCENT_TO_KILL_RANGE.
 const WOLVES_ENVIRONMENT_MULTIPLIER = NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier;
 
 class WolfCollection {
@@ -110,7 +107,8 @@ class WolfCollection {
 
           // Create wolves
           assert && assert( this.wolfGroup.count === 0, 'expected there to be no wolves' );
-          const numberOfWolves = Math.max( MIN_WOLVES, Utils.roundSymmetric( liveBunnies.length / BUNNIES_PER_WOLF ) );
+          const numberOfWolves = Math.max( NaturalSelectionQueryParameters.minWolves,
+            Utils.roundSymmetric( liveBunnies.length / NaturalSelectionQueryParameters.bunniesPerWolf ) );
           phet.log && phet.log( `Creating ${numberOfWolves} wolves` );
           for ( let i = 0; i < numberOfWolves; i++ ) {
             this.wolfGroup.createNextElement();
@@ -174,7 +172,7 @@ class WolfCollection {
 
       // Kill off some of each type of bunny, but a higher percentage of bunnies that don't blend into the environment.
       const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
-      const percentToKillMatch = NaturalSelectionUtils.nextInRange( WOLVES_PERCENT_TO_KILL );
+      const percentToKillMatch = NaturalSelectionUtils.nextInRange( WOLVES_PERCENT_TO_KILL_RANGE );
       assert && assert( percentToKillMatch > 0 && percentToKillMatch < 1, `invalid percentToKillMatch: ${percentToKillMatch}` );
       const percentToKillNoMatch = WOLVES_ENVIRONMENT_MULTIPLIER * percentToKillMatch;
       assert && assert( percentToKillNoMatch > 0 && percentToKillNoMatch < 1, `invalid percentToKillNoMatch: ${percentToKillNoMatch}` );

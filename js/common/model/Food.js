@@ -32,21 +32,23 @@ import Shrub from './Shrub.js';
 // constants
 
 // Limited tender food will cause this percentage of bunnies to die of starvation, regardless of their teeth genes.
-const LIMITED_FOOD_PERCENT_TO_KILL = new Range(
+const LIMITED_FOOD_PERCENT_TO_KILL_RANGE = new Range(
   NaturalSelectionQueryParameters.limitedFoodPercentToKill[ 0 ],
   NaturalSelectionQueryParameters.limitedFoodPercentToKill[ 1 ]
 );
 
 // Tough unlimited food will cause this percentage of bunnies to die of starvation, regardless of their teeth genes.
-const TOUGH_FOOD_PERCENT_TO_KILL = new Range(
+const TOUGH_FOOD_PERCENT_TO_KILL_RANGE = new Range(
   NaturalSelectionQueryParameters.toughFoodPercentToKill[ 0 ],
   NaturalSelectionQueryParameters.toughFoodPercentToKill[ 1 ]
 );
 
-// Multiplier for when limited food is combined with tough food, applied to TOUGH_FOOD_PERCENT_TO_KILL.
+// Multiplier for when limited food is combined with tough food, applied to the value that is randomly chosen
+// from TOUGH_FOOD_PERCENT_TO_KILL_RANGE.
 const LIMITED_FOOD_MULTIPLIER = NaturalSelectionQueryParameters.limitedFoodMultiplier;
 
-// Multiplier for bunnies with short teeth when food is tough, applied to TOUGH_FOOD_PERCENT_TO_KILL.
+// Multiplier for bunnies with short teeth when food is tough, applied to the value that is randomly chosen
+// from TOUGH_FOOD_PERCENT_TO_KILL_RANGE.
 const SHORT_TEETH_MULTIPLIER = NaturalSelectionQueryParameters.shortTeethMultiplier;
 
 class Food {
@@ -174,7 +176,7 @@ class Food {
 
         // Kill off bunnies with long teeth.
         const bunniesLongTeeth = _.filter( bunnies, bunny => bunny.phenotype.hasLongTeeth() );
-        let percentToKillLongTeeth = NaturalSelectionUtils.nextInRange( TOUGH_FOOD_PERCENT_TO_KILL );
+        let percentToKillLongTeeth = NaturalSelectionUtils.nextInRange( TOUGH_FOOD_PERCENT_TO_KILL_RANGE );
         if ( this.isLimitedProperty.value ) {
           percentToKillLongTeeth *= LIMITED_FOOD_MULTIPLIER;
         }
@@ -204,7 +206,7 @@ class Food {
       else if ( this.isLimitedProperty.value ) {
 
         // Kill off a percentage of all bunnies, regardless of their Teeth genes.
-        const percentToKill = NaturalSelectionUtils.nextInRange( LIMITED_FOOD_PERCENT_TO_KILL );
+        const percentToKill = NaturalSelectionUtils.nextInRange( LIMITED_FOOD_PERCENT_TO_KILL_RANGE );
         assert && assert( percentToKill > 0 && percentToKill < 1, `invalid percentToKill: ${percentToKill}` );
         const numberToKill = Math.ceil( percentToKill * bunnies.length );
         assert && assert( numberToKill <= bunnies.length, 'invalid numberToKill' );
