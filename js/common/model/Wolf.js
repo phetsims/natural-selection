@@ -20,7 +20,7 @@ import SpriteDirection from './SpriteDirection.js';
 import WolfIO from './WolfIO.js';
 
 // const
-const SPEED_RANGE = new Range( 2.75, 3.25 );
+const SPEED_RANGE = new Range( 2.75, 3.25 ); //TODO rename and document
 
 class Wolf extends NaturalSelectionSprite {
 
