@@ -6,20 +6,20 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Shape from '../../../../kite/js/Shape.js';
-import merge from '../../../../phet-core/js/merge.js';
-import PressListener from '../../../../scenery/js/listeners/PressListener.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
-import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionModel from '../model/NaturalSelectionModel.js';
-import NaturalSelectionColors from '../NaturalSelectionColors.js';
-import BunnyNodeCollection from './BunnyNodeCollection.js';
-import BunnyPressListener from './BunnyPressListener.js';
+import Shape from '../../../../../kite/js/Shape.js';
+import merge from '../../../../../phet-core/js/merge.js';
+import PressListener from '../../../../../scenery/js/listeners/PressListener.js';
+import Node from '../../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
+import naturalSelection from '../../../naturalSelection.js';
+import NaturalSelectionModel from '../../model/NaturalSelectionModel.js';
+import NaturalSelectionColors from '../../NaturalSelectionColors.js';
+import ShrubNode from '../ShrubNode.js';
+import WolfNodeCollection from '../WolfNodeCollection.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
-import ShrubNode from './ShrubNode.js';
-import WolfNodeCollection from './WolfNodeCollection.js';
+import EnvironmentBunnyNodeCollection from './EnvironmentBunnyNodeCollection.js';
+import EnvironmentBunnyPressListener from './EnvironmentBunnyPressListener.js';
 
 class EnvironmentNode extends Node {
 
@@ -71,7 +71,7 @@ class EnvironmentNode extends Node {
     super( options );
 
     // manages dynamic BunnyNode instances
-    const bunnyNodeCollection = new BunnyNodeCollection( model.bunnyCollection, model.pedigreeModel.selectedBunnyProperty, {
+    const bunnyNodeCollection = new EnvironmentBunnyNodeCollection( model.bunnyCollection, model.pedigreeModel.selectedBunnyProperty, {
       tandem: options.tandem.createTandem( 'bunnyNodeCollection' )
     } );
 
@@ -92,7 +92,7 @@ class EnvironmentNode extends Node {
     model.bunnyCollection.bunnyCreatedEmitter.addListener( createBunnyNode );
 
     // Press on a bunny to select it. No need to removeInputListener, exists for the lifetime of the sim.
-    spritesNode.addInputListener( new BunnyPressListener( model.pedigreeModel.selectedBunnyProperty, {
+    spritesNode.addInputListener( new EnvironmentBunnyPressListener( model.pedigreeModel.selectedBunnyProperty, {
       tandem: options.tandem.createTandem( 'bunnyPressListener' )
     } ) );
 

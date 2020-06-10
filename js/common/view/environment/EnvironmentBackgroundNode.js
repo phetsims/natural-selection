@@ -7,17 +7,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import Image from '../../../../scenery/js/nodes/Image.js';
-import Line from '../../../../scenery/js/nodes/Line.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
-import arcticBackgroundImage from '../../../images/arcticBackground_png.js';
-import equatorBackgroundImage from '../../../images/equatorBackground_png.js';
-import naturalSelection from '../../naturalSelection.js';
-import Environment from '../model/Environment.js';
-import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
+import EnumerationProperty from '../../../../../axon/js/EnumerationProperty.js';
+import Dimension2 from '../../../../../dot/js/Dimension2.js';
+import merge from '../../../../../phet-core/js/merge.js';
+import Image from '../../../../../scenery/js/nodes/Image.js';
+import Line from '../../../../../scenery/js/nodes/Line.js';
+import Node from '../../../../../scenery/js/nodes/Node.js';
+import arcticBackgroundImage from '../../../../images/arcticBackground_png.js';
+import equatorBackgroundImage from '../../../../images/equatorBackground_png.js';
+import naturalSelection from '../../../naturalSelection.js';
+import Environment from '../../model/Environment.js';
+import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 
 class EnvironmentBackgroundNode extends Node {
 

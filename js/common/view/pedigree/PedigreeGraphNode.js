@@ -68,6 +68,7 @@ class PedigreeGraphNode extends Node {
 
       if ( branchNode ) {
         branchNode.dispose();
+        console.log( 'branchNode disposed' );//TODO XXX
         branchNode = null;
       }
 
@@ -75,12 +76,10 @@ class PedigreeGraphNode extends Node {
 
         // Create the graph
         branchNode = new PedigreeBranchNode( bunny, TREE_DEPTH,
+          pedigreeModel.selectedBunnyProperty,
           pedigreeModel.furAllelesVisibleProperty,
           pedigreeModel.earsAllelesVisibleProperty,
           pedigreeModel.teethAllelesVisibleProperty, {
-            bunnyIsSelected: true,
-
-            // centered at the bottom of the background
             x: backgroundNode.centerX,
             bottom: backgroundNode.bottom - Y_MARGIN
           } );

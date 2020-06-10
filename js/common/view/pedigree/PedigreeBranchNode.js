@@ -15,6 +15,7 @@ import Node from '../../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../../scenery/js/nodes/Path.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
+import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
 import PedigreeBunnyNode from './PedigreeBunnyNode.js';
 
 // constants
@@ -32,15 +33,18 @@ class PedigreeBranchNode extends Node {
   /**
    * @param {Bunny} bunny
    * @param {number} depth
+   * @param {SelectedBunnyProperty} selectedBunnyProperty
    * @param {Property.<boolean>} furAllelesVisibleProperty
    * @param {Property.<boolean>} earsAllelesVisibleProperty
    * @param {Property.<boolean>} teethAllelesVisibleProperty
    * @param {Object} [options]
    */
-  constructor( bunny, depth, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
+  constructor( bunny, depth, selectedBunnyProperty,
+               furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
     assert && assert( typeof depth === 'number', 'invalid depth' );
+    assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty, 'invalid selectedBunnyProperty' );
     assert && AssertUtils.assertPropertyOf( furAllelesVisibleProperty, 'boolean' );
     assert && AssertUtils.assertPropertyOf( earsAllelesVisibleProperty, 'boolean' );
     assert && AssertUtils.assertPropertyOf( teethAllelesVisibleProperty, 'boolean' );
@@ -53,7 +57,7 @@ class PedigreeBranchNode extends Node {
       ySpacing: DEFAULT_Y_SPACING
     }, options );
 
-    const bunnyNode = new PedigreeBunnyNode( bunny,
+    const bunnyNode = new PedigreeBunnyNode( bunny, selectedBunnyProperty,
       furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
         isSelected: options.bunnyIsSelected
       } );
@@ -63,7 +67,7 @@ class PedigreeBranchNode extends Node {
     let motherNode = null;
     if ( depth > 1 && bunny.father && bunny.mother ) {
 
-      fatherNode = new PedigreeBranchNode( bunny.father, depth - 1,
+      fatherNode = new PedigreeBranchNode( bunny.father, depth - 1, selectedBunnyProperty,
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
           xSpacing: X_SPACING_SCALE * options.xSpacing,
           parentsYSpacing: Y_SPACING_SCALE * options.parentsYSpacing,
@@ -73,7 +77,7 @@ class PedigreeBranchNode extends Node {
         } );
       children.push( fatherNode );
 
-      motherNode = new PedigreeBranchNode( bunny.mother, depth - 1,
+      motherNode = new PedigreeBranchNode( bunny.mother, depth - 1, selectedBunnyProperty,
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
           xSpacing: X_SPACING_SCALE * options.xSpacing,
           parentsYSpacing: Y_SPACING_SCALE * options.parentsYSpacing,

@@ -1,20 +1,22 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * BunnyNodeCollection is the collection of BunnyNode instances, with methods for managing that collection.
- * It encapsulates BunnyNodeGroup (the PhetioGroup), hiding it from the rest of the sim.
+ * EnvironmentBunnyNodeCollection is the collection of EnvironmentBunnyNode instances, with methods for managing that
+ * collection. It encapsulates EnvironmentBunnyNodeGroup (the PhetioGroup), hiding it from the rest of the sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import PhetioObject from '../../../../tandem/js/PhetioObject.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import naturalSelection from '../../naturalSelection.js';
-import Bunny from '../model/Bunny.js';
-import BunnyNodeGroup from './BunnyNodeGroup.js';
+import merge from '../../../../../phet-core/js/merge.js';
+import PhetioObject from '../../../../../tandem/js/PhetioObject.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
+import naturalSelection from '../../../naturalSelection.js';
+import Bunny from '../../model/Bunny.js';
+import BunnyCollection from '../../model/BunnyCollection.js';
+import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
+import EnvironmentBunnyNodeGroup from './EnvironmentBunnyNodeGroup.js';
 
-class BunnyNodeCollection extends PhetioObject {
+class EnvironmentBunnyNodeCollection extends PhetioObject {
 
   /**
    * @param {BunnyCollection} bunnyCollection
@@ -22,6 +24,9 @@ class BunnyNodeCollection extends PhetioObject {
    * @param {Object} [options]
    */
   constructor( bunnyCollection, selectedBunnyProperty, options ) {
+
+    assert && assert( bunnyCollection instanceof BunnyCollection, 'invalid bunnyCollection' );
+    assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty, 'invalid selectedBunnyProperty' );
 
     options = merge( {
 
@@ -33,7 +38,7 @@ class BunnyNodeCollection extends PhetioObject {
     super( options );
 
     // @private the PhetioGroup that manages BunnyNode instances as dynamic PhET-iO elements
-    this.bunnyNodeGroup = new BunnyNodeGroup( bunnyCollection, selectedBunnyProperty, {
+    this.bunnyNodeGroup = new EnvironmentBunnyNodeGroup( bunnyCollection, selectedBunnyProperty, {
       tandem: options.tandem.createTandem( 'bunnyNodeGroup' )
     } );
   }
@@ -63,5 +68,5 @@ class BunnyNodeCollection extends PhetioObject {
   }
 }
 
-naturalSelection.register( 'BunnyNodeCollection', BunnyNodeCollection );
-export default BunnyNodeCollection;
+naturalSelection.register( 'EnvironmentBunnyNodeCollection', EnvironmentBunnyNodeCollection );
+export default EnvironmentBunnyNodeCollection;

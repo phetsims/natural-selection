@@ -1,30 +1,26 @@
 // Copyright 2020, University of Colorado Boulder
 
-//TODO lots of duplication with BunnyNode
 /**
- * PedigreeBunnyNode is the representation of a Bunny in the Pedigree graph. Origin at bottom center of bunny image.
+ * PedigreeBunnyNode is the representation of a Bunny in the Pedigree graph. It ignores bunny motion, and displays
+ * only the information that is relevant to pedigree.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../../axon/js/Property.js';
+import Multilink from '../../../../../axon/js/Multilink.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
-import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
-import NaturalSelectionColors from '../../NaturalSelectionColors.js';
-import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
+import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
-import BunnyImageCache from '../BunnyImageCache.js';
-import MutationIconNode from '../MutationIconNode.js';
+import BunnyNode from '../BunnyNode.js';
 import OriginNode from '../OriginNode.js';
 
 // constants
-const IMAGE_SCALE = 0.4; // how much the bunny PNG image is scaled
 const ALLELES_FONT = new PhetFont( 16 );
 const DEAD_SYMBOL_FONT = new PhetFont( 20 );
 
@@ -32,61 +28,35 @@ class PedigreeBunnyNode extends Node {
 
   /**
    * @param {Bunny} bunny
+   * @param {SelectedBunnyProperty} selectedBunnyProperty
    * @param {Property.<boolean>} furAllelesVisibleProperty
    * @param {Property.<boolean>} earsAllelesVisibleProperty
    * @param {Property.<boolean>} teethAllelesVisibleProperty
    * @param {Object} [options]
    */
-  constructor( bunny, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
+  constructor( bunny, selectedBunnyProperty, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
+    assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty, 'invalid selectedBunnyProperty' );
     assert && AssertUtils.assertPropertyOf( furAllelesVisibleProperty, 'boolean' );
     assert && AssertUtils.assertPropertyOf( earsAllelesVisibleProperty, 'boolean' );
     assert && AssertUtils.assertPropertyOf( teethAllelesVisibleProperty, 'boolean' );
 
-    options = merge( {
-      isSelected: false
-    }, options );
+    options = merge( {}, options );
 
     const children = [];
 
-    const wrappedImage = BunnyImageCache.getWrappedImage( bunny, {
-      scale: IMAGE_SCALE,
-      centerX: 0,
-      bottom: 0
-    } );
-    children.push( wrappedImage );
+    const bunnyNode = new BunnyNode( bunny, selectedBunnyProperty );
+    children.push( bunnyNode );
 
     const allelesNode = new Text( '', {
       font: ALLELES_FONT,
-      maxWidth: wrappedImage.width
+      maxWidth: bunnyNode.width
     } );
     children.push( allelesNode );
 
-    if ( bunny.genotype.isOriginalMutant ) {
-      children.push( new MutationIconNode( {
-        radius: 12,
-        left: wrappedImage.left,
-        bottom: wrappedImage.bottom
-      } ) );
-    }
-
-    // Rectangle that appears around the selected bunny. Similar to the rectangle in BunnyNode, but tweaked to look
-    // better with the size and background color used for the Pedigree graph.
-    if ( options.isSelected ) {
-      const selectionRectangle = new Rectangle( wrappedImage.bounds.dilated( 3 ), {
-        fill: 'rgba( 0, 0, 0, 0.1 )',
-        stroke: NaturalSelectionColors.SELECTED_BUNNY_STROKE,
-        lineWidth: 2,
-        cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
-        center: wrappedImage.center,
-        pickable: false
-      } );
-      children.unshift( selectionRectangle );
-    }
-
     if ( NaturalSelectionQueryParameters.showOrigin ) {
-      children.push( new OriginNode( 4 ) );
+      children.push( new OriginNode() );
     }
 
     assert && assert( !options.children, 'PedigreeBunnyNode sets children' );
@@ -101,25 +71,27 @@ class PedigreeBunnyNode extends Node {
         // Unicode red cross mark
         this.addChild( new Text( '\u274c', {
           font: DEAD_SYMBOL_FONT,
-          left: wrappedImage.left,
-          bottom: wrappedImage.centerY
+          right: bunnyNode.centerX,
+          bottom: bunnyNode.centerY
         } ) );
       }
     };
     bunny.diedEmitter.addListener( diedListener );
     diedListener( bunny.isAlive );
 
-    Property.multilink(
+    const multilink = new Multilink(
       [ furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty ],
       ( furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) => {
         allelesNode.visible = ( furAllelesVisible || earsAllelesVisible || teethAllelesVisible );
         allelesNode.text = getAllelesString( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible );
-        allelesNode.centerX = wrappedImage.centerX;
-        allelesNode.top = wrappedImage.bottom + 5;
+        allelesNode.centerX = bunnyNode.centerX;
+        allelesNode.top = bunnyNode.bottom + 5;
       } );
 
     // @private
     this.disposePedigreeBunnyNode = () => {
+      bunnyNode.dispose();
+      multilink.dispose();
       if ( bunny.diedEmitter.hasListener( diedListener ) ) {
         bunny.diedEmitter.removeListener( diedListener );
       }

@@ -1,30 +1,26 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * BunnyNode is the view of a Bunny.
+ * BunnyNode is the view of a Bunny, used in both the environment and Pedigree graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
 import SelectedBunnyProperty from '../model/SelectedBunnyProperty.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import BunnyImageCache from './BunnyImageCache.js';
-import BunnyNodeIO from './BunnyNodeIO.js';
 import MutationIconNode from './MutationIconNode.js';
-import NaturalSelectionSpriteNode from './NaturalSelectionSpriteNode.js';
-import OriginNode from './OriginNode.js';
 
 // constants
 const IMAGE_SCALE = 0.4; // how much the bunny PNG image is scaled
 
-class BunnyNode extends NaturalSelectionSpriteNode {
+class BunnyNode extends Node {
 
   /**
    * @param {Bunny} bunny
@@ -36,16 +32,7 @@ class BunnyNode extends NaturalSelectionSpriteNode {
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
     assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty );
 
-    options = merge( {
-
-      // Node options
-      cursor: 'pointer',
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
-      phetioDynamicElement: true,
-      phetioType: BunnyNodeIO
-    }, options );
+    options = merge( {}, options );
 
     const wrappedImage = BunnyImageCache.getWrappedImage( bunny, {
       scale: IMAGE_SCALE,
@@ -66,20 +53,16 @@ class BunnyNode extends NaturalSelectionSpriteNode {
     assert && assert( !options.children, 'BunnyNode sets children' );
     options.children = [ selectionRectangle, wrappedImage ];
 
+    // Label original mutant with an icon
     if ( bunny.genotype.isOriginalMutant ) {
       options.children.push( new MutationIconNode( {
         radius: 12,
-        left: wrappedImage.left,
+        right: wrappedImage.centerX,
         bottom: wrappedImage.bottom
       } ) );
     }
 
-    // Red dot at the origin
-    if ( NaturalSelectionQueryParameters.showOrigin ) {
-      options.children.push( new OriginNode() );
-    }
-
-    super( bunny, options );
+    super( options );
 
     // Indicate that this bunny is selected
     const selectedBunnyListener = someBunny => {
@@ -91,9 +74,6 @@ class BunnyNode extends NaturalSelectionSpriteNode {
     this.disposeBunnyNode = () => {
       selectedBunnyProperty.unlink( selectedBunnyListener );
     };
-
-    // @private
-    this.bunny = bunny;
   }
 
   /**
