@@ -51,7 +51,7 @@ class PopulationLegendCheckbox extends NaturalSelectionCheckbox {
     // allele name
     const nameNode = new Text( name, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 105 // determined empirically
+      maxWidth: 100 // determined empirically
     } );
 
     const content = new HBox( {

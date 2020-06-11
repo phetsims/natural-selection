@@ -37,7 +37,7 @@ class PopulationNode extends Node {
     }, options );
 
     // Divvy up the width
-    const panelWidth = 0.25 * size.width;
+    const panelWidth = 175; // determined empirically
     const graphWidth = size.width - panelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
     const populationPanel = new PopulationPanel( populationModel, {

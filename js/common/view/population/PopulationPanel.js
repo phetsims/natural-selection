@@ -63,6 +63,7 @@ class PopulationPanel extends NaturalSelectionPanel {
       color: earsGene.color,
       tandem: options.tandem.createTandem( 'straightEarsCheckbox' )
     } );
+    console.log( `straightEarsCheckbox.width=${straightEarsCheckbox.width}` );
 
     const floppyEarsCheckbox = new PopulationLegendCheckbox( populationModel.floppyEarsVisibleProperty, earsGene.mutantAllele.name, {
       color: earsGene.color,
