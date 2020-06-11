@@ -56,7 +56,6 @@ class BunnyNode extends Node {
     // Label original mutant with an icon
     if ( bunny.genotype.isOriginalMutant ) {
       options.children.push( new MutationIconNode( {
-        radius: 12,
         right: wrappedImage.centerX,
         bottom: wrappedImage.bottom,
         pickable: false

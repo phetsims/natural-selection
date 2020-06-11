@@ -20,7 +20,7 @@ class MutationIconNode extends Node {
   constructor( options ) {
 
     options = merge( {
-      radius: 10
+      radius: 12
     }, options );
 
     // Yellow circle
