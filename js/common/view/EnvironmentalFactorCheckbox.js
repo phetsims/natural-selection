@@ -38,7 +38,6 @@ class EnvironmentalFactorCheckbox extends NaturalSelectionCheckbox {
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
     assert && assert( clockSliceRange instanceof Range, 'invalid clockSliceRange' );
     assert && assert( ColorDef.isColorDef( clockSliceColor ), 'invalid clockSliceColor' );
-    assert && AssertUtils.assertPropertyOf( enabledProperty, 'boolean' );
 
     const alignBox = new AlignBox( labelNode, {
       group: alignGroup,

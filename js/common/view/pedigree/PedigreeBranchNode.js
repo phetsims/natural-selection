@@ -32,18 +32,18 @@ class PedigreeBranchNode extends Node {
 
   /**
    * @param {Bunny} bunny
-   * @param {number} depth
+   * @param {number} branchDepth - depth of this branch of the Pedigree tree
    * @param {SelectedBunnyProperty} selectedBunnyProperty
    * @param {Property.<boolean>} furAllelesVisibleProperty
    * @param {Property.<boolean>} earsAllelesVisibleProperty
    * @param {Property.<boolean>} teethAllelesVisibleProperty
    * @param {Object} [options]
    */
-  constructor( bunny, depth, selectedBunnyProperty,
+  constructor( bunny, branchDepth, selectedBunnyProperty,
                furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-    assert && assert( typeof depth === 'number', 'invalid depth' );
+    assert && assert( typeof branchDepth === 'number', 'invalid branchDepth' );
     assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty, 'invalid selectedBunnyProperty' );
     assert && AssertUtils.assertPropertyOf( furAllelesVisibleProperty, 'boolean' );
     assert && AssertUtils.assertPropertyOf( earsAllelesVisibleProperty, 'boolean' );
@@ -65,9 +65,9 @@ class PedigreeBranchNode extends Node {
 
     let fatherNode = null;
     let motherNode = null;
-    if ( depth > 1 && bunny.father && bunny.mother ) {
+    if ( branchDepth > 1 && bunny.father && bunny.mother ) {
 
-      fatherNode = new PedigreeBranchNode( bunny.father, depth - 1, selectedBunnyProperty,
+      fatherNode = new PedigreeBranchNode( bunny.father, branchDepth - 1, selectedBunnyProperty,
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
           xSpacing: X_SPACING_SCALE * options.xSpacing,
           parentsYSpacing: Y_SPACING_SCALE * options.parentsYSpacing,
@@ -77,7 +77,7 @@ class PedigreeBranchNode extends Node {
         } );
       children.push( fatherNode );
 
-      motherNode = new PedigreeBranchNode( bunny.mother, depth - 1, selectedBunnyProperty,
+      motherNode = new PedigreeBranchNode( bunny.mother, branchDepth - 1, selectedBunnyProperty,
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
           xSpacing: X_SPACING_SCALE * options.xSpacing,
           parentsYSpacing: Y_SPACING_SCALE * options.parentsYSpacing,

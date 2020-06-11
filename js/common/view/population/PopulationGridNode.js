@@ -206,6 +206,9 @@ class HorizontalLines extends Path {
    */
   constructor( yRangeProperty, getYSpacing, options ) {
 
+    assert && AssertUtils.assertPropertyOf( yRangeProperty, Range );
+    assert && assert( typeof getYSpacing === 'function', 'invalid getYSpacing' );
+
     options = merge( {
       yAxisHeight: 100, // y axis height, in view coordinates
       lineLength: 100 // line length, in view coordinates
@@ -254,6 +257,8 @@ class XTickLabels extends Node {
    * @param {Object} [options]
    */
   constructor( xRangeProperty, options ) {
+
+    assert && AssertUtils.assertPropertyOf( xRangeProperty, Range );
 
     options = merge( {
       xSpacingModel: 1, // spacing between lines, in model coordinates
@@ -316,6 +321,9 @@ class YTickLabels extends Node {
    * @param {Object} [options]
    */
   constructor( yRangeProperty, getYSpacing, options ) {
+
+    assert && AssertUtils.assertPropertyOf( yRangeProperty, Range );
+    assert && assert( typeof getYSpacing === 'function', 'invalid getYSpacing' );
 
     options = merge( {
       yAxisHeight: 100 // y axis height, in view coordinates

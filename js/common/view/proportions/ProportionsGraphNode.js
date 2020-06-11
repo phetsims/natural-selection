@@ -321,6 +321,7 @@ class Column extends VBox {
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( endNormalCount ), 'invalid endNormalCount' );
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( endMutantCount ), 'invalid endMutantCount' );
     assert && AssertUtils.assertPropertyOf( valuesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( geneVisibleProperty, 'boolean' );
     assert && assert( barsAlignGroup instanceof AlignGroup, 'invalid barsAlignGroup' );
 
     options = merge( {

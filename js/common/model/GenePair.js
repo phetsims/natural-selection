@@ -82,6 +82,7 @@ class GenePair extends PhetioObject {
    * @public
    */
   mutate( mutantAllele ) {
+    assert && assert( mutantAllele instanceof Allele, 'invalid mutantAllele' );
 
     if ( NaturalSelectionQueryParameters.homozygousMutants ) {
 

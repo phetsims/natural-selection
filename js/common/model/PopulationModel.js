@@ -255,7 +255,7 @@ class PopulationModel extends PhetioObject {
 
   /**
    * Converts population counts to Vector2 points on the graph.
-   * @param {number} generation
+   * @param {number} generation - floating point, not integer!
    * @param {BunnyCounts} counts
    * @public
    */
@@ -277,7 +277,7 @@ class PopulationModel extends PhetioObject {
 /**
  * Records a count if it differs from the previous data point.
  * @param {ObservableArray.<Vector2>} observableArray
- * @param {number} generation
+ * @param {number} generation - floating point, not integer!
  * @param {number} count
  */
 function recordCount( observableArray, generation, count ) {

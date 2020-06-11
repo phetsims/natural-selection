@@ -20,6 +20,7 @@ import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
 import BunnyCountsIO from './BunnyCountsIO.js';
 import ProportionsCounts from './ProportionsCounts.js';
@@ -212,7 +213,10 @@ class ProportionsModel extends PhetioObject {
    * @public
    */
   recordStartCounts( generation, startCounts ) {
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
+    assert && assert( startCounts instanceof BunnyCounts, 'invalid startCounts' );
     assert && assert( generation === this.currentGenerationProperty.value, `${generation} is not the current generation` );
+
     this.currentStartCountsProperty.value = startCounts;
     phet.log && phet.log( `ProportionsModel recorded start counts for generation ${generation}: ${startCounts.toString()}` );
   }
@@ -224,6 +228,8 @@ class ProportionsModel extends PhetioObject {
    * @public
    */
   recordEndCounts( generation, endCounts ) {
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
+    assert && assert( endCounts instanceof BunnyCounts, 'invalid endCounts' );
     assert && assert( generation === this.currentGenerationProperty.value - 1, `${generation} is not the previous generation` );
     assert && assert( this.previousCounts.length === generation, `data already exists for generation ${generation}` );
 

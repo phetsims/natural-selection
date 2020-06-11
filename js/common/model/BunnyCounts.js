@@ -41,6 +41,7 @@ class BunnyCounts {
    * @public
    */
   plus( bunny ) {
+    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
     return this.updateCounts( bunny, 1 );
   }
 
@@ -51,6 +52,7 @@ class BunnyCounts {
    * @public
    */
   minus( bunny ) {
+    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
     return this.updateCounts( bunny, -1 );
   }
 
