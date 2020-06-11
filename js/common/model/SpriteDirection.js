@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * SpriteDirection is the direction that a Sprite (bunny, wolf,...) is facing.
+ * SpriteDirection is the direction that a NaturalSelectionSprite (bunny, wolf) is facing.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -33,9 +33,10 @@ const SpriteDirection = Enumeration.byKeys( [ 'LEFT', 'RIGHT' ], {
       ( direction === SpriteDirection.RIGHT ) ? SpriteDirection.LEFT : SpriteDirection.RIGHT;
 
     /**
-     * Converts a SpriteDirection to a sign, relative to the x axis.
-     * This assumes that the default direction for all Sprites is SpriteDirection.RIGHT.
-     * For example, this means that all bunny PNG files were drawn with the bunny facing right.
+     * Converts a SpriteDirection to a sign, relative to the x axis. Used to set the sign of the x-scale, which will
+     * reflect the sprite about the y axis, making it appear to face in the desired direction. This assumes that the
+     * default direction for all sprites is SpriteDirection.RIGHT. For example, this means that all bunny PNG files
+     * were drawn with the bunny facing right.
      * @param {SpriteDirection} direction
      * @returns {number}
      * @public

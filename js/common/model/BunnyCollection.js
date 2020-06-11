@@ -102,7 +102,7 @@ class BunnyCollection {
       this.bunnyCreatedEmitter.emit( bunny );
     } );
 
-    // When a bunny is disposed... removeListener is not necessary.
+    // When a bunny is disposed, remove it from the appropriate array. removeListener is not necessary.
     bunnyGroup.elementDisposedEmitter.addListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
       this.liveBunnies.contains( bunny ) && this.liveBunnies.remove( bunny );
