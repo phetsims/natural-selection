@@ -31,6 +31,8 @@ const ALIGN_BOX_OPTIONS = {
   yAlign: 'bottom'
 };
 
+// Hit test on non-transparent pixels, to make it easier to select overlapping bunnies.
+// See https://github.com/phetsims/natural-selection/issues/63
 const IMAGE_OPTIONS = {
   hitTestPixels: true
 };
