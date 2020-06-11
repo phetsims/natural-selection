@@ -24,24 +24,29 @@ import bunnyWhiteFurStraightEarsShortTeethImage from '../../../images/bunny-whit
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
 
-// To make all images have the same effective dimensions, bottom aligned because all images have a similar bottom.
+// To make all images have the same effective dimensions, center-bottom aligned to correspond to bunny's origin.
 const ALIGN_BOX_OPTIONS = {
   group: new AlignGroup(),
+  xAlign: 'center',
   yAlign: 'bottom'
+};
+
+const IMAGE_OPTIONS = {
+  hitTestPixels: true
 };
 
 // The cache is a map, which maps phenotype key to an Image instance.
 // The phenotype key pattern is '{{hasWhiteFur}}-{{hasStraightEars}}-{{hasShortTeeth}}', where each value is a boolean.
 // See getImage for how the key is assembled.
 const CACHE = {
-  'true-true-true': new AlignBox( new Image( bunnyWhiteFurStraightEarsShortTeethImage ), ALIGN_BOX_OPTIONS ),
-  'true-true-false': new AlignBox( new Image( bunnyWhiteFurStraightEarsLongTeethImage ), ALIGN_BOX_OPTIONS ),
-  'true-false-true': new AlignBox( new Image( bunnyWhiteFurFloppyEarsShortTeethImage ), ALIGN_BOX_OPTIONS ),
-  'true-false-false': new AlignBox( new Image( bunnyWhiteFurFloppyEarsLongTeethImage ), ALIGN_BOX_OPTIONS ),
-  'false-true-true': new AlignBox( new Image( bunnyBrownFurStraightEarsShortTeethImage ), ALIGN_BOX_OPTIONS ),
-  'false-true-false': new AlignBox( new Image( bunnyBrownFurStraightEarsLongTeethImage ), ALIGN_BOX_OPTIONS ),
-  'false-false-true': new AlignBox( new Image( bunnyBrownFurFloppyEarsShortTeethImage ), ALIGN_BOX_OPTIONS ),
-  'false-false-false': new AlignBox( new Image( bunnyBrownFurFloppyEarsLongTeethImage ), ALIGN_BOX_OPTIONS )
+  'true-true-true': new AlignBox( new Image( bunnyWhiteFurStraightEarsShortTeethImage, IMAGE_OPTIONS ), ALIGN_BOX_OPTIONS ),
+  'true-true-false': new AlignBox( new Image( bunnyWhiteFurStraightEarsLongTeethImage, IMAGE_OPTIONS ), ALIGN_BOX_OPTIONS ),
+  'true-false-true': new AlignBox( new Image( bunnyWhiteFurFloppyEarsShortTeethImage, IMAGE_OPTIONS ), ALIGN_BOX_OPTIONS ),
+  'true-false-false': new AlignBox( new Image( bunnyWhiteFurFloppyEarsLongTeethImage, IMAGE_OPTIONS ), ALIGN_BOX_OPTIONS ),
+  'false-true-true': new AlignBox( new Image( bunnyBrownFurStraightEarsShortTeethImage, IMAGE_OPTIONS ), ALIGN_BOX_OPTIONS ),
+  'false-true-false': new AlignBox( new Image( bunnyBrownFurStraightEarsLongTeethImage, IMAGE_OPTIONS ), ALIGN_BOX_OPTIONS ),
+  'false-false-true': new AlignBox( new Image( bunnyBrownFurFloppyEarsShortTeethImage, IMAGE_OPTIONS ), ALIGN_BOX_OPTIONS ),
+  'false-false-false': new AlignBox( new Image( bunnyBrownFurFloppyEarsLongTeethImage, IMAGE_OPTIONS ), ALIGN_BOX_OPTIONS )
 };
 assert && assert( _.keys( CACHE ).length === 8, 'CACHE is incomplete' );
 assert && assert( _.every( _.keys( CACHE ), key => key.match( /(true|false)-(true|false)-(true|false)/ ) ),
