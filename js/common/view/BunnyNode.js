@@ -58,7 +58,8 @@ class BunnyNode extends Node {
       options.children.push( new MutationIconNode( {
         radius: 12,
         right: wrappedImage.centerX,
-        bottom: wrappedImage.bottom
+        bottom: wrappedImage.bottom,
+        pickable: false
       } ) );
     }
 
