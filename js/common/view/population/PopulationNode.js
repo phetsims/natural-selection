@@ -36,7 +36,7 @@ class PopulationNode extends Node {
       phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     }, options );
 
-    // Divy up the width
+    // Divvy up the width
     const panelWidth = 0.25 * size.width;
     const graphWidth = size.width - panelWidth - NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
