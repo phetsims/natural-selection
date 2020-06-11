@@ -24,17 +24,17 @@ import bunnyWhiteFurStraightEarsShortTeethImage from '../../../images/bunny-whit
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
 
+// Hit test on non-transparent pixels, to make it easier to select overlapping bunnies.
+// See https://github.com/phetsims/natural-selection/issues/63
+const IMAGE_OPTIONS = {
+  hitTestPixels: true
+};
+
 // To make all images have the same effective dimensions, center-bottom aligned to correspond to bunny's origin.
 const ALIGN_BOX_OPTIONS = {
   group: new AlignGroup(),
   xAlign: 'center',
   yAlign: 'bottom'
-};
-
-// Hit test on non-transparent pixels, to make it easier to select overlapping bunnies.
-// See https://github.com/phetsims/natural-selection/issues/63
-const IMAGE_OPTIONS = {
-  hitTestPixels: true
 };
 
 // The cache is a map, which maps phenotype key to an Image instance.
