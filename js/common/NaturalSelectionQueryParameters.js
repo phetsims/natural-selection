@@ -53,11 +53,14 @@ const SCHEMA = {
   // and which allele abbreviations can appear in the labPopulation query-parameter value.
   //
   // Valid characters for the mutations are as follows:
-  //   Fur:   'F' = dominant, 'f' = recessive
-  //   Ears:  'E' = dominant, 'e' = recessive
-  //   Teeth: 'T' = dominant, 't' = recessive
   //
-  // The string can contain characters for zero or more mutations. Each mutation may appear only once.
+  //   Mutation       Dominant   Recessive
+  //   -----------------------------------
+  //   Brown Fur         F           f
+  //   Floppy Ears       E           e
+  //   Long Teeth        T           t
+  //
+  // The value may contain characters for one or more mutations. Each mutation may appear only once.
   //
   // Valid examples:
   //   labMutations=F
@@ -85,9 +88,13 @@ const SCHEMA = {
   // Specifies the genotypes and their distribution in the initial population for the Lab screen.
   // See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
   //
-  // The value of labMutations determines which alleles abbreviations can appear in this query parameter's value.
+  // The value of labMutations determines which allele abbreviations can appear in this query parameter's value.
   // If a mutation is present in the labMutations query parameter, then the dominant and/or recessive abbreviations
   // for that allele must appear exactly twice in labPopulation.
+  //
+  // Related alleles must appear in pairs. The first allele in the pair is the 'father' allele, the second allele is
+  // the 'mother' allele. In the Pedigree graph, the father is on the left, the mother is on the right. So for example,
+  // 'Ff' and 'fF' result in a different genotype.
   //
   // Valid examples:
   //   labMutations=F&labPopulation=5FF
@@ -96,11 +103,12 @@ const SCHEMA = {
   //   labMutations=FeT&labPopulation=5FFeETt,5ffeett
   //
   // Invalid examples:
-  //   labMutations=F&labPopulation=FfEe - missing count
+  //   labMutations=FE&labPopulation=FfEe - missing count
+  //   labMutations=FE&labPopulation=10FEfe - related alleles are not paired, should be 10FfEe
   //   labMutations=F&labPopulation=20FfEe - Ears ('E', 'e') does not appear in labMutations
   //   labMutations=FE&labPopulation=10Ff - Ears ('E', 'e') is missing from labPopulation
-  //   labMutations=FE&labPopulation=10FEe - Fur ('F', 'f') must appear exactly twice in labPopulation
-  //   labMutations=F&labPopulation=10FfF - Fur ('F', 'f') must appear exactly twice in labPopulation
+  //   labMutations=FE&labPopulation=10FEe - 'F' is invalid, fur must appear exactly twice
+  //   labMutations=F&labPopulation=10FfFEe - 'FfF' is invalid, fur must appear exactly twice
   //   labMutations=F&labPopulation=10FFx - 'x' is not a valid character
   //
   labPopulation: {
