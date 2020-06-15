@@ -103,8 +103,7 @@ class GenePair extends PhetioObject {
       }
     }
 
-    this.childAlleles = phet.joist.random.shuffle( [ this.fatherAllele, this.fatherAllele, this.motherAllele, this.motherAllele ] );
-    this.childAllelesIndex = 0;
+    this.updateChildAlleles();
   }
 
   /**
