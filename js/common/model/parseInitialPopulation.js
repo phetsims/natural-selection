@@ -226,10 +226,25 @@ function parsePopulation( genePool, mutationChars, populationName, populationVal
         const dominantAbbreviation = gene.dominantAbbreviationEnglish;
         const recessiveAbbreviation = gene.recessiveAbbreviationEnglish;
 
+        // If the gene is represented in mutations...
         if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 || mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
-          const countDominant = _.filter( genotypeString.split( '' ), char => char === dominantAbbreviation ).length;
-          const countRecessive = _.filter( genotypeString.split( '' ), char => char === recessiveAbbreviation ).length;
+
+          const genotypeChars = genotypeString.split( '' );
+
+          // The expression must contain exactly 2 alleles for each gene.
+          const countDominant = _.filter( genotypeChars, char => char === dominantAbbreviation ).length;
+          const countRecessive = _.filter( genotypeChars, char => char === recessiveAbbreviation ).length;
           verify( countDominant + countRecessive === 2, genotypeErrorMessage );
+
+          // The alleles must be paired (adjacent) in the expression.
+          const dominantIndex = genotypeChars.indexOf( dominantAbbreviation );
+          const recessiveIndex = genotypeChars.indexOf( recessiveAbbreviation );
+          const maxIndex = Math.max( dominantIndex, recessiveIndex );
+          const minIndex = Math.min( dominantIndex, recessiveIndex );
+          const firstIndex = ( minIndex !== -1 ) ? minIndex : maxIndex;
+          verify( genotypeChars[ firstIndex + 1 ] === dominantAbbreviation ||
+                  genotypeChars[ firstIndex + 1 ] === recessiveAbbreviation,
+            genotypeErrorMessage );
         }
       } );
 
