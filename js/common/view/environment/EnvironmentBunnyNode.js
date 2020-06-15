@@ -31,6 +31,9 @@ class EnvironmentBunnyNode extends NaturalSelectionSpriteNode {
 
     options = merge( {
 
+      // Whether to show the mutation icon on original mutants
+      showMutationIcon: NaturalSelectionQueryParameters.labelMutants,
+
       // Node options
       cursor: 'pointer',
 
@@ -40,7 +43,9 @@ class EnvironmentBunnyNode extends NaturalSelectionSpriteNode {
       phetioType: EnvironmentBunnyNodeIO
     }, options );
 
-    const bunnyNode = new BunnyNode( bunny, selectedBunnyProperty );
+    const bunnyNode = new BunnyNode( bunny, selectedBunnyProperty, {
+      showMutationIcon: options.showMutationIcon
+    } );
 
     assert && assert( !options.children, 'BunnyNode sets children' );
     options.children = [ bunnyNode ];

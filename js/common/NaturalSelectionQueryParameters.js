@@ -247,6 +247,12 @@ const SCHEMA = {
     type: 'flag'
   },
 
+  // Whether to label original mutants in the environment
+  // For internal use only.
+  labelMutants: {
+    type: 'flag'
+  },
+
   // When a mutation is applied, the mutant is homozygous.
   // For internal use only.
   homozygousMutants: {

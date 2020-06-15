@@ -18,7 +18,6 @@ import Bunny from '../../model/Bunny.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 import BunnyNode from '../BunnyNode.js';
-import MutationIconNode from '../MutationIconNode.js';
 import OriginNode from '../OriginNode.js';
 
 // constants
@@ -43,11 +42,15 @@ class PedigreeBunnyNode extends Node {
     assert && AssertUtils.assertPropertyOf( earsAllelesVisibleProperty, 'boolean' );
     assert && AssertUtils.assertPropertyOf( teethAllelesVisibleProperty, 'boolean' );
 
-    options = merge( {}, options );
+    options = merge( {
+      showMutationIcon: true
+    }, options );
 
     const children = [];
 
-    const bunnyNode = new BunnyNode( bunny, selectedBunnyProperty );
+    const bunnyNode = new BunnyNode( bunny, selectedBunnyProperty, {
+      showMutationIcon: options.showMutationIcon
+    } );
     children.push( bunnyNode );
 
     // Genotype abbreviation
@@ -56,15 +59,6 @@ class PedigreeBunnyNode extends Node {
       maxWidth: bunnyNode.width
     } );
     children.push( genotypeNode );
-
-    // Label original mutant with an icon
-    if ( bunny.genotype.isOriginalMutant ) {
-      children.push( new MutationIconNode( {
-        right: bunnyNode.centerX,
-        bottom: 0,
-        pickable: false
-      } ) );
-    }
 
     if ( NaturalSelectionQueryParameters.showOrigin ) {
       children.push( new OriginNode() );
