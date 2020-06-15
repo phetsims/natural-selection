@@ -56,10 +56,6 @@ class Bunny extends NaturalSelectionSprite {
       mother: null, // {Bunny|null} the Bunny's mother, null if no mother
       generation: 0, // {number} generation that this Bunny belongs to
 
-      // {Alleles|null} alleles for the genotype.
-      // This is an option only when there are no parents, for configuring the initial population.
-      alleles: null,
-
       // {Object|null} options to Genotype constructor
       genotypeOptions: null,
 
@@ -73,7 +69,6 @@ class Bunny extends NaturalSelectionSprite {
 
     // Validate options
     assert && assert( hasParents || ( !options.father && !options.mother ), 'bunny cannot have 1 parent' );
-    assert && assert( !( hasParents && options.alleles ), 'parents and alleles are mutually exclusive' );
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( options.generation ), 'invalid generation' );
 
     // Default to random position and direction
@@ -97,22 +92,7 @@ class Bunny extends NaturalSelectionSprite {
     } );
 
     // @public (read-only) the bunny's genetic blueprint
-    this.genotype = null;
-    if ( hasParents ) {
-
-      // genotype is inherited from parents
-      this.genotype = Genotype.withParents( genePool, this.father, this.mother, genotypeOptions );
-    }
-    else if ( options.alleles ) {
-
-      // genotype is described by a set of alleles
-      this.genotype = Genotype.withAbbreviation( genePool, options.alleles, genotypeOptions );
-    }
-    else {
-
-      // no parents or alleles were provided, so default to normal alleles for all genes
-      this.genotype = Genotype.withNormalAlleles( genePool, genotypeOptions );
-    }
+    this.genotype = new Genotype( genePool, genotypeOptions );
 
     // @public (read-only) the bunny's appearance, the manifestation of its genotype
     this.phenotype = new Phenotype( this.genotype, {

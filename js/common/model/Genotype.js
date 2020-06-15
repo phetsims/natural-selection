@@ -15,8 +15,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import Allele from './Allele.js';
-import Bunny from './Bunny.js';
 import GenePair from './GenePair.js';
 import GenePairIO from './GenePairIO.js';
 import GenePool from './GenePool.js';
@@ -26,26 +24,21 @@ class Genotype extends PhetioObject {
 
   /**
    * @param {GenePool} genePool
-   * @param {Allele} fatherFurAllele
-   * @param {Allele} motherFurAllele
-   * @param {Allele} fatherEarsAllele
-   * @param {Allele} motherEarsAllele
-   * @param {Allele} fatherTeethAllele
-   * @param {Allele} motherTeethAllele
    * @param {Object} [options]
    */
-  constructor( genePool, fatherFurAllele, motherFurAllele, fatherEarsAllele, motherEarsAllele,
-               fatherTeethAllele, motherTeethAllele, options ) {
+  constructor( genePool, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( fatherFurAllele instanceof Allele, 'invalid fatherFurAllele' );
-    assert && assert( motherFurAllele instanceof Allele, 'invalid motherFurAllele' );
-    assert && assert( fatherEarsAllele instanceof Allele, 'invalid fatherEarsAllele' );
-    assert && assert( motherEarsAllele instanceof Allele, 'invalid motherEarsAllele' );
-    assert && assert( fatherTeethAllele instanceof Allele, 'invalid fatherTeethAllele' );
-    assert && assert( motherTeethAllele instanceof Allele, 'invalid motherTeethAllele' );
 
     options = merge( {
+
+      // {Allele} alleles that make up the genotype, all of which default to the normal allele
+      fatherFurAllele: genePool.furGene.normalAllele,
+      motherFurAllele: genePool.furGene.normalAllele,
+      fatherEarsAllele: genePool.earsGene.normalAllele,
+      motherEarsAllele: genePool.earsGene.normalAllele,
+      fatherTeethAllele: genePool.teethGene.normalAllele,
+      motherTeethAllele: genePool.teethGene.normalAllele,
 
       // {boolean} which genes to mutate
       mutateFur: false,
@@ -64,19 +57,19 @@ class Genotype extends PhetioObject {
     super( options );
 
     // @public (read-only)
-    this.furGenePair = new GenePair( genePool.furGene, fatherFurAllele, motherFurAllele, {
+    this.furGenePair = new GenePair( genePool.furGene, options.fatherFurAllele, options.motherFurAllele, {
       tandem: options.tandem.createTandem( 'furGenePair' ),
       phetioDocumentation: 'gene pair that determines the fur trait'
     } );
 
     // @public (read-only)
-    this.earsGenePair = new GenePair( genePool.earsGene, fatherEarsAllele, motherEarsAllele, {
+    this.earsGenePair = new GenePair( genePool.earsGene, options.fatherEarsAllele, options.motherEarsAllele, {
       tandem: options.tandem.createTandem( 'earsGenePair' ),
       phetioDocumentation: 'gene pair that determines the ears trait'
     } );
 
     // @public (read-only)
-    this.teethGenePair = new GenePair( genePool.teethGene, fatherTeethAllele, motherTeethAllele, {
+    this.teethGenePair = new GenePair( genePool.teethGene, options.fatherTeethAllele, options.motherTeethAllele, {
       tandem: options.tandem.createTandem( 'teethGenePair' ),
       phetioDocumentation: 'gene pair that determines the teeth trait'
     } );
@@ -145,40 +138,14 @@ class Genotype extends PhetioObject {
   }
 
   /**
-   * Creates a Genotype by inheriting from specific parents.
-   * @param {GenePool} genePool
-   * @param {Bunny} father
-   * @param {Bunny} mother
-   * @param {Object} [options] - Genotype constructor options
-   * @returns {Genotype}
-   * @public
-   */
-  static withParents( genePool, father, mother, options ) {
-
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( father instanceof Bunny, 'invalid father' );
-    assert && assert( mother instanceof Bunny, 'invalid mother' );
-
-    const fatherGenotype = father.genotype;
-    const motherGenotype = mother.genotype;
-
-    return new Genotype( genePool,
-      fatherGenotype.furGenePair.getNextChildAllele(), motherGenotype.furGenePair.getNextChildAllele(),
-      fatherGenotype.earsGenePair.getNextChildAllele(), motherGenotype.earsGenePair.getNextChildAllele(),
-      fatherGenotype.teethGenePair.getNextChildAllele(), motherGenotype.teethGenePair.getNextChildAllele(),
-      options );
-  }
-
-  /**
-   * Creates a Genotype based on a genotype abbreviation string, e.g. 'FfEEtt'.
-   * This is used when the initial population has been described using query parameters.
+   * Creates a Genotype with a specific set of alleles.
    * @param {GenePool} genePool
    * @param {Alleles} alleles
    * @param {Object} [options]
    * @returns {Genotype}
    * @public
    */
-  static withAbbreviation( genePool, alleles, options ) {
+  static withAlleles( genePool, alleles, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( alleles, 'invalid alleles' );

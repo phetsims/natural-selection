@@ -279,7 +279,14 @@ class NaturalSelectionModel {
       phet.log && phet.log( `creating ${variety.count} bunnies with genotype '${variety.genotypeString}'` );
       for ( let i = 0; i < variety.count; i++ ) {
         this.bunnyCollection.createBunnyZero( {
-          alleles: variety.alleles
+          genotypeOptions: {
+            fatherFurAllele: variety.fatherFurAllele,
+            motherFurAllele: variety.motherFurAllele,
+            fatherEarsAllele: variety.fatherEarsAllele,
+            motherEarsAllele: variety.motherEarsAllele,
+            fatherTeethAllele: variety.fatherTeethAllele,
+            motherTeethAllele: variety.motherTeethAllele
+          }
         } );
       }
     } );

@@ -19,6 +19,7 @@ import BunnyArrayIO from './BunnyArrayIO.js';
 import BunnyGroup from './BunnyGroup.js';
 import CauseOfDeath from './CauseOfDeath.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
+import GenePair from './GenePair.js';
 import GenePool from './GenePool.js';
 
 // constants
@@ -288,6 +289,10 @@ class BunnyCollection {
       const father = bunnies[ i ];
       const mother = bunnies[ i - 1 ];
 
+      const furPunnetSquare = GenePair.getPunnettSquare( father.genotype.furGenePair, mother.genotype.furGenePair );
+      const earsPunnetSquare = GenePair.getPunnettSquare( father.genotype.earsGenePair, mother.genotype.earsGenePair );
+      const teethPunnetSquare = GenePair.getPunnettSquare( father.genotype.teethGenePair, mother.genotype.teethGenePair );
+
       for ( let j = 0; j < LITTER_SIZE; j++ ) {
 
         this.createBunny( {
@@ -295,6 +300,16 @@ class BunnyCollection {
           mother: mother,
           generation: generation,
           genotypeOptions: {
+
+            // inherited alleles
+            fatherFurAllele: furPunnetSquare[ j ].fatherAllele,
+            motherFurAllele: furPunnetSquare[ j ].motherAllele,
+            fatherEarsAllele: earsPunnetSquare[ j ].fatherAllele,
+            motherEarsAllele: earsPunnetSquare[ j ].motherAllele,
+            fatherTeethAllele: teethPunnetSquare[ j ].fatherAllele,
+            motherTeethAllele: teethPunnetSquare[ j ].motherAllele,
+
+            // mutations
             mutateFur: ( furIndices.indexOf( bornIndex ) !== -1 ),
             mutateEars: ( earsIndices.indexOf( bornIndex ) !== -1 ),
             mutateTeeth: ( teethIndices.indexOf( bornIndex ) !== -1 )

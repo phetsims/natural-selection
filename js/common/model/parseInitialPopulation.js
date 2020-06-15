@@ -20,27 +20,8 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import BunnyVariety from './BunnyVariety.js';
 import GenePool from './GenePool.js';
-
-/**
- * Information needed to create a variety of Bunny. This information is parsed out of the query-parameter values.
- * @typedef BunnyVariety
- * @property {number} count - how many Bunny instances to create
- * @property {Alleles} alleles - alleles in this variety's genotype
- * @property {string} genotypeString - string that alleles was derived from, for debugging
- */
-
-/**
- * A complete set of Alleles needed to describe the genotype for a variety of Bunny. This information is parsed
- * out of the query-parameter values. Any gene not represented in the mutations value will default to the normal allele.
- * @typedef Alleles
- * @property {Allele} fatherFurAllele
- * @property {Allele} motherFurAllele
- * @property {Allele} fatherEarsAllele
- * @property {Allele} motherEarsAllele
- * @property {Allele} fatherTeethAllele
- * @property {Allele} motherTeethAllele
- */
 
 /**
  * Parses query parameters that describe the initial population. Because these query parameters are dependent on
@@ -182,11 +163,7 @@ function parsePopulation( genePool, mutationChars, populationName, populationVal
     verify( NaturalSelectionUtils.isPositiveInteger( count ), countErrorMessage );
     const genotypeString = '';
 
-    initialPopulation.push( {
-      count: count,
-      alleles: genotypeToAlleles( genePool, genotypeString ),
-      genotypeString: genotypeString
-    } );
+    initialPopulation.push( createBunnyVariety( genePool, count, genotypeString ) );
   }
   else {
 
@@ -248,11 +225,7 @@ function parsePopulation( genePool, mutationChars, populationName, populationVal
         }
       } );
 
-      initialPopulation.push( {
-        count: count,
-        alleles: genotypeToAlleles( genePool, genotypeString ),
-        genotypeString: genotypeString // for debugging
-      } );
+      initialPopulation.push( createBunnyVariety( genePool, count, genotypeString ) );
     }
     verify( totalCount > 0, `${populationName}: the total population must be > 0` );
   }
@@ -261,16 +234,18 @@ function parsePopulation( genePool, mutationChars, populationName, populationVal
 }
 
 /**
- * Converts a genotype string to a set of alleles that describe the genotype. Alleles not present in the string
- * default to the normal allele for their associated gene.
+ * Converts a genotype expression to a data structure that describes the count and genotype for a bunny variety.
+ * Alleles not present in the string default to the normal allele for their associated gene.
  *
  * @param {GenePool} genePool
+ * @param {number} count
  * @param {string} genotypeString
- * @returns {Alleles}
+ * @returns {BunnyVariety}
  */
-function genotypeToAlleles( genePool, genotypeString ) {
+function createBunnyVariety( genePool, count, genotypeString ) {
 
   assert && assert( genePool instanceof GenePool, 'invalid genePool' );
+  assert && assert( NaturalSelectionUtils.isPositiveInteger( count ), 'invalid count' );
   assert && assert( typeof genotypeString === 'string', 'invalid genotypeString' );
 
   // To make this code easier to read
@@ -291,15 +266,16 @@ function genotypeToAlleles( genePool, genotypeString ) {
     abbreviationToAllele( alleleAbbreviation, teethGene, teethPair );
   } );
 
-  // Default to the normal allele for any allele that was not specified
-  return {
-    fatherFurAllele: furPair.fatherAllele || furGene.normalAllele,
-    motherFurAllele: furPair.motherAllele || furGene.normalAllele,
-    fatherEarsAllele: earsPair.fatherAllele || earsGene.normalAllele,
-    motherEarsAllele: earsPair.motherAllele || earsGene.normalAllele,
-    fatherTeethAllele: teethPair.fatherAllele || teethGene.normalAllele,
-    motherTeethAllele: teethPair.motherAllele || teethGene.normalAllele
-  };
+  return new BunnyVariety( count, genotypeString,
+
+    // Default to the normal allele for any allele that was not specified
+    furPair.fatherAllele || furGene.normalAllele,
+    furPair.motherAllele || furGene.normalAllele,
+    earsPair.fatherAllele || earsGene.normalAllele,
+    earsPair.motherAllele || earsGene.normalAllele,
+    teethPair.fatherAllele || teethGene.normalAllele,
+    teethPair.motherAllele || teethGene.normalAllele
+  );
 }
 
 /**

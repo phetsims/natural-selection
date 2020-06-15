@@ -14,11 +14,8 @@ import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
-import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import Allele from './Allele.js';
 import AlleleIO from './AlleleIO.js';
 import Gene from './Gene.js';
@@ -53,27 +50,7 @@ class GenePair extends PhetioObject {
     this.fatherAllele = fatherAllele;
     this.motherAllele = motherAllele;
 
-    // @private {Allele[]} alleles that will be passed on to children, initialized by updateChildAlleles
-    this.childAlleles = [];
-    this.childAllelesIndex = 0;
-    this.updateChildAlleles();
-
     this.validateInstance();
-  }
-
-  /**
-   * Updates the data structure that is used to donate alleles to children.
-   * This is used to simulate Mendelian inheritance. If a bunny is heterozygous (different alleles), then its alleles
-   * must be donated to offspring with equal frequency. Choosing fatherAllele vs motherAllele using random number
-   * generation would eventually produce equal frequency, but possibly not for a very long time. Putting 2 copies
-   * of each allele in childAlleles and shuffling guarantees that we will immediately have equal frequency, with
-   * some degree of randomness. If there was only 1 copy of each allele in childAlleles, we'd simply be alternating
-   * between the 2 alleles.
-   * @private
-   */
-  updateChildAlleles() {
-    this.childAlleles = phet.joist.random.shuffle( [ this.fatherAllele, this.fatherAllele, this.motherAllele, this.motherAllele ] );
-    this.childAllelesIndex = 0;
   }
 
   /**
@@ -102,8 +79,6 @@ class GenePair extends PhetioObject {
         this.motherAllele = mutantAllele;
       }
     }
-
-    this.updateChildAlleles();
   }
 
   /**
@@ -122,20 +97,6 @@ class GenePair extends PhetioObject {
    */
   isHeterozygous() {
     return ( this.fatherAllele !== this.motherAllele );
-  }
-
-  /**
-   * Gets the next allele for a child. This simulates Mendelian inheritance, where father and mother gene pairs are
-   * combined to produce a child's gene pair. That is, gametes are created by random segregation, and heterozygous
-   * individuals produce gametes with an equal frequency of the two alleles.
-   * @returns {Allele}
-   * @public
-   */
-  getNextChildAllele() {
-    if ( this.childAllelesIndex >= this.childAlleles.length ) {
-      this.childAllelesIndex = 0;
-    }
-    return this.childAlleles[ this.childAllelesIndex++ ];
   }
 
   /**
@@ -175,6 +136,33 @@ class GenePair extends PhetioObject {
     return s;
   }
 
+  /**
+   * Gets the Punnett square that predicts the possible genotypes that result from breeding two bunnies. This is based
+   * on Mendelian inheritance and the Law of Segregation. The array is shuffled to satisfy Mendel's Law of Independence,
+   * which states that individual traits are inherited independently. For example, here's a Punnett square that shows
+   * the 4 possible crosses of 2 bunnies that are heterozygous ('Ff') for the fur gene:
+   *
+   *        F    f
+   *   F | FF | Ff |
+   *   f | Ff | ff |
+   *
+   * @param {GenePair} fatherGenePair
+   * @param {GenePair} motherGenePair
+   * @returns {Array.<{fatherAllele:Allele, motherAllele:Allele}>}
+   * @public
+   */
+  static getPunnettSquare( fatherGenePair, motherGenePair ) {
+    assert && assert( fatherGenePair instanceof GenePair, 'invalid fatherGenePair' );
+    assert && assert( motherGenePair instanceof GenePair, 'invalid motherGenePair' );
+
+    return phet.joist.random.shuffle( [
+      { fatherAllele: fatherGenePair.fatherAllele, motherAllele: motherGenePair.fatherAllele },
+      { fatherAllele: fatherGenePair.fatherAllele, motherAllele: motherGenePair.motherAllele },
+      { fatherAllele: fatherGenePair.motherAllele, motherAllele: motherGenePair.fatherAllele },
+      { fatherAllele: fatherGenePair.motherAllele, motherAllele: motherGenePair.motherAllele }
+    ] );
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   // Below here are methods used by GenePairIO to save and restore PhET-iO state.
   //--------------------------------------------------------------------------------------------------------------------
@@ -188,13 +176,7 @@ class GenePair extends PhetioObject {
     return {
       gene: GeneIO.toStateObject( this.gene ),
       fatherAllele: AlleleIO.toStateObject( this.fatherAllele ),
-      motherAllele: AlleleIO.toStateObject( this.motherAllele ),
-
-      // state that is not part of the public API, and will not be shown in Studio
-      private: {
-        childAlleles: ArrayIO( AlleleIO ).toStateObject( this.childAlleles ),
-        childAllelesIndex: NumberIO.toStateObject( this.childAllelesIndex )
-      }
+      motherAllele: AlleleIO.toStateObject( this.motherAllele )
     };
   }
 
@@ -208,9 +190,7 @@ class GenePair extends PhetioObject {
     return {
       gene: GeneIO.fromStateObject( stateObject.gene ),
       fatherAllele: AlleleIO.fromStateObject( stateObject.fatherAllele ),
-      motherAllele: AlleleIO.fromStateObject( stateObject.motherAllele ),
-      childAlleles: ArrayIO( AlleleIO ).fromStateObject( stateObject.private.childAlleles ),
-      childAllelesIndex: NumberIO.fromStateObject( stateObject.private.childAllelesIndex )
+      motherAllele: AlleleIO.fromStateObject( stateObject.motherAllele )
     };
   }
 
@@ -224,8 +204,6 @@ class GenePair extends PhetioObject {
     this.gene = required( state.gene );
     this.fatherAllele = required( state.fatherAllele );
     this.motherAllele = required( state.motherAllele );
-    this.childAlleles = required( state.childAlleles );
-    this.childAllelesIndex = required( state.childAllelesIndex );
     this.validateInstance();
   }
 
@@ -237,8 +215,6 @@ class GenePair extends PhetioObject {
     assert && assert( this.gene instanceof Gene, 'invalid gene' );
     assert && assert( this.fatherAllele instanceof Allele, 'invalid fatherAllele' );
     assert && assert( this.motherAllele instanceof Allele, 'invalid motherAllele' );
-    assert && assert( Array.isArray( this.childAlleles ), 'invalid childAlleles' );
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.childAllelesIndex ), 'invalid childAllelesIndex' );
   }
 }
 
