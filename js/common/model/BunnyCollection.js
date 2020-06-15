@@ -21,6 +21,11 @@ import CauseOfDeath from './CauseOfDeath.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 
+// constants
+const LITTER_SIZE = 4;
+assert && assert( LITTER_SIZE === 4,
+  'LITTER_SIZE must be 4, to correspond to the Punnett square that results from Mendel\'s Law of Segregation' );
+
 class BunnyCollection {
 
   /**
@@ -235,7 +240,7 @@ class BunnyCollection {
     const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
 
     // The number of bunnies that we expect to be born.
-    const numberToBeBorn = Math.floor( bunnies.length / 2 ) * NaturalSelectionConstants.LITTER_SIZE;
+    const numberToBeBorn = Math.floor( bunnies.length / 2 ) * LITTER_SIZE;
 
     // When a mutation is applied, this is the number of bunnies that will receive that mutation.
     const numberToMutate = Math.max( 1, Math.floor( NaturalSelectionConstants.MUTATION_PERCENTAGE * numberToBeBorn ) );
@@ -283,7 +288,7 @@ class BunnyCollection {
       const father = bunnies[ i ];
       const mother = bunnies[ i - 1 ];
 
-      for ( let j = 0; j < NaturalSelectionConstants.LITTER_SIZE; j++ ) {
+      for ( let j = 0; j < LITTER_SIZE; j++ ) {
 
         this.createBunny( {
           father: father,

@@ -29,9 +29,6 @@ const NaturalSelectionConstants = {
   // bunnies die when they reach this age, in generations
   MAX_AGE: NaturalSelectionQueryParameters.maxAge,
 
-  // number of bunnies in each litter
-  LITTER_SIZE: NaturalSelectionQueryParameters.litterSize,
-
   // percentage of newborn bunnies that will receive a mutation
   MUTATION_PERCENTAGE: NaturalSelectionQueryParameters.mutationPercentage,
 

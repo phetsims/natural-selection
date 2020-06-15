@@ -156,14 +156,6 @@ const SCHEMA = {
     isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
   },
 
-  // The number of bunnies per litter.
-  // For internal use only.
-  litterSize: {
-    type: 'number',
-    defaultValue: 4,
-    isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
-  },
-
   // This query parameter determines the percentages of bunnies that will be eaten by wolves.
   // A value is randomly chosen from this range.
   //
