@@ -15,7 +15,6 @@ import SelectedBunnyProperty from '../model/SelectedBunnyProperty.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import BunnyImageCache from './BunnyImageCache.js';
-import MutationIconNode from './MutationIconNode.js';
 
 // constants
 const IMAGE_SCALE = 0.4; // how much the bunny PNG image is scaled
@@ -52,15 +51,6 @@ class BunnyNode extends Node {
 
     assert && assert( !options.children, 'BunnyNode sets children' );
     options.children = [ selectionRectangle, wrappedImage ];
-
-    // Label original mutant with an icon
-    if ( bunny.genotype.isOriginalMutant ) {
-      options.children.push( new MutationIconNode( {
-        right: wrappedImage.centerX,
-        bottom: wrappedImage.bottom,
-        pickable: false
-      } ) );
-    }
 
     super( options );
 
