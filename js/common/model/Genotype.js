@@ -93,7 +93,8 @@ class Genotype extends PhetioObject {
       this.teethGenePair.mutate( genePool.teethGene.mutantAllele );
     }
 
-    // @public (read-only) identifies an 'original mutant', an individual where a mutation occurred
+    // @public (read-only) identifies an 'original mutant', an individual where a mutation occurred.
+    // These individuals have are denoted with a mutation icon in the Pedigree graph.
     this.isOriginalMutant = ( options.mutateFur || options.mutateEars || options.mutateTeeth );
 
     // @public the translated abbreviation of the Genotype. PhET-iO only, not used in brand=phet.
