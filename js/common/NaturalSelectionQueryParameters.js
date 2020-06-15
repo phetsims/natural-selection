@@ -73,6 +73,9 @@ const SCHEMA = {
   // then allow you to hide Fur in the Lab screen.  Or it will accept 'introMutations=T' and assume that PhET-iO
   // will be making Teeth visible in the Intro screen.
   //
+  // NOTE: Allele abbreviations are (by design) not translated in query parameters. If you are using a translated
+  // version of the sim, you must use the English allele abbreviations in query parameters.
+  //
   labMutations: {
     type: 'string',
     defaultValue: '',
