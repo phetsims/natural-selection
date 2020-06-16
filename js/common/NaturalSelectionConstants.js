@@ -44,9 +44,6 @@ const NaturalSelectionConstants = {
 
   // View ============================================================================================================N
 
-  // Whether the concept of alleles is present in the UI
-  ALLELES_VISIBLE: NaturalSelectionQueryParameters.allelesVisible,
-
   // ScreenView
   SCREEN_VIEW_X_MARGIN: 15, // margins at left and right edges of the ScreenView
   SCREEN_VIEW_Y_MARGIN: 15, // margins at top and bottom edges of the ScreenView

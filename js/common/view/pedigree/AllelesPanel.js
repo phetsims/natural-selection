@@ -23,6 +23,7 @@ import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
+import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 import NaturalSelectionCheckbox from '../NaturalSelectionCheckbox.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
 
@@ -165,7 +166,7 @@ class Row extends VBox {
 
     super( options );
 
-    if ( NaturalSelectionConstants.ALLELES_VISIBLE ) {
+    if ( NaturalSelectionQueryParameters.allelesVisible ) {
 
       // unlink is not necessary.
       gene.dominantAlleleProperty.link( dominantAllele => {
