@@ -59,13 +59,14 @@ class BunnyCollection {
       phetioState: false
     } );
 
-    // @private {Bunny[]} recessive mutants to be mated eagerly. Mutants are added to this array when born, and
-    // removed as soon as they have mated with another bunny that has the mutation.
+    // @private {Bunny[]} Recessive mutants, to be mated eagerly so that their mutation appears in the phenotype as
+    // soon as possible. Mutants are added to this array when born, and removed as soon as they have mated with
+    // another bunny that has the mutation.
     this.recessiveMutants = new BunnyArray( {
       tandem: options.tandem.createTandem( 'recessiveMutants' ),
       phetioType: BunnyArrayIO,
       phetioState: false,
-      phetioDocumentation: 'recessive mutants to be mated eagerly, so that their mutation appears in the phenotype as soon as possible'
+      phetioDocumentation: 'for internal PhET use only'
     } );
 
     // @public notify when a bunny has been created
