@@ -137,10 +137,10 @@ class GenePair extends PhetioObject {
   }
 
   /**
-   * Gets the Punnett square that predicts the possible genotypes that result from breeding two bunnies. This is based
-   * on Mendelian inheritance and the Law of Segregation. The array is shuffled to satisfy Mendel's Law of Independence,
-   * which states that individual traits are inherited independently. For example, here's a Punnett square that shows
-   * the 4 possible crosses of 2 bunnies that are heterozygous ('Ff') for the fur gene:
+   * Gets the Punnett square that predicts the possible genotypes (genetic cross) that result from breeding two bunnies.
+   * This is based on Mendelian inheritance and the Law of Segregation. The array is shuffled to satisfy Mendel's
+   * Law of Independence, which states that individual traits are inherited independently. For example, here's a
+   * Punnett square that shows the 4 possible crosses of 2 bunnies that are heterozygous ('Ff') for the fur gene:
    *
    *        F    f
    *   F | FF | Ff |
