@@ -137,45 +137,6 @@ class Genotype extends PhetioObject {
            this.teethGenePair.getGenotypeAbbreviation( translated );
   }
 
-  /**
-   * Creates a Genotype with a specific set of alleles.
-   * @param {GenePool} genePool
-   * @param {Alleles} alleles
-   * @param {Object} [options]
-   * @returns {Genotype}
-   * @public
-   */
-  static withAlleles( genePool, alleles, options ) {
-
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( alleles, 'invalid alleles' );
-
-    return new Genotype( genePool,
-      alleles.fatherFurAllele, alleles.motherFurAllele,
-      alleles.fatherEarsAllele, alleles.motherEarsAllele,
-      alleles.fatherTeethAllele, alleles.motherTeethAllele,
-      options );
-  }
-
-  /**
-   * Creates a Genotype using the normal allele for every gene. This is typically used for a generation-zero
-   * bunny that has no parents, and can therefore not inherit genes.
-   * @param genePool
-   * @param options
-   * @returns {Genotype}
-   * @public
-   */
-  static withNormalAlleles( genePool, options ) {
-
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-
-    return new Genotype( genePool,
-      genePool.furGene.normalAllele, genePool.furGene.normalAllele,
-      genePool.earsGene.normalAllele, genePool.earsGene.normalAllele,
-      genePool.teethGene.normalAllele, genePool.teethGene.normalAllele,
-      options );
-  }
-
   //--------------------------------------------------------------------------------------------------------------------
   // Below here are methods used by GenotypeIO to save and restore PhET-iO state.
   //--------------------------------------------------------------------------------------------------------------------
