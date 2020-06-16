@@ -125,7 +125,6 @@ const SCHEMA = {
   //------------------------------------------------------------------------------------------------------------------
 
   // Seconds of real time per cycle of the generation clock.
-  // For internal use only.
   secondsPerGeneration: {
     type: 'number',
     defaultValue: 10,
@@ -133,7 +132,6 @@ const SCHEMA = {
   },
 
   // Seconds of real time per each press of the Step button.
-  // For internal use only.
   secondsPerStep: {
     type: 'number',
     defaultValue: 0.1,
@@ -141,7 +139,6 @@ const SCHEMA = {
   },
 
   // The number of bunnies required to 'take over the world'.
-  // For internal use only.
   maxPopulation: {
     type: 'number',
     defaultValue: 750,
@@ -149,7 +146,6 @@ const SCHEMA = {
   },
 
   // The number of bunnies per litter.
-  // For internal use only.
   maxAge: {
     type: 'number',
     defaultValue: 5,
@@ -162,8 +158,6 @@ const SCHEMA = {
   // Bunnies whose fur color matches the environment will be eaten at the rate specified by wolvesPercentToKill.
   // Bunnies whose fur color does NOT match the environment will be eaten at the rate of wolvesEnvironmentMultiplier *
   // wolvesPercentToKill.
-  //
-  // For internal use only.
   wolvesPercentToKill: {
     type: 'array',
     elementSchema: { type: 'number' },
@@ -172,7 +166,6 @@ const SCHEMA = {
   },
 
   // Multiplier for when the bunny's fur color does not match the environment, applied to wolvesPercentToKill.
-  // For internal use only.
   wolvesEnvironmentMultiplier: {
     type: 'number',
     defaultValue: 3,
@@ -182,7 +175,6 @@ const SCHEMA = {
   // This query parameter determines the percentages of bunnies that will die of starvation when food is tender.
   // A value is randomly chosen from this range.
   // Bunnies will die at this rate regardless of their teeth alleles.
-  // For internal use only.
   limitedFoodPercentToKill: {
     type: 'array',
     elementSchema: { type: 'number' },
@@ -196,8 +188,6 @@ const SCHEMA = {
   // Bunnies with long teeth will die at the rate specified by toughFoodPercentToKill.
   // Bunnies with short teeth will die at the rate of toughFoodPercentToKill * ?shortTeethMultiplier.
   // If food is also limited, then the values for both types of bunny will be multiplied by ?limitedFoodMultiplier.
-  //
-  // For internal use only.
   toughFoodPercentToKill: {
     type: 'array',
     elementSchema: { type: 'number' },
@@ -206,7 +196,6 @@ const SCHEMA = {
   },
 
   // Multiplier for bunnies with short teeth when food is tough, applied to toughFoodPercentToKill.
-  // For internal use only.
   shortTeethMultiplier: {
     type: 'number',
     defaultValue: 3,
@@ -214,7 +203,6 @@ const SCHEMA = {
   },
 
   // Multiplier for when limited food is combined with tough food, applied to toughFoodPercentToKill.
-  // For internal use only.
   limitedFoodMultiplier: {
     type: 'number',
     defaultValue: 2,
@@ -222,7 +210,6 @@ const SCHEMA = {
   },
 
   // The minimum number of wolves
-  // For internal use only.
   minWolves: {
     type: 'number',
     defaultValue: 5,
@@ -231,7 +218,6 @@ const SCHEMA = {
 
   // The number of bunnies per wolf. Wolves are created based on the size of the bunny population.
   // The formula is: numberOfWolves = Math.max( ?minWolves, numberOfBunnies / ?bunniesPerWolf )
-  // For internal use only.
   bunniesPerWolf: {
     type: 'number',
     defaultValue: 10,
@@ -239,32 +225,27 @@ const SCHEMA = {
   },
 
   // Adds a red dot at the origin of some objects (bunnies, wolves, food)
-  // For internal use only.
   showOrigin: {
     type: 'flag'
   },
 
   // Draws a red line where the horizon is located
-  // For internal use only.
   showHorizon: {
     type: 'flag'
   },
 
-  // Whether to label original mutants in the environment
-  // For internal use only.
+  // Whether to label original mutants in the environment.
   labelMutants: {
     type: 'flag'
   },
 
   // When a mutation is applied, the mutant is homozygous.
-  // For internal use only.
   homozygousMutants: {
     type: 'flag'
   },
 
   // Percentage of newborn bunnies that will receive a mutation. Symmetric rounding is used, and at least 1 bunny will
   // receive the mutation.
-  // For internal use only.
   mutationPercentage: {
     type: 'number',
 
