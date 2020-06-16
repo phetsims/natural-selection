@@ -32,9 +32,6 @@ const NaturalSelectionConstants = {
   // number of offspring produced each time a pair of bunnies mates
   LITTER_SIZE: 4,
 
-  // percentage of newborn bunnies that will receive a mutation
-  MUTATION_PERCENTAGE: NaturalSelectionQueryParameters.mutationPercentage,
-
   // seconds per generation, one revolution of the generation clock
   SECONDS_PER_GENERATION: NaturalSelectionQueryParameters.secondsPerGeneration,
 
@@ -124,12 +121,6 @@ const NaturalSelectionConstants = {
 
 assert && assert( NaturalSelectionConstants.LITTER_SIZE === 4,
   'LITTER_SIZE must be 4, to correspond to the Punnett square that results from Mendel\'s Law of Segregation' );
-
-// All 3 mutations can be applied simultaneously. Mutation is mutually-exclusive by gene type. A bunny can have at most
-// 1 mutation. And we have 3 mutations, for fur, ears, and teeth. So at most 1/3 of the population can get a specific
-// mutation.
-assert && assert( NaturalSelectionConstants.MUTATION_PERCENTAGE > 0 && NaturalSelectionConstants.MUTATION_PERCENTAGE <= 1/3,
-  'MUTATION_PERCENTAGE must be > 0 and <= 1/numberOfGeneTypes' );
 
 assert && assert( NaturalSelectionConstants.SECONDS_PER_STEP < NaturalSelectionConstants.SECONDS_PER_GENERATION,
   'SECONDS_PER_STEP must be < SECONDS_PER_GENERATION' );

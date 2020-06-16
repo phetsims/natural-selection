@@ -8,10 +8,12 @@
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';
+import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import Bunny from './Bunny.js';
 import BunnyArray from './BunnyArray.js';
@@ -273,7 +275,7 @@ class BunnyCollection {
     if ( mutateFur || mutateEars || mutateTeeth ) {
 
       // When a mutation is applied, this is the number of bunnies that will receive that mutation.
-      const numberToMutate = Math.max( 1, Math.floor( NaturalSelectionConstants.MUTATION_PERCENTAGE * numberToBeBorn ) );
+      const numberToMutate = Math.max( 1, Utils.roundSymmetric( NaturalSelectionQueryParameters.mutationPercentage * numberToBeBorn ) );
 
       // Create indices of the new bunnies, for the purpose of applying mutations.
       let indices = [];

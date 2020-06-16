@@ -262,7 +262,8 @@ const SCHEMA = {
     type: 'flag'
   },
 
-  // Percentage of newborn bunnies that will receive a mutation
+  // Percentage of newborn bunnies that will receive a mutation. Symmetric rounding is used, and at least 1 bunny will
+  // receive the mutation.
   // For internal use only.
   mutationPercentage: {
     type: 'number',
@@ -270,7 +271,9 @@ const SCHEMA = {
     // from the Java version, see MUTATING_BUNNY_PER_BUNNIES in NaturalSelectionDefaults.java
     defaultValue: 1/7,
 
-    // there are 3 mutations, and a bunny can have at most 1 mutation
+    // All 3 mutations can be applied simultaneously. Mutation is mutually-exclusive by gene type. A bunny can have at
+    // most 1 mutation. And we have 3 mutations, for fur, ears, and teeth. So at most 1/3 of the population can get a
+    // specific mutation.
     isValidValue: value => ( value > 0  && value <= 1/3 )
   }
 };
