@@ -283,18 +283,23 @@ class BunnyCollection {
     assert && assert( Array.isArray( earsIndices ), 'expected an array' );
     assert && assert( Array.isArray( teethIndices ), 'expected an array' );
 
-    // Mate adjacent pairs from the collection, applying mutations where appropriate.
+    // Mate pairs from the collection, applying mutations where appropriate.
     for ( let i = 1; i < bunnies.length; i = i + 2 ) {
 
+      // Mate adjacent bunnies. In this sim, bunnies are sexless, so their sex is irrelevant.
       const father = bunnies[ i ];
       const mother = bunnies[ i - 1 ];
 
+      // Get the Punnett square (genetic cross) for each gene. The order of each cross is random.
+      // The return type is {Array.<{fatherAllele:Allele, motherAllele:Allele}>}.
       const furPunnetSquare = GenePair.getPunnettSquare( father.genotype.furGenePair, mother.genotype.furGenePair );
       const earsPunnetSquare = GenePair.getPunnettSquare( father.genotype.earsGenePair, mother.genotype.earsGenePair );
       const teethPunnetSquare = GenePair.getPunnettSquare( father.genotype.teethGenePair, mother.genotype.teethGenePair );
 
+      // Create a litter for this bunny pair
       for ( let j = 0; j < LITTER_SIZE; j++ ) {
 
+        // Create a bunny
         this.createBunny( {
           father: father,
           mother: mother,
