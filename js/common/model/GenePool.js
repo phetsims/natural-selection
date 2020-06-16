@@ -10,6 +10,7 @@
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import Allele from './Allele.js';
 import Gene from './Gene.js';
 
 class GenePool {
@@ -62,6 +63,23 @@ class GenePool {
    */
   dispose() {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
+
+  /**
+   * Is the specified allele a recessive mutation?
+   * @param {Allele} allele
+   * @returns {boolean}
+   * @public
+   */
+  isRecessiveMutation( allele ) {
+    assert && assert( allele instanceof Allele, 'invalid allele' );
+
+    let isRecessiveMutation = false;
+    for ( let i = 0; i < this.genes.length && !isRecessiveMutation; i++ ) {
+      isRecessiveMutation = ( this.genes[ i ].mutantAllele === allele ) &&
+                            ( this.genes[ i ].recessiveAlleleProperty.value === allele );
+    }
+    return isRecessiveMutation;
   }
 }
 

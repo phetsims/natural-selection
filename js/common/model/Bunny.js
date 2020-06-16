@@ -248,6 +248,16 @@ class Bunny extends NaturalSelectionSprite {
   }
 
   /**
+   * Is this bunny an 'original mutant'? An original mutant is a bunny in which the mutation first occurred.
+   * These bunnies are labeled with a mutation icon in the Pedigree graph.
+   * @returns {boolean}
+   * @public
+   */
+  isOriginalMutant() {
+    return !!this.genotype.mutation;
+  }
+
+  /**
    * Converts Bunny to a string. This is intended for debugging only. Do not rely on the format of this string!
    * @returns {string}
    * @public

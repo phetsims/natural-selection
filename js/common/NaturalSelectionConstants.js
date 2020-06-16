@@ -29,6 +29,9 @@ const NaturalSelectionConstants = {
   // bunnies die when they reach this age, in generations
   MAX_AGE: NaturalSelectionQueryParameters.maxAge,
 
+  // number of offspring produced each time a pair of bunnies mates
+  LITTER_SIZE: 4,
+
   // percentage of newborn bunnies that will receive a mutation
   MUTATION_PERCENTAGE: NaturalSelectionQueryParameters.mutationPercentage,
 
@@ -118,6 +121,9 @@ const NaturalSelectionConstants = {
   PROPORTIONS_LEGEND_FONT: new PhetFont( 16 ),
   DIALOG_FONT: new PhetFont( 16 )
 };
+
+assert && assert( NaturalSelectionConstants.LITTER_SIZE === 4,
+  'LITTER_SIZE must be 4, to correspond to the Punnett square that results from Mendel\'s Law of Segregation' );
 
 // All 3 mutations can be applied simultaneously. Mutation is mutually-exclusive by gene type. A bunny can have at most
 // 1 mutation. And we have 3 mutations, for fur, ears, and teeth. So at most 1/3 of the population can get a specific

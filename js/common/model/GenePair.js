@@ -15,6 +15,7 @@ import required from '../../../../phet-core/js/required.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import Allele from './Allele.js';
 import AlleleIO from './AlleleIO.js';
@@ -116,6 +117,17 @@ class GenePair extends PhetioObject {
   }
 
   /**
+   * Does this gene pair contain a specific allele?
+   * @param {Allele} allele
+   * @returns {boolean}
+   * @public
+   */
+  hasAllele( allele ) {
+    assert && assert( allele instanceof Allele, 'invalid allele' );
+    return ( this.fatherAllele === allele || this.motherAllele === allele );
+  }
+
+  /**
    * Gets the genotype abbreviation for the alleles in this gene pair. If there is no dominant gene,
    * then an abbreviation is meaningless, and the empty string is returned.
    * @param {boolean} translated - true = translated (default), false = untranslated
@@ -155,12 +167,15 @@ class GenePair extends PhetioObject {
     assert && assert( fatherGenePair instanceof GenePair, 'invalid fatherGenePair' );
     assert && assert( motherGenePair instanceof GenePair, 'invalid motherGenePair' );
 
-    return phet.joist.random.shuffle( [
+    const punnettSquare = phet.joist.random.shuffle( [
       { fatherAllele: fatherGenePair.fatherAllele, motherAllele: motherGenePair.fatherAllele },
       { fatherAllele: fatherGenePair.fatherAllele, motherAllele: motherGenePair.motherAllele },
       { fatherAllele: fatherGenePair.motherAllele, motherAllele: motherGenePair.fatherAllele },
       { fatherAllele: fatherGenePair.motherAllele, motherAllele: motherGenePair.motherAllele }
     ] );
+    assert && assert( punnettSquare.length === NaturalSelectionConstants.LITTER_SIZE, 'invalid punnettSquare.length' );
+
+    return punnettSquare;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

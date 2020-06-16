@@ -22,11 +22,6 @@ import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePair from './GenePair.js';
 import GenePool from './GenePool.js';
 
-// constants
-const LITTER_SIZE = 4;
-assert && assert( LITTER_SIZE === 4,
-  'LITTER_SIZE must be 4, to correspond to the Punnett square that results from Mendel\'s Law of Segregation' );
-
 class BunnyCollection {
 
   /**
@@ -64,6 +59,15 @@ class BunnyCollection {
       phetioState: false
     } );
 
+    // @private {Bunny[]} recessive mutants to be mated eagerly. Mutants are added to this array when born, and
+    // removed as soon as they have mated with another bunny that has the mutation.
+    this.recessiveMutants = new BunnyArray( {
+      tandem: options.tandem.createTandem( 'recessiveMutants' ),
+      phetioType: BunnyArrayIO,
+      phetioState: false,
+      phetioDocumentation: 'recessive mutants to be mated eagerly, so that their mutation appears in the phenotype as soon as possible'
+    } );
+
     // @public notify when a bunny has been created
     this.bunnyCreatedEmitter = new Emitter( {
       parameters: [ { valueType: Bunny } ]
@@ -88,6 +92,7 @@ class BunnyCollection {
           bunny.diedEmitter.removeListener( diedListener );
           this.liveBunnies.remove( bunny );
           this.deadBunnies.push( bunny );
+          this.recessiveMutants.contains( bunny ) && this.recessiveMutants.remove( bunny );
           if ( this.liveBunnies.length === 0 ) {
             this.allBunniesHaveDiedEmitter.emit();
           }
@@ -113,6 +118,7 @@ class BunnyCollection {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
       this.liveBunnies.contains( bunny ) && this.liveBunnies.remove( bunny );
       this.deadBunnies.contains( bunny ) && this.deadBunnies.remove( bunny );
+      this.recessiveMutants.contains( bunny ) && this.recessiveMutants.remove( bunny );
     } );
 
     // @private fields needed by methods
@@ -235,16 +241,20 @@ class BunnyCollection {
   mateBunnies( generation ) {
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
 
+    // The number of bunnies born.
     let bornIndex = 0;
 
-    // Shuffle the collection of live bunnies so that mating is random.
+    // Shuffle the collection of live bunnies so that mating is random. shuffle returns a new array.
     const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
 
-    // The number of bunnies that we expect to be born.
-    const numberToBeBorn = Math.floor( bunnies.length / 2 ) * LITTER_SIZE;
+    // Prioritize mating of bunnies that have a recessive mutation, so that the mutation appears in the phenotype
+    // as soon as possible. See https://github.com/phetsims/natural-selection/issues/98.
+    if ( this.recessiveMutants.length > 0 ) {
+      this.mateRecessiveMutants( generation, bunnies );
+    }
 
-    // When a mutation is applied, this is the number of bunnies that will receive that mutation.
-    const numberToMutate = Math.max( 1, Math.floor( NaturalSelectionConstants.MUTATION_PERCENTAGE * numberToBeBorn ) );
+    // The number of bunnies that we expect to be born.
+    const numberToBeBorn = Math.floor( bunnies.length / 2 ) * NaturalSelectionConstants.LITTER_SIZE;
 
     // Determine which mutations should be applied, then reset the gene pool.
     const mutateFur = this.genePool.furGene.mutationComingProperty.value;
@@ -252,12 +262,17 @@ class BunnyCollection {
     const mutateTeeth = this.genePool.teethGene.mutationComingProperty.value;
     this.genePool.resetMutationComing();
 
-    // Randomly select indices for the new bunnies that will be mutated.
-    // Mutations are mutually exclusive, no bunny receives more than 1 mutation.
+    // Indices (values of bornIndex) for the new bunnies that will be mutated.
+    // Mutations are mutually exclusive, as are the values in these arrays.
     let furIndices = [];
     let earsIndices = [];
     let teethIndices = [];
+
+    // If a mutation is to be applied...
     if ( mutateFur || mutateEars || mutateTeeth ) {
+
+      // When a mutation is applied, this is the number of bunnies that will receive that mutation.
+      const numberToMutate = Math.max( 1, Math.floor( NaturalSelectionConstants.MUTATION_PERCENTAGE * numberToBeBorn ) );
 
       // Create indices of the new bunnies, for the purpose of applying mutations.
       let indices = [];
@@ -268,7 +283,7 @@ class BunnyCollection {
       // Randomly shuffle the indices, so that we can just take how many we need from the beginning of the array.
       indices = phet.joist.random.shuffle( indices );
 
-      // Select indices for each mutation that will be applied by taking indies from the beginning of the array.
+      // Select indices for each mutation that will be applied by taking indices from the beginning of the array.
       if ( mutateFur ) {
         furIndices = indices.splice( 0, numberToMutate );
       }
@@ -297,10 +312,10 @@ class BunnyCollection {
       const teethPunnetSquare = GenePair.getPunnettSquare( father.genotype.teethGenePair, mother.genotype.teethGenePair );
 
       // Create a litter for this bunny pair
-      for ( let j = 0; j < LITTER_SIZE; j++ ) {
+      for ( let j = 0; j < NaturalSelectionConstants.LITTER_SIZE; j++ ) {
 
-        // Create a bunny
-        this.createBunny( {
+        // A bunny is born
+        const bunny = this.createBunny( {
           father: father,
           mother: mother,
           generation: generation,
@@ -322,6 +337,12 @@ class BunnyCollection {
         } );
 
         bornIndex++;
+
+        // Keep track of recessive mutants, to be 'mated eagerly' when another bunny with the mutation exists.
+        if ( bunny.isOriginalMutant() && this.genePool.isRecessiveMutation( bunny.genotype.mutation ) ) {
+          phet.log && phet.log( `adding to recessiveMutants: ${bunny}` );
+          this.recessiveMutants.push( bunny );
+        }
       }
     }
 
@@ -332,6 +353,75 @@ class BunnyCollection {
     // Notify if bunnies have taken over the world.
     if ( this.liveBunnies.lengthProperty.value >= NaturalSelectionConstants.MAX_POPULATION ) {
       this.bunniesHaveTakenOverTheWorldEmitter.emit();
+    }
+  }
+
+  /**
+   * Mates each recessive mutant with a bunny that has the same mutation. The purpose of this is to make the
+   * mutation appear in the phenotype sooner. This must be done separately from other mating because we don't want
+   * to apply additional mutations. Note that the bunnies argument is modified as a side-effect.
+   * @param {number} generation
+   * @param {Bunny[]} bunnies - the bunnies that are candidates for mating
+   * @private
+   */
+  mateRecessiveMutants( generation, bunnies ) {
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
+    assert && assert( Array.isArray( bunnies ), 'invalid bunnies' );
+
+    const recessiveMutantsCopy = this.recessiveMutants.getArrayCopy();
+
+    // For each recessive mutant...
+    while ( recessiveMutantsCopy.length > 0 ) {
+
+      const fatherIndex = 0;
+      const mutantFather = recessiveMutantsCopy[ fatherIndex ];
+      recessiveMutantsCopy.splice( fatherIndex, 1 );
+
+      // If we find a mate...
+      const mutantMother = getMateForRecessiveMutant( mutantFather, bunnies );
+      if ( mutantMother ) {
+
+        // Get the Punnett square (genetic cross) for each gene. The order of each cross is random.
+        // The return type is {Array.<{fatherAllele:Allele, motherAllele:Allele}>}.
+        const furPunnetSquare = GenePair.getPunnettSquare( mutantFather.genotype.furGenePair, mutantMother.genotype.furGenePair );
+        const earsPunnetSquare = GenePair.getPunnettSquare( mutantFather.genotype.earsGenePair, mutantMother.genotype.earsGenePair );
+        const teethPunnetSquare = GenePair.getPunnettSquare( mutantFather.genotype.teethGenePair, mutantMother.genotype.teethGenePair );
+
+        // Create a litter for this bunny pair
+        for ( let i = 0; i < NaturalSelectionConstants.LITTER_SIZE; i++ ) {
+
+          // A bunny is born
+          this.createBunny( {
+            father: mutantFather,
+            mother: mutantMother,
+            generation: generation,
+            genotypeOptions: {
+
+              // inherited alleles
+              fatherFurAllele: furPunnetSquare[ i ].fatherAllele,
+              motherFurAllele: furPunnetSquare[ i ].motherAllele,
+              fatherEarsAllele: earsPunnetSquare[ i ].fatherAllele,
+              motherEarsAllele: earsPunnetSquare[ i ].motherAllele,
+              fatherTeethAllele: teethPunnetSquare[ i ].fatherAllele,
+              motherTeethAllele: teethPunnetSquare[ i ].motherAllele
+            }
+          } );
+        }
+
+        // Remove the mutants from further consideration of mating.
+        bunnies.splice( bunnies.indexOf( mutantFather ), 1 );
+        bunnies.splice( bunnies.indexOf( mutantMother ), 1 );
+
+        // Remove the mutants from further consideration of mating eagerly. Note that the mother may have been a
+        // sibling (another original mutant created in the same generation) or a member of a later generation.
+        this.recessiveMutants.remove( mutantFather );
+        if ( this.recessiveMutants.contains( mutantMother ) ) {
+          this.recessiveMutants.remove( mutantMother );
+        }
+        if ( recessiveMutantsCopy.indexOf( mutantMother ) !== -1 ) {
+          recessiveMutantsCopy.splice( recessiveMutantsCopy.indexOf( mutantMother ), 1 );
+        }
+      }
     }
   }
 
@@ -364,6 +454,28 @@ class BunnyCollection {
     assert( live + dead === total && total === bunnyGroupLength,
       `bunny counts are out of sync, live=${live}, dead=${dead}, total=${total} bunnyGroupLength=${bunnyGroupLength}` );
   }
+}
+
+/**
+ * Gets a suitable mate for a recessive mutant.
+ * The suitable mate must have the same mutant allele that caused the recessive mutant to mutate.
+ * @param {Bunny} father
+ * @param {Bunny[]} bunnies
+ * @returns {Bunny|null} null if no mate is found
+ */
+function getMateForRecessiveMutant( father, bunnies ) {
+  assert && assert( father instanceof Bunny, 'invalid father' );
+  assert && assert( father.isOriginalMutant(), 'father must be an original mutant' );
+  assert && assert( father.genotype.mutation, 'father must have a mutated genotype' );
+
+  let mother = null;
+  for ( let i = 0; i < bunnies.length && !mother; i++ ) {
+    const bunny = bunnies[ i ];
+    if ( bunny !== father && bunny.genotype.hasAllele( father.genotype.mutation ) ) {
+      mother = bunny;
+    }
+  }
+  return mother;
 }
 
 naturalSelection.register( 'BunnyCollection', BunnyCollection );

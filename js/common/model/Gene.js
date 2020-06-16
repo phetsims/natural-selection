@@ -8,6 +8,8 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import Property from '../../../../axon/js/Property.js';
 import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -67,7 +69,7 @@ class Gene extends PhetioObject {
     this.recessiveAbbreviationTranslated = recessiveAbbreviationTranslated;
     this.color = color;
 
-    // @public {Allele|null} the dominate allele, null until the gene has mutated.  Until a mutation occurs, 
+    // @public {Allele|null} the dominate allele, null until the gene has mutated.  Until a mutation occurs,
     // only the normal allele exists in the population, and the concepts of dominant and recessive are meaningless.
     this.dominantAlleleProperty = new Property( null, {
       validValues: [ null, normalAllele, mutantAllele ],
@@ -76,15 +78,21 @@ class Gene extends PhetioObject {
       phetioReadOnly: true
     } );
 
-    // unlink is not necessary.
-    phet.log && this.dominantAlleleProperty.link( dominantAllele => {
-      if ( dominantAllele ) {
-        phet.log && phet.log( `${this.name}: ${dominantAllele.name} is dominant` );
-      }
-      else {
-        phet.log && phet.log( `${this.name}: no dominant allele` );
-      }
-    } );
+    // @public {Allele|null} the recessive allele, null until the gene has mutated. Until a mutation occurs,
+    // only the normal allele exists in the population, and the concepts of dominant and recessive are meaningless.
+    this.recessiveAlleleProperty = new DerivedProperty(
+      [ this.dominantAlleleProperty ],
+      dominantAllele => {
+        let recessiveAllele = null;
+        if ( dominantAllele ) {
+          recessiveAllele = ( dominantAllele === normalAllele ) ? mutantAllele : normalAllele;
+        }
+        return recessiveAllele;
+      }, {
+        validValues: [ null, normalAllele, mutantAllele ],
+        phetioType: DerivedPropertyIO( NullableIO( AlleleIO ) ),
+        tandem: options.tandem.createTandem( 'recessiveAlleleProperty' )
+      } );
 
     // @public is a mutation coming in the next generation of bunnies?
     this.mutationComingProperty = new BooleanProperty( false, {

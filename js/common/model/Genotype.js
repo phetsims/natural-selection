@@ -12,9 +12,12 @@ import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import NullableIO from '../../../../tandem/js/types/NullableIO.js';
+import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import Allele from './Allele.js';
+import AlleleIO from './AlleleIO.js';
 import GenePair from './GenePair.js';
 import GenePairIO from './GenePairIO.js';
 import GenePool from './GenePool.js';
@@ -51,8 +54,8 @@ class Genotype extends PhetioObject {
       phetioDocumentation: 'the genetic blueprint for a bunny'
     }, options );
 
-    assert && assert( _.filter( [ options.mutateFur, options.mutateEars, options.mutateTeeth ],
-      mutation => mutation ).length <= 1, 'mutations are mutually exclusive' );
+    assert && assert( _.filter( [ options.mutateFur, options.mutateEars, options.mutateTeeth ] ).length <= 1,
+      'mutations are mutually exclusive' );
 
     super( options );
 
@@ -74,21 +77,23 @@ class Genotype extends PhetioObject {
       phetioDocumentation: 'gene pair that determines the teeth trait'
     } );
 
-    // After gene pairs have been created, apply mutations. This ensures that an allele is inherited and then modified,
-    // so that the distribution of alleles in the population is correct.
+    // @public (read-only) {Allele|null} optional mutation that modified this genotype
+    this.mutation = null;
+
+    // After gene pairs have been created, apply an optional mutation. This ensures that an allele is inherited and
+    // then modified, so that the distribution of alleles in the population is correct.
     if ( options.mutateFur ) {
-      this.furGenePair.mutate( genePool.furGene.mutantAllele );
+      this.mutation = genePool.furGene.mutantAllele;
+      this.furGenePair.mutate( this.mutation );
     }
     if ( options.mutateEars ) {
-      this.earsGenePair.mutate( genePool.earsGene.mutantAllele );
+      this.mutation = genePool.earsGene.mutantAllele;
+      this.earsGenePair.mutate( this.mutation );
     }
     if ( options.mutateTeeth ) {
-      this.teethGenePair.mutate( genePool.teethGene.mutantAllele );
+      this.mutation = genePool.teethGene.mutantAllele;
+      this.teethGenePair.mutate( this.mutation );
     }
-
-    // @public (read-only) identifies an 'original mutant', an individual where a mutation occurred.
-    // These individuals have are denoted with a mutation icon in the Pedigree graph.
-    this.isOriginalMutant = ( options.mutateFur || options.mutateEars || options.mutateTeeth );
 
     // @public the translated abbreviation of the Genotype. PhET-iO only, not used in brand=phet.
     // dispose is required.
@@ -125,6 +130,19 @@ class Genotype extends PhetioObject {
   }
 
   /**
+   * Does this genotype contain a specific allele?
+   * @param {Allele} allele
+   * @returns {boolean}
+   * @public
+   */
+  hasAllele( allele ) {
+    assert && assert( allele instanceof Allele, 'invalid allele' );
+    return ( this.furGenePair.hasAllele( allele ) ||
+             this.earsGenePair.hasAllele( allele ) ||
+             this.teethGenePair.hasAllele( allele ) );
+  }
+
+  /**
    * Converts a Genotype to its abbreviation, e.g. 'FfEEtt'.
    * This is intended for debugging only. Do not rely on the format!
    * @param {boolean} translated - true = translated (default), false = not translated
@@ -148,10 +166,10 @@ class Genotype extends PhetioObject {
    */
   toStateObject() {
     return {
-      isOriginalMutant: BooleanIO.toStateObject( this.isOriginalMutant ),
       furGenePair: GenePairIO.toStateObject( this.furGenePair ),
       earsGenePair: GenePairIO.toStateObject( this.earsGenePair ),
-      teethGenePair: GenePairIO.toStateObject( this.teethGenePair )
+      teethGenePair: GenePairIO.toStateObject( this.teethGenePair ),
+      mutation: NullableIO( ReferenceIO( AlleleIO ) ).toStateObject( this.mutation )
     };
   }
 
@@ -163,10 +181,10 @@ class Genotype extends PhetioObject {
    */
   static fromStateObject( stateObject ) {
     return {
-      isOriginalMutant: BooleanIO.fromStateObject( stateObject.isOriginalMutant ),
       furGenePair: GenePairIO.fromStateObject( stateObject.furGenePair ),
       earsGenePair: GenePairIO.fromStateObject( stateObject.earsGenePair ),
-      teethGenePair: GenePairIO.fromStateObject( stateObject.teethGenePair )
+      teethGenePair: GenePairIO.fromStateObject( stateObject.teethGenePair ),
+      mutation: NullableIO( ReferenceIO( AlleleIO ) ).fromStateObject( stateObject.mutation )
     };
   }
 
@@ -177,10 +195,10 @@ class Genotype extends PhetioObject {
    */
   setValue( state ) {
     required( state );
-    this.isOriginalMutant = required( state.isOriginalMutant );
     this.furGenePair.setValue( state.furGenePair );
     this.earsGenePair.setValue( state.earsGenePair );
     this.teethGenePair.setValue( state.teethGenePair );
+    this.mutation = required( state.mutation );
     this.validateInstance();
   }
 
@@ -189,10 +207,10 @@ class Genotype extends PhetioObject {
    * @private
    */
   validateInstance() {
-    assert && assert( typeof this.isOriginalMutant === 'boolean', 'invalid isOriginalMutant' );
     assert && assert( this.furGenePair instanceof GenePair, 'invalid furGenePair' );
     assert && assert( this.earsGenePair instanceof GenePair, 'invalid earsGenePair' );
     assert && assert( this.teethGenePair instanceof GenePair, 'invalid teethGenePair' );
+    assert && assert( this.mutation instanceof Allele || this.mutation === null, 'invalid mutation' );
   }
 }
 
