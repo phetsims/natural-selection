@@ -12,6 +12,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Panel from '../../../../sun/js/Panel.js';
 import SunConstants from '../../../../sun/js/SunConstants.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 class NaturalSelectionPanel extends Panel {
 
@@ -27,7 +28,7 @@ class NaturalSelectionPanel extends Panel {
       fixedWidth: null // {number|null} optional fixed width
     }, options );
 
-    assert && assert( ( typeof options.fixedWidth === 'number' && options.fixedWidth > 0 ) || options.fixedWidth === null,
+    assert && assert( NaturalSelectionUtils.isPositive( options.fixedWidth ) || options.fixedWidth === null,
       `invalid fixedWidth: ${options.fixedWidth}` );
 
     if ( options.fixedWidth ) {

@@ -260,7 +260,7 @@ class PopulationModel extends PhetioObject {
    * @public
    */
   recordCounts( generation, counts ) {
-    assert && assert( typeof generation === 'number' && generation >= 0, 'invalid generation' );
+    assert && assert( NaturalSelectionUtils.isNonNegative( generation ), 'invalid generation' );
     assert && assert( counts instanceof BunnyCounts, 'invalid counts' );
 
     phet.log && phet.log( `PopulationModel.recordCounts: generation=${generation} counts=${counts}` );
@@ -282,7 +282,7 @@ class PopulationModel extends PhetioObject {
  */
 function recordCount( observableArray, generation, count ) {
   assert && assert( observableArray instanceof ObservableArray, 'invalid observableArray' );
-  assert && assert( typeof generation === 'number' && generation >= 0, 'invalid generation' );
+  assert && assert( NaturalSelectionUtils.isNonNegative( generation ), 'invalid generation' );
   assert && assert( NaturalSelectionUtils.isNonNegativeInteger( count ), 'invalid count' );
 
   if ( observableArray.length === 0 || observableArray.get( observableArray.length - 1 ).y !== count ) {

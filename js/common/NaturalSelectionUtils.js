@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Utils from '../../../dot/js/Utils.js';
 import Color from '../../../scenery/js/util/Color.js';
 import naturalSelection from '../naturalSelection.js';
 
@@ -111,13 +110,43 @@ const NaturalSelectionUtils = {
   },
 
   /**
+   * Determines whether a value is a positive number.
+   * @param {*} value
+   * @returns {boolean}
+   * @public
+   */
+  isPositive( value ) {
+    return ( typeof value === 'number' && value > 0 );
+  },
+
+  /**
+   * Determines whether a value is a non-negative number.
+   * @param {*} value
+   * @returns {boolean}
+   * @public
+   */
+  isNonNegative( value ) {
+    return ( typeof value === 'number' ) && ( value >= 0 );
+  },
+
+  //TODO cannot use Utils.isInteger because it fails assert for non-numbers
+  /**
+   * Determines what a value is an integer.
+   * @param {*} value
+   * @returns {boolean}
+   */
+  isInteger( value ) {
+    return ( typeof value === 'number' ) && ( value % 1 === 0 );
+  },
+
+  /**
    * Determines whether a value is a positive integer.
    * @param {*} value
    * @returns {boolean}
    * @public
    */
   isPositiveInteger( value ) {
-    return ( typeof value === 'number' && Utils.isInteger( value ) && value > 0 );
+    return NaturalSelectionUtils.isPositive( value ) && NaturalSelectionUtils.isInteger( value );
   },
 
   /**
@@ -126,7 +155,7 @@ const NaturalSelectionUtils = {
    * @returns {boolean}
    */
   isNonNegativeInteger( value ) {
-    return ( typeof value === 'number' && Utils.isInteger( value ) && value >= 0  );
+    return NaturalSelectionUtils.isNonNegative( value ) && NaturalSelectionUtils.isInteger( value );
   },
 
   /**
