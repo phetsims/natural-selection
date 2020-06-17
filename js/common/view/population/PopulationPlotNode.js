@@ -48,7 +48,7 @@ class PopulationPlotNode extends Node {
 
     options = merge( {
       color: 'black', // {Color|string} color used to render the plot
-      isMutant: false
+      isMutant: false // {boolean} is this plot for a mutant allele?
     }, options );
 
     const plotPath = new Path( new Shape(), {
