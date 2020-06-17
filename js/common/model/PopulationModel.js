@@ -30,9 +30,6 @@ import GenePool from './GenePool.js';
 
 // constants
 
-// Default x-axis range, in generations.
-const X_RANGE_DEFAULT = new Range( 0, 5 );
-
 // The default index into Y_MAXIMUMS, determines the initial y-axis range.
 const Y_MAXIMUMS_INDEX_DEFAULT = 3;
 
@@ -70,6 +67,9 @@ class PopulationModel extends PhetioObject {
 
     options = merge( {
 
+      // {number} width of the graph, in generations
+      xWidth: 5,
+
       // phet-io
       tandem: Tandem.REQUIRED,
       phetioState: false, // to prevent serialization, because we don't have an IO type
@@ -82,6 +82,7 @@ class PopulationModel extends PhetioObject {
     this.genePool = genePool;
     this.generationsProperty = generationsProperty;
     this.isPlayingProperty = isPlayingProperty;
+    this.xWidth = options.xWidth;
 
     // For organizing all data points in Studio
     const dataPointsTandem = options.tandem.createTandem( 'dataPoints' );
@@ -149,7 +150,7 @@ class PopulationModel extends PhetioObject {
     this.xAxisTickSpacing = 1;
 
     // @public range of the x-axis, in generations
-    this.xRangeProperty = new Property( new Range( 0, 5 ), {
+    this.xRangeProperty = new Property( new Range( 0, options.xWidth ), {
       isValidValue: xRange => ( xRange.min >= 0 ),
       tandem: options.tandem.createTandem( 'xRangeProperty' ),
       phetioType: PropertyIO( RangeIO ),
@@ -180,7 +181,7 @@ class PopulationModel extends PhetioObject {
     const scrollToNow = () => {
       if ( generationsProperty.value > this.xRangeProperty.value.max ) {
         const max = generationsProperty.value;
-        const min = max - X_RANGE_DEFAULT.getLength();
+        const min = max - options.xWidth;
         this.xRangeProperty.value = new Range( min, max );
       }
     };

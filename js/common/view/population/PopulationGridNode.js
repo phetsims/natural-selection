@@ -19,6 +19,7 @@ import Text from '../../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../../naturalSelection.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
+import PopulationPlotNode from './PopulationPlotNode.js';
 
 // constants
 const GRID_LINES_LINE_WIDTH = 1;
@@ -116,6 +117,66 @@ class PopulationGridNode extends Node {
       children: [ xTickLines, xTickLabels, yTickLines, yTickLabels ]
     } );
 
+    const plotsParent = new Node( {
+      clipArea: Shape.rectangle( 0, 0, options.gridWidth, options.gridHeight )
+    } );
+
+    const totalPlotNode = new PopulationPlotNode( populationModel.totalPoints, populationModel.totalVisibleProperty,
+      populationModel.xWidth, populationModel.xRangeProperty, populationModel.yRangeProperty,
+      options.gridWidth, options.gridHeight, populationModel.generationsProperty, {
+        color: NaturalSelectionColors.POPULATION_TOTAL_COUNT
+      } );
+
+    const whiteFurPlotNode = new PopulationPlotNode( populationModel.whiteFurPoints, populationModel.whiteFurVisibleProperty,
+      populationModel.xWidth, populationModel.xRangeProperty, populationModel.yRangeProperty,
+      options.gridWidth, options.gridHeight, populationModel.generationsProperty, {
+        color: NaturalSelectionColors.FUR
+      } );
+
+    const brownFurPlotNode = new PopulationPlotNode( populationModel.brownFurPoints, populationModel.brownFurVisibleProperty,
+      populationModel.xWidth, populationModel.xRangeProperty, populationModel.yRangeProperty,
+      options.gridWidth, options.gridHeight, populationModel.generationsProperty, {
+        color: NaturalSelectionColors.FUR,
+        isMutant: true
+      } );
+
+    const straightEarsPlotNode = new PopulationPlotNode( populationModel.straightEarsPoints, populationModel.straightEarsVisibleProperty,
+      populationModel.xWidth, populationModel.xRangeProperty, populationModel.yRangeProperty,
+      options.gridWidth, options.gridHeight, populationModel.generationsProperty, {
+        color: NaturalSelectionColors.EARS
+      } );
+
+    const floppyEarsPlotNode = new PopulationPlotNode( populationModel.floppyEarsPoints, populationModel.floppyEarsVisibleProperty,
+      populationModel.xWidth, populationModel.xRangeProperty, populationModel.yRangeProperty,
+      options.gridWidth, options.gridHeight, populationModel.generationsProperty, {
+        color: NaturalSelectionColors.EARS,
+        isMutant: true
+      } );
+
+    const shortTeethPlotNode = new PopulationPlotNode( populationModel.shortTeethPoints, populationModel.shortTeethVisibleProperty,
+      populationModel.xWidth, populationModel.xRangeProperty, populationModel.yRangeProperty,
+      options.gridWidth, options.gridHeight, populationModel.generationsProperty, {
+        color: NaturalSelectionColors.TEETH
+      } );
+
+    const longTeethProbeNode = new PopulationPlotNode( populationModel.longTeethPoints, populationModel.longTeethVisibleProperty,
+      populationModel.xWidth, populationModel.xRangeProperty, populationModel.yRangeProperty,
+      options.gridWidth, options.gridHeight, populationModel.generationsProperty, {
+        color: NaturalSelectionColors.TEETH,
+        isMutant: true
+      } );
+
+    // In reverse order, to match order of control panel
+    plotsParent.children = [
+      longTeethProbeNode,
+      shortTeethPlotNode,
+      floppyEarsPlotNode,
+      straightEarsPlotNode,
+      brownFurPlotNode,
+      whiteFurPlotNode,
+      totalPlotNode
+    ];
+
     // A crisp frame in the foreground, to hide overlapping of tick marks and grid lines
     const frameNode = new Rectangle( 0, 0, options.gridWidth, options.gridHeight, {
       stroke: NaturalSelectionColors.PANEL_STROKE,
@@ -123,7 +184,7 @@ class PopulationGridNode extends Node {
     } );
 
     assert && assert( !options.children, 'PopulationGraphBackgroundNode sets children' );
-    options.children = [ rectangleNode, gridLinesNode, tickMarksNode, frameNode ];
+    options.children = [ rectangleNode, gridLinesNode, tickMarksNode, plotsParent, frameNode ];
 
     super( options );
   }
