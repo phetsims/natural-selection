@@ -54,9 +54,9 @@ class WolfIO extends ObjectIO {
    * @public
    * @override
    */
-  static setValue( wolf, state ) {
+  static applyState( wolf, state ) {
     validate( wolf, this.validator );
-    wolf.setValue( state );
+    wolf.applyState( state );
   }
 }
 

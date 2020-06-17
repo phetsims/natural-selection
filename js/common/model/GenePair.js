@@ -196,7 +196,7 @@ class GenePair extends PhetioObject {
   }
 
   /**
-   * Deserializes the state needed by GenePairIO.setValue.
+   * Deserializes the state needed by GenePairIO.applyState.
    * @param {Object} stateObject
    * @returns {Object}
    * @public for use by GenePairIO only
@@ -214,7 +214,7 @@ class GenePair extends PhetioObject {
    * @param {Object} state
    * @public for use by GenePairIO only
    */
-  setValue( state ) {
+  applyState( state ) {
     required( state );
     this.gene = required( state.gene );
     this.fatherAllele = required( state.fatherAllele );

@@ -54,9 +54,9 @@ class BunnyIO extends ObjectIO {
    * @public
    * @override
    */
-  static setValue( bunny, state ) {
+  static applyState( bunny, state ) {
     validate( bunny, this.validator );
-    bunny.setValue( state );
+    bunny.applyState( state );
   }
 }
 

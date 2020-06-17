@@ -276,7 +276,7 @@ class Bunny extends NaturalSelectionSprite {
   //--------------------------------------------------------------------------------------------------------------------
   // Below here are methods used by BunnyIO to save and restore PhET-iO state.
   // NOTE! If you add a field to Bunny that is not itself an instrumented PhET-iO element (e.g. a Property),
-  // then you will likely need to add that field to toStateObject, fromStateObject, setValue, and validateInstance.
+  // then you will likely need to add that field to toStateObject, fromStateObject, applyState, and validateInstance.
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
@@ -305,7 +305,7 @@ class Bunny extends NaturalSelectionSprite {
   }
 
   /**
-   * Deserializes the state needed by BunnyIO.stateToArgsForConstructor and BunnyIO.setValue.
+   * Deserializes the state needed by BunnyIO.stateToArgsForConstructor and BunnyIO.applyState.
    * @param {Object} stateObject - return value from toStateObject
    * @returns {Object}
    * @public for use by BunnyIO only
@@ -336,25 +336,25 @@ class Bunny extends NaturalSelectionSprite {
 
     // stateToArgsForConstructor is called only for dynamic elements that are part of a group.
     // So we are not restoring anything through options, because that would not support static elements.
-    // Everything will be restored via setValue.
+    // Everything will be restored via applyState.
     return [ {} ];  // explicit options arg to Bunny constructor
   }
 
   /**
-   * Restores private state for PhET-iO. This is called by BunnyIO.setValue after a Bunny has been instantiated
+   * Restores private state for PhET-iO. This is called by BunnyIO.applyState after a Bunny has been instantiated
    * during deserialization.
    * @param {Object} state - return value of fromStateObject
    * @public for use by BunnyIO only
    */
-  setValue( state ) {
+  applyState( state ) {
     required( state );
     this.generation = required( state.generation );
     this.age = required( state.age );
     this.isAlive = required( state.isAlive );
     this.father = required( state.father );
     this.mother = required( state.mother );
-    this.genotype.setValue( state.genotype );
-    this.phenotype.setValue( state.phenotype );
+    this.genotype.applyState( state.genotype );
+    this.phenotype.applyState( state.phenotype );
     this.stepsCount = required( state.stepsCount );
     this.restSteps = required( state.restSteps );
     this.hopSteps = required( state.hopSteps );

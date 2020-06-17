@@ -43,9 +43,9 @@ class PhenotypeIO extends ObjectIO {
    * @public
    * @override
    */
-  static setValue( phenotype, state ) {
+  static applyState( phenotype, state ) {
     validate( phenotype, this.validator );
-    phenotype.setValue( state );
+    phenotype.applyState( state );
   }
 }
 

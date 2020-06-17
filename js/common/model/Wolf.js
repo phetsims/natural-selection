@@ -125,7 +125,7 @@ class Wolf extends NaturalSelectionSprite {
   }
 
   /**
-   * Deserializes the state needed by WolfIO.stateToArgsForConstructor and WolfIO.setValue.
+   * Deserializes the state needed by WolfIO.stateToArgsForConstructor and WolfIO.applyState.
    * @param {Object} stateObject - return value from toStateObject
    * @returns {Object}
    * @public for use by WolfIO only
@@ -146,17 +146,17 @@ class Wolf extends NaturalSelectionSprite {
 
     // stateToArgsForConstructor is called only for dynamic elements that are part of a group.
     // So we are not restoring anything through options, because that would not support static elements.
-    // Everything will be restored via setValue.
+    // Everything will be restored via applyState.
     return [ {} ];  // explicit options arg to Wolf constructor
   }
 
   /**
-   * Restores private state for PhET-iO. This is called by WolfIO.setValue after a Wolf has been instantiated
+   * Restores private state for PhET-iO. This is called by WolfIO.applyState after a Wolf has been instantiated
    * during deserialization.
    * @param {Object} state - return value of fromStateObject
    * @public for use by WolfIO only
    */
-  setValue( state ) {
+  applyState( state ) {
     required( state );
     //TODO
     this.validateInstance();

@@ -174,7 +174,7 @@ class Genotype extends PhetioObject {
   }
 
   /**
-   * Deserializes the state needed by GenotypeIO.setValue.
+   * Deserializes the state needed by GenotypeIO.applyState.
    * @param {Object} stateObject
    * @returns {Object}
    * @public for use by GenotypeIO only
@@ -193,11 +193,11 @@ class Genotype extends PhetioObject {
    * @param {Object} state
    * @public for use by GenotypeIO only
    */
-  setValue( state ) {
+  applyState( state ) {
     required( state );
-    this.furGenePair.setValue( state.furGenePair );
-    this.earsGenePair.setValue( state.earsGenePair );
-    this.teethGenePair.setValue( state.teethGenePair );
+    this.furGenePair.applyState( state.furGenePair );
+    this.earsGenePair.applyState( state.earsGenePair );
+    this.teethGenePair.applyState( state.teethGenePair );
     this.mutation = required( state.mutation );
     this.validateInstance();
   }

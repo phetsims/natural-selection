@@ -43,9 +43,9 @@ class GenePairIO extends ObjectIO {
    * @public
    * @override
    */
-  static setValue( genePair, state ) {
+  static applyState( genePair, state ) {
     validate( genePair, this.validator );
-    genePair.setValue( state );
+    genePair.applyState( state );
   }
 }
 

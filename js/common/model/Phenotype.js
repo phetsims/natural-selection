@@ -105,7 +105,7 @@ class Phenotype extends PhetioObject {
   }
 
   /**
-   * Deserializes the state needed by PhenotypeIO.setValue.
+   * Deserializes the state needed by PhenotypeIO.applyState.
    * @param {Object} stateObject
    * @returns {Object}
    * @public for use by PhenotypeIO only
@@ -123,7 +123,7 @@ class Phenotype extends PhetioObject {
    * @param {Object} state
    * @public for use by PhenotypeIO only
    */
-  setValue( state ) {
+  applyState( state ) {
     required( state );
     this.furAllele = required( state.furAllele );
     this.earsAllele = required( state.earsAllele );
