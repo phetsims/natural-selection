@@ -11,7 +11,6 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
-import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -28,6 +27,7 @@ import GenesVisibilityManager from './GenesVisibilityManager.js';
 import GraphChoice from './GraphChoice.js';
 import GraphChoiceRadioButtonGroup from './GraphChoiceRadioButtonGroup.js';
 import MutationAlertsNode from './MutationAlertsNode.js';
+import NaturalSelectionTimeControl from './NaturalSelectionTimeControl.js';
 import PedigreeNode from './pedigree/PedigreeNode.js';
 import PlayButtonGroup from './PlayButtonGroup.js';
 import PopulationNode from './population/PopulationNode.js';
@@ -163,15 +163,7 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     // Play/pause/step time controls
-    const timeControlNode = new TimeControlNode( model.isPlayingProperty, {
-      playPauseStepButtonOptions: {
-        stepForwardButtonOptions: {
-          listener: () => {
-            model.stepOnce( NaturalSelectionConstants.SECONDS_PER_STEP );
-            this.stepOnce( NaturalSelectionConstants.SECONDS_PER_STEP );
-          }
-        }
-      },
+    const timeControlNode = new NaturalSelectionTimeControl( model.isPlayingProperty, {
       left: graphChoiceRadioButtonGroup.left,
       bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: options.tandem.createTandem( 'timeControlNode' )
