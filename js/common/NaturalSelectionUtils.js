@@ -26,6 +26,8 @@ const NaturalSelectionUtils = {
 
   /**
    * Logs the time that it takes to execute a specified function.
+   * Used for debugging during implementation, and should not appear in production.
+   *
    * For example, if you want to time this:
    *   this.step( dt );
    * Wrap it like this:
