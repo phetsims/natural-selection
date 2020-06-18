@@ -30,6 +30,7 @@ class PopulationPlotsNode extends Node {
 
     options = merge( {}, options );
 
+    //TODO avoid having to use clipArea, so that lines and points on edges of the grid look clean
     assert && assert( !options.clipArea, 'PopulationPlotsNode sets clipArea' );
     options.clipArea = Shape.rectangle( 0, 0, gridWidth, gridHeight );
 
