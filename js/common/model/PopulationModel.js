@@ -206,6 +206,21 @@ class PopulationModel extends PhetioObject {
     this.xRangeProperty.link( xRange => {
       //TODO update dataProbe.generationProperty
     } );
+
+    // When a mutation has been applied, show the plots associated with that gene.
+    // unlink is not needed
+    this.genePool.furGene.dominantAlleleProperty.link( dominantAllele => {
+      this.whiteFurVisibleProperty.value = !!dominantAllele;
+      this.brownFurVisibleProperty.value = !!dominantAllele;
+    } );
+    this.genePool.earsGene.dominantAlleleProperty.link( dominantAllele => {
+      this.straightEarsVisibleProperty.value = !!dominantAllele;
+      this.floppyEarsVisibleProperty.value = !!dominantAllele;
+    } );
+    this.genePool.teethGene.dominantAlleleProperty.link( dominantAllele => {
+      this.shortTeethVisibleProperty.value = !!dominantAllele;
+      this.longTeethVisibleProperty.value = !!dominantAllele;
+    } );
   }
 
   /**
