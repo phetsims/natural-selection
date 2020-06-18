@@ -159,17 +159,18 @@ const NaturalSelectionUtils = {
   },
 
   /**
-   * Gets the next random double in a Range.
+   * Gets the next random double in a Range, between min (inclusive) and max (exclusive).
    * @param {Range} range
    * @returns {number}
    * @public
    */
   nextInRange( range ) {
-    if ( range.min === range.max ) {
-      return range.max;
+    if ( range.min < range.max ) {
+      return phet.joist.random.nextDoubleBetween( range.min, range.max );
     }
     else {
-      return phet.joist.random.nextDoubleBetween( range.min, range.max );
+      // because random.nextDoubleBetween requires min < max
+      return range.min;
     }
   }
 };
