@@ -13,7 +13,6 @@ import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import NaturalSelectionSprite from './NaturalSelectionSprite.js';
 import SpriteDirection from './SpriteDirection.js';
@@ -47,7 +46,7 @@ class Wolf extends NaturalSelectionSprite {
     super( modelViewTransform, options );
 
     // @private
-    this.speed = NaturalSelectionUtils.nextInRange( SPEED_RANGE );
+    this.speed = phet.joist.random.nextInRange( SPEED_RANGE );
 
     // @public fires when the Wolf has been disposed. dispose is required.
     this.disposedEmitter = new Emitter();

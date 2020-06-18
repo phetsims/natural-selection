@@ -42,24 +42,6 @@ const NaturalSelectionUtils = {
   },
 
   /**
-   * Gets the next random double in a Range.
-   * For min < max, the return value is [min,max), between min (inclusive) and max (exclusive).
-   * For min === max, the return value is min.
-   * @param {Range} range
-   * @returns {number}
-   * @public
-   */
-  nextInRange( range ) {
-    if ( range.min < range.max ) {
-      return phet.joist.random.nextDoubleBetween( range.min, range.max );
-    }
-    else {
-      // because random.nextDoubleBetween requires min < max
-      return range.min;
-    }
-  },
-
-  /**
    * Determines whether an array is sorted. Duplicates are allowed, and an empty array is considered sorted.
    * @param {number[]} array
    * @param {function(value1:*,value2:*):boolean} [compare] - defaults to ascending numbers

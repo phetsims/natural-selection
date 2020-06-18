@@ -23,7 +23,6 @@ import shrubToughCImage from '../../../images/shrub-tough-C_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import CauseOfDeath from './CauseOfDeath.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenerationClock from './GenerationClock.js';
@@ -180,7 +179,7 @@ class Food {
 
         // Kill off bunnies with long teeth.
         const bunniesLongTeeth = _.filter( bunnies, bunny => bunny.phenotype.hasLongTeeth() );
-        let percentToKillLongTeeth = NaturalSelectionUtils.nextInRange( TOUGH_FOOD_PERCENT_TO_KILL_RANGE );
+        let percentToKillLongTeeth = phet.joist.random.nextInRange( TOUGH_FOOD_PERCENT_TO_KILL_RANGE );
         if ( this.isLimitedProperty.value ) {
           percentToKillLongTeeth *= LIMITED_FOOD_MULTIPLIER;
         }
@@ -210,7 +209,7 @@ class Food {
       else if ( this.isLimitedProperty.value ) {
 
         // Kill off a percentage of all bunnies, regardless of their Teeth genes.
-        const percentToKill = NaturalSelectionUtils.nextInRange( LIMITED_FOOD_PERCENT_TO_KILL_RANGE );
+        const percentToKill = phet.joist.random.nextInRange( LIMITED_FOOD_PERCENT_TO_KILL_RANGE );
         assert && assert( percentToKill > 0 && percentToKill < 1, `invalid percentToKill: ${percentToKill}` );
         const numberToKill = Math.ceil( percentToKill * bunnies.length );
         assert && assert( numberToKill <= bunnies.length, 'invalid numberToKill' );

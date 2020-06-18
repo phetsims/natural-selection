@@ -18,7 +18,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import CauseOfDeath from './CauseOfDeath.js';
 import Environment from './Environment.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -172,7 +171,7 @@ class WolfCollection {
 
       // Kill off some of each type of bunny, but a higher percentage of bunnies that don't blend into the environment.
       const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
-      const percentToKillMatch = NaturalSelectionUtils.nextInRange( WOLVES_PERCENT_TO_KILL_RANGE );
+      const percentToKillMatch = phet.joist.random.nextInRange( WOLVES_PERCENT_TO_KILL_RANGE );
       assert && assert( percentToKillMatch > 0 && percentToKillMatch < 1, `invalid percentToKillMatch: ${percentToKillMatch}` );
       const percentToKillNoMatch = WOLVES_ENVIRONMENT_MULTIPLIER * percentToKillMatch;
       assert && assert( percentToKillNoMatch > 0 && percentToKillNoMatch < 1, `invalid percentToKillNoMatch: ${percentToKillNoMatch}` );
