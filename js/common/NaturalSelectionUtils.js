@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Utils from '../../../dot/js/Utils.js';
 import naturalSelection from '../naturalSelection.js';
 
 const NaturalSelectionUtils = {
@@ -79,16 +80,6 @@ const NaturalSelectionUtils = {
     return ( typeof value === 'number' ) && ( value >= 0 );
   },
 
-  //TODO cannot use Utils.isInteger because it fails assert for non-numbers
-  /**
-   * Determines what a value is an integer.
-   * @param {*} value
-   * @returns {boolean}
-   */
-  isInteger( value ) {
-    return ( typeof value === 'number' ) && ( value % 1 === 0 );
-  },
-
   /**
    * Determines whether a value is a positive integer.
    * @param {*} value
@@ -96,7 +87,7 @@ const NaturalSelectionUtils = {
    * @public
    */
   isPositiveInteger( value ) {
-    return NaturalSelectionUtils.isPositive( value ) && NaturalSelectionUtils.isInteger( value );
+    return NaturalSelectionUtils.isPositive( value ) && Utils.isInteger( value );
   },
 
   /**
@@ -105,7 +96,7 @@ const NaturalSelectionUtils = {
    * @returns {boolean}
    */
   isNonNegativeInteger( value ) {
-    return NaturalSelectionUtils.isNonNegative( value ) && NaturalSelectionUtils.isInteger( value );
+    return NaturalSelectionUtils.isNonNegative( value ) && Utils.isInteger( value );
   },
 
   /**
