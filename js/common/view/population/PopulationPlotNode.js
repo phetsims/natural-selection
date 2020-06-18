@@ -116,6 +116,7 @@ class PopulationPlotNode extends Node {
       let previousXView = null;
       let previousYView = null;
 
+      //TODO traverse points in opposite direction, to optimize for scrolling graph
       for ( let i = 0; i < numberOfPoints; i++ ) {
 
         const point = this.points.get( i );
