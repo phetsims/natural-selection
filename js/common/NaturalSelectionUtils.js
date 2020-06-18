@@ -159,8 +159,9 @@ const NaturalSelectionUtils = {
   },
 
   /**
-   * Gets the next random double in a Range, between min (inclusive) and max (exclusive).
-   * Also supports the case where min === max.
+   * Gets the next random double in a Range.
+   * For min < max, the return value is between min (inclusive) and max (exclusive).
+   * For min === max, the return value is min.
    * @param {Range} range
    * @returns {number}
    * @public
