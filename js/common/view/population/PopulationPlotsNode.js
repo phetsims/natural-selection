@@ -12,6 +12,7 @@ import Node from '../../../../../scenery/js/nodes/Node.js';
 import naturalSelection from '../../../naturalSelection.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
+import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import PopulationPlotNode from './PopulationPlotNode.js';
 
@@ -30,9 +31,9 @@ class PopulationPlotsNode extends Node {
 
     options = merge( {}, options );
 
-    //TODO avoid having to use clipArea, so that lines and points on edges of the grid look clean
     assert && assert( !options.clipArea, 'PopulationPlotsNode sets clipArea' );
-    options.clipArea = Shape.rectangle( -100, 0, gridWidth + 100, gridHeight + 10 );
+    const clipAreaDilation = NaturalSelectionConstants.POPULATION_POINT_RADIUS;
+    options.clipArea = Shape.rectangle( -clipAreaDilation, 0, gridWidth + 2 * clipAreaDilation, gridHeight + clipAreaDilation );
 
     //TODO lots of duplication in how these constructors are called
     const totalPlotNode = new PopulationPlotNode( populationModel.totalPoints,

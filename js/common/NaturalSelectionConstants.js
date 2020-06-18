@@ -113,7 +113,10 @@ const NaturalSelectionConstants = {
   POPULATION_AXIS_FONT: new PhetFont( 14 ),
   PROPORTIONS_GENERATION_CONTROL_FONT: new PhetFont( 16 ),
   PROPORTIONS_LEGEND_FONT: new PhetFont( 16 ),
-  DIALOG_FONT: new PhetFont( 16 )
+  DIALOG_FONT: new PhetFont( 16 ),
+
+  // Population plot
+  POPULATION_POINT_RADIUS: 3 // point radius, in view coordinates
 };
 
 assert && assert( NaturalSelectionConstants.LITTER_SIZE === 4,
