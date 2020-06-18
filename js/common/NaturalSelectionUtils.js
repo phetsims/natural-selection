@@ -45,7 +45,7 @@ const NaturalSelectionUtils = {
 
   /**
    * Determines whether an array is sorted. Duplicates are allowed, and an empty array is considered sorted.
-   * @param {number[]} array
+   * @param {*[]} array
    * @param {function(value1:*,value2:*):boolean} [compare] - defaults to ascending numbers
    * @returns {boolean}
    * @public
