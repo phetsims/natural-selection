@@ -11,7 +11,7 @@
 | Pedigree graph | 0 | 5/11/2020 |
 | query parameters | 0 | 5/18/2020 |
 | Proportions graph | 0 | 5/26/2020 | 
-| Population graph | 3 weeks | |
+| Population graph | 2 weeks | |
 | Food | 2 weeks | | 
 | Wolves | 2 weeks | |
 | Memory pruning | 2 weeks | |
