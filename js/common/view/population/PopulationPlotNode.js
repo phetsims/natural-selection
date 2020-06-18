@@ -112,39 +112,65 @@ class PopulationPlotNode extends Node {
       const plotShape = new Shape();
       const pointsShape = new Shape();
 
-      const numberOfPoints = this.points.length;
-      let previousXView = null;
-      let previousYView = null;
+      let previousPoint = null;
+      let plotStarted = false;
 
-      //TODO traverse points in opposite direction, to optimize for scrolling graph
-      for ( let i = 0; i < numberOfPoints; i++ ) {
+      // traverse points from right to left, to optimize for scrolling graph
+      for ( let i = this.points.length - 1; i >= 0; i-- ) {
 
         const point = this.points.get( i );
 
-        // Compute view coordinates
-        const xView = this.modelToViewX( point.x );
-        const yView = this.modelToViewY( point.y );
+        if ( this.xRangeProperty.value.contains( point.x ) ) {
 
-        pointsShape.circle( xView, yView, POINT_RADIUS );
-        if ( previousXView === null ) {
-          plotShape.moveTo( xView, yView );
+          // Compute view coordinates
+          const xView = this.modelToViewX( point.x );
+          const yView = this.modelToViewY( point.y );
+
+          // Plot point
+          pointsShape.circle( xView, yView, POINT_RADIUS );
+
+          // Move to the right end of the plot
+          if ( !plotStarted ) {
+            if ( previousPoint ) {
+
+              // Right end is at the right edge of the grid
+              plotShape.moveTo( xView, this.modelToViewX( this.xRangeProperty.value.max ) );
+            }
+            else if ( this.generationsProperty.value > point.x ) {
+
+              // Right end is at the current generation value
+              plotShape.moveTo( this.modelToViewX( this.generationsProperty.value ), yView );
+              plotShape.lineTo( xView, yView );
+            }
+            else {
+
+              // Right end is at the point
+              plotShape.moveTo( xView, yView );
+            }
+            plotStarted = true;
+          }
+
+          // Plot line segments
+          if ( previousPoint ) {
+            plotShape.lineTo( this.modelToViewX( previousPoint.x ), yView );
+            plotShape.lineTo( xView, yView );
+          }
+
+          // We're done when we find a point that's to the left of the grid
+          if ( point.x === this.xRangeProperty.value.min ) {
+            break;
+          }
         }
-        else {
-          plotShape.lineTo( xView, previousYView );
-          plotShape.lineTo( xView, yView );
-        }
+        else if ( previousPoint && point.x < this.xRangeProperty.value.min ) {
 
-        previousXView = xView;
-        previousYView = yView;
-
-        if ( point.x > this.xRangeProperty.value.max ) {
+          // Finish plotting to the left edge of the grid
+          const yView = this.modelToViewY( point.y );
+          plotShape.lineTo( this.modelToViewX( previousPoint.x ), yView );
+          plotShape.lineTo( this.modelToViewX( this.xRangeProperty.value.min ), yView );
           break;
         }
-      }
 
-      const xView = this.modelToViewX( this.generationsProperty.value );
-      if ( previousXView < xView ) {
-        plotShape.lineTo( xView, previousYView );
+        previousPoint = point;
       }
 
       this.plotPath.setShape( plotShape );

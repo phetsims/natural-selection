@@ -19,7 +19,6 @@ import Text from '../../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../../naturalSelection.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
-import PopulationPlotsNode from './PopulationPlotsNode.js';
 
 // constants
 const GRID_LINES_LINE_WIDTH = 1;
@@ -117,9 +116,6 @@ class PopulationGridNode extends Node {
       children: [ xTickLines, xTickLabels, yTickLines, yTickLabels ]
     } );
 
-    // The complete set of plots
-    const plotsNode = new PopulationPlotsNode( populationModel, options.gridWidth, options.gridHeight );
-
     // A crisp frame in the foreground, to hide overlapping of tick marks and grid lines
     const frameNode = new Rectangle( 0, 0, options.gridWidth, options.gridHeight, {
       stroke: NaturalSelectionColors.PANEL_STROKE,
@@ -127,7 +123,7 @@ class PopulationGridNode extends Node {
     } );
 
     assert && assert( !options.children, 'PopulationGraphBackgroundNode sets children' );
-    options.children = [ rectangleNode, gridLinesNode, tickMarksNode, plotsNode, frameNode ];
+    options.children = [ rectangleNode, gridLinesNode, tickMarksNode, frameNode ];
 
     super( options );
   }

@@ -32,7 +32,7 @@ class PopulationPlotsNode extends Node {
 
     //TODO avoid having to use clipArea, so that lines and points on edges of the grid look clean
     assert && assert( !options.clipArea, 'PopulationPlotsNode sets clipArea' );
-    options.clipArea = Shape.rectangle( 0, 0, gridWidth, gridHeight );
+    options.clipArea = Shape.rectangle( -100, 0, gridWidth + 100, gridHeight + 10 );
 
     //TODO lots of duplication in how these constructors are called
     const totalPlotNode = new PopulationPlotNode( populationModel.totalPoints,

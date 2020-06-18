@@ -19,6 +19,7 @@ import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import DataProbeNode from './DataProbeNode.js';
 import GenerationScrollControl from './GenerationScrollControl.js';
 import PopulationGridNode from './PopulationGridNode.js';
+import PopulationPlotsNode from './PopulationPlotsNode.js';
 import ZoomControl from './ZoomControl.js';
 
 // const
@@ -98,6 +99,11 @@ class PopulationGraphNode extends Node {
       y: boundsRectangle.top
     } );
 
+    // The complete set of plots
+    const plotsNode = new PopulationPlotsNode( populationModel, gridWidth, gridHeight, {
+      translation: gridNode.translation
+    } );
+
     const dataProbeXRange = new Range( gridNode.x, gridNode.x + gridWidth );
     const dataProbeNode = new DataProbeNode( populationModel, dataProbeXRange, gridHeight, {
       x: gridNode.x,
@@ -110,6 +116,7 @@ class PopulationGraphNode extends Node {
       boundsRectangle, gridNode,
       generationScrollControlWrapper,
       yZoomControl, yAxisLabelNodeWrapper,
+      plotsNode,
       dataProbeNode
     ];
 
