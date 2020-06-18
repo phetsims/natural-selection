@@ -162,7 +162,7 @@ class PopulationPlotNode extends Node {
   }
 
   /**
-   * Model-view transform for y axis.
+   * Model-view transform for y axis. The y axis is inverted (+y up in model, +y down in view).
    * @param {number} yModel - y model value, population
    * @returns {number}
    * @private
