@@ -27,7 +27,6 @@ import naturalSelection from '../../../naturalSelection.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
-import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import DataProbeDragListener from './DataProbeDragListener.js';
 
 // constants
@@ -245,7 +244,7 @@ function createNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, options
   // Set the text fill based on whether the background color is dark or light.
   if ( !options.textOptions || options.textOptions.fill === undefined ) {
     options.textOptions = options.textOptions || {};
-    options.textOptions.fill = NaturalSelectionUtils.isDarkColor( options.backgroundFill ) ? 'white' : 'black';
+    options.textOptions.fill = Color.isDarkColor( options.backgroundFill ) ? 'white' : 'black';
   }
 
   // Adapter Property, for interfacing with NumberDisplay. dispose is not necessary.
