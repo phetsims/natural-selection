@@ -46,7 +46,7 @@ const NaturalSelectionUtils = {
   /**
    * Determines whether an array is sorted. Duplicates are allowed, and an empty array is considered sorted.
    * @param {*[]} array
-   * @param {function(value1:*,value2:*):boolean} [compare] - defaults to ascending numbers
+   * @param {function(value:*,nextValue:*):boolean} [compare] - defaults to ascending numbers
    * @returns {boolean}
    * @public
    */
@@ -54,7 +54,7 @@ const NaturalSelectionUtils = {
     assert && assert( Array.isArray( array ), 'invalid array' );
     assert && assert( !compare || typeof compare === 'function', 'invalid array' );
 
-    compare = compare || ( ( value1, value2 ) => value1 <= value2 );
+    compare = compare || ( ( value, nextValue ) => value <= nextValue );
     let isSorted = true;
     for ( let i = 1; i < array.length - 1 && isSorted; i++ ) {
       isSorted = compare( array[ i ], array[ i + 1 ] );
