@@ -93,7 +93,7 @@ const NaturalSelectionUtils = {
   },
 
   /**
-   * Determines whether an array is sorted in ascending order.
+   * Determines whether an array of numbers is sorted in ascending order.
    * @param {number[]} array
    * @returns {boolean}
    * @public
