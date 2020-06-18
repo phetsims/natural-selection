@@ -1,6 +1,5 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
-//TODO should any of these be migrated to common?
 /**
  * NaturalSelectionUtils defines utility functions that are specific to this simulation.
  *
