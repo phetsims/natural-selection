@@ -13,13 +13,13 @@ const NaturalSelectionUtils = {
 
   /**
    * Determines the time that it takes to execute a specified function.
-   * @param {function} someFunction - a function with no parameters and no return value
-   * @returns {number} the time to complete someFunction, in ms
+   * @param {function} f - a function with no parameters and no return value
+   * @returns {number} the time to complete f, in ms
    * @public
    */
-  time( someFunction ) {
+  time( f ) {
     const tBefore = performance.now();
-    someFunction();
+    f();
     return performance.now() - tBefore;
   },
 
@@ -34,12 +34,12 @@ const NaturalSelectionUtils = {
    * Console output will look like this:
    *   step took 56.68500000001586 ms
    *
-   * @param {string} name
-   * @param {function} someFunction - a function with no parameters and no return value
+   * @param {string} name - name used to identify the function in the log message
+   * @param {function} f - a function with no parameters and no return value
    * @public
    */
-  logTime( name, someFunction ) {
-    console.log( `${name} took ${NaturalSelectionUtils.time( someFunction )} ms` );
+  logTime( name, f ) {
+    console.log( `${name} took ${NaturalSelectionUtils.time( f )} ms` );
   },
 
   /**
