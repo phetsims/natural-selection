@@ -12,7 +12,9 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import NaturalSelectionSprite from './NaturalSelectionSprite.js';
 import SpriteDirection from './SpriteDirection.js';
@@ -119,7 +121,9 @@ class Wolf extends NaturalSelectionSprite {
    */
   toStateObject() {
     return {
-      //TODO
+      private: {
+        speed: NumberIO.toStateObject( this.speed )
+      }
     };
   }
 
@@ -131,7 +135,7 @@ class Wolf extends NaturalSelectionSprite {
    */
   static fromStateObject( stateObject ) {
     return {
-      //TODO
+     speed: NumberIO.fromStateObject( stateObject.speed )
     };
   }
 
@@ -157,7 +161,7 @@ class Wolf extends NaturalSelectionSprite {
    */
   applyState( state ) {
     required( state );
-    //TODO
+    this.speed = required( state.speed );
     this.validateInstance();
   }
 
@@ -166,7 +170,7 @@ class Wolf extends NaturalSelectionSprite {
    * @private
    */
   validateInstance() {
-    //TODO
+    assert && assert( NaturalSelectionUtils.isPositive( this.speed ), 'invalid speed' );
   }
 }
 
