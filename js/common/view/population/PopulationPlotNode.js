@@ -97,10 +97,21 @@ class PopulationPlotNode extends Node {
       }
     } );
 
+    // Listen to generation until data fills the width of the graph and the graph starts scrolling.
+    // After that, it's sufficient to listener to xRangeProperty.
+    // unlink not needed.
+    const generationsListener = generation => {
+      if ( generation < xWidth ) {
+        this.plotPoints();
+      }
+      else {
+        generationsProperty.unlink( generationsListener );
+      }
+    };
+    generationsProperty.link( generationsListener );
+
     // unmultilink not needed
-    //TODO there is duplicated work here, because xRangeProperty and generationsProperty both change while graph scrolls
-    Property.multilink(
-      [ xRangeProperty, yRangeProperty, generationsProperty, this.visibleProperty ],
+    Property.multilink( [ xRangeProperty, yRangeProperty, this.visibleProperty ],
       () => this.plotPoints()
     );
   }
