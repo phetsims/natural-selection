@@ -39,9 +39,10 @@ class NaturalSelectionTimeControl extends HBox {
       radius: PLAY_PAUSE_BUTTON_RADIUS
     } );
 
-    //TODO move to sim model
+    //TODO move to sim model, use TimeSpeed enumeration
     const timeSpeedProperty = new NumberProperty( NaturalSelectionConstants.SECONDS_PER_GENERATION );
 
+    //TODO factor out FastForwardButton
     const fastForwardButton = new RoundMomentaryButton(
       NaturalSelectionConstants.SECONDS_PER_GENERATION,
       FAST_FORWARD_SCALE * NaturalSelectionConstants.SECONDS_PER_GENERATION,
