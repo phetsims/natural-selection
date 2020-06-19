@@ -100,7 +100,9 @@ class PopulationGraphNode extends Node {
     } );
 
     // The complete set of plots
-    const plotsNode = new PopulationPlotsNode( populationModel, gridWidth, gridHeight, {
+    const plotsNode = new PopulationPlotsNode( populationModel, {
+      gridWidth: gridWidth,
+      gridHeight: gridHeight,
       translation: gridNode.translation
     } );
 

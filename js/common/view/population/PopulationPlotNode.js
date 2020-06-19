@@ -17,7 +17,6 @@ import Node from '../../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../../scenery/js/nodes/Path.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
-import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 
 // constants
 const LINE_WIDTH = 2; // plotted line width, in view coordinates
@@ -33,23 +32,21 @@ class PopulationPlotNode extends Node {
    * @param {number} xWidth - width of the x axis, in model coordinates (Generations)
    * @param {Property.<Range>} xRangeProperty - range of the graph's x axis, in model coordinates (Generation)
    * @param {Property.<Range>} yRangeProperty - range of the graph's y axis, in model coordinates (Population)
-   * @param {number} gridWidth - width of the graph's grid, in view coordinates
-   * @param {number} gridHeight - height of the graph's grid, in view coordinates
    * @param {Property.<number>} generationsProperty - the current value of the generation clock
    * @param {Object} [options]
    */
-  constructor( name, points, plotVisibleProperty, xWidth, xRangeProperty, yRangeProperty,
-               gridWidth, gridHeight, generationsProperty, options ) {
+  constructor( name, points, plotVisibleProperty, xWidth, xRangeProperty, yRangeProperty, generationsProperty, options ) {
     assert && assert( typeof name === 'string', 'invalid name' );
     assert && assert( points instanceof ObservableArray, 'invalid points' );
     assert && AssertUtils.assertPropertyOf( plotVisibleProperty, 'boolean' );
     assert && AssertUtils.assertPropertyOf( xRangeProperty, Range );
     assert && AssertUtils.assertPropertyOf( yRangeProperty, Range );
-    assert && assert( NaturalSelectionUtils.isPositive( gridWidth ), 'invalid gridWidth' );
-    assert && assert( NaturalSelectionUtils.isPositive( gridHeight ), 'invalid gridHeight' );
     assert && AssertUtils.assertPropertyOf( generationsProperty, 'number' );
 
     options = merge( {
+      // dimensions of the grid (sans tick marks) in view coordinates
+      gridWidth: 100,
+      gridHeight: 100,
       color: 'black', // {Color|string} color used to render the plot
       isMutant: false // {boolean} is this plot for a mutant allele?
     }, options );
@@ -77,9 +74,9 @@ class PopulationPlotNode extends Node {
     this.xWidth = xWidth;
     this.xRangeProperty = xRangeProperty;
     this.yRangeProperty = yRangeProperty;
-    this.gridWidth = gridWidth;
-    this.gridHeight = gridHeight;
     this.generationsProperty = generationsProperty;
+    this.gridWidth = options.gridWidth;
+    this.gridHeight = options.gridHeight;
     this.stepPath = stepPath;
     this.pointsPath = pointsPath;
 
