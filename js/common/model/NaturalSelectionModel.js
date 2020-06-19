@@ -12,6 +12,7 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import BunnyCollection from './BunnyCollection.js';
 import Environment from './Environment.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -59,7 +60,7 @@ class NaturalSelectionModel {
     // @public
     this.fastForwardScaleProperty = new NumberProperty( 1, {
       tandem: options.tandem.createTandem( 'fastForwardScaleProperty' ),
-      phetioReadOnly: true,
+      validValues: [ 1, NaturalSelectionQueryParameters.fastForwardScale ],
       phetioDocumentation: 'time speeds up by this scale factor while the Fast-Forward button is pressed'
     } );
 
