@@ -305,7 +305,9 @@ class NaturalSelectionScreenView extends ScreenView {
   }
 
   /**
-   * Steps the view one time step.
+   * Steps the view one time step. The sim originally had a Step button, but that was removed in
+   * https://github.com/phetsims/natural-selection/issues/100. This method was retained in case it's
+   * desirable to add a Step button in the future.
    * @param {number} dt - time step, in seconds
    * @public
    */
