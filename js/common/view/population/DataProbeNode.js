@@ -130,7 +130,7 @@ class DataProbeNode extends Node {
     this.addInputListener( new DragListener( {
       positionProperty: dataProbe.offsetProperty,
       transform: offsetTransform,
-      dragBoundsProperty: new Property( new Bounds2( 0, 0, populationModel.xWidth, 0 ) ),
+      dragBoundsProperty: new Property( new Bounds2( 0, 0, populationModel.xWidth, 0 ) ), // model coordinates
       tandem: options.tandem.createTandem( 'dragListener' )
     } ) );
 
