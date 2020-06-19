@@ -130,11 +130,11 @@ const SCHEMA = {
     isValidValue: value => ( value > 0 )
   },
 
-  // Seconds of real time per each press of the Step button.
-  secondsPerStep: {
+  // Scale time by this much while the fast-forward button is pressed.
+  fastForwardScale: {
     type: 'number',
-    defaultValue: 0.1,
-    isValidValue: value => ( value > 0 )
+    defaultValue: 4,
+    isValidValue: value => ( value >= 1 )
   },
 
   // The number of bunnies required to 'take over the world'.
@@ -290,8 +290,6 @@ function isPercentRange( array ) {
 }
 
 // validate query parameters
-assert && assert( NaturalSelectionQueryParameters.secondsPerStep < NaturalSelectionQueryParameters.secondsPerGeneration,
-  'secondsPerStep must be < secondsPerGeneration' );
 assert && assert( NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier *
                   NaturalSelectionQueryParameters.wolvesPercentToKill[ 1 ] <= 1,
   'wolvesEnvironmentMultiplier * wolvesPercentToKill.max must be <= 1' );

@@ -32,11 +32,8 @@ const NaturalSelectionConstants = {
   // number of offspring produced each time a pair of bunnies mates
   LITTER_SIZE: 4,
 
-  // seconds per generation, one revolution of the generation clock
+  // time to complete 1 revolution of the generation clock, in seconds
   SECONDS_PER_GENERATION: NaturalSelectionQueryParameters.secondsPerGeneration,
-
-  // dt when the Step button is pressed, in seconds
-  SECONDS_PER_STEP: NaturalSelectionQueryParameters.secondsPerStep,
 
   // Generation Clock
   CLOCK_FOOD_RANGE: new Range( 1/6, 3/6 ), // percentage of clock cycle when bunnies are starved by food factors
@@ -121,9 +118,6 @@ const NaturalSelectionConstants = {
 
 assert && assert( NaturalSelectionConstants.LITTER_SIZE === 4,
   'LITTER_SIZE must be 4, to correspond to the Punnett square that results from Mendel\'s Law of Segregation' );
-
-assert && assert( NaturalSelectionConstants.SECONDS_PER_STEP < NaturalSelectionConstants.SECONDS_PER_GENERATION,
-  'SECONDS_PER_STEP must be < SECONDS_PER_GENERATION' );
 
 assert && AssertUtils.assertRangeBetween( NaturalSelectionConstants.CLOCK_FOOD_RANGE, 0, 1 );
 assert && AssertUtils.assertRangeBetween( NaturalSelectionConstants.CLOCK_WOLVES_RANGE, 0, 1 );

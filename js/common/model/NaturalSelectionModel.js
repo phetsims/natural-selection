@@ -8,6 +8,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -49,10 +50,16 @@ class NaturalSelectionModel {
       phetioReadOnly: true
     } );
 
-    // @public whether the sim is playing
+    // @public
     this.isPlayingProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'isPlayingProperty' ),
-      phetioDocumentation: 'whether time is advancing in the simulation, controlled by the Play/Pause buttons'
+      phetioDocumentation: 'whether time is advancing in the simulation, controlled by the Play/Pause button'
+    } );
+
+    // @public
+    this.fastForwardScaleProperty = new NumberProperty( 1, {
+      tandem: options.tandem.createTandem( 'fastForwardScaleProperty' ),
+      phetioDocumentation: 'time speeds up by this scale factor while the Fast-Foward button is pressed'
     } );
 
     // @public (read-only)
@@ -232,10 +239,11 @@ class NaturalSelectionModel {
    */
   step( dt ) {
     if ( this.isPlayingProperty.value ) {
-      this.stepOnce( dt );
+      this.stepOnce( dt * this.fastForwardScaleProperty.value );
     }
   }
 
+  //TODO delete stepOnce if the Step button is permanently gone
   /**
    * Steps the model one time step. Used by the time controls Step button.
    * @param {number} dt - time step, in seconds

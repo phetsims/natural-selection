@@ -163,7 +163,7 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     // Play/pause/step time controls
-    const timeControlNode = new NaturalSelectionTimeControl( model.isPlayingProperty, {
+    const timeControlNode = new NaturalSelectionTimeControl( model.isPlayingProperty, model.fastForwardScaleProperty, {
       left: graphChoiceRadioButtonGroup.left,
       bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: options.tandem.createTandem( 'timeControlNode' )
@@ -304,6 +304,7 @@ class NaturalSelectionScreenView extends ScreenView {
     }
   }
 
+  //TODO delete stepOnce if the Step button is permanently gone
   /**
    * Steps the view one time step. Used by the time controls Step button.
    * @param {number} dt - time step, in seconds
