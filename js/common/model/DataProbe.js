@@ -11,29 +11,25 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
-import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCountsIO from './BunnyCountsIO.js';
+import PopulationModel from './PopulationModel.js';
 
 class DataProbe extends PhetioObject {
 
   /**
-   * @param {number} xWidth - width of the x axis, in model coordinates (generations)
-   * @param {Property.<Range>} xRangeProperty
+   * @param {PopulationModel} populationModel
    * @param {Object} [options]
    */
-  constructor( xWidth, xRangeProperty, options ) {
-    assert && assert( NaturalSelectionUtils.isPositiveInteger( xWidth ), 'invalid xWidth' );
-    assert && AssertUtils.assertPropertyOf( xRangeProperty, Range );
+  constructor( populationModel, options ) {
+    assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
 
     options = merge( {
 
@@ -45,9 +41,6 @@ class DataProbe extends PhetioObject {
     super( options );
 
     // @public
-    this.xRangeProperty = xRangeProperty;
-
-    // @public
     this.offsetProperty = new Vector2Property( Vector2.ZERO, {
       tandem: options.tandem.createTandem( 'offsetProperty' ),
       phetioDocumentation: 'offset of the data from the left edge of the graph'
@@ -55,7 +48,7 @@ class DataProbe extends PhetioObject {
 
     // @public
     this.generationProperty = new DerivedProperty(
-      [ this.xRangeProperty, this.offsetProperty ],
+      [ populationModel.xRangeProperty, this.offsetProperty ],
       ( xRange, offset ) => xRange.min + offset.x, {
         tandem: options.tandem.createTandem( 'generationProperty' ),
         phetioType: DerivedPropertyIO( NumberIO ),

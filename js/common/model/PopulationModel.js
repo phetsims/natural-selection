@@ -173,7 +173,7 @@ class PopulationModel extends PhetioObject {
       } );
 
     // @public
-    this.dataProbe = new DataProbe( this.xWidth, this.xRangeProperty, {
+    this.dataProbe = new DataProbe( this, {
       tandem: options.tandem.createTandem( 'dataProbe' )
     } );
 
