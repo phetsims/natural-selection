@@ -37,72 +37,56 @@ class PopulationPlotsNode extends Node {
     options.clipArea = Shape.rectangle( -clipAreaDilation, 0,
       options.gridWidth + 2 * clipAreaDilation, options.gridHeight + clipAreaDilation );
 
-    //TODO lots of duplication in how these constructors are called
-    const totalPlotNode = new PopulationPlotNode( 'total',
+    // Options common to all PopulationPlotNode instances
+    const plotNodeOptions = {
+      gridWidth: options.gridWidth,
+      gridHeight: options.gridHeight
+    };
+
+    const totalPlotNode = new PopulationPlotNode( populationModel,
       populationModel.totalPoints, populationModel.totalVisibleProperty,
-      populationModel.xWidth, populationModel.xRangeProperty, populationModel.yRangeProperty,
-      populationModel.generationsProperty, {
-        gridWidth: options.gridWidth,
-        gridHeight: options.gridHeight,
+      merge( {
         color: NaturalSelectionColors.POPULATION_TOTAL_COUNT
-      } );
+      }, plotNodeOptions ) );
 
-    const whiteFurPlotNode = new PopulationPlotNode( 'whiteFur',
+    const whiteFurPlotNode = new PopulationPlotNode( populationModel,
       populationModel.whiteFurPoints, populationModel.whiteFurVisibleProperty,
-      populationModel.xWidth, populationModel.xRangeProperty, populationModel.yRangeProperty,
-      populationModel.generationsProperty, {
-        gridWidth: options.gridWidth,
-        gridHeight: options.gridHeight,
+      merge( {
         color: NaturalSelectionColors.FUR
-      } );
+      }, plotNodeOptions ) );
 
-    const brownFurPlotNode = new PopulationPlotNode( 'brownFur',
+    const brownFurPlotNode = new PopulationPlotNode( populationModel,
       populationModel.brownFurPoints, populationModel.brownFurVisibleProperty,
-      populationModel.xWidth, populationModel.xRangeProperty, populationModel.yRangeProperty,
-      populationModel.generationsProperty, {
-        gridWidth: options.gridWidth,
-        gridHeight: options.gridHeight,
+      merge( {
         color: NaturalSelectionColors.FUR,
         isMutant: true
-      } );
+      }, plotNodeOptions ) );
 
-    const straightEarsPlotNode = new PopulationPlotNode( 'straightEars',
+    const straightEarsPlotNode = new PopulationPlotNode( populationModel,
       populationModel.straightEarsPoints, populationModel.straightEarsVisibleProperty,
-      populationModel.xWidth, populationModel.xRangeProperty, populationModel.yRangeProperty,
-      populationModel.generationsProperty, {
-        gridWidth: options.gridWidth,
-        gridHeight: options.gridHeight,
+      merge( {
         color: NaturalSelectionColors.EARS
-      } );
+      }, plotNodeOptions ) );
 
-    const floppyEarsPlotNode = new PopulationPlotNode( 'floppyEars',
+    const floppyEarsPlotNode = new PopulationPlotNode( populationModel,
       populationModel.floppyEarsPoints, populationModel.floppyEarsVisibleProperty,
-      populationModel.xWidth, populationModel.xRangeProperty, populationModel.yRangeProperty,
-      populationModel.generationsProperty, {
-        gridWidth: options.gridWidth,
-        gridHeight: options.gridHeight,
+      merge( {
         color: NaturalSelectionColors.EARS,
         isMutant: true
-      } );
+      }, plotNodeOptions ) );
 
-    const shortTeethPlotNode = new PopulationPlotNode( 'shortTeeth',
+    const shortTeethPlotNode = new PopulationPlotNode( populationModel,
       populationModel.shortTeethPoints, populationModel.shortTeethVisibleProperty,
-      populationModel.xWidth, populationModel.xRangeProperty, populationModel.yRangeProperty,
-      populationModel.generationsProperty, {
-        gridWidth: options.gridWidth,
-        gridHeight: options.gridHeight,
+      merge( {
         color: NaturalSelectionColors.TEETH
-      } );
+      }, plotNodeOptions ) );
 
-    const longTeethProbeNode = new PopulationPlotNode( 'longTeeth',
+    const longTeethProbeNode = new PopulationPlotNode( populationModel,
       populationModel.longTeethPoints, populationModel.longTeethVisibleProperty,
-      populationModel.xWidth, populationModel.xRangeProperty, populationModel.yRangeProperty,
-      populationModel.generationsProperty, {
-        gridWidth: options.gridWidth,
-        gridHeight: options.gridHeight,
+      merge( {
         color: NaturalSelectionColors.TEETH,
         isMutant: true
-      } );
+      }, plotNodeOptions ) );
 
     // Front-to-back rendering order should match top-to-bottom order of checkboxes in PopulationPanel
     assert && assert( !options.children, 'PopulationPlotsNode sets children' );

@@ -9,13 +9,13 @@
 
 import ObservableArray from '../../../../../axon/js/ObservableArray.js';
 import Property from '../../../../../axon/js/Property.js';
-import Range from '../../../../../dot/js/Range.js';
 import Shape from '../../../../../kite/js/Shape.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../../scenery/js/nodes/Path.js';
 import naturalSelection from '../../../naturalSelection.js';
+import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
 // constants
@@ -26,26 +26,18 @@ const MUTANT_LINE_DASH = [ 3, 3 ];
 class PopulationPlotNode extends Node {
 
   /**
-   * @param {string} name - internal name, for debugging
+   * @param {PopulationModel} populationModel
    * @param {ObservableArray.<Vector2>} points - data points, in model coordinates (x=Generation, y=Population)
    * @param {Property.<boolean>} plotVisibleProperty - whether this plot is visible
-   * @param {number} xWidth - width of the x axis, in model coordinates (Generations)
-   * @param {Property.<Range>} xRangeProperty - range of the graph's x axis, in model coordinates (Generation)
-   * @param {Property.<Range>} yRangeProperty - range of the graph's y axis, in model coordinates (Population)
-   * @param {Property.<number>} generationsProperty - the current value of the generation clock
    * @param {Object} [options]
    */
-  constructor( name, points, plotVisibleProperty, xWidth, xRangeProperty, yRangeProperty, generationsProperty, options ) {
-    assert && assert( typeof name === 'string', 'invalid name' );
+  constructor( populationModel, points, plotVisibleProperty, options ) {
+    assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
     assert && assert( points instanceof ObservableArray, 'invalid points' );
     assert && AssertUtils.assertPropertyOf( plotVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyOf( xRangeProperty, Range );
-    assert && AssertUtils.assertPropertyOf( yRangeProperty, Range );
-    assert && AssertUtils.assertPropertyOf( generationsProperty, 'number' );
 
     options = merge( {
-      // dimensions of the grid (sans tick marks) in view coordinates
-      gridWidth: 100,
+      gridWidth: 100, // dimensions of the grid (sans tick marks) in view coordinates
       gridHeight: 100,
       color: 'black', // {Color|string} color used to render the plot
       isMutant: false // {boolean} is this plot for a mutant allele?
@@ -69,12 +61,11 @@ class PopulationPlotNode extends Node {
     super( options );
 
     // @private
-    this.name = name;
     this.points = points;
-    this.xWidth = xWidth;
-    this.xRangeProperty = xRangeProperty;
-    this.yRangeProperty = yRangeProperty;
-    this.generationsProperty = generationsProperty;
+    this.xWidth = populationModel.xWidth;
+    this.xRangeProperty = populationModel.xRangeProperty;
+    this.yRangeProperty = populationModel.yRangeProperty;
+    this.generationsProperty = populationModel.generationsProperty;
     this.gridWidth = options.gridWidth;
     this.gridHeight = options.gridHeight;
     this.stepPath = stepPath;
@@ -98,17 +89,17 @@ class PopulationPlotNode extends Node {
     // After that, it's sufficient to listener to xRangeProperty.
     // unlink not needed.
     const generationsListener = generation => {
-      if ( generation < xWidth ) {
+      if ( generation < this.xWidth ) {
         this.plotPoints();
       }
       else {
-        generationsProperty.unlink( generationsListener );
+        this.generationsProperty.unlink( generationsListener );
       }
     };
-    generationsProperty.link( generationsListener );
+    this.generationsProperty.link( generationsListener );
 
     // unmultilink not needed
-    Property.multilink( [ xRangeProperty, yRangeProperty ],
+    Property.multilink( [ this.xRangeProperty, this.yRangeProperty ],
       () => this.plotPoints()
     );
 
