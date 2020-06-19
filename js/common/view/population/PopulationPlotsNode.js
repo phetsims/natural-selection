@@ -88,7 +88,7 @@ class PopulationPlotsNode extends Node {
         isMutant: true
       } );
 
-    // Children in reverse order, to match bottom-to-top order of checkboxes in PopulationPanel
+    // Front-to-back rendering order should match top-to-bottom order of checkboxes in PopulationPanel
     assert && assert( !options.children, 'PopulationPlotsNode sets children' );
     options.children = [
       longTeethProbeNode,
