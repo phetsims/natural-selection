@@ -243,9 +243,8 @@ class NaturalSelectionModel {
     }
   }
 
-  //TODO delete stepOnce if the Step button is permanently gone
   /**
-   * Steps the model one time step. Used by the time controls Step button.
+   * Steps the model one time step.
    * @param {number} dt - time step, in seconds
    * @public
    */

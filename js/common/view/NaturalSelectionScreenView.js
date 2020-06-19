@@ -304,9 +304,8 @@ class NaturalSelectionScreenView extends ScreenView {
     }
   }
 
-  //TODO delete stepOnce if the Step button is permanently gone
   /**
-   * Steps the view one time step. Used by the time controls Step button.
+   * Steps the view one time step.
    * @param {number} dt - time step, in seconds
    * @public
    */
