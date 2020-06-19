@@ -91,7 +91,7 @@ class PopulationPlotNode extends Node {
     // unlink not needed
     points.lengthProperty.link( ( length, previousLength ) => {
       if ( length > previousLength || length === 0 ) {
-        this.update();
+        this.draw();
       }
     } );
 
@@ -99,16 +99,17 @@ class PopulationPlotNode extends Node {
     //TODO there is duplicated work here, because xRangeProperty and generationsProperty both change while graph scrolls
     Property.multilink(
       [ xRangeProperty, yRangeProperty, generationsProperty, this.visibleProperty ],
-      () => this.update()
+      () => this.draw()
     );
   }
 
   /**
-   * Updates the plot.
+   * Draws the plot.
    * @private
    */
-  update() {
+  draw() {
 
+    // Draw only if visible
     if ( this.visible && this.points.length > 0 ) {
 
       const plotShape = new Shape();
