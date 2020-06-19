@@ -232,7 +232,7 @@ class NaturalSelectionModel {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
   }
 
-  //TODO do I need to do something for dt=0 here?
+  //TODO do I need to do something for dt=0 here? Bunnies will move regardless of dt.
   /**
    * Steps the model.
    * @param {number} dt - time step, in seconds
