@@ -118,11 +118,6 @@ class PopulationModel extends PhetioObject {
       phetioType: ObservableArrayIO( Vector2IO )
     } );
 
-    // @public
-    this.dataProbe = new DataProbe( {
-      tandem: options.tandem.createTandem( 'dataProbe' )
-    } );
-
     // @public visibility of each data set, on the graph and data probe
     this.totalVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'totalVisibleProperty' )
@@ -176,6 +171,11 @@ class PopulationModel extends PhetioObject {
         tandem: options.tandem.createTandem( 'yRangeProperty' ),
         phetioDocumentation: 'range of the y (Population) axis'
       } );
+
+    // @public
+    this.dataProbe = new DataProbe( this.xWidth, this.xRangeProperty, {
+      tandem: options.tandem.createTandem( 'dataProbe' )
+    } );
 
     // Scrolls the x-axis so that xRangeProperty.max is 'now'.
     const scrollToNow = () => {

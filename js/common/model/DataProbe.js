@@ -11,20 +11,29 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Range from '../../../../dot/js/Range.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCountsIO from './BunnyCountsIO.js';
 
 class DataProbe extends PhetioObject {
 
   /**
+   * @param {number} xWidth - width of the x axis, in model coordinates (generations)
+   * @param {Property.<Range>} xRangeProperty
    * @param {Object} [options]
    */
-  constructor( options ) {
+  constructor( xWidth, xRangeProperty, options ) {
+    assert && assert( NaturalSelectionUtils.isPositiveInteger( xWidth ), 'invalid xWidth' );
+    assert && AssertUtils.assertPropertyOf( xRangeProperty, Range );
 
     options = merge( {
 
@@ -35,24 +44,37 @@ class DataProbe extends PhetioObject {
 
     super( options );
 
-    // @public visibility of the probe
-    this.visibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'visibleProperty' )
+    // @public
+    this.xRangeProperty = xRangeProperty;
+
+    // @public
+    this.offsetProperty = new Vector2Property( Vector2.ZERO, {
+      tandem: options.tandem.createTandem( 'offsetProperty' ),
+      phetioDocumentation: 'offset of the data from the left edge of the graph'
     } );
 
-    // @public the generation (x) value
-    this.generationProperty = new NumberProperty( 0, {
-      tandem: options.tandem.createTandem( 'generationProperty' ),
-      phetioReadOnly: true // range is dynamic
-    } );
+    // @public
+    this.generationProperty = new DerivedProperty(
+      [ this.xRangeProperty, this.offsetProperty ],
+      ( xRange, offset ) => xRange.min + offset.x, {
+        tandem: options.tandem.createTandem( 'generationProperty' ),
+        phetioType: DerivedPropertyIO( NumberIO ),
+        phetioDocumentation: 'the generation (x-axis) value where the data probe is positioned'
+      } );
 
-    // @public counts displayed by the probe. dispose is not necessary.
+    // @public dispose is not necessary.
     this.countsProperty = new DerivedProperty( [ this.generationProperty ],
 
       //TODO set BunnyCounts based on position of the data probe
       generation => null, {
-      tandem: options.tandem.createTandem( 'countsProperty' ),
-      phetioType: DerivedPropertyIO( NullableIO( BunnyCountsIO ) )
+        tandem: options.tandem.createTandem( 'countsProperty' ),
+        phetioType: DerivedPropertyIO( NullableIO( BunnyCountsIO ) ),
+        phetioDocumentation: 'counts displayed by the data probe'
+      } );
+
+    // @public visibility of the probe
+    this.visibleProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'visibleProperty' )
     } );
   }
 

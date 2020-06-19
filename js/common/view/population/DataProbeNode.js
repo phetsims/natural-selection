@@ -10,13 +10,16 @@
 
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../../axon/js/Property.js';
+import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import Range from '../../../../../dot/js/Range.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import Shape from '../../../../../kite/js/Shape.js';
 import merge from '../../../../../phet-core/js/merge.js';
+import ModelViewTransform2 from '../../../../../phetcommon/js/view/ModelViewTransform2.js';
 import NumberDisplay from '../../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../../../scenery-phet/js/ShadedSphereNode.js';
+import DragListener from '../../../../../scenery/js/listeners/DragListener.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import VBox from '../../../../../scenery/js/nodes/VBox.js';
@@ -27,7 +30,6 @@ import naturalSelection from '../../../naturalSelection.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
-import DataProbeDragListener from './DataProbeDragListener.js';
 
 // constants
 const MANIPULATOR_RADIUS = 5;
@@ -45,18 +47,17 @@ class DataProbeNode extends Node {
 
   /**
    * @param {PopulationModel} populationModel
-   * @param {Range} xRange - x range, in view coordinates
-   * @param {number} graphHeight
    * @param {Object} [options]
    */
-  constructor( populationModel, xRange, graphHeight, options ) {
+  constructor( populationModel, options ) {
 
     assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
-    assert && assert( xRange instanceof Range, 'invalid xRange' );
-    assert && assert( typeof graphHeight === 'number', 'invalid graphHeight' );
 
     options = merge( {
       cursor: 'ew-resize', // east-west arrows, <->
+      gridWidth: 100, // dimensions of the grid (sans tick marks) in view coordinates
+      gridHeight: 100,
+      offset: Vector2.ZERO, // offset in view coordinates
 
       // phet-io
       tandem: Tandem.REQUIRED,
@@ -72,11 +73,15 @@ class DataProbeNode extends Node {
 
     const dataProbe = populationModel.dataProbe;
 
+    // Transform for data probe offset from the top-left of the grid
+    const offsetTransform =
+      ModelViewTransform2.createOffsetScaleMapping( options.offset, options.gridWidth / populationModel.xWidth );
+
     // Which side of the bar the displays are on: true = right, false = left
     let displaysOnRight = true;
 
     // Vertical bar
-    const barNode = new Rectangle( 0, 0, 3, graphHeight, {
+    const barNode = new Rectangle( 0, 0, 3, options.gridHeight, {
       fill: NaturalSelectionColors.DATA_PROBE_BAR_COLOR,
       opacity: 0.6,
       centerX: 0,
@@ -122,10 +127,10 @@ class DataProbeNode extends Node {
 
     super( options );
 
-    // @private position in view coordinate frame, relative to the left edge of the graph
-    this.positionProperty = new Property( new Vector2( xRange.min, 0 ) );
-
-    this.addInputListener( new DataProbeDragListener( this.positionProperty, xRange, {
+    this.addInputListener( new DragListener( {
+      positionProperty: dataProbe.offsetProperty,
+      transform: offsetTransform,
+      dragBoundsProperty: new Property( new Bounds2( 0, 0, populationModel.xWidth, 0 ) ),
       tandem: options.tandem.createTandem( 'dragListener' )
     } ) );
 
@@ -156,24 +161,23 @@ class DataProbeNode extends Node {
     };
 
     // unlink is not necessary.
-    this.positionProperty.link( position => {
-      this.x = position.x;
+    dataProbe.offsetProperty.link( offset => {
 
-      //TODO update dataProbe.generationProperty
+      this.x = offsetTransform.modelToViewPosition( offset ).x;
 
       // flip NumberDisplays around y axis at edges of graph
-      if ( this.left < xRange.min && !displaysOnRight ) {
+      if ( this.left < options.offset.x && !displaysOnRight ) {
         displaysOnRight = true;
         updateDisplayLayout();
       }
-      else if ( this.right > xRange.max && displaysOnRight ) {
+      else if ( this.right > + options.offset.x + options.gridWidth && displaysOnRight ) {
         displaysOnRight = false;
         updateDisplayLayout();
       }
     } );
 
     // Create a link to the model that this Node displays
-    this.addLinkedElement( populationModel.dataProbe, {
+    this.addLinkedElement( dataProbe, {
       tandem: options.tandem.createTandem( 'dataProbe' )
     } );
   }
@@ -182,7 +186,7 @@ class DataProbeNode extends Node {
    * @public
    */
   reset() {
-    this.positionProperty.reset();
+    //TODO delete?
   }
 
   /**

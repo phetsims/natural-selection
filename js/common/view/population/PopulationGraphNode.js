@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Range from '../../../../../dot/js/Range.js';
+import Vector2 from '../../../../../dot/js/Vector2.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
@@ -106,10 +106,10 @@ class PopulationGraphNode extends Node {
       translation: gridNode.translation
     } );
 
-    const dataProbeXRange = new Range( gridNode.x, gridNode.x + gridWidth );
-    const dataProbeNode = new DataProbeNode( populationModel, dataProbeXRange, gridHeight, {
-      x: gridNode.x,
-      top: gridNode.y,
+    const dataProbeNode = new DataProbeNode( populationModel, {
+      gridWidth: gridWidth,
+      gridHeight: gridHeight,
+      offset: new Vector2( gridNode.x, 0 ),
       tandem: options.tandem.createTandem( 'dataProbeNode' )
     } );
 
