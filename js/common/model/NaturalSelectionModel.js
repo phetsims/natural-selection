@@ -59,7 +59,8 @@ class NaturalSelectionModel {
     // @public
     this.fastForwardScaleProperty = new NumberProperty( 1, {
       tandem: options.tandem.createTandem( 'fastForwardScaleProperty' ),
-      phetioDocumentation: 'time speeds up by this scale factor while the Fast-Foward button is pressed'
+      phetioReadOnly: true,
+      phetioDocumentation: 'time speeds up by this scale factor while the Fast-Forward button is pressed'
     } );
 
     // @public (read-only)

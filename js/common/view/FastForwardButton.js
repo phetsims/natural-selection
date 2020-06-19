@@ -53,7 +53,7 @@ class FastForwardButton extends RoundMomentaryButton {
     super( 1, fastScale, fastForwardScaleProperty, options );
 
     this.addLinkedElement( fastForwardScaleProperty, {
-      tandem: options.tandem.createTandem( 'fastForwardScaleProperty' )
+      tandem: options.tandem.createTandem( 'property' )
     } );
   }
 }
