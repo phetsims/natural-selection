@@ -144,7 +144,7 @@ const SCHEMA = {
     isValidValue: value => ( value > 0 && Utils.isInteger( value ) )
   },
 
-  // The number of bunnies per litter.
+  // Age at which bunnies die of old-age.
   maxAge: {
     type: 'number',
     defaultValue: 5,
