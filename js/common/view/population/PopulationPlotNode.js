@@ -54,18 +54,20 @@ class PopulationPlotNode extends Node {
       isMutant: false // {boolean} is this plot for a mutant allele?
     }, options );
 
-    const plotPath = new Path( new Shape(), {
+    // Points will be drawn as circles
+    const pointsPath = new Path( new Shape(), {
+      fill: options.color
+    } );
+
+    // Points will be connected using line segments that create a step plot
+    const stepPath = new Path( new Shape(), {
       stroke: options.color,
       lineWidth: LINE_WIDTH,
       lineDash: options.isMutant ? MUTANT_LINE_DASH : NORMAL_LINE_DASH
     } );
 
-    const pointsPath = new Path( new Shape(), {
-      fill: options.color
-    } );
-
     assert && assert( !options.children, 'PopulationPlotNode sets children' );
-    options.children = [ plotPath, pointsPath ];
+    options.children = [ stepPath, pointsPath ];
 
     super( options );
 
@@ -78,7 +80,7 @@ class PopulationPlotNode extends Node {
     this.gridWidth = gridWidth;
     this.gridHeight = gridHeight;
     this.generationsProperty = generationsProperty;
-    this.plotPath = plotPath;
+    this.stepPath = stepPath;
     this.pointsPath = pointsPath;
 
     // unlink not needed
@@ -91,7 +93,7 @@ class PopulationPlotNode extends Node {
     // unlink not needed
     points.lengthProperty.link( ( length, previousLength ) => {
       if ( length > previousLength || length === 0 ) {
-        this.draw();
+        this.plotPoints();
       }
     } );
 
@@ -99,26 +101,28 @@ class PopulationPlotNode extends Node {
     //TODO there is duplicated work here, because xRangeProperty and generationsProperty both change while graph scrolls
     Property.multilink(
       [ xRangeProperty, yRangeProperty, generationsProperty, this.visibleProperty ],
-      () => this.draw()
+      () => this.plotPoints()
     );
   }
 
   /**
-   * Draws the plot.
+   * Plots the points that are within the range of the graph.
    * @private
    */
-  draw() {
+  plotPoints() {
 
     // Draw only if visible
     if ( this.visible && this.points.length > 0 ) {
 
-      const plotShape = new Shape();
+      const stepShape = new Shape();
       const pointsShape = new Shape();
 
       const numberOfPoints = this.points.length;
 
-      // Find the index of the first point that is to the left of the grid.
-      // Search from the end of the array, to optimize for animated scrolling for the graph.
+      // Find the index of the first point that is to the left of the grid. Search from the end of the array, to
+      // optimize for the case where the graph is scrolling (animated). If the graph is not scrolling, then the sim
+      // is paused, and the graph is being used to examine data for a previous generation. In that case, the time
+      // to find this index is not critical.
       let firstIndex = 0;
       for ( let i = numberOfPoints - 1; i >= 0; i-- ) {
         const point = this.points.get( i );
@@ -149,15 +153,15 @@ class PopulationPlotNode extends Node {
             if ( point.x === this.xRangeProperty.value.min ) {
 
               // First point is at xMin
-              plotShape.moveTo( xView, yView );
+              stepShape.moveTo( xView, yView );
             }
             else {
 
               // Draw information from left edge of grid to first point
               const yViewPrevious = this.modelToViewY( previousPoint.y );
-              plotShape.moveTo( this.modelToViewX( this.xRangeProperty.value.min ), yViewPrevious );
-              plotShape.lineTo( xView, yViewPrevious );
-              plotShape.lineTo( xView, yView );
+              stepShape.moveTo( this.modelToViewX( this.xRangeProperty.value.min ), yViewPrevious );
+              stepShape.lineTo( xView, yViewPrevious );
+              stepShape.lineTo( xView, yView );
             }
             plotStarted = true;
           }
@@ -165,8 +169,8 @@ class PopulationPlotNode extends Node {
 
             // Make a step from previous point to current point
             const yViewPrevious = this.modelToViewY( previousPoint.y );
-            plotShape.lineTo( xView, yViewPrevious );
-            plotShape.lineTo( xView, yView );
+            stepShape.lineTo( xView, yViewPrevious );
+            stepShape.lineTo( xView, yView );
           }
         }
         else if ( plotStarted && point.x > this.xRangeProperty.value.max ) {
@@ -175,8 +179,8 @@ class PopulationPlotNode extends Node {
           const xViewPrevious = this.modelToViewX( previousPoint.x );
           const xViewRight = this.modelToViewX( this.xRangeProperty.value.max );
           const yView = this.modelToViewY( point.y );
-          plotShape.lineTo( xViewPrevious, yView );
-          plotShape.lineTo( xViewRight, yView );
+          stepShape.lineTo( xViewPrevious, yView );
+          stepShape.lineTo( xViewRight, yView );
           break;
         }
 
@@ -187,10 +191,10 @@ class PopulationPlotNode extends Node {
       if ( previousPoint && previousPoint.x < this.generationsProperty.value ) {
         const xView = this.modelToViewX( this.generationsProperty.value );
         const yView = this.modelToViewY( previousPoint.y );
-        plotShape.lineTo( xView, yView );
+        stepShape.lineTo( xView, yView );
       }
 
-      this.plotPath.setShape( plotShape );
+      this.stepPath.setShape( stepShape );
       this.pointsPath.setShape( pointsShape );
     }
   }
