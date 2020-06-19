@@ -27,6 +27,7 @@ const MUTANT_LINE_DASH = [ 3, 3 ];
 class PopulationPlotNode extends Node {
 
   /**
+   * @param {string} name - internal name, for debugging
    * @param {ObservableArray.<Vector2>} points - data points, in model coordinates (x=Generation, y=Population)
    * @param {Property.<boolean>} plotVisibleProperty - whether this plot is visible
    * @param {number} xWidth - width of the x axis, in model coordinates (Generations)
@@ -37,8 +38,9 @@ class PopulationPlotNode extends Node {
    * @param {Property.<number>} generationsProperty - the current value of the generation clock
    * @param {Object} [options]
    */
-  constructor( points, plotVisibleProperty, xWidth, xRangeProperty, yRangeProperty,
+  constructor( name, points, plotVisibleProperty, xWidth, xRangeProperty, yRangeProperty,
                gridWidth, gridHeight, generationsProperty, options ) {
+    assert && assert( typeof name === 'string', 'invalid name' );
     assert && assert( points instanceof ObservableArray, 'invalid points' );
     assert && AssertUtils.assertPropertyOf( plotVisibleProperty, 'boolean' );
     assert && AssertUtils.assertPropertyOf( xRangeProperty, Range );
@@ -68,6 +70,7 @@ class PopulationPlotNode extends Node {
     super( options );
 
     // @private
+    this.name = name;
     this.points = points;
     this.xWidth = xWidth;
     this.xRangeProperty = xRangeProperty;
@@ -95,11 +98,9 @@ class PopulationPlotNode extends Node {
     // unmultilink not needed
     //TODO there is duplicated work here, because xRangeProperty and generationsProperty both change while graph scrolls
     Property.multilink(
-      [ xRangeProperty, yRangeProperty, generationsProperty ],
+      [ xRangeProperty, yRangeProperty, generationsProperty, this.visibleProperty ],
       () => this.update()
     );
-
-    //TODO optimize so that this is not updated if invisible?
   }
 
   /**
@@ -108,7 +109,7 @@ class PopulationPlotNode extends Node {
    */
   update() {
 
-    if ( this.points.length > 0 ) {
+    if ( this.visible && this.points.length > 0 ) {
 
       const plotShape = new Shape();
       const pointsShape = new Shape();
