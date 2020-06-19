@@ -7,20 +7,15 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import PlayPauseButton from '../../../../scenery-phet/js/buttons/PlayPauseButton.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
-import Path from '../../../../scenery/js/nodes/Path.js';
-import RoundMomentaryButton from '../../../../sun/js/buttons/RoundMomentaryButton.js';
 import EnabledNode from '../../../../sun/js/EnabledNode.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
-
-// constants
-const PLAY_PAUSE_BUTTON_RADIUS = 20;
-const FAST_FORWARD_BUTTON_RADIUS = 16;
+import FastForwardButton from './FastForwardButton.js';
 
 class NaturalSelectionTimeControl extends HBox {
 
@@ -34,21 +29,28 @@ class NaturalSelectionTimeControl extends HBox {
     assert && AssertUtils.assertPropertyOf( fastForwardScaleProperty, 'number' );
 
     options = merge( {
-      spacing: 10
+      spacing: 10,
+
+      // phet-io
+      tandem: Tandem.REQUIRED
     }, options );
 
     const playPauseButton = new PlayPauseButton( isPlayingProperty, {
-      radius: PLAY_PAUSE_BUTTON_RADIUS,
-      listener: () => fastForwardButton.interruptSubtreeInput()
+      radius: 20,
+      listener: () => fastForwardButton.interruptSubtreeInput(),
+      tandem: options.tandem.createTandem( 'playPauseButton' )
     } );
 
-    const fastForwardButton = new RoundMomentaryButton( 1, NaturalSelectionQueryParameters.fastForwardScale,
-      fastForwardScaleProperty, {
-      radius: FAST_FORWARD_BUTTON_RADIUS,
-      content: new Path( createFastForwardShape( FAST_FORWARD_BUTTON_RADIUS ), {
-        fill: 'black'
-      } )
+    const fastForwardButton = new FastForwardButton( fastForwardScaleProperty,
+      NaturalSelectionQueryParameters.fastForwardScale, {
+      tandem: options.tandem.createTandem( 'fastForwardButton' )
     } );
+
+    assert && assert( !options.children, 'NaturalSelectionTimeControl sets children' );
+    options.children = [ playPauseButton, fastForwardButton ];
+
+    super( options );
+    this.initializeEnabledNode( options );
 
     let isPlayingSaved = isPlayingProperty.value;
     fastForwardButton.buttonModel.downProperty.link( down => {
@@ -67,12 +69,6 @@ class NaturalSelectionTimeControl extends HBox {
         isPlayingProperty.value = isPlayingSaved;
       }
     } );
-
-    assert && assert( !options.children, 'NaturalSelectionTimeControl sets children' );
-    options.children = [ playPauseButton, fastForwardButton ];
-
-    super( options );
-    this.initializeEnabledNode( options );
   }
 
   /**
@@ -87,23 +83,6 @@ class NaturalSelectionTimeControl extends HBox {
 
 // mix in enabled component into a Node
 EnabledNode.mixInto( NaturalSelectionTimeControl );
-
-/**
- * Creates the Shape for the fast-forward icon. Drawn clockwise from the top-left corner.
- * @param {number} radius
- * @returns {Shape}
- */
-function createFastForwardShape( radius ) {
-  return new Shape()
-    .moveTo( 0, 0 )
-    .lineTo( radius / 2, radius / 2 )
-    .lineTo( radius / 2, 0 )
-    .lineTo( radius, radius / 2 )
-    .lineTo( radius / 2, radius )
-    .lineTo( radius / 2, radius / 2 )
-    .lineTo( 0, radius )
-    .close();
-}
 
 naturalSelection.register( 'NaturalSelectionTimeControl', NaturalSelectionTimeControl );
 export default NaturalSelectionTimeControl;
