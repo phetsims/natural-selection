@@ -29,7 +29,6 @@
 ## Design
 
 * Death due to old-age is not a separate data point
-* Co-locate generation clock and time controls?
 
 ## Testing
 
