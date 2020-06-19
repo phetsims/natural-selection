@@ -111,9 +111,18 @@ class PopulationPlotNode extends Node {
     generationsProperty.link( generationsListener );
 
     // unmultilink not needed
-    Property.multilink( [ xRangeProperty, yRangeProperty, this.visibleProperty ],
+    Property.multilink( [ xRangeProperty, yRangeProperty ],
       () => this.plotPoints()
     );
+
+    // Update when this Node becomes visible.
+    // visibleProperty is a TinyProperty, so cannot be included in the above multilink.
+    // unlink not needed
+    this.visibleProperty.link( visible => {
+      if ( visible ) {
+        this.plotPoints();
+      }
+    } );
   }
 
   /**
