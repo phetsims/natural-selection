@@ -18,6 +18,7 @@
 
 ## Implementation
 
+* Too many Properties with 'generation' in their name is confusing
 * More iteration over genes, less brute-force
 * Prune dead bunnies
 * Stop the sim when generation limit is hit
