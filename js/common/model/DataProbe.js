@@ -122,6 +122,8 @@ class DataProbe extends PhetioObject {
    */
   getCount( generation, points ) {
     let count = 0;
+
+    // Optimize for scrolling graph. Start with most recent points and work backwards in time.
     for ( let i = points.length - 1; i >=0; i-- ) {
       const point = points.get( i );
       if ( generation >= point.x ) {
