@@ -1,6 +1,5 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
-//TODO should probably have a positionProperty that changes as graph scrolls and user drags
 /**
  * DataProbe is the model for the data probe on the Population graph. It shows population (y-axis) values at a specific
  * generation (x-axis) value on the graph.
@@ -90,7 +89,7 @@ class DataProbe extends PhetioObject {
     super.dispose();
   }
 
-  //TODO generation and generations is confusing!
+  //TODO generation and generations is confusing! There are too many Properties in this sim with "generation" name.
   /**
    * Gets the bunny counts for a specific generation value.
    * @param {number} generation
