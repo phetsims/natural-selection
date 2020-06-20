@@ -92,7 +92,7 @@ class DataProbe extends PhetioObject {
   //TODO generation and generations is confusing! There are too many Properties in this sim with "generation" name.
   /**
    * Gets the bunny counts for a specific generation value.
-   * @param {number} generation
+   * @param {number} generation - current position of the data probe on the x axis
    * @param {number} generations - current value of the generation clock
    * @returns {BunnyCounts|null}
    * @private
@@ -115,8 +115,8 @@ class DataProbe extends PhetioObject {
 
   /**
    * Gets the population count (y value) for a specific generation (x value).
-   * @param {number} generation
-   * @param {ObservableArray.<Vector2>} points
+   * @param {number} generation - current position of the data probe on the x axis
+   * @param {ObservableArray.<Vector2>} points - data points, x (generation) and y (population)
    * @returns {number}
    * @private
    */
