@@ -76,8 +76,8 @@ class DataProbe extends PhetioObject {
    * @public
    */
   reset() {
+    this.offsetProperty.reset();
     this.visibleProperty.reset();
-    this.generationProperty.reset();
   }
 
   /**
