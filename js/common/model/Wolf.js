@@ -135,7 +135,7 @@ class Wolf extends NaturalSelectionSprite {
    */
   static fromStateObject( stateObject ) {
     return {
-     speed: NumberIO.fromStateObject( stateObject.speed )
+     speed: NumberIO.fromStateObject( stateObject.private.speed )
     };
   }
 
