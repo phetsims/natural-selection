@@ -237,8 +237,6 @@ class PopulationModel extends PhetioObject {
     this.shortTeethPoints.reset();
     this.longTeethPoints.reset();
 
-    this.dataProbe.reset();
-
     this.totalVisibleProperty.reset();
     this.whiteFurVisibleProperty.reset();
     this.brownFurVisibleProperty.reset();
@@ -249,6 +247,8 @@ class PopulationModel extends PhetioObject {
 
     this.xRangeProperty.reset();
     this.yZoomLevelProperty.reset();
+
+    this.dataProbe.reset();
   }
 
   /**
