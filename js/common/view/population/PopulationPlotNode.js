@@ -120,7 +120,7 @@ class PopulationPlotNode extends Node {
   plotPoints() {
 
     // Draw only if visible
-    if ( this.visible && this.points.length > 0 ) {
+    if ( this.visible ) {
 
       const stepShape = new Shape();
       const pointsShape = new Shape();
