@@ -32,6 +32,10 @@
 
 * Death due to old-age is not a separate data point
 
+## Performance
+
+Update graphs only when they are selected and visible
+
 ## Testing
 
 * Update PhET-iO design doc for QA
