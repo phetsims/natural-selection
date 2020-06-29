@@ -21,7 +21,7 @@ import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 // constants
 const LINE_WIDTH = 2; // plotted line width, in view coordinates
 const NORMAL_LINE_DASH = [];
-const MUTANT_LINE_DASH = [ 3, 3 ];
+const MUTANT_LINE_DASH = NaturalSelectionConstants.POPULATION_MUTANT_LINE_DASH;
 
 class PopulationPlotNode extends Node {
 

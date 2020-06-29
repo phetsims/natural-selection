@@ -113,7 +113,8 @@ const NaturalSelectionConstants = {
   DIALOG_FONT: new PhetFont( 16 ),
 
   // Population plot
-  POPULATION_POINT_RADIUS: 3 // point radius, in view coordinates
+  POPULATION_POINT_RADIUS: 3, // point radius, in view coordinates
+  POPULATION_MUTANT_LINE_DASH: [ 3, 3 ]
 };
 
 assert && assert( NaturalSelectionConstants.LITTER_SIZE === 4,
