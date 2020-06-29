@@ -17,12 +17,14 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionModel from '../model/NaturalSelectionModel.js';
 import SimulationMode from '../model/SimulationMode.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import AddMutationsPanel from './AddMutationsPanel.js';
 import DiedDialog from './DiedDialog.js';
 import EnvironmentNode from './environment/EnvironmentNode.js';
 import EnvironmentalFactorsPanel from './EnvironmentalFactorsPanel.js';
 import EnvironmentRadioButtonGroup from './EnvironmentRadioButtonGroup.js';
 import GenerationClockNode from './GenerationClockNode.js';
+import GenerationLimitDialog from './GenerationLimitDialog.js';
 import GenesVisibilityManager from './GenesVisibilityManager.js';
 import GraphChoice from './GraphChoice.js';
 import GraphChoiceRadioButtonGroup from './GraphChoiceRadioButtonGroup.js';
@@ -258,10 +260,22 @@ class NaturalSelectionScreenView extends ScreenView {
       }
     } );
 
-    //  removeListener is not necessary.
+    // removeListener is not necessary.
     model.bunnyCollection.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
       worldDialog.show();
       model.simulationModeProperty.value = SimulationMode.COMPLETED;
+    } );
+
+    // Display a dialog when we hit the generation limit.
+    // See https://github.com/phetsims/natural-selection/issues/46
+    const generationLimitDialog = new GenerationLimitDialog();
+
+    // removeListener is not necessary.
+    model.generationClock.currentGenerationProperty.link( currentGeneration => {
+      if ( currentGeneration >= NaturalSelectionQueryParameters.maxGenerations ) {
+        generationLimitDialog.show();
+        model.simulationModeProperty.value = SimulationMode.COMPLETED;
+      }
     } );
 
     // @private

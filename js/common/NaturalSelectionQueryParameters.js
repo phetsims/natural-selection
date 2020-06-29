@@ -123,6 +123,13 @@ const SCHEMA = {
   // For internal use only
   //------------------------------------------------------------------------------------------------------------------
 
+  // Maximum number of generations before the sim stops. See https://github.com/phetsims/natural-selection/issues/46
+  maxGenerations: {
+    type: 'number',
+    defaultValue: 100,
+    isValidValue: value => ( value > 0 )
+  },
+
   // Seconds of real time per cycle of the generation clock.
   secondsPerGeneration: {
     type: 'number',
