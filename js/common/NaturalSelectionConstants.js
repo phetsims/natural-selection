@@ -114,7 +114,7 @@ const NaturalSelectionConstants = {
 
   // Population plot
   POPULATION_POINT_RADIUS: 2.4, // point radius, in view coordinates
-  POPULATION_MUTANT_LINE_DASH: [ 3, 3 ]
+  POPULATION_MUTANT_LINE_DASH: [ 3, 2 ]
 };
 
 assert && assert( NaturalSelectionConstants.LITTER_SIZE === 4,
