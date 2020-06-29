@@ -21,7 +21,7 @@ const LINE_DASH = NaturalSelectionConstants.POPULATION_MUTANT_LINE_DASH;
 
 // Compute line length so that we have uniform dash length
 assert && assert( LINE_DASH.length === 2, 'unsupported LINE_DASH' );
-const NUMBER_OF_DASHES = 4;
+const NUMBER_OF_DASHES = 5;
 const LINE_LENGTH = NUMBER_OF_DASHES * LINE_DASH[ 0 ] + ( NUMBER_OF_DASHES - 1 ) * LINE_DASH[ 1 ];
 
 class PopulationLegendCheckbox extends NaturalSelectionCheckbox {
