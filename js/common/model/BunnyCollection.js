@@ -231,7 +231,7 @@ class BunnyCollection {
     } );
 
     assert && this.assertValidCounts();
-    phet.log && phet.log( `${diedCount} bunnies died, total dead = ${this.deadBunnies.length}` );
+    phet.log && phet.log( `${diedCount} bunnies died of old age, total dead = ${this.deadBunnies.length}` );
   }
 
   /**
