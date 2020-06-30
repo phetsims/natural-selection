@@ -29,6 +29,8 @@ import GenerationClock from './GenerationClock.js';
 import Shrub from './Shrub.js';
 
 // constants
+const CLOCK_FOOD_MIDPOINT =
+  NaturalSelectionConstants.CLOCK_FOOD_RANGE.min + NaturalSelectionConstants.CLOCK_FOOD_RANGE.getLength() / 2;
 
 // Limited tender food will cause this percentage of bunnies to die of starvation, regardless of their teeth genes.
 const LIMITED_FOOD_PERCENT_TO_KILL_RANGE = new Range(
@@ -131,12 +133,12 @@ class Food {
       }
     } );
 
-    // Starve some bunnies. unlink is not necessary.
-    //TODO Temporarily starve all bunnies at once, instead of over CLOCK_FOOD_RANGE
+    // Starve some bunnies at the midpoint of CLOCK_FOOD_RANGE.
+    // See https://github.com/phetsims/natural-selection/issues/110
+    // unlink is not necessary.
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
-        const foodRangeMin = NaturalSelectionConstants.CLOCK_FOOD_RANGE.min;
-        if ( previousPercentTime < foodRangeMin && currentPercentTime >= foodRangeMin ) {
+        if ( previousPercentTime < CLOCK_FOOD_MIDPOINT && currentPercentTime >= CLOCK_FOOD_MIDPOINT ) {
           this.starveBunnies( liveBunnies.getArray() );
         }
       }

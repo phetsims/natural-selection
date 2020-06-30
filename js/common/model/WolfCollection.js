@@ -25,6 +25,12 @@ import GenerationClock from './GenerationClock.js';
 import Wolf from './Wolf.js';
 import WolfGroup from './WolfGroup.js';
 
+// constants
+const CLOCK_WOLVES_MIN = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.min;
+const CLOCK_WOLVES_MAX = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.max;
+const CLOCK_WOLVES_MIDPOINT =
+  NaturalSelectionConstants.CLOCK_WOLVES_RANGE.min + NaturalSelectionConstants.CLOCK_WOLVES_RANGE.getLength() / 2;
+
 // Wolves will kill at least this percentage of the bunnies, regardless of their fur color.
 const WOLVES_PERCENT_TO_KILL_RANGE = new Range(
   NaturalSelectionQueryParameters.wolvesPercentToKill[ 0 ],
@@ -94,15 +100,10 @@ class WolfCollection {
     } );
 
     // Eat some bunnies. unlink is not necessary.
-    //TODO Temporarily eat all bunnies at once, instead of over CLOCK_WOLVES_RANGE
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
 
-        // Part of the generation clock when wolves are active
-        const wolvesRangeMin = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.min;
-        const wolvesRangeMax = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.max;
-
-        if ( this.enabledProperty.value && previousPercentTime < wolvesRangeMin && currentPercentTime >= wolvesRangeMin ) {
+        if ( this.enabledProperty.value && previousPercentTime < CLOCK_WOLVES_MIN && currentPercentTime >= CLOCK_WOLVES_MIN ) {
 
           // Create wolves
           assert && assert( this.wolfGroup.count === 0, 'expected there to be no wolves' );
@@ -112,15 +113,18 @@ class WolfCollection {
           for ( let i = 0; i < numberOfWolves; i++ ) {
             this.wolfGroup.createNextElement();
           }
-
-          // Eat bunnies
-          this.eatBunnies( environmentProperty.value );
         }
-        else if ( currentPercentTime > wolvesRangeMax && this.wolfGroup.count > 0 ) {
+        else if ( currentPercentTime > CLOCK_WOLVES_MAX && this.wolfGroup.count > 0 ) {
 
           // Dispose of all wolves
           phet.log && phet.log( `Disposing of ${this.wolfGroup.count} wolves` );
           this.wolfGroup.clear();
+        }
+
+        // Eat bunnies at the midpoint of CLOCK_WOLVES_RANGE.
+        // See https://github.com/phetsims/natural-selection/issues/110
+        if ( previousPercentTime < CLOCK_WOLVES_MIDPOINT && currentPercentTime >= CLOCK_WOLVES_MIDPOINT ) {
+          this.eatBunnies( environmentProperty.value );
         }
       }
     } );
