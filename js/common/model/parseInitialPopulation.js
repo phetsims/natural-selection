@@ -108,24 +108,24 @@ function parseMutations( genePool, mutationsName, mutationsValue ) {
     alleleAbbreviations.push( recessiveAbbreviation );
 
     // Dominant and recessive abbreviations for the same gene are mutually exclusive
-    verify( !( mutationChars.indexOf( dominantAbbreviation ) !== -1 && mutationChars.indexOf( recessiveAbbreviation ) !== -1 ),
+    verify( !( mutationChars.includes( dominantAbbreviation ) && mutationChars.includes( recessiveAbbreviation ) ),
       `${mutationsName}: ${dominantAbbreviation} and ${recessiveAbbreviation} are mutually exclusive` );
 
     // If one of the abbreviations is specified, then make the mutant gene dominant or recessive.
     // This changes both the value and initialValue of dominantAlleleProperty, because this is the initial population,
     // and we want dominantAlleleProperty.reset to behave correctly.
-    if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 ) {
+    if ( mutationChars.includes( dominantAbbreviation ) ) {
       gene.dominantAlleleProperty.value = gene.mutantAllele;
       gene.dominantAlleleProperty.setInitialValue( gene.mutantAllele );
     }
-    else if ( mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
+    else if ( mutationChars.includes( recessiveAbbreviation ) ) {
       gene.dominantAlleleProperty.value = gene.normalAllele;
       gene.dominantAlleleProperty.setInitialValue( gene.normalAllele );
     }
   } );
 
   // Check for non-allele characters
-  verify( _.every( mutationChars, char => alleleAbbreviations.indexOf( char ) !== -1 ),
+  verify( _.every( mutationChars, char => alleleAbbreviations.includes( char ) ),
     `${mutationsName}: ${mutationsValue} contains an invalid character` );
 
   return mutationChars;
@@ -204,7 +204,7 @@ function parsePopulation( genePool, mutationChars, populationName, populationVal
         const recessiveAbbreviation = gene.recessiveAbbreviationEnglish;
 
         // If the gene is represented in mutations...
-        if ( mutationChars.indexOf( dominantAbbreviation ) !== -1 || mutationChars.indexOf( recessiveAbbreviation ) !== -1 ) {
+        if ( mutationChars.includes( dominantAbbreviation ) || mutationChars.includes( recessiveAbbreviation ) ) {
 
           const genotypeChars = genotypeString.split( '' );
 

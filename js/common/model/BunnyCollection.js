@@ -333,9 +333,9 @@ class BunnyCollection {
             motherTeethAllele: teethPunnetSquare[ j ].motherAllele,
 
             // mutations
-            mutateFur: ( furIndices.indexOf( bornIndex ) !== -1 ),
-            mutateEars: ( earsIndices.indexOf( bornIndex ) !== -1 ),
-            mutateTeeth: ( teethIndices.indexOf( bornIndex ) !== -1 )
+            mutateFur: furIndices.includes( bornIndex ),
+            mutateEars: earsIndices.includes( bornIndex ),
+            mutateTeeth: teethIndices.includes( bornIndex )
           }
         } );
 
@@ -421,7 +421,7 @@ class BunnyCollection {
         if ( this.recessiveMutants.contains( mutantMother ) ) {
           this.recessiveMutants.remove( mutantMother );
         }
-        if ( recessiveMutantsCopy.indexOf( mutantMother ) !== -1 ) {
+        if ( recessiveMutantsCopy.includes( mutantMother ) ) {
           recessiveMutantsCopy.splice( recessiveMutantsCopy.indexOf( mutantMother ), 1 );
         }
       }
