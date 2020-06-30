@@ -279,7 +279,6 @@ class PopulationModel extends PhetioObject {
     assert && assert( NaturalSelectionUtils.isNonNegative( generation ), 'invalid generation' );
     assert && assert( counts instanceof BunnyCounts, 'invalid counts' );
 
-    phet.log && phet.log( `PopulationModel.recordCounts: generation=${generation} counts=${counts}` );
     recordCount( this.totalPoints, generation, counts.totalCount );
     recordCount( this.whiteFurPoints, generation, counts.whiteFurCount );
     recordCount( this.brownFurPoints, generation, counts.brownFurCount );

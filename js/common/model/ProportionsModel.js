@@ -218,7 +218,6 @@ class ProportionsModel extends PhetioObject {
     assert && assert( generation === this.currentGenerationProperty.value, `${generation} is not the current generation` );
 
     this.currentStartCountsProperty.value = startCounts;
-    phet.log && phet.log( `ProportionsModel recorded start counts for generation ${generation}: ${startCounts.toString()}` );
   }
 
   /**
@@ -235,8 +234,6 @@ class ProportionsModel extends PhetioObject {
 
     const startCounts = this.currentStartCountsProperty.value;
     this.previousCounts.push( new ProportionsCounts( generation, startCounts, endCounts ) );
-
-    phet.log && phet.log( `ProportionsModel recorded end counts for generation ${generation}: ${endCounts.toString()}` );
   }
 }
 
