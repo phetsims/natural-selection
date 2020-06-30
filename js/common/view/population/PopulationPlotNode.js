@@ -68,8 +68,8 @@ class PopulationPlotNode extends Node {
     this.generationsProperty = populationModel.generationsProperty;
     this.gridWidth = options.gridWidth;
     this.gridHeight = options.gridHeight;
-    this.stepPath = stepPath;
     this.pointsPath = pointsPath;
+    this.stepPath = stepPath;
 
     // unlink not needed
     plotVisibleProperty.link( plotVisible => {
@@ -122,8 +122,8 @@ class PopulationPlotNode extends Node {
     // Draw only if visible
     if ( this.visible ) {
 
-      const stepShape = new Shape();
       const pointsShape = new Shape();
+      const stepShape = new Shape();
 
       const numberOfPoints = this.points.length;
 
@@ -202,8 +202,8 @@ class PopulationPlotNode extends Node {
         stepShape.lineTo( xView, yView );
       }
 
-      this.stepPath.setShape( stepShape );
       this.pointsPath.setShape( pointsShape );
+      this.stepPath.setShape( stepShape );
     }
   }
 
