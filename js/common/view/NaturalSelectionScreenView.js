@@ -241,29 +241,35 @@ class NaturalSelectionScreenView extends ScreenView {
       }
     } );
 
+    // Stuff to do when the simulation needs to be ended.
+    const endSimulation = () => {
+
+      // Interrupt any interactions that are in progress
+      this.interruptSubtreeInput();
+
+      model.simulationModeProperty.value = SimulationMode.COMPLETED;
+
+      // So we don't leave bunnies captured in mid-hop
+      model.bunnyCollection.moveBunniesToGround();
+      environmentNode.sortSprites();
+    };
+
     // Display a dialog when all bunnies have died.
     const diedDialog = new DiedDialog();
 
     // removeListener is not necessary.
     model.bunnyCollection.allBunniesHaveDiedEmitter.addListener( () => {
+      endSimulation();
       diedDialog.show();
-      model.simulationModeProperty.value = SimulationMode.COMPLETED;
     } );
 
     // Display a dialog when bunnies have taken over the world.
-    const worldDialog = new WorldDialog( {
-      showCallback: () => {
-
-        // so we don't leave bunnies captured in mid-hop
-        model.bunnyCollection.moveBunniesToGround();
-        environmentNode.sortSprites();
-      }
-    } );
+    const worldDialog = new WorldDialog();
 
     // removeListener is not necessary.
     model.bunnyCollection.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
+      endSimulation();
       worldDialog.show();
-      model.simulationModeProperty.value = SimulationMode.COMPLETED;
     } );
 
     // Display a dialog when we hit the generation limit.
@@ -273,8 +279,8 @@ class NaturalSelectionScreenView extends ScreenView {
     // removeListener is not necessary.
     model.generationClock.currentGenerationProperty.link( currentGeneration => {
       if ( currentGeneration >= NaturalSelectionQueryParameters.maxGenerations ) {
+        endSimulation();
         generationLimitDialog.show();
-        model.simulationModeProperty.value = SimulationMode.COMPLETED;
       }
     } );
 
