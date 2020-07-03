@@ -44,8 +44,9 @@ class BunnyNode extends Node {
       bottom: 0
     } );
 
-    // {Node|null} Rectangle that appears around this Node when bunny is selected. This is created on demand
-    // to improve performance. See https://github.com/phetsims/natural-selection/issues/60.
+    // {Node|null} Rectangle that appears around this Node when bunny is selected.
+    // Created on demand, since most bunnies will never be selected, and deferring creation improves performance.
+    // See https://github.com/phetsims/natural-selection/issues/60.
     let selectionRectangle = null;
 
     assert && assert( !options.children, 'BunnyNode sets children' );
