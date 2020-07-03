@@ -34,7 +34,7 @@ class BunnyNode extends Node {
 
     options = merge( {
 
-      // Whether to show the mutation icon on this bunny
+      // Whether to show the mutation icon on this bunny, if the associated bunny is an original mutant
       showMutationIcon: false
     }, options );
 
