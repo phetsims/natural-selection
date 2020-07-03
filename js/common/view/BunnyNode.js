@@ -44,18 +44,12 @@ class BunnyNode extends Node {
       bottom: 0
     } );
 
-    // Rectangle that appears around this Node when bunny is selected
-    const selectionRectangle = new Rectangle( wrappedImage.bounds.dilated( 3 ), {
-      fill: 'rgba( 0, 0, 0, 0.25 )',
-      stroke: NaturalSelectionColors.SELECTED_BUNNY_STROKE,
-      lineWidth: 2,
-      cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
-      center: wrappedImage.center,
-      pickable: false
-    } );
+    // {Node|null} Rectangle that appears around this Node when bunny is selected. This is created on demand
+    // to improve performance. See https://github.com/phetsims/natural-selection/issues/60.
+    let selectionRectangle = null;
 
     assert && assert( !options.children, 'BunnyNode sets children' );
-    options.children = [ selectionRectangle, wrappedImage ];
+    options.children = [ wrappedImage ];
 
     // Label original mutant with an icon
     if ( options.showMutationIcon && bunny.isOriginalMutant() ) {
@@ -70,7 +64,21 @@ class BunnyNode extends Node {
 
     // Indicate that this bunny is selected.
     const selectedBunnyListener = someBunny => {
-      selectionRectangle.visible = ( someBunny === bunny );
+      if ( selectionRectangle ) {
+        selectionRectangle.visible = ( someBunny === bunny );
+      }
+      else if ( someBunny === bunny ) {
+        selectionRectangle = new Rectangle( wrappedImage.bounds.dilated( 3 ), {
+          fill: 'rgba( 0, 0, 0, 0.25 )',
+          stroke: NaturalSelectionColors.SELECTED_BUNNY_STROKE,
+          lineWidth: 2,
+          cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
+          center: wrappedImage.center,
+          pickable: false
+        } );
+        this.addChild( selectionRectangle );
+        selectionRectangle.moveToBack();
+      }
     };
     selectedBunnyProperty.link( selectedBunnyListener ); // unlink is required
 
