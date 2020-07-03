@@ -50,8 +50,9 @@ Mating follows Mendelian inheritance, see Punnett square.
 
 Bunnies die when 5 years old.
 
-Any bunny can mate with any other bunny. Sex is irrelevant, but the code refers to the 2 parents 
-as 'father' and 'mother'. In Pedigree graph, 'father' is on the left, 'mother' is on the right.
+Any bunny can mate with any other bunny. Age is irrelevant. Sex is irrelevant, but the code refers 
+to the 2 parents as 'father' and 'mother'. In Pedigree graph, 'father' is on the left, 'mother' is 
+on the right.
 
 Order of alleles in genotype abbreviations is relevant. 'Ff' is different than 'fF'. The first 
 allele is inherited from the father, the second from the mother.
