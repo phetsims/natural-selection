@@ -174,8 +174,9 @@ class NaturalSelectionModel {
         this.bunnyCollection.ageBunnies();
 
         // Mate bunnies
-        // TODO https://github.com/phetsims/natural-selection/issues/60 delete this code
+        //TODO https://github.com/phetsims/natural-selection/issues/60 delete this statement
         this.timeToMateProperty.value = NaturalSelectionUtils.time( () => this.bunnyCollection.mateBunnies( currentGeneration ) );
+        //TODO https://github.com/phetsims/natural-selection/issues/60 restore this statement
         // this.bunnyCollection.mateBunnies( currentGeneration );
 
         // After bunnies are aged and mated, record counts for graphs.

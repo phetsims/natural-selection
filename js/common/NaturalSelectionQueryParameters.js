@@ -240,6 +240,12 @@ const SCHEMA = {
     type: 'flag'
   },
 
+  // Displays the time spent on each mating cycle in the upper-left corner of the screen.
+  //TODO https://github.com/phetsims/natural-selection/issues/60 delete this
+  showTimeToMate: {
+    type: 'flag'
+  },
+
   // Whether to label original mutants in the environment.
   labelMutants: {
     type: 'flag'

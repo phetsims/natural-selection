@@ -299,18 +299,22 @@ class NaturalSelectionScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'genes' )
     } );
 
-    //TODO https://github.com/phetsims/natural-selection/issues/60 delete this code
-    const timeToMateNode = new Text( '', {
-      font: new PhetFont( 20 ),
-      left: environmentNode.left + 5,
-      top: environmentNode.top + 5
-    });
-    this.addChild( timeToMateNode );
-    model.timeToMateProperty.link( timeToMate => {
-      const t = Utils.roundSymmetric( timeToMate );
-      console.log( `time to mate = ${t} ms` );
-      timeToMateNode.text = `time to mate = ${t} ms`;
-    } );
+    //TODO https://github.com/phetsims/natural-selection/issues/60 delete this block
+    {
+      const timeToMateNode = new Text( '', {
+        font: new PhetFont( 20 ),
+        left: environmentNode.left + 5,
+        top: environmentNode.top + 5
+      } );
+      if ( NaturalSelectionQueryParameters.showTimeToMate ) {
+        this.addChild( timeToMateNode );
+      }
+      model.timeToMateProperty.link( timeToMate => {
+        const t = Utils.roundSymmetric( timeToMate );
+        console.log( `time to mate = ${t} ms` );
+        timeToMateNode.text = `time to mate = ${t} ms`;
+      } );
+    }
   }
 
   /**
