@@ -32,6 +32,8 @@ organism's appearance.
 * ff - homozygous recessive
 * Ff, fF - heterozygous
 
+## Model
+
 In the context of this sim:
 
 * A bunny has 3 traits, and 3 corresponding gene types: fur, ears, teeth.
