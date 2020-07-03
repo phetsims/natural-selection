@@ -68,6 +68,8 @@ class BunnyNode extends Node {
         selectionRectangle.visible = ( someBunny === bunny );
       }
       else if ( someBunny === bunny ) {
+
+        // The selection rectangle is created the first time that this bunny is selected.
         selectionRectangle = new Rectangle( wrappedImage.bounds.dilated( 3 ), {
           fill: 'rgba( 0, 0, 0, 0.25 )',
           stroke: NaturalSelectionColors.SELECTED_BUNNY_STROKE,
