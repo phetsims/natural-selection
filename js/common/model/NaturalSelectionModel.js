@@ -13,6 +13,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCollection from './BunnyCollection.js';
 import Environment from './Environment.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -156,6 +157,9 @@ class NaturalSelectionModel {
       }
     } );
 
+    //TODO https://github.com/phetsims/natural-selection/issues/60 delete this Property
+    this.timeToMateProperty = new NumberProperty( 0 );
+
     // When the generation changes... unlink is not necessary.
     this.generationClock.currentGenerationProperty.lazyLink( currentGeneration => {
 
@@ -170,7 +174,9 @@ class NaturalSelectionModel {
         this.bunnyCollection.ageBunnies();
 
         // Mate bunnies
-        this.bunnyCollection.mateBunnies( currentGeneration );
+        // TODO https://github.com/phetsims/natural-selection/issues/60 delete this code
+        this.timeToMateProperty.value = NaturalSelectionUtils.time( () => this.bunnyCollection.mateBunnies( currentGeneration ) );
+        // this.bunnyCollection.mateBunnies( currentGeneration );
 
         // After bunnies are aged and mated, record counts for graphs.
         const counts = this.bunnyCollection.getLiveBunnyCounts();

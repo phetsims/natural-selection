@@ -8,9 +8,12 @@
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import Utils from '../../../../dot/js/Utils.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -294,6 +297,19 @@ class NaturalSelectionScreenView extends ScreenView {
       earsVisible: options.earsVisible,
       teethVisible: options.teethVisible,
       tandem: options.tandem.createTandem( 'genes' )
+    } );
+
+    //TODO https://github.com/phetsims/natural-selection/issues/60 delete this code
+    const timeToMateNode = new Text( '', {
+      font: new PhetFont( 20 ),
+      left: environmentNode.left + 5,
+      top: environmentNode.top + 5
+    });
+    this.addChild( timeToMateNode );
+    model.timeToMateProperty.link( timeToMate => {
+      const t = Utils.roundSymmetric( timeToMate );
+      console.log( `time to mate = ${t} ms` );
+      timeToMateNode.text = `time to mate = ${t} ms`;
     } );
   }
 
