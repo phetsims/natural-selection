@@ -257,8 +257,8 @@ const SCHEMA = {
     type: 'flag'
   },
 
-  // Percentage of newborn bunnies that will receive a mutation. Symmetric rounding is used, and at least 1 bunny will
-  // receive the mutation.
+  // Percentage of newborn bunnies that will receive a mutation.
+  // Symmetric rounding is used, and at least 1 bunny will receive the mutation.
   mutationPercentage: {
     type: 'number',
 
