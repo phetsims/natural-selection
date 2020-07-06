@@ -393,23 +393,45 @@ class BunnyCollection {
         // Create a litter for this bunny pair
         for ( let i = 0; i < NaturalSelectionConstants.LITTER_SIZE; i++ ) {
 
+          // inherited alleles
+          const genotypeOptions = {
+            fatherFurAllele: furPunnetSquare[ i ].fatherAllele,
+            motherFurAllele: furPunnetSquare[ i ].motherAllele,
+            fatherEarsAllele: earsPunnetSquare[ i ].fatherAllele,
+            motherEarsAllele: earsPunnetSquare[ i ].motherAllele,
+            fatherTeethAllele: teethPunnetSquare[ i ].fatherAllele,
+            motherTeethAllele: teethPunnetSquare[ i ].motherAllele
+          };
+
           // A bunny is born
           this.createBunny( {
             father: mutantFather,
             mother: mutantMother,
             generation: generation,
-            genotypeOptions: {
-
-              // inherited alleles
-              fatherFurAllele: furPunnetSquare[ i ].fatherAllele,
-              motherFurAllele: furPunnetSquare[ i ].motherAllele,
-              fatherEarsAllele: earsPunnetSquare[ i ].fatherAllele,
-              motherEarsAllele: earsPunnetSquare[ i ].motherAllele,
-              fatherTeethAllele: teethPunnetSquare[ i ].fatherAllele,
-              motherTeethAllele: teethPunnetSquare[ i ].motherAllele
-            }
+            genotypeOptions: genotypeOptions
           } );
         }
+
+        // Create 1 additional offspring that is homozygous recessive.
+        // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
+        const mutation = mutantFather.genotype.mutation;
+        const furIndex = getPunnettIndexForAdditionalOffspring( furPunnetSquare, mutation, this.genePool.furGene.dominantAlleleProperty.value );
+        const earsIndex = getPunnettIndexForAdditionalOffspring( earsPunnetSquare, mutation, this.genePool.earsGene.dominantAlleleProperty.value );
+        const teethIndex = getPunnettIndexForAdditionalOffspring( teethPunnetSquare, mutation, this.genePool.teethGene.dominantAlleleProperty.value );
+        const genotypeOptions = {
+          fatherFurAllele: furPunnetSquare[ furIndex ].fatherAllele,
+          motherFurAllele: furPunnetSquare[ furIndex ].motherAllele,
+          fatherEarsAllele: earsPunnetSquare[ earsIndex ].fatherAllele,
+          motherEarsAllele: earsPunnetSquare[ earsIndex ].motherAllele,
+          fatherTeethAllele: teethPunnetSquare[ teethIndex ].fatherAllele,
+          motherTeethAllele: teethPunnetSquare[ teethIndex ].motherAllele
+        };
+        this.createBunny( {
+          father: mutantFather,
+          mother: mutantMother,
+          generation: generation,
+          genotypeOptions: genotypeOptions
+        } );
 
         // Remove the mutants from further consideration of mating.
         bunnies.splice( bunnies.indexOf( mutantFather ), 1 );
@@ -480,7 +502,7 @@ class BunnyCollection {
 
 /**
  * Gets a suitable mate for a recessive mutant.
- * The suitable mate must have the same mutant allele that caused the recessive mutant to mutate.
+ * The mate must have the same mutant allele that caused the recessive mutant to mutate.
  * @param {Bunny} father
  * @param {Bunny[]} bunnies
  * @returns {Bunny|null} null if no mate is found
@@ -498,6 +520,42 @@ function getMateForRecessiveMutant( father, bunnies ) {
     }
   }
   return mother;
+}
+
+/**
+ * Gets the index of the cell in the Punnett square to use for an additional homozygous offspring.
+ * If the Punnett square contains a homozygous mutation, that genotype is returned.
+ * Otherwise, read the code comments :)
+ * @param {Array.<{fatherAllele:Allele, motherAllele:Allele}>} punnettSquare
+ * @param {Allele} mutantAllele
+ * @param {Allele|null} dominantAllele
+ * @returns {number}
+ */
+function getPunnettIndexForAdditionalOffspring( punnettSquare, mutantAllele, dominantAllele ) {
+
+  let index = -1;
+
+  // Look for homozygous mutation
+  for ( let i = 0; i < punnettSquare.length && index === -1; i++ ) {
+    if ( punnettSquare[ i ].fatherAllele === mutantAllele && punnettSquare[ i ].motherAllele === mutantAllele ) {
+      index = i;
+    }
+  }
+
+  // Fallback to dominant genotype
+  for ( let i = 0; i < punnettSquare.length && index === -1; i++ ) {
+    if ( punnettSquare[ i ].fatherAllele === dominantAllele || punnettSquare[ i ].motherAllele === dominantAllele ) {
+      index = i;
+    }
+  }
+
+  // Fallback to random selection
+  if ( index === -1 ) {
+    index = phet.joist.random.nextIntBetween( 0, punnettSquare.length - 1 );
+  }
+
+  assert && assert( index >= 0 && index < punnettSquare.length, `invalid index: ${index}` );
+  return index;
 }
 
 naturalSelection.register( 'BunnyCollection', BunnyCollection );
