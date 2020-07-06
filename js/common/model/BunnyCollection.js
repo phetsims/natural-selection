@@ -360,9 +360,9 @@ class BunnyCollection {
   }
 
   /**
-   * Mates each recessive mutant with a bunny that has the same mutation. The purpose of this is to make the
-   * mutation appear in the phenotype sooner. This must be done separately from other mating because we don't want
-   * to apply additional mutations. Note that the bunnies argument is modified as a side-effect.
+   * Mates each recessive mutant with a bunny that has the same mutation. This is referred to as 'mate eagerly', as
+   * the purpose is to make the mutation appear in the phenotype sooner. This must be done separately from other mating
+   * because we don't want to apply additional mutations. Note that the bunnies argument is modified as a side-effect.
    * @param {number} generation
    * @param {Bunny[]} bunnies - the bunnies that are candidates for mating
    * @private
