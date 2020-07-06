@@ -252,6 +252,7 @@ const SCHEMA = {
   },
 
   // When a mutation is applied, the mutant is homozygous.
+  //TODO https://github.com/phetsims/natural-selection/issues/98 delete this and associated code?
   homozygousMutants: {
     type: 'flag'
   },
