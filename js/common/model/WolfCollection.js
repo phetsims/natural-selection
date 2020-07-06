@@ -9,7 +9,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
-import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -18,6 +17,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
+import BunnyCollection from './BunnyCollection.js';
 import CauseOfDeath from './CauseOfDeath.js';
 import Environment from './Environment.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -46,15 +46,15 @@ class WolfCollection {
   /**
    * @param {GenerationClock} generationClock
    * @param {EnumerationProperty.<Environment>} environmentProperty
-   * @param {ObservableArray.<Bunny>} liveBunnies
+   * @param {BunnyCollection} bunnyCollection
    * @param {EnvironmentModelViewTransform} modelViewTransform
    * @param {Object} [options]
    */
-  constructor( generationClock, environmentProperty, liveBunnies, modelViewTransform, options ) {
+  constructor( generationClock, environmentProperty, bunnyCollection, modelViewTransform, options ) {
 
     assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
     assert && AssertUtils.assertEnumerationPropertyOf( environmentProperty, Environment );
-    assert && assert( liveBunnies instanceof ObservableArray, 'invalid liveBunnies' );
+    assert && assert( bunnyCollection instanceof BunnyCollection, 'invalid bunnyCollection' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
     options = merge( {
@@ -64,7 +64,7 @@ class WolfCollection {
     }, options );
 
     // @private
-    this.liveBunnies = liveBunnies;
+    this.bunnyCollection = bunnyCollection;
 
     // @private the PhetioGroup that manages Wolf instances as dynamic PhET-iO elements
     this.wolfGroup = new WolfGroup( modelViewTransform, {
@@ -108,7 +108,7 @@ class WolfCollection {
           // Create wolves
           assert && assert( this.wolfGroup.count === 0, 'expected there to be no wolves' );
           const numberOfWolves = Math.max( NaturalSelectionQueryParameters.minWolves,
-            Utils.roundSymmetric( liveBunnies.length / NaturalSelectionQueryParameters.bunniesPerWolf ) );
+            Utils.roundSymmetric( bunnyCollection.liveBunnies.length / NaturalSelectionQueryParameters.bunniesPerWolf ) );
           phet.log && phet.log( `Creating ${numberOfWolves} wolves` );
           for ( let i = 0; i < numberOfWolves; i++ ) {
             this.wolfGroup.createNextElement();
@@ -123,7 +123,7 @@ class WolfCollection {
 
         // Eat bunnies at the midpoint of CLOCK_WOLVES_RANGE.
         // See https://github.com/phetsims/natural-selection/issues/110
-        if ( previousPercentTime < CLOCK_WOLVES_MIDPOINT && currentPercentTime >= CLOCK_WOLVES_MIDPOINT ) {
+        if ( this.enabledProperty.value && previousPercentTime < CLOCK_WOLVES_MIDPOINT && currentPercentTime >= CLOCK_WOLVES_MIDPOINT ) {
           this.eatBunnies( environmentProperty.value );
         }
       }
@@ -170,11 +170,14 @@ class WolfCollection {
    */
   eatBunnies( environment ) {
     assert && assert( Environment.includes( environment ), 'invalid environment' );
+    assert && assert( this.enabledProperty.value, 'should not be called when disabled' );
 
-    if ( this.liveBunnies.length > 0 && this.enabledProperty.value ) {
+    // Get the bunnies that are candidates for natural selection, in random order.
+    const bunnies = this.bunnyCollection.getSelectionCandidates();
+
+    if ( bunnies.length > 0  ) {
 
       // Kill off some of each type of bunny, but a higher percentage of bunnies that don't blend into the environment.
-      const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
       const percentToKillMatch = phet.joist.random.nextInRange( WOLVES_PERCENT_TO_KILL_RANGE );
       assert && assert( percentToKillMatch > 0 && percentToKillMatch < 1, `invalid percentToKillMatch: ${percentToKillMatch}` );
       const percentToKillNoMatch = WOLVES_ENVIRONMENT_MULTIPLIER * percentToKillMatch;

@@ -446,6 +446,25 @@ class BunnyCollection {
   }
 
   /**
+   * Gets the bunnies that are candidates for natural selection due to environmental factors, in a random order.
+   * @returns {Bunny[]}
+   * @public
+   */
+  getSelectionCandidates() {
+
+    // Live bunnies are candidates.
+    const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
+
+    // Recessive mutants are not candidates until they have mated.
+    // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
+    for ( let i = 0; i < this.recessiveMutants.length; i++ ) {
+      bunnies.splice( bunnies.indexOf( this.recessiveMutants[ i ] ), 1 );
+    }
+
+    return bunnies;
+  }
+
+  /**
    * Asserts that collection counts are in-sync with the BunnyGroup.
    * @private
    */

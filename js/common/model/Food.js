@@ -10,7 +10,6 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
-import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -23,6 +22,7 @@ import shrubToughCImage from '../../../images/shrub-tough-C_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
+import BunnyCollection from './BunnyCollection.js';
 import CauseOfDeath from './CauseOfDeath.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenerationClock from './GenerationClock.js';
@@ -56,14 +56,14 @@ class Food {
 
   /**
    * @param {GenerationClock} generationClock
-   *  @param {ObservableArray.<Bunny>} liveBunnies
+   * @param {BunnyCollection} bunnyCollection
    * @param {EnvironmentModelViewTransform} modelViewTransform
    * @param {Object} [options]
    */
-  constructor( generationClock, liveBunnies, modelViewTransform, options ) {
+  constructor( generationClock, bunnyCollection, modelViewTransform, options ) {
 
     assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
-    assert && assert( liveBunnies instanceof ObservableArray, 'invalid liveBunnies' );
+    assert && assert( bunnyCollection instanceof BunnyCollection, 'invalid bunnyCollection' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 
     options = merge( {
@@ -139,7 +139,7 @@ class Food {
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
         if ( previousPercentTime < CLOCK_FOOD_MIDPOINT && currentPercentTime >= CLOCK_FOOD_MIDPOINT ) {
-          this.starveBunnies( liveBunnies.getArray() );
+          this.starveBunnies( bunnyCollection.getSelectionCandidates() );
         }
       }
     } );
@@ -162,15 +162,13 @@ class Food {
 
   /**
    * Starves some portion of the bunny population.
-   * @param {Bunny[]} bunnies
+   * @param {Bunny[]} bunnies - a list of bunnies, already in a random order
    * @private
    */
   starveBunnies( bunnies ) {
     assert && assert( Array.isArray( bunnies ), 'invalid bunnies' );
 
     if ( bunnies.length > 0 && ( this.isLimitedProperty.value || this.isToughProperty.value ) ) {
-
-      bunnies = phet.joist.random.shuffle( bunnies );
 
       let totalStarved = 0;
 

@@ -91,13 +91,13 @@ class NaturalSelectionModel {
     } );
 
     // @public (read-only)
-    this.wolfCollection = new WolfCollection( this.generationClock, this.environmentProperty,
-      this.bunnyCollection.liveBunnies, this.modelViewTransform, {
+    this.wolfCollection = new WolfCollection( this.generationClock, this.environmentProperty, this.bunnyCollection,
+      this.modelViewTransform, {
         tandem: options.tandem.createTandem( 'wolfCollection' )
       } );
 
     // @public (read-only)
-    this.food = new Food( this.generationClock, this.bunnyCollection.liveBunnies, this.modelViewTransform, {
+    this.food = new Food( this.generationClock, this.bunnyCollection, this.modelViewTransform, {
       tandem: options.tandem.createTandem( 'food' )
     } );
 
