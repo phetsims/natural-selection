@@ -15,7 +15,6 @@ import required from '../../../../phet-core/js/required.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import Allele from './Allele.js';
 import AlleleIO from './AlleleIO.js';
@@ -146,36 +145,6 @@ class GenePair extends PhetioObject {
       s += ( this.motherAllele === dominantAllele ) ? dominantAbbreviation : recessiveAbbreviation;
     }
     return s;
-  }
-
-  /**
-   * Gets the Punnett square that predicts the possible genotypes (genetic cross) that result from breeding two bunnies.
-   * This is based on Mendelian inheritance and the Law of Segregation. The array is shuffled to satisfy Mendel's
-   * Law of Independence, which states that individual traits are inherited independently. For example, here's a
-   * Punnett square that shows the 4 possible crosses of 2 bunnies that are heterozygous ('Ff') for the fur gene:
-   *
-   *        F    f
-   *   F | FF | Ff |
-   *   f | Ff | ff |
-   *
-   * @param {GenePair} fatherGenePair
-   * @param {GenePair} motherGenePair
-   * @returns {Array.<{fatherAllele:Allele, motherAllele:Allele}>}
-   * @public
-   */
-  static getPunnettSquare( fatherGenePair, motherGenePair ) {
-    assert && assert( fatherGenePair instanceof GenePair, 'invalid fatherGenePair' );
-    assert && assert( motherGenePair instanceof GenePair, 'invalid motherGenePair' );
-
-    const punnettSquare = phet.joist.random.shuffle( [
-      { fatherAllele: fatherGenePair.fatherAllele, motherAllele: motherGenePair.fatherAllele },
-      { fatherAllele: fatherGenePair.fatherAllele, motherAllele: motherGenePair.motherAllele },
-      { fatherAllele: fatherGenePair.motherAllele, motherAllele: motherGenePair.fatherAllele },
-      { fatherAllele: fatherGenePair.motherAllele, motherAllele: motherGenePair.motherAllele }
-    ] );
-    assert && assert( punnettSquare.length === NaturalSelectionConstants.LITTER_SIZE, 'invalid punnettSquare.length' );
-
-    return punnettSquare;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
