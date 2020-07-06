@@ -22,9 +22,7 @@ import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 const LINE_WIDTH = 2; // plotted line width, in view coordinates
 const NORMAL_LINE_DASH = [];
 const MUTANT_LINE_DASH = NaturalSelectionConstants.POPULATION_MUTANT_LINE_DASH;
-
-assert && assert( MUTANT_LINE_DASH.length === 2, 'unsupported MUTANT_LINE_DASH' );
-const MUTANT_LINE_DASH_SUM = MUTANT_LINE_DASH[ 0 ] + MUTANT_LINE_DASH[ 1 ];
+const MUTANT_LINE_DASH_SUM = _.sum( MUTANT_LINE_DASH );
 
 class PopulationPlotNode extends Node {
 
@@ -65,7 +63,6 @@ class PopulationPlotNode extends Node {
 
     // @private
     this.points = points;
-    this.isMutant = options.isMutant;
     this.xWidth = populationModel.xWidth;
     this.xRangeProperty = populationModel.xRangeProperty;
     this.yRangeProperty = populationModel.yRangeProperty;
@@ -74,6 +71,7 @@ class PopulationPlotNode extends Node {
     this.gridHeight = options.gridHeight;
     this.pointsPath = pointsPath;
     this.stepPath = stepPath;
+    this.isDashed = _.sum( stepPath.lineDash ) > 0;
 
     // unlink not needed
     plotVisibleProperty.link( plotVisible => {
@@ -142,7 +140,7 @@ class PopulationPlotNode extends Node {
 
       // For mutant plots (drawn with a lineDash), adjust lineDashOffset so that the dash appears to scroll.
       // See https://github.com/phetsims/natural-selection/issues/111
-      if ( this.isMutant && this.points.length > 0 ) {
+      if ( this.isDashed && this.points.length > 0 ) {
         const firstPoint = this.points.get( firstIndex );
         const xRemainderModel = firstPoint.x % 1;
         const xRemainderView = this.modelToViewX( xRemainderModel );
