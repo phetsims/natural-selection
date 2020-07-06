@@ -23,6 +23,9 @@ const LINE_WIDTH = 2; // plotted line width, in view coordinates
 const NORMAL_LINE_DASH = [];
 const MUTANT_LINE_DASH = NaturalSelectionConstants.POPULATION_MUTANT_LINE_DASH;
 
+assert && assert( MUTANT_LINE_DASH.length === 2, 'unsupported MUTANT_LINE_DASH' );
+const MUTANT_LINE_DASH_SUM = MUTANT_LINE_DASH[ 0 ] + MUTANT_LINE_DASH[ 1 ];
+
 class PopulationPlotNode extends Node {
 
   /**
@@ -62,6 +65,7 @@ class PopulationPlotNode extends Node {
 
     // @private
     this.points = points;
+    this.isMutant = options.isMutant;
     this.xWidth = populationModel.xWidth;
     this.xRangeProperty = populationModel.xRangeProperty;
     this.yRangeProperty = populationModel.yRangeProperty;
@@ -134,6 +138,15 @@ class PopulationPlotNode extends Node {
           firstIndex = i;
           break;
         }
+      }
+
+      // For mutant plots (drawn with a lineDash), adjust lineDashOffset so that the dash appears to scroll.
+      // See https://github.com/phetsims/natural-selection/issues/111
+      if ( this.isMutant && this.points.length > 0 ) {
+        const firstPoint = this.points.get( firstIndex );
+        const xRemainderModel = firstPoint.x % 1;
+        const xRemainderView = this.modelToViewX( xRemainderModel );
+        this.stepPath.lineDashOffset = -( xRemainderView % MUTANT_LINE_DASH_SUM );
       }
 
       let plotStarted = false;
