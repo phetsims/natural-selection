@@ -8,12 +8,15 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
@@ -66,8 +69,21 @@ class WolfCollection {
     // @private
     this.bunnyCollection = bunnyCollection;
 
+    // @public
+    this.enabledProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'enabledProperty' )
+    } );
+
+    // @public
+    this.visibleProperty = new DerivedProperty(
+      [ this.enabledProperty, generationClock.percentTimeProperty ],
+      ( enabled, percentTime ) => ( enabled && percentTime >= CLOCK_WOLVES_MIN && percentTime <= CLOCK_WOLVES_MAX ), {
+        tandem: options.tandem.createTandem( 'visibleProperty' ),
+        phetioType: DerivedPropertyIO( BooleanIO )
+      } );
+
     // @private the PhetioGroup that manages Wolf instances as dynamic PhET-iO elements
-    this.wolfGroup = new WolfGroup( modelViewTransform, {
+    this.wolfGroup = new WolfGroup( modelViewTransform, this.visibleProperty, {
       tandem: options.tandem.createTandem( 'wolfGroup' )
     } );
 
@@ -76,22 +92,9 @@ class WolfCollection {
       parameters: [ { valueType: Wolf } ]
     } );
 
-    // @public
-    this.enabledProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'enabledProperty' )
-    } );
-
     // When the group creates a Wolf, notify listeners. removeListener is not necessary.
     this.wolfGroup.elementCreatedEmitter.addListener( wolf => {
       this.wolfCreatedEmitter.emit( wolf );
-    } );
-
-    // When disabled, dispose of all wolves. unlink is not necessary.
-    this.enabledProperty.lazyLink( enabled => {
-      if ( !enabled && this.wolfGroup.count > 0 ) {
-        phet.log && phet.log( `Disposing of ${this.wolfGroup.count} wolves` );
-        this.wolfGroup.clear();
-      }
     } );
 
     // @public emits when bunnies have been eaten. dispose is not necessary.
@@ -99,33 +102,16 @@ class WolfCollection {
       parameters: [ { valueType: 'number' } ] // the number of bunnies that were eaten
     } );
 
-    // Eat some bunnies. unlink is not necessary.
+    // Adjust the initial wolf population to match the bunny population.
+    this.adjustPopulation();
+
+    // Eat bunnies at the midpoint of CLOCK_WOLVES_RANGE.
+    // See https://github.com/phetsims/natural-selection/issues/110
+    // unlink is not necessary.
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
-
-        if ( this.enabledProperty.value && previousPercentTime < CLOCK_WOLVES_MIN && currentPercentTime >= CLOCK_WOLVES_MIN ) {
-
-          // Create wolves
-          assert && assert( this.wolfGroup.count === 0, 'expected there to be no wolves' );
-          const numberOfWolves = Math.max( NaturalSelectionQueryParameters.minWolves,
-            Utils.roundSymmetric( bunnyCollection.liveBunnies.length / NaturalSelectionQueryParameters.bunniesPerWolf ) );
-          for ( let i = 0; i < numberOfWolves; i++ ) {
-            this.wolfGroup.createNextElement();
-          }
-          phet.log && phet.log( `${numberOfWolves} wolves were created` );
-        }
-        else if ( currentPercentTime > CLOCK_WOLVES_MAX && this.wolfGroup.count > 0 ) {
-
-          // Dispose of all wolves
-          phet.log && phet.log( `${this.wolfGroup.count} wolves were disposed` );
-          this.wolfGroup.clear();
-        }
-
-        // Eat bunnies at the midpoint of CLOCK_WOLVES_RANGE.
-        // See https://github.com/phetsims/natural-selection/issues/110
-        if ( this.enabledProperty.value && previousPercentTime < CLOCK_WOLVES_MIDPOINT && currentPercentTime >= CLOCK_WOLVES_MIDPOINT ) {
-          this.eatBunnies( environmentProperty.value );
-        }
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value && this.enabledProperty.value &&
+           previousPercentTime < CLOCK_WOLVES_MIDPOINT && currentPercentTime >= CLOCK_WOLVES_MIDPOINT ) {
+        this.eatBunnies( environmentProperty.value );
       }
     } );
   }
@@ -156,11 +142,42 @@ class WolfCollection {
   }
 
   /**
+   * Adjusts the wolf population to match the number of live bunnies.
+   * @public
+   */
+  adjustPopulation() {
+
+    // Number of wolves is a function of the number of live bunnies
+    const numberOfWolves = Math.max( NaturalSelectionQueryParameters.minWolves,
+      Utils.roundSymmetric( this.bunnyCollection.liveBunnies.length / NaturalSelectionQueryParameters.bunniesPerWolf ) );
+
+    const delta = numberOfWolves - this.wolfGroup.count;
+    if ( delta > 0 ) {
+
+      // create more wolves
+      for ( let i = 0; i < delta; i++ ) {
+        this.wolfGroup.createNextElement();
+      }
+      phet.log && phet.log( `${delta} wolves were created, total = ${this.wolfGroup.count}` );
+    }
+    else if ( delta < 0 ) {
+
+      // dispose of some wolves
+      for ( let i = 0; i < Math.abs( delta ); i++ ) {
+        this.wolfGroup.disposeElement( this.wolfGroup.getElement( this.wolfGroup.count - 1 ) );
+      }
+      phet.log && phet.log( `${delta} wolves were disposed, total = ${this.wolfGroup.count}` );
+    }
+  }
+
+  /**
    * Moves all wolves.
    * @public
    */
    moveWolves() {
-    this.wolfGroup.forEach( wolf => wolf.move() );
+     if ( this.visibleProperty.value ) {
+       this.wolfGroup.forEach( wolf => wolf.move() );
+     }
   }
 
   /**

@@ -11,6 +11,7 @@ import Range from '../../../../dot/js/Range.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -27,11 +28,13 @@ class Wolf extends NaturalSelectionSprite {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
+   * @param {Property.<boolean>} visibleProperty
    * @param {Object} [options]
    */
-  constructor( modelViewTransform, options ) {
+  constructor( modelViewTransform, visibleProperty, options ) {
 
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
+    assert && AssertUtils.assertPropertyOf( visibleProperty, 'boolean' );
 
     options = merge( {
 
@@ -49,6 +52,9 @@ class Wolf extends NaturalSelectionSprite {
 
     // @private
     this.speed = phet.joist.random.nextInRange( SPEED_RANGE );
+
+    // @public
+    this.visibleProperty = visibleProperty;
 
     // @public fires when the Wolf has been disposed. dispose is required.
     this.disposedEmitter = new Emitter();
@@ -78,6 +84,7 @@ class Wolf extends NaturalSelectionSprite {
    * @public
    */
   move() {
+    assert && assert( this.visibleProperty.value, 'cannot move an invisible wolf' );
 
     //TODO I don't understand the use of cos, sin, and swap -- same as Bunny.getHopDelta
     const angle = phet.joist.random.nextDoubleBetween( 0, 2 * Math.PI );

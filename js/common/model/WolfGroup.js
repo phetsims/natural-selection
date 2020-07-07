@@ -8,6 +8,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
 import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -20,11 +21,13 @@ class WolfGroup extends PhetioGroup {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
+   * @param {Property.<boolean>} visibleProperty
    * @param {Object} [options]
    */
-  constructor( modelViewTransform, options ) {
+  constructor( modelViewTransform, visibleProperty, options ) {
 
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
+    assert && AssertUtils.assertPropertyOf( visibleProperty, 'boolean' );
 
     options = merge( {
 
@@ -43,7 +46,7 @@ class WolfGroup extends PhetioGroup {
      * @returns {Wolf}
      */
     const createElement = ( tandem, wolfOptions ) => {
-      return new Wolf( modelViewTransform, merge( {}, wolfOptions, {
+      return new Wolf( modelViewTransform, visibleProperty, merge( {}, wolfOptions, {
         tandem: tandem
       } ) );
     };
@@ -52,15 +55,6 @@ class WolfGroup extends PhetioGroup {
     const defaultArguments = [ {} ];
 
     super( createElement, defaultArguments, options );
-  }
-
-  /**
-   * Steps all wolves.
-   * @param {number} dt - time step, in seconds
-   * @public
-   */
-  step( dt ) {
-    this.forEach( wolf => wolf.step( dt ) );
   }
 }
 

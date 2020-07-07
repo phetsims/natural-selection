@@ -181,6 +181,9 @@ class NaturalSelectionModel {
         //TODO https://github.com/phetsims/natural-selection/issues/60 restore this statement
         // this.bunnyCollection.mateBunnies( currentGeneration );
 
+        // Adjust the wolf population to match the number of bunnies.
+        this.wolfCollection.adjustPopulation();
+
         // After bunnies are aged and mated, record counts for graphs.
         const counts = this.bunnyCollection.getLiveBunnyCounts();
         this.proportionsModel.recordStartCounts( currentGeneration, counts );
@@ -227,6 +230,7 @@ class NaturalSelectionModel {
 
     // See https://github.com/phetsims/natural-selection/issues/91
     this.wolfCollection.reset();
+    this.wolfCollection.adjustPopulation();
     this.food.reset();
 
     this.populationModel.reset();
