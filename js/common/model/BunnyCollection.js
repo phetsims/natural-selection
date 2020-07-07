@@ -412,7 +412,8 @@ class BunnyCollection {
           } );
         }
 
-        // Create 1 additional offspring that is homozygous recessive.
+        // Create 1 additional offspring that is homozygous recessive, in order to make the recessive allele
+        // propagate through the phenotype more quickly.
         // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
         const mutantAllele = mutantFather.genotype.mutation;
         const furCell = getAdditionalPunnettCell( furPunnetSquare, mutantAllele, this.genePool.furGene.dominantAlleleProperty.value );
