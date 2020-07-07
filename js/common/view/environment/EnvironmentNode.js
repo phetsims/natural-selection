@@ -51,6 +51,7 @@ class EnvironmentNode extends Node {
 
     // Parent for all SpriteNodes, clipped to the backgroundNode
     const spritesNode = new Node( {
+      preventFit: true, // a slight performance improvement
       children: [],
       clipArea: Shape.rect( 0, 0, options.size.width, options.size.height )
     } );
