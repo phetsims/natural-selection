@@ -103,8 +103,8 @@ class WolfCollection {
       parameters: [ { valueType: 'number' } ] // the number of bunnies that were eaten
     } );
 
-    // Adjust the initial wolf population to match the bunny population.
-    this.adjustPopulation();
+    // When wolves are made visible, adjust the population to match the number of bunnies.
+    this.visibleProperty.link( visible => visible && this.adjustPopulation() );
 
     // Eat bunnies at the midpoint of CLOCK_WOLVES_RANGE.
     // See https://github.com/phetsims/natural-selection/issues/110
@@ -153,8 +153,7 @@ class WolfCollection {
 
   /**
    * Adjusts the wolf population to match the number of live bunnies.
-   * DO NOT OVERRIDE, because this is called by the constructor.
-   * @public
+   * @private
    */
   adjustPopulation() {
 
