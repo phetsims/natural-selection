@@ -74,12 +74,13 @@ class WolfCollection {
       tandem: options.tandem.createTandem( 'enabledProperty' )
     } );
 
-    // @public
+    // @private
     this.isHuntingProperty = new DerivedProperty(
       [ this.enabledProperty, generationClock.percentTimeProperty ],
       ( enabled, percentTime ) => ( enabled && percentTime >= CLOCK_WOLVES_MIN && percentTime <= CLOCK_WOLVES_MAX ), {
         tandem: options.tandem.createTandem( 'isHuntingProperty' ),
-        phetioType: DerivedPropertyIO( BooleanIO )
+        phetioType: DerivedPropertyIO( BooleanIO ),
+        phetioDocumentation: 'for internal PhET use only'
       } );
 
     // @private the PhetioGroup that manages Wolf instances as dynamic PhET-iO elements
