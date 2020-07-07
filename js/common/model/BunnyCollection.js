@@ -249,12 +249,12 @@ class BunnyCollection {
     let bornIndex = 0;
 
     // Shuffle the collection of live bunnies so that mating is random. shuffle returns a new array.
-    const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
+    let bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
 
     // Prioritize mating of bunnies that have a recessive mutation, so that the mutation appears in the phenotype
     // as soon as possible. See https://github.com/phetsims/natural-selection/issues/98.
     if ( this.recessiveMutants.length > 0 ) {
-      this.mateRecessiveMutants( generation, bunnies );
+      bunnies = this.mateRecessiveMutants( generation, bunnies );
     }
 
     // The number of bunnies that we expect to be born.
@@ -362,9 +362,10 @@ class BunnyCollection {
   /**
    * Mates each recessive mutant with a bunny that has the same mutation. This is referred to as 'mate eagerly', as
    * the purpose is to make the mutation appear in the phenotype sooner. This must be done separately from other mating
-   * because we don't want to apply additional mutations. Note that the bunnies argument is modified as a side-effect.
+   * because we don't want to apply additional mutations.
    * @param {number} generation
-   * @param {Bunny[]} bunnies - the bunnies that are candidates for mating
+   * @param {Bunny[]} bunnies - the bunnies that are candidates for mating, modified as a side-effect
+   * @param {Bunny[]} the bunnies array, with bunnies that are successfully mated removed
    * @private
    */
   mateRecessiveMutants( generation, bunnies ) {
@@ -447,6 +448,8 @@ class BunnyCollection {
         }
       }
     }
+
+    return bunnies;
   }
 
   /**
