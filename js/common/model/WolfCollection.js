@@ -189,7 +189,8 @@ class WolfCollection {
       const bunniesWhiteFur = _.filter( bunnies, bunny => bunny.phenotype.hasWhiteFur() );
       if ( environment === Environment.ARCTIC && bunniesWhiteFur.length <= NaturalSelectionQueryParameters.minBunniesForWolves ) {
 
-        // Do nothing because the population is too small. See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
+        // Do nothing because the population with the preferred trait is too small.
+        // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
         phet.log && phet.log( 'wolves are ignoring white bunnies because the population is too small' );
       }
       else {
@@ -207,7 +208,8 @@ class WolfCollection {
       const bunniesBrownFur = _.filter( bunnies, bunny => bunny.phenotype.hasBrownFur() );
       if ( environment === Environment.EQUATOR && bunniesBrownFur.length <= NaturalSelectionQueryParameters.minBunniesForWolves ) {
 
-        // Do nothing because the population is too small. See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
+        // Do nothing because the population with the preferred trait is too small.
+        // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
         phet.log && phet.log( 'wolves are ignoring brown bunnies because the population is too small' );
       }
       else {
