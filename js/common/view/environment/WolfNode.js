@@ -55,25 +55,6 @@ class WolfNode extends NaturalSelectionSpriteNode {
     }
 
     super( wolf, options );
-
-    const visibleListener = visible => {
-      this.visible = visible;
-    };
-    wolf.visibleProperty.link( visibleListener );
-
-    // @private
-    this.disposeWolfNode = () => {
-      wolf.visibleProperty.unlink( visibleListener );
-    };
-  }
-
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
-    this.disposeWolfNode();
-    super.dispose();
   }
 }
 

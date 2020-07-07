@@ -8,7 +8,6 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
 import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -21,13 +20,11 @@ class WolfGroup extends PhetioGroup {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
-   * @param {Property.<boolean>} visibleProperty
    * @param {Object} [options]
    */
-  constructor( modelViewTransform, visibleProperty, options ) {
+  constructor( modelViewTransform, options ) {
 
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
-    assert && AssertUtils.assertPropertyOf( visibleProperty, 'boolean' );
 
     options = merge( {
 
@@ -46,7 +43,7 @@ class WolfGroup extends PhetioGroup {
      * @returns {Wolf}
      */
     const createElement = ( tandem, wolfOptions ) => {
-      return new Wolf( modelViewTransform, visibleProperty, merge( {}, wolfOptions, {
+      return new Wolf( modelViewTransform, merge( {}, wolfOptions, {
         tandem: tandem
       } ) );
     };

@@ -75,16 +75,15 @@ class WolfCollection {
     } );
 
     // @public
-    assert && assert( !this.visibleProperty, 'attempt to redefine visibleProperty' );
-    this.visibleProperty = new DerivedProperty(
+    this.isHuntingProperty = new DerivedProperty(
       [ this.enabledProperty, generationClock.percentTimeProperty ],
       ( enabled, percentTime ) => ( enabled && percentTime >= CLOCK_WOLVES_MIN && percentTime <= CLOCK_WOLVES_MAX ), {
-        tandem: options.tandem.createTandem( 'visibleProperty' ),
+        tandem: options.tandem.createTandem( 'isHuntingProperty' ),
         phetioType: DerivedPropertyIO( BooleanIO )
       } );
 
     // @private the PhetioGroup that manages Wolf instances as dynamic PhET-iO elements
-    this.wolfGroup = new WolfGroup( modelViewTransform, this.visibleProperty, {
+    this.wolfGroup = new WolfGroup( modelViewTransform, {
       tandem: options.tandem.createTandem( 'wolfGroup' )
     } );
 
@@ -103,9 +102,9 @@ class WolfCollection {
       parameters: [ { valueType: 'number' } ] // the number of bunnies that were eaten
     } );
 
-    // The wolf population exists while the collection is visible.
-    this.visibleProperty.link( visible => {
-      if ( visible ) {
+    // The wolf population exists only while it's hunting.
+    this.isHuntingProperty.link( isHunting => {
+      if ( isHunting ) {
 
         // Number of wolves is a function of the number of live bunnies
         const numberOfWolves = Math.max( NaturalSelectionQueryParameters.minWolves,
@@ -173,9 +172,7 @@ class WolfCollection {
    * @public
    */
   moveWolves() {
-    if ( this.visibleProperty.value ) {
-      this.wolfGroup.forEach( wolf => wolf.move() );
-    }
+    this.wolfGroup.forEach( wolf => wolf.move() );
   }
 
   /**
