@@ -159,15 +159,6 @@ class WolfCollection {
   }
 
   /**
-   * Gets the number of wolves.
-   * @returns {number}
-   * @public
-   */
-  get count() {
-    return this.wolfGroup.count;
-  }
-
-  /**
    * Moves all wolves.
    * @public
    */
