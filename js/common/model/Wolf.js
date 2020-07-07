@@ -54,6 +54,7 @@ class Wolf extends NaturalSelectionSprite {
     this.speed = phet.joist.random.nextInRange( SPEED_RANGE );
 
     // @public
+    assert && assert( !this.visibleProperty, 'attempt to redefine visibleProperty' );
     this.visibleProperty = visibleProperty;
 
     // @public fires when the Wolf has been disposed. dispose is required.

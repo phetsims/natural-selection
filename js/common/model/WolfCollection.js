@@ -75,6 +75,7 @@ class WolfCollection {
     } );
 
     // @public
+    assert && assert( !this.visibleProperty, 'attempt to redefine visibleProperty' );
     this.visibleProperty = new DerivedProperty(
       [ this.enabledProperty, generationClock.percentTimeProperty ],
       ( enabled, percentTime ) => ( enabled && percentTime >= CLOCK_WOLVES_MIN && percentTime <= CLOCK_WOLVES_MAX ), {

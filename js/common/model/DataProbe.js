@@ -67,6 +67,7 @@ class DataProbe extends PhetioObject {
       } );
 
     // @public visibility of the probe
+    assert && assert( !this.visibleProperty, 'attempt to redefine visibleProperty' );
     this.visibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'visibleProperty' )
     } );

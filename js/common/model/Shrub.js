@@ -39,6 +39,7 @@ class Shrub extends NaturalSelectionSprite {
     this.isToughProperty = isToughProperty;
 
     // @public whether the shrub is visible, used to hide shrubs when the food supply is limited
+    assert && assert( !this.visibleProperty, 'attempt to redefine visibleProperty' );
     this.visibleProperty = new BooleanProperty( true );
   }
 
