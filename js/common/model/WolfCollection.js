@@ -143,6 +143,7 @@ class WolfCollection {
 
   /**
    * Adjusts the wolf population to match the number of live bunnies.
+   * DO NOT OVERRIDE, because this is called by the constructor.
    * @public
    */
   adjustPopulation() {
