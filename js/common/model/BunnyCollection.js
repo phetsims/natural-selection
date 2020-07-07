@@ -414,10 +414,10 @@ class BunnyCollection {
 
         // Create 1 additional offspring that is homozygous recessive.
         // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
-        const mutation = mutantFather.genotype.mutation;
-        const furCell = getAdditionalPunnettCell( furPunnetSquare, mutation, this.genePool.furGene.dominantAlleleProperty.value );
-        const earsCell = getAdditionalPunnettCell( earsPunnetSquare, mutation, this.genePool.earsGene.dominantAlleleProperty.value );
-        const teethCell = getAdditionalPunnettCell( teethPunnetSquare, mutation, this.genePool.teethGene.dominantAlleleProperty.value );
+        const mutantAllele = mutantFather.genotype.mutation;
+        const furCell = getAdditionalPunnettCell( furPunnetSquare, mutantAllele, this.genePool.furGene.dominantAlleleProperty.value );
+        const earsCell = getAdditionalPunnettCell( earsPunnetSquare, mutantAllele, this.genePool.earsGene.dominantAlleleProperty.value );
+        const teethCell = getAdditionalPunnettCell( teethPunnetSquare, mutantAllele, this.genePool.teethGene.dominantAlleleProperty.value );
         const genotypeOptions = {
           fatherFurAllele: furCell.fatherAllele,
           motherFurAllele: furCell.motherAllele,
