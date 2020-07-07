@@ -117,11 +117,29 @@ class Bunny extends NaturalSelectionSprite {
     // @public fires when the Bunny has been disposed. dispose is required.
     this.disposedEmitter = new Emitter();
 
+    // When the father or mother is disposed, set them to null to free memory.
+    const fatherDisposedListener = () => {
+      this.father.disposedEmitter.removeListener( fatherDisposedListener );
+      this.father = null;
+    };
+    this.father && this.father.disposedEmitter.addListener( fatherDisposedListener );
+    const motherDisposedListener = () => {
+      this.mother.disposedEmitter.removeListener( motherDisposedListener );
+      this.mother = null;
+    };
+    this.mother && this.mother.disposedEmitter.addListener( motherDisposedListener );
+
     // @private
     this.disposeBunny = () => {
       this.genotype.dispose();
       this.phenotype.dispose();
       this.diedEmitter.dispose();
+      if ( this.father && this.father.disposedEmitter.hasListener( fatherDisposedListener ) ) {
+        this.father.disposedEmitter.removeListener( fatherDisposedListener );
+      }
+      if ( this.mother && this.mother.disposedEmitter.hasListener( motherDisposedListener ) ) {
+        this.mother.disposedEmitter.removeListener( motherDisposedListener );
+      }
     };
 
     this.validateInstance();
@@ -140,11 +158,11 @@ class Bunny extends NaturalSelectionSprite {
    * @override
    */
   dispose() {
+    assert && assert( !this.isDisposed, 'bunny is already disposed' );
     this.disposeBunny();
     super.dispose();
     this.disposedEmitter.emit();
     this.disposedEmitter.dispose();
-    this.disposedEmitter = null; // in case we try to call dispose twice
   }
 
   /**

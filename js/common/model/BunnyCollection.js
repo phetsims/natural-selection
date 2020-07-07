@@ -10,6 +10,7 @@
 import Emitter from '../../../../axon/js/Emitter.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -24,6 +25,14 @@ import CauseOfDeath from './CauseOfDeath.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 import PunnettSquare from './PunnettSquare.js';
+
+// constants
+
+// The maximum number of generations that a dead bunny needs to exist before it can be disposed.
+// This is based on the Pedigree graph depth, because the Pedigree graph is the only place where
+// dead bunnies appear. See https://github.com/phetsims/natural-selection/issues/112
+const MAX_DEAD_BUNNY_GENERATIONS = NaturalSelectionQueryParameters.maxAge *
+                                   ( NaturalSelectionConstants.PEDIGREE_TREE_DEPTH - 1 );
 
 class BunnyCollection {
 
@@ -497,6 +506,31 @@ class BunnyCollection {
     }
 
     return bunnies;
+  }
+
+  /**
+   * Disposes of dead bunnies that are guaranteed not to be needed by the Pedigree graph.
+   * @param {number} currentGeneration
+   * @public
+   */
+  pruneDeadBunnies( currentGeneration ) {
+    assert && AssertUtils.assertPositiveInteger( currentGeneration );
+
+    let numberPruned = 0;
+
+    // This modifies the array. Iterate backwards to avoid having to make a copy.
+    const deadBunnies = this.deadBunnies.getArray();
+    for ( let i = deadBunnies.length - 1; i >= 0; i-- ) {
+      const bunny = deadBunnies[ i ];
+      if ( currentGeneration - bunny.generation > MAX_DEAD_BUNNY_GENERATIONS ) {
+        bunny.dispose();
+        numberPruned++;
+      }
+    }
+
+    if ( numberPruned > 0 ) {
+      phet.log && phet.log( `${numberPruned} dead bunnies pruned` );
+    }
   }
 
   /**

@@ -19,7 +19,6 @@ import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import PedigreeBranchNode from './PedigreeBranchNode.js';
 
 // constants
-const TREE_DEPTH = 4;
 const X_MARGIN = 5;
 const Y_MARGIN = 5;
 
@@ -75,7 +74,7 @@ class PedigreeGraphNode extends Node {
       if ( bunny ) {
 
         // Create the graph
-        branchNode = new PedigreeBranchNode( bunny, TREE_DEPTH,
+        branchNode = new PedigreeBranchNode( bunny, NaturalSelectionConstants.PEDIGREE_TREE_DEPTH,
           pedigreeModel.selectedBunnyProperty,
           pedigreeModel.furAllelesVisibleProperty,
           pedigreeModel.earsAllelesVisibleProperty,

@@ -112,9 +112,12 @@ const NaturalSelectionConstants = {
   PROPORTIONS_LEGEND_FONT: new PhetFont( 16 ),
   DIALOG_FONT: new PhetFont( 16 ),
 
-  // Population plot
+  // Population graph
   POPULATION_POINT_RADIUS: 2.4, // point radius, in view coordinates
-  POPULATION_MUTANT_LINE_DASH: [ 3, 2 ]
+  POPULATION_MUTANT_LINE_DASH: [ 3, 2 ],
+
+  // Pedigree graph
+  PEDIGREE_TREE_DEPTH: 4
 };
 
 assert && assert( NaturalSelectionConstants.LITTER_SIZE === 4,

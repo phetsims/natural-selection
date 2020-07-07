@@ -176,6 +176,8 @@ class NaturalSelectionModel {
         // Age bunnies, some may die of old age.
         this.bunnyCollection.ageBunnies();
 
+        this.bunnyCollection.pruneDeadBunnies( currentGeneration );
+
         // Mate bunnies
         //TODO https://github.com/phetsims/natural-selection/issues/60 delete this statement
         this.timeToMateProperty.value = NaturalSelectionUtils.time( () => this.bunnyCollection.mateBunnies( currentGeneration ) );
