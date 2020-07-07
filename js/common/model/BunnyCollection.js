@@ -96,7 +96,7 @@ class BunnyCollection {
           bunny.diedEmitter.removeListener( diedListener );
           this.liveBunnies.remove( bunny );
           this.deadBunnies.push( bunny );
-          this.recessiveMutants.contains( bunny ) && this.recessiveMutants.remove( bunny );
+          this.recessiveMutants.includes( bunny ) && this.recessiveMutants.remove( bunny );
           if ( this.liveBunnies.length === 0 ) {
             this.allBunniesHaveDiedEmitter.emit();
           }
@@ -120,9 +120,9 @@ class BunnyCollection {
     // When a bunny is disposed, remove it from the appropriate array. removeListener is not necessary.
     bunnyGroup.elementDisposedEmitter.addListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-      this.liveBunnies.contains( bunny ) && this.liveBunnies.remove( bunny );
-      this.deadBunnies.contains( bunny ) && this.deadBunnies.remove( bunny );
-      this.recessiveMutants.contains( bunny ) && this.recessiveMutants.remove( bunny );
+      this.liveBunnies.includes( bunny ) && this.liveBunnies.remove( bunny );
+      this.deadBunnies.includes( bunny ) && this.deadBunnies.remove( bunny );
+      this.recessiveMutants.includes( bunny ) && this.recessiveMutants.remove( bunny );
     } );
 
     // @private fields needed by methods
@@ -439,7 +439,7 @@ class BunnyCollection {
         // Remove the mutants from further consideration of mating eagerly. Note that the mother may have been a
         // sibling (another original mutant created in the same generation) or a member of a later generation.
         this.recessiveMutants.remove( mutantFather );
-        if ( this.recessiveMutants.contains( mutantMother ) ) {
+        if ( this.recessiveMutants.includes( mutantMother ) ) {
           this.recessiveMutants.remove( mutantMother );
         }
         if ( recessiveMutantsCopy.includes( mutantMother ) ) {
