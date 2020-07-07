@@ -125,7 +125,6 @@ class NaturalSelectionModel {
 
     // When the simulation state changes... unlink is not necessary.
     this.simulationModeProperty.link( simulationMode => {
-      phet.log && phet.log( `simulationMode=${simulationMode}` );
 
       // SimulationMode indicates which mode the simulation is in. It does not describe a full state of that mode.
       // So do nothing when PhET-iO is restoring state, or saved state will be overwritten.
@@ -165,10 +164,13 @@ class NaturalSelectionModel {
 
       // When restoring PhET-iO state, skip this code, because downstream elements are already stateful.
       if ( currentGeneration !== 0 && !phet.joist.sim.isSettingPhetioStateProperty.value ) {
-        phet.log && phet.log( `generation=${currentGeneration}` );
 
         // Before bunnies are aged or mated, Record 'End of Generation' counts for the Proportions graph.
         this.proportionsModel.recordEndCounts( currentGeneration - 1, this.bunnyCollection.getLiveBunnyCounts() );
+
+        phet.log && phet.log( `total live bunnies = ${this.bunnyCollection.liveBunnies.length}` );
+        phet.log && phet.log( `total dead bunnies = ${this.bunnyCollection.deadBunnies.length}` );
+        phet.log && phet.log( `====== Generation ${currentGeneration} ======` );
 
         // Age bunnies, some may die of old age.
         this.bunnyCollection.ageBunnies();

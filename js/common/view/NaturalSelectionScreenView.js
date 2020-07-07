@@ -300,15 +300,15 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     //TODO https://github.com/phetsims/natural-selection/issues/60 delete this block
-    {
+    if ( NaturalSelectionQueryParameters.showTimeToMate ) {
+
       const timeToMateNode = new Text( '', {
         font: new PhetFont( 20 ),
         left: environmentNode.left + 5,
         top: environmentNode.top + 5
       } );
-      if ( NaturalSelectionQueryParameters.showTimeToMate ) {
-        this.addChild( timeToMateNode );
-      }
+      this.addChild( timeToMateNode );
+
       model.timeToMateProperty.link( timeToMate => {
         const t = Utils.roundSymmetric( timeToMate );
         console.log( `time to mate = ${t} ms` );

@@ -109,15 +109,14 @@ class WolfCollection {
           assert && assert( this.wolfGroup.count === 0, 'expected there to be no wolves' );
           const numberOfWolves = Math.max( NaturalSelectionQueryParameters.minWolves,
             Utils.roundSymmetric( bunnyCollection.liveBunnies.length / NaturalSelectionQueryParameters.bunniesPerWolf ) );
-          phet.log && phet.log( `Creating ${numberOfWolves} wolves` );
           for ( let i = 0; i < numberOfWolves; i++ ) {
             this.wolfGroup.createNextElement();
           }
+          phet.log && phet.log( `${numberOfWolves} wolves were created` );
         }
         else if ( currentPercentTime > CLOCK_WOLVES_MAX && this.wolfGroup.count > 0 ) {
 
           // Dispose of all wolves
-          phet.log && phet.log( `Disposing of ${this.wolfGroup.count} wolves` );
           this.wolfGroup.clear();
         }
 
@@ -191,7 +190,7 @@ class WolfCollection {
 
         // Do nothing because the population with the preferred trait is too small.
         // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
-        phet.log && phet.log( 'wolves are ignoring white bunnies because the population is too small' );
+        phet.log && phet.log( `Wolves ignored white bunnies because the population is <= ${NaturalSelectionQueryParameters.minBunniesForWolves}` );
       }
       else {
         const percentToEatWhiteFur = ( environment === Environment.ARCTIC ) ? percentToEatMatch : percentToEatNoMatch;
@@ -210,7 +209,7 @@ class WolfCollection {
 
         // Do nothing because the population with the preferred trait is too small.
         // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
-        phet.log && phet.log( 'wolves are ignoring brown bunnies because the population is too small' );
+        phet.log && phet.log( `Wolves ignored brown bunnies because the population is <= ${NaturalSelectionQueryParameters.minBunniesForWolves}.` );
       }
       else {
         const percentToEatBrownFur = ( environment === Environment.EQUATOR ) ? percentToEatMatch : percentToEatNoMatch;

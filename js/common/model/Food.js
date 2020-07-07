@@ -215,7 +215,7 @@ class Food {
 
         // Do nothing because the population with the preferred trait is too small.
         // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
-        phet.log && phet.log( 'no bunnies with long teeth starved because the population is too small' );
+        phet.log && phet.log( `No bunnies with long teeth were starved because the population is <= ${NaturalSelectionQueryParameters.minBunniesForFood}.` );
       }
       else {
         const numberToStarveLongTeeth = Math.ceil( percentToStarveLongTeeth * bunniesLongTeeth.length );

@@ -232,7 +232,7 @@ class BunnyCollection {
     } );
 
     assert && this.assertValidCounts();
-    phet.log && phet.log( `${diedCount} bunnies died of old age, total dead = ${this.deadBunnies.length}` );
+    phet.log && phet.log( `${diedCount} bunnies died of old age` );
   }
 
   /**
@@ -351,7 +351,7 @@ class BunnyCollection {
 
     assert && this.assertValidCounts();
     assert && assert( bornIndex === numberToBeBorn, 'unexpected number of bunnies were born' );
-    phet.log && phet.log( `${bornIndex} bunnies born, total live = ${this.liveBunnies.length}` );
+    phet.log && phet.log( `${bornIndex} bunnies were born` );
 
     // Notify if bunnies have taken over the world.
     if ( this.liveBunnies.lengthProperty.value >= NaturalSelectionConstants.MAX_POPULATION ) {
@@ -365,7 +365,7 @@ class BunnyCollection {
    * because we don't want to apply additional mutations.
    * @param {number} generation
    * @param {Bunny[]} bunnies - the bunnies that are candidates for mating, modified as a side-effect
-   * @param {Bunny[]} the bunnies array, with bunnies that are successfully mated removed
+   * @returns {Bunny[]} the bunnies array, with bunnies that are successfully mated removed
    * @private
    */
   mateRecessiveMutants( generation, bunnies ) {
