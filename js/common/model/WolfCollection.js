@@ -117,6 +117,7 @@ class WolfCollection {
         else if ( currentPercentTime > CLOCK_WOLVES_MAX && this.wolfGroup.count > 0 ) {
 
           // Dispose of all wolves
+          phet.log && phet.log( `${this.wolfGroup.count} wolves were disposed` );
           this.wolfGroup.clear();
         }
 
