@@ -264,6 +264,7 @@ class NaturalSelectionScreenView extends ScreenView {
     model.bunnyCollection.allBunniesHaveDiedEmitter.addListener( () => {
       endSimulation();
       diedDialog.show();
+      phet.log && phet.log( 'All of the bunnies have died.' );
     } );
 
     // Display a dialog when bunnies have taken over the world.
@@ -273,6 +274,7 @@ class NaturalSelectionScreenView extends ScreenView {
     model.bunnyCollection.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
       endSimulation();
       worldDialog.show();
+      phet.log && phet.log( 'Bunnies have taken over the world.' );
     } );
 
     // Display a dialog when we hit the generation limit.

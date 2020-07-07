@@ -142,6 +142,15 @@ class WolfCollection {
   }
 
   /**
+   * Gets the number of wolves.
+   * @returns {number}
+   * @public
+   */
+  get count() {
+    return this.wolfGroup.count;
+  }
+
+  /**
    * Adjusts the wolf population to match the number of live bunnies.
    * DO NOT OVERRIDE, because this is called by the constructor.
    * @public
@@ -159,7 +168,7 @@ class WolfCollection {
       for ( let i = 0; i < delta; i++ ) {
         this.wolfGroup.createNextElement();
       }
-      phet.log && phet.log( `${delta} wolves were created, total = ${this.wolfGroup.count}` );
+      phet.log && phet.log( `${delta} wolves were created` );
     }
     else if ( delta < 0 ) {
 
@@ -167,7 +176,7 @@ class WolfCollection {
       for ( let i = 0; i < Math.abs( delta ); i++ ) {
         this.wolfGroup.disposeElement( this.wolfGroup.getElement( this.wolfGroup.count - 1 ) );
       }
-      phet.log && phet.log( `${delta} wolves were disposed, total = ${this.wolfGroup.count}` );
+      phet.log && phet.log( `${delta} wolves were disposed` );
     }
   }
 

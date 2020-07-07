@@ -69,6 +69,7 @@ class NaturalSelectionModel {
     this.generationClock = new GenerationClock( {
       tandem: options.tandem.createTandem( 'generationClock' )
     } );
+    phet.log && phet.log( '====== Generation 0 ======' );
 
     // @pubic (read-only) pool of genes for the bunny population
     this.genePool = new GenePool( {
@@ -168,8 +169,6 @@ class NaturalSelectionModel {
         // Before bunnies are aged or mated, Record 'End of Generation' counts for the Proportions graph.
         this.proportionsModel.recordEndCounts( currentGeneration - 1, this.bunnyCollection.getLiveBunnyCounts() );
 
-        phet.log && phet.log( `total live bunnies = ${this.bunnyCollection.liveBunnies.length}` );
-        phet.log && phet.log( `total dead bunnies = ${this.bunnyCollection.deadBunnies.length}` );
         phet.log && phet.log( `====== Generation ${currentGeneration} ======` );
 
         // Age bunnies, some may die of old age.
@@ -188,6 +187,10 @@ class NaturalSelectionModel {
         const counts = this.bunnyCollection.getLiveBunnyCounts();
         this.proportionsModel.recordStartCounts( currentGeneration, counts );
         this.populationModel.recordCounts( currentGeneration, counts );
+
+        phet.log && phet.log( `total live bunnies = ${this.bunnyCollection.liveBunnies.length}` );
+        phet.log && phet.log( `total dead bunnies = ${this.bunnyCollection.deadBunnies.length}` );
+        phet.log && phet.log( `total wolves = ${this.wolfCollection.count}` );
       }
     } );
 
@@ -218,6 +221,8 @@ class NaturalSelectionModel {
    * @public
    */
   startOver() {
+
+    phet.log && phet.log( '====== Generation 0 ======' );
 
     this.simulationModeProperty.reset();
     this.isPlayingProperty.reset(); // see https://github.com/phetsims/natural-selection/issues/55
@@ -294,7 +299,7 @@ class NaturalSelectionModel {
    */
   initializeGenerationZero() {
 
-    phet.log && phet.log( 'EnvironmentModel.initializeGenerationZero' );
+    phet.log && phet.log( 'NaturalSelectionModel.initializeGenerationZero' );
     assert && assert( this.bunnyCollection.liveBunnies.length === 0, 'bunnies already exist' );
     assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
 
