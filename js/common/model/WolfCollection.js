@@ -126,7 +126,7 @@ class WolfCollection {
     // See https://github.com/phetsims/natural-selection/issues/110
     // unlink is not necessary.
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value && this.enabledProperty.value &&
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value && this.isHuntingProperty.value &&
            previousPercentTime < CLOCK_WOLVES_MIDPOINT && currentPercentTime >= CLOCK_WOLVES_MIDPOINT ) {
         this.eatBunnies( environmentProperty.value );
       }
@@ -173,7 +173,7 @@ class WolfCollection {
    */
   eatBunnies( environment ) {
     assert && assert( Environment.includes( environment ), 'invalid environment' );
-    assert && assert( this.enabledProperty.value, 'should not be called when disabled' );
+    assert && assert( this.isHuntingProperty.value, 'should not be called unless hunting' );
 
     // Get the bunnies that are candidates for natural selection, in random order.
     const bunnies = this.bunnyCollection.getSelectionCandidates();
