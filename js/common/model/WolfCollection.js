@@ -103,8 +103,25 @@ class WolfCollection {
       parameters: [ { valueType: 'number' } ] // the number of bunnies that were eaten
     } );
 
-    // When wolves are made visible, adjust the population to match the number of bunnies.
-    this.visibleProperty.link( visible => visible && this.adjustPopulation() );
+    // The wolf population exists while the collection is visible.
+    this.visibleProperty.link( visible => {
+      if ( visible ) {
+
+        // Number of wolves is a function of the number of live bunnies
+        const numberOfWolves = Math.max( NaturalSelectionQueryParameters.minWolves,
+          Utils.roundSymmetric( this.bunnyCollection.liveBunnies.length / NaturalSelectionQueryParameters.bunniesPerWolf ) );
+        for ( let i = 0; i < numberOfWolves; i++ ) {
+          this.wolfGroup.createNextElement();
+        }
+        phet.log && phet.log( `${this.wolfGroup.count} wolves were created` );
+      }
+      else {
+
+        // Dispose of all wolves
+        phet.log && phet.log( `${this.wolfGroup.count} wolves were disposed` );
+        this.wolfGroup.clear();
+      }
+    } );
 
     // Eat bunnies at the midpoint of CLOCK_WOLVES_RANGE.
     // See https://github.com/phetsims/natural-selection/issues/110
@@ -152,42 +169,13 @@ class WolfCollection {
   }
 
   /**
-   * Adjusts the wolf population to match the number of live bunnies.
-   * @private
-   */
-  adjustPopulation() {
-
-    // Number of wolves is a function of the number of live bunnies
-    const numberOfWolves = Math.max( NaturalSelectionQueryParameters.minWolves,
-      Utils.roundSymmetric( this.bunnyCollection.liveBunnies.length / NaturalSelectionQueryParameters.bunniesPerWolf ) );
-
-    const delta = numberOfWolves - this.wolfGroup.count;
-    if ( delta > 0 ) {
-
-      // create more wolves
-      for ( let i = 0; i < delta; i++ ) {
-        this.wolfGroup.createNextElement();
-      }
-      phet.log && phet.log( `${delta} wolves were created` );
-    }
-    else if ( delta < 0 ) {
-
-      // dispose of some wolves
-      for ( let i = 0; i < Math.abs( delta ); i++ ) {
-        this.wolfGroup.disposeElement( this.wolfGroup.getElement( this.wolfGroup.count - 1 ) );
-      }
-      phet.log && phet.log( `${delta} wolves were disposed` );
-    }
-  }
-
-  /**
    * Moves all wolves.
    * @public
    */
-   moveWolves() {
-     if ( this.visibleProperty.value ) {
-       this.wolfGroup.forEach( wolf => wolf.move() );
-     }
+  moveWolves() {
+    if ( this.visibleProperty.value ) {
+      this.wolfGroup.forEach( wolf => wolf.move() );
+    }
   }
 
   /**
@@ -202,7 +190,7 @@ class WolfCollection {
     // Get the bunnies that are candidates for natural selection, in random order.
     const bunnies = this.bunnyCollection.getSelectionCandidates();
 
-    if ( bunnies.length > 0  ) {
+    if ( bunnies.length > 0 ) {
 
       let totalEaten = 0;
 

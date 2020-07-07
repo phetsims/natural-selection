@@ -81,9 +81,19 @@ class BunnyCollection {
 
     // @public notifies when all bunnies have died. dispose is not necessary.
     this.allBunniesHaveDiedEmitter = new Emitter();
+    phet.log && this.allBunniesHaveDiedEmitter.addListener( () => {
+      phet.log && phet.log( 'All of the bunnies have died.' );
+      phet.log && phet.log( `total live bunnies = ${this.liveBunnies.length}` );
+      phet.log && phet.log( `total dead bunnies = ${this.deadBunnies.length}` );
+    } );
 
     // @public notifies when bunnies have taken over the world. dispose is not necessary.
     this.bunniesHaveTakenOverTheWorldEmitter = new Emitter();
+    phet.log && this.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
+      phet.log && phet.log( 'Bunnies have taken over the world.' );
+      phet.log && phet.log( `total live bunnies = ${this.liveBunnies.length}` );
+      phet.log && phet.log( `total dead bunnies = ${this.deadBunnies.length}` );
+    } );
 
     // When a bunny is created or restored via PhET-iO. removeListener is not necessary.
     bunnyGroup.elementCreatedEmitter.addListener( bunny => {
