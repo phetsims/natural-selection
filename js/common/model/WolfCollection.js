@@ -177,6 +177,8 @@ class WolfCollection {
 
     if ( bunnies.length > 0  ) {
 
+      let totalKilled = 0;
+
       // Kill off some of each type of bunny, but a higher percentage of bunnies that don't blend into the environment.
       const percentToKillMatch = phet.joist.random.nextInRange( WOLVES_PERCENT_TO_KILL_RANGE );
       assert && assert( percentToKillMatch > 0 && percentToKillMatch < 1, `invalid percentToKillMatch: ${percentToKillMatch}` );
@@ -185,27 +187,43 @@ class WolfCollection {
 
       // Kill off bunnies with white fur.
       const bunniesWhiteFur = _.filter( bunnies, bunny => bunny.phenotype.hasWhiteFur() );
-      const percentToKillWhiteFur = ( environment === Environment.EQUATOR ) ? percentToKillNoMatch : percentToKillMatch;
-      const numberToKillWhiteFur = Math.ceil( percentToKillWhiteFur * bunniesWhiteFur.length );
-      assert && assert( numberToKillWhiteFur <= bunniesWhiteFur.length, 'invalid numberToKillWhiteFur' );
-      for ( let i = 0; i < numberToKillWhiteFur; i++ ) {
-        bunniesWhiteFur[ i ].die( CauseOfDeath.WOLF );
+      if ( environment === Environment.ARCTIC && bunniesWhiteFur.length <= NaturalSelectionQueryParameters.minBunniesForWolves ) {
+
+        // Do nothing because the population is too small. See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
+        phet.log && phet.log( 'wolves are ignoring white bunnies because the population is too small' );
       }
-      phet.log && phet.log( `${numberToKillWhiteFur} bunnies with white fur were eaten by wolves` );
+      else {
+        const percentToKillWhiteFur = ( environment === Environment.ARCTIC ) ? percentToKillMatch : percentToKillNoMatch;
+        const numberToKillWhiteFur = Math.ceil( percentToKillWhiteFur * bunniesWhiteFur.length );
+        assert && assert( numberToKillWhiteFur <= bunniesWhiteFur.length, 'invalid numberToKillWhiteFur' );
+        for ( let i = 0; i < numberToKillWhiteFur; i++ ) {
+          bunniesWhiteFur[ i ].die( CauseOfDeath.WOLF );
+        }
+        totalKilled += numberToKillWhiteFur;
+        phet.log && phet.log( `${numberToKillWhiteFur} bunnies with white fur were eaten by wolves` );
+      }
 
       // Kill off bunnies with brown fur.
       const bunniesBrownFur = _.filter( bunnies, bunny => bunny.phenotype.hasBrownFur() );
-      const percentToKillBrownFur = ( environment === Environment.EQUATOR ) ? percentToKillMatch : percentToKillNoMatch;
-      const numberToKillBrownFur = Math.ceil( percentToKillBrownFur * bunniesBrownFur.length );
-      assert && assert( numberToKillBrownFur <= bunniesBrownFur.length, 'invalid numberToKillBrownFur' );
-      for ( let i = 0; i < numberToKillBrownFur; i++ ) {
-        bunniesBrownFur[ i ].die( CauseOfDeath.WOLF );
+      if ( environment === Environment.EQUATOR && bunniesBrownFur.length <= NaturalSelectionQueryParameters.minBunniesForWolves ) {
+
+        // Do nothing because the population is too small. See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
+        phet.log && phet.log( 'wolves are ignoring brown bunnies because the population is too small' );
       }
-      phet.log && phet.log( `${numberToKillBrownFur} bunnies with brown fur were eaten by wolves` );
+      else {
+        const percentToKillBrownFur = ( environment === Environment.EQUATOR ) ? percentToKillMatch : percentToKillNoMatch;
+        const numberToKillBrownFur = Math.ceil( percentToKillBrownFur * bunniesBrownFur.length );
+        assert && assert( numberToKillBrownFur <= bunniesBrownFur.length, 'invalid numberToKillBrownFur' );
+        for ( let i = 0; i < numberToKillBrownFur; i++ ) {
+          bunniesBrownFur[ i ].die( CauseOfDeath.WOLF );
+        }
+        totalKilled += numberToKillBrownFur;
+        phet.log && phet.log( `${numberToKillBrownFur} bunnies with brown fur were eaten by wolves` );
+      }
 
       // Notify that bunnies have been eaten.
-      if ( numberToKillWhiteFur + numberToKillBrownFur > 0 ) {
-        this.bunniesEatenEmitter.emit( numberToKillWhiteFur + numberToKillBrownFur );
+      if ( totalKilled > 0 ) {
+        this.bunniesEatenEmitter.emit( totalKilled );
       }
     }
   }

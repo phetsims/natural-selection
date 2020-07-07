@@ -269,6 +269,20 @@ const SCHEMA = {
     // most 1 mutation. And we have 3 mutations, for fur, ears, and teeth. So at most 1/3 of the population can get a
     // specific mutation.
     isValidValue: value => ( value > 0  && value <= 1/3 )
+  },
+
+  // If the number of bunnies whose fur matches their environment is <= this value, wolves will eat none of them.
+  minBunniesForWolves: {
+    type: 'number',
+    defaultValue: 5,
+    isValidValue: value => NaturalSelectionUtils.isNonNegativeInteger( value )
+  },
+
+  // If the number of bunnies with long teeth is <= this value, none of them will die of starvation.
+  minBunniesForFood: {
+    type: 'number',
+    defaultValue: 5,
+    isValidValue: value => NaturalSelectionUtils.isNonNegativeInteger( value )
   }
 };
 
