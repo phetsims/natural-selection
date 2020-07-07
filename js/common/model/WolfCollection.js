@@ -32,13 +32,13 @@ const CLOCK_WOLVES_MIDPOINT =
   NaturalSelectionConstants.CLOCK_WOLVES_RANGE.min + NaturalSelectionConstants.CLOCK_WOLVES_RANGE.getLength() / 2;
 
 // Wolves will kill at least this percentage of the bunnies, regardless of their fur color.
-const WOLVES_PERCENT_TO_KILL_RANGE = new Range(
+const WOLVES_PERCENT_TO_EAT_RANGE = new Range(
   NaturalSelectionQueryParameters.wolvesPercentToKill[ 0 ],
   NaturalSelectionQueryParameters.wolvesPercentToKill[ 1 ]
 );
 
 // Multiplier for when the bunny's fur color does not match the environment, applied to the value that is
-// randomly chosen from WOLVES_PERCENT_TO_KILL_RANGE.
+// randomly chosen from WOLVES_PERCENT_TO_EAT_RANGE.
 const WOLVES_ENVIRONMENT_MULTIPLIER = NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier;
 
 class WolfCollection {
@@ -177,15 +177,15 @@ class WolfCollection {
 
     if ( bunnies.length > 0  ) {
 
-      let totalKilled = 0;
+      let totalEaten = 0;
 
-      // Kill off some of each type of bunny, but a higher percentage of bunnies that don't blend into the environment.
-      const percentToKillMatch = phet.joist.random.nextInRange( WOLVES_PERCENT_TO_KILL_RANGE );
-      assert && assert( percentToKillMatch > 0 && percentToKillMatch < 1, `invalid percentToKillMatch: ${percentToKillMatch}` );
-      const percentToKillNoMatch = WOLVES_ENVIRONMENT_MULTIPLIER * percentToKillMatch;
-      assert && assert( percentToKillNoMatch > 0 && percentToKillNoMatch < 1, `invalid percentToKillNoMatch: ${percentToKillNoMatch}` );
+      // Eat off some of each type of bunny, but a higher percentage of bunnies that don't blend into the environment.
+      const percentToEatMatch = phet.joist.random.nextInRange( WOLVES_PERCENT_TO_EAT_RANGE );
+      assert && assert( percentToEatMatch > 0 && percentToEatMatch < 1, `invalid percentToEatMatch: ${percentToEatMatch}` );
+      const percentToEatNoMatch = WOLVES_ENVIRONMENT_MULTIPLIER * percentToEatMatch;
+      assert && assert( percentToEatNoMatch > 0 && percentToEatNoMatch < 1, `invalid percentToEatNoMatch: ${percentToEatNoMatch}` );
 
-      // Kill off bunnies with white fur.
+      // Eat bunnies with white fur.
       const bunniesWhiteFur = _.filter( bunnies, bunny => bunny.phenotype.hasWhiteFur() );
       if ( environment === Environment.ARCTIC && bunniesWhiteFur.length <= NaturalSelectionQueryParameters.minBunniesForWolves ) {
 
@@ -193,17 +193,17 @@ class WolfCollection {
         phet.log && phet.log( 'wolves are ignoring white bunnies because the population is too small' );
       }
       else {
-        const percentToKillWhiteFur = ( environment === Environment.ARCTIC ) ? percentToKillMatch : percentToKillNoMatch;
-        const numberToKillWhiteFur = Math.ceil( percentToKillWhiteFur * bunniesWhiteFur.length );
-        assert && assert( numberToKillWhiteFur <= bunniesWhiteFur.length, 'invalid numberToKillWhiteFur' );
-        for ( let i = 0; i < numberToKillWhiteFur; i++ ) {
+        const percentToEatWhiteFur = ( environment === Environment.ARCTIC ) ? percentToEatMatch : percentToEatNoMatch;
+        const numberToEatWhiteFur = Math.ceil( percentToEatWhiteFur * bunniesWhiteFur.length );
+        assert && assert( numberToEatWhiteFur <= bunniesWhiteFur.length, 'invalid numberToEatWhiteFur' );
+        for ( let i = 0; i < numberToEatWhiteFur; i++ ) {
           bunniesWhiteFur[ i ].die( CauseOfDeath.WOLF );
         }
-        totalKilled += numberToKillWhiteFur;
-        phet.log && phet.log( `${numberToKillWhiteFur} bunnies with white fur were eaten by wolves` );
+        totalEaten += numberToEatWhiteFur;
+        phet.log && phet.log( `${numberToEatWhiteFur} bunnies with white fur were eaten by wolves` );
       }
 
-      // Kill off bunnies with brown fur.
+      // Eat bunnies with brown fur.
       const bunniesBrownFur = _.filter( bunnies, bunny => bunny.phenotype.hasBrownFur() );
       if ( environment === Environment.EQUATOR && bunniesBrownFur.length <= NaturalSelectionQueryParameters.minBunniesForWolves ) {
 
@@ -211,19 +211,19 @@ class WolfCollection {
         phet.log && phet.log( 'wolves are ignoring brown bunnies because the population is too small' );
       }
       else {
-        const percentToKillBrownFur = ( environment === Environment.EQUATOR ) ? percentToKillMatch : percentToKillNoMatch;
-        const numberToKillBrownFur = Math.ceil( percentToKillBrownFur * bunniesBrownFur.length );
-        assert && assert( numberToKillBrownFur <= bunniesBrownFur.length, 'invalid numberToKillBrownFur' );
-        for ( let i = 0; i < numberToKillBrownFur; i++ ) {
+        const percentToEatBrownFur = ( environment === Environment.EQUATOR ) ? percentToEatMatch : percentToEatNoMatch;
+        const numberToEatBrownFur = Math.ceil( percentToEatBrownFur * bunniesBrownFur.length );
+        assert && assert( numberToEatBrownFur <= bunniesBrownFur.length, 'invalid numberToEatBrownFur' );
+        for ( let i = 0; i < numberToEatBrownFur; i++ ) {
           bunniesBrownFur[ i ].die( CauseOfDeath.WOLF );
         }
-        totalKilled += numberToKillBrownFur;
-        phet.log && phet.log( `${numberToKillBrownFur} bunnies with brown fur were eaten by wolves` );
+        totalEaten += numberToEatBrownFur;
+        phet.log && phet.log( `${numberToEatBrownFur} bunnies with brown fur were eaten by wolves` );
       }
 
       // Notify that bunnies have been eaten.
-      if ( totalKilled > 0 ) {
-        this.bunniesEatenEmitter.emit( totalKilled );
+      if ( totalEaten > 0 ) {
+        this.bunniesEatenEmitter.emit( totalEaten );
       }
     }
   }
