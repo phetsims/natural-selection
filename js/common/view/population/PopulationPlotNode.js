@@ -97,18 +97,9 @@ class PopulationPlotNode extends Node {
     } );
 
     // unmultilink not needed
-    Property.multilink( [ this.xRangeProperty, this.yRangeProperty ],
-      () => this.plotPoints()
+    Property.multilink( [ this.visibleProperty, this.xRangeProperty, this.yRangeProperty ],
+      visible => visible && this.plotPoints()
     );
-
-    // Update when this Node becomes visible.
-    // visibleProperty is a TinyProperty, so cannot be included in the above multilink.
-    // unlink not needed
-    this.visibleProperty.link( visible => {
-      if ( visible ) {
-        this.plotPoints();
-      }
-    } );
   }
 
   /**
