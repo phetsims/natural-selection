@@ -510,6 +510,7 @@ class BunnyCollection {
 
   /**
    * Disposes of dead bunnies that are guaranteed not to be needed by the Pedigree graph.
+   * See https://github.com/phetsims/natural-selection/issues/112
    * @param {number} currentGeneration
    * @public
    */
