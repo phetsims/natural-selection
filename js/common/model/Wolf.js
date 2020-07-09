@@ -66,11 +66,11 @@ class Wolf extends NaturalSelectionSprite {
    * @override
    */
   dispose() {
+    assert && assert( !this.isDisposed, 'wolf is already disposed' );
     this.disposeWolf();
     super.dispose();
     this.disposedEmitter.emit();
     this.disposedEmitter.dispose();
-    this.disposedEmitter = null; // in case we try to call dispose twice
   }
 
   /**

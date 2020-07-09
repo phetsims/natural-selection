@@ -16,10 +16,10 @@ import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionModel from '../../model/NaturalSelectionModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
-import EnvironmentBunnyNodeCollection from './EnvironmentBunnyNodeCollection.js';
+import EnvironmentBunnyNode from './EnvironmentBunnyNode.js';
 import EnvironmentBunnyPressListener from './EnvironmentBunnyPressListener.js';
 import ShrubNode from './ShrubNode.js';
-import WolfNodeCollection from './WolfNodeCollection.js';
+import WolfNode from './WolfNode.js';
 
 class EnvironmentNode extends Node {
 
@@ -71,18 +71,23 @@ class EnvironmentNode extends Node {
 
     super( options );
 
-    // manages dynamic BunnyNode instances
-    const bunnyNodeCollection = new EnvironmentBunnyNodeCollection( model.bunnyCollection, model.pedigreeModel.selectedBunnyProperty, {
-      tandem: options.tandem.createTandem( 'bunnyNodeCollection' )
-    } );
-
     // Creates a BunnyNode and adds it to the scenegraph
     const createBunnyNode = bunny => {
 
       // PhET-iO state will restore both live and dead bunnies. Create BunnyNodes only for the live ones.
       if ( bunny.isAlive ) {
-        const bunnyNode = bunnyNodeCollection.createBunnyNode( bunny );
+
+        const bunnyNode = new EnvironmentBunnyNode( bunny, model.pedigreeModel.selectedBunnyProperty );
         spritesNode.addChild( bunnyNode );
+
+        // If the bunny dies or is disposed, dispose of the associated BunnyNode.
+        const disposeBunnyNode = () => {
+          bunny.diedEmitter.removeListener( disposeBunnyNode );
+          bunny.disposedEmitter.removeListener( disposeBunnyNode );
+          bunnyNode.dispose();
+        };
+        bunny.diedEmitter.addListener( disposeBunnyNode );
+        bunny.disposedEmitter.addListener( disposeBunnyNode );
       }
     };
 
@@ -107,15 +112,20 @@ class EnvironmentNode extends Node {
       tandem: options.tandem.createTandem( 'backgroundPressListener' )
     } ) );
 
-    // manages dynamic WolfNode instances
-    const wolfNodeCollection = new WolfNodeCollection( model.wolfCollection, {
-      tandem: options.tandem.createTandem( 'wolfNodeCollection' )
-    } );
-
     // Creates a WolfNode and adds it to the scenegraph. removeListener is not necessary.
     model.wolfCollection.wolfCreatedEmitter.addListener( wolf => {
-      const wolfNode = wolfNodeCollection.createWolfNode( wolf );
+
+      const wolfNode = new WolfNode( wolf );
       spritesNode.addChild( wolfNode );
+
+      // When the wolf is disposed, dispose of the associated WolfNode.
+      // removeListener is not necessary, because wolf.disposeEmitter is disposed.
+      const wolfDisposedListener = () => wolfNode.dispose();
+      wolf.disposedEmitter.addListener( () => {
+        wolf.disposedEmitter.removeListener( wolfDisposedListener );
+        wolfNode.dispose();
+      } );
+
       if ( !model.isPlayingProperty ) {
         this.sortSprites();
       }

@@ -7,7 +7,6 @@
  */
 
 import merge from '../../../../../phet-core/js/merge.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
@@ -15,7 +14,6 @@ import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParamete
 import BunnyNode from '../BunnyNode.js';
 import NaturalSelectionSpriteNode from '../NaturalSelectionSpriteNode.js';
 import OriginNode from '../OriginNode.js';
-import EnvironmentBunnyNodeIO from './EnvironmentBunnyNodeIO.js';
 
 class EnvironmentBunnyNode extends NaturalSelectionSpriteNode {
 
@@ -35,12 +33,7 @@ class EnvironmentBunnyNode extends NaturalSelectionSpriteNode {
       showMutationIcon: NaturalSelectionQueryParameters.labelMutants,
 
       // Node options
-      cursor: 'pointer',
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
-      phetioDynamicElement: true,
-      phetioType: EnvironmentBunnyNodeIO
+      cursor: 'pointer'
     }, options );
 
     const bunnyNode = new BunnyNode( bunny, selectedBunnyProperty, {

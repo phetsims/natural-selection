@@ -8,14 +8,12 @@
 
 import merge from '../../../../../phet-core/js/merge.js';
 import Image from '../../../../../scenery/js/nodes/Image.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
 import wolfImage from '../../../../images/wolf_png.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Wolf from '../../model/Wolf.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 import NaturalSelectionSpriteNode from '../NaturalSelectionSpriteNode.js';
 import OriginNode from '../OriginNode.js';
-import WolfNodeIO from './WolfNodeIO.js';
 
 // constants
 const IMAGE_SCALE = 0.25; // how much the wolf PNG image is scaled
@@ -30,13 +28,7 @@ class WolfNode extends NaturalSelectionSpriteNode {
 
     assert && assert( wolf instanceof Wolf, 'invalid wolf' );
 
-    options = merge( {
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
-      phetioDynamicElement: true,
-      phetioType: WolfNodeIO
-    }, options );
+    options = merge( {}, options );
 
     // Since this node will be scaled based on z position, and the image itself must have a base scale,
     // Image is used via composition instead of inheritance.
