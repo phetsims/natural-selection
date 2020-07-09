@@ -53,15 +53,6 @@ class WolfGroup extends PhetioGroup {
 
     super( createElement, defaultArguments, options );
   }
-
-  /**
-   * Steps all wolves.
-   * @param {number} dt - time step, in seconds
-   * @public
-   */
-  step( dt ) {
-    this.forEach( wolf => wolf.step( dt ) );
-  }
 }
 
 naturalSelection.register( 'WolfGroup', WolfGroup );

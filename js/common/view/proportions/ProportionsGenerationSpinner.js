@@ -28,17 +28,20 @@ class ProportionsGenerationSpinner extends NumberSpinner {
     options = merge( {
 
       // NumberSpinner options
-      arrowsPosition: 'leftRight',
-      backgroundStroke: null,
-      backgroundFill: null,
-      xMargin: 0,
-      yMargin: 0,
       xSpacing: 10,
-      valuePattern: naturalSelectionStrings.generationValue,
-      valueAlign: 'center',
-      valueMaxWidth: 250, // determined empirically
-      font: NaturalSelectionConstants.PROPORTIONS_GENERATION_CONTROL_FONT,
-      backgroundMinWidth: 100, // determined empirically
+      arrowsPosition: 'leftRight',
+      numberDisplayOptions: {
+        valuePattern: naturalSelectionStrings.generationValue,
+        align: 'center',
+        xMargin: 0,
+        yMargin: 0,
+        backgroundStroke: null,
+        backgroundFill: null,
+        minBackgroundWidth: 100, // determined empirically
+        textOptions: {
+          font: NaturalSelectionConstants.PROPORTIONS_GENERATION_CONTROL_FONT
+        }
+      },
 
       // phet-io
       tandem: Tandem.REQUIRED

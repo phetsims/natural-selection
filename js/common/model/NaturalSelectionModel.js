@@ -69,6 +69,7 @@ class NaturalSelectionModel {
     this.generationClock = new GenerationClock( {
       tandem: options.tandem.createTandem( 'generationClock' )
     } );
+    phet.log && phet.log( '====== Generation 0 ======' );
 
     // @pubic (read-only) pool of genes for the bunny population
     this.genePool = new GenePool( {
@@ -125,7 +126,6 @@ class NaturalSelectionModel {
 
     // When the simulation state changes... unlink is not necessary.
     this.simulationModeProperty.link( simulationMode => {
-      phet.log && phet.log( `simulationMode=${simulationMode}` );
 
       // SimulationMode indicates which mode the simulation is in. It does not describe a full state of that mode.
       // So do nothing when PhET-iO is restoring state, or saved state will be overwritten.
@@ -165,13 +165,18 @@ class NaturalSelectionModel {
 
       // When restoring PhET-iO state, skip this code, because downstream elements are already stateful.
       if ( currentGeneration !== 0 && !phet.joist.sim.isSettingPhetioStateProperty.value ) {
-        phet.log && phet.log( `generation=${currentGeneration}` );
 
         // Before bunnies are aged or mated, Record 'End of Generation' counts for the Proportions graph.
         this.proportionsModel.recordEndCounts( currentGeneration - 1, this.bunnyCollection.getLiveBunnyCounts() );
 
+        phet.log && phet.log( `total live bunnies = ${this.bunnyCollection.liveBunnies.length}` );
+        phet.log && phet.log( `total dead bunnies = ${this.bunnyCollection.deadBunnies.length}` );
+        phet.log && phet.log( `====== Generation ${currentGeneration} ======` );
+
         // Age bunnies, some may die of old age.
         this.bunnyCollection.ageBunnies();
+
+        this.bunnyCollection.pruneDeadBunnies( currentGeneration );
 
         // Mate bunnies
         //TODO https://github.com/phetsims/natural-selection/issues/60 delete this statement
@@ -213,6 +218,8 @@ class NaturalSelectionModel {
    * @public
    */
   startOver() {
+
+    phet.log && phet.log( '====== Generation 0 ======' );
 
     this.simulationModeProperty.reset();
     this.isPlayingProperty.reset(); // see https://github.com/phetsims/natural-selection/issues/55
@@ -288,7 +295,7 @@ class NaturalSelectionModel {
    */
   initializeGenerationZero() {
 
-    phet.log && phet.log( 'EnvironmentModel.initializeGenerationZero' );
+    phet.log && phet.log( 'NaturalSelectionModel.initializeGenerationZero' );
     assert && assert( this.bunnyCollection.liveBunnies.length === 0, 'bunnies already exist' );
     assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
 

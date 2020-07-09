@@ -8,12 +8,15 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
@@ -32,13 +35,13 @@ const CLOCK_WOLVES_MIDPOINT =
   NaturalSelectionConstants.CLOCK_WOLVES_RANGE.min + NaturalSelectionConstants.CLOCK_WOLVES_RANGE.getLength() / 2;
 
 // Wolves will kill at least this percentage of the bunnies, regardless of their fur color.
-const WOLVES_PERCENT_TO_KILL_RANGE = new Range(
+const WOLVES_PERCENT_TO_EAT_RANGE = new Range(
   NaturalSelectionQueryParameters.wolvesPercentToKill[ 0 ],
   NaturalSelectionQueryParameters.wolvesPercentToKill[ 1 ]
 );
 
 // Multiplier for when the bunny's fur color does not match the environment, applied to the value that is
-// randomly chosen from WOLVES_PERCENT_TO_KILL_RANGE.
+// randomly chosen from WOLVES_PERCENT_TO_EAT_RANGE.
 const WOLVES_ENVIRONMENT_MULTIPLIER = NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier;
 
 class WolfCollection {
@@ -66,6 +69,20 @@ class WolfCollection {
     // @private
     this.bunnyCollection = bunnyCollection;
 
+    // @public
+    this.enabledProperty = new BooleanProperty( false, {
+      tandem: options.tandem.createTandem( 'enabledProperty' )
+    } );
+
+    // @private
+    this.isHuntingProperty = new DerivedProperty(
+      [ this.enabledProperty, generationClock.percentTimeProperty ],
+      ( enabled, percentTime ) => ( enabled && percentTime >= CLOCK_WOLVES_MIN && percentTime <= CLOCK_WOLVES_MAX ), {
+        tandem: options.tandem.createTandem( 'isHuntingProperty' ),
+        phetioType: DerivedPropertyIO( BooleanIO ),
+        phetioDocumentation: 'for internal PhET use only'
+      } );
+
     // @private the PhetioGroup that manages Wolf instances as dynamic PhET-iO elements
     this.wolfGroup = new WolfGroup( modelViewTransform, {
       tandem: options.tandem.createTandem( 'wolfGroup' )
@@ -76,22 +93,9 @@ class WolfCollection {
       parameters: [ { valueType: Wolf } ]
     } );
 
-    // @public
-    this.enabledProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'enabledProperty' )
-    } );
-
     // When the group creates a Wolf, notify listeners. removeListener is not necessary.
     this.wolfGroup.elementCreatedEmitter.addListener( wolf => {
       this.wolfCreatedEmitter.emit( wolf );
-    } );
-
-    // When disabled, dispose of all wolves. unlink is not necessary.
-    this.enabledProperty.lazyLink( enabled => {
-      if ( !enabled && this.wolfGroup.count > 0 ) {
-        phet.log && phet.log( `Disposing of ${this.wolfGroup.count} wolves` );
-        this.wolfGroup.clear();
-      }
     } );
 
     // @public emits when bunnies have been eaten. dispose is not necessary.
@@ -99,33 +103,33 @@ class WolfCollection {
       parameters: [ { valueType: 'number' } ] // the number of bunnies that were eaten
     } );
 
-    // Eat some bunnies. unlink is not necessary.
+    // The wolf population exists only while it's hunting.
+    this.isHuntingProperty.link( isHunting => {
+      if ( isHunting ) {
+
+        // Number of wolves is a function of the number of live bunnies
+        const numberOfWolves = Math.max( NaturalSelectionQueryParameters.minWolves,
+          Utils.roundSymmetric( this.bunnyCollection.liveBunnies.length / NaturalSelectionQueryParameters.bunniesPerWolf ) );
+        for ( let i = 0; i < numberOfWolves; i++ ) {
+          this.wolfGroup.createNextElement();
+        }
+        phet.log && phet.log( `${this.wolfGroup.count} wolves were created` );
+      }
+      else {
+
+        // Dispose of all wolves
+        phet.log && phet.log( `${this.wolfGroup.count} wolves were disposed` );
+        this.wolfGroup.clear();
+      }
+    } );
+
+    // Eat bunnies at the midpoint of CLOCK_WOLVES_RANGE.
+    // See https://github.com/phetsims/natural-selection/issues/110
+    // unlink is not necessary.
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
-
-        if ( this.enabledProperty.value && previousPercentTime < CLOCK_WOLVES_MIN && currentPercentTime >= CLOCK_WOLVES_MIN ) {
-
-          // Create wolves
-          assert && assert( this.wolfGroup.count === 0, 'expected there to be no wolves' );
-          const numberOfWolves = Math.max( NaturalSelectionQueryParameters.minWolves,
-            Utils.roundSymmetric( bunnyCollection.liveBunnies.length / NaturalSelectionQueryParameters.bunniesPerWolf ) );
-          phet.log && phet.log( `Creating ${numberOfWolves} wolves` );
-          for ( let i = 0; i < numberOfWolves; i++ ) {
-            this.wolfGroup.createNextElement();
-          }
-        }
-        else if ( currentPercentTime > CLOCK_WOLVES_MAX && this.wolfGroup.count > 0 ) {
-
-          // Dispose of all wolves
-          phet.log && phet.log( `Disposing of ${this.wolfGroup.count} wolves` );
-          this.wolfGroup.clear();
-        }
-
-        // Eat bunnies at the midpoint of CLOCK_WOLVES_RANGE.
-        // See https://github.com/phetsims/natural-selection/issues/110
-        if ( this.enabledProperty.value && previousPercentTime < CLOCK_WOLVES_MIDPOINT && currentPercentTime >= CLOCK_WOLVES_MIDPOINT ) {
-          this.eatBunnies( environmentProperty.value );
-        }
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value && this.isHuntingProperty.value &&
+           previousPercentTime < CLOCK_WOLVES_MIDPOINT && currentPercentTime >= CLOCK_WOLVES_MIDPOINT ) {
+        this.eatBunnies( environmentProperty.value );
       }
     } );
   }
@@ -159,7 +163,7 @@ class WolfCollection {
    * Moves all wolves.
    * @public
    */
-   moveWolves() {
+  moveWolves() {
     this.wolfGroup.forEach( wolf => wolf.move() );
   }
 
@@ -170,42 +174,62 @@ class WolfCollection {
    */
   eatBunnies( environment ) {
     assert && assert( Environment.includes( environment ), 'invalid environment' );
-    assert && assert( this.enabledProperty.value, 'should not be called when disabled' );
+    assert && assert( this.isHuntingProperty.value, 'should not be called unless hunting' );
 
     // Get the bunnies that are candidates for natural selection, in random order.
     const bunnies = this.bunnyCollection.getSelectionCandidates();
 
-    if ( bunnies.length > 0  ) {
+    if ( bunnies.length > 0 ) {
 
-      // Kill off some of each type of bunny, but a higher percentage of bunnies that don't blend into the environment.
-      const percentToKillMatch = phet.joist.random.nextInRange( WOLVES_PERCENT_TO_KILL_RANGE );
-      assert && assert( percentToKillMatch > 0 && percentToKillMatch < 1, `invalid percentToKillMatch: ${percentToKillMatch}` );
-      const percentToKillNoMatch = WOLVES_ENVIRONMENT_MULTIPLIER * percentToKillMatch;
-      assert && assert( percentToKillNoMatch > 0 && percentToKillNoMatch < 1, `invalid percentToKillNoMatch: ${percentToKillNoMatch}` );
+      let totalEaten = 0;
 
-      // Kill off bunnies with white fur.
+      // Eat off some of each type of bunny, but a higher percentage of bunnies that don't blend into the environment.
+      const percentToEatMatch = phet.joist.random.nextInRange( WOLVES_PERCENT_TO_EAT_RANGE );
+      assert && assert( percentToEatMatch > 0 && percentToEatMatch < 1, `invalid percentToEatMatch: ${percentToEatMatch}` );
+      const percentToEatNoMatch = WOLVES_ENVIRONMENT_MULTIPLIER * percentToEatMatch;
+      assert && assert( percentToEatNoMatch > 0 && percentToEatNoMatch < 1, `invalid percentToEatNoMatch: ${percentToEatNoMatch}` );
+
+      // Eat bunnies with white fur.
       const bunniesWhiteFur = _.filter( bunnies, bunny => bunny.phenotype.hasWhiteFur() );
-      const percentToKillWhiteFur = ( environment === Environment.EQUATOR ) ? percentToKillNoMatch : percentToKillMatch;
-      const numberToKillWhiteFur = Math.ceil( percentToKillWhiteFur * bunniesWhiteFur.length );
-      assert && assert( numberToKillWhiteFur <= bunniesWhiteFur.length, 'invalid numberToKillWhiteFur' );
-      for ( let i = 0; i < numberToKillWhiteFur; i++ ) {
-        bunniesWhiteFur[ i ].die( CauseOfDeath.WOLF );
-      }
-      phet.log && phet.log( `${numberToKillWhiteFur} bunnies with white fur were eaten by wolves` );
+      if ( environment === Environment.ARCTIC && bunniesWhiteFur.length <= NaturalSelectionQueryParameters.minBunniesForWolves ) {
 
-      // Kill off bunnies with brown fur.
-      const bunniesBrownFur = _.filter( bunnies, bunny => bunny.phenotype.hasBrownFur() );
-      const percentToKillBrownFur = ( environment === Environment.EQUATOR ) ? percentToKillMatch : percentToKillNoMatch;
-      const numberToKillBrownFur = Math.ceil( percentToKillBrownFur * bunniesBrownFur.length );
-      assert && assert( numberToKillBrownFur <= bunniesBrownFur.length, 'invalid numberToKillBrownFur' );
-      for ( let i = 0; i < numberToKillBrownFur; i++ ) {
-        bunniesBrownFur[ i ].die( CauseOfDeath.WOLF );
+        // Do nothing because the population with the preferred trait is too small.
+        // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
+        phet.log && phet.log( `Wolves ignored white bunnies because the population is <= ${NaturalSelectionQueryParameters.minBunniesForWolves}` );
       }
-      phet.log && phet.log( `${numberToKillBrownFur} bunnies with brown fur were eaten by wolves` );
+      else {
+        const percentToEatWhiteFur = ( environment === Environment.ARCTIC ) ? percentToEatMatch : percentToEatNoMatch;
+        const numberToEatWhiteFur = Math.ceil( percentToEatWhiteFur * bunniesWhiteFur.length );
+        assert && assert( numberToEatWhiteFur <= bunniesWhiteFur.length, 'invalid numberToEatWhiteFur' );
+        for ( let i = 0; i < numberToEatWhiteFur; i++ ) {
+          bunniesWhiteFur[ i ].die( CauseOfDeath.WOLF );
+        }
+        totalEaten += numberToEatWhiteFur;
+        phet.log && phet.log( `${numberToEatWhiteFur} bunnies with white fur were eaten by wolves` );
+      }
+
+      // Eat bunnies with brown fur.
+      const bunniesBrownFur = _.filter( bunnies, bunny => bunny.phenotype.hasBrownFur() );
+      if ( environment === Environment.EQUATOR && bunniesBrownFur.length <= NaturalSelectionQueryParameters.minBunniesForWolves ) {
+
+        // Do nothing because the population with the preferred trait is too small.
+        // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
+        phet.log && phet.log( `Wolves ignored brown bunnies because the population is <= ${NaturalSelectionQueryParameters.minBunniesForWolves}.` );
+      }
+      else {
+        const percentToEatBrownFur = ( environment === Environment.EQUATOR ) ? percentToEatMatch : percentToEatNoMatch;
+        const numberToEatBrownFur = Math.ceil( percentToEatBrownFur * bunniesBrownFur.length );
+        assert && assert( numberToEatBrownFur <= bunniesBrownFur.length, 'invalid numberToEatBrownFur' );
+        for ( let i = 0; i < numberToEatBrownFur; i++ ) {
+          bunniesBrownFur[ i ].die( CauseOfDeath.WOLF );
+        }
+        totalEaten += numberToEatBrownFur;
+        phet.log && phet.log( `${numberToEatBrownFur} bunnies with brown fur were eaten by wolves` );
+      }
 
       // Notify that bunnies have been eaten.
-      if ( numberToKillWhiteFur + numberToKillBrownFur > 0 ) {
-        this.bunniesEatenEmitter.emit( numberToKillWhiteFur + numberToKillBrownFur );
+      if ( totalEaten > 0 ) {
+        this.bunniesEatenEmitter.emit( totalEaten );
       }
     }
   }
