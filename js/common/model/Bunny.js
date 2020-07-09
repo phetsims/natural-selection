@@ -117,6 +117,7 @@ class Bunny extends NaturalSelectionSprite {
     // @public fires when the Bunny has been disposed. dispose is required.
     this.disposedEmitter = new Emitter();
 
+    //TODO https://github.com/phetsims/natural-selection/issues/112 should father/mother be set to something other than null?
     // When the father or mother is disposed, set them to null to free memory.
     const fatherDisposedListener = () => {
       this.father.disposedEmitter.removeListener( fatherDisposedListener );
