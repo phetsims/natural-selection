@@ -129,7 +129,7 @@ class PopulationGraphNode extends Node {
     } );
 
     // Center y-axis label to left of graph. unlink is not necessary.
-    yAxisLabelNode.boundsProperty.link( () => {
+    yAxisLabelNode.localBoundsProperty.link( () => {
       yAxisLabelNode.right = yZoomControl.right;
       yAxisLabelNode.centerY = gridNode.y + ( gridHeight / 2 );
     } );
