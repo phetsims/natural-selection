@@ -123,7 +123,7 @@ class PopulationGraphNode extends Node {
     ];
 
     // Center x-axis control under the graph. unlink is not necessary.
-    generationScrollControl.boundsProperty.link( () => {
+    generationScrollControl.localBoundsProperty.link( () => {
       generationScrollControl.centerX = gridNode.x + ( gridWidth / 2 );
       generationScrollControl.top = gridNode.bottom + X_AXIS_LABEL_SPACING;
     } );
