@@ -62,7 +62,7 @@ class NaturalSelectionModel {
     this.fastForwardScaleProperty = new NumberProperty( 1, {
       tandem: options.tandem.createTandem( 'fastForwardScaleProperty' ),
       validValues: [ 1, NaturalSelectionQueryParameters.fastForwardScale ],
-      phetioDocumentation: 'time speeds up by this scale factor while the Fast-Forward button is pressed'
+      phetioDocumentation: 'generation clock speeds up by this scale factor while the Fast-Forward button is pressed'
     } );
 
     // @public (read-only)
@@ -255,7 +255,7 @@ class NaturalSelectionModel {
    */
   step( dt ) {
     if ( this.isPlayingProperty.value ) {
-      this.stepOnce( dt * this.fastForwardScaleProperty.value );
+      this.stepOnce( dt );
     }
   }
 
@@ -269,7 +269,7 @@ class NaturalSelectionModel {
   stepOnce( dt ) {
 
     // step the generation clock
-    this.generationClock.step( dt );
+    this.generationClock.step( dt * this.fastForwardScaleProperty.value );
 
     // move the bunnies
     this.bunnyCollection.moveBunnies();
