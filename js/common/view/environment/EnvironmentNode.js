@@ -120,9 +120,7 @@ class EnvironmentNode extends Node {
 
       // When the wolf is disposed, dispose of the associated WolfNode.
       // removeListener is not necessary, because wolf.disposeEmitter is disposed.
-      const wolfDisposedListener = () => wolfNode.dispose();
       wolf.disposedEmitter.addListener( () => {
-        wolf.disposedEmitter.removeListener( wolfDisposedListener );
         wolfNode.dispose();
       } );
 
