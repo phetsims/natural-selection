@@ -57,11 +57,6 @@ class Wolf extends NaturalSelectionSprite {
     // @public fires when the Wolf has been disposed. dispose is required.
     this.disposedEmitter = new Emitter();
 
-    // @private
-    this.disposeWolf = () => {
-      //TODO
-    };
-
     this.validateInstance();
   }
 
@@ -71,7 +66,6 @@ class Wolf extends NaturalSelectionSprite {
    */
   dispose() {
     assert && assert( !this.isDisposed, 'wolf is already disposed' );
-    this.disposeWolf();
     super.dispose();
     this.disposedEmitter.emit();
     this.disposedEmitter.dispose();
