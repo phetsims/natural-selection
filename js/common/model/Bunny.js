@@ -221,10 +221,10 @@ class Bunny extends NaturalSelectionSprite {
     this.cumulativeHopTime = 0;
 
     // Randomize motion for the next cycle
-    this.restTime = phet.joist.random.nextInRange( REST_TIME_RANGE );
-    this.hopTime = phet.joist.random.nextInRange( HOP_TIME_RANGE );
-    const hopDistance = phet.joist.random.nextInRange( HOP_DISTANCE_RANGE );
-    const hopHeight = phet.joist.random.nextInRange( HOP_HEIGHT_RANGE );
+    this.restTime = phet.joist.random.nextDoubleInRange( REST_TIME_RANGE );
+    this.hopTime = phet.joist.random.nextDoubleInRange( HOP_TIME_RANGE );
+    const hopDistance = phet.joist.random.nextDoubleInRange( HOP_DISTANCE_RANGE );
+    const hopHeight = phet.joist.random.nextDoubleInRange( HOP_HEIGHT_RANGE );
 
     // Get motion delta for the next cycle
     this.hopDelta = getHopDelta( hopDistance, hopHeight, this.directionProperty.value );

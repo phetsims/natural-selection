@@ -180,7 +180,7 @@ class WolfCollection {
       let totalEaten = 0;
 
       // Eat off some of each type of bunny, but a higher percentage of bunnies that don't blend into the environment.
-      const percentToEatMatch = phet.joist.random.nextInRange( WOLVES_PERCENT_TO_EAT_RANGE );
+      const percentToEatMatch = phet.joist.random.nextDoubleInRange( WOLVES_PERCENT_TO_EAT_RANGE );
       assert && assert( percentToEatMatch > 0 && percentToEatMatch < 1, `invalid percentToEatMatch: ${percentToEatMatch}` );
       const percentToEatNoMatch = WOLVES_ENVIRONMENT_MULTIPLIER * percentToEatMatch;
       assert && assert( percentToEatNoMatch > 0 && percentToEatNoMatch < 1, `invalid percentToEatNoMatch: ${percentToEatNoMatch}` );
