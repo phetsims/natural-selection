@@ -33,8 +33,8 @@ import PhenotypeIO from './PhenotypeIO.js';
 import SpriteDirection from './SpriteDirection.js';
 
 // constants
-const REST_STEPS_RANGE = new Range( 40, 160 );  // number of steps that the Bunny will rest before hopping
-const HOP_STEPS_RANGE = new Range( 10, 20 );    // number of steps that is takes to complete a hop
+const REST_TIME_RANGE = new Range( 2, 4 ); // time to complete a rest interval, in seconds
+const HOP_TIME_RANGE = new Range( 0.25, 0.5 ); // time to complete a hop cycle, in seconds
 const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // x and z distance that a bunny hops
 const HOP_HEIGHT_RANGE = new Range( 30, 50 );   // how high above the ground a bunny hops
 
@@ -99,17 +99,23 @@ class Bunny extends NaturalSelectionSprite {
       tandem: options.tandem.createTandem( 'phenotype' )
     } );
 
-    // @private {number} number of times that step has been called in the current rest + hop cycle
-    this.stepsCount = 0;
+    // @private {number} the cumulative time spent resting since the last hop, in seconds
+    this.cumulativeRestTime = 0;
 
-    // @private {number} the number of steps that the bunny rests before hopping, randomized in initializeMotion
-    this.restSteps = REST_STEPS_RANGE.max;
+    // @private {number} the cumulative time spent hopping since the last reset, in seconds
+    this.cumulativeHopTime = 0;
 
-    // @private {number} the number of steps required to complete one full hop, randomized in initializeMotion
-    this.hopSteps = HOP_STEPS_RANGE.max;
+    // @private {number} time to rest before hopping, randomized in initializeMotion
+    this.restTime = REST_TIME_RANGE.max;
+
+    // @private {number} time to complete one full hop, randomized in initializeMotion
+    this.hopTime = HOP_TIME_RANGE.max;
 
     // @private {Vector3|null} the change in position when the bunny hops
     this.hopDelta = null;
+
+    // Initialize the first motion cycle.
+    this.initializeMotion();
 
     // @public fires when the Bunny has died. dispose is required.
     this.diedEmitter = new Emitter();
@@ -179,7 +185,6 @@ class Bunny extends NaturalSelectionSprite {
     this.diedEmitter.emit();
   }
 
-  //TODO https://github.com/phetsims/natural-selection/issues/123 base animation on dt
   /**
    * Moves the Bunny around. This is the motion cycle for a bunny. Each bunny rests, hops, rests, hops, ...
    * @param {number} dt - time step, in seconds
@@ -188,20 +193,20 @@ class Bunny extends NaturalSelectionSprite {
   move( dt ) {
     assert && assert( this.isAlive, 'dead bunny cannot move' );
 
-    this.stepsCount++;
+    if ( this.cumulativeRestTime < this.restTime ) {
 
-    if ( this.hopDelta === null || this.stepsCount > this.restSteps + this.hopSteps ) {
-
-      // When we've completed a motion cycle, initialize the next cycle
-      this.initializeMotion();
+      // The bunny is resting.
+      this.cumulativeRestTime += dt;
     }
-    else if ( this.stepsCount > this.restSteps ) {
+    else if ( this.cumulativeHopTime < this.hopTime ) {
 
-      // do part of the hop cycle
-      this.hop();
+      // Do part of the hop cycle.
+      this.hop( dt );
     }
     else {
-      // do nothing, the bunny is resting
+
+      // When we've completed a motion cycle, initialize the next cycle.
+      this.initializeMotion();
     }
   }
 
@@ -211,13 +216,14 @@ class Bunny extends NaturalSelectionSprite {
    */
   initializeMotion() {
 
-    this.stepsCount = 0;
+    this.cumulativeRestTime = 0;
+    this.cumulativeHopTime = 0;
 
     // Randomize motion for the next cycle
-    this.restSteps = phet.joist.random.nextIntBetween( REST_STEPS_RANGE.min, REST_STEPS_RANGE.max );
-    this.hopSteps = phet.joist.random.nextIntBetween( HOP_STEPS_RANGE.min, HOP_STEPS_RANGE.max );
-    const hopDistance = phet.joist.random.nextIntBetween( HOP_DISTANCE_RANGE.min, HOP_DISTANCE_RANGE.max );
-    const hopHeight = phet.joist.random.nextIntBetween( HOP_HEIGHT_RANGE.min, HOP_HEIGHT_RANGE.max );
+    this.restTime = phet.joist.random.nextDoubleBetween( REST_TIME_RANGE.min, REST_TIME_RANGE.max );
+    this.hopTime = phet.joist.random.nextDoubleBetween( HOP_TIME_RANGE.min, HOP_TIME_RANGE.max );
+    const hopDistance = phet.joist.random.nextDoubleBetween( HOP_DISTANCE_RANGE.min, HOP_DISTANCE_RANGE.max );
+    const hopHeight = phet.joist.random.nextDoubleBetween( HOP_HEIGHT_RANGE.min, HOP_HEIGHT_RANGE.max );
 
     // Get motion delta for the next cycle
     this.hopDelta = getHopDelta( hopDistance, hopHeight, this.directionProperty.value );
@@ -240,15 +246,23 @@ class Bunny extends NaturalSelectionSprite {
 
   /**
    * Do part of the hop cycle.
+   * @param {number} dt - time step, in seconds
    * @private
    */
-  hop() {
-    const x = this.positionProperty.value.x + ( this.hopDelta.x / this.hopSteps );
-    const z = this.positionProperty.value.z + ( this.hopDelta.z / this.hopSteps );
-    const hopHeightFraction = ( this.stepsCount - this.restSteps ) / this.hopSteps;
+  hop( dt ) {
+
+    const scale = Math.min( dt, this.hopTime - this.cumulativeHopTime ) / this.hopTime;
+
+    const x = this.positionProperty.value.x + ( scale * this.hopDelta.x );
+    const z = this.positionProperty.value.z + ( scale * this.hopDelta.z );
+
+    const hopHeightFraction = this.cumulativeHopTime / this.hopTime;
     //TODO I don't understand the last part of this, from Bunny.java moveAround
     const y = this.modelViewTransform.getGroundY( z ) + this.hopDelta.y * 2 * ( -hopHeightFraction * hopHeightFraction + hopHeightFraction );
+
     this.positionProperty.value = new Vector3( x, y, z );
+
+    this.cumulativeHopTime += dt;
   }
 
   /**
@@ -263,8 +277,8 @@ class Bunny extends NaturalSelectionSprite {
     const y = this.modelViewTransform.getGroundY( position.z );
     this.positionProperty.value = new Vector3( position.x, y, position.z );
 
-    // to force reinitialization of hop sequence on next step
-    this.hopDelta = null;
+    // initialization the next motion cycle
+    this.initializeMotion();
   }
 
   /**
@@ -306,6 +320,8 @@ class Bunny extends NaturalSelectionSprite {
    */
   toStateObject() {
     return {
+
+      // public fields
       generation: NumberIO.toStateObject( this.generation ),
       age: NumberIO.toStateObject( this.age ),
       isAlive: BooleanIO.toStateObject( this.isAlive ),
@@ -314,11 +330,12 @@ class Bunny extends NaturalSelectionSprite {
       genotype: GenotypeIO.toStateObject( this.genotype ),
       phenotype: PhenotypeIO.toStateObject( this.phenotype ),
 
-      // state that is not part of the public API, and will not be shown in Studio
+      // private fields, will not be shown in Studio
       private: {
-        stepsCount: NumberIO.toStateObject( this.stepsCount ),
-        restSteps: NumberIO.toStateObject( this.restSteps ),
-        hopSteps: NumberIO.toStateObject( this.hopSteps ),
+        cumulativeRestTime: NumberIO.toStateObject( this.cumulativeRestTime ),
+        cumulativeHopTime: NumberIO.toStateObject( this.cumulativeHopTime ),
+        restTime: NumberIO.toStateObject( this.restTime ),
+        hopTime: NumberIO.toStateObject( this.hopTime ),
         hopDelta: NullableIO( Vector3IO ).toStateObject( this.hopDelta )
       }
     };
@@ -332,6 +349,8 @@ class Bunny extends NaturalSelectionSprite {
    */
   static fromStateObject( stateObject ) {
     return {
+
+      // public fields
       generation: NumberIO.fromStateObject( stateObject.generation ),
       age: NumberIO.fromStateObject( stateObject.age ),
       isAlive: BooleanIO.fromStateObject( stateObject.isAlive ),
@@ -339,9 +358,12 @@ class Bunny extends NaturalSelectionSprite {
       mother: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.mother ),
       genotype: GenotypeIO.fromStateObject( stateObject.genotype ),
       phenotype: PhenotypeIO.fromStateObject( stateObject.phenotype ),
-      stepsCount: NumberIO.fromStateObject( stateObject.private.stepsCount ),
-      restSteps: NumberIO.fromStateObject( stateObject.private.restSteps ),
-      hopSteps: NumberIO.fromStateObject( stateObject.private.hopSteps ),
+
+      // private fields
+      cumulativeRestTime: NumberIO.fromStateObject( stateObject.private.cumulativeRestTime ),
+      cumulativeHopTime: NumberIO.fromStateObject( stateObject.private.cumulativeHopTime ),
+      restTime: NumberIO.fromStateObject( stateObject.private.restTime ),
+      hopTime: NumberIO.fromStateObject( stateObject.private.hopTime ),
       hopDelta: NullableIO( Vector3IO ).fromStateObject( stateObject.private.hopDelta )
     };
   }
@@ -368,6 +390,8 @@ class Bunny extends NaturalSelectionSprite {
    */
   applyState( state ) {
     required( state );
+
+    // public fields
     this.generation = required( state.generation );
     this.age = required( state.age );
     this.isAlive = required( state.isAlive );
@@ -375,10 +399,14 @@ class Bunny extends NaturalSelectionSprite {
     this.mother = required( state.mother );
     this.genotype.applyState( state.genotype );
     this.phenotype.applyState( state.phenotype );
-    this.stepsCount = required( state.stepsCount );
-    this.restSteps = required( state.restSteps );
-    this.hopSteps = required( state.hopSteps );
+
+    // private fields
+    this.cumulativeRestTime = required( state.cumulativeRestTime );
+    this.cumulativeHopTime = required( state.cumulativeHopTime );
+    this.restTime = required( state.restTime );
+    this.hopTime = required( state.hopTime );
     this.hopDelta = required( state.hopDelta );
+
     this.validateInstance();
   }
 
@@ -394,9 +422,10 @@ class Bunny extends NaturalSelectionSprite {
     assert && assert( this.mother instanceof Bunny || this.mother === null, 'invalid mother' );
     assert && assert( this.genotype instanceof Genotype, 'invalid genotype' );
     assert && assert( this.phenotype instanceof Phenotype, 'invalid phenotype' );
-    assert && assert( typeof this.stepsCount === 'number', 'invalid stepsCount' );
-    assert && assert( typeof this.restSteps === 'number', 'invalid restSteps' );
-    assert && assert( typeof this.hopSteps === 'number', 'invalid hopSteps' );
+    assert && assert( typeof this.cumulativeRestTime === 'number', 'invalid cumulativeRestTime' );
+    assert && assert( typeof this.cumulativeHopTime === 'number', 'invalid cumulativeHopTime' );
+    assert && assert( typeof this.restTime === 'number', 'invalid restTime' );
+    assert && assert( typeof this.hopTime === 'number', 'invalid hopTime' );
     assert && assert( this.hopDelta instanceof Vector3 || this.hopDelta === null, 'invalid hopDelta' );
   }
 }
