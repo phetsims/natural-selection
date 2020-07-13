@@ -179,7 +179,7 @@ class Bunny extends NaturalSelectionSprite {
     this.diedEmitter.emit();
   }
 
-  //TODO As in the Java version, this is based on number of steps. Should it use dt?
+  //TODO https://github.com/phetsims/natural-selection/issues/123 base animation on dt
   /**
    * Moves the Bunny around. This is the motion cycle for a bunny. Each bunny rests, hops, rests, hops, ...
    * @param {number} dt - time step, in seconds
