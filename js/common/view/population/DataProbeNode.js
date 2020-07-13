@@ -184,13 +184,6 @@ class DataProbeNode extends Node {
 
   /**
    * @public
-   */
-  reset() {
-    //TODO delete?
-  }
-
-  /**
-   * @public
    * @override
    */
   dispose() {

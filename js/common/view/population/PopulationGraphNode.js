@@ -135,16 +135,6 @@ class PopulationGraphNode extends Node {
     } );
 
     super( options );
-
-    // @private
-    this.dataProbeNode = dataProbeNode;
-  }
-
-  /**
-   * @public
-   */
-  reset() {
-    this.dataProbeNode.reset();
   }
 
   /**

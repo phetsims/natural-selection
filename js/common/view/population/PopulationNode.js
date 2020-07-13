@@ -73,13 +73,6 @@ class PopulationNode extends Node {
 
   /**
    * @public
-   */
-  reset() {
-    this.populationGraphNode.reset();
-  }
-
-  /**
-   * @public
    * @override
    */
   dispose() {
