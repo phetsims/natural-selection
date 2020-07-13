@@ -269,6 +269,7 @@ const SCHEMA = {
   },
 
   // Whether to label original mutants in the environment.
+  //TODO delete this?
   labelMutants: {
     type: 'flag'
   },
@@ -320,7 +321,7 @@ NaturalSelectionQueryParameters.getDefaultValue = function( key ) {
  * @returns {boolean}
  */
 function isPercentRange( array ) {
-  return isRange( array ) && _.every( array, element => ( element > 0 && element < 1 ) );
+  return isRange( array ) && _.every( array, element => ( element >= 0 && element <= 1 ) );
 }
 
 /**
