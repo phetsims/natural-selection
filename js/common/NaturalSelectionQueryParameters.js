@@ -2,7 +2,7 @@
 
 /**
  * NaturalSelectionQueryParameters defines query parameters that are specific to this simulation.
- * Running with ?log will print these query parameters and their values to the console at startup.
+ * Running with ?log will print these query parameters and their values to the browser console at startup.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
