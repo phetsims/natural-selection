@@ -7,7 +7,6 @@
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';
-import Range from '../../../../dot/js/Range.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
@@ -22,10 +21,7 @@ import SpriteDirection from './SpriteDirection.js';
 import WolfIO from './WolfIO.js';
 
 // const
-const SPEED_RANGE = new Range(
-  NaturalSelectionQueryParameters.wolvesSpeed[ 0 ],
-  NaturalSelectionQueryParameters.wolvesSpeed[ 1 ]
-);
+const SPEED_RANGE = NaturalSelectionQueryParameters.toRange( 'wolvesSpeed' );
 
 class Wolf extends NaturalSelectionSprite {
 

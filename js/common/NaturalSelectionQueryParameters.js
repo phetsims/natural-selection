@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Range from '../../../dot/js/Range.js';
 import Utils from '../../../dot/js/Utils.js';
 import naturalSelection from '../naturalSelection.js';
 import NaturalSelectionUtils from './NaturalSelectionUtils.js';
@@ -158,6 +159,22 @@ const SCHEMA = {
     isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
   },
 
+  // Amount of time that a bunny rests between hops, in seconds. A value is randomly chosen from this range.
+  bunnyRestTime: {
+    type: 'array',
+    elementSchema: { type: 'number' },
+    defaultValue: [ 2, 4 ], // min, max
+    isValidValue: array => isPositiveRange( array )
+  },
+
+  // Amount of time it takes for 1 hop, in seconds. A value is randomly chosen from this range.
+  bunnyHopTime: {
+    type: 'array',
+    elementSchema: { type: 'number' },
+    defaultValue: [ 0.25, 0.5 ], // min, max
+    isValidValue: array => isPositiveRange( array )
+  },
+
   // This query parameter determines the percentages of bunnies that will be eaten by wolves.
   // A value is randomly chosen from this range.
   //
@@ -301,6 +318,7 @@ const NaturalSelectionQueryParameters = QueryStringMachine.getAll( SCHEMA );
  * Gets the value for a query parameter.
  * @param {string} key - the query parameter key
  * @returns {*}
+ * @public
  */
 NaturalSelectionQueryParameters.getValue = function( key ) {
   return NaturalSelectionQueryParameters[ key ];
@@ -310,9 +328,22 @@ NaturalSelectionQueryParameters.getValue = function( key ) {
  * Gets the default value for a query parameter.
  * @param {string} key - the query parameter key
  * @returns {*}
+ * @public
  */
 NaturalSelectionQueryParameters.getDefaultValue = function( key ) {
   return SCHEMA[ key ].defaultValue;
+};
+
+/**
+ * Converts a query-parameter value of type array to Range.
+ * @param {string} key
+ * @returns {Range}
+ * @public
+ */
+NaturalSelectionQueryParameters.toRange = function( key ) {
+  const value = NaturalSelectionQueryParameters.getValue( key );
+  assert && assert( isRange( value ), `${key} is not a range` );
+  return new Range( value[ 0 ], value[ 1 ] );
 };
 
 /**

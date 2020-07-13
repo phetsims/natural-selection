@@ -11,7 +11,6 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import Emitter from '../../../../axon/js/Emitter.js';
-import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
@@ -35,10 +34,7 @@ const CLOCK_WOLVES_MIDPOINT =
   NaturalSelectionConstants.CLOCK_WOLVES_RANGE.min + NaturalSelectionConstants.CLOCK_WOLVES_RANGE.getLength() / 2;
 
 // Wolves will kill at least this percentage of the bunnies, regardless of their fur color.
-const WOLVES_PERCENT_TO_EAT_RANGE = new Range(
-  NaturalSelectionQueryParameters.wolvesPercentToKill[ 0 ],
-  NaturalSelectionQueryParameters.wolvesPercentToKill[ 1 ]
-);
+const WOLVES_PERCENT_TO_EAT_RANGE = NaturalSelectionQueryParameters.toRange( 'wolvesPercentToKill' );
 
 // Multiplier for when the bunny's fur color does not match the environment, applied to the value that is
 // randomly chosen from WOLVES_PERCENT_TO_EAT_RANGE.

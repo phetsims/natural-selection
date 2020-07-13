@@ -10,7 +10,6 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
-import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import shrubTenderAImage from '../../../images/shrub-tender-A_png.js';
@@ -33,16 +32,10 @@ const CLOCK_FOOD_MIDPOINT =
   NaturalSelectionConstants.CLOCK_FOOD_RANGE.min + NaturalSelectionConstants.CLOCK_FOOD_RANGE.getLength() / 2;
 
 // Limited tender food will cause this percentage of bunnies to die of starvation, regardless of their teeth genes.
-const LIMITED_FOOD_PERCENT_TO_STARVE_RANGE = new Range(
-  NaturalSelectionQueryParameters.limitedFoodPercentToKill[ 0 ],
-  NaturalSelectionQueryParameters.limitedFoodPercentToKill[ 1 ]
-);
+const LIMITED_FOOD_PERCENT_TO_STARVE_RANGE = NaturalSelectionQueryParameters.toRange( 'limitedFoodPercentToKill' );
 
 // Tough unlimited food will cause this percentage of bunnies to die of starvation, regardless of their teeth genes.
-const TOUGH_FOOD_PERCENT_TO_STARVE_RANGE = new Range(
-  NaturalSelectionQueryParameters.toughFoodPercentToKill[ 0 ],
-  NaturalSelectionQueryParameters.toughFoodPercentToKill[ 1 ]
-);
+const TOUGH_FOOD_PERCENT_TO_STARVE_RANGE = NaturalSelectionQueryParameters.toRange( 'toughFoodPercentToKill' );
 
 // Multiplier for when limited food is combined with tough food, applied to the value that is randomly chosen
 // from TOUGH_FOOD_PERCENT_TO_STARVE_RANGE.
