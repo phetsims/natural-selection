@@ -167,14 +167,14 @@ const SCHEMA = {
   wolvesPercentToKill: {
     type: 'array',
     elementSchema: { type: 'number' },
-    defaultValue: [ 0.05, 0.05 ], // min, max
+    defaultValue: [ 0.35, 0.4 ], // min, max
     isValidValue: array => isPercentRange( array )
   },
 
   // Multiplier for when the bunny's fur color does not match the environment, applied to wolvesPercentToKill.
   wolvesEnvironmentMultiplier: {
     type: 'number',
-    defaultValue: 3,
+    defaultValue: 2.3,
     isValidValue: value => ( value > 1 )
   },
 
@@ -184,7 +184,7 @@ const SCHEMA = {
   limitedFoodPercentToKill: {
     type: 'array',
     elementSchema: { type: 'number' },
-    defaultValue: [ 0.1, 0.1 ], // min, max
+    defaultValue: [ 0.6, 0.7 ], // min, max
     isValidValue: array => isPercentRange( array )
   },
 
@@ -197,22 +197,36 @@ const SCHEMA = {
   toughFoodPercentToKill: {
     type: 'array',
     elementSchema: { type: 'number' },
-    defaultValue: [ 0.05, 0.05 ], // min, max
+    defaultValue: [ 0.4, 0.7 ], // min, max
     isValidValue: array => isPercentRange( array )
   },
 
   // Multiplier for bunnies with short teeth when food is tough, applied to toughFoodPercentToKill.
   shortTeethMultiplier: {
     type: 'number',
-    defaultValue: 3,
+    defaultValue: 1.4,
     isValidValue: value => ( value > 1 )
   },
 
   // Multiplier for when limited food is combined with tough food, applied to toughFoodPercentToKill.
   limitedFoodMultiplier: {
     type: 'number',
-    defaultValue: 2,
+    defaultValue: 1.02,
     isValidValue: value => ( value > 1 )
+  },
+
+  // If the number of bunnies with long teeth is <= this value, none of them will die of starvation.
+  minBunniesForFood: {
+    type: 'number',
+    defaultValue: 4,
+    isValidValue: value => NaturalSelectionUtils.isNonNegativeInteger( value )
+  },
+
+  // If the number of bunnies whose fur matches their environment is <= this value, wolves will eat none of them.
+  minBunniesForWolves: {
+    type: 'number',
+    defaultValue: 5,
+    isValidValue: value => NaturalSelectionUtils.isNonNegativeInteger( value )
   },
 
   // The minimum number of wolves
@@ -269,20 +283,6 @@ const SCHEMA = {
     // most 1 mutation. And we have 3 mutations, for fur, ears, and teeth. So at most 1/3 of the population can get a
     // specific mutation.
     isValidValue: value => ( value > 0  && value <= 1/3 )
-  },
-
-  // If the number of bunnies whose fur matches their environment is <= this value, wolves will eat none of them.
-  minBunniesForWolves: {
-    type: 'number',
-    defaultValue: 5,
-    isValidValue: value => NaturalSelectionUtils.isNonNegativeInteger( value )
-  },
-
-  // If the number of bunnies with long teeth is <= this value, none of them will die of starvation.
-  minBunniesForFood: {
-    type: 'number',
-    defaultValue: 5,
-    isValidValue: value => NaturalSelectionUtils.isNonNegativeInteger( value )
   }
 };
 
