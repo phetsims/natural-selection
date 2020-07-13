@@ -244,6 +244,14 @@ const SCHEMA = {
     isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
   },
 
+  // Speed of the wolves, in pixels/second. A value from this range is randomly selected for each wolf.
+  wolvesSpeed: {
+    type: 'array',
+    elementSchema: { type: 'number' },
+    defaultValue: [ 125, 200 ], // min, max
+    isValidValue: array => isPositiveRange( array )
+  },
+
   // Adds a red dot at the origin of some objects (bunnies, wolves, food)
   showOrigin: {
     type: 'flag'
@@ -277,12 +285,12 @@ const SCHEMA = {
     type: 'number',
 
     // from the Java version, see MUTATING_BUNNY_PER_BUNNIES in NaturalSelectionDefaults.java
-    defaultValue: 1/7,
+    defaultValue: 1 / 7,
 
     // All 3 mutations can be applied simultaneously. Mutation is mutually-exclusive by gene type. A bunny can have at
     // most 1 mutation. And we have 3 mutations, for fur, ears, and teeth. So at most 1/3 of the population can get a
     // specific mutation.
-    isValidValue: value => ( value > 0  && value <= 1/3 )
+    isValidValue: value => ( value > 0 && value <= 1 / 3 )
   }
 };
 
@@ -312,9 +320,28 @@ NaturalSelectionQueryParameters.getDefaultValue = function( key ) {
  * @returns {boolean}
  */
 function isPercentRange( array ) {
-  return ( Array.isArray( array ) && ( array.length === 2 ) && ( array[ 0 ] <= array[ 1 ] ) &&
-           _.every( array, element => ( element > 0 && element < 1 ) )
-  );
+  return isRange( array ) && _.every( array, element => ( element > 0 && element < 1 ) );
+}
+
+/**
+ * Is the query parameter value a range whose min and max are positive?
+ * @param {*} array
+ * @returns {boolean}
+ */
+function isPositiveRange( array ) {
+  return isRange( array ) && _.every( array, element => element > 0 );
+}
+
+/**
+ * Is the query parameter value a numeric range?
+ * @param {*} array
+ * @returns {boolean}
+ */
+function isRange( array ) {
+  return Array.isArray( array ) &&
+         ( array.length === 2 ) &&
+         _.every( array, element => typeof element === 'number' ) &&
+         ( array[ 0 ] <= array[ 1 ] );
 }
 
 // validate query parameters

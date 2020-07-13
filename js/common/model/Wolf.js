@@ -14,6 +14,7 @@ import required from '../../../../phet-core/js/required.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import NaturalSelectionSprite from './NaturalSelectionSprite.js';
@@ -21,7 +22,10 @@ import SpriteDirection from './SpriteDirection.js';
 import WolfIO from './WolfIO.js';
 
 // const
-const SPEED_RANGE = new Range( 125, 200 ); // in pixels/second
+const SPEED_RANGE = new Range(
+  NaturalSelectionQueryParameters.wolvesSpeed[ 0 ],
+  NaturalSelectionQueryParameters.wolvesSpeed[ 1 ]
+);
 
 class Wolf extends NaturalSelectionSprite {
 
@@ -136,7 +140,7 @@ class Wolf extends NaturalSelectionSprite {
    */
   static fromStateObject( stateObject ) {
     return {
-     speed: NumberIO.fromStateObject( stateObject.private.speed )
+      speed: NumberIO.fromStateObject( stateObject.private.speed )
     };
   }
 
