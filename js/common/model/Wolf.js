@@ -20,9 +20,6 @@ import NaturalSelectionSprite from './NaturalSelectionSprite.js';
 import SpriteDirection from './SpriteDirection.js';
 import WolfIO from './WolfIO.js';
 
-// const
-const SPEED_RANGE = NaturalSelectionQueryParameters.toRange( 'wolvesSpeed' );
-
 class Wolf extends NaturalSelectionSprite {
 
   /**
@@ -48,7 +45,7 @@ class Wolf extends NaturalSelectionSprite {
     super( modelViewTransform, options );
 
     // @private
-    this.speed = phet.joist.random.nextInRange( SPEED_RANGE );
+    this.speed = phet.joist.random.nextInRange( NaturalSelectionQueryParameters.wolvesSpeed );
 
     // @public fires when the Wolf has been disposed. dispose is required.
     this.disposedEmitter = new Emitter();

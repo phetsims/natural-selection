@@ -30,11 +30,10 @@ import WolfGroup from './WolfGroup.js';
 // constants
 const CLOCK_WOLVES_MIN = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.min;
 const CLOCK_WOLVES_MAX = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.max;
-const CLOCK_WOLVES_MIDPOINT =
-  NaturalSelectionConstants.CLOCK_WOLVES_RANGE.min + NaturalSelectionConstants.CLOCK_WOLVES_RANGE.getLength() / 2;
+const CLOCK_WOLVES_MIDPOINT = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.getCenter();
 
 // Wolves will kill at least this percentage of the bunnies, regardless of their fur color.
-const WOLVES_PERCENT_TO_EAT_RANGE = NaturalSelectionQueryParameters.toRange( 'wolvesPercentToKill' );
+const WOLVES_PERCENT_TO_EAT_RANGE = NaturalSelectionQueryParameters.wolvesPercentToKill;
 
 // Multiplier for when the bunny's fur color does not match the environment, applied to the value that is
 // randomly chosen from WOLVES_PERCENT_TO_EAT_RANGE.

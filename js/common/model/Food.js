@@ -28,22 +28,7 @@ import GenerationClock from './GenerationClock.js';
 import Shrub from './Shrub.js';
 
 // constants
-const CLOCK_FOOD_MIDPOINT =
-  NaturalSelectionConstants.CLOCK_FOOD_RANGE.min + NaturalSelectionConstants.CLOCK_FOOD_RANGE.getLength() / 2;
-
-// Limited tender food will cause this percentage of bunnies to die of starvation, regardless of their teeth genes.
-const LIMITED_FOOD_PERCENT_TO_STARVE_RANGE = NaturalSelectionQueryParameters.toRange( 'limitedFoodPercentToKill' );
-
-// Tough unlimited food will cause this percentage of bunnies to die of starvation, regardless of their teeth genes.
-const TOUGH_FOOD_PERCENT_TO_STARVE_RANGE = NaturalSelectionQueryParameters.toRange( 'toughFoodPercentToKill' );
-
-// Multiplier for when limited food is combined with tough food, applied to the value that is randomly chosen
-// from TOUGH_FOOD_PERCENT_TO_STARVE_RANGE.
-const LIMITED_FOOD_MULTIPLIER = NaturalSelectionQueryParameters.limitedFoodMultiplier;
-
-// Multiplier for bunnies with short teeth when food is tough, applied to the value that is randomly chosen
-// from TOUGH_FOOD_PERCENT_TO_STARVE_RANGE.
-const SHORT_TEETH_MULTIPLIER = NaturalSelectionQueryParameters.shortTeethMultiplier;
+const CLOCK_FOOD_MIDPOINT = NaturalSelectionConstants.CLOCK_FOOD_RANGE.getCenter();
 
 class Food {
 
@@ -171,17 +156,17 @@ class Food {
       if ( this.isToughProperty.value ) {
 
         // Starve some of each type of bunny, but a higher percentage of bunnies with short teeth.
-        percentToStarveLongTeeth = phet.joist.random.nextInRange( TOUGH_FOOD_PERCENT_TO_STARVE_RANGE );
+        percentToStarveLongTeeth = phet.joist.random.nextInRange( NaturalSelectionQueryParameters.toughFoodPercentToKill );
         if ( this.isLimitedProperty.value ) {
-          percentToStarveLongTeeth *= LIMITED_FOOD_MULTIPLIER;
+          percentToStarveLongTeeth *= NaturalSelectionQueryParameters.limitedFoodMultiplier;
         }
-        percentToStarveShortTeeth = SHORT_TEETH_MULTIPLIER * percentToStarveLongTeeth;
+        percentToStarveShortTeeth = NaturalSelectionQueryParameters.shortTeethMultiplier * percentToStarveLongTeeth;
       }
       else {
         assert && assert( this.isLimitedProperty.value, 'logic error' );
 
         // Starve a percentage of all bunnies, regardless of their Teeth genes.
-        percentToStarveLongTeeth = phet.joist.random.nextInRange( LIMITED_FOOD_PERCENT_TO_STARVE_RANGE );
+        percentToStarveLongTeeth = phet.joist.random.nextInRange( NaturalSelectionQueryParameters.limitedFoodPercentToKill );
         percentToStarveShortTeeth = percentToStarveLongTeeth;
       }
       assert && assert( percentToStarveLongTeeth > 0 && percentToStarveLongTeeth < 1,

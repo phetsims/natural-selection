@@ -34,8 +34,8 @@ import PhenotypeIO from './PhenotypeIO.js';
 import SpriteDirection from './SpriteDirection.js';
 
 // constants
-const REST_TIME_RANGE = NaturalSelectionQueryParameters.toRange( 'bunnyRestTime' ); // time to complete a rest interval, in seconds
-const HOP_TIME_RANGE = NaturalSelectionQueryParameters.toRange( 'bunnyHopTime' ); // time to complete a hop cycle, in seconds
+const REST_TIME_RANGE = NaturalSelectionQueryParameters.bunnyRestTime; // time to complete a rest interval, in seconds
+const HOP_TIME_RANGE = NaturalSelectionQueryParameters.bunnyHopTime; // time to complete a hop cycle, in seconds
 const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // x and z distance that a bunny hops
 const HOP_HEIGHT_RANGE = new Range( 30, 50 );   // how high above the ground a bunny hops
 
@@ -221,10 +221,10 @@ class Bunny extends NaturalSelectionSprite {
     this.cumulativeHopTime = 0;
 
     // Randomize motion for the next cycle
-    this.restTime = phet.joist.random.nextDoubleBetween( REST_TIME_RANGE.min, REST_TIME_RANGE.max );
-    this.hopTime = phet.joist.random.nextDoubleBetween( HOP_TIME_RANGE.min, HOP_TIME_RANGE.max );
-    const hopDistance = phet.joist.random.nextDoubleBetween( HOP_DISTANCE_RANGE.min, HOP_DISTANCE_RANGE.max );
-    const hopHeight = phet.joist.random.nextDoubleBetween( HOP_HEIGHT_RANGE.min, HOP_HEIGHT_RANGE.max );
+    this.restTime = phet.joist.random.nextInRange( REST_TIME_RANGE );
+    this.hopTime = phet.joist.random.nextInRange( HOP_TIME_RANGE );
+    const hopDistance = phet.joist.random.nextInRange( HOP_DISTANCE_RANGE );
+    const hopHeight = phet.joist.random.nextInRange( HOP_HEIGHT_RANGE );
 
     // Get motion delta for the next cycle
     this.hopDelta = getHopDelta( hopDistance, hopHeight, this.directionProperty.value );

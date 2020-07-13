@@ -159,20 +159,22 @@ const SCHEMA = {
     isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
   },
 
-  // Amount of time that a bunny rests between hops, in seconds. A value is randomly chosen from this range.
+  // Amount of time that a bunny rests between hops, in seconds.
+  // A value is randomly chosen from this range for each rest cycle.
   bunnyRestTime: {
-    type: 'array',
-    elementSchema: { type: 'number' },
-    defaultValue: [ 2, 4 ], // min, max
-    isValidValue: array => isPositiveRange( array )
+    type: 'custom',
+    parse: parseRange,
+    defaultValue: new Range( 2, 4 ),
+    isValidValue: range => isPositiveRange( range )
   },
 
-  // Amount of time it takes for 1 hop, in seconds. A value is randomly chosen from this range.
+  // Amount of time it takes for a bunny to hop once, in seconds.
+  // A value is randomly chosen from this range for each hop.
   bunnyHopTime: {
-    type: 'array',
-    elementSchema: { type: 'number' },
-    defaultValue: [ 0.25, 0.5 ], // min, max
-    isValidValue: array => isPositiveRange( array )
+    type: 'custom',
+    parse: parseRange,
+    defaultValue: new Range( 0.25, 0.5 ),
+    isValidValue: range => isPositiveRange( range )
   },
 
   // This query parameter determines the percentages of bunnies that will be eaten by wolves.
@@ -182,10 +184,10 @@ const SCHEMA = {
   // Bunnies whose fur color does NOT match the environment will be eaten at the rate of wolvesEnvironmentMultiplier *
   // wolvesPercentToKill.
   wolvesPercentToKill: {
-    type: 'array',
-    elementSchema: { type: 'number' },
-    defaultValue: [ 0.35, 0.4 ], // min, max
-    isValidValue: array => isPercentRange( array )
+    type: 'custom',
+    parse: parseRange,
+    defaultValue: new Range( 0.35, 0.4 ),
+    isValidValue: range => isPercentRange( range )
   },
 
   // Multiplier for when the bunny's fur color does not match the environment, applied to wolvesPercentToKill.
@@ -199,10 +201,10 @@ const SCHEMA = {
   // A value is randomly chosen from this range.
   // Bunnies will die at this rate regardless of their teeth alleles.
   limitedFoodPercentToKill: {
-    type: 'array',
-    elementSchema: { type: 'number' },
-    defaultValue: [ 0.6, 0.7 ], // min, max
-    isValidValue: array => isPercentRange( array )
+    type: 'custom',
+    parse: parseRange,
+    defaultValue: new Range( 0.6, 0.7 ),
+    isValidValue: range => isPercentRange( range )
   },
 
   // This query parameter determines the percentages of bunnies that will die of starvation when food is tough.
@@ -212,10 +214,10 @@ const SCHEMA = {
   // Bunnies with short teeth will die at the rate of toughFoodPercentToKill * ?shortTeethMultiplier.
   // If food is also limited, then the values for both types of bunny will be multiplied by ?limitedFoodMultiplier.
   toughFoodPercentToKill: {
-    type: 'array',
-    elementSchema: { type: 'number' },
-    defaultValue: [ 0.4, 0.7 ], // min, max
-    isValidValue: array => isPercentRange( array )
+    type: 'custom',
+    parse: parseRange,
+    defaultValue: new Range( 0.4, 0.7 ),
+    isValidValue: range => isPercentRange( range )
   },
 
   // Multiplier for bunnies with short teeth when food is tough, applied to toughFoodPercentToKill.
@@ -261,12 +263,12 @@ const SCHEMA = {
     isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
   },
 
-  // Speed of the wolves, in pixels/second. A value from this range is randomly selected for each wolf.
+  // Speed of the wolves, in pixels/second. A value is randomly chosen from this range for each wolf.
   wolvesSpeed: {
-    type: 'array',
-    elementSchema: { type: 'number' },
-    defaultValue: [ 125, 200 ], // min, max
-    isValidValue: array => isPositiveRange( array )
+    type: 'custom',
+    parse: parseRange,
+    defaultValue: new Range( 125, 200 ),
+    isValidValue: range => isPositiveRange( range )
   },
 
   // Adds a red dot at the origin of some objects (bunnies, wolves, food)
@@ -335,54 +337,43 @@ NaturalSelectionQueryParameters.getDefaultValue = function( key ) {
 };
 
 /**
- * Converts a query-parameter value of type array to Range.
- * @param {string} key
- * @returns {Range}
- * @public
- */
-NaturalSelectionQueryParameters.toRange = function( key ) {
-  const value = NaturalSelectionQueryParameters.getValue( key );
-  assert && assert( isRange( value ), `${key} is not a range` );
-  return new Range( value[ 0 ], value[ 1 ] );
-};
-
-/**
  * Is the query parameter value a min/max range for a percentage?
- * @param {*} array
+ * @param {Range} range
  * @returns {boolean}
  */
-function isPercentRange( array ) {
-  return isRange( array ) && _.every( array, element => ( element >= 0 && element <= 1 ) );
+function isPercentRange( range ) {
+  return range.min >= 0 && range.max <= 1;
 }
 
 /**
  * Is the query parameter value a range whose min and max are positive?
- * @param {*} array
+ * @param {Range} range
  * @returns {boolean}
  */
-function isPositiveRange( array ) {
-  return isRange( array ) && _.every( array, element => element > 0 );
+function isPositiveRange( range ) {
+  return range.min > 0;
 }
 
 /**
- * Is the query parameter value a numeric range?
- * @param {*} array
- * @returns {boolean}
+ * Parses a query-parameter value into a Range.
+ * @param {string} value
+ * @returns {Range}
  */
-function isRange( array ) {
-  return Array.isArray( array ) &&
-         ( array.length === 2 ) &&
-         _.every( array, element => typeof element === 'number' ) &&
-         ( array[ 0 ] <= array[ 1 ] );
+function parseRange( value ) {
+  const tokens = value.split( ',' );
+  assert && assert( tokens.length === 2, `range format is min,max: ${value}` );
+  assert && assert( _.every( tokens, token => isFinite( token ) ), `range must be 2 numbers: ${value}` );
+  const numbers = _.map( tokens, token => parseFloat( token ) );
+  return new Range( numbers[ 0 ], numbers[ 1 ] );
 }
 
 // validate query parameters
 assert && assert( NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier *
-                  NaturalSelectionQueryParameters.wolvesPercentToKill[ 1 ] <= 1,
+                  NaturalSelectionQueryParameters.wolvesPercentToKill.max <= 1,
   'wolvesEnvironmentMultiplier * wolvesPercentToKill.max must be <= 1' );
 assert && assert( NaturalSelectionQueryParameters.limitedFoodMultiplier *
                   NaturalSelectionQueryParameters.shortTeethMultiplier *
-                  NaturalSelectionQueryParameters.toughFoodPercentToKill[ 1 ] <= 1,
+                  NaturalSelectionQueryParameters.toughFoodPercentToKill.max <= 1,
   'limitedFoodMultiplier * shortTeethMultiplier * toughFoodPercentToKill.max must be <= 1' );
 
 // log the values of all sim-specific query parameters
