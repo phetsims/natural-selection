@@ -20,6 +20,7 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyIO from './BunnyIO.js';
 import CauseOfDeath from './CauseOfDeath.js';
@@ -33,8 +34,8 @@ import PhenotypeIO from './PhenotypeIO.js';
 import SpriteDirection from './SpriteDirection.js';
 
 // constants
-const REST_TIME_RANGE = new Range( 2, 4 ); // time to complete a rest interval, in seconds
-const HOP_TIME_RANGE = new Range( 0.25, 0.5 ); // time to complete a hop cycle, in seconds
+const REST_TIME_RANGE = NaturalSelectionQueryParameters.toRange( 'bunnyRestTime' ); // time to complete a rest interval, in seconds
+const HOP_TIME_RANGE = NaturalSelectionQueryParameters.toRange( 'bunnyHopTime' ); // time to complete a hop cycle, in seconds
 const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // x and z distance that a bunny hops
 const HOP_HEIGHT_RANGE = new Range( 30, 50 );   // how high above the ground a bunny hops
 
