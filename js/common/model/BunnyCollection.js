@@ -218,10 +218,12 @@ class BunnyCollection {
 
   /**
    * Moves all live bunnies.
+   * @param {number} dt - time step, in seconds
    * @public
    */
-  moveBunnies() {
-    this.liveBunnies.forEach( bunny => bunny.move() );
+  moveBunnies( dt ) {
+    assert && assert( typeof dt === 'number' && dt >= 0, `invalid dt: ${dt}` );
+    this.liveBunnies.forEach( bunny => bunny.move( dt ) );
   }
 
   /**

@@ -182,9 +182,10 @@ class Bunny extends NaturalSelectionSprite {
   //TODO As in the Java version, this is based on number of steps. Should it use dt?
   /**
    * Moves the Bunny around. This is the motion cycle for a bunny. Each bunny rests, hops, rests, hops, ...
+   * @param {number} dt - time step, in seconds
    * @public
    */
-  move() {
+  move( dt ) {
     assert && assert( this.isAlive, 'dead bunny cannot move' );
 
     this.stepsCount++;

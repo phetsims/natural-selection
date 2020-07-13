@@ -272,10 +272,10 @@ class NaturalSelectionModel {
     this.generationClock.step( dt * this.fastForwardScaleProperty.value );
 
     // move the bunnies
-    this.bunnyCollection.moveBunnies();
+    this.bunnyCollection.moveBunnies( dt );
 
     // move the wolves
-    this.wolfCollection.moveWolves();
+    this.wolfCollection.moveWolves( dt );
   }
 
   /**

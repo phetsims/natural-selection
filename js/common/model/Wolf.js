@@ -21,7 +21,7 @@ import SpriteDirection from './SpriteDirection.js';
 import WolfIO from './WolfIO.js';
 
 // const
-const SPEED_RANGE = new Range( 2.75, 3.25 ); //TODO rename and document
+const SPEED_RANGE = new Range( 125, 200 ); // in pixels/second
 
 class Wolf extends NaturalSelectionSprite {
 
@@ -75,14 +75,15 @@ class Wolf extends NaturalSelectionSprite {
 
   /**
    * Moves the Wolf around.
+   * @param {number} dt - time step, in seconds
    * @public
    */
-  move() {
+  move( dt ) {
 
     //TODO I don't understand the use of cos, sin, and swap -- same as Bunny.getHopDelta
     const angle = phet.joist.random.nextDoubleBetween( 0, 2 * Math.PI );
-    const a = this.speed * Math.cos( angle );
-    const b = this.speed * Math.sin( angle );
+    const a = dt * this.speed * Math.cos( angle );
+    const b = dt * this.speed * Math.sin( angle );
     const swap = ( Math.abs( a ) < Math.abs( b ) );
 
     let z = this.positionProperty.value.z;

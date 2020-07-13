@@ -161,10 +161,11 @@ class WolfCollection {
 
   /**
    * Moves all wolves.
+   * @param {number} dt - time step, in seconds
    * @public
    */
-  moveWolves() {
-    this.wolfGroup.forEach( wolf => wolf.move() );
+  moveWolves( dt ) {
+    this.wolfGroup.forEach( wolf => wolf.move( dt ) );
   }
 
   /**
