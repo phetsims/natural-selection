@@ -186,26 +186,8 @@ class PopulationModel extends PhetioObject {
       }
     };
 
-    // When generations changes... unlink is not necessary.
-    generationsProperty.link( () => {
-
-      // scroll the x-axis
-      scrollToNow();
-
-      //TODO update dataProbe if it was previously to the right of data (better place to do this?)
-    } );
-
-    // When the sim starts playing, scroll the x-axis. unlink is not necessary.
-    isPlayingProperty.link( isPlaying => {
-      if ( isPlaying ) {
-        scrollToNow();
-      }
-    } );
-
-    // unlink is not necessary.
-    this.xRangeProperty.link( xRange => {
-      //TODO update dataProbe.generationProperty
-    } );
+    // When the sim resumes playing, resume scrolling the x-axis. unlink is not necessary.
+    isPlayingProperty.link( isPlaying => isPlaying && scrollToNow() );
 
     // When a mutation has been applied, show the plots associated with that gene.
     // unlink is not needed
