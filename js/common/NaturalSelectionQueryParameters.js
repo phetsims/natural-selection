@@ -263,8 +263,8 @@ const SCHEMA = {
     isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
   },
 
-  // Speed of the wolves, in pixels/second. A value is randomly chosen from this range for each wolf.
-  wolvesSpeed: {
+  // Speed of a wolf, in pixels/second. A value is randomly chosen from this range for each wolf.
+  wolfSpeed: {
     type: 'custom',
     parse: parseRange,
     defaultValue: new Range( 125, 200 ),

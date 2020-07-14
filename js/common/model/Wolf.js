@@ -45,7 +45,7 @@ class Wolf extends NaturalSelectionSprite {
     super( modelViewTransform, options );
 
     // @private
-    this.speed = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.wolvesSpeed );
+    this.speed = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.wolfSpeed );
 
     // @public fires when the Wolf has been disposed. dispose is required.
     this.disposedEmitter = new Emitter();
