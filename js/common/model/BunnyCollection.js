@@ -521,7 +521,7 @@ class BunnyCollection {
     for ( let i = deadBunnies.length - 1; i >= 0; i-- ) {
       const bunny = deadBunnies[ i ];
       if ( currentGeneration - bunny.generation > MAX_DEAD_BUNNY_GENERATIONS ) {
-        bunny.dispose();
+        this.bunnyGroup.disposeElement( bunny );
         numberPruned++;
       }
     }
