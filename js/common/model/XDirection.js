@@ -33,7 +33,7 @@ const XDirection = Enumeration.byKeys( [ 'LEFT', 'RIGHT' ], {
       ( direction === XDirection.RIGHT ) ? XDirection.LEFT : XDirection.RIGHT;
 
     /**
-     * Converts a XDirection to a sign, relative to the x axis. Used to set the sign of the x-scale, which will
+     * Converts an XDirection to a sign, relative to the x axis. Used to set the sign of the view's x scale, which will
      * reflect the organism about the y axis, making it appear to face in the desired direction. This assumes that the
      * default direction for all organisms is XDirection.RIGHT. For example, this means that all bunny PNG files
      * were drawn with the bunny facing right.
