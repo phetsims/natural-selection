@@ -74,7 +74,7 @@ class GenerationScrollControl extends HBox {
 
     // forward button
     const forward = () => {
-      const max = Math.floor( rangeProperty.value.max + options.step ); // snap to integer value
+      const max = Math.min( maxProperty.value, Math.floor( rangeProperty.value.max + options.step ) );
       const min = max - rangeLength;
       rangeProperty.value = new Range( min, max );
     };
