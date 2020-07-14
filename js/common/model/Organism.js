@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Organism is the base class for all organisms that appear in the environment.
+ * Organism is the base class for all living things that appear in the environment.
  * It has a 3D position and a direction along the x axis.
  *
  * @author Chris Malley (PixelZoom, Inc.)
