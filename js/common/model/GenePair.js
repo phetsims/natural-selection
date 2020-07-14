@@ -15,7 +15,6 @@ import required from '../../../../phet-core/js/required.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import Allele from './Allele.js';
 import AlleleIO from './AlleleIO.js';
 import Gene from './Gene.js';
@@ -61,23 +60,14 @@ class GenePair extends PhetioObject {
   mutate( mutantAllele ) {
     assert && assert( mutantAllele instanceof Allele, 'invalid mutantAllele' );
 
-    if ( NaturalSelectionQueryParameters.homozygousMutants ) {
-
-      // Both alleles are set to the mutant allele, so that the mutation will immediately affect appearance.
+    // The mutation is randomly applied to either the father or mother allele, but not both. If the mutant allele is
+    // recessive, the mutation will not immediately affect appearance. It appear in the phenotype in some later
+    // generation, when a homozygous recessive bunny is born.
+    if ( phet.joist.random.nextBoolean() ) {
       this.fatherAllele = mutantAllele;
-      this.motherAllele = mutantAllele;
     }
     else {
-
-      // The mutation is randomly applied to either the father or mother allele, but not both. If the mutant allele is
-      // recessive, the mutation will not immediately affect appearance, and will not appear in the phenotype until
-      // some later generation, when a bunny is born with 2 mutant alleles.
-      if ( phet.joist.random.nextBoolean() ) {
-        this.fatherAllele = mutantAllele;
-      }
-      else {
-        this.motherAllele = mutantAllele;
-      }
+      this.motherAllele = mutantAllele;
     }
   }
 

@@ -293,12 +293,6 @@ const SCHEMA = {
     type: 'flag'
   },
 
-  // When a mutation is applied, the mutant is homozygous.
-  //TODO https://github.com/phetsims/natural-selection/issues/98 delete this and associated code?
-  homozygousMutants: {
-    type: 'flag'
-  },
-
   // Percentage of newborn bunnies that will receive a mutation.
   // Symmetric rounding is used, and at least 1 bunny will receive the mutation.
   mutationPercentage: {
