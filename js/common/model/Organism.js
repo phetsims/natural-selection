@@ -49,7 +49,7 @@ class Organism extends PhetioObject {
       tandem: options.tandem.createTandem( 'positionProperty' ),
       phetioType: PropertyIO( Vector3IO ),
       phetioReadOnly: true,
-      phetioDocumentation: 'position in the 3D model coordinate frame'
+      phetioDocumentation: 'position in the 3D model-coordinate frame'
     } );
 
     // @public
