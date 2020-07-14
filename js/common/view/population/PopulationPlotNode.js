@@ -1,6 +1,5 @@
 // Copyright 2020, University of Colorado Boulder
 
-//TODO when the graph starts scrolling, lineDash appears to strobe
 /**
  * PopulationPlotNode plots one set of data on the Population graph.
  *
