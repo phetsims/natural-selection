@@ -11,8 +11,8 @@ import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import naturalSelection from '../../naturalSelection.js';
 
 const SimulationMode = Enumeration.byKeys( [
-  'STAGED', // the simulation is staged, but waiting for the user press 'Add a Mate' or 'Play' button
-  'ACTIVE', // the simulation is active
+  'STAGED',   // the simulation is staged, but waiting for the user press 'Add a Mate' or 'Play' button
+  'ACTIVE',   // the simulation is active
   'COMPLETED' // the simulation has completed and the user is reviewing results
 ] );
 
