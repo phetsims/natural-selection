@@ -12,6 +12,7 @@ import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import BunnyArrayIO from './BunnyArrayIO.js';
 import BunnyCounts from './BunnyCounts.js';
 import BunnyCountsIO from './BunnyCountsIO.js';
 
@@ -25,13 +26,15 @@ class BunnyArray extends ObservableArray {
     options = merge( {
 
       // phet-io
-      tandem: Tandem.REQUIRED
+      tandem: Tandem.REQUIRED,
+      phetioType: BunnyArrayIO,
+      phetioState: false
     }, options );
 
     super( options );
 
     // @public (read-only)
-    this.countsProperty = new Property( BunnyCounts.ZERO, {
+    this.countsProperty = new Property( BunnyCounts.withZero(), {
       tandem: options.tandem.createTandem( 'countsProperty' ),
       phetioType: PropertyIO( BunnyCountsIO ),
       phetioState: false // because counts will be restored as Bunny instances are restored to BunnyGroup

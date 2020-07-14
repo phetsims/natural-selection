@@ -77,12 +77,12 @@ class ProportionsModel extends PhetioObject {
     );
 
     // @public counts for 'Start of Generation'
-    this.startCountsProperty = new Property( BunnyCounts.ZERO, {
+    this.startCountsProperty = new Property( BunnyCounts.withZero(), {
       valueType: BunnyCounts
     } );
 
     // @public counts for 'End of Generation'
-    this.endCountsProperty = new Property( BunnyCounts.ZERO, {
+    this.endCountsProperty = new Property( BunnyCounts.withZero(), {
       valueType: BunnyCounts
     } );
 

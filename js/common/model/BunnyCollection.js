@@ -59,16 +59,13 @@ class BunnyCollection {
 
     // @public (read-only) the live bunnies in bunnyGroup
     this.liveBunnies = new BunnyArray( {
-      tandem: options.tandem.createTandem( 'liveBunnies' ),
-      phetioType: BunnyArrayIO,
-      phetioState: false
+      tandem: options.tandem.createTandem( 'liveBunnies' )
     } );
 
     // @public (read-only) the dead bunnies in bunnyGroup
     this.deadBunnies = new BunnyArray( {
       tandem: options.tandem.createTandem( 'deadBunnies' ),
-      phetioType: BunnyArrayIO,
-      phetioState: false
+      phetioType: BunnyArrayIO
     } );
 
     // @private {Bunny[]} Recessive mutants, to be mated eagerly so that their mutation appears in the phenotype as
@@ -76,8 +73,6 @@ class BunnyCollection {
     // another bunny that has the mutation.
     this.recessiveMutants = new BunnyArray( {
       tandem: options.tandem.createTandem( 'recessiveMutants' ),
-      phetioType: BunnyArrayIO,
-      phetioState: false,
       phetioDocumentation: 'for internal PhET use only'
     } );
 

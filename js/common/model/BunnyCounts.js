@@ -87,6 +87,23 @@ class BunnyCounts {
     return JSON.stringify( this, null, 2 );
   }
 
+  /**
+   * Gets a BunnyCounts instance with all counts initialized to zero.
+   * @returns {BunnyCounts}
+   * @public
+   */
+  static withZero() {
+    return new BunnyCounts( {
+      totalCount: 0,
+      whiteFurCount: 0,
+      brownFurCount: 0,
+      straightEarsCount: 0,
+      floppyEarsCount: 0,
+      shortTeethCount: 0,
+      longTeethCount: 0
+    } );
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   // Below here are methods used by BunnyCountsIO to save and restore PhET-iO state.
   //--------------------------------------------------------------------------------------------------------------------
@@ -147,16 +164,6 @@ class BunnyCounts {
       'teeth counts are out of sync' );
   }
 }
-
-BunnyCounts.ZERO = new BunnyCounts( {
-  totalCount: 0,
-  whiteFurCount: 0,
-  brownFurCount: 0,
-  straightEarsCount: 0,
-  floppyEarsCount: 0,
-  shortTeethCount: 0,
-  longTeethCount: 0
-} );
 
 naturalSelection.register( 'BunnyCounts', BunnyCounts );
 export default BunnyCounts;
