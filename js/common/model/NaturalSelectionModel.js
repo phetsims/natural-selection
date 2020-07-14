@@ -102,12 +102,15 @@ class NaturalSelectionModel {
       tandem: options.tandem.createTandem( 'food' )
     } );
 
+    // Organize all graphs under this tandem
+    const graphsTandem = options.tandem.createTandem( 'graphs' );
+
     // @public (read-only)
     this.populationModel = new PopulationModel(
       this.genePool,
       this.generationClock.generationsProperty,
       this.isPlayingProperty, {
-        tandem: options.tandem.createTandem( 'populationModel' )
+        tandem: graphsTandem.createTandem( 'populationModel' )
       } );
 
     // @public (read-only)
@@ -116,12 +119,12 @@ class NaturalSelectionModel {
       this.generationClock.currentGenerationProperty,
       this.isPlayingProperty,
       this.simulationModeProperty, {
-        tandem: options.tandem.createTandem( 'proportionsModel' )
+        tandem: graphsTandem.createTandem( 'proportionsModel' )
       } );
 
     // @public (read-only)
     this.pedigreeModel = new PedigreeModel( {
-      tandem: options.tandem.createTandem( 'pedigreeModel' )
+      tandem: graphsTandem.createTandem( 'pedigreeModel' )
     } );
 
     // When the simulation state changes... unlink is not necessary.
