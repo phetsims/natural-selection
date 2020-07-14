@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.0.0-dev.68 Tue Jul 14 2020 10:29:48 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.0.0-dev.69 Tue Jul 14 2020 13:05:30 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "1a41cef653bbed1025af5768bea958d7e3e0f8ae",
     "branch": "master"
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "natural-selection": {
-    "sha": "8af72121326bb3bf472ec243cb2dad8c5014ecde",
+    "sha": "dff4e647fda9fbcda8908a099731938645748219",
     "branch": "master"
   },
   "phet-core": {
@@ -65,7 +65,7 @@
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "b88ed1f0207a27d13fd42b7ab1fb0f0f0b1a668d",
+    "sha": "ecb36d276b2bb4a7e128179e9b0bf5d5a73dd1f9",
     "branch": "master"
   },
   "sherpa": {
