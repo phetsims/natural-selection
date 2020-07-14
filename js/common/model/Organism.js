@@ -33,7 +33,7 @@ class Organism extends PhetioObject {
 
     options = merge( {
       position: DEFAULT_POSITION, // initial position
-      direction: XDirection.RIGHT, // initial direction of motion
+      xDirection: XDirection.RIGHT, // initial direction of motion along the x axis
 
       // phet-io
       tandem: Tandem.OPTIONAL
@@ -53,7 +53,7 @@ class Organism extends PhetioObject {
     } );
 
     // @public
-    this.xDirectionProperty = new EnumerationProperty( XDirection, options.direction, {
+    this.xDirectionProperty = new EnumerationProperty( XDirection, options.xDirection, {
       tandem: options.tandem.createTandem( 'xDirectionProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'direction that the organism is facing along the x axis'

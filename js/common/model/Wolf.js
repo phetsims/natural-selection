@@ -32,15 +32,15 @@ class Wolf extends Organism {
 
     options = merge( {
 
+      // Default to random position and x direction
+      position: modelViewTransform.getRandomGroundPosition(),
+      xDirection: XDirection.getRandom(),
+
       // phet-io
       tandem: Tandem.REQUIRED,
       phetioType: WolfIO,
       phetioDynamicElement: true
     }, options );
-
-    // Default to random position and direction
-    options.position = options.position || modelViewTransform.getRandomGroundPosition();
-    options.direction = options.direction || XDirection.getRandom();
 
     super( modelViewTransform, options );
 
@@ -82,13 +82,13 @@ class Wolf extends Organism {
     const dx = Math.abs( swap ? b : a ) * XDirection.toSign( this.xDirectionProperty.value );
     let x = this.positionProperty.value.x + dx;
 
-    // Reverse direction if motion would exceed x boundaries
+    // Reverse x direction if motion would exceed x boundaries
     if ( x <= this.getMinimumX() || x >= this.getMaximumX() ) {
       x = this.positionProperty.value.x - dx;
       this.xDirectionProperty.value = XDirection.opposite( this.xDirectionProperty.value );
 
-      // Change z when direction changes.
-      // Reverse direction if motion would exceed z boundaries
+      // Change z when x direction changes.
+      // Reverse z direction if motion would exceed z boundaries
       const dz = ( swap ? a : b );
       z = this.positionProperty.value.z + dz;
       if ( z <= this.getMinimumZ() || z >= this.getMaximumZ() ) {

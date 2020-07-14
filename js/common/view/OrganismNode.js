@@ -28,7 +28,7 @@ class OrganismNode extends Node {
     // @public (read-only)
     this.organism = organism;
 
-    // Position and direction, must be disposed
+    // Update position and direction, must be disposed
     const multilink = new Multilink(
       [ organism.positionProperty, organism.xDirectionProperty ],
       ( position, xDirection ) => {

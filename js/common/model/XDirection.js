@@ -24,25 +24,25 @@ const XDirection = Enumeration.byKeys( [ 'LEFT', 'RIGHT' ], {
 
     /**
      * Provides the opposite direction.
-     * @param {XDirection} direction
+     * @param {XDirection} xDirection
      * @returns {XDirection}
      * @public
      * @static
      */
-    XDirection.opposite = direction =>
-      ( direction === XDirection.RIGHT ) ? XDirection.LEFT : XDirection.RIGHT;
+    XDirection.opposite = xDirection =>
+      ( xDirection === XDirection.RIGHT ) ? XDirection.LEFT : XDirection.RIGHT;
 
     /**
      * Converts an XDirection to a sign, relative to the x axis. Used to set the sign of the view's x scale, which will
      * reflect the organism about the y axis, making it appear to face in the desired direction. This assumes that the
-     * default direction for all organisms is XDirection.RIGHT. For example, this means that all bunny PNG files
+     * default x direction for all organisms is XDirection.RIGHT. For example, this means that all bunny PNG files
      * were drawn with the bunny facing right.
-     * @param {XDirection} direction
+     * @param {XDirection} xDirection
      * @returns {number}
      * @public
      * @static
      */
-    XDirection.toSign = direction => ( direction === XDirection.RIGHT ) ? 1 : -1;
+    XDirection.toSign = xDirection => ( xDirection === XDirection.RIGHT ) ? 1 : -1;
   }
 } );
 

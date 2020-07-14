@@ -37,7 +37,7 @@ import XDirection from './XDirection.js';
 const REST_TIME_RANGE = NaturalSelectionQueryParameters.bunnyRestTime; // time to complete a rest interval, in seconds
 const HOP_TIME_RANGE = NaturalSelectionQueryParameters.bunnyHopTime; // time to complete a hop cycle, in seconds
 const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // x and z distance that a bunny hops
-const HOP_HEIGHT_RANGE = new Range( 30, 50 );   // how high above the ground a bunny hops
+const HOP_HEIGHT_RANGE = new Range( 30, 50 ); // how high above the ground a bunny hops
 
 class Bunny extends Organism {
 
@@ -60,21 +60,20 @@ class Bunny extends Organism {
       // {Object|null} options to Genotype constructor
       genotypeOptions: null,
 
+      // Default to random position and xDirection
+      position: modelViewTransform.getRandomGroundPosition(),
+      xDirection: XDirection.getRandom(),
+
       // phet-io
       tandem: Tandem.REQUIRED,
       phetioType: BunnyIO,
       phetioDynamicElement: true
     }, options );
 
-    const hasParents = ( options.father && options.mother );
-
     // Validate options
-    assert && assert( hasParents || ( !options.father && !options.mother ), 'bunny cannot have 1 parent' );
+    assert && assert( ( options.father && options.mother ) || ( !options.father && !options.mother ),
+      'bunny must have both parents or no parents' );
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( options.generation ), 'invalid generation' );
-
-    // Default to random position and direction
-    options.position = options.position || modelViewTransform.getRandomGroundPosition();
-    options.direction = options.direction || XDirection.getRandom();
 
     super( modelViewTransform, options );
 
@@ -218,6 +217,7 @@ class Bunny extends Organism {
    */
   initializeMotion() {
 
+    // Zero out cumulative times
     this.cumulativeRestTime = 0;
     this.cumulativeHopTime = 0;
 
@@ -253,6 +253,7 @@ class Bunny extends Organism {
    */
   hop( dt ) {
 
+    // Portion of the hop to do
     const scale = Math.min( dt, this.hopTime - this.cumulativeHopTime ) / this.hopTime;
 
     const x = this.positionProperty.value.x + ( scale * this.hopDelta.x );
@@ -436,10 +437,10 @@ class Bunny extends Organism {
  * Gets the Vector3 that describes the change in x, y, and z for a hop cycle.
  * @param {number} hopDistance - maximum x and z distance that the bunny will hop
  * @param {number} hopHeight - height above the ground that the bunny will hop
- * @param {XDirection} direction - direction that the bunny is facing
+ * @param {XDirection} xDirection - direction that the bunny is facing along the x axis
  * @returns {Vector3}
  */
-function getHopDelta( hopDistance, hopHeight, direction ) {
+function getHopDelta( hopDistance, hopHeight, xDirection ) {
 
   //TODO I don't understand the use of cos, sin, and swap
   const angle = phet.joist.random.nextDoubleBetween( 0, 2 * Math.PI );
@@ -448,7 +449,7 @@ function getHopDelta( hopDistance, hopHeight, direction ) {
 
   const swap = ( Math.abs( a ) < Math.abs( b ) );
 
-  const dx = Math.abs( swap ? b : a ) * XDirection.toSign( direction );
+  const dx = Math.abs( swap ? b : a ) * XDirection.toSign( xDirection );
   const dy = hopHeight;
   const dz = ( swap ? a : b );
   return new Vector3( dx, dy, dz );
