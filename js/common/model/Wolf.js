@@ -16,11 +16,11 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
-import NaturalSelectionSprite from './NaturalSelectionSprite.js';
-import SpriteDirection from './SpriteDirection.js';
+import Organism from './Organism.js';
 import WolfIO from './WolfIO.js';
+import XDirection from './XDirection.js';
 
-class Wolf extends NaturalSelectionSprite {
+class Wolf extends Organism {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
@@ -40,7 +40,7 @@ class Wolf extends NaturalSelectionSprite {
 
     // Default to random position and direction
     options.position = options.position || modelViewTransform.getRandomGroundPosition();
-    options.direction = options.direction || SpriteDirection.getRandom();
+    options.direction = options.direction || XDirection.getRandom();
 
     super( modelViewTransform, options );
 
@@ -79,13 +79,13 @@ class Wolf extends NaturalSelectionSprite {
 
     let z = this.positionProperty.value.z;
 
-    const dx = Math.abs( swap ? b : a ) * SpriteDirection.toSign( this.directionProperty.value );
+    const dx = Math.abs( swap ? b : a ) * XDirection.toSign( this.xDirectionProperty.value );
     let x = this.positionProperty.value.x + dx;
 
     // Reverse direction if motion would exceed x boundaries
     if ( x <= this.getMinimumX() || x >= this.getMaximumX() ) {
       x = this.positionProperty.value.x - dx;
-      this.directionProperty.value = SpriteDirection.opposite( this.directionProperty.value );
+      this.xDirectionProperty.value = XDirection.opposite( this.xDirectionProperty.value );
 
       // Change z when direction changes.
       // Reverse direction if motion would exceed z boundaries

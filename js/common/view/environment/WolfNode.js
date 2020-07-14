@@ -12,13 +12,13 @@ import wolfImage from '../../../../images/wolf_png.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Wolf from '../../model/Wolf.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
-import NaturalSelectionSpriteNode from '../NaturalSelectionSpriteNode.js';
+import OrganismNode from '../OrganismNode.js';
 import OriginNode from '../OriginNode.js';
 
 // constants
 const IMAGE_SCALE = 0.25; // how much the wolf PNG image is scaled
 
-class WolfNode extends NaturalSelectionSpriteNode {
+class WolfNode extends OrganismNode {
 
   /**
    * @param {Wolf} wolf

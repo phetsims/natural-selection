@@ -12,10 +12,10 @@ import Bunny from '../../model/Bunny.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 import BunnyNode from '../BunnyNode.js';
-import NaturalSelectionSpriteNode from '../NaturalSelectionSpriteNode.js';
+import OrganismNode from '../OrganismNode.js';
 import OriginNode from '../OriginNode.js';
 
-class EnvironmentBunnyNode extends NaturalSelectionSpriteNode {
+class EnvironmentBunnyNode extends OrganismNode {
 
   /**
    * @param {Bunny} bunny

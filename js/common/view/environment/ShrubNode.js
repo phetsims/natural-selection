@@ -11,13 +11,13 @@ import Image from '../../../../../scenery/js/nodes/Image.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Shrub from '../../model/Shrub.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
-import NaturalSelectionSpriteNode from '../NaturalSelectionSpriteNode.js';
+import OrganismNode from '../OrganismNode.js';
 import OriginNode from '../OriginNode.js';
 
 // constants
 const IMAGE_SCALE = 0.5; // how much the shrub PNG images are scaled
 
-class ShrubNode extends NaturalSelectionSpriteNode {
+class ShrubNode extends OrganismNode {
 
   /**
    * @param {Shrub} shrub

@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * NaturalSelectionSprite is the base class for a model element that will be integrated into the environment scene.
+ * Organism is the base class for all organisms that appear in the environment.
  * It has a 3D position and a direction along the x axis.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -17,12 +17,12 @@ import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
-import SpriteDirection from './SpriteDirection.js';
+import XDirection from './XDirection.js';
 
 // constants
 const DEFAULT_POSITION = new Vector3( 0, 0, 1 ); // z=0 is illegal, results in divide-by-zero
 
-class NaturalSelectionSprite extends PhetioObject {
+class Organism extends PhetioObject {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
@@ -34,7 +34,7 @@ class NaturalSelectionSprite extends PhetioObject {
 
     options = merge( {
       position: DEFAULT_POSITION, // initial position
-      direction: SpriteDirection.RIGHT, // initial direction of motion
+      direction: XDirection.RIGHT, // initial direction of motion
 
       // phet-io
       tandem: Tandem.OPTIONAL
@@ -53,17 +53,17 @@ class NaturalSelectionSprite extends PhetioObject {
       phetioDocumentation: 'position in the 3D model coordinate frame'
     } );
 
-    // @public direction that the sprite is facing along the x axis
-    this.directionProperty = new EnumerationProperty( SpriteDirection, options.direction, {
-      tandem: options.tandem.createTandem( 'directionProperty' ),
+    // @public direction that the organism is facing along the x axis
+    this.xDirectionProperty = new EnumerationProperty( XDirection, options.direction, {
+      tandem: options.tandem.createTandem( 'xDirectionProperty' ),
       phetioReadOnly: true,
-      phetioDocumentation: 'direction that the sprite is facing'
+      phetioDocumentation: 'direction that the organism is facing'
     } );
 
     // @private
-    this.disposeNaturalSelectionSprite = () => {
+    this.disposeOrganism = () => {
       this.positionProperty.dispose();
-      this.directionProperty.dispose();
+      this.xDirectionProperty.dispose();
     };
   }
 
@@ -72,7 +72,7 @@ class NaturalSelectionSprite extends PhetioObject {
    */
   reset() {
     this.positionProperty.reset();
-    this.directionProperty.reset();
+    this.xDirectionProperty.reset();
   }
 
   /**
@@ -80,12 +80,12 @@ class NaturalSelectionSprite extends PhetioObject {
    * @override
    */
   dispose() {
-    this.disposeNaturalSelectionSprite();
+    this.disposeOrganism();
     super.dispose();
   }
 
   /**
-   * Gets the minimum x coordinate for a sprite's position.
+   * Gets the minimum x coordinate for an organism's position.
    * @returns {number}
    * @private
    */
@@ -95,7 +95,7 @@ class NaturalSelectionSprite extends PhetioObject {
   }
 
   /**
-   * Gets the maximum x coordinate for a sprite's position.
+   * Gets the maximum x coordinate for an organism's position.
    * @returns {number}
    * @private
    */
@@ -105,7 +105,7 @@ class NaturalSelectionSprite extends PhetioObject {
   }
 
   /**
-   * Gets the minimum z coordinate for a sprite's position.
+   * Gets the minimum z coordinate for an organism's position.
    * @returns {number}
    * @private
    */
@@ -114,7 +114,7 @@ class NaturalSelectionSprite extends PhetioObject {
   }
 
   /**
-   * Gets the maximum z coordinate for a sprite's position.
+   * Gets the maximum z coordinate for an organism's position.
    * @returns {number}
    * @private
    */
@@ -123,5 +123,5 @@ class NaturalSelectionSprite extends PhetioObject {
   }
 }
 
-naturalSelection.register( 'NaturalSelectionSprite', NaturalSelectionSprite );
-export default NaturalSelectionSprite;
+naturalSelection.register( 'Organism', Organism );
+export default Organism;

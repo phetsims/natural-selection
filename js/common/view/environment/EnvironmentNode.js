@@ -49,8 +49,8 @@ class EnvironmentNode extends Node {
       stroke: NaturalSelectionColors.PANEL_STROKE
     } );
 
-    // Parent for all SpriteNodes, clipped to the backgroundNode
-    const spritesNode = new Node( {
+    // Parent for all instances of OrganismNode, clipped to the backgroundNode
+    const organismsNode = new Node( {
       preventFit: true, // a slight performance improvement
       children: [],
       clipArea: Shape.rect( 0, 0, options.size.width, options.size.height )
@@ -58,14 +58,14 @@ class EnvironmentNode extends Node {
 
     // Add shrubs
     model.food.shrubs.forEach( shrub => {
-      spritesNode.addChild( new ShrubNode( shrub ) );
+      organismsNode.addChild( new ShrubNode( shrub ) );
     } );
 
     // layering
     assert && assert( !options.children, 'EnvironmentNode sets children' );
     options.children = [
       backgroundNode,
-      spritesNode,
+      organismsNode,
       frameNode
     ];
 
@@ -78,7 +78,7 @@ class EnvironmentNode extends Node {
       if ( bunny.isAlive ) {
 
         const bunnyNode = new EnvironmentBunnyNode( bunny, model.pedigreeModel.selectedBunnyProperty );
-        spritesNode.addChild( bunnyNode );
+        organismsNode.addChild( bunnyNode );
 
         // If the bunny dies or is disposed, dispose of the associated BunnyNode.
         const disposeBunnyNode = () => {
@@ -98,7 +98,7 @@ class EnvironmentNode extends Node {
     model.bunnyCollection.bunnyCreatedEmitter.addListener( createBunnyNode );
 
     // Press on a bunny to select it. No need to removeInputListener, exists for the lifetime of the sim.
-    spritesNode.addInputListener( new EnvironmentBunnyPressListener( model.pedigreeModel.selectedBunnyProperty, {
+    organismsNode.addInputListener( new EnvironmentBunnyPressListener( model.pedigreeModel.selectedBunnyProperty, {
       tandem: options.tandem.createTandem( 'bunnyPressListener' )
     } ) );
 
@@ -116,7 +116,7 @@ class EnvironmentNode extends Node {
     model.wolfCollection.wolfCreatedEmitter.addListener( wolf => {
 
       const wolfNode = new WolfNode( wolf );
-      spritesNode.addChild( wolfNode );
+      organismsNode.addChild( wolfNode );
 
       // When the wolf is disposed, dispose of the associated WolfNode.
       // removeListener is not necessary, because wolf.disposeEmitter is disposed.
@@ -125,12 +125,12 @@ class EnvironmentNode extends Node {
       } );
 
       if ( !model.isPlayingProperty ) {
-        this.sortSprites();
+        this.sortOrganisms();
       }
     } );
 
     // @private
-    this.spritesNode = spritesNode;
+    this.organismsNode = organismsNode;
   }
 
   /**
@@ -143,13 +143,13 @@ class EnvironmentNode extends Node {
   }
 
   /**
-   * Sorts the SpriteNodes by descending position.z (furthest to closest)
+   * Sorts the OrganismNodes by descending position.z (furthest to closest)
    * @public
    */
-  sortSprites() {
-    this.spritesNode.children = _.sortBy(
-      this.spritesNode.children,
-      child => child.sprite.positionProperty.value.z
+  sortOrganisms() {
+    this.organismsNode.children = _.sortBy(
+      this.organismsNode.children,
+      child => child.organism.positionProperty.value.z
     ).reverse();
   }
 }

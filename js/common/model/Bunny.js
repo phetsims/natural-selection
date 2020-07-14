@@ -28,10 +28,10 @@ import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 import Genotype from './Genotype.js';
 import GenotypeIO from './GenotypeIO.js';
-import NaturalSelectionSprite from './NaturalSelectionSprite.js';
+import Organism from './Organism.js';
 import Phenotype from './Phenotype.js';
 import PhenotypeIO from './PhenotypeIO.js';
-import SpriteDirection from './SpriteDirection.js';
+import XDirection from './XDirection.js';
 
 // constants
 const REST_TIME_RANGE = NaturalSelectionQueryParameters.bunnyRestTime; // time to complete a rest interval, in seconds
@@ -39,7 +39,7 @@ const HOP_TIME_RANGE = NaturalSelectionQueryParameters.bunnyHopTime; // time to 
 const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // x and z distance that a bunny hops
 const HOP_HEIGHT_RANGE = new Range( 30, 50 );   // how high above the ground a bunny hops
 
-class Bunny extends NaturalSelectionSprite {
+class Bunny extends Organism {
 
   /**
    * @param {GenePool} genePool
@@ -74,7 +74,7 @@ class Bunny extends NaturalSelectionSprite {
 
     // Default to random position and direction
     options.position = options.position || modelViewTransform.getRandomGroundPosition();
-    options.direction = options.direction || SpriteDirection.getRandom();
+    options.direction = options.direction || XDirection.getRandom();
 
     super( modelViewTransform, options );
 
@@ -228,7 +228,7 @@ class Bunny extends NaturalSelectionSprite {
     const hopHeight = phet.joist.random.nextDoubleInRange( HOP_HEIGHT_RANGE );
 
     // Get motion delta for the next cycle
-    this.hopDelta = getHopDelta( hopDistance, hopHeight, this.directionProperty.value );
+    this.hopDelta = getHopDelta( hopDistance, hopHeight, this.xDirectionProperty.value );
 
     // Reverse delta x if the hop would exceed x boundaries
     const hopEndX = this.positionProperty.value.x + this.hopDelta.x;
@@ -243,7 +243,7 @@ class Bunny extends NaturalSelectionSprite {
     }
 
     // Adjust the x direction to match the hop delta x
-    this.directionProperty.value = ( this.hopDelta.x >= 0 ) ? SpriteDirection.RIGHT : SpriteDirection.LEFT;
+    this.xDirectionProperty.value = ( this.hopDelta.x >= 0 ) ? XDirection.RIGHT : XDirection.LEFT;
   }
 
   /**
@@ -436,7 +436,7 @@ class Bunny extends NaturalSelectionSprite {
  * Gets the Vector3 that describes the change in x, y, and z for a hop cycle.
  * @param {number} hopDistance - maximum x and z distance that the bunny will hop
  * @param {number} hopHeight - height above the ground that the bunny will hop
- * @param {SpriteDirection} direction - direction that the bunny is facing
+ * @param {XDirection} direction - direction that the bunny is facing
  * @returns {Vector3}
  */
 function getHopDelta( hopDistance, hopHeight, direction ) {
@@ -448,7 +448,7 @@ function getHopDelta( hopDistance, hopHeight, direction ) {
 
   const swap = ( Math.abs( a ) < Math.abs( b ) );
 
-  const dx = Math.abs( swap ? b : a ) * SpriteDirection.toSign( direction );
+  const dx = Math.abs( swap ? b : a ) * XDirection.toSign( direction );
   const dy = hopHeight;
   const dz = ( swap ? a : b );
   return new Vector3( dx, dy, dz );
