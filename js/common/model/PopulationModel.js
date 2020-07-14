@@ -177,17 +177,14 @@ class PopulationModel extends PhetioObject {
       tandem: options.tandem.createTandem( 'dataProbe' )
     } );
 
-    // Scrolls the x-axis so that xRangeProperty.max is 'now'.
-    const scrollToNow = () => {
-      if ( generationsProperty.value > this.xRangeProperty.value.max ) {
-        const max = generationsProperty.value;
+    // Scrolling the x-axis so that 'now' is always the max x value. unlink is not necessary.
+    generationsProperty.link( generations => {
+      const max = Math.max( options.xWidth, generations );
+      if ( this.xRangeProperty.value.max !== max ) {
         const min = max - options.xWidth;
         this.xRangeProperty.value = new Range( min, max );
       }
-    };
-
-    // When the sim resumes playing, resume scrolling the x-axis. unlink is not necessary.
-    isPlayingProperty.link( isPlaying => isPlaying && scrollToNow() );
+    } );
 
     // When a mutation has been applied, show the plots associated with that gene.
     // unlink is not needed
