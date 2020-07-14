@@ -14,6 +14,7 @@ import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import PedigreeModel from '../../model/PedigreeModel.js';
+import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import PedigreeBranchNode from './PedigreeBranchNode.js';
@@ -26,11 +27,13 @@ class PedigreeGraphNode extends Node {
 
   /**
    * @param {PedigreeModel} pedigreeModel
+   * @param {SelectedBunnyProperty} selectedBunnyProperty
    * @param {Object} [options]
    */
-  constructor( pedigreeModel, options ) {
+  constructor( pedigreeModel, selectedBunnyProperty, options ) {
 
     assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
+    assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty, 'invalid selectedBunnyProperty' );
 
     options = merge( {
       graphWidth: 100,
@@ -63,7 +66,7 @@ class PedigreeGraphNode extends Node {
     let branchNode = null;
 
     // When a bunny is selected, display its pedigree. unlink is not necessary.
-    pedigreeModel.selectedBunnyProperty.link( bunny => {
+    selectedBunnyProperty.link( bunny => {
       selectABunnyText.visible = !bunny;
 
       if ( branchNode ) {
@@ -75,7 +78,7 @@ class PedigreeGraphNode extends Node {
 
         // Create the graph
         branchNode = new PedigreeBranchNode( bunny, NaturalSelectionConstants.PEDIGREE_TREE_DEPTH,
-          pedigreeModel.selectedBunnyProperty,
+          selectedBunnyProperty,
           pedigreeModel.furAllelesVisibleProperty,
           pedigreeModel.earsAllelesVisibleProperty,
           pedigreeModel.teethAllelesVisibleProperty, {
@@ -96,7 +99,7 @@ class PedigreeGraphNode extends Node {
     } );
 
     // Create a link to selectedBunnyProperty
-    this.addLinkedElement( pedigreeModel.selectedBunnyProperty, {
+    this.addLinkedElement( selectedBunnyProperty, {
       tandem: options.tandem.createTandem( 'selectedBunnyProperty' )
     } );
   }

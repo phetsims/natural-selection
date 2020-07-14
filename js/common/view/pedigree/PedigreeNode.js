@@ -13,6 +13,7 @@ import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import GenePool from '../../model/GenePool.js';
 import PedigreeModel from '../../model/PedigreeModel.js';
+import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 import AllelesPanel from './AllelesPanel.js';
@@ -22,13 +23,15 @@ class PedigreeNode extends HBox {
 
   /**
    * @param {PedigreeModel} pedigreeModel
+   * @param {SelectedBunnyProperty} selectedBunnyProperty
    * @param {GenePool} genePool
    * @param {Dimension2} size - dimensions of the rectangle available for this Node and its children
    * @param {Object} [options]
    */
-  constructor( pedigreeModel, genePool, size, options ) {
+  constructor( pedigreeModel, selectedBunnyProperty, genePool, size, options ) {
 
     assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
+    assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty, 'invalid selectedBunnyProperty' );
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( size instanceof Dimension2, 'invalid size' );
 
@@ -65,7 +68,7 @@ class PedigreeNode extends HBox {
                              'but changes to its elements and metadata will have no affect.'
       } );
 
-    const pedigreeGraphNode = new PedigreeGraphNode( pedigreeModel, {
+    const pedigreeGraphNode = new PedigreeGraphNode( pedigreeModel, selectedBunnyProperty, {
         graphWidth: graphWidth,
         graphHeight: size.height,
         tandem: options.tandem.createTandem( 'pedigreeGraphNode' )

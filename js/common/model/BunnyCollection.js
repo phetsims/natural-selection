@@ -25,6 +25,7 @@ import CauseOfDeath from './CauseOfDeath.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 import PunnettSquare from './PunnettSquare.js';
+import SelectedBunnyProperty from './SelectedBunnyProperty.js';
 
 // constants
 
@@ -74,6 +75,15 @@ class BunnyCollection {
     this.recessiveMutants = new BunnyArray( {
       tandem: options.tandem.createTandem( 'recessiveMutants' ),
       phetioDocumentation: 'for internal PhET use only'
+    } );
+
+    // @public
+    this.selectedBunnyProperty = new SelectedBunnyProperty( {
+      tandem: options.tandem.createTandem( 'selectedBunnyProperty' )
+    } );
+    // unlink is not necessary.
+    phet.log && this.selectedBunnyProperty.link( selectedBunny => {
+      phet.log && phet.log( `selectedBunny=${selectedBunny}` );
     } );
 
     // @public notify when a bunny has been created
@@ -150,6 +160,7 @@ class BunnyCollection {
    */
   reset() {
     this.bunnyGroup.clear(); // calls dispose for all Bunny instances
+    this.selectedBunnyProperty.reset();
     assert && this.assertValidCounts();
   }
 
@@ -520,7 +531,8 @@ class BunnyCollection {
     const deadBunnies = this.deadBunnies.getArray();
     for ( let i = deadBunnies.length - 1; i >= 0; i-- ) {
       const bunny = deadBunnies[ i ];
-      if ( currentGeneration - bunny.generation > MAX_DEAD_BUNNY_GENERATIONS ) {
+      if ( currentGeneration - bunny.generation > MAX_DEAD_BUNNY_GENERATIONS &&
+           this.selectedBunnyProperty.value !== bunny ) {
         this.bunnyGroup.disposeElement( bunny );
         numberPruned++;
       }

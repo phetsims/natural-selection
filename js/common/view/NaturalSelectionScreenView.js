@@ -138,11 +138,12 @@ class NaturalSelectionScreenView extends ScreenView {
       } );
 
     // Pedigree
-    const pedigreeNode = new PedigreeNode( model.pedigreeModel, model.genePool, graphAreaSize, {
-      left: graphAreaLeft,
-      top: graphAreaTop,
-      tandem: graphsTandem.createTandem( 'pedigreeNode' )
-    } );
+    const pedigreeNode = new PedigreeNode( model.pedigreeModel, model.bunnyCollection.selectedBunnyProperty,
+      model.genePool, graphAreaSize, {
+        left: graphAreaLeft,
+        top: graphAreaTop,
+        tandem: graphsTandem.createTandem( 'pedigreeNode' )
+      } );
 
     // @public
     this.graphChoiceProperty = new EnumerationProperty( GraphChoice, GraphChoice.POPULATION, {

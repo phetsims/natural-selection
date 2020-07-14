@@ -77,7 +77,7 @@ class EnvironmentNode extends Node {
       // PhET-iO state will restore both live and dead bunnies. Create BunnyNodes only for the live ones.
       if ( bunny.isAlive ) {
 
-        const bunnyNode = new EnvironmentBunnyNode( bunny, model.pedigreeModel.selectedBunnyProperty );
+        const bunnyNode = new EnvironmentBunnyNode( bunny, model.bunnyCollection.selectedBunnyProperty );
         organismsNode.addChild( bunnyNode );
 
         // If the bunny dies or is disposed, dispose of the associated BunnyNode.
@@ -98,7 +98,7 @@ class EnvironmentNode extends Node {
     model.bunnyCollection.bunnyCreatedEmitter.addListener( createBunnyNode );
 
     // Press on a bunny to select it. No need to removeInputListener, exists for the lifetime of the sim.
-    organismsNode.addInputListener( new EnvironmentBunnyPressListener( model.pedigreeModel.selectedBunnyProperty, {
+    organismsNode.addInputListener( new EnvironmentBunnyPressListener( model.bunnyCollection.selectedBunnyProperty, {
       tandem: options.tandem.createTandem( 'bunnyPressListener' )
     } ) );
 
@@ -106,7 +106,7 @@ class EnvironmentNode extends Node {
     // No need to removeInputListener, exists for the lifetime of the sim.
     backgroundNode.addInputListener( new PressListener( {
       press: () => {
-        model.pedigreeModel.selectedBunnyProperty.value = null;
+        model.bunnyCollection.selectedBunnyProperty.value = null;
       },
       pressCursor: 'default',
       tandem: options.tandem.createTandem( 'backgroundPressListener' )
