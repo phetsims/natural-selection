@@ -270,7 +270,8 @@ class BunnyCollection {
     let bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
 
     // Prioritize mating of bunnies that have a recessive mutation, so that the mutation appears in the phenotype
-    // as soon as possible. See https://github.com/phetsims/natural-selection/issues/98.
+    // as soon as possible. This is referred to as 'mating eagerly'.
+    // See https://github.com/phetsims/natural-selection/issues/98.
     if ( this.recessiveMutants.length > 0 ) {
       bunnies = this.mateRecessiveMutants( generation, bunnies );
     }
