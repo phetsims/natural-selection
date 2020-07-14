@@ -100,17 +100,18 @@ class Bunny extends NaturalSelectionSprite {
       tandem: options.tandem.createTandem( 'phenotype' )
     } );
 
-    // @private {number} the cumulative time spent resting since the last hop, in seconds
-    this.cumulativeRestTime = 0;
-
-    // @private {number} the cumulative time spent hopping since the last reset, in seconds
-    this.cumulativeHopTime = 0;
-
     // @private {number} time to rest before hopping, randomized in initializeMotion
     this.restTime = REST_TIME_RANGE.max;
 
     // @private {number} time to complete one full hop, randomized in initializeMotion
     this.hopTime = HOP_TIME_RANGE.max;
+
+    // @private {number} the cumulative time spent resting since the last hop, in seconds
+    // Choose a random value so that bunnies born at the same time don't all hop at the same time.
+    this.cumulativeRestTime = phet.joist.random.nextDoubleInRange( REST_TIME_RANGE );
+
+    // @private {number} the cumulative time spent hopping since the last reset, in seconds
+    this.cumulativeHopTime = 0;
 
     // @private {Vector3|null} the change in position when the bunny hops
     this.hopDelta = null;
@@ -333,10 +334,10 @@ class Bunny extends NaturalSelectionSprite {
 
       // private fields, will not be shown in Studio
       private: {
-        cumulativeRestTime: NumberIO.toStateObject( this.cumulativeRestTime ),
-        cumulativeHopTime: NumberIO.toStateObject( this.cumulativeHopTime ),
         restTime: NumberIO.toStateObject( this.restTime ),
         hopTime: NumberIO.toStateObject( this.hopTime ),
+        cumulativeRestTime: NumberIO.toStateObject( this.cumulativeRestTime ),
+        cumulativeHopTime: NumberIO.toStateObject( this.cumulativeHopTime ),
         hopDelta: NullableIO( Vector3IO ).toStateObject( this.hopDelta )
       }
     };
@@ -361,10 +362,10 @@ class Bunny extends NaturalSelectionSprite {
       phenotype: PhenotypeIO.fromStateObject( stateObject.phenotype ),
 
       // private fields
-      cumulativeRestTime: NumberIO.fromStateObject( stateObject.private.cumulativeRestTime ),
-      cumulativeHopTime: NumberIO.fromStateObject( stateObject.private.cumulativeHopTime ),
       restTime: NumberIO.fromStateObject( stateObject.private.restTime ),
       hopTime: NumberIO.fromStateObject( stateObject.private.hopTime ),
+      cumulativeRestTime: NumberIO.fromStateObject( stateObject.private.cumulativeRestTime ),
+      cumulativeHopTime: NumberIO.fromStateObject( stateObject.private.cumulativeHopTime ),
       hopDelta: NullableIO( Vector3IO ).fromStateObject( stateObject.private.hopDelta )
     };
   }
@@ -402,10 +403,10 @@ class Bunny extends NaturalSelectionSprite {
     this.phenotype.applyState( state.phenotype );
 
     // private fields
-    this.cumulativeRestTime = required( state.cumulativeRestTime );
-    this.cumulativeHopTime = required( state.cumulativeHopTime );
     this.restTime = required( state.restTime );
     this.hopTime = required( state.hopTime );
+    this.cumulativeRestTime = required( state.cumulativeRestTime );
+    this.cumulativeHopTime = required( state.cumulativeHopTime );
     this.hopDelta = required( state.hopDelta );
 
     this.validateInstance();
