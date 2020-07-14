@@ -214,15 +214,6 @@ class BunnyCollection {
   }
 
   /**
-   * Disposes a Bunny.
-   * @param {Bunny} bunny
-   * @public
-   */
-  disposeBunny( bunny ) {
-    this.bunnyGroup.disposeElement( bunny );
-  }
-
-  /**
    * Moves all live bunnies.
    * @param {number} dt - time step, in seconds
    * @public
