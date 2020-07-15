@@ -40,7 +40,7 @@ class OrganismSpriteInstance extends SpriteInstance {
     // @public (read-only)
     this.organism = organism;
 
-    //TODO #128 is there a more efficient way?
+    //TODO #128 is there a more efficient way to set this.matrix?
     //TODO #128 locations look incorrect
     // Update position and direction, must be disposed
     const multilink = new Multilink(
