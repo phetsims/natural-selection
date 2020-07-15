@@ -55,8 +55,8 @@ class OrganismSprites extends Sprites {
     super( {
       sprites: sprites,
       spriteInstances: spriteInstances,
-      canvasBounds: canvasBounds, //TODO #128 constrained to these bounds only with canvas, and it's a little off
-      hitTestSprites: true,  //TODO #128 how to hit test only bunny sprites?  add pickable to SpriteImage
+      canvasBounds: canvasBounds,
+      hitTestSprites: true,
       cursor: 'pointer',
 
       inputListeners: [

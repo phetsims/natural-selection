@@ -55,7 +55,6 @@ class ShrubSpriteInstance extends OrganismSpriteInstance {
     this.toughSprite = toughSprite;
   }
 
-  //TODO #128 origin does not remain at bottom-center, moves around when SpriteImage is changed
   /**
    * Sets the appearance of to correspond to tough or tender food.
    * @param {boolean} isTough

@@ -26,6 +26,7 @@ class OrganismSpriteImage extends SpriteImage {
       pickable: false
     }, options );
 
+    //TODO #128 offset is wrong, image does not have valid dimensions yet
     super( image, new Vector2( image.width / 2, image.height ), options );
   }
 }
