@@ -287,12 +287,6 @@ const SCHEMA = {
     type: 'flag'
   },
 
-  // Whether to label original mutants in the environment.
-  //TODO delete this?
-  labelMutants: {
-    type: 'flag'
-  },
-
   // Percentage of newborn bunnies that will receive a mutation.
   // Symmetric rounding is used, and at least 1 bunny will receive the mutation.
   mutationPercentage: {
