@@ -57,9 +57,9 @@ class PedigreeBranchNode extends Node {
       ySpacing: DEFAULT_Y_SPACING
     }, options );
 
-    const bunnyNode = new PedigreeBunnyNode( bunny, selectedBunnyProperty,
+    const bunnyNode = new PedigreeBunnyNode( bunny,
       furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
-        isSelected: options.bunnyIsSelected
+        bunnyIsSelected: ( selectedBunnyProperty.value === bunny )
       } );
     children.push( bunnyNode );
 

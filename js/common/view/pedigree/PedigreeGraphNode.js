@@ -82,6 +82,7 @@ class PedigreeGraphNode extends Node {
           pedigreeModel.furAllelesVisibleProperty,
           pedigreeModel.earsAllelesVisibleProperty,
           pedigreeModel.teethAllelesVisibleProperty, {
+            bunnyIsSelected: true,
             x: backgroundNode.centerX,
             bottom: backgroundNode.bottom - Y_MARGIN
           } );

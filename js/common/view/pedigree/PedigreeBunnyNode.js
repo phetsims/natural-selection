@@ -12,15 +12,19 @@ import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
-import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
+import NaturalSelectionColors from '../../NaturalSelectionColors.js';
+import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
-import BunnyNode from '../BunnyNode.js';
+import MutationIconNode from '../MutationIconNode.js';
 import OriginNode from '../OriginNode.js';
+import BunnyImageCache from './BunnyImageCache.js';
 
 // constants
+const IMAGE_SCALE = 0.4; // how much the bunny PNG image is scaled
 const GENOTYPE_FONT = new PhetFont( 16 );
 const DEAD_SYMBOL_FONT = new PhetFont( 20 );
 
@@ -28,37 +32,61 @@ class PedigreeBunnyNode extends Node {
 
   /**
    * @param {Bunny} bunny
-   * @param {SelectedBunnyProperty} selectedBunnyProperty
    * @param {Property.<boolean>} furAllelesVisibleProperty
    * @param {Property.<boolean>} earsAllelesVisibleProperty
    * @param {Property.<boolean>} teethAllelesVisibleProperty
    * @param {Object} [options]
    */
-  constructor( bunny, selectedBunnyProperty, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
+  constructor( bunny, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-    assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty, 'invalid selectedBunnyProperty' );
     assert && AssertUtils.assertPropertyOf( furAllelesVisibleProperty, 'boolean' );
     assert && AssertUtils.assertPropertyOf( earsAllelesVisibleProperty, 'boolean' );
     assert && AssertUtils.assertPropertyOf( teethAllelesVisibleProperty, 'boolean' );
 
     options = merge( {
-      showMutationIcon: true
+      showMutationIcon: true,
+      bunnyIsSelected: false
     }, options );
 
     const children = [];
 
-    const bunnyNode = new BunnyNode( bunny, selectedBunnyProperty, {
-      showMutationIcon: options.showMutationIcon
+    const wrappedImage = BunnyImageCache.getWrappedImage( bunny, {
+      scale: IMAGE_SCALE,
+      centerX: 0,
+      bottom: 0
     } );
-    children.push( bunnyNode );
+    children.push( wrappedImage );
+
+    // Label original mutant with an icon
+    if ( bunny.isOriginalMutant() ) {
+      children.push( new MutationIconNode( {
+        right: wrappedImage.centerX,
+        bottom: wrappedImage.bottom,
+        pickable: false
+      } ) );
+    }
 
     // Genotype abbreviation
     const genotypeNode = new Text( '', {
       font: GENOTYPE_FONT,
-      maxWidth: bunnyNode.width
+      maxWidth: wrappedImage.width
     } );
     children.push( genotypeNode );
+
+    // Optional selection rectangle
+    if ( options.bunnyIsSelected ) {
+      const selectionRectangle = new Rectangle( wrappedImage.bounds.dilated( 3 ), {
+        fill: 'rgba( 0, 0, 0, 0.25 )',
+        stroke: NaturalSelectionColors.SELECTED_BUNNY_STROKE,
+        lineWidth: 2,
+        cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
+        center: wrappedImage.center,
+        pickable: false
+      } );
+      children.push( selectionRectangle );
+      selectionRectangle.moveToBack();
+    }
 
     if ( NaturalSelectionQueryParameters.showOrigin ) {
       children.push( new OriginNode() );
@@ -76,8 +104,8 @@ class PedigreeBunnyNode extends Node {
         // Unicode red cross mark
         this.addChild( new Text( '\u274c', {
           font: DEAD_SYMBOL_FONT,
-          right: bunnyNode.centerX,
-          bottom: bunnyNode.centerY
+          right: wrappedImage.centerX,
+          bottom: wrappedImage.centerY
         } ) );
       }
     };
@@ -90,13 +118,12 @@ class PedigreeBunnyNode extends Node {
       ( furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) => {
         genotypeNode.visible = ( furAllelesVisible || earsAllelesVisible || teethAllelesVisible );
         genotypeNode.text = getGenotypeAbbreviation( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible );
-        genotypeNode.centerX = bunnyNode.centerX;
-        genotypeNode.top = bunnyNode.bottom + 5;
+        genotypeNode.centerX = wrappedImage.centerX;
+        genotypeNode.top = wrappedImage.bottom + 5;
       } );
 
     // @private
     this.disposePedigreeBunnyNode = () => {
-      bunnyNode.dispose();
       multilink.dispose();
       if ( bunny.diedEmitter.hasListener( diedListener ) ) {
         bunny.diedEmitter.removeListener( diedListener );

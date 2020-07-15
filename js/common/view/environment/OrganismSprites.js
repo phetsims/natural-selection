@@ -124,19 +124,16 @@ class OrganismSprites extends Sprites {
         // Mix in SpriteListenable, so we have access to the SpriteInstance.
         new ( SpriteListenable( PressListener ) )( {
 
-          // Select a bunny, or clear the current selection.
+          // Select a bunny. This is called only when we click on a SpriteInstance.
           press: ( event, listener ) => {
+            assert && assert( listener.spriteInstance, 'expected a sprite instance' );
 
-            const spriteInstance = listener.spriteInstance;
-            if ( spriteInstance && spriteInstance instanceof BunnySpriteInstance ) {
-              bunnyCollection.selectedBunnyProperty.value = spriteInstance.bunny;
-            }
-            else {
-              bunnyCollection.selectedBunnyProperty.value = null;
-            }
+            if ( listener.spriteInstance instanceof BunnySpriteInstance ) {
+              bunnyCollection.selectedBunnyProperty.value = listener.spriteInstance.bunny;
 
-            //TODO #128 move selected bunny to front
-            //TODO #128 add selection rectangle behind selected bunny
+              //TODO #128 move selected bunny to front
+              //TODO #128 add selection rectangle behind selected bunny
+            }
           },
 
           tandem: tandem.createTandem( 'pressListener' )

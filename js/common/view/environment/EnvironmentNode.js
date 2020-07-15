@@ -58,6 +58,13 @@ class EnvironmentNode extends Node {
 
     super( options );
 
+    // Pressing on anything other than a bunny clears the selection. removeInputListener is not needed.
+    backgroundNode.addInputListener( {
+      down: () => {
+        model.bunnyCollection.selectedBunnyProperty.value = null;
+      }
+    } );
+
     // @private
     this.organismSprites = organismSprites;
   }
