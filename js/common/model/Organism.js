@@ -83,6 +83,7 @@ class Organism extends PhetioObject {
     super.dispose();
   }
 
+  //TODO #128 modify so that complete sprite for all organisms stays in bounds
   /**
    * Gets the minimum x coordinate for an organism's position.
    * @returns {number}
@@ -93,6 +94,7 @@ class Organism extends PhetioObject {
            EnvironmentModelViewTransform.X_MARGIN_MODEL;
   }
 
+  //TODO #128 modify so that complete sprite for all organisms stays in bounds
   /**
    * Gets the maximum x coordinate for an organism's position.
    * @returns {number}
