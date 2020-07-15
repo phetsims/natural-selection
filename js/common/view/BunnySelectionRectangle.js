@@ -25,8 +25,8 @@ class BunnySelectionRectangle extends Rectangle {
     assert && assert( bounds instanceof Bounds2, 'invalid bounds' );
 
     options = merge( {
-      fill: 'rgba( 0, 0, 0, 0.25 )',
-      stroke: NaturalSelectionColors.SELECTED_BUNNY_STROKE,
+      fill: NaturalSelectionColors.BUNNY_SELECTION_RECTANGLE_FILL,
+      stroke: NaturalSelectionColors.BUNNY_SELECTION_RECTANGLE_STROKE,
       lineWidth: 2,
       cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
       pickable: false

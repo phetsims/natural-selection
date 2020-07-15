@@ -68,7 +68,8 @@ const NaturalSelectionColors = {
   DATA_PROBE_MANIPULATOR_COLOR: 'rgb( 128, 128, 128 )',
 
   // Bunny
-  SELECTED_BUNNY_STROKE: 'blue'
+  BUNNY_SELECTION_RECTANGLE_STROKE: 'blue',
+  BUNNY_SELECTION_RECTANGLE_FILL: 'rgba( 0, 0, 0, 0.25 )'
 };
 
 naturalSelection.register( 'NaturalSelectionColors', NaturalSelectionColors );
