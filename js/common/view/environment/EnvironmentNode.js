@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import Shape from '../../../../../kite/js/Shape.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import PressListener from '../../../../../scenery/js/listeners/PressListener.js';
@@ -15,6 +16,8 @@ import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionModel from '../../model/NaturalSelectionModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
+import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
+import OrganismSprites from '../sprites/OrganismSprites.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
 import EnvironmentBunnyNode from './EnvironmentBunnyNode.js';
 import EnvironmentBunnyPressListener from './EnvironmentBunnyPressListener.js';
@@ -61,11 +64,18 @@ class EnvironmentNode extends Node {
       organismsNode.addChild( new ShrubNode( shrub ) );
     } );
 
+    // High-performance sprites, for rendering bunnies, wolves, and food.
+    const organismSprites = new OrganismSprites(
+      model.bunnyCollection, model.wolfCollection, model.food,
+      new Bounds2( 0, 0, options.size.width, options.size.height ),
+      options.tandem.createTandem( 'organismSprites' )
+    );
+
     // layering
     assert && assert( !options.children, 'EnvironmentNode sets children' );
     options.children = [
       backgroundNode,
-      organismsNode,
+      NaturalSelectionQueryParameters.sprites ? organismSprites : organismsNode,
       frameNode
     ];
 
@@ -131,6 +141,7 @@ class EnvironmentNode extends Node {
 
     // @private
     this.organismsNode = organismsNode;
+    this.organismSprites = organismSprites;
   }
 
   /**
@@ -140,6 +151,16 @@ class EnvironmentNode extends Node {
   dispose() {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
+  }
+
+  /**
+   * Steps the view. This called after model.step by Sim.js.
+   * @param {number} dt - the time step, in seconds
+   * @public
+   */
+  step( dt ) {
+    this.sortOrganisms();
+    this.organismSprites.update();
   }
 
   /**
