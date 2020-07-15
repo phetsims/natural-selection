@@ -3,6 +3,8 @@
 /**
  * OrganismSprites renders sprites for all organisms (living things) in the environment.
  * It uses scenery's high-performance Sprites feature, which uses renderer:'webgl', with a fallback of 'canvas'.
+ * While each sprite instance stays synchronized with its associated model element, update() must be explicitly
+ * called to render this Node correctly.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
