@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * NaturalSelectionSprites renders sprites for all organisms (living things) in the environment.
+ * OrganismSprites renders sprites for all organisms (living things) in the environment.
  * It uses scenery's high-performance Sprites feature, which uses renderer:'webgl', with a fallback of 'canvas'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
