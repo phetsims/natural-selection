@@ -56,14 +56,13 @@ class OrganismSprites extends Sprites {
       sprites: sprites,
       spriteInstances: spriteInstances,
       canvasBounds: canvasBounds, //TODO #128 constrained to these bounds only with canvas, and it's a little off
-      hitTestSprites: true,  //TODO #128 how to hit test only bunny sprites?
-      cursor: 'pointer', //TODO #128 how to show cursor for only bunny sprites?
+      hitTestSprites: true,  //TODO #128 how to hit test only bunny sprites?  add pickable to SpriteImage
+      cursor: 'pointer',
 
       inputListeners: [
 
         // Mix in SpriteListenable, so we have access to the SpriteInstance.
         new ( SpriteListenable( PressListener ) )( {
-          applyOffset: false, //TODO #128 what is this? is appears in scenery-phet demo
 
           // Select a bunny, or clear the current selection.
           press: ( event, listener ) => {
@@ -180,8 +179,8 @@ class OrganismSprites extends Sprites {
     // Sort by z coordinate, from back to front.
     // Use splice instead of assignment because super has a reference to this.spriteInstances.
     //TODO #128 order looks incorrect
-    //TODO #128 change Sprites API to make spriteInstances mutable, so we can use assignment?
-    //TODO #128 how fast is _.sortBy ?
+    //TODO #128 use this.spriteInstances.sort( compareFunction )
+    //TODO #128 if sort is a performance issue, then sort when each organism moves if its z changed
     const sortedSpriteInstances = _.sortBy( this.spriteInstances, spriteInstance => spriteInstance.organism.positionProperty.value.z ).reverse();
     this.spriteInstances.splice( 0, this.spriteInstances.length, ...sortedSpriteInstances );
 
