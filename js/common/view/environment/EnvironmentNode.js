@@ -48,13 +48,13 @@ class EnvironmentNode extends Node {
     } );
 
     // High-performance sprites, for rendering bunnies, wolves, and food.
-    const organismSprites = new OrganismSprites( model.bunnyCollection, model.wolfCollection, model.food,
-      model.isPlayingProperty, bounds, options.tandem.createTandem( 'organismSprites' )
+    const sprites = new OrganismSprites( model.bunnyCollection, model.wolfCollection, model.food,
+      model.isPlayingProperty, bounds, options.tandem.createTandem( 'sprites' )
     );
 
     // layering
     assert && assert( !options.children, 'EnvironmentNode sets children' );
-    options.children = [ backgroundNode, organismSprites, frameNode ];
+    options.children = [ backgroundNode, sprites, frameNode ];
 
     super( options );
 
@@ -66,7 +66,7 @@ class EnvironmentNode extends Node {
     } );
 
     // @private
-    this.organismSprites = organismSprites;
+    this.sprites = sprites;
   }
 
   /**
@@ -92,7 +92,7 @@ class EnvironmentNode extends Node {
    * @public
    */
   updateSprites() {
-    this.organismSprites.update();
+    this.sprites.update();
   }
 }
 
