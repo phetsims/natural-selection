@@ -88,8 +88,8 @@ class OrganismSprites extends Sprites {
     // @private
     this.spriteInstances = spriteInstances;
 
-    // When a bunny is created...
-    bunnyCollection.bunnyCreatedEmitter.addListener( bunny => {
+    // Creates a sprite instance of a bunny
+    const createBunnySpriteInstance = bunny => {
 
       // PhET-iO state will restore both live and dead bunnies. Create SpriteInstances only for the live ones.
       if ( bunny.isAlive ) {
@@ -107,7 +107,13 @@ class OrganismSprites extends Sprites {
         bunny.diedEmitter.addListener( disposeBunnySpriteInstance );
         bunny.disposedEmitter.addListener( disposeBunnySpriteInstance );
       }
-    } );
+    };
+
+    // Create a BunnyNode for each Bunny in the initial population.
+    bunnyCollection.liveBunnies.forEach( createBunnySpriteInstance );
+
+    // When a bunny is created...
+    bunnyCollection.bunnyCreatedEmitter.addListener( createBunnySpriteInstance );
 
     // When a wolf is created...
     wolfCollection.wolfCreatedEmitter.addListener( wolf => {
