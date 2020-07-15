@@ -10,6 +10,7 @@
  */
 
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
+import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import PressListener from '../../../../../scenery/js/listeners/PressListener.js';
 import SpriteListenable from '../../../../../scenery/js/listeners/SpriteListenable.js';
@@ -51,16 +52,30 @@ class OrganismSprites extends Sprites {
    * @param {Food} food
    * @param {Property.<boolean>} isPlayingProperty
    * @param {Bounds2} canvasBounds
-   * @param {Tandem} tandem
+   * @param {Object} [options]
    */
-  constructor( bunnyCollection, wolfCollection, food, isPlayingProperty, canvasBounds, tandem ) {
+  constructor( bunnyCollection, wolfCollection, food, isPlayingProperty, canvasBounds, options ) {
 
     assert && assert( bunnyCollection instanceof BunnyCollection, 'invalid bunnyCollection' );
     assert && assert( wolfCollection instanceof WolfCollection, 'invalid wolfCollection' );
     assert && assert( food instanceof Food, 'invalid food' );
     assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
     assert && assert( canvasBounds instanceof Bounds2, 'invalid canvasBounds' );
-    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
+
+    options = merge( {
+
+      // Sprites options
+      hitTestSprites: true,
+      cursor: 'pointer',
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      phetioReadOnly: true,
+      phetioDocumentation: 'bunnies, wolves, and shrubs that appear in the environment'
+    }, options );
+
+    assert && assert( !options.canvasBounds, 'OrganismSprites sets canvasBounds' );
+    options.canvasBounds = canvasBounds;
 
     // Sprites for each possible bunny phenotype. Maps a phenotype key to an Image instance. The phenotype key pattern
     // is '{{hasWhiteFur}}-{{hasStraightEars}}-{{hasShortTeeth}}', where the value for each placeholder is 'true' or
@@ -103,14 +118,15 @@ class OrganismSprites extends Sprites {
       'invalid key in shrubSpritesMap' );
 
     // {Sprite[]} the complete unique set of sprites
-    const sprites = [];
+    assert && assert( !options.sprites, 'OrganismSprites sets sprites' );
+    options.sprites = [];
     for ( const key in bunnySpritesMap ) {
-      sprites.push( bunnySpritesMap[ key ] );
+      options.sprites.push( bunnySpritesMap[ key ] );
     }
-    sprites.push( wolfSprite );
+    options.sprites.push( wolfSprite );
     for ( const key in shrubSpritesMap ) {
-      sprites.push( shrubSpritesMap[ key ].tenderSprite );
-      sprites.push( shrubSpritesMap[ key ].toughSprite );
+      options.sprites.push( shrubSpritesMap[ key ].tenderSprite );
+      options.sprites.push( shrubSpritesMap[ key ].toughSprite );
     }
 
     // {ShrubSpriteInstance[]} sprite instances for shrubs
@@ -120,23 +136,15 @@ class OrganismSprites extends Sprites {
     );
 
     // {SpriteInstances[]} sprite instances for all organisms
-    const spriteInstances = [ ...shrubSpriteInstances ];
+    assert && assert( !options.spriteInstances, 'OrganismSprites sets spriteInstances' );
+    options.spriteInstances = [ ...shrubSpriteInstances ];
 
-    super( {
-      sprites: sprites,
-      spriteInstances: spriteInstances,
-      canvasBounds: canvasBounds,
-      hitTestSprites: true,
-      cursor: 'pointer',
-      tandem: tandem,
-      phetioReadOnly: true,
-      phetioDocumentation: 'bunnies, wolves, and shrubs that appear in the environment'
-    } );
+    super( options );
 
     // @private
     this.isPlayingProperty = isPlayingProperty;
     this.bunnySpritesMap = bunnySpritesMap;
-    this.spriteInstances = spriteInstances;
+    this.spriteInstances = options.spriteInstances;
 
     // @private {BunnySpriteInstance|null}
     this.selectedBunnySpriteInstance = null;
@@ -172,7 +180,7 @@ class OrganismSprites extends Sprites {
         }
       },
 
-      tandem: tandem.createTandem( 'bunnyPressListener' )
+      tandem: options.tandem.createTandem( 'bunnyPressListener' )
     } ) );
 
     // Creates a sprite instance of a bunny
@@ -183,13 +191,13 @@ class OrganismSprites extends Sprites {
 
         // Create a SpriteInstance for the bunny.
         const bunnySpriteInstance = new BunnySpriteInstance( bunny, this.getBunnySprite( bunny ) );
-        spriteInstances.push( bunnySpriteInstance );
+        this.spriteInstances.push( bunnySpriteInstance );
 
         // If the bunny dies or is disposed, dispose of bunnySpriteInstance.
         const disposeBunnySpriteInstance = () => {
           bunny.diedEmitter.removeListener( disposeBunnySpriteInstance );
           bunny.disposedEmitter.removeListener( disposeBunnySpriteInstance );
-          spriteInstances.splice( spriteInstances.indexOf( bunnySpriteInstance ), 1 );
+          this.spriteInstances.splice( this.spriteInstances.indexOf( bunnySpriteInstance ), 1 );
           bunnySpriteInstance.dispose();
         };
         bunny.diedEmitter.addListener( disposeBunnySpriteInstance );
@@ -208,12 +216,12 @@ class OrganismSprites extends Sprites {
 
       // Create a SpriteInstance for the wolf.
       const wolfSpriteInstance = new WolfSpriteInstance( wolf, wolfSprite );
-      spriteInstances.push( wolfSpriteInstance );
+      this.spriteInstances.push( wolfSpriteInstance );
 
       // When the wolf is disposed, remove wolfSpriteInstance.
       // removeListener is not necessary, because wolf.disposeEmitter is disposed.
       wolf.disposedEmitter.addListener( () => {
-        spriteInstances.splice( spriteInstances.indexOf( wolfSpriteInstance ), 1 );
+        this.spriteInstances.splice( this.spriteInstances.indexOf( wolfSpriteInstance ), 1 );
       } );
     } );
 
@@ -230,9 +238,9 @@ class OrganismSprites extends Sprites {
 
       // Start by removing all shrubs
       shrubSpriteInstances.forEach( shrubSpriteInstance => {
-        const index = spriteInstances.indexOf( shrubSpriteInstance );
+        const index = this.spriteInstances.indexOf( shrubSpriteInstance );
         if ( index !== -1 ) {
-          spriteInstances.splice( index, 1 );
+          this.spriteInstances.splice( index, 1 );
         }
       } );
 
@@ -240,14 +248,14 @@ class OrganismSprites extends Sprites {
 
         // Food is limited, add every other shrub.
         for ( let i = 0; i < shrubSpriteInstances.length; i += 2 ) {
-          spriteInstances.push( shrubSpriteInstances[ i ] );
+          this.spriteInstances.push( shrubSpriteInstances[ i ] );
         }
       }
       else {
 
         // Food is not limited, add all shrubs.
         shrubSpriteInstances.forEach( shrubSpriteInstance => {
-          spriteInstances.push( shrubSpriteInstance );
+          this.spriteInstances.push( shrubSpriteInstance );
         } );
       }
 

@@ -49,8 +49,9 @@ class EnvironmentNode extends Node {
 
     // High-performance sprites, for rendering bunnies, wolves, and food.
     const sprites = new OrganismSprites( model.bunnyCollection, model.wolfCollection, model.food,
-      model.isPlayingProperty, bounds, options.tandem.createTandem( 'sprites' )
-    );
+      model.isPlayingProperty, bounds, {
+        tandem: options.tandem.createTandem( 'sprites' )
+      } );
 
     // layering
     assert && assert( !options.children, 'EnvironmentNode sets children' );
