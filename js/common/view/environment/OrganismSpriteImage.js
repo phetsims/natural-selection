@@ -8,6 +8,7 @@
  */
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
+import merge from '../../../../../phet-core/js/merge.js';
 import SpriteImage from '../../../../../scenery/js/util/SpriteImage.js';
 import naturalSelection from '../../../naturalSelection.js';
 
@@ -18,7 +19,13 @@ class OrganismSpriteImage extends SpriteImage {
    * @param {Object} [options]
    */
   constructor( image, options ) {
+
     assert && assert( image instanceof HTMLImageElement, 'invalid image' );
+
+    options = merge( {
+      pickable: false
+    }, options );
+
     super( image, new Vector2( image.width / 2, image.height ), options );
   }
 }
