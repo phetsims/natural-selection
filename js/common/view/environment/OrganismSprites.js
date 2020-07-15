@@ -238,12 +238,14 @@ class OrganismSprites extends Sprites {
    */
   update() {
 
-    // Sort by z coordinate, from back to front.
-    // Use splice instead of assignment because super has a reference to this.spriteInstances.
-    //TODO #128 use this.spriteInstances.sort( compareFunction )
+    // Sort by z coordinate, from back to front. +z is away from the camera.
+    // Sort in place, because super has a reference to this.spriteInstances.
     //TODO #128 if sort is a performance issue, then sort when each organism moves if its z changed
-    const sortedSpriteInstances = _.sortBy( this.spriteInstances, spriteInstance => spriteInstance.organism.positionProperty.value.z ).reverse();
-    this.spriteInstances.splice( 0, this.spriteInstances.length, ...sortedSpriteInstances );
+    this.spriteInstances.sort( ( spriteInstance1, spriteInstance2 ) => {
+      const z1 = spriteInstance1.organism.positionProperty.value.z;
+      const z2 = spriteInstance2.organism.positionProperty.value.z;
+      return Math.sign( z2 - z1 );
+    } );
 
     //TODO #128 move selected bunny and selection rectangle to front
 
