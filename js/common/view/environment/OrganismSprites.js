@@ -179,6 +179,7 @@ class OrganismSprites extends Sprites {
 
     // Sort by z coordinate, from back to front.
     // Use splice instead of assignment because super has a reference to this.spriteInstances.
+    //TODO #128 order looks incorrect
     //TODO #128 change Sprites API to make spriteInstances mutable, so we can use assignment?
     //TODO #128 how fast is _.sortBy ?
     const sortedSpriteInstances = _.sortBy( this.spriteInstances, spriteInstance => spriteInstance.organism.positionProperty.value.z ).reverse();
