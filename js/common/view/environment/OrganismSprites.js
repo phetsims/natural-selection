@@ -121,38 +121,48 @@ class OrganismSprites extends Sprites {
       canvasBounds: canvasBounds,
       hitTestSprites: true,
       cursor: 'pointer',
-
-      inputListeners: [
-
-        // Mix in SpriteListenable, so we have access to the pressed SpriteInstance.
-        new ( SpriteListenable( PressListener ) )( {
-
-          // Select a bunny. This is called only when we click on a SpriteInstance.
-          press: ( event, listener ) => {
-            assert && assert( listener.spriteInstance, 'expected a sprite instance' );
-
-            if ( listener.spriteInstance instanceof BunnySpriteInstance ) {
-              bunnyCollection.selectedBunnyProperty.value = listener.spriteInstance.organism;
-
-              //TODO #128 move selected bunny to front
-              //TODO #128 add selection rectangle behind selected bunny
-
-              if ( !isPlayingProperty.value ) {
-                this.update();
-              }
-            }
-          },
-
-          tandem: tandem.createTandem( 'pressListener' )
-        } )
-      ],
-
       tandem: tandem
     } );
 
     // @private
+    this.isPlayingProperty = isPlayingProperty;
     this.bunnySpritesMap = bunnySpritesMap;
     this.spriteInstances = spriteInstances;
+
+    // @private {BunnySpriteInstance|null}
+    this.selectedBunnySpriteInstance = null;
+
+    // When the selected bunny is cleared, also clear the associated sprite instance.
+    bunnyCollection.selectedBunnyProperty.link( selectedBunny => {
+      if ( !selectedBunny ) {
+        this.selectedBunnySpriteInstance = null;
+        if ( !isPlayingProperty.value ) {
+          this.update();
+        }
+      }
+    } );
+
+    this.addInputListener( new ( SpriteListenable( PressListener ) )( {
+
+      // Select a bunny. This is called only when we click on a SpriteInstance.
+      press: ( event, listener ) => {
+        assert && assert( listener.spriteInstance, 'expected a sprite instance' );
+
+        if ( listener.spriteInstance instanceof BunnySpriteInstance ) {
+
+          this.selectedBunnySpriteInstance = listener.spriteInstance;
+          bunnyCollection.selectedBunnyProperty.value = listener.spriteInstance.organism;
+
+          //TODO #128 add selection rectangle behind selected bunny
+
+          if ( !isPlayingProperty.value ) {
+            this.update();
+          }
+        }
+      },
+
+      tandem: tandem.createTandem( 'pressListener' )
+    } ) );
 
     // Creates a sprite instance of a bunny
     const createBunnySpriteInstance = bunny => {
@@ -248,8 +258,6 @@ class OrganismSprites extends Sprites {
     // Sort by z coordinate, from back to front.
     this.sort();
 
-    //TODO #128 move selected bunny and selection rectangle to front
-
     // Repaint.
     this.invalidatePaint();
   }
@@ -261,11 +269,18 @@ class OrganismSprites extends Sprites {
    * @private
    */
   sort() {
+
     this.spriteInstances.sort( ( spriteInstance1, spriteInstance2 ) => {
       const z1 = spriteInstance1.organism.positionProperty.value.z;
       const z2 = spriteInstance2.organism.positionProperty.value.z;
       return Math.sign( z2 - z1 );
     } );
+
+    // Move the selected bunny and the selection rectangle to the front when the sim is paused.
+    if ( this.selectedBunnySpriteInstance && !this.isPlayingProperty.value ) {
+      this.spriteInstances.splice( this.spriteInstances.indexOf( this.selectedBunnySpriteInstance ), 1 );
+      this.spriteInstances.push( this.selectedBunnySpriteInstance );
+    }
   }
 
   /**
