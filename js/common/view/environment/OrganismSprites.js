@@ -95,15 +95,15 @@ class OrganismSprites extends Sprites {
       }
     };
 
-    // {Sprite[]} sprites for all organisms
+    // {Sprite[]} the complete unique set of sprites
     const sprites = [];
-    for ( const property in bunnySpritesMap ) {
-      sprites.push( bunnySpritesMap[ property ] );
+    for ( const key in bunnySpritesMap ) {
+      sprites.push( bunnySpritesMap[ key ] );
     }
     sprites.push( wolfSprite );
-    for ( const property in shrubSpritesMap ) {
-      sprites.push( shrubSpritesMap[ property ].tenderSprite );
-      sprites.push( shrubSpritesMap[ property ].toughSprite );
+    for ( const key in shrubSpritesMap ) {
+      sprites.push( shrubSpritesMap[ key ].tenderSprite );
+      sprites.push( shrubSpritesMap[ key ].toughSprite );
     }
 
     // {ShrubSpriteInstance[]} sprite instances for shrubs
