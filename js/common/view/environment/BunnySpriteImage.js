@@ -18,8 +18,8 @@ class BunnySpriteImage extends OrganismSpriteImage {
    */
   constructor( image ) {
     super( image, {
-      hitTestPixels: true,
-      pickable: true
+      pickable: true,
+      hitTestPixels: true
     } );
   }
 }
