@@ -33,28 +33,29 @@ class OrganismSpriteInstance extends SpriteInstance {
 
     super();
 
-    //TODO #128 it would be nice to pass these to super
+    // Set fields for SpriteInstance
     this.sprite = sprite;
     this.transformType = SpriteInstance.TransformType.TRANSLATION_AND_SCALE;
 
     // @public (read-only)
     this.organism = organism;
 
-    //TODO #128 is there a more efficient way to set this.matrix?
     //TODO #128 locations look incorrect
     // Update position and direction, must be disposed
     const multilink = new Multilink(
       [ organism.positionProperty, organism.xDirectionProperty ],
       ( position, xDirection ) => {
 
-        // scale
+        // compute position and scale
+        const viewPosition = organism.modelViewTransform.modelToViewPosition( position ); //TODO #128 creates Vector2, bottleneck?
         const viewScale = options.baseScale * organism.modelViewTransform.getViewScale( position.z );
         const xSign = XDirection.toSign( xDirection );
-        this.matrix.setToScale( xSign * viewScale, viewScale );
 
-        // position
-        const viewPosition = organism.modelViewTransform.modelToViewPosition( position );
-        this.matrix.prependTranslation( viewPosition.x, viewPosition.y );
+        // update the matrix
+        this.matrix.set00( xSign * viewScale );
+        this.matrix.set11( viewScale );
+        this.matrix.set02( viewPosition.x );
+        this.matrix.set12( viewPosition.y );
       } );
 
     // @private
