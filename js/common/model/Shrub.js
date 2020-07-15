@@ -12,6 +12,7 @@ import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Organism from './Organism.js';
 
 // Used for image lookup, as specified in https://github.com/phetsims/natural-selection/issues/17
+// This is not an Enumeration because values are used as keys for shrubSpritesMap in OrganismSprites.js.
 const CATEGORIES = [ 'A', 'B', 'C' ];
 
 class Shrub extends Organism {

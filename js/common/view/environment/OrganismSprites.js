@@ -62,9 +62,9 @@ class OrganismSprites extends Sprites {
     assert && assert( canvasBounds instanceof Bounds2, 'invalid canvasBounds' );
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
-    // Sprites for each possible bunny phenotype. The cache is a map, which maps phenotype key to an Image
-    // instance. The phenotype key pattern is '{{hasWhiteFur}}-{{hasStraightEars}}-{{hasShortTeeth}}', where the value
-    // for each placeholder is 'true' or 'false'. See getBunnySprite for how the key is assembled.
+    // Sprites for each possible bunny phenotype. Maps a phenotype key to an Image instance. The phenotype key pattern
+    // is '{{hasWhiteFur}}-{{hasStraightEars}}-{{hasShortTeeth}}', where the value for each placeholder is 'true' or
+    // 'false'. See getBunnySprite for how the key is assembled.
     const bunnySpritesMap = {
 
       // key: value
@@ -81,8 +81,8 @@ class OrganismSprites extends Sprites {
     // The sprite that is used for all wolves.
     const wolfSprite = new Sprite( new OrganismSpriteImage( wolfImage ) );
 
-    // Sprites for all categories of shrubs.
-    // The key is Shrub.category, as specified in https://github.com/phetsims/natural-selection/issues/17
+    // Sprites for all categories of shrubs. Maps a shrub category to a pair of sprites, for tough and tender versions
+    // of the shrub. Keys are from Shrub.CATEGORIES.
     const shrubSpritesMap = {
 
       // key: value
