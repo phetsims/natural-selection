@@ -128,7 +128,9 @@ class OrganismSprites extends Sprites {
       canvasBounds: canvasBounds,
       hitTestSprites: true,
       cursor: 'pointer',
-      tandem: tandem
+      tandem: tandem,
+      phetioReadOnly: true,
+      phetioDocumentation: 'bunnies, wolves, and shrubs that appear in the environment'
     } );
 
     // @private
