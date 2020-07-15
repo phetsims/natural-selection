@@ -254,7 +254,7 @@ class NaturalSelectionScreenView extends ScreenView {
 
       // So we don't leave bunnies captured in mid-hop
       model.bunnyCollection.moveBunniesToGround();
-      environmentNode.sortOrganisms();
+      environmentNode.updateSprites();
     };
 
     // Display a dialog when all bunnies have died.

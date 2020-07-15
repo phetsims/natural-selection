@@ -12,12 +12,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import shrubTenderAImage from '../../../images/shrub-tender-A_png.js';
-import shrubTenderBImage from '../../../images/shrub-tender-B_png.js';
-import shrubTenderCImage from '../../../images/shrub-tender-C_png.js';
-import shrubToughAImage from '../../../images/shrub-tough-A_png.js';
-import shrubToughBImage from '../../../images/shrub-tough-B_png.js';
-import shrubToughCImage from '../../../images/shrub-tough-C_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
@@ -26,9 +20,6 @@ import CauseOfDeath from './CauseOfDeath.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenerationClock from './GenerationClock.js';
 import Shrub from './Shrub.js';
-
-// constants
-const CLOCK_FOOD_MIDPOINT = NaturalSelectionConstants.CLOCK_FOOD_RANGE.getCenter();
 
 class Food {
 
@@ -74,31 +65,37 @@ class Food {
     } );
 
     // @public (read-only) {Shrub[]} the collection of Shrubs
-    // Approximate positions and categories (A, B, C) are as specified in
+    // Categories (A, B, C) and approximate positions are as specified in
     // https://github.com/phetsims/natural-selection/issues/17
     this.shrubs = [
 
       // A
-      new Shrub( 'A', shrubTenderAImage, shrubToughAImage, modelViewTransform, this.isToughProperty, {
+      new Shrub( modelViewTransform, {
+        category: 'A',
         position: modelViewTransform.getGroundPosition( -65, 210 )
       } ),
-      new Shrub( 'A', shrubTenderAImage, shrubToughAImage, modelViewTransform, this.isToughProperty, {
+      new Shrub( modelViewTransform, {
+        category: 'A',
         position: modelViewTransform.getGroundPosition( 155, 160 )
       } ),
 
       // B
-      new Shrub( 'B', shrubTenderBImage, shrubToughBImage, modelViewTransform, this.isToughProperty, {
+      new Shrub( modelViewTransform, {
+        category: 'B',
         position: modelViewTransform.getGroundPosition( -155, 160 )
       } ),
-      new Shrub( 'B', shrubTenderBImage, shrubToughBImage, modelViewTransform, this.isToughProperty, {
+      new Shrub( modelViewTransform, {
+        category: 'B',
         position: modelViewTransform.getGroundPosition( 200, 250 )
       } ),
 
       // C
-      new Shrub( 'C', shrubTenderCImage, shrubToughCImage, modelViewTransform, this.isToughProperty, {
+      new Shrub( modelViewTransform, {
+        category: 'C',
         position: modelViewTransform.getGroundPosition( 60, 185 )
       } ),
-      new Shrub( 'C', shrubTenderCImage, shrubToughCImage, modelViewTransform, this.isToughProperty, {
+      new Shrub( modelViewTransform, {
+        category: 'C',
         position: modelViewTransform.getGroundPosition( -180, 270 )
       } )
     ];
@@ -116,7 +113,8 @@ class Food {
     // unlink is not necessary.
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
-        if ( previousPercentTime < CLOCK_FOOD_MIDPOINT && currentPercentTime >= CLOCK_FOOD_MIDPOINT ) {
+        const midPoint = NaturalSelectionConstants.CLOCK_FOOD_RANGE.getCenter();
+        if ( previousPercentTime < midPoint && currentPercentTime >= midPoint ) {
           this.starveBunnies( bunnyCollection.getSelectionCandidates() );
         }
       }

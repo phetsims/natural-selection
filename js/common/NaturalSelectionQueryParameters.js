@@ -293,12 +293,6 @@ const SCHEMA = {
     type: 'flag'
   },
 
-  // Whether to use scenery Sprites
-  //TODO #128 delete this and non-sprite code
-  sprites: {
-    type: 'flag'
-  },
-
   // Percentage of newborn bunnies that will receive a mutation.
   // Symmetric rounding is used, and at least 1 bunny will receive the mutation.
   mutationPercentage: {

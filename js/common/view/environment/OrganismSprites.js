@@ -238,19 +238,27 @@ class OrganismSprites extends Sprites {
    */
   update() {
 
-    // Sort by z coordinate, from back to front. +z is away from the camera.
-    // Sort in place, because super has a reference to this.spriteInstances.
-    //TODO #128 if sort is a performance issue, then sort when each organism moves if its z changed
-    this.spriteInstances.sort( ( spriteInstance1, spriteInstance2 ) => {
-      const z1 = spriteInstance1.organism.positionProperty.value.z;
-      const z2 = spriteInstance2.organism.positionProperty.value.z;
-      return Math.sign( z2 - z1 );
-    } );
+    // Sort by z coordinate, from back to front.
+    this.sort();
 
     //TODO #128 move selected bunny and selection rectangle to front
 
     // Repaint.
     this.invalidatePaint();
+  }
+
+  //TODO #128 if sort is a performance issue, then sort when each organism moves if its z changed
+  /**
+   * Sorts sprite instances by z coordinate of their associated organism, from back to front.
+   * +z is away from the camera. Sorts in place, because super has a reference to this.spriteInstances.
+   * @private
+   */
+  sort() {
+    this.spriteInstances.sort( ( spriteInstance1, spriteInstance2 ) => {
+      const z1 = spriteInstance1.organism.positionProperty.value.z;
+      const z2 = spriteInstance2.organism.positionProperty.value.z;
+      return Math.sign( z2 - z1 );
+    } );
   }
 
   /**

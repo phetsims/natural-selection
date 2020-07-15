@@ -1,6 +1,5 @@
 // Copyright 2020, University of Colorado Boulder
 
-//TODO #128 delete tenderImage, toughImage, isToughProperty
 /**
  * Shrub is the model of a shrub, the food for bunnies.
  *
@@ -9,41 +8,34 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Organism from './Organism.js';
 
-// as specified in https://github.com/phetsims/natural-selection/issues/17
+// Used for image lookup, as specified in https://github.com/phetsims/natural-selection/issues/17
 const CATEGORIES = [ 'A', 'B', 'C' ];
 
 class Shrub extends Organism {
 
   /**
-   * @param {string} category
-   * @param {HTMLImageElement} tenderImage - image used when the shrub is tender
-   * @param {HTMLImageElement} toughImage - image used when the shrub is tough
    * @param {EnvironmentModelViewTransform} modelViewTransform
-   * @param {Property.<boolean>} isToughProperty
    * @param {Object} [options]
    */
-  constructor( category, tenderImage, toughImage, modelViewTransform, isToughProperty, options ) {
+  constructor( modelViewTransform, options ) {
 
-    assert && assert( CATEGORIES.includes( category ), 'invalid category' );
-    assert && assert( tenderImage instanceof HTMLImageElement, 'invalid tenderImage' );
-    assert && assert( toughImage instanceof HTMLImageElement, 'invalid toughImage' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
-    assert && AssertUtils.assertPropertyOf( isToughProperty, 'boolean' );
 
-    options = merge( {}, options );
+    options = merge( {
+      category: 'A'
+    }, options );
+
+    assert && assert( CATEGORIES.includes( options.category ), 'invalid category' );
 
     super( modelViewTransform, options );
 
     // @public (read-only)
-    this.category = category;
-    this.tenderImage = tenderImage;
-    this.toughImage = toughImage;
-    this.isToughProperty = isToughProperty;
+    // Used for image lookup, as specified in https://github.com/phetsims/natural-selection/issues/17
+    this.category = options.category;
 
     // @public whether the shrub is visible, used to hide shrubs when the food supply is limited
     assert && assert( !this.visibleProperty, 'attempt to redefine visibleProperty' );
@@ -59,6 +51,9 @@ class Shrub extends Organism {
     super.dispose();
   }
 }
+
+// Used for image lookup, as specified in https://github.com/phetsims/natural-selection/issues/17
+Shrub.CATEGORIES = CATEGORIES;
 
 naturalSelection.register( 'Shrub', Shrub );
 export default Shrub;
