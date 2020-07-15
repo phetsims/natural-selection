@@ -10,6 +10,7 @@
  */
 
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
+import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import PressListener from '../../../../../scenery/js/listeners/PressListener.js';
 import SpriteListenable from '../../../../../scenery/js/listeners/SpriteListenable.js';
 import Sprites from '../../../../../scenery/js/nodes/Sprites.js';
@@ -47,14 +48,16 @@ class OrganismSprites extends Sprites {
    * @param {BunnyCollection} bunnyCollection
    * @param {WolfCollection} wolfCollection
    * @param {Food} food
+   * @param {Property.<boolean>} isPlayingProperty
    * @param {Bounds2} canvasBounds
    * @param {Tandem} tandem
    */
-  constructor( bunnyCollection, wolfCollection, food, canvasBounds, tandem ) {
+  constructor( bunnyCollection, wolfCollection, food, isPlayingProperty, canvasBounds, tandem ) {
 
     assert && assert( bunnyCollection instanceof BunnyCollection, 'invalid bunnyCollection' );
     assert && assert( wolfCollection instanceof WolfCollection, 'invalid wolfCollection' );
     assert && assert( food instanceof Food, 'invalid food' );
+    assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
     assert && assert( canvasBounds instanceof Bounds2, 'invalid canvasBounds' );
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
@@ -133,6 +136,10 @@ class OrganismSprites extends Sprites {
 
               //TODO #128 move selected bunny to front
               //TODO #128 add selection rectangle behind selected bunny
+
+              if ( !isPlayingProperty.value ) {
+                this.update();
+              }
             }
           },
 

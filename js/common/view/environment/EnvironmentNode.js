@@ -36,20 +36,20 @@ class EnvironmentNode extends Node {
       phetioDocumentation: 'the area of the screen that displays what is happening in the environment'
     }, options );
 
+    const bounds = new Bounds2( 0, 0, options.size.width, options.size.height );
+
     // The background, which changes to match the environment
     const backgroundNode = new EnvironmentBackgroundNode( model.environmentProperty, options.size,
       options.yHorizon );
 
     // Frame around the background, to provide a nice crisp border.
-    const frameNode = new Rectangle( 0, 0, options.size.width, options.size.height, {
+    const frameNode = new Rectangle( bounds, {
       stroke: NaturalSelectionColors.PANEL_STROKE
     } );
 
     // High-performance sprites, for rendering bunnies, wolves, and food.
-    const organismSprites = new OrganismSprites(
-      model.bunnyCollection, model.wolfCollection, model.food,
-      new Bounds2( 0, 0, options.size.width, options.size.height ),
-      options.tandem.createTandem( 'organismSprites' )
+    const organismSprites = new OrganismSprites( model.bunnyCollection, model.wolfCollection, model.food,
+      model.isPlayingProperty, bounds, options.tandem.createTandem( 'organismSprites' )
     );
 
     // layering
