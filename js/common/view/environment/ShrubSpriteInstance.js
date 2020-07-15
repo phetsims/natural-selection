@@ -46,7 +46,9 @@ class ShrubSpriteInstance extends OrganismSpriteInstance {
     const tenderSprite = SHRUB_SPRITES_CACHE[ shrub.category ].tenderSprite;
     const toughSprite = SHRUB_SPRITES_CACHE[ shrub.category ].toughSprite;
 
-    super( shrub, isTough ? toughSprite : tenderSprite );
+    super( shrub, isTough ? toughSprite : tenderSprite, {
+      baseScale: 0.5
+    } );
 
     // @private
     this.tenderSprite = tenderSprite;

@@ -23,7 +23,9 @@ class WolfSpriteInstance extends OrganismSpriteInstance {
    */
   constructor( wolf ) {
     assert && assert( wolf instanceof Wolf, 'invalid wolf' );
-    super( wolf, WOLF_SPRITE );
+    super( wolf, WOLF_SPRITE, {
+      baseScale: 0.25
+    } );
   }
 
   /**

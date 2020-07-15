@@ -41,7 +41,9 @@ class BunnySpriteInstance extends OrganismSpriteInstance {
    */
   constructor( bunny ) {
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-    super( bunny, getBunnySprite( bunny ) );
+    super( bunny, getBunnySprite( bunny ), {
+      baseScale: 0.4
+    } );
     this.bunny = bunny;
   }
 

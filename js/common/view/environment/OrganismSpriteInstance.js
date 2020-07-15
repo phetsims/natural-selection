@@ -8,20 +8,28 @@
  */
 
 import Multilink from '../../../../../axon/js/Multilink.js';
+import merge from '../../../../../phet-core/js/merge.js';
 import Sprite from '../../../../../scenery/js/util/Sprite.js';
 import SpriteInstance from '../../../../../scenery/js/util/SpriteInstance.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Organism from '../../model/Organism.js';
+import XDirection from '../../model/XDirection.js';
 
 class OrganismSpriteInstance extends SpriteInstance {
 
   /**
    * @param {Organism} organism
    * @param {Sprite} sprite
+   * @param {Object} [options]
    */
-  constructor( organism, sprite ) {
+  constructor( organism, sprite, options ) {
+
     assert && assert( organism instanceof Organism, 'invalid organism' );
     assert && assert( sprite instanceof Sprite, 'invalid sprite' );
+
+    options = merge( {
+      baseScale: 1 // the base amount to scale, tuned based on the PNG file dimensions
+    }, options );
 
     super();
 
@@ -32,18 +40,21 @@ class OrganismSpriteInstance extends SpriteInstance {
     // @public (read-only)
     this.organism = organism;
 
+    //TODO #128 is there a more efficient way?
+    //TODO #128 locations look incorrect
     // Update position and direction, must be disposed
     const multilink = new Multilink(
       [ organism.positionProperty, organism.xDirectionProperty ],
       ( position, xDirection ) => {
 
-        const viewPosition = organism.modelViewTransform.modelToViewPosition( position );
-        // const viewScale = organism.modelViewTransform.getViewScale( position.z );
-        // const xSign = XDirection.toSign( xDirection );
+        // scale
+        const viewScale = options.baseScale * organism.modelViewTransform.getViewScale( position.z );
+        const xSign = XDirection.toSign( xDirection );
+        this.matrix.setToScale( xSign * viewScale, viewScale );
 
-        this.matrix.set02( viewPosition.x );
-        this.matrix.set12( viewPosition.y );
-        // this.setScaleMagnitude( xSign * scale, scale );
+        // position
+        const viewPosition = organism.modelViewTransform.modelToViewPosition( position );
+        this.matrix.prependTranslation( viewPosition.x, viewPosition.y );
       } );
 
     // @private
