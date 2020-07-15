@@ -79,26 +79,26 @@ class Food {
     this.shrubs = [
 
       // A
-      new Shrub( shrubTenderAImage, shrubToughAImage, modelViewTransform, this.isToughProperty, {
+      new Shrub( 'A', shrubTenderAImage, shrubToughAImage, modelViewTransform, this.isToughProperty, {
         position: modelViewTransform.getGroundPosition( -65, 210 )
       } ),
-      new Shrub( shrubTenderAImage, shrubToughAImage, modelViewTransform, this.isToughProperty, {
+      new Shrub( 'A', shrubTenderAImage, shrubToughAImage, modelViewTransform, this.isToughProperty, {
         position: modelViewTransform.getGroundPosition( 155, 160 )
       } ),
 
       // B
-      new Shrub( shrubTenderBImage, shrubToughBImage, modelViewTransform, this.isToughProperty, {
+      new Shrub( 'B', shrubTenderBImage, shrubToughBImage, modelViewTransform, this.isToughProperty, {
         position: modelViewTransform.getGroundPosition( -155, 160 )
       } ),
-      new Shrub( shrubTenderBImage, shrubToughBImage, modelViewTransform, this.isToughProperty, {
+      new Shrub( 'B', shrubTenderBImage, shrubToughBImage, modelViewTransform, this.isToughProperty, {
         position: modelViewTransform.getGroundPosition( 200, 250 )
       } ),
 
       // C
-      new Shrub( shrubTenderCImage, shrubToughCImage, modelViewTransform, this.isToughProperty, {
+      new Shrub( 'C', shrubTenderCImage, shrubToughCImage, modelViewTransform, this.isToughProperty, {
         position: modelViewTransform.getGroundPosition( 60, 185 )
       } ),
-      new Shrub( shrubTenderCImage, shrubToughCImage, modelViewTransform, this.isToughProperty, {
+      new Shrub( 'C', shrubTenderCImage, shrubToughCImage, modelViewTransform, this.isToughProperty, {
         position: modelViewTransform.getGroundPosition( -180, 270 )
       } )
     ];

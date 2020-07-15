@@ -45,7 +45,7 @@ class OrganismSprites extends Sprites {
     ];
 
     // {ShrubSpriteInstance[]}
-    const shrubSpriteInstances = _.map( food.shrubs, shrub => new ShrubSpriteInstance( shrub ) );
+    const shrubSpriteInstances = _.map( food.shrubs, shrub => new ShrubSpriteInstance( shrub, food.isToughProperty.value ) );
 
     // {SpriteInstances[]}
     const spriteInstances = [ ...shrubSpriteInstances ];
@@ -120,11 +120,9 @@ class OrganismSprites extends Sprites {
     } );
 
     // Change sprites for shrubs depending on whether food is tough or tender.
-    //TODO #128 delete Shrub.isToughProperty
-    //TODO #128 handle 'B' and 'C' shrub images
     food.isToughProperty.link( isTough => {
       shrubSpriteInstances.forEach( shrubSpriteInstance => {
-        shrubSpriteInstance.sprite = isTough ? ShrubSpriteInstance.SHRUB_TOUGH_SPRITE : ShrubSpriteInstance.SHRUB_TENDER_SPRITE;
+        shrubSpriteInstance.setTough( isTough );
       } );
       this.invalidatePaint();
     } );

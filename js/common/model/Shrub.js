@@ -1,5 +1,6 @@
 // Copyright 2020, University of Colorado Boulder
 
+//TODO #128 delete tenderImage, toughImage, isToughProperty
 /**
  * Shrub is the model of a shrub, the food for bunnies.
  *
@@ -16,14 +17,16 @@ import Organism from './Organism.js';
 class Shrub extends Organism {
 
   /**
+   * @param {string} category
    * @param {HTMLImageElement} tenderImage - image used when the shrub is tender
    * @param {HTMLImageElement} toughImage - image used when the shrub is tough
    * @param {EnvironmentModelViewTransform} modelViewTransform
    * @param {Property.<boolean>} isToughProperty
    * @param {Object} [options]
    */
-  constructor( tenderImage, toughImage, modelViewTransform, isToughProperty, options ) {
+  constructor( category, tenderImage, toughImage, modelViewTransform, isToughProperty, options ) {
 
+    assert && assert( typeof category === 'string', 'invalid category' );
     assert && assert( tenderImage instanceof HTMLImageElement, 'invalid tenderImage' );
     assert && assert( toughImage instanceof HTMLImageElement, 'invalid toughImage' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
@@ -34,6 +37,7 @@ class Shrub extends Organism {
     super( modelViewTransform, options );
 
     // @public (read-only)
+    this.category = category;
     this.tenderImage = tenderImage;
     this.toughImage = toughImage;
     this.isToughProperty = isToughProperty;
