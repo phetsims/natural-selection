@@ -17,10 +17,10 @@ import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionModel from '../../model/NaturalSelectionModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
-import OrganismSprites from '../sprites/OrganismSprites.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
 import EnvironmentBunnyNode from './EnvironmentBunnyNode.js';
 import EnvironmentBunnyPressListener from './EnvironmentBunnyPressListener.js';
+import OrganismSprites from './OrganismSprites.js';
 import ShrubNode from './ShrubNode.js';
 import WolfNode from './WolfNode.js';
 
