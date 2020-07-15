@@ -337,6 +337,19 @@ NaturalSelectionQueryParameters.getDefaultValue = function( key ) {
 };
 
 /**
+ * Parses a query-parameter value into a Range.
+ * @param {string} value
+ * @returns {Range}
+ */
+function parseRange( value ) {
+  const tokens = value.split( ',' );
+  assert && assert( tokens.length === 2, `range format is min,max: ${value}` );
+  assert && assert( _.every( tokens, token => isFinite( token ) ), `range must be 2 numbers: ${value}` );
+  const numbers = _.map( tokens, token => parseFloat( token ) );
+  return new Range( numbers[ 0 ], numbers[ 1 ] );
+}
+
+/**
  * Is the query parameter value a min/max range for a percentage?
  * @param {Range} range
  * @returns {boolean}
@@ -352,19 +365,6 @@ function isPercentRange( range ) {
  */
 function isPositiveRange( range ) {
   return range.min > 0;
-}
-
-/**
- * Parses a query-parameter value into a Range.
- * @param {string} value
- * @returns {Range}
- */
-function parseRange( value ) {
-  const tokens = value.split( ',' );
-  assert && assert( tokens.length === 2, `range format is min,max: ${value}` );
-  assert && assert( _.every( tokens, token => isFinite( token ) ), `range must be 2 numbers: ${value}` );
-  const numbers = _.map( tokens, token => parseFloat( token ) );
-  return new Range( numbers[ 0 ], numbers[ 1 ] );
 }
 
 // validate query parameters
