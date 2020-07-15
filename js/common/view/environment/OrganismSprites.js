@@ -44,10 +44,10 @@ class OrganismSprites extends Sprites {
       ...ShrubSpriteInstance.getSprites()
     ];
 
-    // {ShrubSpriteInstance[]}
+    // {ShrubSpriteInstance[]} sprite instances for shrubs
     const shrubSpriteInstances = _.map( food.shrubs, shrub => new ShrubSpriteInstance( shrub, food.isToughProperty.value ) );
 
-    // {SpriteInstances[]}
+    // {SpriteInstances[]} sprite instances for all organisms
     const spriteInstances = [ ...shrubSpriteInstances ];
 
     super( {
@@ -57,10 +57,11 @@ class OrganismSprites extends Sprites {
       hitTestSprites: true,  //TODO #128 how to hit test only bunny sprites?
       cursor: 'pointer', //TODO #128 how to show cursor for only bunny sprites?
 
-      // Mix in SpriteListenable, so we have access to the SpriteInstance, and will only interact when there is one.
       inputListeners: [
+
+        // Mix in SpriteListenable, so we have access to the SpriteInstance.
         new ( SpriteListenable( PressListener ) )( {
-          applyOffset: false, //TODO #128 what is this?
+          applyOffset: false, //TODO #128 what is this? is appears in scenery-phet demo
 
           // Select a bunny, or clear the current selection.
           press: ( event, listener ) => {
@@ -83,6 +84,9 @@ class OrganismSprites extends Sprites {
 
       tandem: tandem
     } );
+
+    // @private
+    this.spriteInstances = spriteInstances;
 
     // When a bunny is created...
     bunnyCollection.bunnyCreatedEmitter.addListener( bunny => {
@@ -127,8 +131,31 @@ class OrganismSprites extends Sprites {
       this.invalidatePaint();
     } );
 
-    // @private
-    this.spriteInstances = spriteInstances;
+    // Hide half of the shrubs when food is limited.
+    food.isLimitedProperty.link( isLimited => {
+
+      // Start by removing all shrubs
+      shrubSpriteInstances.forEach( shrubSpriteInstance => {
+        spriteInstances.splice( spriteInstances.indexOf( shrubSpriteInstance ), 1 );
+      } );
+
+      if ( isLimited ) {
+
+        // Food is limited, add every other shrub.
+        for ( let i = 0; i < shrubSpriteInstances.length; i += 2 ) {
+          spriteInstances.push( shrubSpriteInstances[ i ] );
+        }
+      }
+      else {
+
+        // Food is not limited, add all shrubs.
+        shrubSpriteInstances.forEach( shrubSpriteInstance => {
+          spriteInstances.push( shrubSpriteInstance );
+        } );
+      }
+
+      this.update();
+    } );
 
     this.update();
   }
