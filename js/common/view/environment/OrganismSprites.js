@@ -124,7 +124,7 @@ class OrganismSprites extends Sprites {
 
       inputListeners: [
 
-        // Mix in SpriteListenable, so we have access to the SpriteInstance.
+        // Mix in SpriteListenable, so we have access to the pressed SpriteInstance.
         new ( SpriteListenable( PressListener ) )( {
 
           // Select a bunny. This is called only when we click on a SpriteInstance.
