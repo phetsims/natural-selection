@@ -71,7 +71,6 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import naturalSelection from '../../naturalSelection.js';
 
@@ -214,18 +213,6 @@ class EnvironmentModelViewTransform {
   getViewScale( zModel ) {
     assert && assert( zModel > 0, `invalid zModel: ${zModel}` );
     return NEAR_SCALE * this.zNearModel / zModel;
-  }
-
-  //TODO #28 delete if unused
-  /**
-   * Given a 3D model position, project it into 2D view coordinates.
-   * @param {Vector3 } position
-   * @returns {Vector2}
-   * @public
-   */
-  modelToViewPosition( position ) {
-    assert && assert( position.z !== 0, 'z cannot be zero' );
-    return new Vector2( this.modelToViewX( position ), this.modelToViewY( position ) );
   }
 
   /**
