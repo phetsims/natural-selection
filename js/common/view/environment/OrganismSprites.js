@@ -35,6 +35,7 @@ import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
 import BunnyCollection from '../../model/BunnyCollection.js';
 import Food from '../../model/Food.js';
+import Shrub from '../../model/Shrub.js';
 import WolfCollection from '../../model/WolfCollection.js';
 import BunnySpriteImage from './BunnySpriteImage.js';
 import BunnySpriteInstance from './BunnySpriteInstance.js';
@@ -65,6 +66,8 @@ class OrganismSprites extends Sprites {
     // instance. The phenotype key pattern is '{{hasWhiteFur}}-{{hasStraightEars}}-{{hasShortTeeth}}', where the value
     // for each placeholder is 'true' or 'false'. See getBunnySprite for how the key is assembled.
     const bunnySpritesMap = {
+
+      // key: value
       'true-true-true': new Sprite( new BunnySpriteImage( bunnyWhiteFurStraightEarsShortTeethImage ) ),
       'true-true-false': new Sprite( new BunnySpriteImage( bunnyWhiteFurStraightEarsLongTeethImage ) ),
       'true-false-true': new Sprite( new BunnySpriteImage( bunnyWhiteFurFloppyEarsShortTeethImage ) ),
@@ -81,6 +84,8 @@ class OrganismSprites extends Sprites {
     // Sprites for all categories of shrubs.
     // The key is Shrub.category, as specified in https://github.com/phetsims/natural-selection/issues/17
     const shrubSpritesMap = {
+
+      // key: value
       'A': {
         tenderSprite: new Sprite( new OrganismSpriteImage( shrubTenderAImage ) ),
         toughSprite: new Sprite( new OrganismSpriteImage( shrubToughAImage ) )
@@ -94,6 +99,8 @@ class OrganismSprites extends Sprites {
         toughSprite: new Sprite( new OrganismSpriteImage( shrubToughCImage ) )
       }
     };
+    assert && assert( _.every( _.keys( shrubSpritesMap ), key => Shrub.CATEGORIES.includes( key ) ),
+      'invalid key in shrubSpritesMap' );
 
     // {Sprite[]} the complete unique set of sprites
     const sprites = [];
