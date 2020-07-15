@@ -13,7 +13,7 @@ import Organism from './Organism.js';
 
 // Each shrub is assigned a category, which determines which images it uses for tender and tough food.
 // The categories are specified in https://github.com/phetsims/natural-selection/issues/17.
-// This is not an Enumeration because values are used as keys for shrubSpritesMap in OrganismSprites.js.
+// This is not an Enumeration because values are used as keys for shrubSpritesMap in NaturalSelectionSprites.js.
 const CATEGORIES = [ 'A', 'B', 'C' ];
 
 class Shrub extends Organism {

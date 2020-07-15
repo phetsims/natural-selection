@@ -15,7 +15,7 @@ import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionModel from '../../model/NaturalSelectionModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
-import OrganismSprites from './OrganismSprites.js';
+import NaturalSelectionSprites from './NaturalSelectionSprites.js';
 
 class EnvironmentNode extends Node {
 
@@ -48,7 +48,7 @@ class EnvironmentNode extends Node {
     } );
 
     // High-performance sprites, for rendering bunnies, wolves, and food.
-    const sprites = new OrganismSprites( model.bunnyCollection, model.wolfCollection, model.food,
+    const sprites = new NaturalSelectionSprites( model.bunnyCollection, model.wolfCollection, model.food,
       model.isPlayingProperty, bounds, {
         tandem: options.tandem.createTandem( 'sprites' )
       } );
