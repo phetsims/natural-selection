@@ -51,6 +51,7 @@ class PedigreeBunnyNode extends Node {
 
     const children = [];
 
+    // Image that corresponds to the bunny's phenotype (appearance)
     const wrappedImage = BunnyImageCache.getWrappedImage( bunny, {
       scale: IMAGE_SCALE,
       centerX: 0,
@@ -97,11 +98,11 @@ class PedigreeBunnyNode extends Node {
 
     super( options );
 
+    // When a bunny dies, label it with a red cross mark
     const diedListener = isAlive => {
       if ( !isAlive ) {
         bunny.diedEmitter.removeListener( diedListener );
 
-        // Unicode red cross mark
         this.addChild( new Text( '\u274c', {
           font: DEAD_SYMBOL_FONT,
           right: wrappedImage.centerX,
@@ -109,7 +110,7 @@ class PedigreeBunnyNode extends Node {
         } ) );
       }
     };
-    bunny.diedEmitter.addListener( diedListener ); // removeListener is handled by diedListener
+    bunny.diedEmitter.addListener( diedListener ); // removeListener is required
     diedListener( bunny.isAlive );
     
     // Update the genotype abbreviation, must be disposed
