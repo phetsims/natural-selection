@@ -17,13 +17,22 @@ import naturalSelection from '../../../naturalSelection.js';
 import OrganismSpriteImage from './OrganismSpriteImage.js';
 import OrganismSpriteInstance from './OrganismSpriteInstance.js';
 
-// constants
-const SHRUB_TENDER_A_SPRITE = new Sprite( new OrganismSpriteImage( shrubTenderAImage ) );
-const SHRUB_TOUGH_A_SPRITE = new Sprite( new OrganismSpriteImage( shrubToughAImage ) );
-const SHRUB_TENDER_B_SPRITE = new Sprite( new OrganismSpriteImage( shrubTenderBImage ) );
-const SHRUB_TOUGH_B_SPRITE = new Sprite( new OrganismSpriteImage( shrubToughBImage ) );
-const SHRUB_TENDER_C_SPRITE = new Sprite( new OrganismSpriteImage( shrubTenderCImage ) );
-const SHRUB_TOUGH_C_SPRITE = new Sprite( new OrganismSpriteImage( shrubToughCImage ) );
+// Cache containing all possible sprites used to render shrubs.
+// The key is Shrub.category, as specified in https://github.com/phetsims/natural-selection/issues/17
+const SHRUB_SPRITES_CACHE = {
+  'A': {
+    tenderSprite: new Sprite( new OrganismSpriteImage( shrubTenderAImage ) ),
+    toughSprite: new Sprite( new OrganismSpriteImage( shrubToughAImage ) )
+  },
+  'B': {
+    tenderSprite: new Sprite( new OrganismSpriteImage( shrubTenderBImage ) ),
+    toughSprite: new Sprite( new OrganismSpriteImage( shrubToughBImage ) )
+  },
+  'C': {
+    tenderSprite: new Sprite( new OrganismSpriteImage( shrubTenderCImage ) ),
+    toughSprite: new Sprite( new OrganismSpriteImage( shrubToughCImage ) )
+  }
+};
 
 class ShrubSpriteInstance extends OrganismSpriteInstance {
 
@@ -34,23 +43,8 @@ class ShrubSpriteInstance extends OrganismSpriteInstance {
   constructor( shrub, isTough ) {
 
     // Choose the sprites for tender and tough food based on 'category'.
-    let tenderSprite = null;
-    let toughSprite = null;
-    if ( shrub.category === 'A' ) {
-      tenderSprite = SHRUB_TENDER_A_SPRITE;
-      toughSprite = SHRUB_TOUGH_A_SPRITE;
-    }
-    else if ( shrub.category === 'B' ) {
-      tenderSprite = SHRUB_TENDER_B_SPRITE;
-      toughSprite = SHRUB_TOUGH_B_SPRITE;
-    }
-    else if ( shrub.category === 'C' ) {
-      tenderSprite = SHRUB_TENDER_C_SPRITE;
-      toughSprite = SHRUB_TOUGH_C_SPRITE;
-    }
-    else {
-      throw new Error( `invalid shrub category: ${shrub.category}` );
-    }
+    const tenderSprite = SHRUB_SPRITES_CACHE[ shrub.category ].tenderSprite;
+    const toughSprite = SHRUB_SPRITES_CACHE[ shrub.category ].toughSprite;
 
     super( shrub, isTough ? toughSprite : tenderSprite );
 
@@ -75,11 +69,12 @@ class ShrubSpriteInstance extends OrganismSpriteInstance {
    * @public
    */
   static getSprites() {
-    return [
-      SHRUB_TENDER_A_SPRITE, SHRUB_TOUGH_A_SPRITE,
-      SHRUB_TENDER_B_SPRITE, SHRUB_TOUGH_B_SPRITE,
-      SHRUB_TENDER_C_SPRITE, SHRUB_TOUGH_C_SPRITE
-    ];
+    const sprites = [];
+    for ( const property in SHRUB_SPRITES_CACHE ) {
+      sprites.push( SHRUB_SPRITES_CACHE[ property ].tenderSprite );
+      sprites.push( SHRUB_SPRITES_CACHE[ property ].toughSprite );
+    }
+    return sprites;
   }
 }
 

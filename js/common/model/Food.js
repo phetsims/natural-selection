@@ -74,7 +74,7 @@ class Food {
     } );
 
     // @public (read-only) {Shrub[]} the collection of Shrubs
-    // Approximate positions and A, B, C labeling of images comes from
+    // Approximate positions and categories (A, B, C) are as specified in
     // https://github.com/phetsims/natural-selection/issues/17
     this.shrubs = [
 
