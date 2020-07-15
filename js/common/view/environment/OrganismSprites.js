@@ -170,6 +170,9 @@ class OrganismSprites extends Sprites {
 
   /**
    * Sorts the SpriteInstances based on z coordinate of their associated organism. Then repaints.
+   * Operations that change visibility or appearance (e.g. hiding shrubs, changing shrubs from tender to tough)
+   * should call update immediately. Animation (e.g. moving bunnies or wolves) should be handled by calling
+   * update from view.step, after model.step has positioned the model elements.
    * @public
    */
   update() {
