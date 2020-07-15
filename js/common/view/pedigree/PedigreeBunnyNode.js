@@ -85,8 +85,7 @@ class PedigreeBunnyNode extends Node {
         center: wrappedImage.center,
         pickable: false
       } );
-      children.push( selectionRectangle );
-      selectionRectangle.moveToBack();
+      children.unshift( selectionRectangle ); // prepend
     }
 
     if ( NaturalSelectionQueryParameters.showOrigin ) {
