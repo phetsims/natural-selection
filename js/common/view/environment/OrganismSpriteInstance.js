@@ -45,16 +45,16 @@ class OrganismSpriteInstance extends SpriteInstance {
       [ organism.positionProperty, organism.xDirectionProperty ],
       ( position, xDirection ) => {
 
-        // compute position and scale
-        const viewPosition = organism.modelViewTransform.modelToViewPosition( position ); //TODO #128 creates Vector2, bottleneck?
+        // compute scale and position, in view coordinates
         const viewScale = options.baseScale * organism.modelViewTransform.getViewScale( position.z );
-        const xSign = XDirection.toSign( xDirection );
+        const viewX = organism.modelViewTransform.modelToViewX( position );
+        const viewY = organism.modelViewTransform.modelToViewY( position );
 
-        // update the matrix
-        this.matrix.set00( xSign * viewScale );
+        // update the matrix in the most efficient way possible
+        this.matrix.set00( viewScale * XDirection.toSign( xDirection ) ); // reflected to account for x direction
         this.matrix.set11( viewScale );
-        this.matrix.set02( viewPosition.x );
-        this.matrix.set12( viewPosition.y );
+        this.matrix.set02( viewX );
+        this.matrix.set12( viewY );
       } );
 
     // @private

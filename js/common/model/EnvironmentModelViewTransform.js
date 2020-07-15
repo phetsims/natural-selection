@@ -216,6 +216,7 @@ class EnvironmentModelViewTransform {
     return NEAR_SCALE * this.zNearModel / zModel;
   }
 
+  //TODO #28 delete if unused
   /**
    * Given a 3D model position, project it into 2D view coordinates.
    * @param {Vector3 } position
@@ -224,9 +225,29 @@ class EnvironmentModelViewTransform {
    */
   modelToViewPosition( position ) {
     assert && assert( position.z !== 0, 'z cannot be zero' );
-    const xView = ( this.viewSize.width / 2 ) + ( position.x / position.z ) * this.scaleFactor;
-    const yView = this.yHorizonView - ( position.y / position.z ) * this.scaleFactor;
-    return new Vector2( xView, yView );
+    return new Vector2( this.modelToViewX( position ), this.modelToViewY( position ) );
+  }
+
+  /**
+   * Given a 3D model position, project it into 2D view coordinates and return x.
+   * @param {Vector3 } position
+   * @returns {number}
+   * @public
+   */
+  modelToViewX( position ) {
+    assert && assert( position.z !== 0, 'z cannot be zero' );
+    return ( this.viewSize.width / 2 ) + ( position.x / position.z ) * this.scaleFactor;
+  }
+
+  /**
+   * Given a 3D model position, project it into 2D view coordinates and return y.
+   * @param {Vector3 } position
+   * @returns {number}
+   * @public
+   */
+  modelToViewY( position ) {
+    assert && assert( position.z !== 0, 'z cannot be zero' );
+    return this.yHorizonView - ( position.y / position.z ) * this.scaleFactor;
   }
 
   /**
