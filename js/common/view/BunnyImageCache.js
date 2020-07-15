@@ -2,7 +2,7 @@
 
 /**
  * BunnyImageCache is a cache of Image nodes for all possible Bunny phenotypes (appearances).
- * These Image instances are used throughout the sim via scenery's DAG feature, so exercise
+ * These Image instances are used in multiple places via scenery's DAG feature, so exercise
  * caution when applying transforms.
  *
  * @author Chris Malley (PixelZoom, Inc.)
