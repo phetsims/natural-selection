@@ -149,6 +149,8 @@ class OrganismSprites extends Sprites {
       }
     } );
 
+    // PressListener for selecting a bunny.
+    // Mix in SpriteListenable, so we have access to the pressed SpriteInstance.
     this.addInputListener( new ( SpriteListenable( PressListener ) )( {
 
       // Select a bunny. This is called only when we click on a SpriteInstance.
@@ -168,7 +170,7 @@ class OrganismSprites extends Sprites {
         }
       },
 
-      tandem: tandem.createTandem( 'pressListener' )
+      tandem: tandem.createTandem( 'bunnyPressListener' )
     } ) );
 
     // Creates a sprite instance of a bunny
