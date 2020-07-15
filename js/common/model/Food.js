@@ -100,14 +100,6 @@ class Food {
       } )
     ];
 
-    // When food is limited, hide half of the food (odd-indexed Shrubs). unlink is not necessary.
-    assert && assert( this.shrubs.length % 2 === 0, 'to hide half of the food, an even number of Shrubs is required' );
-    this.isLimitedProperty.link( isLimited => {
-      for ( let i = 1; i < this.shrubs.length; i = i + 2 ) {
-        this.shrubs[ i ].visibleProperty.value = !isLimited;
-      }
-    } );
-
     // Starve some bunnies at the midpoint of CLOCK_FOOD_RANGE.
     // See https://github.com/phetsims/natural-selection/issues/110
     // unlink is not necessary.

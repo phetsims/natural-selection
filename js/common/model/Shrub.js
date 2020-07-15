@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -36,10 +35,6 @@ class Shrub extends Organism {
     // @public (read-only)
     // Used for image lookup, as specified in https://github.com/phetsims/natural-selection/issues/17
     this.category = options.category;
-
-    // @public whether the shrub is visible, used to hide shrubs when the food supply is limited
-    assert && assert( !this.visibleProperty, 'attempt to redefine visibleProperty' );
-    this.visibleProperty = new BooleanProperty( true );
   }
 
   /**

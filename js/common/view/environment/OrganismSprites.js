@@ -175,10 +175,10 @@ class OrganismSprites extends Sprites {
     // Create a BunnyNode for each Bunny in the initial population.
     bunnyCollection.liveBunnies.forEach( createBunnySpriteInstance );
 
-    // When a bunny is created...
+    // When a bunny is created... removeListener is not necessary.
     bunnyCollection.bunnyCreatedEmitter.addListener( createBunnySpriteInstance );
 
-    // When a wolf is created...
+    // When a wolf is created... removeListener is not necessary.
     wolfCollection.wolfCreatedEmitter.addListener( wolf => {
 
       // Create a SpriteInstance for the wolf.
@@ -192,7 +192,7 @@ class OrganismSprites extends Sprites {
       } );
     } );
 
-    // Change sprites for shrubs depending on whether food is tough or tender.
+    // Change sprites for shrubs depending on whether food is tough or tender. unlink is not necessary.
     food.isToughProperty.link( isTough => {
       shrubSpriteInstances.forEach( shrubSpriteInstance => {
         shrubSpriteInstance.setTough( isTough );
@@ -200,12 +200,15 @@ class OrganismSprites extends Sprites {
       this.invalidatePaint();
     } );
 
-    // Hide half of the shrubs when food is limited.
+    // Hide half of the shrubs (hide odd-indexed Shrubs) when food is limited. unlink is not necessary.
     food.isLimitedProperty.link( isLimited => {
 
       // Start by removing all shrubs
       shrubSpriteInstances.forEach( shrubSpriteInstance => {
-        spriteInstances.splice( spriteInstances.indexOf( shrubSpriteInstance ), 1 );
+        const index = spriteInstances.indexOf( shrubSpriteInstance );
+        if ( index !== -1 ) {
+          spriteInstances.splice( index, 1 );
+        }
       } );
 
       if ( isLimited ) {
