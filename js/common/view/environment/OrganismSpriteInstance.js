@@ -33,7 +33,7 @@ class OrganismSpriteInstance extends SpriteInstance {
 
     super();
 
-    // Set fields for SpriteInstance
+    // Set fields in super SpriteInstance
     this.sprite = sprite;
     this.transformType = SpriteInstance.TransformType.TRANSLATION_AND_SCALE;
 
