@@ -40,7 +40,7 @@ class OrganismSpriteInstance extends SpriteInstance {
     // @public (read-only)
     this.organism = organism;
 
-    // Update position and direction, must be disposed
+    // Update position and direction. Must be disposed.
     const multilink = new Multilink(
       [ organism.positionProperty, organism.xDirectionProperty ],
       ( position, xDirection ) => {
