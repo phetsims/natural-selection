@@ -7,34 +7,24 @@
  */
 
 import Sprite from '../../../../../scenery/js/util/Sprite.js';
-import wolfImage from '../../../../images/wolf_png.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Wolf from '../../model/Wolf.js';
-import OrganismSpriteImage from './OrganismSpriteImage.js';
 import OrganismSpriteInstance from './OrganismSpriteInstance.js';
-
-// constants
-const WOLF_SPRITE = new Sprite( new OrganismSpriteImage( wolfImage ) );
 
 class WolfSpriteInstance extends OrganismSpriteInstance {
 
   /**
    * @param {Wolf} wolf
+   * @param {Sprite} sprite
    */
-  constructor( wolf ) {
+  constructor( wolf, sprite ) {
+
     assert && assert( wolf instanceof Wolf, 'invalid wolf' );
-    super( wolf, WOLF_SPRITE, {
+    assert && assert( sprite instanceof Sprite, 'invalid sprite' );
+
+    super( wolf, sprite, {
       baseScale: 0.25
     } );
-  }
-
-  /**
-   * Gets the sprites used for wolves.
-   * @returns {Sprite[]}
-   * @public
-   */
-  static getSprites() {
-    return [ WOLF_SPRITE ];
   }
 }
 

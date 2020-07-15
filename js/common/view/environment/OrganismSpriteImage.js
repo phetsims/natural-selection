@@ -21,12 +21,12 @@ class OrganismSpriteImage extends SpriteImage {
   constructor( image, options ) {
 
     assert && assert( image instanceof HTMLImageElement, 'invalid image' );
+    assert && assert( image.width !== 0 && image.height !== 0, 'image dimensions are not available' );
 
     options = merge( {
       pickable: false
     }, options );
 
-    //TODO #128 offset is wrong, image does not have valid dimensions yet
     super( image, new Vector2( image.width / 2, image.height ), options );
   }
 }

@@ -65,6 +65,7 @@ class OrganismSpriteInstance extends SpriteInstance {
 
   /**
    * @public
+   * @override
    */
   dispose() {
     this.disposeOrganismSpriteInstance();
