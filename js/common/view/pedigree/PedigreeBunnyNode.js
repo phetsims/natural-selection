@@ -12,13 +12,11 @@ import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
-import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
-import NaturalSelectionColors from '../../NaturalSelectionColors.js';
-import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
+import BunnySelectionRectangle from '../BunnySelectionRectangle.js';
 import MutationIconNode from '../MutationIconNode.js';
 import OriginNode from '../OriginNode.js';
 import BunnyImageCache from './BunnyImageCache.js';
@@ -75,17 +73,11 @@ class PedigreeBunnyNode extends Node {
     } );
     children.push( genotypeNode );
 
-    // Optional selection rectangle
+    // Optional selection rectangle, prepended to children
     if ( options.bunnyIsSelected ) {
-      const selectionRectangle = new Rectangle( wrappedImage.bounds.dilated( 3 ), {
-        fill: 'rgba( 0, 0, 0, 0.25 )',
-        stroke: NaturalSelectionColors.SELECTED_BUNNY_STROKE,
-        lineWidth: 2,
-        cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
-        center: wrappedImage.center,
-        pickable: false
-      } );
-      children.unshift( selectionRectangle ); // prepend
+      children.unshift( new BunnySelectionRectangle( wrappedImage.bounds.dilated( 3 ), {
+        center: wrappedImage.center
+      } ) );
     }
 
     if ( NaturalSelectionQueryParameters.showOrigin ) {
