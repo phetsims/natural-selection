@@ -1,6 +1,6 @@
 // Copyright 2020, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/natural-selection/issues/128 delete, replaced by Sprites
+//TODO #128 delete, replaced by Sprites
 /**
  * WolfNode is the view of a Wolf.
  *

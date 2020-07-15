@@ -294,7 +294,7 @@ const SCHEMA = {
   },
 
   // Whether to use scenery Sprites
-  //TODO https://github.com/phetsims/natural-selection/issues/128 delete this and non-sprite code
+  //TODO #128 delete this and non-sprite code
   sprites: {
     type: 'flag'
   },

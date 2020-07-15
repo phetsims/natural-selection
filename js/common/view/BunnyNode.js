@@ -1,6 +1,6 @@
 // Copyright 2020, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/natural-selection/issues/128 fold into PedigreeBunnyNode
+//TODO#128 fold into PedigreeBunnyNode
 /**
  * BunnyNode is the view of a Bunny, used in both the environment and Pedigree graph.
  *

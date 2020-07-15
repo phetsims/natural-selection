@@ -1,6 +1,6 @@
 // Copyright 2020, University of Colorado Boulder
 
-//TODO add sprites for 'B' and 'C' shrub images
+//TODO #128 add sprites for 'B' and 'C' shrub images
 /**
  * ShrubSpriteInstance is a specialization of OrganismSpriteInstance for shrubs.
  *

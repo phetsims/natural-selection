@@ -53,14 +53,14 @@ class OrganismSprites extends Sprites {
     super( {
       sprites: sprites,
       spriteInstances: spriteInstances,
-      canvasBounds: canvasBounds, //TODO constrained to these bounds only with canvas, and it's a little off
-      hitTestSprites: true,  //TODO how to hit test only bunny sprites?
-      cursor: 'pointer', //TODO how to show cursor for only bunny sprites?
+      canvasBounds: canvasBounds, //TODO #128 constrained to these bounds only with canvas, and it's a little off
+      hitTestSprites: true,  //TODO #128 how to hit test only bunny sprites?
+      cursor: 'pointer', //TODO #128 how to show cursor for only bunny sprites?
 
       // Mix in SpriteListenable, so we have access to the SpriteInstance, and will only interact when there is one.
       inputListeners: [
         new ( SpriteListenable( PressListener ) )( {
-          applyOffset: false, //TODO what is this?
+          applyOffset: false, //TODO #128 what is this?
 
           // Select a bunny, or clear the current selection.
           press: ( event, listener ) => {
@@ -73,8 +73,8 @@ class OrganismSprites extends Sprites {
               bunnyCollection.selectedBunnyProperty.value = null;
             }
 
-            //TODO move selected bunny to front
-            //TODO add selection rectangle behind selected bunny
+            //TODO #128 move selected bunny to front
+            //TODO #128 add selection rectangle behind selected bunny
           },
 
           tandem: tandem.createTandem( 'pressListener' )
@@ -120,8 +120,8 @@ class OrganismSprites extends Sprites {
     } );
 
     // Change sprites for shrubs depending on whether food is tough or tender.
-    //TODO delete Shrub.isToughProperty
-    //TODO handle 'B' and 'C' shrub images
+    //TODO #128 delete Shrub.isToughProperty
+    //TODO #128 handle 'B' and 'C' shrub images
     food.isToughProperty.link( isTough => {
       shrubSpriteInstances.forEach( shrubSpriteInstance => {
         shrubSpriteInstance.sprite = isTough ? ShrubSpriteInstance.SHRUB_TOUGH_SPRITE : ShrubSpriteInstance.SHRUB_TENDER_SPRITE;
@@ -143,12 +143,12 @@ class OrganismSprites extends Sprites {
 
     // Sort by z coordinate, from back to front.
     // Use splice instead of assignment because super has a reference to this.spriteInstances.
-    //TODO change Sprites API to make spriteInstances mutable, so we can use assignment?
-    //TODO how fast is _.sortBy ?
+    //TODO #128 change Sprites API to make spriteInstances mutable, so we can use assignment?
+    //TODO #128 how fast is _.sortBy ?
     const sortedSpriteInstances = _.sortBy( this.spriteInstances, spriteInstance => spriteInstance.organism.positionProperty.value.z ).reverse();
     this.spriteInstances.splice( 0, this.spriteInstances.length, ...sortedSpriteInstances );
 
-    //TODO move selected bunny and selection rectangle to front
+    //TODO #128 move selected bunny and selection rectangle to front
 
     // Repaint.
     this.invalidatePaint();

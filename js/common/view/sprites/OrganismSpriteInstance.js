@@ -25,7 +25,7 @@ class OrganismSpriteInstance extends SpriteInstance {
 
     super();
 
-    //TODO it would be nice to pass these to super
+    //TODO #128 it would be nice to pass these to super
     this.sprite = sprite;
     this.transformType = SpriteInstance.TransformType.TRANSLATION_AND_SCALE;
 
