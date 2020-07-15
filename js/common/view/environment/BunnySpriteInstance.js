@@ -25,9 +25,6 @@ class BunnySpriteInstance extends OrganismSpriteInstance {
     super( bunny, sprite, {
       baseScale: 0.4
     } );
-
-    // @public (read-only)
-    this.bunny = bunny;
   }
 }
 

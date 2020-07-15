@@ -132,7 +132,7 @@ class OrganismSprites extends Sprites {
             assert && assert( listener.spriteInstance, 'expected a sprite instance' );
 
             if ( listener.spriteInstance instanceof BunnySpriteInstance ) {
-              bunnyCollection.selectedBunnyProperty.value = listener.spriteInstance.bunny;
+              bunnyCollection.selectedBunnyProperty.value = listener.spriteInstance.organism;
 
               //TODO #128 move selected bunny to front
               //TODO #128 add selection rectangle behind selected bunny
