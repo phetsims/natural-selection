@@ -137,7 +137,7 @@ class NaturalSelectionSprites extends Sprites {
         shrubSpritesMap[ shrub.category ].tenderSprite, shrubSpritesMap[ shrub.category ].toughSprite )
     );
 
-    // {SpriteInstances[]} sprite instances for all organisms
+    // {SpriteInstances[]} all sprite instances to be rendered, must be modified in place because super has a reference
     assert && assert( !options.spriteInstances, 'NaturalSelectionSprites sets spriteInstances' );
     options.spriteInstances = [ ...shrubSpriteInstances ];
 
@@ -185,7 +185,7 @@ class NaturalSelectionSprites extends Sprites {
       tandem: options.tandem.createTandem( 'bunnyPressListener' )
     } ) );
 
-    // Creates a sprite instance of a bunny
+    // Creates a sprite instance for a bunny, and the scaffolding to remove it when the bunny dies or is disposed.
     const createBunnySpriteInstance = bunny => {
 
       // PhET-iO state will restore both live and dead bunnies. Create SpriteInstances only for the live ones.
@@ -238,7 +238,7 @@ class NaturalSelectionSprites extends Sprites {
     // Hide half of the shrubs (hide odd-indexed Shrubs) when food is limited. unlink is not necessary.
     food.isLimitedProperty.link( isLimited => {
 
-      // Start by removing all shrubs
+      // Start by removing all shrubs.
       shrubSpriteInstances.forEach( shrubSpriteInstance => {
         const index = this.spriteInstances.indexOf( shrubSpriteInstance );
         if ( index !== -1 ) {
@@ -291,6 +291,7 @@ class NaturalSelectionSprites extends Sprites {
    */
   sort() {
 
+    // Sort by descending z coordinate.
     this.spriteInstances.sort( ( spriteInstance1, spriteInstance2 ) => {
       const z1 = spriteInstance1.organism.positionProperty.value.z;
       const z2 = spriteInstance2.organism.positionProperty.value.z;
@@ -314,10 +315,10 @@ class NaturalSelectionSprites extends Sprites {
   getBunnySprite( bunny ) {
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
-    // create the key by inspecting the phenotype
+    // Create the key by inspecting the phenotype.
     const key = `${bunny.phenotype.hasWhiteFur()}-${bunny.phenotype.hasStraightEars()}-${bunny.phenotype.hasShortTeeth()}`;
 
-    // look up the image in the map
+    // Look up the image in the map.
     const sprite = this.bunnySpritesMap[ key ];
     assert && assert( sprite, `no sprite found for key ${key}` );
 
