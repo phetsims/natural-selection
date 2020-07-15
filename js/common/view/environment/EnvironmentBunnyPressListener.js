@@ -1,5 +1,6 @@
 // Copyright 2020, University of Colorado Boulder
 
+//TODO https://github.com/phetsims/natural-selection/issues/128 delete, replaced by Sprites
 /**
  * EnvironmentBunnyPressListener is the scenery input listener for selecting a bunny in the environment.
  *

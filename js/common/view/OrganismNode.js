@@ -1,5 +1,6 @@
 // Copyright 2020, University of Colorado Boulder
 
+//TODO https://github.com/phetsims/natural-selection/issues/128 delete, replaced by Sprites
 /**
  * OrganismNode is the base-class view of a Organism model element. It synchronizes its
  * position and direction with the model, and converts the model's 3D position to a 2D position and scale.
