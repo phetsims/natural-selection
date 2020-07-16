@@ -268,7 +268,7 @@ class NaturalSelectionSprites extends Sprites {
       shrubSpriteInstance.setTough( isTough );
     } );
 
-    // No change in sorting or bunny selection, so no need to call update, invalidatePaint suffices.
+    // There was no change to spriteInstances, so no need to call update, invalidatePaint suffices.
     this.invalidatePaint();
   }
 
