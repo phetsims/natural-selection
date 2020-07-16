@@ -21,7 +21,7 @@ class OrganismSpriteImage extends SpriteImage {
   constructor( image, options ) {
 
     assert && assert( image instanceof HTMLImageElement, 'invalid image' );
-    assert && assert( image.width !== 0 && image.height !== 0, 'image dimensions are not available' );
+    assert && assert( image.width > 0 && image.height > 0, 'image does not have valid dimensions' );
 
     options = merge( {
       pickable: false
