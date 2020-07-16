@@ -1,11 +1,11 @@
 {
-  "comment": "# natural-selection 1.0.0-dev.70 Wed Jul 15 2020 22:27:58 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.0.0-dev.71 Thu Jul 16 2020 14:58:41 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "1a41cef653bbed1025af5768bea958d7e3e0f8ae",
     "branch": "master"
   },
   "axon": {
-    "sha": "a8437273aafc43be65a3794cf467b7835cf9154a",
+    "sha": "971e48b78ebcd314366032ee7c2c9c2ed901a34b",
     "branch": "master"
   },
   "brand": {
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "natural-selection": {
-    "sha": "21fac22d8c2343004749efff44bbe3cc50d22e01",
+    "sha": "1bba762829e90215c1881c2aae2474632c9c88f4",
     "branch": "master"
   },
   "phet-core": {
@@ -77,7 +77,7 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "f0dc5d72577e2ce011a56c4e0a91ac116807a203",
+    "sha": "8c8e03ad6e47976bd00ef58279e29169080cd906",
     "branch": "master"
   },
   "tambo": {
@@ -85,7 +85,7 @@
     "branch": "master"
   },
   "tandem": {
-    "sha": "e0ac94ad466d5323a7e2153c6a075cfbcd8be7ed",
+    "sha": "891090d344311761250f2b532e03ac664c2e8b96",
     "branch": "master"
   },
   "utterance-queue": {
