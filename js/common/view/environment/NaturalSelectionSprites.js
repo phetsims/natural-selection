@@ -369,25 +369,22 @@ class NaturalSelectionSprites extends Sprites {
       return Math.sign( z2 - z1 );
     } );
 
-    // If a bunny is selected...
-    if ( this.bunnyCollection.selectedBunnyProperty.value ) {
+    // If a bunny is selected and the sim is paused, move the selected bunny and the selection rectangle to the front.
+    if ( this.bunnyCollection.selectedBunnyProperty.value && !this.isPlayingProperty.value ) {
       assert && assert( this.selectedBunnySpriteInstance, 'expected selectedBunnySpriteInstance to be set' );
       assert && assert( this.selectionRectangleSpriteInstance, 'expected selectionRectangleSpriteInstance to be set' );
 
       // Gets the indices of the selected bunny and selection rectangle
-      const selectedBunnyIndex  = this.spriteInstances.indexOf( this.selectedBunnySpriteInstance );
+      const selectedBunnyIndex = this.spriteInstances.indexOf( this.selectedBunnySpriteInstance );
       assert && assert( selectedBunnyIndex !== -1, 'expected selectedBunnySpriteInstance to be in spriteInstances' );
 
-      const selectionRectangleIndex  = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
+      const selectionRectangleIndex = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
       assert && assert( selectionRectangleIndex !== -1, 'expected selectionRectangleSpriteInstance to be in spriteInstances' );
 
-      // When the sim is paused, move the selected bunny and the selection rectangle to the front.
-      if ( !this.isPlayingProperty.value ) {
-        this.spriteInstances.splice( selectionRectangleIndex, 1 );
-        this.spriteInstances.splice( selectedBunnyIndex, 1 );
-        this.spriteInstances.push( this.selectionRectangleSpriteInstance );
-        this.spriteInstances.push( this.selectedBunnySpriteInstance );
-      }
+      this.spriteInstances.splice( selectionRectangleIndex, 1 );
+      this.spriteInstances.splice( selectedBunnyIndex, 1 );
+      this.spriteInstances.push( this.selectionRectangleSpriteInstance );
+      this.spriteInstances.push( this.selectedBunnySpriteInstance );
     }
   }
 
