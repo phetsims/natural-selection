@@ -1,12 +1,9 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * NaturalSelectionSprites renders all sprites that appear in the environment. With the exception of the bunny
- * selection rectangle, all sprites are associated with organisms (living things).
- *
- * NaturalSelectionSprites uses scenery's high-performance Sprites feature, which uses renderer:'webgl', with a
- * fallback of 'canvas'. While each sprite instance stays synchronized with its associated model element, update()
- * must be explicitly called to render this Node correctly.
+ * NaturalSelectionSprites renders all sprites that appear in the environment. It uses scenery's high-performance
+ * Sprites feature, which uses renderer:'webgl', with a fallback of 'canvas'. While each sprite instance stays
+ * synchronized with its associated model element, update() must be explicitly called to render this Node correctly.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
