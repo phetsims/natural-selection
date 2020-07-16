@@ -202,7 +202,6 @@ class NaturalSelectionSprites extends Sprites {
   update() {
 
     // Sort sprite instances in back-to-front rendering order.
-    //TODO #128 if sort impacts performance, then sort as each organism changes z
     this.sort();
 
     // Repaint.
@@ -332,7 +331,7 @@ class NaturalSelectionSprites extends Sprites {
     if ( selectedBunny ) {
 
       // Find the sprite instance that is associated with the selected bunny.
-      //TODO #128 performance?
+      // Performance: For a maximum population, this brute-force approach takes < 1ms on a 2019 MacBook Pro.
       let selectedBunnySpriteInstance = null;
       for ( let i = 0; i < this.spriteInstances.length && !selectedBunnySpriteInstance; i++ ) {
         if ( this.spriteInstances[ i ].organism === selectedBunny ) {
@@ -363,6 +362,7 @@ class NaturalSelectionSprites extends Sprites {
   sort() {
 
     // Sort by descending z coordinate.
+    // Performance: For a maximum population, this takes < 1ms on a 2019 MacBook Pro.
     this.spriteInstances.sort( ( spriteInstance1, spriteInstance2 ) => {
       const z1 = spriteInstance1.organism.positionProperty.value.z;
       const z2 = spriteInstance2.organism.positionProperty.value.z;
