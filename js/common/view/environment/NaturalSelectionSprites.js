@@ -1,7 +1,5 @@
 // Copyright 2020, University of Colorado Boulder
 
-//TODO #128 bunny selection rectangle flickers while sim is playing, sometimes in front of selected bunny?
-
 /**
  * NaturalSelectionSprites renders all sprites that appear in the environment. With the exception of the bunny
  * selection rectangle, all sprites are associated with organisms (living things).
@@ -349,7 +347,7 @@ class NaturalSelectionSprites extends Sprites {
 
       // Create the selection rectangle for the selected bunny.
       this.selectionRectangleSpriteInstance = new BunnySelectionRectangleSpriteInstance( selectedBunny, this.selectionRectangleSprite );
-      this.spriteInstances.push( this.selectionRectangleSpriteInstance );
+      this.spriteInstances.unshift( this.selectionRectangleSpriteInstance ); // prepend, so it's behind the selected bunny
     }
 
     // If the sim is paused, update.
@@ -386,15 +384,8 @@ class NaturalSelectionSprites extends Sprites {
       const selectionRectangleIndex  = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
       assert && assert( selectionRectangleIndex !== -1, 'expected selectionRectangleSpriteInstance to be in spriteInstances' );
 
-      if ( this.isPlayingProperty.value ) {
-
-        // When the sim is playing, move the selection rectangle immediately behind the selected bunny.
-        this.spriteInstances.splice( selectionRectangleIndex, 1 );
-        this.spriteInstances.splice( selectedBunnyIndex, 0, this.selectionRectangleSpriteInstance );
-      }
-      else {
-
-        // When the sim is paused, move the selected bunny and the selection rectangle to the front.
+      // When the sim is paused, move the selected bunny and the selection rectangle to the front.
+      if ( !this.isPlayingProperty.value ) {
         this.spriteInstances.splice( selectionRectangleIndex, 1 );
         this.spriteInstances.splice( selectedBunnyIndex, 1 );
         this.spriteInstances.push( this.selectionRectangleSpriteInstance );
