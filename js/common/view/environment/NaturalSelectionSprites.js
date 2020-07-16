@@ -303,8 +303,7 @@ class NaturalSelectionSprites extends Sprites {
       } );
     }
 
-    // No change in sorting or bunny selection, so no need to call update, invalidatePaint suffices.
-    this.invalidatePaint();
+    this.update();
   }
 
   /**
