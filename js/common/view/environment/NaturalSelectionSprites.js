@@ -153,7 +153,7 @@ class NaturalSelectionSprites extends Sprites {
     // @private {BunnySpriteInstance|null} reference to the sprite instance for the selected bunny, null if no selection
     this.selectedBunnySpriteInstance = null;
 
-    // @private {BunnySelectionRectangleSpriteInstance}
+    // @private {BunnySelectionRectangleSpriteInstance|null} the selection rectangle, recreated for each selected bunny
     this.selectionRectangleSpriteInstance = null;
 
     // @private references to constructor arguments and local variables needed by methods
