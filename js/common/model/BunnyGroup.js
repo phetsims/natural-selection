@@ -7,7 +7,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
 import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -22,12 +24,14 @@ class BunnyGroup extends PhetioGroup {
   /**
    * @param {GenePool} genePool
    * @param {EnvironmentModelViewTransform} modelViewTransform
+   * @param {Property.<Range>} bunnyRestRangeProperty
    * @param {Object} [options]
    */
-  constructor( genePool, modelViewTransform, options ) {
+  constructor( genePool, modelViewTransform, bunnyRestRangeProperty, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
+    assert && AssertUtils.assertPropertyOf( bunnyRestRangeProperty, Range );
 
     options = merge( {
 
@@ -46,7 +50,7 @@ class BunnyGroup extends PhetioGroup {
      * @returns {Bunny}
      */
     const createElement = ( tandem, bunnyOptions ) => {
-      return new Bunny( genePool, modelViewTransform, merge( {}, bunnyOptions, {
+      return new Bunny( genePool, modelViewTransform, bunnyRestRangeProperty, merge( {}, bunnyOptions, {
         tandem: tandem
       } ) );
     };

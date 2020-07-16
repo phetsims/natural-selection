@@ -159,15 +159,6 @@ const SCHEMA = {
     isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
   },
 
-  // Amount of time that a bunny rests between hops, in seconds.
-  // A value is randomly chosen from this range for each rest cycle.
-  bunnyRestTime: {
-    type: 'custom',
-    parse: parseRange,
-    defaultValue: new Range( 2, 4 ),
-    isValidValue: range => isPositiveRange( range )
-  },
-
   // Amount of time it takes for a bunny to hop once, in seconds.
   // A value is randomly chosen from this range for each hop.
   bunnyHopTime: {

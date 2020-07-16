@@ -7,7 +7,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import Emitter from '../../../../axon/js/Emitter.js';
+import Range from '../../../../dot/js/Range.js';
+import RangeIO from '../../../../dot/js/RangeIO.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
@@ -28,6 +32,11 @@ import PunnettSquare from './PunnettSquare.js';
 import SelectedBunnyProperty from './SelectedBunnyProperty.js';
 
 // constants
+
+// Ranges for bunny rest time, as specified in https://github.com/phetsims/natural-selection/issues/129
+const BUNNY_REST_RANGE_SHORT = new Range( 2, 4 );
+const BUNNY_REST_RANGE_MEDIUM = new Range( 3, 7 );
+const BUNNY_REST_RANGE_LONG = new Range( 5, 9 );
 
 // The maximum number of generations that a dead bunny needs to exist before it can be disposed.
 // This is based on the Pedigree graph depth, because the Pedigree graph is the only place where
@@ -53,11 +62,6 @@ class BunnyCollection {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // the PhetioGroup that manages Bunny instances as dynamic PhET-iO elements
-    const bunnyGroup = new BunnyGroup( genePool, modelViewTransform, {
-      tandem: options.tandem.createTandem( 'bunnyGroup' )
-    } );
-
     // @public (read-only) the live bunnies in bunnyGroup
     this.liveBunnies = new BunnyArray( {
       tandem: options.tandem.createTandem( 'liveBunnies' )
@@ -75,6 +79,37 @@ class BunnyCollection {
     this.recessiveMutants = new BunnyArray( {
       tandem: options.tandem.createTandem( 'recessiveMutants' ),
       phetioDocumentation: 'for internal PhET use only'
+    } );
+
+    // @private {Property.<Range>} the range of time that a bunny will reset between hops, in seconds.
+    // This value is derived from population size, so that bunnies rest longer when the population is larger.
+    // Range values and populations sizes are specified in https://github.com/phetsims/natural-selection/issues/129
+    //TODO this is called every time a bunny is born or dies, is there a performance impact?
+    this.bunnyRestRangeProperty = new DerivedProperty(
+      [ this.liveBunnies.lengthProperty ],
+      length => {
+        if ( length < 10 ) {
+          return BUNNY_REST_RANGE_SHORT;
+        }
+        else if ( length < 250 ) {
+          return BUNNY_REST_RANGE_MEDIUM;
+        }
+        else {
+          return BUNNY_REST_RANGE_LONG;
+        }
+      }, {
+        tandem: options.tandem.createTandem( 'bunnyRestRangeProperty' ),
+        phetioType: DerivedPropertyIO( RangeIO ),
+        phetioDocumentation: 'for internal PhET use only'
+      } );
+    phet.log && this.bunnyRestRangeProperty.link( bunnyRestRange => {
+      phet.log && phet.log( `using bunnyRestRange=[${bunnyRestRange.min},${bunnyRestRange.max}] ` +
+                            `for population=${this.liveBunnies.lengthProperty.value}` );
+    } );
+
+    // the PhetioGroup that manages Bunny instances as dynamic PhET-iO elements
+    const bunnyGroup = new BunnyGroup( genePool, modelViewTransform, this.bunnyRestRangeProperty, {
+      tandem: options.tandem.createTandem( 'bunnyGroup' )
     } );
 
     // @public

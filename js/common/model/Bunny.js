@@ -14,6 +14,7 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import Vector3IO from '../../../../dot/js/Vector3IO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
+import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
@@ -34,7 +35,6 @@ import PhenotypeIO from './PhenotypeIO.js';
 import XDirection from './XDirection.js';
 
 // constants
-const REST_TIME_RANGE = NaturalSelectionQueryParameters.bunnyRestTime; // time to complete a rest interval, in seconds
 const HOP_TIME_RANGE = NaturalSelectionQueryParameters.bunnyHopTime; // time to complete a hop cycle, in seconds
 const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // x and z distance that a bunny hops
 const HOP_HEIGHT_RANGE = new Range( 30, 50 ); // how high above the ground a bunny hops
@@ -45,12 +45,14 @@ class Bunny extends Organism {
   /**
    * @param {GenePool} genePool
    * @param {EnvironmentModelViewTransform} modelViewTransform
+   * @param {Property.<Range>} bunnyRestRangeProperty - range for time spent resting between hops, in seconds
    * @param {Object} [options]
    */
-  constructor( genePool, modelViewTransform, options ) {
+  constructor( genePool, modelViewTransform, bunnyRestRangeProperty, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
+    assert && AssertUtils.assertPropertyOf( bunnyRestRangeProperty, Range );
 
     options = merge( {
 
@@ -78,6 +80,9 @@ class Bunny extends Organism {
 
     super( modelViewTransform, options );
 
+    // @private
+    this.bunnyRestRangeProperty = bunnyRestRangeProperty;
+
     // @public (read-only)
     this.father = options.father;
     this.mother = options.mother;
@@ -101,14 +106,14 @@ class Bunny extends Organism {
     } );
 
     // @private {number} time to rest before hopping, randomized in initializeMotion
-    this.restTime = REST_TIME_RANGE.max;
+    this.restTime = this.bunnyRestRangeProperty.value.min;
 
     // @private {number} time to complete one full hop, randomized in initializeMotion
     this.hopTime = HOP_TIME_RANGE.max;
 
     // @private {number} the cumulative time spent resting since the last hop, in seconds
     // Choose a random value so that bunnies born at the same time don't all hop at the same time.
-    this.cumulativeRestTime = phet.joist.random.nextDoubleInRange( REST_TIME_RANGE );
+    this.cumulativeRestTime = phet.joist.random.nextDoubleInRange( this.bunnyRestRangeProperty.value );
 
     // @private {number} the cumulative time spent hopping since the last reset, in seconds
     this.cumulativeHopTime = 0;
@@ -222,7 +227,7 @@ class Bunny extends Organism {
     this.cumulativeHopTime = 0;
 
     // Randomize motion for the next cycle
-    this.restTime = phet.joist.random.nextDoubleInRange( REST_TIME_RANGE );
+    this.restTime = phet.joist.random.nextDoubleInRange( this.bunnyRestRangeProperty.value );
     this.hopTime = phet.joist.random.nextDoubleInRange( HOP_TIME_RANGE );
     const hopDistance = phet.joist.random.nextDoubleInRange( HOP_DISTANCE_RANGE );
     const hopHeight = phet.joist.random.nextDoubleInRange( HOP_HEIGHT_RANGE );
