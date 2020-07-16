@@ -26,17 +26,6 @@ class GenePairIO extends ObjectIO {
   }
 
   /**
-   * Deserializes a GenePair instance.
-   * @param {Object} stateObject
-   * @returns {Object}
-   * @public
-   * @override
-   */
-  static fromStateObject( stateObject ) {
-    return GenePair.fromStateObject( stateObject );
-  }
-
-  /**
    * Restores GenePair state after instantiation.
    * @param {GenePair} genePair
    * @param {Object} state

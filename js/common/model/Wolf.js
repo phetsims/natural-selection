@@ -120,18 +120,6 @@ class Wolf extends Organism {
   }
 
   /**
-   * Deserializes the state needed by WolfIO.stateToArgsForConstructor and WolfIO.applyState.
-   * @param {Object} stateObject - return value from toStateObject
-   * @returns {Object}
-   * @public for use by WolfIO only
-   */
-  static fromStateObject( stateObject ) {
-    return {
-      speed: NumberIO.fromStateObject( stateObject.private.speed )
-    };
-  }
-
-  /**
    * Creates the args that WolfGroup uses to create a Wolf instance.
    * @param state
    * @returns {Object[]}
@@ -148,12 +136,12 @@ class Wolf extends Organism {
   /**
    * Restores private state for PhET-iO. This is called by WolfIO.applyState after a Wolf has been instantiated
    * during deserialization.
-   * @param {Object} state - return value of fromStateObject
+   * @param {Object} stateObject - return value of toStateObject
    * @public for use by WolfIO only
    */
-  applyState( state ) {
-    required( state );
-    this.speed = required( state.speed );
+  applyState( stateObject ) {
+    required( stateObject );
+    this.speed = required( NumberIO.fromStateObject( stateObject.private.speed ) );
     this.validateInstance();
   }
 

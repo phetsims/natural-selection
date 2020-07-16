@@ -26,17 +26,6 @@ class BunnyIO extends ObjectIO {
   }
 
   /**
-   * Deserializes a Bunny instance.
-   * @param {Object} stateObject
-   * @returns {Object}
-   * @public
-   * @override
-   */
-  static fromStateObject( stateObject ) {
-    return Bunny.fromStateObject( stateObject );
-  }
-
-  /**
    * Creates the args to BunnyGroup.createNextElement that creates Bunny instances.
    * @param state
    * @returns {Object[]}

@@ -26,17 +26,6 @@ class WolfIO extends ObjectIO {
   }
 
   /**
-   * Deserializes a Wolf instance.
-   * @param {Object} stateObject
-   * @returns {Object}
-   * @public
-   * @override
-   */
-  static fromStateObject( stateObject ) {
-    return Wolf.fromStateObject( stateObject );
-  }
-
-  /**
    * Creates the args to WolfGroup.createNextElement that creates Wolf instances.
    * @param state
    * @returns {Object[]}

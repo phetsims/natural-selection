@@ -26,17 +26,6 @@ class GenotypeIO extends ObjectIO {
   }
 
   /**
-   * Deserializes the state needed by GenotypeIO.applyState.
-   * @param {Object} stateObject
-   * @returns {Object}
-   * @public
-   * @override
-   */
-  static fromStateObject( stateObject ) {
-    return Genotype.fromStateObject( stateObject );
-  }
-
-  /**
    * Restores Genotype state after instantiation.
    * @param {Genotype} genotype
    * @param {Object} state
