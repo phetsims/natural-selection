@@ -26,17 +26,6 @@ class PhenotypeIO extends ObjectIO {
   }
 
   /**
-   * Deserializes a Phenotype instance.
-   * @param {Object} stateObject
-   * @returns {Object}
-   * @public
-   * @override
-   */
-  static fromStateObject( stateObject ) {
-    return Phenotype.fromStateObject( stateObject );
-  }
-
-  /**
    * Restores Phenotype state after instantiation.
    * @param {Phenotype} phenotype
    * @param {Object} state

@@ -174,31 +174,16 @@ class Genotype extends PhetioObject {
   }
 
   /**
-   * Deserializes the state needed by GenotypeIO.applyState.
+   * Restores Genotype stateObject after instantiation.
    * @param {Object} stateObject
-   * @returns {Object}
    * @public for use by GenotypeIO only
    */
-  static fromStateObject( stateObject ) {
-    return {
-      furGenePair: GenePairIO.fromStateObject( stateObject.furGenePair ),
-      earsGenePair: GenePairIO.fromStateObject( stateObject.earsGenePair ),
-      teethGenePair: GenePairIO.fromStateObject( stateObject.teethGenePair ),
-      mutation: NullableIO( ReferenceIO( AlleleIO ) ).fromStateObject( stateObject.mutation )
-    };
-  }
-
-  /**
-   * Restores Genotype state after instantiation.
-   * @param {Object} state
-   * @public for use by GenotypeIO only
-   */
-  applyState( state ) {
-    required( state );
-    this.furGenePair.applyState( state.furGenePair );
-    this.earsGenePair.applyState( state.earsGenePair );
-    this.teethGenePair.applyState( state.teethGenePair );
-    this.mutation = required( state.mutation );
+  applyState( stateObject ) {
+    required( stateObject );
+    this.furGenePair.applyState( GenePairIO.fromStateObject( stateObject.furGenePair ) );
+    this.earsGenePair.applyState( GenePairIO.fromStateObject( stateObject.earsGenePair ) );
+    this.teethGenePair.applyState( GenePairIO.fromStateObject( stateObject.teethGenePair ) );
+    this.mutation = required( NullableIO( ReferenceIO( AlleleIO ) ).fromStateObject( stateObject.mutation ) );
     this.validateInstance();
   }
 

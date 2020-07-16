@@ -105,29 +105,15 @@ class Phenotype extends PhetioObject {
   }
 
   /**
-   * Deserializes the state needed by PhenotypeIO.applyState.
-   * @param {Object} stateObject
-   * @returns {Object}
-   * @public for use by PhenotypeIO only
-   */
-  static fromStateObject( stateObject ) {
-    return {
-      furAllele: AlleleIO.fromStateObject( stateObject.furAllele ),
-      earsAllele: AlleleIO.fromStateObject( stateObject.earsAllele ),
-      teethAllele: AlleleIO.fromStateObject( stateObject.teethAllele )
-    };
-  }
-
-  /**
    * Restores Phenotype state after instantiation.
-   * @param {Object} state
+   * @param {Object} stateObject
    * @public for use by PhenotypeIO only
    */
-  applyState( state ) {
-    required( state );
-    this.furAllele = required( state.furAllele );
-    this.earsAllele = required( state.earsAllele );
-    this.teethAllele = required( state.teethAllele );
+  applyState( stateObject ) {
+    required( stateObject );
+    this.furAllele = required( AlleleIO.fromStateObject( stateObject.furAllele ) );
+    this.earsAllele = required( AlleleIO.fromStateObject( stateObject.earsAllele ) );
+    this.teethAllele = required( AlleleIO.fromStateObject( stateObject.teethAllele ) );
     this.validateInstance();
   }
 

@@ -345,11 +345,12 @@ class Bunny extends Organism {
 
   /**
    * Deserializes the state needed by BunnyIO.stateToArgsForConstructor and BunnyIO.applyState.
+   * TODO: inline into Bunny.applyState? https://github.com/phetsims/phet-io/issues/1685
    * @param {Object} stateObject - return value from toStateObject
    * @returns {Object}
-   * @public for use by BunnyIO only
+   * @private
    */
-  static fromStateObject( stateObject ) {
+  static deserializeComponents( stateObject ) {
     return {
 
       // public fields
@@ -372,7 +373,7 @@ class Bunny extends Organism {
 
   /**
    * Creates the args that BunnyGroup uses to create a Bunny instance.
-   * @param state
+   * @param {Object} state
    * @returns {Object[]}
    * @public for use by BunnyIO only
    */
@@ -393,21 +394,23 @@ class Bunny extends Organism {
   applyState( state ) {
     required( state );
 
+    const deserializedState = Bunny.deserializeComponents( state );
+
     // public fields
-    this.generation = required( state.generation );
-    this.age = required( state.age );
-    this.isAlive = required( state.isAlive );
-    this.father = required( state.father );
-    this.mother = required( state.mother );
-    this.genotype.applyState( state.genotype );
-    this.phenotype.applyState( state.phenotype );
+    this.generation = required( deserializedState.generation );
+    this.age = required( deserializedState.age );
+    this.isAlive = required( deserializedState.isAlive );
+    this.father = required( deserializedState.father );
+    this.mother = required( deserializedState.mother );
+    this.genotype.applyState( deserializedState.genotype );
+    this.phenotype.applyState( deserializedState.phenotype );
 
     // private fields
-    this.restTime = required( state.restTime );
-    this.hopTime = required( state.hopTime );
-    this.cumulativeRestTime = required( state.cumulativeRestTime );
-    this.cumulativeHopTime = required( state.cumulativeHopTime );
-    this.hopDelta = required( state.hopDelta );
+    this.restTime = required( deserializedState.restTime );
+    this.hopTime = required( deserializedState.hopTime );
+    this.cumulativeRestTime = required( deserializedState.cumulativeRestTime );
+    this.cumulativeHopTime = required( deserializedState.cumulativeHopTime );
+    this.hopDelta = required( deserializedState.hopDelta );
 
     this.validateInstance();
   }

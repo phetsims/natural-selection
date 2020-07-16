@@ -155,29 +155,15 @@ class GenePair extends PhetioObject {
   }
 
   /**
-   * Deserializes the state needed by GenePairIO.applyState.
-   * @param {Object} stateObject
-   * @returns {Object}
-   * @public for use by GenePairIO only
-   */
-  static fromStateObject( stateObject ) {
-    return {
-      gene: GeneIO.fromStateObject( stateObject.gene ),
-      fatherAllele: AlleleIO.fromStateObject( stateObject.fatherAllele ),
-      motherAllele: AlleleIO.fromStateObject( stateObject.motherAllele )
-    };
-  }
-
-  /**
    * Restores GenePair state after instantiation.
-   * @param {Object} state
+   * @param {Object} stateObject
    * @public for use by GenePairIO only
    */
-  applyState( state ) {
-    required( state );
-    this.gene = required( state.gene );
-    this.fatherAllele = required( state.fatherAllele );
-    this.motherAllele = required( state.motherAllele );
+  applyState( stateObject ) {
+    required( stateObject );
+    this.gene = required( GeneIO.fromStateObject( stateObject.gene ) );
+    this.fatherAllele = required( AlleleIO.fromStateObject( stateObject.fatherAllele ) );
+    this.motherAllele = required( AlleleIO.fromStateObject( stateObject.motherAllele ) );
     this.validateInstance();
   }
 
