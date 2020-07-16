@@ -195,8 +195,9 @@ class NaturalSelectionSprites extends Sprites {
   }
 
   /**
-   * Updates the display to reflect the current state of the model. While each sprite instance stays synchronized with
-   * its associated model element, update() must be explicitly called to render this Node correctly.
+   * Puts the sprite instances in the correct order (back-to-front), and then repaints. While each sprite instance
+   * stays synchronized with its associated model element, update() must be explicitly called to render this Node
+   * correctly.
    * @public
    */
   update() {
