@@ -83,26 +83,22 @@ class Organism extends PhetioObject {
     super.dispose();
   }
 
-  //TODO #128 modify so that complete sprite for all organisms stays in bounds
   /**
    * Gets the minimum x coordinate for an organism's position.
    * @returns {number}
    * @private
    */
   getMinimumX() {
-    return this.modelViewTransform.getMinimumX( this.positionProperty.value.z ) +
-           EnvironmentModelViewTransform.X_MARGIN_MODEL;
+    return this.modelViewTransform.getMinimumX( this.positionProperty.value.z );
   }
 
-  //TODO #128 modify so that complete sprite for all organisms stays in bounds
   /**
    * Gets the maximum x coordinate for an organism's position.
    * @returns {number}
    * @private
    */
   getMaximumX() {
-    return this.modelViewTransform.getMaximumX( this.positionProperty.value.z ) -
-           EnvironmentModelViewTransform.X_MARGIN_MODEL;
+    return this.modelViewTransform.getMaximumX( this.positionProperty.value.z );
   }
 
   /**

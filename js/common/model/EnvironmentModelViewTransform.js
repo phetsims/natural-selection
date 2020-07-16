@@ -80,10 +80,8 @@ import naturalSelection from '../../naturalSelection.js';
 const NEAR_SCALE = 1;
 assert && assert( NEAR_SCALE > 0 && NEAR_SCALE <= 1, `invalid NEAR_SCALE: ${NEAR_SCALE}` );
 
-// margins for getRandomGroundPosition (in model coordinates)
-// This keeps bunnies well within the ground trapezoid, and avoids floating-point errors that would have them 
-// end up just outside the ground trapezoid.
-const X_MARGIN_MODEL = 20;
+// z margin for getRandomGroundPosition (in model coordinates). This keeps bunnies well within the ground trapezoid,
+// and avoids floating-point errors that would have them end up just outside the ground trapezoid.
 const Z_MARGIN_MODEL = 1;
 
 class EnvironmentModelViewTransform {
@@ -113,17 +111,18 @@ class EnvironmentModelViewTransform {
 
   /**
    * Returns a random position on the ground, in model coordinates.
+   * @param {number} xMargin
    * @returns {Vector3}
    * @public
    */
-  getRandomGroundPosition() {
+  getRandomGroundPosition( xMargin = 0 ) {
 
     // Choose a random z coordinate on the ground trapezoid.
     const zModel = phet.joist.random.nextDoubleBetween( this.zNearModel + Z_MARGIN_MODEL, this.zFarModel - Z_MARGIN_MODEL );
 
     // Choose a random x coordinate at the z coordinate.
-    const xMinModel = this.getMinimumX( zModel ) + X_MARGIN_MODEL;
-    const xMaxModel = this.getMaximumX( zModel ) - X_MARGIN_MODEL;
+    const xMinModel = this.getMinimumX( zModel ) + xMargin;
+    const xMaxModel = this.getMaximumX( zModel ) - xMargin;
     const xModel = phet.joist.random.nextDoubleBetween( xMinModel, xMaxModel );
 
     // Get the ground y coordinate at the z coordinate.
@@ -340,7 +339,6 @@ class EnvironmentModelViewTransform {
   }
 }
 
-EnvironmentModelViewTransform.X_MARGIN_MODEL = X_MARGIN_MODEL;
 EnvironmentModelViewTransform.Z_MARGIN_MODEL = Z_MARGIN_MODEL;
 
 naturalSelection.register( 'EnvironmentModelViewTransform', EnvironmentModelViewTransform );

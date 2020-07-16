@@ -20,6 +20,9 @@ import Organism from './Organism.js';
 import WolfIO from './WolfIO.js';
 import XDirection from './XDirection.js';
 
+// const
+const X_MARGIN = 35; // determined empirically, to keep wolves inside bounds of the environment
+
 class Wolf extends Organism {
 
   /**
@@ -33,7 +36,7 @@ class Wolf extends Organism {
     options = merge( {
 
       // Default to random position and x direction
-      position: modelViewTransform.getRandomGroundPosition(),
+      position: modelViewTransform.getRandomGroundPosition( X_MARGIN ),
       xDirection: XDirection.getRandom(),
 
       // phet-io
@@ -83,7 +86,7 @@ class Wolf extends Organism {
     let x = this.positionProperty.value.x + dx;
 
     // Reverse x direction if motion would exceed x boundaries
-    if ( x <= this.getMinimumX() || x >= this.getMaximumX() ) {
+    if ( x <= this.getMinimumX() + X_MARGIN || x >= this.getMaximumX() - X_MARGIN ) {
       x = this.positionProperty.value.x - dx;
       this.xDirectionProperty.value = XDirection.opposite( this.xDirectionProperty.value );
 

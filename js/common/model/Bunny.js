@@ -38,6 +38,7 @@ const REST_TIME_RANGE = NaturalSelectionQueryParameters.bunnyRestTime; // time t
 const HOP_TIME_RANGE = NaturalSelectionQueryParameters.bunnyHopTime; // time to complete a hop cycle, in seconds
 const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // x and z distance that a bunny hops
 const HOP_HEIGHT_RANGE = new Range( 30, 50 ); // how high above the ground a bunny hops
+const X_MARGIN = 25; // determined empirically, to keep bunnies inside bounds of the environment
 
 class Bunny extends Organism {
 
@@ -61,7 +62,7 @@ class Bunny extends Organism {
       genotypeOptions: null,
 
       // Default to random position and xDirection
-      position: modelViewTransform.getRandomGroundPosition(),
+      position: modelViewTransform.getRandomGroundPosition( X_MARGIN ),
       xDirection: XDirection.getRandom(),
 
       // phet-io
@@ -231,7 +232,7 @@ class Bunny extends Organism {
 
     // Reverse delta x if the hop would exceed x boundaries
     const hopEndX = this.positionProperty.value.x + this.hopDelta.x;
-    if ( hopEndX <= this.getMinimumX() || hopEndX >= this.getMaximumX() ) {
+    if ( hopEndX <= this.getMinimumX() + X_MARGIN|| hopEndX >= this.getMaximumX() - X_MARGIN) {
       this.hopDelta.setX( -this.hopDelta.x );
     }
 
