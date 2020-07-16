@@ -124,9 +124,8 @@ class NaturalSelectionSprites extends Sprites {
     assert && assert( _.every( _.keys( shrubSpritesMap ), key => Shrub.CATEGORIES.includes( key ) ),
       'invalid key in shrubSpritesMap' );
 
-    // Sprite for the bunny selection rectangle.
-    const maxBunnyBounds = new Bounds2( 0, 0, bunnyWhiteFurStraightEarsShortTeethImage.width, bunnyWhiteFurStraightEarsShortTeethImage.height );
-    const selectionRectangleSprite = new BunnySelectionRectangleSprite( maxBunnyBounds );
+    // Sprite for the bunny selection rectangle, sized to fit the largest bunny image.
+    const selectionRectangleSprite = new BunnySelectionRectangleSprite( bunnyWhiteFurStraightEarsShortTeethImage );
 
     // {Sprite[]} the complete unique set of sprites
     assert && assert( !options.sprites, 'NaturalSelectionSprites sets sprites' );

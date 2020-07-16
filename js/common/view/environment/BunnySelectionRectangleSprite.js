@@ -19,17 +19,23 @@ const SELECTION_RECTANGLE_DILATION = 8;
 class BunnySelectionRectangleSprite extends Sprite {
 
   /**
-   * @param {Bounds2} maxBunnyBounds
+   * @param {HTMLImageElement} maxImage - the largest bunny image
    * @param {Object} [options]
    */
-  constructor( maxBunnyBounds, options ) {
+  constructor( maxImage, options ) {
 
-    assert && assert( maxBunnyBounds instanceof Bounds2, 'invalid maxBunnyBounds' );
+    assert && assert( maxImage instanceof HTMLImageElement, 'invalid maxImage' );
+    assert && assert( maxImage.width > 0 && maxImage.height > 0, 'maxImage does not have valid dimensions' );
 
-    const selectionRectangleBounds = maxBunnyBounds.dilated( SELECTION_RECTANGLE_DILATION );
+    // Make the selection rectangle a little larger than the bunny image
+    const selectionRectangleBounds = new Bounds2( 0, 0, maxImage.width, maxImage.height )
+      .dilated( SELECTION_RECTANGLE_DILATION );
+
     const selectionRectangle = new BunnySelectionRectangle( selectionRectangleBounds, {
-      lineWidth: 5
+      lineWidth: 5 // determined empirically, to match the lineWidth in Pedigree graph
     } );
+
+    // {HTMLCanvasElement}
     let selectionRectangleSpriteImage = null;
     selectionRectangle.toCanvas( canvas => {
       const offset = new Vector2( selectionRectangleBounds.width / 2, selectionRectangleBounds.height - SELECTION_RECTANGLE_DILATION );
