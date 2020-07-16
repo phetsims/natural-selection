@@ -22,7 +22,7 @@ simLauncher.launch( () => {
 
   const sim = new Sim( naturalSelectionStrings[ 'natural-selection' ].title, screens, {
 
-    // Best performance for scenery Sprites is with webgl, fallback is canvas
+    // NaturalSelectionSprites uses WebGL, with a fallback of Canvas.
     // See https://github.com/phetsims/natural-selection/issues/128
     webgl: true,
 
