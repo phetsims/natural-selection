@@ -9,6 +9,7 @@
 
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
+import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import BunnySelectionRectangleSprite from './BunnySelectionRectangleSprite.js';
 import OrganismSpriteInstance from './OrganismSpriteInstance.js';
 
@@ -24,7 +25,7 @@ class BunnySelectionRectangleSpriteInstance extends OrganismSpriteInstance {
     assert && assert( sprite instanceof BunnySelectionRectangleSprite, 'invalid sprite' );
 
     super( bunny, sprite, {
-      baseScale: 0.4 //TODO #128 same as BunnySpriteInstance, factor out
+      baseScale: NaturalSelectionConstants.BUNNY_IMAGE_SCALE
     } );
   }
 }

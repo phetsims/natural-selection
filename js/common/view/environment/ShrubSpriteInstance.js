@@ -9,6 +9,7 @@
 import Sprite from '../../../../../scenery/js/util/Sprite.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Shrub from '../../model/Shrub.js';
+import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import OrganismSpriteInstance from './OrganismSpriteInstance.js';
 
 class ShrubSpriteInstance extends OrganismSpriteInstance {
@@ -27,7 +28,7 @@ class ShrubSpriteInstance extends OrganismSpriteInstance {
     assert && assert( toughSprite instanceof Sprite, 'invalid toughSprite' );
 
     super( shrub, isTough ? toughSprite : tenderSprite, {
-      baseScale: 0.5
+      baseScale: NaturalSelectionConstants.SHRUB_IMAGE_SCALE
     } );
 
     // @private

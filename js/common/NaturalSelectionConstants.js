@@ -112,6 +112,11 @@ const NaturalSelectionConstants = {
   PROPORTIONS_LEGEND_FONT: new PhetFont( 16 ),
   DIALOG_FONT: new PhetFont( 16 ),
 
+  // Scale factors for images
+  BUNNY_IMAGE_SCALE: 0.4,
+  WOLF_IMAGE_SCALE: 0.25,
+  SHRUB_IMAGE_SCALE: 0.5,
+
   // Population graph
   POPULATION_POINT_RADIUS: 2.4, // point radius, in view coordinates
   POPULATION_MUTANT_LINE_DASH: [ 3, 2 ],

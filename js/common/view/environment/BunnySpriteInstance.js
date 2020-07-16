@@ -9,6 +9,7 @@
 import Sprite from '../../../../../scenery/js/util/Sprite.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
+import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import OrganismSpriteInstance from './OrganismSpriteInstance.js';
 
 class BunnySpriteInstance extends OrganismSpriteInstance {
@@ -23,7 +24,7 @@ class BunnySpriteInstance extends OrganismSpriteInstance {
     assert && assert( sprite instanceof Sprite, 'invalid sprite' );
 
     super( bunny, sprite, {
-      baseScale: 0.4
+      baseScale: NaturalSelectionConstants.BUNNY_IMAGE_SCALE
     } );
   }
 }

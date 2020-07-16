@@ -15,6 +15,7 @@ import Node from '../../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
+import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 import BunnySelectionRectangle from '../BunnySelectionRectangle.js';
 import MutationIconNode from '../MutationIconNode.js';
@@ -22,7 +23,6 @@ import OriginNode from '../OriginNode.js';
 import BunnyImageCache from './BunnyImageCache.js';
 
 // constants
-const IMAGE_SCALE = 0.4; // how much the bunny PNG image is scaled
 const GENOTYPE_FONT = new PhetFont( 16 );
 const DEAD_SYMBOL_FONT = new PhetFont( 20 );
 
@@ -51,7 +51,7 @@ class PedigreeBunnyNode extends Node {
 
     // Image that corresponds to the bunny's phenotype (appearance)
     const wrappedImage = BunnyImageCache.getWrappedImage( bunny, {
-      scale: IMAGE_SCALE,
+      scale: NaturalSelectionConstants.BUNNY_IMAGE_SCALE,
       centerX: 0,
       bottom: 0
     } );
