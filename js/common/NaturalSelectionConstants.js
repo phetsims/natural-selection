@@ -114,7 +114,7 @@ const NaturalSelectionConstants = {
 
   // Scale factors for images
   BUNNY_IMAGE_SCALE: 0.4,
-  WOLF_IMAGE_SCALE: 0.25,
+  WOLF_IMAGE_SCALE: 0.5,
   SHRUB_IMAGE_SCALE: 0.5,
 
   // Population graph
