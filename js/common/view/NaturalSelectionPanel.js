@@ -32,8 +32,6 @@ class NaturalSelectionPanel extends Panel {
       `invalid fixedWidth: ${options.fixedWidth}` );
 
     if ( options.fixedWidth ) {
-      assert && assert( typeof options.fixedWidth === 'number', `invalid fixedWidth: ${options.fixedWidth}` );
-
       assert && assert( options.minWidth === undefined, 'NaturalSelectionPanel sets minWidth' );
       assert && assert( options.maxWidth === undefined, 'NaturalSelectionPanel sets maxWidth' );
       options.minWidth = options.fixedWidth;
