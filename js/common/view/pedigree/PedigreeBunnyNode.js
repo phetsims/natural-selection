@@ -89,21 +89,23 @@ class PedigreeBunnyNode extends Node {
 
     super( options );
 
-    // When a bunny dies, label it with a red cross mark
-    const diedListener = isAlive => {
-      if ( !isAlive ) {
-        bunny.diedEmitter.removeListener( diedListener );
-
-        this.addChild( new Text( '\u274c', {
-          font: DEAD_SYMBOL_FONT,
-          right: wrappedImage.centerX,
-          bottom: wrappedImage.centerY
-        } ) );
-      }
+    // Label a dead bunny with a red cross mark.
+    const addRedCrossMark = () => {
+      this.addChild( new Text( '\u274c', {
+        font: DEAD_SYMBOL_FONT,
+        right: wrappedImage.centerX,
+        bottom: wrappedImage.centerY
+      } ) );
     };
-    bunny.diedEmitter.addListener( diedListener ); // removeListener is required
-    diedListener( bunny.isAlive );
-    
+    if ( bunny.isAlive ) {
+
+      // removeListener in dispose. Not necessary to removeListener when diedEmitter fires, because it disposes itself.
+      bunny.diedEmitter.addListener( addRedCrossMark );
+    }
+    else {
+      addRedCrossMark();
+    }
+
     // Update the genotype abbreviation, must be disposed
     const multilink = new Multilink(
       [ furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty ],
@@ -117,8 +119,8 @@ class PedigreeBunnyNode extends Node {
     // @private
     this.disposePedigreeBunnyNode = () => {
       multilink.dispose();
-      if ( bunny.diedEmitter.hasListener( diedListener ) ) {
-        bunny.diedEmitter.removeListener( diedListener );
+      if ( bunny.diedEmitter.hasListener( addRedCrossMark ) ) {
+        bunny.diedEmitter.removeListener( addRedCrossMark );
       }
     };
 

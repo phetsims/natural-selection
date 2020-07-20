@@ -146,7 +146,12 @@ class Bunny extends Organism {
     this.disposeBunny = () => {
       this.genotype.dispose();
       this.phenotype.dispose();
-      this.diedEmitter.dispose();
+
+      // diedEmitter is disposed after it fires
+      if ( !this.diedEmitter.isDisposed ) {
+        this.diedEmitter.dispose();
+      }
+
       if ( this.father && this.father.disposedEmitter.hasListener( fatherDisposedListener ) ) {
         this.father.disposedEmitter.removeListener( fatherDisposedListener );
       }
@@ -189,6 +194,7 @@ class Bunny extends Organism {
     this.causeOfDeath = causeOfDeath;
     this.isAlive = false;
     this.diedEmitter.emit();
+    this.diedEmitter.dispose();
   }
 
   /**

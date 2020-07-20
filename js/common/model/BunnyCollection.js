@@ -150,20 +150,16 @@ class BunnyCollection {
 
       if ( bunny.isAlive ) {
 
-        // When a bunny dies...
-        const diedListener = () => {
-          bunny.diedEmitter.removeListener( diedListener );
+        // When the bunny dies, clean up.
+        // removeListener is not necessary because Bunny.diedEmitter is disposed after firing.
+        bunny.diedEmitter.addListener( () => {
           this.liveBunnies.remove( bunny );
           this.deadBunnies.push( bunny );
           this.recessiveMutants.includes( bunny ) && this.recessiveMutants.remove( bunny );
           if ( this.liveBunnies.length === 0 ) {
             this.allBunniesHaveDiedEmitter.emit();
           }
-        };
-
-        // removeListener is handled by diedListener, but not necessary when bunny is disposed,
-        // because bunny.diedEmitter will be disposed.
-        bunny.diedEmitter.addListener( diedListener );
+        } );
 
         this.liveBunnies.push( bunny );
       }
