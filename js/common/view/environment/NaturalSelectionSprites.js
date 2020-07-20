@@ -236,8 +236,8 @@ class NaturalSelectionSprites extends Sprites {
         this.spriteInstances.splice( this.spriteInstances.indexOf( bunnySpriteInstance ), 1 );
         bunnySpriteInstance.dispose();
       };
-      bunny.diedEmitter.addListener( disposeBunnySpriteInstance );
-      bunny.disposedEmitter.addListener( disposeBunnySpriteInstance );
+      bunny.diedEmitter.addListener( disposeBunnySpriteInstance ); // removeListener is performed by callback
+      bunny.disposedEmitter.addListener( disposeBunnySpriteInstance ); // removeListener is performed by callback
     }
   }
 
@@ -256,11 +256,13 @@ class NaturalSelectionSprites extends Sprites {
     this.spriteInstances.push( wolfSpriteInstance );
     assert && this.assertWolvesCount();
 
-    // When the wolf is disposed, remove wolfSpriteInstance.
-    // removeListener is not necessary, because wolf.disposeEmitter is disposed.
-    wolf.disposedEmitter.addListener( () => {
+    // When the wolf is disposed, dispose of wolfSpriteInstance.
+    const disposeWolfSpriteInstance = () => {
+      wolf.disposedEmitter.removeListener( disposeWolfSpriteInstance );
       this.spriteInstances.splice( this.spriteInstances.indexOf( wolfSpriteInstance ), 1 );
-    } );
+      wolfSpriteInstance.dispose();
+    };
+    wolf.disposedEmitter.addListener( disposeWolfSpriteInstance ); // removeListener is performed by callback
   }
 
   /**
