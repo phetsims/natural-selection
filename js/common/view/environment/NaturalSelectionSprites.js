@@ -122,7 +122,7 @@ class NaturalSelectionSprites extends Sprites {
     // Sprite for the bunny selection rectangle, sized to fit the largest bunny image.
     const selectionRectangleSprite = new BunnySelectionRectangleSprite( bunnyWhiteFurStraightEarsShortTeethImage );
 
-    // {Sprite[]} the complete unique set of sprites
+    // {OrganismSprite[]} the complete unique set of sprites
     assert && assert( !options.sprites, 'NaturalSelectionSprites sets sprites' );
     options.sprites = [ wolfSprite, selectionRectangleSprite ];
     for ( const key in bunnySpritesMap ) {
@@ -153,6 +153,7 @@ class NaturalSelectionSprites extends Sprites {
 
     // @private references to constructor arguments and local variables needed by methods
     this.bunnyCollection = bunnyCollection;
+    this.wolfCollection = wolfCollection;
     this.isPlayingProperty = isPlayingProperty;
     this.bunnySpritesMap = bunnySpritesMap;
     this.selectionRectangleSprite = selectionRectangleSprite;
@@ -175,7 +176,10 @@ class NaturalSelectionSprites extends Sprites {
     food.isLimitedProperty.link( isLimited => this.setLimitedFood( isLimited ) );
 
     // Put a selection rectangle around the selected bunny. unlink is not necessary.
-    bunnyCollection.selectedBunnyProperty.link( selectedBunny => this.setSelectedBunny( selectedBunny ) );
+    bunnyCollection.selectedBunnyProperty.link( bunny => this.setSelectedBunny( bunny ) );
+
+    // @private
+    this.clearSelectedBunnyBound = this.clearSelectedBunny.bind( this );
 
     // PressListener for selecting a bunny. Mix in SpriteListenable, so we have access to the pressed SpriteInstance.
     // removeInputListener is not necessary.
@@ -223,10 +227,12 @@ class NaturalSelectionSprites extends Sprites {
       // Create a SpriteInstance for the bunny.
       const bunnySpriteInstance = new BunnySpriteInstance( bunny, this.getBunnySprite( bunny ) );
       this.spriteInstances.push( bunnySpriteInstance );
+      assert && this.assertBunniesInSync();
 
       // If the bunny dies or is disposed, dispose of bunnySpriteInstance.
-      // removeListener is not necessary because diedEmitter and disposedEmitter are disposed after firing.
       const disposeBunnySpriteInstance = () => {
+        bunny.diedEmitter.removeListener( disposeBunnySpriteInstance );
+        bunny.disposedEmitter.removeListener( disposeBunnySpriteInstance );
         this.spriteInstances.splice( this.spriteInstances.indexOf( bunnySpriteInstance ), 1 );
         bunnySpriteInstance.dispose();
       };
@@ -248,6 +254,7 @@ class NaturalSelectionSprites extends Sprites {
     // Create a SpriteInstance for the wolf.
     const wolfSpriteInstance = new WolfSpriteInstance( wolf, wolfSprite );
     this.spriteInstances.push( wolfSpriteInstance );
+    assert && this.assertWolvesInSync();
 
     // When the wolf is disposed, remove wolfSpriteInstance.
     // removeListener is not necessary, because wolf.disposeEmitter is disposed.
@@ -308,74 +315,77 @@ class NaturalSelectionSprites extends Sprites {
 
   /**
    * Configures a sprite instance and the selection rectangle to correspond to a selected bunny.
-   * @param {Bunny|null} selectedBunny
+   * @param {Bunny|null} bunny
    * @private
    */
-  setSelectedBunny( selectedBunny ) {
+  setSelectedBunny( bunny ) {
 
-    assert && assert( selectedBunny instanceof Bunny || selectedBunny === null, 'invalid selectedBunny' );
+    assert && assert( bunny instanceof Bunny || bunny === null, 'invalid bunny' );
 
-    // Clear any previous selection
-    this.selectedBunnySpriteInstance = null;
-    if ( this.selectionRectangleSpriteInstance ) {
-      this.deleteSelectionRectangle();
-    }
+    // Clear any previous selection.
+    this.clearSelectedBunny();
 
-    if ( selectedBunny && selectedBunny.isAlive ) {
+    // If there's a live bunny selected...
+    if ( bunny && bunny.isAlive ) {
 
       // Find the sprite instance that is associated with the selected bunny.
       // Performance: For a maximum population, this brute-force approach takes < 1ms on a 2019 MacBook Pro.
-      let selectedBunnySpriteInstance = null;
-      for ( let i = 0; i < this.spriteInstances.length && !selectedBunnySpriteInstance; i++ ) {
-        if ( this.spriteInstances[ i ].organism === selectedBunny ) {
-          selectedBunnySpriteInstance = this.spriteInstances[ i ];
+      let selectedBunnyIndex = -1;
+      for ( let i = 0; i < this.spriteInstances.length && selectedBunnyIndex ===  -1; i++ ) {
+        if ( this.spriteInstances[ i ].organism === bunny ) {
+          selectedBunnyIndex = i;
         }
       }
-      assert && assert( selectedBunnySpriteInstance, 'sprite instance not found for selected bunny' );
-      this.selectedBunnySpriteInstance = selectedBunnySpriteInstance;
+      assert && assert( selectedBunnyIndex !== -1, 'sprite instance not found for selected bunny' );
+      this.selectedBunnySpriteInstance = this.spriteInstances[ selectedBunnyIndex ];
 
-      // Create the selection rectangle for the selected bunny.
-      this.selectionRectangleSpriteInstance = new BunnySelectionRectangleSpriteInstance( selectedBunny, this.selectionRectangleSprite );
-      this.spriteInstances.unshift( this.selectionRectangleSpriteInstance ); // prepend, so it's behind the selected bunny
+      // Create the selection rectangle and put it immediately behind the selected bunny.
+      this.selectionRectangleSpriteInstance = new BunnySelectionRectangleSpriteInstance( bunny, this.selectionRectangleSprite );
+      this.spriteInstances.splice( selectedBunnyIndex, 0, this.selectionRectangleSpriteInstance );
 
-      // Remove the selection if selectedBunny dies.
-      // removeListener is not necessary because Bunny.diedEmitter is disposed after firing.
-      selectedBunny.diedEmitter.addListener( () => {
-        this.selectedBunnySpriteInstance = null;
-        this.deleteSelectionRectangle();
-      } );
+      // Clear the selection if the selected bunny dies.
+      bunny.diedEmitter.addListener( this.clearSelectedBunnyBound );
+
+      assert && this.assertBunniesInSync();
     }
 
-    // If the sim is paused, update.
-    if ( !this.isPlayingProperty.value ) {
-      this.update();
-    }
+    this.update();
   }
 
   /**
-   * Deletes the selection rectangle.
+   * Clears the sprites for the bunny selection, if there is one.
    * @private
    */
-  deleteSelectionRectangle() {
-    assert && assert( this.selectionRectangleSpriteInstance, 'selectionRectangleSpriteInstance does not exist' );
+  clearSelectedBunny() {
 
-    const selectionRectangleIndex = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
-    assert && assert( selectionRectangleIndex !== -1, 'expected selectionRectangleSpriteInstance in spriteInstances' );
-    this.spriteInstances.splice( selectionRectangleIndex, 1 );
-    this.selectionRectangleSpriteInstance.dispose();
-    this.selectionRectangleSpriteInstance = null;
+    if ( this.selectedBunnySpriteInstance ) {
+      assert && assert( this.selectionRectangleSpriteInstance, 'expected selectionRectangleSpriteInstance to be set' );
+
+      // clear the selected bunny
+      const bunny = this.selectedBunnySpriteInstance.organism;
+      if ( bunny.diedEmitter.hasListener( this.clearSelectedBunnyBound ) ) {
+        bunny.diedEmitter.removeListener( this.clearSelectedBunnyBound );
+      }
+      this.selectedBunnySpriteInstance = null;
+
+      // clear the selection rectangle
+      const selectionRectangleIndex = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
+      assert && assert( selectionRectangleIndex !== -1, 'expected selectionRectangleSpriteInstance in spriteInstances' );
+      this.spriteInstances.splice( selectionRectangleIndex, 1 );
+      this.selectionRectangleSpriteInstance.dispose();
+      this.selectionRectangleSpriteInstance = null;
+    }
   }
 
   /**
    * Sorts the sprite instances in back-to-front rendering order. Instances are first sorted by z coordinate of their
    * associated organism, from back to front, where +z is away from the camera. If there is a selected bunny,
    * then the bunny and its selection rectangle are adjusted, depending on whether the sim is playing or paused.
-   * Sorting is done in place, because super has a reference to this.spriteInstances.
    * @private
    */
   sort() {
 
-    // Sort by descending z coordinate.
+    // Sort by descending z coordinate. Sorting is done in place, because super has a reference to this.spriteInstances.
     // Performance: For a maximum population, this takes < 1ms on a 2019 MacBook Pro.
     this.spriteInstances.sort( ( spriteInstance1, spriteInstance2 ) => {
       const z1 = spriteInstance1.organism.positionProperty.value.z;
@@ -383,21 +393,23 @@ class NaturalSelectionSprites extends Sprites {
       return Math.sign( z2 - z1 );
     } );
 
-    // If a selected bunny is visible and the sim is paused, move the selected bunny and the selection rectangle to the front.
+    // If a selected bunny is visible and the sim is paused...
     if ( this.selectedBunnySpriteInstance && !this.isPlayingProperty.value ) {
+      assert && assert( this.selectedBunnySpriteInstance, 'expected selectedBunnySpriteInstance to be set' );
       assert && assert( this.selectionRectangleSpriteInstance, 'expected selectionRectangleSpriteInstance to be set' );
 
-      // Gets the indices of the selected bunny and selection rectangle
+      // Gets the indices of the selection rectangle and selected bunny
+      const selectionRectangleIndex = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
+      assert && assert( selectionRectangleIndex !== -1, 'expected selectionRectangleSpriteInstance to be in spriteInstances' );
       const selectedBunnyIndex = this.spriteInstances.indexOf( this.selectedBunnySpriteInstance );
       assert && assert( selectedBunnyIndex !== -1, 'expected selectedBunnySpriteInstance to be in spriteInstances' );
 
-      const selectionRectangleIndex = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
-      assert && assert( selectionRectangleIndex !== -1, 'expected selectionRectangleSpriteInstance to be in spriteInstances' );
-
+      // Move the selected bunny and the selection rectangle to the front.
       this.spriteInstances.splice( selectionRectangleIndex, 1 );
       this.spriteInstances.splice( selectedBunnyIndex, 1 );
       this.spriteInstances.push( this.selectionRectangleSpriteInstance );
       this.spriteInstances.push( this.selectedBunnySpriteInstance );
+      assert && this.assertBunniesInSync();
     }
   }
 
@@ -419,6 +431,28 @@ class NaturalSelectionSprites extends Sprites {
     assert && assert( sprite, `no sprite found for key ${key}` );
 
     return sprite;
+  }
+
+  /**
+   * Asserts that the number of sprite instances for bunnies matches the number of live bunnies in the model.
+   * @private
+   */
+  assertBunniesInSync() {
+    const numberOfSprites = _.filter( this.spriteInstances, spriteInstance => spriteInstance instanceof BunnySpriteInstance ).length;
+    const numberOfBunnies = this.bunnyCollection.liveBunnies.lengthProperty.value;
+    assert && assert( numberOfSprites === numberOfBunnies,
+      `number of bunny sprites ${numberOfSprites} is out of sync with number of bunnies ${numberOfBunnies}` );
+  }
+
+  /**
+   * Asserts that the number of sprite instances for wolves matches the number of wolves in the model.
+   * @private
+   */
+  assertWolvesInSync() {
+    const numberOfSprites = _.filter( this.spriteInstances, spriteInstance => spriteInstance instanceof WolfSpriteInstance ).length;
+    const numberOfWolves = this.wolfCollection.count;
+    assert && assert( numberOfSprites === numberOfWolves,
+      `number of wolf sprites ${numberOfSprites} is out of sync with number of wolves ${numberOfWolves}` );
   }
 }
 
