@@ -390,6 +390,9 @@ class NaturalSelectionSprites extends Sprites {
       this.selectionRectangleSpriteInstance.dispose();
       this.selectionRectangleSpriteInstance = null;
     }
+
+    assert && assert( this.selectedBunnySpriteInstance === null, 'selectedBunnySpriteInstance should be null' );
+    assert && assert( this.selectionRectangleSpriteInstance === null, 'selectionRectangleSpriteInstance should be null' );
   }
 
   /**
