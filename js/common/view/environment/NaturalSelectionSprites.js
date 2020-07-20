@@ -179,7 +179,7 @@ class NaturalSelectionSprites extends Sprites {
     bunnyCollection.selectedBunnyProperty.link( bunny => this.setSelectedBunny( bunny ) );
 
     // @private
-    this.clearSelectedBunnyBound = this.clearSelectedBunny.bind( this );
+    this.clearSelectedBunnyCallback = this.clearSelectedBunny.bind( this );
 
     // PressListener for selecting a bunny. Mix in SpriteListenable, so we have access to the pressed SpriteInstance.
     // removeInputListener is not necessary.
@@ -344,7 +344,7 @@ class NaturalSelectionSprites extends Sprites {
       this.spriteInstances.splice( selectedBunnyIndex, 0, this.selectionRectangleSpriteInstance );
 
       // Clear the selection if the selected bunny dies.
-      bunny.diedEmitter.addListener( this.clearSelectedBunnyBound );
+      bunny.diedEmitter.addListener( this.clearSelectedBunnyCallback );
 
       assert && this.assertBunniesCount();
     }
@@ -363,8 +363,8 @@ class NaturalSelectionSprites extends Sprites {
 
       // clear the selected bunny
       const bunny = this.selectedBunnySpriteInstance.organism;
-      if ( bunny.diedEmitter.hasListener( this.clearSelectedBunnyBound ) ) {
-        bunny.diedEmitter.removeListener( this.clearSelectedBunnyBound );
+      if ( bunny.diedEmitter.hasListener( this.clearSelectedBunnyCallback ) ) {
+        bunny.diedEmitter.removeListener( this.clearSelectedBunnyCallback );
       }
       this.selectedBunnySpriteInstance = null;
 
