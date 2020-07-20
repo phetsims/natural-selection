@@ -330,14 +330,8 @@ class NaturalSelectionSprites extends Sprites {
     // If there's a live bunny selected...
     if ( bunny && bunny.isAlive ) {
 
-      // Find the sprite instance that is associated with the selected bunny.
-      // Performance: For a maximum population, this brute-force approach takes < 1ms on a 2019 MacBook Pro.
-      let selectedBunnyIndex = -1;
-      for ( let i = 0; i < this.spriteInstances.length && selectedBunnyIndex ===  -1; i++ ) {
-        if ( this.spriteInstances[ i ].organism === bunny ) {
-          selectedBunnyIndex = i;
-        }
-      }
+      // Get the sprite instance that is associated with the selected bunny.
+      const selectedBunnyIndex = this.getSpriteInstanceIndex( bunny );
       assert && assert( selectedBunnyIndex !== -1, 'sprite instance not found for selected bunny' );
       this.selectedBunnySpriteInstance = this.spriteInstances[ selectedBunnyIndex ];
 
@@ -352,6 +346,25 @@ class NaturalSelectionSprites extends Sprites {
     }
 
     this.update();
+  }
+
+  /**
+   * Gets the index of the sprite instance that is associated with a specific bunny.
+   * @param {Bunny} bunny
+   * @returns {number}
+   * @private
+   */
+  getSpriteInstanceIndex( bunny ) {
+    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
+
+    // Performance: For a maximum population, this brute-force approach takes < 1ms on a 2019 MacBook Pro.
+    let selectedBunnyIndex = -1;
+    for ( let i = 0; i < this.spriteInstances.length && selectedBunnyIndex ===  -1; i++ ) {
+      if ( this.spriteInstances[ i ].organism === bunny ) {
+        selectedBunnyIndex = i;
+      }
+    }
+    return selectedBunnyIndex;
   }
 
   /**
