@@ -227,7 +227,7 @@ class NaturalSelectionSprites extends Sprites {
       // Create a SpriteInstance for the bunny.
       const bunnySpriteInstance = new BunnySpriteInstance( bunny, this.getBunnySprite( bunny ) );
       this.spriteInstances.push( bunnySpriteInstance );
-      assert && this.assertBunniesInSync();
+      assert && this.assertBunniesCount();
 
       // If the bunny dies or is disposed, dispose of bunnySpriteInstance.
       const disposeBunnySpriteInstance = () => {
@@ -254,7 +254,7 @@ class NaturalSelectionSprites extends Sprites {
     // Create a SpriteInstance for the wolf.
     const wolfSpriteInstance = new WolfSpriteInstance( wolf, wolfSprite );
     this.spriteInstances.push( wolfSpriteInstance );
-    assert && this.assertWolvesInSync();
+    assert && this.assertWolvesCount();
 
     // When the wolf is disposed, remove wolfSpriteInstance.
     // removeListener is not necessary, because wolf.disposeEmitter is disposed.
@@ -346,7 +346,7 @@ class NaturalSelectionSprites extends Sprites {
       // Clear the selection if the selected bunny dies.
       bunny.diedEmitter.addListener( this.clearSelectedBunnyBound );
 
-      assert && this.assertBunniesInSync();
+      assert && this.assertBunniesCount();
     }
 
     this.update();
@@ -409,7 +409,7 @@ class NaturalSelectionSprites extends Sprites {
       this.spriteInstances.splice( selectedBunnyIndex, 1 );
       this.spriteInstances.push( this.selectionRectangleSpriteInstance );
       this.spriteInstances.push( this.selectedBunnySpriteInstance );
-      assert && this.assertBunniesInSync();
+      assert && this.assertBunniesCount();
     }
   }
 
@@ -437,7 +437,7 @@ class NaturalSelectionSprites extends Sprites {
    * Asserts that the number of sprite instances for bunnies matches the number of live bunnies in the model.
    * @private
    */
-  assertBunniesInSync() {
+  assertBunniesCount() {
     const numberOfSprites = _.filter( this.spriteInstances, spriteInstance => spriteInstance instanceof BunnySpriteInstance ).length;
     const numberOfBunnies = this.bunnyCollection.liveBunnies.lengthProperty.value;
     assert && assert( numberOfSprites === numberOfBunnies,
@@ -448,7 +448,7 @@ class NaturalSelectionSprites extends Sprites {
    * Asserts that the number of sprite instances for wolves matches the number of wolves in the model.
    * @private
    */
-  assertWolvesInSync() {
+  assertWolvesCount() {
     const numberOfSprites = _.filter( this.spriteInstances, spriteInstance => spriteInstance instanceof WolfSpriteInstance ).length;
     const numberOfWolves = this.wolfCollection.count;
     assert && assert( numberOfSprites === numberOfWolves,
