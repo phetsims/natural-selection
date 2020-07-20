@@ -225,9 +225,8 @@ class NaturalSelectionSprites extends Sprites {
       this.spriteInstances.push( bunnySpriteInstance );
 
       // If the bunny dies or is disposed, dispose of bunnySpriteInstance.
+      // removeListener is not necessary because diedEmitter and disposedEmitter are disposed after firing.
       const disposeBunnySpriteInstance = () => {
-        bunny.diedEmitter.removeListener( disposeBunnySpriteInstance );
-        bunny.disposedEmitter.removeListener( disposeBunnySpriteInstance );
         this.spriteInstances.splice( this.spriteInstances.indexOf( bunnySpriteInstance ), 1 );
         bunnySpriteInstance.dispose();
       };
@@ -314,21 +313,15 @@ class NaturalSelectionSprites extends Sprites {
    */
   setSelectedBunny( selectedBunny ) {
 
-    assert && assert( selectedBunny instanceof Bunny || selectedBunny === null, 'invalid bunny' );
+    assert && assert( selectedBunny instanceof Bunny || selectedBunny === null, 'invalid selectedBunny' );
 
-    // Clear the reference to any previously-selected sprite instance.
+    // Clear any previous selection
     this.selectedBunnySpriteInstance = null;
-
-    // Dispose of the selection rectangle.
     if ( this.selectionRectangleSpriteInstance ) {
-      const selectionRectangleIndex = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
-      assert && assert( selectionRectangleIndex !== -1, 'expected selectionRectangleSpriteInstance in spriteInstances' );
-      this.spriteInstances.splice( selectionRectangleIndex, 1 );
-      this.selectionRectangleSpriteInstance.dispose();
-      this.selectionRectangleSpriteInstance = null;
+      this.deleteSelectionRectangle();
     }
 
-    if ( selectedBunny ) {
+    if ( selectedBunny && selectedBunny.isAlive ) {
 
       // Find the sprite instance that is associated with the selected bunny.
       // Performance: For a maximum population, this brute-force approach takes < 1ms on a 2019 MacBook Pro.
@@ -344,12 +337,33 @@ class NaturalSelectionSprites extends Sprites {
       // Create the selection rectangle for the selected bunny.
       this.selectionRectangleSpriteInstance = new BunnySelectionRectangleSpriteInstance( selectedBunny, this.selectionRectangleSprite );
       this.spriteInstances.unshift( this.selectionRectangleSpriteInstance ); // prepend, so it's behind the selected bunny
+
+      // Remove the selection if selectedBunny dies.
+      // removeListener is not necessary because Bunny.diedEmitter is disposed after firing.
+      selectedBunny.diedEmitter.addListener( () => {
+        this.selectedBunnySpriteInstance = null;
+        this.deleteSelectionRectangle();
+      } );
     }
 
     // If the sim is paused, update.
     if ( !this.isPlayingProperty.value ) {
       this.update();
     }
+  }
+
+  /**
+   * Deletes the selection rectangle.
+   * @private
+   */
+  deleteSelectionRectangle() {
+    assert && assert( this.selectionRectangleSpriteInstance, 'selectionRectangleSpriteInstance does not exist' );
+
+    const selectionRectangleIndex = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
+    assert && assert( selectionRectangleIndex !== -1, 'expected selectionRectangleSpriteInstance in spriteInstances' );
+    this.spriteInstances.splice( selectionRectangleIndex, 1 );
+    this.selectionRectangleSpriteInstance.dispose();
+    this.selectionRectangleSpriteInstance = null;
   }
 
   /**
@@ -369,9 +383,8 @@ class NaturalSelectionSprites extends Sprites {
       return Math.sign( z2 - z1 );
     } );
 
-    // If a bunny is selected and the sim is paused, move the selected bunny and the selection rectangle to the front.
-    if ( this.bunnyCollection.selectedBunnyProperty.value && !this.isPlayingProperty.value ) {
-      assert && assert( this.selectedBunnySpriteInstance, 'expected selectedBunnySpriteInstance to be set' );
+    // If a selected bunny is visible and the sim is paused, move the selected bunny and the selection rectangle to the front.
+    if ( this.selectedBunnySpriteInstance && !this.isPlayingProperty.value ) {
       assert && assert( this.selectionRectangleSpriteInstance, 'expected selectionRectangleSpriteInstance to be set' );
 
       // Gets the indices of the selected bunny and selection rectangle
