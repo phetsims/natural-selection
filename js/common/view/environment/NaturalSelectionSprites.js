@@ -180,7 +180,6 @@ class NaturalSelectionSprites extends Sprites {
     // PressListener for selecting a bunny. Mix in SpriteListenable, so we have access to the pressed SpriteInstance.
     this.addInputListener( new ( SpriteListenable( PressListener ) )( {
 
-      // Select a bunny. This is called only when we click on a SpriteInstance that has a pickable SpriteImage.
       press: ( event, listener ) => {
         assert && assert( listener.spriteInstance, 'expected a sprite instance' );
         if ( listener.spriteInstance instanceof BunnySpriteInstance ) {
