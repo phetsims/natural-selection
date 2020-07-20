@@ -398,7 +398,7 @@ class NaturalSelectionSprites extends Sprites {
       assert && assert( this.selectedBunnySpriteInstance, 'expected selectedBunnySpriteInstance to be set' );
       assert && assert( this.selectionRectangleSpriteInstance, 'expected selectionRectangleSpriteInstance to be set' );
 
-      // Gets the indices of the selection rectangle and selected bunny
+      // Get the indices of the selection rectangle and selected bunny
       const selectionRectangleIndex = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
       assert && assert( selectionRectangleIndex !== -1, 'expected selectionRectangleSpriteInstance to be in spriteInstances' );
       const selectedBunnyIndex = this.spriteInstances.indexOf( this.selectedBunnySpriteInstance );
@@ -407,7 +407,7 @@ class NaturalSelectionSprites extends Sprites {
       // Move the selected bunny and the selection rectangle to the front.
       this.spriteInstances.splice( selectionRectangleIndex, 1 );
       this.spriteInstances.splice( selectedBunnyIndex, 1 );
-      this.spriteInstances.push( this.selectionRectangleSpriteInstance );
+      this.spriteInstances.push( this.selectionRectangleSpriteInstance ); // rectangle behind bunny
       this.spriteInstances.push( this.selectedBunnySpriteInstance );
       assert && this.assertBunniesCount();
     }
