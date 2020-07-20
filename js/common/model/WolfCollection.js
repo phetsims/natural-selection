@@ -155,6 +155,15 @@ class WolfCollection {
   }
 
   /**
+   * Gets the number of wolves.
+   * @returns {number}
+   * @public
+   */
+  get count() {
+    return this.wolfGroup.countProperty.value;
+  }
+
+  /**
    * Moves all wolves.
    * @param {number} dt - time step, in seconds
    * @public
