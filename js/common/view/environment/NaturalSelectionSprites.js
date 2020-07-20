@@ -99,7 +99,7 @@ class NaturalSelectionSprites extends Sprites {
     const wolfSprite = new Sprite( new OrganismSpriteImage( wolfImage ) );
 
     // Sprites for all categories of shrubs. Maps a shrub category to a pair of sprites, for tough and tender versions
-    // of the shrub. Keys are from Shrub.CATEGORIES.
+    // of the shrub. Keys are described at Shrub.CATEGORIES.
     const shrubSpritesMap = {
 
       // key: value
