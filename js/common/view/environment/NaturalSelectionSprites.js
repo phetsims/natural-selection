@@ -174,10 +174,11 @@ class NaturalSelectionSprites extends Sprites {
     // Show sprites for limited vs plentiful food. unlink is not necessary.
     food.isLimitedProperty.link( isLimited => this.setLimitedFood( isLimited ) );
 
-    // Put a selection rectangle around the selected bunny.
+    // Put a selection rectangle around the selected bunny. unlink is not necessary.
     bunnyCollection.selectedBunnyProperty.link( selectedBunny => this.setSelectedBunny( selectedBunny ) );
 
     // PressListener for selecting a bunny. Mix in SpriteListenable, so we have access to the pressed SpriteInstance.
+    // removeInputListener is not necessary.
     this.addInputListener( new ( SpriteListenable( PressListener ) )( {
 
       press: ( event, listener ) => {
