@@ -425,8 +425,10 @@ class NaturalSelectionSprites extends Sprites {
       return Math.sign( z2 - z1 );
     } );
 
-    // If a selected bunny is visible and the sim is paused, move selected bunny and selection rectangle to the front.
+    // If a selected bunny is visible and the sim is paused, move the bunny and selection rectangle to the front.
     if ( this.selectedBunnySpriteInstance && !this.isPlayingProperty.value ) {
+      assert && assert( this.bunnyCollection.selectedBunnyProperty.value,
+        'selectedBunnySpriteInstance should not exist when there is no selected bunny' );
       assert && assert( this.selectionRectangleSpriteInstance, 'expected selectionRectangleSpriteInstance to be set' );
 
       // Remove the selected bunny
@@ -439,7 +441,7 @@ class NaturalSelectionSprites extends Sprites {
       assert && assert( selectionRectangleIndex !== -1, 'selectionRectangleSpriteInstance missing from spriteInstances' );
       this.spriteInstances.splice( selectionRectangleIndex, 1 );
 
-      // Move the selected bunny and the selection rectangle to the front.
+      // Append the selected bunny and the selection rectangle to the front.
       this.spriteInstances.push( this.selectionRectangleSpriteInstance ); // rectangle behind bunny
       this.spriteInstances.push( this.selectedBunnySpriteInstance );
 
