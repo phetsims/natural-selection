@@ -229,11 +229,17 @@ class NaturalSelectionSprites extends Sprites {
       this.spriteInstances.push( bunnySpriteInstance );
       assert && this.assertBunniesCount();
 
-      // If the bunny dies or is disposed, dispose of bunnySpriteInstance.
+      // If the bunny dies or is disposed...
       const disposeBunnySpriteInstance = () => {
+
+        // Remove this listener
         bunny.diedEmitter.removeListener( disposeBunnySpriteInstance );
         bunny.disposedEmitter.removeListener( disposeBunnySpriteInstance );
-        this.spriteInstances.splice( this.spriteInstances.indexOf( bunnySpriteInstance ), 1 );
+
+        // Remove the associated sprite instance
+        const bunnySpriteInstanceIndex = this.spriteInstances.indexOf( bunnySpriteInstance );
+        assert && assert( bunnySpriteInstanceIndex !== -1, 'bunnySpriteInstance missing from spriteInstances' );
+        this.spriteInstances.splice( bunnySpriteInstanceIndex, 1 );
         bunnySpriteInstance.dispose();
       };
       bunny.diedEmitter.addListener( disposeBunnySpriteInstance ); // removeListener is performed by callback
@@ -256,10 +262,16 @@ class NaturalSelectionSprites extends Sprites {
     this.spriteInstances.push( wolfSpriteInstance );
     assert && this.assertWolvesCount();
 
-    // When the wolf is disposed, dispose of wolfSpriteInstance.
+    // When the wolf is disposed...
     const disposeWolfSpriteInstance = () => {
+
+      // Remove this listener
       wolf.disposedEmitter.removeListener( disposeWolfSpriteInstance );
-      this.spriteInstances.splice( this.spriteInstances.indexOf( wolfSpriteInstance ), 1 );
+
+      // Remove the associated sprite instance
+      const wolfSpriteInstanceIndex = this.spriteInstances.indexOf( wolfSpriteInstance );
+      assert && assert( wolfSpriteInstanceIndex !== -1, 'wolfSpriteInstanceIndex missing from spriteInstances' );
+      this.spriteInstances.splice( wolfSpriteInstanceIndex, 1 );
       wolfSpriteInstance.dispose();
     };
     wolf.disposedEmitter.addListener( disposeWolfSpriteInstance ); // removeListener is performed by callback
@@ -330,10 +342,11 @@ class NaturalSelectionSprites extends Sprites {
     // If there's a live bunny selected...
     if ( bunny && bunny.isAlive ) {
 
-      // Get the sprite instance that is associated with the selected bunny.
-      const selectedBunnyIndex = this.getSpriteInstanceIndex( bunny );
+      // Get the BunnySpriteInstance that is associated with the selected bunny.
+      const selectedBunnyIndex = this.getBunnySpriteInstanceIndex( bunny );
       assert && assert( selectedBunnyIndex !== -1, 'sprite instance not found for selected bunny' );
       this.selectedBunnySpriteInstance = this.spriteInstances[ selectedBunnyIndex ];
+      assert && assert( this.selectedBunnySpriteInstance instanceof BunnySpriteInstance, 'invalid selectedBunnySpriteInstance' );
 
       // Create the selection rectangle and put it immediately behind the selected bunny.
       this.selectionRectangleSpriteInstance = new BunnySelectionRectangleSpriteInstance( bunny, this.selectionRectangleSprite );
@@ -349,18 +362,19 @@ class NaturalSelectionSprites extends Sprites {
   }
 
   /**
-   * Gets the index of the sprite instance that is associated with a specific bunny.
+   * Gets the index of the BunnySpriteInstance that is associated with a specific bunny.
    * @param {Bunny} bunny
-   * @returns {number}
+   * @returns {number} -1 if not found
    * @private
    */
-  getSpriteInstanceIndex( bunny ) {
+  getBunnySpriteInstanceIndex( bunny ) {
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
     // Performance: For a maximum population, this brute-force approach takes < 1ms on a 2019 MacBook Pro.
     let selectedBunnyIndex = -1;
     for ( let i = 0; i < this.spriteInstances.length && selectedBunnyIndex ===  -1; i++ ) {
-      if ( this.spriteInstances[ i ].organism === bunny ) {
+      const spriteInstance = this.spriteInstances[ i ];
+      if ( spriteInstance instanceof BunnySpriteInstance && spriteInstance.organism === bunny ) {
         selectedBunnyIndex = i;
       }
     }
@@ -374,18 +388,18 @@ class NaturalSelectionSprites extends Sprites {
   clearSelectedBunny() {
 
     if ( this.selectedBunnySpriteInstance ) {
-      assert && assert( this.selectionRectangleSpriteInstance, 'expected selectionRectangleSpriteInstance to be set' );
 
       // clear the selected bunny
       const bunny = this.selectedBunnySpriteInstance.organism;
-      if ( bunny.diedEmitter.hasListener( this.clearSelectedBunnyCallback ) ) {
-        bunny.diedEmitter.removeListener( this.clearSelectedBunnyCallback );
-      }
+      bunny.diedEmitter.removeListener( this.clearSelectedBunnyCallback );
       this.selectedBunnySpriteInstance = null;
 
       // clear the selection rectangle
+      assert && assert( this.selectionRectangleSpriteInstance, 'expected selectionRectangleSpriteInstance to be set' );
+      assert && assert( this.selectionRectangleSpriteInstance.organism === bunny,
+        `selectionRectangleSpriteInstance is attached to ${this.selectionRectangleSpriteInstance.organism.tandem.name}, expected ${bunny.tandem.name}` );
       const selectionRectangleIndex = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
-      assert && assert( selectionRectangleIndex !== -1, 'expected selectionRectangleSpriteInstance in spriteInstances' );
+      assert && assert( selectionRectangleIndex !== -1, `missing selectionRectangleSpriteInstance attached to ${bunny.tandem.name}` );
       this.spriteInstances.splice( selectionRectangleIndex, 1 );
       this.selectionRectangleSpriteInstance.dispose();
       this.selectionRectangleSpriteInstance = null;
@@ -413,14 +427,13 @@ class NaturalSelectionSprites extends Sprites {
 
     // If a selected bunny is visible and the sim is paused...
     if ( this.selectedBunnySpriteInstance && !this.isPlayingProperty.value ) {
-      assert && assert( this.selectedBunnySpriteInstance, 'expected selectedBunnySpriteInstance to be set' );
       assert && assert( this.selectionRectangleSpriteInstance, 'expected selectionRectangleSpriteInstance to be set' );
 
       // Get the indices of the selection rectangle and selected bunny
       const selectionRectangleIndex = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
-      assert && assert( selectionRectangleIndex !== -1, 'expected selectionRectangleSpriteInstance to be in spriteInstances' );
+      assert && assert( selectionRectangleIndex !== -1, 'selectionRectangleSpriteInstance missing from spriteInstances' );
       const selectedBunnyIndex = this.spriteInstances.indexOf( this.selectedBunnySpriteInstance );
-      assert && assert( selectedBunnyIndex !== -1, 'expected selectedBunnySpriteInstance to be in spriteInstances' );
+      assert && assert( selectedBunnyIndex !== -1, 'selectedBunnySpriteInstance missing from spriteInstances' );
 
       // Move the selected bunny and the selection rectangle to the front.
       this.spriteInstances.splice( selectionRectangleIndex, 1 );
