@@ -321,6 +321,7 @@ class NaturalSelectionScreenView extends ScreenView {
       } );
     }
 
+    //TODO https://github.com/phetsims/natural-selection/issues/140 delete this block
     if ( NaturalSelectionQueryParameters.showTimeToStartOver ) {
 
       const timeToStartOverNode = new Text( '', {
