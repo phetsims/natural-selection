@@ -305,7 +305,7 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     //TODO https://github.com/phetsims/natural-selection/issues/60 delete this block
-    if ( NaturalSelectionQueryParameters.showTimeToMate ) {
+    if ( NaturalSelectionQueryParameters.showTimes ) {
 
       const timeToMateNode = new Text( '', {
         font: new PhetFont( 20 ),
@@ -316,25 +316,21 @@ class NaturalSelectionScreenView extends ScreenView {
 
       model.timeToMateProperty.link( timeToMate => {
         const t = Utils.roundSymmetric( timeToMate );
-        console.log( `time to mate = ${t} ms` );
         timeToMateNode.text = `time to mate = ${t} ms`;
+        console.log( timeToMateNode.text );
       } );
-    }
-
-    //TODO https://github.com/phetsims/natural-selection/issues/140 delete this block
-    if ( NaturalSelectionQueryParameters.showTimeToStartOver ) {
 
       const timeToStartOverNode = new Text( '', {
         font: new PhetFont( 20 ),
         left: environmentNode.left + 5,
-        top: environmentNode.top + 35
+        top: timeToMateNode.bottom + 5
       } );
       this.addChild( timeToStartOverNode );
 
       model.timeToStartOverProperty.link( timeToStartOver => {
         const t = Utils.roundSymmetric( timeToStartOver );
-        console.log( `time to Start Over  = ${t} ms` );
         timeToStartOverNode.text = `time to Start Over = ${t} ms`;
+        console.log( timeToStartOverNode.text );
       } );
     }
   }

@@ -272,15 +272,10 @@ const SCHEMA = {
     type: 'flag'
   },
 
-  // Displays the time spent on each mating cycle in the upper-left corner of the screen.
+  // Displays time profiling in the upper-left corner of the screen.
   //TODO https://github.com/phetsims/natural-selection/issues/60 delete this
-  showTimeToMate: {
-    type: 'flag'
-  },
-
-  // Displays the time spent in executing the callback for the 'Start Over' button.
   //TODO https://github.com/phetsims/natural-selection/issues/140 delete this
-  showTimeToStartOver: {
+  showTimes: {
     type: 'flag'
   },
 
