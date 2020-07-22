@@ -180,6 +180,7 @@ class WolfCollection {
   eatBunnies( environment ) {
     assert && assert( Environment.includes( environment ), 'invalid environment' );
     assert && assert( this.isHuntingProperty.value, 'should not be called unless hunting' );
+    phet.log && phet.log( 'Wolves are hunting' );
 
     // Get the bunnies that are candidates for natural selection, in random order.
     const bunnies = this.bunnyCollection.getSelectionCandidates();

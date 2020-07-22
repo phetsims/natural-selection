@@ -135,6 +135,7 @@ class Food {
    */
   starveBunnies( bunnies ) {
     assert && assert( Array.isArray( bunnies ), 'invalid bunnies' );
+    phet.log && phet.log( 'attempting to starve bunnies' );
 
     if ( bunnies.length > 0 && ( this.isLimitedProperty.value || this.isToughProperty.value ) ) {
 
