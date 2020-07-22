@@ -163,6 +163,9 @@ class NaturalSelectionModel {
     //TODO https://github.com/phetsims/natural-selection/issues/60 delete this Property
     this.timeToMateProperty = new NumberProperty( 0 );
 
+    //TODO https://github.com/phetsims/natural-selection/issues/140 delete this Property
+    this.timeToStartOverProperty = new NumberProperty( 0 );
+
     // When the generation changes... unlink is not necessary.
     this.generationClock.currentGenerationProperty.lazyLink( currentGeneration => {
 

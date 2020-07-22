@@ -21,6 +21,7 @@ import NaturalSelectionModel from '../model/NaturalSelectionModel.js';
 import SimulationMode from '../model/SimulationMode.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import AddMutationsPanel from './AddMutationsPanel.js';
 import DiedDialog from './DiedDialog.js';
 import EnvironmentNode from './environment/EnvironmentNode.js';
@@ -192,7 +193,11 @@ class NaturalSelectionScreenView extends ScreenView {
       model.simulationModeProperty,
       model.bunnyCollection.liveBunnies.lengthProperty, {
         addAMate: () => model.addAMate(),
-        startOver: () => model.startOver(),
+        //TODO https://github.com/phetsims/natural-selection/issues/140 remove NaturalSelectionUtils.time
+        //startOver: () => model.startOver(),
+        startOver: () => {
+          model.timeToStartOverProperty.value = NaturalSelectionUtils.time( () => model.startOver() );
+        },
         centerX: environmentNode.centerX,
         bottom: environmentNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
         tandem: options.tandem.createTandem( 'playButtonGroup' )
@@ -313,6 +318,22 @@ class NaturalSelectionScreenView extends ScreenView {
         const t = Utils.roundSymmetric( timeToMate );
         console.log( `time to mate = ${t} ms` );
         timeToMateNode.text = `time to mate = ${t} ms`;
+      } );
+    }
+
+    if ( NaturalSelectionQueryParameters.showTimeToStartOver ) {
+
+      const timeToStartOverNode = new Text( '', {
+        font: new PhetFont( 20 ),
+        left: environmentNode.left + 5,
+        top: environmentNode.top + 35
+      } );
+      this.addChild( timeToStartOverNode );
+
+      model.timeToStartOverProperty.link( timeToStartOver => {
+        const t = Utils.roundSymmetric( timeToStartOver );
+        console.log( `time to Start Over  = ${t} ms` );
+        timeToStartOverNode.text = `time to Start Over = ${t} ms`;
       } );
     }
   }

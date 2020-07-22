@@ -278,6 +278,12 @@ const SCHEMA = {
     type: 'flag'
   },
 
+  // Displays the time spent in executing the callback for the 'Start Over' button.
+  //TODO https://github.com/phetsims/natural-selection/issues/140 delete this
+  showTimeToStartOver: {
+    type: 'flag'
+  },
+
   // Percentage of newborn bunnies that will receive a mutation.
   // Symmetric rounding is used, and at least 1 bunny will receive the mutation.
   mutationPercentage: {
