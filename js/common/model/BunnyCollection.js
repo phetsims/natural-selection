@@ -34,9 +34,9 @@ import SelectedBunnyProperty from './SelectedBunnyProperty.js';
 // constants
 
 // Ranges for bunny rest time, as specified in https://github.com/phetsims/natural-selection/issues/129
-const BUNNY_REST_RANGE_SHORT = new Range( 2, 4 );
-const BUNNY_REST_RANGE_MEDIUM = new Range( 3, 7 );
-const BUNNY_REST_RANGE_LONG = new Range( 5, 9 );
+const BUNNY_REST_RANGE_SHORT = new Range( 1, 3 );
+const BUNNY_REST_RANGE_MEDIUM = new Range( 2, 7 );
+const BUNNY_REST_RANGE_LONG = new Range( 6, 10 );
 
 // The maximum number of generations that a dead bunny needs to exist before it can be disposed.
 // This is based on the Pedigree graph depth, because the Pedigree graph is the only place where
