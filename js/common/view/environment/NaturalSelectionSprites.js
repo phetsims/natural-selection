@@ -351,7 +351,7 @@ class NaturalSelectionSprites extends Sprites {
       this.selectionRectangleSpriteInstance = new BunnySelectionRectangleSpriteInstance( bunny, this.selectionRectangleSprite );
       this.spriteInstances.splice( selectedBunnyIndex, 0, this.selectionRectangleSpriteInstance );
 
-      // Clear the selection if the selected bunny dies.
+      // Clear the selection if the selected bunny dies. removeListener in clearSelectedBunny.
       bunny.diedEmitter.addListener( this.clearSelectedBunnyCallback );
 
       assert && this.assertBunniesCount();
