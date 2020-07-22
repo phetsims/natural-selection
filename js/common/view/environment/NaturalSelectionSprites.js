@@ -227,7 +227,6 @@ class NaturalSelectionSprites extends Sprites {
       // Create a SpriteInstance for the bunny.
       const bunnySpriteInstance = new BunnySpriteInstance( bunny, this.getBunnySprite( bunny ) );
       this.spriteInstances.push( bunnySpriteInstance );
-      assert && this.assertBunniesCount();
 
       // If the bunny dies or is disposed...
       const disposeBunnySpriteInstance = () => {
