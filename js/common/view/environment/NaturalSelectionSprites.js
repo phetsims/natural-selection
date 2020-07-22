@@ -395,11 +395,12 @@ class NaturalSelectionSprites extends Sprites {
       this.selectedBunnySpriteInstance = null;
 
       // clear the selection rectangle
-      assert && assert( this.selectionRectangleSpriteInstance, 'expected selectionRectangleSpriteInstance to be set' );
+      assert && assert( this.selectionRectangleSpriteInstance,
+        'expected selectionRectangleSpriteInstance to be set' );
       assert && assert( this.selectionRectangleSpriteInstance.organism === bunny,
-        `selectionRectangleSpriteInstance is attached to ${this.selectionRectangleSpriteInstance.organism.tandem.name}, expected ${bunny.tandem.name}` );
+        'selectionRectangleSpriteInstance is attached to unexpected bunny' );
       const selectionRectangleIndex = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
-      assert && assert( selectionRectangleIndex !== -1, `missing selectionRectangleSpriteInstance attached to ${bunny.tandem.name}` );
+      assert && assert( selectionRectangleIndex !== -1, 'selectionRectangleSpriteInstance is missing from spriteInstances' );
       this.spriteInstances.splice( selectionRectangleIndex, 1 );
       this.selectionRectangleSpriteInstance.dispose();
       this.selectionRectangleSpriteInstance = null;
@@ -425,21 +426,24 @@ class NaturalSelectionSprites extends Sprites {
       return Math.sign( z2 - z1 );
     } );
 
-    // If a selected bunny is visible and the sim is paused...
+    // If a selected bunny is visible and the sim is paused, move selected bunny and selection rectangle to the front.
     if ( this.selectedBunnySpriteInstance && !this.isPlayingProperty.value ) {
       assert && assert( this.selectionRectangleSpriteInstance, 'expected selectionRectangleSpriteInstance to be set' );
 
-      // Get the indices of the selection rectangle and selected bunny
-      const selectionRectangleIndex = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
-      assert && assert( selectionRectangleIndex !== -1, 'selectionRectangleSpriteInstance missing from spriteInstances' );
+      // Remove the selected bunny
       const selectedBunnyIndex = this.spriteInstances.indexOf( this.selectedBunnySpriteInstance );
       assert && assert( selectedBunnyIndex !== -1, 'selectedBunnySpriteInstance missing from spriteInstances' );
+      this.spriteInstances.splice( selectedBunnyIndex, 1 );
+
+      // Remove the selection rectangle
+      const selectionRectangleIndex = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
+      assert && assert( selectionRectangleIndex !== -1, 'selectionRectangleSpriteInstance missing from spriteInstances' );
+      this.spriteInstances.splice( selectionRectangleIndex, 1 );
 
       // Move the selected bunny and the selection rectangle to the front.
-      this.spriteInstances.splice( selectionRectangleIndex, 1 );
-      this.spriteInstances.splice( selectedBunnyIndex, 1 );
       this.spriteInstances.push( this.selectionRectangleSpriteInstance ); // rectangle behind bunny
       this.spriteInstances.push( this.selectedBunnySpriteInstance );
+
       assert && this.assertBunniesCount();
     }
   }
