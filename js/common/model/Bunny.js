@@ -38,7 +38,7 @@ import XDirection from './XDirection.js';
 const HOP_TIME_RANGE = NaturalSelectionQueryParameters.bunnyHopTime; // time to complete a hop cycle, in seconds
 const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // x and z distance that a bunny hops
 const HOP_HEIGHT_RANGE = new Range( 30, 50 ); // how high above the ground a bunny hops
-const X_MARGIN = 25; // determined empirically, to keep bunnies inside bounds of the environment
+const X_MARGIN = 28; // determined empirically, to keep bunnies inside bounds of the environment
 
 class Bunny extends Organism {
 
