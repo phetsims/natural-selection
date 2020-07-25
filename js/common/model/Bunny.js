@@ -243,7 +243,7 @@ class Bunny extends Organism {
 
     // Reverse delta x if the hop would exceed x boundaries
     const hopEndX = this.positionProperty.value.x + this.hopDelta.x;
-    if ( hopEndX <= this.getMinimumX() + X_MARGIN|| hopEndX >= this.getMaximumX() - X_MARGIN) {
+    if ( hopEndX <= this.getMinimumX() + X_MARGIN || hopEndX >= this.getMaximumX() - X_MARGIN ) {
       this.hopDelta.setX( -this.hopDelta.x );
     }
 
@@ -356,34 +356,6 @@ class Bunny extends Organism {
   }
 
   /**
-   * Deserializes the state needed by BunnyIO.stateToArgsForConstructor and BunnyIO.applyState.
-   * TODO: inline into Bunny.applyState? https://github.com/phetsims/phet-io/issues/1685
-   * @param {Object} stateObject - return value from toStateObject
-   * @returns {Object}
-   * @private
-   */
-  static deserializeComponents( stateObject ) {
-    return {
-
-      // public fields
-      generation: NumberIO.fromStateObject( stateObject.generation ),
-      age: NumberIO.fromStateObject( stateObject.age ),
-      isAlive: BooleanIO.fromStateObject( stateObject.isAlive ),
-      father: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.father ),
-      mother: NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.mother ),
-      genotype: GenotypeIO.fromStateObject( stateObject.genotype ),
-      phenotype: PhenotypeIO.fromStateObject( stateObject.phenotype ),
-
-      // private fields
-      restTime: NumberIO.fromStateObject( stateObject.private.restTime ),
-      hopTime: NumberIO.fromStateObject( stateObject.private.hopTime ),
-      cumulativeRestTime: NumberIO.fromStateObject( stateObject.private.cumulativeRestTime ),
-      cumulativeHopTime: NumberIO.fromStateObject( stateObject.private.cumulativeHopTime ),
-      hopDelta: NullableIO( Vector3IO ).fromStateObject( stateObject.private.hopDelta )
-    };
-  }
-
-  /**
    * Creates the args that BunnyGroup uses to create a Bunny instance.
    * @param {Object} state
    * @returns {Object[]}
@@ -400,29 +372,27 @@ class Bunny extends Organism {
   /**
    * Restores private state for PhET-iO. This is called by BunnyIO.applyState after a Bunny has been instantiated
    * during deserialization.
-   * @param {Object} state - return value of fromStateObject
+   * @param {Object} stateObject - return value of fromStateObject
    * @public for use by BunnyIO only
    */
-  applyState( state ) {
-    required( state );
-
-    const deserializedState = Bunny.deserializeComponents( state );
+  applyState( stateObject ) {
+    required( stateObject );
 
     // public fields
-    this.generation = required( deserializedState.generation );
-    this.age = required( deserializedState.age );
-    this.isAlive = required( deserializedState.isAlive );
-    this.father = required( deserializedState.father );
-    this.mother = required( deserializedState.mother );
-    this.genotype.applyState( deserializedState.genotype );
-    this.phenotype.applyState( deserializedState.phenotype );
+    this.generation = required( NumberIO.fromStateObject( stateObject.generation ) );
+    this.age = required( NumberIO.fromStateObject( stateObject.age ) );
+    this.isAlive = required( BooleanIO.fromStateObject( stateObject.isAlive ) );
+    this.father = required( NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.father ) );
+    this.mother = required( NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.mother ) );
+    this.genotype.applyState( stateObject.genotype );
+    this.phenotype.applyState( stateObject.phenotype );
 
     // private fields
-    this.restTime = required( deserializedState.restTime );
-    this.hopTime = required( deserializedState.hopTime );
-    this.cumulativeRestTime = required( deserializedState.cumulativeRestTime );
-    this.cumulativeHopTime = required( deserializedState.cumulativeHopTime );
-    this.hopDelta = required( deserializedState.hopDelta );
+    this.restTime = required( NumberIO.fromStateObject( stateObject.private.restTime ) );
+    this.hopTime = required( NumberIO.fromStateObject( stateObject.private.hopTime ) );
+    this.cumulativeRestTime = required( NumberIO.fromStateObject( stateObject.private.cumulativeRestTime ) );
+    this.cumulativeHopTime = required( NumberIO.fromStateObject( stateObject.private.cumulativeHopTime ) );
+    this.hopDelta = required( NullableIO( Vector3IO ).fromStateObject( stateObject.private.hopDelta ) );
 
     this.validateInstance();
   }
