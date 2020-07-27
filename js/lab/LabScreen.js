@@ -7,6 +7,7 @@
  */
 
 import Property from '../../../axon/js/Property.js';
+import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import HBox from '../../../scenery/js/nodes/HBox.js';
 import Image from '../../../scenery/js/nodes/Image.js';
@@ -21,13 +22,12 @@ import whiteBunnyImage2 from '../../images/bunny-whiteFur-floppyEars-shortTeeth_
 import whiteBunnyImage3 from '../../images/bunny-whiteFur-straightEars-longTeeth_png.js';
 import whiteBunnyImage1 from '../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
 import NaturalSelectionColors from '../common/NaturalSelectionColors.js';
-import NaturalSelectionScreen from '../common/NaturalSelectionScreen.js';
 import naturalSelection from '../naturalSelection.js';
 import naturalSelectionStrings from '../naturalSelectionStrings.js';
 import LabModel from './model/LabModel.js';
 import LabScreenView from './view/LabScreenView.js';
 
-class LabScreen extends NaturalSelectionScreen {
+class LabScreen extends Screen {
 
   /**
    * @param {Tandem} tandem

@@ -36,5 +36,10 @@ simLauncher.launch( () => {
     }
   } );
 
+  // Log the name of the active screen, to make the console logging easier to grok.
+  sim.screenProperty.link( screen =>
+    phet.log && phet.log( `>>>>>> ${screen.nameProperty.value} screen is active` )
+  );
+
   sim.start();
 } );
