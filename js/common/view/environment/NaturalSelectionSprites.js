@@ -368,8 +368,6 @@ class NaturalSelectionSprites extends Sprites {
 
         // Clear the selection if the selected bunny dies. removeListener in clearSelectedBunny.
         bunny.diedEmitter.addListener( this.clearSelectedBunnyCallback );
-
-        assert && this.assertBunniesCount();
       }
     }
 
@@ -481,17 +479,6 @@ class NaturalSelectionSprites extends Sprites {
     assert && assert( sprite, `no sprite found for key ${key}` );
 
     return sprite;
-  }
-
-  /**
-   * Asserts that the number of sprite instances for bunnies matches the number of live bunnies in the model.
-   * @private
-   */
-  assertBunniesCount() {
-    const numberOfSpriteInstances = _.filter( this.spriteInstances, spriteInstance => spriteInstance instanceof BunnySpriteInstance ).length;
-    const numberOfBunnies = this.bunnyCollection.liveBunnies.lengthProperty.value;
-    assert && assert( numberOfSpriteInstances === numberOfBunnies,
-      `number of bunny sprite instances ${numberOfSpriteInstances} is out of sync with number of bunnies ${numberOfBunnies}` );
   }
 
   /**
