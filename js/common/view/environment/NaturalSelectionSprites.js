@@ -264,7 +264,6 @@ class NaturalSelectionSprites extends Sprites {
     // Create a SpriteInstance for the wolf.
     const wolfSpriteInstance = new WolfSpriteInstance( wolf, wolfSprite );
     this.spriteInstances.push( wolfSpriteInstance );
-    assert && this.assertWolvesCount();
 
     // When the wolf is disposed...
     const disposeWolfSpriteInstance = () => {
@@ -479,17 +478,6 @@ class NaturalSelectionSprites extends Sprites {
     assert && assert( sprite, `no sprite found for key ${key}` );
 
     return sprite;
-  }
-
-  /**
-   * Asserts that the number of sprite instances for wolves matches the number of wolves in the model.
-   * @private
-   */
-  assertWolvesCount() {
-    const numberOfSpriteInstances = _.filter( this.spriteInstances, spriteInstance => spriteInstance instanceof WolfSpriteInstance ).length;
-    const numberOfWolves = this.wolfCollection.count;
-    assert && assert( numberOfSpriteInstances === numberOfWolves,
-      `number of wolf sprite instances ${numberOfSpriteInstances} is out of sync with number of wolves ${numberOfWolves}` );
   }
 }
 
