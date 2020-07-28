@@ -488,10 +488,10 @@ class NaturalSelectionSprites extends Sprites {
    * @private
    */
   assertBunniesCount() {
-    const numberOfSprites = _.filter( this.spriteInstances, spriteInstance => spriteInstance instanceof BunnySpriteInstance ).length;
+    const numberOfSpriteInstances = _.filter( this.spriteInstances, spriteInstance => spriteInstance instanceof BunnySpriteInstance ).length;
     const numberOfBunnies = this.bunnyCollection.liveBunnies.lengthProperty.value;
-    assert && assert( numberOfSprites === numberOfBunnies,
-      `number of bunny sprites ${numberOfSprites} is out of sync with number of bunnies ${numberOfBunnies}` );
+    assert && assert( numberOfSpriteInstances === numberOfBunnies,
+      `number of bunny sprite instances ${numberOfSpriteInstances} is out of sync with number of bunnies ${numberOfBunnies}` );
   }
 
   /**
@@ -499,10 +499,10 @@ class NaturalSelectionSprites extends Sprites {
    * @private
    */
   assertWolvesCount() {
-    const numberOfSprites = _.filter( this.spriteInstances, spriteInstance => spriteInstance instanceof WolfSpriteInstance ).length;
+    const numberOfSpriteInstances = _.filter( this.spriteInstances, spriteInstance => spriteInstance instanceof WolfSpriteInstance ).length;
     const numberOfWolves = this.wolfCollection.count;
-    assert && assert( numberOfSprites === numberOfWolves,
-      `number of wolf sprites ${numberOfSprites} is out of sync with number of wolves ${numberOfWolves}` );
+    assert && assert( numberOfSpriteInstances === numberOfWolves,
+      `number of wolf sprite instances ${numberOfSpriteInstances} is out of sync with number of wolves ${numberOfWolves}` );
   }
 }
 
