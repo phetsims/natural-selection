@@ -460,8 +460,6 @@ class NaturalSelectionSprites extends Sprites {
       // Append the selected bunny and the selection rectangle to the front.
       this.spriteInstances.push( this.selectionRectangleSpriteInstance ); // rectangle behind bunny
       this.spriteInstances.push( this.selectedBunnySpriteInstance );
-
-      assert && this.assertBunniesCount();
     }
   }
 
