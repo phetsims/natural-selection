@@ -164,7 +164,7 @@ class NaturalSelectionSprites extends Sprites {
     bunnyCollection.liveBunnies.forEach( bunny => this.createBunnySpriteInstance( bunny ) );
 
     // Create a sprite instance for each bunny this is created. removeListener is not necessary.
-    bunnyCollection.bunnyCreatedEmitter.addListener( bunny => this.createBunnySpriteInstance( bunny ) );
+    bunnyCollection.liveBunnies.addItemAddedListener( bunny => this.createBunnySpriteInstance( bunny ) );
 
     // Create a sprite instance for each wolf that is created. removeListener is not necessary.
     wolfCollection.wolfCreatedEmitter.addListener( wolf => this.createWolfSpriteInstance( wolf, wolfSprite ) );
@@ -220,29 +220,34 @@ class NaturalSelectionSprites extends Sprites {
    */
   createBunnySpriteInstance( bunny ) {
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
+    assert && assert( bunny.isAlive, 'expected a live bunny' );
 
-    // PhET-iO state will restore both live and dead bunnies. Create SpriteInstances only for the live ones.
-    if ( bunny.isAlive ) {
+    // Create a SpriteInstance for the bunny.
+    const bunnySpriteInstance = new BunnySpriteInstance( bunny, this.getBunnySprite( bunny ) );
+    this.spriteInstances.push( bunnySpriteInstance );
 
-      // Create a SpriteInstance for the bunny.
-      const bunnySpriteInstance = new BunnySpriteInstance( bunny, this.getBunnySprite( bunny ) );
-      this.spriteInstances.push( bunnySpriteInstance );
+    // If the bunny dies or is disposed...
+    const disposeBunnySpriteInstance = () => {
 
-      // If the bunny dies or is disposed...
-      const disposeBunnySpriteInstance = () => {
+      // Remove this listener
+      bunny.diedEmitter.removeListener( disposeBunnySpriteInstance );
+      bunny.disposedEmitter.removeListener( disposeBunnySpriteInstance );
 
-        // Remove this listener
-        bunny.diedEmitter.removeListener( disposeBunnySpriteInstance );
-        bunny.disposedEmitter.removeListener( disposeBunnySpriteInstance );
+      // Remove the associated sprite instance
+      const bunnySpriteInstanceIndex = this.spriteInstances.indexOf( bunnySpriteInstance );
+      assert && assert( bunnySpriteInstanceIndex !== -1, 'bunnySpriteInstance missing from spriteInstances' );
+      this.spriteInstances.splice( bunnySpriteInstanceIndex, 1 );
+      bunnySpriteInstance.dispose();
+    };
+    bunny.diedEmitter.addListener( disposeBunnySpriteInstance ); // removeListener is performed by callback
+    bunny.disposedEmitter.addListener( disposeBunnySpriteInstance ); // removeListener is performed by callback
 
-        // Remove the associated sprite instance
-        const bunnySpriteInstanceIndex = this.spriteInstances.indexOf( bunnySpriteInstance );
-        assert && assert( bunnySpriteInstanceIndex !== -1, 'bunnySpriteInstance missing from spriteInstances' );
-        this.spriteInstances.splice( bunnySpriteInstanceIndex, 1 );
-        bunnySpriteInstance.dispose();
-      };
-      bunny.diedEmitter.addListener( disposeBunnySpriteInstance ); // removeListener is performed by callback
-      bunny.disposedEmitter.addListener( disposeBunnySpriteInstance ); // removeListener is performed by callback
+    // PhET-iO state engine may restore bunnyCollection.selectedBunnyProperty before firing
+    // bunnyCollection.liveBunnies.addItemAddedListener, the callback that creates BunnySpriteInstances.
+    // If that happens, then createBunnySpriteInstance is responsible for calling setSelectedBunny.
+    // See https://github.com/phetsims/natural-selection/issues/138
+    if ( phet.joist.sim.isSettingPhetioStateProperty.value && this.bunnyCollection.selectedBunnyProperty.value === bunny  ) {
+      this.setSelectedBunny( bunny );
     }
   }
 
@@ -343,18 +348,29 @@ class NaturalSelectionSprites extends Sprites {
 
       // Get the BunnySpriteInstance that is associated with the selected bunny.
       const selectedBunnyIndex = this.getBunnySpriteInstanceIndex( bunny );
-      assert && assert( selectedBunnyIndex !== -1, 'sprite instance not found for selected bunny' );
-      this.selectedBunnySpriteInstance = this.spriteInstances[ selectedBunnyIndex ];
-      assert && assert( this.selectedBunnySpriteInstance instanceof BunnySpriteInstance, 'invalid selectedBunnySpriteInstance' );
 
-      // Create the selection rectangle and put it immediately behind the selected bunny.
-      this.selectionRectangleSpriteInstance = new BunnySelectionRectangleSpriteInstance( bunny, this.selectionRectangleSprite );
-      this.spriteInstances.splice( selectedBunnyIndex, 0, this.selectionRectangleSpriteInstance );
+      if ( phet.joist.sim.isSettingPhetioStateProperty.value && selectedBunnyIndex === -1 ) {
 
-      // Clear the selection if the selected bunny dies. removeListener in clearSelectedBunny.
-      bunny.diedEmitter.addListener( this.clearSelectedBunnyCallback );
+        // PhET-iO state engine may restore bunnyCollection.selectedBunnyProperty before firing
+        // bunnyCollection.liveBunnies.addItemAddedListener, the callback that creates BunnySpriteInstances.
+        // If that happens, then rely on createBunnySpriteInstance to call setSelectedBunny.
+        // See https://github.com/phetsims/natural-selection/issues/138
+      }
+      else {
 
-      assert && this.assertBunniesCount();
+        assert && assert( selectedBunnyIndex !== -1, 'sprite instance not found for selected bunny' );
+        this.selectedBunnySpriteInstance = this.spriteInstances[ selectedBunnyIndex ];
+        assert && assert( this.selectedBunnySpriteInstance instanceof BunnySpriteInstance, 'invalid selectedBunnySpriteInstance' );
+
+        // Create the selection rectangle and put it immediately behind the selected bunny.
+        this.selectionRectangleSpriteInstance = new BunnySelectionRectangleSpriteInstance( bunny, this.selectionRectangleSprite );
+        this.spriteInstances.splice( selectedBunnyIndex, 0, this.selectionRectangleSpriteInstance );
+
+        // Clear the selection if the selected bunny dies. removeListener in clearSelectedBunny.
+        bunny.diedEmitter.addListener( this.clearSelectedBunnyCallback );
+
+        assert && this.assertBunniesCount();
+      }
     }
 
     this.update();

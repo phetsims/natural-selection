@@ -121,13 +121,6 @@ class BunnyCollection {
       phet.log && phet.log( `selectedBunny=${selectedBunny}` );
     } );
 
-    // @public notify when a bunny has been created
-    this.bunnyCreatedEmitter = new Emitter( {
-      parameters: [ { valueType: Bunny } ]
-    } );
-
-    // NOTE: BunnyCollection has no bunnyDiedEmitter or bunnyDisposedEmitter. Bunny has those Emitters.
-
     // @public notifies when all bunnies have died. dispose is not necessary.
     this.allBunniesHaveDiedEmitter = new Emitter();
     phet.log && this.allBunniesHaveDiedEmitter.addListener( () => {
@@ -168,8 +161,6 @@ class BunnyCollection {
           'a dead bunny should only be created when restoring PhET-iO state' );
         this.deadBunnies.push( bunny );
       }
-
-      this.bunnyCreatedEmitter.emit( bunny );
     } );
 
     // When a bunny is disposed, remove it from the appropriate array. removeListener is not necessary.
