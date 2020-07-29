@@ -44,7 +44,7 @@ class PopulationPanel extends NaturalSelectionPanel {
 
     const totalCheckbox =
       new PopulationLegendCheckbox( populationModel.totalVisibleProperty, naturalSelectionStrings.total, {
-        color: NaturalSelectionColors.TOTAL_POPULATION,
+        color: NaturalSelectionColors.POPULATION_TOTAL_COUNT,
         tandem: options.tandem.createTandem( 'totalCheckbox' )
       } );
 
