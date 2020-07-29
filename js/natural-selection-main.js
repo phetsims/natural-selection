@@ -8,6 +8,7 @@
 
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
+import Utils from '../../scenery/js/util/Utils.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import IntroScreen from './intro/IntroScreen.js';
 import LabScreen from './lab/LabScreen.js';
@@ -35,6 +36,9 @@ simLauncher.launch( () => {
       graphicArts: 'Megan Lai'
     }
   } );
+
+  // Log whether we're using WebGL, which is the preferred rendering option for NaturalSelectionSprites
+  phet.log && phet.log( `using WebGL = ${phet.chipper.queryParameters.webgl && Utils.isWebGLSupported}` );
 
   // Log the name of the active screen, to make the console logging easier to grok.
   sim.screenProperty.link( screen =>
