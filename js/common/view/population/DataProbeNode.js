@@ -20,6 +20,7 @@ import NumberDisplay from '../../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../../../scenery-phet/js/ShadedSphereNode.js';
 import DragListener from '../../../../../scenery/js/listeners/DragListener.js';
+import HStrut from '../../../../../scenery/js/nodes/HStrut.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import VBox from '../../../../../scenery/js/nodes/VBox.js';
@@ -115,11 +116,13 @@ class DataProbeNode extends Node {
       align: 'left',
       children: [
         new VStrut( 5 ), // a bit of space at the top
+        new HStrut( totalDisplay.width ), // so that numberDisplaysParent always has consistent non-zero width
         totalDisplay,
         whiteFurDisplay, brownFurDisplay,
         straightEarsDisplay, floppyEarsDisplay,
         shortTeethDisplay, longTeethDisplay
-      ]
+      ],
+      top: barNode.top
     } );
 
     assert && assert( !options.children, 'DataProbeNode sets children' );
@@ -149,17 +152,7 @@ class DataProbeNode extends Node {
     populationModel.shortTeethVisibleProperty.linkAttribute( shortTeethDisplay, 'visible' );
     populationModel.longTeethVisibleProperty.linkAttribute( longTeethDisplay, 'visible' );
 
-    // Positions the displays on the proper side of the bar.
-    const updateDisplayLayout = () => {
-      if ( displaysOnRight ) {
-        numberDisplaysParent.left = barNode.right;
-      }
-      else {
-        numberDisplaysParent.right = barNode.left;
-      }
-      numberDisplaysParent.top = barNode.top;
-    };
-
+    // Flip NumberDisplays around the y axis at edges of the graph, so that they stay inside the bounds of the graph.
     // unlink is not necessary.
     dataProbe.offsetProperty.link( offset => {
 
@@ -168,11 +161,11 @@ class DataProbeNode extends Node {
       // flip NumberDisplays around y axis at edges of graph
       if ( this.left < options.offset.x && !displaysOnRight ) {
         displaysOnRight = true;
-        updateDisplayLayout();
+        numberDisplaysParent.left = barNode.right;
       }
-      else if ( this.right > + options.offset.x + options.gridWidth && displaysOnRight ) {
+      else if ( this.right > +options.offset.x + options.gridWidth && displaysOnRight ) {
         displaysOnRight = false;
-        updateDisplayLayout();
+        numberDisplaysParent.right = barNode.left;
       }
     } );
 
