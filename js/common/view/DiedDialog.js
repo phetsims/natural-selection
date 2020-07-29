@@ -23,8 +23,7 @@ class DiedDialog extends Dialog {
 
     options = merge( {
       topMargin: 50,
-      bottomMargin: 50,
-      scale: NaturalSelectionConstants.DIALOG_SCALE
+      bottomMargin: 50
     }, options );
 
     const messageText = new Text( naturalSelectionStrings.allOfTheBunniesHaveDied, {

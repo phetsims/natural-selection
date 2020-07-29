@@ -27,8 +27,7 @@ class WorldDialog extends Dialog {
     options = merge( {
       fill: 'black',
       closeButtonColor: 'white',
-      topMargin: 25,
-      scale: NaturalSelectionConstants.DIALOG_SCALE
+      topMargin: 25
     }, options );
 
     const worldNode = new Image( worldImage, {

@@ -7,8 +7,6 @@
  */
 
 import Range from '../../../dot/js/Range.js';
-import HomeScreenView from '../../../joist/js/HomeScreenView.js';
-import ScreenView from '../../../joist/js/ScreenView.js';
 import AssertUtils from '../../../phetcommon/js/AssertUtils.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import RectangularButtonView from '../../../sun/js/buttons/RectangularButtonView.js';
@@ -93,10 +91,6 @@ const NaturalSelectionConstants = {
     spacing: 11,
     align: 'left'
   },
-
-  // Dialog
-  //TODO workaround for https://github.com/phetsims/joist/issues/586
-  DIALOG_SCALE: HomeScreenView.LAYOUT_BOUNDS.width / ScreenView.DEFAULT_LAYOUT_BOUNDS.width,
 
   // Fonts
   CHECKBOX_FONT: new PhetFont( 16 ),

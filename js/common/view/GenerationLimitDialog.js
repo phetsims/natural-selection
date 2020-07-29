@@ -30,8 +30,10 @@ class GenerationLimitDialog extends OopsDialog {
     options = merge( {
       topMargin: 50,
       bottomMargin: 50,
-      scale: NaturalSelectionConstants.DIALOG_SCALE,
-      iconNode: iconNode
+      iconNode: iconNode,
+      richTextOptions: {
+        font: NaturalSelectionConstants.DIALOG_FONT
+      }
     }, options );
 
     super( naturalSelectionStrings.memoryLimitMessage, options );
