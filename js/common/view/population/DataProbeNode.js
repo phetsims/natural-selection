@@ -169,7 +169,7 @@ class DataProbeNode extends Node {
       }
     } );
 
-    // Create a link to the model that this Node displays
+    // Create a Studio link to the model
     this.addLinkedElement( dataProbe, {
       tandem: options.tandem.createTandem( 'dataProbe' )
     } );

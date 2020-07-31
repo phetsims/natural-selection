@@ -172,7 +172,7 @@ class ProportionsModel extends PhetioObject {
         }
       } );
 
-    // Create a link to the 'Currently' counts for the current generation
+    // Create a Studio link
     this.addLinkedElement( liveBunnyCountsProperty, {
       tandem: options.tandem.createTandem( 'currentCountsProperty' )
     } );

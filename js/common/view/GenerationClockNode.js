@@ -109,7 +109,7 @@ class GenerationClockNode extends Node {
       foodSliceNode.visible = enabled;
     } );
 
-    // Create a link to the model that this Node displays
+    // Create a Studio link to the model
     this.addLinkedElement( generationClock, {
       tandem: options.tandem.createTandem( 'generationClock' )
     } );
