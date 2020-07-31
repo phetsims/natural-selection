@@ -126,18 +126,18 @@ class GenerationClockNode extends Node {
   /**
    * Creates an icon with one slice of the clock filled in.
    * @param {Range} sliceRange
+   * @param {Color|string} sliceColor
    * @param {Object} [options]
    * @returns {Node}
    * @public
    */
-  static createSliceIcon( sliceRange, options ) {
+  static createSliceIcon( sliceRange, sliceColor, options ) {
 
     options = merge( {
-      radius: 10,
-      sliceFill: 'black'
+      radius: 10
     }, options );
 
-    const sliceNode = createSlice( options.radius, sliceRange, options.sliceFill );
+    const sliceNode = createSlice( options.radius, sliceRange, sliceColor );
 
     const rimNode = new Circle( options.radius, {
       stroke: NaturalSelectionColors.CLOCK_STROKE

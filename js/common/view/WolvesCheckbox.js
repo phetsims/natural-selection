@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
@@ -30,6 +31,13 @@ class WolvesCheckbox extends EnvironmentalFactorCheckbox {
     assert && AssertUtils.assertPropertyOf( wolvesEnabledProperty, 'boolean' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
+    options = merge( {
+
+      // EnvironmentalFactorCheckbox options
+      clockSliceRange: NaturalSelectionConstants.CLOCK_WOLVES_RANGE,
+      clockSliceColor: NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR
+    }, options );
+
     const text = new Text( naturalSelectionStrings.wolves, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 110 // determined empirically
@@ -44,8 +52,7 @@ class WolvesCheckbox extends EnvironmentalFactorCheckbox {
       spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING
     } );
 
-    super( labelNode, wolvesEnabledProperty, alignGroup, NaturalSelectionConstants.CLOCK_WOLVES_RANGE,
-      NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR, options );
+    super( labelNode, wolvesEnabledProperty, alignGroup, options );
   }
 }
 

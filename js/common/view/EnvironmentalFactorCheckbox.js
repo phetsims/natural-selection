@@ -16,11 +16,13 @@ import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import ColorDef from '../../../../scenery/js/util/ColorDef.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import GenerationClockNode from './GenerationClockNode.js';
+
+// constants
+const DEFAULT_CLOCK_SLICE_RANGE = new Range( 0, 1 );
 
 class EnvironmentalFactorCheckbox extends Checkbox {
 
@@ -28,28 +30,25 @@ class EnvironmentalFactorCheckbox extends Checkbox {
    * @param {Node} labelNode - the label that appears to the right of the box
    * @param {Property.<boolean>} enabledProperty - whether the environmental factor is enabled
    * @param {AlignGroup} alignGroup - set the effective size of labelNode
-   * @param {Range} clockSliceRange - slice of the generation clock during which this environmental factor is applied
-   * @param {ColorDef} clockSliceColor - generation clock color coding for this environmental factor
    * @param {Object} [options]
    */
-  constructor( labelNode, enabledProperty, alignGroup, clockSliceRange, clockSliceColor, options ) {
+  constructor( labelNode, enabledProperty, alignGroup, options ) {
 
     assert && assert( labelNode instanceof Node, 'invalid labelNode' );
     assert && AssertUtils.assertPropertyOf( enabledProperty, 'boolean' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
-    assert && assert( clockSliceRange instanceof Range, 'invalid clockSliceRange' );
-    assert && assert( ColorDef.isColorDef( clockSliceColor ), 'invalid clockSliceColor' );
 
-    options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
+    options = merge( {
+      clockSliceRange: DEFAULT_CLOCK_SLICE_RANGE, // {Range}
+      clockSliceColor: 'black'
+    }, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 
     const alignBox = new AlignBox( labelNode, {
       group: alignGroup,
       xAlign: 'left'
     } );
 
-    const clockSliceNode = GenerationClockNode.createSliceIcon( clockSliceRange, {
-      sliceFill: clockSliceColor
-    } );
+    const clockSliceNode = GenerationClockNode.createSliceIcon( options.clockSliceRange, options.clockSliceColor );
 
     const content = new HBox( {
       spacing: 2 * NaturalSelectionConstants.CHECKBOX_X_SPACING,

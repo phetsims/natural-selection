@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
@@ -30,6 +31,13 @@ class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
     assert && AssertUtils.assertPropertyOf( isToughProperty, 'boolean' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
+    options = merge( {
+
+      // EnvironmentalFactorCheckbox options
+      clockSliceRange: NaturalSelectionConstants.CLOCK_FOOD_RANGE,
+      clockSliceColor: NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR
+    }, options );
+
     const text = new Text( naturalSelectionStrings.toughFood, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 110 // determined empirically
@@ -44,8 +52,7 @@ class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
       spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING
     } );
 
-    super( labelNode, isToughProperty, alignGroup, NaturalSelectionConstants.CLOCK_FOOD_RANGE,
-      NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR, options );
+    super( labelNode, isToughProperty, alignGroup, options );
   }
 }
 

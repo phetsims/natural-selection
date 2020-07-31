@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
@@ -27,13 +28,19 @@ class LimitedFoodCheckbox extends EnvironmentalFactorCheckbox {
     assert && AssertUtils.assertPropertyOf( limitedFoodProperty, 'boolean' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
+    options = merge( {
+
+      // EnvironmentalFactorCheckbox options
+      clockSliceRange: NaturalSelectionConstants.CLOCK_FOOD_RANGE,
+      clockSliceColor: NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR
+    }, options );
+
     const labelNode = new Text( naturalSelectionStrings.limitedFood, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 150 // determined empirically
     } );
 
-    super( labelNode, limitedFoodProperty, alignGroup, NaturalSelectionConstants.CLOCK_FOOD_RANGE,
-      NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR, options );
+    super( labelNode, limitedFoodProperty, alignGroup, options );
   }
 }
 
