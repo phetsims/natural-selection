@@ -52,7 +52,7 @@ class WolvesCheckbox extends EnvironmentalFactorCheckbox {
       spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING
     } );
 
-    super( labelNode, wolvesEnabledProperty, alignGroup, options );
+    super( wolvesEnabledProperty, labelNode, alignGroup, options );
   }
 }
 

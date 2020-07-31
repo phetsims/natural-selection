@@ -52,7 +52,7 @@ class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
       spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING
     } );
 
-    super( labelNode, isToughProperty, alignGroup, options );
+    super( isToughProperty, labelNode, alignGroup, options );
   }
 }
 

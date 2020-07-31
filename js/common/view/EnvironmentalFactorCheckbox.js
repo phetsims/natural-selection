@@ -27,15 +27,15 @@ const DEFAULT_CLOCK_SLICE_RANGE = new Range( 0, 1 );
 class EnvironmentalFactorCheckbox extends Checkbox {
 
   /**
-   * @param {Node} labelNode - the label that appears to the right of the box
    * @param {Property.<boolean>} enabledProperty - whether the environmental factor is enabled
-   * @param {AlignGroup} alignGroup - set the effective size of labelNode
+   * @param {Node} labelNode - the label that appears to the right of the box
+   * @param {AlignGroup} alignGroup - sets the effective size of labelNode
    * @param {Object} [options]
    */
-  constructor( labelNode, enabledProperty, alignGroup, options ) {
+  constructor( enabledProperty, labelNode, alignGroup, options ) {
 
-    assert && assert( labelNode instanceof Node, 'invalid labelNode' );
     assert && AssertUtils.assertPropertyOf( enabledProperty, 'boolean' );
+    assert && assert( labelNode instanceof Node, 'invalid labelNode' );
     assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
 
     options = merge( {

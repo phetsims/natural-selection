@@ -40,7 +40,7 @@ class LimitedFoodCheckbox extends EnvironmentalFactorCheckbox {
       maxWidth: 150 // determined empirically
     } );
 
-    super( labelNode, limitedFoodProperty, alignGroup, options );
+    super( limitedFoodProperty, labelNode, alignGroup, options );
   }
 }
 
