@@ -58,10 +58,10 @@ class GenerationClockNode extends Node {
     } );
 
     // The slice of the circle that denotes when food is active
-    const foodSlice = createSlice( RADIUS, NaturalSelectionConstants.CLOCK_FOOD_RANGE, NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR );
+    const foodSliceNode = createSliceNode( RADIUS, NaturalSelectionConstants.CLOCK_FOOD_RANGE, NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR );
 
     // The slice of the circle that denotes when the wolves are active
-    const wolvesSlice = createSlice( RADIUS, NaturalSelectionConstants.CLOCK_WOLVES_RANGE, NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR );
+    const wolvesSliceNode = createSliceNode( RADIUS, NaturalSelectionConstants.CLOCK_WOLVES_RANGE, NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR );
 
     // Overlay on the clock, sweeps out an arc to reveal what's under it.
     // The portion revealed corresponds to the percentage of a revolution that has elapsed.
@@ -80,7 +80,7 @@ class GenerationClockNode extends Node {
 
     // Layering order is important here!
     assert && assert( !options.children, 'GenerationClockNode sets children' );
-    options.children = [ circle, foodSlice, wolvesSlice, revealArc, rimNode, generationNode ];
+    options.children = [ circle, foodSliceNode, wolvesSliceNode, revealArc, rimNode, generationNode ];
 
     super( options );
 
@@ -100,12 +100,12 @@ class GenerationClockNode extends Node {
 
     // Makes the wolves slice visible. unlink is not necessary.
     wolvesEnabledProperty.link( enabled => {
-      wolvesSlice.visible = enabled;
+      wolvesSliceNode.visible = enabled;
     } );
 
     // Makes the food slice visible. unlink is not necessary.
     foodEnabledProperty.link( enabled => {
-      foodSlice.visible = enabled;
+      foodSliceNode.visible = enabled;
     } );
 
     // Create a link to the model that this Node displays
@@ -137,7 +137,7 @@ class GenerationClockNode extends Node {
       radius: 10
     }, options );
 
-    const sliceNode = createSlice( options.radius, sliceRange, sliceColor );
+    const sliceNode = createSliceNode( options.radius, sliceRange, sliceColor );
 
     const rimNode = new Circle( options.radius, {
       stroke: NaturalSelectionColors.CLOCK_STROKE
@@ -154,9 +154,9 @@ class GenerationClockNode extends Node {
  * @param {number} radius
  * @param {Range} range
  * @param {Color|string} color
- * @returns {Path}
+ * @returns {Node}
  */
-function createSlice( radius, range, color ) {
+function createSliceNode( radius, range, color ) {
   const startAngle = START_ANGLE + range.min * 2 * Math.PI;
   const endAngle = START_ANGLE + range.max * 2 * Math.PI;
   const shape = new Shape()
