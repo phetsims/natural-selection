@@ -225,6 +225,9 @@ class NaturalSelectionSprites extends Sprites {
     // Create a SpriteInstance for the bunny.
     const bunnySpriteInstance = new BunnySpriteInstance( bunny, this.getBunnySprite( bunny ) );
     this.spriteInstances.push( bunnySpriteInstance );
+    if ( !this.isPlayingProperty.value ) {
+      this.update();
+    }
 
     // If the bunny dies or is disposed...
     const disposeBunnySpriteInstance = () => {
@@ -237,6 +240,9 @@ class NaturalSelectionSprites extends Sprites {
       const bunnySpriteInstanceIndex = this.spriteInstances.indexOf( bunnySpriteInstance );
       assert && assert( bunnySpriteInstanceIndex !== -1, 'bunnySpriteInstance missing from spriteInstances' );
       this.spriteInstances.splice( bunnySpriteInstanceIndex, 1 );
+      if ( !this.isPlayingProperty.value ) {
+        this.update();
+      }
       bunnySpriteInstance.dispose();
     };
     bunny.diedEmitter.addListener( disposeBunnySpriteInstance ); // removeListener is performed by callback
@@ -264,6 +270,9 @@ class NaturalSelectionSprites extends Sprites {
     // Create a SpriteInstance for the wolf.
     const wolfSpriteInstance = new WolfSpriteInstance( wolf, wolfSprite );
     this.spriteInstances.push( wolfSpriteInstance );
+    if ( !this.isPlayingProperty.value ) {
+      this.update();
+    }
 
     // When the wolf is disposed...
     const disposeWolfSpriteInstance = () => {
@@ -275,6 +284,9 @@ class NaturalSelectionSprites extends Sprites {
       const wolfSpriteInstanceIndex = this.spriteInstances.indexOf( wolfSpriteInstance );
       assert && assert( wolfSpriteInstanceIndex !== -1, 'wolfSpriteInstanceIndex missing from spriteInstances' );
       this.spriteInstances.splice( wolfSpriteInstanceIndex, 1 );
+      if ( !this.isPlayingProperty.value ) {
+        this.update();
+      }
       wolfSpriteInstance.dispose();
     };
     wolf.disposedEmitter.addListener( disposeWolfSpriteInstance ); // removeListener is performed by callback
@@ -414,6 +426,9 @@ class NaturalSelectionSprites extends Sprites {
       const selectionRectangleIndex = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
       assert && assert( selectionRectangleIndex !== -1, 'selectionRectangleSpriteInstance is missing from spriteInstances' );
       this.spriteInstances.splice( selectionRectangleIndex, 1 );
+      if ( !this.isPlayingProperty.value ) {
+        this.update();
+      }
       this.selectionRectangleSpriteInstance.dispose();
       this.selectionRectangleSpriteInstance = null;
     }
