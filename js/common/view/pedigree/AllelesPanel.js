@@ -17,6 +17,7 @@ import HStrut from '../../../../../scenery/js/nodes/HStrut.js';
 import Image from '../../../../../scenery/js/nodes/Image.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../../scenery/js/nodes/VBox.js';
+import Checkbox from '../../../../../sun/js/Checkbox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
@@ -24,7 +25,6 @@ import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
-import NaturalSelectionCheckbox from '../NaturalSelectionCheckbox.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
 
 class AllelesPanel extends NaturalSelectionPanel {
@@ -131,9 +131,10 @@ class Row extends VBox {
       maxWidth: 100 // determined empirically
     } );
 
-    const checkbox = new NaturalSelectionCheckbox( labelNode, visibleProperty, {
-      tandem: options.tandem.createTandem( 'checkbox' )
-    } );
+    const checkbox = new Checkbox( labelNode, visibleProperty,
+      merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+        tandem: options.tandem.createTandem( 'checkbox' )
+      } ) );
 
     // Dominant allele
     const dominantAlleleNode = new AlleleNode( gene.dominantAbbreviationTranslated, gene.normalAllele.image );

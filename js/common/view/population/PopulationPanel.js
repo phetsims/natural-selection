@@ -9,6 +9,7 @@
 import merge from '../../../../../phet-core/js/merge.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../../scenery/js/nodes/VBox.js';
+import Checkbox from '../../../../../sun/js/Checkbox.js';
 import HSeparator from '../../../../../sun/js/HSeparator.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
@@ -16,7 +17,6 @@ import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
-import NaturalSelectionCheckbox from '../NaturalSelectionCheckbox.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
 import PopulationLegendCheckbox from './PopulationLegendCheckbox.js';
 
@@ -90,10 +90,10 @@ class PopulationPanel extends NaturalSelectionPanel {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 135 // determined empirically
     } );
-    const dataProbeCheckbox = new NaturalSelectionCheckbox( dataProbeCheckboxLabel,
-      populationModel.dataProbe.visibleProperty, {
+    const dataProbeCheckbox = new Checkbox( dataProbeCheckboxLabel, populationModel.dataProbe.visibleProperty,
+      merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
         tandem: options.tandem.createTandem( 'dataProbeCheckbox' )
-      } );
+      } ) );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: [

@@ -10,18 +10,19 @@
  */
 
 import Range from '../../../../dot/js/Range.js';
+import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import ColorDef from '../../../../scenery/js/util/ColorDef.js';
+import Checkbox from '../../../../sun/js/Checkbox.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import GenerationClockNode from './GenerationClockNode.js';
-import NaturalSelectionCheckbox from './NaturalSelectionCheckbox.js';
 
-class EnvironmentalFactorCheckbox extends NaturalSelectionCheckbox {
+class EnvironmentalFactorCheckbox extends Checkbox {
 
   /**
    * @param {Node} labelNode - the label that appears to the right of the box
@@ -39,6 +40,8 @@ class EnvironmentalFactorCheckbox extends NaturalSelectionCheckbox {
     assert && assert( clockSliceRange instanceof Range, 'invalid clockSliceRange' );
     assert && assert( ColorDef.isColorDef( clockSliceColor ), 'invalid clockSliceColor' );
 
+    options = merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
+
     const alignBox = new AlignBox( labelNode, {
       group: alignGroup,
       xAlign: 'left'
@@ -54,6 +57,10 @@ class EnvironmentalFactorCheckbox extends NaturalSelectionCheckbox {
     } );
 
     super( content, enabledProperty, options );
+
+    // So that pointer areas will be shown with ?showPointerAreas
+    this.touchArea = this.localBounds.dilated( 0 );
+    this.mouseArea = this.localBounds.dilated( 0 );
   }
 }
 
