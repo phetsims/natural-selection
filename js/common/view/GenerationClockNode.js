@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Range from '../../../../dot/js/Range.js';
 import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
@@ -152,11 +153,16 @@ class GenerationClockNode extends Node {
 /**
  * Creates a slice of the pie that is the generation clock.
  * @param {number} radius
- * @param {Range} range
+ * @param {Range} range - range between 0 and 1, starting at 12:00 and going clockwise
  * @param {Color|string} color
  * @returns {Node}
  */
 function createSliceNode( radius, range, color ) {
+
+  assert && AssertUtils.assertPositiveInteger( radius );
+  assert && assert( range instanceof Range, 'invalid range' );
+  assert && assert( range.min >= 0 && range.max <= 1, 'invalid range' );
+
   const startAngle = START_ANGLE + range.min * 2 * Math.PI;
   const endAngle = START_ANGLE + range.max * 2 * Math.PI;
   const shape = new Shape()
