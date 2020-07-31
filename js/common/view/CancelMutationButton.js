@@ -31,6 +31,9 @@ class CancelMutationButton extends RoundPushButton {
         cursor: 'pointer'
       } ),
 
+      touchAreaDilation: 8,
+      mouseAreaDilation: 4,
+
       // phet-io
       tandem: Tandem.OPTIONAL // because we don't want to instrument this button
     }, options );
