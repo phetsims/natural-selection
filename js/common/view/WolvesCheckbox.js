@@ -45,7 +45,7 @@ class WolvesCheckbox extends EnvironmentalFactorCheckbox {
 
     const icon = new Image( wolfImage );
     const scale = 0.13; // determined empirically
-    icon.setScaleMagnitude( -scale, scale );
+    icon.setScaleMagnitude( -scale, scale ); // reflect so the wolf is facing left
 
     const labelNode = new HBox( {
       children: [ text, icon ],
