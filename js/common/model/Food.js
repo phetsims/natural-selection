@@ -21,6 +21,12 @@ import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenerationClock from './GenerationClock.js';
 import Shrub from './Shrub.js';
 
+// constants
+
+// The minimum population size required for limited food to be a factor,
+// see https://github.com/phetsims/natural-selection/issues/153
+const MIN_POPULATION_FOR_LIMITED_FOOD = 7;
+
 class Food {
 
   /**
@@ -141,28 +147,43 @@ class Food {
 
       let totalStarved = 0;
 
-      // Compute the percentage of bunnies to starve based on their phenotype.
+      // Compute the percentage of bunnies to starve for each phenotype.
       let percentToStarveLongTeeth = 0;
       let percentToStarveShortTeeth = 0;
+
+      // Apply tough food.
+      // Tough food starves some of each type of bunny, but starves a higher percentage of bunnies with short teeth.
       if ( this.isToughProperty.value ) {
+        const percentToStarve = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.toughFoodPercentToKill );
+        percentToStarveLongTeeth = percentToStarve;
+        percentToStarveShortTeeth = percentToStarve * NaturalSelectionQueryParameters.shortTeethMultiplier;
+      }
 
-        // Starve some of each type of bunny, but a higher percentage of bunnies with short teeth.
-        percentToStarveLongTeeth = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.toughFoodPercentToKill );
-        if ( this.isLimitedProperty.value ) {
-          percentToStarveLongTeeth *= NaturalSelectionQueryParameters.limitedFoodMultiplier;
+      // Apply limited food if the population is greater than some minimum size.
+      if ( this.isLimitedProperty.value ) {
+        if ( bunnies.length >= MIN_POPULATION_FOR_LIMITED_FOOD ) {
+          if ( this.isToughProperty.value ) {
+
+            // If limited food is combined with tough food, apply a multiplier.
+            percentToStarveLongTeeth *= NaturalSelectionQueryParameters.limitedFoodMultiplier;
+            percentToStarveShortTeeth *= NaturalSelectionQueryParameters.limitedFoodMultiplier;
+          }
+          else {
+
+            // If limited food is applied without tough food, starve a percentage of all bunnies, regardless of phenotype.
+            const percentToStarve = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.limitedFoodPercentToKill );
+            percentToStarveLongTeeth = percentToStarve;
+            percentToStarveShortTeeth = percentToStarve;
+          }
         }
-        percentToStarveShortTeeth = NaturalSelectionQueryParameters.shortTeethMultiplier * percentToStarveLongTeeth;
+        else {
+          phet.log && phet.log( `limited food is not a factor because population is < ${MIN_POPULATION_FOR_LIMITED_FOOD}` );
+        }
       }
-      else {
-        assert && assert( this.isLimitedProperty.value, 'logic error' );
 
-        // Starve a percentage of all bunnies, regardless of their Teeth genes.
-        percentToStarveLongTeeth = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.limitedFoodPercentToKill );
-        percentToStarveShortTeeth = percentToStarveLongTeeth;
-      }
-      assert && assert( percentToStarveLongTeeth > 0 && percentToStarveLongTeeth < 1,
+      assert && assert( percentToStarveLongTeeth >= 0 && percentToStarveLongTeeth <= 1,
         `invalid percentToStarveLongTeeth: ${percentToStarveLongTeeth}` );
-      assert && assert( percentToStarveShortTeeth > 0 && percentToStarveShortTeeth < 1,
+      assert && assert( percentToStarveShortTeeth >= 0 && percentToStarveShortTeeth <= 1,
         `invalid percentToStarveShortTeeth: ${percentToStarveShortTeeth}` );
 
       // Compute cause of death
@@ -179,32 +200,36 @@ class Food {
       }
 
       // Starve bunnies with long teeth.
-      const bunniesLongTeeth = _.filter( bunnies, bunny => bunny.phenotype.hasLongTeeth() );
-      if ( bunniesLongTeeth.length <= NaturalSelectionQueryParameters.minBunniesForFood ) {
+      if ( percentToStarveLongTeeth > 0 ) {
+        const bunniesLongTeeth = _.filter( bunnies, bunny => bunny.phenotype.hasLongTeeth() );
+        if ( bunniesLongTeeth.length <= NaturalSelectionQueryParameters.minBunniesForFood ) {
 
-        // Do nothing because the population with the preferred trait is too small.
-        // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
-        phet.log && phet.log( `No bunnies with long teeth were starved because the population is <= ${NaturalSelectionQueryParameters.minBunniesForFood}.` );
-      }
-      else {
-        const numberToStarveLongTeeth = Math.ceil( percentToStarveLongTeeth * bunniesLongTeeth.length );
-        assert && assert( numberToStarveLongTeeth <= bunniesLongTeeth.length, 'invalid numberToStarveLongTeeth' );
-        for ( let i = 0; i < numberToStarveLongTeeth; i++ ) {
-          bunniesLongTeeth[ i ].die( causeOfDeath );
+          // Do nothing because the population with the preferred trait is too small.
+          // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
+          phet.log && phet.log( `No bunnies with long teeth were starved because the population is <= ${NaturalSelectionQueryParameters.minBunniesForFood}.` );
         }
-        phet.log && phet.log( `${numberToStarveLongTeeth} bunnies with long teeth died of starvation` );
-        totalStarved += numberToStarveLongTeeth;
+        else {
+          const numberToStarveLongTeeth = Math.ceil( percentToStarveLongTeeth * bunniesLongTeeth.length );
+          assert && assert( numberToStarveLongTeeth <= bunniesLongTeeth.length, 'invalid numberToStarveLongTeeth' );
+          for ( let i = 0; i < numberToStarveLongTeeth; i++ ) {
+            bunniesLongTeeth[ i ].die( causeOfDeath );
+          }
+          totalStarved += numberToStarveLongTeeth;
+          phet.log && phet.log( `${numberToStarveLongTeeth} bunnies with long teeth died of starvation` );
+        }
       }
 
       // Starve bunnies with short teeth.
-      const bunniesShortTeeth = _.filter( bunnies, bunny => bunny.phenotype.hasShortTeeth() );
-      const numberToStarveShortTeeth = Math.ceil( percentToStarveShortTeeth * bunniesShortTeeth.length );
-      assert && assert( numberToStarveShortTeeth <= bunniesShortTeeth.length, 'invalid numberToStarveShortTeeth' );
-      for ( let i = 0; i < numberToStarveShortTeeth; i++ ) {
-        bunniesShortTeeth[ i ].die( causeOfDeath );
+      if ( percentToStarveShortTeeth > 0 ) {
+        const bunniesShortTeeth = _.filter( bunnies, bunny => bunny.phenotype.hasShortTeeth() );
+        const numberToStarveShortTeeth = Math.ceil( percentToStarveShortTeeth * bunniesShortTeeth.length );
+        assert && assert( numberToStarveShortTeeth <= bunniesShortTeeth.length, 'invalid numberToStarveShortTeeth' );
+        for ( let i = 0; i < numberToStarveShortTeeth; i++ ) {
+          bunniesShortTeeth[ i ].die( causeOfDeath );
+        }
+        totalStarved += numberToStarveShortTeeth;
+        phet.log && phet.log( `${numberToStarveShortTeeth} bunnies with short teeth died of starvation` );
       }
-      phet.log && phet.log( `${numberToStarveShortTeeth} bunnies with short teeth died of starvation` );
-      totalStarved += numberToStarveShortTeeth;
 
       // Notify that bunnies have been starved to death.
       if ( totalStarved > 0 ) {
