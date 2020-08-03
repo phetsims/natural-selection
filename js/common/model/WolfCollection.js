@@ -197,11 +197,14 @@ class WolfCollection {
 
       // Eat bunnies with white fur.
       const bunniesWhiteFur = _.filter( bunnies, bunny => bunny.phenotype.hasWhiteFur() );
-      if ( environment === Environment.ARCTIC && bunniesWhiteFur.length <= NaturalSelectionQueryParameters.minBunniesForWolves ) {
+      if ( environment === Environment.ARCTIC &&
+           bunniesWhiteFur.length <= NaturalSelectionQueryParameters.minBunniesForWolves &&
+           bunnies.length > NaturalSelectionQueryParameters.minBunniesForWolves ) {
 
-        // Do nothing because the population with the preferred trait is too small.
+        // Do nothing because the population with the preferred trait is too small, and there are other bunnies to eat.
         // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
-        phet.log && phet.log( `Wolves ignored white bunnies because the population is <= ${NaturalSelectionQueryParameters.minBunniesForWolves}` );
+        // and https://github.com/phetsims/natural-selection/issues/152
+        phet.log && phet.log( `Wolves ignored white bunnies because their population is <= ${NaturalSelectionQueryParameters.minBunniesForWolves}` );
       }
       else {
         const percentToEatWhiteFur = ( environment === Environment.ARCTIC ) ? percentToEatMatch : percentToEatNoMatch;
@@ -216,11 +219,14 @@ class WolfCollection {
 
       // Eat bunnies with brown fur.
       const bunniesBrownFur = _.filter( bunnies, bunny => bunny.phenotype.hasBrownFur() );
-      if ( environment === Environment.EQUATOR && bunniesBrownFur.length <= NaturalSelectionQueryParameters.minBunniesForWolves ) {
+      if ( environment === Environment.EQUATOR &&
+           bunniesBrownFur.length <= NaturalSelectionQueryParameters.minBunniesForWolves &&
+           bunnies.length > NaturalSelectionQueryParameters.minBunniesForWolves ) {
 
-        // Do nothing because the population with the preferred trait is too small.
+        // Do nothing because the population with the preferred trait is too small, and there are other bunnies to eat.
         // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
-        phet.log && phet.log( `Wolves ignored brown bunnies because the population is <= ${NaturalSelectionQueryParameters.minBunniesForWolves}.` );
+        // and https://github.com/phetsims/natural-selection/issues/152
+        phet.log && phet.log( `Wolves ignored brown bunnies because their population is <= ${NaturalSelectionQueryParameters.minBunniesForWolves}.` );
       }
       else {
         const percentToEatBrownFur = ( environment === Environment.EQUATOR ) ? percentToEatMatch : percentToEatNoMatch;
