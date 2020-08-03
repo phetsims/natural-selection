@@ -68,6 +68,15 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       children: [ wolvesCheckbox, toughFoodCheckbox, limitedFoodCheckbox ]
     } ) );
 
+    // Checkbox currently has a limitation with adjusting its content size after instantiation, which is the case with
+    // these checkboxes that use AlignGroup. So this forces the pointer areas to be recomputed, and also sets a
+    // non-default pointer area which will be displayed with ?showPointerAreas.
+    // See https://github.com/phetsims/natural-selection/issues/145
+    checkboxes.children.forEach( checkbox => {
+      checkbox.touchArea = checkbox.localBounds.dilated( 0 );
+      checkbox.mouseArea = checkbox.localBounds.dilated( 0 );
+    } );
+
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: [ titleNode, checkboxes ]
     } ) );

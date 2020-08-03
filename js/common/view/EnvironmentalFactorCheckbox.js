@@ -56,10 +56,6 @@ class EnvironmentalFactorCheckbox extends Checkbox {
     } );
 
     super( content, enabledProperty, options );
-
-    // So that pointer areas will be shown with ?showPointerAreas
-    this.touchArea = this.localBounds.dilated( 0 );
-    this.mouseArea = this.localBounds.dilated( 0 );
   }
 }
 
