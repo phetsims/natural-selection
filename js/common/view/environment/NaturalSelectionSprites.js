@@ -200,7 +200,7 @@ class NaturalSelectionSprites extends Sprites {
 
   /**
    * Puts the sprite instances in the correct order (back-to-front), and then repaints.
-   * If your change does not involve z position, skip sort by calling invalidatePaint directly.
+   * If your change does not involve z position (rendering order), skip sort by calling invalidatePaint directly.
    * @public
    */
   update() {
