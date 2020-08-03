@@ -5,5 +5,5 @@
 * Delete CauseOfDeath
 * Too many Properties with 'generation' in their name is confusing
 * More iteration over genes, less brute-force
-
+* rename NaturalSelectionSprites to OrganismSprites
 
