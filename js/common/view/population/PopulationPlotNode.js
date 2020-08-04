@@ -115,88 +115,85 @@ class PopulationPlotNode extends Node {
 
       const numberOfPoints = this.points.length;
 
-      // Find the index of the first point that is to the left of the grid. Search from the end of the array, to
-      // optimize for the case where the graph is scrolling (animated). If the graph is not scrolling, then the sim
-      // is paused, and the graph is being used to examine data for a previous generation. In that case, the time
-      // to find this index is not critical.
-      let firstIndex = 0;
-      for ( let i = numberOfPoints - 1; i >= 0; i-- ) {
-        const point = this.points.get( i );
-        if ( point.x < this.xRangeProperty.value.min ) {
-          firstIndex = i;
-          break;
-        }
-      }
+      if ( numberOfPoints > 0 ) {
 
-      // For mutant plots (drawn with a lineDash), adjust lineDashOffset so that the dash appears to scroll.
-      // See https://github.com/phetsims/natural-selection/issues/111
-      if ( this.isDashed && this.points.length > 0 ) {
-        const firstPoint = this.points.get( firstIndex );
-        const xRemainderModel = firstPoint.x % 1;
-        const xRemainderView = this.modelToViewX( xRemainderModel );
-        this.stepPath.lineDashOffset = -( xRemainderView % MUTANT_LINE_DASH_SUM );
-      }
-
-      let plotStarted = false;
-      let previousPoint = null;
-
-      // Plot from left to right
-      for ( let i = firstIndex; i < numberOfPoints; i++ ) {
-
-        const point = this.points.get( i );
-
-        if ( this.xRangeProperty.value.contains( point.x ) ) {
-
-          // Compute view coordinates
-          const xView = this.modelToViewX( point.x );
-          const yView = this.modelToViewY( point.y );
-
-          // Plot the point
-          pointsShape.circle( xView, yView, NaturalSelectionConstants.POPULATION_POINT_RADIUS );
-
-          if ( !plotStarted ) {
-            if ( point.x === this.xRangeProperty.value.min ) {
-
-              // First point is at xMin
-              stepShape.moveTo( xView, yView );
-            }
-            else {
-
-              // Draw information from left edge of grid to first point
-              const yViewPrevious = this.modelToViewY( previousPoint.y );
-              stepShape.moveTo( this.modelToViewX( this.xRangeProperty.value.min ), yViewPrevious );
-              stepShape.lineTo( xView, yViewPrevious );
-              stepShape.lineTo( xView, yView );
-            }
-            plotStarted = true;
+        // Find the index of the first point that is <= xRange.min. Search from the end of the array, to
+        // optimize for the case where the graph is scrolling (animated). If the graph is not scrolling, then the sim
+        // is paused, and the graph is being used to examine data for a previous generation. In that case, the time
+        // to find this index is not critical.
+        let firstIndex = -1;
+        for ( let i = numberOfPoints - 1; i >= 0; i-- ) {
+          const point = this.points.get( i );
+          if ( point.x <= this.xRangeProperty.value.min ) {
+            firstIndex = i;
+            break;
           }
-          else {
+        }
+        assert && assert( firstIndex !== -1, 'firstIndex not found' );
+        const firstPoint = this.points.get( firstIndex );
 
-            // Make a step from previous point to current point
+        // For mutant plots (drawn with a lineDash), adjust lineDashOffset so that the dash appears to scroll.
+        // See https://github.com/phetsims/natural-selection/issues/111
+        if ( this.isDashed && this.points.length > 0 ) {
+          const xRemainderModel = firstPoint.x % 1;
+          const xRemainderView = this.modelToViewX( xRemainderModel );
+          this.stepPath.lineDashOffset = -( xRemainderView % MUTANT_LINE_DASH_SUM );
+        }
+
+        // Plot the first point
+        const firstXView = this.modelToViewX( Math.max( firstPoint.x, this.xRangeProperty.value.min ) );
+        const firstYView = this.modelToViewY( firstPoint.y );
+        if ( firstPoint.x >= this.xRangeProperty.value.min ) {
+          pointsShape.circle( firstXView, firstYView, NaturalSelectionConstants.POPULATION_POINT_RADIUS );
+        }
+        stepShape.moveTo( firstXView, firstYView );
+
+        // Keep track of the previous point that was plotted.
+        let previousPoint = firstPoint;
+
+        // Starting with the next point, plot from left to right.
+        for ( let i = firstIndex + 1; i < numberOfPoints; i++ ) {
+
+          const point = this.points.get( i );
+
+          if ( point.x <= this.xRangeProperty.value.max ) {
+
+            // Compute view coordinates
+            const xView = this.modelToViewX( point.x );
+            const yView = this.modelToViewY( point.y );
             const yViewPrevious = this.modelToViewY( previousPoint.y );
+
+            // Plot the point
+            pointsShape.circle( xView, yView, NaturalSelectionConstants.POPULATION_POINT_RADIUS );
+
+            // Plot the line segments
             stepShape.lineTo( xView, yViewPrevious );
             stepShape.lineTo( xView, yView );
           }
+          else {
+
+            // Extend the plot from previousPoint to the right edge of the grid.
+            const xViewPrevious = this.modelToViewX( previousPoint.x );
+            const xViewMax = this.modelToViewX( this.xRangeProperty.value.max );
+            const yView = this.modelToViewY( point.y );
+            stepShape.lineTo( xViewPrevious, yView );
+            stepShape.lineTo( xViewMax, yView );
+          }
+
+          previousPoint = point;
+
+          // Bail out if when we reach the right edge of grid.
+          if ( point.x >= this.xRangeProperty.value.max ) {
+            break;
+          }
         }
-        else if ( plotStarted && point.x > this.xRangeProperty.value.max ) {
 
-          // Draw information from previousPoint point to right edge of grid
-          const xViewPrevious = this.modelToViewX( previousPoint.x );
-          const xViewRight = this.modelToViewX( this.xRangeProperty.value.max );
-          const yView = this.modelToViewY( point.y );
-          stepShape.lineTo( xViewPrevious, yView );
-          stepShape.lineTo( xViewRight, yView );
-          break;
+        // Plot from previousPoint to current generation value
+        if ( previousPoint && previousPoint.x < this.generationsProperty.value ) {
+          const xView = this.modelToViewX( this.generationsProperty.value );
+          const yView = this.modelToViewY( previousPoint.y );
+          stepShape.lineTo( xView, yView );
         }
-
-        previousPoint = point;
-      }
-
-      // Plot from last point to current generation value
-      if ( previousPoint && previousPoint.x < this.generationsProperty.value ) {
-        const xView = this.modelToViewX( this.generationsProperty.value );
-        const yView = this.modelToViewY( previousPoint.y );
-        stepShape.lineTo( xView, yView );
       }
 
       this.pointsPath.setShape( pointsShape );
