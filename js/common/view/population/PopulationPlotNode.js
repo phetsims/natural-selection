@@ -115,21 +115,27 @@ class PopulationPlotNode extends Node {
 
       const numberOfPoints = this.points.length;
 
-      if ( numberOfPoints > 0 ) {
+      // If we have points and any of them fall within the x range...
+      if ( numberOfPoints > 0 && this.points.get( 0 ).x <= this.xRangeProperty.value.max ) {
 
-        // Find the index of the first point that is <= xRange.min. Search from the end of the array, to
-        // optimize for the case where the graph is scrolling (animated). If the graph is not scrolling, then the sim
-        // is paused, and the graph is being used to examine data for a previous generation. In that case, the time
-        // to find this index is not critical.
-        let firstIndex = -1;
-        for ( let i = numberOfPoints - 1; i >= 0; i-- ) {
-          const point = this.points.get( i );
-          if ( point.x <= this.xRangeProperty.value.min ) {
-            firstIndex = i;
-            break;
+        let firstIndex = 0;
+
+        // If there is at least one point that is < xMin ...
+        if ( this.points.get( 0 ).x < this.xRangeProperty.value.min ) {
+
+          // Find the index of the first point that is <= xMin. Do a brute-force search from the end of the array,
+          // to optimize for the case where the graph is scrolling (animated). If the graph is not scrolling, then
+          // the sim is paused, and the graph is being used to examine data for a previous generation. In that case,
+          // the time to find this index is not critical.
+          for ( let i = numberOfPoints - 1; i >= 0; i-- ) {
+            const point = this.points.get( i );
+            if ( point.x <= this.xRangeProperty.value.min ) {
+              firstIndex = i;
+              break;
+            }
           }
         }
-        assert && assert( firstIndex !== -1, 'firstIndex not found' );
+
         const firstPoint = this.points.get( firstIndex );
 
         // For mutant plots (drawn with a lineDash), adjust lineDashOffset so that the dash appears to scroll.
