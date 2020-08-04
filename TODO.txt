@@ -1,11 +1,14 @@
 # TODO list for natural-selection
 
-Implementation
+Specific things:
 
 * Delete CauseOfDeath
-* Too many Properties with 'generation' in their name is confusing
-* More iteration over genes, less brute-force
 * rename NaturalSelectionSprites to OrganismSprites
 * update Proportions graph only if it's visible, or document that it's not a performance issue
 * update Pedigree graph only if it's visible, or document that it's not a performance issue
 * factor out duplication in WolfCollection.eatBunnies
+
+General things:
+
+* Too many Properties with 'generation' in their name is confusing
+* More iteration over genes, less brute-force
