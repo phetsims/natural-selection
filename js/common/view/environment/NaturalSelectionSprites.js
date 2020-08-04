@@ -2,8 +2,11 @@
 
 /**
  * NaturalSelectionSprites renders all sprites that appear in the environment. It uses scenery's high-performance
- * Sprites feature, which uses renderer:'webgl', with a fallback of 'canvas'. While each sprite instance stays
- * synchronized with its associated model element, update() must be explicitly called to render this Node correctly.
+ * Sprites feature, which uses renderer:'webgl', with a fallback of 'canvas'.
+ *
+ * While each sprite instance stays synchronized with its associated model element, update() must be explicitly called
+ * to render this Node correctly. Internally, call update for changes that affect the sort order of sprites;
+ * otherwise call invalidatePaint.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -178,9 +181,6 @@ class NaturalSelectionSprites extends Sprites {
     // Put a selection rectangle around the selected bunny. unlink is not necessary.
     bunnyCollection.selectedBunnyProperty.link( bunny => this.setSelectedBunny( bunny ) );
 
-    // @private
-    this.clearSelectedBunnyCallback = this.clearSelectedBunny.bind( this );
-
     // PressListener for selecting a bunny. Mix in SpriteListenable, so we have access to the pressed SpriteInstance.
     // removeInputListener is not necessary.
     this.addInputListener( new ( SpriteListenable( PressListener ) )( {
@@ -199,9 +199,8 @@ class NaturalSelectionSprites extends Sprites {
   }
 
   /**
-   * Puts the sprite instances in the correct order (back-to-front), and then repaints. While each sprite instance
-   * stays synchronized with its associated model element, update() must be explicitly called to render this Node
-   * correctly.
+   * Puts the sprite instances in the correct order (back-to-front), and then repaints.
+   * If your change does not involve z position (rendering order), skip sort by calling invalidatePaint directly.
    * @public
    */
   update() {
@@ -230,23 +229,28 @@ class NaturalSelectionSprites extends Sprites {
     }
 
     // If the bunny dies or is disposed...
-    const disposeBunnySpriteInstance = () => {
+    const bunnyDiedOrDisposedListener = () => {
 
-      // Remove this listener
-      bunny.diedEmitter.removeListener( disposeBunnySpriteInstance );
-      bunny.disposedEmitter.removeListener( disposeBunnySpriteInstance );
+      // If this was the selected bunny, clear the selection.
+      if ( this.bunnyCollection.selectedBunnyProperty.value === bunny ) {
+        this.clearSelectedBunny();
+      }
 
-      // Remove the associated sprite instance
+      // Dispose of the associated sprite instance
       const bunnySpriteInstanceIndex = this.spriteInstances.indexOf( bunnySpriteInstance );
       assert && assert( bunnySpriteInstanceIndex !== -1, 'bunnySpriteInstance missing from spriteInstances' );
       this.spriteInstances.splice( bunnySpriteInstanceIndex, 1 );
       if ( !this.isPlayingProperty.value ) {
-        this.update();
+        this.invalidatePaint();
       }
       bunnySpriteInstance.dispose();
+
+      // Remove this listener
+      bunny.diedEmitter.removeListener( bunnyDiedOrDisposedListener );
+      bunny.disposedEmitter.removeListener( bunnyDiedOrDisposedListener );
     };
-    bunny.diedEmitter.addListener( disposeBunnySpriteInstance ); // removeListener is performed by callback
-    bunny.disposedEmitter.addListener( disposeBunnySpriteInstance ); // removeListener is performed by callback
+    bunny.diedEmitter.addListener( bunnyDiedOrDisposedListener ); // removeListener is performed by callback
+    bunny.disposedEmitter.addListener( bunnyDiedOrDisposedListener ); // removeListener is performed by callback
 
     // PhET-iO state engine may restore bunnyCollection.selectedBunnyProperty before firing
     // bunnyCollection.liveBunnies.addItemAddedListener, the callback that creates BunnySpriteInstances.
@@ -270,27 +274,26 @@ class NaturalSelectionSprites extends Sprites {
     // Create a SpriteInstance for the wolf.
     const wolfSpriteInstance = new WolfSpriteInstance( wolf, wolfSprite );
     this.spriteInstances.push( wolfSpriteInstance );
-
     if ( !this.isPlayingProperty.value ) {
       this.update();
     }
 
     // When the wolf is disposed...
-    const disposeWolfSpriteInstance = () => {
+    const wolfDisposedListener = () => {
 
-      // Remove this listener
-      wolf.disposedEmitter.removeListener( disposeWolfSpriteInstance );
-
-      // Remove the associated sprite instance
+      // Dispose of the associated sprite instance
       const wolfSpriteInstanceIndex = this.spriteInstances.indexOf( wolfSpriteInstance );
       assert && assert( wolfSpriteInstanceIndex !== -1, 'wolfSpriteInstanceIndex missing from spriteInstances' );
       this.spriteInstances.splice( wolfSpriteInstanceIndex, 1 );
       if ( !this.isPlayingProperty.value ) {
-        this.update();
+        this.invalidatePaint();
       }
       wolfSpriteInstance.dispose();
+
+      // Remove this listener
+      wolf.disposedEmitter.removeListener( wolfDisposedListener );
     };
-    wolf.disposedEmitter.addListener( disposeWolfSpriteInstance ); // removeListener is performed by callback
+    wolf.disposedEmitter.addListener( wolfDisposedListener ); // removeListener is performed by callback
   }
 
   /**
@@ -355,7 +358,8 @@ class NaturalSelectionSprites extends Sprites {
     // Clear any previous selection.
     this.clearSelectedBunny();
 
-    // If there's a live bunny selected...
+    // This view only displays live bunnies, and selectedBunnyProperty may contain a dead bunny, for display in the
+    // Pedigree graph.  So only if there's a live bunny selected...
     if ( bunny && bunny.isAlive ) {
 
       // Get the BunnySpriteInstance that is associated with the selected bunny.
@@ -380,13 +384,8 @@ class NaturalSelectionSprites extends Sprites {
         if ( !this.isPlayingProperty.value ) {
           this.update();
         }
-
-        // Clear the selection if the selected bunny dies. removeListener in clearSelectedBunny.
-        bunny.diedEmitter.addListener( this.clearSelectedBunnyCallback );
       }
     }
-
-    this.update();
   }
 
   /**
@@ -418,20 +417,15 @@ class NaturalSelectionSprites extends Sprites {
     if ( this.selectedBunnySpriteInstance ) {
 
       // clear the selected bunny
-      const bunny = this.selectedBunnySpriteInstance.organism;
-      bunny.diedEmitter.removeListener( this.clearSelectedBunnyCallback );
       this.selectedBunnySpriteInstance = null;
 
       // clear the selection rectangle
-      assert && assert( this.selectionRectangleSpriteInstance,
-        'expected selectionRectangleSpriteInstance to be set' );
-      assert && assert( this.selectionRectangleSpriteInstance.organism === bunny,
-        'selectionRectangleSpriteInstance is attached to unexpected bunny' );
+      assert && assert( this.selectionRectangleSpriteInstance, 'expected selectionRectangleSpriteInstance to be set' );
       const selectionRectangleIndex = this.spriteInstances.indexOf( this.selectionRectangleSpriteInstance );
       assert && assert( selectionRectangleIndex !== -1, 'selectionRectangleSpriteInstance is missing from spriteInstances' );
       this.spriteInstances.splice( selectionRectangleIndex, 1 );
       if ( !this.isPlayingProperty.value ) {
-        this.update();
+        this.invalidatePaint();
       }
       this.selectionRectangleSpriteInstance.dispose();
       this.selectionRectangleSpriteInstance = null;
@@ -476,6 +470,8 @@ class NaturalSelectionSprites extends Sprites {
       // Append the selected bunny and the selection rectangle to the front.
       this.spriteInstances.push( this.selectionRectangleSpriteInstance ); // rectangle behind bunny
       this.spriteInstances.push( this.selectedBunnySpriteInstance );
+
+      this.invalidatePaint();
     }
   }
 
