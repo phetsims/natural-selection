@@ -203,52 +203,60 @@ class WolfCollection {
 
       // Eat bunnies with white fur.
       const bunniesWhiteFur = _.filter( bunnies, bunny => bunny.phenotype.hasWhiteFur() );
-      if ( environment === Environment.ARCTIC &&
-           bunniesWhiteFur.length <= NaturalSelectionQueryParameters.minBunniesForWolves &&
-           bunnies.length > NaturalSelectionQueryParameters.minBunniesForWolves ) {
+      if ( bunniesWhiteFur.length > 0 ) {
+        if ( environment === Environment.ARCTIC &&
+             bunniesWhiteFur.length <= NaturalSelectionQueryParameters.minBunniesForWolves &&
+             bunnies.length > NaturalSelectionQueryParameters.minBunniesForWolves ) {
 
-        // Do nothing because the population with the preferred trait is too small, and there are other bunnies to eat.
-        // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
-        // and https://github.com/phetsims/natural-selection/issues/152
-        phet.log && phet.log(
-          `Wolves ignored white bunnies because their population is <= ${NaturalSelectionQueryParameters.minBunniesForWolves} ` +
-          `and total population is > ${NaturalSelectionQueryParameters.minBunniesForWolves}`
-        );
-      }
-      else {
-        const percentToEatWhiteFur = ( environment === Environment.ARCTIC ) ? percentToEatMatch : percentToEatNoMatch;
-        const numberToEatWhiteFur = Math.ceil( percentToEatWhiteFur * bunniesWhiteFur.length );
-        assert && assert( numberToEatWhiteFur <= bunniesWhiteFur.length, 'invalid numberToEatWhiteFur' );
-        for ( let i = 0; i < numberToEatWhiteFur; i++ ) {
-          bunniesWhiteFur[ i ].die( CauseOfDeath.WOLF );
+          // Do nothing because the population with the preferred trait is too small, and there are other bunnies to eat.
+          // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
+          // and https://github.com/phetsims/natural-selection/issues/152
+          phet.log && phet.log(
+            `Wolves ignored white bunnies because their population is <= ${NaturalSelectionQueryParameters.minBunniesForWolves} ` +
+            `and total population is > ${NaturalSelectionQueryParameters.minBunniesForWolves}`
+          );
         }
-        totalEaten += numberToEatWhiteFur;
-        phet.log && phet.log( `${numberToEatWhiteFur} bunnies with white fur were eaten by wolves` );
+        else {
+
+          // Eat at least 1 bunny, if we've gotten this far.
+          const percentToEatWhiteFur = ( environment === Environment.ARCTIC ) ? percentToEatMatch : percentToEatNoMatch;
+          const numberToEatWhiteFur = Math.max( 1, Utils.roundSymmetric( percentToEatWhiteFur * bunniesWhiteFur.length ) );
+          assert && assert( numberToEatWhiteFur <= bunniesWhiteFur.length, 'invalid numberToEatWhiteFur' );
+          for ( let i = 0; i < numberToEatWhiteFur; i++ ) {
+            bunniesWhiteFur[ i ].die( CauseOfDeath.WOLF );
+          }
+          totalEaten += numberToEatWhiteFur;
+          phet.log && phet.log( `${numberToEatWhiteFur} bunnies with white fur were eaten by wolves` );
+        }
       }
 
       // Eat bunnies with brown fur.
       const bunniesBrownFur = _.filter( bunnies, bunny => bunny.phenotype.hasBrownFur() );
-      if ( environment === Environment.EQUATOR &&
-           bunniesBrownFur.length <= NaturalSelectionQueryParameters.minBunniesForWolves &&
-           bunnies.length > NaturalSelectionQueryParameters.minBunniesForWolves ) {
+      if ( bunniesBrownFur.length > 0 ) {
+        if ( environment === Environment.EQUATOR &&
+             bunniesBrownFur.length <= NaturalSelectionQueryParameters.minBunniesForWolves &&
+             bunnies.length > NaturalSelectionQueryParameters.minBunniesForWolves ) {
 
-        // Do nothing because the population with the preferred trait is too small, and there are other bunnies to eat.
-        // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
-        // and https://github.com/phetsims/natural-selection/issues/152
-        phet.log && phet.log(
-          `Wolves ignored brown bunnies because their population is <= ${NaturalSelectionQueryParameters.minBunniesForWolves} ` +
-          `and total population is > ${NaturalSelectionQueryParameters.minBunniesForWolves}`
-        );
-      }
-      else {
-        const percentToEatBrownFur = ( environment === Environment.EQUATOR ) ? percentToEatMatch : percentToEatNoMatch;
-        const numberToEatBrownFur = Math.ceil( percentToEatBrownFur * bunniesBrownFur.length );
-        assert && assert( numberToEatBrownFur <= bunniesBrownFur.length, 'invalid numberToEatBrownFur' );
-        for ( let i = 0; i < numberToEatBrownFur; i++ ) {
-          bunniesBrownFur[ i ].die( CauseOfDeath.WOLF );
+          // Do nothing because the population with the preferred trait is too small, and there are other bunnies to eat.
+          // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
+          // and https://github.com/phetsims/natural-selection/issues/152
+          phet.log && phet.log(
+            `Wolves ignored brown bunnies because their population is <= ${NaturalSelectionQueryParameters.minBunniesForWolves} ` +
+            `and total population is > ${NaturalSelectionQueryParameters.minBunniesForWolves}`
+          );
         }
-        totalEaten += numberToEatBrownFur;
-        phet.log && phet.log( `${numberToEatBrownFur} bunnies with brown fur were eaten by wolves` );
+        else {
+
+          // Eat at least 1 bunny, if we've gotten this far.
+          const percentToEatBrownFur = ( environment === Environment.EQUATOR ) ? percentToEatMatch : percentToEatNoMatch;
+          const numberToEatBrownFur = Math.max( 1, Utils.roundSymmetric( percentToEatBrownFur * bunniesBrownFur.length ) );
+          assert && assert( numberToEatBrownFur <= bunniesBrownFur.length, 'invalid numberToEatBrownFur' );
+          for ( let i = 0; i < numberToEatBrownFur; i++ ) {
+            bunniesBrownFur[ i ].die( CauseOfDeath.WOLF );
+          }
+          totalEaten += numberToEatBrownFur;
+          phet.log && phet.log( `${numberToEatBrownFur} bunnies with brown fur were eaten by wolves` );
+        }
       }
 
       // Notify that bunnies have been eaten.
