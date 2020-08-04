@@ -8,4 +8,4 @@ Implementation
 * rename NaturalSelectionSprites to OrganismSprites
 * update Proportions graph only if it's visible, or document that it's not a performance issue
 * update Pedigree graph only if it's visible, or document that it's not a performance issue
-
+* factor out duplication in WolfCollection.eatBunnies
