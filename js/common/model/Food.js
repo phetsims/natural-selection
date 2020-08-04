@@ -10,6 +10,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
+import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -209,7 +210,9 @@ class Food {
           phet.log && phet.log( `No bunnies with long teeth were starved because the population is <= ${NaturalSelectionQueryParameters.minBunniesForFood}.` );
         }
         else {
-          const numberToStarveLongTeeth = Math.ceil( percentToStarveLongTeeth * bunniesLongTeeth.length );
+
+          // Starve at least 1 bunny, if we've gotten this far.
+          const numberToStarveLongTeeth = Math.max( 1, Utils.roundSymmetric( percentToStarveLongTeeth * bunniesLongTeeth.length ) );
           assert && assert( numberToStarveLongTeeth <= bunniesLongTeeth.length, 'invalid numberToStarveLongTeeth' );
           for ( let i = 0; i < numberToStarveLongTeeth; i++ ) {
             bunniesLongTeeth[ i ].die( causeOfDeath );
@@ -222,7 +225,9 @@ class Food {
       // Starve bunnies with short teeth.
       if ( percentToStarveShortTeeth > 0 ) {
         const bunniesShortTeeth = _.filter( bunnies, bunny => bunny.phenotype.hasShortTeeth() );
-        const numberToStarveShortTeeth = Math.ceil( percentToStarveShortTeeth * bunniesShortTeeth.length );
+
+        // Starve at least 1 bunny, if we've gotten this far.
+        const numberToStarveShortTeeth = Math.max( 1, Utils.roundSymmetric( percentToStarveShortTeeth * bunniesShortTeeth.length ) );
         assert && assert( numberToStarveShortTeeth <= bunniesShortTeeth.length, 'invalid numberToStarveShortTeeth' );
         for ( let i = 0; i < numberToStarveShortTeeth; i++ ) {
           bunniesShortTeeth[ i ].die( causeOfDeath );
