@@ -7,8 +7,10 @@ Specific things:
 * update Proportions graph only if it's visible, or document that it's not a performance issue
 * update Pedigree graph only if it's visible, or document that it's not a performance issue
 * factor out duplication in WolfCollection.eatBunnies
+* delete query parameters that have outlived their usefulness
 
 General things:
 
 * Too many Properties with 'generation' in their name is confusing
 * More iteration over genes, less brute-force
+* Figure out things I don't understand in Bunny.js, Wolf.js, EnvironmentModelViewTransform.js
