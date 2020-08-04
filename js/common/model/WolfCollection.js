@@ -101,8 +101,9 @@ class WolfCollection {
     // The wolf population exists only while it's hunting.
     this.isHuntingProperty.link( isHunting => {
 
-      // When the isHuntingProperty changes during normal simulation use, it can create or clear Wolf instances.
-      // However, when setting PhET-iO state, this work is redundant and would duplicate wolves.
+      // When the isHuntingProperty changes during normal simulation use, it creates or disposes Wolf instances.
+      // However, when setting PhET-iO state, isHuntingProperty and Wolf instances are restored, so executing
+      // this code would result in duplicate wolves. See https://github.com/phetsims/natural-selection/issues/117
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
 
         if ( isHunting ) {
