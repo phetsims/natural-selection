@@ -210,8 +210,10 @@ class WolfCollection {
         );
       }
       else {
+
+        // Eat at least 1 bunny, if we've gotten this far.
         const percentToEatWhiteFur = ( environment === Environment.ARCTIC ) ? percentToEatMatch : percentToEatNoMatch;
-        const numberToEatWhiteFur = Math.ceil( percentToEatWhiteFur * bunniesWhiteFur.length );
+        const numberToEatWhiteFur = Math.max( 1, Utils.roundSymmetric( percentToEatWhiteFur * bunniesWhiteFur.length ) );
         assert && assert( numberToEatWhiteFur <= bunniesWhiteFur.length, 'invalid numberToEatWhiteFur' );
         for ( let i = 0; i < numberToEatWhiteFur; i++ ) {
           bunniesWhiteFur[ i ].die( CauseOfDeath.WOLF );
@@ -235,8 +237,10 @@ class WolfCollection {
         );
       }
       else {
+
+        // Eat at least 1 bunny, if we've gotten this far.
         const percentToEatBrownFur = ( environment === Environment.EQUATOR ) ? percentToEatMatch : percentToEatNoMatch;
-        const numberToEatBrownFur = Math.ceil( percentToEatBrownFur * bunniesBrownFur.length );
+        const numberToEatBrownFur = Math.max( 1, Utils.roundSymmetric( percentToEatBrownFur * bunniesBrownFur.length ) );
         assert && assert( numberToEatBrownFur <= bunniesBrownFur.length, 'invalid numberToEatBrownFur' );
         for ( let i = 0; i < numberToEatBrownFur; i++ ) {
           bunniesBrownFur[ i ].die( CauseOfDeath.WOLF );
