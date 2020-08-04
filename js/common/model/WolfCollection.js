@@ -100,21 +100,27 @@ class WolfCollection {
 
     // The wolf population exists only while it's hunting.
     this.isHuntingProperty.link( isHunting => {
-      if ( isHunting ) {
 
-        // Number of wolves is a function of the number of live bunnies
-        const numberOfWolves = Math.max( NaturalSelectionQueryParameters.minWolves,
-          Utils.roundSymmetric( this.bunnyCollection.liveBunnies.length / NaturalSelectionQueryParameters.bunniesPerWolf ) );
-        for ( let i = 0; i < numberOfWolves; i++ ) {
-          this.wolfGroup.createNextElement();
+      // When the isHuntingProperty changes during normal simulation use, it can create or clear Wolf instances.
+      // However, when setting PhET-iO state, this work is redundant and would duplicate wolves.
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+
+        if ( isHunting ) {
+
+          // Number of wolves is a function of the number of live bunnies
+          const numberOfWolves = Math.max( NaturalSelectionQueryParameters.minWolves,
+            Utils.roundSymmetric( this.bunnyCollection.liveBunnies.length / NaturalSelectionQueryParameters.bunniesPerWolf ) );
+          for ( let i = 0; i < numberOfWolves; i++ ) {
+            this.wolfGroup.createNextElement();
+          }
+          phet.log && phet.log( `${this.wolfGroup.count} wolves were created` );
         }
-        phet.log && phet.log( `${this.wolfGroup.count} wolves were created` );
-      }
-      else {
+        else {
 
-        // Dispose of all wolves
-        phet.log && phet.log( `${this.wolfGroup.count} wolves were disposed` );
-        this.wolfGroup.clear();
+          // Dispose of all wolves
+          phet.log && phet.log( `${this.wolfGroup.count} wolves were disposed` );
+          this.wolfGroup.clear();
+        }
       }
     } );
 
