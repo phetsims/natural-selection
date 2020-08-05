@@ -263,7 +263,9 @@ class NaturalSelectionScreenView extends ScreenView {
     };
 
     // Display a dialog when all bunnies have died.
-    const diedDialog = new DiedDialog();
+    const diedDialog = new DiedDialog( {
+      tandem: options.tandem.createTandem( 'diedDialog' )
+    } );
 
     // removeListener is not necessary.
     model.bunnyCollection.allBunniesHaveDiedEmitter.addListener( () => {
@@ -272,7 +274,9 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     // Display a dialog when bunnies have taken over the world.
-    const worldDialog = new WorldDialog();
+    const worldDialog = new WorldDialog( {
+      tandem: options.tandem.createTandem( 'worldDialog' )
+    } );
 
     // removeListener is not necessary.
     model.bunnyCollection.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {

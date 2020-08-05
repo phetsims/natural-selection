@@ -12,6 +12,7 @@ import Image from '../../../../scenery/js/nodes/Image.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Dialog from '../../../../sun/js/Dialog.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import worldImage from '../../../images/world_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
@@ -27,7 +28,11 @@ class WorldDialog extends Dialog {
     options = merge( {
       fill: 'black',
       closeButtonColor: 'white',
-      topMargin: 25
+      topMargin: 25,
+
+      // phet-io
+      tandem: Tandem.REQUIRED, // see https://github.com/phetsims/natural-selection/issues/156
+      phetioReadOnly: true
     }, options );
 
     const worldNode = new Image( worldImage, {

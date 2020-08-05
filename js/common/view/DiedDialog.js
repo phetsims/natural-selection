@@ -10,6 +10,7 @@
 import merge from '../../../../phet-core/js/merge.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Dialog from '../../../../sun/js/Dialog.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -23,7 +24,11 @@ class DiedDialog extends Dialog {
 
     options = merge( {
       topMargin: 50,
-      bottomMargin: 50
+      bottomMargin: 50,
+
+      // phet-io
+      tandem: Tandem.REQUIRED, // see https://github.com/phetsims/natural-selection/issues/156
+      phetioReadOnly: true
     }, options );
 
     const messageText = new Text( naturalSelectionStrings.allOfTheBunniesHaveDied, {
