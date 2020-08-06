@@ -32,7 +32,7 @@ const CLOCK_FOOD_MIDPOINT = NaturalSelectionConstants.CLOCK_FOOD_RANGE.getCenter
 // see https://github.com/phetsims/natural-selection/issues/153
 const LIMITED_FOOD_MIN_TOTAL_POPULATION = 7;
 
-// The minimum long-teeth population required for tough food to be a factor for long-teeth bunnies,
+// The minimum number of bunnies with long teeth required for tough food to be a factor for bunnies with long teeth,
 // see https://github.com/phetsims/natural-selection/issues/98
 const TOUGH_FOOD_MIN_LONG_TEETH_POPULATION = 5;
 
