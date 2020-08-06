@@ -186,7 +186,7 @@ const SCHEMA = {
 
   // This query parameter determines the percentages of bunnies that will die of starvation when food is tender.
   // A value is randomly chosen from this range.
-  // Bunnies will die at this rate regardless of their teeth alleles.
+  // Bunnies will die at this rate regardless of their phenotype.
   // Tuned in https://github.com/phetsims/natural-selection/issues/86
   limitedFoodPercentToKill: {
     type: 'custom',
