@@ -170,10 +170,10 @@ const SCHEMA = {
 
   // This query parameter determines the percentages of bunnies that will be eaten by wolves.
   // A value is randomly chosen from this range.
-  //
   // Bunnies whose fur color matches the environment will be eaten at the rate specified by wolvesPercentToKill.
   // Bunnies whose fur color does NOT match the environment will be eaten at the rate of wolvesEnvironmentMultiplier *
   // wolvesPercentToKill.
+  // Tuned in https://github.com/phetsims/natural-selection/issues/86
   wolvesPercentToKill: {
     type: 'custom',
     parse: parseRange,
@@ -182,6 +182,7 @@ const SCHEMA = {
   },
 
   // Multiplier for when the bunny's fur color does not match the environment, applied to wolvesPercentToKill.
+  // Tuned in https://github.com/phetsims/natural-selection/issues/86
   wolvesEnvironmentMultiplier: {
     type: 'number',
     defaultValue: 2.3,
@@ -191,6 +192,7 @@ const SCHEMA = {
   // This query parameter determines the percentages of bunnies that will die of starvation when food is tender.
   // A value is randomly chosen from this range.
   // Bunnies will die at this rate regardless of their teeth alleles.
+  // Tuned in https://github.com/phetsims/natural-selection/issues/86
   limitedFoodPercentToKill: {
     type: 'custom',
     parse: parseRange,
@@ -200,10 +202,10 @@ const SCHEMA = {
 
   // This query parameter determines the percentages of bunnies that will die of starvation when food is tough.
   // A value is randomly chosen from this range.
-  //
   // Bunnies with long teeth will die at the rate specified by toughFoodPercentToKill.
   // Bunnies with short teeth will die at the rate of toughFoodPercentToKill * ?shortTeethMultiplier.
   // If food is also limited, then the values for both types of bunny will be multiplied by ?limitedFoodMultiplier.
+  // Tuned in https://github.com/phetsims/natural-selection/issues/86
   toughFoodPercentToKill: {
     type: 'custom',
     parse: parseRange,
@@ -212,6 +214,7 @@ const SCHEMA = {
   },
 
   // Multiplier for bunnies with short teeth when food is tough, applied to toughFoodPercentToKill.
+  // Tuned in https://github.com/phetsims/natural-selection/issues/86
   shortTeethMultiplier: {
     type: 'number',
     defaultValue: 1.4,
@@ -219,20 +222,16 @@ const SCHEMA = {
   },
 
   // Multiplier for when limited food is combined with tough food, applied to toughFoodPercentToKill.
+  // Tuned in https://github.com/phetsims/natural-selection/issues/86
   limitedFoodMultiplier: {
     type: 'number',
     defaultValue: 1.02,
     isValidValue: value => ( value > 1 )
   },
 
-  // If the number of bunnies with long teeth is <= this value, none of them will die of starvation.
-  minBunniesForFood: {
-    type: 'number',
-    defaultValue: 4,
-    isValidValue: value => NaturalSelectionUtils.isNonNegativeInteger( value )
-  },
-
+  //TODO change this to <
   // If the number of bunnies whose fur matches their environment is <= this value, wolves will eat none of them.
+  // Tuned in https://github.com/phetsims/natural-selection/issues/98
   minBunniesForWolves: {
     type: 'number',
     defaultValue: 5,

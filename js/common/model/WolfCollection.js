@@ -20,7 +20,6 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import BunnyCollection from './BunnyCollection.js';
-import CauseOfDeath from './CauseOfDeath.js';
 import Environment from './Environment.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenerationClock from './GenerationClock.js';
@@ -30,6 +29,9 @@ import WolfGroup from './WolfGroup.js';
 // constants
 const CLOCK_WOLVES_MIN = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.min;
 const CLOCK_WOLVES_MAX = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.max;
+
+// Wolves are applied at the midpoint of its 'slice' of the generation clock.
+// See https://github.com/phetsims/natural-selection/issues/110
 const CLOCK_WOLVES_MIDPOINT = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.getCenter();
 
 // Wolves will kill at least this percentage of the bunnies, regardless of their fur color.
@@ -228,7 +230,7 @@ class WolfCollection {
           const numberToEatWhiteFur = Math.max( 1, Utils.roundSymmetric( percentToEatWhiteFur * numberWhiteFur ) );
           assert && assert( numberToEatWhiteFur <= numberWhiteFur, 'invalid numberToEatWhiteFur' );
           for ( let i = 0; i < numberToEatWhiteFur; i++ ) {
-            bunniesWhiteFur[ i ].die( CauseOfDeath.WOLF );
+            bunniesWhiteFur[ i ].die();
           }
           totalEaten += numberToEatWhiteFur;
           phet.log && phet.log( `${numberToEatWhiteFur} of ${numberWhiteFur} bunnies with white fur were eaten by wolves` );
@@ -258,7 +260,7 @@ class WolfCollection {
           const numberToEatBrownFur = Math.max( 1, Utils.roundSymmetric( percentToEatBrownFur * numberBrownFur ) );
           assert && assert( numberToEatBrownFur <= numberBrownFur, 'invalid numberToEatBrownFur' );
           for ( let i = 0; i < numberToEatBrownFur; i++ ) {
-            bunniesBrownFur[ i ].die( CauseOfDeath.WOLF );
+            bunniesBrownFur[ i ].die();
           }
           totalEaten += numberToEatBrownFur;
           phet.log && phet.log( `${numberToEatBrownFur} of ${numberBrownFur} bunnies with brown fur were eaten by wolves` );

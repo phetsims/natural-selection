@@ -24,7 +24,6 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyIO from './BunnyIO.js';
-import CauseOfDeath from './CauseOfDeath.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 import Genotype from './Genotype.js';
@@ -88,7 +87,6 @@ class Bunny extends Organism {
     this.mother = options.mother;
     this.generation = options.generation;
     this.isAlive = true;
-    this.causeOfDeath = null; // {CauseOfDeath|null} provided solely for debugging
 
     // @public
     this.age = 0;
@@ -185,13 +183,10 @@ class Bunny extends Organism {
 
   /**
    * Kills this bunny, forever and ever. (This sim does not support reincarnation or other forms of 'pooling' :)
-   * @param {CauseOfDeath} causeOfDeath
    * @public
    */
-  die( causeOfDeath ) {
-    assert && assert( CauseOfDeath.includes( causeOfDeath ), 'invalid causeOfDeath' );
+  die() {
     assert && assert( this.isAlive, 'bunny is already dead' );
-    this.causeOfDeath = causeOfDeath;
     this.isAlive = false;
     this.diedEmitter.emit();
     this.diedEmitter.dispose();
@@ -315,7 +310,6 @@ class Bunny extends Organism {
            `generation=${this.generation}, ` +
            `age=${this.age}, ` +
            `isAlive=${this.isAlive}, ` +
-           `${this.causeOfDeath ? 'causeOfDeath=' + this.causeOfDeath : ''}, ` +
            `genotype='${this.genotype.toAbbreviation()}', ` +
            `father=${this.father ? this.father.tandem.name : null}, ` +
            `mother=${this.mother ? this.mother.tandem.name : null}`;

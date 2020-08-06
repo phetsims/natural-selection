@@ -25,7 +25,6 @@ import Bunny from './Bunny.js';
 import BunnyArray from './BunnyArray.js';
 import BunnyArrayIO from './BunnyArrayIO.js';
 import BunnyGroup from './BunnyGroup.js';
-import CauseOfDeath from './CauseOfDeath.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 import PunnettSquare from './PunnettSquare.js';
@@ -102,10 +101,6 @@ class BunnyCollection {
         phetioType: DerivedPropertyIO( RangeIO ),
         phetioDocumentation: 'for internal PhET use only'
       } );
-    phet.log && this.bunnyRestRangeProperty.link( bunnyRestRange => {
-      phet.log && phet.log( `bunnies will rest [${bunnyRestRange.min},${bunnyRestRange.max}] seconds ` +
-                            `for population=${this.liveBunnies.lengthProperty.value}` );
-    } );
 
     // the PhetioGroup that manages Bunny instances as dynamic PhET-iO elements
     const bunnyGroup = new BunnyGroup( genePool, modelViewTransform, this.bunnyRestRangeProperty, {
@@ -266,7 +261,7 @@ class BunnyCollection {
 
       // bunny dies if it exceeds the maximum age
       if ( bunny.age === NaturalSelectionConstants.MAX_AGE ) {
-        bunny.die( CauseOfDeath.OLD_AGE );
+        bunny.die();
         diedCount++;
       }
     } );

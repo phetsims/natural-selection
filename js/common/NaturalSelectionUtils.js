@@ -98,6 +98,15 @@ const NaturalSelectionUtils = {
    */
   isNonNegativeInteger( value ) {
     return NaturalSelectionUtils.isNonNegative( value ) && Utils.isInteger( value );
+  },
+
+  /**
+   * Determines whether a value is a percentage, between 0 and 1.
+   * @param {*} value
+   * @returns {boolean}
+   */
+  isPercent( value ) {
+    return NaturalSelectionUtils.isNonNegative( value ) && ( value >= 0 ) && ( value <= 1 );
   }
 };
 
