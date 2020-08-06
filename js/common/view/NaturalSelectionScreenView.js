@@ -28,10 +28,10 @@ import EnvironmentNode from './environment/EnvironmentNode.js';
 import EnvironmentalFactorsPanel from './EnvironmentalFactorsPanel.js';
 import EnvironmentRadioButtonGroup from './EnvironmentRadioButtonGroup.js';
 import GenerationClockNode from './GenerationClockNode.js';
-import GenerationLimitDialog from './GenerationLimitDialog.js';
 import GenesVisibilityManager from './GenesVisibilityManager.js';
 import GraphChoice from './GraphChoice.js';
 import GraphChoiceRadioButtonGroup from './GraphChoiceRadioButtonGroup.js';
+import MemoryLimitDialog from './MemoryLimitDialog.js';
 import MutationAlertsNode from './MutationAlertsNode.js';
 import NaturalSelectionTimeControl from './NaturalSelectionTimeControl.js';
 import PedigreeNode from './pedigree/PedigreeNode.js';
@@ -262,9 +262,12 @@ class NaturalSelectionScreenView extends ScreenView {
       environmentNode.updateSprites();
     };
 
+    // Group all dialogs in Studio
+    const dialogsTandem = options.tandem.createTandem( 'dialogs' );
+
     // Display a dialog when all bunnies have died.
     const diedDialog = new DiedDialog( {
-      tandem: options.tandem.createTandem( 'diedDialog' )
+      tandem: dialogsTandem.createTandem( 'diedDialog' )
     } );
 
     // removeListener is not necessary.
@@ -275,7 +278,7 @@ class NaturalSelectionScreenView extends ScreenView {
 
     // Display a dialog when bunnies have taken over the world.
     const worldDialog = new WorldDialog( {
-      tandem: options.tandem.createTandem( 'worldDialog' )
+      tandem: dialogsTandem.createTandem( 'worldDialog' )
     } );
 
     // removeListener is not necessary.
@@ -284,15 +287,17 @@ class NaturalSelectionScreenView extends ScreenView {
       worldDialog.show();
     } );
 
-    // Display a dialog when we hit the generation limit.
+    // Display a dialog when we hit the memory limit (which is actually a generation limit).
     // See https://github.com/phetsims/natural-selection/issues/46
-    const generationLimitDialog = new GenerationLimitDialog();
+    const memoryLimitDialog = new MemoryLimitDialog( {
+      tandem: dialogsTandem.createTandem( 'memoryLimitDialog' )
+    } );
 
     // removeListener is not necessary.
     model.generationClock.currentGenerationProperty.link( currentGeneration => {
       if ( currentGeneration >= NaturalSelectionQueryParameters.maxGenerations ) {
         endSimulation();
-        generationLimitDialog.show();
+        memoryLimitDialog.show();
       }
     } );
 

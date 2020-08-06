@@ -124,7 +124,7 @@ const SCHEMA = {
   // For internal use only
   //------------------------------------------------------------------------------------------------------------------
 
-  // Maximum number of generations before the sim stops and displays GenerationLimitDialog.
+  // Maximum number of generations before the sim stops and displays MemoryLimitDialog.
   // See https://github.com/phetsims/natural-selection/issues/46
   maxGenerations: {
     type: 'number',

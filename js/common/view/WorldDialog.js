@@ -32,7 +32,8 @@ class WorldDialog extends Dialog {
 
       // phet-io
       tandem: Tandem.REQUIRED, // see https://github.com/phetsims/natural-selection/issues/156
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioDocumentation: 'This dialog is displayed when bunnies have taken over the world.'
     }, options );
 
     const worldNode = new Image( worldImage, {

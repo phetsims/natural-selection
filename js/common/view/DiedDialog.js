@@ -28,7 +28,8 @@ class DiedDialog extends Dialog {
 
       // phet-io
       tandem: Tandem.REQUIRED, // see https://github.com/phetsims/natural-selection/issues/156
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioDocumentation: 'This dialog is displayed when all of the bunnies have died.'
     }, options );
 
     const messageText = new Text( naturalSelectionStrings.allOfTheBunniesHaveDied, {
