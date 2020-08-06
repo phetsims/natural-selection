@@ -132,7 +132,7 @@ class WolfCollection {
       }
     } );
 
-    // Eat bunnies at the midpoint of CLOCK_WOLVES_RANGE.
+    // Eat bunnies at the midpoint of their 'slice' of the generation clock.
     // See https://github.com/phetsims/natural-selection/issues/110
     // unlink is not necessary.
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
@@ -206,20 +206,20 @@ class WolfCollection {
       const whiteCount = whiteBunnies.length;
       const brownBunnies = _.filter( bunnies, bunny => bunny.phenotype.hasBrownFur() );
       const brownCount = brownBunnies.length;
-      phet.log && phet.log( `Applying wolves: ${whiteCount} white, ${brownCount} brown` );
+      phet.log && phet.log( `Applying wolves: ${whiteCount} white, ${brownCount} brown, environment=${this.environmentProperty.value}` );
 
       // Eat some of each phenotype, but a higher percentage of bunnies that don't blend into the environment.
       const percentToEatMatch = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.wolvesPercentToKill );
       const percentToEatNoMatch = percentToEatMatch * NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier;
 
       // Eat white bunnies.
-      const numberEatenWhite = eatSomeBunnies( 'white', whiteBunnies,
-        this.environmentProperty.value, Environment.ARCTIC, percentToEatMatch, percentToEatNoMatch, bunnies.length );
+      const numberEatenWhite = eatSomeBunnies( whiteBunnies, bunnies.length,
+        this.environmentProperty.value, Environment.ARCTIC, percentToEatMatch, percentToEatNoMatch );
       phet.log && phet.log( `${numberEatenWhite} of ${whiteCount} white bunnies were eaten by wolves` );
 
       // Eat brown bunnies.
-      const numberEatenBrown = eatSomeBunnies( 'brown', brownBunnies,
-        this.environmentProperty.value, Environment.EQUATOR, percentToEatMatch, percentToEatNoMatch, bunnies.length );
+      const numberEatenBrown = eatSomeBunnies( brownBunnies, bunnies.length,
+        this.environmentProperty.value, Environment.EQUATOR, percentToEatMatch, percentToEatNoMatch );
       phet.log && phet.log( `${numberEatenBrown} of ${brownCount} brown bunnies were eaten by wolves` );
 
       // Notify if bunnies have been eaten.
@@ -232,33 +232,38 @@ class WolfCollection {
 
 /**
  * Eats a percentage of some set of bunnies, depending on whether their fur color matches the environment.
- * @param furColorName - the name of the fur color, used in a log message
  * @param {Bunny[]} bunnies - a set of bunnies, all with the same phenotype
+ * @param totalBunnies - the total number of bunnies that were eligible for selection, both phenotypes
  * @param {Environment} environment - the current environment that is selected
  * @param {Environment} environmentMatch - the environment that matches the set of bunnies' fur color
  * @param {number} percentToEatMatch - the percentage of bunnies to eat if fur color matches the environment
  * @param percentToEatNoMatch - the percentage of bunnies to eat if fur color does NOT match the environment
- * @param totalBunnies - the total number of bunnies that were eligible for selection, both phenotypes
  * @returns {number} - the number of bunnies that were eaten
  */
-function eatSomeBunnies( furColorName, bunnies, environment, environmentMatch, percentToEatMatch, percentToEatNoMatch, totalBunnies ) {
+function eatSomeBunnies( bunnies, totalBunnies, environment, environmentMatch, percentToEatMatch, percentToEatNoMatch ) {
 
   assert && assert( Array.isArray( bunnies ), 'invalid bunnies' );
+  assert && assert( NaturalSelectionUtils.isNonNegativeInteger( totalBunnies ), `invalid totalBunnies: ${totalBunnies}` );
   assert && assert( Environment.includes( environment ), 'invalid environment' );
   assert && assert( Environment.includes( environmentMatch ), 'invalid environmentMatch' );
   assert && assert( NaturalSelectionUtils.isPercent( percentToEatMatch ), `invalid percentToEatMatch: ${percentToEatMatch}` );
   assert && assert( NaturalSelectionUtils.isPercent( percentToEatNoMatch ), `invalid percentToEatNoMatch: ${percentToEatNoMatch}` );
-  assert && assert( NaturalSelectionUtils.isNonNegativeInteger( totalBunnies ), `invalid totalBunnies: ${totalBunnies}` );
 
   const percentToEat = ( environment === environmentMatch ) ? percentToEatMatch : percentToEatNoMatch;
   let numberToEat = 0;
 
   if ( bunnies.length > 0 && percentToEat > 0 ) {
-    if ( ( environment === environmentMatch ) && ( bunnies.length < MIN_BUNNIES ) && ( totalBunnies >= MIN_BUNNIES ) ) {
+
+    // Assumes that all bunnies have the same fur phenotype
+    const bunny0 = bunnies[ 0 ];
+    const furColorName = bunny0.phenotype.hasBrownFur() ? 'brown' : 'white'; // for logging
+    const otherFurColorName = bunny0.phenotype.hasBrownFur() ? 'white' : 'brown'; // for logging
+
+    if ( ( environmentMatch === environment ) && ( bunnies.length < MIN_BUNNIES ) && ( totalBunnies >= MIN_BUNNIES ) ) {
 
       // Do nothing. The population whose fur color matches their environment is too small, and there are other bunnies to eat.
       phet.log && phet.log( `Wolves ignored ${furColorName} bunnies because their count is < ${MIN_BUNNIES} ` +
-        'there are other bunnies to eat' );
+        `and there are ${otherFurColorName} bunnies to eat` );
     }
     else {
 
