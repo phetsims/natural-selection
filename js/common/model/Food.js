@@ -30,11 +30,11 @@ const CLOCK_FOOD_MIDPOINT = NaturalSelectionConstants.CLOCK_FOOD_RANGE.getCenter
 
 // The minimum total population required for limited food to be a factor,
 // see https://github.com/phetsims/natural-selection/issues/153
-const LIMITED_FOOD_MIN_TOTAL_POPULATION = 7;
+const LIMITED_FOOD_MIN_TOTAL = 7;
 
 // The minimum number of bunnies with long teeth required for tough food to be a factor for bunnies with long teeth,
 // see https://github.com/phetsims/natural-selection/issues/98
-const TOUGH_FOOD_MIN_LONG_TEETH_POPULATION = 5;
+const TOUGH_FOOD_MIN_LONG_TEETH = 5;
 
 class Food {
 
@@ -177,8 +177,8 @@ class Food {
         const percentToStarve = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.toughFoodPercentToKill );
         percentToStarveShortTeeth = percentToStarve * NaturalSelectionQueryParameters.shortTeethMultiplier;
         percentToStarveLongTeeth = percentToStarve;
-        if ( numberLongTeeth < TOUGH_FOOD_MIN_LONG_TEETH_POPULATION ) {
-          phet.log && phet.log( `Ignoring tough food for long teeth because their count is < ${TOUGH_FOOD_MIN_LONG_TEETH_POPULATION}.` );
+        if ( numberLongTeeth < TOUGH_FOOD_MIN_LONG_TEETH ) {
+          phet.log && phet.log( `Ignoring tough food for long teeth because their count is < ${TOUGH_FOOD_MIN_LONG_TEETH}.` );
           percentToStarveLongTeeth = 0;
         }
       }
@@ -186,8 +186,8 @@ class Food {
       // Apply limited food. If the population is below some threshold, limited food has no affect, because a small
       // population can be sustained on limited food. See https://github.com/phetsims/natural-selection/issues/153
       if ( this.isLimitedProperty.value ) {
-        if ( bunnies.length < LIMITED_FOOD_MIN_TOTAL_POPULATION ) {
-          phet.log && phet.log( `Ignoring limited food because the total population is < ${LIMITED_FOOD_MIN_TOTAL_POPULATION}` );
+        if ( bunnies.length < LIMITED_FOOD_MIN_TOTAL ) {
+          phet.log && phet.log( `Ignoring limited food because the total population is < ${LIMITED_FOOD_MIN_TOTAL}` );
         }
         else {
           if ( this.isToughProperty.value ) {
