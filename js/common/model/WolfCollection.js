@@ -254,16 +254,16 @@ function eatSomeBunnies( bunnies, totalBunnies, environment, environmentMatch, p
 
   if ( bunnies.length > 0 && percentToEat > 0 ) {
 
-    // Assumes that all bunnies have the same fur phenotype
-    const bunny0 = bunnies[ 0 ];
-    const furColorName = bunny0.phenotype.hasBrownFur() ? 'brown' : 'white'; // for logging
-    const otherFurColorName = bunny0.phenotype.hasBrownFur() ? 'white' : 'brown'; // for logging
-
     if ( ( environmentMatch === environment ) && ( bunnies.length < MIN_BUNNIES ) && ( totalBunnies >= MIN_BUNNIES ) ) {
 
       // Do nothing. The population whose fur color matches their environment is too small, and there are other bunnies to eat.
-      phet.log && phet.log( `Wolves ignored ${furColorName} bunnies because their count is < ${MIN_BUNNIES} ` +
-        `and there are ${otherFurColorName} bunnies to eat` );
+
+      // Get fur color names for log messages. Assumes that all bunnies have the same fur phenotype.
+      const bunny0 = bunnies[ 0 ];
+      const thisFurColor = bunny0.phenotype.hasBrownFur() ? 'brown' : 'white';
+      const otherFurColor = bunny0.phenotype.hasBrownFur() ? 'white' : 'brown';
+      phet.log && phet.log( `Wolves ignored ${thisFurColor} bunnies because their count is < ${MIN_BUNNIES} ` +
+        `and there are ${otherFurColor} bunnies to eat` );
     }
     else {
 
