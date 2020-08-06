@@ -103,7 +103,7 @@ class BunnyCollection {
         phetioDocumentation: 'for internal PhET use only'
       } );
     phet.log && this.bunnyRestRangeProperty.link( bunnyRestRange => {
-      phet.log && phet.log( `bunnies will reset [${bunnyRestRange.min},${bunnyRestRange.max}] seconds ` +
+      phet.log && phet.log( `bunnies will rest [${bunnyRestRange.min},${bunnyRestRange.max}] seconds ` +
                             `for population=${this.liveBunnies.lengthProperty.value}` );
     } );
 
