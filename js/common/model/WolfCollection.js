@@ -28,15 +28,14 @@ import Wolf from './Wolf.js';
 import WolfGroup from './WolfGroup.js';
 
 // constants
-const CLOCK_WOLVES_MIN = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.min;
-const CLOCK_WOLVES_MAX = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.max;
 
-// Wolves are applied at the midpoint of its 'slice' of the generation clock.
+// Wolves are applied at the midpoint of their 'slice' of the generation clock.
 // See https://github.com/phetsims/natural-selection/issues/110
 const CLOCK_WOLVES_MIDPOINT = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.getCenter();
 
-// The minimum number of bunnies that match their environment that must exist in order to eat them, unless there are
-// no other bunnies to eat. See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
+// The minimum number of bunnies whose fur color matches their environment that must exist in order to eat them,
+// unless there are no other bunnies to eat.
+// See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
 // and https://github.com/phetsims/natural-selection/issues/152
 const MIN_BUNNIES = 6;
 
@@ -44,7 +43,6 @@ const MIN_BUNNIES = 6;
 const MIN_WOLVES = 5;
 
 // The number of bunnies per wolf. Wolves are created based on the size of the bunny population.
-// The formula is: numberOfWolves = Math.max( MIN_WOLVES, numberOfBunnies / BUNNIES_PER_WOLF )
 const BUNNIES_PER_WOLF = 10;
 
 class WolfCollection {
@@ -81,7 +79,7 @@ class WolfCollection {
     // @private Wolves hunt during the 'wolves' slice of the generation clock.
     this.isHuntingProperty = new DerivedProperty(
       [ this.enabledProperty, generationClock.percentTimeProperty ],
-      ( enabled, percentTime ) => ( enabled && percentTime >= CLOCK_WOLVES_MIN && percentTime <= CLOCK_WOLVES_MAX ), {
+      ( enabled, percentTime ) => ( enabled && NaturalSelectionConstants.CLOCK_WOLVES_RANGE.contains( percentTime ) ), {
         tandem: options.tandem.createTandem( 'isHuntingProperty' ),
         phetioType: DerivedPropertyIO( BooleanIO ),
         phetioDocumentation: 'for internal PhET use only'
