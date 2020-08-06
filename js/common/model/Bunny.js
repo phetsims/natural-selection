@@ -88,7 +88,7 @@ class Bunny extends Organism {
     this.mother = options.mother;
     this.generation = options.generation;
     this.isAlive = true;
-    this.causeOfDeath = null; // {CauseOfDeath|null}
+    this.causeOfDeath = null; // {CauseOfDeath|null} provided solely for debugging
 
     // @public
     this.age = 0;
