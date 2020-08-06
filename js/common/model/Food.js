@@ -116,7 +116,7 @@ class Food {
       } )
     ];
 
-    // Starve some bunnies at the midpoint of CLOCK_FOOD_RANGE.
+    // Starve some bunnies at the midpoint of their 'slice' of the generation clock.
     // See https://github.com/phetsims/natural-selection/issues/110
     // unlink is not necessary.
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
