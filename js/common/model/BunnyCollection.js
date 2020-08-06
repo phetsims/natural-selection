@@ -103,7 +103,7 @@ class BunnyCollection {
         phetioDocumentation: 'for internal PhET use only'
       } );
     phet.log && this.bunnyRestRangeProperty.link( bunnyRestRange => {
-      phet.log && phet.log( `using bunnyRestRange=[${bunnyRestRange.min},${bunnyRestRange.max}] ` +
+      phet.log && phet.log( `bunnies will reset [${bunnyRestRange.min},${bunnyRestRange.max}] seconds ` +
                             `for population=${this.liveBunnies.lengthProperty.value}` );
     } );
 
@@ -284,6 +284,7 @@ class BunnyCollection {
    */
   mateBunnies( generation ) {
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
+    phet.log && phet.log( 'mating bunnies' );
 
     // The number of bunnies born.
     let bornIndex = 0;
