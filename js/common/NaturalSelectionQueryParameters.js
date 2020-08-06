@@ -191,7 +191,7 @@ const SCHEMA = {
   limitedFoodPercentToKill: {
     type: 'custom',
     parse: parseRange,
-    defaultValue: new Range( 0.6, 0.7 ),
+    defaultValue: new Range( 0.6, 0.73 ),
     isValidValue: range => NaturalSelectionUtils.isPercentRange( range )
   },
 
@@ -204,7 +204,7 @@ const SCHEMA = {
   toughFoodPercentToKill: {
     type: 'custom',
     parse: parseRange,
-    defaultValue: new Range( 0.4, 0.7 ),
+    defaultValue: new Range( 0.45, 0.7 ),
     isValidValue: range => NaturalSelectionUtils.isPercentRange( range )
   },
 
