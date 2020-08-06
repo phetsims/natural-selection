@@ -124,7 +124,8 @@ const SCHEMA = {
   // For internal use only
   //------------------------------------------------------------------------------------------------------------------
 
-  // Maximum number of generations before the sim stops. See https://github.com/phetsims/natural-selection/issues/46
+  // Maximum number of generations before the sim stops and displays GenerationLimitDialog.
+  // See https://github.com/phetsims/natural-selection/issues/46
   maxGenerations: {
     type: 'number',
     defaultValue: 1000,
@@ -139,13 +140,16 @@ const SCHEMA = {
   },
 
   // Scale time by this much while the fast-forward button is pressed.
+  // Tuned in https://github.com/phetsims/natural-selection/issues/100
   fastForwardScale: {
     type: 'number',
     defaultValue: 4,
     isValidValue: value => ( value >= 1 )
   },
 
-  // The number of bunnies required to 'take over the world'.
+  // The number of bunnies required to 'take over the world'. Careful, because all bunnies are allowed to mate before
+  // this value is checked, so the population could get ridiculously large.
+  // Tuned in https://github.com/phetsims/natural-selection/issues/75
   maxPopulation: {
     type: 'number',
     defaultValue: 750,
@@ -155,17 +159,8 @@ const SCHEMA = {
   // Age at which bunnies die of old-age.
   maxAge: {
     type: 'number',
-    defaultValue: 5,
+    defaultValue: 5, // Java version value is 5
     isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
-  },
-
-  // Amount of time it takes for a bunny to hop once, in seconds.
-  // A value is randomly chosen from this range for each hop.
-  bunnyHopTime: {
-    type: 'custom',
-    parse: parseRange,
-    defaultValue: new Range( 0.25, 0.5 ),
-    isValidValue: range => isPositiveRange( range )
   },
 
   // This query parameter determines the percentages of bunnies that will be eaten by wolves.
@@ -178,7 +173,7 @@ const SCHEMA = {
     type: 'custom',
     parse: parseRange,
     defaultValue: new Range( 0.35, 0.4 ),
-    isValidValue: range => isPercentRange( range )
+    isValidValue: range => NaturalSelectionUtils.isPercentRange( range )
   },
 
   // Multiplier for when the bunny's fur color does not match the environment, applied to wolvesPercentToKill.
@@ -197,7 +192,7 @@ const SCHEMA = {
     type: 'custom',
     parse: parseRange,
     defaultValue: new Range( 0.6, 0.7 ),
-    isValidValue: range => isPercentRange( range )
+    isValidValue: range => NaturalSelectionUtils.isPercentRange( range )
   },
 
   // This query parameter determines the percentages of bunnies that will die of starvation when food is tough.
@@ -210,7 +205,7 @@ const SCHEMA = {
     type: 'custom',
     parse: parseRange,
     defaultValue: new Range( 0.4, 0.7 ),
-    isValidValue: range => isPercentRange( range )
+    isValidValue: range => NaturalSelectionUtils.isPercentRange( range )
   },
 
   // Multiplier for bunnies with short teeth when food is tough, applied to toughFoodPercentToKill.
@@ -227,38 +222,6 @@ const SCHEMA = {
     type: 'number',
     defaultValue: 1.02,
     isValidValue: value => ( value > 1 )
-  },
-
-  //TODO change this to <
-  // If the number of bunnies whose fur matches their environment is <= this value, wolves will eat none of them.
-  // Tuned in https://github.com/phetsims/natural-selection/issues/98
-  minBunniesForWolves: {
-    type: 'number',
-    defaultValue: 5,
-    isValidValue: value => NaturalSelectionUtils.isNonNegativeInteger( value )
-  },
-
-  // The minimum number of wolves
-  minWolves: {
-    type: 'number',
-    defaultValue: 5,
-    isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
-  },
-
-  // The number of bunnies per wolf. Wolves are created based on the size of the bunny population.
-  // The formula is: numberOfWolves = Math.max( ?minWolves, numberOfBunnies / ?bunniesPerWolf )
-  bunniesPerWolf: {
-    type: 'number',
-    defaultValue: 10,
-    isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
-  },
-
-  // Speed of a wolf, in pixels/second. A value is randomly chosen from this range for each wolf.
-  wolfSpeed: {
-    type: 'custom',
-    parse: parseRange,
-    defaultValue: new Range( 125, 200 ),
-    isValidValue: range => isPositiveRange( range )
   },
 
   // Adds a red dot at the origin of some objects (bunnies, wolves, food)
@@ -326,24 +289,6 @@ function parseRange( value ) {
   assert && assert( _.every( tokens, token => isFinite( token ) ), `range must be 2 numbers: ${value}` );
   const numbers = _.map( tokens, token => parseFloat( token ) );
   return new Range( numbers[ 0 ], numbers[ 1 ] );
-}
-
-/**
- * Is the query parameter value a min/max range for a percentage?
- * @param {Range} range
- * @returns {boolean}
- */
-function isPercentRange( range ) {
-  return range.min >= 0 && range.max <= 1;
-}
-
-/**
- * Is the query parameter value a range whose min and max are positive?
- * @param {Range} range
- * @returns {boolean}
- */
-function isPositiveRange( range ) {
-  return range.min > 0;
 }
 
 // validate query parameters

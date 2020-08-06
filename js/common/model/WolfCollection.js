@@ -19,6 +19,7 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCollection from './BunnyCollection.js';
 import Environment from './Environment.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -34,12 +35,17 @@ const CLOCK_WOLVES_MAX = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.max;
 // See https://github.com/phetsims/natural-selection/issues/110
 const CLOCK_WOLVES_MIDPOINT = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.getCenter();
 
-// Wolves will kill at least this percentage of the bunnies, regardless of their fur color.
-const WOLVES_PERCENT_TO_EAT_RANGE = NaturalSelectionQueryParameters.wolvesPercentToKill;
+// The minimum number of bunnies that match their environment that must exist in order to eat them, unless there are
+// no other bunnies to eat. See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
+// and https://github.com/phetsims/natural-selection/issues/152
+const MIN_BUNNIES = 6;
 
-// Multiplier for when the bunny's fur color does not match the environment, applied to the value that is
-// randomly chosen from WOLVES_PERCENT_TO_EAT_RANGE.
-const WOLVES_ENVIRONMENT_MULTIPLIER = NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier;
+// The minimum number of wolves
+const MIN_WOLVES = 5;
+
+// The number of bunnies per wolf. Wolves are created based on the size of the bunny population.
+// The formula is: numberOfWolves = Math.max( MIN_WOLVES, numberOfBunnies / BUNNIES_PER_WOLF )
+const BUNNIES_PER_WOLF = 10;
 
 class WolfCollection {
 
@@ -64,6 +70,7 @@ class WolfCollection {
     }, options );
 
     // @private
+    this.environmentProperty = environmentProperty;
     this.bunnyCollection = bunnyCollection;
 
     // @public
@@ -96,9 +103,7 @@ class WolfCollection {
     } );
 
     // @public emits when bunnies have been eaten. dispose is not necessary.
-    this.bunniesEatenEmitter = new Emitter( {
-      parameters: [ { valueType: 'number' } ] // the number of bunnies that were eaten
-    } );
+    this.bunniesEatenEmitter = new Emitter();
 
     // The wolf population exists only while it's hunting.
     this.isHuntingProperty.link( isHunting => {
@@ -111,8 +116,8 @@ class WolfCollection {
         if ( isHunting ) {
 
           // Number of wolves is a function of the number of live bunnies
-          const numberOfWolves = Math.max( NaturalSelectionQueryParameters.minWolves,
-            Utils.roundSymmetric( this.bunnyCollection.liveBunnies.length / NaturalSelectionQueryParameters.bunniesPerWolf ) );
+          const numberOfWolves = Math.max( MIN_WOLVES,
+            Utils.roundSymmetric( this.bunnyCollection.liveBunnies.length / BUNNIES_PER_WOLF ) );
           for ( let i = 0; i < numberOfWolves; i++ ) {
             this.wolfGroup.createNextElement();
           }
@@ -136,7 +141,7 @@ class WolfCollection {
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value &&
            this.enabledProperty.value &&
            previousPercentTime < CLOCK_WOLVES_MIDPOINT && currentPercentTime >= CLOCK_WOLVES_MIDPOINT ) {
-        this.eatBunnies( environmentProperty.value );
+        this.eatBunnies();
       }
     } );
   }
@@ -186,93 +191,87 @@ class WolfCollection {
 
   /**
    * Eats some portion of the bunny population.
-   * @param {Environment} environment
    * @private
    */
-  eatBunnies( environment ) {
-    assert && assert( Environment.includes( environment ), 'invalid environment' );
+  eatBunnies() {
     assert && assert( this.enabledProperty.value, 'should not be called if not enabled' );
-    phet.log && phet.log( 'Applying wolves' );
 
     // Get the bunnies that are candidates for natural selection, in random order.
     const bunnies = this.bunnyCollection.getSelectionCandidates();
 
     if ( bunnies.length > 0 ) {
 
-      let totalEaten = 0;
+      // {Bunny[]} array for each phenotype
+      const whiteBunnies = _.filter( bunnies, bunny => bunny.phenotype.hasWhiteFur() );
+      const whiteCount = whiteBunnies.length;
+      const brownBunnies = _.filter( bunnies, bunny => bunny.phenotype.hasBrownFur() );
+      const brownCount = brownBunnies.length;
+      phet.log && phet.log( `Applying wolves: ${whiteCount} white, ${brownCount} brown` );
 
-      // Eat off some of each type of bunny, but a higher percentage of bunnies that don't blend into the environment.
-      const percentToEatMatch = phet.joist.random.nextDoubleInRange( WOLVES_PERCENT_TO_EAT_RANGE );
-      assert && assert( percentToEatMatch > 0 && percentToEatMatch < 1, `invalid percentToEatMatch: ${percentToEatMatch}` );
-      const percentToEatNoMatch = WOLVES_ENVIRONMENT_MULTIPLIER * percentToEatMatch;
-      assert && assert( percentToEatNoMatch > 0 && percentToEatNoMatch < 1, `invalid percentToEatNoMatch: ${percentToEatNoMatch}` );
+      // Eat some of each phenotype, but a higher percentage of bunnies that don't blend into the environment.
+      const percentToEatMatch = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.wolvesPercentToKill );
+      const percentToEatNoMatch = percentToEatMatch * NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier;
 
-      // Eat bunnies with white fur.
-      const bunniesWhiteFur = _.filter( bunnies, bunny => bunny.phenotype.hasWhiteFur() );
-      const numberWhiteFur = bunniesWhiteFur.length;
-      if ( numberWhiteFur > 0 ) {
-        if ( environment === Environment.ARCTIC &&
-             numberWhiteFur <= NaturalSelectionQueryParameters.minBunniesForWolves &&
-             bunnies.length > NaturalSelectionQueryParameters.minBunniesForWolves ) {
+      // Eat white bunnies.
+      const numberEatenWhite = eatSomeBunnies( 'white', whiteBunnies,
+        this.environmentProperty.value, Environment.ARCTIC, percentToEatMatch, percentToEatNoMatch, bunnies.length );
+      phet.log && phet.log( `${numberEatenWhite} of ${whiteCount} white bunnies were eaten by wolves` );
 
-          // Do nothing because the population with the preferred trait is too small, and there are other bunnies to eat.
-          // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
-          // and https://github.com/phetsims/natural-selection/issues/152
-          phet.log && phet.log(
-            `Wolves ignored white bunnies because their population is <= ${NaturalSelectionQueryParameters.minBunniesForWolves} ` +
-            `and total population is > ${NaturalSelectionQueryParameters.minBunniesForWolves}`
-          );
-        }
-        else {
+      // Eat brown bunnies.
+      const numberEatenBrown = eatSomeBunnies( 'brown', brownBunnies,
+        this.environmentProperty.value, Environment.EQUATOR, percentToEatMatch, percentToEatNoMatch, bunnies.length );
+      phet.log && phet.log( `${numberEatenBrown} of ${brownCount} brown bunnies were eaten by wolves` );
 
-          // Eat at least 1 bunny, if we've gotten this far.
-          const percentToEatWhiteFur = ( environment === Environment.ARCTIC ) ? percentToEatMatch : percentToEatNoMatch;
-          const numberToEatWhiteFur = Math.max( 1, Utils.roundSymmetric( percentToEatWhiteFur * numberWhiteFur ) );
-          assert && assert( numberToEatWhiteFur <= numberWhiteFur, 'invalid numberToEatWhiteFur' );
-          for ( let i = 0; i < numberToEatWhiteFur; i++ ) {
-            bunniesWhiteFur[ i ].die();
-          }
-          totalEaten += numberToEatWhiteFur;
-          phet.log && phet.log( `${numberToEatWhiteFur} of ${numberWhiteFur} bunnies with white fur were eaten by wolves` );
-        }
-      }
-
-      // Eat bunnies with brown fur.
-      const bunniesBrownFur = _.filter( bunnies, bunny => bunny.phenotype.hasBrownFur() );
-      const numberBrownFur = bunniesBrownFur.length;
-      if ( numberBrownFur > 0 ) {
-        if ( environment === Environment.EQUATOR &&
-             numberBrownFur <= NaturalSelectionQueryParameters.minBunniesForWolves &&
-             bunnies.length > NaturalSelectionQueryParameters.minBunniesForWolves ) {
-
-          // Do nothing because the population with the preferred trait is too small, and there are other bunnies to eat.
-          // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
-          // and https://github.com/phetsims/natural-selection/issues/152
-          phet.log && phet.log(
-            `Wolves ignored brown bunnies because their population is <= ${NaturalSelectionQueryParameters.minBunniesForWolves} ` +
-            `and total population is > ${NaturalSelectionQueryParameters.minBunniesForWolves}`
-          );
-        }
-        else {
-
-          // Eat at least 1 bunny, if we've gotten this far.
-          const percentToEatBrownFur = ( environment === Environment.EQUATOR ) ? percentToEatMatch : percentToEatNoMatch;
-          const numberToEatBrownFur = Math.max( 1, Utils.roundSymmetric( percentToEatBrownFur * numberBrownFur ) );
-          assert && assert( numberToEatBrownFur <= numberBrownFur, 'invalid numberToEatBrownFur' );
-          for ( let i = 0; i < numberToEatBrownFur; i++ ) {
-            bunniesBrownFur[ i ].die();
-          }
-          totalEaten += numberToEatBrownFur;
-          phet.log && phet.log( `${numberToEatBrownFur} of ${numberBrownFur} bunnies with brown fur were eaten by wolves` );
-        }
-      }
-
-      // Notify that bunnies have been eaten.
-      if ( totalEaten > 0 ) {
-        this.bunniesEatenEmitter.emit( totalEaten );
+      // Notify if bunnies have been eaten.
+      if ( numberEatenWhite + numberEatenBrown > 0 ) {
+        this.bunniesEatenEmitter.emit();
       }
     }
   }
+}
+
+/**
+ * Eats a percentage of some set of bunnies, depending on whether their fur color matches the environment.
+ * @param furColorName - the name of the fur color, used in a log message
+ * @param {Bunny[]} bunnies - a set of bunnies, all with the same phenotype
+ * @param {Environment} environment - the current environment that is selected
+ * @param {Environment} environmentMatch - the environment that matches the set of bunnies' fur color
+ * @param {number} percentToEatMatch - the percentage of bunnies to eat if fur color matches the environment
+ * @param percentToEatNoMatch - the percentage of bunnies to eat if fur color does NOT match the environment
+ * @param totalBunnies - the total number of bunnies that were eligible for selection, both phenotypes
+ * @returns {number} - the number of bunnies that were eaten
+ */
+function eatSomeBunnies( furColorName, bunnies, environment, environmentMatch, percentToEatMatch, percentToEatNoMatch, totalBunnies ) {
+
+  assert && assert( Array.isArray( bunnies ), 'invalid bunnies' );
+  assert && assert( Environment.includes( environment ), 'invalid environment' );
+  assert && assert( Environment.includes( environmentMatch ), 'invalid environmentMatch' );
+  assert && assert( NaturalSelectionUtils.isPercent( percentToEatMatch ), `invalid percentToEatMatch: ${percentToEatMatch}` );
+  assert && assert( NaturalSelectionUtils.isPercent( percentToEatNoMatch ), `invalid percentToEatNoMatch: ${percentToEatNoMatch}` );
+  assert && assert( NaturalSelectionUtils.isNonNegativeInteger( totalBunnies ), `invalid totalBunnies: ${totalBunnies}` );
+
+  const percentToEat = ( environment === environmentMatch ) ? percentToEatMatch : percentToEatNoMatch;
+  let numberToEat = 0;
+
+  if ( bunnies.length > 0 && percentToEat > 0 ) {
+    if ( ( environment === environmentMatch ) && ( bunnies.length < MIN_BUNNIES ) && ( totalBunnies >= MIN_BUNNIES ) ) {
+
+      // Do nothing. The population whose fur color matches their environment is too small, and there are other bunnies to eat.
+      phet.log && phet.log( `Wolves ignored ${furColorName} bunnies because their count is < ${MIN_BUNNIES} ` +
+        'there are other bunnies to eat' );
+    }
+    else {
+
+      // Eat at least 1 bunny, if we've gotten this far.
+      numberToEat = Math.max( 1, Utils.roundSymmetric( percentToEat * bunnies.length ) );
+      assert && assert( numberToEat <= bunnies.length, 'invalid numberToEat' );
+      for ( let i = 0; i < numberToEat; i++ ) {
+        bunnies[ i ].die();
+      }
+    }
+  }
+
+  return numberToEat;
 }
 
 naturalSelection.register( 'WolfCollection', WolfCollection );

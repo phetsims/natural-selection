@@ -7,21 +7,26 @@
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';
+import Range from '../../../../dot/js/Range.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Organism from './Organism.js';
 import WolfIO from './WolfIO.js';
 import XDirection from './XDirection.js';
 
-// const
-const X_MARGIN = 35; // determined empirically, to keep wolves inside bounds of the environment
+// constants
+
+// determined empirically, to keep wolves inside bounds of the environment
+const X_MARGIN = 35;
+
+// Speed of a wolf, in pixels/second. A value is randomly chosen from this range for each wolf.
+const WOLF_SPEED_RANGE = new Range( 125, 200 );
 
 class Wolf extends Organism {
 
@@ -48,7 +53,7 @@ class Wolf extends Organism {
     super( modelViewTransform, options );
 
     // @private
-    this.speed = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.wolfSpeed );
+    this.speed = phet.joist.random.nextDoubleInRange( WOLF_SPEED_RANGE );
 
     // @public fires when the Wolf has been disposed. dispose is required.
     this.disposedEmitter = new Emitter();

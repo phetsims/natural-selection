@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Range from '../../../dot/js/Range.js';
 import Utils from '../../../dot/js/Utils.js';
 import naturalSelection from '../naturalSelection.js';
 
@@ -107,6 +108,15 @@ const NaturalSelectionUtils = {
    */
   isPercent( value ) {
     return NaturalSelectionUtils.isNonNegative( value ) && ( value >= 0 ) && ( value <= 1 );
+  },
+
+  /**
+   * Determines whether a value is a Range for a percentage, between 0 and 1.
+   * @param {*} value
+   * @returns {boolean}
+   */
+  isPercentRange( value ) {
+    return ( value instanceof Range ) && ( value.min >= 0 ) && ( value.max <= 1 );
   }
 };
 
