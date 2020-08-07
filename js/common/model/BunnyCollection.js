@@ -279,19 +279,20 @@ class BunnyCollection {
    */
   mateBunnies( generation ) {
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
-    phet.log && phet.log( 'mating bunnies' );
 
     // The number of bunnies born.
     let bornIndex = 0;
 
     // Shuffle the collection of live bunnies so that mating is random. shuffle returns a new array.
-    let bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
+    const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
+    phet.log && phet.log( `mating ${bunnies.length} bunnies` );
 
     // Prioritize mating of bunnies that have a recessive mutation, so that the mutation appears in the phenotype
     // as soon as possible. This is referred to as 'mating eagerly'.
     // See https://github.com/phetsims/natural-selection/issues/98.
+    let numberOfRecessiveMutantOffspring = 0;
     if ( this.recessiveMutants.length > 0 ) {
-      bunnies = this.mateRecessiveMutants( generation, bunnies );
+      numberOfRecessiveMutantOffspring = this.mateRecessiveMutants( generation, bunnies );
     }
 
     // The number of bunnies that we expect to be born.
@@ -375,7 +376,6 @@ class BunnyCollection {
             mutateTeeth: teethIndices.includes( bornIndex )
           }
         } );
-
         bornIndex++;
 
         // Keep track of recessive mutants, to be 'mated eagerly' when another bunny with the mutation exists.
@@ -388,7 +388,7 @@ class BunnyCollection {
 
     assert && this.assertValidCounts();
     assert && assert( bornIndex === numberToBeBorn, 'unexpected number of bunnies were born' );
-    phet.log && phet.log( `${bornIndex} bunnies were born` );
+    phet.log && phet.log( `${numberToBeBorn + numberOfRecessiveMutantOffspring} bunnies were born` );
 
     // Notify if bunnies have taken over the world.
     if ( this.liveBunnies.lengthProperty.value >= NaturalSelectionConstants.MAX_POPULATION ) {
@@ -399,10 +399,11 @@ class BunnyCollection {
   /**
    * Mates each recessive mutant with a bunny that has the same mutation. This is referred to as 'mate eagerly', as
    * the purpose is to make the mutation appear in the phenotype sooner. This must be done separately from other mating
-   * because we don't want to apply additional mutations.
+   * because we don't want to apply additional mutations.  As a side-effect, bunnies that are successfully mated are
+   * removed from the bunnies array.
    * @param {number} generation
    * @param {Bunny[]} bunnies - the bunnies that are candidates for mating, modified as a side-effect
-   * @returns {Bunny[]} the bunnies array, with bunnies that are successfully mated removed
+   * @returns {number} the number of bunnies born
    * @private
    */
   mateRecessiveMutants( generation, bunnies ) {
@@ -410,6 +411,9 @@ class BunnyCollection {
     assert && assert( Array.isArray( bunnies ), 'invalid bunnies' );
 
     const recessiveMutantsCopy = this.recessiveMutants.getArrayCopy();
+
+    let numberOfRecessiveMutantsMated = 0;
+    let numberBorn = 0;
 
     // For each recessive mutant...
     while ( recessiveMutantsCopy.length > 0 ) {
@@ -421,6 +425,9 @@ class BunnyCollection {
       // If we find a mate...
       const mutantMother = getMateForRecessiveMutant( mutantFather, bunnies );
       if ( mutantMother ) {
+
+        phet.log && phet.log( `recessive mutant [${mutantFather}] is mating with [${mutantMother}]` );
+        numberOfRecessiveMutantsMated++;
 
         // Get the Punnett square (genetic cross) for each gene. The order of each cross is random.
         const furPunnetSquare = new PunnettSquare( mutantFather.genotype.furGenePair, mutantMother.genotype.furGenePair );
@@ -447,6 +454,7 @@ class BunnyCollection {
             generation: generation,
             genotypeOptions: genotypeOptions
           } );
+          numberBorn++;
         }
 
         // Create 1 additional offspring that is homozygous recessive, in order to make the recessive allele
@@ -470,6 +478,7 @@ class BunnyCollection {
           generation: generation,
           genotypeOptions: genotypeOptions
         } );
+        numberBorn++;
 
         // Remove the mutants from further consideration of mating.
         bunnies.splice( bunnies.indexOf( mutantFather ), 1 );
@@ -480,6 +489,7 @@ class BunnyCollection {
         this.recessiveMutants.remove( mutantFather );
         if ( this.recessiveMutants.includes( mutantMother ) ) {
           this.recessiveMutants.remove( mutantMother );
+          numberOfRecessiveMutantsMated++;
         }
         if ( recessiveMutantsCopy.includes( mutantMother ) ) {
           recessiveMutantsCopy.splice( recessiveMutantsCopy.indexOf( mutantMother ), 1 );
@@ -487,7 +497,11 @@ class BunnyCollection {
       }
     }
 
-    return bunnies;
+    if ( numberOfRecessiveMutantsMated > 0 ) {
+      phet.log && phet.log( `${numberOfRecessiveMutantsMated} recessive mutants mated eagerly to birth ${numberBorn} bunnies` );
+    }
+
+    return numberBorn;
   }
 
   /**
