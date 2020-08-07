@@ -126,7 +126,7 @@ class Food {
         // See https://github.com/phetsims/natural-selection/issues/110
         if ( this.enabledProperty.value &&
              previousPercentTime < CLOCK_FOOD_MIDPOINT && currentPercentTime >= CLOCK_FOOD_MIDPOINT ) {
-          this.starveBunnies( bunnyCollection.getSelectionCandidates() );
+          this.starveBunnies();
         }
       }
     } );
