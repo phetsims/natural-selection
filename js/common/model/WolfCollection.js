@@ -130,16 +130,18 @@ class WolfCollection {
       }
     } );
 
-    // Eat bunnies at the midpoint of their 'slice' of the generation clock.
-    // See https://github.com/phetsims/natural-selection/issues/110
     // unlink is not necessary.
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
 
       // Execute this code only when the sim is running normally, not when setting PhET-iO state.
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value &&
-           this.enabledProperty.value &&
-           previousPercentTime < CLOCK_WOLVES_MIDPOINT && currentPercentTime >= CLOCK_WOLVES_MIDPOINT ) {
-        this.eatBunnies();
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+
+        // Eat bunnies at the midpoint of their 'slice' of the generation clock.
+        // See https://github.com/phetsims/natural-selection/issues/110
+        if ( this.enabledProperty.value &&
+             previousPercentTime < CLOCK_WOLVES_MIDPOINT && currentPercentTime >= CLOCK_WOLVES_MIDPOINT ) {
+          this.eatBunnies();
+        }
       }
     } );
   }

@@ -166,34 +166,38 @@ class NaturalSelectionModel {
     //TODO https://github.com/phetsims/natural-selection/issues/140 delete this Property
     this.timeToStartOverProperty = new NumberProperty( 0 );
 
-    // When the generation changes... unlink is not necessary.
+    // unlink is not necessary.
     this.generationClock.currentGenerationProperty.lazyLink( currentGeneration => {
 
       // When restoring PhET-iO state, skip this code, because downstream elements are already stateful.
-      if ( currentGeneration !== 0 && !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
 
-        // Before bunnies are aged or mated, Record 'End of Generation' counts for the Proportions graph.
-        this.proportionsModel.recordEndCounts( currentGeneration - 1, this.bunnyCollection.getLiveBunnyCounts() );
+        // Generation 0 is initialized elsewhere, this code is for subsequent generations.
+        if ( currentGeneration !== 0 ) {
 
-        phet.log && phet.log( `live bunnies = ${this.bunnyCollection.liveBunnies.length}` );
-        phet.log && phet.log( `dead bunnies = ${this.bunnyCollection.deadBunnies.length}` );
-        phet.log && phet.log( `recessive mutants = ${this.bunnyCollection.recessiveMutants.length}` );
-        phet.log && phet.log( `====== Generation ${currentGeneration} ======` );
+          // Before bunnies are aged or mated, Record 'End of Generation' counts for the Proportions graph.
+          this.proportionsModel.recordEndCounts( currentGeneration - 1, this.bunnyCollection.getLiveBunnyCounts() );
 
-        // Age bunnies, some may die of old age.
-        this.bunnyCollection.ageBunnies();
+          phet.log && phet.log( `live bunnies = ${this.bunnyCollection.liveBunnies.length}` );
+          phet.log && phet.log( `dead bunnies = ${this.bunnyCollection.deadBunnies.length}` );
+          phet.log && phet.log( `recessive mutants = ${this.bunnyCollection.recessiveMutants.length}` );
+          phet.log && phet.log( `====== Generation ${currentGeneration} ======` );
 
-        this.bunnyCollection.pruneDeadBunnies( currentGeneration );
+          // Age bunnies, some may die of old age.
+          this.bunnyCollection.ageBunnies();
 
-        // Mate bunnies
-        //TODO https://github.com/phetsims/natural-selection/issues/60 delete NaturalSelectionUtils.time
-        // this.bunnyCollection.mateBunnies( currentGeneration );
-        this.timeToMateProperty.value = NaturalSelectionUtils.time( () => this.bunnyCollection.mateBunnies( currentGeneration ) );
+          this.bunnyCollection.pruneDeadBunnies( currentGeneration );
 
-        // After bunnies are aged and mated, record counts for graphs.
-        const counts = this.bunnyCollection.getLiveBunnyCounts();
-        this.proportionsModel.recordStartCounts( currentGeneration, counts );
-        this.populationModel.recordCounts( currentGeneration, counts );
+          // Mate bunnies
+          //TODO https://github.com/phetsims/natural-selection/issues/60 delete NaturalSelectionUtils.time
+          // this.bunnyCollection.mateBunnies( currentGeneration );
+          this.timeToMateProperty.value = NaturalSelectionUtils.time( () => this.bunnyCollection.mateBunnies( currentGeneration ) );
+
+          // After bunnies are aged and mated, record counts for graphs.
+          const counts = this.bunnyCollection.getLiveBunnyCounts();
+          this.proportionsModel.recordStartCounts( currentGeneration, counts );
+          this.populationModel.recordCounts( currentGeneration, counts );
+        }
       }
     } );
 
