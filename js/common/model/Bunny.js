@@ -311,7 +311,8 @@ class Bunny extends Organism {
            `isAlive=${this.isAlive}, ` +
            `genotype='${this.genotype.toAbbreviation()}', ` +
            `father=${this.father ? this.father.tandem.name : null}, ` +
-           `mother=${this.mother ? this.mother.tandem.name : null}`;
+           `mother=${this.mother ? this.mother.tandem.name : null}, ` +
+           `isOriginalMutant=${this.isOriginalMutant()}`;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
