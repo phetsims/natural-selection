@@ -175,8 +175,9 @@ class NaturalSelectionModel {
         // Before bunnies are aged or mated, Record 'End of Generation' counts for the Proportions graph.
         this.proportionsModel.recordEndCounts( currentGeneration - 1, this.bunnyCollection.getLiveBunnyCounts() );
 
-        phet.log && phet.log( `total live bunnies = ${this.bunnyCollection.liveBunnies.length}` );
-        phet.log && phet.log( `total dead bunnies = ${this.bunnyCollection.deadBunnies.length}` );
+        phet.log && phet.log( `live bunnies = ${this.bunnyCollection.liveBunnies.length}` );
+        phet.log && phet.log( `dead bunnies = ${this.bunnyCollection.deadBunnies.length}` );
+        phet.log && phet.log( `recessive mutants = ${this.bunnyCollection.recessiveMutants.length}` );
         phet.log && phet.log( `====== Generation ${currentGeneration} ======` );
 
         // Age bunnies, some may die of old age.
