@@ -118,47 +118,47 @@ class PopulationPlotNode extends Node {
       // If we have points and any of them fall within the x range...
       if ( numberOfPoints > 0 && this.points.get( 0 ).x <= this.xRangeProperty.value.max ) {
 
-        let firstIndex = 0;
+        // Index of the point to start with. Defaults to the first point in the array.
+        let startIndex = 0;
 
-        // If there is at least one point that is < xMin ...
+        // If there is at least one point that is < xMin, find the index of the first point that is <= xMin.
+        // Do a brute-force search from the end of the array, to optimize for the case where the graph is scrolling
+        // (animated). If the graph is not scrolling, then the sim is paused, and the graph is being used to examine
+        // data for a previous generation. In that case, the time for this search is not critical.
         if ( this.points.get( 0 ).x < this.xRangeProperty.value.min ) {
-
-          // Find the index of the first point that is <= xMin. Do a brute-force search from the end of the array,
-          // to optimize for the case where the graph is scrolling (animated). If the graph is not scrolling, then
-          // the sim is paused, and the graph is being used to examine data for a previous generation. In that case,
-          // the time to find this index is not critical.
           for ( let i = numberOfPoints - 1; i >= 0; i-- ) {
             const point = this.points.get( i );
             if ( point.x <= this.xRangeProperty.value.min ) {
-              firstIndex = i;
+              startIndex = i;
               break;
             }
           }
         }
 
-        const firstPoint = this.points.get( firstIndex );
+        // Start with this point, and plot from left to right.
+        const startPoint = this.points.get( startIndex );
 
         // For mutant plots (drawn with a lineDash), adjust lineDashOffset so that the dash appears to scroll.
         // See https://github.com/phetsims/natural-selection/issues/111
         if ( this.isDashed && this.points.length > 0 ) {
-          const xRemainderModel = firstPoint.x % 1;
+          const xRemainderModel = startPoint.x % 1;
           const xRemainderView = this.modelToViewX( xRemainderModel );
           this.stepPath.lineDashOffset = -( xRemainderView % MUTANT_LINE_DASH_SUM );
         }
 
-        // Plot the first point
-        const firstXView = this.modelToViewX( Math.max( firstPoint.x, this.xRangeProperty.value.min ) );
-        const firstYView = this.modelToViewY( firstPoint.y );
-        if ( firstPoint.x >= this.xRangeProperty.value.min ) {
-          pointsShape.circle( firstXView, firstYView, NaturalSelectionConstants.POPULATION_POINT_RADIUS );
+        // Plot the start point, if it's within the x range of the grid.
+        const startXView = this.modelToViewX( Math.max( startPoint.x, this.xRangeProperty.value.min ) );
+        const startYView = this.modelToViewY( startPoint.y );
+        if ( startPoint.x >= this.xRangeProperty.value.min ) {
+          pointsShape.circle( startXView, startYView, NaturalSelectionConstants.POPULATION_POINT_RADIUS );
         }
-        stepShape.moveTo( firstXView, firstYView );
+        stepShape.moveTo( startXView, startYView );
 
         // Keep track of the previous point that was plotted.
-        let previousPoint = firstPoint;
+        let previousPoint = startPoint;
 
         // Starting with the next point, plot from left to right.
-        for ( let i = firstIndex + 1; i < numberOfPoints; i++ ) {
+        for ( let i = startIndex + 1; i < numberOfPoints; i++ ) {
 
           const point = this.points.get( i );
 
@@ -173,17 +173,15 @@ class PopulationPlotNode extends Node {
             pointsShape.circle( xView, yView, NaturalSelectionConstants.POPULATION_POINT_RADIUS );
 
             // Plot the line segments
-            stepShape.lineTo( xView, yViewPrevious );
-            stepShape.lineTo( xView, yView );
+            stepShape.lineTo( xView, yViewPrevious ); // horizontal line from the previous point
+            stepShape.lineTo( xView, yView ); // vertical line to the current point
           }
           else {
 
             // Extend the plot from previousPoint to the right edge of the grid.
-            const xViewPrevious = this.modelToViewX( previousPoint.x );
             const xViewMax = this.modelToViewX( this.xRangeProperty.value.max );
-            const yView = this.modelToViewY( point.y );
-            stepShape.lineTo( xViewPrevious, yView );
-            stepShape.lineTo( xViewMax, yView );
+            const yViewPrevious = this.modelToViewY( previousPoint.y );
+            stepShape.lineTo( xViewMax, yViewPrevious ); // horizontal line from the previous point
           }
 
           previousPoint = point;
@@ -195,7 +193,7 @@ class PopulationPlotNode extends Node {
         }
 
         // Plot from previousPoint to current generation value
-        if ( previousPoint && previousPoint.x < this.generationsProperty.value ) {
+        if ( ( previousPoint.x < this.xRangeProperty.value.max ) && ( previousPoint.x < this.generationsProperty.value ) ) {
           const xView = this.modelToViewX( this.generationsProperty.value );
           const yView = this.modelToViewY( previousPoint.y );
           stepShape.lineTo( xView, yView );
