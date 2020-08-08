@@ -141,12 +141,13 @@ class PopulationGraphNode extends Node {
       yAxisLabelNode.centerY = gridNode.y + ( gridHeight / 2 );
     } );
 
-    // If the sim has started playing and there's no data visible, display 'Zoom out to see data.'
+    // If the generation clock has started and there's no data visible, display 'Zoom out to see data.'
     assert && assert( plotsNode.clipArea, 'plotsNode.clipArea is required' );
     const clipAreaBounds = plotsNode.clipArea.getBounds();
     plotsNode.localBoundsProperty.link( localBounds => {
+      const clockHasStarted = ( populationModel.generationsProperty.value !== 0 );
       const dataIsVisible = localBounds.intersectsBounds( clipAreaBounds );
-      zoomOutToSeeDataText.visible = !dataIsVisible && ( populationModel.generationsProperty.value !== 0 );
+      zoomOutToSeeDataText.visible = clockHasStarted && !dataIsVisible;
     } );
 
     super( options );
