@@ -141,11 +141,12 @@ class PopulationGraphNode extends Node {
       yAxisLabelNode.centerY = gridNode.y + ( gridHeight / 2 );
     } );
 
-    // If all of the data is above the graph's yMax (and therefore clipped), display 'Zoom out to see data.'
-    // Note that plotsNode's origin is at the upper-left corner of the grid, so bounds.maxY < 0 means that nothing
-    // is being drawn in the graph.
-    plotsNode.boundsProperty.link( bounds => {
-      zoomOutToSeeDataText.visible = ( bounds.maxY < 0 ) && ( populationModel.generationsProperty.value !== 0 );
+    // If there's data that's not visible, then display 'Zoom out to see data.'
+    assert && assert( plotsNode.clipArea, 'plotsNode.clipArea is required' );
+    const clipAreaBounds = plotsNode.clipArea.getBounds();
+    plotsNode.localBoundsProperty.link( localBounds => {
+      const dataIsVisible = localBounds.intersectsBounds( clipAreaBounds );
+      zoomOutToSeeDataText.visible = !dataIsVisible && ( populationModel.generationsProperty.value !== 0 );
     } );
 
     super( options );
