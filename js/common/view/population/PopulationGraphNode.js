@@ -141,7 +141,7 @@ class PopulationGraphNode extends Node {
       yAxisLabelNode.centerY = gridNode.y + ( gridHeight / 2 );
     } );
 
-    // If there's data that's not visible, then display 'Zoom out to see data.'
+    // If the sim has started playing and there's no data visible, display 'Zoom out to see data.'
     assert && assert( plotsNode.clipArea, 'plotsNode.clipArea is required' );
     const clipAreaBounds = plotsNode.clipArea.getBounds();
     plotsNode.localBoundsProperty.link( localBounds => {
