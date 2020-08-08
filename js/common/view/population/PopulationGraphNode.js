@@ -142,6 +142,8 @@ class PopulationGraphNode extends Node {
     } );
 
     // If all of the data is above the graph's yMax (and therefore clipped), display 'Zoom out to see data.'
+    // Note that plotsNode's origin is at the upper-left corner of the grid, so bounds.maxY < 0 means that nothing
+    // is being drawn in the graph.
     plotsNode.boundsProperty.link( bounds => {
       zoomOutToSeeDataText.visible = ( bounds.maxY < 0 ) && ( populationModel.generationsProperty.value !== 0 );
     } );
