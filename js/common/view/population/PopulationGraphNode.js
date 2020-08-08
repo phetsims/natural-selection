@@ -113,12 +113,19 @@ class PopulationGraphNode extends Node {
       tandem: options.tandem.createTandem( 'dataProbeNode' )
     } );
 
+    const zoomOutToSeeDataText = new Text( naturalSelectionStrings.zoomOutToSeeData, {
+      font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
+      centerX: gridNode.x + gridWidth / 2,
+      centerY: gridNode.y + gridHeight / 2
+    } );
+
     assert && assert( !options.children, 'PopulationGraphNode sets children' );
     options.children = [
       boundsRectangle, gridNode,
       generationScrollControlWrapper,
       yZoomControl, yAxisLabelNodeWrapper,
       plotsNode,
+      zoomOutToSeeDataText,
       dataProbeNode
     ];
 
@@ -132,6 +139,11 @@ class PopulationGraphNode extends Node {
     yAxisLabelNode.localBoundsProperty.link( () => {
       yAxisLabelNode.right = yZoomControl.right;
       yAxisLabelNode.centerY = gridNode.y + ( gridHeight / 2 );
+    } );
+
+    // If all of the data is above the graph's yMax (and therefore clipped), display 'Zoom out to see data.'
+    plotsNode.boundsProperty.link( bounds => {
+      zoomOutToSeeDataText.visible = ( bounds.maxY < 0 ) && ( populationModel.generationsProperty.value !== 0 );
     } );
 
     super( options );

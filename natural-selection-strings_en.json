@@ -158,6 +158,9 @@
   "noData": {
     "value": "No Data"
   },
+  "zoomOutToSeeData": {
+    "value": "Zoom out to see data."
+  },
   "memoryLimitMessage": {
     "value": "Congratulations!<br><br>Your bunny population has survived long enough<br>to hit the memory limit of the simulation."
   }
