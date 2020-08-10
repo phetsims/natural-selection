@@ -200,7 +200,7 @@ class Food {
           }
           else {
 
-            // If limited food is applied without tough food, starve a percentage of all bunnies, regardless of phenotype.
+            // If limited food is applied without tough food, starve the same percentage of both phenotypes.
             const percentToStarve = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.limitedFoodPercentToKill );
             percentToStarveShortTeeth = percentToStarve;
             percentToStarveLongTeeth = percentToStarve;
