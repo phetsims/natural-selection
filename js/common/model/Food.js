@@ -172,7 +172,7 @@ class Food {
       let percentToStarveLongTeeth = 0;
       let percentToStarveShortTeeth = 0;
 
-      // Apply tough food. Tough food starves some of each type of bunny, but starves a higher percentage of bunnies with
+      // Apply tough food. Tough food starves some of each phenotype, but starves a higher percentage of bunnies with
       // short teeth. Tough food has no affect on bunnies with long teeth when their population is below a threshold.
       // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
       if ( this.isToughProperty.value ) {
