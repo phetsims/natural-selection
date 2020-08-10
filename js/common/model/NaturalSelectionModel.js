@@ -175,13 +175,14 @@ class NaturalSelectionModel {
         // Generation 0 is initialized elsewhere, this code is for subsequent generations.
         if ( currentGeneration !== 0 ) {
 
+          phet.log && phet.log( `====== Generation ${currentGeneration} ======` );
+
           // Before bunnies are aged or mated, Record 'End of Generation' counts for the Proportions graph.
           this.proportionsModel.recordEndCounts( currentGeneration - 1, this.bunnyCollection.getLiveBunnyCounts() );
 
           phet.log && phet.log( `live bunnies = ${this.bunnyCollection.liveBunnies.length}` );
           phet.log && phet.log( `dead bunnies = ${this.bunnyCollection.deadBunnies.length}` );
           phet.log && phet.log( `recessive mutants = ${this.bunnyCollection.recessiveMutants.length}` );
-          phet.log && phet.log( `====== Generation ${currentGeneration} ======` );
 
           // Age bunnies, some may die of old age.
           this.bunnyCollection.ageBunnies();
