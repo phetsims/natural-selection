@@ -208,9 +208,10 @@ class WolfCollection {
       const brownCount = brownBunnies.length;
       phet.log && phet.log( `Applying wolves: ${whiteCount} white, ${brownCount} brown, environment=${this.environmentProperty.value}` );
 
-      // Eat some of each phenotype, but a higher percentage of bunnies that don't blend into the environment.
-      const percentToEatMatch = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.wolvesPercentToKill );
-      const percentToEatNoMatch = percentToEatMatch * NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier;
+      // Eat some of each phenotype, but eat more of the bunnies whose fur color does not match the environment.
+      const percentToEat = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.wolvesPercentToKill );
+      const percentToEatMatch = percentToEat;
+      const percentToEatNoMatch = percentToEat * NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier;
 
       // Eat white bunnies.
       const numberEatenWhite = eatSomeBunnies( whiteBunnies, bunnies.length,
