@@ -188,7 +188,7 @@ class Food {
       // Apply limited food. If the population is below some threshold, limited food has no affect, because a small
       // population can be sustained on limited food. See https://github.com/phetsims/natural-selection/issues/153
       if ( this.isLimitedProperty.value ) {
-        if ( bunnies.length < LIMITED_FOOD_MIN_TOTAL ) {
+        if ( this.bunnyCollection.liveBunnies.length < LIMITED_FOOD_MIN_TOTAL ) {
           phet.log && phet.log( `Ignoring limited food because the total population is < ${LIMITED_FOOD_MIN_TOTAL}` );
         }
         else {
