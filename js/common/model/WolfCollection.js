@@ -194,7 +194,7 @@ class WolfCollection {
    * @private
    */
   eatBunnies() {
-    assert && assert( this.enabledProperty.value, 'should not be called if not enabled' );
+    assert && assert( this.enabledProperty.value, 'Wolves are not enabled' );
 
     // Get the bunnies that are candidates for natural selection, in random order.
     const bunnies = this.bunnyCollection.getSelectionCandidates();
