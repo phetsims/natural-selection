@@ -74,6 +74,10 @@ class GenerationClock extends PhetioObject {
         phetioDocumentation: 'integer generation number for the current cycle of the generation clock'
       }
     );
+    assert && this.currentGenerationProperty.lazyLink( ( currentGeneration, previousGeneration ) => {
+      assert && assert( currentGeneration === 0 || currentGeneration === previousGeneration + 1,
+        `skipped a generation, currentGeneration=${currentGeneration}, previousGeneration=${previousGeneration}` );
+    } );
 
     // @public percent of the current clock cycle that has been completed. dispose is not necessary.
     this.percentTimeProperty = new DerivedProperty(
