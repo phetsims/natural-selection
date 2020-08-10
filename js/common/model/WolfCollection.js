@@ -214,12 +214,12 @@ class WolfCollection {
       const percentToEatNoMatch = percentToEat * NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier;
 
       // Eat white bunnies.
-      const numberEatenWhite = eatSomeBunnies( whiteBunnies, bunnies.length,
+      const numberEatenWhite = eatSomeBunnies( whiteBunnies, this.bunnyCollection.liveBunnies.length,
         this.environmentProperty.value, Environment.ARCTIC, percentToEatMatch, percentToEatNoMatch );
       phet.log && phet.log( `${numberEatenWhite} of ${whiteCount} white bunnies were eaten by wolves` );
 
       // Eat brown bunnies.
-      const numberEatenBrown = eatSomeBunnies( brownBunnies, bunnies.length,
+      const numberEatenBrown = eatSomeBunnies( brownBunnies, this.bunnyCollection.liveBunnies.length,
         this.environmentProperty.value, Environment.EQUATOR, percentToEatMatch, percentToEatNoMatch );
       phet.log && phet.log( `${numberEatenBrown} of ${brownCount} brown bunnies were eaten by wolves` );
 
@@ -234,7 +234,7 @@ class WolfCollection {
 /**
  * Eats a percentage of some set of bunnies, depending on whether their fur color matches the environment.
  * @param {Bunny[]} bunnies - a set of bunnies, all with the same phenotype
- * @param totalBunnies - the total number of bunnies that were eligible for selection, both phenotypes
+ * @param totalBunnies - the total number of live bunnies
  * @param {Environment} environment - the current environment that is selected
  * @param {Environment} environmentMatch - the environment that matches the set of bunnies' fur color
  * @param {number} percentToEatMatch - the percentage of bunnies to eat if fur color matches the environment
