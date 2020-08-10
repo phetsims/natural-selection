@@ -21,21 +21,20 @@ const NaturalSelectionConstants = {
 
   // Model ===========================================================================================================
 
+  //TODO replace uses of this constant with NaturalSelectionQueryParameters.maxPopulation
   // number of bunnies required to 'take over the world'
   MAX_POPULATION: NaturalSelectionQueryParameters.maxPopulation,
 
+  //TODO move this constant to BunnyCollection
   // bunnies die when they reach this age, in generations
   MAX_AGE: NaturalSelectionQueryParameters.maxAge,
 
   // number of offspring produced each time a pair of bunnies mates
   LITTER_SIZE: 4,
 
-  // time to complete 1 revolution of the generation clock, in seconds
-  SECONDS_PER_GENERATION: NaturalSelectionQueryParameters.secondsPerGeneration,
-
   // Generation Clock
-  CLOCK_FOOD_RANGE: new Range( 1/6, 3/6 ), // percentage of clock cycle when bunnies are starved by food factors
-  CLOCK_WOLVES_RANGE: new Range( 3/6, 5/6 ), // percentage of clock cycle when bunnies are eaten by wolves
+  CLOCK_FOOD_RANGE: new Range( 1/6, 3/6 ), // generation clock 'slice' when bunnies are starved by food factors, [0,1]
+  CLOCK_WOLVES_RANGE: new Range( 3/6, 5/6 ), // generation clock 'slice' when bunnies are eaten by wolves, [0,1]
 
   // View ============================================================================================================N
 

@@ -362,24 +362,17 @@ class NaturalSelectionScreenView extends ScreenView {
 
   /**
    * Steps the view.
-   * @param {number} dt - time step, in seconds
+   * @param {number} dt - time step, in seconds. Note that dt is currently not used by the view, and constrained by
+   *   the model. If it needs to be used by the view, see NaturalSelectionModel.step and GenerationClock.constrainDt.
    * @public
    */
   step( dt ) {
     if ( this.model.isPlayingProperty.value ) {
-      this.stepOnce( dt );
-    }
-  }
 
-  /**
-   * Steps the view one time step. The sim originally had a Step button, but that was removed in
-   * https://github.com/phetsims/natural-selection/issues/100. This method was retained in case it's
-   * desirable to add a Step button in the future.
-   * @param {number} dt - time step, in seconds
-   * @public
-   */
-  stepOnce( dt ) {
-    this.environmentNode.step( dt );
+      // Sim.js calls model.step before view.step. So after all of the model elements have been updated, this
+      // updates the view of their corresponding sprites.
+      this.environmentNode.updateSprites();
+    }
   }
 }
 

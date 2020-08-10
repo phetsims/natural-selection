@@ -265,27 +265,19 @@ class NaturalSelectionModel {
    */
   step( dt ) {
     if ( this.isPlayingProperty.value ) {
-      this.stepOnce( dt );
+
+      // So we can't make the sim run so fast that it skips generations,
+      dt = GenerationClock.constrainDt( dt );
+
+      // step the generation clock
+      this.generationClock.step( dt * this.fastForwardScaleProperty.value );
+
+      // move the bunnies
+      this.bunnyCollection.moveBunnies( dt );
+
+      // move the wolves
+      this.wolfCollection.moveWolves( dt );
     }
-  }
-
-  /**
-   * Steps the model one time step. The sim originally had a Step button, but that was removed in
-   * https://github.com/phetsims/natural-selection/issues/100. This method was retained in case it's
-   * desirable to add a Step button in the future.
-   * @param {number} dt - time step, in seconds
-   * @public
-   */
-  stepOnce( dt ) {
-
-    // step the generation clock
-    this.generationClock.step( dt * this.fastForwardScaleProperty.value );
-
-    // move the bunnies
-    this.bunnyCollection.moveBunnies( dt );
-
-    // move the wolves
-    this.wolfCollection.moveWolves( dt );
   }
 
   /**

@@ -16,9 +16,12 @@ import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 
 // const
+const SECONDS_PER_GENERATION = NaturalSelectionQueryParameters.secondsPerGeneration;
+const MIN_STEPS_PER_GENERATION = 10;
+const MAX_DT = SECONDS_PER_GENERATION / MIN_STEPS_PER_GENERATION;
 const TIME_FLOATING_POINT_ERROR = 0.0001; // to compensate for floating-point error in time computation, in seconds
 
 class GenerationClock extends PhetioObject {
@@ -57,7 +60,7 @@ class GenerationClock extends PhetioObject {
     // @public dispose is not necessary
     this.generationsProperty = new DerivedProperty(
       [ this.timeProperty ],
-      time => time / NaturalSelectionConstants.SECONDS_PER_GENERATION, {
+      time => time / SECONDS_PER_GENERATION, {
         phetioType: DerivedPropertyIO( NumberIO ),
         tandem: options.tandem.createTandem( 'generationsProperty' ),
         phetioDocumentation: 'decimal number of generations that the generation clock has been running',
@@ -82,7 +85,7 @@ class GenerationClock extends PhetioObject {
     // @public percent of the current clock cycle that has been completed. dispose is not necessary.
     this.percentTimeProperty = new DerivedProperty(
       [ this.timeProperty ],
-      time => ( time % NaturalSelectionConstants.SECONDS_PER_GENERATION ) / NaturalSelectionConstants.SECONDS_PER_GENERATION, {
+      time => ( time % SECONDS_PER_GENERATION ) / SECONDS_PER_GENERATION, {
         isValidValue: percentTime => ( percentTime >= 0 && percentTime <= 1 )
       } );
   }
@@ -109,6 +112,8 @@ class GenerationClock extends PhetioObject {
    * @public
    */
   step( dt ) {
+    assert && assert( dt < SECONDS_PER_GENERATION,
+      `dt=${dt} exceeded secondsPerGeneration=${SECONDS_PER_GENERATION}` );
     if ( this.isRunningProperty.value ) {
       this.stepTime( dt );
     }
@@ -125,8 +130,8 @@ class GenerationClock extends PhetioObject {
     const currentTime = this.timeProperty.value;
     const steppedTime = currentTime + dt + TIME_FLOATING_POINT_ERROR;
 
-    const currentGeneration = Math.floor( currentTime / NaturalSelectionConstants.SECONDS_PER_GENERATION );
-    const steppedGeneration = Math.floor( steppedTime / NaturalSelectionConstants.SECONDS_PER_GENERATION );
+    const currentGeneration = Math.floor( currentTime / SECONDS_PER_GENERATION );
+    const steppedGeneration = Math.floor( steppedTime / SECONDS_PER_GENERATION );
 
     if ( currentGeneration === steppedGeneration ) {
       // we have not passed 12:00 on this step
@@ -134,8 +139,22 @@ class GenerationClock extends PhetioObject {
     }
     else {
       // snap to 12:00
-      this.timeProperty.value = steppedGeneration * NaturalSelectionConstants.SECONDS_PER_GENERATION;
+      this.timeProperty.value = steppedGeneration * SECONDS_PER_GENERATION;
     }
+  }
+
+  /**
+   * Constrains dt so that the clock doesn't run so fast that we skip over generations. It's possible to run the
+   * clock ridiculously fast using ?secondsPerGeneration, especially if combined with the fast-forward button.
+   * secondsPerGeneration is useful for development and testing, because life is too short to wait for bunnies
+   * to die or take over the world.
+   * See https://github.com/phetsims/natural-selection/issues/165.
+   * @param {number} dt - time step, in seconds
+   * @static
+   * @public
+   */
+  static constrainDt( dt ) {
+    return Math.min( dt, MAX_DT );
   }
 }
 
