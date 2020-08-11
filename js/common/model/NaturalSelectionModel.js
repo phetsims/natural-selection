@@ -204,7 +204,6 @@ class NaturalSelectionModel {
 
     // Record data for the Population graph when the population is changed by environmental factors.
     const recordCounts = generation => {
-      console.log( `recordCounts generation=${generation}` );//XXX
       const counts = this.bunnyCollection.getLiveBunnyCounts();
       this.populationModel.recordCounts( generation, counts );
     };
