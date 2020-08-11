@@ -43,8 +43,8 @@ class DataProbe extends PhetioObject {
     // @private
     this.populationModel = populationModel;
 
-    // @public
-    this.offsetProperty = new Vector2Property( Vector2.ZERO, {
+    // @public the initial offset is as requested in https://github.com/phetsims/natural-selection/issues/173
+    this.offsetProperty = new Vector2Property( new Vector2( 1.5, 0 ), {
       tandem: options.tandem.createTandem( 'offsetProperty' ),
       phetioDocumentation: 'offset of the data probe from the left edge of the graph'
     } );
