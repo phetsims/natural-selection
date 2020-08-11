@@ -164,7 +164,12 @@ class GenerationClock extends PhetioObject {
  * @returns {number} decimal number of generations that corresponds to the elapsed time
  */
 function timeToGenerations( time ) {
-  return ( time / SECONDS_PER_GENERATION ) + 0.0001;
+  if ( time === 0 ) {
+    return 0;
+  }
+  else {
+    return ( time / SECONDS_PER_GENERATION ) + 0.0001;
+  }
 }
 
 naturalSelection.register( 'GenerationClock', GenerationClock );
