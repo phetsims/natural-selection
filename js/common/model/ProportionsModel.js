@@ -230,7 +230,8 @@ class ProportionsModel extends PhetioObject {
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
     assert && assert( endCounts instanceof BunnyCounts, 'invalid endCounts' );
     assert && assert( generation === this.currentGenerationProperty.value - 1, `${generation} is not the previous generation` );
-    assert && assert( this.previousCounts.length === generation, `data already exists for generation ${generation}` );
+    assert && assert( this.previousCounts.length === generation,
+      `unexpected generation=${generation}, expected ${this.previousCounts.length}` );
 
     const startCounts = this.currentStartCountsProperty.value;
     this.previousCounts.push( new ProportionsCounts( generation, startCounts, endCounts ) );

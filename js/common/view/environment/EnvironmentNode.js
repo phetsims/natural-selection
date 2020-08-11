@@ -80,16 +80,7 @@ class EnvironmentNode extends Node {
   }
 
   /**
-   * Steps the view. This called after model.step by Sim.js.
-   * @param {number} dt - the time step, in seconds
-   * @public
-   */
-  step( dt ) {
-    this.updateSprites();
-  }
-
-  /**
-   * Update all sprites.
+   * Updates all sprites.
    * @public
    */
   updateSprites() {

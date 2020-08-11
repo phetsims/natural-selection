@@ -175,13 +175,14 @@ class NaturalSelectionModel {
         // Generation 0 is initialized elsewhere, this code is for subsequent generations.
         if ( currentGeneration !== 0 ) {
 
+          phet.log && phet.log( `====== Generation ${currentGeneration} ======` );
+
           // Before bunnies are aged or mated, Record 'End of Generation' counts for the Proportions graph.
           this.proportionsModel.recordEndCounts( currentGeneration - 1, this.bunnyCollection.getLiveBunnyCounts() );
 
           phet.log && phet.log( `live bunnies = ${this.bunnyCollection.liveBunnies.length}` );
           phet.log && phet.log( `dead bunnies = ${this.bunnyCollection.deadBunnies.length}` );
           phet.log && phet.log( `recessive mutants = ${this.bunnyCollection.recessiveMutants.length}` );
-          phet.log && phet.log( `====== Generation ${currentGeneration} ======` );
 
           // Age bunnies, some may die of old age.
           this.bunnyCollection.ageBunnies();
@@ -264,27 +265,19 @@ class NaturalSelectionModel {
    */
   step( dt ) {
     if ( this.isPlayingProperty.value ) {
-      this.stepOnce( dt );
+
+      // So we can't make the sim run so fast that it skips generations,
+      dt = GenerationClock.constrainDt( dt );
+
+      // step the generation clock
+      this.generationClock.step( dt * this.fastForwardScaleProperty.value );
+
+      // move the bunnies
+      this.bunnyCollection.moveBunnies( dt );
+
+      // move the wolves
+      this.wolfCollection.moveWolves( dt );
     }
-  }
-
-  /**
-   * Steps the model one time step. The sim originally had a Step button, but that was removed in
-   * https://github.com/phetsims/natural-selection/issues/100. This method was retained in case it's
-   * desirable to add a Step button in the future.
-   * @param {number} dt - time step, in seconds
-   * @public
-   */
-  stepOnce( dt ) {
-
-    // step the generation clock
-    this.generationClock.step( dt * this.fastForwardScaleProperty.value );
-
-    // move the bunnies
-    this.bunnyCollection.moveBunnies( dt );
-
-    // move the wolves
-    this.wolfCollection.moveWolves( dt );
   }
 
   /**

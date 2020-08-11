@@ -82,7 +82,7 @@ class PopulationPlotNode extends Node {
     // unlink not needed
     points.lengthProperty.link( ( length, previousLength ) => {
       if ( length > previousLength || length === 0 ) {
-        this.plotPoints();
+        this.updatePlot();
       }
     } );
 
@@ -91,21 +91,22 @@ class PopulationPlotNode extends Node {
     // unlink not needed.
     this.generationsProperty.link( generation => {
       if ( generation < this.xWidth ) {
-        this.plotPoints();
+        this.updatePlot();
       }
     } );
 
     // unmultilink not needed
     Property.multilink( [ this.visibleProperty, this.xRangeProperty, this.yRangeProperty ],
-      visible => visible && this.plotPoints()
+      visible => visible && this.updatePlot()
     );
   }
 
   /**
-   * Plots the points that are within the range of the graph.
+   * Plots the points and line segments that are within the x range of the graph.
+   * The y range is handled by a clipArea on PopulationPlotsNode (the parent Node).
    * @private
    */
-  plotPoints() {
+  updatePlot() {
 
     // Draw only if visible
     if ( this.visible ) {
@@ -208,7 +209,7 @@ class PopulationPlotNode extends Node {
   /**
    * Model-view transform for x axis.
    * @param {number} xModel - x model value, in generations
-   * @returns {number}
+   * @returns {number} x view value
    * @private
    */
   modelToViewX( xModel ) {
@@ -218,7 +219,7 @@ class PopulationPlotNode extends Node {
   /**
    * Model-view transform for y axis. The y axis is inverted (+y up in model, +y down in view).
    * @param {number} yModel - y model value, population
-   * @returns {number}
+   * @returns {number} y view value
    * @private
    */
   modelToViewY( yModel ) {

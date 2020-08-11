@@ -125,14 +125,15 @@ const SCHEMA = {
   //------------------------------------------------------------------------------------------------------------------
 
   // Maximum number of generations before the sim stops and displays MemoryLimitDialog.
-  // See https://github.com/phetsims/natural-selection/issues/46
+  // Tuned in https://github.com/phetsims/natural-selection/issues/46
   maxGenerations: {
     type: 'number',
     defaultValue: 1000,
     isValidValue: value => ( value > 0 )
   },
 
-  // Seconds of real time per cycle of the generation clock.
+  // Seconds of real time per cycle of the generation clock. This is useful for development and testing, because
+  // life is too short to sit around waiting for bunnies to die or take over the world.
   secondsPerGeneration: {
     type: 'number',
     defaultValue: 10,
