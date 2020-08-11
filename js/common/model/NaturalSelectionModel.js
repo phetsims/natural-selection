@@ -261,7 +261,6 @@ class NaturalSelectionModel {
    * Steps the model.
    * @param {number} dt - time step, in seconds
    * @public
-   * @override
    */
   step( dt ) {
     if ( this.isPlayingProperty.value ) {
@@ -282,7 +281,7 @@ class NaturalSelectionModel {
 
   /**
    * Adds a mate for a lone bunny.
-   * @private
+   * @public
    */
   addAMate() {
     assert && assert( this.bunnyCollection.getNumberOfLiveBunnies() === 1, 'there should only be 1 live bunny' );
