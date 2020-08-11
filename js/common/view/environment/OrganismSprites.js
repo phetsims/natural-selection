@@ -437,8 +437,8 @@ class OrganismSprites extends Sprites {
 
   /**
    * Sorts the sprite instances in back-to-front rendering order. Instances are first sorted by z coordinate of their
-   * associated organism, from back to front, where +z is away from the camera. If there is a selected bunny,
-   * then the bunny and its selection rectangle are adjusted, depending on whether the sim is playing or paused.
+   * associated organism, from back to front, where +z is away from the camera. If there is a selected bunny and
+   * the sim is paused, the bunny and its selection rectangle are moved to the front.
    * @private
    */
   sort() {
