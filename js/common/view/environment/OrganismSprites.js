@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * OrganismSprites displays all of the Organism model elements that appear in the environment.
+ * OrganismSprites displays all of the Organism model elements (bunnies, wolves, shrubs) that appear in the environment.
  * It uses scenery's high-performance Sprites feature, which uses renderer:'webgl', with a fallback of 'canvas'.
  *
  * While each sprite instance stays synchronized with its associated model element, update() must be explicitly
