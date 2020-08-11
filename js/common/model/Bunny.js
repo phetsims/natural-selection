@@ -109,7 +109,7 @@ class Bunny extends Organism {
     this.hopTime = HOP_TIME_RANGE.max;
 
     // @private {number} the cumulative time spent resting since the last hop, in seconds
-    // Choose a random value so that bunnies born at the same time don't all hop at the same time.
+    // Initialize with a random value so that bunnies born at the same time don't all hop at the same time.
     this.cumulativeRestTime = phet.joist.random.nextDoubleInRange( this.bunnyRestRangeProperty.value );
 
     // @private {number} the cumulative time spent hopping since the last reset, in seconds
@@ -128,6 +128,7 @@ class Bunny extends Organism {
     this.disposedEmitter = new Emitter();
 
     // When the father or mother is disposed, set them to null to free memory.
+    // See https://github.com/phetsims/natural-selection/issues/112
     const fatherDisposedListener = () => {
       this.father.disposedEmitter.removeListener( fatherDisposedListener );
       this.father = null;
