@@ -30,11 +30,11 @@ import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
-import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
+import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 
 // constants
 const MANIPULATOR_RADIUS = 5;
-const NUMBER_DISPLAY_RANGE = new Range( 0, 10 * NaturalSelectionConstants.MAX_POPULATION );
+const NUMBER_DISPLAY_RANGE = new Range( 0, 10 * NaturalSelectionQueryParameters.maxPopulation );
 const NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY = 0.7;
 const NUMBER_DISPLAY_DEFAULTS = {
   textOptions: {

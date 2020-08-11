@@ -12,7 +12,6 @@ import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import RectangularButtonView from '../../../sun/js/buttons/RectangularButtonView.js';
 import naturalSelection from '../naturalSelection.js';
 import NaturalSelectionColors from './NaturalSelectionColors.js';
-import NaturalSelectionQueryParameters from './NaturalSelectionQueryParameters.js';
 
 // constants
 const CORNER_RADIUS = 5;
@@ -20,10 +19,6 @@ const CORNER_RADIUS = 5;
 const NaturalSelectionConstants = {
 
   // Model ===========================================================================================================
-
-  //TODO replace uses of this constant with NaturalSelectionQueryParameters.maxPopulation
-  // number of bunnies required to 'take over the world'
-  MAX_POPULATION: NaturalSelectionQueryParameters.maxPopulation,
 
   // number of offspring produced each time a pair of bunnies mates
   LITTER_SIZE: 4,

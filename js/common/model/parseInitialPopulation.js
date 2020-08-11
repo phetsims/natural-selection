@@ -17,7 +17,6 @@
  */
 
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyVariety from './BunnyVariety.js';
@@ -192,8 +191,8 @@ function parsePopulation( genePool, mutationChars, populationName, populationVal
 
       // Total of all counts must be < maximum population
       totalCount += count;
-      verify( totalCount < NaturalSelectionConstants.MAX_POPULATION,
-        `${populationName}: the total population must be < ${NaturalSelectionConstants.MAX_POPULATION}` );
+      verify( totalCount < NaturalSelectionQueryParameters.maxPopulation,
+        `${populationName}: the total population must be < ${NaturalSelectionQueryParameters.maxPopulation}` );
 
       // Genotype must contain 2 alleles for each gene represented in mutations
       const genotypeErrorMessage = `${populationName}: ${genotypeString} is an invalid genotype`;
