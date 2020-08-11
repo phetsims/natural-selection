@@ -101,7 +101,9 @@ class WolfCollection {
     } );
 
     // @public emits when bunnies have been eaten. dispose is not necessary.
-    this.bunniesEatenEmitter = new Emitter();
+    this.bunniesEatenEmitter = new Emitter( {
+      parameters: [ { valueType: 'number' } ] // generation value at which the event should be recorded
+    } );
 
     // The wolf population exists only while it's hunting.
     this.isHuntingProperty.link( isHunting => {
@@ -140,7 +142,8 @@ class WolfCollection {
         // See https://github.com/phetsims/natural-selection/issues/110
         if ( this.enabledProperty.value &&
              previousPercentTime < CLOCK_WOLVES_MIDPOINT && currentPercentTime >= CLOCK_WOLVES_MIDPOINT ) {
-          this.eatBunnies();
+          const generations = generationClock.currentGenerationProperty.value + CLOCK_WOLVES_MIDPOINT;
+          this.eatBunnies( generations );
         }
       }
     } );
@@ -182,10 +185,12 @@ class WolfCollection {
 
   /**
    * Eats some portion of the bunny population.
+   * @param {number} generations - the generations value at which this event should be recorded
    * @private
    */
-  eatBunnies() {
+  eatBunnies( generations ) {
     assert && assert( this.enabledProperty.value, 'Wolves are not enabled' );
+    assert && assert( NaturalSelectionUtils.isNonNegative( generations ), `invalid generations: ${generations}`);
 
     // Get the bunnies that are candidates for natural selection, in random order.
     const bunnies = this.bunnyCollection.getSelectionCandidates();
@@ -216,7 +221,7 @@ class WolfCollection {
 
       // Notify if bunnies have been eaten.
       if ( numberEatenWhite + numberEatenBrown > 0 ) {
-        this.bunniesEatenEmitter.emit();
+        this.bunniesEatenEmitter.emit( generations );
       }
     }
   }
@@ -255,7 +260,7 @@ function eatSomeBunnies( bunnies, totalBunnies, environment, environmentMatch, p
       const thisFurColor = bunny0.phenotype.hasBrownFur() ? 'brown' : 'white';
       const otherFurColor = bunny0.phenotype.hasBrownFur() ? 'white' : 'brown';
       phet.log && phet.log( `Wolves ignored ${thisFurColor} bunnies because their count is < ${MIN_BUNNIES} ` +
-        `and there are ${otherFurColor} bunnies to eat` );
+                            `and there are ${otherFurColor} bunnies to eat` );
     }
     else {
 

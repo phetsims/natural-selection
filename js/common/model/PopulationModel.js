@@ -255,7 +255,7 @@ class PopulationModel extends PhetioObject {
    * @public
    */
   recordCounts( generation, counts ) {
-    assert && assert( NaturalSelectionUtils.isNonNegative( generation ), 'invalid generation' );
+    assert && assert( NaturalSelectionUtils.isNonNegative( generation ), `invalid generation: ${generation}` );
     assert && assert( counts instanceof BunnyCounts, 'invalid counts' );
 
     recordCount( this.totalPoints, generation, counts.totalCount );

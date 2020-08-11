@@ -78,7 +78,9 @@ class Food {
     );
 
     // @public emits when bunnies have died of starvation. dispose is not necessary.
-    this.bunniesStarvedEmitter = new Emitter();
+    this.bunniesStarvedEmitter = new Emitter( {
+      parameters: [ { valueType: 'number' } ] // generation value at which the event should be recorded
+    } );
 
     // @public (read-only) {Shrub[]} the collection of Shrubs
     // Categories (A, B, C) and approximate positions are as specified in
@@ -126,7 +128,8 @@ class Food {
         // See https://github.com/phetsims/natural-selection/issues/110
         if ( this.enabledProperty.value &&
              previousPercentTime < CLOCK_FOOD_MIDPOINT && currentPercentTime >= CLOCK_FOOD_MIDPOINT ) {
-          this.starveBunnies();
+          const generations = generationClock.currentGenerationProperty.value + CLOCK_FOOD_MIDPOINT;
+          this.starveBunnies( generations );
         }
       }
     } );
@@ -149,10 +152,12 @@ class Food {
 
   /**
    * Starves some portion of the bunny population.
+   * @param {number} generations - the generations value at which this event should be recorded
    * @private
    */
-  starveBunnies() {
+  starveBunnies( generations ) {
     assert && assert( this.enabledProperty.value, 'Food is not enabled' );
+    assert && assert( NaturalSelectionUtils.isNonNegative( generations ), `invalid generations: ${generations}`);
 
     // Get the bunnies that are candidates for natural selection, in random order.
     const bunnies = this.bunnyCollection.getSelectionCandidates();
@@ -218,7 +223,7 @@ class Food {
 
       // Notify if bunnies have been starved.
       if ( numberStarvedShortTeeth + numberStarvedLongTeeth > 0 ) {
-        this.bunniesStarvedEmitter.emit();
+        this.bunniesStarvedEmitter.emit( generations );
       }
     }
   }
