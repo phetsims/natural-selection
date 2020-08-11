@@ -8,6 +8,7 @@
 
 import Range from '../../../dot/js/Range.js';
 import Utils from '../../../dot/js/Utils.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import naturalSelection from '../naturalSelection.js';
 
 const NaturalSelectionUtils = {
@@ -117,6 +118,25 @@ const NaturalSelectionUtils = {
    */
   isPercentRange( value ) {
     return ( value instanceof Range ) && ( value.min >= 0 ) && ( value.max <= 1 );
+  },
+
+  /**
+   * Gets the PhET-iO element for a specified phetioID. This is intended to be used as a debugging tool,
+   * to inspect a PhET-iO element in the console. Do not use this to access elements via code!
+   *
+   * Example: phet.naturalSelection.NaturalSelectionUtils.getElement( 'naturalSelection.labScreen' )
+   *
+   * @param {string} phetioID
+   * @returns {null|PhetioObject}
+   */
+  getElement( phetioID ) {
+    if ( Tandem.PHET_IO_ENABLED ) {
+      return phet.phetio.phetioEngine.phetioObjectMap[ phetioID ];
+    }
+    else {
+      console.warn( 'PhET-iO is not initialized' );
+      return undefined;
+    }
   }
 };
 
