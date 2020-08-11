@@ -1,12 +1,12 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * NaturalSelectionSprites renders all sprites that appear in the environment. It uses scenery's high-performance
- * Sprites feature, which uses renderer:'webgl', with a fallback of 'canvas'.
+ * OrganismSprites displays all of the Organism model elements that appear in the environment.
+ * It uses scenery's high-performance Sprites feature, which uses renderer:'webgl', with a fallback of 'canvas'.
  *
- * While each sprite instance stays synchronized with its associated model element, update() must be explicitly called
- * to render this Node correctly. Internally, call update for changes that affect the sort order of sprites;
- * otherwise call invalidatePaint.
+ * While each sprite instance stays synchronized with its associated model element, update() must be explicitly
+ * called to render this Node correctly. Internally, call update() for changes that affect the rendering order;
+ * otherwise call invalidatePaint().
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -49,7 +49,7 @@ import OrganismSpriteImage from './OrganismSpriteImage.js';
 import ShrubSpriteInstance from './ShrubSpriteInstance.js';
 import WolfSpriteInstance from './WolfSpriteInstance.js';
 
-class NaturalSelectionSprites extends Sprites {
+class OrganismSprites extends Sprites {
 
   /**
    * @param {BunnyCollection} bunnyCollection
@@ -79,7 +79,7 @@ class NaturalSelectionSprites extends Sprites {
       phetioDocumentation: 'bunnies, wolves, and shrubs that appear in the environment'
     }, options );
 
-    assert && assert( !options.canvasBounds, 'NaturalSelectionSprites sets canvasBounds' );
+    assert && assert( !options.canvasBounds, 'OrganismSprites sets canvasBounds' );
     options.canvasBounds = canvasBounds;
 
     // Sprites for each possible bunny phenotype. Maps a phenotype key to an Image instance. The phenotype key pattern
@@ -126,7 +126,7 @@ class NaturalSelectionSprites extends Sprites {
     const selectionRectangleSprite = new BunnySelectionRectangleSprite( bunnyWhiteFurStraightEarsShortTeethImage );
 
     // {OrganismSprite[]} the complete unique set of sprites
-    assert && assert( !options.sprites, 'NaturalSelectionSprites sets sprites' );
+    assert && assert( !options.sprites, 'OrganismSprites sets sprites' );
     options.sprites = [ wolfSprite, selectionRectangleSprite ];
     for ( const key in bunnySpritesMap ) {
       options.sprites.push( bunnySpritesMap[ key ] );
@@ -143,7 +143,7 @@ class NaturalSelectionSprites extends Sprites {
     );
 
     // {SpriteInstances[]} all sprite instances to be rendered, must be modified in place because super has a reference
-    assert && assert( !options.spriteInstances, 'NaturalSelectionSprites sets spriteInstances' );
+    assert && assert( !options.spriteInstances, 'OrganismSprites sets spriteInstances' );
     options.spriteInstances = [ ...shrubSpriteInstances ];
 
     super( options );
@@ -496,5 +496,5 @@ class NaturalSelectionSprites extends Sprites {
   }
 }
 
-naturalSelection.register( 'NaturalSelectionSprites', NaturalSelectionSprites );
-export default NaturalSelectionSprites;
+naturalSelection.register( 'OrganismSprites', OrganismSprites );
+export default OrganismSprites;

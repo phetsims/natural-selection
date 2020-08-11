@@ -23,7 +23,7 @@ simLauncher.launch( () => {
 
   const sim = new Sim( naturalSelectionStrings[ 'natural-selection' ].title, screens, {
 
-    // NaturalSelectionSprites uses WebGL, with a fallback of Canvas.
+    // OrganismSprites uses WebGL, with a fallback of Canvas.
     // See https://github.com/phetsims/natural-selection/issues/128
     webgl: true,
 
@@ -37,7 +37,7 @@ simLauncher.launch( () => {
     }
   } );
 
-  // Log whether we're using WebGL, which is the preferred rendering option for NaturalSelectionSprites
+  // Log whether we're using WebGL, which is the preferred rendering option for OrganismSprites
   phet.log && phet.log( `using WebGL = ${phet.chipper.queryParameters.webgl && Utils.isWebGLSupported}` );
 
   // Log the name of the active screen, to make the console logging easier to grok.
