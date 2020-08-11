@@ -189,15 +189,6 @@ class BunnyCollection {
   }
 
   /**
-   * Gets the archetype for the PhetioGroup.
-   * @returns {Bunny|null} non-null only during API harvest
-   * @public
-   */
-  getArchetype() {
-    return this.bunnyGroup.archetype;
-  }
-
-  /**
    * Creates a Bunny.
    * @param {Object} [options] - options to Bunny constructor
    * @returns {Bunny}

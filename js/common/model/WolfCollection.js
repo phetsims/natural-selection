@@ -163,15 +163,6 @@ class WolfCollection {
   }
 
   /**
-   * Gets the archetype for the PhetioGroup.
-   * @returns {Wolf|null} non-null only during API harvest
-   * @public
-   */
-  getArchetype() {
-    return this.wolfGroup.archetype;
-  }
-
-  /**
    * Gets the number of wolves.
    * @returns {number}
    * @public
