@@ -2,6 +2,7 @@
 
 /**
  * PedigreeGraphNode displays the pedigree for an individual. Origin at bottom center.
+ * Note that this graph is not a performance concern, so it is currently updated regardless of whether it's visible.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

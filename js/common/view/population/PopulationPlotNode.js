@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * PopulationPlotNode plots one set of data on the Population graph.
+ * PopulationPlotNode plots one set of data on the Population graph, updated only when visible.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
