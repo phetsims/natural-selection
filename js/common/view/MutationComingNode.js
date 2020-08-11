@@ -1,9 +1,9 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * MutationComingNode is a pseudo non-modal dialog. It informs the user that a mutation is about to be occur,
+ * MutationComingNode is a pseudo non-modal dialog. It informs the user that a mutation is about to occur,
  * and gives the user an opportunity to cancel the mutation.  It is not implemented using SUN/Dialog because
- * (at the time of implementation) non-modal dialogs are not yet supported.
+ * (at the time of implementation) non-modal dialogs are not supported.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

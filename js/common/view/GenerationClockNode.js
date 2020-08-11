@@ -2,6 +2,7 @@
 
 /**
  * GenerationClockNode is the clock that does one complete revolution per generation.
+ * It displays 'slices' for each environmental factor, to denote when they will be active.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

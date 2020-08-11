@@ -2,7 +2,7 @@
 
 /**
  * EnvironmentalFactorsPanel is the panel that contains controls for environmental factors that affect
- * the fertility and mortality of bunnies.
+ * the mortality of bunnies.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

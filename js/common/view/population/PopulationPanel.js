@@ -42,12 +42,14 @@ class PopulationPanel extends NaturalSelectionPanel {
     const earsGene = populationModel.genePool.earsGene;
     const teethGene = populationModel.genePool.teethGene;
 
+    // Total checkbox
     const totalCheckbox =
       new PopulationLegendCheckbox( populationModel.totalVisibleProperty, naturalSelectionStrings.total, {
         color: NaturalSelectionColors.POPULATION_TOTAL_COUNT,
         tandem: options.tandem.createTandem( 'totalCheckbox' )
       } );
 
+    // A checkbox for each allele
     const whiteFurCheckbox = new PopulationLegendCheckbox( populationModel.whiteFurVisibleProperty, furGene.normalAllele.name, {
       color: furGene.color,
       tandem: options.tandem.createTandem( 'whiteFurCheckbox' )
@@ -86,6 +88,7 @@ class PopulationPanel extends NaturalSelectionPanel {
       tandem: options.tandem.createTandem( 'separator' )
     } );
 
+    // Data Probe checkbox
     const dataProbeCheckboxLabel = new Text( naturalSelectionStrings.dataProbe, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 135 // determined empirically

@@ -2,7 +2,7 @@
 
 /**
  * NaturalSelectionPanel is a specialization of Panel that provides a more convenient API for creating a
- * fixed-width Panel.
+ * fixed-width Panel, and for disabling the Panel's content.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

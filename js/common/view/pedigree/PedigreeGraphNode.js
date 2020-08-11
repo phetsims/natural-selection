@@ -51,6 +51,7 @@ class PedigreeGraphNode extends Node {
       stroke: NaturalSelectionColors.PANEL_STROKE
     } );
 
+    // 'Select a Bunny' is displayed when there is no selected bunny.
     const selectABunnyText = new Text( naturalSelectionStrings.selectABunny, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
       centerX: backgroundNode.centerX,

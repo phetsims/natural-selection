@@ -2,8 +2,9 @@
 
 /**
  * GenesVisibilityManager manages the visibility of UI components that are related to specific genes.
- * Via a set of Properties, all UI components related to a gene can be shown/hidden, allowing the
- * PhET-iO client to quickly configure the sim. See https://github.com/phetsims/natural-selection/issues/70
+ * This is a PhET-iO only feature, available in Studio. Via a set of Properties, all UI components related to
+ * a gene can be shown/hidden, allowing the PhET-iO client to quickly configure the sim.
+ * See https://github.com/phetsims/natural-selection/issues/70
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

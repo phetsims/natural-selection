@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * PopulationGraphNode displays the population graph. This graph *IS* a performance concern, so plots are updated
+ * PopulationGraphNode displays the population graph. This graph is a performance concern, so plots are updated
  * only when they are visible, see PopulationPlotNode.updatePlot.
  *
  * @author Chris Malley (PixelZoom, Inc.)

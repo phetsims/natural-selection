@@ -35,7 +35,7 @@ class BunnySelectionRectangleSprite extends Sprite {
       lineWidth: 5 // determined empirically, to match the lineWidth in Pedigree graph
     } );
 
-    // {HTMLCanvasElement}
+    // Convert to {HTMLCanvasElement}, as required by Sprite
     let selectionRectangleSpriteImage = null;
     selectionRectangle.toCanvas( canvas => {
       const offset = new Vector2( selectionRectangleBounds.width / 2, selectionRectangleBounds.height - SELECTION_RECTANGLE_DILATION );

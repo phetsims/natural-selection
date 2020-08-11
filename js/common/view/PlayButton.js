@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * Play is the push button that is shown when the initial population of the bunnies is > 1.
+ * PlayButton is the push button that is shown when the initial population of the bunnies is > 1.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

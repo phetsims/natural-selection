@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * NaturalSelectionUtils defines utility functions that are specific to this simulation.
+ * NaturalSelectionUtils defines utility functions that are used throughout this simulation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

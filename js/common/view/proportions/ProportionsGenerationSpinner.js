@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * ProportionsGenerationSpinner is the spinner used to select the generation displayed in the Proportions graph.
+ * ProportionsGenerationSpinner is the spinner used to select the generation displayed by the Proportions graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
