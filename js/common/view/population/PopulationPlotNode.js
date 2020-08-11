@@ -209,7 +209,7 @@ class PopulationPlotNode extends Node {
   /**
    * Model-view transform for x axis.
    * @param {number} xModel - x model value, in generations
-   * @returns {number}
+   * @returns {number} x view value
    * @private
    */
   modelToViewX( xModel ) {
@@ -219,7 +219,7 @@ class PopulationPlotNode extends Node {
   /**
    * Model-view transform for y axis. The y axis is inverted (+y up in model, +y down in view).
    * @param {number} yModel - y model value, population
-   * @returns {number}
+   * @returns {number} y view value
    * @private
    */
   modelToViewY( yModel ) {
