@@ -256,11 +256,11 @@ class BunnyCollection {
 
       // bunny is one generation older
       bunny.age++;
-      assert && assert( bunny.age <= NaturalSelectionConstants.MAX_AGE,
-        `${bunny.tandem.name} age=${bunny.age} exceeds maxAge=${NaturalSelectionConstants.MAX_AGE}` );
+      assert && assert( bunny.age <= NaturalSelectionQueryParameters.maxAge,
+        `${bunny.tandem.name} age=${bunny.age} exceeds maxAge=${NaturalSelectionQueryParameters.maxAge}` );
 
       // bunny dies if it exceeds the maximum age
-      if ( bunny.age === NaturalSelectionConstants.MAX_AGE ) {
+      if ( bunny.age === NaturalSelectionQueryParameters.maxAge ) {
         bunny.die();
         diedCount++;
       }

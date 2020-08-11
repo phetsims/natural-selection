@@ -25,10 +25,6 @@ const NaturalSelectionConstants = {
   // number of bunnies required to 'take over the world'
   MAX_POPULATION: NaturalSelectionQueryParameters.maxPopulation,
 
-  //TODO move this constant to BunnyCollection
-  // bunnies die when they reach this age, in generations
-  MAX_AGE: NaturalSelectionQueryParameters.maxAge,
-
   // number of offspring produced each time a pair of bunnies mates
   LITTER_SIZE: 4,
 
