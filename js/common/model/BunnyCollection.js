@@ -66,7 +66,7 @@ class BunnyCollection {
       tandem: options.tandem.createTandem( 'liveBunnies' )
     } );
 
-    // @public (read-only) the dead bunnies in bunnyGroup
+    // @private the dead bunnies in bunnyGroup
     this.deadBunnies = new BunnyArray( {
       tandem: options.tandem.createTandem( 'deadBunnies' ),
       phetioType: BunnyArrayIO
@@ -513,12 +513,39 @@ class BunnyCollection {
   }
 
   /**
-   * Gets the live bunny counts.
+   * Gets the live bunny counts (total and each phenotype).
    * @returns {BunnyCounts}
    * @public
    */
   getLiveBunnyCounts() {
     return this.liveBunnies.countsProperty.value;
+  }
+
+  /**
+   * Gets the number of live bunnies.
+   * @returns {number}
+   * @public
+   */
+  getNumberOfLiveBunnies() {
+    return this.liveBunnies.length;
+  }
+
+  /**
+   * Gets the number of dead bunnies.
+   * @returns {number}
+   * @public
+   */
+  getNumberOfDeadBunnies() {
+    return this.deadBunnies.length;
+  }
+
+  /**
+   * Gets the number of recessive mutants that waiting to mate eagerly.
+   * @returns {number}
+   * @public
+   */
+  getNumberOfRecessiveMutants() {
+    return this.recessiveMutants.length;
   }
 
   /**

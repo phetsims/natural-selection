@@ -115,7 +115,7 @@ class WolfCollection {
 
           // Number of wolves is a function of the number of live bunnies
           const numberOfWolves = Math.max( MIN_WOLVES,
-            Utils.roundSymmetric( this.bunnyCollection.liveBunnies.length / BUNNIES_PER_WOLF ) );
+            Utils.roundSymmetric( this.bunnyCollection.getNumberOfLiveBunnies() / BUNNIES_PER_WOLF ) );
           for ( let i = 0; i < numberOfWolves; i++ ) {
             this.wolfGroup.createNextElement();
           }
@@ -214,12 +214,12 @@ class WolfCollection {
       const percentToEatNoMatch = percentToEat * NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier;
 
       // Eat white bunnies.
-      const numberEatenWhite = eatSomeBunnies( whiteBunnies, this.bunnyCollection.liveBunnies.length,
+      const numberEatenWhite = eatSomeBunnies( whiteBunnies, this.bunnyCollection.getNumberOfLiveBunnies(),
         this.environmentProperty.value, Environment.ARCTIC, percentToEatMatch, percentToEatNoMatch );
       phet.log && phet.log( `${numberEatenWhite} of ${whiteCount} white bunnies were eaten by wolves` );
 
       // Eat brown bunnies.
-      const numberEatenBrown = eatSomeBunnies( brownBunnies, this.bunnyCollection.liveBunnies.length,
+      const numberEatenBrown = eatSomeBunnies( brownBunnies, this.bunnyCollection.getNumberOfLiveBunnies(),
         this.environmentProperty.value, Environment.EQUATOR, percentToEatMatch, percentToEatNoMatch );
       phet.log && phet.log( `${numberEatenBrown} of ${brownCount} brown bunnies were eaten by wolves` );
 

@@ -180,9 +180,9 @@ class NaturalSelectionModel {
           // Before bunnies are aged or mated, Record 'End of Generation' counts for the Proportions graph.
           this.proportionsModel.recordEndCounts( currentGeneration - 1, this.bunnyCollection.getLiveBunnyCounts() );
 
-          phet.log && phet.log( `live bunnies = ${this.bunnyCollection.liveBunnies.length}` );
-          phet.log && phet.log( `dead bunnies = ${this.bunnyCollection.deadBunnies.length}` );
-          phet.log && phet.log( `recessive mutants = ${this.bunnyCollection.recessiveMutants.length}` );
+          phet.log && phet.log( `live bunnies = ${this.bunnyCollection.getNumberOfLiveBunnies()}` );
+          phet.log && phet.log( `dead bunnies = ${this.bunnyCollection.getNumberOfDeadBunnies()}` );
+          phet.log && phet.log( `recessive mutants = ${this.bunnyCollection.getNumberOfRecessiveMutants()}` );
 
           // Age bunnies, some may die of old age.
           this.bunnyCollection.ageBunnies();
@@ -285,7 +285,7 @@ class NaturalSelectionModel {
    * @private
    */
   addAMate() {
-    assert && assert( this.bunnyCollection.liveBunnies.length === 1, 'there should only be 1 live bunny' );
+    assert && assert( this.bunnyCollection.getNumberOfLiveBunnies() === 1, 'there should only be 1 live bunny' );
     assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
 
     this.bunnyCollection.createBunnyZero();
@@ -298,7 +298,7 @@ class NaturalSelectionModel {
   initializeGenerationZero() {
 
     phet.log && phet.log( 'NaturalSelectionModel.initializeGenerationZero' );
-    assert && assert( this.bunnyCollection.liveBunnies.length === 0, 'bunnies already exist' );
+    assert && assert( this.bunnyCollection.getNumberOfLiveBunnies() === 0, 'bunnies already exist' );
     assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
 
     // For each {BunnyVariety} in the initial population, create bunnies of that variety.
