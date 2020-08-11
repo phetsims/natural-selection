@@ -5,7 +5,6 @@ Specific things:
 * rename NaturalSelectionSprites to OrganismSprites
 * update Proportions graph only if it's visible, or document that it's not a performance issue
 * update Pedigree graph only if it's visible, or document that it's not a performance issue
-* delete query parameters that have outlived their usefulness
 
 General things:
 
