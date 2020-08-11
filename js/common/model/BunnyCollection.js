@@ -531,7 +531,7 @@ class BunnyCollection {
   }
 
   /**
-   * Gets the number of recessive mutants that waiting to mate eagerly.
+   * Gets the number of recessive mutants that are waiting to mate eagerly.
    * @returns {number}
    * @public
    */
