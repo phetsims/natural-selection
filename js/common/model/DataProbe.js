@@ -46,7 +46,7 @@ class DataProbe extends PhetioObject {
     // @public
     this.offsetProperty = new Vector2Property( Vector2.ZERO, {
       tandem: options.tandem.createTandem( 'offsetProperty' ),
-      phetioDocumentation: 'offset of the data from the left edge of the graph'
+      phetioDocumentation: 'offset of the data probe from the left edge of the graph'
     } );
 
     // @public
