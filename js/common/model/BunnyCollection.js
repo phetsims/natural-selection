@@ -132,7 +132,7 @@ class BunnyCollection {
       phet.log && phet.log( `total dead bunnies = ${this.deadBunnies.length}` );
     } );
 
-    // When a bunny is created or restored via PhET-iO. removeListener is not necessary.
+    // When a bunny is created, or restored via PhET-iO. removeListener is not necessary.
     bunnyGroup.elementCreatedEmitter.addListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
