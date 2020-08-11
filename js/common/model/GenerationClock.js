@@ -77,8 +77,12 @@ class GenerationClock extends PhetioObject {
       }
     );
     assert && this.currentGenerationProperty.lazyLink( ( currentGeneration, previousGeneration ) => {
-      assert && assert( currentGeneration === 0 || currentGeneration === previousGeneration + 1,
-        `skipped a generation, currentGeneration=${currentGeneration}, previousGeneration=${previousGeneration}` );
+
+      // Skip this when restoring PhET-iO state, because the initial state might be restored to any generation.
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+        assert && assert( currentGeneration === 0 || currentGeneration === previousGeneration + 1,
+          `skipped a generation, currentGeneration=${currentGeneration}, previousGeneration=${previousGeneration}` );
+      }
     } );
 
     // @public percent of the current clock cycle that has been completed. dispose is not necessary.
