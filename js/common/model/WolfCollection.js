@@ -142,6 +142,9 @@ class WolfCollection {
         // See https://github.com/phetsims/natural-selection/issues/110
         if ( this.enabledProperty.value &&
              previousPercentTime < CLOCK_WOLVES_MIDPOINT && currentPercentTime >= CLOCK_WOLVES_MIDPOINT ) {
+
+          // Ensure that 'eat' event is always recorded at the same time in the clock cycle, regardless of what
+          // the actual time is. See https://github.com/phetsims/natural-selection/issues/170.
           const generations = generationClock.currentGenerationProperty.value + CLOCK_WOLVES_MIDPOINT;
           this.eatBunnies( generations );
         }

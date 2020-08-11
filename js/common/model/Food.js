@@ -128,6 +128,9 @@ class Food {
         // See https://github.com/phetsims/natural-selection/issues/110
         if ( this.enabledProperty.value &&
              previousPercentTime < CLOCK_FOOD_MIDPOINT && currentPercentTime >= CLOCK_FOOD_MIDPOINT ) {
+
+          // Ensure that 'starve' event is always recorded at the same time in the clock cycle, regardless of what
+          // the actual time is. See https://github.com/phetsims/natural-selection/issues/170.
           const generations = generationClock.currentGenerationProperty.value + CLOCK_FOOD_MIDPOINT;
           this.starveBunnies( generations );
         }
