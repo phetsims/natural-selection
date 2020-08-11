@@ -44,6 +44,7 @@ class DataProbe extends PhetioObject {
     this.populationModel = populationModel;
 
     // @public the initial offset is as requested in https://github.com/phetsims/natural-selection/issues/173
+    // While we only need x offset, DragListener requires a {Property.<Vector2>}, and y offset will be constrained to 0.
     this.offsetProperty = new Vector2Property( new Vector2( 1.5, 0 ), {
       tandem: options.tandem.createTandem( 'offsetProperty' ),
       phetioDocumentation: 'offset of the data probe from the left edge of the graph'
