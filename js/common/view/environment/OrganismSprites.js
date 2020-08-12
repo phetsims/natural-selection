@@ -27,18 +27,11 @@ import bunnyWhiteFurFloppyEarsLongTeethImage from '../../../../images/bunny-whit
 import bunnyWhiteFurFloppyEarsShortTeethImage from '../../../../images/bunny-whiteFur-floppyEars-shortTeeth_png.js';
 import bunnyWhiteFurStraightEarsLongTeethImage from '../../../../images/bunny-whiteFur-straightEars-longTeeth_png.js';
 import bunnyWhiteFurStraightEarsShortTeethImage from '../../../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
-import shrubTenderAImage from '../../../../images/shrub-tender-A_png.js';
-import shrubTenderBImage from '../../../../images/shrub-tender-B_png.js';
-import shrubTenderCImage from '../../../../images/shrub-tender-C_png.js';
-import shrubToughAImage from '../../../../images/shrub-tough-A_png.js';
-import shrubToughBImage from '../../../../images/shrub-tough-B_png.js';
-import shrubToughCImage from '../../../../images/shrub-tough-C_png.js';
 import wolfImage from '../../../../images/wolf_png.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
 import BunnyCollection from '../../model/BunnyCollection.js';
 import Food from '../../model/Food.js';
-import Shrub from '../../model/Shrub.js';
 import Wolf from '../../model/Wolf.js';
 import WolfCollection from '../../model/WolfCollection.js';
 import BunnySelectionRectangleSprite from './BunnySelectionRectangleSprite.js';
@@ -47,6 +40,7 @@ import BunnySpriteImage from './BunnySpriteImage.js';
 import BunnySpriteInstance from './BunnySpriteInstance.js';
 import OrganismSpriteImage from './OrganismSpriteImage.js';
 import ShrubSpriteInstance from './ShrubSpriteInstance.js';
+import ShrubSpritesMap from './ShrubSpritesMap.js';
 import WolfSpriteInstance from './WolfSpriteInstance.js';
 
 class OrganismSprites extends Sprites {
@@ -101,26 +95,8 @@ class OrganismSprites extends Sprites {
     // The sprite that is used for all wolves.
     const wolfSprite = new Sprite( new OrganismSpriteImage( wolfImage ) );
 
-    // Sprites for all categories of shrubs. Maps a shrub category to a pair of sprites, for tough and tender versions
-    // of the shrub. Keys are described at Shrub.CATEGORIES.
-    const shrubSpritesMap = {
-
-      // key: value
-      'A': {
-        tenderSprite: new Sprite( new OrganismSpriteImage( shrubTenderAImage ) ),
-        toughSprite: new Sprite( new OrganismSpriteImage( shrubToughAImage ) )
-      },
-      'B': {
-        tenderSprite: new Sprite( new OrganismSpriteImage( shrubTenderBImage ) ),
-        toughSprite: new Sprite( new OrganismSpriteImage( shrubToughBImage ) )
-      },
-      'C': {
-        tenderSprite: new Sprite( new OrganismSpriteImage( shrubTenderCImage ) ),
-        toughSprite: new Sprite( new OrganismSpriteImage( shrubToughCImage ) )
-      }
-    };
-    assert && assert( _.every( _.keys( shrubSpritesMap ), key => Shrub.CATEGORIES.includes( key ) ),
-      'invalid key in shrubSpritesMap' );
+    // Sprites for all categories of shrubs.
+    const shrubSpritesMap = new ShrubSpritesMap();
 
     // Sprite for the bunny selection rectangle, sized to fit the largest bunny image.
     const selectionRectangleSprite = new BunnySelectionRectangleSprite( bunnyWhiteFurStraightEarsShortTeethImage );
@@ -131,15 +107,13 @@ class OrganismSprites extends Sprites {
     for ( const key in bunnySpritesMap ) {
       options.sprites.push( bunnySpritesMap[ key ] );
     }
-    for ( const key in shrubSpritesMap ) {
-      options.sprites.push( shrubSpritesMap[ key ].tenderSprite );
-      options.sprites.push( shrubSpritesMap[ key ].toughSprite );
-    }
+    options.sprites.push( ...shrubSpritesMap.getSprites() );
 
     // {ShrubSpriteInstance[]} sprite instances for shrubs
     const shrubSpriteInstances = _.map( food.shrubs, shrub =>
       new ShrubSpriteInstance( shrub, food.isToughProperty.value,
-        shrubSpritesMap[ shrub.category ].tenderSprite, shrubSpritesMap[ shrub.category ].toughSprite )
+        shrubSpritesMap.getTenderSprite( shrub.category ),
+        shrubSpritesMap.getToughSprite( shrub.category ) )
     );
 
     // {SpriteInstances[]} all sprite instances to be rendered, must be modified in place because super has a reference
