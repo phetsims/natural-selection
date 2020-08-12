@@ -1,6 +1,5 @@
 # TODO list for natural-selection
 
-* Rename wolvesPercentToKill and limitedFoodPercentToKill to indicate that they are ranges, change in model.md
 * Factor BunnySpritesMap (and other things?) out of OrganismSprites
 * Too many Properties with 'generation' in their name is confusing
 * More iteration over genes, less brute-force

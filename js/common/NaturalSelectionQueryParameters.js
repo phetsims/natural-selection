@@ -170,6 +170,9 @@ const SCHEMA = {
   // Bunnies whose fur color does NOT match the environment will be eaten at the rate of wolvesEnvironmentMultiplier *
   // wolvesPercentToKill.
   // Tuned in https://github.com/phetsims/natural-selection/issues/86
+  //
+  // NOTE: A better name for this would have been wolvesPercentToEatRange, but designers got used to it,
+  // so I didn't dare rename it.
   wolvesPercentToKill: {
     type: 'custom',
     parse: parseRange,
@@ -189,6 +192,9 @@ const SCHEMA = {
   // A value is randomly chosen from this range.
   // Bunnies will die at this rate regardless of their phenotype.
   // Tuned in https://github.com/phetsims/natural-selection/issues/86
+  //
+  // NOTE: A better name for this would have been limitedFoodPercentToStarveRange, but designers got used to it,
+  // so I didn't dare rename it.
   limitedFoodPercentToKill: {
     type: 'custom',
     parse: parseRange,
@@ -202,6 +208,9 @@ const SCHEMA = {
   // Bunnies with short teeth will die at the rate of toughFoodPercentToKill * ?shortTeethMultiplier.
   // If food is also limited, then the values for both types of bunny will be multiplied by ?limitedFoodMultiplier.
   // Tuned in https://github.com/phetsims/natural-selection/issues/86
+  //
+  // NOTE: A better name for this would have been toughFoodPercentToStarveRange, but designers got used to it,
+  // so I didn't dare rename it.
   toughFoodPercentToKill: {
     type: 'custom',
     parse: parseRange,
