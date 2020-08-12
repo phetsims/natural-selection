@@ -2,7 +2,7 @@
 
 /**
  * ZoomButtonGroup is a general 'modern' button group for zooming in and out.
- * In this sim, it's used for scaling the y axis of the Population graph.
+ * It was conceived and first used in natural-selection.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -20,7 +20,7 @@ import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 
 // constants
-const FONT = new PhetFont( 16 );
+const DEFAULT_FONT = new PhetFont( 16 );
 
 class ZoomButtonGroup extends LayoutBox {
 
@@ -50,6 +50,11 @@ class ZoomButtonGroup extends LayoutBox {
         fireOnHoldInterval: 250 // ms
       },
 
+      // Text options, for the + and - buttons
+      textOptions: {
+        font: DEFAULT_FONT
+      },
+
       // LayoutBox options
       spacing: 0,
       orientation: 'horizontal',
@@ -64,7 +69,7 @@ class ZoomButtonGroup extends LayoutBox {
 
     // zoom in
     const zoomInButton = new RectangularPushButton( merge( {}, options.buttonOptions, {
-      content: new Text( MathSymbols.PLUS, { font: FONT } ),
+      content: new Text( MathSymbols.PLUS, options.textOptions ),
       listener: () => {
         zoomLevelProperty.value += options.zoomInDelta;
       },
@@ -73,23 +78,31 @@ class ZoomButtonGroup extends LayoutBox {
 
     // zoom out
     const zoomOutButton = new RectangularPushButton( merge( {}, options.buttonOptions, {
-      content: new Text( MathSymbols.MINUS, { font: FONT } ),
+      content: new Text( MathSymbols.MINUS, options.textOptions ),
       listener: () => {
         zoomLevelProperty.value += options.zoomOutDelta;
       },
       tandem: options.tandem.createTandem( 'zoomOutButton' )
     } ) );
 
-    // disable a button if we reach the min or max
-    zoomLevelProperty.link( zoomLevel => {
-      zoomInButton.enabled = ( zoomLevel < zoomLevelProperty.range.max );
-      zoomOutButton.enabled = ( zoomLevel > zoomLevelProperty.range.min );
-    } );
-
     assert && assert( !options.children, 'ZoomButtonGroup sets children' );
     options.children = [ zoomInButton, zoomOutButton ];
 
     super( options );
+
+    // disable a button if we reach the min or max
+    const zoomLevelListener = zoomLevel => {
+      zoomOutButton.enabled = ( zoomLevel > zoomLevelProperty.range.min );
+      zoomInButton.enabled = ( zoomLevel < zoomLevelProperty.range.max );
+    };
+    zoomLevelProperty.link( zoomLevelListener );
+
+    // @private
+    this.disposeZoomButtonGroup = () => {
+      zoomInButton.dispose();
+      zoomOutButton.dispose();
+      zoomLevelProperty.unlink( zoomLevelListener );
+    };
   }
 
   /**
@@ -97,7 +110,7 @@ class ZoomButtonGroup extends LayoutBox {
    * @override
    */
   dispose() {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    this.disposeZoomButtonGroup();
     super.dispose();
   }
 }
