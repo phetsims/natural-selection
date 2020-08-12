@@ -115,7 +115,7 @@ on the clock) during which it is applied.
 The food "slice" of the generation clock occurs from 2:00-6:00. Food is applied at 4:00, and this is where
 you'll see data points related to food on the Population graph.
 
-Food consists of two factors that can be applied: tough food and limited food. 
+Food consists of two factors that can be applied: tough food and limited food.  Both factors result in bunnies dying of starvation.
 
 Tough food favors bunnies with long teeth by killing a greater percentage of bunnies with 
 short teeth. Additionally, if the number of bunnies with long teeth is small (less than 5),
