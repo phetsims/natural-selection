@@ -103,6 +103,7 @@ const NaturalSelectionConstants = {
 
   // Population graph
   POPULATION_POINT_RADIUS: 2.4, // point radius, in view coordinates
+  POPULATION_LINE_WIDTH: 2,  // line segment width, in view coordinates
   POPULATION_MUTANT_LINE_DASH: [ 3, 2 ],
 
   // Pedigree graph

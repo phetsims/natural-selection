@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import Shape from '../../../../../kite/js/Shape.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
@@ -31,11 +32,18 @@ class PopulationPlotsNode extends Node {
       gridHeight: 100
     }, options );
 
-    // Clipped to the graph, but dilated so that points and line segments at the edges of the grid are not clipped.
+    // Clipped to the graph, but dilated to mitigate clipping of points and line segments at the edges of the grid.
+    // Points (but not line segments) that fall at yMax will be slightly clipped as a compromise for improved clipping
+    // performance. See https://github.com/phetsims/natural-selection/issues/159
     assert && assert( !options.clipArea, 'PopulationPlotsNode sets clipArea' );
-    const clipAreaDilation = NaturalSelectionConstants.POPULATION_POINT_RADIUS;
-    options.clipArea = Shape.rectangle( -clipAreaDilation, 0,
-      options.gridWidth + 2 * clipAreaDilation, options.gridHeight + clipAreaDilation );
+    options.clipArea = Shape.bounds(
+      new Bounds2(
+        -NaturalSelectionConstants.POPULATION_POINT_RADIUS, // minX
+        -NaturalSelectionConstants.POPULATION_LINE_WIDTH / 2, // minY
+        options.gridWidth + NaturalSelectionConstants.POPULATION_POINT_RADIUS, // maxX
+        options.gridHeight + NaturalSelectionConstants.POPULATION_POINT_RADIUS // maxY
+      )
+    );
 
     // Options common to all PopulationPlotNode instances
     const plotNodeOptions = {

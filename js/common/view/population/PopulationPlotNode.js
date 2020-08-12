@@ -18,7 +18,6 @@ import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
 // constants
-const LINE_WIDTH = 2; // plotted line width, in view coordinates
 const NORMAL_LINE_DASH = [];
 const MUTANT_LINE_DASH = NaturalSelectionConstants.POPULATION_MUTANT_LINE_DASH;
 const MUTANT_LINE_DASH_SUM = _.sum( MUTANT_LINE_DASH );
@@ -51,7 +50,7 @@ class PopulationPlotNode extends Node {
     // Points will be connected using line segments that create a step plot
     const stepPath = new Path( new Shape(), {
       stroke: options.color,
-      lineWidth: LINE_WIDTH,
+      lineWidth: NaturalSelectionConstants.POPULATION_LINE_WIDTH,
       lineDash: options.isMutant ? MUTANT_LINE_DASH : NORMAL_LINE_DASH
     } );
 
