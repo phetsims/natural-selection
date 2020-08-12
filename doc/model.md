@@ -110,7 +110,7 @@ The environmental factors in this simulation affect bunny mortality, by selectin
 eliminating them. Each environmental factor has a corresponding "slice" of the generation clock (shown
 on the clock) during which it is applied. 
 
-## Food 
+### Food 
 
 The food "slice" of the generation clock occurs from 2:00-6:00. Food is applied at 4:00, and this is where
 you'll see data points related to food on the Population graph.
@@ -163,7 +163,7 @@ shortTeethMultiplier = 1.6
 limitedFoodMultiplier = 1.25
 ```
 
-## Wolves
+### Wolves
 
 The wolves "slice" of the generation clock occurs from 6:00-10:00, which is when you'll see them
 roaming around hunting. They eat at 8:00, and this is where you'll see data points related to 
