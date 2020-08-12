@@ -173,7 +173,7 @@ Wolves favor bunnies whose fur color matches their environment by eating a great
 bunnies whose fur color does not match their environment. If the population of favored bunnies is
 small (less than 6) and there are non-favored bunnies to eat, then the favored bunnies will be ignored.
 
-In pseudo code, here's the wolves algorithm for calculating the percentages of brown and white bunnies to eat:
+In pseudo code, here's the wolves selection algorithm for calculating the percentages of brown and white bunnies to eat:
 
 ```
 percentToEat = nextRandomInRange( wolvesPercentToKill );
