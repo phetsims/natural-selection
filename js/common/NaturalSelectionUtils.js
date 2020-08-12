@@ -64,6 +64,15 @@ const NaturalSelectionUtils = {
   },
 
   /**
+   * Determines when an array is sorted in descending order. Duplicates are allowed, and an empty array is considered sorted.
+   * @param {*[]} array
+   * @returns {boolean}
+   */
+  isSortedDescending( array ) {
+    return NaturalSelectionUtils.isSorted( array, ( value, nextValue ) => value >= nextValue );
+  },
+
+  /**
    * Determines whether a value is a positive number.
    * @param {*} value
    * @returns {boolean}

@@ -35,6 +35,9 @@ class ZoomButtonGroup extends LayoutBox {
 
     options = merge( {
 
+      zoomInDelta: 1,   // delta applied when the '+' button is pressed
+      zoomOutDelta: -1, // delta applied when the '-' button is pressed
+
       // RectangularPushButton options
       buttonOptions: {
         baseColor: NaturalSelectionColors.ZOOM_BUTTONS,
@@ -63,7 +66,7 @@ class ZoomButtonGroup extends LayoutBox {
     const zoomInButton = new RectangularPushButton( merge( {}, options.buttonOptions, {
       content: new Text( MathSymbols.PLUS, { font: FONT } ),
       listener: () => {
-        zoomLevelProperty.value -= 1;
+        zoomLevelProperty.value += options.zoomInDelta;
       },
       tandem: options.tandem.createTandem( 'zoomInButton' )
     } ) );
@@ -72,15 +75,15 @@ class ZoomButtonGroup extends LayoutBox {
     const zoomOutButton = new RectangularPushButton( merge( {}, options.buttonOptions, {
       content: new Text( MathSymbols.MINUS, { font: FONT } ),
       listener: () => {
-        zoomLevelProperty.value += 1;
+        zoomLevelProperty.value += options.zoomOutDelta;
       },
       tandem: options.tandem.createTandem( 'zoomOutButton' )
     } ) );
 
     // disable a button if we reach the min or max
     zoomLevelProperty.link( zoomLevel => {
-      zoomInButton.enabled = ( zoomLevel > zoomLevelProperty.range.min );
-      zoomOutButton.enabled = ( zoomLevel < zoomLevelProperty.range.max );
+      zoomInButton.enabled = ( zoomLevel < zoomLevelProperty.range.max );
+      zoomOutButton.enabled = ( zoomLevel > zoomLevelProperty.range.min );
     } );
 
     assert && assert( !options.children, 'ZoomButtonGroup sets children' );

@@ -31,25 +31,25 @@ import GenePool from './GenePool.js';
 // constants
 
 // The default index into Y_MAXIMUMS, determines the initial y-axis range.
-const Y_MAXIMUMS_INDEX_DEFAULT = 3;
+const Y_MAXIMUMS_INDEX_DEFAULT = 11;
 
 // Minimum value for the y-axis range.
 const Y_MINIMUM = 0;
 
 // Maximum population values for the y-axis range.
-const Y_MAXIMUMS = [ 5, 14, 30, 50, 70, 100, 140, 200, 240, 350, 500, 1000, 1400, 2000, 2500 ];
+const Y_MAXIMUMS = [ 2500, 2000, 1400, 1000, 500, 350, 240, 200, 140, 100, 70, 50, 30, 14, 5 ];
 assert && assert( _.every( value => NaturalSelectionUtils.isPositiveInteger( value ) ),
   'Y_MAXIMUMS must contain positive integer values' );
-assert && assert( NaturalSelectionUtils.isSorted( Y_MAXIMUMS ),
-  'Y_MAXIMUMS must be sorted in ascending order' );
+assert && assert( NaturalSelectionUtils.isSortedDescending( Y_MAXIMUMS ),
+  'Y_MAXIMUMS must be sorted in descending order' );
 
 // Spacing of tick marks for each value of Y_MAXIMUMS.
-const Y_TICK_SPACINGS = [ 1, 2, 5, 10, 10, 20, 20, 40, 40, 50, 100, 100, 200, 200, 500 ];
+const Y_TICK_SPACINGS = [ 500, 200, 200, 100, 100, 50, 40, 40, 20, 20, 10, 10, 5, 2, 1 ];
 assert && assert( Y_TICK_SPACINGS.length === Y_MAXIMUMS.length, 'incorrect number of Y_TICK_SPACINGS' );
 assert && assert( _.every( value => NaturalSelectionUtils.isPositiveInteger( value ) ),
   'Y_TICK_SPACINGS must contain positive integer values' );
-assert && assert( NaturalSelectionUtils.isSorted( Y_TICK_SPACINGS ),
-  'Y_TICK_SPACINGS must be sorted in ascending order' );
+assert && assert( NaturalSelectionUtils.isSortedDescending( Y_TICK_SPACINGS ),
+  'Y_TICK_SPACINGS must be sorted in descending order' );
 
 class PopulationModel extends PhetioObject {
 
@@ -159,7 +159,7 @@ class PopulationModel extends PhetioObject {
       numberType: 'Integer',
       range: new Range( 0, Y_MAXIMUMS.length - 1 ),
       tandem: options.tandem.createTandem( 'yZoomLevelProperty' ),
-      phetioDocumentation: 'Zooms in and out by selecting a pre-set y-axis range. The larger the value, the larger the y-axis range.'
+      phetioDocumentation: 'Zooms in and out by selecting a pre-set y-axis range. The smaller the value, the larger the y-axis range.'
     } );
 
     // @public range of the y-axis, in population. dispose is not necessary.
