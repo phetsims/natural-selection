@@ -4,4 +4,3 @@
 * Too many Properties with 'generation' in their name is confusing
 * More iteration over genes, less brute-force
 * Figure out things I don't understand in Bunny.js, Wolf.js, EnvironmentModelViewTransform.js
-* Migrate ZoomButtonGroup to common?

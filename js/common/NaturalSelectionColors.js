@@ -36,7 +36,6 @@ const NaturalSelectionColors = {
   ADD_A_MATE_BUTTON: PhetColorScheme.BUTTON_YELLOW,
   ADD_MUTATION_BUTTONS: 'rgb( 203, 203, 203 )',
   ARROW_BUTTONS: 'white',
-  ZOOM_BUTTONS: 'white',
 
   // Radio Buttons
   RADIO_BUTTON_SELECTED_STROKE: PhetColorScheme.BUTTON_YELLOW,

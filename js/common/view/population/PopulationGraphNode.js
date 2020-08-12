@@ -9,6 +9,7 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import merge from '../../../../../phet-core/js/merge.js';
+import ZoomButtonGroup from '../../../../../scenery-phet/js/ZoomButtonGroup.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
@@ -21,7 +22,6 @@ import DataProbeNode from './DataProbeNode.js';
 import GenerationScrollControl from './GenerationScrollControl.js';
 import PopulationGridNode from './PopulationGridNode.js';
 import PopulationPlotsNode from './PopulationPlotsNode.js';
-import ZoomButtonGroup from './ZoomButtonGroup.js';
 
 // const
 const X_TICK_MARKS_HEIGHT = 20; // height of x-axis tick marks, determined empirically
