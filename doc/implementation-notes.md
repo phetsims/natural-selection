@@ -13,9 +13,26 @@ In addition to this document, you are encouraged to read:
 * [PhET Software Design Patterns](https://github.com/phetsims/phet-info/blob/master/doc/phet-software-design-patterns.md)
 * [Natural Selection HTML5](https://docs.google.com/document/d/16C5TPL9LfK7JgYbo_NOP80FM5kOvCx2tMkvsZH4leQU/edit#), the design document
 
-## Memory management
+## Terminology
 
-All uses of `link`, `addListener`, etc. are documented as to whether they need a corresponding `unlink`, `removeListener`, etc.
+The *Terminology* section of [model.md](https://github.com/phetsims/natural-selection/blob/master/doc/model.md)
+documents domain terminology that you'll need to be familiar with in order to understand the implementation.
+
+These addition terms are specific to the implementation: 
+
+## Common Patterns
+
+**Model-View Transform**:
+
+**Coordinate Frames**:
+
+**Query Parameters**: Query parameters are used to enable sim-specific features, mainly for debugging and
+testing. Sim-specific query parameters are documented in
+[NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js).
+
+**Assertions**: The implementation makes heavy use of `assert` to verify pre/post assumptions and perform type checking. If you are making modifications to this sim, do so with assertions enabled via the `ea` query parameter.
+
+**Memory Management**: All uses of `link`, `addListener`, etc. are documented as to whether they need a corresponding `unlink`, `removeListener`, etc.
 
 All classes have a `dispose` method. Classes whose instances exist for the lifetime of the sim are not intended to 
 be disposed, and their `dispose` implementation looks like this:
@@ -30,3 +47,11 @@ be disposed, and their `dispose` implementation looks like this:
     super.dispose();
   }
 ```
+
+## Model
+
+## View
+
+## PhET-iO
+
+PhET-iO is a PhET product feature that is described at https://phet-io.colorado.edu.
