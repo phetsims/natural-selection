@@ -208,9 +208,9 @@ wolvesEnvironmentMultiplier = 2.3
 
 The population graph plot has time as its x axis, and population (number of bunnies) as its y axis. There is a plot for total number of bunnies, and a plot for each allele.  Data points for any plot may occur at the following times:
 
-12:00 bunnies die or old age and reproduce
-4:00 food factors result in bunnies starving
-8:00 wolves factor results in bunnies being eaten
+* 12:00 bunnies die or old age and reproduce
+* 4:00 food factors result in bunnies starving
+* 8:00 wolves factor results in bunnies being eaten
 
 ### Proportions graph
 
