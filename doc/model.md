@@ -201,3 +201,22 @@ As of this writing, their values are:
 wolvesPercentToKill = [ 0.35, 0.4 ] // a value is randomly selected from this range
 wolvesEnvironmentMultiplier = 2.3
 ```
+
+## Graphs
+
+### Population graph
+
+The population graph plot has time as its x axis, and population (number of bunnies) as its y axis. There is a plot for total number of bunnies, and a plot for each allele.  Data points for any plot may occur at the following times:
+
+12:00 bunnies die or old age and reproduce
+4:00 food factors result in bunnies starving
+8:00 wolves factor results in bunnies being eaten
+
+### Proportions graph
+
+The Proportions graph shows the proportions of alleles for each gene at the start and end of each generation. For the current generation, it shows the current proportion corresponding to the generation clock time.  The start proportion is computed at 12:00, immeditely _after_ bunnies die of old age and reproduce. The end proportion is computed at 12:00, immediate _before_ bunnies die of old age and reproduce.
+
+### Pedigree graph
+
+The Pedigree graph shows a bunny's pedigree to a maximum depth of 3 ancestors. The pedigree optionally shows genotype abbreviation. 
+A red 'X' on a bunny indicates that the bunny is dead.
