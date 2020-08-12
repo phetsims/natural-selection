@@ -108,9 +108,8 @@ that has the same mutant allele, so that the mutation appears in the phenotype a
 We refer to this prioritization as "mating eagerly".
 
 When a recessive mutant mates eagerly, it produces 5 offspring. The first 4 are as in the 
-Punnett Square described above, and will include 1 homozygous recessive bunny.  
-The 5th offspring is also homozygous recessive, in order to make the recessive allele
-propagate through the phenotype more quickly.
+Punnett Square described above, and will include 1 homozygous recessive bunny. The 5th offspring is 
+also homozygous recessive, in order to make the recessive allele propagate through the phenotype more quickly.
 
 A recessive mutant mates eagerly only once. Thereafter it mates like any other bunny.
 
