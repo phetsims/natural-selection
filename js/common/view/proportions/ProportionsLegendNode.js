@@ -96,34 +96,34 @@ class GeneLegendNode extends VBox {
 
   /**
    * @param {Gene} gene
-   * @param {Object} [options]
+   * @param {Object} config
    */
-  constructor( gene, options ) {
+  constructor( gene, config ) {
 
     assert && assert( gene instanceof Gene, 'invalid gene' );
 
-    options = merge( {
+    config = merge( {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      normalTandemName: required( null ), // tandem name for the normal allele
-      mutantTandemName: required( null ) // tandem name for the mutant allele
-    }, options );
+      normalTandemName: required( config.normalTandemName ), // tandem name for the normal allele
+      mutantTandemName: required( config.mutantTandemName ) // tandem name for the mutant allele
+    }, config );
 
-    assert && assert( !options.children, 'GeneLegendNode sets children' );
-    options = merge( {
+    assert && assert( !config.children, 'GeneLegendNode sets children' );
+    config = merge( {
       children: [
         new AlleleLegendNode( gene.normalAllele.name, gene.color, {
-          tandem: options.tandem.createTandem( options.normalTandemName )
+          tandem: config.tandem.createTandem( config.normalTandemName )
         } ),
         new AlleleLegendNode( gene.mutantAllele.name, gene.color, {
           isMutant: true,
-          tandem: options.tandem.createTandem( options.mutantTandemName )
+          tandem: config.tandem.createTandem( config.mutantTandemName )
         } )
       ]
-    }, NaturalSelectionConstants.VBOX_OPTIONS, options );
+    }, NaturalSelectionConstants.VBOX_OPTIONS, config );
 
-    super( options );
+    super( config );
   }
 
   /**
