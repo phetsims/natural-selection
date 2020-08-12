@@ -157,8 +157,8 @@ The parameters in the above algorithm are defined in
 As of this writing, their values are:
 
 ```
-toughFoodPercentToKill = [ 0.45, 0.6 ]
-limitedFoodPercentToKill = [ 0.6, 0.73 ]
+toughFoodPercentToKill = [ 0.45, 0.6 ] // a value is randomly selected from this range
+limitedFoodPercentToKill = [ 0.6, 0.73 ] // a value is randomly selected from this range
 shortTeethMultiplier = 1.6
 limitedFoodMultiplier = 1.25
 ```
@@ -198,6 +198,6 @@ The parameters in the above algorithm are defined in
 As of this writing, their values are:
 
 ```
-wolvesPercentToKill = [ 0.35, 0.4 ]
+wolvesPercentToKill = [ 0.35, 0.4 ] // a value is randomly selected from this range
 wolvesEnvironmentMultiplier = 2.3
 ```
