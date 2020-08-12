@@ -6,7 +6,10 @@ It's assumed that the reader has some basic knowledge of genetics.
 ## Time
 
 Time is measured in _**generations**_. Each revolution of the _**generation clock**_ 
-(shown at the top center of the user interface) corresponds to the passage of 1 generation. 
+(shown at the top center of the user interface) corresponds to the passage of 1 generation.
+
+Various events are described as times on a standard wall clock. 
+For example, "bunnies reproduce at 12:00", or "wolves eat at 8:00". 
 
 ## Genes and Alleles
 
@@ -92,15 +95,20 @@ by the user, via the _Add Mutations_ panel. The user specifies whether a mutant 
 is dominant or recessive with respect to the corresponding normal allele. The mutation is 
 then introduced the next time that bunnies reproduce.
 
+### Recessive Mutants
+
 ## Environmental Factors
 
 An _**environmental factor**_ (aka selective agent) is something in the environment that results in the 
 preferential survival and reproduction or preferential elimination of individuals with certain genotypes.
-All environmental factors in this simulation affect bunny mortality, by selecting bunnies and 
-eliminating them. 
+The environmental factors in this simulation affect bunny mortality, by selecting bunnies and 
+eliminating them. Each environmental factor has a corresponding "slice" of the generation clock (shown
+on the clock) during which it is applied. 
 
-## Food
+## Food 
+
+2:00-6:00, applied at 4:00
 
 ## Wolves
 
-## Recessive Mutants
+6:00-10:00, applied at 8:00
