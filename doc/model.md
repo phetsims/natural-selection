@@ -15,7 +15,7 @@ Time is measured in _**generations**_. Each revolution of the _**generation cloc
 of a trait. Our 3 genes are: fur, ears, teeth.
 * Variants of a gene are called _**alleles**_. For example "white fur" and "brown fur" are alleles of the fur gene.
 (Note that gene and allele are often used interchangeably in the literature, but we attempt to use them 
-consistently as defined above.) 
+consistently as defined herein.) 
 * Each individual has 2 alleles for each gene, one allele inherited from each parent. These 2 alleles are 
 referred to as a _gene pair_.
 * If an individual's alleles are identical, it is _**homozygous**_. If its alleles are different, 
