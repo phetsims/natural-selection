@@ -137,7 +137,7 @@ Limited food does not favor any phenotype - the same percentage of bunnies with 
 is starved. Limited food is ignored if the population is small (less than 7) because a small 
 population can be sustained on limited food.
 
-In pseudo code, here's the food selection algorithm for calculating the percentages of long-toothed and short-toothed bunnies to eat:
+In pseudo code, here's the algorithm for calculating the percentages of long-toothed and short-toothed bunnies to eat:
 
 ```
 if ( tough food is enabled ) {
@@ -190,7 +190,7 @@ Wolves favor bunnies whose fur color matches their environment by eating a great
 bunnies whose fur color does not match their environment. If the population of favored bunnies is
 small (less than 6) and there are non-favored bunnies to eat, then the favored bunnies will be ignored.
 
-In pseudo code, here's the wolves selection algorithm for calculating the percentages of brown and white bunnies to eat:
+In pseudo code, here's the algorithm for calculating the percentages of brown and white bunnies to eat:
 
 ```
 percentToEat = nextRandomInRange( wolvesPercentToKill );
