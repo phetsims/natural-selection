@@ -5,7 +5,7 @@ It's assumed that the reader has some basic knowledge of genetics.
 
 ## Time
 
-Time is measured in generations. Each revolution of the _generation clock_ 
+Time is measured in _**generations**_. Each revolution of the _**generation clock**_ 
 (shown at the top center of the user interface) corresponds to the passage of 1 generation. 
 
 ## Genes and Alleles
