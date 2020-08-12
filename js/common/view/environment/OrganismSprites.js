@@ -72,16 +72,16 @@ class OrganismSprites extends Sprites {
     // Sprites for all bunny phenotypes
     const bunnySpritesMap = new BunnySpritesMap();
 
-    // Sprites for all categories of shrubs.
+    // Sprites for all categories of shrubs
     const shrubSpritesMap = new ShrubSpritesMap();
 
-    // The sprite that is used for all wolves.
+    // The sprite that is used for all wolves
     const wolfSprite = new Sprite( new OrganismSpriteImage( wolfImage ) );
 
-    // Sprite for the bunny selection rectangle, sized to fit the largest bunny image.
+    // Sprite for the bunny selection rectangle, sized to fit the largest bunny image
     const selectionRectangleSprite = new BunnySelectionRectangleSprite( bunnyWhiteFurStraightEarsShortTeethImage );
 
-    // {OrganismSprite[]} the complete unique set of sprites
+    // {OrganismSprite[]} the complete set of sprites
     assert && assert( !options.sprites, 'OrganismSprites sets sprites' );
     options.sprites = [ wolfSprite, selectionRectangleSprite ];
     options.sprites.push( ...bunnySpritesMap.getSprites() );
