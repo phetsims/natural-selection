@@ -181,6 +181,11 @@ The wolves "slice" of the generation clock occurs from 6:00-10:00, which is when
 roaming around hunting. They eat at 8:00, and this is where you'll see data points related to 
 wolves on the Population graph.
 
+The number of wolves is proportional to the number of bunnies, with a minimum number of wolves.
+The computations is:
+
+`numberOfWolves = max( 5, round( numberOfBunnies / 10 ) )`
+
 Wolves favor bunnies whose fur color matches their environment by eating a greater percentage of 
 bunnies whose fur color does not match their environment. If the population of favored bunnies is
 small (less than 6) and there are non-favored bunnies to eat, then the favored bunnies will be ignored.
@@ -224,7 +229,7 @@ The population graph plot has time as its x axis, and population (number of bunn
 | :--- | :--- |
 | 12:00 | bunnies die of old age and reproduce |
 | 4:00 | food factors result in bunnies starving |
-| 8:00 | wolves factor results in bunnies being eaten |
+| 8:00 | wolves eat bunnies |
 
 ### Proportions graph
 
