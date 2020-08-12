@@ -100,17 +100,19 @@ A mutation is introduced by randomly selecting one newborn bunny to received the
 that bunny's inherited alleles is selected randomly and replaced with the mutant allele.
 Multiple mutations may occur at the same time, but an individual will never receive more than one mutation.
 
-### Homozygous Recessive Mutants
+### Recessive Mutants
 
-When a homozygous recessive mutant is born, they are prioritized to mate as soon as possible with another bunny 
-that has the mutant allele, so that the mutation appears in the phenotype as soon as possible. We refer to
-this prioritization as "mating eagerly".
+When the user specifies that a mutation should be recessive, a recessive mutant is born.
+A newborn recessive mutant is prioritized to mate as soon as possible with another bunny 
+that has the same mutant allele, so that the mutation appears in the phenotype as soon as possible. 
+We refer to this prioritization as "mating eagerly".
 
-When a homozygous recessive mutant mates eagerly, it produces 5 offspring. The first 4 are as in the 
-Punnett Square described above.  The 5th offspring is homozygous recessive, in order to make the recessive allele
+When a recessive mutant mates eagerly, it produces 5 offspring. The first 4 are as in the 
+Punnett Square described above, and will include 1 homozygous recessive bunny.  
+The 5th offspring is also homozygous recessive, in order to make the recessive allele
 propagate through the phenotype more quickly.
 
-A homozygous recessive mutant mates eagerly only once. Thereafter it mates like any other bunny.
+A recessive mutant mates eagerly only once. Thereafter it mates like any other bunny.
 
 ## Environmental Factors
 
