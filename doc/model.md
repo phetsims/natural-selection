@@ -79,7 +79,7 @@ the allele inherited from the father is first, the mother is second.
 * When bunnies mate, they produce 4 offspring. Mating follows 
 [Mendelian Inheritance](https://en.wikipedia.org/wiki/Mendelian_inheritance), 
  with cross breeding as described by a [Punnett Square](https://en.wikipedia.org/wiki/Punnett_square).
- For example, this Punnett Square describes the fur gene pairs for the 4 offspring for an 'FF' father and 'Ff' mother:
+ For example, this Punnett Square describes the fur gene pairs for the 4 offspring of an 'FF' father and 'Ff' mother:
  
 | | **F** | **F** |
 |---|---|---|
