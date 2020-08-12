@@ -60,8 +60,8 @@ teeth are recessive (t), then genotype "FFEett" is parsed as:
   * Ee = 1 allele for floppy ears, 1 allele for straight ears
   * tt = 2 alleles for long teeth
 * The order of letters in our genotype abbreviations is relevant, and identifies the parent who contributed
-the allele. For example, 'Ff' is different than 'fF'. The first allele ('f') is inherited from the father, 
-the second ('F') from the mother.
+the allele. For example, 'Ff' is different than 'fF'. The first allele is inherited from the father, 
+the second from the mother.
 
 ## Life Expectancy
 
