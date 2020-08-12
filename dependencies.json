@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.1.0-dev.6 Tue Aug 11 2020 11:28:33 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.1.0-dev.7 Wed Aug 12 2020 13:26:33 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "1a41cef653bbed1025af5768bea958d7e3e0f8ae",
     "branch": "master"
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "natural-selection": {
-    "sha": "45b8bd0106b6776d5196d4490b2b01f1fe5d93a3",
+    "sha": "6ac09acbccdf17d50c539402dbf0d6252d267da4",
     "branch": "master"
   },
   "phet-core": {
@@ -37,7 +37,7 @@
     "branch": "master"
   },
   "phet-io": {
-    "sha": "9441ca74ec28f1afa5dc204679f25a747c457f73",
+    "sha": "4a47e87198634b3a013e99da38bd710ce6858aa1",
     "branch": "master"
   },
   "phet-io-client-guides": {
@@ -49,7 +49,7 @@
     "branch": "master"
   },
   "phetcommon": {
-    "sha": "dfa4530642f62b1137db204f1dcad41c13366913",
+    "sha": "219060b55fd4c38dc5526173167930bcf62212ff",
     "branch": "master"
   },
   "phetmarks": {
@@ -65,11 +65,11 @@
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "642a0d9878616cb625e7b97f8cc70ece3a1de244",
+    "sha": "17a9b7fdada325f639cfa12af987c40e8931d65f",
     "branch": "master"
   },
   "sherpa": {
-    "sha": "fb6f21e33be7b7d596cb61b383fd97763e36c391",
+    "sha": "258ab6305bc415aeada5b4ed6ad70442f9cb7ca0",
     "branch": "master"
   },
   "studio": {
@@ -85,7 +85,7 @@
     "branch": "master"
   },
   "tandem": {
-    "sha": "3fb3805adc12dae56c268cd67a8a4f7b47265c1f",
+    "sha": "090d88e4d93b5dbba4b9cacf4b866a903ef1dcf3",
     "branch": "master"
   },
   "utterance-queue": {
