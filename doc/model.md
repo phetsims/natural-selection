@@ -42,23 +42,23 @@ the alleles are identical. For heterozygous individuals, appearance is determine
 
 Genotype abbreviation:
 
-* Each gene has a pair of letters that are used to label its alleles: 
+* Each gene has a pair of letters that are used to label its 2 alleles: 
 'F' and 'f' for fur, 'E' and e' for ears, 'T' and 't' for teeth.
 * Dominant alleles are denoted by a capital letter, recessive alleles by a lowercase letter. 
 For example, if the "brown fur" mutation is dominant, then 'F' means brown fur, and 'f' means white fur.
-* Letters can be assigned to alleles only after a dominant/recessive relationship exists between 2 alleles. 
+* Letters can be assigned to alleles only after a dominance relationship exists. 
 For example, if the population consists of white bunnies, and the brown fur mutation has not yet occurred, 
 then it's impossible to label the white bunnies as 'F' or 'f', because "white fur" is not yet involved in a 
-dominant/recessive relationship.
-* For genes where a dominant/recessive relationship exists, the genotype is abbreviated using the 
+dominance relationship.
+* For genes where a dominance relationship exists, the genotype is abbreviated using the 
 letters mentioned above.  For example if brown fur is dominant (F), floppy ears are dominant (E), and long 
 teeth are recessive (t), then genotype "FFEett" is parsed as:
   * FF = 2 alleles for brown fur
   * Ee = 1 allele for floppy ears, 1 allele for straight ears
   * tt = 2 alleles for long teeth
-... and the bunny's phenotype (appearance) will be brown fur, floppy ears, long teeth.
-* The order of letters in our genotype abbreviations is relevant. 'Ff' is different than 'fF'. 
-In this sim, the first allele ('f') is inherited from the father, the second ('F') from the mother.
+* The order of letters in our genotype abbreviations is relevant, and identifies the parent who contributed
+the allele. For example, 'Ff' is different than 'fF'. The first allele ('f') is inherited from the father, 
+the second ('F') from the mother.
 
 ## Life Expectancy
 
