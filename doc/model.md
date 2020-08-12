@@ -107,8 +107,92 @@ on the clock) during which it is applied.
 
 ## Food 
 
-2:00-6:00, applied at 4:00
+The food "slice" of the generation clock occurs from 2:00-6:00. Food is applied at 4:00, and this is where
+you'll see data points related to food on the Population graph.
+
+Food consists of two factors that can be applied: tough food and limited food. 
+
+Tough food favors bunnies with long teeth by killing a greater percentage of bunnies with 
+short teeth. Additionally, if the number of bunnies with long teeth is small (less than 5),
+then no bunnies with long teeth are starved. 
+
+Limited food does not favor any phenotype - the same percentage of bunnies with long teeth and short teeth 
+is starved. Limited food is not applied for if the population is small (less than 7) because a small 
+population can be sustained on limited food.
+
+In pseudo code, here's the food selection algorithm:
+
+```
+if ( tough food is enabled ) {
+  percentToStarve = nextRandomInRange( toughFoodPercentToKill )
+  percentShortTeethStarved = percentToStarve * shortTeethMultiplier
+  percentLongTeethStarved = percentToStarve
+  if ( number of bunnies with long teeth < 5 ) {
+    percentLongTeethStarved = 0;
+  }
+}
+
+if ( limited food is enabled && total number of bunnies < 7 ) {
+  if ( tough food is enabled ) {
+    percentShortTeethStarved = percentShortTeethStarved * limitedFoodMultiplier
+    percentLongTeethStarved = percentLongTeethStarved * limitedFoodMultiplier
+  }
+  else {
+    percentToStarve = nextRandomInRange( limitedFoodPercentToKill )
+    percentLongTeethStarved = percentToStarve
+    percentShortTeethStarved = percentToStarve
+  }
+}
+
+percentShortTeethStarved = min( 1, percentShortTeethStarved )
+```
+
+The parameters in the above algorithm are defined in 
+[NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js).
+As of this writing, their values are:
+
+```
+toughFoodPercentToKill = [ 0.45, 0.6 ]
+limitedFoodPercentToKill = [ 0.6, 0.73 ]
+shortTeethMultiplier = 1.6
+limitedFoodMultiplier = 1.25
+```
 
 ## Wolves
 
-6:00-10:00, applied at 8:00
+The wolves "slice" of the generation clock occurs from 6:00-10:00, which is when you'll see them
+roaming around hunting. They eat at 8:00, and this is where you'll see data points related to 
+wolves on the Population graph.
+
+Wolves favor bunnies whose fur color matches their environment by eating a greater percentage of 
+bunnies whose fur color does not match their environment. If the population of favored bunnies is
+small (less than 6) and there are non-favored bunnies to eat, then the favored bunnies will be ignored.
+
+In pseudo code, here's the wolves algorithm:
+
+```
+percentToEat = nextRandomInRange( wolvesPercentToKill );
+if ( environment color is brown ) {
+  percentToEatWhite = percentToEat * wolvesEnvironmentMultiplier;
+  percentToEatBrown = percentToEat;
+  if ( number of brown bunnies < 6 && number of white bunnies > 0 ) {
+    percentToEatBrown = 0;
+  }
+}
+else {
+  percentToEatBrown = percentToEat * wolvesEnvironmentMultiplier;
+  percentToEatWhite = percentToEat;
+  if ( number of white bunnies < 6 && number of brown bunnies > 0 ) {
+    percentToEatWhite = 0;
+  }
+}
+```
+
+The parameters in the above algorithm are defined in 
+[NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js).
+As of this writing, their values are:
+
+```
+wolvesPercentToKill = [ 0.35, 0.4 ]
+wolvesEnvironmentMultiplier = 2.3
+```
