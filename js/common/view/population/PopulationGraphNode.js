@@ -21,7 +21,7 @@ import DataProbeNode from './DataProbeNode.js';
 import GenerationScrollControl from './GenerationScrollControl.js';
 import PopulationGridNode from './PopulationGridNode.js';
 import PopulationPlotsNode from './PopulationPlotsNode.js';
-import ZoomControl from './ZoomControl.js';
+import ZoomButtonGroup from './ZoomButtonGroup.js';
 
 // const
 const X_TICK_MARKS_HEIGHT = 20; // height of x-axis tick marks, determined empirically
@@ -77,26 +77,26 @@ class PopulationGraphNode extends Node {
       children: [ yAxisLabelNode ]
     } );
 
-    // Population (y-axis) zoom control
-    const yZoomControl = new ZoomControl( populationModel.yZoomLevelProperty, {
+    // Population (y-axis) zoom buttons
+    const yZoomButtonGroup = new ZoomButtonGroup( populationModel.yZoomLevelProperty, {
       orientation: 'vertical',
       zoomLevelMin: populationModel.yZoomLevelProperty.range.min,
       zoomLevelMax: populationModel.yZoomLevelProperty.range.max,
       left: boundsRectangle.left,
       top: boundsRectangle.top,
-      tandem: options.tandem.createTandem( 'yZoomControl' ),
+      tandem: options.tandem.createTandem( 'yZoomButtonGroup' ),
       phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
     } );
 
     // Dimensions of the 2D grid (sans tick marks) in view coordinates
-    const gridWidth = options.graphWidth - yZoomControl.width - Y_AXIS_LABEL_SPACING;
+    const gridWidth = options.graphWidth - yZoomButtonGroup.width - Y_AXIS_LABEL_SPACING;
     const gridHeight = options.graphHeight - generationScrollControl.height - X_TICK_MARKS_HEIGHT - X_AXIS_LABEL_SPACING;
 
     // the 2D grid, including tick marks
     const gridNode = new PopulationGridNode( populationModel, {
       gridWidth: gridWidth,
       gridHeight: gridHeight,
-      x: yZoomControl.right + Y_AXIS_LABEL_SPACING,
+      x: yZoomButtonGroup.right + Y_AXIS_LABEL_SPACING,
       y: boundsRectangle.top
     } );
 
@@ -124,7 +124,7 @@ class PopulationGraphNode extends Node {
     options.children = [
       boundsRectangle, gridNode,
       generationScrollControlWrapper,
-      yZoomControl, yAxisLabelNodeWrapper,
+      yZoomButtonGroup, yAxisLabelNodeWrapper,
       plotsNode,
       zoomOutToSeeDataText,
       dataProbeNode
@@ -138,7 +138,7 @@ class PopulationGraphNode extends Node {
 
     // Center y-axis label to left of graph. unlink is not necessary.
     yAxisLabelNode.localBoundsProperty.link( () => {
-      yAxisLabelNode.right = yZoomControl.right;
+      yAxisLabelNode.right = yZoomButtonGroup.right;
       yAxisLabelNode.centerY = gridNode.y + ( gridHeight / 2 );
     } );
 

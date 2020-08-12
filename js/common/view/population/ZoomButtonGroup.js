@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * ZoomControl is a general 'modern' control for zooming in and out.
+ * ZoomButtonGroup is a general 'modern' button group for zooming in and out.
  * In this sim, it's used for scaling the y axis of the Population graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -22,7 +22,7 @@ import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 // constants
 const FONT = new PhetFont( 16 );
 
-class ZoomControl extends LayoutBox {
+class ZoomButtonGroup extends LayoutBox {
 
   /**
    * @param {NumberProperty} zoomLevelProperty - smaller value means more zoomed in
@@ -56,8 +56,8 @@ class ZoomControl extends LayoutBox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    assert && assert( !options.buttonOptions.content, 'ZoomControl sets buttonOptions.content' );
-    assert && assert( !options.buttonOptions.listener, 'ZoomControl sets buttonOptions.listener' );
+    assert && assert( !options.buttonOptions.content, 'ZoomButtonGroup sets buttonOptions.content' );
+    assert && assert( !options.buttonOptions.listener, 'ZoomButtonGroup sets buttonOptions.listener' );
 
     // zoom in
     const zoomInButton = new RectangularPushButton( merge( {}, options.buttonOptions, {
@@ -83,7 +83,7 @@ class ZoomControl extends LayoutBox {
       zoomOutButton.enabled = ( zoomLevel < zoomLevelProperty.range.max );
     } );
 
-    assert && assert( !options.children, 'ZoomControl sets children' );
+    assert && assert( !options.children, 'ZoomButtonGroup sets children' );
     options.children = [ zoomInButton, zoomOutButton ];
 
     super( options );
@@ -99,5 +99,5 @@ class ZoomControl extends LayoutBox {
   }
 }
 
-naturalSelection.register( 'ZoomControl', ZoomControl );
-export default ZoomControl;
+naturalSelection.register( 'ZoomButtonGroup', ZoomButtonGroup );
+export default ZoomButtonGroup;
