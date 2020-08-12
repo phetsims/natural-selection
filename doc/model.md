@@ -1,6 +1,7 @@
 # Natural Selection - model description
 
 This document is a high-level description of the model used in PhET's _Natural Selection_ simulation.
+It's assumed that the reader has some basic knowledge of genetics.
 
 ## Terminology
 
@@ -32,21 +33,46 @@ organism's appearance.
 * ff - homozygous recessive
 * Ff, fF - heterozygous
 
-## Model
+## Genes: Alleles, Genotype, and Phenotype
 
-In the context of this sim:
+* The 3 genes types in the sim are: fur, ears, teeth.
+* Variants of a gene type are called _alleles_. For example "white fur" and "brown fur" are alleles of the fur gene. 
+* Each bunny has 2 alleles for each gene, one allele inherited from each parent. These 2 alleles are 
+referred to as a _gene pair_.
+* If a bunny's alleles are identical, it is _homozygous_; if its alleles are different, it is _heterozygous_.
+* A _normal_ (aka "wild type") allele is present in the natural population. For our bunnies, 
+the normal alleles are: white fur, straight ears, short teeth.
+* A _mutant_ allele is any allele that is not normal. For our bunnies, the mutant alleles are:
+ brown fur, floppy ears, long teeth.  
+* Mutation occurs when a mutant allele is introduced into the population. Mutations result from errors during DNA 
+replication, mitosis, and meiosis or other types of damage to DNA. In this sim, mutations are introduced
+by the user.  When a mutation is introduced, the user specifies whether the mutant allele is _dominant_ or 
+_recessive_ with respect to the corresponding normal allele. For example, mutation "brown fur" can be dominant 
+or recessive with respect to "white fur".
+* _Genotype_ is a complete set of genes, the blueprint for an organism. The blueprint consists of 2 alleles for each gene. 
+* _Phenotype_ is the appearance of the organism. For homozygous individuals, appearance is straightforward, since 
+they have 2 identical alleles. For heterozygous individuals, appearance is determined by the dominant allele.
 
-* A bunny has 3 traits, and 3 corresponding gene types: fur, ears, teeth.
-* A bunny has 6 genes, 2 of each gene type.  One of each type is inherited from each parent.
-* Prior to mutation, each gene type has 1 allele type.
-* After mutation, each gene type has 2 allele types, with an established dominance relationship. 
-* The alleles for fur are 'white fur' (normal) and 'brown fur' (mutation).
-* The alleles for ears are 'straight ears' (normal) and 'floppy ears' (mutation).
-* The alleles for teeth are 'short teeth' (normal) and 'long teeth' (mutation).
-* A bunny's genotype is its complete set of 6 genes (3 pairs).
-* A bunny's phenotype is how the bunny appears (fur, ears, and teeth) and functions due to its genotype.
+# Genotype Abbreviation
 
-The sim does not support genes with more than 2 allele types.
+* A genotype can be abbreviated by using letters to represent the bunny's alleles. Standards for abbreviation
+vary, and this section describes the abbreviation used in this simulation.
+* Each gene has a pair of letters that are used to label its alleles: 
+'F' and 'f' for fur, 'E' and e' for ears, 'T' and 't' for teeth.
+* Dominant alleles are denoted by a capital letter, recessive alleles by a lowercase letter. 
+For example, if the "brown fur" mutation is dominant, then 'F' means brown fur, and 'f' means white fur.
+* Letters can be assigned to alleles only after a dominant/recessive relationship exists between 2 alleles. 
+For example, if the population consists of white bunnies, and the brown fur mutation has not yet occurred, 
+then it's impossible to label the white bunnies as 'F' or 'f', because "white fur" is not yet involved in a 
+dominant/recessive relationship.
+* For genes where a dominant/recessive relationship exists, the genotype is abbreviated using the allele 
+letters mentioned above.  For example if brown fur is dominant (F), floppy ears are dominant (E), and long 
+teeth are recessive (t), then genotype "FFEett" is parsed as:
+  * FF = 2 alleles for brown fur
+  * Ee = 1 allele for floppy ears, 1 allele for straight ears
+  * tt = 2 alleles for long teeth
+... and the bunny's phenotype (appearance) will be brown fur, floppy ears, long teeth.
+
 
 Mating follows Mendelian inheritance, see Punnett square.
 
