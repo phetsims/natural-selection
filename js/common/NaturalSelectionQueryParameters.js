@@ -205,7 +205,7 @@ const SCHEMA = {
   toughFoodPercentToKill: {
     type: 'custom',
     parse: parseRange,
-    defaultValue: new Range( 0.45, 0.7 ),
+    defaultValue: new Range( 0.45, 0.6 ),
     isValidValue: range => NaturalSelectionUtils.isPercentRange( range )
   },
 
@@ -213,7 +213,7 @@ const SCHEMA = {
   // Tuned in https://github.com/phetsims/natural-selection/issues/86
   shortTeethMultiplier: {
     type: 'number',
-    defaultValue: 1.4,
+    defaultValue: 1.6,
     isValidValue: value => ( value > 1 )
   },
 
@@ -221,7 +221,7 @@ const SCHEMA = {
   // Tuned in https://github.com/phetsims/natural-selection/issues/86
   limitedFoodMultiplier: {
     type: 'number',
-    defaultValue: 1.02,
+    defaultValue: 1.25,
     isValidValue: value => ( value > 1 )
   },
 
@@ -292,17 +292,22 @@ function parseRange( value ) {
   return new Range( numbers[ 0 ], numbers[ 1 ] );
 }
 
+// log the values of all sim-specific query parameters
+phet.log && phet.log( 'query parameters: ' + JSON.stringify( NaturalSelectionQueryParameters, null, 2 ) );
+
 // validate query parameters
 assert && assert( NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier *
                   NaturalSelectionQueryParameters.wolvesPercentToKill.max <= 1,
   'wolvesEnvironmentMultiplier * wolvesPercentToKill.max must be <= 1' );
-assert && assert( NaturalSelectionQueryParameters.limitedFoodMultiplier *
-                  NaturalSelectionQueryParameters.shortTeethMultiplier *
-                  NaturalSelectionQueryParameters.toughFoodPercentToKill.max <= 1,
-  'limitedFoodMultiplier * shortTeethMultiplier * toughFoodPercentToKill.max must be <= 1' );
 
-// log the values of all sim-specific query parameters
-phet.log && phet.log( 'query parameters: ' + JSON.stringify( NaturalSelectionQueryParameters, null, 2 ) );
+// Tweaking the parameters for food required that we clamp this computation to 1. This warning is a reminder.
+// See https://github.com/phetsims/natural-selection/issues/168#issuecomment-673048314
+if ( NaturalSelectionQueryParameters.limitedFoodMultiplier *
+     NaturalSelectionQueryParameters.shortTeethMultiplier *
+     NaturalSelectionQueryParameters.toughFoodPercentToKill.max > 1 ) {
+  phet.log && phet.log( 'WARNING: limitedFoodMultiplier * shortTeethMultiplier * toughFoodPercentToKill.max > 1, ' +
+                        'and will be clamped to 1' );
+}
 
 naturalSelection.register( 'NaturalSelectionQueryParameters', NaturalSelectionQueryParameters );
 export default NaturalSelectionQueryParameters;

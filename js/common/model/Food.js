@@ -216,6 +216,10 @@ class Food {
         }
       }
 
+      // Query parameter values may result in a percentage > 1. If so, clamp to 1.
+      // As requested in https://github.com/phetsims/natural-selection/issues/168#issuecomment-673048314.
+      percentToStarveShortTeeth = Math.min( 1, percentToStarveShortTeeth );
+
       // Starve bunnies with short teeth.
       const numberStarvedShortTeeth = starveSomeBunnies( bunniesShortTeeth, percentToStarveShortTeeth );
       phet.log && phet.log( `${numberStarvedShortTeeth} of ${numberShortTeeth} short teeth died of starvation` );
