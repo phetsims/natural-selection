@@ -25,7 +25,7 @@ const FONT = new PhetFont( 16 );
 class ZoomButtonGroup extends LayoutBox {
 
   /**
-   * @param {NumberProperty} zoomLevelProperty - smaller value means more zoomed in
+   * @param {NumberProperty} zoomLevelProperty - smaller value means more zoomed out
    * @param {Object} [options]
    */
   constructor( zoomLevelProperty, options ) {
