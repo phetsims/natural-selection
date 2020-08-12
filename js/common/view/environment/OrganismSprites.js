@@ -19,13 +19,6 @@ import SpriteListenable from '../../../../../scenery/js/listeners/SpriteListenab
 import Sprites from '../../../../../scenery/js/nodes/Sprites.js';
 import Sprite from '../../../../../scenery/js/util/Sprite.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
-import bunnyBrownFurFloppyEarsLongTeethImage from '../../../../images/bunny-brownFur-floppyEars-longTeeth_png.js';
-import bunnyBrownFurFloppyEarsShortTeethImage from '../../../../images/bunny-brownFur-floppyEars-shortTeeth_png.js';
-import bunnyBrownFurStraightEarsLongTeethImage from '../../../../images/bunny-brownFur-straightEars-longTeeth_png.js';
-import bunnyBrownFurStraightEarsShortTeethImage from '../../../../images/bunny-brownFur-straightEars-shortTeeth_png.js';
-import bunnyWhiteFurFloppyEarsLongTeethImage from '../../../../images/bunny-whiteFur-floppyEars-longTeeth_png.js';
-import bunnyWhiteFurFloppyEarsShortTeethImage from '../../../../images/bunny-whiteFur-floppyEars-shortTeeth_png.js';
-import bunnyWhiteFurStraightEarsLongTeethImage from '../../../../images/bunny-whiteFur-straightEars-longTeeth_png.js';
 import bunnyWhiteFurStraightEarsShortTeethImage from '../../../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
 import wolfImage from '../../../../images/wolf_png.js';
 import naturalSelection from '../../../naturalSelection.js';
@@ -36,8 +29,8 @@ import Wolf from '../../model/Wolf.js';
 import WolfCollection from '../../model/WolfCollection.js';
 import BunnySelectionRectangleSprite from './BunnySelectionRectangleSprite.js';
 import BunnySelectionRectangleSpriteInstance from './BunnySelectionRectangleSpriteInstance.js';
-import BunnySpriteImage from './BunnySpriteImage.js';
 import BunnySpriteInstance from './BunnySpriteInstance.js';
+import BunnySpritesMap from './BunnySpritesMap.js';
 import OrganismSpriteImage from './OrganismSpriteImage.js';
 import ShrubSpriteInstance from './ShrubSpriteInstance.js';
 import ShrubSpritesMap from './ShrubSpritesMap.js';
@@ -76,27 +69,14 @@ class OrganismSprites extends Sprites {
     assert && assert( !options.canvasBounds, 'OrganismSprites sets canvasBounds' );
     options.canvasBounds = canvasBounds;
 
-    // Sprites for each possible bunny phenotype. Maps a phenotype key to an Image instance. The phenotype key pattern
-    // is '{{hasWhiteFur}}-{{hasStraightEars}}-{{hasShortTeeth}}', where the value for each placeholder is 'true' or
-    // 'false'. See getBunnySprite for how the key is assembled.
-    const bunnySpritesMap = {
-
-      // key: value
-      'true-true-true': new Sprite( new BunnySpriteImage( bunnyWhiteFurStraightEarsShortTeethImage ) ),
-      'true-true-false': new Sprite( new BunnySpriteImage( bunnyWhiteFurStraightEarsLongTeethImage ) ),
-      'true-false-true': new Sprite( new BunnySpriteImage( bunnyWhiteFurFloppyEarsShortTeethImage ) ),
-      'true-false-false': new Sprite( new BunnySpriteImage( bunnyWhiteFurFloppyEarsLongTeethImage ) ),
-      'false-true-true': new Sprite( new BunnySpriteImage( bunnyBrownFurStraightEarsShortTeethImage ) ),
-      'false-true-false': new Sprite( new BunnySpriteImage( bunnyBrownFurStraightEarsLongTeethImage ) ),
-      'false-false-true': new Sprite( new BunnySpriteImage( bunnyBrownFurFloppyEarsShortTeethImage ) ),
-      'false-false-false': new Sprite( new BunnySpriteImage( bunnyBrownFurFloppyEarsLongTeethImage ) )
-    };
-
-    // The sprite that is used for all wolves.
-    const wolfSprite = new Sprite( new OrganismSpriteImage( wolfImage ) );
+    // Sprites for all bunny phenotypes
+    const bunnySpritesMap = new BunnySpritesMap();
 
     // Sprites for all categories of shrubs.
     const shrubSpritesMap = new ShrubSpritesMap();
+
+    // The sprite that is used for all wolves.
+    const wolfSprite = new Sprite( new OrganismSpriteImage( wolfImage ) );
 
     // Sprite for the bunny selection rectangle, sized to fit the largest bunny image.
     const selectionRectangleSprite = new BunnySelectionRectangleSprite( bunnyWhiteFurStraightEarsShortTeethImage );
@@ -104,9 +84,7 @@ class OrganismSprites extends Sprites {
     // {OrganismSprite[]} the complete unique set of sprites
     assert && assert( !options.sprites, 'OrganismSprites sets sprites' );
     options.sprites = [ wolfSprite, selectionRectangleSprite ];
-    for ( const key in bunnySpritesMap ) {
-      options.sprites.push( bunnySpritesMap[ key ] );
-    }
+    options.sprites.push( ...bunnySpritesMap.getSprites() );
     options.sprites.push( ...shrubSpritesMap.getSprites() );
 
     // {ShrubSpriteInstance[]} sprite instances for shrubs
@@ -196,7 +174,7 @@ class OrganismSprites extends Sprites {
     assert && assert( bunny.isAlive, 'expected a live bunny' );
 
     // Create a SpriteInstance for the bunny.
-    const bunnySpriteInstance = new BunnySpriteInstance( bunny, this.getBunnySprite( bunny ) );
+    const bunnySpriteInstance = new BunnySpriteInstance( bunny, this.bunnySpritesMap.getSprite( bunny ) );
     this.spriteInstances.push( bunnySpriteInstance );
     if ( !this.isPlayingProperty.value ) {
       this.update();
@@ -447,26 +425,6 @@ class OrganismSprites extends Sprites {
 
       this.invalidatePaint();
     }
-  }
-
-  /**
-   * Gets the Sprite that matches a bunny's phenotype. Instead of a big if-then-else statement for each permutation
-   * of gene type, this implementation converts the phenotype to a string key, and maps that key to a Sprite.
-   * @param {Bunny} bunny
-   * @returns {Sprite}
-   * @private
-   */
-  getBunnySprite( bunny ) {
-    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-
-    // Create the key by inspecting the phenotype.
-    const key = `${bunny.phenotype.hasWhiteFur()}-${bunny.phenotype.hasStraightEars()}-${bunny.phenotype.hasShortTeeth()}`;
-
-    // Look up the image in the map.
-    const sprite = this.bunnySpritesMap[ key ];
-    assert && assert( sprite, `no sprite found for key ${key}` );
-
-    return sprite;
   }
 }
 
