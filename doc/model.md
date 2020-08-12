@@ -16,20 +16,19 @@ of a trait. Our 3 genes are: fur, ears, teeth.
 * Variants of a gene are called _**alleles**_. For example "white fur" and "brown fur" are alleles of the fur gene.
 (Note that gene and allele are often used interchangeably in the literature, but we attempt to use them 
 consistently as defined herein.) 
+* The complete collection of alleles that exist is referred to as the _**gene pool**_.
 * Each individual has 2 alleles for each gene, one allele inherited from each parent. These 2 alleles are 
-referred to as a _gene pair_.
+referred to as a _**gene pair**_.
 * If an individual's alleles are identical, it is _**homozygous**_. If its alleles are different, 
 it is _**heterozygous**_.
 * A _**normal**_ (aka "wild type") allele is present in the natural population. 
 For our bunnies, the normal alleles are: white fur, straight ears, short teeth.
 * A _**mutant**_ allele is any allele that is not normal. 
 For our bunnies, the mutant alleles are: brown fur, floppy ears, long teeth.  
-* Mutation occurs when a mutant allele is introduced into the population. Mutations result from errors during DNA 
-replication, mitosis, and meiosis or other types of damage to DNA. In this simulation, mutations are introduced
-by the user, via the _Add Mutation_ panel.  When a mutation is introduced, the user specifies whether the mutant allele 
-is _**dominant**_ or _**recessive**_ with respect to the corresponding normal allele. For example, mutation "brown fur" 
-can be dominant or recessive with respect to "white fur".
-* The collection of alleles that exist is referred to as the _**gene pool**_.
+* _**Dominance**_ is the effect of one allele masking the expression of a different allele. 
+The first allele is referred to as _**dominant**_ and the second is _**recessive**_. Note that since dominance
+is a relationship between 2 alleles, it is impossible to have a dominance relationship until a mutant allele
+has been introduced.
 
 ## Genotype and Phenotype
 
@@ -83,11 +82,22 @@ graph, the father is on the left, the mother is on the right.
 | **F** | FF | FF |
 | **f** | Ff | Ff|
 
+## Mutation
+
+_**Mutation**_ occurs when a mutant allele is introduced into the population. A mutant allele results from 
+errors during DNA replication, mitosis, and meiosis, or other types of damage to DNA. 
+
+In this simulation, mutations are introduced
+by the user, via the _Add Mutations_ panel. The user specifies whether a mutant allele 
+is dominant or recessive with respect to the corresponding normal allele. The mutation is 
+then introduced the next time that bunnies reproduce.
+
 ## Environmental Factors
 
-An environmental factor (aka factor, selection factor, or selection agent) is something that affects fertility
-or mortality. There are no factors in this simulation that affect fertility. All factors result affect 
-mortality by selecting bunnies and killing them. 
+An _**environmental factor**_ (aka selective agent) is something in the environment that results in the 
+preferential survival and reproduction or preferential elimination of individuals with certain genotypes.
+All environmental factors in this simulation affect bunny mortality, by selecting bunnies and 
+eliminating them. 
 
 ## Food
 
