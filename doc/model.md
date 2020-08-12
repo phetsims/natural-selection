@@ -8,7 +8,7 @@ It's assumed that the reader has some basic knowledge of genetics.
 Time is measured in _**generations**_. Each revolution of the _**generation clock**_ 
 (shown at the top center of the user interface) corresponds to the passage of 1 generation.
 
-Various events are described as times on a standard wall clock. 
+Various events are described as times relative to the "wall clock" time on the generation clock. 
 For example, "bunnies reproduce at 12:00", or "wolves eat at 8:00". 
 
 ## Genes and Alleles
@@ -60,8 +60,8 @@ teeth are recessive (t), then genotype "FFEett" is parsed as:
   * Ee = 1 allele for floppy ears, 1 allele for straight ears
   * tt = 2 alleles for long teeth
 * The order of letters in our genotype abbreviations is relevant, and identifies the parent who contributed
-the allele. For example, 'Ff' is different than 'fF'. The first allele ('f') is inherited from the father, 
-the second ('F') from the mother.
+the allele. For example, 'Ff' is different than 'fF'. The first allele is inherited from the father, 
+the second from the mother.
 
 ## Life Expectancy
 
@@ -74,11 +74,12 @@ just before reproduction occurs.
 * Bunnies reproduce at 12:00 on the generation clock.
 * Any bunny can mate with any other bunny. Age, sex, and pedigree relationship are irrelevant.
 * For convenience, we refer to the two parents as _**father**_ and _**mother**_. In the _Pedigree_ 
-graph, the father is on the left, the mother is on the right. 
+graph, the father is on the left, the mother is on the right. In genotype abbreviations (e.g. 'Ff'),
+the allele inherited from the father is first, the mother is second.
 * When bunnies mate, they produce 4 offspring. Mating follows 
 [Mendelian Inheritance](https://en.wikipedia.org/wiki/Mendelian_inheritance), 
  with cross breeding as described by a [Punnett Square](https://en.wikipedia.org/wiki/Punnett_square).
- For example, this Punnett Square describes the 4 offspring for an 'FF' father and 'Ff' mother:
+ For example, this Punnett Square describes the fur gene pairs for the 4 offspring of an 'FF' father and 'Ff' mother:
  
 | | **F** | **F** |
 |---|---|---|
@@ -93,9 +94,24 @@ errors during DNA replication, mitosis, and meiosis, or other types of damage to
 In this simulation, mutations are introduced
 by the user, via the _Add Mutations_ panel. The user specifies whether a mutant allele 
 is dominant or recessive with respect to the corresponding normal allele. The mutation is 
-then introduced the next time that bunnies reproduce.
+then introduced the next time that bunnies reproduce.  
+
+A mutation is introduced by randomly selecting one newborn bunny to received the mutation. One of
+that bunny's inherited alleles is selected randomly and replaced with the mutant allele.
+Multiple mutations may occur at the same time, but an individual will never receive more than one mutation.
 
 ### Recessive Mutants
+
+When the user specifies that a mutation should be recessive, a recessive mutant is born.
+A newborn recessive mutant is prioritized to mate as soon as possible with another bunny 
+that has the same mutant allele, so that the mutation appears in the phenotype as soon as possible. 
+We refer to this prioritization as "mating eagerly".
+
+When a recessive mutant mates eagerly, it produces 5 offspring. The first 4 are as in the 
+Punnett Square described above, and will include 1 homozygous recessive bunny. The 5th offspring is 
+also homozygous recessive, in order to make the recessive allele propagate through the phenotype more quickly.
+
+A recessive mutant mates eagerly only once. Thereafter it mates like any other bunny.
 
 ## Environmental Factors
 
@@ -105,22 +121,22 @@ The environmental factors in this simulation affect bunny mortality, by selectin
 eliminating them. Each environmental factor has a corresponding "slice" of the generation clock (shown
 on the clock) during which it is applied. 
 
-## Food 
+### Food 
 
 The food "slice" of the generation clock occurs from 2:00-6:00. Food is applied at 4:00, and this is where
 you'll see data points related to food on the Population graph.
 
-Food consists of two factors that can be applied: tough food and limited food. 
+Food consists of two factors that can be applied: tough food and limited food.  Both factors result in bunnies dying of starvation.
 
 Tough food favors bunnies with long teeth by killing a greater percentage of bunnies with 
 short teeth. Additionally, if the number of bunnies with long teeth is small (less than 5),
 then no bunnies with long teeth are starved. 
 
 Limited food does not favor any phenotype - the same percentage of bunnies with long teeth and short teeth 
-is starved. Limited food is not applied for if the population is small (less than 7) because a small 
+is starved. Limited food is ignored if the population is small (less than 7) because a small 
 population can be sustained on limited food.
 
-In pseudo code, here's the food selection algorithm:
+In pseudo code, here's the algorithm for calculating the percentages of long-toothed and short-toothed bunnies to eat:
 
 ```
 if ( tough food is enabled ) {
@@ -152,23 +168,28 @@ The parameters in the above algorithm are defined in
 As of this writing, their values are:
 
 ```
-toughFoodPercentToKill = [ 0.45, 0.6 ]
-limitedFoodPercentToKill = [ 0.6, 0.73 ]
+toughFoodPercentToKill = [ 0.45, 0.6 ] // a value is randomly selected from this range
+limitedFoodPercentToKill = [ 0.6, 0.73 ] // a value is randomly selected from this range
 shortTeethMultiplier = 1.6
 limitedFoodMultiplier = 1.25
 ```
 
-## Wolves
+### Wolves
 
 The wolves "slice" of the generation clock occurs from 6:00-10:00, which is when you'll see them
 roaming around hunting. They eat at 8:00, and this is where you'll see data points related to 
 wolves on the Population graph.
 
+The number of wolves is proportional to the number of bunnies, with a minimum number of wolves.
+The computation is:
+
+`numberOfWolves = max( 5, round( numberOfBunnies / 10 ) )`
+
 Wolves favor bunnies whose fur color matches their environment by eating a greater percentage of 
 bunnies whose fur color does not match their environment. If the population of favored bunnies is
 small (less than 6) and there are non-favored bunnies to eat, then the favored bunnies will be ignored.
 
-In pseudo code, here's the wolves algorithm:
+In pseudo code, here's the algorithm for calculating the percentages of brown and white bunnies to eat:
 
 ```
 percentToEat = nextRandomInRange( wolvesPercentToKill );
@@ -193,6 +214,27 @@ The parameters in the above algorithm are defined in
 As of this writing, their values are:
 
 ```
-wolvesPercentToKill = [ 0.35, 0.4 ]
+wolvesPercentToKill = [ 0.35, 0.4 ] // a value is randomly selected from this range
 wolvesEnvironmentMultiplier = 2.3
 ```
+
+## Graphs
+
+### Population graph
+
+The population graph plot has time as its x axis, and population (number of bunnies) as its y axis. There is a plot for total number of bunnies, and a plot for each allele.  Data points occur at the following times/events whenever there is a change in number of bunnies:
+
+| Time | Event |
+| :--- | :--- |
+| 12:00 | bunnies die of old age and reproduce |
+| 4:00 | food factors result in bunnies starving |
+| 8:00 | wolves eat bunnies |
+
+### Proportions graph
+
+The Proportions graph shows the proportions of alleles for each gene at the start and end of each generation. For the current generation, it shows the current proportion corresponding to the generation clock time.  The start proportion is computed at 12:00, immeditely _after_ bunnies die of old age and reproduce. The end proportion is computed at 12:00, immediate _before_ bunnies die of old age and reproduce.
+
+### Pedigree graph
+
+The Pedigree graph shows a bunny's pedigree to a maximum depth of 3 ancestors. The pedigree optionally shows genotype abbreviation. 
+A red 'X' on a bunny indicates that the bunny is dead.
