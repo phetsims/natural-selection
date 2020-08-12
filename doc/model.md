@@ -94,7 +94,11 @@ errors during DNA replication, mitosis, and meiosis, or other types of damage to
 In this simulation, mutations are introduced
 by the user, via the _Add Mutations_ panel. The user specifies whether a mutant allele 
 is dominant or recessive with respect to the corresponding normal allele. The mutation is 
-then introduced the next time that bunnies reproduce.
+then introduced the next time that bunnies reproduce.  
+
+A mutation is introduced by randomly selecting one newborn bunny to received the mutation. One of
+that bunny's inherited alleles is selected randomly and replaced with the mutant allele.
+Multiple mutations may occur at the same time, but an individual will never receive more than one mutation.
 
 ### Recessive Mutants
 
