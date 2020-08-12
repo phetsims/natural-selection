@@ -83,7 +83,6 @@ class BunnyCollection {
     // @private {Property.<Range>} the range of time that a bunny will reset between hops, in seconds.
     // This value is derived from population size, so that bunnies rest longer when the population is larger.
     // Range values and populations sizes are specified in https://github.com/phetsims/natural-selection/issues/129
-    //TODO this is called every time a bunny is born or dies, is there a performance impact?
     this.bunnyRestRangeProperty = new DerivedProperty(
       [ this.liveBunnies.lengthProperty ],
       length => {
