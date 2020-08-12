@@ -33,15 +33,15 @@ class PopulationPlotsNode extends Node {
     }, options );
 
     // Clipped to the graph, but dilated to mitigate clipping of points and line segments at the edges of the grid.
-    // Points (but not line segments) that fall at yMax will be slightly clipped as a compromise for improved clipping
-    // performance. See https://github.com/phetsims/natural-selection/issues/159
+    // Points (but not line segments) that fall at yMax (in model coordinates) will be slightly clipped as a compromise
+    // for improved clipping performance. See https://github.com/phetsims/natural-selection/issues/159
     assert && assert( !options.clipArea, 'PopulationPlotsNode sets clipArea' );
     options.clipArea = Shape.bounds(
       new Bounds2(
-        -NaturalSelectionConstants.POPULATION_POINT_RADIUS, // minX
-        -NaturalSelectionConstants.POPULATION_LINE_WIDTH / 2, // minY
-        options.gridWidth + NaturalSelectionConstants.POPULATION_POINT_RADIUS, // maxX
-        options.gridHeight + NaturalSelectionConstants.POPULATION_POINT_RADIUS // maxY
+        -NaturalSelectionConstants.POPULATION_POINT_RADIUS,
+        -NaturalSelectionConstants.POPULATION_LINE_WIDTH / 2,
+        options.gridWidth + NaturalSelectionConstants.POPULATION_POINT_RADIUS,
+        options.gridHeight + NaturalSelectionConstants.POPULATION_POINT_RADIUS
       )
     );
 
