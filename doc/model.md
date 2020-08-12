@@ -122,7 +122,7 @@ short teeth. Additionally, if the number of bunnies with long teeth is small (le
 then no bunnies with long teeth are starved. 
 
 Limited food does not favor any phenotype - the same percentage of bunnies with long teeth and short teeth 
-is starved. Limited food is not applied for if the population is small (less than 7) because a small 
+is starved. Limited food is ignored if the population is small (less than 7) because a small 
 population can be sustained on limited food.
 
 In pseudo code, here's the food selection algorithm:
