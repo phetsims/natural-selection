@@ -74,7 +74,8 @@ just before reproduction occurs.
 * Bunnies reproduce at 12:00 on the generation clock.
 * Any bunny can mate with any other bunny. Age, sex, and pedigree relationship are irrelevant.
 * For convenience, we refer to the two parents as _**father**_ and _**mother**_. In the _Pedigree_ 
-graph, the father is on the left, the mother is on the right. 
+graph, the father is on the left, the mother is on the right. In genotype abbreviations (e.g. 'Ff'),
+the allele inherited from the father is first, the mother is second.
 * When bunnies mate, they produce 4 offspring. Mating follows 
 [Mendelian Inheritance](https://en.wikipedia.org/wiki/Mendelian_inheritance), 
  with cross breeding as described by a [Punnett Square](https://en.wikipedia.org/wiki/Punnett_square).
