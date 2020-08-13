@@ -78,14 +78,11 @@ class Bunny extends Organism {
 
     super( modelViewTransform, options );
 
-    // @private
-    this.bunnyRestRangeProperty = bunnyRestRangeProperty;
-
     // @public (read-only)
-    this.father = options.father;
-    this.mother = options.mother;
+    this.father = options.father; // {Bunny|null} null if the bunny had no father, or the father was disposed
+    this.mother = options.mother; // {Bunny|null} null if the bunny had no mother, or the mother was disposed
     this.generation = options.generation;
-    this.isAlive = true;
+    this.isAlive = true; // dead bunnies are kept for the Pedigree graph
 
     // @public
     this.age = 0;
@@ -102,20 +99,25 @@ class Bunny extends Organism {
       tandem: options.tandem.createTandem( 'phenotype' )
     } );
 
+    // @private dynamic range for time spent resting between hops, in seconds. This is set by BunnyCollection based
+    // on the total number of bunnies, so that bunnies rest longer when the population is larger. More details at
+    // BunnyCollection.bunnyRestRangeProperty.
+    this.bunnyRestRangeProperty = bunnyRestRangeProperty;
+
     // @private {number} time to rest before hopping, randomized in initializeMotion
     this.restTime = this.bunnyRestRangeProperty.value.min;
+
+    // @private {number} the cumulative time spent resting since the last hop, in seconds
+    // Initialized with a random value so that bunnies born at the same time don't all hop at the same time.
+    this.cumulativeRestTime = phet.joist.random.nextDoubleInRange( this.bunnyRestRangeProperty.value );
 
     // @private {number} time to complete one full hop, randomized in initializeMotion
     this.hopTime = HOP_TIME_RANGE.max;
 
-    // @private {number} the cumulative time spent resting since the last hop, in seconds
-    // Initialize with a random value so that bunnies born at the same time don't all hop at the same time.
-    this.cumulativeRestTime = phet.joist.random.nextDoubleInRange( this.bunnyRestRangeProperty.value );
-
     // @private {number} the cumulative time spent hopping since the last reset, in seconds
     this.cumulativeHopTime = 0;
 
-    // @private {Vector3|null} the change in position when the bunny hops
+    // @private {Vector3|null} the change in position when the bunny hops, randomized in initializeMotion
     this.hopDelta = null;
 
     // Initialize the first motion cycle.
@@ -253,7 +255,7 @@ class Bunny extends Organism {
   }
 
   /**
-   * Do part of the hop cycle.
+   * Does part of a hop cycle.
    * @param {number} dt - time step, in seconds
    * @private
    */
@@ -413,7 +415,7 @@ class Bunny extends Organism {
 }
 
 /**
- * Gets the Vector3 that describes the change in x, y, and z for a hop cycle.
+ * Gets the (dx, dy, dz) for a hop cycle.
  * @param {number} hopDistance - maximum x and z distance that the bunny will hop
  * @param {number} hopHeight - height above the ground that the bunny will hop
  * @param {XDirection} xDirection - direction that the bunny is facing along the x axis
