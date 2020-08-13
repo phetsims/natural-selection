@@ -37,7 +37,7 @@ class Phenotype extends PhetioObject {
 
     super( options );
 
-    // @public (read-only) the alleles that correspond to the bunny's appearance
+    // @public (read-only) the alleles that determine the bunny's appearance
     this.furAllele = genotype.furGenePair.getVisibleAllele();
     this.earsAllele = genotype.earsGenePair.getVisibleAllele();
     this.teethAllele = genotype.teethGenePair.getVisibleAllele();

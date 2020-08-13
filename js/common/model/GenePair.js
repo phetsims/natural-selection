@@ -61,7 +61,7 @@ class GenePair extends PhetioObject {
     assert && assert( mutantAllele instanceof Allele, 'invalid mutantAllele' );
 
     // The mutation is randomly applied to either the father or mother allele, but not both. If the mutant allele is
-    // recessive, the mutation will not immediately affect appearance. It appear in the phenotype in some later
+    // recessive, the mutation will not immediately affect appearance. It appears in the phenotype in some later
     // generation, when a homozygous recessive bunny is born.
     if ( phet.joist.random.nextBoolean() ) {
       this.fatherAllele = mutantAllele;
@@ -117,8 +117,8 @@ class GenePair extends PhetioObject {
   }
 
   /**
-   * Gets the genotype abbreviation for the alleles in this gene pair. If there is no dominant gene,
-   * then an abbreviation is meaningless, and the empty string is returned.
+   * Gets the genotype abbreviation for the alleles in this gene pair. If there is no dominant gene (and therefore
+   * no dominance relationship), then an abbreviation is meaningless, and the empty string is returned.
    * @param {boolean} translated - true = translated (default), false = untranslated
    * @returns {string}
    * @public

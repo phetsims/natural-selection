@@ -29,7 +29,7 @@ class PedigreeModel extends PhetioObject {
 
     super( options );
 
-    // @public visibility of the alleles for each gene type in the Pedigree tree
+    // @public visibility of each gene in the genotype abbreviation that appears in the Pedigree tree
     this.furAllelesVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'furAllelesVisibleProperty' )
     } );

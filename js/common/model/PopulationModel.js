@@ -177,7 +177,7 @@ class PopulationModel extends PhetioObject {
       tandem: options.tandem.createTandem( 'dataProbe' )
     } );
 
-    // Scrolling the x-axis so that 'now' is always the max x value. unlink is not necessary.
+    // Scrolls the x-axis so that 'now' is always the max x value. unlink is not necessary.
     generationsProperty.link( generations => {
       const max = Math.max( options.xWidth, generations );
       if ( this.xRangeProperty.value.max !== max ) {
@@ -216,6 +216,7 @@ class PopulationModel extends PhetioObject {
     this.shortTeethPoints.reset();
     this.longTeethPoints.reset();
 
+    // reset visibility of plots
     this.totalVisibleProperty.reset();
     this.whiteFurVisibleProperty.reset();
     this.brownFurVisibleProperty.reset();

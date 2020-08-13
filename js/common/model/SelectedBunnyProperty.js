@@ -25,7 +25,7 @@ class SelectedBunnyProperty extends Property {
 
     options = merge( {
 
-      // {Bunny|null} the initial value
+      // {Bunny|null} null means no selection
       selectedBunny: null,
 
       // phet-io
