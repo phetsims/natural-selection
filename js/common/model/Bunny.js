@@ -167,14 +167,6 @@ class Bunny extends Organism {
    * @public
    * @override
    */
-  reset() {
-    assert && assert( false, 'Bunny does not support reset' );
-  }
-
-  /**
-   * @public
-   * @override
-   */
   dispose() {
     assert && assert( !this.isDisposed, 'bunny is already disposed' );
     this.disposeBunny();
