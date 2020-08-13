@@ -1,7 +1,6 @@
 # TODO list for natural-selection
 
 * More iteration over genes, less brute-force
-* Figure out things I don't understand in EnvironmentModelViewTransform.js
 
 * Too many Properties with 'generation' in their name is confusing
 

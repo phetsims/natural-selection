@@ -103,10 +103,10 @@ class EnvironmentModelViewTransform {
     // @private rise of the ground from zNearModel to zFarModel
     this.riseModel = 100;
 
-    //TODO I don't understand this
     // @private common scaling factor used to convert x and y between model and view
     // Multiply for model-to-view, divide for view-to-model.
-    this.scaleFactor = this.zNearModel * ( this.viewSize.height - this.yHorizonView ) / this.riseModel;
+    // Ported from Landscape.getFactor in the Java version.
+    this.xyScaleFactor = this.zNearModel * ( this.viewSize.height - this.yHorizonView ) / this.riseModel;
   }
 
   /**
@@ -148,6 +148,7 @@ class EnvironmentModelViewTransform {
 
   /**
    * Gets the ground y at the specified z coordinate.
+   * Adapted from Landscape.getGroundY in the Java version.
    * @param {number} zModel
    * @returns {number} y, in model coordinates
    * @public
@@ -165,13 +166,14 @@ class EnvironmentModelViewTransform {
 
   /**
    * Gets the maximum x value for a particular depth. This varies based on depth, since the ground is a trapezoid.
+   * Ported from Landscape.getMaximumX in the Java version.
    * @param zModel
    * @returns {number} maximum x, in model coordinates
    * @public
    */
   getMaximumX( zModel ) {
     assert && assert( zModel > 0, `invalid zModel: ${zModel}` );
-    return zModel * this.viewSize.width * 0.5 / this.scaleFactor;
+    return zModel * this.viewSize.width * 0.5 / this.xyScaleFactor;
   }
 
   /**
@@ -202,7 +204,6 @@ class EnvironmentModelViewTransform {
     return this.zFarModel;
   }
 
-  //TODO this isn't the same as scale used to compute coordinates, like getMaximumX. Should it be?
   /**
    * Gets the view scaling factor that corresponds to model z position.
    * @param {number} zModel
@@ -216,49 +217,51 @@ class EnvironmentModelViewTransform {
 
   /**
    * Given a 3D model position, project it into 2D view coordinates and return x.
+   * Extracted from Landscape.spriteToScreen in the Java version.
    * @param {Vector3 } position
    * @returns {number}
    * @public
    */
   modelToViewX( position ) {
     assert && assert( position.z !== 0, 'z cannot be zero' );
-    return ( this.viewSize.width / 2 ) + ( position.x / position.z ) * this.scaleFactor;
+    return ( this.viewSize.width / 2 ) + ( position.x / position.z ) * this.xyScaleFactor;
   }
 
   /**
    * Given a 3D model position, project it into 2D view coordinates and return y.
+   * Extracted from Landscape.spriteToScreen in the Java version.
    * @param {Vector3 } position
    * @returns {number}
    * @public
    */
   modelToViewY( position ) {
     assert && assert( position.z !== 0, 'z cannot be zero' );
-    return this.yHorizonView - ( position.y / position.z ) * this.scaleFactor;
+    return this.yHorizonView - ( position.y / position.z ) * this.xyScaleFactor;
   }
 
   /**
    * Given a view y value, return the model z value where the ground has that y height.
+   * Ported from Landscape.landscapeYToZ in the Java version.
    * @param {number} yView
    * @returns {number} z, in model coordinates
    * @public
    */
   viewToModelZ( yView ) {
     assert && assert( yView >= this.yHorizonView && yView <= this.viewSize.height, `invalid yView: ${yView}` );
-
-    //TODO what is this computation?
     return ( this.zNearModel * this.zFarModel * ( this.yHorizonView - this.viewSize.height ) ) /
            ( this.zFarModel * ( this.yHorizonView - yView ) + this.zNearModel * ( yView - this.viewSize.height ) );
   }
 
   /**
    * Given a view x value and a model z value, return the model x value.
+   * Ported from Landscape.landscapeXmodelZToX in the Java version.
    * @param {number} xView
    * @param {number} zModel
    * @returns {number} x, in model coordinates
    * @public
    */
   viewToModelX( xView, zModel ) {
-    return zModel * ( xView - this.viewSize.width / 2 ) / this.scaleFactor;
+    return zModel * ( xView - this.viewSize.width / 2 ) / this.xyScaleFactor;
   }
 
   /**
@@ -280,13 +283,14 @@ class EnvironmentModelViewTransform {
 
   /**
    * Turns a view distance (x or y) into a model distance at a specified model z.
+   * Ported from Landscape.landscapeDistanceToModel in the Java version.
    * @param {number} distanceView
    * @param {number} zModel
    * @returns {number} distance, in model coordinates
    * @public
    */
   viewToModelDistance( distanceView, zModel ) {
-    return distanceView * zModel / this.scaleFactor;
+    return distanceView * zModel / this.xyScaleFactor;
   }
 
   /**
