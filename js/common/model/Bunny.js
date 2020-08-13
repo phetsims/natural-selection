@@ -259,15 +259,15 @@ class Bunny extends Organism {
    */
   hop( dt ) {
 
-    // Portion of the hop to do
-    const scale = Math.min( dt, this.hopTime - this.cumulativeHopTime ) / this.hopTime;
+    // x and y parts of the hop. Don't do more than the remaining portion of the hop cycle.
+    const xzFraction = Math.min( dt, this.hopTime - this.cumulativeHopTime ) / this.hopTime;
+    const x = this.positionProperty.value.x + ( xzFraction * this.hopDelta.x );
+    const z = this.positionProperty.value.z + ( xzFraction * this.hopDelta.z );
 
-    const x = this.positionProperty.value.x + ( scale * this.hopDelta.x );
-    const z = this.positionProperty.value.z + ( scale * this.hopDelta.z );
-
-    const hopHeightFraction = this.cumulativeHopTime / this.hopTime;
-    //TODO I don't understand the last part of this, from Bunny.java moveAround
-    const y = this.modelViewTransform.getGroundY( z ) + this.hopDelta.y * 2 * ( -hopHeightFraction * hopHeightFraction + hopHeightFraction );
+    // Hop height (y) follows a quadratic arc. Again, don't do more than the remaining portion of the hop cycle.
+    const yFraction = Math.min( 1, this.cumulativeHopTime / this.hopTime );
+    const yAboveGround = this.hopDelta.y * 2 * ( -( yFraction * yFraction ) + yFraction );
+    const y = this.modelViewTransform.getGroundY( z ) + yAboveGround;
 
     this.positionProperty.value = new Vector3( x, y, z );
 
