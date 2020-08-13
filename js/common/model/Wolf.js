@@ -79,10 +79,12 @@ class Wolf extends Organism {
    */
   move( dt ) {
 
-    // Do some basic trig to compute motion in x and z planes
     const angle = phet.joist.random.nextDoubleBetween( 0, 2 * Math.PI );
-    const adjacent = dt * this.speed * Math.cos( angle ); // cos(theta) = adjacent/hypotenuse
-    const opposite = dt * this.speed * Math.sin( angle ); // sin(theta) = opposite/hypotenuse
+
+    // Do some basic trig to compute motion in x and z planes
+    const hypotenuse = dt * this.speed;
+    const adjacent = hypotenuse * Math.cos( angle ); // cos(theta) = adjacent/hypotenuse
+    const opposite = hypotenuse * Math.sin( angle ); // sin(theta) = opposite/hypotenuse
 
     // We'll use the larger motion for dx, the smaller for dz.
     const oppositeIsLarger = ( Math.abs( opposite ) > Math.abs( adjacent ) );
