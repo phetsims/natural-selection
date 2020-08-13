@@ -81,7 +81,8 @@ class BunnyCollection {
     } );
 
     // @private {Property.<Range>} the range of time that a bunny will reset between hops, in seconds.
-    // This value is derived from population size, so that bunnies rest longer when the population is larger.
+    // This value is derived from population size, so that bunnies rest longer when the population is larger,
+    // resulting in less motion on screen and fewer updates.
     // Range values and populations sizes are specified in https://github.com/phetsims/natural-selection/issues/129
     this.bunnyRestRangeProperty = new DerivedProperty(
       [ this.liveBunnies.lengthProperty ],
