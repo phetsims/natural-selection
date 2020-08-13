@@ -79,15 +79,17 @@ class Wolf extends Organism {
    */
   move( dt ) {
 
-    //TODO I don't understand the use of cos, sin, and swap -- same as Bunny.getHopDelta
+    // Do some basic trig to compute motion in x and z planes
     const angle = phet.joist.random.nextDoubleBetween( 0, 2 * Math.PI );
-    const a = dt * this.speed * Math.cos( angle );
-    const b = dt * this.speed * Math.sin( angle );
-    const swap = ( Math.abs( a ) < Math.abs( b ) );
+    const adjacent = dt * this.speed * Math.cos( angle ); // cos(theta) = adjacent/hypotenuse
+    const opposite = dt * this.speed * Math.sin( angle ); // sin(theta) = opposite/hypotenuse
+
+    // We'll use the larger motion for dx, the smaller for dz.
+    const oppositeIsLarger = ( Math.abs( opposite ) > Math.abs( adjacent ) );
 
     let z = this.positionProperty.value.z;
 
-    const dx = Math.abs( swap ? b : a ) * XDirection.toSign( this.xDirectionProperty.value );
+    const dx = Math.abs( oppositeIsLarger ? opposite : adjacent ) * XDirection.toSign( this.xDirectionProperty.value );
     let x = this.positionProperty.value.x + dx;
 
     // Reverse x direction if motion would exceed x boundaries
@@ -97,7 +99,7 @@ class Wolf extends Organism {
 
       // Change z when x direction changes.
       // Reverse z direction if motion would exceed z boundaries
-      const dz = ( swap ? a : b );
+      const dz = ( oppositeIsLarger ? adjacent : opposite );
       z = this.positionProperty.value.z + dz;
       if ( z <= this.getMinimumZ() || z >= this.getMaximumZ() ) {
         z = this.positionProperty.value.z - dz;
