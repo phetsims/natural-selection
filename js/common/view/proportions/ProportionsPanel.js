@@ -59,6 +59,10 @@ class ProportionsPanel extends NaturalSelectionPanel {
       merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
         tandem: options.tandem.createTandem( 'valuesCheckbox' )
       } ) );
+    const xDilation = 4;
+    const yDilation = 6;
+    valuesCheckbox.touchArea = valuesCheckbox.localBounds.dilatedXY( xDilation, yDilation );
+    valuesCheckbox.mouseArea = valuesCheckbox.localBounds.dilatedXY( xDilation, yDilation );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: [

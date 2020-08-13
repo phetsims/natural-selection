@@ -136,6 +136,10 @@ class Row extends VBox {
       merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
         tandem: options.tandem.createTandem( 'checkbox' )
       } ) );
+    const xDilation = 6;
+    const yDilation = 8;
+    checkbox.touchArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
+    checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
 
     // Dominant allele
     const dominantAlleleNode = new AlleleNode( gene.dominantAbbreviationTranslated, gene.normalAllele.image );

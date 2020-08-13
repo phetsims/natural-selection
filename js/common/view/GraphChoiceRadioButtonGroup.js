@@ -36,6 +36,8 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
       radius: 8,
       xSpacing: 10,
       spacing: 12,
+      touchAreaXDilation: 4,
+      mouseAreaXDilation: 4,
 
       // phet-io
       tandem: Tandem.REQUIRED

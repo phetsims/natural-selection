@@ -51,7 +51,9 @@ const NaturalSelectionConstants = {
     arrowWidth: 8, // width of base
     arrowHeight: 10, // from tip to base
     xMargin: 6,
-    yMargin: 4
+    yMargin: 4,
+    touchAreaXDilation: 7,
+    touchAreaYDilation: 6
   },
 
   // Checkbox

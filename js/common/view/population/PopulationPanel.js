@@ -97,10 +97,11 @@ class PopulationPanel extends NaturalSelectionPanel {
 
     // Dilate the pointer areas to fill vertical space between the checkboxes.
     // See https://github.com/phetsims/natural-selection/issues/173
+    const xDilation = 4;
     const yDilation = NaturalSelectionConstants.VBOX_OPTIONS.spacing / 2;
     checkboxes.children.forEach( checkbox => {
-      checkbox.touchArea = checkbox.localBounds.dilatedXY( 4, yDilation );
-      checkbox.mouseArea = checkbox.localBounds.dilatedXY( 4, yDilation );
+      checkbox.touchArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
+      checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
     } );
 
     const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin, {
@@ -117,6 +118,8 @@ class PopulationPanel extends NaturalSelectionPanel {
       merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
         tandem: options.tandem.createTandem( 'dataProbeCheckbox' )
       } ) );
+    dataProbeCheckbox.touchArea = dataProbeCheckbox.localBounds.dilatedXY( xDilation, yDilation );
+    dataProbeCheckbox.mouseArea = dataProbeCheckbox.localBounds.dilatedXY( xDilation, yDilation );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: [

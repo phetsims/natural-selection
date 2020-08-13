@@ -72,10 +72,11 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     // these checkboxes that use AlignGroup. So this forces the pointer areas to be recomputed, and also dilates the
     // pointer areas to fill vertical space between the checkboxes.
     // See https://github.com/phetsims/natural-selection/issues/145 and https://github.com/phetsims/natural-selection/issues/173
+    const xDilation = 4;
     const yDilation = NaturalSelectionConstants.VBOX_OPTIONS.spacing / 2;
     checkboxes.children.forEach( checkbox => {
-      checkbox.touchArea = checkbox.localBounds.dilatedXY( 4, yDilation );
-      checkbox.mouseArea = checkbox.localBounds.dilatedXY( 4, yDilation );
+      checkbox.touchArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
+      checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
     } );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
