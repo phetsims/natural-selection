@@ -242,7 +242,13 @@ function createNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, options
     bunnyCounts => bunnyCounts ? bunnyCounts[ bunnyCountsFieldName ] : null
   );
 
-  return new NumberDisplay( countProperty, NUMBER_DISPLAY_RANGE, options );
+  const numberDisplay = new NumberDisplay( countProperty, NUMBER_DISPLAY_RANGE, options );
+
+  // Set non-dilated pointer areas so that they will be rendered by ?showPointerAreas.
+  numberDisplay.touchArea = numberDisplay.localBounds.dilated( 0 );
+  numberDisplay.mouseArea = numberDisplay.localBounds.dilated( 0 );
+
+  return numberDisplay;
 }
 
 naturalSelection.register( 'DataProbeNode', DataProbeNode );
