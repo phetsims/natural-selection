@@ -1,7 +1,12 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * PedigreeBranchNode is a branch of the Pedigree graph.  It connects a child bunny to 2 parent bunnies via a T shape.
+ * PedigreeBranchNode is a branch of the Pedigree graph. It connects a child bunny to 2 parent bunnies via a T shape:
+ *
+ *    father ----- mother
+ *             |
+ *          child
+ *
  * The parents are in turn instances of PedigreeBranchNode, so this is a recursively-defined structure.  If the bunny
  * has no parents, or we have reached the desired depth of the tree, then only the bunny is shown.
  *

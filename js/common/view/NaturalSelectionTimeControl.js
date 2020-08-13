@@ -2,7 +2,8 @@
 
 /**
  * NaturalSelectionTimeControl is the time control for this sim. It has a play/pause button and a fast-forward button.
- * To make the sim run faster, press and hold the fast-forward button.
+ * To make the sim run faster, press and hold the fast-forward button.  It has nothing in common with PhET's standard
+ * TimeControlNode other than a PlayPauseButton, so TimeControlNode is not used.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -59,6 +59,7 @@ class AllelesPanel extends NaturalSelectionPanel {
       tandem: options.tandem.createTandem( 'titleNode' )
     } );
 
+    // A row for each gene
     const furRow = new Row( genePool.furGene, furAllelesVisibleProperty, alleleAlignGroup, {
       tandem: options.tandem.createTandem( 'furRow' )
     } );

@@ -64,7 +64,8 @@ const NaturalSelectionUtils = {
   },
 
   /**
-   * Determines when an array is sorted in descending order. Duplicates are allowed, and an empty array is considered sorted.
+   * Determines whether an array is sorted in descending order.
+   * Duplicates are allowed, and an empty array is considered sorted.
    * @param {*[]} array
    * @returns {boolean}
    */

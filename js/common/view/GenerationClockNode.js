@@ -3,6 +3,7 @@
 /**
  * GenerationClockNode is the clock that does one complete revolution per generation.
  * It displays 'slices' for each environmental factor, to denote when they will be active.
+ * We commonly refer to times "like 12:00" as if this were a standard wall clock.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
