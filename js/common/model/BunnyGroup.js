@@ -42,8 +42,9 @@ class BunnyGroup extends PhetioGroup {
     }, options );
 
     /**
-     * Called to instantiate a Bunny. Note that genePool and modelViewTransform are passed via closure, so we don't
-     * have to create it as part of defaultArguments, and don't have to deal with serializing it in BunnyIO.
+     * Called to instantiate a Bunny. Note that genePool and modelViewTransform arguments to Bunny constructor
+     * are passed via closure, so we don't have to create them as part of defaultArguments, and don't have to
+     * deal with serializing them in BunnyIO.
      * @param {Tandem} tandem - PhetioGroup requires tandem to be the first param
      * @param {Object} bunnyOptions - options to Bunny constructor, not actually optional, because createElement
      *                                must have a fixed number of args
