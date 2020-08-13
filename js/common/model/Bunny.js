@@ -421,16 +421,19 @@ class Bunny extends Organism {
  */
 function getHopDelta( hopDistance, hopHeight, xDirection ) {
 
-  //TODO I don't understand the use of cos, sin, and swap
   const angle = phet.joist.random.nextDoubleBetween( 0, 2 * Math.PI );
-  const a = hopDistance * Math.cos( angle );
-  const b = hopDistance * Math.sin( angle );
 
-  const swap = ( Math.abs( a ) < Math.abs( b ) );
+  // Do some basic trig to compute motion in x and z planes
+  const hypotenuse = hopDistance;
+  const adjacent = hypotenuse * Math.cos( angle ); // cos(theta) = adjacent/hypotenuse
+  const opposite = hypotenuse * Math.sin( angle ); // sin(theta) = opposite/hypotenuse
 
-  const dx = Math.abs( swap ? b : a ) * XDirection.toSign( xDirection );
+  // We'll use the larger motion for dx, the smaller for dz.
+  const oppositeIsLarger = ( Math.abs( opposite ) > Math.abs( adjacent ) );
+
+  const dx = Math.abs( oppositeIsLarger ? opposite : adjacent ) * XDirection.toSign( xDirection );
   const dy = hopHeight;
-  const dz = ( swap ? a : b );
+  const dz = ( oppositeIsLarger ? adjacent : opposite );
   return new Vector3( dx, dy, dz );
 }
 
