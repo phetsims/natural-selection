@@ -1,5 +1,15 @@
 # TODO list for natural-selection
 
-* Too many Properties with 'generation' in their name is confusing
 * More iteration over genes, less brute-force
 * Figure out things I don't understand in Bunny.js, Wolf.js, EnvironmentModelViewTransform.js
+
+* Too many Properties with 'generation' in their name is confusing
+
+GenerationClock.generationsProperty - decimal
+GenerationClock.currentGenerationProperty - integer
+
+PopulationModel.generationsProperty (reference to GenerationClock.generationsProperty)
+
+ProportionsModel.generationProperty - integer, the generation displayed
+ProportionsModel.currentGenerationProperty (reference to GenerationClock.generationsProperty)
+ProportionsModel.isDisplayingCurrentGenerationProperty - is the graph displaying GenerationClock.currentGenerationProperty
