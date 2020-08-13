@@ -1,7 +1,5 @@
 # TODO list for natural-selection
 
-* More iteration over genes, less brute-force
-
 * Too many Properties with 'generation' in their name is confusing
 
 GenerationClock.generationsProperty - decimal
