@@ -33,6 +33,7 @@ import SelectedBunnyProperty from './SelectedBunnyProperty.js';
 // constants
 
 // Ranges for bunny rest time, as specified in https://github.com/phetsims/natural-selection/issues/129
+// Bunnies rest longer as the population grows larger.
 const BUNNY_REST_RANGE_SHORT = new Range( 1, 3 );
 const BUNNY_REST_RANGE_MEDIUM = new Range( 2, 7 );
 const BUNNY_REST_RANGE_LONG = new Range( 6, 10 );
@@ -74,7 +75,7 @@ class BunnyCollection {
 
     // @private {Bunny[]} Recessive mutants, to be mated eagerly so that their mutation appears in the phenotype as
     // soon as possible. Mutants are added to this array when born, and removed as soon as they have mated with
-    // another bunny that has the mutation.
+    // another bunny that has the same mutant allele.
     this.recessiveMutants = new BunnyArray( {
       tandem: options.tandem.createTandem( 'recessiveMutants' ),
       phetioDocumentation: 'for internal PhET use only'
@@ -107,7 +108,7 @@ class BunnyCollection {
       tandem: options.tandem.createTandem( 'bunnyGroup' )
     } );
 
-    // @public
+    // @public the bunny that is selected in the Pedigree graph
     this.selectedBunnyProperty = new SelectedBunnyProperty( {
       tandem: options.tandem.createTandem( 'selectedBunnyProperty' )
     } );
@@ -116,7 +117,7 @@ class BunnyCollection {
       phet.log && phet.log( `selectedBunny=${selectedBunny}` );
     } );
 
-    // @public notifies when all bunnies have died. dispose is not necessary.
+    // @public notifies listeners when all bunnies have died. dispose is not necessary.
     this.allBunniesHaveDiedEmitter = new Emitter();
     phet.log && this.allBunniesHaveDiedEmitter.addListener( () => {
       phet.log && phet.log( 'All of the bunnies have died.' );
@@ -124,7 +125,7 @@ class BunnyCollection {
       phet.log && phet.log( `total dead bunnies = ${this.deadBunnies.length}` );
     } );
 
-    // @public notifies when bunnies have taken over the world. dispose is not necessary.
+    // @public notifies listeners when bunnies have taken over the world. dispose is not necessary.
     this.bunniesHaveTakenOverTheWorldEmitter = new Emitter();
     phet.log && this.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
       phet.log && phet.log( 'Bunnies have taken over the world.' );
@@ -132,7 +133,8 @@ class BunnyCollection {
       phet.log && phet.log( `total dead bunnies = ${this.deadBunnies.length}` );
     } );
 
-    // When a bunny is created, or restored via PhET-iO. removeListener is not necessary.
+    // This listener is called when a bunny is created during normal running of the sim, or restored via PhET-iO.
+    // removeListener is not necessary.
     bunnyGroup.elementCreatedEmitter.addListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
@@ -199,7 +201,7 @@ class BunnyCollection {
   }
 
   /**
-   * Creates a generation-zero Bunny.
+   * Creates a generation-zero Bunny, which has no parents since its the first generation to exist.
    * @returns {Bunny}
    * @param {Object} [options]
    * @public
@@ -390,7 +392,7 @@ class BunnyCollection {
   /**
    * Mates each recessive mutant with a bunny that has the same mutation. This is referred to as 'mate eagerly', as
    * the purpose is to make the mutation appear in the phenotype sooner. This must be done separately from other mating
-   * because we don't want to apply additional mutations.  As a side-effect, bunnies that are successfully mated are
+   * because we don't want to apply additional mutations. As a side-effect, bunnies that are successfully mated are
    * removed from the bunnies array.
    * @param {number} generation
    * @param {Bunny[]} bunnies - the bunnies that are candidates for mating, modified as a side-effect

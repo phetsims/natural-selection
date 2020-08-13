@@ -1,5 +1,7 @@
 # TODO list for natural-selection
 
+* Duplication in BunnyCollection mateBunnies and mateRecessiveMutants
+
 * Too many Properties with 'generation' in their name is confusing
 
 GenerationClock.generationsProperty - decimal
