@@ -56,7 +56,7 @@ const NaturalSelectionColors = {
   PEDIGREE_GRAPH_FILL: 'rgb( 207, 221, 228 )',
 
   // Generation Clock
-  CLOCK_FILL: 'rgb( 203, 120, 162 )', // pink
+  CLOCK_FILL: '#f473a7', // pink
   CLOCK_STROKE: 'black',
   CLOCK_REVEAL_COLOR: 'rgba( 255, 255, 255, 0.4 )', // transparent white
   CLOCK_FOOD_SLICE_COLOR: 'rgb( 0, 210, 0 )', // green
