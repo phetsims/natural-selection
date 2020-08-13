@@ -83,6 +83,26 @@ class PopulationPanel extends NaturalSelectionPanel {
       tandem: options.tandem.createTandem( 'longTeethCheckbox' )
     } );
 
+    const checkboxes = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+      children: [
+        totalCheckbox,
+        whiteFurCheckbox,
+        brownFurCheckbox,
+        straightEarsCheckbox,
+        floppyEarsCheckbox,
+        shortTeethCheckbox,
+        longTeethCheckbox
+      ]
+    } ) );
+
+    // Dilate the pointer areas to fill vertical space between the checkboxes.
+    // See https://github.com/phetsims/natural-selection/issues/173
+    const yDilation = NaturalSelectionConstants.VBOX_OPTIONS.spacing / 2;
+    checkboxes.children.forEach( checkbox => {
+      checkbox.touchArea = checkbox.localBounds.dilatedXY( 4, yDilation );
+      checkbox.mouseArea = checkbox.localBounds.dilatedXY( 4, yDilation );
+    } );
+
     const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin, {
       stroke: NaturalSelectionColors.SEPARATOR_STROKE,
       tandem: options.tandem.createTandem( 'separator' )
@@ -100,13 +120,7 @@ class PopulationPanel extends NaturalSelectionPanel {
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: [
-        totalCheckbox,
-        whiteFurCheckbox,
-        brownFurCheckbox,
-        straightEarsCheckbox,
-        floppyEarsCheckbox,
-        shortTeethCheckbox,
-        longTeethCheckbox,
+        checkboxes,
         separator,
         dataProbeCheckbox
       ]
