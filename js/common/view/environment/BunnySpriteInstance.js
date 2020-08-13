@@ -2,6 +2,7 @@
 
 /**
  * BunnySpriteInstance is a specialization of OrganismSpriteInstance for bunnies.
+ * Each instance corresponds to a bunny in the model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

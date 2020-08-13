@@ -2,6 +2,7 @@
 
 /**
  * BunnySelectionRectangleSprite is the sprite for the bunny selection rectangle.
+ * It looks the same as the selection rectangle in the Pedigree graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

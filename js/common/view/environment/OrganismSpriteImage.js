@@ -27,7 +27,10 @@ class OrganismSpriteImage extends SpriteImage {
       pickable: false
     }, options );
 
-    super( image, new Vector2( image.width / 2, image.height ), options );
+    // Origin at bottom-center
+    const offset = new Vector2( image.width / 2, image.height );
+
+    super( image, offset, options );
   }
 }
 

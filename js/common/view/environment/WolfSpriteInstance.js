@@ -2,6 +2,7 @@
 
 /**
  * WolfSpriteInstance is a specialization of OrganismSpriteInstance for wolves.
+ * Each instance corresponds to a wolf in the model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

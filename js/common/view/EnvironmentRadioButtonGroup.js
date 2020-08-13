@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * EnvironmentRadioButtonGroup is the radio button group for choosing the abiotic component of the environment.
+ * EnvironmentRadioButtonGroup is the radio button group for choosing the environment that the bunnies live in.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

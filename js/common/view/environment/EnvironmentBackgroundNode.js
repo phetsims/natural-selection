@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * EnvironmentBackgroundNode shows the background image that corresponds to the abiotic environment.
+ * EnvironmentBackgroundNode shows the background image that corresponds to the environment.
  * The image is scaled to fit the specified dimensions.
  *
  * @author Chris Malley (PixelZoom, Inc.)

@@ -2,6 +2,7 @@
 
 /**
  * ShrubSpriteInstance is a specialization of OrganismSpriteInstance for shrubs.
+ * Each instance corresponds to a shrub in the model.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
