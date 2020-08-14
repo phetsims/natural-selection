@@ -209,6 +209,7 @@ class WolfCollection {
 
       // Eat some of each phenotype, but eat more of the bunnies whose fur color does not match the environment.
       const percentToEat = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.wolvesPercentToKill );
+      phet.log && phet.log( `randomly selected ${percentToEat} from wolvesPercentToKill` );
       const percentToEatMatch = percentToEat;
       const percentToEatNoMatch = percentToEat * NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier;
 
