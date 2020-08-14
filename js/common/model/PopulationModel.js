@@ -37,14 +37,14 @@ const Y_MAXIMUMS_INDEX_DEFAULT = 11;
 const Y_MINIMUM = 0;
 
 // Maximum population values for the y-axis range.
-const Y_MAXIMUMS = [ 2500, 2000, 1400, 1000, 500, 350, 240, 200, 140, 100, 70, 50, 30, 14, 5 ];
+const Y_MAXIMUMS = [ 2500, 2000, 1400, 1000, 700, 500, 350, 240, 200, 140, 100, 70, 50, 30, 14, 5 ];
 assert && assert( _.every( value => NaturalSelectionUtils.isPositiveInteger( value ) ),
   'Y_MAXIMUMS must contain positive integer values' );
 assert && assert( NaturalSelectionUtils.isSortedDescending( Y_MAXIMUMS ),
   'Y_MAXIMUMS must be sorted in descending order' );
 
 // Spacing of tick marks for each value of Y_MAXIMUMS.
-const Y_TICK_SPACINGS = [ 500, 200, 200, 100, 100, 50, 40, 40, 20, 20, 10, 10, 5, 2, 1 ];
+const Y_TICK_SPACINGS = [ 500, 200, 200, 100, 100, 100, 50, 40, 40, 20, 20, 10, 10, 5, 2, 1 ];
 assert && assert( Y_TICK_SPACINGS.length === Y_MAXIMUMS.length, 'incorrect number of Y_TICK_SPACINGS' );
 assert && assert( _.every( value => NaturalSelectionUtils.isPositiveInteger( value ) ),
   'Y_TICK_SPACINGS must contain positive integer values' );
