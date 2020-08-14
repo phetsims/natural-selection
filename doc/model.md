@@ -194,6 +194,7 @@ In pseudo code, here's the algorithm for calculating the percentages of brown an
 ```
 percentToEat = nextRandomInRange( [ 0.35, 0.4 ] );
 multiplier = 2.3
+
 if ( environment color is brown ) {
   percentToEatWhite = multiplier * percentToEat;
   percentToEatBrown = percentToEat;
