@@ -185,6 +185,7 @@ class Food {
       // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
       if ( this.isToughProperty.value ) {
         const percentToStarve = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.toughFoodPercentToKill );
+        phet.log && phet.log( `randomly selected ${percentToStarve} from toughFoodPercentToKill` );
         percentToStarveShortTeeth = percentToStarve * NaturalSelectionQueryParameters.shortTeethMultiplier;
         percentToStarveLongTeeth = percentToStarve;
         if ( numberLongTeeth < TOUGH_FOOD_MIN_LONG_TEETH ) {
@@ -210,6 +211,7 @@ class Food {
 
             // If limited food is applied without tough food, starve the same percentage of both phenotypes.
             const percentToStarve = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.limitedFoodPercentToKill );
+            phet.log && phet.log( `randomly selected ${percentToStarve} from limitedFoodPercentToKill` );
             percentToStarveShortTeeth = percentToStarve;
             percentToStarveLongTeeth = percentToStarve;
           }
