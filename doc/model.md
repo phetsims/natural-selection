@@ -192,30 +192,21 @@ small (less than 6) and there are non-favored bunnies to eat, then the favored b
 In pseudo code, here's the algorithm for calculating the percentages of brown and white bunnies to eat:
 
 ```
-percentToEat = nextRandomInRange( wolvesPercentToKill );
+percentToEat = nextRandomInRange( [ 0.35, 0.4 ] );
 if ( environment color is brown ) {
-  percentToEatWhite = percentToEat * wolvesEnvironmentMultiplier;
+  percentToEatWhite = 2.3 * percentToEat;
   percentToEatBrown = percentToEat;
   if ( number of brown bunnies < 6 && number of white bunnies > 0 ) {
     percentToEatBrown = 0;
   }
 }
 else {
-  percentToEatBrown = percentToEat * wolvesEnvironmentMultiplier;
+  percentToEatBrown = 2.3 * percentToEat ;
   percentToEatWhite = percentToEat;
   if ( number of white bunnies < 6 && number of brown bunnies > 0 ) {
     percentToEatWhite = 0;
   }
 }
-```
-
-The parameters in the above algorithm are defined in 
-[NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js).
-As of this writing, their values are:
-
-```
-wolvesPercentToKill = [ 0.35, 0.4 ] // a value is randomly selected from this range
-wolvesEnvironmentMultiplier = 2.3
 ```
 
 ## Graphs
