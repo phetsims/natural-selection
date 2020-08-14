@@ -213,13 +213,16 @@ class WolfCollection {
       const percentToEatMatch = percentToEat;
       const percentToEatNoMatch = percentToEat * NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier;
 
+      // Get the total bunnies before any are eaten.
+      const totalBunnies = this.bunnyCollection.getNumberOfLiveBunnies();
+
       // Eat white bunnies.
-      const numberEatenWhite = eatSomeBunnies( whiteBunnies, this.bunnyCollection.getNumberOfLiveBunnies(),
+      const numberEatenWhite = eatSomeBunnies( whiteBunnies, totalBunnies,
         this.environmentProperty.value, Environment.ARCTIC, percentToEatMatch, percentToEatNoMatch );
       phet.log && phet.log( `${numberEatenWhite} of ${whiteCount} white bunnies were eaten by wolves` );
 
       // Eat brown bunnies.
-      const numberEatenBrown = eatSomeBunnies( brownBunnies, this.bunnyCollection.getNumberOfLiveBunnies(),
+      const numberEatenBrown = eatSomeBunnies( brownBunnies, totalBunnies,
         this.environmentProperty.value, Environment.EQUATOR, percentToEatMatch, percentToEatNoMatch );
       phet.log && phet.log( `${numberEatenBrown} of ${brownCount} brown bunnies were eaten by wolves` );
 
@@ -255,7 +258,7 @@ function eatSomeBunnies( bunnies, totalBunnies, environment, environmentMatch, p
 
   if ( bunnies.length > 0 && percentToEat > 0 ) {
 
-    if ( ( environmentMatch === environment ) && ( bunnies.length < MIN_BUNNIES ) && ( totalBunnies >= MIN_BUNNIES ) ) {
+    if ( ( environmentMatch === environment ) && ( bunnies.length < MIN_BUNNIES ) && ( totalBunnies > bunnies.length ) ) {
 
       // Do nothing. The population whose fur color matches their environment is too small, and there are other bunnies to eat.
 
