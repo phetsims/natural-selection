@@ -193,15 +193,16 @@ In pseudo code, here's the algorithm for calculating the percentages of brown an
 
 ```
 percentToEat = nextRandomInRange( [ 0.35, 0.4 ] );
+multiplier = 2.3
 if ( environment color is brown ) {
-  percentToEatWhite = 2.3 * percentToEat;
+  percentToEatWhite = multiplier * percentToEat;
   percentToEatBrown = percentToEat;
   if ( number of brown bunnies < 6 && number of white bunnies > 0 ) {
     percentToEatBrown = 0;
   }
 }
 else {
-  percentToEatBrown = 2.3 * percentToEat ;
+  percentToEatBrown = multiplier * percentToEat ;
   percentToEatWhite = percentToEat;
   if ( number of white bunnies < 6 && number of brown bunnies > 0 ) {
     percentToEatWhite = 0;
