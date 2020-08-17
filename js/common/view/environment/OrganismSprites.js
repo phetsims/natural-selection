@@ -90,8 +90,7 @@ class OrganismSprites extends Sprites {
     // {ShrubSpriteInstance[]} sprite instances for shrubs
     const shrubSpriteInstances = _.map( food.shrubs, shrub =>
       new ShrubSpriteInstance( shrub, food.isToughProperty.value,
-        shrubSpritesMap.getTenderSprite( shrub.category ),
-        shrubSpritesMap.getToughSprite( shrub.category ) )
+        shrubSpritesMap.getNextTenderSprite(), shrubSpritesMap.getNextToughSprite() )
     );
 
     // {SpriteInstances[]} all sprite instances to be rendered, must be modified in place because super has a reference
@@ -282,8 +281,8 @@ class OrganismSprites extends Sprites {
 
     if ( isLimited ) {
 
-      // Food is limited, add every other shrub.
-      for ( let i = 0; i < this.shrubSpriteInstances.length; i += 2 ) {
+      // Food is limited, add half of the shrub.
+      for ( let i = 0; i < this.shrubSpriteInstances.length / 2; i++ ) {
         this.spriteInstances.push( this.shrubSpriteInstances[ i ] );
       }
     }

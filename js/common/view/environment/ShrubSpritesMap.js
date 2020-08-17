@@ -1,20 +1,19 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * ShrubSpritesMap maps categories of shrubs (defined in Shrub.CATEGORIES) to their Sprites for tough and tender food.
+ * ShrubSpritesMap manages the Sprites used for tough and tender food.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import Sprite from '../../../../../scenery/js/util/Sprite.js';
-import shrubTenderAImage from '../../../../images/shrub-tender-A_png.js';
-import shrubTenderBImage from '../../../../images/shrub-tender-B_png.js';
-import shrubTenderCImage from '../../../../images/shrub-tender-C_png.js';
-import shrubToughAImage from '../../../../images/shrub-tough-A_png.js';
-import shrubToughBImage from '../../../../images/shrub-tough-B_png.js';
-import shrubToughCImage from '../../../../images/shrub-tough-C_png.js';
+import tenderShrub1Image from '../../../../images/tenderShrub1_png.js';
+import tenderShrub2Image from '../../../../images/tenderShrub2_png.js';
+import tenderShrub3Image from '../../../../images/tenderShrub3_png.js';
+import toughShrub1Image from '../../../../images/toughShrub1_png.js';
+import toughShrub2Image from '../../../../images/toughShrub2_png.js';
+import toughShrub3Image from '../../../../images/toughShrub3_png.js';
 import naturalSelection from '../../../naturalSelection.js';
-import Shrub from '../../model/Shrub.js';
 import OrganismSpriteImage from './OrganismSpriteImage.js';
 
 class ShrubSpritesMap {
@@ -24,25 +23,25 @@ class ShrubSpritesMap {
    */
   constructor( options ) {
 
-    // @private
-    this.spritesMap = {
+    // @private {Sprite[]} sprites for tender food
+    this.tenderSprites = [
+      new Sprite( new OrganismSpriteImage( tenderShrub1Image ) ),
+      new Sprite( new OrganismSpriteImage( tenderShrub2Image ) ),
+      new Sprite( new OrganismSpriteImage( tenderShrub3Image ) )
+    ];
 
-      // category: value
-      'A': {
-        tenderSprite: new Sprite( new OrganismSpriteImage( shrubTenderAImage ) ),
-        toughSprite: new Sprite( new OrganismSpriteImage( shrubToughAImage ) )
-      },
-      'B': {
-        tenderSprite: new Sprite( new OrganismSpriteImage( shrubTenderBImage ) ),
-        toughSprite: new Sprite( new OrganismSpriteImage( shrubToughBImage ) )
-      },
-      'C': {
-        tenderSprite: new Sprite( new OrganismSpriteImage( shrubTenderCImage ) ),
-        toughSprite: new Sprite( new OrganismSpriteImage( shrubToughCImage ) )
-      }
-    };
-    assert && assert( _.every( _.keys( this.spritesMap ), key => Shrub.CATEGORIES.includes( key ) ),
-      'invalid key in shrubSpritesMap' );
+    // @private {number} index of the next sprite to use for tender food
+    this.tenderSpritesIndex = 0;
+
+    // @private {Sprite[]} sprites for tough food
+    this.toughSprites = [
+      new Sprite( new OrganismSpriteImage( toughShrub1Image ) ),
+      new Sprite( new OrganismSpriteImage( toughShrub2Image ) ),
+      new Sprite( new OrganismSpriteImage( toughShrub3Image ) )
+    ];
+
+    // @private {number} index of the next sprite to use for tough food
+    this.toughSpritesIndex = 0;
   }
 
   /**
@@ -51,34 +50,33 @@ class ShrubSpritesMap {
    * @public
    */
   getSprites() {
-    const sprites = [];
-    for ( const key in this.spritesMap ) {
-      sprites.push( this.spritesMap[ key ].tenderSprite );
-      sprites.push( this.spritesMap[ key ].toughSprite );
+    return this.tenderSprites.concat( this.toughSprites );
+  }
+
+  /**
+   * Gets the next sprite to use for tender shrubs.
+   * @returns {Sprite}
+   * @public
+   */
+  getNextTenderSprite() {
+    const sprite = this.tenderSprites[ this.tenderSpritesIndex++ ];
+    if ( this.tenderSpritesIndex >= this.tenderSprites.length ) {
+      this.tenderSpritesIndex = 0;
     }
-    return sprites;
+    return sprite;
   }
 
   /**
-   * Gets the sprite used for tender shrubs for a specified category.
-   * @param {string} category - see see Shrub.CATEGORIES
+   * Gets the next sprite to use for tough shrubs.
    * @returns {Sprite}
    * @public
    */
-  getTenderSprite( category ) {
-    assert && assert( Shrub.CATEGORIES.includes( category ), `invalid category: ${category}` );
-    return this.spritesMap[ category ].tenderSprite;
-  }
-
-  /**
-   * Gets the sprite used for tough shrubs for a specified category.
-   * @param {string} category - see Shrub.CATEGORIES
-   * @returns {Sprite}
-   * @public
-   */
-  getToughSprite( category ) {
-    assert && assert( Shrub.CATEGORIES.includes( category ), `invalid category: ${category}` );
-    return this.spritesMap[ category ].toughSprite;
+  getNextToughSprite( category ) {
+    const sprite = this.toughSprites[ this.toughSpritesIndex++ ];
+    if ( this.toughSpritesIndex >= this.toughSprites.length ) {
+      this.toughSpritesIndex = 0;
+    }
+    return sprite;
   }
 }
 

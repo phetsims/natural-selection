@@ -83,37 +83,25 @@ class Food {
     } );
 
     // @public (read-only) {Shrub[]} the collection of Shrubs
-    // Categories (A, B, C) and approximate positions are as specified in
-    // https://github.com/phetsims/natural-selection/issues/17
+    // Approximate positions are as specified in https://github.com/phetsims/natural-selection/issues/17
+    // Sprites are assigned to shrubs via ShrubSpritesMap.getNextTenderSprite and getNextToughSprite.
     this.shrubs = [
-
-      // A
       new Shrub( modelViewTransform, {
-        category: 'A',
         position: modelViewTransform.getGroundPosition( -65, 210 )
       } ),
       new Shrub( modelViewTransform, {
-        category: 'A',
-        position: modelViewTransform.getGroundPosition( 155, 160 )
-      } ),
-
-      // B
-      new Shrub( modelViewTransform, {
-        category: 'B',
         position: modelViewTransform.getGroundPosition( -155, 160 )
       } ),
       new Shrub( modelViewTransform, {
-        category: 'B',
-        position: modelViewTransform.getGroundPosition( 200, 250 )
-      } ),
-
-      // C
-      new Shrub( modelViewTransform, {
-        category: 'C',
         position: modelViewTransform.getGroundPosition( 60, 185 )
       } ),
       new Shrub( modelViewTransform, {
-        category: 'C',
+        position: modelViewTransform.getGroundPosition( 155, 160 )
+      } ),
+      new Shrub( modelViewTransform, {
+        position: modelViewTransform.getGroundPosition( 200, 250 )
+      } ),
+      new Shrub( modelViewTransform, {
         position: modelViewTransform.getGroundPosition( -180, 270 )
       } )
     ];
