@@ -10,6 +10,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
+import Random from '../../../../dot/js/Random.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -87,21 +88,31 @@ class Food {
       parameters: [ { valueType: 'number' } ] // generation value at which the event should be recorded
     } );
 
+    // Use our own instance of Random to produce locations for shrubs.
+    //TODO https://github.com/phetsims/natural-selection/issues/176 if we want the same locations each time, set a specific seed, and uninstrument shrubs.
+    // otherwise replace random with phet.joist.random
+    const random = new Random( { seed: phet.joist.random.nextDouble() } );
+
+    const shrubsTandem = options.tandem.createTandem( 'shrubs' );
+
     // @public (read-only) {Shrub[]} the collection of Shrubs
     // Shrubs are placed randomly in the environment.
     // Sprites are assigned to shrubs via ShrubSpritesMap.getNextTenderSprite and getNextToughSprite.
     this.shrubs = [];
-    const shrubsTandem = options.tandem.createTandem( 'shrubs' );
     const zRange = new Range( modelViewTransform.getMinimumZ() + SHRUBS_Z_MARGIN, modelViewTransform.getMaximumZ() - SHRUBS_Z_MARGIN );
-    for ( let i = 0; i < NaturalSelectionQueryParameters.shrubsRange.max; i++ ) {
-      const z = phet.joist.random.nextDoubleInRange( zRange );
+    const numberOfShrubs = NaturalSelectionQueryParameters.shrubsRange.max;
+    for ( let i = 0; i < numberOfShrubs; i++ ) {
+      const z = random.nextDoubleInRange( zRange );
       const xRange = new Range( modelViewTransform.getMinimumX( z ) + SHRUBS_X_MARGIN, modelViewTransform.getMaximumX( z ) - SHRUBS_X_MARGIN );
-      const x = phet.joist.random.nextDoubleInRange( xRange );
+      const x = random.nextDoubleInRange( xRange );
       this.shrubs.push( new Shrub( modelViewTransform, {
         position: modelViewTransform.getGroundPosition( x, z ),
+
+        //TODO https://github.com/phetsims/natural-selection/issues/176 if we use fixed locations for shrubs, remove instrumentation
         tandem: shrubsTandem.createTandem( `shrub${i}` )
       } ) );
     }
+    phet.log && phet.log( `${numberOfShrubs} shrubs randomly placed using seed ${random.getSeed()}` );
 
     // unlink is not necessary.
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
