@@ -10,6 +10,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
+import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -35,6 +36,10 @@ const LIMITED_FOOD_MIN_TOTAL = 7;
 // The minimum number of bunnies with long teeth required for tough food to be a factor for bunnies with long teeth,
 // see https://github.com/phetsims/natural-selection/issues/98
 const TOUGH_FOOD_MIN_LONG_TEETH = 5;
+
+// Margins for placing the shrubs from the edges of the model-view transform, in model coordinates
+const SHRUBS_X_MARGIN = 20;
+const SHRUBS_Z_MARGIN = 5;
 
 class Food {
 
@@ -83,28 +88,18 @@ class Food {
     } );
 
     // @public (read-only) {Shrub[]} the collection of Shrubs
-    // Approximate positions are as specified in https://github.com/phetsims/natural-selection/issues/17
+    // Shrubs are placed randomly in the environment.
     // Sprites are assigned to shrubs via ShrubSpritesMap.getNextTenderSprite and getNextToughSprite.
-    this.shrubs = [
-      new Shrub( modelViewTransform, {
-        position: modelViewTransform.getGroundPosition( -65, 210 )
-      } ),
-      new Shrub( modelViewTransform, {
-        position: modelViewTransform.getGroundPosition( -155, 160 )
-      } ),
-      new Shrub( modelViewTransform, {
-        position: modelViewTransform.getGroundPosition( 60, 185 )
-      } ),
-      new Shrub( modelViewTransform, {
-        position: modelViewTransform.getGroundPosition( 155, 160 )
-      } ),
-      new Shrub( modelViewTransform, {
-        position: modelViewTransform.getGroundPosition( 200, 250 )
-      } ),
-      new Shrub( modelViewTransform, {
-        position: modelViewTransform.getGroundPosition( -180, 270 )
-      } )
-    ];
+    this.shrubs = [];
+    const zRange = new Range( modelViewTransform.getMinimumZ() + SHRUBS_Z_MARGIN, modelViewTransform.getMaximumZ() - SHRUBS_Z_MARGIN );
+    for ( let i = 0; i < NaturalSelectionQueryParameters.shrubsRange.max; i++ ) {
+      const z = phet.joist.random.nextDoubleInRange( zRange );
+      const xRange = new Range( modelViewTransform.getMinimumX( z ) + SHRUBS_X_MARGIN, modelViewTransform.getMaximumX( z ) - SHRUBS_X_MARGIN );
+      const x = phet.joist.random.nextDoubleInRange( xRange );
+      this.shrubs.push( new Shrub( modelViewTransform, {
+        position: modelViewTransform.getGroundPosition( x, z )
+      } ) );
+    }
 
     // unlink is not necessary.
     generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
@@ -225,11 +220,6 @@ class Food {
     }
   }
 }
-
-// Determines what percentage of the shrubs are visible when food is limited.
-Food.LIMITED_FOOD_PERCENTAGE = 0.5;
-assert && assert( Food.LIMITED_FOOD_PERCENTAGE > 0 && Food.LIMITED_FOOD_PERCENTAGE < 1,
-  `invalid LIMITED_FOOD_PERCENTAGE: ${Food.LIMITED_FOOD_PERCENTAGE}` );
 
 /**
  * Starves a percentage of some set of bunnies.

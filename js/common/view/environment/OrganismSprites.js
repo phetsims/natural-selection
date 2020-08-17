@@ -12,7 +12,6 @@
  */
 
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
-import Utils from '../../../../../dot/js/Utils.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import PressListener from '../../../../../scenery/js/listeners/PressListener.js';
@@ -28,6 +27,7 @@ import BunnyCollection from '../../model/BunnyCollection.js';
 import Food from '../../model/Food.js';
 import Wolf from '../../model/Wolf.js';
 import WolfCollection from '../../model/WolfCollection.js';
+import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 import BunnySelectionRectangleSprite from './BunnySelectionRectangleSprite.js';
 import BunnySelectionRectangleSpriteInstance from './BunnySelectionRectangleSpriteInstance.js';
 import BunnySpriteInstance from './BunnySpriteInstance.js';
@@ -283,14 +283,13 @@ class OrganismSprites extends Sprites {
     if ( isLimited ) {
 
       // Food is limited, show some of the shrubs.
-      const numberOfVisibleShrubs = Utils.roundSymmetric( Food.LIMITED_FOOD_PERCENTAGE * this.shrubSpriteInstances.length );
-      for ( let i = 0; i < numberOfVisibleShrubs; i++ ) {
+      for ( let i = 0; i < NaturalSelectionQueryParameters.shrubsRange.min; i++ ) {
         this.spriteInstances.push( this.shrubSpriteInstances[ i ] );
       }
     }
     else {
 
-      // Food is plentiful, show all shrubs.
+      // Food is abundant, show all shrubs.
       this.shrubSpriteInstances.forEach( shrubSpriteInstance => {
         this.spriteInstances.push( shrubSpriteInstance );
       } );

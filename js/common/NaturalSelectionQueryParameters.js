@@ -263,6 +263,14 @@ const SCHEMA = {
     // most 1 mutation. And we have 3 mutations, for fur, ears, and teeth. So at most 1/3 of the population can get a
     // specific mutation.
     isValidValue: value => ( value > 0 && value <= 1 / 3 )
+  },
+
+  // Specifies the number of shrubs to show for limited (min) and abundant (max) food.
+  shrubsRange: {
+    type: 'custom',
+    parse: parseRange,
+    defaultValue: new Range( 10, 75 ),
+    isValidValue: range => ( range.min > 0 ) && ( range.max > range.min )
   }
 };
 
