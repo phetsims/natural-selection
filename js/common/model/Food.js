@@ -91,13 +91,15 @@ class Food {
     // Shrubs are placed randomly in the environment.
     // Sprites are assigned to shrubs via ShrubSpritesMap.getNextTenderSprite and getNextToughSprite.
     this.shrubs = [];
+    const shrubsTandem = options.tandem.createTandem( 'shrubs' );
     const zRange = new Range( modelViewTransform.getMinimumZ() + SHRUBS_Z_MARGIN, modelViewTransform.getMaximumZ() - SHRUBS_Z_MARGIN );
     for ( let i = 0; i < NaturalSelectionQueryParameters.shrubsRange.max; i++ ) {
       const z = phet.joist.random.nextDoubleInRange( zRange );
       const xRange = new Range( modelViewTransform.getMinimumX( z ) + SHRUBS_X_MARGIN, modelViewTransform.getMaximumX( z ) - SHRUBS_X_MARGIN );
       const x = phet.joist.random.nextDoubleInRange( xRange );
       this.shrubs.push( new Shrub( modelViewTransform, {
-        position: modelViewTransform.getGroundPosition( x, z )
+        position: modelViewTransform.getGroundPosition( x, z ),
+        tandem: shrubsTandem.createTandem( `shrub${i}` )
       } ) );
     }
 
@@ -143,7 +145,7 @@ class Food {
    */
   starveBunnies( generations ) {
     assert && assert( this.enabledProperty.value, 'Food is not enabled' );
-    assert && assert( NaturalSelectionUtils.isNonNegative( generations ), `invalid generations: ${generations}`);
+    assert && assert( NaturalSelectionUtils.isNonNegative( generations ), `invalid generations: ${generations}` );
 
     // Get the bunnies that are candidates for natural selection, in random order.
     const bunnies = this.bunnyCollection.getSelectionCandidates();
