@@ -226,6 +226,11 @@ class Food {
   }
 }
 
+// Determines what percentage of the shrubs are visible when food is limited.
+Food.LIMITED_FOOD_PERCENTAGE = 0.5;
+assert && assert( Food.LIMITED_FOOD_PERCENTAGE > 0 && Food.LIMITED_FOOD_PERCENTAGE < 1,
+  `invalid LIMITED_FOOD_PERCENTAGE: ${Food.LIMITED_FOOD_PERCENTAGE}` );
+
 /**
  * Starves a percentage of some set of bunnies.
  * @param {Bunny[]} bunnies - a set of bunnies, all with the same phenotype

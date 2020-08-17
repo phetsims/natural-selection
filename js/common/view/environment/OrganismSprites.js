@@ -12,6 +12,7 @@
  */
 
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
+import Utils from '../../../../../dot/js/Utils.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import PressListener from '../../../../../scenery/js/listeners/PressListener.js';
@@ -281,14 +282,15 @@ class OrganismSprites extends Sprites {
 
     if ( isLimited ) {
 
-      // Food is limited, add half of the shrub.
-      for ( let i = 0; i < this.shrubSpriteInstances.length / 2; i++ ) {
+      // Food is limited, show some of the shrubs.
+      const numberOfVisibleShrubs = Utils.roundSymmetric( Food.LIMITED_FOOD_PERCENTAGE * this.shrubSpriteInstances.length );
+      for ( let i = 0; i < numberOfVisibleShrubs; i++ ) {
         this.spriteInstances.push( this.shrubSpriteInstances[ i ] );
       }
     }
     else {
 
-      // Food is plentiful, add all shrubs.
+      // Food is plentiful, show all shrubs.
       this.shrubSpriteInstances.forEach( shrubSpriteInstance => {
         this.spriteInstances.push( shrubSpriteInstance );
       } );
