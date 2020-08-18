@@ -148,7 +148,7 @@ if ( tough food is enabled ) {
   }
 }
 
-if ( limited food is enabled && total number of bunnies < 7 ) {
+if ( limited food is enabled AND total number of bunnies < 7 ) {
   if ( tough food is enabled ) {
     limitedFoodMultiplier = 1.25
     percentShortTeethStarved = percentShortTeethStarved * limitedFoodMultiplier
