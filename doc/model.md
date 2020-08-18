@@ -121,53 +121,10 @@ The environmental factors in this simulation affect bunny mortality, by selectin
 eliminating them. Each environmental factor has a corresponding "slice" of the generation clock (shown
 on the clock) during which it is applied. 
 
-### Food 
-
-The food "slice" of the generation clock occurs from 2:00-6:00. Food is applied at 4:00, and this is where
-you'll see data points related to food on the Population graph.
-
-Food consists of two factors that can be applied: tough food and limited food.  Both factors result in bunnies dying of starvation.
-
-Tough food favors bunnies with long teeth by killing a greater percentage of bunnies with 
-short teeth. Additionally, if the number of bunnies with long teeth is small (less than 5),
-then no bunnies with long teeth are starved. 
-
-Limited food does not favor any phenotype - the same percentage of bunnies with long teeth and short teeth 
-is starved. Limited food is ignored if the population is small (less than 7) because a small 
-population can be sustained on limited food.
-
-In pseudo code, here's the algorithm for calculating the percentages of long-toothed and short-toothed bunnies to eat:
-
-```
-if ( tough food is enabled ) {
-  percentToStarve = nextRandomInRange( [ 0.45, 0.6 ] )
-  percentShortTeethStarved = percentToStarve * 1.6
-  percentLongTeethStarved = percentToStarve
-  if ( number of bunnies with long teeth < 5 ) {
-    percentLongTeethStarved = 0;
-  }
-}
-
-if ( limited food is enabled AND total number of bunnies < 7 ) {
-  if ( tough food is enabled ) {
-    limitedFoodMultiplier = 1.25
-    percentShortTeethStarved = percentShortTeethStarved * limitedFoodMultiplier
-    percentLongTeethStarved = percentLongTeethStarved * limitedFoodMultiplier
-  }
-  else {
-    percentToStarve = nextRandomInRange( [ 0.6, 0.73 ] )
-    percentLongTeethStarved = percentToStarve
-    percentShortTeethStarved = percentToStarve
-  }
-}
-
-percentShortTeethStarved = min( 1, percentShortTeethStarved )
-```
-
 ### Wolves
 
-The wolves "slice" of the generation clock occurs from 6:00-10:00, which is when you'll see them
-roaming around hunting. They eat at 8:00, and this is where you'll see data points related to 
+The wolves "slice" of the generation clock occurs from 2:00-6:00, which is when you'll see them
+roaming around hunting. They eat at 4:00, and this is where you'll see data points related to 
 wolves on the Population graph.
 
 The number of wolves is proportional to the number of bunnies, with a minimum number of wolves.
@@ -197,6 +154,49 @@ else {
   percentToEatWhite = percentToEat;
   if ( number of white bunnies < 6 && number of brown bunnies > 0 ) {
     percentToEatWhite = 0;
+  }
+}
+```
+
+### Food 
+
+The food "slice" of the generation clock occurs from 6:00-10:00. Food is applied at 8:00, and this is where
+you'll see data points related to food on the Population graph.
+
+Food consists of two factors that can be applied: tough food and limited food.  Both factors result in bunnies dying of starvation.
+
+Tough food is more difficult to eat, so some of each phenotype will starve. But bunnies with short teeth are less adapted to eating tough food, 
+so a larger percentage of bunnies with short teeth will starve. Additionally, if the number of bunnies with long teeth is small (less than 5),
+then no bunnies with long teeth will starve. 
+
+In pseudo code, here's the algorithm for calculating the percentages of long-toothed and short-toothed bunnies that will starve from tough food:
+
+```
+percentShortTeethStarved = 0
+percentLongTeethStarved = 0
+
+if ( tough food is enabled ) {
+  percentToStarve = nextRandomInRange( [ 0.45, 0.6 ] )
+  percentShortTeethStarved = percentToStarve * 1.6
+  if ( number of bunnies with long teeth >= 5 ) {
+    percentLongTeethStarved = percentToStarve
+  }
+}
+```
+
+Limited food can support a population up to a carrying capacity, and does not favor any phenotype. If the population exceeds the carrying capacity, then
+bunnies die off to reduce the population to the carrying capacity.  The carrying capacity is randomly selected from a narrow range to provide some
+variability.
+
+In pseudo code, here's the algorithm for calculating the number of bunnies that will die due to limited food:
+
+```
+numberToStarve = 0
+
+if ( limited food is enabled ) {
+  carryingCapacity = nextRandomInRange( 90, 110 )
+  if ( total number of bunnies > carryingCapacity ) {
+    numberToStarve = total number of bunnies - carryingCapacity
   }
 }
 ```
