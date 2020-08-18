@@ -58,17 +58,16 @@ class BunnyImageMap {
       hitTestPixels: true
     };
 
-    // To make all images have the same effective dimensions, center-bottom aligned to correspond to bunny's origin.
+    // Make all Nodes have the same origin and effective dimensions.
     const alignBoxOptions = {
-      group: new AlignGroup(),
       xAlign: 'center',
-      yAlign: 'bottom'
+      yAlign: 'bottom',
+      group: new AlignGroup()
     };
 
     // @private Nodes for each bunny phenotype, used in the Pedigree graph. Uses the same keys as imageMap.
-    // All Nodes are guaranteed to have the same effective size.
+    // All of these Nodes have the same origin and effective size.
     this.nodeMap = _.mapValues( imageMap, image => new AlignBox( new Image( image, imageOptions ), alignBoxOptions ) );
-    //TODO verify that they all have the same size
   }
 
   /**
@@ -117,11 +116,12 @@ class BunnyImageMap {
     // Create the key that corresponds to the bunny's phenotype.
     const key = getKey( bunny );
 
-    // look up the Node in the map
-    const image = this.nodeMap[ key ];
+    // Look up the Node in the map.
+    const node = this.nodeMap[ key ];
+    assert && assert( node, `no Node found for key ${key}` );
 
     assert && assert( !options.children, 'getWrappedNode sets children' );
-    options.children = [ image ];
+    options.children = [ node ];
 
     return new Node( options );
   }
