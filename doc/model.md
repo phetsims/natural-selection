@@ -141,21 +141,28 @@ In pseudo code, here's the algorithm for calculating the percentages of brown an
 ```
 // Wolves
 
-percentToEat = nextRandomInRange( [ 0.35, 0.4 ] );
-multiplierForNonFavoredBunnies = 2.3
+// the quantities that this algorithm computes, with their default values
+percentToEatBrown = 0
+percentToEatWhite = 0
 
-if ( environment color is brown ) {
-  percentToEatWhite = multiplierForNonFavoredBunnies * percentToEat;
-  percentToEatBrown = percentToEat;
-  if ( number of brown bunnies < 6 && number of white bunnies > 0 ) {
-    percentToEatBrown = 0;
+if ( wolves are enabled ) {
+
+  percentToEat = nextRandomInRange( [ 0.35, 0.4 ] );
+  multiplierForNonFavoredBunnies = 2.3
+
+  if ( environment color is brown ) {
+    percentToEatWhite = multiplierForNonFavoredBunnies * percentToEat;
+    percentToEatBrown = percentToEat;
+    if ( number of brown bunnies < 6 && number of white bunnies > 0 ) {
+      percentToEatBrown = 0;
+    }
   }
-}
-else {
-  percentToEatBrown = multiplierForNonFavoredBunnies * percentToEat ;
-  percentToEatWhite = percentToEat;
-  if ( number of white bunnies < 6 && number of brown bunnies > 0 ) {
-    percentToEatWhite = 0;
+  else {
+    percentToEatBrown = multiplierForNonFavoredBunnies * percentToEat ;
+    percentToEatWhite = percentToEat;
+    if ( number of white bunnies < 6 && number of brown bunnies > 0 ) {
+      percentToEatWhite = 0;
+    }
   }
 }
 ```
@@ -176,6 +183,7 @@ In pseudo code, here's the algorithm for calculating the percentages of long-too
 ```
 // Tough Food
 
+// the quantities that this algorithm computes, with their default values
 percentShortTeethStarved = 0
 percentLongTeethStarved = 0
 
@@ -198,6 +206,7 @@ In pseudo code, here's the algorithm for calculating the number of bunnies that 
 ```
 // Limited Food
 
+// the quantities that this algorithm computes, with their default values
 numberToStarve = 0
 
 if ( limited food is enabled ) {
