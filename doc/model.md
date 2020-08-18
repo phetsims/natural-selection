@@ -140,8 +140,8 @@ In pseudo code, here's the algorithm for calculating the percentages of long-too
 
 ```
 if ( tough food is enabled ) {
-  percentToStarve = nextRandomInRange( toughFoodPercentToKill )
-  percentShortTeethStarved = percentToStarve * shortTeethMultiplier
+  percentToStarve = nextRandomInRange( [ 0.45, 0.6 ] )
+  percentShortTeethStarved = 1.6 * percentToStarve
   percentLongTeethStarved = percentToStarve
   if ( number of bunnies with long teeth < 5 ) {
     percentLongTeethStarved = 0;
@@ -150,28 +150,18 @@ if ( tough food is enabled ) {
 
 if ( limited food is enabled && total number of bunnies < 7 ) {
   if ( tough food is enabled ) {
+    limitedFoodMultiplier = 1.25
     percentShortTeethStarved = percentShortTeethStarved * limitedFoodMultiplier
     percentLongTeethStarved = percentLongTeethStarved * limitedFoodMultiplier
   }
   else {
-    percentToStarve = nextRandomInRange( limitedFoodPercentToKill )
+    percentToStarve = nextRandomInRange( [ 0.6, 0.73 ] )
     percentLongTeethStarved = percentToStarve
     percentShortTeethStarved = percentToStarve
   }
 }
 
 percentShortTeethStarved = min( 1, percentShortTeethStarved )
-```
-
-The parameters in the above algorithm are defined in 
-[NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js).
-As of this writing, their values are:
-
-```
-toughFoodPercentToKill = [ 0.45, 0.6 ] // a value is randomly selected from this range
-limitedFoodPercentToKill = [ 0.6, 0.73 ] // a value is randomly selected from this range
-shortTeethMultiplier = 1.6
-limitedFoodMultiplier = 1.25
 ```
 
 ### Wolves
