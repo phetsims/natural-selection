@@ -18,12 +18,12 @@ import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 class FastForwardButton extends RoundMomentaryButton {
 
   /**
-   * @param {Property.<boolean>} fastForwardScaleProperty
+   * @param {Property.<number>} timeScaleProperty
    * @param {number} fastScale - how much to scale time when the button is pressed
    * @param {Object} [options]
    */
-  constructor( fastForwardScaleProperty, fastScale, options ) {
-    assert && AssertUtils.assertPropertyOf( fastForwardScaleProperty, 'number' );
+  constructor( timeScaleProperty, fastScale, options ) {
+    assert && AssertUtils.assertPropertyOf( timeScaleProperty, 'number' );
     assert && assert( NaturalSelectionUtils.isPositive( fastScale ), 'invalid fastScale' );
 
     options = merge( {
@@ -50,10 +50,10 @@ class FastForwardButton extends RoundMomentaryButton {
       fill: 'black'
     } );
 
-    super( 1, fastScale, fastForwardScaleProperty, options );
+    super( 1, fastScale, timeScaleProperty, options );
 
     // Create a Studio link to the model Property
-    this.addLinkedElement( fastForwardScaleProperty, {
+    this.addLinkedElement( timeScaleProperty, {
       tandem: options.tandem.createTandem( 'property' )
     } );
   }

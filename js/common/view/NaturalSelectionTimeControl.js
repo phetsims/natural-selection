@@ -22,12 +22,12 @@ class NaturalSelectionTimeControl extends HBox {
 
   /**
    * @param {Property.<boolean>} isPlayingProperty
-   * @param {Property.<boolean>} fastForwardScaleProperty
+   * @param {Property.<number>} timeScaleProperty
    * @param {Object} [options]
    */
-  constructor( isPlayingProperty, fastForwardScaleProperty, options ) {
+  constructor( isPlayingProperty, timeScaleProperty, options ) {
     assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyOf( fastForwardScaleProperty, 'number' );
+    assert && AssertUtils.assertPropertyOf( timeScaleProperty, 'number' );
 
     options = merge( {
       spacing: 10,
@@ -42,7 +42,7 @@ class NaturalSelectionTimeControl extends HBox {
       tandem: options.tandem.createTandem( 'playPauseButton' )
     } );
 
-    const fastForwardButton = new FastForwardButton( fastForwardScaleProperty,
+    const fastForwardButton = new FastForwardButton( timeScaleProperty,
       NaturalSelectionQueryParameters.fastForwardScale, {
       tandem: options.tandem.createTandem( 'fastForwardButton' )
     } );
