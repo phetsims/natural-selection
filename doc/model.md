@@ -141,7 +141,7 @@ In pseudo code, here's the algorithm for calculating the percentages of long-too
 ```
 if ( tough food is enabled ) {
   percentToStarve = nextRandomInRange( [ 0.45, 0.6 ] )
-  percentShortTeethStarved = 1.6 * percentToStarve
+  percentShortTeethStarved = percentToStarve * 1.6
   percentLongTeethStarved = percentToStarve
   if ( number of bunnies with long teeth < 5 ) {
     percentLongTeethStarved = 0;
