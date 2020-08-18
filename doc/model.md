@@ -139,6 +139,8 @@ small (less than 6) and there are non-favored bunnies to eat, then the favored b
 In pseudo code, here's the algorithm for calculating the percentages of brown and white bunnies to eat:
 
 ```
+// Wolves
+
 percentToEat = nextRandomInRange( [ 0.35, 0.4 ] );
 multiplierForNonFavoredBunnies = 2.3
 
@@ -172,6 +174,8 @@ then no bunnies with long teeth will starve.
 In pseudo code, here's the algorithm for calculating the percentages of long-toothed and short-toothed bunnies that will starve from tough food:
 
 ```
+// Tough Food
+
 percentShortTeethStarved = 0
 percentLongTeethStarved = 0
 
@@ -191,6 +195,8 @@ variability.
 In pseudo code, here's the algorithm for calculating the number of bunnies that will die due to limited food:
 
 ```
+// Limited Food
+
 numberToStarve = 0
 
 if ( limited food is enabled ) {
