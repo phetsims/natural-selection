@@ -182,8 +182,9 @@ percentLongTeethStarved = 0
 if ( tough food is enabled ) {
   percentToStarve = nextRandomInRange( [ 0.45, 0.6 ] )
   percentShortTeethStarved = percentToStarve * 1.6
-  if ( number of bunnies with long teeth >= 5 ) {
-    percentLongTeethStarved = percentToStarve
+  percentLongTeethStarved = percentToStarve
+  if ( number of bunnies with long teeth < 5 ) {
+    percentLongTeethStarved = 0
   }
 }
 ```
