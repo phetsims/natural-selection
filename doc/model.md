@@ -201,7 +201,7 @@ if ( tough food is enabled ) {
 ```
 
 Limited food can support a population up to a carrying capacity, and does not favor any phenotype. If the population exceeds the carrying capacity, then
-bunnies die off to reduce the population to the carrying capacity.  The carrying capacity is randomly selected from a narrow range to provide some
+bunnies die off to reduce the population to the carrying capacity.  The carrying capacity is randomly selected from a range to provide some
 variability.
 
 In pseudocode†, here's the algorithm for calculating the number of bunnies that will die due to limited food:
