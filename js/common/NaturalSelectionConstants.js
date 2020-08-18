@@ -24,8 +24,8 @@ const NaturalSelectionConstants = {
   LITTER_SIZE: 4,
 
   // Generation Clock
-  CLOCK_FOOD_RANGE: new Range( 1/6, 3/6 ), // generation clock 'slice' when bunnies are starved by food factors, [0,1]
-  CLOCK_WOLVES_RANGE: new Range( 3/6, 5/6 ), // generation clock 'slice' when bunnies are eaten by wolves, [0,1]
+  CLOCK_WOLVES_RANGE: new Range( 1/6, 3/6 ), // generation clock 'slice' when bunnies are eaten by wolves, [0,1]
+  CLOCK_FOOD_RANGE: new Range( 3/6, 5/6 ), // generation clock 'slice' when bunnies are starved by food factors, [0,1]
 
   // View ============================================================================================================N
 
