@@ -172,7 +172,8 @@ if ( wolves are enabled ) {
 The food "slice" of the generation clock occurs from 6:00-10:00. Food is applied at 8:00, and this is where
 you'll see data points related to food on the Population graph.
 
-Food consists of two factors that can be applied: tough food and limited food.  Both factors result in bunnies dying of starvation.
+Food consists of two factors: tough food and limited food. They are applied independently and in that order.  
+Both factors result in bunnies dying of starvation.
 
 Tough food is more difficult to eat, so some of each phenotype will starve. But bunnies with short teeth are less adapted to eating tough food, 
 so a larger percentage of bunnies with short teeth will starve. Additionally, if the number of bunnies with long teeth is small (less than 5),
