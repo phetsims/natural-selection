@@ -149,21 +149,21 @@ percentToEatWhite = 0
 
 if ( wolves are enabled ) {
 
-  percentToEat = randomNumberBetween( 0.35, 0.4 );
+  percentToEat = randomNumberBetween( 0.35, 0.4 )
   multiplierForNonFavoredBunnies = 2.3
 
   if ( environment color is brown ) {
-    percentToEatWhite = multiplierForNonFavoredBunnies * percentToEat;
-    percentToEatBrown = percentToEat;
+    percentToEatWhite = multiplierForNonFavoredBunnies * percentToEat
+    percentToEatBrown = percentToEat
     if ( number of brown bunnies < 6 AND number of white bunnies > 0 ) {
-      percentToEatBrown = 0;
+      percentToEatBrown = 0
     }
   }
   else {
-    percentToEatBrown = multiplierForNonFavoredBunnies * percentToEat ;
-    percentToEatWhite = percentToEat;
+    percentToEatBrown = multiplierForNonFavoredBunnies * percentToEat
+    percentToEatWhite = percentToEat
     if ( number of white bunnies < 6 AND number of brown bunnies > 0 ) {
-      percentToEatWhite = 0;
+      percentToEatWhite = 0
     }
   }
 }
