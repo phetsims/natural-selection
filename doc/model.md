@@ -138,7 +138,7 @@ Wolves favor bunnies whose fur color matches their environment by eating a great
 bunnies whose fur color does not match their environment. If the population of favored bunnies is
 small (less than 6) and there are non-favored bunnies to eat, then the favored bunnies will be ignored.
 
-In pseudocode†, here's the algorithm for calculating the percentages of brown and white bunnies to eat:
+In pseudocode†, here's the algorithm for calculating the percentages [0,1] of brown and white bunnies to eat:
 
 ```
 // Wolves
@@ -181,7 +181,7 @@ Tough food is more difficult to eat, so some of each phenotype will starve. But 
 so a larger percentage of bunnies with short teeth will starve. Additionally, if the number of bunnies with long teeth is small (less than 5),
 then no bunnies with long teeth will starve. 
 
-In pseudocode†, here's the algorithm for calculating the percentages of long-toothed and short-toothed bunnies that will starve from tough food:
+In pseudocode†, here's the algorithm for calculating the percentages [0,1] of long-toothed and short-toothed bunnies that will starve from tough food:
 
 ```
 // Tough Food
