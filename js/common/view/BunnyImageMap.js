@@ -33,6 +33,7 @@ class BunnyImageMap {
   constructor( options ) {
 
     // Maps a bunny's phenotype to an HTMLImageElement. See getKey for how the key is formed.
+    // This map is not static because the images need to be loaded before they can be used by SpriteImage.
     const imageMap = {
 
       // key: value
