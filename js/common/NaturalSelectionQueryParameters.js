@@ -164,23 +164,16 @@ const SCHEMA = {
     isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
   },
 
-  // This query parameter determines the percentages of bunnies that will be eaten by wolves.
-  // A value is randomly chosen from this range.
-  // Bunnies whose fur color matches the environment will be eaten at the rate specified by wolvesPercentToKill.
-  // Bunnies whose fur color does NOT match the environment will be eaten at the rate of wolvesEnvironmentMultiplier *
-  // wolvesPercentToKill.
+  // The random percentage of bunnies that will be eaten by wolves. See WolfCollection.eatBunnies.
   // Tuned in https://github.com/phetsims/natural-selection/issues/86
-  //
-  // NOTE: A better name for this would have been wolvesPercentToEatRange, but designers got used to it,
-  // so I didn't dare rename it.
-  wolvesPercentToKill: {
+  wolvesPercentToEatRange: {
     type: 'custom',
     parse: parseRange,
     defaultValue: new Range( 0.35, 0.4 ),
     isValidValue: range => NaturalSelectionUtils.isPercentRange( range )
   },
 
-  // Multiplier for when the bunny's fur color does not match the environment, applied to wolvesPercentToKill.
+  // Multiplier for when the bunny's fur color does not match the environment. See WolfCollection.eatBunnies.
   // Tuned in https://github.com/phetsims/natural-selection/issues/86
   wolvesEnvironmentMultiplier: {
     type: 'number',
@@ -188,37 +181,16 @@ const SCHEMA = {
     isValidValue: value => ( value > 1 )
   },
 
-  // This query parameter determines the percentages of bunnies that will die of starvation when food is tender.
-  // A value is randomly chosen from this range.
-  // Bunnies will die at this rate regardless of their phenotype.
+  // The random percentage of bunnies that will die of starvation when food is tough. See Food.starveBunnies.
   // Tuned in https://github.com/phetsims/natural-selection/issues/86
-  //
-  // NOTE: A better name for this would have been limitedFoodPercentToStarveRange, but designers got used to it,
-  // so I didn't dare rename it.
-  limitedFoodPercentToKill: {
-    type: 'custom',
-    parse: parseRange,
-    defaultValue: new Range( 0.6, 0.73 ),
-    isValidValue: range => NaturalSelectionUtils.isPercentRange( range )
-  },
-
-  // This query parameter determines the percentages of bunnies that will die of starvation when food is tough.
-  // A value is randomly chosen from this range.
-  // Bunnies with long teeth will die at the rate specified by toughFoodPercentToKill.
-  // Bunnies with short teeth will die at the rate of toughFoodPercentToKill * ?shortTeethMultiplier.
-  // If food is also limited, then the values for both types of bunny will be multiplied by ?limitedFoodMultiplier.
-  // Tuned in https://github.com/phetsims/natural-selection/issues/86
-  //
-  // NOTE: A better name for this would have been toughFoodPercentToStarveRange, but designers got used to it,
-  // so I didn't dare rename it.
-  toughFoodPercentToKill: {
+  toughFoodPercentToStarveRange: {
     type: 'custom',
     parse: parseRange,
     defaultValue: new Range( 0.45, 0.6 ),
     isValidValue: range => NaturalSelectionUtils.isPercentRange( range )
   },
 
-  // Multiplier for bunnies with short teeth when food is tough, applied to toughFoodPercentToKill.
+  // Multiplier for bunnies with short teeth when food is tough. See Food.starveBunnies.
   // Tuned in https://github.com/phetsims/natural-selection/issues/86
   shortTeethMultiplier: {
     type: 'number',
@@ -226,12 +198,12 @@ const SCHEMA = {
     isValidValue: value => ( value > 1 )
   },
 
-  // Multiplier for when limited food is combined with tough food, applied to toughFoodPercentToKill.
-  // Tuned in https://github.com/phetsims/natural-selection/issues/86
-  limitedFoodMultiplier: {
-    type: 'number',
-    defaultValue: 1.25,
-    isValidValue: value => ( value > 1 )
+  // Range for the number of bunnies that can be sustained on limited food. See Food.starveBunnies.
+  limitedFoodPopulationRange: {
+    type: 'custom',
+    parse: parseRange,
+    defaultValue: new Range( 90, 110 ),
+    isValidValue: range => ( range.min > 0 )
   },
 
   // Adds a red dot at the origin of some objects (bunnies, wolves, food)
@@ -314,17 +286,12 @@ phet.log && phet.log( 'query parameters: ' + JSON.stringify( NaturalSelectionQue
 
 // validate query parameters
 assert && assert( NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier *
-                  NaturalSelectionQueryParameters.wolvesPercentToKill.max <= 1,
-  'wolvesEnvironmentMultiplier * wolvesPercentToKill.max must be <= 1' );
+                  NaturalSelectionQueryParameters.wolvesPercentToEatRange.max <= 1,
+  'wolvesEnvironmentMultiplier * wolvesPercentToEatRange.max must be <= 1' );
 
-// Tweaking the parameters for food required that we clamp this computation to 1. This warning is a reminder.
-// See https://github.com/phetsims/natural-selection/issues/168#issuecomment-673048314
-if ( NaturalSelectionQueryParameters.limitedFoodMultiplier *
-     NaturalSelectionQueryParameters.shortTeethMultiplier *
-     NaturalSelectionQueryParameters.toughFoodPercentToKill.max > 1 ) {
-  phet.log && phet.log( 'WARNING: limitedFoodMultiplier * shortTeethMultiplier * toughFoodPercentToKill.max > 1, ' +
-                        'and will be clamped to 1' );
-}
+assert && assert( NaturalSelectionQueryParameters.shortTeethMultiplier *
+                  NaturalSelectionQueryParameters.toughFoodPercentToStarveRange.max <= 1,
+  'shortTeethMultiplier * toughFoodPercentToKill.max must be <= 1' );
 
 naturalSelection.register( 'NaturalSelectionQueryParameters', NaturalSelectionQueryParameters );
 export default NaturalSelectionQueryParameters;

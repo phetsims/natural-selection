@@ -195,10 +195,11 @@ class WolfCollection {
     assert && assert( this.enabledProperty.value, 'Wolves are not enabled' );
     assert && assert( NaturalSelectionUtils.isNonNegative( generations ), `invalid generations: ${generations}`);
 
-    // Get the bunnies that are candidates for natural selection, in random order.
-    const bunnies = this.bunnyCollection.getSelectionCandidates();
+    // Get the current population of bunnies.
+    const bunnies = this.bunnyCollection.getLiveBunniesRandomOrder();
+    const totalBunnies = bunnies.length;
 
-    if ( bunnies.length > 0 ) {
+    if ( totalBunnies > 0 ) {
 
       // {Bunny[]} array for each phenotype
       const whiteBunnies = _.filter( bunnies, bunny => bunny.phenotype.hasWhiteFur() );
@@ -208,13 +209,10 @@ class WolfCollection {
       phet.log && phet.log( `Applying wolves: ${whiteCount} white, ${brownCount} brown, environment=${this.environmentProperty.value}` );
 
       // Eat some of each phenotype, but eat more of the bunnies whose fur color does not match the environment.
-      const percentToEat = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.wolvesPercentToKill );
-      phet.log && phet.log( `randomly selected ${percentToEat} from wolvesPercentToKill` );
+      const percentToEat = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.wolvesPercentToEatRange );
+      phet.log && phet.log( `randomly selected ${percentToEat} from wolvesPercentToEatRange` );
       const percentToEatMatch = percentToEat;
       const percentToEatNoMatch = percentToEat * NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier;
-
-      // Get the total bunnies before any are eaten.
-      const totalBunnies = this.bunnyCollection.getNumberOfLiveBunnies();
 
       // Eat white bunnies.
       const numberEatenWhite = eatSomeBunnies( whiteBunnies, totalBunnies,

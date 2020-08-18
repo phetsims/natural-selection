@@ -30,10 +30,6 @@ import Shrub from './Shrub.js';
 // See https://github.com/phetsims/natural-selection/issues/110
 const CLOCK_FOOD_MIDPOINT = NaturalSelectionConstants.CLOCK_FOOD_RANGE.getCenter();
 
-// The minimum total population required for limited food to be a factor,
-// see https://github.com/phetsims/natural-selection/issues/153
-const LIMITED_FOOD_MIN_TOTAL = 7;
-
 // The minimum number of bunnies with long teeth required for tough food to be a factor for bunnies with long teeth,
 // see https://github.com/phetsims/natural-selection/issues/98
 const TOUGH_FOOD_MIN_LONG_TEETH = 5;
@@ -158,8 +154,35 @@ class Food {
     assert && assert( this.enabledProperty.value, 'Food is not enabled' );
     assert && assert( NaturalSelectionUtils.isNonNegative( generations ), `invalid generations: ${generations}` );
 
-    // Get the bunnies that are candidates for natural selection, in random order.
-    const bunnies = this.bunnyCollection.getSelectionCandidates();
+    let totalStarved = 0;
+    if ( this.isToughProperty.value ) {
+      totalStarved += this.applyToughFood();
+    }
+    if ( this.isLimitedProperty.value ) {
+      totalStarved += this.applyLimitedFood();
+    }
+
+    // Notify if bunnies have been starved.
+    if ( totalStarved > 0 ) {
+      this.bunniesStarvedEmitter.emit( generations );
+    }
+  }
+
+  /**
+   * Applies tough food as a selection factor. Tough food is more difficult to eat, so some of each phenotype will
+   * starve. Bunnies with short teeth are less adapted to eating tough food, so a larger percentage of bunnies
+   * with short teeth will starve. Tough food has no affect on bunnies with long teeth when their population
+   * is below a threshold. See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
+   * @returns {number} the number of bunnies that died
+   * @private
+   */
+  applyToughFood() {
+    assert && assert( this.isToughProperty.value, 'tough food is not enabled' );
+
+    let totalStarved = 0;
+
+    // Get the current population of bunnies.
+    const bunnies = this.bunnyCollection.getLiveBunniesRandomOrder();
 
     if ( bunnies.length > 0 ) {
 
@@ -168,69 +191,71 @@ class Food {
       const numberShortTeeth = bunniesShortTeeth.length;
       const bunniesLongTeeth = _.filter( bunnies, bunny => bunny.phenotype.hasLongTeeth() );
       const numberLongTeeth = bunniesLongTeeth.length;
-      phet.log && phet.log( 'Applying food: ' +
-                            `${numberShortTeeth} short teeth, ${numberLongTeeth} long teeth, ` +
-                            `limited=${this.isLimitedProperty.value}, tough=${this.isToughProperty.value}` );
+      phet.log && phet.log( `Applying tough food: ${numberShortTeeth} short teeth, ${numberLongTeeth} long teeth` );
 
       // {number} percentage [0,1] of bunnies to starve for each phenotype, computed below
       let percentToStarveLongTeeth = 0;
       let percentToStarveShortTeeth = 0;
 
-      // Apply tough food. Tough food starves some of each phenotype, but starves a higher percentage of bunnies with
-      // short teeth. Tough food has no affect on bunnies with long teeth when their population is below a threshold.
-      // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
-      if ( this.isToughProperty.value ) {
-        const percentToStarve = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.toughFoodPercentToKill );
-        phet.log && phet.log( `randomly selected ${percentToStarve} from toughFoodPercentToKill` );
-        percentToStarveShortTeeth = percentToStarve * NaturalSelectionQueryParameters.shortTeethMultiplier;
-        percentToStarveLongTeeth = percentToStarve;
-        if ( numberLongTeeth < TOUGH_FOOD_MIN_LONG_TEETH ) {
-          phet.log && phet.log( `Ignoring tough food for long teeth because their count is < ${TOUGH_FOOD_MIN_LONG_TEETH}.` );
-          percentToStarveLongTeeth = 0;
-        }
+      const percentToStarve = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.toughFoodPercentToStarveRange );
+      phet.log && phet.log( `randomly selected ${percentToStarve} from toughFoodPercentToStarveRange` );
+      percentToStarveShortTeeth = percentToStarve * NaturalSelectionQueryParameters.shortTeethMultiplier;
+      percentToStarveLongTeeth = percentToStarve;
+      if ( numberLongTeeth < TOUGH_FOOD_MIN_LONG_TEETH ) {
+        phet.log && phet.log( `Ignoring tough food for long teeth because their count ${numberLongTeeth} is < ${TOUGH_FOOD_MIN_LONG_TEETH}.` );
+        percentToStarveLongTeeth = 0;
       }
-
-      // Apply limited food. If the population is below some threshold, limited food has no affect, because a small
-      // population can be sustained on limited food. See https://github.com/phetsims/natural-selection/issues/153
-      if ( this.isLimitedProperty.value ) {
-        if ( this.bunnyCollection.getNumberOfLiveBunnies() < LIMITED_FOOD_MIN_TOTAL ) {
-          phet.log && phet.log( `Ignoring limited food because the total population is < ${LIMITED_FOOD_MIN_TOTAL}` );
-        }
-        else {
-          if ( this.isToughProperty.value ) {
-
-            // If limited food is combined with tough food, apply a multiplier.
-            percentToStarveShortTeeth *= NaturalSelectionQueryParameters.limitedFoodMultiplier;
-            percentToStarveLongTeeth *= NaturalSelectionQueryParameters.limitedFoodMultiplier;
-          }
-          else {
-
-            // If limited food is applied without tough food, starve the same percentage of both phenotypes.
-            const percentToStarve = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.limitedFoodPercentToKill );
-            phet.log && phet.log( `randomly selected ${percentToStarve} from limitedFoodPercentToKill` );
-            percentToStarveShortTeeth = percentToStarve;
-            percentToStarveLongTeeth = percentToStarve;
-          }
-        }
-      }
-
-      // Query parameter values may result in a percentage > 1. If so, clamp to 1.
-      // As requested in https://github.com/phetsims/natural-selection/issues/168#issuecomment-673048314.
-      percentToStarveShortTeeth = Math.min( 1, percentToStarveShortTeeth );
 
       // Starve bunnies with short teeth.
-      const numberStarvedShortTeeth = starveSomeBunnies( bunniesShortTeeth, percentToStarveShortTeeth );
-      phet.log && phet.log( `${numberStarvedShortTeeth} of ${numberShortTeeth} short teeth died of starvation` );
+      const numberStarvedShortTeeth = starvePercentage( bunniesShortTeeth, percentToStarveShortTeeth );
+      phet.log && phet.log( `${numberStarvedShortTeeth} of ${numberShortTeeth} short teeth died from tough food` );
+      totalStarved += numberStarvedShortTeeth;
 
       // Starve bunnies with long teeth.
-      const numberStarvedLongTeeth = starveSomeBunnies( bunniesLongTeeth, percentToStarveLongTeeth );
-      phet.log && phet.log( `${numberStarvedLongTeeth} of ${numberLongTeeth} long teeth died of starvation` );
+      const numberStarvedLongTeeth = starvePercentage( bunniesLongTeeth, percentToStarveLongTeeth );
+      phet.log && phet.log( `${numberStarvedLongTeeth} of ${numberLongTeeth} long teeth died from tough food` );
+      totalStarved += numberStarvedLongTeeth;
+    }
 
-      // Notify if bunnies have been starved.
-      if ( numberStarvedShortTeeth + numberStarvedLongTeeth > 0 ) {
-        this.bunniesStarvedEmitter.emit( generations );
+    return totalStarved;
+  }
+
+  /**
+   * Applies limited food as a selection factor. Limited food can support the population up to a specific carrying
+   * capacity. If the population exceeds the carrying capacity, then bunnies will die off to reduce the population
+   * to the carrying capacity. See https://github.com/phetsims/natural-selection/issues/183
+   * @returns {number} the number of bunnies that died
+   * @private
+   */
+  applyLimitedFood() {
+    assert && assert( this.isLimitedProperty.value, 'limited food is not enabled' );
+
+    let totalStarved = 0;
+
+    // Get the current population of bunnies.
+    const bunnies = this.bunnyCollection.getLiveBunniesRandomOrder();
+    const totalBunnies = bunnies.length;
+
+    // Randomly choose the number of bunnies that can be supported by limited food.
+    const carryingCapacity = Utils.roundSymmetric( phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.limitedFoodPopulationRange ) );
+
+    if ( totalBunnies > 0 ) {
+      phet.log && phet.log( `Applying limited food: population is ${totalBunnies}, carrying capacity is ${carryingCapacity}` );
+
+      if ( totalBunnies > carryingCapacity ) {
+        const numberToStarve = totalBunnies - carryingCapacity;
+        for ( let i = 0; i < numberToStarve; i++ ) {
+          bunnies[ i ].die();
+        }
+        totalStarved = numberToStarve;
+        phet.log && phet.log( `Carrying capacity exceeded, ${totalStarved} bunnies died from limited food` );
+      }
+      else {
+        phet.log && phet.log( 'Carrying capacity not exceeded, no bunnies died from limited food.' );
       }
     }
+
+    return totalStarved;
   }
 }
 
@@ -238,9 +263,9 @@ class Food {
  * Starves a percentage of some set of bunnies.
  * @param {Bunny[]} bunnies - a set of bunnies, all with the same phenotype
  * @param {number} percentToStarve - the percentage of bunnies to starve
- * @returns {number} the number of bunnies that were starved
+ * @returns {number} the number of bunnies that died
  */
-function starveSomeBunnies( bunnies, percentToStarve ) {
+function starvePercentage( bunnies, percentToStarve ) {
 
   assert && assert( Array.isArray( bunnies ), 'invalid bunnies' );
   assert && assert( NaturalSelectionUtils.isPercent( percentToStarve ), `invalid percentToStarve: ${percentToStarve}` );
