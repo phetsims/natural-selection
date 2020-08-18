@@ -77,12 +77,7 @@ class BunnyImageMap {
    * @public
    */
   getSprites() {
-    const sprites = [];
-    for ( const key in this.spriteMap ) {
-      assert && assert( this.spriteMap.hasOwnProperty( key ), `spriteMaps is missing key ${key}` );
-      sprites.push( this.spriteMap[ key ] );
-    }
-    return sprites;
+    return _.values( this.spriteMap );
   }
 
   /**
