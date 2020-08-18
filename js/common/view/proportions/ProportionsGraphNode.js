@@ -163,7 +163,7 @@ class ProportionsGraphNode extends Node {
 
     super( options );
 
-    // Center content on the background. Columns may be removed via PhET-iO. unlink is not necessary.
+    // Center content on the background. Columns or generationSpinner may be hidden via PhET-iO. unlink is not necessary.
     content.localBoundsProperty.link( () => {
       content.center = backgroundNode.center;
     } );
