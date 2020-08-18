@@ -181,8 +181,8 @@ class Food {
 
     let totalStarved = 0;
 
-    // Get the current population of bunnies.
-    const bunnies = this.bunnyCollection.getLiveBunniesRandomOrder();
+    // Get the bunnies that are candidates for selection by environmental factors, in random order.
+    const bunnies = this.bunnyCollection.getSelectionCandidates();
 
     if ( bunnies.length > 0 ) {
 
@@ -232,8 +232,8 @@ class Food {
 
     let totalStarved = 0;
 
-    // Get the current population of bunnies.
-    const bunnies = this.bunnyCollection.getLiveBunniesRandomOrder();
+    // Get the bunnies that are candidates for selection by environmental factors, in random order.
+    const bunnies = this.bunnyCollection.getSelectionCandidates();
     const totalBunnies = bunnies.length;
 
     // Randomly choose the number of bunnies that can be supported by limited food.

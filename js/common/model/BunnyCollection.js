@@ -506,11 +506,11 @@ class BunnyCollection {
   }
 
   /**
-   * Gets all live bunnies in a random order.
+   * Gets the bunnies that are candidates for natural selection due to environmental factors, in a random order.
    * @returns {Bunny[]}
    * @public
    */
-  getLiveBunniesRandomOrder() {
+  getSelectionCandidates() {
     return phet.joist.random.shuffle( this.liveBunnies.getArray() ); // shuffle returns a new array
   }
 

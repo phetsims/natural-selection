@@ -195,8 +195,8 @@ class WolfCollection {
     assert && assert( this.enabledProperty.value, 'Wolves are not enabled' );
     assert && assert( NaturalSelectionUtils.isNonNegative( generations ), `invalid generations: ${generations}`);
 
-    // Get the current population of bunnies.
-    const bunnies = this.bunnyCollection.getLiveBunniesRandomOrder();
+    // Get the bunnies that are candidates for selection by environmental factors, in random order.
+    const bunnies = this.bunnyCollection.getSelectionCandidates();
     const totalBunnies = bunnies.length;
 
     if ( totalBunnies > 0 ) {
