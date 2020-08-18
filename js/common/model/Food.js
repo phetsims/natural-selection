@@ -199,7 +199,7 @@ class Food {
 
       const percentToStarve = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.toughFoodPercentToStarveRange );
       phet.log && phet.log( `randomly selected ${percentToStarve} from toughFoodPercentToStarveRange` );
-      percentToStarveShortTeeth = percentToStarve * NaturalSelectionQueryParameters.shortTeethMultiplier;
+      percentToStarveShortTeeth = Math.min( 1, percentToStarve * NaturalSelectionQueryParameters.shortTeethMultiplier );
       percentToStarveLongTeeth = percentToStarve;
       if ( numberLongTeeth < TOUGH_FOOD_MIN_LONG_TEETH ) {
         phet.log && phet.log( `Ignoring tough food for long teeth because their count ${numberLongTeeth} is < ${TOUGH_FOOD_MIN_LONG_TEETH}.` );

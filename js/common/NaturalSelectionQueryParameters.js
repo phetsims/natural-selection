@@ -289,9 +289,12 @@ assert && assert( NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier *
                   NaturalSelectionQueryParameters.wolvesPercentToEatRange.max <= 1,
   'wolvesEnvironmentMultiplier * wolvesPercentToEatRange.max must be <= 1' );
 
-assert && assert( NaturalSelectionQueryParameters.shortTeethMultiplier *
-                  NaturalSelectionQueryParameters.toughFoodPercentToStarveRange.max <= 1,
-  'shortTeethMultiplier * toughFoodPercentToKill.max must be <= 1' );
+// Tweaking the parameters for tough food required that we clamp this computation to 1. This warning is a reminder.
+// See https://github.com/phetsims/natural-selection/issues/168#issuecomment-673048314
+if ( NaturalSelectionQueryParameters.shortTeethMultiplier *
+     NaturalSelectionQueryParameters.toughFoodPercentToStarveRange.max > 1 ) {
+  phet.log && phet.log( 'WARNING: shortTeethMultiplier * toughFoodPercentToStarveRange.max > 1, and will be clamped to 1' );
+}
 
 naturalSelection.register( 'NaturalSelectionQueryParameters', NaturalSelectionQueryParameters );
 export default NaturalSelectionQueryParameters;
