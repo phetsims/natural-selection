@@ -181,7 +181,7 @@ Tough food is more difficult to eat, so some of each phenotype will starve. But 
 so a larger percentage of bunnies with short teeth will starve. Additionally, if the number of bunnies with long teeth is small (less than 5),
 then no bunnies with long teeth will starve. 
 
-In pseudocode†, here's the algorithm for calculating the percentages [0,1] of long-toothed and short-toothed bunnies that will starve from tough food:
+In pseudocode†, here's the algorithm for calculating the percentages [0,1] of bunnies that will starve from tough food:
 
 ```
 // Tough Food
