@@ -32,7 +32,7 @@ class BunnySpritesMap {
   constructor( options ) {
 
     // Maps a bunny's phenotype to an HTMLImageElement. See getKey for how the key is formed.
-    const imagesMap = {
+    const imageMap = {
 
       // key: value
       'true-true-true': bunnyWhiteFurStraightEarsShortTeethImage,
@@ -44,14 +44,14 @@ class BunnySpritesMap {
       'false-false-true': bunnyBrownFurFloppyEarsShortTeethImage,
       'false-false-false': bunnyBrownFurFloppyEarsLongTeethImage
     };
-    assert && assert( _.keys( imagesMap ).length === 8, 'imagesMap is incomplete' );
-    assert && assert( _.every( _.keys( imagesMap ), key => key.match( /(true|false)-(true|false)-(true|false)/ ) ),
-      'imagesMap has an invalid key' );
+    assert && assert( _.keys( imageMap ).length === 8, 'imageMap is incomplete' );
+    assert && assert( _.every( _.keys( imageMap ), key => key.match( /(true|false)-(true|false)-(true|false)/ ) ),
+      'imageMap has an invalid key' );
 
-    // @private Sprites for each bunny phenotype, used in OrganismSprites. Uses the same keys as imagesMap.
-    this.spritesMap = {};
-    for ( const key in imagesMap ) {
-      this.spritesMap[ key ] = new Sprite( new BunnySpriteImage( imagesMap[ key ] ) );
+    // @private Sprites for each bunny phenotype, used in OrganismSprites. Uses the same keys as imageMap.
+    this.spriteMap = {};
+    for ( const key in imageMap ) {
+      this.spriteMap[ key ] = new Sprite( new BunnySpriteImage( imageMap[ key ] ) );
     }
 
     // Hit test on non-transparent pixels, to make it easier to select overlapping bunnies.
@@ -67,11 +67,11 @@ class BunnySpritesMap {
       yAlign: 'bottom'
     };
 
-    // @private Nodes for each bunny phenotype, used in the Pedigree graph. Uses the same keys as imagesMap.
+    // @private Nodes for each bunny phenotype, used in the Pedigree graph. Uses the same keys as imageMap.
     // All Nodes are guaranteed to have the same effective size.
-    this.nodesMap = {};
-    for ( const key in imagesMap ) {
-      this.nodesMap[ key ] = new AlignBox( new Image( imagesMap[ key ], imageOptions ), alignBoxOptions );
+    this.nodeMap = {};
+    for ( const key in imageMap ) {
+      this.nodeMap[ key ] = new AlignBox( new Image( imageMap[ key ], imageOptions ), alignBoxOptions );
     }
     //TODO verify that they all have the same size
   }
@@ -83,9 +83,9 @@ class BunnySpritesMap {
    */
   getSprites() {
     const sprites = [];
-    for ( const key in this.spritesMap ) {
-      assert && assert( this.spritesMap.hasOwnProperty( key ), `spriteMaps is missing key ${key}` );
-      sprites.push( this.spritesMap[ key ] );
+    for ( const key in this.spriteMap ) {
+      assert && assert( this.spriteMap.hasOwnProperty( key ), `spriteMaps is missing key ${key}` );
+      sprites.push( this.spriteMap[ key ] );
     }
     return sprites;
   }
@@ -103,7 +103,7 @@ class BunnySpritesMap {
     const key = getKey( bunny );
 
     // Look up the Sprite in the map.
-    const sprite = this.spritesMap[ key ];
+    const sprite = this.spriteMap[ key ];
     assert && assert( sprite, `no sprite found for key ${key}` );
 
     return sprite;
@@ -128,7 +128,7 @@ class BunnySpritesMap {
     const key = getKey( bunny );
 
     // look up the Node in the map
-    const image = this.nodesMap[ key ];
+    const image = this.nodeMap[ key ];
 
     assert && assert( !options.children, 'getWrappedNode sets children' );
     options.children = [ image ];
