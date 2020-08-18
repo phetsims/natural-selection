@@ -203,7 +203,7 @@ const SCHEMA = {
     type: 'custom',
     parse: parseRange,
     defaultValue: new Range( 90, 110 ),
-    isValidValue: range => ( range.min > 0 )
+    isValidValue: range => ( range.min > 0 ) && ( range.min < range.max )
   },
 
   // Adds a red dot at the origin of some objects (bunnies, wolves, food)
