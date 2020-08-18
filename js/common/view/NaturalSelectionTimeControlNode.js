@@ -1,9 +1,9 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * NaturalSelectionTimeControl is the time control for this sim. It has a play/pause button and a fast-forward button.
- * To make the sim run faster, press and hold the fast-forward button.  It has nothing in common with PhET's standard
- * TimeControlNode other than a PlayPauseButton, so TimeControlNode is not used.
+ * NaturalSelectionTimeControlNode is the time control for this sim. It has a play/pause button and a fast-forward
+ * button. To make the sim run faster, press and hold the fast-forward button.  It has nothing in common with PhET's
+ * standard TimeControlNode other than a PlayPauseButton, so it does not extend TimeControlNode.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -18,7 +18,7 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import FastForwardButton from './FastForwardButton.js';
 
-class NaturalSelectionTimeControl extends HBox {
+class NaturalSelectionTimeControlNode extends HBox {
 
   /**
    * @param {Property.<boolean>} isPlayingProperty
@@ -83,7 +83,7 @@ class NaturalSelectionTimeControl extends HBox {
 }
 
 // mix in enabled component into a Node
-EnabledNode.mixInto( NaturalSelectionTimeControl );
+EnabledNode.mixInto( NaturalSelectionTimeControlNode );
 
-naturalSelection.register( 'NaturalSelectionTimeControl', NaturalSelectionTimeControl );
-export default NaturalSelectionTimeControl;
+naturalSelection.register( 'NaturalSelectionTimeControlNode', NaturalSelectionTimeControlNode );
+export default NaturalSelectionTimeControlNode;
