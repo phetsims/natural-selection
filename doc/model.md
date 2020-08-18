@@ -121,6 +121,8 @@ The environmental factors in this simulation affect bunny mortality, by selectin
 eliminating them. Each environmental factor has a corresponding "slice" of the generation clock (shown
 on the clock) during which it is applied. 
 
+Environmental factors are applied in this order: wolves, tough food, limited food.
+
 ### Wolves
 
 The wolves "slice" of the generation clock occurs from 2:00-6:00, which is when you'll see them
