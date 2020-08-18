@@ -206,7 +206,7 @@ In pseudo code, here's the algorithm for calculating the number of bunnies that 
 ```
 // Limited Food
 
-// the quantities that this algorithm computes, with their default values
+// the quantity that this algorithm computes, with its default value
 numberToStarve = 0
 
 if ( limited food is enabled ) {
