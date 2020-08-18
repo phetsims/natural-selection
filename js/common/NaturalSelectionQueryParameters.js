@@ -198,7 +198,7 @@ const SCHEMA = {
     isValidValue: value => ( value > 1 )
   },
 
-  // Range for the number of bunnies that can be sustained on limited food. See Food.starveBunnies.
+  // Range for the number of bunnies that can be sustained on limited food (carrying capacity). See Food.starveBunnies.
   limitedFoodPopulationRange: {
     type: 'custom',
     parse: parseRange,
