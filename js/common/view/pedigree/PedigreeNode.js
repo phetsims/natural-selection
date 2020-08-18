@@ -16,7 +16,7 @@ import PedigreeModel from '../../model/PedigreeModel.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
-import BunnySpritesMap from '../BunnySpritesMap.js';
+import BunnyImageMap from '../bunnyImageMap.js';
 import AllelesPanel from './AllelesPanel.js';
 import PedigreeGraphNode from './PedigreeGraphNode.js';
 
@@ -26,16 +26,16 @@ class PedigreeNode extends HBox {
    * @param {PedigreeModel} pedigreeModel
    * @param {SelectedBunnyProperty} selectedBunnyProperty
    * @param {GenePool} genePool
-   * @param {BunnySpritesMap} bunnySpritesMap
+   * @param {BunnyImageMap} bunnyImageMap
    * @param {Dimension2} size - dimensions of the rectangle available for this Node and its children
    * @param {Object} [options]
    */
-  constructor( pedigreeModel, selectedBunnyProperty, genePool, bunnySpritesMap, size, options ) {
+  constructor( pedigreeModel, selectedBunnyProperty, genePool, bunnyImageMap, size, options ) {
 
     assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
     assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty, 'invalid selectedBunnyProperty' );
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( bunnySpritesMap instanceof BunnySpritesMap, 'invalid bunnySpritesMap' );
+    assert && assert( bunnyImageMap instanceof BunnyImageMap, 'invalid bunnyImageMap' );
     assert && assert( size instanceof Dimension2, 'invalid size' );
 
     options = merge( {
@@ -71,7 +71,7 @@ class PedigreeNode extends HBox {
                              'but changes to its elements and metadata will have no affect.'
       } );
 
-    const pedigreeGraphNode = new PedigreeGraphNode( pedigreeModel, selectedBunnyProperty, bunnySpritesMap, {
+    const pedigreeGraphNode = new PedigreeGraphNode( pedigreeModel, selectedBunnyProperty, bunnyImageMap, {
         graphWidth: graphWidth,
         graphHeight: size.height,
         tandem: options.tandem.createTandem( 'pedigreeGraphNode' )

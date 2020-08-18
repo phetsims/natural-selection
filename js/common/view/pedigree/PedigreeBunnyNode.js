@@ -17,8 +17,8 @@ import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
+import BunnyImageMap from '../bunnyImageMap.js';
 import BunnySelectionRectangle from '../BunnySelectionRectangle.js';
-import BunnySpritesMap from '../BunnySpritesMap.js';
 import MutationIconNode from '../MutationIconNode.js';
 import OriginNode from '../OriginNode.js';
 
@@ -30,17 +30,17 @@ class PedigreeBunnyNode extends Node {
 
   /**
    * @param {Bunny} bunny
-   * @param {BunnySpritesMap} bunnySpritesMap
+   * @param {BunnyImageMap} bunnyImageMap
    * @param {Property.<boolean>} furAllelesVisibleProperty
    * @param {Property.<boolean>} earsAllelesVisibleProperty
    * @param {Property.<boolean>} teethAllelesVisibleProperty
    * @param {Object} [options]
    */
-  constructor( bunny, bunnySpritesMap,
+  constructor( bunny, bunnyImageMap,
                furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-    assert && assert( bunnySpritesMap instanceof BunnySpritesMap, 'invalid bunnySpritesMap' );
+    assert && assert( bunnyImageMap instanceof BunnyImageMap, 'invalid bunnyImageMap' );
     assert && AssertUtils.assertPropertyOf( furAllelesVisibleProperty, 'boolean' );
     assert && AssertUtils.assertPropertyOf( earsAllelesVisibleProperty, 'boolean' );
     assert && AssertUtils.assertPropertyOf( teethAllelesVisibleProperty, 'boolean' );
@@ -53,18 +53,18 @@ class PedigreeBunnyNode extends Node {
     const children = [];
 
     // Node that corresponds to the bunny's phenotype (appearance)
-    const wrappedNode = bunnySpritesMap.getWrappedNode( bunny, {
+    const bunnyNode = bunnyImageMap.getNode( bunny, {
       scale: NaturalSelectionConstants.BUNNY_IMAGE_SCALE,
       centerX: 0,
       bottom: 0
     } );
-    children.push( wrappedNode );
+    children.push( bunnyNode );
 
     // Label original mutant with an icon
     if ( bunny.isOriginalMutant() ) {
       children.push( new MutationIconNode( {
-        right: wrappedNode.centerX,
-        bottom: wrappedNode.bottom,
+        right: bunnyNode.centerX,
+        bottom: bunnyNode.bottom,
         pickable: false
       } ) );
     }
@@ -72,14 +72,14 @@ class PedigreeBunnyNode extends Node {
     // Genotype abbreviation
     const genotypeNode = new Text( '', {
       font: GENOTYPE_FONT,
-      maxWidth: wrappedNode.width
+      maxWidth: bunnyNode.width
     } );
     children.push( genotypeNode );
 
     // Optional selection rectangle, prepended to children
     if ( options.bunnyIsSelected ) {
-      children.unshift( new BunnySelectionRectangle( wrappedNode.bounds.dilated( 3 ), {
-        center: wrappedNode.center
+      children.unshift( new BunnySelectionRectangle( bunnyNode.bounds.dilated( 3 ), {
+        center: bunnyNode.center
       } ) );
     }
 
@@ -96,8 +96,8 @@ class PedigreeBunnyNode extends Node {
     const addRedCrossMark = () => {
       this.addChild( new Text( '\u274c', {
         font: DEAD_SYMBOL_FONT,
-        right: wrappedNode.centerX,
-        bottom: wrappedNode.centerY
+        right: bunnyNode.centerX,
+        bottom: bunnyNode.centerY
       } ) );
     };
     if ( bunny.isAlive ) {
@@ -115,8 +115,8 @@ class PedigreeBunnyNode extends Node {
       ( furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) => {
         genotypeNode.visible = ( furAllelesVisible || earsAllelesVisible || teethAllelesVisible );
         genotypeNode.text = getGenotypeAbbreviation( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible );
-        genotypeNode.centerX = wrappedNode.centerX;
-        genotypeNode.top = wrappedNode.bottom + 5;
+        genotypeNode.centerX = bunnyNode.centerX;
+        genotypeNode.top = bunnyNode.bottom + 5;
       } );
 
     // @private

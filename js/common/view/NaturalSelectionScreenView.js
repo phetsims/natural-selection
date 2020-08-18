@@ -23,7 +23,7 @@ import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import AddMutationsPanel from './AddMutationsPanel.js';
-import BunnySpritesMap from './BunnySpritesMap.js';
+import BunnyImageMap from './bunnyImageMap.js';
 import DiedDialog from './DiedDialog.js';
 import EnvironmentNode from './environment/EnvironmentNode.js';
 import EnvironmentalFactorsPanel from './EnvironmentalFactorsPanel.js';
@@ -65,9 +65,9 @@ class NaturalSelectionScreenView extends ScreenView {
 
     super( options );
 
-    const bunnySpritesMap = new BunnySpritesMap();
+    const bunnyImageMap = new BunnyImageMap();
 
-    const environmentNode = new EnvironmentNode( model, bunnySpritesMap, {
+    const environmentNode = new EnvironmentNode( model, bunnyImageMap, {
       left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: options.tandem.createTandem( 'environmentNode' )
@@ -144,7 +144,7 @@ class NaturalSelectionScreenView extends ScreenView {
 
     // Pedigree
     const pedigreeNode = new PedigreeNode( model.pedigreeModel, model.bunnyCollection.selectedBunnyProperty,
-      model.genePool, bunnySpritesMap, graphAreaSize, {
+      model.genePool, bunnyImageMap, graphAreaSize, {
         left: graphAreaLeft,
         top: graphAreaTop,
         tandem: graphsTandem.createTandem( 'pedigreeNode' )

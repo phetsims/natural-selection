@@ -14,7 +14,7 @@ import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionModel from '../../model/NaturalSelectionModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
-import BunnySpritesMap from '../BunnySpritesMap.js';
+import BunnyImageMap from '../bunnyImageMap.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
 import OrganismSprites from './OrganismSprites.js';
 
@@ -22,13 +22,13 @@ class EnvironmentNode extends Node {
 
   /**
    * @param {NaturalSelectionModel} model
-   * @param {BunnySpritesMap} bunnySpritesMap
+   * @param {BunnyImageMap} bunnyImageMap
    * @param {Object} [options]
    */
-  constructor( model, bunnySpritesMap, options ) {
+  constructor( model, bunnyImageMap, options ) {
 
     assert && assert( model instanceof NaturalSelectionModel, 'invalid model' );
-    assert && assert( bunnySpritesMap instanceof BunnySpritesMap, 'invalid bunnySpritesMap' );
+    assert && assert( bunnyImageMap instanceof BunnyImageMap, 'invalid bunnyImageMap' );
 
     options = merge( {
       size: model.modelViewTransform.viewSize,
@@ -51,8 +51,8 @@ class EnvironmentNode extends Node {
     } );
 
     // High-performance sprites, for rendering bunnies, wolves, and food.
-    const sprites = new OrganismSprites( model.bunnyCollection, model.wolfCollection, model.food,
-      model.isPlayingProperty, bunnySpritesMap, bounds, {
+    const sprites = new OrganismSprites( model.bunnyCollection, bunnyImageMap, model.wolfCollection, model.food,
+      model.isPlayingProperty, bounds, {
         tandem: options.tandem.createTandem( 'sprites' )
       } );
 

@@ -1,7 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * BunnySpritesMap maps a bunny to a Sprite or Node, based on the bunny's phenotype.
+ * BunnyImageMap maps a bunny to a visual representation that corresponds to its phenotype.
+ * The visual representation can be a Sprite (for use in OrganismSprites) or a Node (for use in the Pedigree graph).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -24,7 +25,7 @@ import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
 import BunnySpriteImage from './environment/BunnySpriteImage.js';
 
-class BunnySpritesMap {
+class BunnyImageMap {
 
   /**
    * @param {Object} [options]
@@ -49,10 +50,7 @@ class BunnySpritesMap {
       'imageMap has an invalid key' );
 
     // @private Sprites for each bunny phenotype, used in OrganismSprites. Uses the same keys as imageMap.
-    this.spriteMap = {};
-    for ( const key in imageMap ) {
-      this.spriteMap[ key ] = new Sprite( new BunnySpriteImage( imageMap[ key ] ) );
-    }
+    this.spriteMap = _.mapValues( imageMap, image => new Sprite( new BunnySpriteImage( image ) ) );
 
     // Hit test on non-transparent pixels, to make it easier to select overlapping bunnies.
     // See https://github.com/phetsims/natural-selection/issues/63
@@ -69,10 +67,7 @@ class BunnySpritesMap {
 
     // @private Nodes for each bunny phenotype, used in the Pedigree graph. Uses the same keys as imageMap.
     // All Nodes are guaranteed to have the same effective size.
-    this.nodeMap = {};
-    for ( const key in imageMap ) {
-      this.nodeMap[ key ] = new AlignBox( new Image( imageMap[ key ], imageOptions ), alignBoxOptions );
-    }
+    this.nodeMap = _.mapValues( imageMap, image => new AlignBox( new Image( image, imageOptions ), alignBoxOptions ) );
     //TODO verify that they all have the same size
   }
 
@@ -118,7 +113,7 @@ class BunnySpritesMap {
    * @returns {Node}
    * @public
    */
-  getWrappedNode( bunny, options ) {
+  getNode( bunny, options ) {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
@@ -149,5 +144,5 @@ function getKey( bunny ) {
   return `${bunny.phenotype.hasWhiteFur()}-${bunny.phenotype.hasStraightEars()}-${bunny.phenotype.hasShortTeeth()}`;
 }
 
-naturalSelection.register( 'BunnySpritesMap', BunnySpritesMap );
-export default BunnySpritesMap;
+naturalSelection.register( 'BunnyImageMap', BunnyImageMap );
+export default BunnyImageMap;

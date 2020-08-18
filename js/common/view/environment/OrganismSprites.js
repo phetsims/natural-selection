@@ -28,7 +28,7 @@ import Food from '../../model/Food.js';
 import Wolf from '../../model/Wolf.js';
 import WolfCollection from '../../model/WolfCollection.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
-import BunnySpritesMap from '../BunnySpritesMap.js';
+import BunnyImageMap from '../bunnyImageMap.js';
 import BunnySelectionRectangleSprite from './BunnySelectionRectangleSprite.js';
 import BunnySelectionRectangleSpriteInstance from './BunnySelectionRectangleSpriteInstance.js';
 import BunnySpriteInstance from './BunnySpriteInstance.js';
@@ -41,20 +41,20 @@ class OrganismSprites extends Sprites {
 
   /**
    * @param {BunnyCollection} bunnyCollection
+   * @param {BunnyImageMap} bunnyImageMap - Sprites for all bunny phenotypes
    * @param {WolfCollection} wolfCollection
    * @param {Food} food
    * @param {Property.<boolean>} isPlayingProperty
-   * @param {BunnySpritesMap} bunnySpritesMap - Sprites for all bunny phenotypes
    * @param {Bounds2} canvasBounds
    * @param {Object} [options]
    */
-  constructor( bunnyCollection, wolfCollection, food, isPlayingProperty, bunnySpritesMap, canvasBounds, options ) {
+  constructor( bunnyCollection, bunnyImageMap, wolfCollection, food, isPlayingProperty, canvasBounds, options ) {
 
     assert && assert( bunnyCollection instanceof BunnyCollection, 'invalid bunnyCollection' );
+    assert && assert( bunnyImageMap instanceof BunnyImageMap, 'invalid bunnyImageMap' );
     assert && assert( wolfCollection instanceof WolfCollection, 'invalid wolfCollection' );
     assert && assert( food instanceof Food, 'invalid food' );
     assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
-    assert && assert( bunnySpritesMap instanceof BunnySpritesMap, 'invalid bunnySpritesMap' );
     assert && assert( canvasBounds instanceof Bounds2, 'invalid canvasBounds' );
 
     options = merge( {
@@ -84,7 +84,7 @@ class OrganismSprites extends Sprites {
     // {OrganismSprite[]} the complete set of sprites
     assert && assert( !options.sprites, 'OrganismSprites sets sprites' );
     options.sprites = [ wolfSprite, selectionRectangleSprite ];
-    options.sprites.push( ...bunnySpritesMap.getSprites() );
+    options.sprites.push( ...bunnyImageMap.getSprites() );
     options.sprites.push( ...shrubSpritesMap.getSprites() );
 
     // {ShrubSpriteInstance[]} sprite instances for shrubs
@@ -109,7 +109,7 @@ class OrganismSprites extends Sprites {
     this.bunnyCollection = bunnyCollection;
     this.wolfCollection = wolfCollection;
     this.isPlayingProperty = isPlayingProperty;
-    this.bunnySpritesMap = bunnySpritesMap;
+    this.bunnyImageMap = bunnyImageMap;
     this.selectionRectangleSprite = selectionRectangleSprite;
     this.shrubSpriteInstances = shrubSpriteInstances;
     this.spriteInstances = options.spriteInstances;
@@ -173,7 +173,7 @@ class OrganismSprites extends Sprites {
     assert && assert( bunny.isAlive, 'expected a live bunny' );
 
     // Create a SpriteInstance for the bunny.
-    const bunnySpriteInstance = new BunnySpriteInstance( bunny, this.bunnySpritesMap.getSprite( bunny ) );
+    const bunnySpriteInstance = new BunnySpriteInstance( bunny, this.bunnyImageMap.getSprite( bunny ) );
     this.spriteInstances.push( bunnySpriteInstance );
     if ( !this.isPlayingProperty.value ) {
       this.update();
