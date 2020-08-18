@@ -208,7 +208,7 @@ if ( limited food is enabled ) {
 }
 ```
 
-†The constants used in the above algorithms were accurate at the time of writing. We'll try to keep those values in sync with reality. But it's possible that someone might update the code without updating this document.
+†The constants shown in the above algorithms were accurate at the time of writing. We'll try to keep those values in sync with reality. But it's possible that someone might update the code without updating this document.
 
 ## Graphs
 
