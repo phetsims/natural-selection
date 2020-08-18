@@ -18,6 +18,7 @@ import PedigreeModel from '../../model/PedigreeModel.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
+import BunnySpritesMap from '../BunnySpritesMap.js';
 import PedigreeBranchNode from './PedigreeBranchNode.js';
 
 // constants
@@ -29,12 +30,14 @@ class PedigreeGraphNode extends Node {
   /**
    * @param {PedigreeModel} pedigreeModel
    * @param {SelectedBunnyProperty} selectedBunnyProperty
+   * @param {BunnySpritesMap} bunnySpritesMap
    * @param {Object} [options]
    */
-  constructor( pedigreeModel, selectedBunnyProperty, options ) {
+  constructor( pedigreeModel, selectedBunnyProperty, bunnySpritesMap, options ) {
 
     assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
     assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty, 'invalid selectedBunnyProperty' );
+    assert && assert( bunnySpritesMap instanceof BunnySpritesMap, 'invalid bunnySpritesMap' );
 
     options = merge( {
       graphWidth: 100,
@@ -79,7 +82,7 @@ class PedigreeGraphNode extends Node {
       if ( bunny ) {
 
         // Create the graph
-        branchNode = new PedigreeBranchNode( bunny, NaturalSelectionConstants.PEDIGREE_TREE_DEPTH,
+        branchNode = new PedigreeBranchNode( bunny, bunnySpritesMap, NaturalSelectionConstants.PEDIGREE_TREE_DEPTH,
           selectedBunnyProperty,
           pedigreeModel.furAllelesVisibleProperty,
           pedigreeModel.earsAllelesVisibleProperty,

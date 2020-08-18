@@ -28,10 +28,10 @@ import Food from '../../model/Food.js';
 import Wolf from '../../model/Wolf.js';
 import WolfCollection from '../../model/WolfCollection.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
+import BunnySpritesMap from '../BunnySpritesMap.js';
 import BunnySelectionRectangleSprite from './BunnySelectionRectangleSprite.js';
 import BunnySelectionRectangleSpriteInstance from './BunnySelectionRectangleSpriteInstance.js';
 import BunnySpriteInstance from './BunnySpriteInstance.js';
-import BunnySpritesMap from './BunnySpritesMap.js';
 import OrganismSpriteImage from './OrganismSpriteImage.js';
 import ShrubSpriteInstance from './ShrubSpriteInstance.js';
 import ShrubSpritesMap from './ShrubSpritesMap.js';
@@ -44,15 +44,17 @@ class OrganismSprites extends Sprites {
    * @param {WolfCollection} wolfCollection
    * @param {Food} food
    * @param {Property.<boolean>} isPlayingProperty
+   * @param {BunnySpritesMap} bunnySpritesMap - Sprites for all bunny phenotypes
    * @param {Bounds2} canvasBounds
    * @param {Object} [options]
    */
-  constructor( bunnyCollection, wolfCollection, food, isPlayingProperty, canvasBounds, options ) {
+  constructor( bunnyCollection, wolfCollection, food, isPlayingProperty, bunnySpritesMap, canvasBounds, options ) {
 
     assert && assert( bunnyCollection instanceof BunnyCollection, 'invalid bunnyCollection' );
     assert && assert( wolfCollection instanceof WolfCollection, 'invalid wolfCollection' );
     assert && assert( food instanceof Food, 'invalid food' );
     assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
+    assert && assert( bunnySpritesMap instanceof BunnySpritesMap, 'invalid bunnySpritesMap' );
     assert && assert( canvasBounds instanceof Bounds2, 'invalid canvasBounds' );
 
     options = merge( {
@@ -69,9 +71,6 @@ class OrganismSprites extends Sprites {
 
     assert && assert( !options.canvasBounds, 'OrganismSprites sets canvasBounds' );
     options.canvasBounds = canvasBounds;
-
-    // Sprites for all bunny phenotypes
-    const bunnySpritesMap = new BunnySpritesMap();
 
     // Sprites for all categories of shrubs
     const shrubSpritesMap = new ShrubSpritesMap();

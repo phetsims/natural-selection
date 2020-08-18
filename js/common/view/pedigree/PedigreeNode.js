@@ -16,6 +16,7 @@ import PedigreeModel from '../../model/PedigreeModel.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
+import BunnySpritesMap from '../BunnySpritesMap.js';
 import AllelesPanel from './AllelesPanel.js';
 import PedigreeGraphNode from './PedigreeGraphNode.js';
 
@@ -25,14 +26,16 @@ class PedigreeNode extends HBox {
    * @param {PedigreeModel} pedigreeModel
    * @param {SelectedBunnyProperty} selectedBunnyProperty
    * @param {GenePool} genePool
+   * @param {BunnySpritesMap} bunnySpritesMap
    * @param {Dimension2} size - dimensions of the rectangle available for this Node and its children
    * @param {Object} [options]
    */
-  constructor( pedigreeModel, selectedBunnyProperty, genePool, size, options ) {
+  constructor( pedigreeModel, selectedBunnyProperty, genePool, bunnySpritesMap, size, options ) {
 
     assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
     assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty, 'invalid selectedBunnyProperty' );
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
+    assert && assert( bunnySpritesMap instanceof BunnySpritesMap, 'invalid bunnySpritesMap' );
     assert && assert( size instanceof Dimension2, 'invalid size' );
 
     options = merge( {
@@ -68,7 +71,7 @@ class PedigreeNode extends HBox {
                              'but changes to its elements and metadata will have no affect.'
       } );
 
-    const pedigreeGraphNode = new PedigreeGraphNode( pedigreeModel, selectedBunnyProperty, {
+    const pedigreeGraphNode = new PedigreeGraphNode( pedigreeModel, selectedBunnyProperty, bunnySpritesMap, {
         graphWidth: graphWidth,
         graphHeight: size.height,
         tandem: options.tandem.createTandem( 'pedigreeGraphNode' )

@@ -18,9 +18,9 @@ import Bunny from '../../model/Bunny.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 import BunnySelectionRectangle from '../BunnySelectionRectangle.js';
+import BunnySpritesMap from '../BunnySpritesMap.js';
 import MutationIconNode from '../MutationIconNode.js';
 import OriginNode from '../OriginNode.js';
-import BunnyImageCache from './BunnyImageCache.js';
 
 // constants
 const GENOTYPE_FONT = new PhetFont( 16 );
@@ -30,14 +30,17 @@ class PedigreeBunnyNode extends Node {
 
   /**
    * @param {Bunny} bunny
+   * @param {BunnySpritesMap} bunnySpritesMap
    * @param {Property.<boolean>} furAllelesVisibleProperty
    * @param {Property.<boolean>} earsAllelesVisibleProperty
    * @param {Property.<boolean>} teethAllelesVisibleProperty
    * @param {Object} [options]
    */
-  constructor( bunny, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
+  constructor( bunny, bunnySpritesMap,
+               furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
 
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
+    assert && assert( bunnySpritesMap instanceof BunnySpritesMap, 'invalid bunnySpritesMap' );
     assert && AssertUtils.assertPropertyOf( furAllelesVisibleProperty, 'boolean' );
     assert && AssertUtils.assertPropertyOf( earsAllelesVisibleProperty, 'boolean' );
     assert && AssertUtils.assertPropertyOf( teethAllelesVisibleProperty, 'boolean' );
@@ -49,19 +52,19 @@ class PedigreeBunnyNode extends Node {
 
     const children = [];
 
-    // Image that corresponds to the bunny's phenotype (appearance)
-    const wrappedImage = BunnyImageCache.getWrappedImage( bunny, {
+    // Node that corresponds to the bunny's phenotype (appearance)
+    const wrappedNode = bunnySpritesMap.getWrappedNode( bunny, {
       scale: NaturalSelectionConstants.BUNNY_IMAGE_SCALE,
       centerX: 0,
       bottom: 0
     } );
-    children.push( wrappedImage );
+    children.push( wrappedNode );
 
     // Label original mutant with an icon
     if ( bunny.isOriginalMutant() ) {
       children.push( new MutationIconNode( {
-        right: wrappedImage.centerX,
-        bottom: wrappedImage.bottom,
+        right: wrappedNode.centerX,
+        bottom: wrappedNode.bottom,
         pickable: false
       } ) );
     }
@@ -69,14 +72,14 @@ class PedigreeBunnyNode extends Node {
     // Genotype abbreviation
     const genotypeNode = new Text( '', {
       font: GENOTYPE_FONT,
-      maxWidth: wrappedImage.width
+      maxWidth: wrappedNode.width
     } );
     children.push( genotypeNode );
 
     // Optional selection rectangle, prepended to children
     if ( options.bunnyIsSelected ) {
-      children.unshift( new BunnySelectionRectangle( wrappedImage.bounds.dilated( 3 ), {
-        center: wrappedImage.center
+      children.unshift( new BunnySelectionRectangle( wrappedNode.bounds.dilated( 3 ), {
+        center: wrappedNode.center
       } ) );
     }
 
@@ -93,8 +96,8 @@ class PedigreeBunnyNode extends Node {
     const addRedCrossMark = () => {
       this.addChild( new Text( '\u274c', {
         font: DEAD_SYMBOL_FONT,
-        right: wrappedImage.centerX,
-        bottom: wrappedImage.centerY
+        right: wrappedNode.centerX,
+        bottom: wrappedNode.centerY
       } ) );
     };
     if ( bunny.isAlive ) {
@@ -112,8 +115,8 @@ class PedigreeBunnyNode extends Node {
       ( furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) => {
         genotypeNode.visible = ( furAllelesVisible || earsAllelesVisible || teethAllelesVisible );
         genotypeNode.text = getGenotypeAbbreviation( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible );
-        genotypeNode.centerX = wrappedImage.centerX;
-        genotypeNode.top = wrappedImage.bottom + 5;
+        genotypeNode.centerX = wrappedNode.centerX;
+        genotypeNode.top = wrappedNode.bottom + 5;
       } );
 
     // @private
