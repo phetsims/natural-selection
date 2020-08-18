@@ -149,7 +149,7 @@ percentToEatWhite = 0
 
 if ( wolves are enabled ) {
 
-  percentToEat = nextRandomInRange( [ 0.35, 0.4 ] );
+  percentToEat = randomNumberBetween( 0.35, 0.4 );
   multiplierForNonFavoredBunnies = 2.3
 
   if ( environment color is brown ) {
@@ -191,7 +191,7 @@ percentShortTeethStarved = 0
 percentLongTeethStarved = 0
 
 if ( tough food is enabled ) {
-  percentToStarve = nextRandomInRange( [ 0.45, 0.6 ] )
+  percentToStarve = randomNumberBetween( 0.45, 0.6 )
   percentShortTeethStarved = percentToStarve * 1.6
   percentLongTeethStarved = percentToStarve
   if ( number of bunnies with long teeth < 5 ) {
@@ -213,7 +213,7 @@ In pseudocode†, here's the algorithm for calculating the number of bunnies tha
 numberToStarve = 0
 
 if ( limited food is enabled ) {
-  carryingCapacity = nextRandomInRange( 90, 110 )
+  carryingCapacity = randomNumberBetween( 90, 110 )
   if ( total number of bunnies > carryingCapacity ) {
     numberToStarve = total number of bunnies - carryingCapacity
   }
