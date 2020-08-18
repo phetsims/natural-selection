@@ -62,7 +62,8 @@ class NaturalSelectionModel {
     this.timeScaleProperty = new NumberProperty( 1, {
       tandem: options.tandem.createTandem( 'timeScaleProperty' ),
       validValues: [ 1, NaturalSelectionQueryParameters.fastForwardScale ],
-      phetioDocumentation: 'the generation clock is sped up by this scale factor'
+      phetioDocumentation: 'the generation clock is sped up by this scale factor',
+      phetioReadOnly: true
     } );
 
     // @public (read-only)
