@@ -136,7 +136,7 @@ Wolves favor bunnies whose fur color matches their environment by eating a great
 bunnies whose fur color does not match their environment. If the population of favored bunnies is
 small (less than 6) and there are non-favored bunnies to eat, then the favored bunnies will be ignored.
 
-In pseudo code, here's the algorithm for calculating the percentages of brown and white bunnies to eat†:
+In pseudocode†, here's the algorithm for calculating the percentages of brown and white bunnies to eat:
 
 ```
 // Wolves
@@ -178,7 +178,7 @@ Tough food is more difficult to eat, so some of each phenotype will starve. But 
 so a larger percentage of bunnies with short teeth will starve. Additionally, if the number of bunnies with long teeth is small (less than 5),
 then no bunnies with long teeth will starve. 
 
-In pseudo code, here's the algorithm for calculating the percentages of long-toothed and short-toothed bunnies that will starve from tough food†:
+In pseudocode†, here's the algorithm for calculating the percentages of long-toothed and short-toothed bunnies that will starve from tough food:
 
 ```
 // Tough Food
@@ -201,7 +201,7 @@ Limited food can support a population up to a carrying capacity, and does not fa
 bunnies die off to reduce the population to the carrying capacity.  The carrying capacity is randomly selected from a narrow range to provide some
 variability.
 
-In pseudo code, here's the algorithm for calculating the number of bunnies that will die due to limited food†:
+In pseudocode†, here's the algorithm for calculating the number of bunnies that will die due to limited food:
 
 ```
 // Limited Food
@@ -217,7 +217,7 @@ if ( limited food is enabled ) {
 }
 ```
 
-†The constants shown in the above algorithms were accurate at the time of writing. We'll try to keep those values in sync with reality. But it's possible that someone might update the code without updating this document.
+†The constants shown in the above pseudocode were accurate at the time of writing. We'll try to keep those values in sync with reality. But it's possible that someone might update the code without updating this document.
 
 ## Graphs
 
