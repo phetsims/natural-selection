@@ -75,7 +75,7 @@ just before reproduction occurs.
 ## Reproduction
 
 In reality, environmental factors may affect reproduction. That is not the case in this simulation. Reproduction
-is not affected by environmental factors, and bunnies reproduce using the following model:
+is not affected by environmental factors, and bunnies reproduce according to the following model:
 
 * Bunnies reproduce at 12:00.
 * Any bunny can mate with any other bunny. Age, sex, and pedigree relationship are irrelevant.
