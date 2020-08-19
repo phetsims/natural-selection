@@ -1,7 +1,5 @@
 # TODO list for natural-selection
 
-* Better name for BunnyVariety
-
 * Too many Properties with 'generation' in their name is confusing
 
 GenerationClock.generationsProperty - decimal
