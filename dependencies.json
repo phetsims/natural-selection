@@ -1,11 +1,11 @@
 {
-  "comment": "# natural-selection 1.1.0-dev.11 Tue Aug 18 2020 19:11:00 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.1.0-dev.12 Wed Aug 19 2020 13:58:08 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "1a41cef653bbed1025af5768bea958d7e3e0f8ae",
     "branch": "master"
   },
   "axon": {
-    "sha": "d38928dae0a0b5bf825127483d1b4a5948f9226d",
+    "sha": "264925b71ceb5ba08ef21e4dd7d739af3bf78193",
     "branch": "master"
   },
   "brand": {
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "natural-selection": {
-    "sha": "e594b50f426ad9ba25a95fc1c8cdebd22f6e1cc5",
+    "sha": "b05e48d9412f0cee8aaee51e24c29ffa5db772e0",
     "branch": "master"
   },
   "phet-core": {
@@ -65,7 +65,7 @@
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "6b210fdbf97012f451a79252986979cf261e037a",
+    "sha": "a9970fcf1da0af108528a7282e840c9c87b53035",
     "branch": "master"
   },
   "sherpa": {
@@ -85,7 +85,7 @@
     "branch": "master"
   },
   "tandem": {
-    "sha": "e816dcf22aa5e2a0ccf64b4bfd1461561ab92b65",
+    "sha": "8f7a642bdc58b69b0988eb2309bcb1d9a0d921d8",
     "branch": "master"
   },
   "utterance-queue": {
