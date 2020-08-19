@@ -147,6 +147,6 @@ PhET-iO is a PhET product that is described at https://phet-io.colorado.edu. If 
 
 **Configure the Genes for a screen**: `GeneVisibilityManager` contains a `{{gene}}VisibleProperty` for each Gene, which controls the visiblity of all UI components for that gene. Use these Properties via Studio to quickly configure which genes appear in the UI. Search for "view.genes" in Studio.
 
-**Configure the Environmental Factors for a screen**: Configuring which environmental factors are relevant for a screen is as easy as deciding which checkboxes to make visible.  Search for `wolvesCheckbox`, `toughFoodCheckbox`, and `limitedFoodCheckbox` in Studio, and set their visibleProperty as desired.
+**Configure the Environmental Factors for a screen**: Configuring which environmental factors are available for a screen is as easy as deciding which checkboxes to make visible.  Search for `wolvesCheckbox`, `toughFoodCheckbox`, and `limitedFoodCheckbox` in Studio, and set their visibleProperty as desired.
 
   
