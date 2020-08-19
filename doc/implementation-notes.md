@@ -84,6 +84,7 @@ There is a sub-model for each graph:
 Here are the entry points to some of the major features of the model:
 
 * Bunny motion: `Bunny.move`
+* Bunny appearance: `Phenotype`, `GenePair.getVisibleAllele`
 * Wolf motion: `Wolf.move`
 * Death due to old age: `BunnyCollection.ageBunnies`
 * Reproduction: `BunnyCollection.mateBunnies` and `PunnettSquare`
