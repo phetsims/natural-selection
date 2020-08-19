@@ -74,7 +74,7 @@ just before reproduction occurs.
 
 ## Reproduction
 
-In reality, environmental factors may affect reproduction. That is not the case in this simulation - reproduction
+In reality, environmental factors may affect reproduction. That is not the case in this simulation. Reproduction
 is not affected by environmental factors, and bunnies reproduce using the following model:
 
 * Bunnies reproduce at 12:00.
