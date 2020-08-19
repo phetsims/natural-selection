@@ -25,7 +25,9 @@ Terms that are specific to the implementation:
 * A _**sprite**_ is a high-performance way of drawing an organism, using the scenery `Sprites` API.
 * A _**plot**_ is a set of points connected by line segments, used in the Population graph.
 
-## Common Patterns
+## General Consideration
+
+This section describes how this simulation addresses implementation considerations that are typically encountered in PhET simulations.
 
 **Model-View Transform**: There are 3 different model-view transforms in this sim.
 
@@ -58,6 +60,10 @@ be disposed, and their `dispose` implementation looks like this:
     super.dispose();
   }
 ```
+
+When bunnies die, they can be immediately disposed. Their information is needed by the Pedigree graph. If we kept them forever, we'd run out of memory. `BunnyCollection.pruneDeadBunnies` handles pruning dead bunnies, disposing of them when they will no longer be needed by the Pedigree graph.
+
+It's possible to put this sim in a state where the population stabilizes, and the sim will run forever. The sim would continue to create data points for the population graph, and would eventually crash the browser.  So the sim has a limit on the number of generations that it will run, see `maxGenerations` in `NaturalSelectionQueryParameters`. When this limit is reached, the sim stops, `MemoryLimitDialog` is displayed, and the student can review the final state of the sim. 
 
 ## Model
 
