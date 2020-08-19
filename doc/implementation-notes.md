@@ -29,7 +29,7 @@ Terms that are specific to the implementation:
 
 **Model-View Transform**: There are 3 different model-view transforms in this sim.
 
-_Environment_: The environment is where the bunnies are hopping around. The model uses a unitless 3D coordinate frame, where +x is to the left, +y is up, and +z is into the screen. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. `EnvironmentModelViewTransform` handles the transforms, and has very detailed documentation in the source code header. 
+_Environment_: The model uses a unitless 3D coordinate frame, where +x is to the left, +y is up, and +z is into the screen. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. `EnvironmentModelViewTransform` handles the transforms, and has very detailed documentation in the source code header. 
 
 _Population graph_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. Because drawing plots needs to be lightweight and high-performance, `ModelViewTransform` is not used here. Model-to-view transform is handled by `PopulationPlotNode` (see `modelToViewX` and `modelToViewY`). View-to-model transform is unnecessary.
 
