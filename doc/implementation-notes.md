@@ -58,28 +58,33 @@ This section provides a quick overview of the model.
 The main model class is `NaturalSelectionModel`. It manages how the sim is playing (play, pause, speed) and what mode the sim is in (see `SimulationMode`). Everything else is delegated to other model elements. `NaturalSelectionModel` is used by both screens, with no differences. Genes and environmental factors that are not relevant in the _Intro_ screen are hidden by the view.
 
 There are a few top-level model elements:
+
 * `GenerationClock` is responsible for the elapsed time in generations
 * `GenePool` is the collection of genes that are present in the bunny population 
 * There is one instance of `Gene` for fur, teeth, and ears.  They live in the `GenePool` and they globally determine dominance relationship, and whether a mutation is going to occur. 
 
 Living things are instances of `Organism`. There are 3 subclasses of Organism:
+
 * `Bunny` - created dynamically, moves around, has reference to parents, has a `Genotype` and a `Phenotype`
 * `Wolf` - created dynamically, moves around
 * `Shrub` - created statically at startup, remains stationary
 
 Organisms are organized into collections:
+
 * `BunnyCollection` - `Bunny` instances, responsible for reproduction and death due to old age
 * `WolfCollection` - `Wolf` instances, responsible for eating bunnies
 * `Food` - `Shrub` instances, responsible for starving bunnies
 
 There is a sub-model for each graph:
+
 * `PopulationGraph`
 * `ProportionsGraph`
 * `PedigreeGraph`
 
-Here are the entry points to the major features of the model:
+Here are the entry points to some of the major features of the model:
 
 * Bunny motion: `Bunny.move`
+* Bunny appearance: `Phenotype`, `GenePair.getVisibleAllele`
 * Wolf motion: `Wolf.move`
 * Death due to old age: `BunnyCollection.ageBunnies`
 * Reproduction: `BunnyCollection.mateBunnies` and `PunnettSquare`
@@ -92,9 +97,31 @@ Here are the entry points to the major features of the model:
 * Population graph data points: `see ObservableArray instances in PopulationModel`
 * Proportions graph start/end counts: `ProportionsCounts`
 * Pedigree graph: shows a tree for `BunnyCollection.selectedBunnyProperty`
+* Genotype abbreviation: `Genotype.abbreviationProperty`, `GenePair.getGenotypeAbbreviation`
 * Initializing the bunny population via query parameters: `parseInitialPopulation.js`, `NaturalSelectionQueryParameters`, 
 
 ## View
+
+This section provides a quick overview of the view.
+
+The main view class is `NaturalSelectionScreenView`. It is used by both screens, and simply hides genes and environmental factors that are not relevant for the _Intro_ (see options in `IntroScreenView`).
+
+`GenerationClock` displays the generation clock. It appears at the top-center of the UI. When environmental factors are enabled, the clock reveals color-coded "slices" that show when those environmental factors will be applied.
+
+`natural-selection/js/common/view/` organizes independent parts of the view into 4 subdirectories:
+
+* `environment/` - specific to the part of the screen where the bunnies hop around, main class `EnvironmentNode`
+* `population/` - specific to the Population graph, main class `PopulatioNode`
+* `proportions/` - specific to the Proportions graph, main class `ProportionsNode`
+* `pedigree/` - specific to the Pedigree graph, main class `PedigreeNode`
+
+Here are the entry points to some of the major features of the view:
+
+* Drawing the bunnies, wolves, and shrubs: `OrganismSprites`
+* Mapping a bunny to an image: `BunnyImageMap`
+* Plotting data on the Population graph: `PopulationPlotNode`
+* Bars in the Proportions graph: `ProportionsBarNode`
+* Pedigree tree structure: `PedigreeBranchNode`
 
 ## PhET-iO
 
