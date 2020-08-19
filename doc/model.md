@@ -40,7 +40,7 @@ The blueprint consists of a gene pair for each gene.
 A genotype can be abbreviated by using letters to represent an individual's alleles. 
 Conventions for abbreviation vary, and the section below describes the convention used in this simulation.
 
-_**Phenotype**_ is the appearance of the organism. For homozygous individuals, appearance is straightforward, since 
+_**Phenotype**_ is the appearance of the organism, the manifestation of the genotype. For homozygous individuals, appearance is straightforward, since 
 the alleles are identical. For heterozygous individuals, appearance is determined by the dominant allele.
 
 Genotype abbreviation:
