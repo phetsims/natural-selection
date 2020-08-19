@@ -52,7 +52,7 @@ For example, if the "brown fur" mutation is dominant, then 'F' means brown fur, 
 * Letters can be assigned to alleles only after a dominance relationship exists. 
 For example, if the population consists of white bunnies, and the brown fur mutation has not yet occurred, 
 then it's impossible to label the white bunnies as 'F' or 'f', because "white fur" is not yet involved in a 
-dominance relationship.
+dominance relationship. In this case, the allele does not appear in the abbreviation.
 * For genes where a dominance relationship exists, the genotype is abbreviated using the 
 letters mentioned above.  For example if brown fur is dominant (F), floppy ears are dominant (E), and long 
 teeth are recessive (t), then genotype "FFEett" is parsed as:
