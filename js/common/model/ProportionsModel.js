@@ -31,15 +31,15 @@ class ProportionsModel extends PhetioObject {
 
   /**
    * @param {Property.<BunnyCounts>} liveBunnyCountsProperty - counts of live bunnies, used for dynamic 'Currently' data
-   * @param {Property.<number>} currentGenerationProperty
+   * @param {Property.<number>} clockGenerationProperty - the generation number of the generation clock
    * @param {Property.<boolean>} isPlayingProperty
    * @param {EnumerationProperty.<SimulationMode>} simulationModeProperty
    * @param {Object} [options]
    */
-  constructor( liveBunnyCountsProperty, currentGenerationProperty, isPlayingProperty, simulationModeProperty, options ) {
+  constructor( liveBunnyCountsProperty, clockGenerationProperty, isPlayingProperty, simulationModeProperty, options ) {
 
     assert && assert( liveBunnyCountsProperty instanceof Property, 'invalid bunnyCounts' );
-    assert && AssertUtils.assertPropertyOf( currentGenerationProperty, 'number' );
+    assert && AssertUtils.assertPropertyOf( clockGenerationProperty, 'number' );
     assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
     assert && AssertUtils.assertEnumerationPropertyOf( simulationModeProperty, SimulationMode );
 
@@ -54,7 +54,7 @@ class ProportionsModel extends PhetioObject {
     super( options );
 
     // @private
-    this.currentGenerationProperty = currentGenerationProperty;
+    this.clockGenerationProperty = clockGenerationProperty;
 
     // @public
     this.valuesVisibleProperty = new BooleanProperty( true, {
@@ -63,17 +63,19 @@ class ProportionsModel extends PhetioObject {
     } );
 
     // @public the generation that is displayed by the Proportions graph
-    this.generationProperty = new NumberProperty( 0, {
+    // Named proportionsGenerationProperty to distinguish it from the other 'generation' Properties in this sim.
+    // See https://github.com/phetsims/natural-selection/issues/187
+    this.proportionsGenerationProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       range: new Range( 0, 0 ), // dynamically adjusted by calling setValueAndRange
-      tandem: options.tandem.createTandem( 'generationProperty' ),
+      tandem: options.tandem.createTandem( 'proportionsGenerationProperty' ),
       phetioReadOnly: true // range is dynamic
     } );
 
     // @public whether the Proportions graph is displaying the current generation. dispose is not necessary.
     this.isDisplayingCurrentGenerationProperty = new DerivedProperty(
-      [ this.generationProperty, currentGenerationProperty ],
-      ( generation, currentGeneration ) => ( generation === currentGeneration )
+      [ this.proportionsGenerationProperty, clockGenerationProperty ],
+      ( proportionsGeneration, clockGeneration ) => ( proportionsGeneration === clockGeneration )
     );
 
     // @public counts for 'Start of Generation'
@@ -104,8 +106,8 @@ class ProportionsModel extends PhetioObject {
     this.hasDataProperty = new DerivedProperty( [ currentStartCountsProperty ], currentStartCounts => !!currentStartCounts );
 
     // Pause the sim when a generation other than the current generation is being viewed. unlink is not necessary.
-    this.generationProperty.link( generation => {
-      if ( generation !== currentGenerationProperty.value ) {
+    this.proportionsGenerationProperty.link( proportionsGeneration => {
+      if ( proportionsGeneration !== clockGenerationProperty.value ) {
         isPlayingProperty.value = false;
       }
     } );
@@ -124,10 +126,10 @@ class ProportionsModel extends PhetioObject {
     // When the sim starts playing or the current generation changes, show the current generation immediately.
     // Multilink dispose is not necessary.
     Property.multilink(
-      [ isPlayingProperty, currentGenerationProperty ],
-      ( isPlaying, currentGeneration ) => {
+      [ isPlayingProperty, clockGenerationProperty ],
+      ( isPlaying, clockGeneration ) => {
         if ( isPlaying ) {
-          this.generationProperty.setValueAndRange( currentGeneration, new Range( 0, currentGeneration ) );
+          this.proportionsGenerationProperty.setValueAndRange( clockGeneration, new Range( 0, clockGeneration ) );
         }
       } );
 
@@ -137,8 +139,8 @@ class ProportionsModel extends PhetioObject {
 
     // Determine what data to display. Multilink dispose is not necessary.
     Property.multilink(
-      [ this.generationProperty, currentStartCountsProperty ],
-      ( generation, currentStartCounts ) => {
+      [ this.proportionsGenerationProperty, currentStartCountsProperty ],
+      ( proportionsGeneration, currentStartCounts ) => {
 
         if ( liveBunnyCountsProperty.hasListener( updateEndCounts ) ) {
           liveBunnyCountsProperty.unlink( updateEndCounts );
@@ -147,7 +149,7 @@ class ProportionsModel extends PhetioObject {
         if ( currentStartCounts ) {
 
           // We have data. Decide whether to display data for the current generation or a previous generation.
-          if ( generation === currentGenerationProperty.value ) {
+          if ( proportionsGeneration === clockGenerationProperty.value ) {
 
             // Show static counts for the start of the current generation.
             this.startCountsProperty.value = currentStartCountsProperty.value;
@@ -158,8 +160,8 @@ class ProportionsModel extends PhetioObject {
           else {
 
             // Show static counts for a previous generation.
-            const counts = previousCounts.get( generation );
-            assert && assert( counts.generation === generation, 'unexpected generation' );
+            const counts = previousCounts.get( proportionsGeneration );
+            assert && assert( counts.generation === proportionsGeneration, 'unexpected generation' );
             this.startCountsProperty.value = counts.startCounts;
             this.endCountsProperty.value = counts.endCounts;
           }
@@ -187,7 +189,7 @@ class ProportionsModel extends PhetioObject {
    */
   reset() {
     this.valuesVisibleProperty.reset();
-    this.generationProperty.resetValueAndRange(); // because we're using setValueAndRange
+    this.proportionsGenerationProperty.resetValueAndRange(); // because we're using setValueAndRange
     this.startCountsProperty.reset();
     this.endCountsProperty.reset();
     this.currentStartCountsProperty.reset();
@@ -208,14 +210,14 @@ class ProportionsModel extends PhetioObject {
 
   /**
    * Records start counts for the current generation.
-   * @param {generation} generation
+   * @param {number} clockGeneration
    * @param {BunnyCounts} startCounts
    * @public
    */
-  recordStartCounts( generation, startCounts ) {
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
+  recordStartCounts( clockGeneration, startCounts ) {
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( clockGeneration ), 'invalid clockGeneration' );
     assert && assert( startCounts instanceof BunnyCounts, 'invalid startCounts' );
-    assert && assert( generation === this.currentGenerationProperty.value, `${generation} is not the current generation` );
+    assert && assert( clockGeneration === this.clockGenerationProperty.value, `${clockGeneration} is not the current generation` );
 
     this.currentStartCountsProperty.value = startCounts;
   }
@@ -229,7 +231,7 @@ class ProportionsModel extends PhetioObject {
   recordEndCounts( generation, endCounts ) {
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
     assert && assert( endCounts instanceof BunnyCounts, 'invalid endCounts' );
-    assert && assert( generation === this.currentGenerationProperty.value - 1, `${generation} is not the previous generation` );
+    assert && assert( generation === this.clockGenerationProperty.value - 1, `${generation} is not the previous generation` );
     assert && assert( this.previousCounts.length === generation,
       `unexpected generation=${generation}, expected ${this.previousCounts.length}` );
 

@@ -52,17 +52,19 @@ class DataProbe extends PhetioObject {
     } );
 
     // @public
-    this.generationProperty = new DerivedProperty(
+    // Named dataProbeGenerationProperty to distinguish it from the other 'generation' Properties in this sim.
+    // See https://github.com/phetsims/natural-selection/issues/187
+    this.dataProbeGenerationProperty = new DerivedProperty(
       [ populationModel.xRangeProperty, this.offsetProperty ],
       ( xRange, offset ) => xRange.min + offset.x, {
-        tandem: options.tandem.createTandem( 'generationProperty' ),
+        tandem: options.tandem.createTandem( 'dataProbeGenerationProperty' ),
         phetioType: DerivedPropertyIO( NumberIO ),
         phetioDocumentation: 'the generation (x-axis) value where the data probe is positioned'
       } );
 
     // @public Set BunnyCounts based on position of the data probe. dispose is not necessary.
-    this.countsProperty = new DerivedProperty( [ this.generationProperty, populationModel.timeInGenerationsProperty ],
-      ( generation, timeInGenerations ) => this.getCounts( generation, timeInGenerations ), {
+    this.countsProperty = new DerivedProperty( [ this.dataProbeGenerationProperty, populationModel.timeInGenerationsProperty ],
+      ( dataProbeGeneration, timeInGenerations ) => this.getCounts( dataProbeGeneration, timeInGenerations ), {
         tandem: options.tandem.createTandem( 'countsProperty' ),
         phetioType: DerivedPropertyIO( NullableIO( BunnyCountsIO ) ),
         phetioDocumentation: 'counts displayed by the data probe'
@@ -95,22 +97,22 @@ class DataProbe extends PhetioObject {
   //TODO generation and generations is confusing! There are too many Properties in this sim with "generation" name.
   /**
    * Gets the bunny counts for a specific generation value.
-   * @param {number} generation - current position of the data probe on the x axis
+   * @param {number} dataProbeGeneration - current position of the data probe on the x axis
    * @param {number} timeInGenerations - current time on the generation clock, in generations
    * @returns {BunnyCounts|null}
    * @private
    */
-  getCounts( generation, timeInGenerations ) {
+  getCounts( dataProbeGeneration, timeInGenerations ) {
     let counts = null;
-    if ( generation <= timeInGenerations && timeInGenerations > 0 ) {
+    if ( dataProbeGeneration <= timeInGenerations && timeInGenerations > 0 ) {
       counts = new BunnyCounts( {
-        totalCount: this.getCount( generation, this.populationModel.totalPoints ),
-        whiteFurCount: this.getCount( generation, this.populationModel.whiteFurPoints ),
-        brownFurCount: this.getCount( generation, this.populationModel.brownFurPoints ),
-        straightEarsCount: this.getCount( generation, this.populationModel.straightEarsPoints ),
-        floppyEarsCount: this.getCount( generation, this.populationModel.floppyEarsPoints ),
-        shortTeethCount: this.getCount( generation, this.populationModel.shortTeethPoints ),
-        longTeethCount: this.getCount( generation, this.populationModel.longTeethPoints )
+        totalCount: this.getCount( dataProbeGeneration, this.populationModel.totalPoints ),
+        whiteFurCount: this.getCount( dataProbeGeneration, this.populationModel.whiteFurPoints ),
+        brownFurCount: this.getCount( dataProbeGeneration, this.populationModel.brownFurPoints ),
+        straightEarsCount: this.getCount( dataProbeGeneration, this.populationModel.straightEarsPoints ),
+        floppyEarsCount: this.getCount( dataProbeGeneration, this.populationModel.floppyEarsPoints ),
+        shortTeethCount: this.getCount( dataProbeGeneration, this.populationModel.shortTeethPoints ),
+        longTeethCount: this.getCount( dataProbeGeneration, this.populationModel.longTeethPoints )
       } );
     }
     return counts;
@@ -118,18 +120,18 @@ class DataProbe extends PhetioObject {
 
   /**
    * Gets the population count (y value) for a specific generation (x value).
-   * @param {number} generation - current position of the data probe on the x axis
+   * @param {number} dataProbeGeneration - current position of the data probe on the x axis
    * @param {ObservableArray.<Vector2>} points - data points, x (generation) and y (population)
    * @returns {number}
    * @private
    */
-  getCount( generation, points ) {
+  getCount( dataProbeGeneration, points ) {
     let count = 0;
 
     // Optimize for scrolling graph. Start with most recent points and work backwards in time.
     for ( let i = points.length - 1; i >=0; i-- ) {
       const point = points.get( i );
-      if ( generation >= point.x ) {
+      if ( dataProbeGeneration >= point.x ) {
         count = point.y;
         break;
       }

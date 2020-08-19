@@ -251,37 +251,37 @@ class PopulationModel extends PhetioObject {
 
   /**
    * Converts population counts to Vector2 points on the graph.
-   * @param {number} generation - floating point, not integer!
+   * @param {number} timeInGenerations - time (in generations) for the counts
    * @param {BunnyCounts} counts
    * @public
    */
-  recordCounts( generation, counts ) {
-    assert && assert( NaturalSelectionUtils.isNonNegative( generation ), `invalid generation: ${generation}` );
+  recordCounts( timeInGenerations, counts ) {
+    assert && assert( NaturalSelectionUtils.isNonNegative( timeInGenerations ), `invalid timeInGenerations: ${timeInGenerations}` );
     assert && assert( counts instanceof BunnyCounts, 'invalid counts' );
 
-    recordCount( this.totalPoints, generation, counts.totalCount );
-    recordCount( this.whiteFurPoints, generation, counts.whiteFurCount );
-    recordCount( this.brownFurPoints, generation, counts.brownFurCount );
-    recordCount( this.straightEarsPoints, generation, counts.straightEarsCount );
-    recordCount( this.floppyEarsPoints, generation, counts.floppyEarsCount );
-    recordCount( this.shortTeethPoints, generation, counts.shortTeethCount );
-    recordCount( this.longTeethPoints, generation, counts.longTeethCount );
+    recordCount( this.totalPoints, timeInGenerations, counts.totalCount );
+    recordCount( this.whiteFurPoints, timeInGenerations, counts.whiteFurCount );
+    recordCount( this.brownFurPoints, timeInGenerations, counts.brownFurCount );
+    recordCount( this.straightEarsPoints, timeInGenerations, counts.straightEarsCount );
+    recordCount( this.floppyEarsPoints, timeInGenerations, counts.floppyEarsCount );
+    recordCount( this.shortTeethPoints, timeInGenerations, counts.shortTeethCount );
+    recordCount( this.longTeethPoints, timeInGenerations, counts.longTeethCount );
   }
 }
 
 /**
  * Records a count if it differs from the previous data point.
  * @param {ObservableArray.<Vector2>} observableArray
- * @param {number} generation - floating point, not integer!
+ * @param {number} timeInGenerations - time (in generations) for the count
  * @param {number} count
  */
-function recordCount( observableArray, generation, count ) {
+function recordCount( observableArray, timeInGenerations, count ) {
   assert && assert( observableArray instanceof ObservableArray, 'invalid observableArray' );
-  assert && assert( NaturalSelectionUtils.isNonNegative( generation ), 'invalid generation' );
+  assert && assert( NaturalSelectionUtils.isNonNegative( timeInGenerations ), 'invalid generation' );
   assert && assert( NaturalSelectionUtils.isNonNegativeInteger( count ), 'invalid count' );
 
   if ( observableArray.length === 0 || observableArray.get( observableArray.length - 1 ).y !== count ) {
-    observableArray.push( new Vector2( generation, count ) );
+    observableArray.push( new Vector2( timeInGenerations, count ) );
   }
 }
 

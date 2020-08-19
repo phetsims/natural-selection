@@ -17,13 +17,13 @@ import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 class ProportionsGenerationSpinner extends NumberSpinner {
 
   /**
-   * @param {NumberProperty} generationProperty
+   * @param {NumberProperty} proportionsGenerationProperty - the generation displayed by the Proportions graph
    * @param {Object} [options]
    */
-  constructor( generationProperty, options ) {
+  constructor( proportionsGenerationProperty, options ) {
 
-    assert && assert( generationProperty instanceof NumberProperty, 'invalid generationProperty' );
-    assert && assert( generationProperty.rangeProperty, 'generationProperty must have rangeProperty' );
+    assert && assert( proportionsGenerationProperty instanceof NumberProperty, 'invalid proportionsGenerationProperty' );
+    assert && assert( proportionsGenerationProperty.rangeProperty, 'proportionsGenerationProperty must have rangeProperty' );
 
     options = merge( {
 
@@ -47,7 +47,7 @@ class ProportionsGenerationSpinner extends NumberSpinner {
       tandem: Tandem.REQUIRED
     }, options );
 
-    super( generationProperty, generationProperty.rangeProperty, options );
+    super( proportionsGenerationProperty, proportionsGenerationProperty.rangeProperty, options );
   }
 }
 

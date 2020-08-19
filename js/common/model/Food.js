@@ -81,7 +81,7 @@ class Food {
 
     // @public emits when bunnies have died of starvation. dispose is not necessary.
     this.bunniesStarvedEmitter = new Emitter( {
-      parameters: [ { valueType: 'number' } ] // generation value at which the event should be recorded
+      parameters: [ { valueType: 'number' } ] // timeInGenerations at which the event should be recorded
     } );
 
     // Use our own instance of Random to produce locations for shrubs.
@@ -123,8 +123,8 @@ class Food {
 
           // Ensure that 'starve' event is always recorded at the same time in the clock cycle, regardless of what
           // the actual time is. See https://github.com/phetsims/natural-selection/issues/170.
-          const generations = generationClock.currentGenerationProperty.value + CLOCK_FOOD_MIDPOINT;
-          this.starveBunnies( generations );
+          const timeInGenerations = generationClock.clockGenerationProperty.value + CLOCK_FOOD_MIDPOINT;
+          this.starveBunnies( timeInGenerations );
         }
       }
     } );
@@ -147,12 +147,12 @@ class Food {
 
   /**
    * Starves some portion of the bunny population.
-   * @param {number} generations - the generations value at which this event should be recorded
+   * @param {number} timeInGenerations - the time (in generations) at which this event should be recorded
    * @private
    */
-  starveBunnies( generations ) {
+  starveBunnies( timeInGenerations ) {
     assert && assert( this.enabledProperty.value, 'Food is not enabled' );
-    assert && assert( NaturalSelectionUtils.isNonNegative( generations ), `invalid generations: ${generations}` );
+    assert && assert( NaturalSelectionUtils.isNonNegative( timeInGenerations ), `invalid timeInGenerations: ${timeInGenerations}` );
 
     let totalStarved = 0;
     if ( this.isToughProperty.value ) {
@@ -164,7 +164,7 @@ class Food {
 
     // Notify if bunnies have been starved.
     if ( totalStarved > 0 ) {
-      this.bunniesStarvedEmitter.emit( generations );
+      this.bunniesStarvedEmitter.emit( timeInGenerations );
     }
   }
 

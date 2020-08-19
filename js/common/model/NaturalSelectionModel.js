@@ -126,7 +126,7 @@ class NaturalSelectionModel {
     // @public (read-only)
     this.proportionsModel = new ProportionsModel(
       this.bunnyCollection.liveBunnies.countsProperty,
-      this.generationClock.currentGenerationProperty,
+      this.generationClock.clockGenerationProperty,
       this.isPlayingProperty,
       this.simulationModeProperty, {
         tandem: graphsTandem.createTandem( 'proportionsModel' )
@@ -146,10 +146,10 @@ class NaturalSelectionModel {
 
         // When the simulation begins, record 'start' data for the graphs.
         if ( simulationMode === SimulationMode.ACTIVE ) {
-          const currentGeneration = this.generationClock.currentGenerationProperty.value;
+          const clockGeneration = this.generationClock.clockGenerationProperty.value;
           const counts = this.bunnyCollection.getLiveBunnyCounts();
-          this.proportionsModel.recordStartCounts( currentGeneration, counts );
-          this.populationModel.recordCounts( currentGeneration, counts );
+          this.proportionsModel.recordStartCounts( clockGeneration, counts );
+          this.populationModel.recordCounts( clockGeneration, counts );
         }
 
         // Adjust the sim playback and generation clock
@@ -177,18 +177,18 @@ class NaturalSelectionModel {
     this.timeToStartOverProperty = new NumberProperty( 0 );
 
     // unlink is not necessary.
-    this.generationClock.currentGenerationProperty.lazyLink( currentGeneration => {
+    this.generationClock.clockGenerationProperty.lazyLink( clockGeneration => {
 
       // When restoring PhET-iO state, skip this code, because downstream elements are already stateful.
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
 
         // Generation 0 is initialized elsewhere, this code is for subsequent generations.
-        if ( currentGeneration !== 0 ) {
+        if ( clockGeneration !== 0 ) {
 
-          phet.log && phet.log( `====== Generation ${currentGeneration} ======` );
+          phet.log && phet.log( `====== Generation ${clockGeneration} ======` );
 
           // Before bunnies are aged or mated, Record 'End of Generation' counts for the Proportions graph.
-          this.proportionsModel.recordEndCounts( currentGeneration - 1, this.bunnyCollection.getLiveBunnyCounts() );
+          this.proportionsModel.recordEndCounts( clockGeneration - 1, this.bunnyCollection.getLiveBunnyCounts() );
 
           phet.log && phet.log( `live bunnies = ${this.bunnyCollection.getNumberOfLiveBunnies()}` );
           phet.log && phet.log( `dead bunnies = ${this.bunnyCollection.getNumberOfDeadBunnies()}` );
@@ -197,25 +197,25 @@ class NaturalSelectionModel {
           // Age bunnies, some may die of old age.
           this.bunnyCollection.ageBunnies();
 
-          this.bunnyCollection.pruneDeadBunnies( currentGeneration );
+          this.bunnyCollection.pruneDeadBunnies( clockGeneration );
 
           // Mate bunnies
           //TODO https://github.com/phetsims/natural-selection/issues/60 delete NaturalSelectionUtils.time
-          // this.bunnyCollection.mateBunnies( currentGeneration );
-          this.timeToMateProperty.value = NaturalSelectionUtils.time( () => this.bunnyCollection.mateBunnies( currentGeneration ) );
+          // this.bunnyCollection.mateBunnies( clockGeneration );
+          this.timeToMateProperty.value = NaturalSelectionUtils.time( () => this.bunnyCollection.mateBunnies( clockGeneration ) );
 
           // After bunnies are aged and mated, record counts for graphs.
           const counts = this.bunnyCollection.getLiveBunnyCounts();
-          this.proportionsModel.recordStartCounts( currentGeneration, counts );
-          this.populationModel.recordCounts( currentGeneration, counts );
+          this.proportionsModel.recordStartCounts( clockGeneration, counts );
+          this.populationModel.recordCounts( clockGeneration, counts );
         }
       }
     } );
 
     // Record data for the Population graph when the population is changed by environmental factors.
-    const recordCounts = generation => {
+    const recordCounts = timeInGenerations => {
       const counts = this.bunnyCollection.getLiveBunnyCounts();
-      this.populationModel.recordCounts( generation, counts );
+      this.populationModel.recordCounts( timeInGenerations, counts );
     };
     this.wolfCollection.bunniesEatenEmitter.addListener( recordCounts ); // removeListener is not necessary.
     this.food.bunniesStarvedEmitter.addListener( recordCounts ); // removeListener is not necessary.
@@ -296,7 +296,7 @@ class NaturalSelectionModel {
    */
   addAMate() {
     assert && assert( this.bunnyCollection.getNumberOfLiveBunnies() === 1, 'there should only be 1 live bunny' );
-    assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
+    assert && assert( this.generationClock.clockGenerationProperty.value === 0, 'unexpected clockGeneration' );
 
     this.bunnyCollection.createBunnyZero();
   }
@@ -309,7 +309,7 @@ class NaturalSelectionModel {
 
     phet.log && phet.log( 'NaturalSelectionModel.initializeGenerationZero' );
     assert && assert( this.bunnyCollection.getNumberOfLiveBunnies() === 0, 'bunnies already exist' );
-    assert && assert( this.generationClock.currentGenerationProperty.value === 0, 'unexpected generation' );
+    assert && assert( this.generationClock.clockGenerationProperty.value === 0, 'unexpected clockGeneration' );
 
     // For each {BunnyVariety} in the initial population, create bunnies of that variety.
     this.initialBunnyVarieties.forEach( variety => {

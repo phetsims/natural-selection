@@ -88,8 +88,8 @@ class GenerationClockNode extends Node {
     super( options );
 
     // Update the generation number. unlink is not necessary.
-    generationClock.currentGenerationProperty.link( currentGeneration => {
-      generationNode.text = currentGeneration;
+    generationClock.clockGenerationProperty.link( clockGeneration => {
+      generationNode.text = clockGeneration;
       generationNode.centerX = circle.centerX;
     } );
 

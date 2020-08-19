@@ -140,7 +140,7 @@ class ProportionsGraphNode extends Node {
     } );
 
     // Spinner for selecting which generation is displayed
-    const generationSpinner = new PopulationGenerationSpinner( proportionsModel.generationProperty, {
+    const generationSpinner = new PopulationGenerationSpinner( proportionsModel.proportionsGenerationProperty, {
       tandem: options.tandem.createTandem( 'generationSpinner' )
     } );
 

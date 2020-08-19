@@ -557,11 +557,11 @@ class BunnyCollection {
   /**
    * Disposes of dead bunnies that are guaranteed not to be needed by the Pedigree graph.
    * See https://github.com/phetsims/natural-selection/issues/112
-   * @param {number} currentGeneration
+   * @param {number} generation - the current generation number
    * @public
    */
-  pruneDeadBunnies( currentGeneration ) {
-    assert && AssertUtils.assertPositiveInteger( currentGeneration );
+  pruneDeadBunnies( generation ) {
+    assert && AssertUtils.assertPositiveInteger( generation );
 
     let numberPruned = 0;
 
@@ -569,7 +569,7 @@ class BunnyCollection {
     const deadBunnies = this.deadBunnies.getArray();
     for ( let i = deadBunnies.length - 1; i >= 0; i-- ) {
       const bunny = deadBunnies[ i ];
-      if ( currentGeneration - bunny.generation > MAX_DEAD_BUNNY_GENERATIONS &&
+      if ( generation - bunny.generation > MAX_DEAD_BUNNY_GENERATIONS &&
            this.selectedBunnyProperty.value !== bunny ) {
         this.bunnyGroup.disposeElement( bunny );
         numberPruned++;

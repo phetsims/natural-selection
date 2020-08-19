@@ -298,8 +298,8 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     // removeListener is not necessary.
-    model.generationClock.currentGenerationProperty.link( currentGeneration => {
-      if ( currentGeneration >= NaturalSelectionQueryParameters.maxGenerations ) {
+    model.generationClock.clockGenerationProperty.link( clockGeneration => {
+      if ( clockGeneration >= NaturalSelectionQueryParameters.maxGenerations ) {
         endSimulation();
         memoryLimitDialog.show();
       }

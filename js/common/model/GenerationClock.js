@@ -73,23 +73,24 @@ class GenerationClock extends PhetioObject {
         phetioHighFrequency: true
       } );
 
-    //TODO #187 rename to generationProperty?
     // @public dispose is not necessary
-    this.currentGenerationProperty = new DerivedProperty(
+    // Named clockGenerationProperty to distinguish it from the other 'generation' Properties in this sim.
+    // See https://github.com/phetsims/natural-selection/issues/187
+    this.clockGenerationProperty = new DerivedProperty(
       [ this.timeInGenerationsProperty ],
       timeInGenerations => Math.floor( timeInGenerations ), {
         phetioType: DerivedPropertyIO( NumberIO ),
-        isValidValue: currentGeneration => Utils.isInteger( currentGeneration ),
-        tandem: options.tandem.createTandem( 'currentGenerationProperty' ),
+        isValidValue: clockGeneration => Utils.isInteger( clockGeneration ),
+        tandem: options.tandem.createTandem( 'clockGenerationProperty' ),
         phetioDocumentation: 'integer generation number of the current cycle of the generation clock'
       }
     );
-    assert && this.currentGenerationProperty.lazyLink( ( currentGeneration, previousGeneration ) => {
+    assert && this.clockGenerationProperty.lazyLink( ( currentClockGeneration, previousClockGeneration ) => {
 
       // Skip this when restoring PhET-iO state, because the initial state might be restored to any generation.
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
-        assert && assert( currentGeneration === 0 || currentGeneration === previousGeneration + 1,
-          `skipped a generation, currentGeneration=${currentGeneration}, previousGeneration=${previousGeneration}` );
+        assert && assert( currentClockGeneration === 0 || currentClockGeneration === previousClockGeneration + 1,
+          `skipped a generation, currentClockGeneration=${currentClockGeneration}, previousClockGeneration=${previousClockGeneration}` );
       }
     } );
   }
@@ -135,7 +136,7 @@ class GenerationClock extends PhetioObject {
     const nextTime = this.timeInSecondsProperty.value + dt;
     const nextGeneration = secondsToGenerations( nextTime );
 
-    if ( nextGeneration > this.currentGenerationProperty.value ) {
+    if ( nextGeneration > this.clockGenerationProperty.value ) {
       // snap to 12:00
       this.timeInSecondsProperty.value = nextGeneration * SECONDS_PER_GENERATION;
     }

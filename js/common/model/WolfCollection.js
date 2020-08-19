@@ -145,8 +145,8 @@ class WolfCollection {
 
           // Ensure that 'eat' event is always recorded at the same time in the clock cycle, regardless of what
           // the actual time is. See https://github.com/phetsims/natural-selection/issues/170.
-          const generations = generationClock.currentGenerationProperty.value + CLOCK_WOLVES_MIDPOINT;
-          this.eatBunnies( generations );
+          const timeInGenerations = generationClock.clockGenerationProperty.value + CLOCK_WOLVES_MIDPOINT;
+          this.eatBunnies( timeInGenerations );
         }
       }
     } );
@@ -188,12 +188,12 @@ class WolfCollection {
 
   /**
    * Eats some portion of the bunny population.
-   * @param {number} generations - the generations value at which this event should be recorded
+   * @param {number} timeInGenerations - the time (in generations) at which this event should be recorded
    * @private
    */
-  eatBunnies( generations ) {
+  eatBunnies( timeInGenerations ) {
     assert && assert( this.enabledProperty.value, 'Wolves are not enabled' );
-    assert && assert( NaturalSelectionUtils.isNonNegative( generations ), `invalid generations: ${generations}`);
+    assert && assert( NaturalSelectionUtils.isNonNegative( timeInGenerations ), `invalid timeInGenerations: ${timeInGenerations}`);
 
     // Get the bunnies that are candidates for selection by environmental factors, in random order.
     const bunnies = this.bunnyCollection.getSelectionCandidates();
@@ -226,7 +226,7 @@ class WolfCollection {
 
       // Notify if bunnies have been eaten.
       if ( numberEatenWhite + numberEatenBrown > 0 ) {
-        this.bunniesEatenEmitter.emit( generations );
+        this.bunniesEatenEmitter.emit( timeInGenerations );
       }
     }
   }
