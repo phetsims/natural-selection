@@ -20,7 +20,7 @@ Most of terminology that you'll need to navigate the implementation is found in 
 Terms that are specific to the implementation:
 
 * An _organism_ is a living thing. It includes bunnies, wolves, and shrubs.
-* The _environment_ is the part of the UI where bunnies hop around, and it can be switched between "equator" and "arctic".
+* The _environment_ is the part of the UI where bunnies hop around. It can be switched between "equator" and "arctic".
 * The _simulation mode_ determines what UI components are available. See `SimulationMode`.
 * A _sprite_ is a high-performance way of drawing an organism, using the scenery `Sprites` API.
 * A _plot_ is a set of points connected by line segments, used in the Population graph.
