@@ -61,7 +61,7 @@ Here are the entry points to the major features of the model:
 * Tough Food: `Food.applyToughFood`
 * Limited Food: `Food.applyLimitedFood`
 * Bunnies take over the world: `BunnyCollection.bunniesHaveTakenOverTheWorldEmitter`
-* All bunies are have died: `BunnyCollection.allBunniesHaveDiedEmitter`
+* All of the bunnies have died: `BunnyCollection.allBunniesHaveDiedEmitter`
 * Memory management of dead bunnies: `BunnyCollection.pruneBunnies`
 * Population graph data points: `see ObservableArray instances in PopulationModel`
 * Proportions graph start/end counts: `ProportionsCounts`
