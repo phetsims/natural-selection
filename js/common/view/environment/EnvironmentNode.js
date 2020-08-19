@@ -14,7 +14,7 @@ import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionModel from '../../model/NaturalSelectionModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
-import BunnyImageMap from '../bunnyImageMap.js';
+import BunnyImageMap from '../BunnyImageMap.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
 import OrganismSprites from './OrganismSprites.js';
 

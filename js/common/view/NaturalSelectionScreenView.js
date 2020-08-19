@@ -23,7 +23,7 @@ import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import AddMutationsPanel from './AddMutationsPanel.js';
-import BunnyImageMap from './bunnyImageMap.js';
+import BunnyImageMap from './BunnyImageMap.js';
 import DiedDialog from './DiedDialog.js';
 import EnvironmentNode from './environment/EnvironmentNode.js';
 import EnvironmentalFactorsPanel from './EnvironmentalFactorsPanel.js';

@@ -18,7 +18,7 @@ import PedigreeModel from '../../model/PedigreeModel.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
-import BunnyImageMap from '../bunnyImageMap.js';
+import BunnyImageMap from '../BunnyImageMap.js';
 import PedigreeBranchNode from './PedigreeBranchNode.js';
 
 // constants

@@ -28,7 +28,7 @@ import Food from '../../model/Food.js';
 import Wolf from '../../model/Wolf.js';
 import WolfCollection from '../../model/WolfCollection.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
-import BunnyImageMap from '../bunnyImageMap.js';
+import BunnyImageMap from '../BunnyImageMap.js';
 import BunnySelectionRectangleSprite from './BunnySelectionRectangleSprite.js';
 import BunnySelectionRectangleSpriteInstance from './BunnySelectionRectangleSpriteInstance.js';
 import BunnySpriteInstance from './BunnySpriteInstance.js';

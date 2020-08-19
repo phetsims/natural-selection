@@ -17,7 +17,7 @@ import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
-import BunnyImageMap from '../bunnyImageMap.js';
+import BunnyImageMap from '../BunnyImageMap.js';
 import BunnySelectionRectangle from '../BunnySelectionRectangle.js';
 import MutationIconNode from '../MutationIconNode.js';
 import OriginNode from '../OriginNode.js';
