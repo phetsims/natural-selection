@@ -62,13 +62,14 @@ class ProportionsModel extends PhetioObject {
       phetioDocumentation: 'determines whether values are visible on the bars in the Proportions graph'
     } );
 
-    // @public the generation that is displayed by the Proportions graph
+    // @public
     // Named proportionsGenerationProperty to distinguish it from the other 'generation' Properties in this sim.
     // See https://github.com/phetsims/natural-selection/issues/187
     this.proportionsGenerationProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       range: new Range( 0, 0 ), // dynamically adjusted by calling setValueAndRange
       tandem: options.tandem.createTandem( 'proportionsGenerationProperty' ),
+      phetioDocumentation: 'the generation that is displayed by the Proportions graph (integer)',
       phetioReadOnly: true // range is dynamic
     } );
 

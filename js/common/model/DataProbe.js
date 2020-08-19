@@ -59,7 +59,7 @@ class DataProbe extends PhetioObject {
       ( xRange, offset ) => xRange.min + offset.x, {
         tandem: options.tandem.createTandem( 'dataProbeGenerationProperty' ),
         phetioType: DerivedPropertyIO( NumberIO ),
-        phetioDocumentation: 'the generation (x-axis) value where the data probe is positioned'
+        phetioDocumentation: 'the generation (x-axis) value where the data probe is positioned (decimal)'
       } );
 
     // @public Set BunnyCounts based on position of the data probe. dispose is not necessary.

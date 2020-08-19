@@ -52,7 +52,7 @@ class GenerationClock extends PhetioObject {
       isValidValue: time => ( time >= 0 ),
       tandem: options.tandem.createTandem( 'timeInSecondsProperty' ),
       phetioReadOnly: true,
-      phetioDocumentation: 'time that the generation clock has been running, in seconds',
+      phetioDocumentation: 'time that the generation clock has been running, in seconds (decimal)',
       phetioHighFrequency: true
     } );
 
@@ -69,7 +69,7 @@ class GenerationClock extends PhetioObject {
       timeInSeconds => secondsToGenerations( timeInSeconds ), {
         phetioType: DerivedPropertyIO( NumberIO ),
         tandem: options.tandem.createTandem( 'timeInGenerationsProperty' ),
-        phetioDocumentation: 'time that the generation clock has been running, in generations',
+        phetioDocumentation: 'time that the generation clock has been running, in generations (decimal)',
         phetioHighFrequency: true
       } );
 
@@ -82,7 +82,7 @@ class GenerationClock extends PhetioObject {
         phetioType: DerivedPropertyIO( NumberIO ),
         isValidValue: clockGeneration => Utils.isInteger( clockGeneration ),
         tandem: options.tandem.createTandem( 'clockGenerationProperty' ),
-        phetioDocumentation: 'integer generation number of the current cycle of the generation clock'
+        phetioDocumentation: 'generation number of the current cycle of the generation clock (integer)'
       }
     );
     assert && this.clockGenerationProperty.lazyLink( ( currentClockGeneration, previousClockGeneration ) => {
