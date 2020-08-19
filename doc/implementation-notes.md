@@ -83,9 +83,11 @@ There is a sub-model for each graph:
 
 Here are the entry points to some of the major features of the model:
 
+* Main animation loop: `NaturalSelectionModel.step`
 * Bunny motion: `Bunny.move`
 * Bunny appearance: `Phenotype`, `GenePair.getVisibleAllele`
 * Wolf motion: `Wolf.move`
+* Stuff that happens at 12:00: see `clockGenerationProperty` listener in `NaturalSelectionModel`
 * Death due to old age: `BunnyCollection.ageBunnies`
 * Reproduction: `BunnyCollection.mateBunnies` and `PunnettSquare`
 * Wolves: `WolfCollection.eatBunnies`
