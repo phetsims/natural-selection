@@ -68,7 +68,7 @@ the second from the mother.
 ## Life Expectancy
 
 In reality, environmental factors may affect life expectancy. That is not the case in this simulation.
-All bunnies have identical life expectancy, which is not affected by environmental factors. 
+All bunnies have an identical life expectancy of 5 generations. 
 If a bunny makes it to 5 generations old, it dies of old age. Bunnies die at 12:00,
 just before reproduction occurs.
 
