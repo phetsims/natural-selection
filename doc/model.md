@@ -11,7 +11,10 @@ Time is measured in _**generations**_. Each revolution of the _**generation cloc
 (shown at the top center of the user interface) corresponds to the passage of 1 generation.
 
 Various events are described as times relative to the "wall clock" time on the generation clock. 
-For example, "bunnies reproduce at 12:00", or "wolves eat at 4:00". 
+For example, "bunnies reproduce at 12:00", or "wolves eat at 4:00".
+
+Because compute memory is finite, the simulation has a limit of 1000 generations. 
+If the generation clock reaches 1000, the simulation stops, a dialog is displayed, and the student can review the final state.
 
 ## Genes and Alleles
 
