@@ -65,11 +65,15 @@ the second from the mother.
 
 ## Life Expectancy
 
+In reality, environmental factors may affect life expectancy. That is not the case in this simulation.
 All bunnies have identical life expectancy, which is not influenced by other factors. 
 If a bunny makes it to 5 generations old, it dies of old age. Bunnies die at 12:00 on the generation clock,
 just before reproduction occurs.
 
 ## Reproduction
+
+In reality, environmental factors may affect reproduction. That is not the case in this simulation - reproduction
+is not affected by environmental factors, and bunnies reproduce using the following model:
 
 * Bunnies reproduce at 12:00 on the generation clock.
 * Any bunny can mate with any other bunny. Age, sex, and pedigree relationship are irrelevant.
