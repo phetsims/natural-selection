@@ -229,6 +229,8 @@ class NaturalSelectionModel {
 
     this.startOver();
 
+    this.timeSpeedProperty.reset();
+
     // environmental factors
     this.environmentProperty.reset();
   }
