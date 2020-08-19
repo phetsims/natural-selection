@@ -53,9 +53,9 @@ be disposed, and their `dispose` implementation looks like this:
 
 ## Model
 
-This section provides a quick overview of the model. The same model class is used for both screens, with no differences. Genes and environmental factors that are not relevant in the _Intro_ screen are hidden by the view.
+This section provides a quick overview of the model.
 
-The main model class is `NaturalSelectionModel`. It manages how the sim is playing (play, pause, speed) and what mode the sim is in (see `SimulationMode`). Everything else is delegated to other model elements.
+The main model class is `NaturalSelectionModel`. It manages how the sim is playing (play, pause, speed) and what mode the sim is in (see `SimulationMode`). Everything else is delegated to other model elements. This model class is used for both screens, with no differences. Genes and environmental factors that are not relevant in the _Intro_ screen are hidden by the view.
 
 There are a few top-level model elements:
 * `GenerationClock` is responsible for the elapsed time in generations
