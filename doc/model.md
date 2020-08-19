@@ -130,7 +130,7 @@ roaming around hunting. They eat at 4:00, and this is where you'll see data poin
 wolves on the Population graph.
 
 The number of wolves is proportional to the number of bunnies, with a minimum number of wolves.
-The computation is:
+The calculation is:
 
 `numberOfWolves = max( 5, round( numberOfBunnies / 10 ) )`
 
