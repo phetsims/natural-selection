@@ -14,7 +14,7 @@ For example, "bunnies reproduce at 12:00", or "wolves eat at 4:00".
 ## Genes and Alleles
 
 * A _**trait**_ is a characteristic or feature of an organism. For example, "blue eyes" or "brown fur".
-* A _**gene**_ is the unit of heredity that is transferred from a parent to an offspring, and controls the expression
+* A _**gene**_ is the unit of heredity that is transferred from a parent to its offspring, and controls the expression
 of a trait. Our 3 genes are: fur, ears, teeth.
 * Variants of a gene are called _**alleles**_. For example "white fur" and "brown fur" are alleles of the fur gene.
 (Note that gene and allele are often used interchangeably in the literature, but we attempt to use them 
