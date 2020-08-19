@@ -231,8 +231,8 @@ The population graph plot has time (in generations) as its x axis, and populatio
 | Time | Event |
 | :--- | :--- |
 | 12:00 | bunnies die of old age and reproduce |
-| 4:00 | food factors result in bunnies starving |
-| 8:00 | wolves eat bunnies |
+| 4:00 | wolves eat bunnies |
+| 8:00 | food factors result in bunnies starving |
 
 ### Proportions graph
 
