@@ -93,7 +93,7 @@ the allele inherited from the father is first, the mother is second.
 | **F** | FF | FF |
 | **f** | Ff | Ff|
 
-* Bunnies take over the world when the population (after mating) is 750 or greater. All bunnies mate before considering whether bunnies have "taken over the world".
+* Bunnies take over the world when the population (after mating) is 750 or greater. All bunnies mate before considering whether bunnies have taken over the world. When this happens, the simulation stops, and the student can review the final state.
 
 ## Mutation
 
