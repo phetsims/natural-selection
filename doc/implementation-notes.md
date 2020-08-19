@@ -15,7 +15,7 @@ In addition to this document, you are encouraged to read:
 
 ## Terminology
 
-Most of terminology that you'll need to navigate the implementation is found in [model.md](https://github.com/phetsims/natural-selection/blob/master/doc/model.md). 
+The domain terminology that you'll need to navigate the implementation is found in [model.md](https://github.com/phetsims/natural-selection/blob/master/doc/model.md). 
 
 Terms that are specific to the implementation:
 
