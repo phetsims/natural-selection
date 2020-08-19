@@ -31,7 +31,9 @@ _Data Probe_: The model uses a 2D coordinate frame, where +generation is to the 
 testing. Sim-specific query parameters are documented in
 [NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js).
 
-**Assertions**: The implementation makes heavy use of `assert` to verify pre/post assumptions and perform type checking. This sim performs type-checking for almost all function arguments via `assert`. While this may look like overkill, it did catch quite a few problems during refactoring, and was a net gain. If you are making modifications to this sim, do so with assertions enabled via the `ea` query parameter.
+**Assertions**: The sim makes heavy use of `assert` to verify pre/post assumptions and perform type checking. This sim performs type-checking for almost all function arguments via `assert`. If you are making modifications to this sim, do so with assertions enabled via the `ea` query parameter.
+
+**Logging**: The sim makes heavy use of logging via `phet.log`, enabled using the `log` query parameter. If you are making modifications to this sim, or trying to understand its behavior, do so with logging enabled.
 
 **Memory Management**: All uses of `link`, `addListener`, etc. are documented as to whether they need a corresponding `unlink`, `removeListener`, etc.
 
