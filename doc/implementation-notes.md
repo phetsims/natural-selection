@@ -60,7 +60,7 @@ Here are the entry points to the major features of the model:
 * Wolves: `WolfCollection.eatBunnies`
 * Tough Food: `Food.applyToughFood`
 * Limited Food: `Food.applyLimitedFood`
-* Bunnies take over the world: `BunnyCollection.bunniesHaveTakenOverTheWorldEmitter`
+* Bunnies have taken over the world: `BunnyCollection.bunniesHaveTakenOverTheWorldEmitter`
 * All of the bunnies have died: `BunnyCollection.allBunniesHaveDiedEmitter`
 * Memory management of dead bunnies: `BunnyCollection.pruneBunnies`
 * Population graph data points: `see ObservableArray instances in PopulationModel`
