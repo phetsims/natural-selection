@@ -53,12 +53,34 @@ be disposed, and their `dispose` implementation looks like this:
 
 ## Model
 
+The main model class is `NaturalSelectionModel`. It manages how the sim is playing (play, pause, speed) and what mode the sim is in (see `SimulationMode`). Everything else is delegated to other model elements.
+
+There are a few top-level model elements:
+* `GenerationClock` is responsible the elapse time of a generation
+* `GenePool` is the collection of genes that are present in the bunny population 
+* There is one instance of `Gene` for fur, teeth, and ears.  They live in the `GenePool` and they globally determine dominance relationship, and whether a mutation is going to occur. 
+
+Living things are instances of `Organism`. There are 3 subclasses of Organism:
+* `Bunny` - created dynamically, moves around, has reference to parents, has a `Genotype` and a `Phenotype`
+* `Wolf` - created dynamically, moves around
+* `Shrub` - created statically at startup, remains stationary
+
+Organisms are organized into collections:
+* `BunnyCollection` - `Bunny` instances, responsible for reproduction and death due to old age
+* `WolfCollection` - `Wolf` instances, responsible for eating bunnies
+* `Food` - `Shrub` instances, responsible for starving bunnies
+
+There is a sub-model for each graph:
+* `PopulationGraph`
+* `ProportionsGraph`
+* `PedigreeGraph`
+
 Here are the entry points to the major features of the model:
 
 * Bunny motion: `Bunny.move`
 * Wolf motion: `Wolf.move`
 * Death due to old age: `BunnyCollection.ageBunnies`
-* Reproduction: `BunnyCollection.mateBunnies`
+* Reproduction: `BunnyCollection.mateBunnies` and `PunnettSquare`
 * Wolves: `WolfCollection.eatBunnies`
 * Tough Food: `Food.applyToughFood`
 * Limited Food: `Food.applyLimitedFood`
