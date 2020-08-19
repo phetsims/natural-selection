@@ -145,7 +145,7 @@ PhET-iO is a PhET product that is described at https://phet-io.colorado.edu. If 
 
 **IO Types delegate to Core Types**: IO Types handle serialization of elements that are instances of Core Types. For example, `BunnyIO` is the IO Type that serializes the `Bunny` Core Type.  Throughout this simulation, each IO Type delegates serialization to its associated Core Type.  This ensures that the API of the Core Type is not violated by acccessing private members.
 
-**Configure the Genes for a screen**: `GeneVisibilityManager` contains a visibility Property for each Gene, which controls the visiblity of all UI components for that gene. Use these Properties via Studio to quickly configure which genes appear in the UI. Search for "view.genes" in Studio.
+**Configure the Genes for a screen**: `GeneVisibilityManager` contains a `{{gene}}VisibleProperty` for each Gene, which controls the visiblity of all UI components for that gene. Use these Properties via Studio to quickly configure which genes appear in the UI. Search for "view.genes" in Studio.
 
 **Configure the Environmental Factors for a screen**: Configuring which environmental factors are relevant for a screen is as easy as deciding which checkboxes to make visible.  Search for `wolvesCheckbox`, `toughFoodCheckbox`, and `limitedFoodCheckbox` in Studio, and set their visibleProperty as desired.
 
