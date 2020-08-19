@@ -176,6 +176,7 @@ class NaturalSelectionModel {
     //TODO https://github.com/phetsims/natural-selection/issues/140 delete this Property
     this.timeToStartOverProperty = new NumberProperty( 0 );
 
+    // All of the stuff that happens at 12:00 on the generation clock.
     // unlink is not necessary.
     this.generationClock.clockGenerationProperty.lazyLink( clockGeneration => {
 
