@@ -55,14 +55,14 @@ class PopulationModel extends PhetioObject {
 
   /**
    * @param {GenePool} genePool
-   * @param {Property.<number>} generationsProperty
+   * @param {Property.<number>} timeInGenerationsProperty
    * @param {Property.<boolean>} isPlayingProperty
    * @param {Object} [options]
    */
-  constructor( genePool, generationsProperty, isPlayingProperty, options ) {
+  constructor( genePool, timeInGenerationsProperty, isPlayingProperty, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && AssertUtils.assertPropertyOf( generationsProperty, 'number' );
+    assert && AssertUtils.assertPropertyOf( timeInGenerationsProperty, 'number' );
     assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
 
     options = merge( {
@@ -80,7 +80,7 @@ class PopulationModel extends PhetioObject {
 
     // @public
     this.genePool = genePool;
-    this.generationsProperty = generationsProperty;
+    this.timeInGenerationsProperty = timeInGenerationsProperty;
     this.isPlayingProperty = isPlayingProperty;
     this.xWidth = options.xWidth;
 
@@ -178,8 +178,8 @@ class PopulationModel extends PhetioObject {
     } );
 
     // Scrolls the x-axis so that 'now' is always the max x value. unlink is not necessary.
-    generationsProperty.link( generations => {
-      const max = Math.max( options.xWidth, generations );
+    timeInGenerationsProperty.link( timeInGeneration => {
+      const max = Math.max( options.xWidth, timeInGeneration );
       if ( this.xRangeProperty.value.max !== max ) {
         const min = max - options.xWidth;
         this.xRangeProperty.value = new Range( min, max );

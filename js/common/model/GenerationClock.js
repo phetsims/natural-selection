@@ -47,33 +47,34 @@ class GenerationClock extends PhetioObject {
       phetioDocumentation: 'whether the generation clock is running'
     } );
 
-    // @public (read-only)
-    this.timeProperty = new NumberProperty( 0, {
+    // @private
+    this.timeInSecondsProperty = new NumberProperty( 0, {
       isValidValue: time => ( time >= 0 ),
-      tandem: options.tandem.createTandem( 'timeProperty' ),
+      tandem: options.tandem.createTandem( 'timeInSecondsProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'time that the generation clock has been running, in seconds',
       phetioHighFrequency: true
     } );
 
     // @public dispose is not necessary
-    this.generationsProperty = new DerivedProperty(
-      [ this.timeProperty ],
-      time => timeToGenerations( time ), {
+    this.timeInGenerationsProperty = new DerivedProperty(
+      [ this.timeInSecondsProperty ],
+      timeInSeconds => secondsToGenerations( timeInSeconds ), {
         phetioType: DerivedPropertyIO( NumberIO ),
-        tandem: options.tandem.createTandem( 'generationsProperty' ),
-        phetioDocumentation: 'decimal number of generations that the generation clock has been running',
+        tandem: options.tandem.createTandem( 'timeInGenerationsProperty' ),
+        phetioDocumentation: 'time that the generation clock has been running, in generations',
         phetioHighFrequency: true
       } );
 
+    //TODO #187 rename to generationProperty?
     // @public dispose is not necessary
     this.currentGenerationProperty = new DerivedProperty(
-      [ this.generationsProperty ],
-      generations => Math.floor( generations ), {
+      [ this.timeInGenerationsProperty ],
+      timeInGenerations => Math.floor( timeInGenerations ), {
         phetioType: DerivedPropertyIO( NumberIO ),
         isValidValue: currentGeneration => Utils.isInteger( currentGeneration ),
         tandem: options.tandem.createTandem( 'currentGenerationProperty' ),
-        phetioDocumentation: 'integer generation number for the current cycle of the generation clock'
+        phetioDocumentation: 'integer generation number of the current cycle of the generation clock'
       }
     );
     assert && this.currentGenerationProperty.lazyLink( ( currentGeneration, previousGeneration ) => {
@@ -87,7 +88,7 @@ class GenerationClock extends PhetioObject {
 
     // @public percent of the current clock cycle that has been completed. dispose is not necessary.
     this.percentTimeProperty = new DerivedProperty(
-      [ this.timeProperty ],
+      [ this.timeInSecondsProperty ],
       time => ( time % SECONDS_PER_GENERATION ) / SECONDS_PER_GENERATION, {
         isValidValue: percentTime => ( percentTime >= 0 && percentTime <= 1 )
       } );
@@ -98,7 +99,7 @@ class GenerationClock extends PhetioObject {
    */
   reset() {
     this.isRunningProperty.reset();
-    this.timeProperty.reset();
+    this.timeInSecondsProperty.reset();
   }
 
   /**
@@ -123,22 +124,23 @@ class GenerationClock extends PhetioObject {
   }
 
   /**
-   * Sets timeProperty, the time that the generation clock has been running, in seconds. As time passes through the
-   * 12:00 position, it will always snap to the 12:00 position, which is when bunnies die of old age and mate.
+   * Sets timeInSecondsProperty, the time (in seconds) that the generation clock has been running, in seconds.
+   * As time passes through the 12:00 position, it will always snap to the 12:00 position, which is when bunnies
+   * die of old age and mate.
    * @param {number} dt - the time step, in seconds
    * @private
    */
   stepTime( dt ) {
 
-    const nextTime = this.timeProperty.value + dt;
-    const nextGeneration = timeToGenerations( nextTime );
+    const nextTime = this.timeInSecondsProperty.value + dt;
+    const nextGeneration = secondsToGenerations( nextTime );
 
     if ( nextGeneration > this.currentGenerationProperty.value ) {
       // snap to 12:00
-      this.timeProperty.value = nextGeneration * SECONDS_PER_GENERATION;
+      this.timeInSecondsProperty.value = nextGeneration * SECONDS_PER_GENERATION;
     }
     else {
-      this.timeProperty.value = nextTime;
+      this.timeInSecondsProperty.value = nextTime;
     }
   }
 
@@ -156,19 +158,20 @@ class GenerationClock extends PhetioObject {
 }
 
 /**
- * Converts elapsed time in seconds to a decimal number of generations. We need to add a small value here to
- * compensate for floating-point error in division. For example 8.6 seconds / 0.2 secondsPerGeneration should be
- * 43 generations, but JavaScript evaluates to 42.99999999999999.
- * See https://github.com/phetsims/natural-selection/issues/165
- * @param {number} time - elapsed time, in seconds
- * @returns {number} decimal number of generations that corresponds to the elapsed time
+ * Converts time from seconds to generations.
+ * @param {number} seconds - time, in seconds
+ * @returns {number} time, in decimal number of generations
  */
-function timeToGenerations( time ) {
-  if ( time === 0 ) {
+function secondsToGenerations( seconds ) {
+  if ( seconds === 0 ) {
     return 0;
   }
   else {
-    return ( time / SECONDS_PER_GENERATION ) + 0.0001;
+
+    // Add a small value here to compensate for floating-point error in division. For example
+    // 8.6 seconds / 0.2 secondsPerGeneration should be 43 generations, but JavaScript evaluates
+    // to 42.99999999999999. See https://github.com/phetsims/natural-selection/issues/165
+    return ( seconds / SECONDS_PER_GENERATION ) + 0.0001;
   }
 }
 

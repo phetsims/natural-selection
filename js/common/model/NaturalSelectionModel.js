@@ -118,7 +118,7 @@ class NaturalSelectionModel {
     // @public (read-only)
     this.populationModel = new PopulationModel(
       this.genePool,
-      this.generationClock.generationsProperty,
+      this.generationClock.timeInGenerationsProperty,
       this.isPlayingProperty, {
         tandem: graphsTandem.createTandem( 'populationModel' )
       } );

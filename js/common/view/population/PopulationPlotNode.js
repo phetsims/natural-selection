@@ -64,7 +64,7 @@ class PopulationPlotNode extends Node {
     this.xWidth = populationModel.xWidth;
     this.xRangeProperty = populationModel.xRangeProperty;
     this.yRangeProperty = populationModel.yRangeProperty;
-    this.generationsProperty = populationModel.generationsProperty;
+    this.timeInGenerationsProperty = populationModel.timeInGenerationsProperty;
     this.gridWidth = options.gridWidth;
     this.gridHeight = options.gridHeight;
     this.pointsPath = pointsPath;
@@ -88,8 +88,8 @@ class PopulationPlotNode extends Node {
     // Until data fills the width of the graph and the graph starts scrolling, update the plot when generation changes.
     // After that, it's sufficient to update the plot when xRangeProperty changes.
     // unlink not needed.
-    this.generationsProperty.link( generation => {
-      if ( generation < this.xWidth ) {
+    this.timeInGenerationsProperty.link( timeInGenerations => {
+      if ( timeInGenerations < this.xWidth ) {
         this.updatePlot();
       }
     } );
@@ -192,9 +192,9 @@ class PopulationPlotNode extends Node {
           }
         }
 
-        // Plot from previousPoint to current generation value
-        if ( ( previousPoint.x < this.xRangeProperty.value.max ) && ( previousPoint.x < this.generationsProperty.value ) ) {
-          const xView = this.modelToViewX( this.generationsProperty.value );
+        // Plot from previousPoint to current generation time
+        if ( ( previousPoint.x < this.xRangeProperty.value.max ) && ( previousPoint.x < this.timeInGenerationsProperty.value ) ) {
+          const xView = this.modelToViewX( this.timeInGenerationsProperty.value );
           const yView = this.modelToViewY( previousPoint.y );
           stepShape.lineTo( xView, yView );
         }

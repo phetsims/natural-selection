@@ -52,7 +52,7 @@ class PopulationGraphNode extends Node {
 
     // Generation (x-axis) scroll control
     const generationScrollControl = new GenerationScrollControl(
-      populationModel.xRangeProperty, populationModel.generationsProperty, populationModel.isPlayingProperty, {
+      populationModel.xRangeProperty, populationModel.timeInGenerationsProperty, populationModel.isPlayingProperty, {
         labelString: naturalSelectionStrings.generation,
         tandem: options.tandem.createTandem( 'generationScrollControl' ),
         phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
@@ -146,7 +146,7 @@ class PopulationGraphNode extends Node {
     assert && assert( plotsNode.clipArea, 'plotsNode.clipArea is required' );
     const clipAreaBounds = plotsNode.clipArea.getBounds();
     plotsNode.localBoundsProperty.link( localBounds => {
-      const clockHasStarted = ( populationModel.generationsProperty.value !== 0 );
+      const clockHasStarted = ( populationModel.timeInGenerationsProperty.value !== 0 );
       const dataIsVisible = localBounds.intersectsBounds( clipAreaBounds );
       zoomOutToSeeDataText.visible = clockHasStarted && !dataIsVisible;
     } );

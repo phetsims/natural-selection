@@ -61,8 +61,8 @@ class DataProbe extends PhetioObject {
       } );
 
     // @public Set BunnyCounts based on position of the data probe. dispose is not necessary.
-    this.countsProperty = new DerivedProperty( [ this.generationProperty, populationModel.generationsProperty ],
-      ( generation, generations ) => this.getCounts( generation, generations ), {
+    this.countsProperty = new DerivedProperty( [ this.generationProperty, populationModel.timeInGenerationsProperty ],
+      ( generation, timeInGenerations ) => this.getCounts( generation, timeInGenerations ), {
         tandem: options.tandem.createTandem( 'countsProperty' ),
         phetioType: DerivedPropertyIO( NullableIO( BunnyCountsIO ) ),
         phetioDocumentation: 'counts displayed by the data probe'
@@ -96,13 +96,13 @@ class DataProbe extends PhetioObject {
   /**
    * Gets the bunny counts for a specific generation value.
    * @param {number} generation - current position of the data probe on the x axis
-   * @param {number} generations - current value of the generation clock
+   * @param {number} timeInGenerations - current time on the generation clock, in generations
    * @returns {BunnyCounts|null}
    * @private
    */
-  getCounts( generation, generations ) {
+  getCounts( generation, timeInGenerations ) {
     let counts = null;
-    if ( generation <= generations && generations > 0 ) {
+    if ( generation <= timeInGenerations && timeInGenerations > 0 ) {
       counts = new BunnyCounts( {
         totalCount: this.getCount( generation, this.populationModel.totalPoints ),
         whiteFurCount: this.getCount( generation, this.populationModel.whiteFurPoints ),
