@@ -29,7 +29,9 @@ Terms that are specific to the implementation:
 
 This section describes how this simulation addresses implementation considerations that are typically encountered in PhET simulations.
 
-**Model-View Transform**: There are 3 different model-view transforms in this sim.
+**Model-View Transform**
+
+There are 3 different model-view transforms in this sim.
 
 _Environment_: The model uses a unitless 3D coordinate frame, where +x is to the left, +y is up, and +z is into the screen. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. `EnvironmentModelViewTransform` handles the transforms, and has very detailed documentation in the source code header. 
 
@@ -37,15 +39,21 @@ _Population graph_: The model uses a 2D coordinate frame, where +generation is t
 
 _Data Probe_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. The data probe can only move horizontally, so the y-axis is irrelevant. But positon is a `Vector2` because it's required by DragListener. `ModelViewTransform` handles the transforms.
 
-**Query Parameters**: Query parameters are used to enable sim-specific features. Some of these query parameters are public, but most are for debugging and
+**Query Parameters**
+
+Query parameters are used to enable sim-specific features. Some of these query parameters are public, but most are for debugging and
 tuning model behavior. Sim-specific query parameters are documented in
 [NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js).
 
-**Assertions**: The sim makes heavy use of `assert` to verify pre/post assumptions and perform type checking. This sim performs type-checking for almost all function arguments via `assert`. If you are making modifications to this sim, do so with assertions enabled via the `ea` query parameter.
+**Assertions**
 
-**Logging**: The sim makes heavy use of logging via `phet.log`, enabled using the `log` query parameter. If you are making modifications to this sim, or trying to understand its behavior, do so with logging enabled.
+The sim makes heavy use of `assert` to verify pre/post assumptions and perform type checking. This sim performs type-checking for almost all function arguments via `assert`. If you are making modifications to this sim, do so with assertions enabled via the `ea` query parameter.
 
-**Memory Management**: 
+**Logging**
+
+The sim makes heavy use of logging via `phet.log`, enabled using the `log` query parameter. If you are making modifications to this sim, or trying to understand its behavior, do so with logging enabled.
+
+**Memory Management** 
 
 All uses of `link`, `addListener`, etc. are documented as to whether they need a corresponding `unlink`, `removeListener`, etc.
 
