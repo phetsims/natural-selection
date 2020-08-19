@@ -69,7 +69,7 @@ class ProportionsModel extends PhetioObject {
       numberType: 'Integer',
       range: new Range( 0, 0 ), // dynamically adjusted by calling setValueAndRange
       tandem: options.tandem.createTandem( 'proportionsGenerationProperty' ),
-      phetioDocumentation: 'the generation that is displayed by the Proportions graph (integer)',
+      phetioDocumentation: 'the generation whose data is displayed by the Proportions graph (integer)',
       phetioReadOnly: true // range is dynamic
     } );
 
