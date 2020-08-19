@@ -243,7 +243,7 @@ if ( limited food is enabled ) {
 
 ### Population graph
 
-The Population graph shows how population (y-axis, number of bunnies) changes over time (x-axis, generations). There is a plot for total number of bunnies, and a plot for each allele.  Data points occur at the following times/events whenever there is a change in the number of bunnies:
+The Population graph shows how population (y-axis, in number of bunnies) changes over time (x-axis, in generations). There is a plot for total number of bunnies, and a plot for each allele.  Data points occur at the following times/events whenever there is a change in the number of bunnies:
 
 | Time | Event |
 | :--- | :--- |
