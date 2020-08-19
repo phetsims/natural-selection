@@ -119,11 +119,15 @@ The main view class is `NaturalSelectionScreenView`. It is used by both screens,
 
 Here are the entry points to some of the major features of the view:
 
-* Drawing the bunnies, wolves, and shrubs: `OrganismSprites`
-* Mapping a bunny to an image: `BunnyImageMap`
-* Plotting data on the Population graph: `PopulationPlotNode`
-* Bars in the Proportions graph: `ProportionsBarNode`
+* Draw the bunnies, wolves, and shrubs: `OrganismSprites`
+* Add a bunny to the view: `OrganismSprites.createBunnySpriteInstance`
+* Add a wolf to the view: `OrganismSprites.createWolfSpriteInstance`
+* Map a bunny to an image: `BunnyImageMap`
+* Plot data on the Population graph: `PopulationPlotNode`
+* Draw bars in the Proportions graph: `ProportionsBarNode`
 * Pedigree tree structure: `PedigreeBranchNode`
+* Manage the "Mutation Coming" popups: `MutationAlertsNode`
+* Sim reaches its memory limit: see `new MemoryLimitDialog` in `NaturalSelectionScreenView`
 
 ## PhET-iO
 
