@@ -49,7 +49,7 @@ be disposed, and their `dispose` implementation looks like this:
 
 ## PhET-iO
 
-This section describes patterns used in the PhET-iO instrumentation of this sim. PhET-iO is a PhET product that is described at https://phet-io.colorado.edu. If you're not familiar with it, you can skip this section.
+PhET-iO is a PhET product that is described at https://phet-io.colorado.edu. If you're not familiar with PhET-iO, you can skip this section, which describes patterns used in the PhET-iO instrumentation of this sim. 
 
 **PhetioGroup is encapsulated***: PhetioGroup is the PhET-iO mechanism for dynamically creating elements. The dynamic elements in this sim are of class `Bunny` and `Wolf`. Instances of `Bunny` are created by `BunnyGroup`, which is private to `BunnyCollection`.  Instances of `Wolf` are created by `WolfGroup`, which is private to `WolfCollection`.  This pattern of using a "Collection" wrapper hides the details of PhetioGroup from all other parts of the simulation.
 
