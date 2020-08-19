@@ -67,7 +67,7 @@ the second from the mother.
 
 In reality, environmental factors may affect life expectancy. That is not the case in this simulation.
 All bunnies have identical life expectancy, which is not influenced by other factors. 
-If a bunny makes it to 5 generations old, it dies of old age. Bunnies die at 12:00 on the generation clock,
+If a bunny makes it to 5 generations old, it dies of old age. Bunnies die at 12:00,
 just before reproduction occurs.
 
 ## Reproduction
@@ -75,7 +75,7 @@ just before reproduction occurs.
 In reality, environmental factors may affect reproduction. That is not the case in this simulation - reproduction
 is not affected by environmental factors, and bunnies reproduce using the following model:
 
-* Bunnies reproduce at 12:00 on the generation clock.
+* Bunnies reproduce at 12:00.
 * Any bunny can mate with any other bunny. Age, sex, and pedigree relationship are irrelevant.
 * For convenience, we refer to the two parents as _**father**_ and _**mother**_. In the _Pedigree_ 
 graph, the father is on the left, the mother is on the right. In genotype abbreviations (e.g. 'Ff'),
