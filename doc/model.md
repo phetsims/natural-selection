@@ -9,7 +9,7 @@ Time is measured in _**generations**_. Each revolution of the _**generation cloc
 (shown at the top center of the user interface) corresponds to the passage of 1 generation.
 
 Various events are described as times relative to the "wall clock" time on the generation clock. 
-For example, "bunnies reproduce at 12:00", or "wolves eat at 8:00". 
+For example, "bunnies reproduce at 12:00", or "wolves eat at 4:00". 
 
 ## Genes and Alleles
 
