@@ -56,7 +56,7 @@ be disposed, and their `dispose` implementation looks like this:
 The main model class is `NaturalSelectionModel`. It manages how the sim is playing (play, pause, speed) and what mode the sim is in (see `SimulationMode`). Everything else is delegated to other model elements.
 
 There are a few top-level model elements:
-* `GenerationClock` is responsible the elapse time of a generation
+* `GenerationClock` is responsible for the elapsed time in generations
 * `GenePool` is the collection of genes that are present in the bunny population 
 * There is one instance of `Gene` for fur, teeth, and ears.  They live in the `GenePool` and they globally determine dominance relationship, and whether a mutation is going to occur. 
 
@@ -90,6 +90,7 @@ Here are the entry points to the major features of the model:
 * Population graph data points: `see ObservableArray instances in PopulationModel`
 * Proportions graph start/end counts: `ProportionsCounts`
 * Pedigree graph: shows a tree for `BunnyCollection.selectedBunnyProperty`
+* Initializing the bunny population via query parameters: `parseInitialPopulation.js`, `NaturalSelectionQueryParameters`, 
 
 ## View
 
