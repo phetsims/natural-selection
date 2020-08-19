@@ -285,7 +285,7 @@ class BunnyCollection {
     // See https://github.com/phetsims/natural-selection/issues/98.
     let numberOfRecessiveMutantOffspring = 0;
     if ( this.recessiveMutants.length > 0 ) {
-      numberOfRecessiveMutantOffspring = this.mateRecessiveMutants( generation, bunnies );
+      numberOfRecessiveMutantOffspring = this.mateEagerly( generation, bunnies );
     }
 
     // The number of bunnies that we expect to be born.
@@ -394,12 +394,16 @@ class BunnyCollection {
    * the purpose is to make the mutation appear in the phenotype sooner. This must be done separately from other mating
    * because we don't want to apply additional mutations. As a side-effect, bunnies that are successfully mated are
    * removed from the bunnies array.
+   *
+   * Note that some parts of this method look similar to method mateBunnies. There are in fact significant differences,
+   * which made it difficult (and less clear) to factor out commonalities.
+   *
    * @param {number} generation
    * @param {Bunny[]} bunnies - the bunnies that are candidates for mating, modified as a side-effect
    * @returns {number} the number of bunnies born
    * @private
    */
-  mateRecessiveMutants( generation, bunnies ) {
+  mateEagerly( generation, bunnies ) {
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
     assert && assert( Array.isArray( bunnies ), 'invalid bunnies' );
 

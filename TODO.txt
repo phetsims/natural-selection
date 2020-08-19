@@ -1,6 +1,5 @@
 # TODO list for natural-selection
 
-* Duplication in BunnyCollection mateBunnies and mateRecessiveMutants
 * Better name for BunnyVariety
 
 * Too many Properties with 'generation' in their name is confusing
