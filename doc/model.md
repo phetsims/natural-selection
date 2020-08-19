@@ -243,7 +243,7 @@ if ( limited food is enabled ) {
 
 ### Population graph
 
-The population graph plot has time (in generations) as its x axis, and population (number of bunnies) as its y axis. There is a plot for total number of bunnies, and a plot for each allele.  Data points occur at the following times/events whenever there is a change in number of bunnies:
+The Population graph has time (in generations) as its x axis, and population (number of bunnies) as its y axis. There is a plot for total number of bunnies, and a plot for each allele.  Data points occur at the following times/events whenever there is a change in number of bunnies:
 
 | Time | Event |
 | :--- | :--- |
