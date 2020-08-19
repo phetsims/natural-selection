@@ -146,9 +146,10 @@ The calculation is:
 
 `numberOfWolves = max( 5, round( numberOfBunnies / 10 ) )`
 
-Wolves favor bunnies whose fur color matches their environment by eating a greater percentage of 
-bunnies whose fur color does not match their environment. If the population of favored bunnies is
-small (less than 6) and there are non-favored bunnies to eat, then the favored bunnies will be ignored.
+Bunnies whose fur color matches their environment ("matching bunnies") have an adaptive advantage.
+It's easier for wolves to see bunnies whose fur color does not match their environment, so they eat more of them.
+If the population of matching bunnies is small (less than 6) and there are other bunnies to eat, 
+then the matching bunnies will be ignored.
 
 In pseudocode†, here's the algorithm for calculating the percentages [0,1] of bunnies to eat:
 
@@ -189,6 +190,8 @@ you'll see data points related to food on the Population graph.
 Food consists of two factors: tough food and limited food. They are applied independently and in that order.  
 Both factors result in bunnies dying of starvation.
 
+### Tough Food
+
 Tough food is more difficult to eat, so some of each phenotype will starve. But bunnies with short teeth are less adapted to eating tough food, 
 so a larger percentage of bunnies with short teeth will starve. Additionally, if the number of bunnies with long teeth is small (less than 5),
 then no bunnies with long teeth will starve. 
@@ -211,6 +214,8 @@ if ( tough food is enabled ) {
   }
 }
 ```
+
+### Limited Food
 
 Limited food can support a population up to a carrying capacity, and does not favor any phenotype. If the population exceeds the carrying capacity, then
 bunnies die off to reduce the population to the carrying capacity.  The carrying capacity is randomly selected from a range to provide some
