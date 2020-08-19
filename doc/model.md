@@ -102,20 +102,22 @@ _**Mutation**_ occurs when a mutant allele is introduced into the population. A 
 errors during DNA replication, mitosis, and meiosis, or other types of damage to DNA. 
 
 In this simulation, mutations are introduced
-by the user, via the _Add Mutations_ panel. The user specifies whether a mutant allele 
+by the user, via the _Add Mutations_ panel. The user pushes a button to indicate whether a mutant allele 
 is dominant or recessive with respect to the corresponding normal allele. The mutation is 
 then introduced the next time that bunnies reproduce.  
 
 A mutation is introduced by randomly selecting one newborn bunny to received the mutation. One of
 that bunny's inherited alleles is selected randomly and replaced with the mutant allele.
-Multiple mutations may occur at the same time, but an individual will never receive more than one mutation.
+Multiple mutations may occur at the same time, but an individual will not receive more than one mutation.
 
 ### Recessive Mutants
 
 When the user specifies that a mutation should be recessive, a recessive mutant is born.
-A newborn recessive mutant is prioritized to mate as soon as possible with another bunny 
-that has the same mutant allele, so that the mutation appears in the phenotype as soon as possible. 
-We refer to this prioritization as "mating eagerly".
+Since the mutation is recessive, it will not appear in the phenotype of the newborn bunny, and in fact cannot
+not appear in the population until 2 generations later, when another bunny has the same mutant allele.
+Rather than leave it to chance that the recessive mutants will be paired up, a newborn recessive mutant is 
+prioritized to mate as soon as possible with another bunny that has the same mutant allele, so that the mutation 
+appears in the phenotype as soon as possible. We refer to this prioritization as "mating eagerly".
 
 When a recessive mutant mates eagerly, it produces 5 offspring. The first 4 are as in the 
 Punnett Square described above, and will include 1 homozygous recessive bunny. The 5th offspring is 
@@ -125,7 +127,7 @@ A recessive mutant mates eagerly only once. Thereafter it mates like any other b
 
 ## Environmental Factors
 
-An _**environmental factor**_ (aka selective agent) is something in the environment that results in the 
+An _**environmental factor**_ (aka selective agent) is something in the environment that results in 
 preferential survival and reproduction or preferential elimination of individuals with certain genotypes.
 The environmental factors in this simulation affect bunny mortality, by selecting bunnies and 
 eliminating them. Each environmental factor has a corresponding "slice" of the generation clock (shown
