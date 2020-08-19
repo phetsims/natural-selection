@@ -111,7 +111,7 @@ class Food {
     phet.log && phet.log( `${numberOfShrubs} shrubs randomly placed using seed ${random.getSeed()}` );
 
     // unlink is not necessary.
-    generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
+    generationClock.timeInPercentProperty.lazyLink( ( currentTimeInPercent, previousTimeInPercent ) => {
 
       // Execute this code only when the sim is running normally, not when setting PhET-iO state.
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
@@ -119,7 +119,7 @@ class Food {
         // Starve some bunnies at the midpoint of their 'slice' of the generation clock.
         // See https://github.com/phetsims/natural-selection/issues/110
         if ( this.enabledProperty.value &&
-             previousPercentTime < CLOCK_FOOD_MIDPOINT && currentPercentTime >= CLOCK_FOOD_MIDPOINT ) {
+             previousTimeInPercent < CLOCK_FOOD_MIDPOINT && currentTimeInPercent >= CLOCK_FOOD_MIDPOINT ) {
 
           // Ensure that 'starve' event is always recorded at the same time in the clock cycle, regardless of what
           // the actual time is. See https://github.com/phetsims/natural-selection/issues/170.

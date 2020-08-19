@@ -94,10 +94,10 @@ class GenerationClockNode extends Node {
     } );
 
     // Reveal part of the clock. unlink is not necessary.
-    generationClock.percentTimeProperty.link( percentTime => {
+    generationClock.timeInPercentProperty.link( timeInPercent => {
       revealArc.shape = new Shape()
         .moveTo( 0, 0 )
-        .arc( 0, 0, RADIUS, START_ANGLE + ( percentTime * 2 * Math.PI ), START_ANGLE + 2 * Math.PI )
+        .arc( 0, 0, RADIUS, START_ANGLE + ( timeInPercent * 2 * Math.PI ), START_ANGLE + 2 * Math.PI )
         .close();
     } );
 

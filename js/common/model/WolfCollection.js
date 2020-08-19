@@ -78,8 +78,8 @@ class WolfCollection {
 
     // @private Wolves hunt during the 'wolves' slice of the generation clock.
     this.isHuntingProperty = new DerivedProperty(
-      [ this.enabledProperty, generationClock.percentTimeProperty ],
-      ( enabled, percentTime ) => ( enabled && NaturalSelectionConstants.CLOCK_WOLVES_RANGE.contains( percentTime ) ), {
+      [ this.enabledProperty, generationClock.timeInPercentProperty ],
+      ( enabled, timeInPercent ) => ( enabled && NaturalSelectionConstants.CLOCK_WOLVES_RANGE.contains( timeInPercent ) ), {
         tandem: options.tandem.createTandem( 'isHuntingProperty' ),
         phetioType: DerivedPropertyIO( BooleanIO ),
         phetioDocumentation: 'for internal PhET use only'
@@ -133,7 +133,7 @@ class WolfCollection {
     } );
 
     // unlink is not necessary.
-    generationClock.percentTimeProperty.lazyLink( ( currentPercentTime, previousPercentTime ) => {
+    generationClock.timeInPercentProperty.lazyLink( ( currentTimeInPercent, previousTimeInPercent ) => {
 
       // Execute this code only when the sim is running normally, not when setting PhET-iO state.
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
@@ -141,7 +141,7 @@ class WolfCollection {
         // Eat bunnies at the midpoint of their 'slice' of the generation clock.
         // See https://github.com/phetsims/natural-selection/issues/110
         if ( this.enabledProperty.value &&
-             previousPercentTime < CLOCK_WOLVES_MIDPOINT && currentPercentTime >= CLOCK_WOLVES_MIDPOINT ) {
+             previousTimeInPercent < CLOCK_WOLVES_MIDPOINT && currentTimeInPercent >= CLOCK_WOLVES_MIDPOINT ) {
 
           // Ensure that 'eat' event is always recorded at the same time in the clock cycle, regardless of what
           // the actual time is. See https://github.com/phetsims/natural-selection/issues/170.

@@ -56,6 +56,13 @@ class GenerationClock extends PhetioObject {
       phetioHighFrequency: true
     } );
 
+    // @public percent of the current clock cycle that has been completed. dispose is not necessary.
+    this.timeInPercentProperty = new DerivedProperty(
+      [ this.timeInSecondsProperty ],
+      timeInSeconds => ( timeInSeconds % SECONDS_PER_GENERATION ) / SECONDS_PER_GENERATION, {
+        isValidValue: timeInPercent => ( timeInPercent >= 0 && timeInPercent <= 1 )
+      } );
+
     // @public dispose is not necessary
     this.timeInGenerationsProperty = new DerivedProperty(
       [ this.timeInSecondsProperty ],
@@ -85,13 +92,6 @@ class GenerationClock extends PhetioObject {
           `skipped a generation, currentGeneration=${currentGeneration}, previousGeneration=${previousGeneration}` );
       }
     } );
-
-    // @public percent of the current clock cycle that has been completed. dispose is not necessary.
-    this.percentTimeProperty = new DerivedProperty(
-      [ this.timeInSecondsProperty ],
-      time => ( time % SECONDS_PER_GENERATION ) / SECONDS_PER_GENERATION, {
-        isValidValue: percentTime => ( percentTime >= 0 && percentTime <= 1 )
-      } );
   }
 
   /**
