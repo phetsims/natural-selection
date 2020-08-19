@@ -144,7 +144,7 @@ class PopulationModel extends PhetioObject {
     // @public (read-only) spacing between x-axis tick marks, in generations
     this.xAxisTickSpacing = 1;
 
-    // @public range of the x-axis, in generations
+    // @public range of the x-axis, as time in generations
     this.xRangeProperty = new Property( new Range( 0, options.xWidth ), {
       isValidValue: xRange => ( xRange.min >= 0 ),
       tandem: options.tandem.createTandem( 'xRangeProperty' ),
