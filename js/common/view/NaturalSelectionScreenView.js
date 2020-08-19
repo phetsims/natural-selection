@@ -174,7 +174,7 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     // Play/pause/step time controls
-    const timeControlNode = new NaturalSelectionTimeControlNode( model.isPlayingProperty, model.timeScaleProperty, {
+    const timeControlNode = new NaturalSelectionTimeControlNode( model.isPlayingProperty, model.timeSpeedProperty, {
       left: graphChoiceRadioButtonGroup.left,
       bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: options.tandem.createTandem( 'timeControlNode' )

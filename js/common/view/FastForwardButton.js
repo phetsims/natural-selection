@@ -9,22 +9,20 @@
 import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
+import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RoundMomentaryButton from '../../../../sun/js/buttons/RoundMomentaryButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 class FastForwardButton extends RoundMomentaryButton {
 
   /**
-   * @param {Property.<number>} timeScaleProperty
-   * @param {number} fastScale - how much to scale time when the button is pressed
+   * @param {EnumerationProperty.<TimeSpeed>} timeSpeedProperty
    * @param {Object} [options]
    */
-  constructor( timeScaleProperty, fastScale, options ) {
-    assert && AssertUtils.assertPropertyOf( timeScaleProperty, 'number' );
-    assert && assert( NaturalSelectionUtils.isPositive( fastScale ), 'invalid fastScale' );
+  constructor( timeSpeedProperty, options ) {
+    assert && AssertUtils.assertEnumerationPropertyOf( timeSpeedProperty, TimeSpeed );
 
     options = merge( {
       radius: 16,
@@ -50,11 +48,11 @@ class FastForwardButton extends RoundMomentaryButton {
       fill: 'black'
     } );
 
-    super( 1, fastScale, timeScaleProperty, options );
+    super( TimeSpeed.NORMAL, TimeSpeed.FAST, timeSpeedProperty, options );
 
     // Create a Studio link to the model Property
-    this.addLinkedElement( timeScaleProperty, {
-      tandem: options.tandem.createTandem( 'property' )
+    this.addLinkedElement( timeSpeedProperty, {
+      tandem: options.tandem.createTandem( 'timeSpeedProperty' )
     } );
   }
 }

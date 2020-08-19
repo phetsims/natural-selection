@@ -10,6 +10,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
+import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
@@ -59,10 +60,10 @@ class NaturalSelectionModel {
     } );
 
     // @public
-    this.timeScaleProperty = new NumberProperty( 1, {
-      tandem: options.tandem.createTandem( 'timeScaleProperty' ),
-      validValues: [ 1, NaturalSelectionQueryParameters.fastForwardScale ],
-      phetioDocumentation: 'the generation clock is sped up by this scale factor',
+    this.timeSpeedProperty = new EnumerationProperty( TimeSpeed, TimeSpeed.NORMAL, {
+      tandem: options.tandem.createTandem( 'timeSpeedProperty' ),
+      validValues: [ TimeSpeed.NORMAL, TimeSpeed.FAST ],
+      phetioDocumentation: 'controls the speed of the generation clock',
       phetioReadOnly: true
     } );
 
@@ -268,8 +269,11 @@ class NaturalSelectionModel {
       // So we can't make the sim run so fast that it skips generations,
       dt = GenerationClock.constrainDt( dt );
 
+      // Determine how fast to run the generation clock.
+      const timeScale = ( this.timeSpeedProperty.value === TimeSpeed.NORMAL ) ? 1 : NaturalSelectionQueryParameters.fastForwardScale;
+
       // step the generation clock
-      this.generationClock.step( dt * this.timeScaleProperty.value );
+      this.generationClock.step( dt * timeScale );
 
       // move the bunnies
       this.bunnyCollection.moveBunnies( dt );
