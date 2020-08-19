@@ -7,6 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -66,6 +67,13 @@ class NaturalSelectionModel {
       phetioDocumentation: 'controls the speed of the generation clock',
       phetioReadOnly: true
     } );
+
+    // @private
+    this.timeScaleProperty = new DerivedProperty(
+      [ this.timeSpeedProperty ],
+      timeSpeed => ( timeSpeed === TimeSpeed.NORMAL ) ? 1 : NaturalSelectionQueryParameters.fastForwardScale, {
+        // PhET-iO instrumentation is not necessary
+      } );
 
     // @public (read-only)
     this.generationClock = new GenerationClock( {
@@ -269,11 +277,8 @@ class NaturalSelectionModel {
       // So we can't make the sim run so fast that it skips generations,
       dt = GenerationClock.constrainDt( dt );
 
-      // Determine how fast to run the generation clock.
-      const timeScale = ( this.timeSpeedProperty.value === TimeSpeed.NORMAL ) ? 1 : NaturalSelectionQueryParameters.fastForwardScale;
-
       // step the generation clock
-      this.generationClock.step( dt * timeScale );
+      this.generationClock.step( dt * this.timeScaleProperty.value );
 
       // move the bunnies
       this.bunnyCollection.moveBunnies( dt );
