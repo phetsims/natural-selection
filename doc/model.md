@@ -78,6 +78,7 @@ In reality, environmental factors may affect reproduction. That is not the case 
 is not affected by environmental factors, and bunnies reproduce according to the following model:
 
 * Bunnies reproduce at 12:00.
+* Each bunny mates once per generation. If the number of bunnies is odd, then 1 bunny will not mate. 
 * Any bunny can mate with any other bunny. Age, sex, and pedigree relationship are irrelevant.
 * For convenience, we refer to the two parents as _**father**_ and _**mother**_. In the _Pedigree_ 
 graph, the father is on the left, the mother is on the right. In genotype abbreviations (e.g. 'Ff'),
@@ -85,12 +86,14 @@ the allele inherited from the father is first, the mother is second.
 * When bunnies mate, they produce 4 offspring. Mating follows 
 [Mendelian Inheritance](https://en.wikipedia.org/wiki/Mendelian_inheritance), 
  with cross breeding as described by a [Punnett Square](https://en.wikipedia.org/wiki/Punnett_square).
- For example, this Punnett Square describes the fur gene pairs for the 4 offspring of an 'FF' father and 'Ff' mother:
+ For example, this Punnett Square describes the fur gene pairs for the 4 offspring that result from an 'FF' father and 'Ff' mother:
  
 | | **F** | **F** |
 |---|---|---|
 | **F** | FF | FF |
 | **f** | Ff | Ff|
+
+* Bunnies take over the world when the population (after mating) is 750 or greater. All bunnies mate before considering whether bunnies have "taken over the world".
 
 ## Mutation
 
