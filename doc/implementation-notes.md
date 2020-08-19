@@ -27,8 +27,8 @@ _Population graph_: The model uses a 2D coordinate frame, where +generation is t
 
 _Data Probe_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. The data probe can only move horizontally, so the y-axis is irrelevant. But positon is a `Vector2` because it's required by DragListener. `ModelViewTransform` handles the transforms.
 
-**Query Parameters**: Query parameters are used to enable sim-specific features, mainly for debugging and
-testing. Sim-specific query parameters are documented in
+**Query Parameters**: Query parameters are used to enable sim-specific features. Some of these query parameters are public, but most are for debugging and
+tuning model behavior. Sim-specific query parameters are documented in
 [NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js).
 
 **Assertions**: The sim makes heavy use of `assert` to verify pre/post assumptions and perform type checking. This sim performs type-checking for almost all function arguments via `assert`. If you are making modifications to this sim, do so with assertions enabled via the `ea` query parameter.
