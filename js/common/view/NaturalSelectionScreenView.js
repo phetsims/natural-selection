@@ -34,7 +34,7 @@ import GraphChoice from './GraphChoice.js';
 import GraphChoiceRadioButtonGroup from './GraphChoiceRadioButtonGroup.js';
 import MemoryLimitDialog from './MemoryLimitDialog.js';
 import MutationAlertsNode from './MutationAlertsNode.js';
-import NaturalSelectionTimeControlNode2 from './NaturalSelectionTimeControlNode2.js';
+import NaturalSelectionTimeControlNode from './NaturalSelectionTimeControlNode.js';
 import PedigreeNode from './pedigree/PedigreeNode.js';
 import PlayButtonGroup from './PlayButtonGroup.js';
 import PopulationNode from './population/PopulationNode.js';
@@ -174,7 +174,7 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     // Play/pause/step time controls
-    const timeControlNode = new NaturalSelectionTimeControlNode2( model.isPlayingProperty, model.timeSpeedProperty, {
+    const timeControlNode = new NaturalSelectionTimeControlNode( model.isPlayingProperty, model.timeSpeedProperty, {
       left: graphChoiceRadioButtonGroup.left,
       bottom: this.layoutBounds.bottom - NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: options.tandem.createTandem( 'timeControlNode' )
