@@ -15,7 +15,15 @@ In addition to this document, you are encouraged to read:
 
 ## Terminology
 
-All of terminology that you'll need to navigate the implementation is found in [model.md](https://github.com/phetsims/natural-selection/blob/master/doc/model.md). 
+Most of terminology that you'll need to navigate the implementation is found in [model.md](https://github.com/phetsims/natural-selection/blob/master/doc/model.md). 
+
+Terms that are specific to the implementation:
+
+* An _organism_ is a living thing. It includes bunneis, wolves, and shrubs.
+* The _environment_ is the part of the UI where bunnies hop around, and it can be switched between "equator" and "arctic".
+* A _simulation mode_ (or _mode_) determines what UI components are available. See `SimulationMode`.
+* A _sprite_ is a high-performance way of drawing an organism, using the scenery `Sprites` API.
+* A _plot_ is a set of points connected by line segments, used in the Population graph.
 
 ## Common Patterns
 
@@ -136,5 +144,7 @@ PhET-iO is a PhET product that is described at https://phet-io.colorado.edu. If 
 **PhetioGroup is encapsulated**: `PhetioGroup` manages dynamic elements. The dynamic elements in this sim are instances of `Bunny` and `Wolf`. Instances of `Bunny` are created by `BunnyGroup`, which is private to `BunnyCollection`.  Instances of `Wolf` are created by `WolfGroup`, which is private to `WolfCollection`.  This pattern of using a "Collection" wrapper hides the details of PhetioGroup from all other parts of the simulation.
 
 **IO Types delegate to Core Types**: IO Types handle serialization of elements that are instances of Core Types. For example, `BunnyIO` is the IO Type that serializes the `Bunny` Core Type.  Throughout this simulation, each IO Type delegates serialization to its associated Core Type.  This ensures that the API of the Core Type is not violated by acccessing private members.
+
+**Configure the set of Genes displayed**: `GeneVisibilityManager` contains a visibility Property for each Gene, which controls the visiblity of all UI components for that gene. Use these Properties via Studio to quickly configure which genes appear in the UI. Search for "view.genes" in Studio.
 
   
