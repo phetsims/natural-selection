@@ -21,7 +21,7 @@ import Path from '../../../../../scenery/js/nodes/Path.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
-import BunnyImageMap from '../bunnyImageMap.js';
+import BunnyImageMap from '../BunnyImageMap.js';
 import PedigreeBunnyNode from './PedigreeBunnyNode.js';
 
 // constants
