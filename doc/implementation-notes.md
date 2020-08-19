@@ -23,7 +23,7 @@ Most of terminology that you'll need to navigate the implementation is found thr
 
 _Environment_: The environment is where the bunnies are hopping around. The model uses a unitless 3D coordinate frame, where +x is to the left, +y is up, and +z is into the screen. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. `EnvironmentModelViewTransform` handles the transform between these coordinate frames, and has very detailed documentation in the source code header. 
 
-_Population graph_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. Because drawing plots needs to be light-weight and high-performance, `ModelViewTransform` is not used here. Model-to-view mapping is handled by `PopulationPlotNode` (see `modelToViewX` and `modelToViewY`).
+_Population graph_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. Because drawing plots needs to be lightweight and high-performance, `ModelViewTransform` is not used here. Model-to-view mapping is handled by `PopulationPlotNode` (see `modelToViewX` and `modelToViewY`).
 
 _Data Probe_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. The data probe can only move horizontally, so the y-axis is irrelevant. But positon is a `Vector2` because it's required by DragListener. `ModelViewTransform` is used to map between coordinate frames.
 
