@@ -335,7 +335,7 @@ class Column extends VBox {
 
     const labelNode = new Text( gene.name, {
       font: COLUMN_LABEL_FONT,
-      maxWidth: 120 // determined empirically
+      maxWidth: 100 // determined empirically
     } );
     const checkbox = new Checkbox( labelNode, geneVisibleProperty,
       merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {

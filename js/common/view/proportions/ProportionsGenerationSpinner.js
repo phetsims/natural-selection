@@ -39,7 +39,8 @@ class ProportionsGenerationSpinner extends NumberSpinner {
         backgroundFill: null,
         minBackgroundWidth: 100, // determined empirically
         textOptions: {
-          font: NaturalSelectionConstants.PROPORTIONS_GENERATION_CONTROL_FONT
+          font: NaturalSelectionConstants.PROPORTIONS_GENERATION_CONTROL_FONT,
+          maxWidth: 250 // determined empirically
         }
       },
 
