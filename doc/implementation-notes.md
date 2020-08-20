@@ -75,11 +75,15 @@ When bunnies die, they cannot be immediately disposed. Their information is need
 
 It's possible to put this sim in a state where the population stabilizes, and the sim will run forever. The sim would continue to create data points for the Population graph, and would eventually crash the browser.  So the sim has a limit on the number of generations, see `maxGenerations` in [NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js). When this limit is reached, the sim stops, [MemoryLimitDialog](https://github.com/phetsims/natural-selection/blob/master/js/common/view/MemoryLimitDialog.js) is displayed, and the student can review the final state of the sim. 
 
+## Screens
+
+The sim has two screens, named _Intro_ and _Lab_.  The implementation of the model and view for these screens is identical. The view simply hides the genes and environmental factors that are not desired for a screen.  The _Intro_ screen has the fur gene, wolves, and limited food.  The _Lab_ screen has the full set of genes and environmental factors.
+
 ## Model
 
 This section provides a quick overview of the model.
 
-The main model class is [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/NaturalSelectionModel.js). It manages how the sim is playing (play, pause, speed) and what mode the sim is in (see [SimulationMode](https://github.com/phetsims/natural-selection/blob/master/js/common/model/SimulationMode.js)). Other responsibilities are delegated to other model elements. [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/NaturalSelectionModel.js) is used by both screens, with no differences. Genes and environmental factors that are not relevant in the _Intro_ screen are hidden by the view.
+The main model class is [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/NaturalSelectionModel.js). It manages how the sim is playing (play, pause, speed) and what mode the sim is in (see [SimulationMode](https://github.com/phetsims/natural-selection/blob/master/js/common/model/SimulationMode.js)). Other responsibilities are delegated to other model elements.
 
 There are a few top-level model elements:
 
@@ -130,7 +134,7 @@ Here are pointers to some of the major features of the model:
 
 This section provides a quick overview of the view.
 
-The main view class is [NaturalSelectionScreenView](https://github.com/phetsims/natural-selection/blob/master/js/common/view/NaturalSelectionScreenView.js). It is used by both screens, and simply hides genes and environmental factors that are not relevant for the _Intro_ (see options in [IntroScreenView](https://github.com/phetsims/natural-selection/blob/master/js/intro/view/IntroScreenView.js)).
+The main view class is [NaturalSelectionScreenView](https://github.com/phetsims/natural-selection/blob/master/js/common/view/NaturalSelectionScreenView.js). It is used by both screens, and simply hides genes and environmental factors that are not relevant for the _Intro_ screen (see options in [IntroScreenView](https://github.com/phetsims/natural-selection/blob/master/js/intro/view/IntroScreenView.js)).
 
 [GenerationClockNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/GenerationClockNode.js) displays the generation clock. It appears at the top-center of the UI. When environmental factors are enabled, the clock reveals color-coded "slices" that show when those environmental factors will be applied.
 
