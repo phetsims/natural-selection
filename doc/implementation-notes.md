@@ -107,7 +107,7 @@ There is a sub-model for each graph:
 
 Here are pointers to some of the major features of the model:
 
-* Main animation loop: `NaturalSelectionModel.step`
+* Main animation loop: [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/NaturalSelectionModel.js)`.step`
 * Bunny motion: `Bunny.move`
 * Bunny appearance: `Phenotype`, `GenePair.getVisibleAllele`
 * Wolf motion: `Wolf.move`
