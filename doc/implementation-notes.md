@@ -108,22 +108,22 @@ There is a sub-model for each graph:
 Here are pointers to some of the major features of the model:
 
 * Main animation loop: [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/NaturalSelectionModel.js)`.step`
-* Bunny motion: `Bunny.move`
-* Bunny appearance: `Phenotype`, `GenePair.getVisibleAllele`
-* Wolf motion: `Wolf.move`
-* Stuff that happens at 12:00: see `clockGenerationProperty` listener in `NaturalSelectionModel`
-* Death due to old age: `BunnyCollection.ageBunnies`
-* Reproduction: `BunnyCollection.mateBunnies` and `PunnettSquare`
-* Wolves: `WolfCollection.eatBunnies`
-* Tough Food: `Food.applyToughFood`
-* Limited Food: `Food.applyLimitedFood`
-* Bunnies have taken over the world: `BunnyCollection.bunniesHaveTakenOverTheWorldEmitter`
-* All of the bunnies have died: `BunnyCollection.allBunniesHaveDiedEmitter`
-* Memory management of dead bunnies: `BunnyCollection.pruneBunnies`
-* Population graph data points: `see ObservableArray instances in PopulationModel`
-* Proportions graph start/end counts: `ProportionsCounts`
-* Pedigree graph: shows a tree for `BunnyCollection.selectedBunnyProperty`
-* Genotype abbreviation: `Genotype.abbreviationProperty`, `GenePair.getGenotypeAbbreviation`
+* Bunny motion: [Bunny](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Bunny.js)`.move`
+* Bunny appearance: [Phenotype](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Phenotype.js), [GenePair](https://github.com/phetsims/natural-selection/blob/master/js/common/model/GenePair.js)`.getVisibleAllele`
+* Wolf motion: [Wolf](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Wolf.js)`.move`
+* Stuff that happens at 12:00: see `clockGenerationProperty` listener in [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/NaturalSelectionModel.js)
+* Death due to old age: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.ageBunnies`
+* Reproduction: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.mateBunnies` and [PunnettSquare](https://github.com/phetsims/natural-selection/blob/master/js/common/model/PunnettSquare.js)
+* Wolves: [WolfCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/WolfCollection.js)`.eatBunnies`
+* Tough Food: [Food](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Food.js)`.applyToughFood`
+* Limited Food: [Food](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Food.js)`.applyLimitedFood`
+* Bunnies have taken over the world: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.bunniesHaveTakenOverTheWorldEmitter`
+* All of the bunnies have died: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.allBunniesHaveDiedEmitter`
+* Memory management of dead bunnies: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.pruneBunnies`
+* Population graph data points: see `ObservableArray` instances in [PopulationModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/PopulationModel.js)
+* Proportions graph start/end counts: [ProportionsCounts](https://github.com/phetsims/natural-selection/blob/master/js/common/model/ProportionCounts.js)
+* Pedigree graph: shows a tree for [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.selectedBunnyProperty`
+* Genotype abbreviation: [Genotype](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Genotype.js)`.abbreviationProperty`, `GenePair.getGenotypeAbbreviation`
 * Initializing the bunny population via query parameters: `parseInitialPopulation.js`, `NaturalSelectionQueryParameters`, 
 
 ## View
