@@ -21,8 +21,8 @@ Terms that are specific to the implementation:
 
 * An _**organism**_ is a living thing. It includes bunnies, wolves, and shrubs.
 * The _**environment**_ is the part of the UI where bunnies hop around. It can be switched between "equator" and "arctic".
-* The _**simulation mode**_ determines what UI components are available. See `SimulationMode`.
-* A _**sprite**_ is a high-performance way of drawing an organism, using the scenery `Sprites` API.
+* The _**simulation mode**_ determines what UI components are available. See [SimulationMode](https://github.com/phetsims/natural-selection/blob/master/js/common/model/SimulationMode.js).
+* A _**sprite**_ is a high-performance way of drawing an organism, using the scenery [Sprites](https://github.com/phetsims/scenery/blob/master/js/nodes/Sprites.js) API.
 * A _**plot**_ is a set of points connected by line segments, used in the Population graph.
 
 ## General Consideration
@@ -33,9 +33,9 @@ This section describes how this simulation addresses implementation consideratio
 
 There are 3 different model-view transforms in this sim.
 
-_Environment_: The model uses a unitless 3D coordinate frame, where +x is to the left, +y is up, and +z is into the screen. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. `EnvironmentModelViewTransform` handles the transforms, and has very detailed documentation in the source code header. 
+_Environment_: The model uses a unitless 3D coordinate frame, where +x is to the left, +y is up, and +z is into the screen. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. [EnvironmentModelViewTransform](https://github.com/phetsims/natural-selection/blob/master/js/common/model/EnvironmentModelViewTransform.js) handles the transforms, and has very detailed documentation in the source code header. 
 
-_Population graph_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. Because drawing plots needs to be lightweight and high-performance, `ModelViewTransform` is not used here. Model-to-view transform is handled by `PopulationPlotNode` (see `modelToViewX` and `modelToViewY`). View-to-model transform is unnecessary.
+_Population graph_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. Because drawing plots needs to be lightweight and high-performance, `ModelViewTransform` is not used here. Model-to-view transform is handled by [PopulationPlotNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/population/PopulationPlotNode.js) (see `modelToViewX` and `modelToViewY`). View-to-model transform is unnecessary.
 
 _Data Probe_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. The data probe can only move horizontally, so the y-axis is irrelevant. But positon is a `Vector2` because it's required by DragListener. `ModelViewTransform` handles the transforms.
 
@@ -71,27 +71,27 @@ be disposed, and their `dispose` implementation looks like this:
   }
 ```
 
-When bunnies die, they can be immediately disposed. Their information is needed by the Pedigree graph. If we kept them forever, we'd run out of memory. `BunnyCollection.pruneDeadBunnies` handles pruning dead bunnies, disposing of them when they will no longer be needed by the Pedigree graph.
+When bunnies die, they can be immediately disposed. Their information is needed by the Pedigree graph. If we kept them forever, we'd run out of memory. [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.pruneDeadBunnies` handles pruning dead bunnies, disposing of them when they will no longer be needed by the Pedigree graph.
 
-It's possible to put this sim in a state where the population stabilizes, and the sim will run forever. The sim would continue to create data points for the Population graph, and would eventually crash the browser.  So the sim has a limit on the number of generations, see `maxGenerations` in `NaturalSelectionQueryParameters`. When this limit is reached, the sim stops, `MemoryLimitDialog` is displayed, and the student can review the final state of the sim. 
+It's possible to put this sim in a state where the population stabilizes, and the sim will run forever. The sim would continue to create data points for the Population graph, and would eventually crash the browser.  So the sim has a limit on the number of generations, see `maxGenerations` in [NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js). When this limit is reached, the sim stops, [MemoryLimitDialog](https://github.com/phetsims/natural-selection/blob/master/js/common/view/MemoryLimitDialog.js) is displayed, and the student can review the final state of the sim. 
 
 ## Model
 
 This section provides a quick overview of the model.
 
-The main model class is `NaturalSelectionModel`. It manages how the sim is playing (play, pause, speed) and what mode the sim is in (see `SimulationMode`). Everything else is delegated to other model elements. `NaturalSelectionModel` is used by both screens, with no differences. Genes and environmental factors that are not relevant in the _Intro_ screen are hidden by the view.
+The main model class is [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/NaturalSelectionModel.js). It manages how the sim is playing (play, pause, speed) and what mode the sim is in (see `SimulationMode`). Everything else is delegated to other model elements. `NaturalSelectionModel` is used by both screens, with no differences. Genes and environmental factors that are not relevant in the _Intro_ screen are hidden by the view.
 
 There are a few top-level model elements:
 
-* `GenerationClock` is responsible for the elapsed time in generations
-* `GenePool` is the collection of genes that are present in the bunny population 
-* There is one instance of `Gene` for fur, teeth, and ears.  They live in the `GenePool` and they globally determine dominance relationship, and whether a mutation is going to occur. 
+* [GenerationClock](https://github.com/phetsims/natural-selection/blob/master/js/common/model/GenerationClock.js) is responsible for the elapsed time in generations
+* [GenePool](https://github.com/phetsims/natural-selection/blob/master/js/common/model/GenePool.js) is the collection of genes that are present in the bunny population 
+* There is one instance of [Gene](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Gene.js) for fur, teeth, and ears.  They live in the `GenePool` and they globally determine dominance relationship, and whether a mutation is going to occur. 
 
-Living things are instances of `Organism`. There are 3 subclasses of Organism:
+Living things are instances of [Organism](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Organism.js). There are 3 subclasses of Organism:
 
-* `Bunny` - created dynamically, moves around, has reference to parents, has a `Genotype` and a `Phenotype`
-* `Wolf` - created dynamically, moves around
-* `Shrub` - created statically at startup, remains stationary
+* [Bunny](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Bunny.js) - created dynamically, moves around, has reference to parents, has a [Genotype](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Genotype.js) and a [Phenotype](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Phenotype.js)
+* [Wolf](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Wolf.js) - created dynamically, moves around
+* [Shrub](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Shrub.js) - created statically at startup, remains stationary
 
 Organisms are organized into collections:
 
