@@ -71,11 +71,14 @@ class PedigreeNode extends HBox {
                              'but changes to its elements and metadata will have no affect.'
       } );
 
-    const pedigreeGraphNode = new PedigreeGraphNode( pedigreeModel, selectedBunnyProperty, bunnyImageMap, {
-      graphWidth: graphWidth,
-      graphHeight: size.height,
-      tandem: options.tandem.createTandem( 'pedigreeGraphNode' )
-    } );
+    const pedigreeGraphNode = new PedigreeGraphNode( selectedBunnyProperty, bunnyImageMap,
+      pedigreeModel.furAllelesVisibleProperty,
+      pedigreeModel.earsAllelesVisibleProperty,
+      pedigreeModel.teethAllelesVisibleProperty, {
+        graphWidth: graphWidth,
+        graphHeight: size.height,
+        tandem: options.tandem.createTandem( 'pedigreeGraphNode' )
+      } );
 
     assert && assert( !options.children, 'PedigreeNode sets children' );
     options.children = NaturalSelectionQueryParameters.allelesVisible ?

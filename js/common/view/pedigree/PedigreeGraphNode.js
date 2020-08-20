@@ -8,13 +8,13 @@
  */
 
 import merge from '../../../../../phet-core/js/merge.js';
+import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
-import PedigreeModel from '../../model/PedigreeModel.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
@@ -28,16 +28,21 @@ const Y_MARGIN = 5;
 class PedigreeGraphNode extends Node {
 
   /**
-   * @param {PedigreeModel} pedigreeModel
    * @param {SelectedBunnyProperty} selectedBunnyProperty
    * @param {BunnyImageMap} bunnyImageMap
+   * @param {Property.<boolean>} furAllelesVisibleProperty
+   * @param {Property.<boolean>} earsAllelesVisibleProperty
+   * @param {Property.<boolean>} teethAllelesVisibleProperty
    * @param {Object} [options]
    */
-  constructor( pedigreeModel, selectedBunnyProperty, bunnyImageMap, options ) {
+  constructor( selectedBunnyProperty, bunnyImageMap,
+               furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
 
-    assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
     assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty, 'invalid selectedBunnyProperty' );
     assert && assert( bunnyImageMap instanceof BunnyImageMap, 'invalid bunnyImageMap' );
+    assert && AssertUtils.assertPropertyOf( furAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( earsAllelesVisibleProperty, 'boolean' );
+    assert && AssertUtils.assertPropertyOf( teethAllelesVisibleProperty, 'boolean' );
 
     options = merge( {
       graphWidth: 100,
@@ -83,10 +88,7 @@ class PedigreeGraphNode extends Node {
 
         // Create the graph
         branchNode = new PedigreeBranchNode( bunny, bunnyImageMap, NaturalSelectionConstants.PEDIGREE_TREE_DEPTH,
-          selectedBunnyProperty,
-          pedigreeModel.furAllelesVisibleProperty,
-          pedigreeModel.earsAllelesVisibleProperty,
-          pedigreeModel.teethAllelesVisibleProperty, {
+          selectedBunnyProperty, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
             bunnyIsSelected: true,
             x: backgroundNode.centerX,
             bottom: backgroundNode.bottom - Y_MARGIN
