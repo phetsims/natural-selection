@@ -103,7 +103,7 @@ class ProportionsModel extends PhetioObject {
     const previousCounts = new ObservableArray( {
       tandem: options.tandem.createTandem( 'previousCounts' ),
       phetioType: ObservableArrayIO( ProportionsCountsIO ),
-      phetioDocumentation: 'Counts for previous generations, indexed by generation number'
+      phetioDocumentation: 'Start and End counts for previous generations, indexed by generation number'
     } );
 
     // @public Whether the model has data to display. dispose is not necessary.
