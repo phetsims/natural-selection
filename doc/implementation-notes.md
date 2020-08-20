@@ -123,6 +123,7 @@ Here are pointers to some of the major features of the model:
 * Limited Food: [Food](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Food.js)`.applyLimitedFood`
 * Bunnies have taken over the world: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.bunniesHaveTakenOverTheWorldEmitter`
 * All of the bunnies have died: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.allBunniesHaveDiedEmitter`
+* Sim reaches its memory limit: [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/NaturalSelectionModel.js)`.memoryLimitEmitter`
 * Memory management of dead bunnies: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.pruneBunnies`
 * Population graph data points: see `ObservableArray` instances in [PopulationModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/PopulationModel.js)
 * Proportions graph start/end counts: [ProportionsCounts](https://github.com/phetsims/natural-selection/blob/master/js/common/model/ProportionCounts.js)
@@ -155,7 +156,6 @@ Here are pointers to some of the major features of the view:
 * Draw bars in the Proportions graph: [ProportionsBarNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/proportions/ProportionsBarNode.js)
 * Pedigree tree structure: [PedigreeBranchNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/pedigree/PedigreeBranchNode.js)
 * Manage the "Mutation Coming" popups: [MutationAlertsNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/MutationAlertsNode.js)
-* Sim reaches its memory limit: see `new MemoryLimitDialog` in [NaturalSelectionScreenView](https://github.com/phetsims/natural-selection/blob/master/js/common/view/NaturalSelectionScreenView.js)
 
 ## PhET-iO
 

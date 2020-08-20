@@ -8,6 +8,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Emitter from '../../../../axon/js/Emitter.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -174,6 +175,19 @@ class NaturalSelectionModel {
     // For performance profiling, see https://github.com/phetsims/natural-selection/issues/60
     this.timeToMateProperty = new NumberProperty( 0, {
       tandem: Tandem.OPT_OUT
+    } );
+
+    // @public
+    this.memoryLimitEmitter = new Emitter( {
+      tandem: options.tandem.createTandem( 'memoryLimitEmitter' ),
+      phetioDocumentation: 'fires when the memory limit is reached and the simulation must be ended'
+    } );
+
+    // removeListener is not necessary.
+    this.generationClock.clockGenerationProperty.link( clockGeneration => {
+      if ( clockGeneration >= NaturalSelectionQueryParameters.maxGenerations ) {
+        this.memoryLimitEmitter.emit();
+      }
     } );
 
     // All of the stuff that happens at 12:00 on the generation clock.

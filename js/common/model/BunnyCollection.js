@@ -117,7 +117,10 @@ class BunnyCollection {
     } );
 
     // @public notifies listeners when all bunnies have died. dispose is not necessary.
-    this.allBunniesHaveDiedEmitter = new Emitter();
+    this.allBunniesHaveDiedEmitter = new Emitter( {
+      tandem: options.tandem.createTandem( 'allBunniesHaveDiedEmitter' ),
+      phetioDocumentation: 'fires when all of the bunnies have died'
+    } );
     phet.log && this.allBunniesHaveDiedEmitter.addListener( () => {
       phet.log && phet.log( 'All of the bunnies have died.' );
       phet.log && phet.log( `total live bunnies = ${this.liveBunnies.length}` );
@@ -125,7 +128,10 @@ class BunnyCollection {
     } );
 
     // @public notifies listeners when bunnies have taken over the world. dispose is not necessary.
-    this.bunniesHaveTakenOverTheWorldEmitter = new Emitter();
+    this.bunniesHaveTakenOverTheWorldEmitter = new Emitter( {
+      tandem: options.tandem.createTandem( 'bunniesHaveTakenOverTheWorldEmitter' ),
+      phetioDocumentation: 'fires when bunnies have taken over the world'
+    } );
     phet.log && this.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
       phet.log && phet.log( 'Bunnies have taken over the world.' );
       phet.log && phet.log( `total live bunnies = ${this.liveBunnies.length}` );
