@@ -94,7 +94,6 @@ class DataProbe extends PhetioObject {
     super.dispose();
   }
 
-  //TODO generation and generations is confusing! There are too many Properties in this sim with "generation" name.
   /**
    * Gets the bunny counts for a specific generation value.
    * @param {number} dataProbeGeneration - current position of the data probe on the x axis
