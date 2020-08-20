@@ -143,9 +143,9 @@ The main view class is [NaturalSelectionScreenView](https://github.com/phetsims/
 
 Here are pointers to some of the major features of the view:
 
-* Draw the bunnies, wolves, and shrubs: `OrganismSprites`
-* Add a bunny to the view: `OrganismSprites.createBunnySpriteInstance`
-* Add a wolf to the view: `OrganismSprites.createWolfSpriteInstance`
+* Draw the bunnies, wolves, and shrubs: [OrganismSprites](https://github.com/phetsims/natural-selection/blob/master/js/common/view/environment/OrganismSprites.js)
+* Add a bunny to the view: [OrganismSprites](https://github.com/phetsims/natural-selection/blob/master/js/common/view/environment/OrganismSprites.js)`.createBunnySpriteInstance`
+* Add a wolf to the view: [OrganismSprites](https://github.com/phetsims/natural-selection/blob/master/js/common/view/environment/OrganismSprites.js)`.createWolfSpriteInstance`
 * Map a bunny to an image: `BunnyImageMap`
 * Plot data on the Population graph: `PopulationPlotNode`
 * Draw bars in the Proportions graph: `ProportionsBarNode`
