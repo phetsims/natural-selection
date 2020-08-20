@@ -24,8 +24,8 @@ const NaturalSelectionConstants = {
   LITTER_SIZE: 4,
 
   // Generation Clock
-  CLOCK_WOLVES_RANGE: new Range( 1/6, 3/6 ), // slice of the generation clock for wolves, as a percentage range [0,1]
-  CLOCK_FOOD_RANGE: new Range( 3/6, 5/6 ), // slice of the generation clock for food, as a percentage range [0,1]
+  CLOCK_WOLVES_RANGE: new Range( 1 / 6, 3 / 6 ), // slice of the generation clock for wolves, as a percentage range [0,1]
+  CLOCK_FOOD_RANGE: new Range( 3 / 6, 5 / 6 ), // slice of the generation clock for food, as a percentage range [0,1]
 
   // View ============================================================================================================N
 

@@ -72,10 +72,10 @@ class PedigreeNode extends HBox {
       } );
 
     const pedigreeGraphNode = new PedigreeGraphNode( pedigreeModel, selectedBunnyProperty, bunnyImageMap, {
-        graphWidth: graphWidth,
-        graphHeight: size.height,
-        tandem: options.tandem.createTandem( 'pedigreeGraphNode' )
-      } );
+      graphWidth: graphWidth,
+      graphHeight: size.height,
+      tandem: options.tandem.createTandem( 'pedigreeGraphNode' )
+    } );
 
     assert && assert( !options.children, 'PedigreeNode sets children' );
     options.children = NaturalSelectionQueryParameters.allelesVisible ?

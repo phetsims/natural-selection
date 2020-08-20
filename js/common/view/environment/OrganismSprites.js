@@ -212,7 +212,7 @@ class OrganismSprites extends Sprites {
     // bunnyCollection.liveBunnies.addItemAddedListener, the callback that creates BunnySpriteInstances.
     // If that happens, then createBunnySpriteInstance is responsible for calling setSelectedBunny.
     // See https://github.com/phetsims/natural-selection/issues/138
-    if ( phet.joist.sim.isSettingPhetioStateProperty.value && this.bunnyCollection.selectedBunnyProperty.value === bunny  ) {
+    if ( phet.joist.sim.isSettingPhetioStateProperty.value && this.bunnyCollection.selectedBunnyProperty.value === bunny ) {
       this.setSelectedBunny( bunny );
     }
   }
@@ -355,7 +355,7 @@ class OrganismSprites extends Sprites {
 
     // Performance: For a maximum population, this brute-force approach takes < 1ms on a 2019 MacBook Pro.
     let selectedBunnyIndex = -1;
-    for ( let i = 0; i < this.spriteInstances.length && selectedBunnyIndex ===  -1; i++ ) {
+    for ( let i = 0; i < this.spriteInstances.length && selectedBunnyIndex === -1; i++ ) {
       const spriteInstance = this.spriteInstances[ i ];
       if ( spriteInstance instanceof BunnySpriteInstance && spriteInstance.organism === bunny ) {
         selectedBunnyIndex = i;

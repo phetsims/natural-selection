@@ -193,7 +193,7 @@ class WolfCollection {
    */
   eatBunnies( timeInGenerations ) {
     assert && assert( this.enabledProperty.value, 'Wolves are not enabled' );
-    assert && assert( NaturalSelectionUtils.isNonNegative( timeInGenerations ), `invalid timeInGenerations: ${timeInGenerations}`);
+    assert && assert( NaturalSelectionUtils.isNonNegative( timeInGenerations ), `invalid timeInGenerations: ${timeInGenerations}` );
 
     // Get the bunnies that are candidates for selection by environmental factors, in random order.
     const bunnies = this.bunnyCollection.getSelectionCandidates();

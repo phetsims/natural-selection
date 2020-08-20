@@ -92,14 +92,14 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
     // A row for each gene type
     const furRow = new Row( genePool.furGene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
-        tandem: options.tandem.createTandem( 'furRow' )
-      } );
+      tandem: options.tandem.createTandem( 'furRow' )
+    } );
     const earsRow = new Row( genePool.earsGene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
-        tandem: options.tandem.createTandem( 'earsRow' )
-      } );
+      tandem: options.tandem.createTandem( 'earsRow' )
+    } );
     const teethRow = new Row( genePool.teethGene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
-        tandem: options.tandem.createTandem( 'teethRow' )
-      } );
+      tandem: options.tandem.createTandem( 'teethRow' )
+    } );
 
     const rows = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: [ furRow, earsRow, teethRow ]

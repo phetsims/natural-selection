@@ -45,7 +45,7 @@ class ProportionsPanel extends NaturalSelectionPanel {
       tandem: options.tandem.createTandem( 'legendNode' )
     } );
 
-    const separator =  new HSeparator( options.fixedWidth - 2 * options.xMargin, {
+    const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin, {
       stroke: NaturalSelectionColors.SEPARATOR_STROKE,
       tandem: options.tandem.createTandem( 'separator' )
     } );
