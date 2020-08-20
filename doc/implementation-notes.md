@@ -79,7 +79,7 @@ It's possible to put this sim in a state where the population stabilizes, and th
 
 This section provides a quick overview of the model.
 
-The main model class is [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/NaturalSelectionModel.js). It manages how the sim is playing (play, pause, speed) and what mode the sim is in (see [SimulationMode](https://github.com/phetsims/natural-selection/blob/master/js/common/model/SimulationMode.js)). Everything else is delegated to other model elements. [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/NaturalSelectionModel.js) is used by both screens, with no differences. Genes and environmental factors that are not relevant in the _Intro_ screen are hidden by the view.
+The main model class is [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/NaturalSelectionModel.js). It manages how the sim is playing (play, pause, speed) and what mode the sim is in (see [SimulationMode](https://github.com/phetsims/natural-selection/blob/master/js/common/model/SimulationMode.js)). Other responsibilities are delegated to other model elements. [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/NaturalSelectionModel.js) is used by both screens, with no differences. Genes and environmental factors that are not relevant in the _Intro_ screen are hidden by the view.
 
 There are a few top-level model elements:
 
