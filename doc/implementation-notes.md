@@ -17,27 +17,27 @@ In addition to this document, you are encouraged to read:
 
 The domain terminology that you'll need to navigate the implementation is found in [model.md](https://github.com/phetsims/natural-selection/blob/master/doc/model.md). 
 
-Terms that are specific to the implementation:
+Additional terms used in the implementation:
 
 * An _**organism**_ is a living thing. It includes bunnies, wolves, and shrubs.
-* The _**environment**_ is the part of the UI where bunnies hop around. It can be switched between "equator" and "arctic".
-* The _**simulation mode**_ determines what UI components are available. See `SimulationMode`.
-* A _**sprite**_ is a high-performance way of drawing an organism, using the scenery `Sprites` API.
+* The _**environment**_ is the part of the UI where bunnies hop around. It can be switched between "equator" and "arctic", see [Environment](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Environment.js).
+* The _**simulation mode**_ determines what UI components are available. See [SimulationMode](https://github.com/phetsims/natural-selection/blob/master/js/common/model/SimulationMode.js).
+* A _**sprite**_ is a high-performance way of drawing an organism, using the scenery [Sprites](https://github.com/phetsims/scenery/blob/master/js/nodes/Sprites.js) API.
 * A _**plot**_ is a set of points connected by line segments, used in the Population graph.
 
 ## General Consideration
 
-This section describes how this simulation addresses implementation considerations that are typically encountered in PhET simulations.
+This section describes how this sim addresses implementation considerations that are typically encountered in PhET sims.
 
 **Model-View Transform**
 
 There are 3 different model-view transforms in this sim.
 
-_Environment_: The model uses a unitless 3D coordinate frame, where +x is to the left, +y is up, and +z is into the screen. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. `EnvironmentModelViewTransform` handles the transforms, and has very detailed documentation in the source code header. 
+* _Environment_: The model uses a unitless 3D coordinate frame, where +x is to the left, +y is up, and +z is into the screen. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. [EnvironmentModelViewTransform](https://github.com/phetsims/natural-selection/blob/master/js/common/model/EnvironmentModelViewTransform.js) handles the transforms, and has very detailed documentation in the source code header. 
 
-_Population graph_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. Because drawing plots needs to be lightweight and high-performance, `ModelViewTransform` is not used here. Model-to-view transform is handled by `PopulationPlotNode` (see `modelToViewX` and `modelToViewY`). View-to-model transform is unnecessary.
+* _Population graph_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. Because drawing plots needs to be lightweight and high-performance, `ModelViewTransform` is not used here. Model-to-view transform is handled by [PopulationPlotNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/population/PopulationPlotNode.js) (see `modelToViewX` and `modelToViewY`). View-to-model transform is unnecessary.
 
-_Data Probe_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. The data probe can only move horizontally, so the y-axis is irrelevant. But positon is a `Vector2` because it's required by DragListener. `ModelViewTransform` handles the transforms.
+* _Data Probe_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. The data probe can only move horizontally, so the y-axis is irrelevant. But position is a `Vector2` because it's required by DragListener. `ModelViewTransform` handles the transforms.
 
 **Query Parameters**
 
@@ -47,7 +47,7 @@ tuning model behavior. Sim-specific query parameters are documented in
 
 **Assertions**
 
-The sim makes heavy use of `assert` to verify pre/post assumptions and perform type checking. This sim performs type-checking for almost all function arguments via `assert`. If you are making modifications to this sim, do so with assertions enabled via the `ea` query parameter.
+The sim makes heavy use of `assert` and [AssertUtils](https://github.com/phetsims/phetcommon/blob/master/js/AssertUtils.js) to verify pre/post assumptions and perform type checking. This sim performs type-checking for almost all function arguments via `assert`. If you are making modifications to this sim, do so with assertions enabled via the `ea` query parameter.
 
 **Logging**
 
@@ -71,99 +71,103 @@ be disposed, and their `dispose` implementation looks like this:
   }
 ```
 
-When bunnies die, they can be immediately disposed. Their information is needed by the Pedigree graph. If we kept them forever, we'd run out of memory. `BunnyCollection.pruneDeadBunnies` handles pruning dead bunnies, disposing of them when they will no longer be needed by the Pedigree graph.
+When bunnies die, they cannot be immediately disposed. Their information is needed by the Pedigree graph. If we kept them forever, we'd run out of memory. [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.pruneDeadBunnies` handles pruning dead bunnies, disposing of them when they will no longer be needed by the Pedigree graph.
 
-It's possible to put this sim in a state where the population stabilizes, and the sim will run forever. The sim would continue to create data points for the Population graph, and would eventually crash the browser.  So the sim has a limit on the number of generations, see `maxGenerations` in `NaturalSelectionQueryParameters`. When this limit is reached, the sim stops, `MemoryLimitDialog` is displayed, and the student can review the final state of the sim. 
+It's possible to put this sim in a state where the population stabilizes, and the sim will run forever. The sim would continue to create data points for the Population graph, and would eventually crash the browser.  So the sim has a limit on the number of generations, see `maxGenerations` in [NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js). When this limit is reached, the sim stops, [MemoryLimitDialog](https://github.com/phetsims/natural-selection/blob/master/js/common/view/MemoryLimitDialog.js) is displayed, and the student can review the final state of the sim. 
+
+## Screens
+
+The sim has two screens, named _Intro_ and _Lab_.  The implementation of the model and view for these screens is identical. The view simply hides the genes and environmental factors that are not desired for a screen.  The _Intro_ screen has the fur gene, wolves, and limited food.  The _Lab_ screen has the full set of genes and environmental factors.
 
 ## Model
 
 This section provides a quick overview of the model.
 
-The main model class is `NaturalSelectionModel`. It manages how the sim is playing (play, pause, speed) and what mode the sim is in (see `SimulationMode`). Everything else is delegated to other model elements. `NaturalSelectionModel` is used by both screens, with no differences. Genes and environmental factors that are not relevant in the _Intro_ screen are hidden by the view.
+The main model class is [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/NaturalSelectionModel.js). It manages how the sim is playing (play, pause, speed) and what mode the sim is in (see [SimulationMode](https://github.com/phetsims/natural-selection/blob/master/js/common/model/SimulationMode.js)). Other responsibilities are delegated to other model elements.
 
 There are a few top-level model elements:
 
-* `GenerationClock` is responsible for the elapsed time in generations
-* `GenePool` is the collection of genes that are present in the bunny population 
-* There is one instance of `Gene` for fur, teeth, and ears.  They live in the `GenePool` and they globally determine dominance relationship, and whether a mutation is going to occur. 
+* [GenerationClock](https://github.com/phetsims/natural-selection/blob/master/js/common/model/GenerationClock.js) is responsible for the elapsed time in generations
+* [GenePool](https://github.com/phetsims/natural-selection/blob/master/js/common/model/GenePool.js) is the collection of genes that are present in the bunny population 
+* There is one instance of [Gene](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Gene.js) for fur, teeth, and ears.  They live in the [GenePool](https://github.com/phetsims/natural-selection/blob/master/js/common/model/GenePool.js) and they globally determine dominance relationship, and whether a mutation is going to occur. 
 
-Living things are instances of `Organism`. There are 3 subclasses of Organism:
+Living things are instances of [Organism](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Organism.js). There are 3 subclasses of Organism:
 
-* `Bunny` - created dynamically, moves around, has reference to parents, has a `Genotype` and a `Phenotype`
-* `Wolf` - created dynamically, moves around
-* `Shrub` - created statically at startup, remains stationary
+* [Bunny](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Bunny.js) - created dynamically, moves around, has reference to parents, has a [Genotype](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Genotype.js) and a [Phenotype](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Phenotype.js)
+* [Wolf](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Wolf.js) - created dynamically, moves around
+* [Shrub](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Shrub.js) - created statically at startup, remains stationary
 
 Organisms are organized into collections:
 
-* `BunnyCollection` - `Bunny` instances, responsible for reproduction and death due to old age
-* `WolfCollection` - `Wolf` instances, responsible for eating bunnies
-* `Food` - `Shrub` instances, responsible for starving bunnies
+* [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js) - [Bunny](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Bunny.js) instances, responsible for reproduction and death due to old age
+* [WolfCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/WolfCollection.js) - [Wolf](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Wolf.js) instances, responsible for eating bunnies
+* [Food](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Food.js) - [Shrub](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Shrub.js) instances, responsible for starving bunnies
 
 There is a sub-model for each graph:
 
-* `PopulationGraph`
-* `ProportionsGraph`
-* `PedigreeGraph`
+* [PopulationModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/PopulationModel.js)
+* [ProportionsModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/ProportionsModel.js)
+* [PedigreeModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/PedigreeModel.js)
 
-Here are the entry points to some of the major features of the model:
+Here are pointers to some of the major features of the model:
 
-* Main animation loop: `NaturalSelectionModel.step`
-* Bunny motion: `Bunny.move`
-* Bunny appearance: `Phenotype`, `GenePair.getVisibleAllele`
-* Wolf motion: `Wolf.move`
-* Stuff that happens at 12:00: see `clockGenerationProperty` listener in `NaturalSelectionModel`
-* Death due to old age: `BunnyCollection.ageBunnies`
-* Reproduction: `BunnyCollection.mateBunnies` and `PunnettSquare`
-* Wolves: `WolfCollection.eatBunnies`
-* Tough Food: `Food.applyToughFood`
-* Limited Food: `Food.applyLimitedFood`
-* Bunnies have taken over the world: `BunnyCollection.bunniesHaveTakenOverTheWorldEmitter`
-* All of the bunnies have died: `BunnyCollection.allBunniesHaveDiedEmitter`
-* Memory management of dead bunnies: `BunnyCollection.pruneBunnies`
-* Population graph data points: `see ObservableArray instances in PopulationModel`
-* Proportions graph start/end counts: `ProportionsCounts`
-* Pedigree graph: shows a tree for `BunnyCollection.selectedBunnyProperty`
-* Genotype abbreviation: `Genotype.abbreviationProperty`, `GenePair.getGenotypeAbbreviation`
-* Initializing the bunny population via query parameters: `parseInitialPopulation.js`, `NaturalSelectionQueryParameters`, 
+* Main animation loop: [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/NaturalSelectionModel.js)`.step`
+* Bunny motion: [Bunny](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Bunny.js)`.move`
+* Bunny appearance: [Phenotype](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Phenotype.js), [GenePair](https://github.com/phetsims/natural-selection/blob/master/js/common/model/GenePair.js)`.getVisibleAllele`
+* Wolf motion: [Wolf](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Wolf.js)`.move`
+* Stuff that happens at 12:00: see `clockGenerationProperty` listener in [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/NaturalSelectionModel.js)
+* Death due to old age: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.ageBunnies`
+* Reproduction: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.mateBunnies` and [PunnettSquare](https://github.com/phetsims/natural-selection/blob/master/js/common/model/PunnettSquare.js)
+* Wolves: [WolfCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/WolfCollection.js)`.eatBunnies`
+* Tough Food: [Food](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Food.js)`.applyToughFood`
+* Limited Food: [Food](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Food.js)`.applyLimitedFood`
+* Bunnies have taken over the world: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.bunniesHaveTakenOverTheWorldEmitter`
+* All of the bunnies have died: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.allBunniesHaveDiedEmitter`
+* Memory management of dead bunnies: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.pruneBunnies`
+* Population graph data points: see `ObservableArray` instances in [PopulationModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/PopulationModel.js)
+* Proportions graph start/end counts: [ProportionsCounts](https://github.com/phetsims/natural-selection/blob/master/js/common/model/ProportionCounts.js)
+* Pedigree graph: shows a tree for [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.selectedBunnyProperty`
+* Genotype abbreviation: [Genotype](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Genotype.js)`.abbreviationProperty`, `GenePair.getGenotypeAbbreviation`
+* Initializing the bunny population via query parameters: [parseInitialPopulation.js](https://github.com/phetsims/natural-selection/blob/master/js/common/model/parseInitialPopulation.js), [NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js)
 
 ## View
 
 This section provides a quick overview of the view.
 
-The main view class is `NaturalSelectionScreenView`. It is used by both screens, and simply hides genes and environmental factors that are not relevant for the _Intro_ (see options in `IntroScreenView`).
+The main view class is [NaturalSelectionScreenView](https://github.com/phetsims/natural-selection/blob/master/js/common/view/NaturalSelectionScreenView.js). It is used by both screens, and simply hides genes and environmental factors that are not relevant for the _Intro_ screen (see options in [IntroScreenView](https://github.com/phetsims/natural-selection/blob/master/js/intro/view/IntroScreenView.js)).
 
-`GenerationClock` displays the generation clock. It appears at the top-center of the UI. When environmental factors are enabled, the clock reveals color-coded "slices" that show when those environmental factors will be applied.
+[GenerationClockNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/GenerationClockNode.js) displays the generation clock. It appears at the top-center of the UI. When environmental factors are enabled, the clock reveals color-coded "slices" that show when those environmental factors will be applied.
 
-`natural-selection/js/common/view/` organizes independent parts of the view into 4 subdirectories:
+[natural-selection/js/common/view/](https://github.com/phetsims/natural-selection/tree/master/js/common/view) organizes independent parts of the view into 4 subdirectories:
 
-* `environment/` - specific to the part of the screen where the bunnies hop around, main class `EnvironmentNode`
-* `population/` - specific to the Population graph, main class `PopulatioNode`
-* `proportions/` - specific to the Proportions graph, main class `ProportionsNode`
-* `pedigree/` - specific to the Pedigree graph, main class `PedigreeNode`
+* [environment/](https://github.com/phetsims/natural-selection/tree/master/js/common/view/environment) - specific to the part of the screen where the bunnies hop around, main class [EnvironmentNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/environment/EnvironmentNode.js)
+* [pedigree/](https://github.com/phetsims/natural-selection/tree/master/js/common/view/pedigree) - specific to the Pedigree graph, main class [PedigreeNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/pedigree/PedigreeNode.js)
+* [population/](https://github.com/phetsims/natural-selection/tree/master/js/common/view/population) - specific to the Population graph, main class [PopulatioNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/population/PopulationNode.js)
+* [proportions/](https://github.com/phetsims/natural-selection/tree/master/js/common/view/proportions) - specific to the Proportions graph, main class [ProportionsNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/proportions/ProportionsNode.js)
 
-Here are the entry points to some of the major features of the view:
+Here are pointers to some of the major features of the view:
 
-* Draw the bunnies, wolves, and shrubs: `OrganismSprites`
-* Add a bunny to the view: `OrganismSprites.createBunnySpriteInstance`
-* Add a wolf to the view: `OrganismSprites.createWolfSpriteInstance`
-* Map a bunny to an image: `BunnyImageMap`
-* Plot data on the Population graph: `PopulationPlotNode`
-* Draw bars in the Proportions graph: `ProportionsBarNode`
-* Pedigree tree structure: `PedigreeBranchNode`
-* Manage the "Mutation Coming" popups: `MutationAlertsNode`
-* Sim reaches its memory limit: see `new MemoryLimitDialog` in `NaturalSelectionScreenView`
+* Draw the bunnies, wolves, and shrubs: [OrganismSprites](https://github.com/phetsims/natural-selection/blob/master/js/common/view/environment/OrganismSprites.js)
+* Add a bunny to the view: [OrganismSprites](https://github.com/phetsims/natural-selection/blob/master/js/common/view/environment/OrganismSprites.js)`.createBunnySpriteInstance`
+* Add a wolf to the view: [OrganismSprites](https://github.com/phetsims/natural-selection/blob/master/js/common/view/environment/OrganismSprites.js)`.createWolfSpriteInstance`
+* Map a bunny to an image: [BunnyImageMap](https://github.com/phetsims/natural-selection/blob/master/js/common/view/BunnyImageMap.js)
+* Plot data on the Population graph: [PopulationPlotNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/population/PopulationPlotNode.js)
+* Draw bars in the Proportions graph: [ProportionsBarNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/proportions/ProportionsBarNode.js)
+* Pedigree tree structure: [PedigreeBranchNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/pedigree/PedigreeBranchNode.js)
+* Manage the "Mutation Coming" popups: [MutationAlertsNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/MutationAlertsNode.js)
+* Sim reaches its memory limit: see `new MemoryLimitDialog` in [NaturalSelectionScreenView](https://github.com/phetsims/natural-selection/blob/master/js/common/view/NaturalSelectionScreenView.js)
 
 ## PhET-iO
 
 This sections describes patterns and features that are specific to PhET-iO instrumentation. PhET-iO is a PhET product that is described at https://phet-io.colorado.edu. If you're not familiar with PhET-iO, you can skip this section.
 
-**PhetioGroup is encapsulated**: `PhetioGroup` manages dynamic elements. The dynamic elements in this sim are instances of `Bunny` and `Wolf`. Instances of `Bunny` are created by `BunnyGroup`, which is private to `BunnyCollection`.  Instances of `Wolf` are created by `WolfGroup`, which is private to `WolfCollection`.  This pattern of using a "Collection" wrapper hides the details of PhetioGroup from all other parts of the simulation.
+**PhetioGroup is encapsulated**: [PhetioGroup](https://github.com/phetsims/tandem/blob/master/js/PhetioGroup.js) manages dynamic elements. The dynamic elements in this sim are instances of [Bunny](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Bunny.js) and [Wolf]((https://github.com/phetsims/natural-selection/blob/master/js/common/model/Wolf.js)). Instances of [Bunny](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Bunny.js) are created by [BunnyGroup](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyGroup.js), which is private to [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js).  Instances of [Wolf](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Wolf.js) are created by [WolfGroup](https://github.com/phetsims/natural-selection/blob/master/js/common/model/WolfGroup.js), which is private to [WolfCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/WolfCollection.js).  This pattern of using a "Collection" wrapper hides the details of PhetioGroup from all other parts of the sim.
 
-**IO Types delegate to Core Types**: IO Types handle serialization of elements that are instances of Core Types. For example, `BunnyIO` is the IO Type that serializes the `Bunny` Core Type.  Throughout this simulation, each IO Type delegates serialization to its associated Core Type.  This ensures that the API of the Core Type is not violated by acccessing private members.
+**IO Types delegate to Core Types**: IO Types handle serialization of elements that are instances of Core Types. For example, [BunnyIO](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyIO.js) is the IO Type that serializes the [Bunny](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Bunny.js) Core Type.  Throughout this sim, each IO Type delegates serialization to its associated Core Type.  This ensures that the API of the Core Type is not violated by acccessing private members.
 
 **Uninstrumented objects**: Instances that are intentionally not instrumented are instantiated with `tandem: Tandem.OPT_OUT`.
 
-**Configure the Genes for a screen**: `GeneVisibilityManager` contains a `{{gene}}VisibleProperty` for each Gene, which controls the visiblity of all UI components for that gene. Use these Properties via Studio to quickly configure which genes appear in the UI. Search for "view.genes" in Studio.
+**Configure the Genes for a screen**: [GeneVisibilityManager](https://github.com/phetsims/natural-selection/blob/master/js/common/view/GenesVisibilityManager.js) has a `{{gene}}VisibleProperty` for each Gene, which controls the visiblity of all UI components for that gene. Use these Properties via Studio to quickly configure which genes appear in the UI. Search for "view.genes" in Studio.
 
 **Configure the Environmental Factors for a screen**: Configuring which environmental factors are available for a screen is as easy as deciding which checkboxes to make visible.  Search for `wolvesCheckbox`, `toughFoodCheckbox`, and `limitedFoodCheckbox` in Studio, and set their visibleProperty as desired.
 
