@@ -340,8 +340,7 @@ class Column extends VBox {
     } );
     const checkbox = new Checkbox( labelNode, geneVisibleProperty,
       merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-        tandem: options.tandem.createTandem( 'checkbox' ),
-        phetioReadOnly: true
+        tandem: options.tandem.createTandem( 'checkbox' )
       } ) );
 
     const startBarNode = new ProportionsBarNode( gene.color, startNormalCount, startMutantCount, valuesVisibleProperty, {
