@@ -132,6 +132,7 @@ class GeneLegendNode extends VBox {
    */
   dispose() {
     assert && assert( false, 'GeneLegendNode does not support dispose' );
+    super.dispose();
   }
 }
 
@@ -185,6 +186,7 @@ class AlleleLegendNode extends HBox {
    */
   dispose() {
     assert && assert( false, 'AlleleLegendNode does not support dispose' );
+    super.dispose();
   }
 }
 

@@ -267,6 +267,7 @@ class RowLabel extends VBox {
    */
   dispose() {
     assert && assert( false, 'RowLabel does not support dispose' );
+    super.dispose();
   }
 
   /**
@@ -387,6 +388,7 @@ class Column extends VBox {
    */
   dispose() {
     assert && assert( false, 'Column does not support dispose' );
+    super.dispose();
   }
 
   /**
