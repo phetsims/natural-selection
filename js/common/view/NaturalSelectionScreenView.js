@@ -7,13 +7,11 @@
  */
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import Utils from '../../../../dot/js/Utils.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -36,6 +34,7 @@ import MemoryLimitDialog from './MemoryLimitDialog.js';
 import MutationAlertsNode from './MutationAlertsNode.js';
 import NaturalSelectionTimeControlNode from './NaturalSelectionTimeControlNode.js';
 import PedigreeNode from './pedigree/PedigreeNode.js';
+import PerformanceTimesNode from './PerformanceTimesNode.js';
 import PlayButtonGroup from './PlayButtonGroup.js';
 import PopulationNode from './population/PopulationNode.js';
 import ProportionsNode from './proportions/ProportionsNode.js';
@@ -192,15 +191,24 @@ class NaturalSelectionScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
+    // The time that it took to execute the 'Start Over' button callback, in ms
+    // For performance profiling, see https://github.com/phetsims/natural-selection/issues/140
+    const timeToStartOverProperty = new NumberProperty( 0, {
+      tandem: Tandem.OPT_OUT
+    } );
+
     // The different buttons that can be used to make the simulation begin playing.
     const playButtonGroup = new PlayButtonGroup(
       model.simulationModeProperty,
       model.bunnyCollection.liveBunnies.lengthProperty, {
+
+        // Callback for the 'Add a Mate' button
         addAMate: () => model.addAMate(),
-        //TODO https://github.com/phetsims/natural-selection/issues/140 remove NaturalSelectionUtils.time
-        //startOver: () => model.startOver(),
+
+        // Callback for the 'Start Over' button, with performance profiling,
+        // see https://github.com/phetsims/natural-selection/issues/140
         startOver: () => {
-          model.timeToStartOverProperty.value = NaturalSelectionUtils.time( () => model.startOver() );
+          timeToStartOverProperty.value = NaturalSelectionUtils.time( () => model.startOver() );
         },
         centerX: environmentNode.centerX,
         bottom: environmentNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
@@ -317,34 +325,14 @@ class NaturalSelectionScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'genes' )
     } );
 
-    //TODO https://github.com/phetsims/natural-selection/issues/60 delete this block
+    // Show performance profiling in the upper-left corner of the environment, and in the console.
+    // See https://github.com/phetsims/natural-selection/issues/60 and https://github.com/phetsims/natural-selection/issues/140
     if ( NaturalSelectionQueryParameters.showTimes ) {
-
-      const timeToMateNode = new Text( '', {
-        font: new PhetFont( 20 ),
+      this.addChild( new PerformanceTimesNode( model.timeToMateProperty, timeToStartOverProperty, {
         left: environmentNode.left + 5,
-        top: environmentNode.top + 5
-      } );
-      this.addChild( timeToMateNode );
-
-      model.timeToMateProperty.link( timeToMate => {
-        const t = Utils.roundSymmetric( timeToMate );
-        timeToMateNode.text = `time to mate = ${t} ms`;
-        console.log( timeToMateNode.text );
-      } );
-
-      const timeToStartOverNode = new Text( '', {
-        font: new PhetFont( 20 ),
-        left: environmentNode.left + 5,
-        top: timeToMateNode.bottom + 5
-      } );
-      this.addChild( timeToStartOverNode );
-
-      model.timeToStartOverProperty.link( timeToStartOver => {
-        const t = Utils.roundSymmetric( timeToStartOver );
-        timeToStartOverNode.text = `time to Start Over = ${t} ms`;
-        console.log( timeToStartOverNode.text );
-      } );
+        top: environmentNode.top + 5,
+        tandem: Tandem.OPT_OUT
+      } ) );
     }
   }
 

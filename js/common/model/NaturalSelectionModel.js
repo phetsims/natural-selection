@@ -170,11 +170,11 @@ class NaturalSelectionModel {
       }
     } );
 
-    //TODO https://github.com/phetsims/natural-selection/issues/60 delete this Property
-    this.timeToMateProperty = new NumberProperty( 0 );
-
-    //TODO https://github.com/phetsims/natural-selection/issues/140 delete this Property
-    this.timeToStartOverProperty = new NumberProperty( 0 );
+    // @public (read-only) The time that it took to execute bunnyCollection.mateBunnies, in ms
+    // For performance profiling, see https://github.com/phetsims/natural-selection/issues/60
+    this.timeToMateProperty = new NumberProperty( 0, {
+      tandem: Tandem.OPT_OUT
+    } );
 
     // All of the stuff that happens at 12:00 on the generation clock.
     // unlink is not necessary.
@@ -200,9 +200,7 @@ class NaturalSelectionModel {
 
           this.bunnyCollection.pruneDeadBunnies( clockGeneration );
 
-          // Mate bunnies
-          //TODO https://github.com/phetsims/natural-selection/issues/60 delete NaturalSelectionUtils.time
-          // this.bunnyCollection.mateBunnies( clockGeneration );
+          // Mate bunnies, with performance profiling, see see https://github.com/phetsims/natural-selection/issues/60
           this.timeToMateProperty.value = NaturalSelectionUtils.time( () => this.bunnyCollection.mateBunnies( clockGeneration ) );
 
           // After bunnies are aged and mated, record counts for graphs.

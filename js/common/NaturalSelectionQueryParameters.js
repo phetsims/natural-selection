@@ -216,9 +216,9 @@ const SCHEMA = {
     type: 'flag'
   },
 
-  // Displays time profiling in the upper-left corner of the screen.
-  //TODO https://github.com/phetsims/natural-selection/issues/60 delete this
-  //TODO https://github.com/phetsims/natural-selection/issues/140 delete this
+  // Displays time profiling in the upper-left corner of the screen. This was used for performance profiling
+  // and may be useful in the future. See https://github.com/phetsims/natural-selection/issues/60 and
+  // https://github.com/phetsims/natural-selection/issues/140.
   showTimes: {
     type: 'flag'
   },

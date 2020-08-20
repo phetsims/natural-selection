@@ -112,6 +112,7 @@ class PlayButtonGroup extends Node {
    */
   dispose() {
     assert && assert( false, 'PlayButtonGroup does not support dispose' );
+    super.dispose();
   }
 }
 
