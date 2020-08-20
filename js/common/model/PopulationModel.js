@@ -97,12 +97,12 @@ class PopulationModel extends PhetioObject {
     this.whiteFurPoints = new ObservableArray( {
       tandem: dataPointsTandem.createTandem( 'whiteFurPoints' ),
       phetioType: ObservableArrayIO( Vector2IO ),
-      phetioDocumentation: 'Population data points for bunnies with brown fur'
+      phetioDocumentation: 'Population data points for bunnies with white fur'
     } );
     this.brownFurPoints = new ObservableArray( {
       tandem: dataPointsTandem.createTandem( 'brownFurPoints' ),
       phetioType: ObservableArrayIO( Vector2IO ),
-      phetioDocumentation: 'Population data points for bunnies with white fur'
+      phetioDocumentation: 'Population data points for bunnies with brown fur'
     } );
     this.straightEarsPoints = new ObservableArray( {
       tandem: dataPointsTandem.createTandem( 'straightEarsPoints' ),
