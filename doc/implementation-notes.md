@@ -17,7 +17,7 @@ In addition to this document, you are encouraged to read:
 
 The domain terminology that you'll need to navigate the implementation is found in [model.md](https://github.com/phetsims/natural-selection/blob/master/doc/model.md). 
 
-Terms that are specific to the implementation:
+Additional terms used in the implementation:
 
 * An _**organism**_ is a living thing. It includes bunnies, wolves, and shrubs.
 * The _**environment**_ is the part of the UI where bunnies hop around. It can be switched between "equator" and "arctic", see [Environment](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Environment.js).
