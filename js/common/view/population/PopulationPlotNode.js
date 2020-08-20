@@ -6,15 +6,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ObservableArray from '../../../../../axon/js/ObservableArray.js';
 import Property from '../../../../../axon/js/Property.js';
 import Shape from '../../../../../kite/js/Shape.js';
 import merge from '../../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
+import required from '../../../../../phet-core/js/required.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../../scenery/js/nodes/Path.js';
 import naturalSelection from '../../../naturalSelection.js';
-import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
 // constants
@@ -25,61 +23,76 @@ const MUTANT_LINE_DASH_SUM = _.sum( MUTANT_LINE_DASH );
 class PopulationPlotNode extends Node {
 
   /**
-   * @param {PopulationModel} populationModel
-   * @param {ObservableArray.<Vector2>} points - data points, in model coordinates (x=Generation, y=Population)
-   * @param {Property.<boolean>} plotVisibleProperty - whether this plot is visible
-   * @param {Object} [options]
+   * @param {Object} config - NOT propagated to super
    */
-  constructor( populationModel, points, plotVisibleProperty, options ) {
-    assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
-    assert && assert( points instanceof ObservableArray, 'invalid points' );
-    assert && AssertUtils.assertPropertyOf( plotVisibleProperty, 'boolean' );
+  constructor( config ) {
 
-    options = merge( {
-      gridWidth: 100, // dimensions of the grid (sans tick marks) in view coordinates
-      gridHeight: 100,
-      color: 'black', // {Color|string} color used to render the plot
-      isMutant: false // {boolean} is this plot for a mutant allele?
-    }, options );
+    config = merge( {
+
+      // {ObservableArray.<Vector2>} data points, in model coordinates (x=Generation, y=Population)
+      points: required( config.points ),
+
+      // {Property.<boolean>} whether this plot is visible
+      plotVisibleProperty: required( config.plotVisibleProperty ),
+
+      // {number} length of the x axis, in generations
+      xAxisLength: required( config.xAxisLength ),
+
+      // {Property.<Range>} ranges for the axes
+      xRangeProperty: required( config.xRangeProperty ),
+      yRangeProperty: required( config.yRangeProperty ),
+
+      // {Property.<number>} time on the generation clock, in generations
+      timeInGenerationsProperty: required( config.timeInGenerationsProperty ),
+
+      // dimensions of the grid (sans tick marks) in view coordinates
+      gridWidth: required( config.gridWidth ),
+      gridHeight: required( config.gridHeight ),
+
+      // {Color|string} color used to render the plot
+      color: required( config.color ),
+
+      // {boolean} is this plot for a mutant allele?
+      isMutant: false
+    }, config );
 
     // Points will be drawn as circles
     const pointsPath = new Path( new Shape(), {
-      fill: options.color
+      fill: config.color
     } );
 
     // Points will be connected using line segments that create a step plot
     const stepPath = new Path( new Shape(), {
-      stroke: options.color,
+      stroke: config.color,
       lineWidth: NaturalSelectionConstants.POPULATION_LINE_WIDTH,
-      lineDash: options.isMutant ? MUTANT_LINE_DASH : NORMAL_LINE_DASH
+      lineDash: config.isMutant ? MUTANT_LINE_DASH : NORMAL_LINE_DASH
     } );
 
-    assert && assert( !options.children, 'PopulationPlotNode sets children' );
-    options.children = [ stepPath, pointsPath ];
-
-    super( options );
+    super( {
+      children:  [ stepPath, pointsPath ]
+    } );
 
     // @private
-    this.points = points;
-    this.xAxisLength = populationModel.xAxisLength;
-    this.xRangeProperty = populationModel.xRangeProperty;
-    this.yRangeProperty = populationModel.yRangeProperty;
-    this.timeInGenerationsProperty = populationModel.timeInGenerationsProperty;
-    this.gridWidth = options.gridWidth;
-    this.gridHeight = options.gridHeight;
+    this.points = config.points;
+    this.xAxisLength = config.xAxisLength;
+    this.xRangeProperty = config.xRangeProperty;
+    this.yRangeProperty = config.yRangeProperty;
+    this.timeInGenerationsProperty = config.timeInGenerationsProperty;
+    this.gridWidth = config.gridWidth;
+    this.gridHeight = config.gridHeight;
     this.pointsPath = pointsPath;
     this.stepPath = stepPath;
     this.isDashed = _.sum( stepPath.lineDash ) > 0;
 
     // unlink not needed
-    plotVisibleProperty.link( plotVisible => {
+    config.plotVisibleProperty.link( plotVisible => {
       this.visible = plotVisible;
     } );
 
     // Points are only added, and are not deleted until they are all deleted. So this is optimized to avoid doing
     // work as each individual point is deleted.
     // unlink not needed
-    points.lengthProperty.link( ( length, previousLength ) => {
+    this.points.lengthProperty.link( ( length, previousLength ) => {
       if ( length > previousLength || length === 0 ) {
         this.updatePlot();
       }

@@ -45,56 +45,60 @@ class PopulationPlotsNode extends Node {
       )
     );
 
-    // Options common to all PopulationPlotNode instances
-    const plotNodeOptions = {
+    // Config common to all PopulationPlotNode instances
+    const plotNodeConfig = {
       gridWidth: options.gridWidth,
-      gridHeight: options.gridHeight
+      gridHeight: options.gridHeight,
+      xAxisLength: populationModel.xAxisLength,
+      xRangeProperty: populationModel.xRangeProperty,
+      yRangeProperty: populationModel.yRangeProperty,
+      timeInGenerationsProperty: populationModel.timeInGenerationsProperty
     };
 
-    const totalPlotNode = new PopulationPlotNode( populationModel,
-      populationModel.totalPoints, populationModel.totalVisibleProperty,
-      merge( {
-        color: NaturalSelectionColors.POPULATION_TOTAL_COUNT
-      }, plotNodeOptions ) );
+    const totalPlotNode = new PopulationPlotNode( merge( {}, plotNodeConfig, {
+      points: populationModel.totalPoints,
+      plotVisibleProperty: populationModel.totalVisibleProperty,
+      color: NaturalSelectionColors.POPULATION_TOTAL_COUNT
+    } ) );
 
-    const whiteFurPlotNode = new PopulationPlotNode( populationModel,
-      populationModel.whiteFurPoints, populationModel.whiteFurVisibleProperty,
-      merge( {
-        color: NaturalSelectionColors.FUR
-      }, plotNodeOptions ) );
+    const whiteFurPlotNode = new PopulationPlotNode( merge( {}, plotNodeConfig, {
+      points: populationModel.whiteFurPoints,
+      plotVisibleProperty: populationModel.whiteFurVisibleProperty,
+      color: NaturalSelectionColors.FUR
+    } ) );
 
-    const brownFurPlotNode = new PopulationPlotNode( populationModel,
-      populationModel.brownFurPoints, populationModel.brownFurVisibleProperty,
-      merge( {
-        color: NaturalSelectionColors.FUR,
-        isMutant: true
-      }, plotNodeOptions ) );
+    const brownFurPlotNode = new PopulationPlotNode( merge( {}, plotNodeConfig, {
+      points: populationModel.brownFurPoints,
+      plotVisibleProperty: populationModel.brownFurVisibleProperty,
+      color: NaturalSelectionColors.FUR,
+      isMutant: true
+    } ) );
 
-    const straightEarsPlotNode = new PopulationPlotNode( populationModel,
-      populationModel.straightEarsPoints, populationModel.straightEarsVisibleProperty,
-      merge( {
-        color: NaturalSelectionColors.EARS
-      }, plotNodeOptions ) );
+    const straightEarsPlotNode = new PopulationPlotNode( merge( {}, plotNodeConfig, {
+      points: populationModel.straightEarsPoints,
+      plotVisibleProperty: populationModel.straightEarsVisibleProperty,
+      color: NaturalSelectionColors.EARS
+    } ) );
 
-    const floppyEarsPlotNode = new PopulationPlotNode( populationModel,
-      populationModel.floppyEarsPoints, populationModel.floppyEarsVisibleProperty,
-      merge( {
-        color: NaturalSelectionColors.EARS,
-        isMutant: true
-      }, plotNodeOptions ) );
+    const floppyEarsPlotNode = new PopulationPlotNode( merge( {}, plotNodeConfig, {
+      points: populationModel.floppyEarsPoints,
+      plotVisibleProperty: populationModel.floppyEarsVisibleProperty,
+      color: NaturalSelectionColors.EARS,
+      isMutant: true
+    } ) );
 
-    const shortTeethPlotNode = new PopulationPlotNode( populationModel,
-      populationModel.shortTeethPoints, populationModel.shortTeethVisibleProperty,
-      merge( {
-        color: NaturalSelectionColors.TEETH
-      }, plotNodeOptions ) );
+    const shortTeethPlotNode = new PopulationPlotNode( merge( {}, plotNodeConfig, {
+      points: populationModel.shortTeethPoints,
+      plotVisibleProperty: populationModel.shortTeethVisibleProperty,
+      color: NaturalSelectionColors.TEETH
+    } ) );
 
-    const longTeethProbeNode = new PopulationPlotNode( populationModel,
-      populationModel.longTeethPoints, populationModel.longTeethVisibleProperty,
-      merge( {
-        color: NaturalSelectionColors.TEETH,
-        isMutant: true
-      }, plotNodeOptions ) );
+    const longTeethProbeNode = new PopulationPlotNode( merge( {}, plotNodeConfig, {
+      points: populationModel.longTeethPoints,
+      plotVisibleProperty: populationModel.longTeethVisibleProperty,
+      color: NaturalSelectionColors.TEETH,
+      isMutant: true
+    } ) );
 
     // Front-to-back rendering order should match top-to-bottom order of checkboxes in PopulationPanel
     assert && assert( !options.children, 'PopulationPlotsNode sets children' );
