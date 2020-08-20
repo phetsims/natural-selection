@@ -76,7 +76,7 @@ class DataProbeNode extends Node {
 
     // Transform for data probe offset from the top-left of the grid
     const offsetTransform =
-      ModelViewTransform2.createOffsetScaleMapping( options.offset, options.gridWidth / populationModel.xWidth );
+      ModelViewTransform2.createOffsetScaleMapping( options.offset, options.gridWidth / populationModel.xAxisLength );
 
     // Which side of the bar the displays are on: true = right, false = left
     let displaysOnRight = true;
@@ -133,7 +133,7 @@ class DataProbeNode extends Node {
     this.addInputListener( new DragListener( {
       positionProperty: dataProbe.offsetProperty,
       transform: offsetTransform,
-      dragBoundsProperty: new Property( new Bounds2( 0, 0, populationModel.xWidth, 0 ) ), // model coordinates
+      dragBoundsProperty: new Property( new Bounds2( 0, 0, populationModel.xAxisLength, 0 ) ), // model coordinates
       tandem: options.tandem.createTandem( 'dragListener' )
     } ) );
 

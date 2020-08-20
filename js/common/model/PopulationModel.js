@@ -67,8 +67,8 @@ class PopulationModel extends PhetioObject {
 
     options = merge( {
 
-      // {number} width of the graph, in generations
-      xWidth: 5,
+      // {number} length of the x axis, in generations
+      xAxisLength: 5,
 
       // phet-io
       tandem: Tandem.REQUIRED,
@@ -82,7 +82,7 @@ class PopulationModel extends PhetioObject {
     this.genePool = genePool;
     this.timeInGenerationsProperty = timeInGenerationsProperty;
     this.isPlayingProperty = isPlayingProperty;
-    this.xWidth = options.xWidth;
+    this.xAxisLength = options.xAxisLength;
 
     // For organizing all data points in Studio
     const dataPointsTandem = options.tandem.createTandem( 'dataPoints' );
@@ -145,7 +145,7 @@ class PopulationModel extends PhetioObject {
     this.xAxisTickSpacing = 1;
 
     // @public range of the x-axis, as time in generations
-    this.xRangeProperty = new Property( new Range( 0, options.xWidth ), {
+    this.xRangeProperty = new Property( new Range( 0, options.xAxisLength ), {
       isValidValue: xRange => ( xRange.min >= 0 ),
       tandem: options.tandem.createTandem( 'xRangeProperty' ),
       phetioType: PropertyIO( RangeIO ),
@@ -179,9 +179,9 @@ class PopulationModel extends PhetioObject {
 
     // Scrolls the x-axis so that 'now' is always the max x value. unlink is not necessary.
     timeInGenerationsProperty.link( timeInGeneration => {
-      const max = Math.max( options.xWidth, timeInGeneration );
+      const max = Math.max( options.xAxisLength, timeInGeneration );
       if ( this.xRangeProperty.value.max !== max ) {
-        const min = max - options.xWidth;
+        const min = max - options.xAxisLength;
         this.xRangeProperty.value = new Range( min, max );
       }
     } );

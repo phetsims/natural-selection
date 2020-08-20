@@ -61,7 +61,7 @@ class PopulationPlotNode extends Node {
 
     // @private
     this.points = points;
-    this.xWidth = populationModel.xWidth;
+    this.xAxisLength = populationModel.xAxisLength;
     this.xRangeProperty = populationModel.xRangeProperty;
     this.yRangeProperty = populationModel.yRangeProperty;
     this.timeInGenerationsProperty = populationModel.timeInGenerationsProperty;
@@ -89,7 +89,7 @@ class PopulationPlotNode extends Node {
     // After that, it's sufficient to update the plot when xRangeProperty changes.
     // unlink not needed.
     this.timeInGenerationsProperty.link( timeInGenerations => {
-      if ( timeInGenerations < this.xWidth ) {
+      if ( timeInGenerations < this.xAxisLength ) {
         this.updatePlot();
       }
     } );
