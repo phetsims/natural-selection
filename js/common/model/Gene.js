@@ -73,8 +73,8 @@ class Gene extends PhetioObject {
     // only the normal allele exists in the population, and the concepts of dominant and recessive are meaningless.
     this.dominantAlleleProperty = new Property( null, {
       validValues: [ null, normalAllele, mutantAllele ],
-      phetioType: PropertyIO( NullableIO( AlleleIO ) ),
       tandem: options.tandem.createTandem( 'dominantAlleleProperty' ),
+      phetioType: PropertyIO( NullableIO( AlleleIO ) ),
       phetioReadOnly: true
     } );
 
@@ -90,8 +90,8 @@ class Gene extends PhetioObject {
         return recessiveAllele;
       }, {
         validValues: [ null, normalAllele, mutantAllele ],
-        phetioType: DerivedPropertyIO( NullableIO( AlleleIO ) ),
-        tandem: options.tandem.createTandem( 'recessiveAlleleProperty' )
+        tandem: options.tandem.createTandem( 'recessiveAlleleProperty' ),
+        phetioType: DerivedPropertyIO( NullableIO( AlleleIO ) )
       } );
 
     // @public is a mutation coming in the next generation of bunnies?

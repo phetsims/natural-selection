@@ -62,8 +62,8 @@ class NaturalSelectionModel {
 
     // @public
     this.timeSpeedProperty = new EnumerationProperty( TimeSpeed, TimeSpeed.NORMAL, {
-      tandem: options.tandem.createTandem( 'timeSpeedProperty' ),
       validValues: [ TimeSpeed.NORMAL, TimeSpeed.FAST ],
+      tandem: options.tandem.createTandem( 'timeSpeedProperty' ),
       phetioDocumentation: 'controls the speed of the generation clock',
       phetioReadOnly: true
     } );
@@ -72,7 +72,7 @@ class NaturalSelectionModel {
     this.timeScaleProperty = new DerivedProperty(
       [ this.timeSpeedProperty ],
       timeSpeed => ( timeSpeed === TimeSpeed.NORMAL ) ? 1 : NaturalSelectionQueryParameters.fastForwardScale, {
-        // PhET-iO instrumentation is not necessary
+        tandem: Tandem.OPT_OUT
       } );
 
     // @public (read-only)

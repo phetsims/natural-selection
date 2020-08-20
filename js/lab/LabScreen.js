@@ -38,7 +38,9 @@ class LabScreen extends Screen {
 
     const options = {
       name: naturalSelectionStrings.screen.lab,
-      backgroundColorProperty: new Property( NaturalSelectionColors.SCREEN_VIEW_BACKGROUND ),
+      backgroundColorProperty: new Property( NaturalSelectionColors.SCREEN_VIEW_BACKGROUND, {
+        tandem: Tandem.OPT_OUT
+      } ),
       homeScreenIcon: createScreenIcon(),
 
       // phet-io

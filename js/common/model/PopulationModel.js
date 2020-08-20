@@ -167,8 +167,8 @@ class PopulationModel extends PhetioObject {
       [ this.yZoomLevelProperty ],
       yZoomLevel => new Range( Y_MINIMUM, Y_MAXIMUMS[ yZoomLevel ] ), {
         isValidValue: yRange => ( yRange.min >= 0 ),
-        phetioType: DerivedPropertyIO( RangeIO ),
         tandem: options.tandem.createTandem( 'yRangeProperty' ),
+        phetioType: DerivedPropertyIO( RangeIO ),
         phetioDocumentation: 'range of the y (Population) axis'
       } );
 

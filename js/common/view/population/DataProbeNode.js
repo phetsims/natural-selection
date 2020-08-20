@@ -239,8 +239,9 @@ function createNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, options
 
   // Adapter Property, for interfacing with NumberDisplay. dispose is not necessary.
   const countProperty = new DerivedProperty( [ bunnyCountsProperty ],
-    bunnyCounts => bunnyCounts ? bunnyCounts[ bunnyCountsFieldName ] : null
-  );
+    bunnyCounts => bunnyCounts ? bunnyCounts[ bunnyCountsFieldName ] : null, {
+      tandem: Tandem.OPT_OUT
+    } );
 
   const numberDisplay = new NumberDisplay( countProperty, NUMBER_DISPLAY_RANGE, options );
 

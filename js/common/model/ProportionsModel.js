@@ -76,17 +76,20 @@ class ProportionsModel extends PhetioObject {
     // @public whether the Proportions graph is displaying the current generation. dispose is not necessary.
     this.isDisplayingCurrentGenerationProperty = new DerivedProperty(
       [ this.proportionsGenerationProperty, clockGenerationProperty ],
-      ( proportionsGeneration, clockGeneration ) => ( proportionsGeneration === clockGeneration )
-    );
+      ( proportionsGeneration, clockGeneration ) => ( proportionsGeneration === clockGeneration ), {
+        tandem: Tandem.OPT_OUT
+      } );
 
     // @public counts for 'Start of Generation'
     this.startCountsProperty = new Property( BunnyCounts.withZero(), {
-      valueType: BunnyCounts
+      valueType: BunnyCounts,
+      tandem: Tandem.OPT_OUT //TODO should this be instrumented?
     } );
 
     // @public counts for 'End of Generation'
     this.endCountsProperty = new Property( BunnyCounts.withZero(), {
-      valueType: BunnyCounts
+      valueType: BunnyCounts,
+      tandem: Tandem.OPT_OUT //TODO should this be instrumented?
     } );
 
     // 'Start' counts for the current generation. This is null until the sim enters SimulationMode.ACTIVE.
@@ -104,7 +107,10 @@ class ProportionsModel extends PhetioObject {
     } );
 
     // @public Whether the model has data to display. dispose is not necessary.
-    this.hasDataProperty = new DerivedProperty( [ currentStartCountsProperty ], currentStartCounts => !!currentStartCounts );
+    this.hasDataProperty = new DerivedProperty(
+      [ currentStartCountsProperty ], currentStartCounts => !!currentStartCounts, {
+        tandem: Tandem.OPT_OUT
+      } );
 
     // Pause the sim when a generation other than the current generation is being viewed. unlink is not necessary.
     this.proportionsGenerationProperty.link( proportionsGeneration => {

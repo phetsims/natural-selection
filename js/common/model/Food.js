@@ -76,8 +76,9 @@ class Food {
     // @public whether either factor related to food is enabled. dispose is not necessary.
     this.enabledProperty = new DerivedProperty(
       [ this.isToughProperty, this.isLimitedProperty ],
-      ( isTough, isLimited ) => ( isTough || isLimited )
-    );
+      ( isTough, isLimited ) => ( isTough || isLimited ), {
+        tandem: Tandem.OPT_OUT
+      } );
 
     // @public emits when bunnies have died of starvation. dispose is not necessary.
     this.bunniesStarvedEmitter = new Emitter( {
