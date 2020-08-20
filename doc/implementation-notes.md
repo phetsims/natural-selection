@@ -105,7 +105,7 @@ There is a sub-model for each graph:
 * `ProportionsGraph`
 * `PedigreeGraph`
 
-Here are the entry points to some of the major features of the model:
+Here are pointers to some of the major features of the model:
 
 * Main animation loop: `NaturalSelectionModel.step`
 * Bunny motion: `Bunny.move`
@@ -141,7 +141,7 @@ The main view class is `NaturalSelectionScreenView`. It is used by both screens,
 * `proportions/` - specific to the Proportions graph, main class `ProportionsNode`
 * `pedigree/` - specific to the Pedigree graph, main class `PedigreeNode`
 
-Here are the entry points to some of the major features of the view:
+Here are pointers to some of the major features of the view:
 
 * Draw the bunnies, wolves, and shrubs: `OrganismSprites`
 * Add a bunny to the view: `OrganismSprites.createBunnySpriteInstance`
