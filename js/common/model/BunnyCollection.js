@@ -200,7 +200,7 @@ class BunnyCollection {
   }
 
   /**
-   * Creates a generation-zero Bunny, which has no parents since its the first generation to exist.
+   * Creates a generation-zero Bunny, which has no parents since it's the first generation to exist.
    * @returns {Bunny}
    * @param {Object} [options]
    * @public
@@ -233,7 +233,7 @@ class BunnyCollection {
   }
 
   /**
-   * Ages all live bunnies. Bunnies that reach their maximum age will die.
+   * Ages all live bunnies. Bunnies that reach the maximum age will die.
    * @public
    */
   ageBunnies() {
