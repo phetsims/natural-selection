@@ -95,15 +95,15 @@ Living things are instances of [Organism](https://github.com/phetsims/natural-se
 
 Organisms are organized into collections:
 
-* `BunnyCollection` - `Bunny` instances, responsible for reproduction and death due to old age
-* `WolfCollection` - `Wolf` instances, responsible for eating bunnies
-* `Food` - `Shrub` instances, responsible for starving bunnies
+* [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js) - [Bunny](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Bunny.js) instances, responsible for reproduction and death due to old age
+* [WolfCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/WolfCollection.js) - [Wolf](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Wolf.js) instances, responsible for eating bunnies
+* [Food](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Food.js) - [Shrub](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Shrub.js) instances, responsible for starving bunnies
 
 There is a sub-model for each graph:
 
-* `PopulationGraph`
-* `ProportionsGraph`
-* `PedigreeGraph`
+* [PopulationModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/PopulationModel.js)
+* [ProportionsModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/ProportionsModel.js)
+* [PedigreeModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/PedigreeModel.js)
 
 Here are pointers to some of the major features of the model:
 
@@ -157,13 +157,13 @@ Here are pointers to some of the major features of the view:
 
 This sections describes patterns and features that are specific to PhET-iO instrumentation. PhET-iO is a PhET product that is described at https://phet-io.colorado.edu. If you're not familiar with PhET-iO, you can skip this section.
 
-**PhetioGroup is encapsulated**: `PhetioGroup` manages dynamic elements. The dynamic elements in this sim are instances of `Bunny` and `Wolf`. Instances of `Bunny` are created by `BunnyGroup`, which is private to `BunnyCollection`.  Instances of `Wolf` are created by `WolfGroup`, which is private to `WolfCollection`.  This pattern of using a "Collection" wrapper hides the details of PhetioGroup from all other parts of the simulation.
+**PhetioGroup is encapsulated**: `PhetioGroup` manages dynamic elements. The dynamic elements in this sim are instances of [Bunny](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Bunny.js) and `Wolf`. Instances of `Bunny` are created by `BunnyGroup`, which is private to `BunnyCollection`.  Instances of `Wolf` are created by `WolfGroup`, which is private to `WolfCollection`.  This pattern of using a "Collection" wrapper hides the details of PhetioGroup from all other parts of the simulation.
 
-**IO Types delegate to Core Types**: IO Types handle serialization of elements that are instances of Core Types. For example, `BunnyIO` is the IO Type that serializes the `Bunny` Core Type.  Throughout this simulation, each IO Type delegates serialization to its associated Core Type.  This ensures that the API of the Core Type is not violated by acccessing private members.
+**IO Types delegate to Core Types**: IO Types handle serialization of elements that are instances of Core Types. For example, [BunnyIO](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyIO.js) is the IO Type that serializes the [Bunny](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Bunny.js) Core Type.  Throughout this simulation, each IO Type delegates serialization to its associated Core Type.  This ensures that the API of the Core Type is not violated by acccessing private members.
 
 **Uninstrumented objects**: Instances that are intentionally not instrumented are instantiated with `tandem: Tandem.OPT_OUT`.
 
-**Configure the Genes for a screen**: `GeneVisibilityManager` contains a `{{gene}}VisibleProperty` for each Gene, which controls the visiblity of all UI components for that gene. Use these Properties via Studio to quickly configure which genes appear in the UI. Search for "view.genes" in Studio.
+**Configure the Genes for a screen**: [GeneVisibilityManager](https://github.com/phetsims/natural-selection/blob/master/js/common/view/GenesVisibilityManager.js) has a `{{gene}}VisibleProperty` for each Gene, which controls the visiblity of all UI components for that gene. Use these Properties via Studio to quickly configure which genes appear in the UI. Search for "view.genes" in Studio.
 
 **Configure the Environmental Factors for a screen**: Configuring which environmental factors are available for a screen is as easy as deciding which checkboxes to make visible.  Search for `wolvesCheckbox`, `toughFoodCheckbox`, and `limitedFoodCheckbox` in Studio, and set their visibleProperty as desired.
 
