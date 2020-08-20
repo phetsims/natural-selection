@@ -33,11 +33,11 @@ This section describes how this sim addresses implementation considerations that
 
 There are 3 different model-view transforms in this sim.
 
-_Environment_: The model uses a unitless 3D coordinate frame, where +x is to the left, +y is up, and +z is into the screen. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. [EnvironmentModelViewTransform](https://github.com/phetsims/natural-selection/blob/master/js/common/model/EnvironmentModelViewTransform.js) handles the transforms, and has very detailed documentation in the source code header. 
+* _Environment_: The model uses a unitless 3D coordinate frame, where +x is to the left, +y is up, and +z is into the screen. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. [EnvironmentModelViewTransform](https://github.com/phetsims/natural-selection/blob/master/js/common/model/EnvironmentModelViewTransform.js) handles the transforms, and has very detailed documentation in the source code header. 
 
-_Population graph_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. Because drawing plots needs to be lightweight and high-performance, `ModelViewTransform` is not used here. Model-to-view transform is handled by [PopulationPlotNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/population/PopulationPlotNode.js) (see `modelToViewX` and `modelToViewY`). View-to-model transform is unnecessary.
+* _Population graph_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. Because drawing plots needs to be lightweight and high-performance, `ModelViewTransform` is not used here. Model-to-view transform is handled by [PopulationPlotNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/population/PopulationPlotNode.js) (see `modelToViewX` and `modelToViewY`). View-to-model transform is unnecessary.
 
-_Data Probe_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. The data probe can only move horizontally, so the y-axis is irrelevant. But position is a `Vector2` because it's required by DragListener. `ModelViewTransform` handles the transforms.
+* _Data Probe_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. The data probe can only move horizontally, so the y-axis is irrelevant. But position is a `Vector2` because it's required by DragListener. `ModelViewTransform` handles the transforms.
 
 **Query Parameters**
 
