@@ -17,6 +17,7 @@
 
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import Allele from './Allele.js';
 
 class PunnettSquare {
 
@@ -63,6 +64,49 @@ class PunnettSquare {
    */
   get length() {
     return this.cells.length;
+  }
+
+  /**
+   * Gets the cell in the Punnett square to use for an additional offspring. If the Punnett square contains a
+   * homozygous mutation, that genotype is returned. Otherwise, read the code comments :)
+   * This is used to create a 5th offspring when a recessive mutant mates eagerly.
+   * @param {Allele} mutantAllele
+   * @param {Allele|null} dominantAllele
+   * @returns {Cell}
+   * @public
+   */
+  getAdditionalCell( mutantAllele, dominantAllele ) {
+
+    assert && assert( mutantAllele instanceof Allele, 'invalid mutantAllele' );
+    assert && assert( dominantAllele instanceof Allele || dominantAllele === null, 'invalid dominantAllele' );
+
+    let cell = null;
+
+    // Look for homozygous mutation
+    for ( let i = 0; i < this.length && !cell; i++ ) {
+      const currentCell = this.getCell( i );
+      if ( currentCell.fatherAllele === mutantAllele && currentCell.motherAllele === mutantAllele ) {
+        cell = currentCell;
+      }
+    }
+
+    // Fallback to dominant genotype
+    if ( !cell && dominantAllele ) {
+      for ( let i = 0; i < this.length && !cell; i++ ) {
+        const currentCell = this.getCell( i );
+        if ( currentCell.fatherAllele === dominantAllele || currentCell.motherAllele === dominantAllele ) {
+          cell = currentCell;
+        }
+      }
+    }
+
+    // Fallback to random selection
+    if ( !cell ) {
+      cell = this.getRandomCell();
+    }
+
+    assert && assert( cell, 'cell not found' );
+    return cell;
   }
 }
 

@@ -20,7 +20,6 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
-import Allele from './Allele.js';
 import Bunny from './Bunny.js';
 import BunnyArray from './BunnyArray.js';
 import BunnyArrayIO from './BunnyArrayIO.js';
@@ -458,9 +457,9 @@ class BunnyCollection {
         // propagate through the phenotype more quickly.
         // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
         const mutantAllele = mutantFather.genotype.mutation;
-        const furCell = getAdditionalPunnettCell( furPunnetSquare, mutantAllele, this.genePool.furGene.dominantAlleleProperty.value );
-        const earsCell = getAdditionalPunnettCell( earsPunnetSquare, mutantAllele, this.genePool.earsGene.dominantAlleleProperty.value );
-        const teethCell = getAdditionalPunnettCell( teethPunnetSquare, mutantAllele, this.genePool.teethGene.dominantAlleleProperty.value );
+        const furCell = furPunnetSquare.getAdditionalCell( mutantAllele, this.genePool.furGene.dominantAlleleProperty.value );
+        const earsCell = earsPunnetSquare.getAdditionalCell( mutantAllele, this.genePool.earsGene.dominantAlleleProperty.value );
+        const teethCell = teethPunnetSquare.getAdditionalCell( mutantAllele, this.genePool.teethGene.dominantAlleleProperty.value );
         const genotypeOptions = {
           fatherFurAllele: furCell.fatherAllele,
           motherFurAllele: furCell.motherAllele,
@@ -615,49 +614,6 @@ function getMateForRecessiveMutant( father, bunnies ) {
     }
   }
   return mother;
-}
-
-/**
- * Gets the cell in the Punnett square to use for an additional offspring.
- * If the Punnett square contains a homozygous mutation, that genotype is returned.
- * Otherwise, read the code comments :)
- * @param {PunnettSquare} punnettSquare
- * @param {Allele} mutantAllele
- * @param {Allele|null} dominantAllele
- * @returns {PunnettSquare.Cell}
- */
-function getAdditionalPunnettCell( punnettSquare, mutantAllele, dominantAllele ) {
-  assert && assert( punnettSquare instanceof PunnettSquare, 'invalid punnettSquare' );
-  assert && assert( mutantAllele instanceof Allele, 'invalid mutantAllele' );
-  assert && assert( dominantAllele instanceof Allele || dominantAllele === null, 'invalid dominantAllele' );
-
-  let cell = null;
-
-  // Look for homozygous mutation
-  for ( let i = 0; i < punnettSquare.length && !cell; i++ ) {
-    const currentCell = punnettSquare.getCell( i );
-    if ( currentCell.fatherAllele === mutantAllele && currentCell.motherAllele === mutantAllele ) {
-      cell = currentCell;
-    }
-  }
-
-  // Fallback to dominant genotype
-  if ( !cell && dominantAllele ) {
-    for ( let i = 0; i < punnettSquare.length && !cell; i++ ) {
-      const currentCell = punnettSquare.getCell( i );
-      if ( currentCell.fatherAllele === dominantAllele || currentCell.motherAllele === dominantAllele ) {
-        cell = currentCell;
-      }
-    }
-  }
-
-  // Fallback to random selection
-  if ( !cell ) {
-    cell = punnettSquare.getRandomCell();
-  }
-
-  assert && assert( cell, 'cell not found' );
-  return cell;
 }
 
 naturalSelection.register( 'BunnyCollection', BunnyCollection );
