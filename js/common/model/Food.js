@@ -86,8 +86,8 @@ class Food {
     } );
 
     // Use our own instance of Random to produce locations for shrubs.
-    //TODO https://github.com/phetsims/natural-selection/issues/176 if we want the same locations each time, set a specific seed, and uninstrument shrubs.
-    // otherwise replace random with phet.joist.random
+    //TODO https://github.com/phetsims/natural-selection/issues/176 If we want the same locations each time, set a
+    // specific seed. Otherwise replace random with phet.joist.random
     const random = new Random( { seed: phet.joist.random.nextDouble() } );
 
     const shrubsTandem = options.tandem.createTandem( 'shrubs' );
@@ -105,7 +105,7 @@ class Food {
       this.shrubs.push( new Shrub( modelViewTransform, {
         position: modelViewTransform.getGroundPosition( x, z ),
 
-        //TODO https://github.com/phetsims/natural-selection/issues/176 if we use fixed locations for shrubs, remove instrumentation
+        //TODO https://github.com/phetsims/natural-selection/issues/176 If we use fixed locations for shrubs, remove instrumentation.
         tandem: shrubsTandem.createTandem( `shrub${i}` )
       } ) );
     }
