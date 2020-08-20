@@ -6,8 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import Organism from './Organism.js';
 
@@ -18,15 +16,6 @@ class Shrub extends Organism {
    * @param {Object} [options]
    */
   constructor( modelViewTransform, options ) {
-
-    options = merge( {
-
-      //TODO https://github.com/phetsims/natural-selection/issues/176 if we use fixed locations for shrubs, remove instrumentation
-      tandem: Tandem.REQUIRED,
-      phetioReadOnly: true,
-      phetioState: false // because Shrubs never move
-    }, options );
-
     super( modelViewTransform, options );
   }
 

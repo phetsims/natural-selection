@@ -86,11 +86,9 @@ class Food {
     } );
 
     // Use our own instance of Random to produce locations for shrubs.
-    //TODO https://github.com/phetsims/natural-selection/issues/176 If we want the same locations each time, set a
-    // specific seed. Otherwise replace random with phet.joist.random
-    const random = new Random( { seed: phet.joist.random.nextDouble() } );
-
-    const shrubsTandem = options.tandem.createTandem( 'shrubs' );
+    // This specific seed was chosen because it produces a desirable layout.
+    // See https://github.com/phetsims/natural-selection/issues/176
+    const random = new Random( { seed: 0.5853265884696416 } );
 
     // @public (read-only) {Shrub[]} the collection of Shrubs
     // Shrubs are placed randomly in the environment.
@@ -103,10 +101,7 @@ class Food {
       const xRange = new Range( modelViewTransform.getMinimumX( z ) + SHRUBS_X_MARGIN, modelViewTransform.getMaximumX( z ) - SHRUBS_X_MARGIN );
       const x = random.nextDoubleInRange( xRange );
       this.shrubs.push( new Shrub( modelViewTransform, {
-        position: modelViewTransform.getGroundPosition( x, z ),
-
-        //TODO https://github.com/phetsims/natural-selection/issues/176 If we use fixed locations for shrubs, remove instrumentation.
-        tandem: shrubsTandem.createTandem( `shrub${i}` )
+        position: modelViewTransform.getGroundPosition( x, z )
       } ) );
     }
     phet.log && phet.log( `${numberOfShrubs} shrubs randomly placed using seed ${random.getSeed()}` );
