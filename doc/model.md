@@ -25,14 +25,14 @@ of a trait. Our 3 genes are: fur, ears, teeth.
 * Variants of a gene are called _**alleles**_. For example "white fur" and "brown fur" are alleles of the fur gene.
 (Note that gene and allele are often used interchangeably in the literature, but we attempt to use them 
 consistently as defined herein.) 
+* A _**normal**_ (aka "wild type") allele is present in the natural population. 
+For our bunnies, the normal alleles are: white fur, straight ears, short teeth.
+* A _**mutant**_ allele is any allele that is not normal. 
+For our bunnies, the mutant alleles are: brown fur, floppy ears, long teeth.
 * Each individual has 2 alleles for each gene, one allele inherited from each parent. These 2 alleles are 
 referred to as a _**gene pair**_.
 * If an individual's alleles are identical, it is _**homozygous**_. If its alleles are different, 
 it is _**heterozygous**_.
-* A _**normal**_ (aka "wild type") allele is present in the natural population. 
-For our bunnies, the normal alleles are: white fur, straight ears, short teeth.
-* A _**mutant**_ allele is any allele that is not normal. 
-For our bunnies, the mutant alleles are: brown fur, floppy ears, long teeth.  
 * _**Dominance**_ is the effect of one allele masking the expression of a different allele. 
 The first allele is referred to as _**dominant**_ and the second is _**recessive**_. Note that since dominance
 is a relationship between 2 alleles, it is impossible to have a dominance relationship until a mutant allele
