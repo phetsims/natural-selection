@@ -231,7 +231,7 @@ const SCHEMA = {
     // from the Java version, see MUTATING_BUNNY_PER_BUNNIES in NaturalSelectionDefaults.java
     defaultValue: 1 / 7,
 
-    // All 3 mutations can be applied simultaneously. Mutation is mutually-exclusive by gene type. A bunny can have at
+    // All 3 mutations can be applied simultaneously. Mutation is mutually-exclusive by gene. A bunny can have at
     // most 1 mutation. And we have 3 mutations, for fur, ears, and teeth. So at most 1/3 of the population can get a
     // specific mutation.
     isValidValue: value => ( value > 0 && value <= 1 / 3 )

@@ -4,6 +4,7 @@
  * NaturalSelectionTimeControlNode is the time control for this sim. It has a play/pause button and a fast-forward
  * button. To make the sim run faster, press and hold the fast-forward button.  It has nothing in common with PhET's
  * standard TimeControlNode other than a PlayPauseButton, so it does not extend TimeControlNode.
+ * See https://github.com/phetsims/natural-selection/issues/179 for some design history.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

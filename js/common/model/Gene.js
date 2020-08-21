@@ -3,7 +3,8 @@
 /**
  * Gene is the basic physical and functional unit of heredity that is transferred from a parent to its offspring,
  * and controls the expression of a trait. An allele is a variation of a gene. For this sim, we assume that there
- * will only be 2 alleles per gene.
+ * will only be 2 alleles per gene. Note that gene and allele are often used interchangeably in the literature,
+ * but we attempt to use them consistently in this implementation.
  *
  * There is one instance of each gene in the GenePool - i.e., 1 fur gene, 1 ears gene, and 1 teeth gene.
  * A Gene identifies the normal and mutant alleles for the gene, and (if the gene has mutated) defines the

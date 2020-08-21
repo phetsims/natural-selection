@@ -130,7 +130,7 @@ class BunnyImageMap {
 
 /**
  * Gets the key that corresponds to a bunny's phenotype. Instead of a big if-then-else statement for each
- * permutation of gene type, this implementation converts the phenotype to a string key. The key pattern is
+ * permutation of gene, this implementation converts the phenotype to a string key. The key pattern is
  * '{{hasWhiteFur}}-{{hasStraightEars}}-{{hasShortTeeth}}', where the value for each placeholder is 'true' or 'false'.
  * @param {Bunny} bunny
  * @returns {string}

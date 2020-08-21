@@ -90,7 +90,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
       ]
     } );
 
-    // A row for each gene type
+    // A row for each gene
     const furRow = new Row( genePool.furGene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
       tandem: options.tandem.createTandem( 'furRow' )
     } );
@@ -209,7 +209,7 @@ class Row extends HBox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // label that indicates the gene type, to the left of the push buttons
+    // label that indicates the gene, to the left of the push buttons
     const labelNode = new Text( gene.name, {
       font: NaturalSelectionConstants.ADD_MUTATION_GENE_FONT,
       maxWidth: 50 // determined empirically

@@ -2,7 +2,8 @@
 
 /**
  * OrganismSpriteInstance is a specialization of SpriteInstance for organisms (bunnies, wolves, shrubs).
- * It keeps a reference to the associated organism, and updates the sprite's position and direction.
+ * It keeps a reference to the associated organism, and updates its transformation matrix to match the
+ * organism's position and direction.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

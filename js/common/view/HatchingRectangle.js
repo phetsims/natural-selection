@@ -2,7 +2,7 @@
 
 /**
  * HatchingRectangle is a Rectangle that appears as if it's filled with a hatching pattern.
- * The hatching pattern is a set of equally-spaced parallel lines.
+ * The hatching pattern is a set of equally-spaced parallel lines, arranged at some angle.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

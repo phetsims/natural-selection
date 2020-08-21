@@ -4,14 +4,12 @@
  * OrganismSprites displays all of the Organism model elements (bunnies, wolves, shrubs) that appear in the environment.
  * It uses scenery's high-performance Sprites feature, which uses renderer:'webgl', with a fallback of 'canvas'.
  *
- * Understanding this implementation requires an understanding of the scenery Sprites API. In a simplified nutshell:
- * Sprites has an array of Sprite and an array of SpriteInstance. Each SpriteInstance has a reference to a Sprite
- * (which determines what it looks like) and a Matrix3 (which determines how it's transformed). After updating the
- * array of SpriteInstance and adjusting each Matrix3, calling invalidatePaint() redraws the Sprites.
- *
- * While each sprite instance stays synchronized with its associated model element, update() must be explicitly
- * called to render this Node correctly. Internally, call update() for changes that affect the rendering order;
- * otherwise call invalidatePaint().
+ * Understanding this implementation requires an understanding of the scenery Sprites API. In a nutshell:
+ * Sprites has an array of Sprite and an array of SpriteInstance. The array of Sprite is the complete unique set
+ * of images used to render all SpriteInstances. Each SpriteInstance has a reference to a Sprite (which determines
+ * what it looks like) and a Matrix3 (which determines how it's transformed). After updating the array of SpriteInstance
+ * (as bunnies and wolves are created and die) and adjusting each Matrix3 (as bunnies and wolves move around),
+ * calling invalidatePaint() redraws the Sprites.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

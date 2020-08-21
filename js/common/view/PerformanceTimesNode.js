@@ -3,7 +3,7 @@
 /**
  * PerformanceTimesNode displays times related to performance critical parts of the simulation.
  * This is added via the ?showTimes query parameter.
- * See See https://github.com/phetsims/natural-selection/issues/60 and https://github.com/phetsims/natural-selection/issues/140
+ * See https://github.com/phetsims/natural-selection/issues/60 and https://github.com/phetsims/natural-selection/issues/140
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

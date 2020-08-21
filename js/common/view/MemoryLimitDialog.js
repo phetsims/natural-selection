@@ -1,7 +1,12 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * MemoryLimitDialog is displayed when the sim hits the generation limit.
+ * MemoryLimitDialog is displayed when the sim has hit its memory limit.
+ *
+ * It's possible to put this sim in a state where the population stabilizes, and the sim will run forever. The sim
+ * would continue to create data points for the Population graph, and would eventually crash the browser. So the sim
+ * has a limit on the number of generations, see maxGenerations in NaturalSelectionQueryParameters. When this limit
+ * is reached, the sim stops, MemoryLimitDialog is displayed, and the student can review the final state of the sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

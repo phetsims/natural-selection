@@ -2,7 +2,10 @@
 
 /**
  * BunnySelectionRectangleSpriteInstance is the sprite instance for the selection rectangle that surrounds the
- * selected bunny. It's associated with the selected bunny so that it tracks its position and direction.
+ * selected bunny. When a bunny is selected, OrganismSprites creates an instance of BunnySelectionRectangleSpriteInstance
+ * and associates it with the selected bunny so that it tracks its position and direction. (Think of it as another view
+ * of the selected bunny.) OrganismSprites also handles putting the selection rectangle behind the selected bunny in
+ * the rendering order.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
