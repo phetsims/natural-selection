@@ -19,7 +19,6 @@
  */
 
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import Allele from './Allele.js';
 
 class PunnettSquare {
@@ -37,7 +36,6 @@ class PunnettSquare {
       new Cell( fatherGenePair.motherAllele, motherGenePair.fatherAllele ),
       new Cell( fatherGenePair.motherAllele, motherGenePair.motherAllele )
     ] );
-    assert && assert( this.cells.length === NaturalSelectionConstants.LITTER_SIZE, 'invalid ' );
   }
 
   /**

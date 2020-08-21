@@ -31,6 +31,10 @@ import SelectedBunnyProperty from './SelectedBunnyProperty.js';
 
 // constants
 
+const LITTER_SIZE = 4;
+assert && assert( LITTER_SIZE === 4,
+  'LITTER_SIZE must be 4, to correspond to the Punnett square that results from Mendel\'s Law of Segregation' );
+
 // Ranges for bunny rest time, as specified in https://github.com/phetsims/natural-selection/issues/129
 // Bunnies rest longer as the population grows larger.
 const BUNNY_REST_RANGE_SHORT = new Range( 1, 3 );
@@ -297,7 +301,7 @@ class BunnyCollection {
     }
 
     // The number of bunnies that we expect to be born.
-    const numberToBeBorn = Math.floor( bunnies.length / 2 ) * NaturalSelectionConstants.LITTER_SIZE;
+    const numberToBeBorn = Math.floor( bunnies.length / 2 ) * LITTER_SIZE;
 
     // Determine which mutations should be applied, then reset the gene pool.
     const mutateFur = this.genePool.furGene.mutationComingProperty.value;
@@ -354,7 +358,7 @@ class BunnyCollection {
       const teethPunnetSquare = new PunnettSquare( father.genotype.teethGenePair, mother.genotype.teethGenePair );
 
       // Create a litter for this bunny pair
-      for ( let j = 0; j < NaturalSelectionConstants.LITTER_SIZE; j++ ) {
+      for ( let j = 0; j < LITTER_SIZE; j++ ) {
 
         // A bunny is born
         const bunny = this.createBunny( {
@@ -441,7 +445,7 @@ class BunnyCollection {
         const teethPunnetSquare = new PunnettSquare( mutantFather.genotype.teethGenePair, mutantMother.genotype.teethGenePair );
 
         // Create a litter for this bunny pair
-        for ( let i = 0; i < NaturalSelectionConstants.LITTER_SIZE; i++ ) {
+        for ( let i = 0; i < LITTER_SIZE; i++ ) {
 
           // inherited alleles
           const genotypeOptions = {

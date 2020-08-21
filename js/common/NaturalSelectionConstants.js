@@ -20,9 +20,6 @@ const NaturalSelectionConstants = {
 
   // Model ===========================================================================================================
 
-  // number of offspring produced each time a pair of bunnies mates
-  LITTER_SIZE: 4,
-
   // Generation Clock
   CLOCK_WOLVES_RANGE: new Range( 1 / 6, 3 / 6 ), // slice of the generation clock for wolves, as a percentage range [0,1]
   CLOCK_FOOD_RANGE: new Range( 3 / 6, 5 / 6 ), // slice of the generation clock for food, as a percentage range [0,1]
@@ -98,7 +95,7 @@ const NaturalSelectionConstants = {
   PROPORTIONS_LEGEND_FONT: new PhetFont( 16 ),
   DIALOG_FONT: new PhetFont( 16 ),
 
-  // Scale factors for images
+  // Scale factors for images, determined empirically and dependent on image-file sizes
   BUNNY_IMAGE_SCALE: 0.4,
   WOLF_IMAGE_SCALE: 0.5,
   SHRUB_IMAGE_SCALE: 0.5,
@@ -111,9 +108,6 @@ const NaturalSelectionConstants = {
   // Pedigree graph
   PEDIGREE_TREE_DEPTH: 4
 };
-
-assert && assert( NaturalSelectionConstants.LITTER_SIZE === 4,
-  'LITTER_SIZE must be 4, to correspond to the Punnett square that results from Mendel\'s Law of Segregation' );
 
 assert && AssertUtils.assertRangeBetween( NaturalSelectionConstants.CLOCK_FOOD_RANGE, 0, 1 );
 assert && AssertUtils.assertRangeBetween( NaturalSelectionConstants.CLOCK_WOLVES_RANGE, 0, 1 );
