@@ -24,7 +24,7 @@ of a trait. Our 3 genes are: fur, ears, teeth.
 * Variants of a gene are called _**alleles**_. For example "white fur" and "brown fur" are alleles of the fur gene.
 (Note that gene and allele are often used interchangeably in the literature, but we attempt to use them 
 consistently as defined herein.) 
-* The complete collection of genes that exist is referred to as the _**gene pool**_.
+* The set of different genes that exist in the population is the _**gene pool**_.
 * Each individual has 2 alleles for each gene, one allele inherited from each parent. These 2 alleles are 
 referred to as a _**gene pair**_.
 * If an individual's alleles are identical, it is _**homozygous**_. If its alleles are different, 
