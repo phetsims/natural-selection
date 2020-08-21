@@ -1,7 +1,9 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Phenotype describes the appearance of a Bunny, how its genotype manifests.
+ * Phenotype describes the appearance of a bunny, the manifestation of its genotype.
+ * See the 'Genotype and Phenotype' section of model.md at
+ * https://github.com/phetsims/natural-selection/blob/master/doc/model.md#genotype-and-phenotype
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * AlleleInstances defines a set of Allele instances that are used throughout the sim.
+ * AlleleInstances defines a set of global Allele instances that are used throughout the sim.
  * These must be in their own .js file (versus in Allele.js) to avoid the cyclic dependency between Allele and AlleleIO.
  *
  * @author Chris Malley (PixelZoom, Inc.)

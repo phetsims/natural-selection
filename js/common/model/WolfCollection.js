@@ -187,7 +187,8 @@ class WolfCollection {
   }
 
   /**
-   * Eats some portion of the bunny population.
+   * Eats some portion of the bunny population. See the 'Wolves' section of model.md at
+   * https://github.com/phetsims/natural-selection/blob/master/doc/model.md#wolves
    * @param {number} timeInGenerations - the time (in generations) at which this event should be recorded
    * @private
    */

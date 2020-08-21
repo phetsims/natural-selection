@@ -74,7 +74,8 @@ class BunnyCollection {
 
     // @private {Bunny[]} Recessive mutants, to be mated eagerly so that their mutation appears in the phenotype as
     // soon as possible. Mutants are added to this array when born, and removed as soon as they have mated with
-    // another bunny that has the same mutant allele.
+    // another bunny that has the same mutant allele. See also the 'Recessive Mutants' section of model.md at
+    // https://github.com/phetsims/natural-selection/blob/master/doc/model.md#recessive-mutants.
     this.recessiveMutants = new BunnyArray( {
       tandem: options.tandem.createTandem( 'recessiveMutants' ),
       phetioDocumentation: 'for internal PhET use only'
@@ -239,7 +240,8 @@ class BunnyCollection {
   }
 
   /**
-   * Ages all live bunnies. Bunnies that reach the maximum age will die.
+   * Ages all live bunnies. Bunnies that reach the maximum age will die. See also the 'Life Expectancy' section of
+   * model.md at https://github.com/phetsims/natural-selection/blob/master/doc/model.md#life-expectancy.
    * @public
    */
   ageBunnies() {
@@ -271,7 +273,8 @@ class BunnyCollection {
   /**
    * Mates all live bunnies by randomly pairing them up. Any bunny can mate with any other bunny, regardless of their
    * age or previous hereditary relationship. If there is an odd number of bunnies, then one of them will not mate.
-   * Mutations (if any) are applied as the bunnies are born.
+   * Mutations (if any) are applied as the bunnies are born. See also the 'Reproduction' section of model.md at
+   * https://github.com/phetsims/natural-selection/blob/master/doc/model.md#reproduction.
    * @param {number} generation
    * @public
    */
@@ -398,7 +401,8 @@ class BunnyCollection {
    * Mates each recessive mutant with a bunny that has the same mutation. This is referred to as 'mate eagerly', as
    * the purpose is to make the mutation appear in the phenotype sooner. This must be done separately from other mating
    * because we don't want to apply additional mutations. As a side-effect, bunnies that are successfully mated are
-   * removed from the bunnies array.
+   * removed from the bunnies array. See also the 'Recessive Mutants' section of model.md at
+   * https://github.com/phetsims/natural-selection/blob/master/doc/model.md#recessive-mutants.
    *
    * Note that some parts of this method look similar to method mateBunnies. There are in fact significant differences,
    * which made it difficult (and less clear) to factor out commonalities.

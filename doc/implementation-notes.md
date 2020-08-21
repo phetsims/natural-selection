@@ -24,6 +24,7 @@ Additional terms used in the implementation:
 * The _**simulation mode**_ determines what UI components are available. See [SimulationMode](https://github.com/phetsims/natural-selection/blob/master/js/common/model/SimulationMode.js).
 * A _**sprite**_ is a high-performance way of drawing an organism, using the scenery [Sprites](https://github.com/phetsims/scenery/blob/master/js/nodes/Sprites.js) API.
 * A _**plot**_ is a set of points connected by line segments, used in the Population graph.
+* An _**original mutant**_ is a bunny in which a mutation first occurred.
 
 ## General Consideration
 
@@ -43,7 +44,8 @@ There are 3 different model-view transforms in this sim.
 
 Query parameters are used to enable sim-specific features. Some of these query parameters are public, but most are for debugging and
 tuning model behavior. Sim-specific query parameters are documented in
-[NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js).
+[NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js). 
+There are features that can only be accessed via query parameters, so be sure to look them over. The query parameters for initializing the population are particularly important.
 
 **Assertions**
 
@@ -129,7 +131,7 @@ Here are pointers to some of the major features of the model:
 * Proportions graph start/end counts: [ProportionsCounts](https://github.com/phetsims/natural-selection/blob/master/js/common/model/ProportionCounts.js)
 * Pedigree graph: shows a tree for [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.selectedBunnyProperty`
 * Genotype abbreviation: [Genotype](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Genotype.js)`.abbreviationProperty`, `GenePair.getGenotypeAbbreviation`
-* Initializing the bunny population via query parameters: [parseInitialPopulation.js](https://github.com/phetsims/natural-selection/blob/master/js/common/model/parseInitialPopulation.js), [NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js)
+* Initialize the bunny population via query parameters: [parseInitialPopulation.js](https://github.com/phetsims/natural-selection/blob/master/js/common/model/parseInitialPopulation.js), [NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js)
 
 ## View
 

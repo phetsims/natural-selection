@@ -1,7 +1,9 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * GenerationClock is the clock that completes one full cycle per generation.
+ * GenerationClock is the clock that completes one full cycle per generation.  In the user-interface, time is
+ * presented in terms of 'generations'. Various events are described as times relative to the "wall clock" time
+ * on the generation clock. For example, "bunnies reproduce at 12:00", or "wolves eat at 4:00".
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

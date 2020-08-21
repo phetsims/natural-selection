@@ -1,11 +1,18 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Gene is the basic physical and functional unit of heredity. An allele is a variation of a gene, and for this sim,
- * we assume that there will only be 2 alleles per gene.
+ * Gene is the basic physical and functional unit of heredity that is transferred from a parent to its offspring,
+ * and controls the expression of a trait. An allele is a variation of a gene. For this sim, we assume that there
+ * will only be 2 alleles per gene.
  *
- * There is one instance of each gene in the GenePool. It identifies the normal and mutant alleles for the gene,
- * and (if the gene has mutated) defines the dominance relationship between the alleles.
+ * There is one instance of each gene in the GenePool - i.e., 1 fur gene, 1 ears gene, and 1 teeth gene.
+ * A Gene identifies the normal and mutant alleles for the gene, and (if the gene has mutated) defines the
+ * dominance relationship between the alleles. See also the 'Mutation' section of model.md at
+ * https://github.com/phetsims/natural-selection/blob/master/doc/model.md#mutation
+ *
+ * Dominance is the effect of one allele masking the expression of a different allele. The first allele is referred
+ * to as dominant and the second is recessive. Note that since dominance is a relationship between 2 alleles, it
+ * is impossible to have a dominance relationship until the mutation has occurred.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * EnvironmentModelViewTransform is the model-view transform for the 'environment', the space where bunnies, wolves,
+ * EnvironmentModelViewTransform is the model-view transform for the 'environment', the place where bunnies, wolves,
  * food, etc. appear. The model is 3D, the view is 2D, so this deals with the 2D projection of a 3D space.
  *
  * The ground is a trapezoid that rises with constant slope as distance from the 'camera' increases.
@@ -67,7 +67,7 @@
  *                                              (viewSize.width, viewSize.height)
  *
  * @author Chris Malley (PixelZoom, Inc.)
- * @author Jonathan Olson (Landscape.java, from which this was adapted)
+ * @author Jonathan Olson (Landscape.java, from which parts of this were adapted)
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';

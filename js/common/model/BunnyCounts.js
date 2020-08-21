@@ -3,7 +3,7 @@
 /**
  * BunnyCounts is a data structure that contains the counts that describe the phenotypes of a collection of bunnies.
  * There is a count for each allele, and a total count. The data structure is immutable, atomic, and describes the
- * population at a point in time.
+ * population at a point in time. These are the Start Counts and End Counts that are shown in the Proportions graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

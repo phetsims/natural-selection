@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * PedigreeModel is the sub-model used by the Pedigree view.
+ * PedigreeModel is the sub-model for the Pedigree graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
