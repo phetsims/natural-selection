@@ -4,6 +4,9 @@
  * Gene is the basic physical and functional unit of heredity. An allele is a variation of a gene, and for this sim,
  * we assume that there will only be 2 alleles per gene.
  *
+ * There is one instance of each gene in the GenePool. It identifies the normal and mutant alleles for the gene,
+ * and (if the gene has mutated) defines the dominance relationship between the alleles.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
