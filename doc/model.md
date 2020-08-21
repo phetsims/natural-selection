@@ -21,10 +21,10 @@ If the generation clock reaches 1000, the simulation stops, a dialog is displaye
 * A _**trait**_ is a characteristic or feature of an organism. For example, "blue eyes" or "brown fur".
 * A _**gene**_ is the unit of heredity that is transferred from a parent to its offspring, and controls the expression
 of a trait. Our 3 genes are: fur, ears, teeth.
+* The set of different genes that exist in the population is the _**gene pool**_.
 * Variants of a gene are called _**alleles**_. For example "white fur" and "brown fur" are alleles of the fur gene.
 (Note that gene and allele are often used interchangeably in the literature, but we attempt to use them 
 consistently as defined herein.) 
-* The set of different genes that exist in the population is the _**gene pool**_.
 * Each individual has 2 alleles for each gene, one allele inherited from each parent. These 2 alleles are 
 referred to as a _**gene pair**_.
 * If an individual's alleles are identical, it is _**homozygous**_. If its alleles are different, 
