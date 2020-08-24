@@ -136,6 +136,7 @@ class Bunny extends Organism {
       this.father = null;
     };
     this.father && this.father.disposedEmitter.addListener( fatherDisposedListener );
+
     const motherDisposedListener = () => {
       this.mother.disposedEmitter.removeListener( motherDisposedListener );
       this.mother = null;
