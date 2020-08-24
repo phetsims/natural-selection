@@ -130,6 +130,7 @@ class DataProbeNode extends Node {
 
     super( options );
 
+    // removeInputListener is not necessary
     this.addInputListener( new DragListener( {
       positionProperty: dataProbe.offsetProperty,
       transform: offsetTransform,
