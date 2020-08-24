@@ -131,7 +131,7 @@ class ProportionsModel extends PhetioObject {
     } );
 
     // When the sim starts playing or the current generation changes, show the current generation immediately.
-    // Multilink dispose is not necessary.
+    // unmultilink is not necessary.
     Property.multilink(
       [ isPlayingProperty, clockGenerationProperty ],
       ( isPlaying, clockGeneration ) => {
@@ -144,7 +144,7 @@ class ProportionsModel extends PhetioObject {
       this.endCountsProperty.value = liveBunnyCountsProperty.value;
     };
 
-    // Determine what data to display. Multilink dispose is not necessary.
+    // Determine what data to display. unmultilink is not necessary.
     Property.multilink(
       [ this.proportionsGenerationProperty, currentStartCountsProperty ],
       ( proportionsGeneration, currentStartCounts ) => {

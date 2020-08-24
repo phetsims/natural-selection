@@ -107,7 +107,7 @@ class PopulationPlotNode extends Node {
       }
     } );
 
-    // unmultilink not needed
+    // unmultilink is not necessary
     Property.multilink( [ this.visibleProperty, this.xRangeProperty, this.yRangeProperty ],
       visible => visible && this.updatePlot()
     );
