@@ -83,13 +83,13 @@ class ProportionsModel extends PhetioObject {
     // @public counts for 'Start of Generation'
     this.startCountsProperty = new Property( BunnyCounts.withZero(), {
       valueType: BunnyCounts,
-      tandem: Tandem.OPT_OUT //TODO https://github.com/phetsims/natural-selection/issues/188 should this be instrumented?
+      tandem: Tandem.OPT_OUT
     } );
 
     // @public counts for 'End of Generation'
     this.endCountsProperty = new Property( BunnyCounts.withZero(), {
       valueType: BunnyCounts,
-      tandem: Tandem.OPT_OUT //TODO https://github.com/phetsims/natural-selection/issues/188 should this be instrumented?
+      tandem: Tandem.OPT_OUT
     } );
 
     // 'Start' counts for the current generation. This is null until the sim enters SimulationMode.ACTIVE.
