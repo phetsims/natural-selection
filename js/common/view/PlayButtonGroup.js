@@ -75,7 +75,7 @@ class PlayButtonGroup extends Node {
 
     super( options );
 
-    // Multilink dispose is not necessary.
+    // Make at most 1 button visible. Multilink dispose is not necessary.
     Property.multilink(
       [ simulationModeProperty, bunnyCountProperty ],
       ( simulationMode, bunnyCount ) => {
