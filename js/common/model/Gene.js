@@ -91,6 +91,7 @@ class Gene extends PhetioObject {
 
     // @public {Allele|null} the recessive allele, null until the gene has mutated. Until a mutation occurs,
     // only the normal allele exists in the population, and the concepts of dominant and recessive are meaningless.
+    // dispose is not necessary.
     this.recessiveAlleleProperty = new DerivedProperty(
       [ this.dominantAlleleProperty ],
       dominantAllele => {

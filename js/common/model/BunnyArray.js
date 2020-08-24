@@ -40,13 +40,13 @@ class BunnyArray extends ObservableArray {
       phetioState: false // because counts will be restored as Bunny instances are restored to BunnyGroup
     } );
 
-    // Update counts when a bunny is added.
+    // Update counts when a bunny is added. removeItemAddedListener is not necessary.
     this.addItemAddedListener( bunny => {
       this.countsProperty.value = this.countsProperty.value.plus( bunny );
       assert && assert( this.countsProperty.value.totalCount === this.length, 'counts out of sync' );
     } );
 
-    // Update counts when a bunny is removed.
+    // Update counts when a bunny is removed. removeItemAddedListener is not necessary.
     this.addItemRemovedListener( bunny => {
       this.countsProperty.value = this.countsProperty.value.minus( bunny );
       assert && assert( this.countsProperty.value.totalCount === this.length, 'counts out of sync' );

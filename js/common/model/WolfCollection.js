@@ -76,7 +76,7 @@ class WolfCollection {
       tandem: options.tandem.createTandem( 'enabledProperty' )
     } );
 
-    // @private Wolves hunt during the 'wolves' slice of the generation clock.
+    // @private Wolves hunt during the 'wolves' slice of the generation clock. dispose is not necessary.
     this.isHuntingProperty = new DerivedProperty(
       [ this.enabledProperty, generationClock.timeInPercentProperty ],
       ( enabled, timeInPercent ) => ( enabled && NaturalSelectionConstants.CLOCK_WOLVES_RANGE.contains( timeInPercent ) ), {

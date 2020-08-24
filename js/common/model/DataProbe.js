@@ -51,7 +51,7 @@ class DataProbe extends PhetioObject {
       phetioDocumentation: 'offset of the data probe from the left edge of the graph'
     } );
 
-    // @public
+    // @public dispose is not necessary.
     // Named dataProbeGenerationProperty to distinguish it from the other 'generation' Properties in this sim.
     // See https://github.com/phetsims/natural-selection/issues/187
     this.dataProbeGenerationProperty = new DerivedProperty(

@@ -87,7 +87,7 @@ class BunnyCollection {
 
     // @private {Property.<Range>} the range of time that a bunny will reset between hops, in seconds.
     // This value is derived from population size, so that bunnies rest longer when the population is larger,
-    // resulting in less motion on screen and fewer updates.
+    // resulting in less motion on screen and fewer updates. dispose is not necessary.
     // Range values and populations sizes are specified in https://github.com/phetsims/natural-selection/issues/129
     this.bunnyRestRangeProperty = new DerivedProperty(
       [ this.liveBunnies.lengthProperty ],
@@ -126,6 +126,7 @@ class BunnyCollection {
       tandem: options.tandem.createTandem( 'allBunniesHaveDiedEmitter' ),
       phetioDocumentation: 'fires when all of the bunnies have died'
     } );
+    // removeListener is not necessary
     phet.log && this.allBunniesHaveDiedEmitter.addListener( () => {
       phet.log && phet.log( 'All of the bunnies have died.' );
       phet.log && phet.log( `total live bunnies = ${this.liveBunnies.length}` );
@@ -137,6 +138,7 @@ class BunnyCollection {
       tandem: options.tandem.createTandem( 'bunniesHaveTakenOverTheWorldEmitter' ),
       phetioDocumentation: 'fires when bunnies have taken over the world'
     } );
+    // removeListener is not necessary
     phet.log && this.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
       phet.log && phet.log( 'Bunnies have taken over the world.' );
       phet.log && phet.log( `total live bunnies = ${this.liveBunnies.length}` );
@@ -151,7 +153,7 @@ class BunnyCollection {
       if ( bunny.isAlive ) {
 
         // When the bunny dies, clean up.
-        // removeListener is not necessary because Bunny.diedEmitter is disposed after firing.
+        // removeListener is not necessary because Bunny.diedEmitter is disposed when the bunny dies or is disposed.
         bunny.diedEmitter.addListener( () => {
           this.liveBunnies.remove( bunny );
           this.deadBunnies.push( bunny );

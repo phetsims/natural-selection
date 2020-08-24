@@ -69,7 +69,7 @@ class NaturalSelectionModel {
       phetioReadOnly: true
     } );
 
-    // @private
+    // @private dispose is not necessary
     this.timeScaleProperty = new DerivedProperty(
       [ this.timeSpeedProperty ],
       timeSpeed => ( timeSpeed === TimeSpeed.NORMAL ) ? 1 : NaturalSelectionQueryParameters.fastForwardScale, {

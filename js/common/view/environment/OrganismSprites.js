@@ -120,7 +120,7 @@ class OrganismSprites extends Sprites {
     // Create a sprite instance for each bunny in the initial population.
     bunnyCollection.liveBunnies.forEach( bunny => this.createBunnySpriteInstance( bunny ) );
 
-    // Create a sprite instance for each bunny this is created. removeListener is not necessary.
+    // Create a sprite instance for each bunny this is created. removeItemAddedListener is not necessary.
     bunnyCollection.liveBunnies.addItemAddedListener( bunny => this.createBunnySpriteInstance( bunny ) );
 
     // Create a sprite instance for each wolf that is created. removeListener is not necessary.

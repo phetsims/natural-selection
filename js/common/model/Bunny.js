@@ -148,7 +148,7 @@ class Bunny extends Organism {
       this.genotype.dispose();
       this.phenotype.dispose();
 
-      // diedEmitter is disposed after it fires, so don't do dispose again if the bunny is already died.
+      // diedEmitter is disposed after it fires, so don't do dispose again if the bunny is already dead.
       if ( !this.diedEmitter.isDisposed ) {
         this.diedEmitter.dispose();
       }
