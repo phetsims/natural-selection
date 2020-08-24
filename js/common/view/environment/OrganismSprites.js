@@ -182,7 +182,7 @@ class OrganismSprites extends Sprites {
       this.update();
     }
 
-    // If the bunny dies or is disposed...
+    // If the bunny dies or is disposed, remove it from the view.
     const bunnyDiedOrDisposedListener = () => {
 
       // If this was the selected bunny, clear the selection.
@@ -232,7 +232,7 @@ class OrganismSprites extends Sprites {
       this.update();
     }
 
-    // When the wolf is disposed...
+    // When the wolf is disposed, remove it from the view.
     const wolfDisposedListener = () => {
 
       // Dispose of the associated sprite instance
