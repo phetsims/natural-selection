@@ -89,6 +89,8 @@ class GenerationClock extends PhetioObject {
         phetioDocumentation: 'generation number of the current cycle of the generation clock (integer)'
       }
     );
+
+    // unlink is not necessary.
     assert && this.clockGenerationProperty.lazyLink( ( currentClockGeneration, previousClockGeneration ) => {
 
       // Skip this when restoring PhET-iO state, because the initial state might be restored to any generation.
