@@ -590,6 +590,7 @@ class BunnyCollection {
       if ( generation - bunny.generation > MAX_DEAD_BUNNY_GENERATIONS &&
            this.selectedBunnyProperty.value !== bunny ) {
         this.bunnyGroup.disposeElement( bunny );
+        assert && assert( bunny.isDisposed, 'expect bunny to be disposed' );
         numberPruned++;
       }
     }
