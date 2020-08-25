@@ -7,6 +7,8 @@
  */
 
 import merge from '../../../../../phet-core/js/merge.js';
+import AlignBox from '../../../../../scenery/js/nodes/AlignBox.js';
+import AlignGroup from '../../../../../scenery/js/nodes/AlignGroup.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../../scenery/js/nodes/VBox.js';
 import Checkbox from '../../../../../sun/js/Checkbox.js';
@@ -83,26 +85,34 @@ class PopulationPanel extends NaturalSelectionPanel {
       tandem: options.tandem.createTandem( 'longTeethCheckbox' )
     } );
 
-    const checkboxes = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-      children: [
-        totalCheckbox,
-        whiteFurCheckbox,
-        brownFurCheckbox,
-        straightEarsCheckbox,
-        floppyEarsCheckbox,
-        shortTeethCheckbox,
-        longTeethCheckbox
-      ]
-    } ) );
+    const checkboxes = [ totalCheckbox,
+      whiteFurCheckbox,
+      brownFurCheckbox,
+      straightEarsCheckbox,
+      floppyEarsCheckbox,
+      shortTeethCheckbox,
+      longTeethCheckbox
+    ];
+
+    // Make all checkboxes have the same dimensions.
+    const alignBoxOptions = {
+      group: new AlignGroup(),
+      xAlign: 'left'
+    };
+    const alignBoxes = _.map( checkboxes, checkbox => new AlignBox( checkbox, alignBoxOptions ) );
 
     // Dilate the pointer areas to fill vertical space between the checkboxes.
     // See https://github.com/phetsims/natural-selection/issues/173
-    const xDilation = 4;
+    const xDilation = 8;
     const yDilation = NaturalSelectionConstants.VBOX_OPTIONS.spacing / 2;
-    checkboxes.children.forEach( checkbox => {
-      checkbox.touchArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
-      checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
+    alignBoxes.forEach( alignBox => {
+      alignBox.touchArea = alignBox.localBounds.dilatedXY( xDilation, yDilation );
+      alignBox.mouseArea = alignBox.localBounds.dilatedXY( xDilation, yDilation );
     } );
+
+    const checkboxesVBox = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+      children: alignBoxes
+    } ) );
 
     const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin, {
       stroke: NaturalSelectionColors.SEPARATOR_STROKE,
@@ -118,14 +128,15 @@ class PopulationPanel extends NaturalSelectionPanel {
       merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
         tandem: options.tandem.createTandem( 'dataProbeCheckbox' )
       } ) );
-    dataProbeCheckbox.touchArea = dataProbeCheckbox.localBounds.dilatedXY( xDilation, yDilation );
-    dataProbeCheckbox.mouseArea = dataProbeCheckbox.localBounds.dilatedXY( xDilation, yDilation );
+    const dataProbeAlignBox = new AlignBox( dataProbeCheckbox, alignBoxOptions );
+    dataProbeAlignBox.touchArea = dataProbeAlignBox.localBounds.dilatedXY( xDilation, yDilation );
+    dataProbeAlignBox.mouseArea = dataProbeAlignBox.localBounds.dilatedXY( xDilation, yDilation );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: [
-        checkboxes,
+        checkboxesVBox,
         separator,
-        dataProbeCheckbox
+        dataProbeAlignBox
       ]
     } ) );
 
