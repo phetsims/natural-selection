@@ -161,7 +161,7 @@ class ProportionsModel extends PhetioObject {
             // Show static counts for the start of the current generation.
             this.startCountsProperty.value = currentStartCountsProperty.value;
 
-            // Show dynamic counts for the 'Currently' state of the current generation. unlink is handed above.
+            // Show dynamic counts for the 'Currently' state of the current generation. unlink is handled above.
             liveBunnyCountsProperty.link( updateEndCounts );
           }
           else {

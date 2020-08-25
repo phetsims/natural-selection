@@ -194,7 +194,7 @@ class PopulationModel extends PhetioObject {
     } );
 
     // When a mutation has been applied, show the plots associated with that gene.
-    // unlink is not needed
+    // unlinks are not necessary.
     this.genePool.furGene.dominantAlleleProperty.link( dominantAllele => {
       this.whiteFurVisibleProperty.value = !!dominantAllele;
       this.brownFurVisibleProperty.value = !!dominantAllele;

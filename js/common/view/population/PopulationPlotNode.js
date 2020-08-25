@@ -84,14 +84,14 @@ class PopulationPlotNode extends Node {
     this.stepPath = stepPath;
     this.isDashed = _.sum( stepPath.lineDash ) > 0;
 
-    // unlink not needed
+    // unlink is not necessary.
     config.plotVisibleProperty.link( plotVisible => {
       this.visible = plotVisible;
     } );
 
     // Points are only added, and are not deleted until they are all deleted. So this is optimized to avoid doing
     // work as each individual point is deleted.
-    // unlink not needed
+    // unlink is not necessary.
     this.points.lengthProperty.link( ( length, previousLength ) => {
       if ( length > previousLength || length === 0 ) {
         this.updatePlot();
@@ -100,7 +100,7 @@ class PopulationPlotNode extends Node {
 
     // Until data fills the width of the graph and the graph starts scrolling, update the plot when generation changes.
     // After that, it's sufficient to update the plot when xRangeProperty changes.
-    // unlink not needed.
+    // unlink is not necessary.
     this.timeInGenerationsProperty.link( timeInGenerations => {
       if ( timeInGenerations < this.xAxisLength ) {
         this.updatePlot();

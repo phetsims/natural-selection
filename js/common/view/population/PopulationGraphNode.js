@@ -143,6 +143,7 @@ class PopulationGraphNode extends Node {
     } );
 
     // If the generation clock has started and there's no data visible, display 'Zoom out to see data.'
+    // unlink is not necessary.
     assert && assert( plotsNode.clipArea, 'plotsNode.clipArea is required' );
     const clipAreaBounds = plotsNode.clipArea.getBounds();
     plotsNode.localBoundsProperty.link( localBounds => {

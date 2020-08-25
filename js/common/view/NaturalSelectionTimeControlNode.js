@@ -55,7 +55,10 @@ class NaturalSelectionTimeControlNode extends HBox {
     super( options );
     this.initializeEnabledNode( options );
 
+    // Save state of whether the sim is playing, so it can be restored when fast-forward is released.
     let isPlayingSaved = isPlayingProperty.value;
+
+    // unlink is not necessary.
     fastForwardButton.buttonModel.downProperty.link( down => {
       playPauseButton.enabled = !down;
       if ( down ) {

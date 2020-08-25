@@ -116,6 +116,7 @@ class BunnyCollection {
     this.selectedBunnyProperty = new SelectedBunnyProperty( {
       tandem: options.tandem.createTandem( 'selectedBunnyProperty' )
     } );
+
     // unlink is not necessary.
     phet.log && this.selectedBunnyProperty.link( selectedBunny => {
       phet.log && phet.log( `selectedBunny=${selectedBunny}` );
@@ -126,6 +127,7 @@ class BunnyCollection {
       tandem: options.tandem.createTandem( 'allBunniesHaveDiedEmitter' ),
       phetioDocumentation: 'fires when all of the bunnies have died'
     } );
+
     // removeListener is not necessary
     phet.log && this.allBunniesHaveDiedEmitter.addListener( () => {
       phet.log && phet.log( 'All of the bunnies have died.' );
@@ -138,6 +140,7 @@ class BunnyCollection {
       tandem: options.tandem.createTandem( 'bunniesHaveTakenOverTheWorldEmitter' ),
       phetioDocumentation: 'fires when bunnies have taken over the world'
     } );
+
     // removeListener is not necessary
     phet.log && this.bunniesHaveTakenOverTheWorldEmitter.addListener( () => {
       phet.log && phet.log( 'Bunnies have taken over the world.' );

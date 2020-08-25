@@ -105,7 +105,7 @@ class WolfCollection {
       parameters: [ { valueType: 'number' } ] // generation value at which the event should be recorded
     } );
 
-    // The wolf population exists only while it's hunting.
+    // The wolf population exists only while it's hunting. unlink is not necessary.
     this.isHuntingProperty.link( isHunting => {
 
       // When the isHuntingProperty changes during normal simulation use, it creates or disposes Wolf instances.

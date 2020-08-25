@@ -35,6 +35,7 @@ class PerformanceTimesNode extends VBox {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT
     } );
 
+    // unlink is not necessary.
     timeToMateProperty.link( timeToMate => {
       const t = Utils.roundSymmetric( timeToMate );
       timeToMateNode.text = `time to mate = ${t} ms`;
@@ -47,6 +48,7 @@ class PerformanceTimesNode extends VBox {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT
     } );
 
+    // unlink is not necessary.
     timeToStartOverProperty.link( timeToStartOver => {
       const t = Utils.roundSymmetric( timeToStartOver );
       timeToStartOverNode.text = `time to Start Over = ${t} ms`;
