@@ -124,14 +124,6 @@ const SCHEMA = {
   // For internal use only
   //------------------------------------------------------------------------------------------------------------------
 
-  // Maximum number of generations before the sim stops and displays MemoryLimitDialog.
-  // Tuned in https://github.com/phetsims/natural-selection/issues/46
-  maxGenerations: {
-    type: 'number',
-    defaultValue: 1000,
-    isValidValue: value => ( value > 0 )
-  },
-
   // Seconds of real time per cycle of the generation clock. This is useful for development and testing, because
   // life is too short to sit around waiting for bunnies to die or take over the world.
   secondsPerGeneration: {
@@ -148,6 +140,14 @@ const SCHEMA = {
     isValidValue: value => ( value >= 1 )
   },
 
+  // Maximum number of generations before the sim stops and displays MemoryLimitDialog.
+  // Tuned in https://github.com/phetsims/natural-selection/issues/46
+  maxGenerations: {
+    type: 'number',
+    defaultValue: 1000,
+    isValidValue: value => ( value > 0 )
+  },
+
   // The number of bunnies required to 'take over the world'. Careful, because all bunnies are allowed to mate before
   // this value is checked, so the population could get ridiculously large.
   // Tuned in https://github.com/phetsims/natural-selection/issues/75
@@ -162,6 +162,20 @@ const SCHEMA = {
     type: 'number',
     defaultValue: 5, // Java version value is 5
     isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
+  },
+
+  // Percentage of newborn bunnies that will receive a mutation.
+  // Symmetric rounding is used, and at least 1 bunny will receive the mutation.
+  mutationPercentage: {
+    type: 'number',
+
+    // from the Java version, see MUTATING_BUNNY_PER_BUNNIES in NaturalSelectionDefaults.java
+    defaultValue: 1 / 7,
+
+    // All 3 mutations can be applied simultaneously. Mutation is mutually-exclusive by gene. A bunny can have at
+    // most 1 mutation. And we have 3 mutations, for fur, ears, and teeth. So at most 1/3 of the population can get a
+    // specific mutation.
+    isValidValue: value => ( value > 0 && value <= 1 / 3 )
   },
 
   // The random percentage of bunnies that will be eaten by wolves. See WolfCollection.eatBunnies.
@@ -206,6 +220,14 @@ const SCHEMA = {
     isValidValue: range => ( range.min > 0 ) && ( range.min < range.max )
   },
 
+  // Specifies the number of shrubs to show for limited (min) and abundant (max) food.
+  shrubsRange: {
+    type: 'custom',
+    parse: parseRange,
+    defaultValue: new Range( 10, 75 ),
+    isValidValue: range => ( range.min > 0 ) && ( range.max > range.min )
+  },
+
   // Adds a red dot at the origin of some objects (bunnies, wolves, food)
   showOrigin: {
     type: 'flag'
@@ -221,28 +243,6 @@ const SCHEMA = {
   // https://github.com/phetsims/natural-selection/issues/140.
   showTimes: {
     type: 'flag'
-  },
-
-  // Percentage of newborn bunnies that will receive a mutation.
-  // Symmetric rounding is used, and at least 1 bunny will receive the mutation.
-  mutationPercentage: {
-    type: 'number',
-
-    // from the Java version, see MUTATING_BUNNY_PER_BUNNIES in NaturalSelectionDefaults.java
-    defaultValue: 1 / 7,
-
-    // All 3 mutations can be applied simultaneously. Mutation is mutually-exclusive by gene. A bunny can have at
-    // most 1 mutation. And we have 3 mutations, for fur, ears, and teeth. So at most 1/3 of the population can get a
-    // specific mutation.
-    isValidValue: value => ( value > 0 && value <= 1 / 3 )
-  },
-
-  // Specifies the number of shrubs to show for limited (min) and abundant (max) food.
-  shrubsRange: {
-    type: 'custom',
-    parse: parseRange,
-    defaultValue: new Range( 10, 75 ),
-    isValidValue: range => ( range.min > 0 ) && ( range.max > range.min )
   }
 };
 
