@@ -35,9 +35,14 @@ class NaturalSelectionModel {
   /**
    * @param {string} mutationsQueryParameterName
    * @param {string} populationQueryParameterName
+   * @param {number} shrubsSeed - seed for random number generator used to position shrubs
    * @param {Object} [options]
    */
-  constructor( mutationsQueryParameterName, populationQueryParameterName, options ) {
+  constructor( mutationsQueryParameterName, populationQueryParameterName, shrubsSeed, options ) {
+
+    assert && assert( typeof mutationsQueryParameterName === 'string', 'invalid mutationsQueryParameterName' );
+    assert && assert( typeof populationQueryParameterName === 'string', 'invalid populationQueryParameterName' );
+    assert && assert( typeof shrubsSeed === 'number', 'invalid shrubsSeed' );
 
     options = merge( {
 
@@ -109,7 +114,7 @@ class NaturalSelectionModel {
       } );
 
     // @public (read-only)
-    this.food = new Food( this.generationClock, this.bunnyCollection, this.modelViewTransform, {
+    this.food = new Food( this.generationClock, this.bunnyCollection, this.modelViewTransform, shrubsSeed, {
       tandem: options.tandem.createTandem( 'food' )
     } );
 

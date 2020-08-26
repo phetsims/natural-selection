@@ -24,6 +24,11 @@ const NaturalSelectionConstants = {
   CLOCK_WOLVES_RANGE: new Range( 1 / 6, 3 / 6 ), // slice of the generation clock for wolves, as a percentage range [0,1]
   CLOCK_FOOD_RANGE: new Range( 3 / 6, 5 / 6 ), // slice of the generation clock for food, as a percentage range [0,1]
 
+  // Shrubs - Seeds for random number generator used to position shrubs. These specific seeds were chosen because they
+  // produce a desirable layout. See https://github.com/phetsims/natural-selection/issues/176
+  INTRO_SHRUBS_SEED: 0.5286575215756223,
+  LAB_SHRUBS_SEED: 0.9578375636205664,
+
   // View ============================================================================================================N
 
   // ScreenView

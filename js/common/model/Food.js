@@ -45,13 +45,15 @@ class Food {
    * @param {GenerationClock} generationClock
    * @param {BunnyCollection} bunnyCollection
    * @param {EnvironmentModelViewTransform} modelViewTransform
+   * @param {number} shrubsSeed - seed for random number generator used to position shrubs
    * @param {Object} [options]
    */
-  constructor( generationClock, bunnyCollection, modelViewTransform, options ) {
+  constructor( generationClock, bunnyCollection, modelViewTransform, shrubsSeed, options ) {
 
     assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
     assert && assert( bunnyCollection instanceof BunnyCollection, 'invalid bunnyCollection' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
+    assert && assert( typeof shrubsSeed === 'number', 'invalid shrubsSeed' );
 
     options = merge( {
 
@@ -87,9 +89,8 @@ class Food {
     } );
 
     // Use our own instance of Random to produce locations for shrubs.
-    // This specific seed was chosen because it produces a desirable layout.
     // See https://github.com/phetsims/natural-selection/issues/176
-    const random = new Random( { seed: 0.5853265884696416 } );
+    const random = new Random( { seed: shrubsSeed } );
 
     // @public (read-only) {Shrub[]} the collection of Shrubs
     // Shrubs are placed randomly in the environment.
