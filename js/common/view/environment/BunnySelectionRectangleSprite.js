@@ -21,9 +21,8 @@ class BunnySelectionRectangleSprite extends Sprite {
 
   /**
    * @param {HTMLImageElement} maxImage - the largest bunny image
-   * @param {Object} [options]
    */
-  constructor( maxImage, options ) {
+  constructor( maxImage ) {
 
     assert && assert( maxImage instanceof HTMLImageElement, 'invalid maxImage' );
     assert && assert( maxImage.width > 0 && maxImage.height > 0, 'maxImage does not have valid dimensions' );

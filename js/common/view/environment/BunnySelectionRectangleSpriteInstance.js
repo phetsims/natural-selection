@@ -27,9 +27,7 @@ class BunnySelectionRectangleSpriteInstance extends OrganismSpriteInstance {
     assert && assert( bunny instanceof Bunny, 'invalid bunny' );
     assert && assert( sprite instanceof BunnySelectionRectangleSprite, 'invalid sprite' );
 
-    super( bunny, sprite, {
-      baseScale: NaturalSelectionConstants.BUNNY_IMAGE_SCALE
-    } );
+    super( bunny, sprite, NaturalSelectionConstants.BUNNY_IMAGE_SCALE );
   }
 }
 

@@ -24,9 +24,7 @@ class WolfSpriteInstance extends OrganismSpriteInstance {
     assert && assert( wolf instanceof Wolf, 'invalid wolf' );
     assert && assert( sprite instanceof Sprite, 'invalid sprite' );
 
-    super( wolf, sprite, {
-      baseScale: NaturalSelectionConstants.WOLF_IMAGE_SCALE
-    } );
+    super( wolf, sprite, NaturalSelectionConstants.WOLF_IMAGE_SCALE );
   }
 }
 

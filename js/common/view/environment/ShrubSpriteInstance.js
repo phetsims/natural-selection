@@ -28,9 +28,7 @@ class ShrubSpriteInstance extends OrganismSpriteInstance {
     assert && assert( tenderSprite instanceof Sprite, 'invalid tenderSprite' );
     assert && assert( toughSprite instanceof Sprite, 'invalid toughSprite' );
 
-    super( shrub, isTough ? toughSprite : tenderSprite, {
-      baseScale: NaturalSelectionConstants.SHRUB_IMAGE_SCALE
-    } );
+    super( shrub, ( isTough ? toughSprite : tenderSprite ), NaturalSelectionConstants.SHRUB_IMAGE_SCALE );
 
     // @private
     this.tenderSprite = tenderSprite;
