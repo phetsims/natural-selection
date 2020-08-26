@@ -185,6 +185,7 @@ class NaturalSelectionModel {
     // @public
     this.memoryLimitEmitter = new Emitter( {
       tandem: options.tandem.createTandem( 'memoryLimitEmitter' ),
+      phetioReadOnly: true,
       phetioDocumentation: 'fires when the memory limit is reached and the simulation must be ended'
     } );
 

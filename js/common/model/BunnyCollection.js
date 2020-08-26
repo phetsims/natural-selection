@@ -125,6 +125,7 @@ class BunnyCollection {
     // @public notifies listeners when all bunnies have died. dispose is not necessary.
     this.allBunniesHaveDiedEmitter = new Emitter( {
       tandem: options.tandem.createTandem( 'allBunniesHaveDiedEmitter' ),
+      phetioReadOnly: true,
       phetioDocumentation: 'fires when all of the bunnies have died'
     } );
 
@@ -138,6 +139,7 @@ class BunnyCollection {
     // @public notifies listeners when bunnies have taken over the world. dispose is not necessary.
     this.bunniesHaveTakenOverTheWorldEmitter = new Emitter( {
       tandem: options.tandem.createTandem( 'bunniesHaveTakenOverTheWorldEmitter' ),
+      phetioReadOnly: true,
       phetioDocumentation: 'fires when bunnies have taken over the world'
     } );
 
