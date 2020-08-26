@@ -44,46 +44,55 @@ class PopulationPanel extends NaturalSelectionPanel {
     const earsGene = populationModel.genePool.earsGene;
     const teethGene = populationModel.genePool.teethGene;
 
+    // To make the content for all checkboxes have the same dimensions.
+    const alignGroup = new AlignGroup();
+
     // Total checkbox
     const totalCheckbox =
-      new PopulationLegendCheckbox( populationModel.totalVisibleProperty, naturalSelectionStrings.total, {
+      new PopulationLegendCheckbox( populationModel.totalVisibleProperty, naturalSelectionStrings.total, alignGroup, {
         color: NaturalSelectionColors.POPULATION_TOTAL_COUNT,
         tandem: options.tandem.createTandem( 'totalCheckbox' )
       } );
 
     // A checkbox for each allele
-    const whiteFurCheckbox = new PopulationLegendCheckbox( populationModel.whiteFurVisibleProperty, furGene.normalAllele.name, {
-      color: furGene.color,
-      tandem: options.tandem.createTandem( 'whiteFurCheckbox' )
-    } );
+    const whiteFurCheckbox =
+      new PopulationLegendCheckbox( populationModel.whiteFurVisibleProperty, furGene.normalAllele.name, alignGroup, {
+        color: furGene.color,
+        tandem: options.tandem.createTandem( 'whiteFurCheckbox' )
+      } );
 
-    const brownFurCheckbox = new PopulationLegendCheckbox( populationModel.brownFurVisibleProperty, furGene.mutantAllele.name, {
-      color: furGene.color,
-      isMutant: true,
-      tandem: options.tandem.createTandem( 'brownFurCheckbox' )
-    } );
+    const brownFurCheckbox =
+      new PopulationLegendCheckbox( populationModel.brownFurVisibleProperty, furGene.mutantAllele.name, alignGroup, {
+        color: furGene.color,
+        isMutant: true,
+        tandem: options.tandem.createTandem( 'brownFurCheckbox' )
+      } );
 
-    const straightEarsCheckbox = new PopulationLegendCheckbox( populationModel.straightEarsVisibleProperty, earsGene.normalAllele.name, {
-      color: earsGene.color,
-      tandem: options.tandem.createTandem( 'straightEarsCheckbox' )
-    } );
+    const straightEarsCheckbox =
+      new PopulationLegendCheckbox( populationModel.straightEarsVisibleProperty, earsGene.normalAllele.name, alignGroup, {
+        color: earsGene.color,
+        tandem: options.tandem.createTandem( 'straightEarsCheckbox' )
+      } );
 
-    const floppyEarsCheckbox = new PopulationLegendCheckbox( populationModel.floppyEarsVisibleProperty, earsGene.mutantAllele.name, {
-      color: earsGene.color,
-      isMutant: true,
-      tandem: options.tandem.createTandem( 'floppyEarsCheckbox' )
-    } );
+    const floppyEarsCheckbox =
+      new PopulationLegendCheckbox( populationModel.floppyEarsVisibleProperty, earsGene.mutantAllele.name, alignGroup, {
+        color: earsGene.color,
+        isMutant: true,
+        tandem: options.tandem.createTandem( 'floppyEarsCheckbox' )
+      } );
 
-    const shortTeethCheckbox = new PopulationLegendCheckbox( populationModel.shortTeethVisibleProperty, teethGene.normalAllele.name, {
-      color: teethGene.color,
-      tandem: options.tandem.createTandem( 'shortTeethCheckbox' )
-    } );
+    const shortTeethCheckbox =
+      new PopulationLegendCheckbox( populationModel.shortTeethVisibleProperty, teethGene.normalAllele.name, alignGroup, {
+        color: teethGene.color,
+        tandem: options.tandem.createTandem( 'shortTeethCheckbox' )
+      } );
 
-    const longTeethCheckbox = new PopulationLegendCheckbox( populationModel.longTeethVisibleProperty, teethGene.mutantAllele.name, {
-      color: teethGene.color,
-      isMutant: true,
-      tandem: options.tandem.createTandem( 'longTeethCheckbox' )
-    } );
+    const longTeethCheckbox =
+      new PopulationLegendCheckbox( populationModel.longTeethVisibleProperty, teethGene.mutantAllele.name, alignGroup, {
+        color: teethGene.color,
+        isMutant: true,
+        tandem: options.tandem.createTandem( 'longTeethCheckbox' )
+      } );
 
     const checkboxes = [ totalCheckbox,
       whiteFurCheckbox,
@@ -94,24 +103,17 @@ class PopulationPanel extends NaturalSelectionPanel {
       longTeethCheckbox
     ];
 
-    // Make all checkboxes have the same dimensions.
-    const alignBoxOptions = {
-      group: new AlignGroup(),
-      xAlign: 'left'
-    };
-    const alignBoxes = _.map( checkboxes, checkbox => new AlignBox( checkbox, alignBoxOptions ) );
-
     // Dilate the pointer areas to fill vertical space between the checkboxes.
     // See https://github.com/phetsims/natural-selection/issues/173
     const xDilation = 8;
     const yDilation = NaturalSelectionConstants.VBOX_OPTIONS.spacing / 2;
-    alignBoxes.forEach( alignBox => {
-      alignBox.touchArea = alignBox.localBounds.dilatedXY( xDilation, yDilation );
-      alignBox.mouseArea = alignBox.localBounds.dilatedXY( xDilation, yDilation );
+    checkboxes.forEach( checkbox => {
+      checkbox.touchArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
+      checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
     } );
 
     const checkboxesVBox = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-      children: alignBoxes
+      children: checkboxes
     } ) );
 
     const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin, {
@@ -124,19 +126,22 @@ class PopulationPanel extends NaturalSelectionPanel {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 135 // determined empirically
     } );
-    const dataProbeCheckbox = new Checkbox( dataProbeCheckboxLabel, populationModel.dataProbe.visibleProperty,
+    const dataProbeCheckboxContent = new AlignBox( dataProbeCheckboxLabel, {
+      group: alignGroup,
+      xAlign: 'left'
+    } );
+    const dataProbeCheckbox = new Checkbox( dataProbeCheckboxContent, populationModel.dataProbe.visibleProperty,
       merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
         tandem: options.tandem.createTandem( 'dataProbeCheckbox' )
       } ) );
-    const dataProbeAlignBox = new AlignBox( dataProbeCheckbox, alignBoxOptions );
-    dataProbeAlignBox.touchArea = dataProbeAlignBox.localBounds.dilatedXY( xDilation, yDilation );
-    dataProbeAlignBox.mouseArea = dataProbeAlignBox.localBounds.dilatedXY( xDilation, yDilation );
+    dataProbeCheckbox.touchArea = dataProbeCheckbox.localBounds.dilatedXY( xDilation, yDilation );
+    dataProbeCheckbox.mouseArea = dataProbeCheckbox.localBounds.dilatedXY( xDilation, yDilation );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: [
         checkboxesVBox,
         separator,
-        dataProbeAlignBox
+        dataProbeCheckbox
       ]
     } ) );
 

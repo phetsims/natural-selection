@@ -9,6 +9,7 @@
 
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
+import AlignBox from '../../../../../scenery/js/nodes/AlignBox.js';
 import HBox from '../../../../../scenery/js/nodes/HBox.js';
 import Line from '../../../../../scenery/js/nodes/Line.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
@@ -29,9 +30,10 @@ class PopulationLegendCheckbox extends Checkbox {
   /**
    * @param {Property.<boolean>} plotVisibleProperty - Property to show/hide the associated plot on the Population graph
    * @param {string} name - the allele name
+   * @param {AlignGroup} alignGroup - to make all checkbox content have the same effective size
    * @param {Object} [options]
    */
-  constructor( plotVisibleProperty, name, options ) {
+  constructor( plotVisibleProperty, name, alignGroup, options ) {
 
     assert && AssertUtils.assertPropertyOf( plotVisibleProperty, 'boolean' );
     assert && assert( typeof name === 'string', 'invalid name' );
@@ -54,9 +56,14 @@ class PopulationLegendCheckbox extends Checkbox {
       maxWidth: 100 // determined empirically
     } );
 
-    const content = new HBox( {
+    const hBox = new HBox( {
       spacing: 5,
       children: [ lineNode, nameNode ]
+    } );
+
+    const content = new AlignBox( hBox, {
+      group: alignGroup,
+      xAlign: 'left'
     } );
 
     super( content, plotVisibleProperty, options );
