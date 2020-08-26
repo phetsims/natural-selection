@@ -186,7 +186,7 @@ const SCHEMA = {
   toughFoodPercentToStarveRange: {
     type: 'custom',
     parse: parseRange,
-    defaultValue: new Range( 0.45, 0.6 ),
+    defaultValue: new Range( 0.4, 0.45 ),
     isValidValue: range => NaturalSelectionUtils.isPercentRange( range )
   },
 
@@ -194,7 +194,7 @@ const SCHEMA = {
   // Tuned in https://github.com/phetsims/natural-selection/issues/86
   shortTeethMultiplier: {
     type: 'number',
-    defaultValue: 1.6,
+    defaultValue: 2 ,
     isValidValue: value => ( value > 1 )
   },
 
