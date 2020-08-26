@@ -208,8 +208,8 @@ percentShortTeethStarved = 0
 percentLongTeethStarved = 0
 
 if ( tough food is enabled ) {
-  percentToStarve = randomNumberBetween( 0.45, 0.6 )
-  percentShortTeethStarved = percentToStarve * 1.6
+  percentToStarve = randomNumberBetween( 0.4, 0.45 )
+  percentShortTeethStarved = percentToStarve * 2
   percentLongTeethStarved = percentToStarve
   if ( number of bunnies with long teeth < 5 ) {
     percentLongTeethStarved = 0
