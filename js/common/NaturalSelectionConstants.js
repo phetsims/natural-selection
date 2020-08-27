@@ -21,8 +21,10 @@ const NaturalSelectionConstants = {
   // Model ===========================================================================================================
 
   // Generation Clock
-  CLOCK_WOLVES_RANGE: new Range( 1 / 6, 3 / 6 ), // slice of the generation clock for wolves, as a percentage range [0,1]
-  CLOCK_FOOD_RANGE: new Range( 3 / 6, 5 / 6 ), // slice of the generation clock for food, as a percentage range [0,1]
+  // slice of the generation clock for wolves, as a percentage range [0,1]. This correspond to 2:00-6:00 on the clock.
+  CLOCK_WOLVES_RANGE: new Range( 2 / 12, 6 / 12 ),
+  // slice of the generation clock for food, as a percentage range [0,1]. This correspond to 6:00-10:00 on the clock.
+  CLOCK_FOOD_RANGE: new Range( 6 / 12, 10 / 12 ),
 
   // Shrubs
   // Seeds for random number generator used to position shrubs. These specific seeds were chosen because they
