@@ -153,7 +153,7 @@ Here are pointers to some of the major features of the view:
 * Add a wolf to the view: [OrganismSprites](https://github.com/phetsims/natural-selection/blob/master/js/common/view/environment/OrganismSprites.js)`.createWolfSpriteInstance`
 * Map a bunny to an image: [BunnyImageMap](https://github.com/phetsims/natural-selection/blob/master/js/common/view/BunnyImageMap.js)
 * Plot data on the Population graph: [PopulationPlotNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/population/PopulationPlotNode.js)
-* Draw bars in the Proportions graph: [ProportionsBarNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/proportions/ProportionsBarNode.js)
+* Draw a bar for the Proportions graph: [ProportionsBarNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/proportions/ProportionsBarNode.js)
 * Pedigree tree structure: [PedigreeBranchNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/pedigree/PedigreeBranchNode.js)
 * Manage the "Mutation Coming" popups: [MutationAlertsNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/MutationAlertsNode.js)
 
