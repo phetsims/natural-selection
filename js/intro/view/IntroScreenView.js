@@ -24,7 +24,7 @@ class IntroScreenView extends NaturalSelectionScreenView {
 
     super( model, {
 
-      // Hide the user-interface for the Ears, Teeth, and Limited Food features.
+      // Hide the user-interface for the Ears, Teeth, and Tough Food features.
       // See see https://github.com/phetsims/natural-selection/issues/70.
       earsVisible: false,
       teethVisible: false,
