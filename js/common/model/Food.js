@@ -88,7 +88,7 @@ class Food {
       parameters: [ { valueType: 'number' } ] // timeInGenerations at which the event should be recorded
     } );
 
-    // Use our own instance of Random to produce locations for shrubs.
+    // Use our own instance of Random to produce positions for shrubs.
     // See https://github.com/phetsims/natural-selection/issues/176
     const random = new Random( { seed: shrubsSeed } );
 
