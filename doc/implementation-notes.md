@@ -169,6 +169,6 @@ This section describes patterns and features that are specific to PhET-iO instru
 
 **Configure the Genes for a screen**: [GeneVisibilityManager](https://github.com/phetsims/natural-selection/blob/master/js/common/view/GenesVisibilityManager.js) has a `{{gene}}VisibleProperty` for each Gene, which controls the visiblity of all UI components for that gene. Use these Properties via Studio to quickly configure which genes appear in the UI. Search for "view.genes" in Studio.
 
-**Configure the Environmental Factors for a screen**: Configuring which environmental factors are available for a screen is as easy as deciding which checkboxes to make visible.  Search for `wolvesCheckbox`, `toughFoodCheckbox`, and `limitedFoodCheckbox` in Studio, and set their visibleProperty as desired.
+**Configure the Environmental Factors for a screen**: Configuring which environmental factors are available for a screen is as easy as deciding which checkboxes to make visible in the "Environmental Factors" panel.  Search for `wolvesCheckbox`, `toughFoodCheckbox`, and `limitedFoodCheckbox` in Studio, and set their visibleProperty as desired.
 
   
