@@ -245,12 +245,12 @@ class NaturalSelectionModel {
    */
   reset() {
 
-    this.startOver();
-
+    // These Properties are not reset by startOver
     this.timeSpeedProperty.reset();
-
-    // environmental factors
     this.environmentProperty.reset();
+
+    // Everything else is the same as startOver
+    this.startOver();
   }
 
   /**
@@ -261,7 +261,6 @@ class NaturalSelectionModel {
 
     phet.log && phet.log( '====== Generation 0 ======' );
 
-    this.simulationModeProperty.reset();
     this.isPlayingProperty.reset(); // see https://github.com/phetsims/natural-selection/issues/55
     this.generationClock.reset();
 
@@ -277,6 +276,9 @@ class NaturalSelectionModel {
     this.populationModel.reset();
     this.proportionsModel.reset();
     this.pedigreeModel.reset();
+
+    // Reset the mode last, because listeners may inspect other model state.
+    this.simulationModeProperty.reset();
   }
 
   /**
