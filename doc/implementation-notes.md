@@ -57,7 +57,7 @@ The sim makes heavy use of logging via `phet.log`, enabled using the `log` query
 
 All uses of `link`, `addListener`, etc. are documented as to whether they need a corresponding `unlink`, `removeListener`, etc.
 
-All classes have a `dispose` method. Classes whose instances exist for the lifetime of the sim are not intended to 
+All classes have a `dispose` method. Sim-specific classes whose instances exist for the lifetime of the sim are not intended to 
 be disposed, and their `dispose` implementation looks like this:
 
 ```js
