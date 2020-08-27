@@ -143,7 +143,7 @@ The main view class is [NaturalSelectionScreenView](https://github.com/phetsims/
 
 * [environment/](https://github.com/phetsims/natural-selection/tree/master/js/common/view/environment) - specific to the part of the screen where the bunnies hop around, main class [EnvironmentNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/environment/EnvironmentNode.js)
 * [pedigree/](https://github.com/phetsims/natural-selection/tree/master/js/common/view/pedigree) - specific to the Pedigree graph, main class [PedigreeNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/pedigree/PedigreeNode.js)
-* [population/](https://github.com/phetsims/natural-selection/tree/master/js/common/view/population) - specific to the Population graph, main class [PopulatioNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/population/PopulationNode.js)
+* [population/](https://github.com/phetsims/natural-selection/tree/master/js/common/view/population) - specific to the Population graph, main class [PopulationNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/population/PopulationNode.js)
 * [proportions/](https://github.com/phetsims/natural-selection/tree/master/js/common/view/proportions) - specific to the Proportions graph, main class [ProportionsNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/proportions/ProportionsNode.js)
 
 Here are pointers to some of the major features of the view:
