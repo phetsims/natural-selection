@@ -36,7 +36,7 @@ There are 3 different model-view transforms in this sim.
 
 * _Environment_: The model uses a unitless 3D coordinate frame, where +x is to the left, +y is up, and +z is into the screen. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. [EnvironmentModelViewTransform](https://github.com/phetsims/natural-selection/blob/master/js/common/model/EnvironmentModelViewTransform.js) handles the transforms, and has very detailed documentation in the source code header. 
 
-* _Population graph_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. Because drawing plots needs to be lightweight and high-performance, `ModelViewTransform` is not used here. Model-to-view transform is handled by [PopulationPlotNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/population/PopulationPlotNode.js) (see `modelToViewX` and `modelToViewY`). View-to-model transform is unnecessary.
+* _Population graph_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. Because drawing plots needs to be lightweight and high-performance, `MoelViewTransform` is not used here. Model-to-view transform is handled by [PopulationPlotNode](https://github.com/phetsims/natural-selection/blob/master/js/common/view/population/PopulationPlotNode.js) (see `modelToViewX` and `modelToViewY`). View-to-model transform is unnecessary.
 
 * _Data Probe_: The model uses a 2D coordinate frame, where +generation is to the right, and +population is up. The view uses scenery's standard coordinate frame, where +x is to the left, and +y is down. The data probe can only move horizontally, so the y-axis is irrelevant, but position is (for convenience) a `Vector2` because it's required by `DragListener`. `ModelViewTransform` handles the transforms.
 
@@ -77,7 +77,7 @@ It's possible to put this sim in a state where the population stabilizes, and th
 
 ## Screens
 
-The sim has two screens, named _Intro_ and _Lab_.  The implementation of the model and view for these screens is identical. The view simply hides the genes and environmental factors that are not desired for a screen.  The _Intro_ screen has the fur gene, wolves, and limited food.  The _Lab_ screen has the full set of genes and environmental factors.
+The sim has two screens, named _Intro_ and _Lab_.  The implementation of the model and view for these screens is identical. The view simply hides the genes and environmental factors that are not desired for a screen.  The _Intro_ screen includes the fur gene, wolves, and limited food.  The _Lab_ screen includes the full set of genes and environmental factors.
 
 ## Model
 
