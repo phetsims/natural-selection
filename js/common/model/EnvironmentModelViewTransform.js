@@ -111,11 +111,11 @@ class EnvironmentModelViewTransform {
 
   /**
    * Returns a random position on the ground, in model coordinates.
-   * @param {number} xMargin
+   * @param {number} xMargin - margin from the left and right edges of the view bounds
    * @returns {Vector3}
    * @public
    */
-  getRandomGroundPosition( xMargin = 0 ) {
+  getRandomGroundPosition( xMargin ) {
 
     // Choose a random z coordinate on the ground trapezoid.
     const zModel = phet.joist.random.nextDoubleBetween( this.zNearModel + Z_MARGIN_MODEL, this.zFarModel - Z_MARGIN_MODEL );
