@@ -342,6 +342,8 @@ class Column extends VBox {
       merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
         tandem: options.tandem.createTandem( 'checkbox' )
       } ) );
+    checkbox.mouseArea = checkbox.localBounds.dilatedXY( 8, 6 );
+    checkbox.touchArea = checkbox.localBounds.dilatedXY( 8, 6 );
 
     const startBarNode = new ProportionsBarNode( gene.color, startNormalCount, startMutantCount, valuesVisibleProperty, {
       tandem: options.tandem.createTandem( 'startBarNode' )
