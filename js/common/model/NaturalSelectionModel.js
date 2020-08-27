@@ -133,8 +133,7 @@ class NaturalSelectionModel {
     this.proportionsModel = new ProportionsModel(
       this.bunnyCollection.liveBunnies.countsProperty,
       this.generationClock.clockGenerationProperty,
-      this.isPlayingProperty,
-      this.simulationModeProperty, {
+      this.isPlayingProperty, {
         tandem: graphsTandem.createTandem( 'proportionsModel' )
       } );
 

@@ -25,7 +25,6 @@ import BunnyCounts from './BunnyCounts.js';
 import BunnyCountsIO from './BunnyCountsIO.js';
 import ProportionsCounts from './ProportionsCounts.js';
 import ProportionsCountsIO from './ProportionsCountsIO.js';
-import SimulationMode from './SimulationMode.js';
 
 class ProportionsModel extends PhetioObject {
 
@@ -33,15 +32,13 @@ class ProportionsModel extends PhetioObject {
    * @param {Property.<BunnyCounts>} liveBunnyCountsProperty - counts of live bunnies, used for dynamic 'Currently' data
    * @param {Property.<number>} clockGenerationProperty - the generation number of the generation clock
    * @param {Property.<boolean>} isPlayingProperty
-   * @param {EnumerationProperty.<SimulationMode>} simulationModeProperty
    * @param {Object} [options]
    */
-  constructor( liveBunnyCountsProperty, clockGenerationProperty, isPlayingProperty, simulationModeProperty, options ) {
+  constructor( liveBunnyCountsProperty, clockGenerationProperty, isPlayingProperty, options ) {
 
     assert && assert( liveBunnyCountsProperty instanceof Property, 'invalid bunnyCounts' );
     assert && AssertUtils.assertPropertyOf( clockGenerationProperty, 'number' );
     assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
-    assert && AssertUtils.assertEnumerationPropertyOf( simulationModeProperty, SimulationMode );
 
     options = merge( {
 
