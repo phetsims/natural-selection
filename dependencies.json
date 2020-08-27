@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.1.0-dev.15 Wed Aug 26 2020 10:26:00 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.1.0-dev.16 Wed Aug 26 2020 19:52:51 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "1a41cef653bbed1025af5768bea958d7e3e0f8ae",
     "branch": "master"
@@ -13,7 +13,7 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "574c30f31de727e3962d24c6d1c1ec2ae5a70019",
+    "sha": "29b616a083a386ecb9744a5c55caccef1f2ab34d",
     "branch": "master"
   },
   "dot": {
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "natural-selection": {
-    "sha": "1fd1551ec461d83fb06c3f2ee3f19e38f5c3984b",
+    "sha": "591a6427d9dd0a761dae7f499258e85989c2b680",
     "branch": "master"
   },
   "phet-core": {
@@ -37,7 +37,7 @@
     "branch": "master"
   },
   "phet-io": {
-    "sha": "496ddd434144cf80e75311f0c0c9b4da5fc7af4c",
+    "sha": "6735f2f139766053213606de5abf21e3ba25b686",
     "branch": "master"
   },
   "phet-io-client-guides": {
@@ -45,7 +45,7 @@
     "branch": "master"
   },
   "phet-io-wrappers": {
-    "sha": "66102e2487df66c2485749bd00a6c50db29f2fe7",
+    "sha": "70f89851fdc68531297c19ca0c1077e47b26be99",
     "branch": "master"
   },
   "phetcommon": {
@@ -61,7 +61,7 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "c0ea8cc3f85f2bc5a8f868d28ec2ef33f7c57496",
+    "sha": "504d1100c2852bf58e2f5fc2433ac724cd8e1d6d",
     "branch": "master"
   },
   "scenery-phet": {
@@ -69,19 +69,19 @@
     "branch": "master"
   },
   "sherpa": {
-    "sha": "b11a107bee1bcff508951656e9ebd3db13239abe",
+    "sha": "345cb1295014fa010002adb91107f07cdc5450ed",
     "branch": "master"
   },
   "studio": {
-    "sha": "fd77bfb3ddc092f8b1b6abe62d32c28dd42b7203",
+    "sha": "e8ec6dd39ee08f9f32e494d01dbff66acfbd9c26",
     "branch": "master"
   },
   "sun": {
-    "sha": "de02371698a4895366992849544b04e5d94f0575",
+    "sha": "55991cbd4b808011f2dc59935363b620f6e31499",
     "branch": "master"
   },
   "tambo": {
-    "sha": "bf323435a704a1b2174d0201918b418a61bfce8f",
+    "sha": "3ed5a17a696e100e73e700ab29124c6ba8f16f46",
     "branch": "master"
   },
   "tandem": {
