@@ -22,7 +22,9 @@ class BunnyVariety {
    * @param {Allele} fatherTeethAllele
    * @param {Allele} motherTeethAllele
    */
-  constructor( count, genotypeString, fatherFurAllele, motherFurAllele, fatherEarsAllele, motherEarsAllele,
+  constructor( count, genotypeString,
+               fatherFurAllele, motherFurAllele,
+               fatherEarsAllele, motherEarsAllele,
                fatherTeethAllele, motherTeethAllele ) {
 
     // @public (read-only) the number of bunnies of this variety to create
