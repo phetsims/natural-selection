@@ -37,11 +37,13 @@ class LabScreen extends Screen {
     assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
     const options = {
+
+      // Screen options
       name: naturalSelectionStrings.screen.lab,
+      homeScreenIcon: createScreenIcon(),
       backgroundColorProperty: new Property( NaturalSelectionColors.SCREEN_VIEW_BACKGROUND, {
         tandem: Tandem.OPT_OUT
       } ),
-      homeScreenIcon: createScreenIcon(),
 
       // phet-io
       tandem: tandem
