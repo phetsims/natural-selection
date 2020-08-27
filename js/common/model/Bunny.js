@@ -248,7 +248,7 @@ class Bunny extends Organism {
   }
 
   /**
-   * Does part of a hop cycle.
+   * Performs part of a hop cycle.
    * @param {number} dt - time step, in seconds
    * @private
    */
@@ -415,6 +415,10 @@ class Bunny extends Organism {
  * @returns {Vector3}
  */
 function getHopDelta( hopDistance, hopHeight, xDirection ) {
+
+  assert && assert( typeof hopDistance === 'number', 'invalid hopDistance' );
+  assert && assert( NaturalSelectionUtils.isNonNegative( hopHeight ), `invalid hopHeight: ${hopHeight}` );
+  assert && assert( XDirection.includes( xDirection ), 'invalid xDirection' );
 
   const angle = phet.joist.random.nextDoubleBetween( 0, 2 * Math.PI );
 
