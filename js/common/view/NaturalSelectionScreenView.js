@@ -208,6 +208,10 @@ class NaturalSelectionScreenView extends ScreenView {
         // Callback for the 'Start Over' button, with performance profiling,
         // see https://github.com/phetsims/natural-selection/issues/140
         startOver: () => {
+
+          // Like 'Reset All', cancel any interactions that are in progress.
+          this.interruptSubtreeInput();
+
           timeToStartOverProperty.value = NaturalSelectionUtils.time( () => model.startOver() );
         },
         centerX: environmentNode.centerX,
