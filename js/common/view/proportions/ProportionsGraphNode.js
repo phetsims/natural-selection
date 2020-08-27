@@ -334,6 +334,7 @@ class Column extends VBox {
       tandem: Tandem.REQUIRED
     }, options );
 
+    // Check box to hide the column
     const labelNode = new Text( gene.name, {
       font: COLUMN_LABEL_FONT,
       maxWidth: 100 // determined empirically
@@ -342,12 +343,17 @@ class Column extends VBox {
       merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
         tandem: options.tandem.createTandem( 'checkbox' )
       } ) );
-    checkbox.mouseArea = checkbox.localBounds.dilatedXY( 8, 6 );
-    checkbox.touchArea = checkbox.localBounds.dilatedXY( 8, 6 );
+
+    // Pointer areas for the checkbox
+    const xDilation = 8;
+    const yDilation = 6;
+    checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
+    checkbox.touchArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
 
     const startBarNode = new ProportionsBarNode( gene.color, startNormalCount, startMutantCount, valuesVisibleProperty, {
       tandem: options.tandem.createTandem( 'startBarNode' )
     } );
+
     const endBarNode = new ProportionsBarNode( gene.color, endNormalCount, endMutantCount, valuesVisibleProperty, {
       tandem: options.tandem.createTandem( 'endBarNode' )
     } );
