@@ -334,7 +334,7 @@ class Column extends VBox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // Check box to hide the column
+    // Checkbox to hide the column
     const labelNode = new Text( gene.name, {
       font: COLUMN_LABEL_FONT,
       maxWidth: 100 // determined empirically
