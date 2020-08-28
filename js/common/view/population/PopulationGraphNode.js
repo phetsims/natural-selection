@@ -116,6 +116,7 @@ class PopulationGraphNode extends Node {
 
     const zoomOutToSeeDataText = new Text( naturalSelectionStrings.zoomOutToSeeData, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
+      maxWidth: 0.75 * gridWidth,
       centerX: gridNode.x + gridWidth / 2,
       centerY: gridNode.y + gridHeight / 2
     } );
