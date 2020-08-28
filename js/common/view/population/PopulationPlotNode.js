@@ -107,9 +107,9 @@ class PopulationPlotNode extends Node {
       }
     } );
 
-    // unmultilink is not necessary
+    // Update when visibility or range changes. unmultilink is not necessary.
     Property.multilink( [ this.visibleProperty, this.xRangeProperty, this.yRangeProperty ],
-      visible => visible && this.updatePlot()
+      visible => visible ? this.updatePlot() : this.clearPlot()
     );
   }
 
@@ -216,6 +216,19 @@ class PopulationPlotNode extends Node {
       this.pointsPath.setShape( pointsShape );
       this.stepPath.setShape( stepShape );
     }
+  }
+
+  /**
+   * Clears the plot. While a plot is invisible, it is not updated.  So when a plot is made invisible, it must
+   * also be cleared. This is important because bounds are used to decide if the graph is displaying data, and
+   * whether the "Zoom out to show data" message should be displayed.  Bounds computation includes invisible Nodes,
+   * and if the plot still contains geometry, then it will be incorrectly contributing to bounds.
+   * See https://github.com/phetsims/natural-selection/issues/209
+   * @private
+   */
+  clearPlot() {
+    this.pointsPath.setShape( null );
+    this.stepPath.setShape( null );
   }
 
   /**
