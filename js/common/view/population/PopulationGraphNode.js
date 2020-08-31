@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import ZoomButtonGroup from '../../../../../scenery-phet/js/ZoomButtonGroup.js';
@@ -143,14 +144,12 @@ class PopulationGraphNode extends Node {
       yAxisLabelNode.centerY = gridNode.y + ( gridHeight / 2 );
     } );
 
-    // If the generation clock has started and there's no data visible, display 'Zoom out to see data.'
+    // If the plot has data that is not visible, display 'Zoom out to see data.'
     // unlink is not necessary.
     assert && assert( plotsNode.clipArea, 'plotsNode.clipArea is required' );
-    const clipAreaBounds = plotsNode.clipArea.getBounds();
     plotsNode.localBoundsProperty.link( localBounds => {
-      const clockHasStarted = ( populationModel.timeInGenerationsProperty.value !== 0 );
-      const dataIsVisible = localBounds.intersectsBounds( clipAreaBounds );
-      zoomOutToSeeDataText.visible = clockHasStarted && !dataIsVisible;
+      zoomOutToSeeDataText.visible = !localBounds.equals( Bounds2.NOTHING ) &&
+                                     !localBounds.intersectsBounds( plotsNode.clipArea.bounds );
     } );
 
     super( options );
