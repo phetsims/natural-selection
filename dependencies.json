@@ -1,11 +1,11 @@
 {
-  "comment": "# natural-selection 1.1.0-dev.18 Thu Aug 27 2020 14:15:35 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.2.0-dev.1 Sun Aug 30 2020 21:56:03 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "1a41cef653bbed1025af5768bea958d7e3e0f8ae",
     "branch": "master"
   },
   "axon": {
-    "sha": "d96cb126b896fa92103943367c9f154918efe627",
+    "sha": "9af0a092673437b0fdac369ee5f6b483893d7d8b",
     "branch": "master"
   },
   "brand": {
@@ -21,7 +21,7 @@
     "branch": "master"
   },
   "joist": {
-    "sha": "44bc0d38ee737e2049cd7da9c6586008c504bac9",
+    "sha": "763a08f2365ea62e503b9546e8a4fba57f1905a6",
     "branch": "master"
   },
   "kite": {
@@ -29,7 +29,7 @@
     "branch": "master"
   },
   "natural-selection": {
-    "sha": "50b4507a789f83cccf50a987e152c9cfb06008d4",
+    "sha": "696c53f3bd524470faa107279c03cc43fd139af8",
     "branch": "master"
   },
   "phet-core": {
@@ -37,7 +37,7 @@
     "branch": "master"
   },
   "phet-io": {
-    "sha": "f20aff6cf43e07856bb78ad27b5f31fad521b0d3",
+    "sha": "1331c44cdbe7aafe6064c7a11daf5b37093cfe98",
     "branch": "master"
   },
   "phet-io-client-guides": {
@@ -45,7 +45,7 @@
     "branch": "master"
   },
   "phet-io-wrappers": {
-    "sha": "70f89851fdc68531297c19ca0c1077e47b26be99",
+    "sha": "3a93a668b37d3b203e2a1dcc8ce637eeb957141a",
     "branch": "master"
   },
   "phetcommon": {
@@ -65,19 +65,19 @@
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "65d4d6834deebe9dde2ac92ce877e9bdd5bd26cd",
+    "sha": "3c2294a474397da4e97538359933e0bb5a76d33f",
     "branch": "master"
   },
   "sherpa": {
-    "sha": "455f61f83419494345cf5b00b17aaebbe85a221f",
+    "sha": "13aba9e75e334a64d67728217e8963f99740d3e5",
     "branch": "master"
   },
   "studio": {
-    "sha": "e8ec6dd39ee08f9f32e494d01dbff66acfbd9c26",
+    "sha": "557bfa126e13e52b987778add18d1eec4ae590d8",
     "branch": "master"
   },
   "sun": {
-    "sha": "0061602b2a7f02a777832aa70491082dead6c6b5",
+    "sha": "ae94a5f7bcc7fde89dd2863a6953f85bb827f9f0",
     "branch": "master"
   },
   "tambo": {
