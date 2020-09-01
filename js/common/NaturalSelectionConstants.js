@@ -58,7 +58,9 @@ const NaturalSelectionConstants = {
     xMargin: 6,
     yMargin: 4,
     touchAreaXDilation: 10,
-    touchAreaYDilation: 6
+    touchAreaYDilation: 6,
+    mouseAreaXDilation: 5,
+    mouseAreaYDilation: 3
   },
 
   // Checkbox

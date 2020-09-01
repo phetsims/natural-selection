@@ -30,6 +30,10 @@ class ProportionsGenerationSpinner extends NumberSpinner {
       // NumberSpinner options
       xSpacing: 10,
       arrowsPosition: 'leftRight',
+      touchAreaXDilation: 20,
+      touchAreaYDilation: 10,
+      mouseAreaXDilation: 10,
+      mouseAreaYDilation: 5,
       numberDisplayOptions: {
         valuePattern: naturalSelectionStrings.generationValue,
         align: 'center',
