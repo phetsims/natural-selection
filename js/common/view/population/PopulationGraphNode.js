@@ -83,6 +83,8 @@ class PopulationGraphNode extends Node {
       orientation: 'vertical',
       zoomLevelMin: populationModel.yZoomLevelProperty.range.min,
       zoomLevelMax: populationModel.yZoomLevelProperty.range.max,
+      touchAreaXDilation: 7,
+      touchAreaYDilation: 4,
       left: boundsRectangle.left,
       top: boundsRectangle.top,
       tandem: options.tandem.createTandem( 'yZoomButtonGroup' ),
