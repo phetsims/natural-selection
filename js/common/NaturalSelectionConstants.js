@@ -57,7 +57,7 @@ const NaturalSelectionConstants = {
     arrowHeight: 10, // from tip to base
     xMargin: 6,
     yMargin: 4,
-    touchAreaXDilation: 7,
+    touchAreaXDilation: 10,
     touchAreaYDilation: 6
   },
 
