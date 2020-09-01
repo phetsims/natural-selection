@@ -156,7 +156,7 @@ class ProportionsModel extends PhetioObject {
           if ( proportionsGeneration === clockGenerationProperty.value ) {
 
             // Show static counts for the start of the current generation.
-            this.startCountsProperty.value = currentStartCountsProperty.value;
+            this.startCountsProperty.value = currentStartCounts;
 
             // Show dynamic counts for the 'Currently' state of the current generation. unlink is handled above.
             liveBunnyCountsProperty.link( updateEndCounts );
