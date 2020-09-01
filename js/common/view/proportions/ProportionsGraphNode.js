@@ -29,7 +29,7 @@ import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import ProportionsBarNode from './ProportionsBarNode.js';
-import PopulationGenerationSpinner from './ProportionsGenerationSpinner.js';
+import ProportionsGenerationSpinner from './ProportionsGenerationSpinner.js';
 
 // constants
 const ROW_SPACING = 30;
@@ -140,7 +140,7 @@ class ProportionsGraphNode extends Node {
     } );
 
     // Spinner for selecting which generation is displayed
-    const generationSpinner = new PopulationGenerationSpinner( proportionsModel.proportionsGenerationProperty, {
+    const generationSpinner = new ProportionsGenerationSpinner( proportionsModel.proportionsGenerationProperty, {
       tandem: options.tandem.createTandem( 'generationSpinner' )
     } );
 
