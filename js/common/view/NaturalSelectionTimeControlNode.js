@@ -19,6 +19,10 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import FastForwardButton from './FastForwardButton.js';
 
+// constants
+const PLAY_BUTTON_RADIUS = 20;
+const FAST_FORWARD_BUTTON_RADIUS = 16;
+
 class NaturalSelectionTimeControlNode extends HBox {
 
   /**
@@ -40,12 +44,14 @@ class NaturalSelectionTimeControlNode extends HBox {
     }, options );
 
     const playPauseButton = new PlayPauseButton( isPlayingProperty, {
-      radius: 20,
+      radius: PLAY_BUTTON_RADIUS,
       listener: () => fastForwardButton.interruptSubtreeInput(),
       tandem: options.tandem.createTandem( 'playPauseButton' )
     } );
 
     const fastForwardButton = new FastForwardButton( timeSpeedProperty, {
+      radius: FAST_FORWARD_BUTTON_RADIUS,
+      touchAreaDilation: PLAY_BUTTON_RADIUS - FAST_FORWARD_BUTTON_RADIUS,
       tandem: options.tandem.createTandem( 'fastForwardButton' )
     } );
 
