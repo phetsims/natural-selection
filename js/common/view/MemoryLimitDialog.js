@@ -33,7 +33,7 @@ class MemoryLimitDialog extends OopsDialog {
     const iconNode = new Image( bunnyBrownFurStraightEarsLongTeethImage );
     iconNode.setScaleMagnitude( -ICON_SCALE, ICON_SCALE );
 
-    options = merge( {
+    options = merge( {}, NaturalSelectionConstants.DIALOG_OPTIONS, {
       topMargin: 50,
       bottomMargin: 50,
       iconNode: iconNode,

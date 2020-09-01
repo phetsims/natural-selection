@@ -89,6 +89,14 @@ const NaturalSelectionConstants = {
     align: 'left'
   },
 
+  // Dialog
+  DIALOG_OPTIONS: {
+    closeButtonTouchAreaXDilation: 20,
+    closeButtonTouchAreaYDilation: 20,
+    closeButtonMouseAreaXDilation: 10,
+    closeButtonMouseAreaYDilation: 10
+  },
+
   // Fonts
   CHECKBOX_FONT: new PhetFont( 16 ),
   PUSH_BUTTON_FONT: new PhetFont( 16 ),

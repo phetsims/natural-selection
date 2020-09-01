@@ -25,7 +25,7 @@ class WorldDialog extends Dialog {
    */
   constructor( options ) {
 
-    options = merge( {
+    options = merge( {}, NaturalSelectionConstants.DIALOG_OPTIONS, {
       fill: 'black',
       closeButtonColor: 'white',
       topMargin: 25,

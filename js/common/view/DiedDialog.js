@@ -22,7 +22,7 @@ class DiedDialog extends Dialog {
    */
   constructor( options ) {
 
-    options = merge( {
+    options = merge( {}, NaturalSelectionConstants.DIALOG_OPTIONS, {
       topMargin: 50,
       bottomMargin: 50,
 
