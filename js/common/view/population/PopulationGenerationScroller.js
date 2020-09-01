@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * GenerationScrollControl is the control used for scrolling the x-axis (Generation) of the Population graph.
+ * PopulationGenerationScroller is the control used for scrolling the x-axis (Generation) of the Population graph.
  *
  * Note that this looks and behaves a bit like a spinner. But NumberSpinner cannot be used because it must
  * show a value. And this control is modifying a {Property.<Range>}, not a {Property.<number>}. So think of
@@ -21,7 +21,7 @@ import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
-class GenerationScrollControl extends HBox {
+class PopulationGenerationScroller extends HBox {
 
   /**
    * @param {Property.<Range>} rangeProperty
@@ -84,7 +84,7 @@ class GenerationScrollControl extends HBox {
       }, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS )
     );
 
-    assert && assert( !options.children, 'GenerationScrollControl sets children' );
+    assert && assert( !options.children, 'PopulationGenerationScroller sets children' );
     options.children = [ backButton, labelNode, forwardButton ];
 
     super( options );
@@ -108,5 +108,5 @@ class GenerationScrollControl extends HBox {
   }
 }
 
-naturalSelection.register( 'GenerationScrollControl', GenerationScrollControl );
-export default GenerationScrollControl;
+naturalSelection.register( 'PopulationGenerationScroller', PopulationGenerationScroller );
+export default PopulationGenerationScroller;

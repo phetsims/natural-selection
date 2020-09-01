@@ -20,7 +20,7 @@ import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import DataProbeNode from './DataProbeNode.js';
-import GenerationScrollControl from './GenerationScrollControl.js';
+import PopulationGenerationScroller from './PopulationGenerationScroller.js';
 import PopulationGridNode from './PopulationGridNode.js';
 import PopulationPlotsNode from './PopulationPlotsNode.js';
 
@@ -52,17 +52,12 @@ class PopulationGraphNode extends Node {
     const boundsRectangle = new Rectangle( 0, 0, options.graphWidth, options.graphHeight );
 
     // Generation (x-axis) scroll control
-    const generationScrollControl = new GenerationScrollControl(
+    const generationScroller = new PopulationGenerationScroller(
       populationModel.xRangeProperty, populationModel.timeInGenerationsProperty, populationModel.isPlayingProperty, {
         labelString: naturalSelectionStrings.generation,
-        tandem: options.tandem.createTandem( 'generationScrollControl' ),
+        tandem: options.tandem.createTandem( 'generationScroller' ),
         phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
       } );
-
-    // Wrap generationScrollControl because we'll be observing its boundsProperty.
-    const generationScrollControlWrapper = new Node( {
-      children: [ generationScrollControl ]
-    } );
 
     // y-axis (Population) label
     const yAxisLabelNode = new Text( naturalSelectionStrings.population, {
@@ -93,7 +88,7 @@ class PopulationGraphNode extends Node {
 
     // Dimensions of the 2D grid (sans tick marks) in view coordinates
     const gridWidth = options.graphWidth - yZoomButtonGroup.width - Y_AXIS_LABEL_SPACING;
-    const gridHeight = options.graphHeight - generationScrollControl.height - X_TICK_MARKS_HEIGHT - X_AXIS_LABEL_SPACING;
+    const gridHeight = options.graphHeight - generationScroller.height - X_TICK_MARKS_HEIGHT - X_AXIS_LABEL_SPACING;
 
     // the 2D grid, including tick marks
     const gridNode = new PopulationGridNode( populationModel, {
@@ -127,7 +122,7 @@ class PopulationGraphNode extends Node {
     assert && assert( !options.children, 'PopulationGraphNode sets children' );
     options.children = [
       boundsRectangle, gridNode,
-      generationScrollControlWrapper,
+      generationScroller,
       yZoomButtonGroup, yAxisLabelNodeWrapper,
       plotsNode,
       zoomOutToSeeDataText,
@@ -135,9 +130,9 @@ class PopulationGraphNode extends Node {
     ];
 
     // Center x-axis control under the graph. unlink is not necessary.
-    generationScrollControl.localBoundsProperty.link( () => {
-      generationScrollControl.centerX = gridNode.x + ( gridWidth / 2 );
-      generationScrollControl.top = gridNode.bottom + X_AXIS_LABEL_SPACING;
+    generationScroller.localBoundsProperty.link( () => {
+      generationScroller.centerX = gridNode.x + ( gridWidth / 2 );
+      generationScroller.top = gridNode.bottom + X_AXIS_LABEL_SPACING;
     } );
 
     // Center y-axis label to left of graph. unlink is not necessary.
