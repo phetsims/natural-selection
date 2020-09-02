@@ -21,9 +21,9 @@ const NaturalSelectionConstants = {
   // Model ===========================================================================================================
 
   // Generation Clock
-  // slice of the generation clock for wolves, as a percentage range [0,1]. This correspond to 2:00-6:00 on the clock.
+  // clock slice for wolves, as a percentage range [0,1]. This correspond to 2:00-6:00 on the clock.
   CLOCK_WOLVES_RANGE: new Range( 2 / 12, 6 / 12 ),
-  // slice of the generation clock for food, as a percentage range [0,1]. This correspond to 6:00-10:00 on the clock.
+  // clock slice for food, as a percentage range [0,1]. This correspond to 6:00-10:00 on the clock.
   CLOCK_FOOD_RANGE: new Range( 6 / 12, 10 / 12 ),
 
   // Shrubs

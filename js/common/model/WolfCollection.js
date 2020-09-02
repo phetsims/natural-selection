@@ -29,7 +29,7 @@ import WolfGroup from './WolfGroup.js';
 
 // constants
 
-// Wolves are applied at the midpoint of their 'slice' of the generation clock.
+// Wolves are applied at the midpoint of their clock slice.
 // See https://github.com/phetsims/natural-selection/issues/110
 const CLOCK_WOLVES_MIDPOINT = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.getCenter();
 
@@ -76,7 +76,7 @@ class WolfCollection {
       tandem: options.tandem.createTandem( 'enabledProperty' )
     } );
 
-    // @private Wolves hunt during the 'wolves' slice of the generation clock. dispose is not necessary.
+    // @private Wolves hunt during the 'wolves' clock slice. dispose is not necessary.
     this.isHuntingProperty = new DerivedProperty(
       [ this.enabledProperty, generationClock.timeInPercentProperty ],
       ( enabled, timeInPercent ) => ( enabled && NaturalSelectionConstants.CLOCK_WOLVES_RANGE.contains( timeInPercent ) ), {
@@ -138,7 +138,7 @@ class WolfCollection {
       // Execute this code only when the sim is running normally, not when setting PhET-iO state.
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
 
-        // Eat bunnies at the midpoint of their 'slice' of the generation clock.
+        // Eat bunnies at the midpoint of their clock slice.
         // See https://github.com/phetsims/natural-selection/issues/110
         if ( this.enabledProperty.value &&
              previousTimeInPercent < CLOCK_WOLVES_MIDPOINT && currentTimeInPercent >= CLOCK_WOLVES_MIDPOINT ) {

@@ -2,7 +2,7 @@
 
 /**
  * GenerationClockNode is the clock that does one complete revolution per generation.
- * It displays 'slices' for each environmental factor, to denote when they will be active.
+ * It displays a clock slice for each environmental factor, to denote when they will be active.
  * We commonly refer to times, like 12:00, as if this were a standard wall clock.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -60,10 +60,10 @@ class GenerationClockNode extends Node {
       lineWidth: LINE_WIDTH
     } );
 
-    // The slice of the circle that denotes when food is active
+    // The clock slice that denotes when food is active
     const foodSliceNode = createSliceNode( RADIUS, NaturalSelectionConstants.CLOCK_FOOD_RANGE, NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR );
 
-    // The slice of the circle that denotes when the wolves are active
+    // The clock slice that denotes when the wolves are active
     const wolvesSliceNode = createSliceNode( RADIUS, NaturalSelectionConstants.CLOCK_WOLVES_RANGE, NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR );
 
     // Overlay on the clock, sweeps out an arc to reveal what's under it.
@@ -101,12 +101,12 @@ class GenerationClockNode extends Node {
         .close();
     } );
 
-    // Makes the wolves slice visible. unlink is not necessary.
+    // Makes the wolves clock slice visible. unlink is not necessary.
     wolvesEnabledProperty.link( enabled => {
       wolvesSliceNode.visible = enabled;
     } );
 
-    // Makes the food slice visible. unlink is not necessary.
+    // Makes the food clock slice visible. unlink is not necessary.
     foodEnabledProperty.link( enabled => {
       foodSliceNode.visible = enabled;
     } );

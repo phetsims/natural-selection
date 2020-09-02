@@ -3,8 +3,8 @@
 /**
  * EnvironmentalFactorCheckbox is the base class for all checkboxes in the 'Environmental Factors' panel.
  * It makes all checkbox labels have the same effective size. And it adds a generation-clock icon to the right of
- * the checkbox's label, to signify which slice of the generation clock corresponds to the time during which the
- * environmental factor will be applied.
+ * the checkbox's label, to signify which clock slice corresponds to the time during which the environmental factor
+ * will be applied.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

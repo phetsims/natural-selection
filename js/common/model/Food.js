@@ -27,7 +27,7 @@ import Shrub from './Shrub.js';
 
 // constants
 
-// Food is applied at the midpoint of its 'slice' of the generation clock.
+// Food is applied at the midpoint of its clock slice.
 // See https://github.com/phetsims/natural-selection/issues/110
 const CLOCK_FOOD_MIDPOINT = NaturalSelectionConstants.CLOCK_FOOD_RANGE.getCenter();
 
@@ -114,7 +114,7 @@ class Food {
       // Execute this code only when the sim is running normally, not when setting PhET-iO state.
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
 
-        // Starve some bunnies at the midpoint of their 'slice' of the generation clock.
+        // Starve some bunnies at the midpoint of their clock slice.
         // See https://github.com/phetsims/natural-selection/issues/110
         if ( this.enabledProperty.value &&
              previousTimeInPercent < CLOCK_FOOD_MIDPOINT && currentTimeInPercent >= CLOCK_FOOD_MIDPOINT ) {
