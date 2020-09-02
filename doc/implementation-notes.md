@@ -55,7 +55,13 @@ The sim makes heavy use of logging via `phet.log`. If you are making modificatio
 
 **Memory Management** 
 
-All uses of `link`, `addListener`, etc. are documented as to whether they need a corresponding `unlink`, `removeListener`, etc.
+All uses of `link`, `addListener`, etc. are documented as to whether they need a corresponding `unlink`, `removeListener`, etc. For example:
+
+```js
+    // Scrolls the x-axis so that 'now' is always the max x value. unlink is not necessary.
+    timeInGenerationsProperty.link( timeInGeneration => {
+      ...
+```
 
 All classes have a `dispose` method. Sim-specific classes whose instances exist for the lifetime of the sim are not intended to 
 be disposed, and their `dispose` implementation looks like this:
