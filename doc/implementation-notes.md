@@ -43,7 +43,7 @@ There are 3 different model-view transforms in this sim.
 **Query Parameters**
 
 Query parameters are used to enable sim-specific features. Sim-specific query parameters are documented in
-[NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js). Some of these query parameters are public, but most are for debugging and tuning model behavior. There are features that can only be accessed via query parameters, so be sure to have a look. The query parameters for initializing the population are particularly important.
+[NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js). Some of these query parameters are public, but most are for debugging and tuning model behavior. There are features that can only be accessed via query parameters, so be sure to have a look. The query parameters for initializing the population are particularly important (and complicated!)
 
 **Assertions**
 
