@@ -43,7 +43,7 @@ There are 3 different model-view transforms in this sim.
 **Query Parameters**
 
 Query parameters are used to enable sim-specific features. Sim-specific query parameters are documented in
-[NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js). Some of these query parameters are public, but most are for debugging and tuning model behavior. There are features that can only be accessed via query parameters, so be sure to have a look. The query parameters for initializing the population are particularly important.
+[NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js). Some of these query parameters are public, but most are for debugging and tuning model behavior. There are features that can only be accessed via query parameters, so be sure to have a look. The query parameters for initializing the population are particularly important (and complicated!)
 
 **Assertions**
 
@@ -51,13 +51,19 @@ The sim makes heavy use of `assert` and [AssertUtils](https://github.com/phetsim
 
 **Logging**
 
-The sim makes heavy use of logging via `phet.log`, enabled using the `log` query parameter. If you are making modifications to this sim, or trying to understand its behavior, do so with logging enabled.
+The sim makes heavy use of logging via `phet.log`. If you are making modifications to this sim, or trying to understand its behavior, do so with logging enabled via the `log` query parameter.
 
 **Memory Management** 
 
-All uses of `link`, `addListener`, etc. are documented as to whether they need a corresponding `unlink`, `removeListener`, etc.
+* **Listeners**: All uses of `link`, `addListener`, etc. are documented as to whether they need a corresponding `unlink`, `removeListener`, etc. For example:
 
-All classes have a `dispose` method. Sim-specific classes whose instances exist for the lifetime of the sim are not intended to 
+```js
+    // Scrolls the x-axis so that 'now' is always the max x value. unlink is not necessary.
+    timeInGenerationsProperty.link( timeInGeneration => {
+      ...
+```
+
+* **dispose:** All classes have a `dispose` method. Sim-specific classes whose instances exist for the lifetime of the sim are not intended to 
 be disposed, and their `dispose` implementation looks like this:
 
 ```js
@@ -71,9 +77,9 @@ be disposed, and their `dispose` implementation looks like this:
   }
 ```
 
-When bunnies die, they cannot be immediately disposed. Their information is needed by the Pedigree graph. If we kept them forever, we'd run out of memory. [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.pruneDeadBunnies` handles pruning dead bunnies, disposing of them when they will no longer be needed by the Pedigree graph.
+* **Dead bunnies**: When bunnies die, they cannot be immediately disposed. Their information is needed by the Pedigree graph. If we kept them forever, we'd run out of memory. [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.pruneDeadBunnies` handles pruning dead bunnies, disposing of them when they are no longer needed by the Pedigree graph.
 
-It's possible to put this sim in a state where the population stabilizes, and the sim will run forever. The sim would continue to create data points for the Population graph, and would eventually crash the browser.  So the sim has a limit on the number of generations, see `maxGenerations` in [NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js). When this limit is reached, the sim stops, [MemoryLimitDialog](https://github.com/phetsims/natural-selection/blob/master/js/common/view/MemoryLimitDialog.js) is displayed, and the student can review the final state of the sim. 
+* **Generation limit:** It's possible to put this sim in a state where the population stabilizes, and the sim will run forever. The sim would continue to create data points for the Population graph, and would eventually crash the browser.  So the sim has a limit on the number of generations, see `maxGenerations` in [NaturalSelectionQueryParameters](https://github.com/phetsims/natural-selection/blob/master/js/common/NaturalSelectionQueryParameters.js). When this limit is reached, the sim stops, [MemoryLimitDialog](https://github.com/phetsims/natural-selection/blob/master/js/common/view/MemoryLimitDialog.js) is displayed, and the student can review the final state of the sim. 
 
 ## Screens
 
