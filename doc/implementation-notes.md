@@ -96,7 +96,7 @@ There are a few top-level model elements:
 * [GenerationClock](https://github.com/phetsims/natural-selection/blob/master/js/common/model/GenerationClock.js) is responsible for the elapsed time in generations
 * [GenePool](https://github.com/phetsims/natural-selection/blob/master/js/common/model/GenePool.js) is the collection of genes that are present in the bunny population 
 * There is one instance of [Gene](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Gene.js) for fur, teeth, and ears.  They live in the [GenePool](https://github.com/phetsims/natural-selection/blob/master/js/common/model/GenePool.js) and they determine mutations and dominance relationships.
-* There is one global instance of [Allele](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Allele.js) for each gene variant: white fur, brown fur, straight ears, floppy ears, short teeth, long teeth.
+* There is one instance of [Allele](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Allele.js) for each gene variant: white fur, brown fur, straight ears, floppy ears, short teeth, long teeth. These instances are global to the sim, and are defined in [AlleleInstances](https://github.com/phetsims/natural-selection/blob/master/js/common/model/AlleleInstances.js).
 
 Living things are instances of [Organism](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Organism.js). There are 3 subclasses of Organism:
 
