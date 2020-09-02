@@ -8,6 +8,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import timer from '../../../../axon/js/timer.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -80,8 +81,14 @@ class PlayButtonGroup extends Node {
       [ simulationModeProperty, bunnyCountProperty ],
       ( simulationMode, bunnyCount ) => {
         if ( simulationMode === SimulationMode.STAGED ) {
-          addAMateButton.visible = ( bunnyCount === 1 );
-          playButton.visible = ( bunnyCount > 1 );
+
+          // Make one of these buttons visible on the next frame, so that a double-click on the 'Start Over' button
+          // doesn't fire the button that is made visible. See https://github.com/phetsims/natural-selection/issues/166
+          timer.runOnNextFrame( () => {
+            addAMateButton.visible = ( bunnyCount === 1 );
+            playButton.visible = ( bunnyCount > 1 );
+          } );
+
           startOverButton.visible = false;
         }
         else if ( simulationMode === SimulationMode.ACTIVE ) {
@@ -97,11 +104,6 @@ class PlayButtonGroup extends Node {
         else {
           throw new Error( `unsupported simulationMode: ${simulationMode}` );
         }
-
-        assert && assert(
-          _.filter( [ addAMateButton, playButton, startOverButton ], button => button.visible ).length <= 1,
-          'at most 1 button should be visible'
-        );
       }
     );
   }
