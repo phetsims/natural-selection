@@ -23,7 +23,7 @@ class PedigreeModel extends PhetioObject {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioState: false, // to prevent serialization, because we don't have an IO type
+      phetioState: false, // to prevent serialization, because we don't have an IO Type
       phetioDocumentation: 'model elements that are specific to the Pedigree feature'
     }, options );
 
