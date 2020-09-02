@@ -51,7 +51,7 @@ The sim makes heavy use of `assert` and [AssertUtils](https://github.com/phetsim
 
 **Logging**
 
-The sim makes heavy use of logging via `phet.log`, enabled using the `log` query parameter. If you are making modifications to this sim, or trying to understand its behavior, do so with logging enabled.
+The sim makes heavy use of logging via `phet.log`. If you are making modifications to this sim, or trying to understand its behavior, do so with logging enabled via the `log` query parameter.
 
 **Memory Management** 
 
