@@ -25,6 +25,7 @@ Additional terms used in the implementation:
 * A _**sprite**_ is a high-performance way of drawing an organism, using the scenery [Sprites](https://github.com/phetsims/scenery/blob/master/js/nodes/Sprites.js) API.
 * A _**plot**_ is a set of points connected by line segments, used in the Population graph.
 * An _**original mutant**_ is a bunny in which a mutation first occurred.
+* A _**clock slice**_ is a pie-shape piece of the generation clock.
 
 ## General Consideration
 
@@ -93,9 +94,10 @@ The main model class is [NaturalSelectionModel](https://github.com/phetsims/natu
 
 There are a few top-level model elements:
 
-* [GenerationClock](https://github.com/phetsims/natural-selection/blob/master/js/common/model/GenerationClock.js) is responsible for the elapsed time in generations
-* [GenePool](https://github.com/phetsims/natural-selection/blob/master/js/common/model/GenePool.js) is the collection of genes that are present in the bunny population 
-* There is one instance of [Gene](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Gene.js) for fur, teeth, and ears.  They live in the [GenePool](https://github.com/phetsims/natural-selection/blob/master/js/common/model/GenePool.js) and they determine mutations and dominance relationships. 
+* [GenerationClock](https://github.com/phetsims/natural-selection/blob/master/js/common/model/GenerationClock.js) is responsible for the elapsed time in generations.
+* [GenePool](https://github.com/phetsims/natural-selection/blob/master/js/common/model/GenePool.js) is the collection of genes that are present in the bunny population.
+* There is one instance of [Gene](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Gene.js) for each gene: fur, teeth, ears.  They live in the [GenePool](https://github.com/phetsims/natural-selection/blob/master/js/common/model/GenePool.js) and they determine mutations and dominance relationships.
+* There is one instance of [Allele](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Allele.js) for each gene variant: white fur, brown fur, straight ears, floppy ears, short teeth, long teeth. These instances are global to the sim, and are defined in [AlleleInstances](https://github.com/phetsims/natural-selection/blob/master/js/common/model/AlleleInstances.js).
 
 Living things are instances of [Organism](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Organism.js). There are 3 subclasses of Organism:
 
