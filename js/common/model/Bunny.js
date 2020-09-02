@@ -213,7 +213,8 @@ class Bunny extends Organism {
   }
 
   /**
-   * Initializes the next motion cycle.
+   * Initializes the next motion cycle. A bunny will continue to hop until it gets to the edge of the screen.
+   * Then it reverses direction.
    * @private
    */
   initializeMotion() {

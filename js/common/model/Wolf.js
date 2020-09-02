@@ -73,7 +73,8 @@ class Wolf extends Organism {
   }
 
   /**
-   * Moves the Wolf around.
+   * Moves the Wolf around. A wolf will continue to move in its current direction until it gets to the edge of
+   * the screen. Then it reverses direction.
    * @param {number} dt - time step, in seconds
    * @public
    */
