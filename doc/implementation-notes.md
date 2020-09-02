@@ -25,7 +25,7 @@ Additional terms used in the implementation:
 * A _**sprite**_ is a high-performance way of drawing an organism, using the scenery [Sprites](https://github.com/phetsims/scenery/blob/master/js/nodes/Sprites.js) API.
 * A _**plot**_ is a set of points connected by line segments, used in the Population graph.
 * An _**original mutant**_ is a bunny in which a mutation first occurred.
-* A _**clock slice**_ is a pie-shaped piece of the generation clock.
+* A _**clock slice**_ is an interval of the generation clock.
 
 ## General Consideration
 
