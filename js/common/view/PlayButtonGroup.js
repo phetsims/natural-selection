@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import timer from '../../../../axon/js/timer.js';
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -75,33 +75,35 @@ class PlayButtonGroup extends Node {
 
     super( options );
 
-    // Make the correct button visible when the mode changes. unlink is not necessary.
-    simulationModeProperty.link( simulationMode => {
+    // Make at most 1 button visible. unmultilink is not necessary.
+    Property.multilink(
+      [ simulationModeProperty, bunnyCountProperty ],
+      ( simulationMode, bunnyCount ) => {
+        if ( simulationMode === SimulationMode.STAGED ) {
+          addAMateButton.visible = ( bunnyCount === 1 );
+          playButton.visible = ( bunnyCount > 1 );
+          startOverButton.visible = false;
+        }
+        else if ( simulationMode === SimulationMode.ACTIVE ) {
+          addAMateButton.visible = false;
+          playButton.visible = false;
+          startOverButton.visible = false;
+        }
+        else if ( simulationMode === SimulationMode.COMPLETED ) {
+          addAMateButton.visible = false;
+          playButton.visible = false;
+          startOverButton.visible = true;
+        }
+        else {
+          throw new Error( `unsupported simulationMode: ${simulationMode}` );
+        }
 
-      if ( simulationMode === SimulationMode.STAGED ) {
-        startOverButton.visible = false;
-
-        // Make one of these buttons visible on the next frame, so that a double-click on the 'Start Over' button
-        // doesn't fire the button that is made visible. See https://github.com/phetsims/natural-selection/issues/166
-        timer.runOnNextFrame( () => {
-          addAMateButton.visible = ( bunnyCountProperty.value === 1 );
-          playButton.visible = ( bunnyCountProperty.value > 1 );
-        } );
+        assert && assert(
+          _.filter( [ addAMateButton, playButton, startOverButton ], button => button.visible ).length <= 1,
+          'at most 1 button should be visible'
+        );
       }
-      else if ( simulationMode === SimulationMode.ACTIVE ) {
-        addAMateButton.visible = false;
-        playButton.visible = false;
-        startOverButton.visible = false;
-      }
-      else if ( simulationMode === SimulationMode.COMPLETED ) {
-        addAMateButton.visible = false;
-        playButton.visible = false;
-        startOverButton.visible = true;
-      }
-      else {
-        throw new Error( `unsupported simulationMode: ${simulationMode}` );
-      }
-    } );
+    );
   }
 
   /**
