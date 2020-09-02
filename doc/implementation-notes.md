@@ -19,13 +19,13 @@ The domain terminology that you'll need to navigate the implementation is found 
 
 Additional terms used in the implementation:
 
-* An _**organism**_ is a living thing. It includes bunnies, wolves, and shrubs.
+* A _**clock slice**_ is an interval of the generation clock.
 * The _**environment**_ is the part of the UI where bunnies hop around. It can be switched between "equator" and "arctic", see [Environment](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Environment.js).
+* An _**original mutant**_ is a bunny in which a mutation first occurred.
+* An _**organism**_ is a living thing. It includes bunnies, wolves, and shrubs.
+* A _**plot**_ is a set of points connected by line segments, used in the Population graph.
 * The _**simulation mode**_ determines what UI components are available. See [SimulationMode](https://github.com/phetsims/natural-selection/blob/master/js/common/model/SimulationMode.js).
 * A _**sprite**_ is a high-performance way of drawing an organism, using the scenery [Sprites](https://github.com/phetsims/scenery/blob/master/js/nodes/Sprites.js) API.
-* A _**plot**_ is a set of points connected by line segments, used in the Population graph.
-* An _**original mutant**_ is a bunny in which a mutation first occurred.
-* A _**clock slice**_ is an interval of the generation clock.
 
 ## General Consideration
 
