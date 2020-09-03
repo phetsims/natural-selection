@@ -432,7 +432,7 @@ function getHopDelta( hopDistance, hopHeight, xDirection ) {
   return new Vector3( dx, dy, dz );
 }
 
-Bunny.BunnyIO = createIOType( 'BunnyIO', Bunny, {
+Bunny.BunnyIO = createIOType( Bunny, 'BunnyIO', {
   toStateObject: bunny => bunny.toStateObject(),
   stateToArgsForConstructor: state => Bunny.stateToArgsForConstructor( state ),
   applyState: ( bunny, stateObject ) => bunny.applyState( stateObject )

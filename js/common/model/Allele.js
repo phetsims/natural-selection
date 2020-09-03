@@ -63,7 +63,7 @@ class Allele extends PhetioObject {
 // tandem for all static instances of Solute, which are used across all screens
 const ALLELES_TANDEM = Tandem.GLOBAL.createTandem( 'model' ).createTandem( 'alleles' );
 
-Allele.AlleleIO = createIOType( 'AlleleIO', Allele, {
+Allele.AlleleIO = createIOType( Allele, 'AlleleIO', {
   parentIOType: ReferenceIO( ObjectIO )
 } );
 

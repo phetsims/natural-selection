@@ -176,7 +176,7 @@ class Gene extends PhetioObject {
   }
 }
 
-Gene.GeneIO = createIOType( 'GeneIO', Gene, {
+Gene.GeneIO = createIOType( Gene, 'GeneIO', {
   parentIOType: ReferenceIO( ObjectIO )
 } );
 

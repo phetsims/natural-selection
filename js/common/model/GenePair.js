@@ -174,7 +174,7 @@ class GenePair extends PhetioObject {
   }
 }
 
-GenePair.GenePairIO = createIOType( 'GenePairIO', GenePair, {
+GenePair.GenePairIO = createIOType( GenePair, 'GenePairIO', {
   toStateObject: genePair => genePair.toStateObject(),
   applyState: ( genePair, stateObject ) => genePair.applyState( stateObject )
 } );

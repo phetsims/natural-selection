@@ -64,7 +64,7 @@ class ProportionsCounts {
   }
 }
 
-ProportionsCounts.ProportionsCountsIO = createIOType( 'ProportionsCountsIO', ProportionsCounts, {
+ProportionsCounts.ProportionsCountsIO = createIOType( ProportionsCounts, 'ProportionsCountsIO', {
   toStateObject: proportionsCounts => proportionsCounts.toStateObject(),
   fromStateObject: stateObject => ProportionsCounts.fromStateObject( stateObject )
 } );

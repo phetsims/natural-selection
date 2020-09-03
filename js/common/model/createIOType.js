@@ -19,12 +19,12 @@ import naturalSelection from '../../naturalSelection.js';
 const IO_TYPE_SUFFIX = 'IO';
 
 /**
- * @param {string} ioTypeName
  * @param {function} coreType
+ * @param {string} ioTypeName
  * @param options
  * @returns {IOType}
  */
-function createIOType( ioTypeName, coreType, options ) {
+function createIOType( coreType, ioTypeName, options ) {
 
   assert && assert( ioTypeName.endsWith( IO_TYPE_SUFFIX ), `IO Type name must end with ${IO_TYPE_SUFFIX}` );
 

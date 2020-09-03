@@ -166,7 +166,7 @@ class BunnyCounts {
   }
 }
 
-BunnyCounts.BunnyCountsIO = createIOType( 'BunnyCountsIO', BunnyCounts, {
+BunnyCounts.BunnyCountsIO = createIOType( BunnyCounts, 'BunnyCountsIO', {
   toStateObject: bunnyCounts => bunnyCounts.toStateObject(),
   fromStateObject: stateObject => BunnyCounts.fromStateObject( stateObject )
 } );

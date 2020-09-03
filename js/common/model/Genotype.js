@@ -199,7 +199,7 @@ class Genotype extends PhetioObject {
   }
 }
 
-Genotype.GenotypeIO = createIOType( 'GenotypeIO', Genotype, {
+Genotype.GenotypeIO = createIOType( Genotype, 'GenotypeIO', {
   toStateObject: genotype => genotype.toStateObject(),
   applyState: ( genotype, stateObject ) => genotype.applyState( stateObject )
 } );

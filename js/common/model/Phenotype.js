@@ -129,7 +129,7 @@ class Phenotype extends PhetioObject {
   }
 }
 
-Phenotype.PhenotypeIO = createIOType( 'PhenotypeIO', Phenotype, {
+Phenotype.PhenotypeIO = createIOType( Phenotype, 'PhenotypeIO', {
   toStateObject: phenotype => phenotype.toStateObject(),
   applyState: ( phenotype, stateObject ) => phenotype.applyState( stateObject )
 } );

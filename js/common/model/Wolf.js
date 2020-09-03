@@ -166,7 +166,7 @@ class Wolf extends Organism {
   }
 }
 
-Wolf.WolfIO = createIOType( 'WolfIO', Wolf, {
+Wolf.WolfIO = createIOType( Wolf, 'WolfIO', {
   toStateObject: wolf => wolf.toStateObject(),
   stateToArgsForConstructor: state => Wolf.stateToArgsForConstructor( state ),
   applyState: ( wolf, stateObject ) => wolf.applyState( stateObject )
