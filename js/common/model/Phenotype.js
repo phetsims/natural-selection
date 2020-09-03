@@ -114,7 +114,6 @@ class Phenotype extends PhetioObject {
     };
   }
 
-  //TODO https://github.com/phetsims/natural-selection/issues/218 why does BunnyIO.applyState call phenotype.applyState instead of relying on PhenotypeIO ?
   /**
    * Restores Phenotype state after instantiation.
    * @param {Object} stateObject
