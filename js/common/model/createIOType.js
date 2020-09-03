@@ -42,12 +42,13 @@ function createIOType( coreType, ioTypeName, options ) {
     stateToArgsForConstructor: null,
     applyState: null,
 
-    // {string} documentation that will appear in the API docs.
-    // The default is (e.g.) 'IO Type for Bunny'
+    // {string} see ObjectIO.documentation. The default is (e.g.) 'IO Type for Bunny'
     documentation: `IO Type for ${ioTypeName.substring( 0, ioTypeName.length - IO_TYPE_SUFFIX.length )}`,
 
-    //TODO https://github.com/phetsims/natural-selection/issues/218 doc, not currently used in natural-selection
+    // see ObjectIO.methods
     methods: {},
+
+    //TODO https://github.com/phetsims/natural-selection/issues/218 doc, not currently used in natural-selection
     events: [],
     parameterTypes: []
 
