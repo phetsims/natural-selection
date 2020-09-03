@@ -3,6 +3,10 @@
 /**
  * createIOType is a convenience function that handles the boilerplate of creating an IO Type.
  *
+ * As of this writing, ObjectIO.createIOType had many problems and didn't meet the needs of this sim.
+ * If that changes in the future, consider replacing this with ObjectIO.createIOType.
+ * See https://github.com/phetsims/tandem/issues/188
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
