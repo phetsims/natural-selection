@@ -33,9 +33,10 @@ function createIOType( coreType, ioTypeName, options ) {
     // {function} the parent IO Type
     parentIOType: ObjectIO,
 
-    // {function|null} parent serialization functions to override, see ObjectIO for docs. There are 3 different
-    // types of serialization, used in different situations. The functions that you'll need to override depend on
-    // which type of serialization you need. See the Serialization section of the PhET-iO Instrumentation Guide at:
+    // {function|null} ObjectIO serialization functions to override. null means to use the default implementation in
+    // ObjectIO. See ObjectIO for function documentation. There are 3 different types of serialization, used in
+    // different situations. The functions that you'll need to override depend on which type of serialization you need.
+    // See the Serialization section of the PhET-iO Instrumentation Guide at:
     // https://github.com/phetsims/phet-io/blob/3865e3e116822ecd46a18646e999213ed77caf59/doc/phet-io-instrumentation-guide.md
     toStateObject: null,
     fromStateObject: null,
