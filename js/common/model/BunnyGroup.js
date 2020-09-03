@@ -15,7 +15,6 @@ import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
-import BunnyIO from './BunnyIO.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 
@@ -37,7 +36,7 @@ class BunnyGroup extends PhetioGroup {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: PhetioGroupIO( BunnyIO ),
+      phetioType: PhetioGroupIO( Bunny.BunnyIO ),
       phetioDocumentation: 'manages dynamic PhET-iO elements of type Bunny, including live and dead bunnies'
     }, options );
 

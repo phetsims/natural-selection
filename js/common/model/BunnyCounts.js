@@ -14,6 +14,7 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 import Bunny from './Bunny.js';
+import createIOType from './createIOType.js';
 
 class BunnyCounts {
 
@@ -104,45 +105,6 @@ class BunnyCounts {
     } );
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
-  // Below here are methods used by BunnyCountsIO to save and restore PhET-iO state.
-  //--------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * Serializes this BunnyCounts instance.
-   * @returns {Object}
-   * @public for use by BunnyCountsIO only
-   */
-  toStateObject() {
-    return {
-      totalCount: NumberIO.toStateObject( this.totalCount ),
-      whiteFurCount: NumberIO.toStateObject( this.whiteFurCount ),
-      brownFurCount: NumberIO.toStateObject( this.brownFurCount ),
-      straightEarsCount: NumberIO.toStateObject( this.straightEarsCount ),
-      floppyEarsCount: NumberIO.toStateObject( this.floppyEarsCount ),
-      shortTeethCount: NumberIO.toStateObject( this.shortTeethCount ),
-      longTeethCount: NumberIO.toStateObject( this.longTeethCount )
-    };
-  }
-
-  /**
-   * Deserializes a BunnyCounts instance.
-   * @param {Object} stateObject - return value from toStateObject
-   * @returns {BunnyCounts}
-   * @public for use by BunnyCountsIO only
-   */
-  static fromStateObject( stateObject ) {
-    return new BunnyCounts( {
-      totalCount: NumberIO.fromStateObject( stateObject.totalCount ),
-      whiteFurCount: NumberIO.fromStateObject( stateObject.whiteFurCount ),
-      brownFurCount: NumberIO.fromStateObject( stateObject.brownFurCount ),
-      straightEarsCount: NumberIO.fromStateObject( stateObject.straightEarsCount ),
-      floppyEarsCount: NumberIO.fromStateObject( stateObject.floppyEarsCount ),
-      shortTeethCount: NumberIO.fromStateObject( stateObject.shortTeethCount ),
-      longTeethCount: NumberIO.fromStateObject( stateObject.longTeethCount )
-    } );
-  }
-
   /**
    * Performs validation of this instance.
    * @private
@@ -163,7 +125,51 @@ class BunnyCounts {
     assert && assert( this.shortTeethCount + this.longTeethCount === this.totalCount,
       'teeth counts are out of sync' );
   }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Below here are methods used by BunnyCountsIO to serialize PhET-iO state.
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Serializes this BunnyCounts instance.
+   * @returns {Object}
+   * @public
+   */
+  toStateObject() {
+    return {
+      totalCount: NumberIO.toStateObject( this.totalCount ),
+      whiteFurCount: NumberIO.toStateObject( this.whiteFurCount ),
+      brownFurCount: NumberIO.toStateObject( this.brownFurCount ),
+      straightEarsCount: NumberIO.toStateObject( this.straightEarsCount ),
+      floppyEarsCount: NumberIO.toStateObject( this.floppyEarsCount ),
+      shortTeethCount: NumberIO.toStateObject( this.shortTeethCount ),
+      longTeethCount: NumberIO.toStateObject( this.longTeethCount )
+    };
+  }
+
+  /**
+   * Deserializes a BunnyCounts instance.
+   * @param {Object} stateObject - return value from toStateObject
+   * @returns {BunnyCounts}
+   * @public
+   */
+  static fromStateObject( stateObject ) {
+    return new BunnyCounts( {
+      totalCount: NumberIO.fromStateObject( stateObject.totalCount ),
+      whiteFurCount: NumberIO.fromStateObject( stateObject.whiteFurCount ),
+      brownFurCount: NumberIO.fromStateObject( stateObject.brownFurCount ),
+      straightEarsCount: NumberIO.fromStateObject( stateObject.straightEarsCount ),
+      floppyEarsCount: NumberIO.fromStateObject( stateObject.floppyEarsCount ),
+      shortTeethCount: NumberIO.fromStateObject( stateObject.shortTeethCount ),
+      longTeethCount: NumberIO.fromStateObject( stateObject.longTeethCount )
+    } );
+  }
 }
+
+BunnyCounts.BunnyCountsIO = createIOType( 'BunnyCountsIO', BunnyCounts, {
+  toStateObject: bunnyCounts => bunnyCounts.toStateObject(),
+  fromStateObject: stateObject => BunnyCounts.fromStateObject( stateObject )
+} );
 
 naturalSelection.register( 'BunnyCounts', BunnyCounts );
 export default BunnyCounts;

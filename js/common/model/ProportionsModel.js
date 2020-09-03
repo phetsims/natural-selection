@@ -22,9 +22,7 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
-import BunnyCountsIO from './BunnyCountsIO.js';
 import ProportionsCounts from './ProportionsCounts.js';
-import ProportionsCountsIO from './ProportionsCountsIO.js';
 
 class ProportionsModel extends PhetioObject {
 
@@ -93,13 +91,13 @@ class ProportionsModel extends PhetioObject {
     // While in SimulationMode.ACTIVE it will always have a value.
     const currentStartCountsProperty = new Property( null, {
       tandem: options.tandem.createTandem( 'currentStartCountsProperty' ),
-      phetioType: PropertyIO( NullableIO( BunnyCountsIO ) ),
+      phetioType: PropertyIO( NullableIO( BunnyCounts.BunnyCountsIO ) ),
       phetioDocumentation: 'Counts at the start of the current generation'
     } );
 
     const previousCounts = new ObservableArray( {
       tandem: options.tandem.createTandem( 'previousCounts' ),
-      phetioType: ObservableArrayIO( ProportionsCountsIO ),
+      phetioType: ObservableArrayIO( ProportionsCounts.ProportionsCountsIO ),
       phetioDocumentation: 'Start and End counts for previous generations, indexed by generation number'
     } );
 

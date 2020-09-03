@@ -12,8 +12,17 @@
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
+import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
+import brownFurImage from '../../../images/brownFur_png.js';
+import floppyEarsImage from '../../../images/floppyEars_png.js';
+import longTeethImage from '../../../images/longTeeth_png.js';
+import shortTeethImage from '../../../images/shortTeeth_png.js';
+import straightEarsImage from '../../../images/straightEars_png.js';
+import whiteFurImage from '../../../images/whiteFur_png.js';
 import naturalSelection from '../../naturalSelection.js';
-import AlleleIO from './AlleleIO.js';
+import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import createIOType from './createIOType.js';
 
 class Allele extends PhetioObject {
 
@@ -31,7 +40,7 @@ class Allele extends PhetioObject {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: AlleleIO
+      phetioType: Allele.AlleleIO
     }, options );
 
     super( options );
@@ -50,6 +59,37 @@ class Allele extends PhetioObject {
     super.dispose();
   }
 }
+
+// tandem for all static instances of Solute, which are used across all screens
+const ALLELES_TANDEM = Tandem.GLOBAL.createTandem( 'model' ).createTandem( 'alleles' );
+
+Allele.AlleleIO = createIOType( 'AlleleIO', Allele, {
+  parentIOType: ReferenceIO( ObjectIO )
+} );
+
+Allele.WHITE_FUR = new Allele( naturalSelectionStrings.whiteFur, whiteFurImage, {
+  tandem: ALLELES_TANDEM.createTandem( 'whiteFur' )
+} );
+
+Allele.BROWN_FUR = new Allele( naturalSelectionStrings.brownFur, brownFurImage, {
+  tandem: ALLELES_TANDEM.createTandem( 'brownFur' )
+} );
+
+Allele.FLOPPY_EARS = new Allele( naturalSelectionStrings.floppyEars, floppyEarsImage, {
+  tandem: ALLELES_TANDEM.createTandem( 'floppyEars' )
+} );
+
+Allele.STRAIGHT_EARS = new Allele( naturalSelectionStrings.straightEars, straightEarsImage, {
+  tandem: ALLELES_TANDEM.createTandem( 'straightEars' )
+} );
+
+Allele.SHORT_TEETH = new Allele( naturalSelectionStrings.shortTeeth, shortTeethImage, {
+  tandem: ALLELES_TANDEM.createTandem( 'shortTeeth' )
+} );
+
+Allele.LONG_TEETH = new Allele( naturalSelectionStrings.longTeeth, longTeethImage, {
+  tandem: ALLELES_TANDEM.createTandem( 'longTeeth' )
+} );
 
 naturalSelection.register( 'Allele', Allele );
 export default Allele;

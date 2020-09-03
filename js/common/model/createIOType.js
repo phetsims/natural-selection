@@ -1,0 +1,134 @@
+// Copyright 2020, University of Colorado Boulder
+
+/**
+ * createIOType is a convenience function that handles the boilerplate of creating an IO Type.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */
+
+import validate from '../../../../axon/js/validate.js';
+import merge from '../../../../phet-core/js/merge.js';
+import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
+import naturalSelection from '../../naturalSelection.js';
+
+// constants
+const IO_TYPE_SUFFIX = 'IO';
+
+/**
+ * @param {string} ioTypeName
+ * @param {function} coreType
+ * @param options
+ * @returns {IOType}
+ */
+function createIOType( ioTypeName, coreType, options ) {
+
+  assert && assert( ioTypeName.endsWith( IO_TYPE_SUFFIX ), `IO Type name must end with ${IO_TYPE_SUFFIX}` );
+
+  options = merge( {
+
+    // {function} the parent IO Type
+    parentIOType: ObjectIO,
+
+    // {function|null} parent serialization functions to override, see ObjectIO for docs. There are 3 different
+    // types of serialization, used in different situations. The methods that you'll need to override depend on
+    // which type of serialization you need. See the Serialization section of the PhET-iO Instrumentation Guide at:
+    // https://github.com/phetsims/phet-io/blob/3865e3e116822ecd46a18646e999213ed77caf59/doc/phet-io-instrumentation-guide.md
+    toStateObject: null,
+    fromStateObject: null,
+    stateToArgsForConstructor: null,
+    applyState: null,
+
+    // {string} documentation that will appear in the API docs.
+    // The default is (e.g.) 'IO Type for Bunny'
+    documentation: `IO Type for ${ioTypeName.substring( 0, ioTypeName.length - IO_TYPE_SUFFIX.length )}`,
+
+    //TODO https://github.com/phetsims/natural-selection/issues/218 doc, not currently used in natural-selection
+    methods: {},
+    events: [],
+    parameterTypes: []
+
+  }, options );
+
+  class IOType extends options.parentIOType {
+
+    /**
+     * See ObjectIO.toStateObject
+     * @param {*} object
+     * @returns {*}
+     * @public
+     * @override
+     */
+    static toStateObject( object ) {
+      validate( object, this.validator );
+      if ( options.toStateObject ) {
+        return options.toStateObject( object );
+      }
+      else {
+        return super.toStateObject( object );
+      }
+    }
+
+    /**
+     * See ObjectIO.fromStateObject
+     * @param {*} stateObject
+     * @returns {*}
+     * @public
+     * @override
+     */
+    static fromStateObject( stateObject ) {
+      if ( options.fromStateObject ) {
+        return options.fromStateObject( stateObject );
+      }
+      else {
+        return super.fromStateObject( stateObject );
+      }
+    }
+
+    /**
+     * See ObjectIO.stateToArgsForConstructor
+     * @param {*} state
+     * @returns {*[]}
+     * @public
+     * @override
+     */
+    static stateToArgsForConstructor( state ) {
+      if ( options.stateToArgsForConstructor ) {
+        return options.stateToArgsForConstructor( state );
+      }
+      else {
+        return super.stateToArgsForConstructor( state );
+      }
+    }
+
+    /**
+     * See ObjectIO.applyState
+     * @param {*} object
+     * @param {*} state
+     * @returns {*}
+     * @public
+     * @override
+     */
+    static applyState( object, state ) {
+      validate( object, this.validator );
+      if ( options.applyState ) {
+        return options.applyState( object, state );
+      }
+      else {
+        return super.applyState( state );
+      }
+    }
+  }
+
+  IOType.documentation = options.documentation;
+  IOType.validator = { valueType: coreType };
+  IOType.typeName = ioTypeName;
+  IOType.events = options.events;
+  IOType.parameterTypes = options.parameterTypes;
+  IOType.methods = options.methods;
+  ObjectIO.validateSubtype( IOType );
+
+  return IOType;
+}
+
+naturalSelection.register( 'createIOType', createIOType );
+export default createIOType;

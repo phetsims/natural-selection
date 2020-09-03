@@ -13,10 +13,8 @@ import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
-import AlleleIO from './AlleleIO.js';
+import createIOType from './createIOType.js';
 import Gene from './Gene.js';
-import GeneIO from './GeneIO.js';
-import GenePairIO from './GenePairIO.js';
 
 class GenePair extends PhetioObject {
 
@@ -36,7 +34,7 @@ class GenePair extends PhetioObject {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: GenePairIO
+      phetioType: GenePair.GenePairIO
     }, options );
 
     super( options );
@@ -134,36 +132,6 @@ class GenePair extends PhetioObject {
     return s;
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
-  // Below here are methods used by GenePairIO to save and restore PhET-iO state.
-  //--------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * Serializes this GenePair instance.
-   * @returns {Object}
-   * @public for use by GenePairIO only
-   */
-  toStateObject() {
-    return {
-      gene: GeneIO.toStateObject( this.gene ),
-      fatherAllele: AlleleIO.toStateObject( this.fatherAllele ),
-      motherAllele: AlleleIO.toStateObject( this.motherAllele )
-    };
-  }
-
-  /**
-   * Restores GenePair state after instantiation.
-   * @param {Object} stateObject
-   * @public for use by GenePairIO only
-   */
-  applyState( stateObject ) {
-    required( stateObject );
-    this.gene = required( GeneIO.fromStateObject( stateObject.gene ) );
-    this.fatherAllele = required( AlleleIO.fromStateObject( stateObject.fatherAllele ) );
-    this.motherAllele = required( AlleleIO.fromStateObject( stateObject.motherAllele ) );
-    this.validateInstance();
-  }
-
   /**
    * Performs validation of this instance. This should be called at the end of construction and deserialization.
    * @private
@@ -173,7 +141,43 @@ class GenePair extends PhetioObject {
     assert && assert( this.fatherAllele instanceof Allele, 'invalid fatherAllele' );
     assert && assert( this.motherAllele instanceof Allele, 'invalid motherAllele' );
   }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Below here are methods used by GenePairIO to serialize PhET-iO state.
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Serializes a GenePair.
+   * @returns {Object}
+   * @public
+   */
+  toStateObject() {
+    return {
+      gene: Gene.GeneIO.toStateObject( this.gene ),
+      fatherAllele: Allele.AlleleIO.toStateObject( this.fatherAllele ),
+      motherAllele: Allele.AlleleIO.toStateObject( this.motherAllele )
+    };
+  }
+
+  //TODO https://github.com/phetsims/natural-selection/issues/218 why does GenotypeIO.applyState call genePair.applyState instead of relying on GenePairIO ?
+  /**
+   * Restores GenePair state after instantiation.
+   * @param {Object} stateObject
+   * @public
+   */
+  applyState( stateObject ) {
+    required( stateObject );
+    this.gene = required( Gene.GeneIO.fromStateObject( stateObject.gene ) );
+    this.fatherAllele = required( Allele.AlleleIO.fromStateObject( stateObject.fatherAllele ) );
+    this.motherAllele = required( Allele.AlleleIO.fromStateObject( stateObject.motherAllele ) );
+    this.validateInstance();
+  }
 }
+
+GenePair.GenePairIO = createIOType( 'GenePairIO', GenePair, {
+  toStateObject: genePair => genePair.toStateObject(),
+  applyState: ( genePair, stateObject ) => genePair.applyState( stateObject )
+} );
 
 naturalSelection.register( 'GenePair', GenePair );
 export default GenePair;

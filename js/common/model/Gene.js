@@ -28,13 +28,13 @@ import Color from '../../../../scenery/js/util/Color.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
+import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
+import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import Allele from './Allele.js';
-import AlleleInstances from './AlleleInstances.js';
-import AlleleIO from './AlleleIO.js';
-import GeneIO from './GeneIO.js';
+import createIOType from './createIOType.js';
 
 class Gene extends PhetioObject {
 
@@ -65,7 +65,7 @@ class Gene extends PhetioObject {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: GeneIO
+      phetioType: Gene.GeneIO
     }, options );
 
     super( options );
@@ -85,7 +85,7 @@ class Gene extends PhetioObject {
     this.dominantAlleleProperty = new Property( null, {
       validValues: [ null, normalAllele, mutantAllele ],
       tandem: options.tandem.createTandem( 'dominantAlleleProperty' ),
-      phetioType: PropertyIO( NullableIO( AlleleIO ) ),
+      phetioType: PropertyIO( NullableIO( Allele.AlleleIO ) ),
       phetioReadOnly: true
     } );
 
@@ -103,7 +103,7 @@ class Gene extends PhetioObject {
       }, {
         validValues: [ null, normalAllele, mutantAllele ],
         tandem: options.tandem.createTandem( 'recessiveAlleleProperty' ),
-        phetioType: DerivedPropertyIO( NullableIO( AlleleIO ) )
+        phetioType: DerivedPropertyIO( NullableIO( Allele.AlleleIO ) )
       } );
 
     // @public is a mutation coming in the next generation of bunnies?
@@ -138,7 +138,7 @@ class Gene extends PhetioObject {
    */
   static createFurGene( options ) {
     return new Gene( naturalSelectionStrings.fur,
-      AlleleInstances.WHITE_FUR, AlleleInstances.BROWN_FUR,
+      Allele.WHITE_FUR, Allele.BROWN_FUR,
       'F', naturalSelectionStrings.furDominant,
       'f', naturalSelectionStrings.furRecessive,
       NaturalSelectionColors.FUR,
@@ -153,7 +153,7 @@ class Gene extends PhetioObject {
    */
   static createEarsGene( options ) {
     return new Gene( naturalSelectionStrings.ears,
-      AlleleInstances.STRAIGHT_EARS, AlleleInstances.FLOPPY_EARS,
+      Allele.STRAIGHT_EARS, Allele.FLOPPY_EARS,
       'E', naturalSelectionStrings.earsDominant,
       'e', naturalSelectionStrings.earsRecessive,
       NaturalSelectionColors.EARS,
@@ -168,13 +168,17 @@ class Gene extends PhetioObject {
    */
   static createTeethGene( options ) {
     return new Gene( naturalSelectionStrings.teeth,
-      AlleleInstances.SHORT_TEETH, AlleleInstances.LONG_TEETH,
+      Allele.SHORT_TEETH, Allele.LONG_TEETH,
       'T', naturalSelectionStrings.teethDominant,
       't', naturalSelectionStrings.teethRecessive,
       NaturalSelectionColors.TEETH,
       options );
   }
 }
+
+Gene.GeneIO = createIOType( 'GeneIO', Gene, {
+  parentIOType: ReferenceIO( ObjectIO )
+} );
 
 naturalSelection.register( 'Gene', Gene );
 export default Gene;

@@ -11,7 +11,7 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
-import BunnyCountsIO from './BunnyCountsIO.js';
+import createIOType from './createIOType.js';
 
 class ProportionsCounts {
 
@@ -33,19 +33,19 @@ class ProportionsCounts {
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  // Below here are methods used by ProportionsCountsIO to save and restore PhET-iO state.
+  // Below here are methods used by ProportionsCountsIO to serialize PhET-iO state.
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
    * Serializes this ProportionsCounts instance.
    * @returns {Object}
-   * @public for use by ProportionsCountsIO only
+   * @public
    */
   toStateObject() {
     return {
       generation: NumberIO.toStateObject( this.generation ),
-      startCounts: BunnyCountsIO.toStateObject( this.startCounts ),
-      endCounts: BunnyCountsIO.toStateObject( this.endCounts )
+      startCounts: BunnyCounts.BunnyCountsIO.toStateObject( this.startCounts ),
+      endCounts: BunnyCounts.BunnyCountsIO.toStateObject( this.endCounts )
     };
   }
 
@@ -53,16 +53,21 @@ class ProportionsCounts {
    * Deserializes a ProportionsCounts instance.
    * @param {Object} stateObject - return value from toStateObject
    * @returns {ProportionsCounts}
-   * @public for use by ProportionsCountsIO only
+   * @public
    */
   static fromStateObject( stateObject ) {
     return new ProportionsCounts(
       NumberIO.fromStateObject( stateObject.generation ),
-      BunnyCountsIO.fromStateObject( stateObject.startCounts ),
-      BunnyCountsIO.fromStateObject( stateObject.endCounts )
+      BunnyCounts.BunnyCountsIO.fromStateObject( stateObject.startCounts ),
+      BunnyCounts.BunnyCountsIO.fromStateObject( stateObject.endCounts )
     );
   }
 }
+
+ProportionsCounts.ProportionsCountsIO = createIOType( 'ProportionsCountsIO', ProportionsCounts, {
+  toStateObject: proportionsCounts => proportionsCounts.toStateObject(),
+  fromStateObject: stateObject => ProportionsCounts.fromStateObject( stateObject )
+} );
 
 naturalSelection.register( 'ProportionsCounts', ProportionsCounts );
 export default ProportionsCounts;

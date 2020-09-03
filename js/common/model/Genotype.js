@@ -19,11 +19,9 @@ import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
-import AlleleIO from './AlleleIO.js';
+import createIOType from './createIOType.js';
 import GenePair from './GenePair.js';
-import GenePairIO from './GenePairIO.js';
 import GenePool from './GenePool.js';
-import GenotypeIO from './GenotypeIO.js';
 
 class Genotype extends PhetioObject {
 
@@ -52,7 +50,7 @@ class Genotype extends PhetioObject {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: GenotypeIO,
+      phetioType: Genotype.GenotypeIO,
       phetioDocumentation: 'the genetic blueprint for a bunny'
     }, options );
 
@@ -157,38 +155,6 @@ class Genotype extends PhetioObject {
            this.teethGenePair.getGenotypeAbbreviation( translated );
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
-  // Below here are methods used by GenotypeIO to save and restore PhET-iO state.
-  //--------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * Serializes a Genotype to a state object.
-   * @returns {Object}
-   * @public for use by GenotypeIO only
-   */
-  toStateObject() {
-    return {
-      furGenePair: GenePairIO.toStateObject( this.furGenePair ),
-      earsGenePair: GenePairIO.toStateObject( this.earsGenePair ),
-      teethGenePair: GenePairIO.toStateObject( this.teethGenePair ),
-      mutation: NullableIO( ReferenceIO( AlleleIO ) ).toStateObject( this.mutation )
-    };
-  }
-
-  /**
-   * Restores Genotype stateObject after instantiation.
-   * @param {Object} stateObject
-   * @public for use by GenotypeIO only
-   */
-  applyState( stateObject ) {
-    required( stateObject );
-    this.furGenePair.applyState( GenePairIO.fromStateObject( stateObject.furGenePair ) );
-    this.earsGenePair.applyState( GenePairIO.fromStateObject( stateObject.earsGenePair ) );
-    this.teethGenePair.applyState( GenePairIO.fromStateObject( stateObject.teethGenePair ) );
-    this.mutation = required( NullableIO( ReferenceIO( AlleleIO ) ).fromStateObject( stateObject.mutation ) );
-    this.validateInstance();
-  }
-
   /**
    * Performs validation of this instance. This should be called at the end of construction and deserialization.
    * @private
@@ -199,7 +165,44 @@ class Genotype extends PhetioObject {
     assert && assert( this.teethGenePair instanceof GenePair, 'invalid teethGenePair' );
     assert && assert( this.mutation instanceof Allele || this.mutation === null, 'invalid mutation' );
   }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Below here are methods used by GenotypeIO to serialize PhET-iO state.
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Serializes a Genotype.
+   * @returns {Object}
+   * @public
+   */
+  toStateObject() {
+    return {
+      furGenePair: GenePair.GenePairIO.toStateObject( this.furGenePair ),
+      earsGenePair: GenePair.GenePairIO.toStateObject( this.earsGenePair ),
+      teethGenePair: GenePair.GenePairIO.toStateObject( this.teethGenePair ),
+      mutation: NullableIO( ReferenceIO( Allele.AlleleIO ) ).toStateObject( this.mutation )
+    };
+  }
+
+  /**
+   * Restores Genotype stateObject after instantiation.
+   * @param {Object} stateObject
+   * @public
+   */
+  applyState( stateObject ) {
+    required( stateObject );
+    this.furGenePair.applyState( GenePair.GenePairIO.fromStateObject( stateObject.furGenePair ) );
+    this.earsGenePair.applyState( GenePair.GenePairIO.fromStateObject( stateObject.earsGenePair ) );
+    this.teethGenePair.applyState( GenePair.GenePairIO.fromStateObject( stateObject.teethGenePair ) );
+    this.mutation = required( NullableIO( ReferenceIO( Allele.AlleleIO ) ).fromStateObject( stateObject.mutation ) );
+    this.validateInstance();
+  }
 }
+
+Genotype.GenotypeIO = createIOType( 'GenotypeIO', Genotype, {
+  toStateObject: genotype => genotype.toStateObject(),
+  applyState: ( genotype, stateObject ) => genotype.applyState( stateObject )
+} );
 
 naturalSelection.register( 'Genotype', Genotype );
 export default Genotype;

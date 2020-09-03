@@ -22,7 +22,6 @@ import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import Bunny from './Bunny.js';
 import BunnyArray from './BunnyArray.js';
-import BunnyArrayIO from './BunnyArrayIO.js';
 import BunnyGroup from './BunnyGroup.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
@@ -72,8 +71,7 @@ class BunnyCollection {
 
     // @private the dead bunnies in bunnyGroup
     this.deadBunnies = new BunnyArray( {
-      tandem: options.tandem.createTandem( 'deadBunnies' ),
-      phetioType: BunnyArrayIO
+      tandem: options.tandem.createTandem( 'deadBunnies' )
     } );
 
     // @private {Bunny[]} Recessive mutants, to be mated eagerly so that their mutation appears in the phenotype as

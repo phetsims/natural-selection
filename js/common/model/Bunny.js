@@ -22,14 +22,12 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
-import BunnyIO from './BunnyIO.js';
+import createIOType from './createIOType.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 import Genotype from './Genotype.js';
-import GenotypeIO from './GenotypeIO.js';
 import Organism from './Organism.js';
 import Phenotype from './Phenotype.js';
-import PhenotypeIO from './PhenotypeIO.js';
 import XDirection from './XDirection.js';
 
 // constants
@@ -67,7 +65,7 @@ class Bunny extends Organism {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: BunnyIO,
+      phetioType: Bunny.BunnyIO,
       phetioDynamicElement: true
     }, options );
 
@@ -312,82 +310,6 @@ class Bunny extends Organism {
            `isOriginalMutant=${this.isOriginalMutant()}`;
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
-  // Below here are methods used by BunnyIO to save and restore PhET-iO state.
-  // NOTE! If you add a field to Bunny that is not itself an instrumented PhET-iO element (e.g. a Property),
-  // then you will likely need to add that field to toStateObject, fromStateObject, applyState, and validateInstance.
-  //--------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * Returns the serialized information needed by BunnyIO.toStateObject.
-   * @returns {Object}
-   * @public for use by BunnyIO only
-   */
-  toStateObject() {
-    return {
-
-      // public fields
-      generation: NumberIO.toStateObject( this.generation ),
-      age: NumberIO.toStateObject( this.age ),
-      isAlive: BooleanIO.toStateObject( this.isAlive ),
-      father: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.father ),
-      mother: NullableIO( ReferenceIO( BunnyIO ) ).toStateObject( this.mother ),
-      genotype: GenotypeIO.toStateObject( this.genotype ),
-      phenotype: PhenotypeIO.toStateObject( this.phenotype ),
-
-      // private fields, will not be shown in Studio
-      private: {
-        restTime: NumberIO.toStateObject( this.restTime ),
-        hopTime: NumberIO.toStateObject( this.hopTime ),
-        cumulativeRestTime: NumberIO.toStateObject( this.cumulativeRestTime ),
-        cumulativeHopTime: NumberIO.toStateObject( this.cumulativeHopTime ),
-        hopDelta: NullableIO( Vector3IO ).toStateObject( this.hopDelta )
-      }
-    };
-  }
-
-  /**
-   * Creates the args that BunnyGroup uses to create a Bunny instance.
-   * @param {Object} state
-   * @returns {Object[]}
-   * @public for use by BunnyIO only
-   */
-  static stateToArgsForConstructor( state ) {
-
-    // stateToArgsForConstructor is called only for dynamic elements that are part of a group.
-    // So we are not restoring anything through options, because that would not support static elements.
-    // Everything will be restored via applyState.
-    return [ {} ];  // explicit options arg to Bunny constructor
-  }
-
-  /**
-   * Restores private state for PhET-iO. This is called by BunnyIO.applyState after a Bunny has been instantiated
-   * during deserialization.
-   * @param {Object} stateObject - return value of fromStateObject
-   * @public for use by BunnyIO only
-   */
-  applyState( stateObject ) {
-    required( stateObject );
-
-    // public fields
-    this.generation = required( NumberIO.fromStateObject( stateObject.generation ) );
-    this.age = required( NumberIO.fromStateObject( stateObject.age ) );
-    this.isAlive = required( BooleanIO.fromStateObject( stateObject.isAlive ) );
-    this.father = required( NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.father ) );
-    this.mother = required( NullableIO( ReferenceIO( BunnyIO ) ).fromStateObject( stateObject.mother ) );
-    this.genotype.applyState( stateObject.genotype );
-    this.phenotype.applyState( stateObject.phenotype );
-
-    // private fields
-    this.restTime = required( NumberIO.fromStateObject( stateObject.private.restTime ) );
-    this.hopTime = required( NumberIO.fromStateObject( stateObject.private.hopTime ) );
-    this.cumulativeRestTime = required( NumberIO.fromStateObject( stateObject.private.cumulativeRestTime ) );
-    this.cumulativeHopTime = required( NumberIO.fromStateObject( stateObject.private.cumulativeHopTime ) );
-    this.hopDelta = required( NullableIO( Vector3IO ).fromStateObject( stateObject.private.hopDelta ) );
-
-    this.validateInstance();
-  }
-
   /**
    * Performs validation of this instance. This should be called at the end of construction and deserialization.
    * @private
@@ -405,6 +327,79 @@ class Bunny extends Organism {
     assert && assert( typeof this.restTime === 'number', 'invalid restTime' );
     assert && assert( typeof this.hopTime === 'number', 'invalid hopTime' );
     assert && assert( this.hopDelta instanceof Vector3 || this.hopDelta === null, 'invalid hopDelta' );
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Below here are methods used by BunnyIO to serialize PhET-iO state.
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Serializes a Bunny.
+   * @returns {Object}
+   * @public
+   */
+  toStateObject() {
+    return {
+
+      // public fields
+      generation: NumberIO.toStateObject( this.generation ),
+      age: NumberIO.toStateObject( this.age ),
+      isAlive: BooleanIO.toStateObject( this.isAlive ),
+      father: NullableIO( ReferenceIO( Bunny.BunnyIO ) ).toStateObject( this.father ),
+      mother: NullableIO( ReferenceIO( Bunny.BunnyIO ) ).toStateObject( this.mother ),
+      genotype: Genotype.GenotypeIO.toStateObject( this.genotype ),
+      phenotype: Phenotype.PhenotypeIO.toStateObject( this.phenotype ),
+
+      // private fields, will not be shown in Studio
+      private: {
+        restTime: NumberIO.toStateObject( this.restTime ),
+        hopTime: NumberIO.toStateObject( this.hopTime ),
+        cumulativeRestTime: NumberIO.toStateObject( this.cumulativeRestTime ),
+        cumulativeHopTime: NumberIO.toStateObject( this.cumulativeHopTime ),
+        hopDelta: NullableIO( Vector3IO ).toStateObject( this.hopDelta )
+      }
+    };
+  }
+
+  /**
+   * Creates the args that BunnyGroup uses to instantiate a Bunny.
+   * @param {Object} state
+   * @returns {Object[]}
+   * @public
+   */
+  static stateToArgsForConstructor( state ) {
+
+    // stateToArgsForConstructor is called only for dynamic elements that are part of a group.
+    // So we are not restoring anything through options, because that would not support static elements.
+    // Everything will be restored via applyState.
+    return [ {} ];  // explicit options arg to Bunny constructor
+  }
+
+  /**
+   * Restores Bunny state after instantiation.
+   * @param {Object} stateObject - return value of fromStateObject
+   * @public
+   */
+  applyState( stateObject ) {
+    required( stateObject );
+
+    // public fields
+    this.generation = required( NumberIO.fromStateObject( stateObject.generation ) );
+    this.age = required( NumberIO.fromStateObject( stateObject.age ) );
+    this.isAlive = required( BooleanIO.fromStateObject( stateObject.isAlive ) );
+    this.father = required( NullableIO( ReferenceIO( Bunny.BunnyIO ) ).fromStateObject( stateObject.father ) );
+    this.mother = required( NullableIO( ReferenceIO( Bunny.BunnyIO ) ).fromStateObject( stateObject.mother ) );
+    this.genotype.applyState( stateObject.genotype );
+    this.phenotype.applyState( stateObject.phenotype );
+
+    // private fields
+    this.restTime = required( NumberIO.fromStateObject( stateObject.private.restTime ) );
+    this.hopTime = required( NumberIO.fromStateObject( stateObject.private.hopTime ) );
+    this.cumulativeRestTime = required( NumberIO.fromStateObject( stateObject.private.cumulativeRestTime ) );
+    this.cumulativeHopTime = required( NumberIO.fromStateObject( stateObject.private.cumulativeHopTime ) );
+    this.hopDelta = required( NullableIO( Vector3IO ).fromStateObject( stateObject.private.hopDelta ) );
+
+    this.validateInstance();
   }
 }
 
@@ -436,6 +431,12 @@ function getHopDelta( hopDistance, hopHeight, xDirection ) {
   const dz = ( oppositeIsLarger ? adjacent : opposite );
   return new Vector3( dx, dy, dz );
 }
+
+Bunny.BunnyIO = createIOType( 'BunnyIO', Bunny, {
+  toStateObject: bunny => bunny.toStateObject(),
+  stateToArgsForConstructor: state => Bunny.stateToArgsForConstructor( state ),
+  applyState: ( bunny, stateObject ) => bunny.applyState( stateObject )
+} );
 
 naturalSelection.register( 'Bunny', Bunny );
 export default Bunny;

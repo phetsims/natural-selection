@@ -14,7 +14,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Wolf from './Wolf.js';
-import WolfIO from './WolfIO.js';
 
 class WolfGroup extends PhetioGroup {
 
@@ -30,7 +29,7 @@ class WolfGroup extends PhetioGroup {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: PhetioGroupIO( WolfIO ),
+      phetioType: PhetioGroupIO( Wolf.WolfIO ),
       phetioDocumentation: 'manages dynamic PhET-iO elements of type Wolf'
     }, options );
 

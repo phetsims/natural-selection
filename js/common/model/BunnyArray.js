@@ -7,14 +7,15 @@
  */
 
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
+import ObservableArrayIO from '../../../../axon/js/ObservableArrayIO.js';
 import Property from '../../../../axon/js/Property.js';
 import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import BunnyArrayIO from './BunnyArrayIO.js';
+import Bunny from './Bunny.js';
 import BunnyCounts from './BunnyCounts.js';
-import BunnyCountsIO from './BunnyCountsIO.js';
 
 class BunnyArray extends ObservableArray {
 
@@ -27,7 +28,7 @@ class BunnyArray extends ObservableArray {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: BunnyArrayIO,
+      phetioType: ObservableArrayIO( ReferenceIO( Bunny.BunnyIO ) ),
       phetioState: false
     }, options );
 
@@ -36,7 +37,7 @@ class BunnyArray extends ObservableArray {
     // @public (read-only)
     this.countsProperty = new Property( BunnyCounts.withZero(), {
       tandem: options.tandem.createTandem( 'countsProperty' ),
-      phetioType: PropertyIO( BunnyCountsIO ),
+      phetioType: PropertyIO( BunnyCounts.BunnyCountsIO ),
       phetioState: false // because counts will be restored as Bunny instances are restored to BunnyGroup
     } );
 

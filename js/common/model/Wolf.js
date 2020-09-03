@@ -15,9 +15,9 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import createIOType from './createIOType.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Organism from './Organism.js';
-import WolfIO from './WolfIO.js';
 import XDirection from './XDirection.js';
 
 // constants
@@ -46,7 +46,7 @@ class Wolf extends Organism {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: WolfIO,
+      phetioType: Wolf.WolfIO,
       phetioDynamicElement: true
     }, options );
 
@@ -115,14 +115,22 @@ class Wolf extends Organism {
     this.positionProperty.value = new Vector3( x, y, z );
   }
 
+  /**
+   * Performs validation of this instance. This should be called at the end of construction and deserialization.
+   * @private
+   */
+  validateInstance() {
+    assert && assert( NaturalSelectionUtils.isPositive( this.speed ), 'invalid speed' );
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   // Below here are methods used by WolfIO to save and restore PhET-iO state.
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Returns the serialized information needed by WolfIO.toStateObject.
+   * Serializes a Wolf.
    * @returns {Object}
-   * @public for use by WolfIO only
+   * @public
    */
   toStateObject() {
     return {
@@ -133,10 +141,10 @@ class Wolf extends Organism {
   }
 
   /**
-   * Creates the args that WolfGroup uses to create a Wolf instance.
+   * Creates the args that WolfGroup uses to instantiate a Wolf.
    * @param state
    * @returns {Object[]}
-   * @public for use by WolfIO only
+   * @public
    */
   static stateToArgsForConstructor( state ) {
 
@@ -147,25 +155,22 @@ class Wolf extends Organism {
   }
 
   /**
-   * Restores private state for PhET-iO. This is called by WolfIO.applyState after a Wolf has been instantiated
-   * during deserialization.
+   * Restores Wolf state after instantiation.
    * @param {Object} stateObject - return value of toStateObject
-   * @public for use by WolfIO only
+   * @public
    */
   applyState( stateObject ) {
     required( stateObject );
     this.speed = required( NumberIO.fromStateObject( stateObject.private.speed ) );
     this.validateInstance();
   }
-
-  /**
-   * Performs validation of this instance. This should be called at the end of construction and deserialization.
-   * @private
-   */
-  validateInstance() {
-    assert && assert( NaturalSelectionUtils.isPositive( this.speed ), 'invalid speed' );
-  }
 }
+
+Wolf.WolfIO = createIOType( 'WolfIO', Wolf, {
+  toStateObject: wolf => wolf.toStateObject(),
+  stateToArgsForConstructor: state => Wolf.stateToArgsForConstructor( state ),
+  applyState: ( wolf, stateObject ) => wolf.applyState( stateObject )
+} );
 
 naturalSelection.register( 'Wolf', Wolf );
 export default Wolf;

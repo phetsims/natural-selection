@@ -19,7 +19,6 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import BunnyCounts from './BunnyCounts.js';
-import BunnyCountsIO from './BunnyCountsIO.js';
 import PopulationModel from './PopulationModel.js';
 
 class DataProbe extends PhetioObject {
@@ -66,7 +65,7 @@ class DataProbe extends PhetioObject {
     this.countsProperty = new DerivedProperty( [ this.dataProbeGenerationProperty, populationModel.timeInGenerationsProperty ],
       ( dataProbeGeneration, timeInGenerations ) => this.getCounts( dataProbeGeneration, timeInGenerations ), {
         tandem: options.tandem.createTandem( 'countsProperty' ),
-        phetioType: DerivedPropertyIO( NullableIO( BunnyCountsIO ) ),
+        phetioType: DerivedPropertyIO( NullableIO( BunnyCounts.BunnyCountsIO ) ),
         phetioDocumentation: 'counts displayed by the data probe'
       } );
 
