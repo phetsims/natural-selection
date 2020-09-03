@@ -48,8 +48,10 @@ function createIOType( coreType, ioTypeName, options ) {
     // see ObjectIO.methods
     methods: {},
 
-    //TODO https://github.com/phetsims/natural-selection/issues/218 doc, not currently used in natural-selection
+    // see ObjectIO.events
     events: [],
+
+    // see ObjectIO.parameterTypes
     parameterTypes: []
 
   }, options );
