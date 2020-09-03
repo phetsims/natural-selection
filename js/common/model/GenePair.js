@@ -159,7 +159,6 @@ class GenePair extends PhetioObject {
     };
   }
 
-  //TODO https://github.com/phetsims/natural-selection/issues/218 why does GenotypeIO.applyState call genePair.applyState instead of relying on GenePairIO ?
   /**
    * Restores GenePair state after instantiation.
    * @param {Object} stateObject

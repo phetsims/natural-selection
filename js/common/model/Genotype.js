@@ -184,7 +184,6 @@ class Genotype extends PhetioObject {
     };
   }
 
-  //TODO https://github.com/phetsims/natural-selection/issues/218 why does BunnyIO.applyState call genotype.applyState instead of relying on GenotypeIO ?
   /**
    * Restores Genotype stateObject after instantiation.
    * @param {Object} stateObject
@@ -192,6 +191,9 @@ class Genotype extends PhetioObject {
    */
   applyState( stateObject ) {
     required( stateObject );
+
+    //TODO https://github.com/phetsims/natural-selection/issues/220
+    // Why does are we calling *GenePair.applyState instead of relying on GenePairIO?
     this.furGenePair.applyState( GenePair.GenePairIO.fromStateObject( stateObject.furGenePair ) );
     this.earsGenePair.applyState( GenePair.GenePairIO.fromStateObject( stateObject.earsGenePair ) );
     this.teethGenePair.applyState( GenePair.GenePairIO.fromStateObject( stateObject.teethGenePair ) );

@@ -389,6 +389,9 @@ class Bunny extends Organism {
     this.isAlive = required( BooleanIO.fromStateObject( stateObject.isAlive ) );
     this.father = required( NullableIO( ReferenceIO( Bunny.BunnyIO ) ).fromStateObject( stateObject.father ) );
     this.mother = required( NullableIO( ReferenceIO( Bunny.BunnyIO ) ).fromStateObject( stateObject.mother ) );
+
+    //TODO https://github.com/phetsims/natural-selection/issues/220
+    // Why does are we calling genotype.applyState and phenotype.applyState instead of relying on GenotypeIO and PhenotypeIO?
     this.genotype.applyState( stateObject.genotype );
     this.phenotype.applyState( stateObject.phenotype );
 
