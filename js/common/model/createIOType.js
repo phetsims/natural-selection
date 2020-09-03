@@ -68,12 +68,7 @@ function createIOType( coreType, ioTypeName, options ) {
      */
     static toStateObject( object ) {
       validate( object, this.validator );
-      if ( options.toStateObject ) {
-        return options.toStateObject( object );
-      }
-      else {
-        return super.toStateObject( object );
-      }
+      return options.toStateObject ? options.toStateObject( object ) : super.toStateObject( object );
     }
 
     /**
@@ -84,12 +79,7 @@ function createIOType( coreType, ioTypeName, options ) {
      * @override
      */
     static fromStateObject( stateObject ) {
-      if ( options.fromStateObject ) {
-        return options.fromStateObject( stateObject );
-      }
-      else {
-        return super.fromStateObject( stateObject );
-      }
+      return options.fromStateObject ? options.fromStateObject( stateObject ) : super.fromStateObject( stateObject );
     }
 
     /**
@@ -100,12 +90,7 @@ function createIOType( coreType, ioTypeName, options ) {
      * @override
      */
     static stateToArgsForConstructor( state ) {
-      if ( options.stateToArgsForConstructor ) {
-        return options.stateToArgsForConstructor( state );
-      }
-      else {
-        return super.stateToArgsForConstructor( state );
-      }
+      return options.stateToArgsForConstructor ? options.stateToArgsForConstructor( state ) : super.stateToArgsForConstructor( state );
     }
 
     /**
@@ -118,12 +103,7 @@ function createIOType( coreType, ioTypeName, options ) {
      */
     static applyState( object, state ) {
       validate( object, this.validator );
-      if ( options.applyState ) {
-        return options.applyState( object, state );
-      }
-      else {
-        return super.applyState( object, state );
-      }
+      options.applyState ? options.applyState( object, state ) : super.applyState( object, state );
     }
   }
 
