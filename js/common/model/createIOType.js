@@ -122,7 +122,7 @@ function createIOType( coreType, ioTypeName, options ) {
         return options.applyState( object, state );
       }
       else {
-        return super.applyState( state );
+        return super.applyState( object, state );
       }
     }
   }
