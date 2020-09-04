@@ -107,6 +107,7 @@ function createIOType( coreType, ioTypeName, options ) {
     }
   }
 
+  // Fill in static fields in the IO Type.
   IOType.validator = { valueType: coreType };
   IOType.typeName = ioTypeName;
   IOType.documentation = options.documentation;
@@ -114,6 +115,7 @@ function createIOType( coreType, ioTypeName, options ) {
   IOType.events = options.events;
   IOType.parameterTypes = options.parameterTypes;
 
+  // Verify that we've defined a valid IO Type.
   ObjectIO.validateSubtype( IOType );
 
   return IOType;
