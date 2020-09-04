@@ -13,11 +13,12 @@ import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
-import createIOType from './createIOType.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Organism from './Organism.js';
+import setIOTypeFields from './setIOTypeFields.js';
 import XDirection from './XDirection.js';
 
 // constants
@@ -168,15 +169,26 @@ class Wolf extends Organism {
 
 /**
  * WolfIO handles PhET-iO serialization of Wolf. Because serialization involves accessing private members,
- * it delegates to Wolf. The methods that WolfIO implements are typical of 'Dynamic element serialization',
+ * it delegates to Wolf. The methods that WolfIO overrides are typical of 'Dynamic element serialization',
  * as described in the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
  */
-Wolf.WolfIO = createIOType( Wolf, 'WolfIO', {
-  toStateObject: wolf => wolf.toStateObject(),
-  stateToArgsForConstructor: state => Wolf.stateToArgsForConstructor( state ),
-  applyState: ( wolf, stateObject ) => wolf.applyState( stateObject )
-} );
+class WolfIO extends ObjectIO {
+
+  // @public @override
+  static toStateObject( wolf ) { return wolf.toStateObject(); }
+
+  // @public @override
+  static stateToArgsForConstructor( state ) { return Wolf.stateToArgsForConstructor( state ); }
+
+  // @public @override
+  static applyState( wolf, stateObject ) { wolf.applyState( stateObject ); }
+}
+
+setIOTypeFields( WolfIO, 'WolfIO', Wolf );
+
+// @public
+Wolf.WolfIO = WolfIO;
 
 naturalSelection.register( 'Wolf', Wolf );
 export default Wolf;

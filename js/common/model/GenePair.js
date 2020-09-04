@@ -11,10 +11,11 @@ import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
-import createIOType from './createIOType.js';
 import Gene from './Gene.js';
+import setIOTypeFields from './setIOTypeFields.js';
 
 class GenePair extends PhetioObject {
 
@@ -179,10 +180,19 @@ class GenePair extends PhetioObject {
  * the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
  */
-GenePair.GenePairIO = createIOType( GenePair, 'GenePairIO', {
-  toStateObject: genePair => genePair.toStateObject(),
-  applyState: ( genePair, stateObject ) => genePair.applyState( stateObject )
-} );
+class GenePairIO extends ObjectIO {
+
+  // @public @overrides
+  static toStateObject( genePair ) { return genePair.toStateObject(); }
+
+  // @public @overrides
+  static applyState( genePair, stateObject ) { genePair.applyState( stateObject ); }
+}
+
+setIOTypeFields( GenePairIO, 'GenePairIO', GenePair );
+
+// @public
+GenePair.GenePairIO = GenePairIO;
 
 naturalSelection.register( 'GenePair', GenePair );
 export default GenePair;

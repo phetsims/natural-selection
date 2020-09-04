@@ -34,7 +34,7 @@ import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import Allele from './Allele.js';
-import createIOType from './createIOType.js';
+import setIOTypeFields from './setIOTypeFields.js';
 
 class Gene extends PhetioObject {
 
@@ -177,13 +177,16 @@ class Gene extends PhetioObject {
 }
 
 /**
- * GeneIO handles PhET-iO serialization of Gene. The methods that it implements are typical of
- * 'Reference type serialization', as described in the Serialization section of
+ * GeneIO handles PhET-iO serialization of Gene. It implements 'Reference type serialization',
+ * as described in the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
  */
-Gene.GeneIO = createIOType( Gene, 'GeneIO', {
-  parentIOType: ReferenceIO( ObjectIO )
-} );
+class GeneIO extends ReferenceIO( ObjectIO ) {}
+
+setIOTypeFields( GeneIO, 'GeneIO', Gene );
+
+// @public
+Gene.GeneIO = GeneIO;
 
 naturalSelection.register( 'Gene', Gene );
 export default Gene;

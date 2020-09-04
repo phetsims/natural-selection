@@ -15,13 +15,14 @@ import required from '../../../../phet-core/js/required.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
+import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
-import createIOType from './createIOType.js';
 import GenePair from './GenePair.js';
 import GenePool from './GenePool.js';
+import setIOTypeFields from './setIOTypeFields.js';
 
 class Genotype extends PhetioObject {
 
@@ -208,10 +209,19 @@ class Genotype extends PhetioObject {
  * the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
  */
-Genotype.GenotypeIO = createIOType( Genotype, 'GenotypeIO', {
-  toStateObject: genotype => genotype.toStateObject(),
-  applyState: ( genotype, stateObject ) => genotype.applyState( stateObject )
-} );
+class GenotypeIO extends ObjectIO {
+
+  // @public @overrides
+  static toStateObject( genotype ) { return genotype.toStateObject(); }
+
+  // @public @overrides
+  static applyState( genotype, stateObject ) { genotype.applyState( stateObject ); }
+}
+
+setIOTypeFields( GenotypeIO, 'GenotypeIO', Genotype );
+
+// @public
+Genotype.GenotypeIO = GenotypeIO;
 
 naturalSelection.register( 'Genotype', Genotype );
 export default Genotype;

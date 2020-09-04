@@ -8,10 +8,11 @@
  */
 
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
-import createIOType from './createIOType.js';
+import setIOTypeFields from './setIOTypeFields.js';
 
 class ProportionsCounts {
 
@@ -70,10 +71,19 @@ class ProportionsCounts {
  * the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
  */
-ProportionsCounts.ProportionsCountsIO = createIOType( ProportionsCounts, 'ProportionsCountsIO', {
-  toStateObject: proportionsCounts => proportionsCounts.toStateObject(),
-  fromStateObject: stateObject => ProportionsCounts.fromStateObject( stateObject )
-} );
+class ProportionsCountsIO extends ObjectIO {
+
+  // @public @overrides
+  static toStateObject( proportionsCounts ) { return proportionsCounts.toStateObject(); }
+
+  // @public @overrides
+  static fromStateObject( stateObject ) { return ProportionsCounts.fromStateObject( stateObject ); }
+}
+
+setIOTypeFields( ProportionsCountsIO, 'ProportionsCountsIO',ProportionsCounts );
+
+// @public
+ProportionsCounts.ProportionsCountsIO = ProportionsCountsIO;
 
 naturalSelection.register( 'ProportionsCounts', ProportionsCounts );
 export default ProportionsCounts;

@@ -19,15 +19,16 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
-import createIOType from './createIOType.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 import Genotype from './Genotype.js';
 import Organism from './Organism.js';
 import Phenotype from './Phenotype.js';
+import setIOTypeFields from './setIOTypeFields.js';
 import XDirection from './XDirection.js';
 
 // constants
@@ -437,15 +438,26 @@ function getHopDelta( hopDistance, hopHeight, xDirection ) {
 
 /**
  * BunnyIO handles PhET-iO serialization of Bunny. Because serialization involves accessing private members,
- * it delegates to Bunny. The methods that BunnyIO implements are typical of 'Dynamic element serialization',
+ * it delegates to Bunny. The methods that BunnyIO overrides are typical of 'Dynamic element serialization',
  * as described in the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
  */
-Bunny.BunnyIO = createIOType( Bunny, 'BunnyIO', {
-  toStateObject: bunny => bunny.toStateObject(),
-  stateToArgsForConstructor: state => Bunny.stateToArgsForConstructor( state ),
-  applyState: ( bunny, stateObject ) => bunny.applyState( stateObject )
-} );
+class BunnyIO extends ObjectIO {
+
+  // @public @override
+  static toStateObject( bunny ) { return bunny.toStateObject(); }
+
+  // @public @override
+  static stateToArgsForConstructor( state ) { return Bunny.stateToArgsForConstructor( state ); }
+
+  // @public @override
+  static applyState( bunny, stateObject ) { bunny.applyState( stateObject ); }
+}
+
+setIOTypeFields( BunnyIO, 'BunnyIO', Bunny );
+
+// @public
+Bunny.BunnyIO = BunnyIO;
 
 naturalSelection.register( 'Bunny', Bunny );
 export default Bunny;

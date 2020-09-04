@@ -25,7 +25,7 @@ import straightEarsImage from '../../../images/straightEars_png.js';
 import whiteFurImage from '../../../images/whiteFur_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
-import createIOType from './createIOType.js';
+import setIOTypeFields from './setIOTypeFields.js';
 
 class Allele extends PhetioObject {
 
@@ -64,13 +64,16 @@ class Allele extends PhetioObject {
 }
 
 /**
- * AlleleIO handles PhET-iO serialization of Allele. The methods that it implements are typical of
- * 'Reference type serialization', as described in the Serialization section of
+ * AlleleIO handles PhET-iO serialization of Allele. It implements 'Reference type serialization',
+ * as described in the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
  */
-Allele.AlleleIO = createIOType( Allele, 'AlleleIO', {
-  parentIOType: ReferenceIO( ObjectIO )
-} );
+class AlleleIO extends ReferenceIO( ObjectIO ) {}
+
+setIOTypeFields( AlleleIO, 'AlleleIO', Allele );
+
+// @public
+Allele.AlleleIO = AlleleIO;
 
 // Static instances
 

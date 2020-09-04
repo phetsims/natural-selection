@@ -10,11 +10,12 @@
 
 import required from '../../../../phet-core/js/required.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 import Bunny from './Bunny.js';
-import createIOType from './createIOType.js';
+import setIOTypeFields from './setIOTypeFields.js';
 
 class BunnyCounts {
 
@@ -172,10 +173,19 @@ class BunnyCounts {
  * the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
  */
-BunnyCounts.BunnyCountsIO = createIOType( BunnyCounts, 'BunnyCountsIO', {
-  toStateObject: bunnyCounts => bunnyCounts.toStateObject(),
-  fromStateObject: stateObject => BunnyCounts.fromStateObject( stateObject )
-} );
+class BunnyCountsIO extends ObjectIO {
+
+  // @public @overrides
+  static toStateObject( bunnyCounts ) { return bunnyCounts.toStateObject(); }
+
+  // @public @overrides
+  static fromStateObject( stateObject ) { return BunnyCounts.fromStateObject( stateObject ); }
+}
+
+setIOTypeFields( BunnyCountsIO, 'BunnyCountsIO', BunnyCounts );
+
+// @public
+BunnyCounts.BunnyCountsIO = BunnyCountsIO;
 
 naturalSelection.register( 'BunnyCounts', BunnyCounts );
 export default BunnyCounts;
