@@ -178,10 +178,8 @@ class Genotype extends PhetioObject {
    */
   toStateObject() {
     return {
-      furGenePair: GenePair.GenePairIO.toStateObject( this.furGenePair ),
-      earsGenePair: GenePair.GenePairIO.toStateObject( this.earsGenePair ),
-      teethGenePair: GenePair.GenePairIO.toStateObject( this.teethGenePair ),
       mutation: NullableIO( ReferenceIO( Allele.AlleleIO ) ).toStateObject( this.mutation )
+      // No need to serialize furGenePair, earsGenePair, teethGenePair. They are stateful and will be automatically serialized.
     };
   }
 
@@ -192,12 +190,6 @@ class Genotype extends PhetioObject {
    */
   applyState( stateObject ) {
     required( stateObject );
-
-    //TODO https://github.com/phetsims/natural-selection/issues/220
-    // Why does are we calling *GenePair.applyState instead of relying on GenePairIO?
-    this.furGenePair.applyState( GenePair.GenePairIO.fromStateObject( stateObject.furGenePair ) );
-    this.earsGenePair.applyState( GenePair.GenePairIO.fromStateObject( stateObject.earsGenePair ) );
-    this.teethGenePair.applyState( GenePair.GenePairIO.fromStateObject( stateObject.teethGenePair ) );
     this.mutation = required( NullableIO( ReferenceIO( Allele.AlleleIO ) ).fromStateObject( stateObject.mutation ) );
     this.validateInstance();
   }

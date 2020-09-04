@@ -342,14 +342,14 @@ class Bunny extends Organism {
   toStateObject() {
     return {
 
+      // No need to serialize genotype and phenotype. They are stateful and will be serialized automatically.
+
       // public fields
       generation: NumberIO.toStateObject( this.generation ),
       age: NumberIO.toStateObject( this.age ),
       isAlive: BooleanIO.toStateObject( this.isAlive ),
       father: NullableIO( ReferenceIO( Bunny.BunnyIO ) ).toStateObject( this.father ),
       mother: NullableIO( ReferenceIO( Bunny.BunnyIO ) ).toStateObject( this.mother ),
-      genotype: Genotype.GenotypeIO.toStateObject( this.genotype ),
-      phenotype: Phenotype.PhenotypeIO.toStateObject( this.phenotype ),
 
       // private fields, will not be shown in Studio
       private: {
@@ -393,8 +393,8 @@ class Bunny extends Organism {
 
     //TODO https://github.com/phetsims/natural-selection/issues/220
     // Why does are we calling genotype.applyState and phenotype.applyState instead of relying on GenotypeIO and PhenotypeIO?
-    this.genotype.applyState( stateObject.genotype );
-    this.phenotype.applyState( stateObject.phenotype );
+    // this.genotype.applyState( stateObject.genotype );
+    // this.phenotype.applyState( stateObject.phenotype );
 
     // private fields
     this.restTime = required( NumberIO.fromStateObject( stateObject.private.restTime ) );
