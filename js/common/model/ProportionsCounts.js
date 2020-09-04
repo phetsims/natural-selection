@@ -66,8 +66,8 @@ class ProportionsCounts {
 }
 
 /**
- * ProportionsCountsIO handles PhET-iO serialization of ProportionsCounts. It does so by delegating to BunnyCounts.
- * The methods that BunnyCountsIO implements are typical of 'Data type serialization', as described in
+ * ProportionsCountsIO handles PhET-iO serialization of ProportionsCounts. It does so by delegating to ProportionsCounts.
+ * The methods that ProportionsCountsIO implements are typical of 'Data type serialization', as described in
  * the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
  */
