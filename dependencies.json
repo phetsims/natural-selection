@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.1.0 Tue Sep 01 2020 14:59:36 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.1.0 Thu Sep 03 2020 16:28:29 GMT-0800 (Alaska Daylight Time)",
   "assert": {
     "sha": "1a41cef653bbed1025af5768bea958d7e3e0f8ae",
     "branch": "HEAD"
@@ -13,8 +13,8 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "29b616a083a386ecb9744a5c55caccef1f2ab34d",
-    "branch": "HEAD"
+    "sha": "2f746e675790b8415126943ca55151e7a552561a",
+    "branch": "natural-selection-1.1"
   },
   "dot": {
     "sha": "9800d977587820cb2fcc90e7a6dd2a1b9025b208",
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "480d544e4245893273d393f79ae40be6fbcd6783",
+    "sha": "6a0c6d37893cfe2e8b998116905c11463e3c6a61",
     "branch": "1.1"
   },
   "phet-core": {
