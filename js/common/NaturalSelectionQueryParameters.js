@@ -27,7 +27,7 @@ const SCHEMA = {
     public: true
   },
 
-  // Specifies the mutations that appear in the initial population of bunnies for the Lab screen.
+  // Specifies the mutations that appear in the initial population of bunnies for the Intro screen.
   // See documentation for labMutations.
   introMutations: {
     type: 'string',
@@ -35,7 +35,7 @@ const SCHEMA = {
     public: true
   },
 
-  // Specifies the initial population of bunnies for the Lab screen.
+  // Specifies the initial population of bunnies for the Intro screen.
   // See documentation for labPopulation.
   introPopulation: {
     type: 'array',
