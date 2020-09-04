@@ -107,12 +107,13 @@ function createIOType( coreType, ioTypeName, options ) {
     }
   }
 
-  IOType.documentation = options.documentation;
   IOType.validator = { valueType: coreType };
   IOType.typeName = ioTypeName;
+  IOType.documentation = options.documentation;
+  IOType.methods = options.methods;
   IOType.events = options.events;
   IOType.parameterTypes = options.parameterTypes;
-  IOType.methods = options.methods;
+
   ObjectIO.validateSubtype( IOType );
 
   return IOType;
