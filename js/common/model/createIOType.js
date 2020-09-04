@@ -61,8 +61,8 @@ function createIOType( coreType, ioTypeName, options ) {
 
     /**
      * See ObjectIO.toStateObject
-     * @param {*} object
-     * @returns {*}
+     * @param {Object} object
+     * @returns {Object}
      * @public
      * @override
      */
@@ -73,8 +73,8 @@ function createIOType( coreType, ioTypeName, options ) {
 
     /**
      * See ObjectIO.fromStateObject
-     * @param {*} stateObject
-     * @returns {*}
+     * @param {Object} stateObject
+     * @returns {Object}
      * @public
      * @override
      */
@@ -84,7 +84,7 @@ function createIOType( coreType, ioTypeName, options ) {
 
     /**
      * See ObjectIO.stateToArgsForConstructor
-     * @param {*} state
+     * @param {Object} state
      * @returns {*[]}
      * @public
      * @override
@@ -95,9 +95,8 @@ function createIOType( coreType, ioTypeName, options ) {
 
     /**
      * See ObjectIO.applyState
-     * @param {*} object
-     * @param {*} state
-     * @returns {*}
+     * @param {Object} object
+     * @param {Object} state
      * @public
      * @override
      */
