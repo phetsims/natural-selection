@@ -6,6 +6,9 @@
  * allele and the phenotype. Note that gene and allele are often used interchangeably in the literature,
  * but we attempt to use them consistently in this implementation.
  *
+ * There is one instance of each Allele, and they are global to the simulation. They are defined herein as
+ * static instances, and appear in Studio as children of the element 'naturalSelection.global.model.alleles'.
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
