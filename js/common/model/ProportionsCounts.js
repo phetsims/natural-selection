@@ -64,6 +64,12 @@ class ProportionsCounts {
   }
 }
 
+/**
+ * ProportionsCountsIO handles PhET-iO serialization of ProportionsCounts. It does so by delegating to BunnyCounts.
+ * The methods that BunnyCountsIO implements are typical of 'Data type serialization', as described in
+ * the Serialization section of
+ * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
+ */
 ProportionsCounts.ProportionsCountsIO = createIOType( ProportionsCounts, 'ProportionsCountsIO', {
   toStateObject: proportionsCounts => proportionsCounts.toStateObject(),
   fromStateObject: stateObject => ProportionsCounts.fromStateObject( stateObject )

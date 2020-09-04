@@ -435,6 +435,12 @@ function getHopDelta( hopDistance, hopHeight, xDirection ) {
   return new Vector3( dx, dy, dz );
 }
 
+/**
+ * BunnyIO handles PhET-iO serialization of Bunny. Because serialization involves accessing private members,
+ * it delegates to Bunny. The methods that BunnyIO implements are typical of 'Dynamic element serialization',
+ * as described in the Serialization section of
+ * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
+ */
 Bunny.BunnyIO = createIOType( Bunny, 'BunnyIO', {
   toStateObject: bunny => bunny.toStateObject(),
   stateToArgsForConstructor: state => Bunny.stateToArgsForConstructor( state ),

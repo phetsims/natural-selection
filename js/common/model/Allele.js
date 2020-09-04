@@ -63,12 +63,19 @@ class Allele extends PhetioObject {
   }
 }
 
-// tandem for all static instances of Solute, which are used across all screens
-const ALLELES_TANDEM = Tandem.GLOBAL.createTandem( 'model' ).createTandem( 'alleles' );
-
+/**
+ * AlleleIO handles PhET-iO serialization of Allele. The methods that it implements are typical of
+ * 'Reference type serialization', as described in the Serialization section of
+ * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
+ */
 Allele.AlleleIO = createIOType( Allele, 'AlleleIO', {
   parentIOType: ReferenceIO( ObjectIO )
 } );
+
+// Static instances
+
+// tandem for all static instances of Solute, which are used across all screens
+const ALLELES_TANDEM = Tandem.GLOBAL.createTandem( 'model' ).createTandem( 'alleles' );
 
 Allele.WHITE_FUR = new Allele( naturalSelectionStrings.whiteFur, whiteFurImage, {
   tandem: ALLELES_TANDEM.createTandem( 'whiteFur' )

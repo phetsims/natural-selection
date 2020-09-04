@@ -128,6 +128,12 @@ class Phenotype extends PhetioObject {
   }
 }
 
+/**
+ * PhenotypeIO handles PhET-iO serialization of Phenotype.  It does so by delegating to Phenotype.
+ * The methods that it implements are typical of 'Dynamic element serialization', as described in
+ * the Serialization section of
+ * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
+ */
 Phenotype.PhenotypeIO = createIOType( Phenotype, 'PhenotypeIO', {
   toStateObject: phenotype => phenotype.toStateObject(),
   applyState: ( phenotype, stateObject ) => phenotype.applyState( stateObject )

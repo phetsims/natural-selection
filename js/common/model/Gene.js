@@ -176,6 +176,11 @@ class Gene extends PhetioObject {
   }
 }
 
+/**
+ * GeneIO handles PhET-iO serialization of Gene. The methods that it implements are typical of
+ * 'Reference type serialization', as described in the Serialization section of
+ * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
+ */
 Gene.GeneIO = createIOType( Gene, 'GeneIO', {
   parentIOType: ReferenceIO( ObjectIO )
 } );
