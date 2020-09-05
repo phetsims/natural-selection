@@ -268,10 +268,10 @@ Some of the resources that were used in the creation of this simulation...
 
 **Books**
 
-* [Molecular and Cell Biology for Dummies, 1st Edition](https://www.academia.edu/5107380/Molecular_and_Cell_Biology_for_Dummies) (free download)
-* [Genetics for Dummies, 2nd Edition](https://epdf.pub/genetics-for-dummies-second-edition.html) (free download)
-* [Cartoon Guide to Genetics](https://archive.org/details/The_Cartoon_Guide_To_Genetics_Larry_Gonick/page/n211) (free download)
-* The Selfish Gene, Richard Dawkins
+* _[Molecular and Cell Biology for Dummies, 1st Edition](https://www.academia.edu/5107380/Molecular_and_Cell_Biology_for_Dummies)_ (free download)
+* _[Genetics for Dummies, 2nd Edition](https://epdf.pub/genetics-for-dummies-second-edition.html)_ (free download)
+* _[Cartoon Guide to Genetics](https://archive.org/details/The_Cartoon_Guide_To_Genetics_Larry_Gonick/page/n211)_ (free download)
+* _The Selfish Gene_, Richard Dawkins
 
 **Wikipedia**
 
