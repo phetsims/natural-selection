@@ -261,3 +261,26 @@ The Proportions graph shows the proportions of alleles for each gene at the star
 
 The Pedigree graph shows a bunny's pedigree to a maximum depth of 3 ancestors. The pedigree optionally shows the genotype abbreviation. 
 A red 'X' on a bunny indicates that the bunny is dead. A yellow 'mutaton' icon indicates a mutant bunny. 
+
+## Bibliography
+
+Some of the resources that were used in the creation of this simulation...
+
+**Books**
+
+* [Molecular and Cell Biology for Dummies, 1st Edition](https://www.academia.edu/5107380/Molecular_and_Cell_Biology_for_Dummies) (free download)
+* [Genetics for Dummies, 2nd Edition](https://epdf.pub/genetics-for-dummies-second-edition.html) (free download)
+* [Cartoon Guide to Genetics](https://archive.org/details/The_Cartoon_Guide_To_Genetics_Larry_Gonick/page/n211) (free download)
+* The Selfish Gene, Richard Dawkins
+
+**Wikipedia**
+
+* [Natural Selection](https://en.wikipedia.org/wiki/Natural_selection)
+* [Mendelian Inheritance](https://en.wikipedia.org/wiki/Mendelian_inheritance)
+* [Trait](https://en.wikipedia.org/wiki/Phenotypic_trait)
+* [Gene](https://en.wikipedia.org/wiki/Gene)
+* [Allele](https://en.wikipedia.org/wiki/Allele)
+* [Genotype](https://en.wikipedia.org/wiki/Genotype)
+* [Phenotype](https://en.wikipedia.org/wiki/Phenotype)
+* [Dominance](https://en.wikipedia.org/wiki/Dominance_(genetics))
+* [Mutation](https://en.wikipedia.org/wiki/Mutation)
