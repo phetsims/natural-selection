@@ -31,7 +31,7 @@ function setIOTypeFields( ioType, ioTypeName, coreType, options ) {
   ioType.validator = { valueType: coreType };
 
   // Verify that we've defined a valid IO Type.
-  ObjectIO.validateSubtype( ioType );
+  ObjectIO.validateIOType( ioType );
 }
 
 naturalSelection.register( 'setIOTypeFields', setIOTypeFields );
