@@ -96,6 +96,9 @@ const SCHEMA = {
   // the 'mother' allele. In the Pedigree graph, the father is on the left, the mother is on the right. So for example,
   // 'Ff' and 'fF' result in a different genotype.
   //
+  // If labMutations is omitted, then labPopulation must be a positive integer that indicates how many bunnies
+  // are in the initial population. Those bunnies will all have normal alleles.
+  //
   // Valid examples:
   //   labMutations=F&labPopulation=5FF
   //   labMutations=F&labPopulation=5FF,5Ff,5ff
