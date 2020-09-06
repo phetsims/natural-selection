@@ -101,6 +101,7 @@ const SCHEMA = {
   //   labMutations=F&labPopulation=5FF,5Ff,5ff
   //   labMutations=FeT&labPopulation=5FFeETt
   //   labMutations=FeT&labPopulation=5FFeETt,5ffeett
+  //   labPopulation=10 - initial population of 10 bunnies with normal alleles
   //
   // Invalid examples:
   //   labMutations=FE&labPopulation=FfEe - missing count
@@ -110,6 +111,7 @@ const SCHEMA = {
   //   labMutations=FE&labPopulation=10FEe - 'F' is invalid, fur must appear exactly twice
   //   labMutations=F&labPopulation=10FfFEe - 'FfF' is invalid, fur must appear exactly twice
   //   labMutations=F&labPopulation=10FFx - 'x' is not a valid character
+  //   labMutations=F&labPopulations=10 - missing mutations in labPopulations
   //
   labPopulation: {
     type: 'array',
