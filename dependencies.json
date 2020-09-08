@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.1.1-rc.1 Thu Sep 03 2020 16:55:41 GMT-0800 (Alaska Daylight Time)",
+  "comment": "# natural-selection 1.1.1 Tue Sep 08 2020 08:23:57 GMT-0800 (Alaska Daylight Time)",
   "assert": {
     "sha": "1a41cef653bbed1025af5768bea958d7e3e0f8ae",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "c90033d727a500b782ce87eea496f4604978349b",
+    "sha": "752903862bf2a7aca64548b5b4c10c86919f67bf",
     "branch": "1.1"
   },
   "phet-core": {
