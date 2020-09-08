@@ -45,14 +45,17 @@ class MutationAlertsNode extends Node {
       } );
     } );
 
-    // Position the alerts to the left of their associated rows.
-    // Rows in the Add Mutations panel can be hidden via PhET-iO, so this must be handled dynamically.
-    // unlink is not necessary.
+    // Alerts point at rows in the Add Mutations panel. Since rows can be dynamically hidden via PhET-iO, manage
+    // the logistics of that here. unlink is not necessary.
     addMutationsPanel.boundsProperty.link( () => {
       mutationComingNodes.forEach( mutationComingNode => {
+
+        // Position the alert to the left of its associated rows.
         const row = addMutationsPanel.getRow( mutationComingNode.gene );
         const globalPoint = row.parentToGlobalPoint( new Vector2( row.left, row.centerY ) ).addXY( X_OFFSET, 0 );
         mutationComingNode.rightCenter = mutationComingNode.globalToParentPoint( globalPoint );
+
+        // If the row was made invisible for a gene that has a mutation was coming, cancel the mutation.
         if ( !row.visible && mutationComingNode.gene.mutationComingProperty.value ) {
           mutationComingNode.gene.cancelMutation();
         }
