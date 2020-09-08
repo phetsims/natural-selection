@@ -9,6 +9,7 @@
 import merge from '../../../../phet-core/js/merge.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
@@ -27,6 +28,7 @@ class AddAMateButton extends RectangularPushButton {
       yMargin: 8,
 
       // phet-io
+      tandem: Tandem.REQUIRED,
       phetioReadOnly: true // because sim state controls when this button is visible
     }, options );
 
