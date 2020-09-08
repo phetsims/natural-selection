@@ -9,7 +9,6 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
@@ -128,6 +127,9 @@ class AddMutationsPanel extends NaturalSelectionPanel {
       }
     } );
 
+    // @private
+    this.rows = rows;
+
     // @public for configuring ScreenViews only
     this.furRow = furRow;
     this.earsRow = earsRow;
@@ -144,45 +146,21 @@ class AddMutationsPanel extends NaturalSelectionPanel {
   }
 
   /**
-   * Gets the left center of the 'Fur' row in the global coordinate frame.
-   * Used to position the MutationAlertsNode that corresponds to fur.
-   * @returns {Vector2}
+   * Gets the row that corresponds to a gene.
+   * @param {Gene} gene
+   * @returns {Node}
    * @public
    */
-  getFurLeftCenter() {
-    return this.getRowGlobalLeftCenter( this.furRow );
-  }
-
-  /**
-   * Gets the left center of the 'Ears' row in the global coordinate frame.
-   * Used to position the MutationAlertsNode that corresponds to ears.
-   * @returns {Vector2}
-   * @public
-   */
-  getEarsLeftCenter() {
-    return this.getRowGlobalLeftCenter( this.earsRow );
-  }
-
-  /**
-   * Gets the left center of the 'Teeth' row in the global coordinate frame.
-   * Used to position the MutationAlertsNode that corresponds to teeth.
-   * @returns {Vector2}
-   * @public
-   */
-  getTeethLeftCenter() {
-    return this.getRowGlobalLeftCenter( this.teethRow );
-  }
-
-  /**
-   * Gets the left center of a row in the global coordinate frame.
-   * Used to position a MutationAlertsNode.
-   * @param {Node} row
-   * @returns {Vector2}
-   * @private
-   */
-  getRowGlobalLeftCenter( row ) {
-    assert && assert( row instanceof Node, 'invalid row' );
-    return row.parentToGlobalPoint( new Vector2( row.left, row.centerY ) );
+  getRow( gene ) {
+    assert && assert( gene instanceof Gene, 'invalid gene' );
+    let row = null;
+    for ( let i = 0; i < this.rows.length && !row; i++ ) {
+      if ( gene === this.rows[ i ].gene ) {
+        row = this.rows[ i ];
+      }
+    }
+    assert && assert( row, `row not found for ${gene.name} gene` );
+    return row;
   }
 }
 
@@ -313,6 +291,9 @@ class Row extends HBox {
         gene.dominantAlleleProperty.value = null;
       }
     } );
+
+    // @public (read-only)
+    this.gene = gene;
   }
 
   /**

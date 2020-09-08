@@ -131,6 +131,15 @@ class Gene extends PhetioObject {
   }
 
   /**
+   * Cancels a mutation that has been scheduled.
+   * @public
+   */
+  cancelMutation() {
+    assert && assert( this.mutationComingProperty.value, `${this.name} mutation is not scheduled` );
+    this.reset();
+  }
+
+  /**
    * Creates a gene for fur.
    * @param {Object} [options] - options for Gene constructor
    * @returns {Gene}

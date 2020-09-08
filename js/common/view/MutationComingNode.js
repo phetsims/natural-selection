@@ -9,13 +9,13 @@
  */
 
 import Shape from '../../../../kite/js/Shape.js';
-import merge from '../../../../phet-core/js/merge.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import Gene from '../model/Gene.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import CancelMutationButton from './CancelMutationButton.js';
 
@@ -27,16 +27,16 @@ const POINTER_WIDTH = 15;
 class MutationComingNode extends Node {
 
   /**
+   * @param {Gene} gene
    * @param {Object} [options]
    */
-  constructor( options ) {
+  constructor( gene, options ) {
+    assert && assert( gene instanceof Gene, 'invalid gene' );
 
-    options = merge( {
-      cancelButtonListener: () => {}
-    }, options );
+    options = options || {};
 
     const cancelButton = new CancelMutationButton( {
-      listener: options.cancelButtonListener
+      listener: () => gene.cancelMutation()
     } );
 
     const textNode = new Text( naturalSelectionStrings.mutationComing, {
@@ -71,6 +71,9 @@ class MutationComingNode extends Node {
     options.children = [ backgroundPath, hBox ];
 
     super( options );
+
+    // @public (read-only)
+    this.gene = gene;
   }
 
   /**

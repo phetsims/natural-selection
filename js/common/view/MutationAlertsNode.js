@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -30,63 +31,32 @@ class MutationAlertsNode extends Node {
 
     options = merge( {}, options );
 
-    // Fur
-    const furAlert = new MutationComingNode( {
-      cancelButtonListener: () => {
-        genePool.furGene.dominantAlleleProperty.value = null;
-        genePool.furGene.mutationComingProperty.value = false;
-      }
-    } );
-
-    // Ears
-    const earsAlert = new MutationComingNode( {
-      cancelButtonListener: () => {
-        genePool.earsGene.dominantAlleleProperty.value = null;
-        genePool.earsGene.mutationComingProperty.value = false;
-      }
-    } );
-
-    // Teeth
-    const teethAlert = new MutationComingNode( {
-      cancelButtonListener: () => {
-        genePool.teethGene.dominantAlleleProperty.value = null;
-        genePool.teethGene.mutationComingProperty.value = false;
-      }
-    } );
-
+    // Create a MutationComingNode (aka 'alert') for each gene
+    const mutationComingNodes = _.map( genePool.genes, gene => new MutationComingNode( gene ) );
     assert && assert( !options.children, 'MutationAlertsNode sets children' );
-    options.children = [ furAlert, earsAlert, teethAlert ];
+    options.children = mutationComingNodes;
 
     super( options );
 
+    // When a mutation is coming, make its associated alert visible. unlinks are not necessary.
+    mutationComingNodes.forEach( mutationComingNode => {
+      mutationComingNode.gene.mutationComingProperty.link( mutationComing => {
+        mutationComingNode.visible = mutationComing;
+      } );
+    } );
+
     // Position the alerts to the left of their associated rows.
-    // Rows in the Add Mutations panel can be hidden via PhET-iO.
-    // If that happens while an alert is visible, adjust the positions of the alerts.
+    // Rows in the Add Mutations panel can be hidden via PhET-iO, so this must be handled dynamically.
     // unlink is not necessary.
     addMutationsPanel.boundsProperty.link( () => {
-
-      // Fur
-      let globalPoint = addMutationsPanel.getFurLeftCenter().addXY( X_OFFSET, 0 );
-      furAlert.rightCenter = furAlert.globalToParentPoint( globalPoint );
-
-      // Ears
-      globalPoint = addMutationsPanel.getEarsLeftCenter().addXY( X_OFFSET, 0 );
-      earsAlert.rightCenter = earsAlert.globalToParentPoint( globalPoint );
-
-      // Teeth
-      globalPoint = addMutationsPanel.getTeethLeftCenter().addXY( X_OFFSET, 0 );
-      teethAlert.rightCenter = teethAlert.globalToParentPoint( globalPoint );
-    } );
-
-    // When a mutation is coming, make its associated alert visible. unlinks are not necessary.
-    genePool.furGene.mutationComingProperty.link( mutationComing => {
-      furAlert.visible = mutationComing;
-    } );
-    genePool.earsGene.mutationComingProperty.link( mutationComing => {
-      earsAlert.visible = mutationComing;
-    } );
-    genePool.teethGene.mutationComingProperty.link( mutationComing => {
-      teethAlert.visible = mutationComing;
+      mutationComingNodes.forEach( mutationComingNode => {
+        const row = addMutationsPanel.getRow( mutationComingNode.gene );
+        const globalPoint = row.parentToGlobalPoint( new Vector2( row.left, row.centerY ) ).addXY( X_OFFSET, 0 );
+        mutationComingNode.rightCenter = mutationComingNode.globalToParentPoint( globalPoint );
+        if ( !row.visible && mutationComingNode.gene.mutationComingProperty.value ) {
+          mutationComingNode.gene.cancelMutation();
+        }
+      } );
     } );
   }
 
