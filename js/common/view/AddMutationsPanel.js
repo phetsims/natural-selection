@@ -66,7 +66,8 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     // title is text + icon
     const titleNode = new Text( naturalSelectionStrings.addMutations, {
       font: NaturalSelectionConstants.TITLE_FONT,
-      maxWidth: 180 // determined empirically
+      maxWidth: 180, // determined empirically
+      tandem: options.tandem.createTandem( 'titleNode' )
     } );
 
     // Individual column headings
