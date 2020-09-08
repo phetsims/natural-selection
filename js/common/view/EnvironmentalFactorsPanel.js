@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
@@ -51,22 +52,18 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     // To make all checkbox labels have the same effective size
     const checkboxLabelAlignGroup = new AlignGroup();
 
+    // A checkbox for each environmental factor
     const wolvesCheckbox = new WolvesCheckbox( wolvesEnabledProperty, checkboxLabelAlignGroup, {
       tandem: options.tandem.createTandem( 'wolvesCheckbox' )
     } );
-
     const toughFoodCheckbox = new ToughFoodCheckbox( foodIsToughProperty, checkboxLabelAlignGroup, {
       visible: options.toughFoodCheckboxVisible,
       tandem: options.tandem.createTandem( 'toughFoodCheckbox' )
     } );
-
     const limitedFoodCheckbox = new LimitedFoodCheckbox( foodIsLimitedProperty, checkboxLabelAlignGroup, {
       tandem: options.tandem.createTandem( 'limitedFoodCheckbox' )
     } );
-
-    const checkboxes = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-      children: [ wolvesCheckbox, toughFoodCheckbox, limitedFoodCheckbox ]
-    } ) );
+    const checkboxes = [ wolvesCheckbox, toughFoodCheckbox, limitedFoodCheckbox ];
 
     // Checkbox currently has a limitation with adjusting its content size after instantiation, which is the case with
     // these checkboxes that use AlignGroup. So this forces the pointer areas to be recomputed, and also dilates the
@@ -74,25 +71,25 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     // See https://github.com/phetsims/natural-selection/issues/145 and https://github.com/phetsims/natural-selection/issues/173
     const xDilation = 8;
     const yDilation = NaturalSelectionConstants.VBOX_OPTIONS.spacing / 2;
-    checkboxes.children.forEach( checkbox => {
+    checkboxes.forEach( checkbox => {
       checkbox.touchArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
       checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
     } );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-      children: [ titleNode, checkboxes ]
+      children: [ titleNode, ...checkboxes ]
     } ) );
 
     super( content, options );
 
     // Set the panel's title to singular or plural, depending on how many checkboxes are visible.
     // unlink is not necessary.
-    checkboxes.localBoundsProperty.link( () => {
+    Property.multilink( _.map( checkboxes, checkbox => checkbox.visibleProperty ), () => {
 
       // If the title hasn't been changed to something entirely different via PhET-iO...
       if ( [ naturalSelectionStrings.environmentalFactor, naturalSelectionStrings.environmentalFactors ].includes( titleNode.text ) ) {
-        const visibleCount = _.filter( checkboxes.children, child => child.visible ).length;
-        titleNode.text = ( visibleCount === 1 ) ?
+        const numberOfVisibleCheckboxes = _.filter( checkboxes, checkbox => checkbox.visible ).length;
+        titleNode.text = ( numberOfVisibleCheckboxes === 1 ) ?
                          naturalSelectionStrings.environmentalFactor :
                          naturalSelectionStrings.environmentalFactors;
       }

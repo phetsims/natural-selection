@@ -8,6 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
@@ -101,29 +102,31 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     const teethRow = new Row( genePool.teethGene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
       tandem: options.tandem.createTandem( 'teethRow' )
     } );
+    const rows = [ furRow, earsRow, teethRow ];
 
-    const rows = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-      children: [ furRow, earsRow, teethRow ]
+    const vBox = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+      children: rows
     } ) );
 
-    // Set the panel's title to singular or plural, depending on how many rows are visible. unlink is not necessary.
-    rows.localBoundsProperty.link( () => {
+    const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+      spacing: 2,
+      children: [ titleNode, columnHeadingsNode, vBox ]
+    } ) );
+
+    super( content, options );
+
+    // Set the panel's title to singular or plural, depending on how many rows are visible.
+    // unmultilink is not necessary.
+    Property.multilink( _.map( rows, row => row.visibleProperty ), () => {
 
       // If the title hasn't been changed to something entirely different via PhET-iO...
       if ( [ naturalSelectionStrings.addMutation, naturalSelectionStrings.addMutations ].includes( titleNode.text ) ) {
-        const visibleCount = _.filter( rows.children, child => child.visible ).length;
-        titleNode.text = ( visibleCount === 1 ) ?
+        const numberOfVisibleRows = _.filter( rows, row => row.visible ).length;
+        titleNode.text = ( numberOfVisibleRows === 1 ) ?
                          naturalSelectionStrings.addMutation :
                          naturalSelectionStrings.addMutations;
       }
     } );
-
-    const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-      spacing: 2,
-      children: [ titleNode, columnHeadingsNode, rows ]
-    } ) );
-
-    super( content, options );
 
     // @public for configuring ScreenViews only
     this.furRow = furRow;
