@@ -342,14 +342,15 @@ class Bunny extends Organism {
   toStateObject() {
     return {
 
-      // No need to serialize genotype and phenotype. They are stateful and will be serialized automatically.
-
-      // public fields
-      generation: NumberIO.toStateObject( this.generation ),
-      age: NumberIO.toStateObject( this.age ),
-      isAlive: BooleanIO.toStateObject( this.isAlive ),
+      // Even though father and mother are stateful, we need a reference to them.
       father: NullableIO( ReferenceIO( Bunny.BunnyIO ) ).toStateObject( this.father ),
       mother: NullableIO( ReferenceIO( Bunny.BunnyIO ) ).toStateObject( this.mother ),
+
+      generation: NumberIO.toStateObject( this.generation ),
+      isAlive: BooleanIO.toStateObject( this.isAlive ),
+      age: NumberIO.toStateObject( this.age ),
+
+      // No need to serialize genotype and phenotype. They are stateful and will be serialized automatically.
 
       // private fields, will not be shown in Studio
       private: {
@@ -385,16 +386,11 @@ class Bunny extends Organism {
     required( stateObject );
 
     // public fields
-    this.generation = required( NumberIO.fromStateObject( stateObject.generation ) );
-    this.age = required( NumberIO.fromStateObject( stateObject.age ) );
-    this.isAlive = required( BooleanIO.fromStateObject( stateObject.isAlive ) );
     this.father = required( NullableIO( ReferenceIO( Bunny.BunnyIO ) ).fromStateObject( stateObject.father ) );
     this.mother = required( NullableIO( ReferenceIO( Bunny.BunnyIO ) ).fromStateObject( stateObject.mother ) );
-
-    //TODO https://github.com/phetsims/natural-selection/issues/220
-    // Why does are we calling genotype.applyState and phenotype.applyState instead of relying on GenotypeIO and PhenotypeIO?
-    // this.genotype.applyState( stateObject.genotype );
-    // this.phenotype.applyState( stateObject.phenotype );
+    this.generation = required( NumberIO.fromStateObject( stateObject.generation ) );
+    this.isAlive = required( BooleanIO.fromStateObject( stateObject.isAlive ) );
+    this.age = required( NumberIO.fromStateObject( stateObject.age ) );
 
     // private fields
     this.restTime = required( NumberIO.fromStateObject( stateObject.private.restTime ) );
