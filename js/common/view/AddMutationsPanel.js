@@ -109,7 +109,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     // Set the panel's title to singular or plural, depending on how many rows are visible. unlink is not necessary.
     rows.localBoundsProperty.link( () => {
 
-      // If the title hasn't been changed to something else via PhET-iO...
+      // If the title hasn't been changed to something entirely different via PhET-iO...
       if ( [ naturalSelectionStrings.addMutation, naturalSelectionStrings.addMutations ].includes( titleNode.text ) ) {
         const visibleCount = _.filter( rows.children, child => child.visible ).length;
         titleNode.text = ( visibleCount === 1 ) ?

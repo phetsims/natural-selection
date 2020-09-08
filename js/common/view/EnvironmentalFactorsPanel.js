@@ -89,7 +89,7 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     // unlink is not necessary.
     checkboxes.localBoundsProperty.link( () => {
 
-      // If the title hasn't been changed to something else via PhET-iO...
+      // If the title hasn't been changed to something entirely different via PhET-iO...
       if ( [ naturalSelectionStrings.environmentalFactor, naturalSelectionStrings.environmentalFactors ].includes( titleNode.text ) ) {
         const visibleCount = _.filter( checkboxes.children, child => child.visible ).length;
         titleNode.text = ( visibleCount === 1 ) ?
