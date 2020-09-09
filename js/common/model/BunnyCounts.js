@@ -15,7 +15,6 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 import Bunny from './Bunny.js';
-import setIOTypeFields from './setIOTypeFields.js';
 
 class BunnyCounts {
 
@@ -182,7 +181,7 @@ class BunnyCountsIO extends ObjectIO {
   static fromStateObject( stateObject ) { return BunnyCounts.fromStateObject( stateObject ); }
 }
 
-setIOTypeFields( BunnyCountsIO, 'BunnyCountsIO', BunnyCounts );
+ObjectIO.setIOTypeFields( BunnyCountsIO, 'BunnyCountsIO', BunnyCounts );
 
 // @public
 BunnyCounts.BunnyCountsIO = BunnyCountsIO;

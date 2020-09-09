@@ -12,7 +12,6 @@ import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
-import setIOTypeFields from './setIOTypeFields.js';
 
 class ProportionsCounts {
 
@@ -80,7 +79,7 @@ class ProportionsCountsIO extends ObjectIO {
   static fromStateObject( stateObject ) { return ProportionsCounts.fromStateObject( stateObject ); }
 }
 
-setIOTypeFields( ProportionsCountsIO, 'ProportionsCountsIO',ProportionsCounts );
+ObjectIO.setIOTypeFields( ProportionsCountsIO, 'ProportionsCountsIO', ProportionsCounts );
 
 // @public
 ProportionsCounts.ProportionsCountsIO = ProportionsCountsIO;

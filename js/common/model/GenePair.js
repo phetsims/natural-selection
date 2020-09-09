@@ -15,7 +15,6 @@ import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
 import Gene from './Gene.js';
-import setIOTypeFields from './setIOTypeFields.js';
 
 class GenePair extends PhetioObject {
 
@@ -189,7 +188,7 @@ class GenePairIO extends ObjectIO {
   static applyState( genePair, stateObject ) { genePair.applyState( stateObject ); }
 }
 
-setIOTypeFields( GenePairIO, 'GenePairIO', GenePair );
+ObjectIO.setIOTypeFields( GenePairIO, 'GenePairIO', GenePair );
 
 // @public
 GenePair.GenePairIO = GenePairIO;

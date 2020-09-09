@@ -28,7 +28,6 @@ import GenePool from './GenePool.js';
 import Genotype from './Genotype.js';
 import Organism from './Organism.js';
 import Phenotype from './Phenotype.js';
-import setIOTypeFields from './setIOTypeFields.js';
 import XDirection from './XDirection.js';
 
 // constants
@@ -450,7 +449,7 @@ class BunnyIO extends ObjectIO {
   static applyState( bunny, stateObject ) { bunny.applyState( stateObject ); }
 }
 
-setIOTypeFields( BunnyIO, 'BunnyIO', Bunny );
+ObjectIO.setIOTypeFields( BunnyIO, 'BunnyIO', Bunny );
 
 // @public
 Bunny.BunnyIO = BunnyIO;

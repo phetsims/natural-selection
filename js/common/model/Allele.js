@@ -25,7 +25,6 @@ import straightEarsImage from '../../../images/straightEars_png.js';
 import whiteFurImage from '../../../images/whiteFur_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
-import setIOTypeFields from './setIOTypeFields.js';
 
 class Allele extends PhetioObject {
 
@@ -70,7 +69,7 @@ class Allele extends PhetioObject {
  */
 class AlleleIO extends ReferenceIO( ObjectIO ) {}
 
-setIOTypeFields( AlleleIO, 'AlleleIO', Allele );
+ObjectIO.setIOTypeFields( AlleleIO, 'AlleleIO', Allele );
 
 // @public
 Allele.AlleleIO = AlleleIO;

@@ -18,7 +18,6 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Organism from './Organism.js';
-import setIOTypeFields from './setIOTypeFields.js';
 import XDirection from './XDirection.js';
 
 // constants
@@ -185,7 +184,7 @@ class WolfIO extends ObjectIO {
   static applyState( wolf, stateObject ) { wolf.applyState( stateObject ); }
 }
 
-setIOTypeFields( WolfIO, 'WolfIO', Wolf );
+ObjectIO.setIOTypeFields( WolfIO, 'WolfIO', Wolf );
 
 // @public
 Wolf.WolfIO = WolfIO;

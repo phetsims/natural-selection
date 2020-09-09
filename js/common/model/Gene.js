@@ -34,7 +34,6 @@ import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import Allele from './Allele.js';
-import setIOTypeFields from './setIOTypeFields.js';
 
 class Gene extends PhetioObject {
 
@@ -192,7 +191,7 @@ class Gene extends PhetioObject {
  */
 class GeneIO extends ReferenceIO( ObjectIO ) {}
 
-setIOTypeFields( GeneIO, 'GeneIO', Gene );
+ObjectIO.setIOTypeFields( GeneIO, 'GeneIO', Gene );
 
 // @public
 Gene.GeneIO = GeneIO;

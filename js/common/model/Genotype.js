@@ -22,7 +22,6 @@ import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
 import GenePair from './GenePair.js';
 import GenePool from './GenePool.js';
-import setIOTypeFields from './setIOTypeFields.js';
 
 class Genotype extends PhetioObject {
 
@@ -210,7 +209,7 @@ class GenotypeIO extends ObjectIO {
   static applyState( genotype, stateObject ) { genotype.applyState( stateObject ); }
 }
 
-setIOTypeFields( GenotypeIO, 'GenotypeIO', Genotype );
+ObjectIO.setIOTypeFields( GenotypeIO, 'GenotypeIO', Genotype );
 
 // @public
 Genotype.GenotypeIO = GenotypeIO;
