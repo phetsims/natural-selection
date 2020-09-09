@@ -131,12 +131,13 @@ class ProportionsGraphNode extends Node {
       columnLabelsAlignGroup, cellsAlignGroup, {
         tandem: options.tandem.createTandem( 'teethColumn' )
       } );
+    const columns = [ labelsColumn, furColumn, earsColumn, teethColumn ];
 
     // Layout the columns
-    const columns = new HBox( {
+    const hBox = new HBox( {
       spacing: COLUMN_SPACING,
       align: 'center',
-      children: [ labelsColumn, furColumn, earsColumn, teethColumn ]
+      children: columns
     } );
 
     // Spinner for selecting which generation is displayed
@@ -147,7 +148,7 @@ class ProportionsGraphNode extends Node {
     const content = new VBox( {
       align: 'center',
       spacing: 35,
-      children: [ columns, generationSpinner ]
+      children: [ hBox, generationSpinner ]
     } );
 
     // 'No Data', visible when we have no data to display.
@@ -201,10 +202,8 @@ class ProportionsGraphNode extends Node {
       teethColumn.setEndCounts( endCounts.shortTeethCount, endCounts.longTeethCount );
     } );
 
-    // @public for configuring ScreenViews only
-    this.furColumn = furColumn;
-    this.earsColumn = earsColumn;
-    this.teethColumn = teethColumn;
+    // @private
+    this.columns = columns;
   }
 
   /**
@@ -214,6 +213,21 @@ class ProportionsGraphNode extends Node {
   dispose() {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
+  }
+
+  /**
+   * Sets visibility of the UI components related to a specific gene.
+   * @param {Gene} gene
+   * @param {boolean} visible
+   * @public
+   */
+  setGeneVisible( gene, visible ) {
+    assert && assert( gene instanceof Gene, 'invalid gene' );
+    assert && assert( typeof visible === 'boolean', 'invalid visible' );
+
+    const column = _.find( this.columns, column => ( column.gene === gene ) );
+    assert && assert( column, `column not found for ${gene.name} gene` );
+    column.visible = visible;
   }
 }
 
@@ -385,6 +399,7 @@ class Column extends VBox {
     } );
 
     // @private
+    this.gene = gene;
     this.startBarNode = startBarNode;
     this.endBarNode = endBarNode;
   }

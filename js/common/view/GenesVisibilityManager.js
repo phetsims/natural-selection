@@ -56,11 +56,12 @@ class GenesVisibilityManager {
 
     // Set visibility of all UI components related to Fur. unlink is not necessary.
     furVisibleProperty.link( visible => {
-      addMutationsPanel.setGeneVisible( genePool.furGene, visible );
+      const gene = genePool.furGene;
+      addMutationsPanel.setGeneVisible( gene, visible );
       populationNode.populationPanel.whiteFurCheckbox.visibleProperty.value = visible;
       populationNode.populationPanel.brownFurCheckbox.visibleProperty.value = visible;
       proportionsNode.proportionsPanel.legendNode.furLegendNode.visibleProperty.value = visible;
-      proportionsNode.proportionsGraphNode.furColumn.visibleProperty.value = visible;
+      proportionsNode.proportionsGraphNode.setGeneVisible( gene, visible );
       pedigreeNode.allelesPanel.furRow.visibleProperty.value = visible;
     } );
 
@@ -72,11 +73,12 @@ class GenesVisibilityManager {
 
     // Set visibility of all UI components related to Ears. unlink is not necessary.
     earsVisibleProperty.link( visible => {
-      addMutationsPanel.setGeneVisible( genePool.earsGene, visible );
+      const gene = genePool.earsGene;
+      addMutationsPanel.setGeneVisible( gene, visible );
       populationNode.populationPanel.straightEarsCheckbox.visibleProperty.value = visible;
       populationNode.populationPanel.floppyEarsCheckbox.visibleProperty.value = visible;
       proportionsNode.proportionsPanel.legendNode.earsLegendNode.visibleProperty.value = visible;
-      proportionsNode.proportionsGraphNode.earsColumn.visibleProperty.value = visible;
+      proportionsNode.proportionsGraphNode.setGeneVisible( gene, visible );
       pedigreeNode.allelesPanel.earsRow.visibleProperty.value = visible;
     } );
 
@@ -88,11 +90,12 @@ class GenesVisibilityManager {
 
     // Set visibility of all UI components related to Teeth. unlink is not necessary.
     teethVisibleProperty.link( visible => {
-      addMutationsPanel.setGeneVisible( genePool.teethGene, visible );
+      const gene = genePool.teethGene;
+      addMutationsPanel.setGeneVisible( gene, visible );
       populationNode.populationPanel.shortTeethCheckbox.visibleProperty.value = visible;
       populationNode.populationPanel.longTeethCheckbox.visibleProperty.value = visible;
       proportionsNode.proportionsPanel.legendNode.teethLegendNode.visibleProperty.value = visible;
-      proportionsNode.proportionsGraphNode.teethColumn.visibleProperty.value = visible;
+      proportionsNode.proportionsGraphNode.setGeneVisible( gene, visible );
       pedigreeNode.allelesPanel.teethRow.visibleProperty.value = visible;
     } );
   }
