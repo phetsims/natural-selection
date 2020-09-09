@@ -177,7 +177,7 @@ class Genotype extends PhetioObject {
   toStateObject() {
     return {
       mutation: NullableIO( Allele.AlleleIO ).toStateObject( this.mutation )
-      // No need to serialize furGenePair, earsGenePair, teethGenePair. They are stateful and will be automatically serialized.
+      // furGenePair, earsGenePair, and teethGenePair are stateful and will be serialized automatically.
     };
   }
 

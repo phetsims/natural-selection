@@ -349,7 +349,7 @@ class Bunny extends Organism {
       isAlive: BooleanIO.toStateObject( this.isAlive ),
       age: NumberIO.toStateObject( this.age ),
 
-      // No need to serialize genotype and phenotype. They are stateful and will be serialized automatically.
+      // genotype and phenotype are stateful and will be serialized automatically.
 
       // private fields, will not be shown in Studio
       private: {
