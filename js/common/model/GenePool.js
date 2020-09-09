@@ -39,6 +39,7 @@ class GenePool {
     } );
 
     // @public (read-only) for situations where it's possible to iterate over genes
+    // When we're able to iterate to create the UI, the order here determines the order of UI components.
     this.genes = [ this.furGene, this.earsGene, this.teethGene ];
   }
 

@@ -46,22 +46,12 @@ class ProportionsLegendNode extends VBox {
     options.spacing = 25;
 
     // A legend for each gene
-    const furLegendNode = new GeneLegendNode( genePool.furGene, {
-      tandem: options.tandem.createTandem( 'furLegendNode' ),
-      normalTandemName: 'whiteFurLegendNode',
-      mutantTandemName: 'brownFurLegendNode'
-    } );
-    const earsLegendNode = new GeneLegendNode( genePool.earsGene, {
-      tandem: options.tandem.createTandem( 'earsLegendNode' ),
-      normalTandemName: 'straightEarsLegendNode',
-      mutantTandemName: 'floppyEarsLegendNode'
-    } );
-    const teethLegendNode = new GeneLegendNode( genePool.teethGene, {
-      tandem: options.tandem.createTandem( 'teethLegendNode' ),
-      normalTandemName: 'shortTeethLegendNode',
-      mutantTandemName: 'longTeethLegendNode'
-    } );
-    const legendNodes = [ furLegendNode, earsLegendNode, teethLegendNode ];
+    const legendNodes = _.map( genePool.genes, gene =>
+      new GeneLegendNode( gene, {
+        tandem: options.tandem.createTandem( `${gene.tandemPrefix}LegendNode` ),
+        normalTandemName: `${gene.normalAlleleTandemPrefix}LegendNode`,
+        mutantTandemName: `${gene.mutantAlleleTandemPrefix}LegendNode`
+      } ) );
 
     assert && assert( !options.children, 'ProportionsLegendNode sets children' );
     options.children = legendNodes;
