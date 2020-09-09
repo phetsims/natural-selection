@@ -39,6 +39,7 @@ class Gene extends PhetioObject {
 
   /**
    * @param {string} name
+   * @param {string} tandemPrefix - prefix used for tandem names, like 'fur' for 'furCheckbox'
    * @param {Allele} normalAllele - the standard 'normal' or 'wild type' variant of the gene
    * @param {Allele} mutantAllele - the non-standard 'mutant' variant of the gene
    * @param {string} dominantAbbreviationEnglish - the untranslated (English) abbreviation of the dominant allele
@@ -48,7 +49,8 @@ class Gene extends PhetioObject {
    * @param {Color|string} color - the color used to color-code things associated with this gene in the UI
    * @param {Object} [options]
    */
-  constructor( name, normalAllele, mutantAllele, dominantAbbreviationEnglish, dominantAbbreviationTranslated,
+  constructor( name, tandemPrefix, normalAllele, mutantAllele,
+               dominantAbbreviationEnglish, dominantAbbreviationTranslated,
                recessiveAbbreviationEnglish, recessiveAbbreviationTranslated, color, options ) {
 
     assert && assert( typeof name === 'string', 'invalid name' );
@@ -71,6 +73,7 @@ class Gene extends PhetioObject {
 
     // @public (read-only)
     this.name = name;
+    this.tandemPrefix = tandemPrefix;
     this.normalAllele = normalAllele;
     this.mutantAllele = mutantAllele;
     this.dominantAbbreviationEnglish = dominantAbbreviationEnglish;
@@ -145,8 +148,10 @@ class Gene extends PhetioObject {
    * @public
    */
   static createFurGene( options ) {
-    return new Gene( naturalSelectionStrings.fur,
-      Allele.WHITE_FUR, Allele.BROWN_FUR,
+    return new Gene(
+      naturalSelectionStrings.fur, 'fur',
+      Allele.WHITE_FUR,
+      Allele.BROWN_FUR,
       'F', naturalSelectionStrings.furDominant,
       'f', naturalSelectionStrings.furRecessive,
       NaturalSelectionColors.FUR,
@@ -160,8 +165,10 @@ class Gene extends PhetioObject {
    * @public
    */
   static createEarsGene( options ) {
-    return new Gene( naturalSelectionStrings.ears,
-      Allele.STRAIGHT_EARS, Allele.FLOPPY_EARS,
+    return new Gene(
+      naturalSelectionStrings.ears, 'ears',
+      Allele.STRAIGHT_EARS,
+      Allele.FLOPPY_EARS,
       'E', naturalSelectionStrings.earsDominant,
       'e', naturalSelectionStrings.earsRecessive,
       NaturalSelectionColors.EARS,
@@ -175,8 +182,10 @@ class Gene extends PhetioObject {
    * @public
    */
   static createTeethGene( options ) {
-    return new Gene( naturalSelectionStrings.teeth,
-      Allele.SHORT_TEETH, Allele.LONG_TEETH,
+    return new Gene(
+      naturalSelectionStrings.teeth, 'teeth',
+      Allele.SHORT_TEETH,
+      Allele.LONG_TEETH,
       'T', naturalSelectionStrings.teethDominant,
       't', naturalSelectionStrings.teethRecessive,
       NaturalSelectionColors.TEETH,

@@ -92,16 +92,11 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     } );
 
     // A row for each gene
-    const furRow = new Row( genePool.furGene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
-      tandem: options.tandem.createTandem( 'furRow' )
-    } );
-    const earsRow = new Row( genePool.earsGene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
-      tandem: options.tandem.createTandem( 'earsRow' )
-    } );
-    const teethRow = new Row( genePool.teethGene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
-      tandem: options.tandem.createTandem( 'teethRow' )
-    } );
-    const rows = [ furRow, earsRow, teethRow ];
+    const rows = _.map( genePool.genes, gene =>
+      new Row( gene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
+        tandem: options.tandem.createTandem( `${gene.tandemPrefix}Row` )
+      } )
+    );
 
     const vBox = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: rows
@@ -129,11 +124,6 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
     // @private
     this.rows = rows;
-
-    // @public for configuring ScreenViews only
-    this.furRow = furRow;
-    this.earsRow = earsRow;
-    this.teethRow = teethRow;
   }
 
   /**
@@ -153,14 +143,23 @@ class AddMutationsPanel extends NaturalSelectionPanel {
    */
   getRow( gene ) {
     assert && assert( gene instanceof Gene, 'invalid gene' );
-    let row = null;
-    for ( let i = 0; i < this.rows.length && !row; i++ ) {
-      if ( gene === this.rows[ i ].gene ) {
-        row = this.rows[ i ];
-      }
-    }
+
+    const row = _.find( this.rows, row => ( row.gene === gene ) );
     assert && assert( row, `row not found for ${gene.name} gene` );
     return row;
+  }
+
+  /**
+   * Sets visibility of the UI components related to a specific gene.
+   * @param {Gene} gene
+   * @param {boolean} visible
+   * @public
+   */
+  setGeneVisible( gene, visible ) {
+    assert && assert( gene instanceof Gene, 'invalid gene' );
+    assert && assert( typeof visible === 'boolean', 'invalid visible' );
+
+    this.getRow( gene ).visible = visible;
   }
 }
 

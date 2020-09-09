@@ -13,6 +13,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import GenePool from '../model/GenePool.js';
 import AddMutationsPanel from './AddMutationsPanel.js';
 import PedigreeNode from './pedigree/PedigreeNode.js';
 import PopulationNode from './population/PopulationNode.js';
@@ -21,14 +22,16 @@ import ProportionsNode from './proportions/ProportionsNode.js';
 class GenesVisibilityManager {
 
   /**
+   * @param {GenePool} genePool
    * @param {AddMutationsPanel} addMutationsPanel
    * @param {PopulationNode} populationNode
    * @param {ProportionsNode} proportionsNode
    * @param {PedigreeNode} pedigreeNode
    * @param {Object} [options]
    */
-  constructor( addMutationsPanel, populationNode, proportionsNode, pedigreeNode, options ) {
+  constructor( genePool, addMutationsPanel, populationNode, proportionsNode, pedigreeNode, options ) {
 
+    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( addMutationsPanel instanceof AddMutationsPanel, 'invalid addMutationsPanel' );
     assert && assert( populationNode instanceof PopulationNode, 'invalid populationNode' );
     assert && assert( proportionsNode instanceof ProportionsNode, 'invalid proportionsNode' );
@@ -53,7 +56,7 @@ class GenesVisibilityManager {
 
     // Set visibility of all UI components related to Fur. unlink is not necessary.
     furVisibleProperty.link( visible => {
-      addMutationsPanel.furRow.visibleProperty.value = visible;
+      addMutationsPanel.setGeneVisible( genePool.furGene, visible );
       populationNode.populationPanel.whiteFurCheckbox.visibleProperty.value = visible;
       populationNode.populationPanel.brownFurCheckbox.visibleProperty.value = visible;
       proportionsNode.proportionsPanel.legendNode.furLegendNode.visibleProperty.value = visible;
@@ -69,7 +72,7 @@ class GenesVisibilityManager {
 
     // Set visibility of all UI components related to Ears. unlink is not necessary.
     earsVisibleProperty.link( visible => {
-      addMutationsPanel.earsRow.visibleProperty.value = visible;
+      addMutationsPanel.setGeneVisible( genePool.earsGene, visible );
       populationNode.populationPanel.straightEarsCheckbox.visibleProperty.value = visible;
       populationNode.populationPanel.floppyEarsCheckbox.visibleProperty.value = visible;
       proportionsNode.proportionsPanel.legendNode.earsLegendNode.visibleProperty.value = visible;
@@ -85,7 +88,7 @@ class GenesVisibilityManager {
 
     // Set visibility of all UI components related to Teeth. unlink is not necessary.
     teethVisibleProperty.link( visible => {
-      addMutationsPanel.teethRow.visibleProperty.value = visible;
+      addMutationsPanel.setGeneVisible( genePool.teethGene, visible );
       populationNode.populationPanel.shortTeethCheckbox.visibleProperty.value = visible;
       populationNode.populationPanel.longTeethCheckbox.visibleProperty.value = visible;
       proportionsNode.proportionsPanel.legendNode.teethLegendNode.visibleProperty.value = visible;
