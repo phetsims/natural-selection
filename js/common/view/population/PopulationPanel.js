@@ -94,7 +94,8 @@ class PopulationPanel extends NaturalSelectionPanel {
         tandem: options.tandem.createTandem( 'longTeethCheckbox' )
       } );
 
-    const checkboxes = [ totalCheckbox,
+    const checkboxes = [
+      totalCheckbox,
       whiteFurCheckbox,
       brownFurCheckbox,
       straightEarsCheckbox,
