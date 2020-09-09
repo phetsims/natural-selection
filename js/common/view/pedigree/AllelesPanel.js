@@ -65,26 +65,23 @@ class AllelesPanel extends NaturalSelectionPanel {
     const furRow = new Row( genePool.furGene, furAllelesVisibleProperty, alleleAlignGroup, {
       tandem: options.tandem.createTandem( 'furRow' )
     } );
-
     const earsRow = new Row( genePool.earsGene, earsAllelesVisibleProperty, alleleAlignGroup, {
       tandem: options.tandem.createTandem( 'earsRow' )
     } );
-
     const teethRow = new Row( genePool.teethGene, teethAllelesVisibleProperty, alleleAlignGroup, {
       tandem: options.tandem.createTandem( 'teethRow' )
     } );
+    const rows = [ furRow, earsRow, teethRow ];
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       spacing: 28,
-      children: [ titleNode, furRow, earsRow, teethRow ]
+      children: [ titleNode, ...rows ]
     } ) );
 
     super( content, options );
 
-    // @public for configuring ScreenViews only
-    this.furRow = furRow;
-    this.earsRow = earsRow;
-    this.teethRow = teethRow;
+    // @private
+    this.rows = rows;
   }
 
   /**
@@ -94,6 +91,21 @@ class AllelesPanel extends NaturalSelectionPanel {
   dispose() {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
+  }
+
+  /**
+   * Sets visibility of the UI components related to a specific gene.
+   * @param {Gene} gene
+   * @param {boolean} visible
+   * @public
+   */
+  setGeneVisible( gene, visible ) {
+    assert && assert( gene instanceof Gene, 'invalid gene' );
+    assert && assert( typeof visible === 'boolean', 'invalid visible' );
+
+    const row = _.find( this.rows, row => ( row.gene === gene ) );
+    assert && assert( row, `row not found for ${gene.name} gene` );
+    row.visible = visible;
   }
 }
 
@@ -200,6 +212,9 @@ class Row extends VBox {
         }
       } );
     }
+
+    // @public (read-only)
+    this.gene = gene;
   }
 
   /**

@@ -87,7 +87,7 @@ class PedigreeNode extends HBox {
 
     super( options );
 
-    // @public for configuring ScreenViews only
+    // @private
     this.allelesPanel = allelesPanel;
   }
 
@@ -98,6 +98,16 @@ class PedigreeNode extends HBox {
   dispose() {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
+  }
+
+  /**
+   * Sets visibility of the UI components related to a specific gene.
+   * @param {Gene} gene
+   * @param {boolean} visible
+   * @public
+   */
+  setGeneVisible( gene, visible ) {
+    this.allelesPanel.setGeneVisible( gene, visible );
   }
 }
 

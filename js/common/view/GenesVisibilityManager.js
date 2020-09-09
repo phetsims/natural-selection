@@ -61,7 +61,7 @@ class GenesVisibilityManager {
       populationNode.populationPanel.whiteFurCheckbox.visibleProperty.value = visible;
       populationNode.populationPanel.brownFurCheckbox.visibleProperty.value = visible;
       proportionsNode.setGeneVisible( gene, visible );
-      pedigreeNode.allelesPanel.furRow.visibleProperty.value = visible;
+      pedigreeNode.setGeneVisible( gene, visible );
     } );
 
     // Determines whether Ears is visible in the UI.
@@ -77,7 +77,7 @@ class GenesVisibilityManager {
       populationNode.populationPanel.straightEarsCheckbox.visibleProperty.value = visible;
       populationNode.populationPanel.floppyEarsCheckbox.visibleProperty.value = visible;
       proportionsNode.setGeneVisible( gene, visible );
-      pedigreeNode.allelesPanel.earsRow.visibleProperty.value = visible;
+      pedigreeNode.setGeneVisible( gene, visible );
     } );
 
     // Determines whether Teeth is visible in the UI.
@@ -93,7 +93,7 @@ class GenesVisibilityManager {
       populationNode.populationPanel.shortTeethCheckbox.visibleProperty.value = visible;
       populationNode.populationPanel.longTeethCheckbox.visibleProperty.value = visible;
       proportionsNode.setGeneVisible( gene, visible );
-      pedigreeNode.allelesPanel.teethRow.visibleProperty.value = visible;
+      pedigreeNode.setGeneVisible( gene, visible );
     } );
   }
 
