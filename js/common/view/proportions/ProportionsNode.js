@@ -70,7 +70,7 @@ class ProportionsNode extends HBox {
       tandem: options.tandem.createTandem( 'proportionsModel' )
     } );
 
-    // @public for configuring ScreenViews only
+    // @private
     this.proportionsPanel = proportionsPanel;
     this.proportionsGraphNode = proportionsGraphNode;
   }
@@ -82,6 +82,17 @@ class ProportionsNode extends HBox {
   dispose() {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
+  }
+
+  /**
+   * Sets visibility of the UI components related to a specific gene.
+   * @param {Gene} gene
+   * @param {boolean} visible
+   * @public
+   */
+  setGeneVisible( gene, visible ) {
+    this.proportionsPanel.setGeneVisible( gene, visible );
+    this.proportionsGraphNode.setGeneVisible( gene, visible );
   }
 }
 

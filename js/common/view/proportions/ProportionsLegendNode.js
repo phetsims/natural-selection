@@ -45,37 +45,31 @@ class ProportionsLegendNode extends VBox {
     assert && assert( options.spacing, 'ProportionsLegendNode sets spacing' );
     options.spacing = 25;
 
+    // A legend for each gene
     const furLegendNode = new GeneLegendNode( genePool.furGene, {
       tandem: options.tandem.createTandem( 'furLegendNode' ),
       normalTandemName: 'whiteFurLegendNode',
       mutantTandemName: 'brownFurLegendNode'
     } );
-
     const earsLegendNode = new GeneLegendNode( genePool.earsGene, {
       tandem: options.tandem.createTandem( 'earsLegendNode' ),
       normalTandemName: 'straightEarsLegendNode',
       mutantTandemName: 'floppyEarsLegendNode'
     } );
-
     const teethLegendNode = new GeneLegendNode( genePool.teethGene, {
       tandem: options.tandem.createTandem( 'teethLegendNode' ),
       normalTandemName: 'shortTeethLegendNode',
       mutantTandemName: 'longTeethLegendNode'
     } );
+    const legendNodes = [ furLegendNode, earsLegendNode, teethLegendNode ];
 
     assert && assert( !options.children, 'ProportionsLegendNode sets children' );
-    options.children = [
-      furLegendNode,
-      earsLegendNode,
-      teethLegendNode
-    ];
+    options.children = legendNodes;
 
     super( options );
 
-    // @public for configuring ScreenViews only
-    this.furLegendNode = furLegendNode;
-    this.earsLegendNode = earsLegendNode;
-    this.teethLegendNode = teethLegendNode;
+    // @private
+    this.legendNodes = legendNodes;
   }
 
   /**
@@ -85,6 +79,21 @@ class ProportionsLegendNode extends VBox {
   dispose() {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
+  }
+
+  /**
+   * Sets visibility of the UI components related to a specific gene.
+   * @param {Gene} gene
+   * @param {boolean} visible
+   * @public
+   */
+  setGeneVisible( gene, visible ) {
+    assert && assert( gene instanceof Gene, 'invalid gene' );
+    assert && assert( typeof visible === 'boolean', 'invalid visible' );
+
+    const legendNode = _.find( this.legendNodes, legendNode => ( legendNode.gene === gene ) );
+    assert && assert( legendNode, `legendNode not found for ${gene.name} gene` );
+    legendNode.visible = visible;
   }
 }
 
@@ -124,6 +133,9 @@ class GeneLegendNode extends VBox {
     }, NaturalSelectionConstants.VBOX_OPTIONS, config );
 
     super( config );
+
+    // @public (read-only)
+    this.gene = gene;
   }
 
   /**

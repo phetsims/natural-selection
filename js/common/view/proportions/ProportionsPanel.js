@@ -74,7 +74,7 @@ class ProportionsPanel extends NaturalSelectionPanel {
 
     super( content, options );
 
-    // @public for configuring ScreenViews only
+    // @private
     this.legendNode = legendNode;
   }
 
@@ -85,6 +85,16 @@ class ProportionsPanel extends NaturalSelectionPanel {
   dispose() {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
+  }
+
+  /**
+   * Sets visibility of the UI components related to a specific gene.
+   * @param {Gene} gene
+   * @param {boolean} visible
+   * @public
+   */
+  setGeneVisible( gene, visible ) {
+    this.legendNode.setGeneVisible( gene, visible );
   }
 }
 

@@ -60,8 +60,7 @@ class GenesVisibilityManager {
       addMutationsPanel.setGeneVisible( gene, visible );
       populationNode.populationPanel.whiteFurCheckbox.visibleProperty.value = visible;
       populationNode.populationPanel.brownFurCheckbox.visibleProperty.value = visible;
-      proportionsNode.proportionsPanel.legendNode.furLegendNode.visibleProperty.value = visible;
-      proportionsNode.proportionsGraphNode.setGeneVisible( gene, visible );
+      proportionsNode.setGeneVisible( gene, visible );
       pedigreeNode.allelesPanel.furRow.visibleProperty.value = visible;
     } );
 
@@ -77,8 +76,7 @@ class GenesVisibilityManager {
       addMutationsPanel.setGeneVisible( gene, visible );
       populationNode.populationPanel.straightEarsCheckbox.visibleProperty.value = visible;
       populationNode.populationPanel.floppyEarsCheckbox.visibleProperty.value = visible;
-      proportionsNode.proportionsPanel.legendNode.earsLegendNode.visibleProperty.value = visible;
-      proportionsNode.proportionsGraphNode.setGeneVisible( gene, visible );
+      proportionsNode.setGeneVisible( gene, visible );
       pedigreeNode.allelesPanel.earsRow.visibleProperty.value = visible;
     } );
 
@@ -94,8 +92,7 @@ class GenesVisibilityManager {
       addMutationsPanel.setGeneVisible( gene, visible );
       populationNode.populationPanel.shortTeethCheckbox.visibleProperty.value = visible;
       populationNode.populationPanel.longTeethCheckbox.visibleProperty.value = visible;
-      proportionsNode.proportionsPanel.legendNode.teethLegendNode.visibleProperty.value = visible;
-      proportionsNode.proportionsGraphNode.setGeneVisible( gene, visible );
+      proportionsNode.setGeneVisible( gene, visible );
       pedigreeNode.allelesPanel.teethRow.visibleProperty.value = visible;
     } );
   }
