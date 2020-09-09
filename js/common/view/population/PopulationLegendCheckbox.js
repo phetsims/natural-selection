@@ -29,14 +29,14 @@ class PopulationLegendCheckbox extends Checkbox {
 
   /**
    * @param {Property.<boolean>} plotVisibleProperty - Property to show/hide the associated plot on the Population graph
-   * @param {string} name - the allele name
+   * @param {string} alleleName - the allele name
    * @param {AlignGroup} alignGroup - to make all checkbox content have the same effective size
    * @param {Object} [options]
    */
-  constructor( plotVisibleProperty, name, alignGroup, options ) {
+  constructor( plotVisibleProperty, alleleName, alignGroup, options ) {
 
     assert && AssertUtils.assertPropertyOf( plotVisibleProperty, 'boolean' );
-    assert && assert( typeof name === 'string', 'invalid name' );
+    assert && assert( typeof alleleName === 'string', 'invalid alleleName' );
 
     options = merge( {
       color: 'white',
@@ -51,7 +51,7 @@ class PopulationLegendCheckbox extends Checkbox {
     } );
 
     // allele name
-    const nameNode = new Text( name, {
+    const nameNode = new Text( alleleName, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 100 // determined empirically
     } );
@@ -67,6 +67,9 @@ class PopulationLegendCheckbox extends Checkbox {
     } );
 
     super( content, plotVisibleProperty, options );
+
+    // @public (read-only)
+    this.alleleName = alleleName;
   }
 
   /**

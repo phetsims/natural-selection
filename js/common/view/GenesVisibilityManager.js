@@ -13,6 +13,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import Gene from '../model/Gene.js';
 import GenePool from '../model/GenePool.js';
 import AddMutationsPanel from './AddMutationsPanel.js';
 import PedigreeNode from './pedigree/PedigreeNode.js';
@@ -48,6 +49,21 @@ class GenesVisibilityManager {
       tandem: Tandem.REQUIRED
     }, options );
 
+    /**
+     * Sets the visibility of all UI components related to a specific gene.
+     * @param {Gene} gene
+     * @param {boolean} visible
+     */
+    function setGeneVisible( gene, visible ) {
+      assert && assert( gene instanceof Gene, 'invalid gene' );
+      assert && assert( typeof visible === 'boolean', 'invalid visible' );
+
+      addMutationsPanel.setGeneVisible( gene, visible );
+      populationNode.setGeneVisible( gene, visible );
+      proportionsNode.setGeneVisible( gene, visible );
+      pedigreeNode.setGeneVisible( gene, visible );
+    }
+
     // Determines whether Fur is visible in the UI.
     const furVisibleProperty = new BooleanProperty( options.furVisible, {
       tandem: options.tandem.createTandem( 'furVisibleProperty' ),
@@ -55,14 +71,7 @@ class GenesVisibilityManager {
     } );
 
     // Set visibility of all UI components related to Fur. unlink is not necessary.
-    furVisibleProperty.link( visible => {
-      const gene = genePool.furGene;
-      addMutationsPanel.setGeneVisible( gene, visible );
-      populationNode.populationPanel.whiteFurCheckbox.visibleProperty.value = visible;
-      populationNode.populationPanel.brownFurCheckbox.visibleProperty.value = visible;
-      proportionsNode.setGeneVisible( gene, visible );
-      pedigreeNode.setGeneVisible( gene, visible );
-    } );
+    furVisibleProperty.link( visible => setGeneVisible( genePool.furGene, visible ) );
 
     // Determines whether Ears is visible in the UI.
     const earsVisibleProperty = new BooleanProperty( options.earsVisible, {
@@ -71,14 +80,7 @@ class GenesVisibilityManager {
     } );
 
     // Set visibility of all UI components related to Ears. unlink is not necessary.
-    earsVisibleProperty.link( visible => {
-      const gene = genePool.earsGene;
-      addMutationsPanel.setGeneVisible( gene, visible );
-      populationNode.populationPanel.straightEarsCheckbox.visibleProperty.value = visible;
-      populationNode.populationPanel.floppyEarsCheckbox.visibleProperty.value = visible;
-      proportionsNode.setGeneVisible( gene, visible );
-      pedigreeNode.setGeneVisible( gene, visible );
-    } );
+    earsVisibleProperty.link( visible => setGeneVisible( genePool.earsGene, visible ) );
 
     // Determines whether Teeth is visible in the UI.
     const teethVisibleProperty = new BooleanProperty( options.teethVisible, {
@@ -87,14 +89,7 @@ class GenesVisibilityManager {
     } );
 
     // Set visibility of all UI components related to Teeth. unlink is not necessary.
-    teethVisibleProperty.link( visible => {
-      const gene = genePool.teethGene;
-      addMutationsPanel.setGeneVisible( gene, visible );
-      populationNode.populationPanel.shortTeethCheckbox.visibleProperty.value = visible;
-      populationNode.populationPanel.longTeethCheckbox.visibleProperty.value = visible;
-      proportionsNode.setGeneVisible( gene, visible );
-      pedigreeNode.setGeneVisible( gene, visible );
-    } );
+    teethVisibleProperty.link( visible => setGeneVisible( genePool.teethGene, visible ) );
   }
 
   /**

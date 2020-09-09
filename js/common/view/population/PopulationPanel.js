@@ -16,6 +16,7 @@ import HSeparator from '../../../../../sun/js/HSeparator.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import Gene from '../../model/Gene.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
@@ -148,13 +149,8 @@ class PopulationPanel extends NaturalSelectionPanel {
 
     super( content, options );
 
-    // @public for configuring ScreenViews only
-    this.whiteFurCheckbox = whiteFurCheckbox;
-    this.brownFurCheckbox = brownFurCheckbox;
-    this.straightEarsCheckbox = straightEarsCheckbox;
-    this.floppyEarsCheckbox = floppyEarsCheckbox;
-    this.shortTeethCheckbox = shortTeethCheckbox;
-    this.longTeethCheckbox = longTeethCheckbox;
+    // @private
+    this.checkboxes = checkboxes;
   }
 
   /**
@@ -164,6 +160,27 @@ class PopulationPanel extends NaturalSelectionPanel {
   dispose() {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
+  }
+
+  /**
+   * Sets visibility of the UI components related to a specific gene.
+   * @param {Gene} gene
+   * @param {boolean} visible
+   * @public
+   */
+  setGeneVisible( gene, visible ) {
+    assert && assert( gene instanceof Gene, 'invalid gene' );
+    assert && assert( typeof visible === 'boolean', 'invalid visible' );
+
+    // Checkbox for the normal allele
+    const normalCheckbox = _.find( this.checkboxes, checkbox => ( checkbox.alleleName === gene.normalAllele.name ) );
+    assert && assert( normalCheckbox, `normalCheckbox not found for ${gene.normalAllele.name} allele` );
+    normalCheckbox.visible = visible;
+
+    // Checkbox for the mutant allele
+    const mutantCheckbox = _.find( this.checkboxes, checkbox => ( checkbox.alleleName === gene.mutantAllele.name ) );
+    assert && assert( normalCheckbox, `mutantCheckbox not found for ${gene.mutantAllele.name} allele` );
+    mutantCheckbox.visible = visible;
   }
 }
 
