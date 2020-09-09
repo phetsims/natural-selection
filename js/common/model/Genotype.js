@@ -16,7 +16,6 @@ import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
-import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
@@ -177,7 +176,7 @@ class Genotype extends PhetioObject {
    */
   toStateObject() {
     return {
-      mutation: NullableIO( ReferenceIO( Allele.AlleleIO ) ).toStateObject( this.mutation )
+      mutation: NullableIO( Allele.AlleleIO ).toStateObject( this.mutation )
       // No need to serialize furGenePair, earsGenePair, teethGenePair. They are stateful and will be automatically serialized.
     };
   }
@@ -189,7 +188,7 @@ class Genotype extends PhetioObject {
    */
   applyState( stateObject ) {
     required( stateObject );
-    this.mutation = required( NullableIO( ReferenceIO( Allele.AlleleIO ) ).fromStateObject( stateObject.mutation ) );
+    this.mutation = required( NullableIO( Allele.AlleleIO ).fromStateObject( stateObject.mutation ) );
     this.validateInstance();
   }
 }
