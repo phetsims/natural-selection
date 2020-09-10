@@ -80,27 +80,27 @@ Allele.AlleleIO = AlleleIO;
 const ALLELES_TANDEM = Tandem.GLOBAL.createTandem( 'model' ).createTandem( 'alleles' );
 
 Allele.WHITE_FUR = new Allele( naturalSelectionStrings.whiteFur, whiteFurImage, {
-  tandem: ALLELES_TANDEM.createTandem( 'whiteFur' )
+  tandem: ALLELES_TANDEM.createTandem( 'whiteFurAllele' )
 } );
 
 Allele.BROWN_FUR = new Allele( naturalSelectionStrings.brownFur, brownFurImage, {
-  tandem: ALLELES_TANDEM.createTandem( 'brownFur' )
+  tandem: ALLELES_TANDEM.createTandem( 'brownFurAllele' )
 } );
 
 Allele.FLOPPY_EARS = new Allele( naturalSelectionStrings.floppyEars, floppyEarsImage, {
-  tandem: ALLELES_TANDEM.createTandem( 'floppyEars' )
+  tandem: ALLELES_TANDEM.createTandem( 'floppyEarsAllele' )
 } );
 
 Allele.STRAIGHT_EARS = new Allele( naturalSelectionStrings.straightEars, straightEarsImage, {
-  tandem: ALLELES_TANDEM.createTandem( 'straightEars' )
+  tandem: ALLELES_TANDEM.createTandem( 'straightEarsAllele' )
 } );
 
 Allele.SHORT_TEETH = new Allele( naturalSelectionStrings.shortTeeth, shortTeethImage, {
-  tandem: ALLELES_TANDEM.createTandem( 'shortTeeth' )
+  tandem: ALLELES_TANDEM.createTandem( 'shortTeethAllele' )
 } );
 
 Allele.LONG_TEETH = new Allele( naturalSelectionStrings.longTeeth, longTeethImage, {
-  tandem: ALLELES_TANDEM.createTandem( 'longTeeth' )
+  tandem: ALLELES_TANDEM.createTandem( 'longTeethAllele' )
 } );
 
 naturalSelection.register( 'Allele', Allele );
