@@ -171,7 +171,20 @@ This section describes patterns and features that are specific to PhET-iO instru
 
 **PhetioGroup is encapsulated**: [PhetioGroup](https://github.com/phetsims/tandem/blob/master/js/PhetioGroup.js) manages dynamic elements. The dynamic elements in this sim are instances of [Bunny](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Bunny.js) and [Wolf](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Wolf.js). Instances of [Bunny](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Bunny.js) are created by [BunnyGroup](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyGroup.js), which is private to [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js).  Instances of [Wolf](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Wolf.js) are created by [WolfGroup](https://github.com/phetsims/natural-selection/blob/master/js/common/model/WolfGroup.js), which is private to [WolfCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/WolfCollection.js).  This pattern of using a "Collection" wrapper hides the details of PhetioGroup from all other parts of the sim.
 
-**IO Types delegate to Core Types**: IO Types handle serialization of elements that are instances of Core Types. For example, [BunnyIO](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyIO.js) is the IO Type that serializes the [Bunny](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Bunny.js) Core Type.  Throughout this sim, each IO Type delegates serialization to its associated Core Type.  This ensures that serialization does not access private members of the Core Type.
+**IO Types delegate to Core Types**: IO Types handle serialization of elements that are instances of Core Types. For example, BunnyIO is the IO Type that serializes the [Bunny](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Bunny.js) Core Type.  Throughout this sim, each IO Type delegates serialization to its associated Core Type.  This ensures that serialization does not access private members of the Core Type.
+
+**Generating tandem names**: In some places you'll see tandem names that are created using string concatenation, for example:
+
+```js
+tandem: options.tandem.createTandem( `${gene.tandemPrefix}Row` )
+```
+
+This pattern is used in places where things (like UI components) are created by iterating over the GenePool. When implementation started on this sim, creating
+tandem names in this way was discouraged, because it's impossible to search the code for such a tandem name.  That policy loosened
+up late in the implementation, because it forces you to resort to what I call brute-force coding, which results in duplicated/boilerplate code. If I had it to do over, I would
+do more iterating over GenePool, and generate more tandem names using string concatenation.  I upgraded to this approach in a few
+low-risk places (very!) late in the game, but there were many places (detailed in [natural-selection#224](https://github.com/phetsims/natural-selection/issues/224)) 
+where it was just too risky.
 
 **Uninstrumented objects**: Instances that are intentionally not instrumented are instantiated with `tandem: Tandem.OPT_OUT`.
 
