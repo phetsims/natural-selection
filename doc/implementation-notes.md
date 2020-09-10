@@ -179,7 +179,7 @@ This section describes patterns and features that are specific to PhET-iO instru
 tandem: options.tandem.createTandem( `${gene.tandemPrefix}Row` )
 ```
 
-This pattern is used in cases where the UI is created by iterating over the GenePool. When implementation started on this sim, creating
+This pattern is used in places where things (like UI components) are created by iterating over the GenePool. When implementation started on this sim, creating
 tandem names in this way was discouraged, because it's impossible to search the code for such a tandem name.  That policy loosened
 up late in the implementation, because it forces you to resort to what I call brute-force coding. If I had it to do over, I would
 do more iterating over GenePool, and generate more tandem names using string concatenation.  I upgraded to this approach in a few
