@@ -173,6 +173,19 @@ This section describes patterns and features that are specific to PhET-iO instru
 
 **IO Types delegate to Core Types**: IO Types handle serialization of elements that are instances of Core Types. For example, BunnyIO is the IO Type that serializes the [Bunny](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Bunny.js) Core Type.  Throughout this sim, each IO Type delegates serialization to its associated Core Type.  This ensures that serialization does not access private members of the Core Type.
 
+**Generating tandem names**: In some places you'll see tandem names that are created using string concatenation, for example:
+
+```js
+tandem: options.tandem.createTandem( `${gene.tandemPrefix}Row` )
+```
+
+This is used in cases where the UI is created by iterating over the GenePool. When implementation started on this sim, creating
+tandem names in this way was discouraged, because it's impossible to search the code for such a tandem name.  That policy loosened
+up late in the implementation, because it forces you to resort to what I call brute-force coding. If I had it to do over, I would
+do more iterating over GenePool, and generate more tandem names using string concatenation.  I upgraded to this approach in a few
+low-risk places late in the game, but there were many places (detailed in [natural-selection#224](https://github.com/phetsims/natural-selection/issues/224)) 
+where it was just too risky.
+
 **Uninstrumented objects**: Instances that are intentionally not instrumented are instantiated with `tandem: Tandem.OPT_OUT`.
 
 **Configure the Genes for a screen**: [GeneVisibilityManager](https://github.com/phetsims/natural-selection/blob/master/js/common/view/GenesVisibilityManager.js) has a `{{gene}}VisibleProperty` for each Gene, which controls the visiblity of all UI components for that gene. Use these Properties via Studio to quickly configure which genes appear in the UI. Search for "view.genes" in Studio.
