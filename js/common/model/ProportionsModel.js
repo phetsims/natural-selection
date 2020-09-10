@@ -114,7 +114,7 @@ class ProportionsModel extends PhetioObject {
       }
     } );
 
-    // @public visibility of the column for each trait in the graph
+    // @public visibility of the column for each gene in the graph
     this.furVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'furVisibleProperty' )
     } );
