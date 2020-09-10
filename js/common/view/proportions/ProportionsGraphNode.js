@@ -109,7 +109,7 @@ class ProportionsGraphNode extends Node {
       ]
     } );
 
-    // Columns that contain bars
+    // A column for each gene
     const furColumn = new Column( genePool.furGene,
       startCounts.whiteFurCount, startCounts.brownFurCount,
       endCounts.whiteFurCount, endCounts.brownFurCount,
@@ -131,13 +131,13 @@ class ProportionsGraphNode extends Node {
       columnLabelsAlignGroup, cellsAlignGroup, {
         tandem: options.tandem.createTandem( 'teethColumn' )
       } );
-    const columns = [ labelsColumn, furColumn, earsColumn, teethColumn ];
+    const geneColumns = [ furColumn, earsColumn, teethColumn ];
 
     // Layout the columns
     const hBox = new HBox( {
       spacing: COLUMN_SPACING,
       align: 'center',
-      children: columns
+      children: [ labelsColumn, ...geneColumns ]
     } );
 
     // Spinner for selecting which generation is displayed
@@ -203,7 +203,7 @@ class ProportionsGraphNode extends Node {
     } );
 
     // @private
-    this.columns = columns;
+    this.geneColumns = geneColumns;
   }
 
   /**
@@ -225,7 +225,7 @@ class ProportionsGraphNode extends Node {
     assert && assert( gene instanceof Gene, 'invalid gene' );
     assert && assert( typeof visible === 'boolean', 'invalid visible' );
 
-    const column = _.find( this.columns, column => ( column.gene === gene ) );
+    const column = _.find( this.geneColumns, column => ( column.gene === gene ) );
     assert && assert( column, `column not found for ${gene.name} gene` );
     column.visible = visible;
   }
