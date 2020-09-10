@@ -31,9 +31,10 @@ class Allele extends PhetioObject {
   /**
    * @param {string} name - name of the allele
    * @param {HTMLImageElement} image - image used to represent the allele in the UI
+   * @param {string} tandemPrefix - prefix used for tandem names for the allele, like 'whiteFur' for 'whiteFurCheckbox'
    * @param {Object} [options]
    */
-  constructor( name, image, options ) {
+  constructor( name, image, tandemPrefix, options ) {
 
     assert && assert( typeof name === 'string', 'invalid name' );
     assert && assert( image instanceof HTMLImageElement, 'invalid image' );
@@ -45,11 +46,15 @@ class Allele extends PhetioObject {
       phetioType: Allele.AlleleIO
     }, options );
 
+    assert && assert( options.tandem.name.startsWith( tandemPrefix ),
+      `tandem name ${options.tandem.name} must start with ${tandemPrefix}` );
+
     super( options );
 
     // @public (read-only)
     this.name = name;
     this.image = image;
+    this.tandemPrefix = tandemPrefix;
   }
 
   /**
@@ -79,27 +84,27 @@ Allele.AlleleIO = AlleleIO;
 // tandem for all static instances of Solute, which are used across all screens
 const ALLELES_TANDEM = Tandem.GLOBAL.createTandem( 'model' ).createTandem( 'alleles' );
 
-Allele.WHITE_FUR = new Allele( naturalSelectionStrings.whiteFur, whiteFurImage, {
+Allele.WHITE_FUR = new Allele( naturalSelectionStrings.whiteFur, whiteFurImage, 'whiteFur', {
   tandem: ALLELES_TANDEM.createTandem( 'whiteFurAllele' )
 } );
 
-Allele.BROWN_FUR = new Allele( naturalSelectionStrings.brownFur, brownFurImage, {
+Allele.BROWN_FUR = new Allele( naturalSelectionStrings.brownFur, brownFurImage, 'brownFur', {
   tandem: ALLELES_TANDEM.createTandem( 'brownFurAllele' )
 } );
 
-Allele.FLOPPY_EARS = new Allele( naturalSelectionStrings.floppyEars, floppyEarsImage, {
+Allele.FLOPPY_EARS = new Allele( naturalSelectionStrings.floppyEars, floppyEarsImage, 'floppyEars', {
   tandem: ALLELES_TANDEM.createTandem( 'floppyEarsAllele' )
 } );
 
-Allele.STRAIGHT_EARS = new Allele( naturalSelectionStrings.straightEars, straightEarsImage, {
+Allele.STRAIGHT_EARS = new Allele( naturalSelectionStrings.straightEars, straightEarsImage, 'straightEars', {
   tandem: ALLELES_TANDEM.createTandem( 'straightEarsAllele' )
 } );
 
-Allele.SHORT_TEETH = new Allele( naturalSelectionStrings.shortTeeth, shortTeethImage, {
+Allele.SHORT_TEETH = new Allele( naturalSelectionStrings.shortTeeth, shortTeethImage, 'shortTeeth', {
   tandem: ALLELES_TANDEM.createTandem( 'shortTeethAllele' )
 } );
 
-Allele.LONG_TEETH = new Allele( naturalSelectionStrings.longTeeth, longTeethImage, {
+Allele.LONG_TEETH = new Allele( naturalSelectionStrings.longTeeth, longTeethImage, 'longTeeth', {
   tandem: ALLELES_TANDEM.createTandem( 'longTeethAllele' )
 } );
 

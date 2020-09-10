@@ -49,8 +49,8 @@ class ProportionsLegendNode extends VBox {
     const legendNodes = _.map( genePool.genes, gene =>
       new GeneLegendNode( gene, {
         tandem: options.tandem.createTandem( `${gene.tandemPrefix}LegendNode` ),
-        normalTandemName: `${gene.normalAlleleTandemPrefix}LegendNode`,
-        mutantTandemName: `${gene.mutantAlleleTandemPrefix}LegendNode`
+        normalTandemName: `${gene.normalAllele.tandemPrefix}LegendNode`,
+        mutantTandemName: `${gene.mutantAllele.tandemPrefix}LegendNode`
       } ) );
 
     assert && assert( !options.children, 'ProportionsLegendNode sets children' );

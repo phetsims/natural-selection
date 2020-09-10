@@ -41,9 +41,7 @@ class Gene extends PhetioObject {
    * @param {string} name - the name of the gene, visible in the UI
    * @param {string} tandemPrefix - prefix used for tandem names for the gene, like 'fur' for 'furCheckbox'
    * @param {Allele} normalAllele - the standard 'normal' or 'wild type' variant of the gene
-   * @param {string} normalAlleleTandemPrefix - prefix used for tandem names for the normal allele, like 'whiteFur' for 'whiteFurCheckbox'
    * @param {Allele} mutantAllele - the non-standard 'mutant' variant of the gene
-   * @param {string} mutantAlleleTandemPrefix - prefix used for tandem names for the mutant allele, like 'brownFur' for 'brownFurCheckbox'
    * @param {string} dominantAbbreviationEnglish - the untranslated (English) abbreviation of the dominant allele
    * @param {string} dominantAbbreviationTranslated - the translated abbreviation of the dominant allele
    * @param {string} recessiveAbbreviationEnglish - the untranslated (English) abbreviation of the recessive allele
@@ -51,14 +49,13 @@ class Gene extends PhetioObject {
    * @param {Color|string} color - the color used to color-code things associated with this gene in the UI
    * @param {Object} [options]
    */
-  constructor( name, tandemPrefix,
-               normalAllele, normalAlleleTandemPrefix,
-               mutantAllele, mutantAlleleTandemPrefix,
+  constructor( name, tandemPrefix, normalAllele, mutantAllele,
                dominantAbbreviationEnglish, dominantAbbreviationTranslated,
                recessiveAbbreviationEnglish, recessiveAbbreviationTranslated,
                color, options ) {
 
     assert && assert( typeof name === 'string', 'invalid name' );
+    assert && assert( typeof tandemPrefix === 'string', 'invalid tandemPrefix' );
     assert && assert( normalAllele instanceof Allele, 'invalid normalAllele' );
     assert && assert( mutantAllele instanceof Allele, 'invalid mutantAllele' );
     assert && assert( typeof dominantAbbreviationEnglish === 'string', 'invalid dominantAbbreviationEnglish' );
@@ -74,15 +71,16 @@ class Gene extends PhetioObject {
       phetioType: Gene.GeneIO
     }, options );
 
+    assert && assert( options.tandem.name.startsWith( tandemPrefix ),
+      `tandem name ${options.tandem.name} must start with ${tandemPrefix}` );
+
     super( options );
 
     // @public (read-only)
     this.name = name;
     this.tandemPrefix = tandemPrefix;
     this.normalAllele = normalAllele;
-    this.normalAlleleTandemPrefix = normalAlleleTandemPrefix;
     this.mutantAllele = mutantAllele;
-    this.mutantAlleleTandemPrefix = mutantAlleleTandemPrefix;
     this.dominantAbbreviationEnglish = dominantAbbreviationEnglish;
     this.dominantAbbreviationTranslated = dominantAbbreviationTranslated;
     this.recessiveAbbreviationEnglish = recessiveAbbreviationEnglish;
@@ -157,8 +155,7 @@ class Gene extends PhetioObject {
   static createFurGene( options ) {
     return new Gene(
       naturalSelectionStrings.fur, 'fur',
-      Allele.WHITE_FUR, 'whiteFur',
-      Allele.BROWN_FUR, 'brownFur',
+      Allele.WHITE_FUR, Allele.BROWN_FUR,
       'F', naturalSelectionStrings.furDominant,
       'f', naturalSelectionStrings.furRecessive,
       NaturalSelectionColors.FUR,
@@ -174,8 +171,7 @@ class Gene extends PhetioObject {
   static createEarsGene( options ) {
     return new Gene(
       naturalSelectionStrings.ears, 'ears',
-      Allele.STRAIGHT_EARS, 'straightEars',
-      Allele.FLOPPY_EARS, 'floppyEars',
+      Allele.STRAIGHT_EARS, Allele.FLOPPY_EARS,
       'E', naturalSelectionStrings.earsDominant,
       'e', naturalSelectionStrings.earsRecessive,
       NaturalSelectionColors.EARS,
@@ -191,8 +187,7 @@ class Gene extends PhetioObject {
   static createTeethGene( options ) {
     return new Gene(
       naturalSelectionStrings.teeth, 'teeth',
-      Allele.SHORT_TEETH, 'shortTeeth',
-      Allele.LONG_TEETH, 'longTeeth',
+      Allele.SHORT_TEETH, Allele.LONG_TEETH,
       'T', naturalSelectionStrings.teethDominant,
       't', naturalSelectionStrings.teethRecessive,
       NaturalSelectionColors.TEETH,
