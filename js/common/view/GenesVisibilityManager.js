@@ -13,7 +13,6 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import Gene from '../model/Gene.js';
 import GenePool from '../model/GenePool.js';
 import AddMutationsPanel from './AddMutationsPanel.js';
 import PedigreeNode from './pedigree/PedigreeNode.js';
@@ -50,46 +49,34 @@ class GenesVisibilityManager {
     }, options );
 
     /**
-     * Sets the visibility of all UI components related to a specific gene.
+     * Creates a Property that controls the visibility of all UI components related to a gene.
      * @param {Gene} gene
      * @param {boolean} visible
+     * @returns {BooleanProperty}
      */
-    function setGeneVisible( gene, visible ) {
-      assert && assert( gene instanceof Gene, 'invalid gene' );
-      assert && assert( typeof visible === 'boolean', 'invalid visible' );
+    function createGeneVisibleProperty( gene, visible ) {
 
-      addMutationsPanel.setGeneVisible( gene, visible );
-      populationNode.setGeneVisible( gene, visible );
-      proportionsNode.setGeneVisible( gene, visible );
-      pedigreeNode.setGeneVisible( gene, visible );
+      const property = new BooleanProperty( visible, {
+        tandem: options.tandem.createTandem( `${gene.tandemPrefix}VisibleProperty` ),
+        phetioDocumentation: `sets the visibility of all user-interface components related to ${gene.name} for this screen`
+      } );
+
+      // Set the visibility of UI components related to the gene. unlink is not necessary.
+      property.link( visible => {
+        addMutationsPanel.setGeneVisible( gene, visible );
+        populationNode.setGeneVisible( gene, visible );
+        proportionsNode.setGeneVisible( gene, visible );
+        pedigreeNode.setGeneVisible( gene, visible );
+      } );
+
+      return property;
     }
 
-    // Determines whether Fur is visible in the UI.
-    const furVisibleProperty = new BooleanProperty( options.furVisible, {
-      tandem: options.tandem.createTandem( 'furVisibleProperty' ),
-      phetioDocumentation: 'sets the visibility of all user-interface components related to Fur for this screen'
-    } );
-
-    // Set visibility of all UI components related to Fur. unlink is not necessary.
-    furVisibleProperty.link( visible => setGeneVisible( genePool.furGene, visible ) );
-
-    // Determines whether Ears is visible in the UI.
-    const earsVisibleProperty = new BooleanProperty( options.earsVisible, {
-      tandem: options.tandem.createTandem( 'earsVisibleProperty' ),
-      phetioDocumentation: 'sets the visibility of all user-interface components related to Ears for this screen'
-    } );
-
-    // Set visibility of all UI components related to Ears. unlink is not necessary.
-    earsVisibleProperty.link( visible => setGeneVisible( genePool.earsGene, visible ) );
-
-    // Determines whether Teeth is visible in the UI.
-    const teethVisibleProperty = new BooleanProperty( options.teethVisible, {
-      tandem: options.tandem.createTandem( 'teethVisibleProperty' ),
-      phetioDocumentation: 'sets the visibility of all user-interface components related to Teeth for this screen'
-    } );
-
-    // Set visibility of all UI components related to Teeth. unlink is not necessary.
-    teethVisibleProperty.link( visible => setGeneVisible( genePool.teethGene, visible ) );
+    // These Properties are used by PhET-iO only, to configure the UI in Studio. They exist for the lifetime of the sim.
+    // They won't be GC'ed because they are registered with PhET-iO, so we don't need a reference to them here.
+    createGeneVisibleProperty( genePool.furGene, options.furVisible );
+    createGeneVisibleProperty( genePool.earsGene, options.earsVisible );
+    createGeneVisibleProperty( genePool.teethGene, options.teethVisible );
   }
 
   /**
