@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import timer from '../../../../axon/js/timer.js';
+import stepTimer from '../../../../axon/js/stepTimer.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -89,7 +89,7 @@ class PlayButtonGroup extends Node {
           // Make one of these buttons visible on the next frame, so that a double-click on the 'Start Over' button
           // doesn't fire the button that is made visible. See https://github.com/phetsims/natural-selection/issues/166
           const bunnyCount = bunnyCountProperty.value;
-          timer.runOnNextFrame( () => {
+          stepTimer.runOnNextFrame( () => {
             addAMateButton.visible = ( bunnyCount === 1 );
             playButton.visible = ( bunnyCount > 1 );
           } );
