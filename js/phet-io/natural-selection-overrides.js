@@ -1,4 +1,4 @@
-/* eslint-disable */
+studio.js:387 /* eslint-disable */
 window.phet.preloads.phetio.phetioElementsOverrides =
 {
   "naturalSelection.labScreen.model.bunnyCollection.bunnyGroup.archetype.genotype.abbreviationProperty": {
@@ -134,6 +134,69 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "phetioFeatured": true
   },
   "naturalSelection.labScreen.model.wolfCollection.enabledProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.addMutationsPanel.earsRow.visibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.addMutationsPanel.furRow.visibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.addMutationsPanel.teethRow.visibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.environmentalFactorsPanel.titleNode.textProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.environmentalFactorsPanel.titleNode.visibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.environmentalFactorsPanel.visibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.generationClockNode.visibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.genes.earsVisibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.genes.furVisibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.genes.teethVisibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.graphs.graphChoiceProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.earsRow.visibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.furRow.visibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.teethRow.visibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.titleNode.textProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.titleNode.visibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.visibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.graphs.populationNode.populationGraphNode.generationScroller.labelNode.textProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.graphs.populationNode.populationGraphNode.yAxisLabelNode.textProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsPanel.visibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.view.visibleProperty": {
     "phetioFeatured": true
   }
 };
