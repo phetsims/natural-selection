@@ -1,4 +1,4 @@
-studio.js:387 /* eslint-disable */
+/* eslint-disable */
 window.phet.preloads.phetio.phetioElementsOverrides =
 {
   "naturalSelection.labScreen.model.bunnyCollection.bunnyGroup.archetype.genotype.abbreviationProperty": {
