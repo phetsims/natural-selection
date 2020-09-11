@@ -72,11 +72,28 @@ class ProportionsCounts {
  */
 class ProportionsCountsIO extends ObjectIO {
 
-  // @public @overrides
-  static toStateObject( proportionsCounts ) { return proportionsCounts.toStateObject(); }
+  /**
+   * Serializes a ProportionsCounts instance.
+   * @param {ProportionsCounts} proportionsCounts
+   * @returns {Object}
+   * @public
+   * @override
+   */
+  static toStateObject( proportionsCounts ) {
+    assert && assert( proportionsCounts instanceof ProportionsCounts, 'invalid proportionsCounts' );
+    return proportionsCounts.toStateObject();
+  }
 
-  // @public @overrides
-  static fromStateObject( stateObject ) { return ProportionsCounts.fromStateObject( stateObject ); }
+  /**
+   * Deserializes a ProportionsCounts instance.
+   * @param {Object} stateObject
+   * @returns {ProportionsCounts}
+   * @public
+   * @override
+   */
+  static fromStateObject( stateObject ) {
+    return ProportionsCounts.fromStateObject( stateObject );
+  }
 }
 
 ObjectIO.setIOTypeFields( ProportionsCountsIO, 'ProportionsCountsIO', ProportionsCounts );

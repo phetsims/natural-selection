@@ -147,7 +147,7 @@ class GenePair extends PhetioObject {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes a GenePair.
+   * Serializes a GenePair instance.
    * @returns {Object}
    * @public
    */
@@ -181,11 +181,29 @@ class GenePair extends PhetioObject {
  */
 class GenePairIO extends ObjectIO {
 
-  // @public @overrides
-  static toStateObject( genePair ) { return genePair.toStateObject(); }
+  /**
+   * Serializes a GenePair instance.
+   * @param {GenePair} genePair
+   * @returns {Object}
+   * @public
+   * @override
+   */
+  static toStateObject( genePair ) {
+    assert && assert( genePair instanceof GenePair, 'invalid genePair' );
+    return genePair.toStateObject();
+  }
 
-  // @public @overrides
-  static applyState( genePair, stateObject ) { genePair.applyState( stateObject ); }
+  /**
+   * Restores GenePair state after instantiation.
+   * @param {GenePair} genePair
+   * @param {Object} stateObject
+   * @public
+   * @override
+   */
+  static applyState( genePair, stateObject ) {
+    assert && assert( genePair instanceof GenePair, 'invalid genePair' );
+    genePair.applyState( stateObject );
+  }
 }
 
 ObjectIO.setIOTypeFields( GenePairIO, 'GenePairIO', GenePair );

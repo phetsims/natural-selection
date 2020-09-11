@@ -128,7 +128,7 @@ class Wolf extends Organism {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes a Wolf.
+   * Serializes this Wolf instance.
    * @returns {Object}
    * @public
    */
@@ -174,14 +174,40 @@ class Wolf extends Organism {
  */
 class WolfIO extends ObjectIO {
 
-  // @public @override
-  static toStateObject( wolf ) { return wolf.toStateObject(); }
+  /**
+   * Serializes a Wolf instance.
+   * @param {Wolf} wolf
+   * @returns {Object}
+   * @public
+   * @override
+   */
+  static toStateObject( wolf ) {
+    assert && assert( wolf instanceof Wolf, 'invalid wolf' );
+    return wolf.toStateObject();
+  }
 
-  // @public @override
-  static stateToArgsForConstructor( state ) { return Wolf.stateToArgsForConstructor( state ); }
+  /**
+   * Creates the args that WolfGroup uses to instantiate a Wolf.
+   * @param state
+   * @returns {Object[]}
+   * @public
+   * @override
+   */
+  static stateToArgsForConstructor( state ) {
+    return Wolf.stateToArgsForConstructor( state );
+  }
 
-  // @public @override
-  static applyState( wolf, stateObject ) { wolf.applyState( stateObject ); }
+  /**
+   * Restores Wolf state after instantiation.
+   * @param {Wolf} wolf
+   * @param {Object} stateObject
+   * @public
+   * @override
+   */
+  static applyState( wolf, stateObject ) {
+    assert && assert( wolf instanceof Wolf, 'invalid wolf' );
+    wolf.applyState( stateObject );
+  }
 }
 
 ObjectIO.setIOTypeFields( WolfIO, 'WolfIO', Wolf );

@@ -174,11 +174,28 @@ class BunnyCounts {
  */
 class BunnyCountsIO extends ObjectIO {
 
-  // @public @overrides
-  static toStateObject( bunnyCounts ) { return bunnyCounts.toStateObject(); }
+  /**
+   * Serializes this BunnyCounts instance.
+   * @param {BunnyCounts} bunnyCounts
+   * @returns {Object}
+   * @public
+   * @override
+   */
+  static toStateObject( bunnyCounts ) {
+    assert && assert( bunnyCounts instanceof BunnyCounts, 'invalid bunnyCounts' );
+    return bunnyCounts.toStateObject();
+  }
 
-  // @public @overrides
-  static fromStateObject( stateObject ) { return BunnyCounts.fromStateObject( stateObject ); }
+  /**
+   * Deserializes a BunnyCounts instance.
+   * @param {Object} stateObject
+   * @returns {BunnyCounts}
+   * @public
+   * @override
+   */
+  static fromStateObject( stateObject ) {
+    return BunnyCounts.fromStateObject( stateObject );
+  }
 }
 
 ObjectIO.setIOTypeFields( BunnyCountsIO, 'BunnyCountsIO', BunnyCounts );

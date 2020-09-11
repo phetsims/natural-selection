@@ -334,7 +334,7 @@ class Bunny extends Organism {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes a Bunny.
+   * Serializes this Bunny instance.
    * @returns {Object}
    * @public
    */
@@ -439,14 +439,39 @@ function getHopDelta( hopDistance, hopHeight, xDirection ) {
  */
 class BunnyIO extends ObjectIO {
 
-  // @public @override
-  static toStateObject( bunny ) { return bunny.toStateObject(); }
+  /**
+   * Serializes a Bunny instance.
+   * @param bunny
+   * @returns {Object}
+   * @public @override
+   */
+  static toStateObject( bunny ) {
+    assert && assert( bunny instanceof Bunny, 'invalid Bunny' );
+    return bunny.toStateObject();
+  }
 
-  // @public @override
-  static stateToArgsForConstructor( state ) { return Bunny.stateToArgsForConstructor( state ); }
+  /**
+   * Creates the args that BunnyGroup uses to instantiate a Bunny.
+   * @param {Object} state
+   * @returns {Object[]}
+   * @public
+   * @override
+   */
+  static stateToArgsForConstructor( state ) {
+    return Bunny.stateToArgsForConstructor( state );
+  }
 
-  // @public @override
-  static applyState( bunny, stateObject ) { bunny.applyState( stateObject ); }
+  /**
+   * Restores Bunny state after instantiation.
+   * @param {Bunny} bunny
+   * @param {Object} stateObject
+   * @public
+   * @override
+   */
+  static applyState( bunny, stateObject ) {
+    assert && assert( bunny instanceof Bunny, 'invalid Bunny' );
+    bunny.applyState( stateObject );
+  }
 }
 
 ObjectIO.setIOTypeFields( BunnyIO, 'BunnyIO', Bunny );

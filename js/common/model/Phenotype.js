@@ -102,7 +102,7 @@ class Phenotype extends PhetioObject {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes a Phenotype.
+   * Serializes this Phenotype instance.
    * @returns {Object}
    * @public
    */
@@ -136,11 +136,29 @@ class Phenotype extends PhetioObject {
  */
 class PhenotypeIO extends ObjectIO {
 
-  // @public @overrides
-  static toStateObject( phenotype ) { return phenotype.toStateObject(); }
+  /**
+   * Serializes a Phenotype instance.
+   * @param {Phenotype} phenotype
+   * @returns {Object}
+   * @public
+   * @override
+   */
+  static toStateObject( phenotype ) {
+    assert && assert( phenotype instanceof Phenotype, 'invalid phenotype' );
+    return phenotype.toStateObject();
+  }
 
-  // @public @overrides
-  static applyState( phenotype, stateObject ) { phenotype.applyState( stateObject ); }
+  /**
+   * Restores Phenotype state after instantiation.
+   * @param {Phenotype} phenotype
+   * @param {Object} stateObject
+   * @public
+   * @override
+   */
+  static applyState( phenotype, stateObject ) {
+    assert && assert( phenotype instanceof Phenotype, 'invalid phenotype' );
+    phenotype.applyState( stateObject );
+  }
 }
 
 ObjectIO.setIOTypeFields( PhenotypeIO, 'PhenotypeIO', Phenotype );

@@ -170,7 +170,7 @@ class Genotype extends PhetioObject {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes a Genotype.
+   * Serializes this Genotype instance.
    * @returns {Object}
    * @public
    */
@@ -201,11 +201,28 @@ class Genotype extends PhetioObject {
  */
 class GenotypeIO extends ObjectIO {
 
-  // @public @overrides
-  static toStateObject( genotype ) { return genotype.toStateObject(); }
+  /**
+   * Serializes a Genotype instance.
+   * @param {Genotype} genotype
+   * @returns {Object}
+   * @public
+   * @override
+   */
+  static toStateObject( genotype ) {
+    assert && assert( genotype instanceof Genotype, 'invalid genotype' );
+    return genotype.toStateObject();
+  }
 
-  // @public @overrides
-  static applyState( genotype, stateObject ) { genotype.applyState( stateObject ); }
+  /**
+   * Restores Genotype stateObject after instantiation.
+   * @param {Genotype} genotype
+   * @param {Object} stateObject
+   * @public
+   */
+  static applyState( genotype, stateObject ) {
+    assert && assert( genotype instanceof Genotype, 'invalid genotype' );
+    genotype.applyState( stateObject );
+  }
 }
 
 ObjectIO.setIOTypeFields( GenotypeIO, 'GenotypeIO', Genotype );
