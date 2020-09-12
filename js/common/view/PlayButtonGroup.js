@@ -89,7 +89,7 @@ class PlayButtonGroup extends Node {
           // Make one of these buttons visible on the next frame, so that a double-click on the 'Start Over' button
           // doesn't fire the button that is made visible. See https://github.com/phetsims/natural-selection/issues/166
           const bunnyCount = bunnyCountProperty.value;
-          stepTimer.runOnNextFrame( () => {
+          stepTimer.runOnNextTick( () => {
             addAMateButton.visible = ( bunnyCount === 1 );
             playButton.visible = ( bunnyCount > 1 );
           } );
