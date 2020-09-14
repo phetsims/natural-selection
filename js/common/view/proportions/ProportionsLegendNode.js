@@ -58,7 +58,7 @@ class ProportionsLegendNode extends VBox {
 
     super( options );
 
-    // @private
+    // @private {GeneLegendNode[]}
     this.legendNodes = legendNodes;
   }
 

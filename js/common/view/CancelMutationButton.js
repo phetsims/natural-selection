@@ -15,6 +15,9 @@ import naturalSelection from '../../naturalSelection.js';
 
 class CancelMutationButton extends RoundPushButton {
 
+  /**
+   * @param {Object} [options]
+   */
   constructor( options ) {
 
     options = merge( {

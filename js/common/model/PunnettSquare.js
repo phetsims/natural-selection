@@ -29,7 +29,7 @@ class PunnettSquare {
    */
   constructor( fatherGenePair, motherGenePair ) {
 
-    // @private
+    // @private {Cell[]}
     this.cells = phet.joist.random.shuffle( [
       new Cell( fatherGenePair.fatherAllele, motherGenePair.fatherAllele ),
       new Cell( fatherGenePair.fatherAllele, motherGenePair.motherAllele ),

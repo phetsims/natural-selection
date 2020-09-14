@@ -68,6 +68,7 @@ const NaturalSelectionUtils = {
    * Duplicates are allowed, and an empty array is considered sorted.
    * @param {*[]} array
    * @returns {boolean}
+   * @public
    */
   isSortedDescending( array ) {
     return NaturalSelectionUtils.isSorted( array, ( value, nextValue ) => value >= nextValue );
@@ -107,6 +108,7 @@ const NaturalSelectionUtils = {
    * Determines whether a value is a non-negative integer.
    * @param {*} value
    * @returns {boolean}
+   * @public
    */
   isNonNegativeInteger( value ) {
     return NaturalSelectionUtils.isNonNegative( value ) && Utils.isInteger( value );
@@ -116,6 +118,7 @@ const NaturalSelectionUtils = {
    * Determines whether a value is a percentage, between 0 and 1.
    * @param {*} value
    * @returns {boolean}
+   * @public
    */
   isPercent( value ) {
     return NaturalSelectionUtils.isNonNegative( value ) && ( value >= 0 ) && ( value <= 1 );
@@ -125,6 +128,7 @@ const NaturalSelectionUtils = {
    * Determines whether a value is a Range for a percentage, between 0 and 1.
    * @param {*} value
    * @returns {boolean}
+   * @public
    */
   isPercentRange( value ) {
     return ( value instanceof Range ) && ( value.min >= 0 ) && ( value.max <= 1 );
@@ -138,6 +142,7 @@ const NaturalSelectionUtils = {
    *
    * @param {string} phetioID
    * @returns {null|PhetioObject}
+   * @public
    */
   getElement( phetioID ) {
     if ( Tandem.PHET_IO_ENABLED ) {

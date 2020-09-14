@@ -113,9 +113,9 @@ class OrganismSprites extends Sprites {
     this.wolfCollection = wolfCollection;
     this.isPlayingProperty = isPlayingProperty;
     this.bunnyImageMap = bunnyImageMap;
-    this.selectionRectangleSprite = selectionRectangleSprite;
-    this.shrubSpriteInstances = shrubSpriteInstances;
-    this.spriteInstances = options.spriteInstances;
+    this.selectionRectangleSprite = selectionRectangleSprite; // {BunnySelectionRectangleSprite}
+    this.shrubSpriteInstances = shrubSpriteInstances; // {ShrubSpriteInstance[]}
+    this.spriteInstances = options.spriteInstances; // {OrganismSpriteInstance[]}
 
     // Create a sprite instance for each bunny in the initial population.
     bunnyCollection.liveBunnies.forEach( bunny => this.createBunnySpriteInstance( bunny ) );

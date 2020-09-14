@@ -44,7 +44,7 @@ class Organism extends PhetioObject {
     // @public (read-only)
     this.modelViewTransform = modelViewTransform;
 
-    // @public
+    // @public {Property.<Vector3>}
     this.positionProperty = new Property( options.position, {
       tandem: options.tandem.createTandem( 'positionProperty' ),
       phetioType: PropertyIO( Vector3IO ),
@@ -52,14 +52,14 @@ class Organism extends PhetioObject {
       phetioDocumentation: 'position in the 3D model coordinate frame'
     } );
 
-    // @public
+    // @public {Property.<XDirection>}
     this.xDirectionProperty = new EnumerationProperty( XDirection, options.xDirection, {
       tandem: options.tandem.createTandem( 'xDirectionProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'direction that the organism is facing along the x axis'
     } );
 
-    // @private
+    // @private {function}
     this.disposeOrganism = () => {
       this.positionProperty.dispose();
       this.xDirectionProperty.dispose();

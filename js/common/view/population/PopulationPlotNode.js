@@ -69,7 +69,7 @@ class PopulationPlotNode extends Node {
     } );
 
     super( {
-      children:  [ stepPath, pointsPath ]
+      children: [ stepPath, pointsPath ]
     } );
 
     // @private
@@ -77,12 +77,12 @@ class PopulationPlotNode extends Node {
     this.xAxisLength = config.xAxisLength;
     this.xRangeProperty = config.xRangeProperty;
     this.yRangeProperty = config.yRangeProperty;
-    this.timeInGenerationsProperty = config.timeInGenerationsProperty;
+    this.timeInGenerationsProperty = config.timeInGenerationsProperty; // {Property.<number>}
     this.gridWidth = config.gridWidth;
     this.gridHeight = config.gridHeight;
-    this.pointsPath = pointsPath;
-    this.stepPath = stepPath;
-    this.isDashed = _.sum( stepPath.lineDash ) > 0;
+    this.pointsPath = pointsPath; // {Path}
+    this.stepPath = stepPath; // {Path}
+    this.isDashed = _.sum( stepPath.lineDash ) > 0; // {number}
 
     // unlink is not necessary.
     config.plotVisibleProperty.link( plotVisible => {

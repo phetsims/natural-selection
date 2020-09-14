@@ -185,7 +185,7 @@ class BunnyCollection {
 
     // @private fields needed by methods
     this.genePool = genePool;
-    this.bunnyGroup = bunnyGroup;
+    this.bunnyGroup = bunnyGroup; // {BunnyGroup}
   }
 
   /**

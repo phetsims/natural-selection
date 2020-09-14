@@ -52,7 +52,7 @@ class Wolf extends Organism {
 
     super( modelViewTransform, options );
 
-    // @private
+    // @private {number}
     this.speed = phet.joist.random.nextDoubleInRange( WOLF_SPEED_RANGE );
 
     // @public fires when the Wolf has been disposed. dispose is required.
@@ -142,7 +142,7 @@ class Wolf extends Organism {
 
   /**
    * Creates the args that WolfGroup uses to instantiate a Wolf.
-   * @param state
+   * @param {*} state
    * @returns {Object[]}
    * @public
    */
@@ -188,7 +188,7 @@ class WolfIO extends ObjectIO {
 
   /**
    * Creates the args that WolfGroup uses to instantiate a Wolf.
-   * @param state
+   * @param {*} state
    * @returns {Object[]}
    * @public
    * @override

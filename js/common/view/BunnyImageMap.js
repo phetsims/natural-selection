@@ -50,7 +50,8 @@ class BunnyImageMap {
     assert && assert( _.every( _.keys( imageMap ), key => key.match( /(true|false)-(true|false)-(true|false)/ ) ),
       'imageMap has an invalid key' );
 
-    // @private Sprites for each bunny phenotype, used in OrganismSprites. Uses the same keys as imageMap.
+    // @private {Object.<string,Sprite>} - Sprites for each bunny phenotype, used in OrganismSprites. Uses the same keys
+    // as imageMap.
     this.spriteMap = _.mapValues( imageMap, image => new Sprite( new BunnySpriteImage( image ) ) );
 
     // Hit test on non-transparent pixels, to make it easier to select overlapping bunnies.
@@ -66,8 +67,8 @@ class BunnyImageMap {
       group: new AlignGroup()
     };
 
-    // @private Nodes for each bunny phenotype, used in the Pedigree graph. Uses the same keys as imageMap.
-    // All of these Nodes have the same origin and effective size.
+    // @private {Object.<string,Node>} - Nodes for each bunny phenotype, used in the Pedigree graph. Uses the same keys
+    // as imageMap. All of these Nodes have the same origin and effective size.
     this.nodeMap = _.mapValues( imageMap, image => new AlignBox( new Image( image, imageOptions ), alignBoxOptions ) );
   }
 

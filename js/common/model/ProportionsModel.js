@@ -75,13 +75,13 @@ class ProportionsModel extends PhetioObject {
         tandem: Tandem.OPT_OUT
       } );
 
-    // @public counts for 'Start of Generation'
+    // @public {Property.<BunnyCounts>} counts for 'Start of Generation'
     this.startCountsProperty = new Property( BunnyCounts.withZero(), {
       valueType: BunnyCounts,
       tandem: Tandem.OPT_OUT
     } );
 
-    // @public counts for 'End of Generation'
+    // @public {Property.<BunnyCounts>} counts for 'End of Generation'
     this.endCountsProperty = new Property( BunnyCounts.withZero(), {
       valueType: BunnyCounts,
       tandem: Tandem.OPT_OUT
@@ -181,8 +181,10 @@ class ProportionsModel extends PhetioObject {
       tandem: options.tandem.createTandem( 'currentCountsProperty' )
     } );
 
-    // @private
+    // @private {Property.<BunnyCounts|null>}
     this.currentStartCountsProperty = currentStartCountsProperty;
+
+    // @private {ObservableArray.<ProportionsCounts>}
     this.previousCounts = previousCounts;
   }
 

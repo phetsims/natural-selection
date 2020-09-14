@@ -79,7 +79,7 @@ class Bunny extends Organism {
     // @public (read-only)
     this.father = options.father; // {Bunny|null} null if the bunny had no father, or the father was disposed
     this.mother = options.mother; // {Bunny|null} null if the bunny had no mother, or the mother was disposed
-    this.generation = options.generation;
+    this.generation = options.generation; // {number}
     this.isAlive = true; // dead bunnies are kept for the Pedigree graph
 
     // @public
@@ -141,7 +141,7 @@ class Bunny extends Organism {
     };
     this.mother && this.mother.disposedEmitter.addListener( motherDisposedListener );
 
-    // @private
+    // @private {function}
     this.disposeBunny = () => {
       this.genotype.dispose();
       this.phenotype.dispose();
@@ -441,7 +441,7 @@ class BunnyIO extends ObjectIO {
 
   /**
    * Serializes a Bunny instance.
-   * @param bunny
+   * @param {Bunny} bunny
    * @returns {Object}
    * @public @override
    */

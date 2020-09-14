@@ -235,7 +235,7 @@ class NaturalSelectionScreenView extends ScreenView {
       mutationAlertsNode
     ];
 
-    // @private
+    // @private {function}
     this.resetNaturalSelectionScreenView = () => {
       this.graphChoiceProperty.reset();
     };
@@ -317,7 +317,7 @@ class NaturalSelectionScreenView extends ScreenView {
 
     // @private
     this.model = model;
-    this.environmentNode = environmentNode;
+    this.environmentNode = environmentNode; // {EnvironmentNode}
 
     /* eslint-disable no-new */
     new GenesVisibilityManager( model.genePool, addMutationsPanel, populationNode, proportionsNode, pedigreeNode, {

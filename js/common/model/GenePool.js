@@ -15,6 +15,9 @@ import Gene from './Gene.js';
 
 class GenePool {
 
+  /**
+   * @param {Object} [options]
+   */
   constructor( options ) {
 
     options = merge( {
@@ -23,22 +26,22 @@ class GenePool {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // @pubic (read-only)
+    // @public (read-only) {Gene}
     this.furGene = Gene.createFurGene( {
       tandem: options.tandem.createTandem( 'furGene' )
     } );
 
-    // @pubic (read-only)
+    // @public (read-only) {Gene}
     this.earsGene = Gene.createEarsGene( {
       tandem: options.tandem.createTandem( 'earsGene' )
     } );
 
-    // @pubic (read-only)
+    // @public (read-only) {Gene}
     this.teethGene = Gene.createTeethGene( {
       tandem: options.tandem.createTandem( 'teethGene' )
     } );
 
-    // @public (read-only) for situations where it's possible to iterate over genes
+    // @public (read-only) {Gene[]} for situations where it's possible to iterate over genes
     // When we're able to iterate to create the UI, the order here determines the order of UI components.
     this.genes = [ this.furGene, this.earsGene, this.teethGene ];
   }

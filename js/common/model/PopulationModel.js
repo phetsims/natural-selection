@@ -87,7 +87,7 @@ class PopulationModel extends PhetioObject {
     // For organizing all data points in Studio
     const dataPointsTandem = options.tandem.createTandem( 'dataPoints' );
 
-    // @public data points, for total population and the population of each allele.
+    // @public {ObservableArray.<Vector2>} - data points, for total population and the population of each allele.
     // Vector2.x = generation, Vector2.y = population
     this.totalPoints = new ObservableArray( {
       tandem: dataPointsTandem.createTandem( 'totalPoints' ),

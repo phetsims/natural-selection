@@ -64,7 +64,7 @@ class PopulationNode extends Node {
       tandem: options.tandem.createTandem( 'populationModel' )
     } );
 
-    // @private
+    // @private {PopulationPanel}
     this.populationPanel = populationPanel;
   }
 

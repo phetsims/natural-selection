@@ -71,8 +71,8 @@ class ProportionsNode extends HBox {
     } );
 
     // @private
-    this.proportionsPanel = proportionsPanel;
-    this.proportionsGraphNode = proportionsGraphNode;
+    this.proportionsPanel = proportionsPanel; // {ProportionsPanel}
+    this.proportionsGraphNode = proportionsGraphNode; // {ProportionsGraphNode}
   }
 
   /**

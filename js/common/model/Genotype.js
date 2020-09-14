@@ -108,7 +108,7 @@ class Genotype extends PhetioObject {
         phetioDocumentation: 'the abbreviation that describes the genotype, the empty string if there are no dominant alleles'
       } );
 
-    // @private
+    // @private {function}
     this.disposeGenotype = () => {
       this.furGenePair.dispose();
       this.earsGenePair.dispose();

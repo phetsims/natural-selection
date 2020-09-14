@@ -71,7 +71,7 @@ class ShrubSpritesMap {
    * @returns {Sprite}
    * @public
    */
-  getNextToughSprite( category ) {
+  getNextToughSprite() {
     const sprite = this.toughSprites[ this.toughSpritesIndex++ ];
     if ( this.toughSpritesIndex >= this.toughSprites.length ) {
       this.toughSpritesIndex = 0;

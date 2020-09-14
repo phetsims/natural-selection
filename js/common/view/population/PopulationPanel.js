@@ -149,7 +149,7 @@ class PopulationPanel extends NaturalSelectionPanel {
 
     super( content, options );
 
-    // @private
+    // @private {PopulationLegendCheckbox[]}
     this.checkboxes = checkboxes;
   }
 

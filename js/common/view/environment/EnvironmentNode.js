@@ -70,7 +70,7 @@ class EnvironmentNode extends Node {
       }
     } );
 
-    // @private
+    // @private {OrganismSprites}
     this.sprites = sprites;
   }
 

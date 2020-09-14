@@ -181,7 +181,7 @@ class VerticalLines extends Node {
       path.x = -xSpacingView * ( ( xRange.max % options.xSpacingModel ) / options.xSpacingModel );
     } );
 
-    super( options );
+    super( options ); //REVIEW: We're passing the options both to the VerticalLines AND its Path? And clipArea is applied to both?
   }
 
   /**

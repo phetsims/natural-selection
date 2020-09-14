@@ -78,6 +78,7 @@ class PedigreeBranchNode extends Node {
       fatherNode = new PedigreeBranchNode( bunny.father, bunnyImageMap, branchDepth - 1, selectedBunnyProperty,
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
           xSpacing: X_SPACING_SCALE * options.xSpacing,
+          //REVIEW: Documenting parentsYSpacing would help, didn't see it above
           parentsYSpacing: Y_SPACING_SCALE * options.parentsYSpacing,
           scale: PARENTS_SCALE,
           x: bunnyNode.centerX - options.xSpacing,
@@ -112,7 +113,7 @@ class PedigreeBranchNode extends Node {
 
     super( options );
 
-    // @private
+    // @private {function}
     this.disposePedigreeBranchNode = () => {
       bunnyNode.dispose();
       fatherNode && fatherNode.dispose();

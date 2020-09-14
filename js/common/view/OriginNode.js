@@ -11,6 +11,9 @@ import naturalSelection from '../../naturalSelection.js';
 
 class OriginNode extends Circle {
 
+  /**
+   * @param {number} [radius]
+   */
   constructor( radius = 2 ) {
     super( radius, { fill: 'red' } );
   }

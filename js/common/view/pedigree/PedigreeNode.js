@@ -87,7 +87,7 @@ class PedigreeNode extends HBox {
 
     super( options );
 
-    // @private
+    // @private {AllelesPanel}
     this.allelesPanel = allelesPanel;
   }
 

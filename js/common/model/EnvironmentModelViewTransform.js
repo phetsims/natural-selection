@@ -103,7 +103,7 @@ class EnvironmentModelViewTransform {
     // @private rise of the ground from zNearModel to zFarModel
     this.riseModel = 100;
 
-    // @private common scaling factor used to convert x and y between model and view
+    // @private {number} - common scaling factor used to convert x and y between model and view
     // Multiply for model-to-view, divide for view-to-model.
     // Ported from Landscape.getFactor in the Java version.
     this.xyScaleFactor = this.zNearModel * ( this.viewSize.height - this.yHorizonView ) / this.riseModel;
@@ -167,7 +167,7 @@ class EnvironmentModelViewTransform {
   /**
    * Gets the maximum x value for a particular depth. This varies based on depth, since the ground is a trapezoid.
    * Ported from Landscape.getMaximumX in the Java version.
-   * @param zModel
+   * @param {number} zModel
    * @returns {number} maximum x, in model coordinates
    * @public
    */
@@ -178,7 +178,7 @@ class EnvironmentModelViewTransform {
 
   /**
    * Gets the minimum x value for a particular depth. Since x=0 is in the center, xMin === -xMax.
-   * @param zModel
+   * @param {number} zModel
    * @returns {number} minimum x, in model coordinates
    * @public
    */
@@ -343,6 +343,7 @@ class EnvironmentModelViewTransform {
   }
 }
 
+// @public {number}
 EnvironmentModelViewTransform.Z_MARGIN_MODEL = Z_MARGIN_MODEL;
 
 naturalSelection.register( 'EnvironmentModelViewTransform', EnvironmentModelViewTransform );

@@ -119,7 +119,7 @@ class PedigreeBunnyNode extends Node {
         genotypeNode.top = bunnyNode.bottom + 5;
       } );
 
-    // @private
+    // @private {function}
     this.disposePedigreeBunnyNode = () => {
       multilink.dispose();
       if ( bunny.diedEmitter.hasListener( addRedCrossMark ) ) {

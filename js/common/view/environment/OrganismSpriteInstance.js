@@ -31,7 +31,7 @@ class OrganismSpriteInstance extends SpriteInstance {
     // because the view is a 2D projection of a 3D model position.
     this.transformType = SpriteInstance.TransformType.TRANSLATION_AND_SCALE;
 
-    // @private
+    // @private {function}
     this.organismListener = this.updateMatrix.bind( this );
 
     this.initialize( organism, sprite, baseScale );
@@ -40,9 +40,9 @@ class OrganismSpriteInstance extends SpriteInstance {
   /**
    * Initializes the OrganismSpriteInstance. This is factored out of the constructor (and is public) in case
    * we ever want to leverage SpriteInstance's Poolable features.
-   * @param organism
-   * @param sprite
-   * @param baseScale
+   * @param {Organism} organism
+   * @param {Sprite} sprite
+   * @param {number} baseScale
    * @protected for use by Poolable
    */
   initialize( organism, sprite, baseScale ) {

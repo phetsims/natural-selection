@@ -80,7 +80,7 @@ class AllelesPanel extends NaturalSelectionPanel {
 
     super( content, options );
 
-    // @private
+    // @private {Row[]}
     this.rows = rows;
   }
 
@@ -260,13 +260,14 @@ class AlleleNode extends HBox {
 
     super( options );
 
-    // @private
+    // @private {Image}
     this.imageNode = imageNode;
   }
 
   /**
    * Sets the allele image for this node.
    * @param {HTMLImageElement} value
+   * @public
    */
   set image( value ) {
     assert && assert( value instanceof HTMLImageElement, 'invalid value' );

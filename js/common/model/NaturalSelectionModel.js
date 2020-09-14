@@ -87,7 +87,7 @@ class NaturalSelectionModel {
     } );
     phet.log && phet.log( '====== Generation 0 ======' );
 
-    // @pubic (read-only) pool of genes for the bunny population
+    // @public (read-only) pool of genes for the bunny population
     this.genePool = new GenePool( {
       tandem: options.tandem.createTandem( 'genePool' )
     } );

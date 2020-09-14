@@ -44,7 +44,7 @@ class HatchingRectangle extends Rectangle {
 
     super( 0, 0, width, height, options );
 
-    // @private
+    // @private {number}
     this.hatchingLineWidth = options.hatchingOptions.lineWidth;
 
     // @private

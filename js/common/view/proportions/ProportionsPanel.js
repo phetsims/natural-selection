@@ -74,7 +74,7 @@ class ProportionsPanel extends NaturalSelectionPanel {
 
     super( content, options );
 
-    // @private
+    // @private {ProportionsLegendNode}
     this.legendNode = legendNode;
   }
 

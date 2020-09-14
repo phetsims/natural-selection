@@ -34,7 +34,7 @@ class BunnyArray extends ObservableArray {
 
     super( options );
 
-    // @public (read-only)
+    // @public (read-only) {Property.<BunnyCounts>}
     this.countsProperty = new Property( BunnyCounts.withZero(), {
       tandem: options.tandem.createTandem( 'countsProperty' ),
       phetioType: PropertyIO( BunnyCounts.BunnyCountsIO ),

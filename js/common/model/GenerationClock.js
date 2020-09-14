@@ -64,6 +64,7 @@ class GenerationClock extends PhetioObject {
       timeInSeconds => ( timeInSeconds % SECONDS_PER_GENERATION ) / SECONDS_PER_GENERATION, {
         isValidValue: timeInPercent => ( timeInPercent >= 0 && timeInPercent <= 1 )
       }, {
+        //REVIEW: This tandem opt-out should presumably be in the options object above with isValidValue?
         tandem: Tandem.OPT_OUT
       } );
 

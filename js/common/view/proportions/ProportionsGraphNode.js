@@ -91,6 +91,7 @@ class ProportionsGraphNode extends Node {
 
         // no label for top row (column headings)
         new AlignBox( new Text( '', { font: ROW_LABEL_FONT } ), {
+          //REVIEW: alignGroup key doesn't seem to do anything? Safe to turn into group:?
           alignGroup: columnLabelsAlignGroup,
           xAlign: ROW_LABELS_X_ALIGN,
           yAlign: CELLS_Y_ALIGN
@@ -202,7 +203,7 @@ class ProportionsGraphNode extends Node {
       teethColumn.setEndCounts( endCounts.shortTeethCount, endCounts.longTeethCount );
     } );
 
-    // @private
+    // @private {Column[]}
     this.geneColumns = geneColumns;
   }
 
@@ -268,7 +269,7 @@ class RowLabel extends VBox {
 
     super( options );
 
-    // @private
+    // @private {Text}
     this.topText = topText;
     this.bottomText = bottomText;
 
@@ -400,8 +401,8 @@ class Column extends VBox {
 
     // @private
     this.gene = gene;
-    this.startBarNode = startBarNode;
-    this.endBarNode = endBarNode;
+    this.startBarNode = startBarNode; // {ProportionsBarNode}
+    this.endBarNode = endBarNode; // {ProportionsBarNode}
   }
 
   /**

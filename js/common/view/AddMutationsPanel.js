@@ -81,7 +81,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
       maxWidth: 60 // determined empirically
     } );
 
-    // Layout of column headings 
+    // Layout of column headings
     const columnHeadingsNode = new HBox( {
       spacing: COLUMN_SPACING,
       children: [
@@ -122,7 +122,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
       }
     } );
 
-    // @private
+    // @private {Row[]}
     this.rows = rows;
   }
 
@@ -313,7 +313,7 @@ class MutationButton extends RectangularPushButton {
   /**
    * @param {HTMLImageElement} mutantAlleleImage - the image on the button
    * @param {AlignGroup} iconsAlignGroup - sets uniform width and height for icons
-   * @param options
+   * @param {Object} [options]
    */
   constructor( mutantAlleleImage, iconsAlignGroup, options ) {
 
@@ -344,8 +344,8 @@ class MutationButton extends RectangularPushButton {
 class AlleleIcon extends Node {
 
   /**
-   * @param image - the default image on the icon
-   * @param iconsAlignGroup - sets uniform width and height for icons
+   * @param {Image} image - the default image on the icon
+   * @param {AlignGroup} iconsAlignGroup - sets uniform width and height for icons
    * @param {Object} [options]
    */
   constructor( image, iconsAlignGroup, options ) {
@@ -381,8 +381,8 @@ class AlleleIcon extends Node {
     super( options );
 
     // @private
-    this.imageNode = imageNode;
-    this.outlineRectangle = outlineRectangle;
+    this.imageNode = imageNode; // {Image}
+    this.outlineRectangle = outlineRectangle; // {Rectangle}
   }
 
   /**
