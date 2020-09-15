@@ -5,7 +5,6 @@
  * of the initial population. See NaturalSelectionQueryParameters (labMutations, labPopulation) for details about
  * the values that are being parsed. See https://github.com/phetsims/natural-selection/issues/9 for design history
  * and insight on how this feature evolved.
- * REVIEW: Having the finalized spec in the code here would be helpful.
  *
  * Responsibilities:
  * - Parses and validates the query-parameter values
