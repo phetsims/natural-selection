@@ -29,7 +29,6 @@ const PARENTS_SCALE = 0.9; // how much the parents are scaled relative to the ch
 const DEFAULT_X_SPACING = 156; // x spacing between parents
 const DEFAULT_Y_SPACING = 68; // y spacing between child and parents
 const X_SPACING_SCALE = 0.55; // how much x spacing is scale for each generation
-const Y_SPACING_SCALE = 0.7; // how much y spacing is scale for each generation
 const T_HEIGHT = 16; // the height of the T that connects child to parents
 const T_X_OFFSET = 28; // x offset of the T from the parent bunny's origin
 const T_Y_OFFSET = 14; // y offset of the T from the parent bunny's origin
@@ -78,8 +77,6 @@ class PedigreeBranchNode extends Node {
       fatherNode = new PedigreeBranchNode( bunny.father, bunnyImageMap, branchDepth - 1, selectedBunnyProperty,
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
           xSpacing: X_SPACING_SCALE * options.xSpacing,
-          //REVIEW: Documenting parentsYSpacing would help, didn't see it above
-          parentsYSpacing: Y_SPACING_SCALE * options.parentsYSpacing,
           scale: PARENTS_SCALE,
           x: bunnyNode.centerX - options.xSpacing,
           bottom: bunnyNode.bottom - options.ySpacing
@@ -89,7 +86,6 @@ class PedigreeBranchNode extends Node {
       motherNode = new PedigreeBranchNode( bunny.mother, bunnyImageMap, branchDepth - 1, selectedBunnyProperty,
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
           xSpacing: X_SPACING_SCALE * options.xSpacing,
-          parentsYSpacing: Y_SPACING_SCALE * options.parentsYSpacing,
           scale: PARENTS_SCALE,
           x: bunnyNode.centerX + options.xSpacing,
           bottom: bunnyNode.bottom - options.ySpacing
