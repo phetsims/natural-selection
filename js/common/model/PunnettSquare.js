@@ -68,10 +68,10 @@ class PunnettSquare {
   }
 
   /**
-   * Gets the cell in the Punnett square to use for an additional offspring. If the Punnett square contains a
-   * homozygous mutation, that genotype is returned. Otherwise, read the code comments :)
-   * REVIEW: Nice comments :)
-   * This is used to create a 5th offspring when a recessive mutant mates eagerly.
+   * Gets the cell in the Punnett square to use for an additional offspring. This is used to create a 5th offspring
+   * when a recessive mutant mates eagerly. If the Punnett square contains a homozygous mutation, that genotype is
+   * returned. Second choice is a dominant genotype, and a random selection is the last resort.
+   *
    * @param {Allele} mutantAllele
    * @param {Allele|null} dominantAllele
    * @returns {Cell}
