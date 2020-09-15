@@ -140,7 +140,6 @@ class WolfCollection {
 
         // Eat bunnies at the midpoint of their clock slice.
         // See https://github.com/phetsims/natural-selection/issues/110
-        //REVIEW: Does GenerationClock.constrainDt mean we can't go from one generation's before-midpoint to the next one's before-midpoint?
         if ( this.enabledProperty.value &&
              previousTimeInPercent < CLOCK_WOLVES_MIDPOINT && currentTimeInPercent >= CLOCK_WOLVES_MIDPOINT ) {
 
