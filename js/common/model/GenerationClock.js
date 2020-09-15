@@ -151,9 +151,11 @@ class GenerationClock extends PhetioObject {
   }
 
   /**
-   * Constrains dt so that the clock doesn't run so fast that we skip over generations. It's possible to run the
-   * clock ridiculously fast using ?secondsPerGeneration, especially if combined with the fast-forward button.
-   * See https://github.com/phetsims/natural-selection/issues/165.
+   * Constrains dt to a maximum value, which results in a minimum number of steps per generation. This prevents us
+   * from skipping over important transitions (like applying environmental factors) or even entire generations.
+   * It's possible to run the clock ridiculously fast using ?secondsPerGeneration, especially if combined with the
+   * fast-forward button. Running the clock fast became as habit of testers, and this constraint protects us from
+   * that type of 'run it fast' abuse. See https://github.com/phetsims/natural-selection/issues/165.
    * @param {number} dt - time step, in seconds
    * @static
    * @public
