@@ -54,9 +54,10 @@ class PopulationGridNode extends Node {
       xAxisWidth: options.gridWidth,
       xSpacingModel: populationModel.xAxisTickSpacing,
       lineLength: options.gridHeight,
-
-      stroke: NaturalSelectionColors.POPULATION_GRID_LINES_STROKE,
-      lineWidth: GRID_LINES_LINE_WIDTH,
+      pathOptions: {
+        stroke: NaturalSelectionColors.POPULATION_GRID_LINES_STROKE,
+        lineWidth: GRID_LINES_LINE_WIDTH
+      },
 
       // Clip to the background bounds, because we'll be horizontally translating the x grid lines
       clipArea: Shape.rectangle( 0, 0, options.gridWidth, options.gridHeight )
@@ -80,9 +81,10 @@ class PopulationGridNode extends Node {
       xSpacingModel: populationModel.xAxisTickSpacing,
       xAxisWidth: options.gridWidth,
       lineLength: TICK_MARKS_LENGTH,
-
-      stroke: NaturalSelectionColors.POPULATION_TICK_MARKS_STROKE,
-      lineWidth: TICK_MARKS_LINE_WIDTH,
+      pathOptions: {
+        stroke: NaturalSelectionColors.POPULATION_TICK_MARKS_STROKE,
+        lineWidth: TICK_MARKS_LINE_WIDTH
+      },
       top: rectangleNode.bottom,
 
       // Clip to the tick mark bounds below the x axis, because we'll be horizontally translating the x tick marks
@@ -156,7 +158,8 @@ class VerticalLines extends Node {
     options = merge( {
       xSpacingModel: 1, // spacing between lines, in model coordinates
       xAxisWidth: 100, // width of the x axis, in view coordinates
-      lineLength: 100 // vertical length of the lines, in view coordinates
+      lineLength: 100, // vertical length of the lines, in view coordinates
+      pathOptions: null // options passed to the Path subcomponent, which draws the lines
     }, options );
 
     // Compute the number of lines and their spacing, in view coordinates
@@ -170,7 +173,7 @@ class VerticalLines extends Node {
       shape.moveTo( x, 0 );
       shape.lineTo( x, options.lineLength );
     }
-    const path = new Path( shape, options );
+    const path = new Path( shape, options.pathOptions );
 
     // Wrapped in a Node because we're going to translate the Path
     assert && assert( !options.children, 'VerticalLines sets children' );
@@ -181,7 +184,7 @@ class VerticalLines extends Node {
       path.x = -xSpacingView * ( ( xRange.max % options.xSpacingModel ) / options.xSpacingModel );
     } );
 
-    super( options ); //REVIEW: We're passing the options both to the VerticalLines AND its Path? And clipArea is applied to both?
+    super( options );
   }
 
   /**
