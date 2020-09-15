@@ -91,8 +91,7 @@ class ProportionsGraphNode extends Node {
 
         // no label for top row (column headings)
         new AlignBox( new Text( '', { font: ROW_LABEL_FONT } ), {
-          //REVIEW: alignGroup key doesn't seem to do anything? Safe to turn into group:?
-          alignGroup: columnLabelsAlignGroup,
+          group: columnLabelsAlignGroup,
           xAlign: ROW_LABELS_X_ALIGN,
           yAlign: CELLS_Y_ALIGN
         } ),
