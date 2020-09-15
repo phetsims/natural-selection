@@ -69,7 +69,7 @@ class Wolf extends Organism {
     assert && assert( !this.isDisposed, 'wolf is already disposed' );
     super.dispose();
     this.disposedEmitter.emit();
-    this.disposedEmitter.dispose(); //REVIEW: why dispose this emitter? and its usage in OrganismSprites removes the listener when triggered. Just a sanity check?
+    this.disposedEmitter.dispose();
   }
 
   /**
