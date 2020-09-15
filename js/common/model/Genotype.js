@@ -142,17 +142,15 @@ class Genotype extends PhetioObject {
   }
 
   /**
-   * Converts a Genotype to its abbreviation, e.g. 'FfEEtt'.
+   * Converts a Genotype to its untranslated abbreviation, e.g. 'FfEEtt'.
    * This is intended for debugging only. Do not rely on the format!
-   * @param {boolean} translated - true = translated (default), false = not translated
    * @returns {string}
-   * REVIEW: Curious about why we're handling untranslated abbreviations, is it for phet-io? I never see this called with an option here
    * @public
    */
-  toAbbreviation( translated = true ) {
-    return this.furGenePair.getGenotypeAbbreviation( translated ) +
-           this.earsGenePair.getGenotypeAbbreviation( translated ) +
-           this.teethGenePair.getGenotypeAbbreviation( translated );
+  toAbbreviation() {
+    return this.furGenePair.getGenotypeAbbreviation( false ) +
+           this.earsGenePair.getGenotypeAbbreviation( false ) +
+           this.teethGenePair.getGenotypeAbbreviation( false );
   }
 
   /**
