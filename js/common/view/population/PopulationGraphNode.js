@@ -76,9 +76,6 @@ class PopulationGraphNode extends Node {
     // Population (y-axis) zoom buttons
     const yZoomButtonGroup = new ZoomButtonGroup( populationModel.yZoomLevelProperty, {
       orientation: 'vertical',
-      //REVIEW: where are zoomLevelMin/Max used/defined? I can't find the reference
-      zoomLevelMin: populationModel.yZoomLevelProperty.range.min,
-      zoomLevelMax: populationModel.yZoomLevelProperty.range.max,
       touchAreaXDilation: 7,
       touchAreaYDilation: 4,
       left: boundsRectangle.left,
