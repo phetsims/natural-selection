@@ -14,7 +14,6 @@ class Shrub extends Organism {
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
    * @param {Object} [options]
-   * REVIEW: Is it best to get rid of constructors that are no-op pass-through? I wouldn't have included this.
    */
   constructor( modelViewTransform, options ) {
     super( modelViewTransform, options );
