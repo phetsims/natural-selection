@@ -2,8 +2,9 @@
 
 /**
  * Parses and validates the values of query parameters that describe the mutations, genotypes, and distribution
- * of the initial population. See NaturalSelectionQueryParameters for the format of the values that are being parsed.
- * See https://github.com/phetsims/natural-selection/issues/9 for design specification and history.
+ * of the initial population. See NaturalSelectionQueryParameters (labMutations, labPopulation) for details about
+ * the values that are being parsed. See https://github.com/phetsims/natural-selection/issues/9 for design history
+ * and insight on how this feature evolved.
  * REVIEW: Having the finalized spec in the code here would be helpful.
  *
  * Responsibilities:
