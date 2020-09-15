@@ -74,7 +74,7 @@ class BunnyCollection {
       tandem: options.tandem.createTandem( 'deadBunnies' )
     } );
 
-    // @private {Bunny[]} Recessive mutants, to be mated eagerly so that their mutation appears in the phenotype as
+    // @private {BunnyArray} Recessive mutants, to be mated eagerly so that their mutation appears in the phenotype as
     // soon as possible. Mutants are added to this array when born, and removed as soon as they have mated with
     // another bunny that has the same mutant allele. See also the 'Recessive Mutants' section of model.md at
     // https://github.com/phetsims/natural-selection/blob/master/doc/model.md#recessive-mutants.

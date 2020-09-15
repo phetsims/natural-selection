@@ -125,6 +125,9 @@ class PedigreeBunnyNode extends Node {
       if ( bunny.diedEmitter.hasListener( addRedCrossMark ) ) {
         bunny.diedEmitter.removeListener( addRedCrossMark );
       }
+
+      // Un-parent the bunnyNode from the shared DAG
+      bunnyNode.dispose();
     };
 
     // If logging is enabled, pressing on a bunny logs its details to the console.
