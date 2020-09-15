@@ -27,19 +27,13 @@ class GenePool {
     }, options );
 
     // @public (read-only) {Gene}
-    this.furGene = Gene.createFurGene( {
-      tandem: options.tandem.createTandem( 'furGene' )
-    } );
+    this.furGene = Gene.createFurGene( options.tandem.createTandem( 'furGene' ) );
 
     // @public (read-only) {Gene}
-    this.earsGene = Gene.createEarsGene( {
-      tandem: options.tandem.createTandem( 'earsGene' )
-    } );
+    this.earsGene = Gene.createEarsGene( options.tandem.createTandem( 'earsGene' ) );
 
     // @public (read-only) {Gene}
-    this.teethGene = Gene.createTeethGene( {
-      tandem: options.tandem.createTandem( 'teethGene' )
-    } );
+    this.teethGene = Gene.createTeethGene( options.tandem.createTandem( 'teethGene' ) );
 
     // @public (read-only) {Gene[]} for situations where it's possible to iterate over genes
     // When we're able to iterate to create the UI, the order here determines the order of UI components.
