@@ -139,7 +139,7 @@ class GenerationClock extends PhetioObject {
   stepTime( dt ) {
 
     const nextTime = this.timeInSecondsProperty.value + dt;
-    const nextGeneration = secondsToGenerations( nextTime );
+    const nextGeneration = Math.floor( secondsToGenerations( nextTime ) ); // integer
 
     if ( nextGeneration > this.clockGenerationProperty.value ) {
       // snap to 12:00
@@ -171,16 +171,21 @@ class GenerationClock extends PhetioObject {
  * @returns {number} time, in decimal number of generations
  */
 function secondsToGenerations( seconds ) {
-  if ( seconds === 0 ) {
-    return 0;
-  }
-  else {
+  let generations = 0;
+  if ( seconds > 0 ) {
 
-    // Add a small value here to compensate for floating-point error in division. For example
-    // 8.6 seconds / 0.2 secondsPerGeneration should be 43 generations, but JavaScript evaluates
-    // to 42.99999999999999. See https://github.com/phetsims/natural-selection/issues/165
-    return ( seconds / SECONDS_PER_GENERATION ) + 0.0001;
+    generations = ( seconds / SECONDS_PER_GENERATION );
+
+    // If generations is not an integer, add a small value here to compensate for floating-point error in division.
+    // This ensures that we move forward and don't get stuck at certain generation values.
+    // For example 8.6 seconds / 0.2 secondsPerGeneration should be 43 generations, but JavaScript evaluates
+    // to 42.99999999999999. See https://github.com/phetsims/natural-selection/issues/165 and
+    // https://github.com/phetsims/natural-selection/issues/230.
+    if ( generations % 1 !== 0 ) {
+      generations += 0.0001;
+    }
   }
+  return generations;
 }
 
 naturalSelection.register( 'GenerationClock', GenerationClock );
