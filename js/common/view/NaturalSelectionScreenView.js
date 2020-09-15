@@ -319,7 +319,7 @@ class NaturalSelectionScreenView extends ScreenView {
     this.model = model;
     this.environmentNode = environmentNode; // {EnvironmentNode}
 
-    /* eslint-disable no-new */
+    // eslint-disable-next-line no-new
     new GenesVisibilityManager( model.genePool, addMutationsPanel, populationNode, proportionsNode, pedigreeNode, {
       furVisible: options.furVisible,
       earsVisible: options.earsVisible,
