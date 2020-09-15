@@ -3,7 +3,9 @@
 /**
  * SelectedBunnyProperty is the Property used for the selected bunny in the Pedigree model.
  * A null value indicates that there is no selection.
- * REVIEW: Does this subtype exist mainly for assertions of type checking?
+ *
+ * This class exists mainly to hide some PhET-iO details, and to simplify type checking when it's passed around
+ * as an argument to other methods.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
