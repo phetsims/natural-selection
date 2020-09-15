@@ -133,7 +133,6 @@ class Phenotype extends PhetioObject {
  * The methods that it implements are typical of 'Dynamic element serialization', as described in
  * the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
- * REVIEW: Is there really this much boilerplate required for simple serialization?
  */
 class PhenotypeIO extends ObjectIO {
 
