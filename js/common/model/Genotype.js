@@ -146,6 +146,7 @@ class Genotype extends PhetioObject {
    * This is intended for debugging only. Do not rely on the format!
    * @param {boolean} translated - true = translated (default), false = not translated
    * @returns {string}
+   * REVIEW: Curious about why we're handling untranslated abbreviations, is it for phet-io? I never see this called with an option here
    * @public
    */
   toAbbreviation( translated = true ) {

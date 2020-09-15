@@ -41,7 +41,7 @@ class Organism extends PhetioObject {
 
     super( options );
 
-    // @public (read-only)
+    // @public (read-only) {EnvironmentModelViewTransform}
     this.modelViewTransform = modelViewTransform;
 
     // @public {Property.<Vector3>}

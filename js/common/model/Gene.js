@@ -38,6 +38,10 @@ import Allele from './Allele.js';
 class Gene extends PhetioObject {
 
   /**
+   * REVIEW: Curious about the large number of parameters, presumably we'd usually use a `config` parameter with named
+   * REVIEW: required fields for this?
+   *
+   * REVIEW: Also, should we mark the constructor as private, if we're only using the static factory methods?
    * @param {string} name - the name of the gene, visible in the UI
    * @param {string} tandemPrefix - prefix used for tandem names for the gene, like 'fur' for 'furCheckbox'
    * @param {Allele} normalAllele - the standard 'normal' or 'wild type' variant of the gene
