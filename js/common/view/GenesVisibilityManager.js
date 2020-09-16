@@ -69,6 +69,7 @@ class GenesVisibilityManager {
         pedigreeNode.setGeneVisible( gene, visible );
       } );
 
+      //REVIEW: Used to use the returned Property?
       return property;
     }
 

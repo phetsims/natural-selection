@@ -242,6 +242,7 @@ class NaturalSelectionScreenView extends ScreenView {
 
     // Simulation mode determines which UI controls are enabled. unlink is not necessary.
     model.simulationModeProperty.link( simulationMode => {
+      //REVIEW: Is the commonality not factored out for a reason?
       if ( simulationMode === SimulationMode.STAGED ) {
         addMutationsPanel.setContentEnabled( true );
         environmentalFactorsPanel.setContentEnabled( true );
