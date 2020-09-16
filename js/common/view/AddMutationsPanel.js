@@ -64,6 +64,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     const buttonColumnsAlignGroup = new AlignGroup();
 
     // title is text + icon
+    //REVIEW: Not sure what the docs "text + icon" mean? Don't see the icon as a child here, or grouped under something named title.
     const titleNode = new Text( naturalSelectionStrings.addMutations, {
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 180, // determined empirically

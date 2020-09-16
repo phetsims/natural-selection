@@ -296,6 +296,7 @@ class XTickLabels extends Node {
       for ( let i = 0; i < numberOfLabels; i++ ) {
         const labelNode = labelNodes[ i ];
         const xModel = xOffsetModel + ( i * options.xSpacingModel );
+        //REVIEW: `labelNode.visible = xRange.contains( xModel )` might be more concise?`
         labelNode.visible = ( xModel >= xRange.min && xModel <= xRange.max );
         if ( labelNode.visible ) {
           labelNode.text = xModel;
