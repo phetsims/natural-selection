@@ -1,6 +1,12 @@
 /* eslint-disable */
 window.phet.preloads.phetio.phetioElementsOverrides =
 {
+  "naturalSelection.introScreen.model.bunnyCollection.allBunniesHaveDiedEmitter": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.introScreen.model.bunnyCollection.bunniesHaveTakenOverTheWorldEmitter": {
+    "phetioFeatured": true
+  },
   "naturalSelection.introScreen.model.bunnyCollection.bunnyGroup.archetype.genotype.abbreviationProperty": {
     "phetioFeatured": true
   },
@@ -19,10 +25,25 @@ window.phet.preloads.phetio.phetioElementsOverrides =
   "naturalSelection.introScreen.model.food.isLimitedProperty": {
     "phetioFeatured": true
   },
+  "naturalSelection.introScreen.model.food.isToughProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.introScreen.model.genePool.earsGene.dominantAlleleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.introScreen.model.genePool.earsGene.recessiveAlleleProperty": {
+    "phetioFeatured": true
+  },
   "naturalSelection.introScreen.model.genePool.furGene.dominantAlleleProperty": {
     "phetioFeatured": true
   },
   "naturalSelection.introScreen.model.genePool.furGene.recessiveAlleleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.introScreen.model.genePool.teethGene.dominantAlleleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.introScreen.model.genePool.teethGene.recessiveAlleleProperty": {
     "phetioFeatured": true
   },
   "naturalSelection.introScreen.model.generationClock.isRunningProperty": {
@@ -76,13 +97,22 @@ window.phet.preloads.phetio.phetioElementsOverrides =
   "naturalSelection.introScreen.model.isPlayingProperty": {
     "phetioFeatured": true
   },
+  "naturalSelection.introScreen.model.memoryLimitEmitter": {
+    "phetioFeatured": true
+  },
   "naturalSelection.introScreen.model.timeSpeedProperty": {
     "phetioFeatured": true
   },
   "naturalSelection.introScreen.model.wolfCollection.enabledProperty": {
     "phetioFeatured": true
   },
+  "naturalSelection.introScreen.view.addMutationsPanel.earsRow.visibleProperty": {
+    "phetioFeatured": true
+  },
   "naturalSelection.introScreen.view.addMutationsPanel.furRow.visibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.introScreen.view.addMutationsPanel.teethRow.visibleProperty": {
     "phetioFeatured": true
   },
   "naturalSelection.introScreen.view.environmentalFactorsPanel.titleNode.textProperty": {
@@ -97,13 +127,25 @@ window.phet.preloads.phetio.phetioElementsOverrides =
   "naturalSelection.introScreen.view.generationClockNode.visibleProperty": {
     "phetioFeatured": true
   },
+  "naturalSelection.introScreen.view.genes.earsVisibleProperty": {
+    "phetioFeatured": true
+  },
   "naturalSelection.introScreen.view.genes.furVisibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.introScreen.view.genes.teethVisibleProperty": {
     "phetioFeatured": true
   },
   "naturalSelection.introScreen.view.graphs.graphChoiceProperty": {
     "phetioFeatured": true
   },
+  "naturalSelection.introScreen.view.graphs.pedigreeNode.allelesPanel.earsRow.visibleProperty": {
+    "phetioFeatured": true
+  },
   "naturalSelection.introScreen.view.graphs.pedigreeNode.allelesPanel.furRow.visibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.introScreen.view.graphs.pedigreeNode.allelesPanel.teethRow.visibleProperty": {
     "phetioFeatured": true
   },
   "naturalSelection.introScreen.view.graphs.pedigreeNode.allelesPanel.titleNode.textProperty": {
@@ -124,7 +166,13 @@ window.phet.preloads.phetio.phetioElementsOverrides =
   "naturalSelection.introScreen.view.graphs.populationNode.populationPanel.visibleProperty": {
     "phetioFeatured": true
   },
+  "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsGraphNode.earsColumn.visibleProperty": {
+    "phetioFeatured": true
+  },
   "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsGraphNode.furColumn.visibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsGraphNode.teethColumn.visibleProperty": {
     "phetioFeatured": true
   },
   "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.furLegendNode.visibleProperty": {
@@ -164,6 +212,12 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "phetioFeatured": true
   },
   "naturalSelection.introScreen.view.visibleProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.model.bunnyCollection.allBunniesHaveDiedEmitter": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.model.bunnyCollection.bunniesHaveTakenOverTheWorldEmitter": {
     "phetioFeatured": true
   },
   "naturalSelection.labScreen.model.bunnyCollection.bunnyGroup.archetype.genotype.abbreviationProperty": {
@@ -293,6 +347,9 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "phetioFeatured": true
   },
   "naturalSelection.labScreen.model.isPlayingProperty": {
+    "phetioFeatured": true
+  },
+  "naturalSelection.labScreen.model.memoryLimitEmitter": {
     "phetioFeatured": true
   },
   "naturalSelection.labScreen.model.timeSpeedProperty": {
