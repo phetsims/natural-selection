@@ -9,7 +9,6 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
@@ -104,7 +103,7 @@ class Genotype extends PhetioObject {
                this.teethGenePair.getGenotypeAbbreviation();
       }, {
         tandem: options.tandem.createTandem( 'abbreviationProperty' ),
-        phetioType: DerivedPropertyIO( StringIO ),
+        phetioType: DerivedProperty.DerivedPropertyIO( StringIO ),
         phetioDocumentation: 'the abbreviation that describes the genotype, the empty string if there are no dominant alleles'
       } );
 

@@ -8,7 +8,6 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Range from '../../../../dot/js/Range.js';
 import RangeIO from '../../../../dot/js/RangeIO.js';
@@ -101,7 +100,7 @@ class BunnyCollection {
         }
       }, {
         tandem: options.tandem.createTandem( 'bunnyRestRangeProperty' ),
-        phetioType: DerivedPropertyIO( RangeIO ),
+        phetioType: DerivedProperty.DerivedPropertyIO( RangeIO ),
         phetioDocumentation: 'for internal PhET use only'
       } );
 

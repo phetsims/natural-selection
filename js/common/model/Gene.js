@@ -20,7 +20,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import Property from '../../../../axon/js/Property.js';
 import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -127,7 +126,7 @@ class Gene extends PhetioObject {
       }, {
         validValues: [ null, this.normalAllele, this.mutantAllele ],
         tandem: config.tandem.createTandem( 'recessiveAlleleProperty' ),
-        phetioType: DerivedPropertyIO( NullableIO( Allele.AlleleIO ) )
+        phetioType: DerivedProperty.DerivedPropertyIO( NullableIO( Allele.AlleleIO ) )
       } );
 
     // @public is a mutation coming in the next generation of bunnies?

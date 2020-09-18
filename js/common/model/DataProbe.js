@@ -9,7 +9,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -57,7 +56,7 @@ class DataProbe extends PhetioObject {
       [ populationModel.xRangeProperty, this.offsetProperty ],
       ( xRange, offset ) => xRange.min + offset.x, {
         tandem: options.tandem.createTandem( 'dataProbeGenerationProperty' ),
-        phetioType: DerivedPropertyIO( NumberIO ),
+        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO ),
         phetioDocumentation: 'the generation (x-axis) value where the data probe is positioned (decimal)'
       } );
 
@@ -65,7 +64,7 @@ class DataProbe extends PhetioObject {
     this.countsProperty = new DerivedProperty( [ this.dataProbeGenerationProperty, populationModel.timeInGenerationsProperty ],
       ( dataProbeGeneration, timeInGenerations ) => this.getCounts( dataProbeGeneration, timeInGenerations ), {
         tandem: options.tandem.createTandem( 'countsProperty' ),
-        phetioType: DerivedPropertyIO( NullableIO( BunnyCounts.BunnyCountsIO ) ),
+        phetioType: DerivedProperty.DerivedPropertyIO( NullableIO( BunnyCounts.BunnyCountsIO ) ),
         phetioDocumentation: 'counts displayed by the data probe'
       } );
 

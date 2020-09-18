@@ -8,7 +8,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import ObservableArrayIO from '../../../../axon/js/ObservableArrayIO.js';
@@ -175,7 +174,7 @@ class PopulationModel extends PhetioObject {
       yZoomLevel => new Range( Y_MINIMUM, Y_MAXIMUMS[ yZoomLevel ] ), {
         isValidValue: yRange => ( yRange.min >= 0 ),
         tandem: options.tandem.createTandem( 'yRangeProperty' ),
-        phetioType: DerivedPropertyIO( RangeIO ),
+        phetioType: DerivedProperty.DerivedPropertyIO( RangeIO ),
         phetioDocumentation: 'range of the y (Population) axis'
       } );
 

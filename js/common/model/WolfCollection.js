@@ -9,7 +9,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -81,7 +80,7 @@ class WolfCollection {
       [ this.enabledProperty, generationClock.timeInPercentProperty ],
       ( enabled, timeInPercent ) => ( enabled && NaturalSelectionConstants.CLOCK_WOLVES_RANGE.contains( timeInPercent ) ), {
         tandem: options.tandem.createTandem( 'isHuntingProperty' ),
-        phetioType: DerivedPropertyIO( BooleanIO ),
+        phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO ),
         phetioDocumentation: 'for internal PhET use only'
       } );
 
