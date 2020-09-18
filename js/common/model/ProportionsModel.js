@@ -10,7 +10,6 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
-import ObservableArrayIO from '../../../../axon/js/ObservableArrayIO.js';
 import Property from '../../../../axon/js/Property.js';
 import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Range from '../../../../dot/js/Range.js';
@@ -97,7 +96,7 @@ class ProportionsModel extends PhetioObject {
 
     const previousCounts = new ObservableArray( {
       tandem: options.tandem.createTandem( 'previousCounts' ),
-      phetioType: ObservableArrayIO( ProportionsCounts.ProportionsCountsIO ),
+      phetioType: ObservableArray.ObservableArrayIO( ProportionsCounts.ProportionsCountsIO ),
       phetioDocumentation: 'Start and End counts for previous generations, indexed by generation number'
     } );
 

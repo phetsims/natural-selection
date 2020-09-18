@@ -7,7 +7,6 @@
  */
 
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
-import ObservableArrayIO from '../../../../axon/js/ObservableArrayIO.js';
 import Property from '../../../../axon/js/Property.js';
 import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -28,7 +27,7 @@ class BunnyArray extends ObservableArray {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: ObservableArrayIO( ReferenceIO( Bunny.BunnyIO ) ),
+      phetioType: ObservableArray.ObservableArrayIO( ReferenceIO( Bunny.BunnyIO ) ),
       phetioState: false
     }, options );
 

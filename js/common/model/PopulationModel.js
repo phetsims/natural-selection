@@ -10,7 +10,6 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
-import ObservableArrayIO from '../../../../axon/js/ObservableArrayIO.js';
 import Property from '../../../../axon/js/Property.js';
 import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Range from '../../../../dot/js/Range.js';
@@ -90,37 +89,37 @@ class PopulationModel extends PhetioObject {
     // Vector2.x = generation, Vector2.y = population
     this.totalPoints = new ObservableArray( {
       tandem: dataPointsTandem.createTandem( 'totalPoints' ),
-      phetioType: ObservableArrayIO( Vector2IO ),
+      phetioType: ObservableArray.ObservableArrayIO( Vector2IO ),
       phetioDocumentation: 'Population data points for all bunnies'
     } );
     this.whiteFurPoints = new ObservableArray( {
       tandem: dataPointsTandem.createTandem( 'whiteFurPoints' ),
-      phetioType: ObservableArrayIO( Vector2IO ),
+      phetioType: ObservableArray.ObservableArrayIO( Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with white fur'
     } );
     this.brownFurPoints = new ObservableArray( {
       tandem: dataPointsTandem.createTandem( 'brownFurPoints' ),
-      phetioType: ObservableArrayIO( Vector2IO ),
+      phetioType: ObservableArray.ObservableArrayIO( Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with brown fur'
     } );
     this.straightEarsPoints = new ObservableArray( {
       tandem: dataPointsTandem.createTandem( 'straightEarsPoints' ),
-      phetioType: ObservableArrayIO( Vector2IO ),
+      phetioType: ObservableArray.ObservableArrayIO( Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with straight ears'
     } );
     this.floppyEarsPoints = new ObservableArray( {
       tandem: dataPointsTandem.createTandem( 'floppyEarsPoints' ),
-      phetioType: ObservableArrayIO( Vector2IO ),
+      phetioType: ObservableArray.ObservableArrayIO( Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with floppy ears'
     } );
     this.shortTeethPoints = new ObservableArray( {
       tandem: dataPointsTandem.createTandem( 'shortTeethPoints' ),
-      phetioType: ObservableArrayIO( Vector2IO ),
+      phetioType: ObservableArray.ObservableArrayIO( Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with short teeth'
     } );
     this.longTeethPoints = new ObservableArray( {
       tandem: dataPointsTandem.createTandem( 'longTeethPoints' ),
-      phetioType: ObservableArrayIO( Vector2IO ),
+      phetioType: ObservableArray.ObservableArrayIO( Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with long teeth'
     } );
 
