@@ -28,8 +28,8 @@ import required from '../../../../phet-core/js/required.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
-import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
@@ -231,13 +231,12 @@ class Gene extends PhetioObject {
  * GeneIO handles PhET-iO serialization of Gene. It implements 'Reference type serialization',
  * as described in the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
+ * @public
  */
-class GeneIO extends ReferenceIO( ObjectIO ) {}
-
-ObjectIO.setIOTypeFields( GeneIO, 'GeneIO', Gene );
-
-// @public
-Gene.GeneIO = GeneIO;
+Gene.GeneIO = new IOType( 'GeneIO', {
+  valueType: Gene,
+  supertype: ReferenceIO( IOType.ObjectIO )
+} );
 
 naturalSelection.register( 'Gene', Gene );
 export default Gene;

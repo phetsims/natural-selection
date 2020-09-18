@@ -9,8 +9,8 @@
  */
 
 import required from '../../../../phet-core/js/required.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
@@ -171,37 +171,13 @@ class BunnyCounts {
  * The methods that BunnyCountsIO implements are typical of 'Data type serialization', as described in
  * the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
+ * @public
  */
-class BunnyCountsIO extends ObjectIO {
-
-  /**
-   * Serializes this BunnyCounts instance.
-   * @param {BunnyCounts} bunnyCounts
-   * @returns {Object}
-   * @public
-   * @override
-   */
-  static toStateObject( bunnyCounts ) {
-    assert && assert( bunnyCounts instanceof BunnyCounts, 'invalid bunnyCounts' );
-    return bunnyCounts.toStateObject();
-  }
-
-  /**
-   * Deserializes a BunnyCounts instance.
-   * @param {Object} stateObject
-   * @returns {BunnyCounts}
-   * @public
-   * @override
-   */
-  static fromStateObject( stateObject ) {
-    return BunnyCounts.fromStateObject( stateObject );
-  }
-}
-
-ObjectIO.setIOTypeFields( BunnyCountsIO, 'BunnyCountsIO', BunnyCounts );
-
-// @public
-BunnyCounts.BunnyCountsIO = BunnyCountsIO;
+BunnyCounts.BunnyCountsIO = new IOType( 'BunnyCountsIO', {
+  valueType: BunnyCounts,
+  toStateObject: bunnyCounts => bunnyCounts.toStateObject(),
+  fromStateObject: BunnyCounts.fromStateObject
+} );
 
 naturalSelection.register( 'BunnyCounts', BunnyCounts );
 export default BunnyCounts;

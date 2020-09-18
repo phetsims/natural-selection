@@ -15,7 +15,7 @@
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import brownFurImage from '../../../images/brownFur_png.js';
 import floppyEarsImage from '../../../images/floppyEars_png.js';
@@ -72,12 +72,11 @@ class Allele extends PhetioObject {
  * as described in the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
  */
-class AlleleIO extends ReferenceIO( ObjectIO ) {}
-
-ObjectIO.setIOTypeFields( AlleleIO, 'AlleleIO', Allele );
-
 // @public
-Allele.AlleleIO = AlleleIO;
+Allele.AlleleIO = new IOType( 'AlleleIO', {
+  valueType: Allele,
+  supertype: ReferenceIO( IOType.ObjectIO )
+} );
 
 // Static instances
 

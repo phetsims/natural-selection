@@ -14,8 +14,8 @@ import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
-import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
@@ -197,37 +197,13 @@ class Genotype extends PhetioObject {
  * The methods that it implements are typical of 'Dynamic element serialization', as described in
  * the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
+ * @public
  */
-class GenotypeIO extends ObjectIO {
-
-  /**
-   * Serializes a Genotype instance.
-   * @param {Genotype} genotype
-   * @returns {Object}
-   * @public
-   * @override
-   */
-  static toStateObject( genotype ) {
-    assert && assert( genotype instanceof Genotype, 'invalid genotype' );
-    return genotype.toStateObject();
-  }
-
-  /**
-   * Restores Genotype stateObject after instantiation.
-   * @param {Genotype} genotype
-   * @param {Object} stateObject
-   * @public
-   */
-  static applyState( genotype, stateObject ) {
-    assert && assert( genotype instanceof Genotype, 'invalid genotype' );
-    genotype.applyState( stateObject );
-  }
-}
-
-ObjectIO.setIOTypeFields( GenotypeIO, 'GenotypeIO', Genotype );
-
-// @public
-Genotype.GenotypeIO = GenotypeIO;
+Genotype.GenotypeIO = new IOType( 'GenotypeIO', {
+  valueType: Genotype,
+  toStateObject: genotype => genotype.toStateObject(),
+  applyState: ( genotype, stateObject ) => genotype.applyState( stateObject )
+} );
 
 naturalSelection.register( 'Genotype', Genotype );
 export default Genotype;

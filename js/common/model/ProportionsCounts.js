@@ -7,8 +7,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
@@ -69,37 +69,13 @@ class ProportionsCounts {
  * The methods that ProportionsCountsIO implements are typical of 'Data type serialization', as described in
  * the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
+ * @public
  */
-class ProportionsCountsIO extends ObjectIO {
-
-  /**
-   * Serializes a ProportionsCounts instance.
-   * @param {ProportionsCounts} proportionsCounts
-   * @returns {Object}
-   * @public
-   * @override
-   */
-  static toStateObject( proportionsCounts ) {
-    assert && assert( proportionsCounts instanceof ProportionsCounts, 'invalid proportionsCounts' );
-    return proportionsCounts.toStateObject();
-  }
-
-  /**
-   * Deserializes a ProportionsCounts instance.
-   * @param {Object} stateObject
-   * @returns {ProportionsCounts}
-   * @public
-   * @override
-   */
-  static fromStateObject( stateObject ) {
-    return ProportionsCounts.fromStateObject( stateObject );
-  }
-}
-
-ObjectIO.setIOTypeFields( ProportionsCountsIO, 'ProportionsCountsIO', ProportionsCounts );
-
-// @public
-ProportionsCounts.ProportionsCountsIO = ProportionsCountsIO;
+ProportionsCounts.ProportionsCountsIO = new IOType( 'ProportionsCountsIO', {
+  valueType: ProportionsCounts,
+  toStateObject: proportionsCounts => proportionsCounts.toStateObject(),
+  fromStateObject: ProportionsCounts.fromStateObject
+} );
 
 naturalSelection.register( 'ProportionsCounts', ProportionsCounts );
 export default ProportionsCounts;

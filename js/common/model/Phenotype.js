@@ -12,7 +12,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
 import Genotype from './Genotype.js';
@@ -133,38 +133,14 @@ class Phenotype extends PhetioObject {
  * The methods that it implements are typical of 'Dynamic element serialization', as described in
  * the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
+ * @public
  */
-class PhenotypeIO extends ObjectIO {
-
-  /**
-   * Serializes a Phenotype instance.
-   * @param {Phenotype} phenotype
-   * @returns {Object}
-   * @public
-   * @override
-   */
-  static toStateObject( phenotype ) {
-    assert && assert( phenotype instanceof Phenotype, 'invalid phenotype' );
-    return phenotype.toStateObject();
-  }
-
-  /**
-   * Restores Phenotype state after instantiation.
-   * @param {Phenotype} phenotype
-   * @param {Object} stateObject
-   * @public
-   * @override
-   */
-  static applyState( phenotype, stateObject ) {
-    assert && assert( phenotype instanceof Phenotype, 'invalid phenotype' );
-    phenotype.applyState( stateObject );
-  }
-}
-
-ObjectIO.setIOTypeFields( PhenotypeIO, 'PhenotypeIO', Phenotype );
-
 // @public
-Phenotype.PhenotypeIO = PhenotypeIO;
+Phenotype.PhenotypeIO = new IOType( 'PhenotypeIO', {
+  valueType: Phenotype,
+  toStateObject: phenotype => phenotype.toStateObject(),
+  applyState: ( phenotype, stateObject ) => phenotype.applyState( stateObject )
+} );
 
 naturalSelection.register( 'Phenotype', Phenotype );
 export default Phenotype;

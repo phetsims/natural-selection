@@ -11,7 +11,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
 import Gene from './Gene.js';
@@ -178,38 +178,13 @@ class GenePair extends PhetioObject {
  * The methods that it implements are typical of 'Dynamic element serialization', as described in
  * the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
+ * @public
  */
-class GenePairIO extends ObjectIO {
-
-  /**
-   * Serializes a GenePair instance.
-   * @param {GenePair} genePair
-   * @returns {Object}
-   * @public
-   * @override
-   */
-  static toStateObject( genePair ) {
-    assert && assert( genePair instanceof GenePair, 'invalid genePair' );
-    return genePair.toStateObject();
-  }
-
-  /**
-   * Restores GenePair state after instantiation.
-   * @param {GenePair} genePair
-   * @param {Object} stateObject
-   * @public
-   * @override
-   */
-  static applyState( genePair, stateObject ) {
-    assert && assert( genePair instanceof GenePair, 'invalid genePair' );
-    genePair.applyState( stateObject );
-  }
-}
-
-ObjectIO.setIOTypeFields( GenePairIO, 'GenePairIO', GenePair );
-
-// @public
-GenePair.GenePairIO = GenePairIO;
+GenePair.GenePairIO = new IOType( 'GenePairIO', {
+  valueType: GenePair,
+  toStateObject: genePair => genePair.toStateObject(),
+  applyState: ( genePair, stateObject ) => genePair.applyState( stateObject )
+} );
 
 naturalSelection.register( 'GenePair', GenePair );
 export default GenePair;

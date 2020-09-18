@@ -12,8 +12,8 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -171,49 +171,14 @@ class Wolf extends Organism {
  * it delegates to Wolf. The methods that WolfIO overrides are typical of 'Dynamic element serialization',
  * as described in the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
+ * @public
  */
-class WolfIO extends ObjectIO {
-
-  /**
-   * Serializes a Wolf instance.
-   * @param {Wolf} wolf
-   * @returns {Object}
-   * @public
-   * @override
-   */
-  static toStateObject( wolf ) {
-    assert && assert( wolf instanceof Wolf, 'invalid wolf' );
-    return wolf.toStateObject();
-  }
-
-  /**
-   * Creates the args that WolfGroup uses to instantiate a Wolf.
-   * @param {*} state
-   * @returns {Object[]}
-   * @public
-   * @override
-   */
-  static stateToArgsForConstructor( state ) {
-    return Wolf.stateToArgsForConstructor( state );
-  }
-
-  /**
-   * Restores Wolf state after instantiation.
-   * @param {Wolf} wolf
-   * @param {Object} stateObject
-   * @public
-   * @override
-   */
-  static applyState( wolf, stateObject ) {
-    assert && assert( wolf instanceof Wolf, 'invalid wolf' );
-    wolf.applyState( stateObject );
-  }
-}
-
-ObjectIO.setIOTypeFields( WolfIO, 'WolfIO', Wolf );
-
-// @public
-Wolf.WolfIO = WolfIO;
+Wolf.WolfIO = new IOType( 'WolfIO', {
+  valueType: Wolf,
+  toStateObject: wolf => wolf.toStateObject(),
+  stateToArgsForConstructor: Wolf.stateToArgsForConstructor,
+  applyState: ( wolf, stateObject ) => wolf.applyState( stateObject )
+});
 
 naturalSelection.register( 'Wolf', Wolf );
 export default Wolf;
