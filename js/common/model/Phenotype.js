@@ -135,7 +135,6 @@ class Phenotype extends PhetioObject {
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
  * @public
  */
-// @public
 Phenotype.PhenotypeIO = new IOType( 'PhenotypeIO', {
   valueType: Phenotype,
   toStateObject: phenotype => phenotype.toStateObject(),
