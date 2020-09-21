@@ -178,7 +178,7 @@ Wolf.WolfIO = new IOType( 'WolfIO', {
   toStateObject: wolf => wolf.toStateObject(),
   stateToArgsForConstructor: Wolf.stateToArgsForConstructor,
   applyState: ( wolf, stateObject ) => wolf.applyState( stateObject )
-});
+} );
 
 naturalSelection.register( 'Wolf', Wolf );
 export default Wolf;
