@@ -78,20 +78,27 @@ class PlayButtonGroup extends Node {
     // Make at most 1 button visible. unlink is not necessary.
     simulationModeProperty.link( simulationMode => {
 
-        // start with all buttons hidden
-        addAMateButton.visible = false;
-        playButton.visible = false;
-        startOverButton.visible = false;
+      console.log( `simulationMode=${simulationMode} bunnyCount=${bunnyCountProperty.value}` );
 
-        if ( simulationMode === SimulationMode.STAGED ) {
+      // start with all buttons hidden
+      addAMateButton.visible = false;
+      playButton.visible = false;
+      startOverButton.visible = false;
 
-          // Show 'Add a Mate' or 'Play' button, depending on the size of the population.
-          // Make one of these buttons visible on the next frame, so that a double-click on the 'Start Over' button
+      if ( simulationMode === SimulationMode.STAGED ) {
+
+        // Show 'Add a Mate' or 'Play' button, depending on the size of the population.
+        // Make one of these buttons visible on the next frame, so that a double-click on the 'Start Over' button
           // doesn't fire the button that is made visible. See https://github.com/phetsims/natural-selection/issues/166
           const bunnyCount = bunnyCountProperty.value;
           stepTimer.runOnNextTick( () => {
-            addAMateButton.visible = ( bunnyCount === 1 );
-            playButton.visible = ( bunnyCount > 1 );
+
+            // Checking simulationModeProperty to make sure it hasn't changed again before this callback fires.
+            // See https://github.com/phetsims/natural-selection/issues/235
+            if ( simulationModeProperty.value === SimulationMode.STAGED ) {
+              addAMateButton.visible = ( bunnyCount === 1 );
+              playButton.visible = ( bunnyCount > 1 );
+            }
           } );
         }
         else if ( simulationMode === SimulationMode.ACTIVE ) {
