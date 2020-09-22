@@ -415,6 +415,9 @@ window.phet.preloads.phetio.phetioElementsOverrides =
   "naturalSelection.labScreen.view.graphs.populationNode.populationGraphNode.yAxisLabelNode.textProperty": {
     "phetioFeatured": true
   },
+  "naturalSelection.labScreen.view.graphs.populationNode.populationPanel.visibleProperty": {
+    "phetioFeatured": true
+  },
   "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsGraphNode.earsColumn.visibleProperty": {
     "phetioFeatured": true
   },
