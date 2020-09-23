@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.2.0-rc.1 Thu Sep 17 2020 12:57:14 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.2.0-rc.1 Wed Sep 23 2020 14:38:35 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "49aa67d01046326d85dcd8f265db91e8753038a1",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "1017350a465c0e5e13cf7581af56620d6eb771a1",
+    "sha": "2b1829eec358dda247fda0d58a4b00ec36a10c1f",
     "branch": "1.2"
   },
   "phet-core": {
