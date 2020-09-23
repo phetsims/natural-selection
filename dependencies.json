@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.2.0-rc.1 Wed Sep 23 2020 14:40:59 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.2.0-rc.1 Wed Sep 23 2020 14:43:10 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "49aa67d01046326d85dcd8f265db91e8753038a1",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "63d129a71d05bc4139fb60b7f2fba065944eee04",
+    "sha": "4cbda992470ced8bfa692fe6af0b91f743eb5e99",
     "branch": "1.2"
   },
   "phet-core": {
@@ -45,8 +45,8 @@
     "branch": "natural-selection-1.2"
   },
   "phet-io-wrappers": {
-    "sha": "24a0ec4fc33e462f02ec975505c558c141dcf969",
-    "branch": "HEAD"
+    "sha": "3a2564b201b023f8cddbb7f77d648a775cc27c8c",
+    "branch": "natural-selection-1.2"
   },
   "phetcommon": {
     "sha": "986ba566848325d6328df666372873c4cba18a7b",
