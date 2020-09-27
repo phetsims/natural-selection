@@ -240,30 +240,13 @@ class NaturalSelectionScreenView extends ScreenView {
       this.graphChoiceProperty.reset();
     };
 
-    // Simulation mode determines which UI controls are enabled. unlink is not necessary.
+    // Simulation mode determines which UI components are enabled. unlink is not necessary.
     model.simulationModeProperty.link( simulationMode => {
-      //REVIEW: Is the commonality not factored out for a reason?
-      if ( simulationMode === SimulationMode.STAGED ) {
-        addMutationsPanel.setContentEnabled( true );
-        environmentalFactorsPanel.setContentEnabled( true );
-        timeControlNode.enabledProperty.value = true;
-        environmentRadioButtonGroup.enabledProperty.value = true;
-      }
-      else if ( simulationMode === SimulationMode.ACTIVE ) {
-        addMutationsPanel.setContentEnabled( true );
-        environmentalFactorsPanel.setContentEnabled( true );
-        timeControlNode.enabledProperty.value = true;
-        environmentRadioButtonGroup.enabledProperty.value = true;
-      }
-      else if ( simulationMode === SimulationMode.COMPLETED ) {
-        addMutationsPanel.setContentEnabled( false );
-        environmentalFactorsPanel.setContentEnabled( false );
-        timeControlNode.enabledProperty.value = false;
-        environmentRadioButtonGroup.enabledProperty.value = false;
-      }
-      else {
-        throw new Error( `invalid simulationMode: ${simulationMode}` );
-      }
+      const enabled = ( simulationMode !== SimulationMode.COMPLETED );
+      addMutationsPanel.setContentEnabled( enabled );
+      environmentalFactorsPanel.setContentEnabled( enabled );
+      timeControlNode.enabledProperty.value = enabled;
+      environmentRadioButtonGroup.enabledProperty.value = enabled;
     } );
 
     // Stuff to do when the simulation needs to be ended.
