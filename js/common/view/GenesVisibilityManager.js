@@ -52,12 +52,13 @@ class GenesVisibilityManager {
      * Creates a Property that controls the visibility of all UI components related to a gene.
      * @param {Gene} gene
      * @param {boolean} visible
+     * @param {Tandem} tandem
      * @returns {BooleanProperty}
      */
-    function createGeneVisibleProperty( gene, visible ) {
+    function createGeneVisibleProperty( gene, visible, tandem ) {
 
       const property = new BooleanProperty( visible, {
-        tandem: options.tandem.createTandem( `${gene.tandemPrefix}VisibleProperty` ),
+        tandem: tandem,
         phetioDocumentation: `sets the visibility of all user-interface components related to ${gene.name} for this screen`
       } );
 
@@ -69,15 +70,16 @@ class GenesVisibilityManager {
         pedigreeNode.setGeneVisible( gene, visible );
       } );
 
-      //REVIEW: Used to use the returned Property?
       return property;
     }
 
-    // These Properties are used by PhET-iO only, to configure the UI in Studio. They exist for the lifetime of the sim.
-    // They won't be GC'ed because they are registered with PhET-iO, so we don't need a reference to them here.
-    createGeneVisibleProperty( genePool.furGene, options.furVisible );
-    createGeneVisibleProperty( genePool.earsGene, options.earsVisible );
-    createGeneVisibleProperty( genePool.teethGene, options.teethVisible );
+    // @private Properties used configure the UI. For use in Studio only, and exist for the lifetime of the sim.
+    this.furVisibleProperty = createGeneVisibleProperty( genePool.furGene, options.furVisible,
+      options.tandem.createTandem( 'furVisibleProperty' ) );
+    this.earsVisibleProperty = createGeneVisibleProperty( genePool.earsGene, options.earsVisible,
+      options.tandem.createTandem( 'earsVisibleProperty' ) );
+    this.teethVisibleProperty = createGeneVisibleProperty( genePool.teethGene, options.teethVisible,
+      options.tandem.createTandem( 'teethVisibleProperty' ) );
   }
 
   /**
