@@ -27,7 +27,6 @@ simLauncher.launch( () => {
     // See https://github.com/phetsims/natural-selection/issues/128
     webgl: true,
 
-    //TODO https://github.com/phetsims/natural-selection/issues/2 complete the credits
     credits: {
       leadDesign: 'Amanda McGarry',
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
