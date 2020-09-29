@@ -9,7 +9,6 @@
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
-import Vector3IO from '../../../../dot/js/Vector3IO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -46,7 +45,7 @@ class Organism extends PhetioObject {
     // @public {Property.<Vector3>}
     this.positionProperty = new Property( options.position, {
       tandem: options.tandem.createTandem( 'positionProperty' ),
-      phetioType: Property.PropertyIO( Vector3IO ),
+      phetioType: Property.PropertyIO( Vector3.Vector3IO ),
       phetioReadOnly: true,
       phetioDocumentation: 'position in the 3D model coordinate frame'
     } );

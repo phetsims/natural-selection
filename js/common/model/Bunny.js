@@ -11,7 +11,6 @@
 import Emitter from '../../../../axon/js/Emitter.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
-import Vector3IO from '../../../../dot/js/Vector3IO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
@@ -357,7 +356,7 @@ class Bunny extends Organism {
         hopTime: NumberIO.toStateObject( this.hopTime ),
         cumulativeRestTime: NumberIO.toStateObject( this.cumulativeRestTime ),
         cumulativeHopTime: NumberIO.toStateObject( this.cumulativeHopTime ),
-        hopDelta: NullableIO( Vector3IO ).toStateObject( this.hopDelta )
+        hopDelta: NullableIO( Vector3.Vector3IO ).toStateObject( this.hopDelta )
       }
     };
   }
@@ -396,7 +395,7 @@ class Bunny extends Organism {
     this.hopTime = required( NumberIO.fromStateObject( stateObject.private.hopTime ) );
     this.cumulativeRestTime = required( NumberIO.fromStateObject( stateObject.private.cumulativeRestTime ) );
     this.cumulativeHopTime = required( NumberIO.fromStateObject( stateObject.private.cumulativeHopTime ) );
-    this.hopDelta = required( NullableIO( Vector3IO ).fromStateObject( stateObject.private.hopDelta ) );
+    this.hopDelta = required( NullableIO( Vector3.Vector3IO ).fromStateObject( stateObject.private.hopDelta ) );
 
     this.validateInstance();
   }
