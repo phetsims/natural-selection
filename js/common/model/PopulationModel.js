@@ -11,7 +11,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Range from '../../../../dot/js/Range.js';
 import RangeIO from '../../../../dot/js/RangeIO.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -153,7 +152,7 @@ class PopulationModel extends PhetioObject {
     this.xRangeProperty = new Property( new Range( 0, options.xAxisLength ), {
       isValidValue: xRange => ( xRange.min >= 0 ),
       tandem: options.tandem.createTandem( 'xRangeProperty' ),
-      phetioType: PropertyIO( RangeIO ),
+      phetioType: Property.PropertyIO( RangeIO ),
       phetioReadOnly: true, // range is dynamic, and changes on every clock tick
       phetioHighFrequency: true,
       phetioDocumentation: 'range of the x (Generation) axis'

@@ -11,7 +11,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
@@ -90,7 +89,7 @@ class ProportionsModel extends PhetioObject {
     // While in SimulationMode.ACTIVE it will always have a value.
     const currentStartCountsProperty = new Property( null, {
       tandem: options.tandem.createTandem( 'currentStartCountsProperty' ),
-      phetioType: PropertyIO( NullableIO( BunnyCounts.BunnyCountsIO ) ),
+      phetioType: Property.PropertyIO( NullableIO( BunnyCounts.BunnyCountsIO ) ),
       phetioDocumentation: 'Counts at the start of the current generation'
     } );
 

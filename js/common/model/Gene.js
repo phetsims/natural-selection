@@ -21,7 +21,6 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import Color from '../../../../scenery/js/util/Color.js';
@@ -108,7 +107,7 @@ class Gene extends PhetioObject {
     this.dominantAlleleProperty = new Property( null, {
       validValues: [ null, this.normalAllele, this.mutantAllele ],
       tandem: config.tandem.createTandem( 'dominantAlleleProperty' ),
-      phetioType: PropertyIO( NullableIO( Allele.AlleleIO ) ),
+      phetioType: Property.PropertyIO( NullableIO( Allele.AlleleIO ) ),
       phetioReadOnly: true
     } );
 

@@ -8,7 +8,6 @@
 
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
@@ -36,7 +35,7 @@ class BunnyArray extends ObservableArray {
     // @public (read-only) {Property.<BunnyCounts>}
     this.countsProperty = new Property( BunnyCounts.withZero(), {
       tandem: options.tandem.createTandem( 'countsProperty' ),
-      phetioType: PropertyIO( BunnyCounts.BunnyCountsIO ),
+      phetioType: Property.PropertyIO( BunnyCounts.BunnyCountsIO ),
       phetioState: false // because counts will be restored as Bunny instances are restored to BunnyGroup
     } );
 

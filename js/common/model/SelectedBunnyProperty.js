@@ -11,7 +11,6 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
@@ -33,7 +32,7 @@ class SelectedBunnyProperty extends Property {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: PropertyIO( NullableIO( ReferenceIO( Bunny.BunnyIO ) ) ),
+      phetioType: Property.PropertyIO( NullableIO( ReferenceIO( Bunny.BunnyIO ) ) ),
       phetioDocumentation: 'the selected bunny, null if no bunny is selected'
     }, options );
 
