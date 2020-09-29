@@ -12,7 +12,6 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
-import RangeIO from '../../../../dot/js/RangeIO.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2IO from '../../../../dot/js/Vector2IO.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -152,7 +151,7 @@ class PopulationModel extends PhetioObject {
     this.xRangeProperty = new Property( new Range( 0, options.xAxisLength ), {
       isValidValue: xRange => ( xRange.min >= 0 ),
       tandem: options.tandem.createTandem( 'xRangeProperty' ),
-      phetioType: Property.PropertyIO( RangeIO ),
+      phetioType: Property.PropertyIO( Range.RangeIO ),
       phetioReadOnly: true, // range is dynamic, and changes on every clock tick
       phetioHighFrequency: true,
       phetioDocumentation: 'range of the x (Generation) axis'
@@ -172,7 +171,7 @@ class PopulationModel extends PhetioObject {
       yZoomLevel => new Range( Y_MINIMUM, Y_MAXIMUMS[ yZoomLevel ] ), {
         isValidValue: yRange => ( yRange.min >= 0 ),
         tandem: options.tandem.createTandem( 'yRangeProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( RangeIO ),
+        phetioType: DerivedProperty.DerivedPropertyIO( Range.RangeIO ),
         phetioDocumentation: 'range of the y (Population) axis'
       } );
 

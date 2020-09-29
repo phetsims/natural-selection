@@ -10,7 +10,6 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Range from '../../../../dot/js/Range.js';
-import RangeIO from '../../../../dot/js/RangeIO.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
@@ -100,7 +99,7 @@ class BunnyCollection {
         }
       }, {
         tandem: options.tandem.createTandem( 'bunnyRestRangeProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( RangeIO ),
+        phetioType: DerivedProperty.DerivedPropertyIO( Range.RangeIO ),
         phetioDocumentation: 'for internal PhET use only'
       } );
 
