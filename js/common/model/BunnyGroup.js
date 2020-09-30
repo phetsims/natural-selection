@@ -11,7 +11,6 @@ import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
-import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
@@ -36,7 +35,7 @@ class BunnyGroup extends PhetioGroup {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: PhetioGroupIO( Bunny.BunnyIO ),
+      phetioType: PhetioGroup.PhetioGroupIO( Bunny.BunnyIO ),
       phetioDocumentation: 'manages dynamic PhET-iO elements of type Bunny, including live and dead bunnies'
     }, options );
 
