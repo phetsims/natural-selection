@@ -46,6 +46,7 @@ class Organism extends PhetioObject {
     this.positionProperty = new Property( options.position, {
       tandem: options.tandem.createTandem( 'positionProperty' ),
       phetioType: Property.PropertyIO( Vector3.Vector3IO ),
+      phetioHighFrequency: true,
       phetioReadOnly: true,
       phetioDocumentation: 'position in the 3D model coordinate frame'
     } );
