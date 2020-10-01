@@ -7,9 +7,9 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import createArrayProxy from '../../../../axon/js/createArrayProxy.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -82,41 +82,41 @@ class PopulationModel extends PhetioObject {
     // For organizing all data points in Studio
     const dataPointsTandem = options.tandem.createTandem( 'dataPoints' );
 
-    // @public {ObservableArray.<Vector2>} - data points, for total population and the population of each allele.
+    // @public {ArrayProxyDef.<Vector2>} - data points, for total population and the population of each allele.
     // Vector2.x = generation, Vector2.y = population
-    this.totalPoints = new ObservableArray( {
+    this.totalPoints = createArrayProxy( {
       tandem: dataPointsTandem.createTandem( 'totalPoints' ),
-      phetioType: ObservableArray.ObservableArrayIO( Vector2.Vector2IO ),
+      phetioType: createArrayProxy.ArrayProxyIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for all bunnies'
     } );
-    this.whiteFurPoints = new ObservableArray( {
+    this.whiteFurPoints = createArrayProxy( {
       tandem: dataPointsTandem.createTandem( 'whiteFurPoints' ),
-      phetioType: ObservableArray.ObservableArrayIO( Vector2.Vector2IO ),
+      phetioType: createArrayProxy.ArrayProxyIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with white fur'
     } );
-    this.brownFurPoints = new ObservableArray( {
+    this.brownFurPoints = createArrayProxy( {
       tandem: dataPointsTandem.createTandem( 'brownFurPoints' ),
-      phetioType: ObservableArray.ObservableArrayIO( Vector2.Vector2IO ),
+      phetioType: createArrayProxy.ArrayProxyIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with brown fur'
     } );
-    this.straightEarsPoints = new ObservableArray( {
+    this.straightEarsPoints = createArrayProxy( {
       tandem: dataPointsTandem.createTandem( 'straightEarsPoints' ),
-      phetioType: ObservableArray.ObservableArrayIO( Vector2.Vector2IO ),
+      phetioType: createArrayProxy.ArrayProxyIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with straight ears'
     } );
-    this.floppyEarsPoints = new ObservableArray( {
+    this.floppyEarsPoints = createArrayProxy( {
       tandem: dataPointsTandem.createTandem( 'floppyEarsPoints' ),
-      phetioType: ObservableArray.ObservableArrayIO( Vector2.Vector2IO ),
+      phetioType: createArrayProxy.ArrayProxyIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with floppy ears'
     } );
-    this.shortTeethPoints = new ObservableArray( {
+    this.shortTeethPoints = createArrayProxy( {
       tandem: dataPointsTandem.createTandem( 'shortTeethPoints' ),
-      phetioType: ObservableArray.ObservableArrayIO( Vector2.Vector2IO ),
+      phetioType: createArrayProxy.ArrayProxyIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with short teeth'
     } );
-    this.longTeethPoints = new ObservableArray( {
+    this.longTeethPoints = createArrayProxy( {
       tandem: dataPointsTandem.createTandem( 'longTeethPoints' ),
-      phetioType: ObservableArray.ObservableArrayIO( Vector2.Vector2IO ),
+      phetioType: createArrayProxy.ArrayProxyIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with long teeth'
     } );
 
@@ -209,14 +209,14 @@ class PopulationModel extends PhetioObject {
    */
   reset() {
 
-    // clear data points
-    this.totalPoints.reset();
-    this.whiteFurPoints.reset();
-    this.brownFurPoints.reset();
-    this.straightEarsPoints.reset();
-    this.floppyEarsPoints.reset();
-    this.shortTeethPoints.reset();
-    this.longTeethPoints.reset();
+    // Clear data points. Use this approach because these are instances of ArrayProxyDef.
+    this.totalPoints.length = 0;
+    this.whiteFurPoints.length = 0;
+    this.brownFurPoints.length = 0;
+    this.straightEarsPoints.length = 0;
+    this.floppyEarsPoints.length = 0;
+    this.shortTeethPoints.length = 0;
+    this.longTeethPoints.length = 0;
 
     // reset visibility of plots
     this.totalVisibleProperty.reset();
@@ -273,17 +273,17 @@ class PopulationModel extends PhetioObject {
 
 /**
  * Records a count if it differs from the previous data point.
- * @param {ObservableArray.<Vector2>} observableArray
+ * @param {Array.<Vector2>} array
  * @param {number} timeInGenerations - time (in generations) for the count
  * @param {number} count
  */
-function recordCount( observableArray, timeInGenerations, count ) {
-  assert && assert( observableArray instanceof ObservableArray, 'invalid observableArray' );
+function recordCount( array, timeInGenerations, count ) {
+  assert && assert( Array.isArray( array ), 'invalid array' );
   assert && assert( NaturalSelectionUtils.isNonNegative( timeInGenerations ), 'invalid generation' );
   assert && assert( NaturalSelectionUtils.isNonNegativeInteger( count ), 'invalid count' );
 
-  if ( observableArray.length === 0 || observableArray.get( observableArray.length - 1 ).y !== count ) {
-    observableArray.push( new Vector2( timeInGenerations, count ) );
+  if ( array.length === 0 || array[ array.length - 1 ].y !== count ) {
+    array.push( new Vector2( timeInGenerations, count ) );
   }
 }
 

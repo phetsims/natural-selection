@@ -118,7 +118,7 @@ class DataProbe extends PhetioObject {
   /**
    * Gets the population count (y value) for a specific generation (x value).
    * @param {number} dataProbeGeneration - current position of the data probe on the x axis
-   * @param {ObservableArray.<Vector2>} points - data points, x (generation) and y (population)
+   * @param {Array.<Vector2>} points - data points, x (generation) and y (population)
    * @returns {number}
    * @private
    */
@@ -127,7 +127,7 @@ class DataProbe extends PhetioObject {
 
     // Optimize for scrolling graph. Start with most recent points and work backwards in time.
     for ( let i = points.length - 1; i >= 0; i-- ) {
-      const point = points.get( i );
+      const point = points[ i ];
       if ( dataProbeGeneration >= point.x ) {
         count = point.y;
         break;

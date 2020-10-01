@@ -7,9 +7,9 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import createArrayProxy from '../../../../axon/js/createArrayProxy.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -93,9 +93,9 @@ class ProportionsModel extends PhetioObject {
       phetioDocumentation: 'Counts at the start of the current generation'
     } );
 
-    const previousCounts = new ObservableArray( {
+    const previousCounts = createArrayProxy( {
       tandem: options.tandem.createTandem( 'previousCounts' ),
-      phetioType: ObservableArray.ObservableArrayIO( ProportionsCounts.ProportionsCountsIO ),
+      phetioType: createArrayProxy.ArrayProxyIO( ProportionsCounts.ProportionsCountsIO ),
       phetioDocumentation: 'Start and End counts for previous generations, indexed by generation number'
     } );
 
@@ -160,7 +160,7 @@ class ProportionsModel extends PhetioObject {
           else {
 
             // Show static counts for a previous generation.
-            const counts = previousCounts.get( proportionsGeneration );
+            const counts = previousCounts[ proportionsGeneration ];
             assert && assert( counts.generation === proportionsGeneration, 'unexpected generation' );
             this.startCountsProperty.value = counts.startCounts;
             this.endCountsProperty.value = counts.endCounts;
@@ -182,7 +182,7 @@ class ProportionsModel extends PhetioObject {
     // @private {Property.<BunnyCounts|null>}
     this.currentStartCountsProperty = currentStartCountsProperty;
 
-    // @private {ObservableArray.<ProportionsCounts>}
+    // @private {ArrayProxyDef.<ProportionsCounts>}
     this.previousCounts = previousCounts;
   }
 
@@ -195,7 +195,7 @@ class ProportionsModel extends PhetioObject {
     this.startCountsProperty.reset();
     this.endCountsProperty.reset();
     this.currentStartCountsProperty.reset();
-    this.previousCounts.clear();
+    this.previousCounts.length = 0; // use this approach because it's an ArrayProxyDef
     this.furVisibleProperty.reset();
     this.earsVisibleProperty.reset();
     this.teethVisibleProperty.reset();

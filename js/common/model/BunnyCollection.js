@@ -19,8 +19,8 @@ import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import Bunny from './Bunny.js';
-import BunnyArray from './BunnyArray.js';
 import BunnyGroup from './BunnyGroup.js';
+import createBunnyArray from './createBunnyArray.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 import PunnettSquare from './PunnettSquare.js';
@@ -62,21 +62,21 @@ class BunnyCollection {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // @public (read-only) the live bunnies in bunnyGroup
-    this.liveBunnies = new BunnyArray( {
+    // @public (read-only) {BunnyArrayDef} the live bunnies in bunnyGroup
+    this.liveBunnies = createBunnyArray( {
       tandem: options.tandem.createTandem( 'liveBunnies' )
     } );
 
-    // @private the dead bunnies in bunnyGroup
-    this.deadBunnies = new BunnyArray( {
+    // @private {BunnyArrayDef} the dead bunnies in bunnyGroup
+    this.deadBunnies = createBunnyArray( {
       tandem: options.tandem.createTandem( 'deadBunnies' )
     } );
 
-    // @private {BunnyArray} Recessive mutants, to be mated eagerly so that their mutation appears in the phenotype as
-    // soon as possible. Mutants are added to this array when born, and removed as soon as they have mated with
+    // @private {BunnyArrayDef} Recessive mutants, to be mated eagerly so that their mutation appears in the phenotype
+    // as soon as possible. Mutants are added to this array when born, and removed as soon as they have mated with
     // another bunny that has the same mutant allele. See also the 'Recessive Mutants' section of model.md at
     // https://github.com/phetsims/natural-selection/blob/master/doc/model.md#recessive-mutants.
-    this.recessiveMutants = new BunnyArray( {
+    this.recessiveMutants = createBunnyArray( {
       tandem: options.tandem.createTandem( 'recessiveMutants' ),
       phetioDocumentation: 'for internal PhET use only'
     } );
@@ -278,14 +278,14 @@ class BunnyCollection {
    * @public
    */
   ageBunnies() {
-    assert && assert( _.every( this.liveBunnies.getArray(), bunny => bunny.isAlive ),
+    assert && assert( _.every( this.liveBunnies, bunny => bunny.isAlive ),
       'liveBunnies contains one or more dead bunnies' );
 
     let diedCount = 0;
 
     // liveBunnies will change if any bunnies die, so operate on a copy
-    const bunnies = this.liveBunnies.getArrayCopy();
-    bunnies.forEach( bunny => {
+    const liveBunniesCopy = this.liveBunnies.slice();
+    liveBunniesCopy.forEach( bunny => {
 
       // bunny is one generation older
       bunny.age++;
@@ -318,7 +318,7 @@ class BunnyCollection {
     let bornIndex = 0;
 
     // Shuffle the collection of live bunnies so that mating is random. shuffle returns a new array.
-    const bunnies = phet.joist.random.shuffle( this.liveBunnies.getArray() );
+    const bunnies = phet.joist.random.shuffle( this.liveBunnies );
     phet.log && phet.log( `mating ${bunnies.length} bunnies` );
 
     // Prioritize mating of bunnies that have a recessive mutation, so that the mutation appears in the phenotype
@@ -453,7 +453,7 @@ class BunnyCollection {
     let numberBorn = 0;
 
     // Get a copy of the array. We'll be iterating over this until it's empty.
-    const recessiveMutantsCopy = this.recessiveMutants.getArrayCopy();
+    const recessiveMutantsCopy = this.recessiveMutants.slice();
 
     // For each recessive mutant...
     while ( recessiveMutantsCopy.length > 0 ) {
@@ -567,7 +567,7 @@ class BunnyCollection {
    * @public
    */
   getSelectionCandidates() {
-    return phet.joist.random.shuffle( this.liveBunnies.getArray() ); // shuffle returns a new array
+    return phet.joist.random.shuffle( this.liveBunnies ); // shuffle returns a new array
   }
 
   /**
@@ -618,9 +618,8 @@ class BunnyCollection {
     let numberPruned = 0;
 
     // This modifies the array. Iterate backwards to avoid having to make a copy.
-    const deadBunnies = this.deadBunnies.getArray();
-    for ( let i = deadBunnies.length - 1; i >= 0; i-- ) {
-      const bunny = deadBunnies[ i ];
+    for ( let i = this.deadBunnies.length - 1; i >= 0; i-- ) {
+      const bunny = this.deadBunnies[ i ];
       if ( generation - bunny.generation > MAX_DEAD_BUNNY_GENERATIONS &&
            this.selectedBunnyProperty.value !== bunny ) {
         this.bunnyGroup.disposeElement( bunny );

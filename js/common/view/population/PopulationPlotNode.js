@@ -29,7 +29,7 @@ class PopulationPlotNode extends Node {
 
     config = merge( {
 
-      // {ObservableArray.<Vector2>} data points, in model coordinates (x=Generation, y=Population)
+      // {ArrayProxyDef.<Vector2>} data points, in model coordinates (x=Generation, y=Population)
       points: required( config.points ),
 
       // {Property.<boolean>} whether this plot is visible
@@ -129,7 +129,7 @@ class PopulationPlotNode extends Node {
       const numberOfPoints = this.points.length;
 
       // If we have points and any of them fall within the x range...
-      if ( numberOfPoints > 0 && this.points.get( 0 ).x <= this.xRangeProperty.value.max ) {
+      if ( numberOfPoints > 0 && this.points[ 0 ].x <= this.xRangeProperty.value.max ) {
 
         // Index of the point to start with. Defaults to the first point in the array.
         let startIndex = 0;
@@ -138,9 +138,9 @@ class PopulationPlotNode extends Node {
         // Do a brute-force search from the end of the array, to optimize for the case where the graph is scrolling
         // (animated). If the graph is not scrolling, then the sim is paused, and the graph is being used to examine
         // data for a previous generation. In that case, the time for this search is not critical.
-        if ( this.points.get( 0 ).x < this.xRangeProperty.value.min ) {
+        if ( this.points[ 0 ].x < this.xRangeProperty.value.min ) {
           for ( let i = numberOfPoints - 1; i >= 0; i-- ) {
-            const point = this.points.get( i );
+            const point = this.points[ i ];
             if ( point.x <= this.xRangeProperty.value.min ) {
               startIndex = i;
               break;
@@ -149,7 +149,7 @@ class PopulationPlotNode extends Node {
         }
 
         // Start with this point, and plot from left to right.
-        const startPoint = this.points.get( startIndex );
+        const startPoint = this.points[ startIndex ];
 
         // For mutant plots (drawn with a lineDash), adjust lineDashOffset so that the dash appears to scroll.
         // See https://github.com/phetsims/natural-selection/issues/111
@@ -173,7 +173,7 @@ class PopulationPlotNode extends Node {
         // Starting with the next point, plot from left to right.
         for ( let i = startIndex + 1; i < numberOfPoints; i++ ) {
 
-          const point = this.points.get( i );
+          const point = this.points[ i ];
 
           if ( point.x <= this.xRangeProperty.value.max ) {
 
