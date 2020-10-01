@@ -156,9 +156,18 @@ class BunnyCollection {
         // When the bunny dies, clean up.
         // removeListener is not necessary because Bunny.diedEmitter is disposed when the bunny dies or is disposed.
         bunny.diedEmitter.addListener( () => {
-          this.liveBunnies.remove( bunny );
+
+          const liveBunnyIndex = this.liveBunnies.indexOf( bunny );
+          assert && assert( liveBunnyIndex !== -1, 'expected bunny to be in liveBunnies' );
+          this.liveBunnies.splice( liveBunnyIndex, 1 );
+
           this.deadBunnies.push( bunny );
-          this.recessiveMutants.includes( bunny ) && this.recessiveMutants.remove( bunny );
+
+          const recessiveMutantsIndex = this.recessiveMutants.indexOf( bunny );
+          if ( recessiveMutantsIndex !== -1 ) {
+            this.recessiveMutants.splice( recessiveMutantsIndex, 1 );
+          }
+
           if ( this.liveBunnies.length === 0 ) {
             this.allBunniesHaveDiedEmitter.emit();
           }
@@ -173,12 +182,29 @@ class BunnyCollection {
       }
     } );
 
-    // When a bunny is disposed, remove it from the appropriate array. removeListener is not necessary.
+    // When a bunny is disposed, remove it from the appropriate arrays. removeListener is not necessary.
     bunnyGroup.elementDisposedEmitter.addListener( bunny => {
       assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-      this.liveBunnies.includes( bunny ) && this.liveBunnies.remove( bunny );
-      this.deadBunnies.includes( bunny ) && this.deadBunnies.remove( bunny );
-      this.recessiveMutants.includes( bunny ) && this.recessiveMutants.remove( bunny );
+
+      const liveIndex = this.liveBunnies.indexOf( bunny );
+      if ( liveIndex !== -1 ) {
+        this.liveBunnies.splice( liveIndex, 1 );
+
+        // If the bunny was in liveBunnies, it might also be in recessiveMutants.
+        const recessiveIndex = this.recessiveMutants.indexOf( bunny );
+        ( recessiveIndex !== -1 ) && this.recessiveMutants.splice( recessiveIndex, 1 );
+      }
+      else {
+
+        // If the bunny was not in liveBunnies, it might be in deadBunnies.
+        const deadIndex = this.deadBunnies.indexOf( bunny );
+        ( deadIndex !== -1 ) && this.deadBunnies.splice( deadIndex, 1 );
+      }
+
+      // Verify that we don't have a logic error that results in retaining a reference to bunny.
+      assert && assert( this.liveBunnies.indexOf( bunny ) === -1, 'bunny is still in liveBunnies' );
+      assert && assert( this.deadBunnies.indexOf( bunny ) === -1, 'bunny is still in deadBunnies' );
+      assert && assert( this.recessiveMutants.indexOf( bunny ) === -1, 'bunny is still in recessiveMutants' );
     } );
 
     // @private fields needed by methods
@@ -423,10 +449,11 @@ class BunnyCollection {
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
     assert && assert( Array.isArray( bunnies ), 'invalid bunnies' );
 
-    const recessiveMutantsCopy = this.recessiveMutants.getArrayCopy();
-
     let numberOfRecessiveMutantsMated = 0;
     let numberBorn = 0;
+
+    // Get a copy of the array. We'll be iterating over this until it's empty.
+    const recessiveMutantsCopy = this.recessiveMutants.getArrayCopy();
 
     // For each recessive mutant...
     while ( recessiveMutantsCopy.length > 0 ) {
@@ -497,16 +524,25 @@ class BunnyCollection {
         bunnies.splice( bunnies.indexOf( mutantFather ), 1 );
         bunnies.splice( bunnies.indexOf( mutantMother ), 1 );
 
-        // Remove the mutants from further consideration of mating eagerly. Note that the mother may have been a
+        // Remove the mutant father from further consideration of mating eagerly.
+        const mutantFatherIndex = this.recessiveMutants.indexOf( mutantFather );
+        assert && assert( mutantFatherIndex !== -1, 'expected mutantFather to be in recessiveMutants' );
+        this.recessiveMutants.splice( mutantFatherIndex, 1 );
+
+        // Remove the mutant mother from further consideration of mating eagerly. Note that the mother may have been a
         // sibling (another original mutant created in the same generation) or a member of a later generation.
-        this.recessiveMutants.remove( mutantFather );
-        if ( this.recessiveMutants.includes( mutantMother ) ) {
-          this.recessiveMutants.remove( mutantMother );
+        const mutantMotherIndex = this.recessiveMutants.indexOf( mutantMother );
+        if ( mutantMotherIndex !== -1 ) {
+          this.recessiveMutants.splice( mutantMotherIndex, 1 );
           numberOfRecessiveMutantsMated++;
+
+          const mutantMotherCopyIndex = recessiveMutantsCopy.indexOf( mutantMother );
+          if ( mutantMotherCopyIndex !== -1 ) {
+            recessiveMutantsCopy.splice( mutantMotherCopyIndex, 1 );
+          }
         }
-        if ( recessiveMutantsCopy.includes( mutantMother ) ) {
-          recessiveMutantsCopy.splice( recessiveMutantsCopy.indexOf( mutantMother ), 1 );
-        }
+        assert && assert( this.recessiveMutants.indexOf( mutantMother ) === -1, 'mutantMother should not be in recessiveMutants' );
+        assert && assert( recessiveMutantsCopy.indexOf( mutantMother ) === -1, 'mutantMother should not be in recessiveMutantsCopy' );
       }
     }
 
