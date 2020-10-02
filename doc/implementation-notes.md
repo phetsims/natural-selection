@@ -133,7 +133,7 @@ Here are pointers to some of the major features of the model:
 * All of the bunnies have died: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.allBunniesHaveDiedEmitter`
 * Sim reaches its memory limit: [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/NaturalSelectionModel.js)`.memoryLimitEmitter`
 * Memory management of dead bunnies: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.pruneBunnies`
-* Population graph data points: see `ObservableArray` instances in [PopulationModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/PopulationModel.js)
+* Population graph data points: see `ObservableArrayDef` instances in [PopulationModel](https://github.com/phetsims/natural-selection/blob/master/js/common/model/PopulationModel.js)
 * Proportions graph start/end counts: [ProportionsCounts](https://github.com/phetsims/natural-selection/blob/master/js/common/model/ProportionCounts.js)
 * Pedigree graph: shows a tree for [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.selectedBunnyProperty`
 * Genotype abbreviation: [Genotype](https://github.com/phetsims/natural-selection/blob/master/js/common/model/Genotype.js)`.abbreviationProperty`, `GenePair.getGenotypeAbbreviation`
