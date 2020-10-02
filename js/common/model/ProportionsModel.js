@@ -95,7 +95,7 @@ class ProportionsModel extends PhetioObject {
 
     const previousCounts = createObservableArray( {
       tandem: options.tandem.createTandem( 'previousCounts' ),
-      phetioType: createObservableArray.ArrayProxyIO( ProportionsCounts.ProportionsCountsIO ),
+      phetioType: createObservableArray.ObservableArrayIO( ProportionsCounts.ProportionsCountsIO ),
       phetioDocumentation: 'Start and End counts for previous generations, indexed by generation number'
     } );
 

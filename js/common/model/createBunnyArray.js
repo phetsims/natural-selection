@@ -29,7 +29,7 @@ function createBunnyArray( options ) {
   options = merge( {
 
     // phet-io
-    phetioType: createObservableArray.ArrayProxyIO( ReferenceIO( Bunny.BunnyIO ) ),
+    phetioType: createObservableArray.ObservableArrayIO( ReferenceIO( Bunny.BunnyIO ) ),
     tandem: Tandem.REQUIRED,
     phetioState: false
   }, options );
