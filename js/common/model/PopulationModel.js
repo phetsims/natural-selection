@@ -7,7 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import createArrayProxy from '../../../../axon/js/createArrayProxy.js';
+import createObservableArray from '../../../../axon/js/createObservableArray.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
@@ -82,41 +82,41 @@ class PopulationModel extends PhetioObject {
     // For organizing all data points in Studio
     const dataPointsTandem = options.tandem.createTandem( 'dataPoints' );
 
-    // @public {ArrayProxyDef.<Vector2>} - data points, for total population and the population of each allele.
+    // @public {ObservableArrayDef.<Vector2>} - data points, for total population and the population of each allele.
     // Vector2.x = generation, Vector2.y = population
-    this.totalPoints = createArrayProxy( {
+    this.totalPoints = createObservableArray( {
       tandem: dataPointsTandem.createTandem( 'totalPoints' ),
-      phetioType: createArrayProxy.ArrayProxyIO( Vector2.Vector2IO ),
+      phetioType: createObservableArray.ArrayProxyIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for all bunnies'
     } );
-    this.whiteFurPoints = createArrayProxy( {
+    this.whiteFurPoints = createObservableArray( {
       tandem: dataPointsTandem.createTandem( 'whiteFurPoints' ),
-      phetioType: createArrayProxy.ArrayProxyIO( Vector2.Vector2IO ),
+      phetioType: createObservableArray.ArrayProxyIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with white fur'
     } );
-    this.brownFurPoints = createArrayProxy( {
+    this.brownFurPoints = createObservableArray( {
       tandem: dataPointsTandem.createTandem( 'brownFurPoints' ),
-      phetioType: createArrayProxy.ArrayProxyIO( Vector2.Vector2IO ),
+      phetioType: createObservableArray.ArrayProxyIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with brown fur'
     } );
-    this.straightEarsPoints = createArrayProxy( {
+    this.straightEarsPoints = createObservableArray( {
       tandem: dataPointsTandem.createTandem( 'straightEarsPoints' ),
-      phetioType: createArrayProxy.ArrayProxyIO( Vector2.Vector2IO ),
+      phetioType: createObservableArray.ArrayProxyIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with straight ears'
     } );
-    this.floppyEarsPoints = createArrayProxy( {
+    this.floppyEarsPoints = createObservableArray( {
       tandem: dataPointsTandem.createTandem( 'floppyEarsPoints' ),
-      phetioType: createArrayProxy.ArrayProxyIO( Vector2.Vector2IO ),
+      phetioType: createObservableArray.ArrayProxyIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with floppy ears'
     } );
-    this.shortTeethPoints = createArrayProxy( {
+    this.shortTeethPoints = createObservableArray( {
       tandem: dataPointsTandem.createTandem( 'shortTeethPoints' ),
-      phetioType: createArrayProxy.ArrayProxyIO( Vector2.Vector2IO ),
+      phetioType: createObservableArray.ArrayProxyIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with short teeth'
     } );
-    this.longTeethPoints = createArrayProxy( {
+    this.longTeethPoints = createObservableArray( {
       tandem: dataPointsTandem.createTandem( 'longTeethPoints' ),
-      phetioType: createArrayProxy.ArrayProxyIO( Vector2.Vector2IO ),
+      phetioType: createObservableArray.ArrayProxyIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with long teeth'
     } );
 
@@ -209,7 +209,7 @@ class PopulationModel extends PhetioObject {
    */
   reset() {
 
-    // Clear data points. Use this approach because these are instances of ArrayProxyDef.
+    // Clear data points. Use this approach because these are instances of ObservableArrayDef.
     this.totalPoints.length = 0;
     this.whiteFurPoints.length = 0;
     this.brownFurPoints.length = 0;

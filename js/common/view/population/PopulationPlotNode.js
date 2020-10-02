@@ -29,7 +29,7 @@ class PopulationPlotNode extends Node {
 
     config = merge( {
 
-      // {ArrayProxyDef.<Vector2>} data points, in model coordinates (x=Generation, y=Population)
+      // {ObservableArrayDef.<Vector2>} data points, in model coordinates (x=Generation, y=Population)
       points: required( config.points ),
 
       // {Property.<boolean>} whether this plot is visible

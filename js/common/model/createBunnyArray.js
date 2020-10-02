@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import createArrayProxy from '../../../../axon/js/createArrayProxy.js';
+import createObservableArray from '../../../../axon/js/createObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -16,7 +16,7 @@ import Bunny from './Bunny.js';
 import BunnyCounts from './BunnyCounts.js';
 
 /**
- * @typedef {ArrayProxyDef} BunnyArrayDef
+ * @typedef {ObservableArrayDef} BunnyArrayDef
  * @property {Property.<BunnyCounts>} countsProperty
  */
 
@@ -29,12 +29,12 @@ function createBunnyArray( options ) {
   options = merge( {
 
     // phet-io
-    phetioType: createArrayProxy.ArrayProxyIO( ReferenceIO( Bunny.BunnyIO ) ),
+    phetioType: createObservableArray.ArrayProxyIO( ReferenceIO( Bunny.BunnyIO ) ),
     tandem: Tandem.REQUIRED,
     phetioState: false
   }, options );
 
-  const bunnyArray = createArrayProxy( options );
+  const bunnyArray = createObservableArray( options );
 
   // @public (read-only) {Property.<BunnyCounts>}
   bunnyArray.countsProperty = new Property( BunnyCounts.withZero(), {

@@ -7,7 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import createArrayProxy from '../../../../axon/js/createArrayProxy.js';
+import createObservableArray from '../../../../axon/js/createObservableArray.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
@@ -93,9 +93,9 @@ class ProportionsModel extends PhetioObject {
       phetioDocumentation: 'Counts at the start of the current generation'
     } );
 
-    const previousCounts = createArrayProxy( {
+    const previousCounts = createObservableArray( {
       tandem: options.tandem.createTandem( 'previousCounts' ),
-      phetioType: createArrayProxy.ArrayProxyIO( ProportionsCounts.ProportionsCountsIO ),
+      phetioType: createObservableArray.ArrayProxyIO( ProportionsCounts.ProportionsCountsIO ),
       phetioDocumentation: 'Start and End counts for previous generations, indexed by generation number'
     } );
 
@@ -182,7 +182,7 @@ class ProportionsModel extends PhetioObject {
     // @private {Property.<BunnyCounts|null>}
     this.currentStartCountsProperty = currentStartCountsProperty;
 
-    // @private {ArrayProxyDef.<ProportionsCounts>}
+    // @private {ObservableArrayDef.<ProportionsCounts>}
     this.previousCounts = previousCounts;
   }
 
@@ -195,7 +195,7 @@ class ProportionsModel extends PhetioObject {
     this.startCountsProperty.reset();
     this.endCountsProperty.reset();
     this.currentStartCountsProperty.reset();
-    this.previousCounts.length = 0; // use this approach because it's an ArrayProxyDef
+    this.previousCounts.length = 0; // use this approach because it's an ObservableArrayDef
     this.furVisibleProperty.reset();
     this.earsVisibleProperty.reset();
     this.teethVisibleProperty.reset();
