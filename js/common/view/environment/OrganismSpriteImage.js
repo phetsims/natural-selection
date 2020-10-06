@@ -24,7 +24,8 @@ class OrganismSpriteImage extends SpriteImage {
     assert && assert( image.width > 0 && image.height > 0, 'image does not have valid dimensions' );
 
     options = merge( {
-      pickable: false
+      pickable: false,
+      mipmap: true
     }, options );
 
     // Origin at bottom-center
