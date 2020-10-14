@@ -324,7 +324,7 @@ class MutationButton extends RectangularPushButton {
       baseColor: NaturalSelectionColors.ADD_MUTATION_BUTTONS,
       cornerRadius: BUTTON_CORNER_RADIUS,
       tandem: Tandem.REQUIRED,
-      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
+      visiblePropertyOptions: { phetioReadOnly: true }
     }, options );
 
     const imageNode = new Image( mutantAlleleImage, {

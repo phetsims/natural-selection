@@ -45,7 +45,7 @@ class PopulationGraphNode extends Node {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
+      visiblePropertyOptions: { phetioReadOnly: true }
     }, options );
 
     // invisible rectangle that defines the bounds of this Node
@@ -56,7 +56,7 @@ class PopulationGraphNode extends Node {
       populationModel.xRangeProperty, populationModel.timeInGenerationsProperty, populationModel.isPlayingProperty, {
         labelString: naturalSelectionStrings.generation,
         tandem: options.tandem.createTandem( 'generationScroller' ),
-        phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
+        visiblePropertyOptions: { phetioReadOnly: true }
       } );
 
     // y-axis (Population) label
@@ -65,7 +65,7 @@ class PopulationGraphNode extends Node {
       rotation: -Math.PI / 2,
       maxWidth: 90, // determined empirically
       tandem: options.tandem.createTandem( 'yAxisLabelNode' ),
-      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
+      visiblePropertyOptions: { phetioReadOnly: true }
     } );
 
     // Wrap yAxisLabelNode because we'll be observing its boundsProperty.
@@ -81,7 +81,7 @@ class PopulationGraphNode extends Node {
       left: boundsRectangle.left,
       top: boundsRectangle.top,
       tandem: options.tandem.createTandem( 'yZoomButtonGroup' ),
-      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
+      visiblePropertyOptions: { phetioReadOnly: true }
     } );
 
     // Dimensions of the 2D grid (sans tick marks) in view coordinates

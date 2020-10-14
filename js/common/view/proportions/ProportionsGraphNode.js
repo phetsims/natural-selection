@@ -58,7 +58,7 @@ class ProportionsGraphNode extends Node {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
+      visiblePropertyOptions: { phetioReadOnly: true }
     }, options );
 
     // To make this code easier to read

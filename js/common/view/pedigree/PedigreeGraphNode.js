@@ -50,7 +50,7 @@ class PedigreeGraphNode extends Node {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
+      visiblePropertyOptions: { phetioReadOnly: true }
     }, options );
 
     const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {

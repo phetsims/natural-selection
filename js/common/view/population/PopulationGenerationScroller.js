@@ -57,7 +57,7 @@ class PopulationGenerationScroller extends HBox {
       font: options.font,
       maxWidth: 250, // determined empirically
       tandem: options.tandem.createTandem( 'labelNode' ),
-      phetioComponentOptions: { visibleProperty: { phetioReadOnly: true } }
+      visiblePropertyOptions: { phetioReadOnly: true }
     } );
 
     // back button
