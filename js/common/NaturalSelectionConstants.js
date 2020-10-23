@@ -9,7 +9,7 @@
 import Range from '../../../dot/js/Range.js';
 import AssertUtils from '../../../phetcommon/js/AssertUtils.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
-import RectangularButtonView from '../../../sun/js/buttons/RectangularButtonView.js';
+import RectangularButton from '../../../sun/js/buttons/RectangularButton.js';
 import naturalSelection from '../naturalSelection.js';
 import NaturalSelectionColors from './NaturalSelectionColors.js';
 
@@ -50,7 +50,7 @@ const NaturalSelectionConstants = {
   ARROW_BUTTON_OPTIONS: {
     baseColor: NaturalSelectionColors.ARROW_BUTTONS,
     stroke: 'black',
-    buttonAppearanceStrategy: RectangularButtonView.FlatAppearanceStrategy,
+    buttonAppearanceStrategy: RectangularButton.FlatAppearanceStrategy,
     cornerRadius: 2,
     lineWidth: 0.5,
     arrowWidth: 8, // width of base
