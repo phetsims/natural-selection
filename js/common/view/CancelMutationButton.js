@@ -23,8 +23,8 @@ class CancelMutationButton extends RoundPushButton {
     options = merge( {
 
       // so we see only the icon
-      minXMargin: 0,
-      minYMargin: 0,
+      xMargin: 0,
+      yMargin: 0,
       baseColor: 'transparent',
 
       // red 'x' inside a circle
