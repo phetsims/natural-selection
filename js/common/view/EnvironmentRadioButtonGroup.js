@@ -10,7 +10,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
+import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import FontAwesomeNode from '../../../../sun/js/FontAwesomeNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -22,7 +22,7 @@ import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 const ICON_X_MARGIN = 8;
 const ICON_Y_MARGIN = 6;
 
-class EnvironmentRadioButtonGroup extends RadioButtonGroup {
+class EnvironmentRadioButtonGroup extends RectangularRadioButtonGroup {
 
   /**
    * @param {EnumerationProperty.<Environment>} environmentProperty
@@ -34,7 +34,7 @@ class EnvironmentRadioButtonGroup extends RadioButtonGroup {
 
     options = merge( {}, {
 
-      // RadioButtonGroup options
+      // RectangularRadioButtonGroup options
       orientation: 'horizontal',
       spacing: 8,
       cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
@@ -54,7 +54,7 @@ class EnvironmentRadioButtonGroup extends RadioButtonGroup {
     const sunIcon = new FontAwesomeNode( 'sun_solid', iconOptions );
     const snowflakeIcon = new FontAwesomeNode( 'snowflake', iconOptions );
 
-    // RadioButtonGroup does not support different colors for radio buttons in the same group.
+    // RectangularRadioButtonGroup does not support different colors for radio buttons in the same group.
     // So we create our own backgrounds, with a cornerRadius that matches options.cornerRadius.
     const buttonWidth = _.maxBy( [ sunIcon, snowflakeIcon ], icon => icon.width ).width + ( 2 * ICON_X_MARGIN );
     const buttonHeight = _.maxBy( [ sunIcon, snowflakeIcon ], icon => icon.height ).height + ( 2 * ICON_Y_MARGIN );
