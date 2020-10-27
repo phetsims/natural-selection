@@ -13,7 +13,6 @@
     "requirejsNamespace": "NATURAL_SELECTION",
     "simulation": true,
     "runnable": true,
-    "supportsPanAndZoom": false,
     "supportedBrands": [
       "phet",
       "phet-io",
