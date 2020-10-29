@@ -26,6 +26,8 @@ class FastForwardButton extends RoundMomentaryButton {
 
     options = merge( {
       radius: 16,
+      xMargin:8,
+      yMargin:8,
 
       // phet-io
       tandem: Tandem.REQUIRED
