@@ -14,7 +14,6 @@ import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import PlayPauseButton from '../../../../scenery-phet/js/buttons/PlayPauseButton.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
-import EnabledNode from '../../../../sun/js/EnabledNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import FastForwardButton from './FastForwardButton.js';
@@ -29,7 +28,6 @@ class NaturalSelectionTimeControlNode extends HBox {
    * @param {Property.<boolean>} isPlayingProperty
    * @param {EnumerationProperty.<TimeSpeed>} timeSpeedProperty
    * @param {Object} [options]
-   * @mixes EnabledNode
    */
   constructor( isPlayingProperty, timeSpeedProperty, options ) {
 
@@ -40,7 +38,8 @@ class NaturalSelectionTimeControlNode extends HBox {
       spacing: 10,
 
       // phet-io
-      tandem: Tandem.REQUIRED
+      tandem: Tandem.REQUIRED,
+      enabledPropertyPhetioInstrumented: true // opt into default PhET-iO instrumented enabledProperty
     }, options );
 
     const playPauseButton = new PlayPauseButton( isPlayingProperty, {
@@ -59,7 +58,6 @@ class NaturalSelectionTimeControlNode extends HBox {
     options.children = [ playPauseButton, fastForwardButton ];
 
     super( options );
-    this.initializeEnabledNode( options );
 
     // Save state of whether the sim is playing, so it can be restored when fast-forward is released.
     let isPlayingSaved = isPlayingProperty.value;
@@ -92,9 +90,6 @@ class NaturalSelectionTimeControlNode extends HBox {
     super.dispose();
   }
 }
-
-// mix in enabled component into a Node
-EnabledNode.mixInto( NaturalSelectionTimeControlNode );
 
 naturalSelection.register( 'NaturalSelectionTimeControlNode', NaturalSelectionTimeControlNode );
 export default NaturalSelectionTimeControlNode;
