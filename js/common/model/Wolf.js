@@ -170,7 +170,7 @@ class Wolf extends Organism {
  * WolfIO handles PhET-iO serialization of Wolf. Because serialization involves accessing private members,
  * it delegates to Wolf. The methods that WolfIO overrides are typical of 'Dynamic element serialization',
  * as described in the Serialization section of
- * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
+ * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
  * @public
  */
 Wolf.WolfIO = new IOType( 'WolfIO', {

@@ -70,7 +70,7 @@ class Allele extends PhetioObject {
 /**
  * AlleleIO handles PhET-iO serialization of Allele. It implements 'Reference type serialization',
  * as described in the Serialization section of
- * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
+ * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
  * @public
  */
 Allele.AlleleIO = new IOType( 'AlleleIO', {

@@ -170,7 +170,7 @@ class BunnyCounts {
  * BunnyCountsIO handles PhET-iO serialization of BunnyCounts. It does so by delegating to BunnyCounts.
  * The methods that BunnyCountsIO implements are typical of 'Data type serialization', as described in
  * the Serialization section of
- * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-guide.md#serialization
+ * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
  * @public
  */
 BunnyCounts.BunnyCountsIO = new IOType( 'BunnyCountsIO', {
