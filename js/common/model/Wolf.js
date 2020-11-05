@@ -173,12 +173,7 @@ class Wolf extends Organism {
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
  * @public
  */
-Wolf.WolfIO = new IOType( 'WolfIO', {
-  valueType: Wolf,
-  toStateObject: wolf => wolf.toStateObject(),
-  stateToArgsForConstructor: Wolf.stateToArgsForConstructor,
-  applyState: ( wolf, stateObject ) => wolf.applyState( stateObject )
-} );
+Wolf.WolfIO = IOType.fromCoreType( 'WolfIO', Wolf );
 
 naturalSelection.register( 'Wolf', Wolf );
 export default Wolf;
