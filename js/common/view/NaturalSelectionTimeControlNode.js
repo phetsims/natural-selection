@@ -14,6 +14,7 @@ import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import PlayPauseButton from '../../../../scenery-phet/js/buttons/PlayPauseButton.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
+import SunConstants from '../../../../sun/js/SunConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import FastForwardButton from './FastForwardButton.js';
@@ -79,6 +80,8 @@ class NaturalSelectionTimeControlNode extends HBox {
         isPlayingProperty.value = isPlayingSaved;
       }
     } );
+
+    this.enabledProperty.link( SunConstants.getComponentEnabledListener( this ) );
   }
 
   /**
