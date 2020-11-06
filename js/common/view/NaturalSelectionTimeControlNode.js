@@ -81,7 +81,7 @@ class NaturalSelectionTimeControlNode extends HBox {
       }
     } );
 
-    this.enabledProperty.link( SunConstants.getComponentEnabledListener( this ) );
+    this.enabledProperty.link( enabled => SunConstants.componentEnabledListener( enabled, this ) );
   }
 
   /**
