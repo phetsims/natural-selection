@@ -173,11 +173,7 @@ class BunnyCounts {
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
  * @public
  */
-BunnyCounts.BunnyCountsIO = new IOType( 'BunnyCountsIO', {
-  valueType: BunnyCounts,
-  toStateObject: bunnyCounts => bunnyCounts.toStateObject(),
-  fromStateObject: BunnyCounts.fromStateObject
-} );
+BunnyCounts.BunnyCountsIO = IOType.fromCoreType( 'BunnyCountsIO', BunnyCounts );
 
 naturalSelection.register( 'BunnyCounts', BunnyCounts );
 export default BunnyCounts;

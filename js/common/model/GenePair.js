@@ -180,11 +180,7 @@ class GenePair extends PhetioObject {
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
  * @public
  */
-GenePair.GenePairIO = new IOType( 'GenePairIO', {
-  valueType: GenePair,
-  toStateObject: genePair => genePair.toStateObject(),
-  applyState: ( genePair, stateObject ) => genePair.applyState( stateObject )
-} );
+GenePair.GenePairIO = IOType.fromCoreType( 'GenePairIO', GenePair );
 
 naturalSelection.register( 'GenePair', GenePair );
 export default GenePair;

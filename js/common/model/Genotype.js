@@ -198,11 +198,7 @@ class Genotype extends PhetioObject {
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
  * @public
  */
-Genotype.GenotypeIO = new IOType( 'GenotypeIO', {
-  valueType: Genotype,
-  toStateObject: genotype => genotype.toStateObject(),
-  applyState: ( genotype, stateObject ) => genotype.applyState( stateObject )
-} );
+Genotype.GenotypeIO = IOType.fromCoreType( 'GenotypeIO', Genotype );
 
 naturalSelection.register( 'Genotype', Genotype );
 export default Genotype;

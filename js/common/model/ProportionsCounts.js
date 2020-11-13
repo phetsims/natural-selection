@@ -71,11 +71,7 @@ class ProportionsCounts {
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
  * @public
  */
-ProportionsCounts.ProportionsCountsIO = new IOType( 'ProportionsCountsIO', {
-  valueType: ProportionsCounts,
-  toStateObject: proportionsCounts => proportionsCounts.toStateObject(),
-  fromStateObject: ProportionsCounts.fromStateObject
-} );
+ProportionsCounts.ProportionsCountsIO = IOType.fromCoreType( 'ProportionsCountsIO', ProportionsCounts );
 
 naturalSelection.register( 'ProportionsCounts', ProportionsCounts );
 export default ProportionsCounts;
