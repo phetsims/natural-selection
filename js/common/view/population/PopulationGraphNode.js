@@ -10,7 +10,7 @@
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import merge from '../../../../../phet-core/js/merge.js';
-import ZoomButtonGroup from '../../../../../scenery-phet/js/ZoomButtonGroup.js';
+import PlusMinusZoomButtonGroup from '../../../../../scenery-phet/js/PlusMinusZoomButtonGroup.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
@@ -74,7 +74,7 @@ class PopulationGraphNode extends Node {
     } );
 
     // Population (y-axis) zoom buttons
-    const yZoomButtonGroup = new ZoomButtonGroup( populationModel.yZoomLevelProperty, {
+    const yZoomButtonGroup = new PlusMinusZoomButtonGroup( populationModel.yZoomLevelProperty, {
       orientation: 'vertical',
       touchAreaXDilation: 7,
       touchAreaYDilation: 4,
