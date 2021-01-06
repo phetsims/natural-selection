@@ -11,7 +11,6 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -81,7 +80,7 @@ class GenerationClock extends PhetioObject {
     this.clockGenerationProperty = new DerivedProperty(
       [ this.timeInGenerationsProperty ],
       timeInGenerations => Math.floor( timeInGenerations ), {
-        isValidValue: clockGeneration => Utils.isInteger( clockGeneration ),
+        isValidValue: clockGeneration => Number.isInteger( clockGeneration ),
         tandem: options.tandem.createTandem( 'clockGenerationProperty' ),
         phetioType: DerivedProperty.DerivedPropertyIO( NumberIO ),
         phetioDocumentation: 'generation number of the current cycle of the generation clock (integer)'

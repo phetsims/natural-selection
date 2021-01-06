@@ -7,7 +7,6 @@
  */
 
 import Range from '../../../dot/js/Range.js';
-import Utils from '../../../dot/js/Utils.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import naturalSelection from '../naturalSelection.js';
 
@@ -101,7 +100,7 @@ const NaturalSelectionUtils = {
    * @public
    */
   isPositiveInteger( value ) {
-    return NaturalSelectionUtils.isPositive( value ) && Utils.isInteger( value );
+    return NaturalSelectionUtils.isPositive( value ) && Number.isInteger( value );
   },
 
   /**
@@ -111,7 +110,7 @@ const NaturalSelectionUtils = {
    * @public
    */
   isNonNegativeInteger( value ) {
-    return NaturalSelectionUtils.isNonNegative( value ) && Utils.isInteger( value );
+    return NaturalSelectionUtils.isNonNegative( value ) && Number.isInteger( value );
   },
 
   /**

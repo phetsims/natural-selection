@@ -8,7 +8,6 @@
  */
 
 import Range from '../../../dot/js/Range.js';
-import Utils from '../../../dot/js/Utils.js';
 import naturalSelection from '../naturalSelection.js';
 import NaturalSelectionUtils from './NaturalSelectionUtils.js';
 
@@ -159,7 +158,7 @@ const SCHEMA = {
   maxPopulation: {
     type: 'number',
     defaultValue: 750,
-    isValidValue: value => ( value > 0 && Utils.isInteger( value ) )
+    isValidValue: value => ( value > 0 && Number.isInteger( value ) )
   },
 
   // Age at which bunnies die of old-age.
