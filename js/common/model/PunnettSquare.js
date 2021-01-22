@@ -18,6 +18,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
 
@@ -30,7 +31,7 @@ class PunnettSquare {
   constructor( fatherGenePair, motherGenePair ) {
 
     // @private {Cell[]}
-    this.cells = phet.joist.random.shuffle( [
+    this.cells = dotRandom.shuffle( [
       new Cell( fatherGenePair.fatherAllele, motherGenePair.fatherAllele ),
       new Cell( fatherGenePair.fatherAllele, motherGenePair.motherAllele ),
       new Cell( fatherGenePair.motherAllele, motherGenePair.fatherAllele ),
@@ -55,7 +56,7 @@ class PunnettSquare {
    * @public
    */
   getRandomCell() {
-    return this.cells[ phet.joist.random.nextIntBetween( 0, this.cells.length - 1 ) ];
+    return this.cells[ dotRandom.nextIntBetween( 0, this.cells.length - 1 ) ];
   }
 
   /**

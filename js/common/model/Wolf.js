@@ -7,6 +7,7 @@
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -53,7 +54,7 @@ class Wolf extends Organism {
     super( modelViewTransform, options );
 
     // @private {number}
-    this.speed = phet.joist.random.nextDoubleInRange( WOLF_SPEED_RANGE );
+    this.speed = dotRandom.nextDoubleInRange( WOLF_SPEED_RANGE );
 
     // @public fires when the Wolf has been disposed. dispose is required.
     this.disposedEmitter = new Emitter();
@@ -80,7 +81,7 @@ class Wolf extends Organism {
    */
   move( dt ) {
 
-    const angle = phet.joist.random.nextDoubleBetween( 0, 2 * Math.PI );
+    const angle = dotRandom.nextDoubleBetween( 0, 2 * Math.PI );
 
     // Do some basic trig to compute motion in x and z planes
     const hypotenuse = dt * this.speed;

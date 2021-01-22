@@ -9,6 +9,7 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -318,7 +319,7 @@ class BunnyCollection {
     let bornIndex = 0;
 
     // Shuffle the collection of live bunnies so that mating is random. shuffle returns a new array.
-    const bunnies = phet.joist.random.shuffle( this.liveBunnies );
+    const bunnies = dotRandom.shuffle( this.liveBunnies );
     phet.log && phet.log( `mating ${bunnies.length} bunnies` );
 
     // Prioritize mating of bunnies that have a recessive mutation, so that the mutation appears in the phenotype
@@ -357,7 +358,7 @@ class BunnyCollection {
       }
 
       // Randomly shuffle the indices, so that we can just take how many we need from the beginning of the array.
-      indices = phet.joist.random.shuffle( indices );
+      indices = dotRandom.shuffle( indices );
 
       // Select indices for each mutation that will be applied by taking indices from the beginning of the array.
       if ( mutateFur ) {
@@ -567,7 +568,7 @@ class BunnyCollection {
    * @public
    */
   getSelectionCandidates() {
-    return phet.joist.random.shuffle( this.liveBunnies ); // shuffle returns a new array
+    return dotRandom.shuffle( this.liveBunnies ); // shuffle returns a new array
   }
 
   /**

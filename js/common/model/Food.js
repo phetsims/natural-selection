@@ -11,6 +11,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import Random from '../../../../dot/js/Random.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -196,7 +197,7 @@ class Food {
       let percentToStarveLongTeeth = 0;
       let percentToStarveShortTeeth = 0;
 
-      const percentToStarve = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.toughFoodPercentToStarveRange );
+      const percentToStarve = dotRandom.nextDoubleInRange( NaturalSelectionQueryParameters.toughFoodPercentToStarveRange );
       phet.log && phet.log( `randomly selected ${percentToStarve} from toughFoodPercentToStarveRange` );
       percentToStarveShortTeeth = Math.min( 1, percentToStarve * NaturalSelectionQueryParameters.shortTeethMultiplier );
       percentToStarveLongTeeth = percentToStarve;
@@ -237,7 +238,7 @@ class Food {
     const totalBunnies = bunnies.length;
 
     // Randomly choose the number of bunnies that can be supported by limited food.
-    const carryingCapacity = Utils.roundSymmetric( phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.limitedFoodPopulationRange ) );
+    const carryingCapacity = Utils.roundSymmetric( dotRandom.nextDoubleInRange( NaturalSelectionQueryParameters.limitedFoodPopulationRange ) );
 
     if ( totalBunnies > 0 ) {
       phet.log && phet.log( `Applying limited food: population is ${totalBunnies}, carrying capacity is ${carryingCapacity}` );

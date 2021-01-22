@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
@@ -58,7 +59,7 @@ class GenePair extends PhetioObject {
     // The mutation is randomly applied to either the father or mother allele, but not both. If the mutant allele is
     // recessive, the mutation will not immediately affect appearance. It appears in the phenotype in some later
     // generation, when a homozygous recessive bunny is born.
-    if ( phet.joist.random.nextBoolean() ) {
+    if ( dotRandom.nextBoolean() ) {
       this.fatherAllele = mutantAllele;
     }
     else {

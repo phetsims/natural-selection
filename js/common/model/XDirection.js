@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import naturalSelection from '../../naturalSelection.js';
 
@@ -20,7 +21,7 @@ const XDirection = Enumeration.byKeys( [ 'LEFT', 'RIGHT' ], {
      * @public
      * @static
      */
-    XDirection.getRandom = () => phet.joist.random.nextBoolean() ? XDirection.RIGHT : XDirection.LEFT;
+    XDirection.getRandom = () => dotRandom.nextBoolean() ? XDirection.RIGHT : XDirection.LEFT;
 
     /**
      * Provides the opposite direction.

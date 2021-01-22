@@ -71,6 +71,7 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import naturalSelection from '../../naturalSelection.js';
 
@@ -118,12 +119,12 @@ class EnvironmentModelViewTransform {
   getRandomGroundPosition( xMargin ) {
 
     // Choose a random z coordinate on the ground trapezoid.
-    const zModel = phet.joist.random.nextDoubleBetween( this.zNearModel + Z_MARGIN_MODEL, this.zFarModel - Z_MARGIN_MODEL );
+    const zModel = dotRandom.nextDoubleBetween( this.zNearModel + Z_MARGIN_MODEL, this.zFarModel - Z_MARGIN_MODEL );
 
     // Choose a random x coordinate at the z coordinate.
     const xMinModel = this.getMinimumX( zModel ) + xMargin;
     const xMaxModel = this.getMaximumX( zModel ) - xMargin;
-    const xModel = phet.joist.random.nextDoubleBetween( xMinModel, xMaxModel );
+    const xModel = dotRandom.nextDoubleBetween( xMinModel, xMaxModel );
 
     // Get the ground y coordinate at the z coordinate.
     const yModel = this.getGroundY( zModel );

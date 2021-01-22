@@ -10,6 +10,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
@@ -209,7 +210,7 @@ class WolfCollection {
       phet.log && phet.log( `Applying wolves: ${whiteCount} white, ${brownCount} brown, environment=${this.environmentProperty.value}` );
 
       // Eat some of each phenotype, but eat more of the bunnies whose fur color does not match the environment.
-      const percentToEat = phet.joist.random.nextDoubleInRange( NaturalSelectionQueryParameters.wolvesPercentToEatRange );
+      const percentToEat = dotRandom.nextDoubleInRange( NaturalSelectionQueryParameters.wolvesPercentToEatRange );
       phet.log && phet.log( `randomly selected ${percentToEat} from wolvesPercentToEatRange` );
       const percentToEatMatch = percentToEat;
       const percentToEatNoMatch = percentToEat * NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier;

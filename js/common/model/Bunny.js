@@ -9,6 +9,7 @@
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -106,7 +107,7 @@ class Bunny extends Organism {
 
     // @private {number} the cumulative time spent resting since the last hop, in seconds
     // Initialized with a random value so that bunnies born at the same time don't all hop at the same time.
-    this.cumulativeRestTime = phet.joist.random.nextDoubleInRange( this.bunnyRestRangeProperty.value );
+    this.cumulativeRestTime = dotRandom.nextDoubleInRange( this.bunnyRestRangeProperty.value );
 
     // @private {number} time to complete one full hop, randomized in initializeMotion
     this.hopTime = HOP_TIME_RANGE.max;
@@ -221,10 +222,10 @@ class Bunny extends Organism {
     this.cumulativeHopTime = 0;
 
     // Randomize motion for the next cycle
-    this.restTime = phet.joist.random.nextDoubleInRange( this.bunnyRestRangeProperty.value );
-    this.hopTime = phet.joist.random.nextDoubleInRange( HOP_TIME_RANGE );
-    const hopDistance = phet.joist.random.nextDoubleInRange( HOP_DISTANCE_RANGE );
-    const hopHeight = phet.joist.random.nextDoubleInRange( HOP_HEIGHT_RANGE );
+    this.restTime = dotRandom.nextDoubleInRange( this.bunnyRestRangeProperty.value );
+    this.hopTime = dotRandom.nextDoubleInRange( HOP_TIME_RANGE );
+    const hopDistance = dotRandom.nextDoubleInRange( HOP_DISTANCE_RANGE );
+    const hopHeight = dotRandom.nextDoubleInRange( HOP_HEIGHT_RANGE );
 
     // Get motion delta for the next cycle
     this.hopDelta = getHopDelta( hopDistance, hopHeight, this.xDirectionProperty.value );
@@ -414,7 +415,7 @@ function getHopDelta( hopDistance, hopHeight, xDirection ) {
   assert && assert( NaturalSelectionUtils.isNonNegative( hopHeight ), `invalid hopHeight: ${hopHeight}` );
   assert && assert( XDirection.includes( xDirection ), 'invalid xDirection' );
 
-  const angle = phet.joist.random.nextDoubleBetween( 0, 2 * Math.PI );
+  const angle = dotRandom.nextDoubleBetween( 0, 2 * Math.PI );
 
   // Do some basic trig to compute motion in x and z planes
   const hypotenuse = hopDistance;
