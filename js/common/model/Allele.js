@@ -80,8 +80,8 @@ Allele.AlleleIO = new IOType( 'AlleleIO', {
 
 // Static instances
 
-// tandem for all static instances of Solute, which are used across all screens
-const ALLELES_TANDEM = Tandem.GLOBAL.createTandem( 'model' ).createTandem( 'alleles' );
+// tandem for all static instances of Solute, which are used across all screens // TODO: bad doc
+const ALLELES_TANDEM = Tandem.GLOBAL_MODEL.createTandem( 'model' ).createTandem( 'alleles' );
 
 Allele.WHITE_FUR = new Allele( naturalSelectionStrings.whiteFur, whiteFurImage, 'whiteFur', {
   tandem: ALLELES_TANDEM.createTandem( 'whiteFurAllele' )
