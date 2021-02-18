@@ -76,7 +76,7 @@ class NaturalSelectionScreenView extends ScreenView {
     const generationClockNode = new GenerationClockNode( model.generationClock,
       model.food.enabledProperty, model.wolfCollection.enabledProperty, {
         centerX: environmentNode.centerX,
-        top: environmentNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
+        top: environmentNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN - 3,
         tandem: options.tandem.createTandem( 'generationClockNode' )
       } );
 

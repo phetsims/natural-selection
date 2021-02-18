@@ -12,6 +12,7 @@ import Range from '../../../../dot/js/Range.js';
 import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -19,6 +20,7 @@ import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import GenerationClock from '../model/GenerationClock.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -27,7 +29,7 @@ import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 const START_ANGLE = -Math.PI / 2; // 12:00
 const RADIUS = 18;
 const LINE_WIDTH = 1;
-const GENERATION_FONT = new PhetFont( 16 );
+const GENERATION_FONT = new PhetFont( 14 );
 
 class GenerationClockNode extends Node {
 
@@ -78,7 +80,8 @@ class GenerationClockNode extends Node {
     const generationNode = new Text( '', {
       font: GENERATION_FONT,
       fill: 'black',
-      top: circle.bottom + 3
+      top: circle.bottom + 3,
+      maxWidth: 100 // determined empirically
     } );
 
     // Layering order is important here!
@@ -89,7 +92,9 @@ class GenerationClockNode extends Node {
 
     // Update the generation number. unlink is not necessary.
     generationClock.clockGenerationProperty.link( clockGeneration => {
-      generationNode.text = clockGeneration;
+      generationNode.text = StringUtils.fillIn( naturalSelectionStrings.generationValue, {
+        value: clockGeneration
+      } );
       generationNode.centerX = circle.centerX;
     } );
 
