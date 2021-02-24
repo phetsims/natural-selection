@@ -8,6 +8,7 @@
  */
 
 import Range from '../../../dot/js/Range.js';
+import logGlobal from '../../../phet-core/js/logGlobal.js';
 import naturalSelection from '../naturalSelection.js';
 import NaturalSelectionUtils from './NaturalSelectionUtils.js';
 
@@ -285,9 +286,6 @@ function parseRange( value ) {
   return new Range( numbers[ 0 ], numbers[ 1 ] );
 }
 
-// log the values of all sim-specific query parameters
-phet.log && phet.log( 'query parameters: ' + JSON.stringify( NaturalSelectionQueryParameters, null, 2 ) );
-
 // validate query parameters
 assert && assert( NaturalSelectionQueryParameters.wolvesEnvironmentMultiplier *
                   NaturalSelectionQueryParameters.wolvesPercentToEatRange.max <= 1,
@@ -301,4 +299,10 @@ if ( NaturalSelectionQueryParameters.shortTeethMultiplier *
 }
 
 naturalSelection.register( 'NaturalSelectionQueryParameters', NaturalSelectionQueryParameters );
+
+// Log query parameters
+logGlobal( 'phet.chipper.queryParameters' );
+logGlobal( 'phet.preloads.phetio.queryParameters' );
+logGlobal( 'phet.naturalSelection.NaturalSelectionQueryParameters' );
+
 export default NaturalSelectionQueryParameters;
