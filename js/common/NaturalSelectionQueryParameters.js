@@ -213,7 +213,7 @@ const SCHEMA = {
   // Tuned in https://github.com/phetsims/natural-selection/issues/86
   shortTeethMultiplier: {
     type: 'number',
-    defaultValue: 2 ,
+    defaultValue: 2,
     isValidValue: value => ( value > 1 )
   },
 
