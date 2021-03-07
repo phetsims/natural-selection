@@ -11,6 +11,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import GenePool from '../model/GenePool.js';
@@ -52,15 +53,12 @@ class GenesVisibilityManager {
      * Creates a Property that controls the visibility of all UI components related to a gene.
      * @param {Gene} gene
      * @param {boolean} visible
-     * @param {Tandem} tandem
+     * @param {Object} [options] - options to BooleanProperty
      * @returns {BooleanProperty}
      */
-    function createGeneVisibleProperty( gene, visible, tandem ) {
+    function createGeneVisibleProperty( gene, visible, options ) {
 
-      const property = new BooleanProperty( visible, {
-        tandem: tandem,
-        phetioDocumentation: `sets the visibility of all user-interface components related to ${gene.name} for this screen`
-      } );
+      const property = new BooleanProperty( visible, options );
 
       // Set the visibility of UI components related to the gene. unlink is not necessary.
       property.link( visible => {
@@ -73,13 +71,21 @@ class GenesVisibilityManager {
       return property;
     }
 
-    // @private Properties used configure the UI. For use in Studio only, and exist for the lifetime of the sim.
-    this.furVisibleProperty = createGeneVisibleProperty( genePool.furGene, options.furVisible,
-      options.tandem.createTandem( 'furVisibleProperty' ) );
-    this.earsVisibleProperty = createGeneVisibleProperty( genePool.earsGene, options.earsVisible,
-      options.tandem.createTandem( 'earsVisibleProperty' ) );
-    this.teethVisibleProperty = createGeneVisibleProperty( genePool.teethGene, options.teethVisible,
-      options.tandem.createTandem( 'teethVisibleProperty' ) );
+    const template = 'sets the visibility of all user-interface components related to {{name}} for this screen';
+
+    // @private Properties used to configure the UI. For use in Studio only, and exist for the lifetime of the sim.
+    this.furVisibleProperty = createGeneVisibleProperty( genePool.furGene, options.furVisible, {
+      tandem: options.tandem.createTandem( 'furVisibleProperty' ),
+      phetioDocumentation: StringUtils.fillIn( template, { name: 'Fur' } )
+    } );
+    this.earsVisibleProperty = createGeneVisibleProperty( genePool.earsGene, options.earsVisible, {
+      tandem: options.tandem.createTandem( 'earsVisibleProperty' ),
+      phetioDocumentation: StringUtils.fillIn( template, { name: 'Ears' } )
+    } );
+    this.teethVisibleProperty = createGeneVisibleProperty( genePool.teethGene, options.teethVisible, {
+      tandem: options.tandem.createTandem( 'teethVisibleProperty' ),
+      phetioDocumentation: StringUtils.fillIn( template, { name: 'Teeth' } )
+    } );
   }
 
   /**
