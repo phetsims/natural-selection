@@ -97,13 +97,20 @@ class DataProbeNode extends Node {
 
     // NumberDisplay instances
     const genePool = populationModel.genePool;
-    const totalDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'totalCount', NaturalSelectionColors.POPULATION_TOTAL_COUNT );
-    const whiteFurDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'whiteFurCount', genePool.furGene.color );
-    const brownFurDisplay = createDashedNumberDisplay( dataProbe.countsProperty, 'brownFurCount', genePool.furGene.color );
-    const straightEarsDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'straightEarsCount', genePool.earsGene.color );
-    const floppyEarsDisplay = createDashedNumberDisplay( dataProbe.countsProperty, 'floppyEarsCount', genePool.earsGene.color );
-    const shortTeethDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'shortTeethCount', genePool.teethGene.color );
-    const longTeethDisplay = createDashedNumberDisplay( dataProbe.countsProperty, 'longTeethCount', genePool.teethGene.color );
+    const totalDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'totalCount',
+      NaturalSelectionColors.POPULATION_TOTAL_COUNT, populationModel.totalVisibleProperty );
+    const whiteFurDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'whiteFurCount',
+      genePool.furGene.color, populationModel.whiteFurVisibleProperty );
+    const brownFurDisplay = createDashedNumberDisplay( dataProbe.countsProperty, 'brownFurCount',
+      genePool.furGene.color, populationModel.brownFurVisibleProperty );
+    const straightEarsDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'straightEarsCount',
+      genePool.earsGene.color, populationModel.straightEarsVisibleProperty );
+    const floppyEarsDisplay = createDashedNumberDisplay( dataProbe.countsProperty, 'floppyEarsCount',
+      genePool.earsGene.color, populationModel.floppyEarsVisibleProperty );
+    const shortTeethDisplay = createSolidNumberDisplay( dataProbe.countsProperty, 'shortTeethCount',
+      genePool.teethGene.color, populationModel.shortTeethVisibleProperty );
+    const longTeethDisplay = createDashedNumberDisplay( dataProbe.countsProperty, 'longTeethCount',
+      genePool.teethGene.color, populationModel.longTeethVisibleProperty );
 
     // vertical layout of NumberDisplays 
     const numberDisplaysParent = new VBox( {
@@ -135,15 +142,6 @@ class DataProbeNode extends Node {
 
     // Interrupt interaction when visibility changes.
     this.visibleProperty.link( visible => this.interruptSubtreeInput() );
-
-    // Visibility of NumberDisplays. VBox handles compacting the layout.
-    populationModel.totalVisibleProperty.linkAttribute( totalDisplay, 'visible' );
-    populationModel.whiteFurVisibleProperty.linkAttribute( whiteFurDisplay, 'visible' );
-    populationModel.brownFurVisibleProperty.linkAttribute( brownFurDisplay, 'visible' );
-    populationModel.straightEarsVisibleProperty.linkAttribute( straightEarsDisplay, 'visible' );
-    populationModel.floppyEarsVisibleProperty.linkAttribute( floppyEarsDisplay, 'visible' );
-    populationModel.shortTeethVisibleProperty.linkAttribute( shortTeethDisplay, 'visible' );
-    populationModel.longTeethVisibleProperty.linkAttribute( longTeethDisplay, 'visible' );
 
     // Flip NumberDisplays around the y axis at edges of the graph, so that they stay inside the bounds of the graph.
     // unlink is not necessary.
@@ -183,11 +181,13 @@ class DataProbeNode extends Node {
  * @param {Property.<BunnyCounts|null>} bunnyCountsProperty
  * @param {string} bunnyCountsFieldName - name of the desired field in BunnyCounts
  * @param {Color|string} color
+ * @param {Property.<boolean>} visibleProperty
  * @returns {NumberDisplay}
  */
-function createSolidNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, color ) {
+function createSolidNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, color, visibleProperty ) {
   const colorWithAlpha = Color.toColor( color ).withAlpha( NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY );
   return createNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, {
+    visibleProperty: visibleProperty,
     backgroundFill: colorWithAlpha,
     backgroundStroke: colorWithAlpha
   } );
@@ -198,10 +198,12 @@ function createSolidNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, co
  * @param {Property.<BunnyCounts|null>} bunnyCountsProperty
  * @param {string} bunnyCountsFieldName - name of the desired field in BunnyCounts
  * @param {Color|string} color
+ * @param {Property.<boolean>} visibleProperty
  * @returns {NumberDisplay}
  */
-function createDashedNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, color ) {
+function createDashedNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, color, visibleProperty ) {
   return createNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, {
+    visibleProperty: visibleProperty,
     backgroundFill: new Color( 255, 255, 255, NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY ),
     backgroundStroke: color,
     backgroundLineDash: [ 3, 3 ]
