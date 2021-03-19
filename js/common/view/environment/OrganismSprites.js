@@ -68,8 +68,10 @@ class OrganismSprites extends Sprites {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioReadOnly: true,
-      phetioDocumentation: 'bunnies, wolves, and shrubs that appear in the environment'
+      // phetioReadOnly: true,
+      phetioDocumentation: 'bunnies, wolves, and shrubs that appear in the environment',
+      visiblePropertyOptions: { phetioReadOnly: true },
+      inputEnabledPropertyPhetioInstrumented: true
     }, options );
 
     assert && assert( !options.canvasBounds, 'OrganismSprites sets canvasBounds' );
@@ -148,6 +150,13 @@ class OrganismSprites extends Sprites {
 
       tandem: options.tandem.createTandem( 'bunnyPressListener' )
     } ) );
+
+    // If inputEnabled is disabled, clear any bunny selection. unlink is not needed.
+    this.inputEnabledProperty.link( inputEnabled => {
+      if ( !inputEnabled ) {
+        this.bunnyCollection.selectedBunnyProperty.value = null;
+      }
+    } );
 
     this.update();
   }
