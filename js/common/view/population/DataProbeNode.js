@@ -61,16 +61,13 @@ class DataProbeNode extends Node {
       offset: Vector2.ZERO, // offset in view coordinates
 
       // phet-io
-      tandem: Tandem.REQUIRED,
-
-      // model controls visibility
-      visiblePropertyOptions: {
-        phetioReadOnly: true,
-        phetioDocumentation: 'visibility is controlled by the model'
-      }
+      tandem: Tandem.REQUIRED
     }, options );
 
     const dataProbe = populationModel.dataProbe;
+
+    assert && assert( !options.visibleProperty, 'DataProbeNode sets visibleProperty' );
+    options.visibleProperty = dataProbe.visibleProperty;
 
     // Transform for data probe offset from the top-left of the grid
     const offsetTransform =
@@ -136,11 +133,8 @@ class DataProbeNode extends Node {
       tandem: options.tandem.createTandem( 'dragListener' )
     } ) );
 
-    // Visibility of the probe. unlink is not necessary.
-    dataProbe.visibleProperty.link( dataProbeVisible => {
-      this.interruptSubtreeInput(); // cancel interactions
-      this.visible = dataProbeVisible;
-    } );
+    // Interrupt interaction when visibility changes.
+    this.visibleProperty.link( visible => this.interruptSubtreeInput() );
 
     // Visibility of NumberDisplays. VBox handles compacting the layout.
     populationModel.totalVisibleProperty.linkAttribute( totalDisplay, 'visible' );
