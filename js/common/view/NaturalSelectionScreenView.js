@@ -7,7 +7,6 @@
  */
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -18,15 +17,11 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionModel from '../model/NaturalSelectionModel.js';
 import SimulationMode from '../model/SimulationMode.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import AddMutationsPanel from './AddMutationsPanel.js';
 import BunnyImageMap from './BunnyImageMap.js';
 import DiedDialog from './DiedDialog.js';
-import EnvironmentNode from './environment/EnvironmentNode.js';
 import EnvironmentalFactorsPanel from './EnvironmentalFactorsPanel.js';
-import EnvironmentRadioButtonGroup from './EnvironmentRadioButtonGroup.js';
-import GenerationClockNode from './GenerationClockNode.js';
+import EnvironmentPanel from './EnvironmentPanel.js';
 import GenesVisibilityManager from './GenesVisibilityManager.js';
 import GraphChoice from './GraphChoice.js';
 import GraphChoiceRadioButtonGroup from './GraphChoiceRadioButtonGroup.js';
@@ -34,8 +29,6 @@ import MemoryLimitDialog from './MemoryLimitDialog.js';
 import MutationAlertsNode from './MutationAlertsNode.js';
 import NaturalSelectionTimeControlNode from './NaturalSelectionTimeControlNode.js';
 import PedigreeNode from './pedigree/PedigreeNode.js';
-import PerformanceTimesNode from './PerformanceTimesNode.js';
-import PlayButtonGroup from './PlayButtonGroup.js';
 import PopulationNode from './population/PopulationNode.js';
 import ProportionsNode from './proportions/ProportionsNode.js';
 import WorldDialog from './WorldDialog.js';
@@ -66,29 +59,14 @@ class NaturalSelectionScreenView extends ScreenView {
 
     const bunnyImageMap = new BunnyImageMap();
 
-    const environmentNode = new EnvironmentNode( model, bunnyImageMap, {
+    const environmentPanel = new EnvironmentPanel( model, bunnyImageMap, {
       left: this.layoutBounds.left + NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN,
       top: this.layoutBounds.top + NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN,
-      tandem: options.tandem.createTandem( 'environmentNode' )
+      tandem: options.tandem.createTandem( 'environmentPanel' )
     } );
 
-    // Generation clock
-    const generationClockNode = new GenerationClockNode( model.generationClock,
-      model.food.enabledProperty, model.wolfCollection.enabledProperty, {
-        centerX: environmentNode.centerX,
-        top: environmentNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN - 3,
-        tandem: options.tandem.createTandem( 'generationClockNode' )
-      } );
-
-    // Environment radio buttons
-    const environmentRadioButtonGroup = new EnvironmentRadioButtonGroup( model.environmentProperty, {
-      right: environmentNode.right - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_X_MARGIN,
-      top: environmentNode.top + NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
-      tandem: options.tandem.createTandem( 'environmentRadioButtonGroup' )
-    } );
-
-    // Available width to the right of environmentNode, used to size control panels
-    const rightOfViewportWidth = this.layoutBounds.width - environmentNode.width -
+    // Available width to the right of environmentPanel, used to size control panels
+    const rightOfViewportWidth = this.layoutBounds.width - environmentPanel.width -
                                  ( 2 * NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN ) -
                                  NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
@@ -104,11 +82,11 @@ class NaturalSelectionScreenView extends ScreenView {
         tandem: options.tandem.createTandem( 'environmentalFactorsPanel' )
       } );
 
-    const panelsParent = new VBox( {
+    const controlPanelsParent = new VBox( {
       children: [ addMutationsPanel, environmentalFactorsPanel ],
       spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-      left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-      top: environmentNode.top
+      left: environmentPanel.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
+      top: environmentPanel.top
     } );
 
     // Displays the 'Mutation Coming...' alerts
@@ -116,12 +94,12 @@ class NaturalSelectionScreenView extends ScreenView {
 
     // The graphs and their related controls fill the space below the viewport.
     const graphAreaSize = new Dimension2(
-      environmentNode.width,
+      environmentPanel.width,
       this.layoutBounds.height - ( 2 * NaturalSelectionConstants.SCREEN_VIEW_Y_MARGIN ) -
-      environmentNode.height - NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
+      environmentPanel.height - NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING
     );
-    const graphAreaLeft = environmentNode.left;
-    const graphAreaTop = environmentNode.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING;
+    const graphAreaLeft = environmentPanel.left;
+    const graphAreaTop = environmentPanel.bottom + NaturalSelectionConstants.SCREEN_VIEW_Y_SPACING;
 
     // Organize everything related to graphs under this tandem
     const graphsTandem = options.tandem.createTandem( 'graphs' );
@@ -160,7 +138,7 @@ class NaturalSelectionScreenView extends ScreenView {
       maxWidth: rightOfViewportWidth,
 
       // Add PANEL_OPTIONS.xMargin so that radio buttons left-align with controls in panels above them.
-      left: environmentNode.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING + NaturalSelectionConstants.PANEL_OPTIONS.xMargin,
+      left: environmentPanel.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING + NaturalSelectionConstants.PANEL_OPTIONS.xMargin,
       centerY: populationNode.centerY,
       tandem: graphsTandem.createTandem( 'graphChoiceRadioButtonGroup' )
     } );
@@ -191,41 +169,10 @@ class NaturalSelectionScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
-    // The time that it took to execute the 'Start Over' button callback, in ms
-    // For performance profiling, see https://github.com/phetsims/natural-selection/issues/140
-    const timeToStartOverProperty = new NumberProperty( 0, {
-      tandem: Tandem.OPT_OUT
-    } );
-
-    // The different buttons that can be used to make the simulation begin playing.
-    const playButtonGroup = new PlayButtonGroup(
-      model.simulationModeProperty,
-      model.bunnyCollection.liveBunnies.lengthProperty, {
-
-        // Callback for the 'Add a Mate' button
-        addAMate: () => model.addAMate(),
-
-        // Callback for the 'Start Over' button, with performance profiling,
-        // see https://github.com/phetsims/natural-selection/issues/140
-        startOver: () => {
-
-          // Like 'Reset All', cancel any interactions that are in progress.
-          this.interruptSubtreeInput();
-
-          timeToStartOverProperty.value = NaturalSelectionUtils.time( () => model.startOver() );
-        },
-        centerX: environmentNode.centerX,
-        bottom: environmentNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
-        tandem: options.tandem.createTandem( 'playButtonGroup' )
-      } );
-
     // layering
     this.children = [
-      environmentNode,
-      generationClockNode,
-      environmentRadioButtonGroup,
-      playButtonGroup,
-      panelsParent,
+      environmentPanel,
+      controlPanelsParent,
       graphChoiceRadioButtonGroup,
       timeControlNode,
       populationNode,
@@ -246,7 +193,6 @@ class NaturalSelectionScreenView extends ScreenView {
       addMutationsPanel.setContentEnabled( enabled );
       environmentalFactorsPanel.setContentEnabled( enabled );
       timeControlNode.enabledProperty.value = enabled;
-      environmentRadioButtonGroup.enabledProperty.value = enabled;
     } );
 
     // Stuff to do when the simulation needs to be ended.
@@ -259,7 +205,7 @@ class NaturalSelectionScreenView extends ScreenView {
 
       // So we don't leave bunnies captured in mid-hop
       model.bunnyCollection.moveBunniesToGround();
-      environmentNode.updateSprites();
+      environmentPanel.updateSprites();
     };
 
     // Group all dialogs in Studio
@@ -301,7 +247,7 @@ class NaturalSelectionScreenView extends ScreenView {
 
     // @private
     this.model = model;
-    this.environmentNode = environmentNode; // {EnvironmentNode}
+    this.environmentPanel = environmentPanel; // {EnvironmentPanel}
 
     // eslint-disable-next-line no-new
     new GenesVisibilityManager( model.genePool, addMutationsPanel, populationNode, proportionsNode, pedigreeNode, {
@@ -310,16 +256,6 @@ class NaturalSelectionScreenView extends ScreenView {
       teethVisible: options.teethVisible,
       tandem: options.tandem.createTandem( 'genes' )
     } );
-
-    // Show performance profiling in the upper-left corner of the environment, and in the console.
-    // See https://github.com/phetsims/natural-selection/issues/60 and https://github.com/phetsims/natural-selection/issues/140
-    if ( NaturalSelectionQueryParameters.showTimes ) {
-      this.addChild( new PerformanceTimesNode( model.timeToMateProperty, timeToStartOverProperty, {
-        left: environmentNode.left + 5,
-        top: environmentNode.top + 5,
-        tandem: Tandem.OPT_OUT
-      } ) );
-    }
   }
 
   /**
@@ -349,7 +285,7 @@ class NaturalSelectionScreenView extends ScreenView {
 
       // Sim.js calls model.step before view.step. So after all of the model elements have been updated, this
       // updates the view of their corresponding sprites.
-      this.environmentNode.updateSprites();
+      this.environmentPanel.updateSprites();
     }
   }
 }
