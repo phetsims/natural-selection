@@ -31,7 +31,7 @@ simLauncher.launch( () => {
       leadDesign: 'Amanda McGarry',
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
       team: 'Wendy Adams, Megan Hoffman, Oliver Nix, Jonathan Olson, Ariel Paul, Kathy Perkins, Noah Podolefsky, Carl Wieman',
-      qualityAssurance: 'Logan Bray, Steele Dalton, Liam Mulhall, Katie Woessner',
+      qualityAssurance: 'Logan Bray, Steele Dalton, Liam Mulhall, Kathryn Woessner',
       graphicArts: 'Megan Lai'
     }
   } );
