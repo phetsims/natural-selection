@@ -38,6 +38,8 @@ class NaturalSelectionTimeControlNode extends HBox {
     options = merge( {
       spacing: 10,
 
+      disabledOpacity: SunConstants.DISABLED_OPACITY,
+
       // phet-io
       tandem: Tandem.REQUIRED,
       enabledPropertyPhetioInstrumented: true // opt into default PhET-iO instrumented enabledProperty
@@ -80,8 +82,6 @@ class NaturalSelectionTimeControlNode extends HBox {
         isPlayingProperty.value = isPlayingSaved;
       }
     } );
-
-    this.enabledProperty.link( enabled => SunConstants.componentEnabledListener( enabled, this ) );
   }
 
   /**
