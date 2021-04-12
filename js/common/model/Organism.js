@@ -85,7 +85,7 @@ class Organism extends PhetioObject {
   /**
    * Gets the minimum x coordinate for an organism's position.
    * @returns {number}
-   * @private
+   * @protected
    */
   getMinimumX() {
     return this.modelViewTransform.getMinimumX( this.positionProperty.value.z );
@@ -94,7 +94,7 @@ class Organism extends PhetioObject {
   /**
    * Gets the maximum x coordinate for an organism's position.
    * @returns {number}
-   * @private
+   * @protected
    */
   getMaximumX() {
     return this.modelViewTransform.getMaximumX( this.positionProperty.value.z );
@@ -103,7 +103,7 @@ class Organism extends PhetioObject {
   /**
    * Gets the minimum z coordinate for an organism's position.
    * @returns {number}
-   * @private
+   * @protected
    */
   getMinimumZ() {
     return this.modelViewTransform.getMinimumZ() + EnvironmentModelViewTransform.Z_MARGIN_MODEL;
@@ -112,7 +112,7 @@ class Organism extends PhetioObject {
   /**
    * Gets the maximum z coordinate for an organism's position.
    * @returns {number}
-   * @private
+   * @protected
    */
   getMaximumZ() {
     return this.modelViewTransform.getMaximumZ() - EnvironmentModelViewTransform.Z_MARGIN_MODEL;
