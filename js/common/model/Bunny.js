@@ -32,7 +32,7 @@ import XDirection from './XDirection.js';
 
 // constants
 const HOP_TIME_RANGE = new Range( 0.25, 0.5 ); // time to complete a hop cycle, in seconds
-const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // x and z distance that a bunny hops
+const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // straight-line distance that a bunny hops in the xz plane
 const HOP_HEIGHT_RANGE = new Range( 30, 50 ); // how high above the ground a bunny hops
 const X_MARGIN = 28; // determined empirically, to keep bunnies inside bounds of the environment
 
@@ -115,8 +115,11 @@ class Bunny extends Organism {
     // @private {number} the cumulative time spent hopping since the last reset, in seconds
     this.cumulativeHopTime = 0;
 
-    // @private {Vector3|null} the change in position when the bunny hops, randomized in initializeMotion
-    this.hopDelta = null;
+    // @private {Vector3} the change in position when the bunny hops, randomized in initializeMotion
+    this.hopDelta = new Vector3( 0, 0, 0 );
+
+    // @private {Vector3} position at the start of a hop cycle
+    this.hopStartPosition = this.positionProperty.value;
 
     // Initialize the first motion cycle.
     this.initializeMotion();
@@ -217,6 +220,27 @@ class Bunny extends Organism {
    */
   initializeMotion() {
 
+    // Verify that the bunny is in z bounds.
+    // See https://github.com/phetsims/natural-selection/issues/131
+    const currentZ = this.positionProperty.value.z;
+    const minZ = this.getMinimumZ();
+    const maxZ = this.getMaximumZ();
+    assert && assert( currentZ >= minZ || currentZ <= maxZ,
+      `bunny is out of z bounds: z=${currentZ}, minZ=${minZ}, maxZ=${maxZ}` );
+
+    // Verify that the bunny is 'reasonably' in x bounds. The modelViewTransform is a trapezoid, where x range depends
+    // on z coordinate. So a bunny may be slightly outside of this trapezoid. We decided that's OK, and it doesn't
+    // negatively impact the learning goals. The assertion below detects bounds conditions are not 'reasonable'.
+    // See https://github.com/phetsims/natural-selection/issues/131
+    const currentX = this.positionProperty.value.x;
+    const minX = this.getMinimumX() + X_MARGIN;
+    const maxX = this.getMaximumX() - X_MARGIN;
+    assert && assert( currentX >= minX - HOP_DISTANCE_RANGE.max || currentX <= maxX + HOP_DISTANCE_RANGE.max,
+      `bunny is way out of x bounds: x=${currentX}, minX=${minX}, maxX=${maxX}` );
+
+    // Record the position at the start of the hop.
+    this.hopStartPosition = this.positionProperty.value;
+
     // Zero out cumulative times
     this.cumulativeRestTime = 0;
     this.cumulativeHopTime = 0;
@@ -230,16 +254,25 @@ class Bunny extends Organism {
     // Get motion delta for the next cycle
     this.hopDelta = getHopDelta( hopDistance, hopHeight, this.xDirectionProperty.value );
 
-    // Reverse delta x if the hop would exceed x boundaries
-    const hopEndX = this.positionProperty.value.x + this.hopDelta.x;
-    if ( hopEndX <= this.getMinimumX() + X_MARGIN || hopEndX >= this.getMaximumX() - X_MARGIN ) {
-      this.hopDelta.setX( -this.hopDelta.x );
+    // If the hop will exceed z boundaries, reverse delta z.  Do this before checking x, because the range of
+    // x depends on the value of z.
+    let hopEndZ = this.hopStartPosition.z + this.hopDelta.z;
+    if ( hopEndZ < minZ || hopEndZ > maxZ ) {
+      this.hopDelta.setZ( -this.hopDelta.z );
+      hopEndZ = this.hopStartPosition.z + this.hopDelta.z;
     }
 
-    // Reverse delta z if the hop would exceed z boundaries
-    const hopEndZ = this.positionProperty.value.z + this.hopDelta.z;
-    if ( hopEndZ <= this.getMinimumZ() || hopEndZ >= this.getMaximumZ() ) {
-      this.hopDelta.setZ( -this.hopDelta.z );
+    // After checking z, now we can check x. If the hop will exceed x boundaries, point the bunny in the correct
+    // direction. Note that this is not a matter of simply flipping the sign of hopDelta.x, because the range of
+    // x is based on z. See https://github.com/phetsims/natural-selection/issues/131
+    const hopEndX = this.hopStartPosition.x + this.hopDelta.x;
+    const endMinX = this.modelViewTransform.getMinimumX( hopEndZ ) + X_MARGIN;
+    const endMaxX = this.modelViewTransform.getMaximumX( hopEndZ ) - X_MARGIN;
+    if ( hopEndX < endMinX ) {
+      this.hopDelta.setX( Math.abs( this.hopDelta.x ) ); // move to the right
+    }
+    else if ( hopEndX > endMaxX ) {
+      this.hopDelta.setX( -Math.abs( this.hopDelta.x ) ); // move to the left
     }
 
     // Adjust the x direction to match the hop delta x
@@ -252,20 +285,22 @@ class Bunny extends Organism {
    * @private
    */
   hop( dt ) {
+    assert && assert( this.cumulativeHopTime < this.hopTime, 'hop should not have been called' );
 
-    // x and y parts of the hop. Don't do more than the remaining portion of the hop cycle.
-    const xzFraction = Math.min( dt, this.hopTime - this.cumulativeHopTime ) / this.hopTime;
-    const x = this.positionProperty.value.x + ( xzFraction * this.hopDelta.x );
-    const z = this.positionProperty.value.z + ( xzFraction * this.hopDelta.z );
+    this.cumulativeHopTime += dt;
 
-    // Hop height (y) follows a quadratic arc. Again, don't do more than the remaining portion of the hop cycle.
-    const yFraction = Math.min( 1, this.cumulativeHopTime / this.hopTime );
-    const yAboveGround = this.hopDelta.y * 2 * ( -( yFraction * yFraction ) + yFraction );
+    // Portion of the hop cycle to do. Don't do more than 1 hop cycle.
+    const hopFraction = Math.min( 1, this.cumulativeHopTime / this.hopTime );
+
+    // x and z components of the hop.
+    const x = this.hopStartPosition.x + ( hopFraction * this.hopDelta.x );
+    const z = this.hopStartPosition.z + ( hopFraction * this.hopDelta.z );
+
+    // Hop height (y) follows a quadratic arc.
+    const yAboveGround = this.hopDelta.y * 2 * ( -( hopFraction * hopFraction ) + hopFraction );
     const y = this.modelViewTransform.getGroundY( z ) + yAboveGround;
 
     this.positionProperty.value = new Vector3( x, y, z );
-
-    this.cumulativeHopTime += dt;
   }
 
   /**
@@ -326,7 +361,8 @@ class Bunny extends Organism {
     assert && assert( typeof this.cumulativeHopTime === 'number', 'invalid cumulativeHopTime' );
     assert && assert( typeof this.restTime === 'number', 'invalid restTime' );
     assert && assert( typeof this.hopTime === 'number', 'invalid hopTime' );
-    assert && assert( this.hopDelta instanceof Vector3 || this.hopDelta === null, 'invalid hopDelta' );
+    assert && assert( this.hopDelta instanceof Vector3, 'invalid hopDelta' );
+    assert && assert( this.hopStartPosition instanceof Vector3, 'invalid hopStartPosition' );
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -357,7 +393,8 @@ class Bunny extends Organism {
         hopTime: NumberIO.toStateObject( this.hopTime ),
         cumulativeRestTime: NumberIO.toStateObject( this.cumulativeRestTime ),
         cumulativeHopTime: NumberIO.toStateObject( this.cumulativeHopTime ),
-        hopDelta: NullableIO( Vector3.Vector3IO ).toStateObject( this.hopDelta )
+        hopDelta: Vector3.Vector3IO.toStateObject( this.hopDelta ),
+        hopStartPosition: Vector3.Vector3IO.toStateObject( this.hopStartPosition )
       }
     };
   }
@@ -396,7 +433,8 @@ class Bunny extends Organism {
     this.hopTime = required( NumberIO.fromStateObject( stateObject.private.hopTime ) );
     this.cumulativeRestTime = required( NumberIO.fromStateObject( stateObject.private.cumulativeRestTime ) );
     this.cumulativeHopTime = required( NumberIO.fromStateObject( stateObject.private.cumulativeHopTime ) );
-    this.hopDelta = required( NullableIO( Vector3.Vector3IO ).fromStateObject( stateObject.private.hopDelta ) );
+    this.hopDelta = required( Vector3.Vector3IO.fromStateObject( stateObject.private.hopDelta ) );
+    this.hopStartPosition = required( Vector3.Vector3IO.fromStateObject( stateObject.private.hopStartPosition ) );
 
     this.validateInstance();
   }
@@ -404,7 +442,7 @@ class Bunny extends Organism {
 
 /**
  * Gets the (dx, dy, dz) for a hop cycle.
- * @param {number} hopDistance - maximum x and z distance that the bunny will hop
+ * @param {number} hopDistance - maximum straight-line distance that the bunny will hop in the xz plane
  * @param {number} hopHeight - height above the ground that the bunny will hop
  * @param {XDirection} xDirection - direction that the bunny is facing along the x axis
  * @returns {Vector3}
