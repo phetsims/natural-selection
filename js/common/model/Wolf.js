@@ -111,7 +111,7 @@ class Wolf extends Organism {
     }
 
     // wolves never leave the ground
-    const y = this.positionProperty.value.y;
+    const y = this.modelViewTransform.getGroundY( z );
 
     this.positionProperty.value = new Vector3( x, y, z );
   }
