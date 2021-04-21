@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2021, University of Colorado Boulder
 
 /**
  * Main entry point for the simulation.
@@ -31,7 +31,7 @@ simLauncher.launch( () => {
       leadDesign: 'Amanda McGarry',
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
       team: 'Wendy Adams, Megan Hoffman, Oliver Nix, Jonathan Olson, Ariel Paul, Kathy Perkins, Noah Podolefsky, Carl Wieman',
-      qualityAssurance: 'Logan Bray, Steele Dalton, Liam Mulhall, Kathryn Woessner',
+      qualityAssurance: 'Logan Bray, Steele Dalton, Brooklyn Lash, Liam Mulhall, Devon Quispe, Kathryn Woessner',
       graphicArts: 'Megan Lai'
     }
   } );
