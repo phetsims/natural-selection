@@ -1,8 +1,8 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2021, University of Colorado Boulder
 
 /**
- * PopulationLegendCheckbox is a checkbox in the control panel for the Population graph. It serves as a legend
- * (shows the color and line style used for a plot) and provides the means of controlling visibility (checkbox).
+ * PopulationLegendCheckbox is a checkbox in the control panel for the Population graph.
+ * It serves as a legend (shows the color and line style used for a plot) and controls visibility of a plot.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -28,48 +28,45 @@ const LINE_LENGTH = NUMBER_OF_DASHES * LINE_DASH[ 0 ] + ( NUMBER_OF_DASHES - 1 )
 class PopulationLegendCheckbox extends Checkbox {
 
   /**
-   * @param {Property.<boolean>} plotVisibleProperty - Property to show/hide the associated plot on the Population graph
-   * @param {string} alleleName - the allele name
-   * @param {AlignGroup} alignGroup - to make all checkbox content have the same effective size
+   * @param {Property.<boolean>} plotVisibleProperty - visibility of the associated plot on the Population graph
+   * @param {string} labelString - the label on the checkbox
+   * @param {AlignGroup} contentAlignGroup - to make all checkbox content have the same effective size
    * @param {Object} [options]
    */
-  constructor( plotVisibleProperty, alleleName, alignGroup, options ) {
+  constructor( plotVisibleProperty, labelString, contentAlignGroup, options ) {
 
     assert && AssertUtils.assertPropertyOf( plotVisibleProperty, 'boolean' );
-    assert && assert( typeof alleleName === 'string', 'invalid alleleName' );
+    assert && assert( typeof labelString === 'string', 'invalid labelString' );
 
     options = merge( {
-      color: 'white',
-      isMutant: false // true = mutant allele, false = normal allele
+      lineColor: 'black',
+      isLineDashed: false
     }, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
 
     // solid or dashed line
     const lineNode = new Line( 0, 0, LINE_LENGTH, 0, {
-      stroke: options.color,
       lineWidth: 3,
-      lineDash: options.isMutant ? LINE_DASH : []  // mutations use a dashed line
+      stroke: options.lineColor,
+      lineDash: ( options.isLineDashed ? LINE_DASH : [] )
     } );
 
-    // allele name
-    const nameNode = new Text( alleleName, {
+    // text label
+    const labelNode = new Text( labelString, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 100 // determined empirically
     } );
 
     const hBox = new HBox( {
       spacing: 5,
-      children: [ lineNode, nameNode ]
+      children: [ lineNode, labelNode ]
     } );
 
     const content = new AlignBox( hBox, {
-      group: alignGroup,
+      group: contentAlignGroup,
       xAlign: 'left'
     } );
 
     super( content, plotVisibleProperty, options );
-
-    // @public (read-only)
-    this.alleleName = alleleName;
   }
 
   /**
