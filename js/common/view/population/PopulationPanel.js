@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2021, University of Colorado Boulder
 
 /**
  * PopulationPanel is the panel that contains controls for the 'Population' graph.
@@ -21,6 +21,7 @@ import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
+import PopulationAlleleCheckbox from './PopulationAlleleCheckbox.js';
 import PopulationLegendCheckbox from './PopulationLegendCheckbox.js';
 
 class PopulationPanel extends NaturalSelectionPanel {
@@ -51,52 +52,52 @@ class PopulationPanel extends NaturalSelectionPanel {
     // Total checkbox
     const totalCheckbox =
       new PopulationLegendCheckbox( populationModel.totalVisibleProperty, naturalSelectionStrings.total, alignGroup, {
-        color: NaturalSelectionColors.POPULATION_TOTAL_COUNT,
+        lineColor: NaturalSelectionColors.POPULATION_TOTAL_COUNT,
         tandem: options.tandem.createTandem( 'totalCheckbox' )
       } );
 
-    // A checkbox for each allele
+    // A checkbox for each allele, with dashed lines for mutant alleles.
     const whiteFurCheckbox =
-      new PopulationLegendCheckbox( populationModel.whiteFurVisibleProperty, furGene.normalAllele.name, alignGroup, {
-        color: furGene.color,
+      new PopulationAlleleCheckbox( populationModel.whiteFurVisibleProperty, furGene.normalAllele, alignGroup, {
+        lineColor: furGene.color,
         tandem: options.tandem.createTandem( 'whiteFurCheckbox' )
       } );
 
     const brownFurCheckbox =
-      new PopulationLegendCheckbox( populationModel.brownFurVisibleProperty, furGene.mutantAllele.name, alignGroup, {
-        color: furGene.color,
-        isMutant: true,
+      new PopulationAlleleCheckbox( populationModel.brownFurVisibleProperty, furGene.mutantAllele, alignGroup, {
+        lineColor: furGene.color,
+        isLineDashed: true,
         tandem: options.tandem.createTandem( 'brownFurCheckbox' )
       } );
 
     const straightEarsCheckbox =
-      new PopulationLegendCheckbox( populationModel.straightEarsVisibleProperty, earsGene.normalAllele.name, alignGroup, {
-        color: earsGene.color,
+      new PopulationAlleleCheckbox( populationModel.straightEarsVisibleProperty, earsGene.normalAllele, alignGroup, {
+        lineColor: earsGene.color,
         tandem: options.tandem.createTandem( 'straightEarsCheckbox' )
       } );
 
     const floppyEarsCheckbox =
-      new PopulationLegendCheckbox( populationModel.floppyEarsVisibleProperty, earsGene.mutantAllele.name, alignGroup, {
-        color: earsGene.color,
-        isMutant: true,
+      new PopulationAlleleCheckbox( populationModel.floppyEarsVisibleProperty, earsGene.mutantAllele, alignGroup, {
+        lineColor: earsGene.color,
+        isLineDashed: true,
         tandem: options.tandem.createTandem( 'floppyEarsCheckbox' )
       } );
 
     const shortTeethCheckbox =
-      new PopulationLegendCheckbox( populationModel.shortTeethVisibleProperty, teethGene.normalAllele.name, alignGroup, {
-        color: teethGene.color,
+      new PopulationAlleleCheckbox( populationModel.shortTeethVisibleProperty, teethGene.normalAllele, alignGroup, {
+        lineColor: teethGene.color,
         tandem: options.tandem.createTandem( 'shortTeethCheckbox' )
       } );
 
     const longTeethCheckbox =
-      new PopulationLegendCheckbox( populationModel.longTeethVisibleProperty, teethGene.mutantAllele.name, alignGroup, {
-        color: teethGene.color,
-        isMutant: true,
+      new PopulationAlleleCheckbox( populationModel.longTeethVisibleProperty, teethGene.mutantAllele, alignGroup, {
+        lineColor: teethGene.color,
+        isLineDashed: true,
         tandem: options.tandem.createTandem( 'longTeethCheckbox' )
       } );
 
-    const checkboxes = [
-      totalCheckbox,
+    // {PopulationAlleleCheckbox[]}
+    const alleleCheckboxes = [
       whiteFurCheckbox,
       brownFurCheckbox,
       straightEarsCheckbox,
@@ -104,6 +105,9 @@ class PopulationPanel extends NaturalSelectionPanel {
       shortTeethCheckbox,
       longTeethCheckbox
     ];
+
+    // {Checkbox[]}
+    const checkboxes = [ totalCheckbox, ...alleleCheckboxes ];
 
     // Dilate the pointer areas to fill vertical space between the checkboxes.
     // See https://github.com/phetsims/natural-selection/issues/173
@@ -149,8 +153,8 @@ class PopulationPanel extends NaturalSelectionPanel {
 
     super( content, options );
 
-    // @private {PopulationLegendCheckbox[]}
-    this.checkboxes = checkboxes;
+    // @private {PopulationAlleleCheckbox[]}
+    this.alleleCheckboxes = alleleCheckboxes;
   }
 
   /**
@@ -173,12 +177,12 @@ class PopulationPanel extends NaturalSelectionPanel {
     assert && assert( typeof visible === 'boolean', 'invalid visible' );
 
     // Checkbox for the normal allele
-    const normalCheckbox = _.find( this.checkboxes, checkbox => ( checkbox.alleleName === gene.normalAllele.name ) );
+    const normalCheckbox = _.find( this.alleleCheckboxes, checkbox => ( checkbox.allele === gene.normalAllele ) );
     assert && assert( normalCheckbox, `normalCheckbox not found for ${gene.normalAllele.name} allele` );
     normalCheckbox.visible = visible;
 
     // Checkbox for the mutant allele
-    const mutantCheckbox = _.find( this.checkboxes, checkbox => ( checkbox.alleleName === gene.mutantAllele.name ) );
+    const mutantCheckbox = _.find( this.alleleCheckboxes, checkbox => ( checkbox.allele === gene.mutantAllele ) );
     assert && assert( normalCheckbox, `mutantCheckbox not found for ${gene.mutantAllele.name} allele` );
     mutantCheckbox.visible = visible;
   }
