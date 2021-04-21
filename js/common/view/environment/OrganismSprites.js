@@ -71,7 +71,7 @@ class OrganismSprites extends Sprites {
       // phetioReadOnly: true,
       phetioDocumentation: 'bunnies, wolves, and shrubs that appear in the environment',
       visiblePropertyOptions: { phetioReadOnly: true },
-      inputEnabledPropertyPhetioInstrumented: true
+      phetioInputEnabledPropertyInstrumented: true
     }, options );
 
     assert && assert( !options.canvasBounds, 'OrganismSprites sets canvasBounds' );

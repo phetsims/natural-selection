@@ -42,7 +42,7 @@ class NaturalSelectionTimeControlNode extends HBox {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      enabledPropertyPhetioInstrumented: true // opt into default PhET-iO instrumented enabledProperty
+      phetioEnabledPropertyInstrumented: true // opt into default PhET-iO instrumented enabledProperty
     }, options );
 
     const playPauseButton = new PlayPauseButton( isPlayingProperty, {
