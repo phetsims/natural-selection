@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.1.1 Mon Mar 08 2021 15:10:52 GMT-0500 (Eastern Standard Time)",
+  "comment": "# natural-selection 1.1.1 Thu Apr 22 2021 15:24:36 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "1a41cef653bbed1025af5768bea958d7e3e0f8ae",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "d71e6c2c28244e1d0d26c096929c9ccedf07ae0d",
+    "sha": "6854dae16d80401e0b49e1f9907842fe9fb7f761",
     "branch": "1.1"
   },
   "phet-core": {
@@ -54,15 +54,15 @@
   },
   "phetmarks": {
     "sha": "b3ffbf895e6c588ec2dc8e1b38df780d9cb75285",
-    "branch": "natural-selection-1.1"
+    "branch": "HEAD"
   },
   "query-string-machine": {
     "sha": "7f3ccebb4232a2e3eccdb68b1ea051cff3b5fa45",
     "branch": "HEAD"
   },
   "scenery": {
-    "sha": "476f2448293ba0fb37739a7058b93d3ab6c2f6e1",
-    "branch": "HEAD"
+    "sha": "c86b4101f01cca6114c1b74584f152747003facb",
+    "branch": "natural-selection-1.1"
   },
   "scenery-phet": {
     "sha": "65d4d6834deebe9dde2ac92ce877e9bdd5bd26cd",
