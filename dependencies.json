@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.1.1 Thu Apr 22 2021 15:24:36 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.1.2-rc.1 Fri Apr 23 2021 14:48:19 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "1a41cef653bbed1025af5768bea958d7e3e0f8ae",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "6854dae16d80401e0b49e1f9907842fe9fb7f761",
+    "sha": "e2833ca52407abea00e415b00ab41b8e0358ceff",
     "branch": "1.1"
   },
   "phet-core": {
@@ -62,7 +62,7 @@
   },
   "scenery": {
     "sha": "c86b4101f01cca6114c1b74584f152747003facb",
-    "branch": "natural-selection-1.1"
+    "branch": "HEAD"
   },
   "scenery-phet": {
     "sha": "65d4d6834deebe9dde2ac92ce877e9bdd5bd26cd",
