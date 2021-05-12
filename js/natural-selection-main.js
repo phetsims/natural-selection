@@ -29,8 +29,8 @@ simLauncher.launch( () => {
 
     credits: {
       leadDesign: 'Amanda McGarry, Noah Podolefsky',
-      softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
-      team: 'Wendy Adams, Megan Hoffman, Oliver Nix, Jonathan Olson, Ariel Paul, Kathy Perkins, Carl Wieman',
+      softwareDevelopment: 'Chris Malley (PixelZoom, Inc.), Jonathan Olson',
+      team: 'Wendy Adams, Megan Hoffman, Oliver Nix, Ariel Paul, Kathy Perkins, Carl Wieman',
       qualityAssurance: 'Logan Bray, Steele Dalton, Brooklyn Lash, Liam Mulhall, Devon Quispe, Kathryn Woessner',
       graphicArts: 'Megan Lai'
     }
