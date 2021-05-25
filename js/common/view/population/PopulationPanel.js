@@ -1,4 +1,4 @@
-// Copyright 2021, University of Colorado Boulder
+// Copyright 2019-2021, University of Colorado Boulder
 
 /**
  * PopulationPanel is the panel that contains controls for the 'Population' graph.

@@ -1,4 +1,4 @@
-// Copyright 2020, University of Colorado Boulder
+// Copyright 2020-2021, University of Colorado Boulder
 
 /**
  * EnvironmentModelViewTransform is the model-view transform for the 'environment', the place where bunnies, wolves,

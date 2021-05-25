@@ -1,4 +1,4 @@
-// Copyright 2020, University of Colorado Boulder
+// Copyright 2020-2021, University of Colorado Boulder
 
 /**
  * GenePair is a pair of alleles for a specific Gene, one inherited from each parent.
