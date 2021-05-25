@@ -43,7 +43,8 @@ class Allele extends PhetioObject {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: Allele.AlleleIO
+      phetioType: Allele.AlleleIO,
+      phetioState: false
     }, options );
 
     assert && assert( options.tandem.name.startsWith( tandemPrefix ),

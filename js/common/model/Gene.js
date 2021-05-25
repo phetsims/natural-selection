@@ -73,7 +73,8 @@ class Gene extends PhetioObject {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: Gene.GeneIO
+      phetioType: Gene.GeneIO,
+      phetioState: false
     }, config );
 
     // validate config fields
