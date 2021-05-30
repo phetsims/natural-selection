@@ -142,6 +142,19 @@ class Wolf extends Organism {
   }
 
   /**
+   * @public
+   * @returns {Object}
+   */
+  static get STATE_SCHEMA() {
+    return {
+      private: {
+        speed: NumberIO
+      }
+    };
+  }
+
+
+  /**
    * Creates the args that WolfGroup uses to instantiate a Wolf.
    * @param {*} state
    * @returns {Object[]}

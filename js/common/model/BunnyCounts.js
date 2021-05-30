@@ -148,6 +148,22 @@ class BunnyCounts {
   }
 
   /**
+   * @public
+   * @returns {Object}
+   */
+  static get STATE_SCHEMA() {
+    return {
+      totalCount: NumberIO,
+      whiteFurCount: NumberIO,
+      brownFurCount: NumberIO,
+      straightEarsCount: NumberIO,
+      floppyEarsCount: NumberIO,
+      shortTeethCount: NumberIO,
+      longTeethCount: NumberIO
+    };
+  }
+
+  /**
    * Deserializes a BunnyCounts instance.
    * @param {Object} stateObject - return value from toStateObject
    * @returns {BunnyCounts}

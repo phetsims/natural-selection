@@ -180,6 +180,17 @@ class Genotype extends PhetioObject {
   }
 
   /**
+   * @public
+   * @returns {Object}
+   */
+  static get STATE_SCHEMA() {
+    return {
+      mutation: NullableIO( Allele.AlleleIO )
+    };
+  }
+
+
+  /**
    * Restores Genotype stateObject after instantiation.
    * @param {Object} stateObject
    * @public

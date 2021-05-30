@@ -50,6 +50,19 @@ class ProportionsCounts {
   }
 
   /**
+   * @public
+   * @returns {Object}
+   */
+  static get STATE_SCHEMA() {
+    return {
+      generation: NumberIO,
+      startCounts: BunnyCounts.BunnyCountsIO,
+      endCounts: BunnyCounts.BunnyCountsIO
+    };
+  }
+
+
+  /**
    * Deserializes a ProportionsCounts instance.
    * @param {Object} stateObject - return value from toStateObject
    * @returns {ProportionsCounts}

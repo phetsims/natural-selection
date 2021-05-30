@@ -476,7 +476,23 @@ function getHopDelta( hopDistance, hopHeight, xDirection ) {
  * as described in the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
  */
-Bunny.BunnyIO = IOType.fromCoreType( 'BunnyIO', Bunny );
+Bunny.BunnyIO = IOType.fromCoreType( 'BunnyIO', Bunny, {
+  stateSchema: BunnyIO => ( {
+    father: NullableIO( ReferenceIO( BunnyIO ) ),
+    mother: NullableIO( ReferenceIO( BunnyIO ) ),
+    generation: NumberIO,
+    isAlive: BooleanIO,
+    age: NumberIO,
+    private: {
+      restTime: NumberIO,
+      hopTime: NumberIO,
+      cumulativeRestTime: NumberIO,
+      cumulativeHopTime: NumberIO,
+      hopDelta: Vector3.Vector3IO,
+      hopStartPosition: Vector3.Vector3IO
+    }
+  } )
+} );
 
 naturalSelection.register( 'Bunny', Bunny );
 export default Bunny;

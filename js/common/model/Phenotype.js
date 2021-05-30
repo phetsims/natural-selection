@@ -115,6 +115,18 @@ class Phenotype extends PhetioObject {
   }
 
   /**
+   * @public
+   * @returns {Object}
+   */
+  static get STATE_SCHEMA() {
+    return {
+      furAllele: Allele.AlleleIO,
+      earsAllele: Allele.AlleleIO,
+      teethAllele: Allele.AlleleIO
+    };
+  }
+
+  /**
    * Restores Phenotype state after instantiation.
    * @param {Object} stateObject
    * @public

@@ -161,6 +161,18 @@ class GenePair extends PhetioObject {
   }
 
   /**
+   * @public
+   * @returns {Object}
+   */
+  static get STATE_SCHEMA() {
+    return {
+      gene: Gene.GeneIO,
+      fatherAllele: Allele.AlleleIO,
+      motherAllele: Allele.AlleleIO
+    };
+  }
+
+  /**
    * Restores GenePair state after instantiation.
    * @param {Object} stateObject
    * @public
