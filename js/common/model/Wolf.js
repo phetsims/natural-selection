@@ -135,7 +135,7 @@ class Wolf extends Organism {
    */
   toStateObject() {
     return {
-      private: {
+      _private: {
         speed: NumberIO.toStateObject( this.speed )
       }
     };
@@ -147,7 +147,7 @@ class Wolf extends Organism {
    */
   static get STATE_SCHEMA() {
     return {
-      private: {
+      _private: {
         speed: NumberIO
       }
     };

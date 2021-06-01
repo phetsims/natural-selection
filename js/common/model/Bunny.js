@@ -388,7 +388,7 @@ class Bunny extends Organism {
       // genotype and phenotype are stateful and will be serialized automatically.
 
       // private fields, will not be shown in Studio
-      private: {
+      _private: {
         restTime: NumberIO.toStateObject( this.restTime ),
         hopTime: NumberIO.toStateObject( this.hopTime ),
         cumulativeRestTime: NumberIO.toStateObject( this.cumulativeRestTime ),
@@ -483,7 +483,7 @@ Bunny.BunnyIO = IOType.fromCoreType( 'BunnyIO', Bunny, {
     generation: NumberIO,
     isAlive: BooleanIO,
     age: NumberIO,
-    private: {
+    _private: {
       restTime: NumberIO,
       hopTime: NumberIO,
       cumulativeRestTime: NumberIO,
