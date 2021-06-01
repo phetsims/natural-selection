@@ -175,7 +175,7 @@ class Wolf extends Organism {
    */
   applyState( stateObject ) {
     required( stateObject );
-    this.speed = required( NumberIO.fromStateObject( stateObject.private.speed ) );
+    this.speed = required( NumberIO.fromStateObject( stateObject._private.speed ) );
     this.validateInstance();
   }
 }

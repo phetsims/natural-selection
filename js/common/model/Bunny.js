@@ -429,12 +429,12 @@ class Bunny extends Organism {
     this.age = required( NumberIO.fromStateObject( stateObject.age ) );
 
     // private fields
-    this.restTime = required( NumberIO.fromStateObject( stateObject.private.restTime ) );
-    this.hopTime = required( NumberIO.fromStateObject( stateObject.private.hopTime ) );
-    this.cumulativeRestTime = required( NumberIO.fromStateObject( stateObject.private.cumulativeRestTime ) );
-    this.cumulativeHopTime = required( NumberIO.fromStateObject( stateObject.private.cumulativeHopTime ) );
-    this.hopDelta = required( Vector3.Vector3IO.fromStateObject( stateObject.private.hopDelta ) );
-    this.hopStartPosition = required( Vector3.Vector3IO.fromStateObject( stateObject.private.hopStartPosition ) );
+    this.restTime = required( NumberIO.fromStateObject( stateObject._private.restTime ) );
+    this.hopTime = required( NumberIO.fromStateObject( stateObject._private.hopTime ) );
+    this.cumulativeRestTime = required( NumberIO.fromStateObject( stateObject._private.cumulativeRestTime ) );
+    this.cumulativeHopTime = required( NumberIO.fromStateObject( stateObject._private.cumulativeHopTime ) );
+    this.hopDelta = required( Vector3.Vector3IO.fromStateObject( stateObject._private.hopDelta ) );
+    this.hopStartPosition = required( Vector3.Vector3IO.fromStateObject( stateObject._private.hopStartPosition ) );
 
     this.validateInstance();
   }
