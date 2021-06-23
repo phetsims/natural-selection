@@ -14,7 +14,7 @@ import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import PlayPauseButton from '../../../../scenery-phet/js/buttons/PlayPauseButton.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
-import SunConstants from '../../../../sun/js/SunConstants.js';
+import SceneryConstants from '../../../../scenery/js/SceneryConstants.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import FastForwardButton from './FastForwardButton.js';
@@ -38,7 +38,7 @@ class NaturalSelectionTimeControlNode extends HBox {
     options = merge( {
       spacing: 10,
 
-      disabledOpacity: SunConstants.DISABLED_OPACITY,
+      disabledOpacity: SceneryConstants.DISABLED_OPACITY,
 
       // phet-io
       tandem: Tandem.REQUIRED,
