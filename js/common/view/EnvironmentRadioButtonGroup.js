@@ -46,7 +46,10 @@ class EnvironmentRadioButtonGroup extends RectangularRadioButtonGroup {
       buttonContentYMargin: 0,  // Set to 0 because we will create our own backgrounds, see below.
 
       // phet-io
-      tandem: Tandem.REQUIRED
+      tandem: Tandem.REQUIRED,
+      enabledPropertyOptions: {
+        phetioReadOnly: true // see https://github.com/phetsims/natural-selection/issues/296
+      }
     }, options );
 
     // icons
