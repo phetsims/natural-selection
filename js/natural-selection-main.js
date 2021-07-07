@@ -33,7 +33,10 @@ simLauncher.launch( () => {
       team: 'Wendy Adams, Megan Hoffman, Oliver Nix, Ariel Paul, Kathy Perkins, Carl Wieman',
       qualityAssurance: 'Logan Bray, Steele Dalton, Brooklyn Lash, Emily Miller, Liam Mulhall, Devon Quispe, Kathryn Woessner',
       graphicArts: 'Megan Lai'
-    }
+    },
+
+    // phet-io options
+    phetioDesigned: true
   } );
 
   // Log whether we're using WebGL, which is the preferred rendering option for OrganismSprites
