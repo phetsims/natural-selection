@@ -10,7 +10,8 @@
 import merge from '../../../../phet-core/js/merge.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import FontAwesomeNode from '../../../../sun/js/FontAwesomeNode.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import dnaSolidShape from '../../../../sherpa/js/fontawesome-5/dnaSolidShape.js';
 import naturalSelection from '../../naturalSelection.js';
 
 class MutationIconNode extends Node {
@@ -31,7 +32,9 @@ class MutationIconNode extends Node {
     } );
 
     // DNA icon centered in the circle
-    const icon = new FontAwesomeNode( 'dna_solid' );
+    const icon = new Path( dnaSolidShape, {
+      fill: 'black'
+    } );
     const scale = ( 0.6 * circle.height ) / Math.max( icon.width, icon.height );
     icon.setScaleMagnitude( scale );
     icon.center = circle.center;

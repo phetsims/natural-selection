@@ -8,8 +8,9 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import timesCircleRegularShape from '../../../../sherpa/js/fontawesome-5/timesCircleRegularShape.js';
 import RoundPushButton from '../../../../sun/js/buttons/RoundPushButton.js';
-import FontAwesomeNode from '../../../../sun/js/FontAwesomeNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 
@@ -28,9 +29,9 @@ class CancelMutationButton extends RoundPushButton {
       baseColor: 'transparent',
 
       // red 'x' inside a circle
-      content: new FontAwesomeNode( 'times_circle_regular', {
+      content: new Path( timesCircleRegularShape, {
         fill: PhetColorScheme.RED_COLORBLIND,
-        scale: 1.4,
+        scale: 0.035,
         cursor: 'pointer'
       } ),
 

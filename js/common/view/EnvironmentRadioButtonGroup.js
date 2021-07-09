@@ -9,9 +9,11 @@
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import snowflakeSolidShape from '../../../../sherpa/js/fontawesome-5/snowflakeSolidShape.js';
+import sunSolidShape from '../../../../sherpa/js/fontawesome-5/sunSolidShape.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
-import FontAwesomeNode from '../../../../sun/js/FontAwesomeNode.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import Environment from '../model/Environment.js';
@@ -53,9 +55,9 @@ class EnvironmentRadioButtonGroup extends RectangularRadioButtonGroup {
     }, options );
 
     // icons
-    const iconOptions = { scale: 2, fill: 'white' };
-    const sunIcon = new FontAwesomeNode( 'sun_solid', iconOptions );
-    const snowflakeIcon = new FontAwesomeNode( 'snowflake', iconOptions );
+    const iconOptions = { scale: 0.05, fill: 'white' };
+    const sunIcon = new Path( sunSolidShape, iconOptions );
+    const snowflakeIcon = new Path( snowflakeSolidShape, iconOptions );
 
     // RectangularRadioButtonGroup does not support different colors for radio buttons in the same group.
     // So we create our own backgrounds, with a cornerRadius that matches options.cornerRadius.
