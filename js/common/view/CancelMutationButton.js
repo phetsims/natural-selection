@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2019-2021, University of Colorado Boulder
 
 /**
  * CancelMutationButton is the button that appears in the 'Mutation Coming' alert, used to cancel a mutation.
