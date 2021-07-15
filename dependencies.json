@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.4.0-rc.1 Tue Jul 13 2021 13:21:07 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.4.0-rc.1 Thu Jul 15 2021 13:23:58 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "1971d73693abe3396a5056c4962feead10507e41",
     "branch": "HEAD"
@@ -13,8 +13,8 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "e0585a3762e3e6aa929eb4999d6aeb0911b3a468",
-    "branch": "HEAD"
+    "sha": "38fcffc234ef4ee576b1ef47157632caee55a287",
+    "branch": "natural-selection-1.4"
   },
   "dot": {
     "sha": "7f9c76f731915e1c77c647665b247b117d386424",
@@ -22,14 +22,14 @@
   },
   "joist": {
     "sha": "e03a5958b117e3808275e95a802ab58178399a53",
-    "branch": "natural-selection-1.4"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "35b503179249118c63892add8e2d3286cc3cbd3c",
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "7687285570d7ce333a6d8bc470a32db97c76df08",
+    "sha": "904ff1e04e70053f1a10d81b53879b1ef0997e8d",
     "branch": "1.4"
   },
   "phet-core": {
@@ -62,7 +62,7 @@
   },
   "scenery": {
     "sha": "e657c7e26439f561bb2495c8c5abb0f65362e243",
-    "branch": "natural-selection-1.4"
+    "branch": "HEAD"
   },
   "scenery-phet": {
     "sha": "5235b663ef3bf4247e85adb2c15101f1b2e1e298",
