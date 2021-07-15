@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.4.0-rc.1 Thu Jul 15 2021 16:57:24 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.4.0-rc.2 Thu Jul 15 2021 17:09:39 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "1971d73693abe3396a5056c4962feead10507e41",
     "branch": "HEAD"
@@ -14,7 +14,7 @@
   },
   "chipper": {
     "sha": "6c289eb266cf1e5e5cecdd4eb864842407348044",
-    "branch": "natural-selection-1.4"
+    "branch": "HEAD"
   },
   "dot": {
     "sha": "7f9c76f731915e1c77c647665b247b117d386424",
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "452429d4ea0429799754d7b51bcec7024ea47c57",
+    "sha": "15f9aae264870869a23476ab3042eab5f0ced922",
     "branch": "1.4"
   },
   "phet-core": {
@@ -42,11 +42,11 @@
   },
   "phet-io-client-guides": {
     "sha": "6bd36908dbe4cfa1b0612786621d81aa86d7fbf2",
-    "branch": "natural-selection-1.4"
+    "branch": "HEAD"
   },
   "phet-io-wrappers": {
     "sha": "cb8bdea55bea86677bc9c86520fe2626b0dd7dad",
-    "branch": "natural-selection-1.4"
+    "branch": "HEAD"
   },
   "phetcommon": {
     "sha": "6a50b84b7fb7084546f2e7023ce59715789fbeb6",
