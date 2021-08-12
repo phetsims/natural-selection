@@ -13,14 +13,14 @@ import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Sprite from '../../../../scenery/js/util/Sprite.js';
-import bunnyBrownFurFloppyEarsLongTeethImage from '../../../images/bunny-brownFur-floppyEars-longTeeth_png.js';
-import bunnyBrownFurFloppyEarsShortTeethImage from '../../../images/bunny-brownFur-floppyEars-shortTeeth_png.js';
-import bunnyBrownFurStraightEarsLongTeethImage from '../../../images/bunny-brownFur-straightEars-longTeeth_png.js';
-import bunnyBrownFurStraightEarsShortTeethImage from '../../../images/bunny-brownFur-straightEars-shortTeeth_png.js';
-import bunnyWhiteFurFloppyEarsLongTeethImage from '../../../images/bunny-whiteFur-floppyEars-longTeeth_png.js';
-import bunnyWhiteFurFloppyEarsShortTeethImage from '../../../images/bunny-whiteFur-floppyEars-shortTeeth_png.js';
-import bunnyWhiteFurStraightEarsLongTeethImage from '../../../images/bunny-whiteFur-straightEars-longTeeth_png.js';
-import bunnyWhiteFurStraightEarsShortTeethImage from '../../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
+import bunnyBrownFurFloppyEarsLongTeeth_png from '../../../images/bunnyBrownFurFloppyEarsLongTeeth_png.js';
+import bunnyBrownFurFloppyEarsShortTeeth_png from '../../../images/bunnyBrownFurFloppyEarsShortTeeth_png.js';
+import bunnyBrownFurStraightEarsLongTeeth_png from '../../../images/bunnyBrownFurStraightEarsLongTeeth_png.js';
+import bunnyBrownFurStraightEarsShortTeeth_png from '../../../images/bunnyBrownFurStraightEarsShortTeeth_png.js';
+import bunnyWhiteFurFloppyEarsLongTeeth_png from '../../../images/bunnyWhiteFurFloppyEarsLongTeeth_png.js';
+import bunnyWhiteFurFloppyEarsShortTeeth_png from '../../../images/bunnyWhiteFurFloppyEarsShortTeeth_png.js';
+import bunnyWhiteFurStraightEarsLongTeeth_png from '../../../images/bunnyWhiteFurStraightEarsLongTeeth_png.js';
+import bunnyWhiteFurStraightEarsShortTeeth_png from '../../../images/bunnyWhiteFurStraightEarsShortTeeth_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
 import BunnySpriteImage from './environment/BunnySpriteImage.js';
@@ -37,14 +37,14 @@ class BunnyImageMap {
     const imageMap = {
 
       // key: value
-      'true-true-true': bunnyWhiteFurStraightEarsShortTeethImage,
-      'true-true-false': bunnyWhiteFurStraightEarsLongTeethImage,
-      'true-false-true': bunnyWhiteFurFloppyEarsShortTeethImage,
-      'true-false-false': bunnyWhiteFurFloppyEarsLongTeethImage,
-      'false-true-true': bunnyBrownFurStraightEarsShortTeethImage,
-      'false-true-false': bunnyBrownFurStraightEarsLongTeethImage,
-      'false-false-true': bunnyBrownFurFloppyEarsShortTeethImage,
-      'false-false-false': bunnyBrownFurFloppyEarsLongTeethImage
+      'true-true-true': bunnyWhiteFurStraightEarsShortTeeth_png,
+      'true-true-false': bunnyWhiteFurStraightEarsLongTeeth_png,
+      'true-false-true': bunnyWhiteFurFloppyEarsShortTeeth_png,
+      'true-false-false': bunnyWhiteFurFloppyEarsLongTeeth_png,
+      'false-true-true': bunnyBrownFurStraightEarsShortTeeth_png,
+      'false-true-false': bunnyBrownFurStraightEarsLongTeeth_png,
+      'false-false-true': bunnyBrownFurFloppyEarsShortTeeth_png,
+      'false-false-false': bunnyBrownFurFloppyEarsLongTeeth_png
     };
     assert && assert( _.keys( imageMap ).length === 8, 'imageMap is incomplete' );
     assert && assert( _.every( _.keys( imageMap ), key => key.match( /(true|false)-(true|false)-(true|false)/ ) ),

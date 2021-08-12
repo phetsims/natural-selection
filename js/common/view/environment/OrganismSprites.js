@@ -22,8 +22,8 @@ import SpriteListenable from '../../../../../scenery/js/listeners/SpriteListenab
 import Sprites from '../../../../../scenery/js/nodes/Sprites.js';
 import Sprite from '../../../../../scenery/js/util/Sprite.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
-import bunnyWhiteFurStraightEarsShortTeethImage from '../../../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
-import wolfImage from '../../../../images/wolf_png.js';
+import bunnyWhiteFurStraightEarsShortTeeth_png from '../../../../images/bunnyWhiteFurStraightEarsShortTeeth_png.js';
+import wolf_png from '../../../../images/wolf_png.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
 import BunnyCollection from '../../model/BunnyCollection.js';
@@ -81,10 +81,10 @@ class OrganismSprites extends Sprites {
     const shrubSpritesMap = new ShrubSpritesMap();
 
     // The sprite that is used for all wolves
-    const wolfSprite = new Sprite( new OrganismSpriteImage( wolfImage ) );
+    const wolfSprite = new Sprite( new OrganismSpriteImage( wolf_png ) );
 
     // Sprite for the bunny selection rectangle, sized to fit the largest bunny image
-    const selectionRectangleSprite = new BunnySelectionRectangleSprite( bunnyWhiteFurStraightEarsShortTeethImage );
+    const selectionRectangleSprite = new BunnySelectionRectangleSprite( bunnyWhiteFurStraightEarsShortTeeth_png );
 
     // {OrganismSprite[]} the complete set of sprites
     assert && assert( !options.sprites, 'OrganismSprites sets sprites' );

@@ -12,7 +12,7 @@ import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import wolfImage from '../../../images/wolf_png.js';
+import wolf_png from '../../../images/wolf_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
@@ -43,7 +43,7 @@ class WolvesCheckbox extends EnvironmentalFactorCheckbox {
       maxWidth: 110 // determined empirically
     } );
 
-    const icon = new Image( wolfImage );
+    const icon = new Image( wolf_png );
     const scale = 0.13; // determined empirically
     icon.setScaleMagnitude( -scale, scale ); // reflect so the wolf is facing left
 

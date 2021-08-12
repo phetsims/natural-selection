@@ -17,12 +17,12 @@ import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
-import brownFurImage from '../../../images/brownFur_png.js';
-import floppyEarsImage from '../../../images/floppyEars_png.js';
-import longTeethImage from '../../../images/longTeeth_png.js';
-import shortTeethImage from '../../../images/shortTeeth_png.js';
-import straightEarsImage from '../../../images/straightEars_png.js';
-import whiteFurImage from '../../../images/whiteFur_png.js';
+import brownFur_png from '../../../images/brownFur_png.js';
+import floppyEars_png from '../../../images/floppyEars_png.js';
+import longTeeth_png from '../../../images/longTeeth_png.js';
+import shortTeeth_png from '../../../images/shortTeeth_png.js';
+import straightEars_png from '../../../images/straightEars_png.js';
+import whiteFur_png from '../../../images/whiteFur_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 
@@ -84,27 +84,27 @@ Allele.AlleleIO = new IOType( 'AlleleIO', {
 // tandem for all static instances of Solute, which are used across all screens // TODO: bad doc
 const ALLELES_TANDEM = Tandem.GLOBAL_MODEL.createTandem( 'alleles' );
 
-Allele.WHITE_FUR = new Allele( naturalSelectionStrings.whiteFur, whiteFurImage, 'whiteFur', {
+Allele.WHITE_FUR = new Allele( naturalSelectionStrings.whiteFur, whiteFur_png, 'whiteFur', {
   tandem: ALLELES_TANDEM.createTandem( 'whiteFurAllele' )
 } );
 
-Allele.BROWN_FUR = new Allele( naturalSelectionStrings.brownFur, brownFurImage, 'brownFur', {
+Allele.BROWN_FUR = new Allele( naturalSelectionStrings.brownFur, brownFur_png, 'brownFur', {
   tandem: ALLELES_TANDEM.createTandem( 'brownFurAllele' )
 } );
 
-Allele.FLOPPY_EARS = new Allele( naturalSelectionStrings.floppyEars, floppyEarsImage, 'floppyEars', {
+Allele.FLOPPY_EARS = new Allele( naturalSelectionStrings.floppyEars, floppyEars_png, 'floppyEars', {
   tandem: ALLELES_TANDEM.createTandem( 'floppyEarsAllele' )
 } );
 
-Allele.STRAIGHT_EARS = new Allele( naturalSelectionStrings.straightEars, straightEarsImage, 'straightEars', {
+Allele.STRAIGHT_EARS = new Allele( naturalSelectionStrings.straightEars, straightEars_png, 'straightEars', {
   tandem: ALLELES_TANDEM.createTandem( 'straightEarsAllele' )
 } );
 
-Allele.SHORT_TEETH = new Allele( naturalSelectionStrings.shortTeeth, shortTeethImage, 'shortTeeth', {
+Allele.SHORT_TEETH = new Allele( naturalSelectionStrings.shortTeeth, shortTeeth_png, 'shortTeeth', {
   tandem: ALLELES_TANDEM.createTandem( 'shortTeethAllele' )
 } );
 
-Allele.LONG_TEETH = new Allele( naturalSelectionStrings.longTeeth, longTeethImage, 'longTeeth', {
+Allele.LONG_TEETH = new Allele( naturalSelectionStrings.longTeeth, longTeeth_png, 'longTeeth', {
   tandem: ALLELES_TANDEM.createTandem( 'longTeethAllele' )
 } );
 

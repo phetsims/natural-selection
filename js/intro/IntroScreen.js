@@ -12,8 +12,8 @@ import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import HBox from '../../../scenery/js/nodes/HBox.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import Tandem from '../../../tandem/js/Tandem.js';
-import brownBunnyImage from '../../images/bunny-brownFur-straightEars-shortTeeth_png.js';
-import whiteBunnyImage from '../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
+import bunnyBrownFurStraightEarsShortTeeth_png from '../../images/bunnyBrownFurStraightEarsShortTeeth_png.js';
+import bunnyWhiteFurStraightEarsShortTeeth_png from '../../images/bunnyWhiteFurStraightEarsShortTeeth_png.js';
 import NaturalSelectionColors from '../common/NaturalSelectionColors.js';
 import naturalSelection from '../naturalSelection.js';
 import naturalSelectionStrings from '../naturalSelectionStrings.js';
@@ -66,7 +66,7 @@ class IntroScreen extends Screen {
 function createScreenIcon() {
   return new ScreenIcon( new HBox( {
     spacing: 20,
-    children: [ new Image( brownBunnyImage ), new Image( whiteBunnyImage ) ]
+    children: [ new Image( bunnyBrownFurStraightEarsShortTeeth_png ), new Image( bunnyWhiteFurStraightEarsShortTeeth_png ) ]
   } ), {
     fill: NaturalSelectionColors.SCREEN_VIEW_BACKGROUND
   } );

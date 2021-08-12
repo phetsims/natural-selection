@@ -15,7 +15,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import OopsDialog from '../../../../scenery-phet/js/OopsDialog.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import bunnyBrownFurStraightEarsLongTeethImage from '../../../images/bunny-brownFur-straightEars-longTeeth_png.js';
+import bunnyBrownFurStraightEarsLongTeeth_png from '../../../images/bunnyBrownFurStraightEarsLongTeeth_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -30,7 +30,7 @@ class MemoryLimitDialog extends OopsDialog {
    */
   constructor( options ) {
 
-    const iconNode = new Image( bunnyBrownFurStraightEarsLongTeethImage );
+    const iconNode = new Image( bunnyBrownFurStraightEarsLongTeeth_png );
     iconNode.setScaleMagnitude( -ICON_SCALE, ICON_SCALE );
 
     options = merge( {}, NaturalSelectionConstants.DIALOG_OPTIONS, {

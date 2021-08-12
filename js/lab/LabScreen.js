@@ -13,14 +13,14 @@ import HBox from '../../../scenery/js/nodes/HBox.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import VBox from '../../../scenery/js/nodes/VBox.js';
 import Tandem from '../../../tandem/js/Tandem.js';
-import brownBunnyImage4 from '../../images/bunny-brownFur-floppyEars-longTeeth_png.js';
-import brownBunnyImage2 from '../../images/bunny-brownFur-floppyEars-shortTeeth_png.js';
-import brownBunnyImage3 from '../../images/bunny-brownFur-straightEars-longTeeth_png.js';
-import brownBunnyImage1 from '../../images/bunny-brownFur-straightEars-shortTeeth_png.js';
-import whiteBunnyImage4 from '../../images/bunny-whiteFur-floppyEars-longTeeth_png.js';
-import whiteBunnyImage2 from '../../images/bunny-whiteFur-floppyEars-shortTeeth_png.js';
-import whiteBunnyImage3 from '../../images/bunny-whiteFur-straightEars-longTeeth_png.js';
-import whiteBunnyImage1 from '../../images/bunny-whiteFur-straightEars-shortTeeth_png.js';
+import bunnyBrownFurFloppyEarsLongTeeth_png from '../../images/bunnyBrownFurFloppyEarsLongTeeth_png.js';
+import bunnyBrownFurFloppyEarsShortTeeth_png from '../../images/bunnyBrownFurFloppyEarsShortTeeth_png.js';
+import bunnyBrownFurStraightEarsLongTeeth_png from '../../images/bunnyBrownFurStraightEarsLongTeeth_png.js';
+import bunnyBrownFurStraightEarsShortTeeth_png from '../../images/bunnyBrownFurStraightEarsShortTeeth_png.js';
+import bunnyWhiteFurFloppyEarsLongTeeth_png from '../../images/bunnyWhiteFurFloppyEarsLongTeeth_png.js';
+import bunnyWhiteFurFloppyEarsShortTeeth_png from '../../images/bunnyWhiteFurFloppyEarsShortTeeth_png.js';
+import bunnyWhiteFurStraightEarsLongTeeth_png from '../../images/bunnyWhiteFurStraightEarsLongTeeth_png.js';
+import bunnyWhiteFurStraightEarsShortTeeth_png from '../../images/bunnyWhiteFurStraightEarsShortTeeth_png.js';
 import NaturalSelectionColors from '../common/NaturalSelectionColors.js';
 import naturalSelection from '../naturalSelection.js';
 import naturalSelectionStrings from '../naturalSelectionStrings.js';
@@ -82,8 +82,8 @@ function createScreenIcon() {
       new HBox( {
         spacing: SPACING,
         children: [
-          new Image( brownBunnyImage1 ), new Image( whiteBunnyImage1 ),
-          new Image( brownBunnyImage2 ), new Image( whiteBunnyImage2 )
+          new Image( bunnyBrownFurStraightEarsShortTeeth_png ), new Image( bunnyWhiteFurStraightEarsShortTeeth_png ),
+          new Image( bunnyBrownFurFloppyEarsShortTeeth_png ), new Image( bunnyWhiteFurFloppyEarsShortTeeth_png )
         ]
       } ),
 
@@ -91,8 +91,8 @@ function createScreenIcon() {
       new HBox( {
         spacing: SPACING,
         children: [
-          new Image( whiteBunnyImage3 ), new Image( brownBunnyImage3 ),
-          new Image( whiteBunnyImage4 ), new Image( brownBunnyImage4 )
+          new Image( bunnyWhiteFurStraightEarsLongTeeth_png ), new Image( bunnyBrownFurStraightEarsLongTeeth_png ),
+          new Image( bunnyWhiteFurFloppyEarsLongTeeth_png ), new Image( bunnyBrownFurFloppyEarsLongTeeth_png )
         ]
       } )
     ]

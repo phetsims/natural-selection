@@ -7,12 +7,12 @@
  */
 
 import Sprite from '../../../../../scenery/js/util/Sprite.js';
-import tenderShrub1Image from '../../../../images/tenderShrub1_png.js';
-import tenderShrub2Image from '../../../../images/tenderShrub2_png.js';
-import tenderShrub3Image from '../../../../images/tenderShrub3_png.js';
-import toughShrub1Image from '../../../../images/toughShrub1_png.js';
-import toughShrub2Image from '../../../../images/toughShrub2_png.js';
-import toughShrub3Image from '../../../../images/toughShrub3_png.js';
+import tenderShrub1_png from '../../../../images/tenderShrub1_png.js';
+import tenderShrub2_png from '../../../../images/tenderShrub2_png.js';
+import tenderShrub3_png from '../../../../images/tenderShrub3_png.js';
+import toughShrub1_png from '../../../../images/toughShrub1_png.js';
+import toughShrub2_png from '../../../../images/toughShrub2_png.js';
+import toughShrub3_png from '../../../../images/toughShrub3_png.js';
 import naturalSelection from '../../../naturalSelection.js';
 import OrganismSpriteImage from './OrganismSpriteImage.js';
 
@@ -25,9 +25,9 @@ class ShrubSpritesMap {
 
     // @private {Sprite[]} sprites for tender food
     this.tenderSprites = [
-      new Sprite( new OrganismSpriteImage( tenderShrub1Image ) ),
-      new Sprite( new OrganismSpriteImage( tenderShrub2Image ) ),
-      new Sprite( new OrganismSpriteImage( tenderShrub3Image ) )
+      new Sprite( new OrganismSpriteImage( tenderShrub1_png ) ),
+      new Sprite( new OrganismSpriteImage( tenderShrub2_png ) ),
+      new Sprite( new OrganismSpriteImage( tenderShrub3_png ) )
     ];
 
     // @private {number} index of the next sprite to use for tender food
@@ -35,9 +35,9 @@ class ShrubSpritesMap {
 
     // @private {Sprite[]} sprites for tough food
     this.toughSprites = [
-      new Sprite( new OrganismSpriteImage( toughShrub1Image ) ),
-      new Sprite( new OrganismSpriteImage( toughShrub2Image ) ),
-      new Sprite( new OrganismSpriteImage( toughShrub3Image ) )
+      new Sprite( new OrganismSpriteImage( toughShrub1_png ) ),
+      new Sprite( new OrganismSpriteImage( toughShrub2_png ) ),
+      new Sprite( new OrganismSpriteImage( toughShrub3_png ) )
     ];
 
     // @private {number} index of the next sprite to use for tough food

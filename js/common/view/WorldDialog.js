@@ -13,7 +13,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Dialog from '../../../../sun/js/Dialog.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import worldImage from '../../../images/world_png.js';
+import world_png from '../../../images/world_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -36,7 +36,7 @@ class WorldDialog extends Dialog {
       phetioDocumentation: 'This dialog is displayed when bunnies have taken over the world.'
     }, options );
 
-    const worldNode = new Image( worldImage, {
+    const worldNode = new Image( world_png, {
       scale: 0.8 // determined empirically
     } );
 

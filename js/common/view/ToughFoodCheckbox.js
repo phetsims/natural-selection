@@ -12,7 +12,7 @@ import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import toughShrub3Image from '../../../images/toughShrub3_png.js';
+import toughShrub3_png from '../../../images/toughShrub3_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
@@ -43,7 +43,7 @@ class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
       maxWidth: 110 // determined empirically
     } );
 
-    const icon = new Image( toughShrub3Image, {
+    const icon = new Image( toughShrub3_png, {
       scale: 0.2 // determined empirically
     } );
 

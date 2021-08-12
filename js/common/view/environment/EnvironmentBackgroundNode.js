@@ -13,8 +13,8 @@ import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import Image from '../../../../../scenery/js/nodes/Image.js';
 import Line from '../../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
-import arcticBackgroundImage from '../../../../images/arcticBackground_png.js';
-import equatorBackgroundImage from '../../../../images/equatorBackground_png.js';
+import arcticBackground_png from '../../../../images/arcticBackground_png.js';
+import equatorBackground_png from '../../../../images/equatorBackground_png.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Environment from '../../model/Environment.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
@@ -36,11 +36,11 @@ class EnvironmentBackgroundNode extends Node {
     options = merge( {}, options );
 
     // Equator background, scaled to fit
-    const equatorBackground = new Image( equatorBackgroundImage );
+    const equatorBackground = new Image( equatorBackground_png );
     equatorBackground.setScaleMagnitude( size.width / equatorBackground.width, size.height / equatorBackground.height );
 
     // Arctic background, scaled to fit
-    const arcticBackground = new Image( arcticBackgroundImage );
+    const arcticBackground = new Image( arcticBackground_png );
     arcticBackground.setScaleMagnitude( size.width / arcticBackground.width, size.height / arcticBackground.height );
 
     assert && assert( !options.children, 'EnvironmentBackgroundNode sets children' );
