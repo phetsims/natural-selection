@@ -438,6 +438,30 @@ class Bunny extends Organism {
 
     this.validateInstance();
   }
+
+  /**
+   * Returns a function that returns a map of state keys and their associated IOTypes, see IOType.fromCoreType for details.
+   * @param {IOType} BunnyIO
+   * @returns {function(IOType): {Object.<string,IOType>}}
+   * @public
+   */
+  static STATE_SCHEMA( BunnyIO ) {
+    return {
+      father: NullableIO( ReferenceIO( BunnyIO ) ),
+      mother: NullableIO( ReferenceIO( BunnyIO ) ),
+      generation: NumberIO,
+      isAlive: BooleanIO,
+      age: NumberIO,
+      _private: {
+        restTime: NumberIO,
+        hopTime: NumberIO,
+        cumulativeRestTime: NumberIO,
+        cumulativeHopTime: NumberIO,
+        hopDelta: Vector3.Vector3IO,
+        hopStartPosition: Vector3.Vector3IO
+      }
+    };
+  }
 }
 
 /**
@@ -476,23 +500,7 @@ function getHopDelta( hopDistance, hopHeight, xDirection ) {
  * as described in the Serialization section of
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
  */
-Bunny.BunnyIO = IOType.fromCoreType( 'BunnyIO', Bunny, {
-  stateSchema: BunnyIO => ( {
-    father: NullableIO( ReferenceIO( BunnyIO ) ),
-    mother: NullableIO( ReferenceIO( BunnyIO ) ),
-    generation: NumberIO,
-    isAlive: BooleanIO,
-    age: NumberIO,
-    _private: {
-      restTime: NumberIO,
-      hopTime: NumberIO,
-      cumulativeRestTime: NumberIO,
-      cumulativeHopTime: NumberIO,
-      hopDelta: Vector3.Vector3IO,
-      hopStartPosition: Vector3.Vector3IO
-    }
-  } )
-} );
+Bunny.BunnyIO = IOType.fromCoreType( 'BunnyIO', Bunny );
 
 naturalSelection.register( 'Bunny', Bunny );
 export default Bunny;
