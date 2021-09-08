@@ -370,36 +370,6 @@ class Bunny extends Organism {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes this Bunny instance.
-   * @returns {Object}
-   * @public
-   */
-  toStateObject() {
-    return {
-
-      // Even though father and mother are stateful, we need a reference to them.
-      father: NullableIO( ReferenceIO( Bunny.BunnyIO ) ).toStateObject( this.father ),
-      mother: NullableIO( ReferenceIO( Bunny.BunnyIO ) ).toStateObject( this.mother ),
-
-      generation: NumberIO.toStateObject( this.generation ),
-      isAlive: BooleanIO.toStateObject( this.isAlive ),
-      age: NumberIO.toStateObject( this.age ),
-
-      // genotype and phenotype are stateful and will be serialized automatically.
-
-      // private fields, will not be shown in Studio
-      _private: {
-        restTime: NumberIO.toStateObject( this.restTime ),
-        hopTime: NumberIO.toStateObject( this.hopTime ),
-        cumulativeRestTime: NumberIO.toStateObject( this.cumulativeRestTime ),
-        cumulativeHopTime: NumberIO.toStateObject( this.cumulativeHopTime ),
-        hopDelta: Vector3.Vector3IO.toStateObject( this.hopDelta ),
-        hopStartPosition: Vector3.Vector3IO.toStateObject( this.hopStartPosition )
-      }
-    };
-  }
-
-  /**
    * Creates the args that BunnyGroup uses to instantiate a Bunny.
    * @param {Object} state
    * @returns {Object[]}
@@ -421,20 +391,7 @@ class Bunny extends Organism {
   applyState( stateObject ) {
     required( stateObject );
 
-    // public fields
-    this.father = required( NullableIO( ReferenceIO( Bunny.BunnyIO ) ).fromStateObject( stateObject.father ) );
-    this.mother = required( NullableIO( ReferenceIO( Bunny.BunnyIO ) ).fromStateObject( stateObject.mother ) );
-    this.generation = required( NumberIO.fromStateObject( stateObject.generation ) );
-    this.isAlive = required( BooleanIO.fromStateObject( stateObject.isAlive ) );
-    this.age = required( NumberIO.fromStateObject( stateObject.age ) );
-
-    // private fields
-    this.restTime = required( NumberIO.fromStateObject( stateObject._private.restTime ) );
-    this.hopTime = required( NumberIO.fromStateObject( stateObject._private.hopTime ) );
-    this.cumulativeRestTime = required( NumberIO.fromStateObject( stateObject._private.cumulativeRestTime ) );
-    this.cumulativeHopTime = required( NumberIO.fromStateObject( stateObject._private.cumulativeHopTime ) );
-    this.hopDelta = required( Vector3.Vector3IO.fromStateObject( stateObject._private.hopDelta ) );
-    this.hopStartPosition = required( Vector3.Vector3IO.fromStateObject( stateObject._private.hopStartPosition ) );
+    Bunny.BunnyIO.stateSchema.defaultApplyState( this, stateObject );
 
     this.validateInstance();
   }
@@ -447,11 +404,17 @@ class Bunny extends Organism {
    */
   static STATE_SCHEMA( BunnyIO ) {
     return {
+
+      // Even though father and mother are stateful, we need a reference to them.
       father: NullableIO( ReferenceIO( BunnyIO ) ),
       mother: NullableIO( ReferenceIO( BunnyIO ) ),
       generation: NumberIO,
       isAlive: BooleanIO,
       age: NumberIO,
+
+      // genotype and phenotype are stateful and will be serialized automatically.
+
+      // private fields, will not be shown in Studio
       _private: {
         restTime: NumberIO,
         hopTime: NumberIO,
