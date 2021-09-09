@@ -390,9 +390,7 @@ class Bunny extends Organism {
    */
   applyState( stateObject ) {
     required( stateObject );
-
     Bunny.BunnyIO.stateSchema.defaultApplyState( this, stateObject );
-
     this.validateInstance();
   }
 
