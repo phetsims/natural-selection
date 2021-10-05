@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * IntroView is the view for the 'Intro' screen.
+ * IntroScreenView is the view for the 'Intro' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

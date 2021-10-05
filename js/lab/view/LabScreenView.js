@@ -1,7 +1,7 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
 /**
- * LabView is the view for the 'Lab' screen. Adds no additional functionality to NaturalSelectionScreenView,
+ * LabScreenView is the view for the 'Lab' screen. Adds no additional functionality to NaturalSelectionScreenView,
  * but included for completeness of the class hierarchy.
  *
  * @author Chris Malley (PixelZoom, Inc.)
