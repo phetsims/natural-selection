@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "e03a5958b117e3808275e95a802ab58178399a53",
+    "sha": "ed9bf096938f408ae5ae081d0b4701cf31485984",
     "branch": "HEAD"
   },
   "kite": {
@@ -65,7 +65,7 @@
     "branch": "HEAD"
   },
   "scenery-phet": {
-    "sha": "5235b663ef3bf4247e85adb2c15101f1b2e1e298",
+    "sha": "64d0c22387ce110430972d145366977deb4883b7",
     "branch": "HEAD"
   },
   "sherpa": {
@@ -81,7 +81,7 @@
     "branch": "HEAD"
   },
   "tambo": {
-    "sha": "1965ae01ebdac4746f1567a352a5ae609f7e7076",
+    "sha": "e17f62a2ac6c364edde0a34700a631ec85164666",
     "branch": "HEAD"
   },
   "tandem": {
