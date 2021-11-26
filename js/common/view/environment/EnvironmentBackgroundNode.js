@@ -10,9 +10,9 @@
 import Dimension2 from '../../../../../dot/js/Dimension2.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
-import Image from '../../../../../scenery/js/nodes/Image.js';
-import Line from '../../../../../scenery/js/nodes/Line.js';
-import Node from '../../../../../scenery/js/nodes/Node.js';
+import { Image } from '../../../../../scenery/js/imports.js';
+import { Line } from '../../../../../scenery/js/imports.js';
+import { Node } from '../../../../../scenery/js/imports.js';
 import arcticBackground_png from '../../../../images/arcticBackground_png.js';
 import equatorBackground_png from '../../../../images/equatorBackground_png.js';
 import naturalSelection from '../../../naturalSelection.js';

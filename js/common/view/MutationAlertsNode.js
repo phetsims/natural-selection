@@ -8,7 +8,7 @@
 
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
 import GenePool from '../model/GenePool.js';
 import AddMutationsPanel from './AddMutationsPanel.js';

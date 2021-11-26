@@ -8,9 +8,9 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import Circle from '../../../../scenery/js/nodes/Circle.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
-import Path from '../../../../scenery/js/nodes/Path.js';
+import { Circle } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
+import { Path } from '../../../../scenery/js/imports.js';
 import dnaSolidShape from '../../../../sherpa/js/fontawesome-5/dnaSolidShape.js';
 import naturalSelection from '../../naturalSelection.js';
 

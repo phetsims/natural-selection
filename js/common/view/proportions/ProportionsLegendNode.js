@@ -9,11 +9,11 @@
 
 import merge from '../../../../../phet-core/js/merge.js';
 import required from '../../../../../phet-core/js/required.js';
-import HBox from '../../../../../scenery/js/nodes/HBox.js';
-import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
-import Text from '../../../../../scenery/js/nodes/Text.js';
-import VBox from '../../../../../scenery/js/nodes/VBox.js';
-import Color from '../../../../../scenery/js/util/Color.js';
+import { HBox } from '../../../../../scenery/js/imports.js';
+import { Rectangle } from '../../../../../scenery/js/imports.js';
+import { Text } from '../../../../../scenery/js/imports.js';
+import { VBox } from '../../../../../scenery/js/imports.js';
+import { Color } from '../../../../../scenery/js/imports.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Gene from '../../model/Gene.js';

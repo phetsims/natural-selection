@@ -8,8 +8,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Sprite from '../../../../../scenery/js/util/Sprite.js';
-import SpriteInstance from '../../../../../scenery/js/util/SpriteInstance.js';
+import { Sprite } from '../../../../../scenery/js/imports.js';
+import { SpriteInstance } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Organism from '../../model/Organism.js';
 import XDirection from '../../model/XDirection.js';

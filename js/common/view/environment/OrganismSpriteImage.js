@@ -9,7 +9,7 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import merge from '../../../../../phet-core/js/merge.js';
-import SpriteImage from '../../../../../scenery/js/util/SpriteImage.js';
+import { SpriteImage } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 
 class OrganismSpriteImage extends SpriteImage {

@@ -8,7 +8,7 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
-import Path from '../../../../scenery/js/nodes/Path.js';
+import { Path } from '../../../../scenery/js/imports.js';
 import timesCircleRegularShape from '../../../../sherpa/js/fontawesome-5/timesCircleRegularShape.js';
 import RoundPushButton from '../../../../sun/js/buttons/RoundPushButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';

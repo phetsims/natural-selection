@@ -7,7 +7,7 @@
  */
 
 import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
-import Color from '../../../scenery/js/util/Color.js';
+import { Color } from '../../../scenery/js/imports.js';
 import naturalSelection from '../naturalSelection.js';
 
 const SCREEN_VIEW_BACKGROUND = new Color( 229, 225, 204 );

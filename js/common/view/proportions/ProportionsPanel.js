@@ -8,8 +8,8 @@
 
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
-import Text from '../../../../../scenery/js/nodes/Text.js';
-import VBox from '../../../../../scenery/js/nodes/VBox.js';
+import { Text } from '../../../../../scenery/js/imports.js';
+import { VBox } from '../../../../../scenery/js/imports.js';
 import Checkbox from '../../../../../sun/js/Checkbox.js';
 import HSeparator from '../../../../../sun/js/HSeparator.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';

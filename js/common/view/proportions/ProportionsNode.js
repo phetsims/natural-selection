@@ -8,7 +8,7 @@
 
 import Dimension2 from '../../../../../dot/js/Dimension2.js';
 import merge from '../../../../../phet-core/js/merge.js';
-import HBox from '../../../../../scenery/js/nodes/HBox.js';
+import { HBox } from '../../../../../scenery/js/imports.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import GenePool from '../../model/GenePool.js';

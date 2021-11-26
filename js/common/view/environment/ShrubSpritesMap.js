@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Sprite from '../../../../../scenery/js/util/Sprite.js';
+import { Sprite } from '../../../../../scenery/js/imports.js';
 import tenderShrub1_png from '../../../../images/tenderShrub1_png.js';
 import tenderShrub2_png from '../../../../images/tenderShrub2_png.js';
 import tenderShrub3_png from '../../../../images/tenderShrub3_png.js';

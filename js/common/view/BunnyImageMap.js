@@ -8,11 +8,11 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
-import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
-import Image from '../../../../scenery/js/nodes/Image.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
-import Sprite from '../../../../scenery/js/util/Sprite.js';
+import { AlignBox } from '../../../../scenery/js/imports.js';
+import { AlignGroup } from '../../../../scenery/js/imports.js';
+import { Image } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
+import { Sprite } from '../../../../scenery/js/imports.js';
 import bunnyBrownFurFloppyEarsLongTeeth_png from '../../../images/bunnyBrownFurFloppyEarsLongTeeth_png.js';
 import bunnyBrownFurFloppyEarsShortTeeth_png from '../../../images/bunnyBrownFurFloppyEarsShortTeeth_png.js';
 import bunnyBrownFurStraightEarsLongTeeth_png from '../../../images/bunnyBrownFurStraightEarsLongTeeth_png.js';

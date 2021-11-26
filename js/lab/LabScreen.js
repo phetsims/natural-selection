@@ -9,9 +9,9 @@
 import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import HBox from '../../../scenery/js/nodes/HBox.js';
-import Image from '../../../scenery/js/nodes/Image.js';
-import VBox from '../../../scenery/js/nodes/VBox.js';
+import { HBox } from '../../../scenery/js/imports.js';
+import { Image } from '../../../scenery/js/imports.js';
+import { VBox } from '../../../scenery/js/imports.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import bunnyBrownFurFloppyEarsLongTeeth_png from '../../images/bunnyBrownFurFloppyEarsLongTeeth_png.js';
 import bunnyBrownFurFloppyEarsShortTeeth_png from '../../images/bunnyBrownFurFloppyEarsShortTeeth_png.js';
