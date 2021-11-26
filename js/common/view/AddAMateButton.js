@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2019-2021, University of Colorado Boulder
 
 /**
  * AddAMateButton is the push button that adds a mate for the sole bunny that exists at startup.

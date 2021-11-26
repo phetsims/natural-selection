@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2019-2021, University of Colorado Boulder
 
 /**
  * AddMutationsPanel is the panel that contains controls used to add mutations. For each gene, press a push button

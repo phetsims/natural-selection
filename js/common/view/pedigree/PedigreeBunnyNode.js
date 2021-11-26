@@ -1,4 +1,4 @@
-// Copyright 2020, University of Colorado Boulder
+// Copyright 2020-2021, University of Colorado Boulder
 
 /**
  * PedigreeBunnyNode is the view of a bunny in the Pedigree graph. It ignores bunny motion, and displays

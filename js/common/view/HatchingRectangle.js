@@ -1,4 +1,4 @@
-// Copyright 2019-2020, University of Colorado Boulder
+// Copyright 2019-2021, University of Colorado Boulder
 
 /**
  * HatchingRectangle is a Rectangle that appears as if it's filled with a hatching pattern.
