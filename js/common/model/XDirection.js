@@ -1,4 +1,4 @@
-// Copyright 2020-2021, University of Colorado Boulder
+// Copyright 2020-2022, University of Colorado Boulder
 
 /**
  * XDirection is the direction that an Organism (bunny, wolf, shrub) is facing along the x axis.
