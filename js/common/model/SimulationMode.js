@@ -7,10 +7,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
 import naturalSelection from '../../naturalSelection.js';
 
-const SimulationMode = Enumeration.byKeys( [
+const SimulationMode = EnumerationDeprecated.byKeys( [
   'STAGED',   // the simulation is staged, but waiting for the user press 'Add a Mate' or 'Play' button
   'ACTIVE',   // the simulation is active
   'COMPLETED' // the simulation has completed and the user is reviewing results

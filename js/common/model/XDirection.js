@@ -7,10 +7,10 @@
  */
 
 import dotRandom from '../../../../dot/js/dotRandom.js';
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
 import naturalSelection from '../../naturalSelection.js';
 
-const XDirection = Enumeration.byKeys( [ 'LEFT', 'RIGHT' ], {
+const XDirection = EnumerationDeprecated.byKeys( [ 'LEFT', 'RIGHT' ], {
 
   // {function(Enumeration)} Called before the enumeration is frozen.
   beforeFreeze: XDirection => {

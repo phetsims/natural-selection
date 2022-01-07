@@ -7,10 +7,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
 import naturalSelection from '../../naturalSelection.js';
 
-const GraphChoice = Enumeration.byKeys( [ 'POPULATION', 'PROPORTIONS', 'PEDIGREE', 'NONE' ] );
+const GraphChoice = EnumerationDeprecated.byKeys( [ 'POPULATION', 'PROPORTIONS', 'PEDIGREE', 'NONE' ] );
 
 naturalSelection.register( 'GraphChoice', GraphChoice );
 export default GraphChoice;
