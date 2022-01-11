@@ -25,7 +25,7 @@ const TEXT_OPTIONS = {
 class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
 
   /**
-   * @param {EnumerationProperty.<GraphChoice>} graphChoiceProperty
+   * @param {EnumerationDeprecatedProperty.<GraphChoice>} graphChoiceProperty
    * @param {Object} [options]
    */
   constructor( graphChoiceProperty, options ) {

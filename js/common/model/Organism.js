@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -52,7 +52,7 @@ class Organism extends PhetioObject {
     } );
 
     // @public {Property.<XDirection>}
-    this.xDirectionProperty = new EnumerationProperty( XDirection, options.xDirection, {
+    this.xDirectionProperty = new EnumerationDeprecatedProperty( XDirection, options.xDirection, {
       tandem: options.tandem.createTandem( 'xDirectionProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'direction that the organism is facing along the x axis'

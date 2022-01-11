@@ -27,7 +27,7 @@ class NaturalSelectionTimeControlNode extends HBox {
 
   /**
    * @param {Property.<boolean>} isPlayingProperty
-   * @param {EnumerationProperty.<TimeSpeed>} timeSpeedProperty
+   * @param {EnumerationDeprecatedProperty.<TimeSpeed>} timeSpeedProperty
    * @param {Object} [options]
    */
   constructor( isPlayingProperty, timeSpeedProperty, options ) {

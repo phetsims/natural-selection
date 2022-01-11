@@ -9,7 +9,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
@@ -54,7 +54,7 @@ class NaturalSelectionModel {
     this.modelViewTransform = new EnvironmentModelViewTransform();
 
     // @public see SimulationMode
-    this.simulationModeProperty = new EnumerationProperty( SimulationMode, SimulationMode.STAGED, {
+    this.simulationModeProperty = new EnumerationDeprecatedProperty( SimulationMode, SimulationMode.STAGED, {
       tandem: options.tandem.createTandem( 'simulationModeProperty' ),
       phetioDocumentation: 'for internal PhET use only', // see https://github.com/phetsims/phet-io/issues/1660
       phetioReadOnly: true
@@ -67,7 +67,7 @@ class NaturalSelectionModel {
     } );
 
     // @public
-    this.timeSpeedProperty = new EnumerationProperty( TimeSpeed, TimeSpeed.NORMAL, {
+    this.timeSpeedProperty = new EnumerationDeprecatedProperty( TimeSpeed, TimeSpeed.NORMAL, {
       validValues: [ TimeSpeed.NORMAL, TimeSpeed.FAST ],
       tandem: options.tandem.createTandem( 'timeSpeedProperty' ),
       phetioDocumentation: 'controls the speed of the generation clock',
@@ -103,7 +103,7 @@ class NaturalSelectionModel {
     this.initializeGenerationZero();
 
     // @public
-    this.environmentProperty = new EnumerationProperty( Environment, Environment.EQUATOR, {
+    this.environmentProperty = new EnumerationDeprecatedProperty( Environment, Environment.EQUATOR, {
       tandem: options.tandem.createTandem( 'environmentProperty' )
     } );
 

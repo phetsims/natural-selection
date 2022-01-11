@@ -18,7 +18,7 @@ import naturalSelection from '../../naturalSelection.js';
 class FastForwardButton extends RoundMomentaryButton {
 
   /**
-   * @param {EnumerationProperty.<TimeSpeed>} timeSpeedProperty
+   * @param {EnumerationDeprecatedProperty.<TimeSpeed>} timeSpeedProperty
    * @param {Object} [options]
    */
   constructor( timeSpeedProperty, options ) {

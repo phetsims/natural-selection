@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -128,7 +128,7 @@ class NaturalSelectionScreenView extends ScreenView {
       } );
 
     // @public
-    this.graphChoiceProperty = new EnumerationProperty( GraphChoice, GraphChoice.POPULATION, {
+    this.graphChoiceProperty = new EnumerationDeprecatedProperty( GraphChoice, GraphChoice.POPULATION, {
       tandem: graphsTandem.createTandem( 'graphChoiceProperty' ),
       phetioDocumentation: 'the graph choice made via graphChoiceRadioButtonGroup'
     } );

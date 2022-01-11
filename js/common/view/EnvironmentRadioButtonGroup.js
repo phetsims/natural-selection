@@ -27,7 +27,7 @@ const ICON_Y_MARGIN = 6;
 class EnvironmentRadioButtonGroup extends RectangularRadioButtonGroup {
 
   /**
-   * @param {EnumerationProperty.<Environment>} environmentProperty
+   * @param {EnumerationDeprecatedProperty.<Environment>} environmentProperty
    * @param {Object} [options]
    */
   constructor( environmentProperty, options ) {

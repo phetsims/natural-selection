@@ -21,7 +21,7 @@ import StartOverButton from './StartOverButton.js';
 class PlayButtonGroup extends Node {
 
   /**
-   * @param {EnumerationProperty.<SimulationMode>} simulationModeProperty
+   * @param {EnumerationDeprecatedProperty.<SimulationMode>} simulationModeProperty
    * @param {Property.<number>} bunnyCountProperty
    * @param {Object} [options]
    */

@@ -49,7 +49,7 @@ class WolfCollection {
 
   /**
    * @param {GenerationClock} generationClock
-   * @param {EnumerationProperty.<Environment>} environmentProperty
+   * @param {EnumerationDeprecatedProperty.<Environment>} environmentProperty
    * @param {BunnyCollection} bunnyCollection
    * @param {EnvironmentModelViewTransform} modelViewTransform
    * @param {Object} [options]

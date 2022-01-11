@@ -22,7 +22,7 @@ import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParamete
 class EnvironmentBackgroundNode extends Node {
 
   /**
-   * @param {EnumerationProperty.<Environment>} environmentProperty
+   * @param {EnumerationDeprecatedProperty.<Environment>} environmentProperty
    * @param {Dimension2} size - dimensions of the backgrounds, in view coordinates
    * @param {number} yHorizon - y coordinate of the horizon, in view coordinates
    * @param {Object} [options]
