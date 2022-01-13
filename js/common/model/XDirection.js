@@ -12,7 +12,7 @@ import naturalSelection from '../../naturalSelection.js';
 
 const XDirection = EnumerationDeprecated.byKeys( [ 'LEFT', 'RIGHT' ], {
 
-  // {function(Enumeration)} Called before the enumeration is frozen.
+  // {function(EnumerationDeprecated)} Called before the enumeration is frozen.
   beforeFreeze: XDirection => {
 
     /**
