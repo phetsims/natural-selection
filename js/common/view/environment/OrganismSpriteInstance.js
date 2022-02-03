@@ -8,8 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Sprite } from '../../../../../scenery/js/imports.js';
-import { SpriteInstance } from '../../../../../scenery/js/imports.js';
+import { Sprite, SpriteInstance, SpriteInstanceTransformType } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Organism from '../../model/Organism.js';
 import XDirection from '../../model/XDirection.js';
@@ -29,7 +28,7 @@ class OrganismSpriteInstance extends SpriteInstance {
 
     // Set field in super SpriteInstance. Every Organism needs to be both translated and scaled
     // because the view is a 2D projection of a 3D model position.
-    this.transformType = SpriteInstance.TransformType.TRANSLATION_AND_SCALE;
+    this.transformType = SpriteInstanceTransformType.TRANSLATION_AND_SCALE;
 
     // @private {function}
     this.organismListener = this.updateMatrix.bind( this );
