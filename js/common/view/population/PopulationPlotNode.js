@@ -7,7 +7,7 @@
  */
 
 import Property from '../../../../../axon/js/Property.js';
-import Shape from '../../../../../kite/js/Shape.js';
+import { Shape } from '../../../../../kite/js/imports.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import required from '../../../../../phet-core/js/required.js';
 import { Node } from '../../../../../scenery/js/imports.js';
