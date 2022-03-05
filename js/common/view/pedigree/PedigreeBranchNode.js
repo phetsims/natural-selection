@@ -1,4 +1,4 @@
-// Copyright 2020-2021, University of Colorado Boulder
+// Copyright 2020-2022, University of Colorado Boulder
 
 /**
  * PedigreeBranchNode is a branch of the Pedigree graph. It connects a child bunny to 2 parent bunnies via a T shape:

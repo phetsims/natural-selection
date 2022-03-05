@@ -1,4 +1,4 @@
-// Copyright 2019-2021, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * MutationComingNode is a popup 'alert' that informs the user that a mutation is about to occur,

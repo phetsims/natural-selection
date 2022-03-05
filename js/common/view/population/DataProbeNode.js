@@ -1,4 +1,4 @@
-// Copyright 2019-2021, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * DataProbeNode displays population (y-axis) values for a specific generation (x-axis) value.
