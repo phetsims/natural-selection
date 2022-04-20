@@ -9,12 +9,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import PlayPauseButton from '../../../../scenery-phet/js/buttons/PlayPauseButton.js';
-import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
-import { HBox } from '../../../../scenery/js/imports.js';
-import { SceneryConstants } from '../../../../scenery/js/imports.js';
+import { HBox, SceneryConstants } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import FastForwardButton from './FastForwardButton.js';
@@ -27,13 +26,13 @@ class NaturalSelectionTimeControlNode extends HBox {
 
   /**
    * @param {Property.<boolean>} isPlayingProperty
-   * @param {EnumerationDeprecatedProperty.<TimeSpeed>} timeSpeedProperty
+   * @param {EnumerationProperty.<TimeSpeed>} timeSpeedProperty
    * @param {Object} [options]
    */
   constructor( isPlayingProperty, timeSpeedProperty, options ) {
 
     assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
-    assert && AssertUtils.assertEnumerationPropertyOf( timeSpeedProperty, TimeSpeed );
+    assert && assert( timeSpeedProperty instanceof EnumerationProperty );
 
     options = merge( {
       spacing: 10,
