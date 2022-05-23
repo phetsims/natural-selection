@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { AlignGroup } from '../../../../scenery/js/imports.js';
@@ -84,7 +84,7 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
 
     // Set the panel's title to singular or plural, depending on how many checkboxes are visible.
     // unlink is not necessary.
-    Property.multilink( _.map( checkboxes, checkbox => checkbox.visibleProperty ), () => {
+    Multilink.multilink( _.map( checkboxes, checkbox => checkbox.visibleProperty ), () => {
 
       // If the title hasn't been changed to something entirely different via PhET-iO...
       if ( [ naturalSelectionStrings.environmentalFactor, naturalSelectionStrings.environmentalFactors ].includes( titleNode.text ) ) {

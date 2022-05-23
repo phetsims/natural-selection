@@ -7,6 +7,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import createObservableArray from '../../../../axon/js/createObservableArray.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
@@ -125,7 +126,7 @@ class ProportionsModel extends PhetioObject {
 
     // When the sim starts playing or the current generation changes, show the current generation immediately.
     // unmultilink is not necessary.
-    Property.multilink(
+    Multilink.multilink(
       [ isPlayingProperty, clockGenerationProperty ],
       ( isPlaying, clockGeneration ) => {
         if ( isPlaying ) {
@@ -138,7 +139,7 @@ class ProportionsModel extends PhetioObject {
     };
 
     // Determine what data to display. unmultilink is not necessary.
-    Property.multilink(
+    Multilink.multilink(
       [ this.proportionsGenerationProperty, currentStartCountsProperty ],
       ( proportionsGeneration, currentStartCounts ) => {
 

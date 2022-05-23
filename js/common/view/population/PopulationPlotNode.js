@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../../axon/js/Property.js';
+import Multilink from '../../../../../axon/js/Multilink.js';
 import { Shape } from '../../../../../kite/js/imports.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import required from '../../../../../phet-core/js/required.js';
@@ -108,7 +108,7 @@ class PopulationPlotNode extends Node {
     } );
 
     // Update when visibility or range changes. unmultilink is not necessary.
-    Property.multilink( [ this.visibleProperty, this.xRangeProperty, this.yRangeProperty ],
+    Multilink.multilink( [ this.visibleProperty, this.xRangeProperty, this.yRangeProperty ],
       visible => visible ? this.updatePlot() : this.clearPlot()
     );
   }

@@ -11,7 +11,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../../axon/js/Property.js';
+import Multilink from '../../../../../axon/js/Multilink.js';
 import Range from '../../../../../dot/js/Range.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
@@ -91,7 +91,7 @@ class PopulationGenerationScroller extends HBox {
     super( options );
 
     // Enable buttons. unmultilink is not necessary.
-    Property.multilink(
+    Multilink.multilink(
       [ rangeProperty, maxProperty ],
       ( range, max ) => {
         backButton.enabled = ( range.min > 0 );

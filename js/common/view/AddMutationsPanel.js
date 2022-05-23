@@ -8,7 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import { AlignBox } from '../../../../scenery/js/imports.js';
 import { AlignGroup } from '../../../../scenery/js/imports.js';
@@ -111,7 +111,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
     // Set the panel's title to singular or plural, depending on how many rows are visible.
     // unmultilink is not necessary.
-    Property.multilink( _.map( rows, row => row.visibleProperty ), () => {
+    Multilink.multilink( _.map( rows, row => row.visibleProperty ), () => {
 
       // If the title hasn't been changed to something entirely different via PhET-iO...
       if ( [ naturalSelectionStrings.addMutation, naturalSelectionStrings.addMutations ].includes( titleNode.text ) ) {
