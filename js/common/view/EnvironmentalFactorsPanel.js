@@ -1,4 +1,4 @@
-// Copyright 2019-2021, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
  * EnvironmentalFactorsPanel is the panel that contains controls for environmental factors that affect
