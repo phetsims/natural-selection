@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.4.3 Wed May 25 2022 12:04:28 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.4.3 Tue May 31 2022 13:00:52 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "1971d73693abe3396a5056c4962feead10507e41",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "3e87c7f0057ad5740822cda82067719d75d2673d",
+    "sha": "2d1ff4d2ebca560451e437aa0c0cc264ac3cc980",
     "branch": "1.4"
   },
   "phet-core": {
@@ -45,8 +45,8 @@
     "branch": "HEAD"
   },
   "phet-io-wrappers": {
-    "sha": "cb8bdea55bea86677bc9c86520fe2626b0dd7dad",
-    "branch": "HEAD"
+    "sha": "857f797565c6532e90d810393e227c21c219ae72",
+    "branch": "natural-selection-1.4"
   },
   "phetcommon": {
     "sha": "6a50b84b7fb7084546f2e7023ce59715789fbeb6",
@@ -73,8 +73,8 @@
     "branch": "HEAD"
   },
   "studio": {
-    "sha": "9b746780cd3ca49a932a6e2a9d0c23344be8bad0",
-    "branch": "HEAD"
+    "sha": "382d74c5a515df391355188a605e91b7d16575ba",
+    "branch": "natural-selection-1.4"
   },
   "sun": {
     "sha": "39e97f24a7df0f5b8159742ae05ce766b06a8007",
