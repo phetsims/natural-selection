@@ -27,14 +27,14 @@ class ProportionsModel extends PhetioObject {
 
   /**
    * @param {Property.<BunnyCounts>} liveBunnyCountsProperty - counts of live bunnies, used for dynamic 'Currently' data
-   * @param {Property.<number>} clockGenerationProperty - the generation number of the generation clock
+   * @param {AbstractProperty.<number>} clockGenerationProperty - the generation number of the generation clock
    * @param {Property.<boolean>} isPlayingProperty
    * @param {Object} [options]
    */
   constructor( liveBunnyCountsProperty, clockGenerationProperty, isPlayingProperty, options ) {
 
     assert && assert( liveBunnyCountsProperty instanceof Property, 'invalid bunnyCounts' );
-    assert && AssertUtils.assertPropertyOf( clockGenerationProperty, 'number' );
+    assert && AssertUtils.assertAbstractPropertyOf( clockGenerationProperty, 'number' );
     assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
 
     options = merge( {

@@ -29,7 +29,7 @@ class BunnyGroup extends PhetioGroup {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
-    assert && AssertUtils.assertPropertyOf( bunnyRestRangeProperty, Range );
+    assert && AssertUtils.assertAbstractPropertyOf( bunnyRestRangeProperty, Range );
 
     options = merge( {
 

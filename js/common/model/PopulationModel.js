@@ -50,14 +50,14 @@ class PopulationModel extends PhetioObject {
 
   /**
    * @param {GenePool} genePool
-   * @param {Property.<number>} timeInGenerationsProperty
+   * @param {AbstractProperty.<number>} timeInGenerationsProperty
    * @param {Property.<boolean>} isPlayingProperty
    * @param {Object} [options]
    */
   constructor( genePool, timeInGenerationsProperty, isPlayingProperty, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && AssertUtils.assertPropertyOf( timeInGenerationsProperty, 'number' );
+    assert && AssertUtils.assertAbstractPropertyOf( timeInGenerationsProperty, 'number' );
     assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
 
     options = merge( {

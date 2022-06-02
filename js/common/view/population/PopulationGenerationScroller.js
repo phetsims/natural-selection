@@ -26,14 +26,14 @@ class PopulationGenerationScroller extends HBox {
 
   /**
    * @param {Property.<Range>} rangeProperty
-   * @param {Property.<number>} maxProperty - maximum value for rangeProperty.value.max
+   * @param {AbstractProperty.<number>} maxProperty - maximum value for rangeProperty.value.max
    * @param {Property.<boolean>} isPlayingProperty
    * @param {Object} [options]
    */
   constructor( rangeProperty, maxProperty, isPlayingProperty, options ) {
 
     assert && AssertUtils.assertPropertyOf( rangeProperty, Range );
-    assert && AssertUtils.assertPropertyOf( maxProperty, 'number' );
+    assert && AssertUtils.assertAbstractPropertyOf( maxProperty, 'number' );
     assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
 
     options = merge( {

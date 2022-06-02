@@ -204,13 +204,13 @@ class VerticalLines extends Node {
 class HorizontalLines extends Path {
 
   /**
-   * @param {Property.<Range>} yRangeProperty - range of the y-axis range, in model coordinates
+   * @param {AbstractProperty.<Range>} yRangeProperty - range of the y-axis range, in model coordinates
    * @param {function:number} getYSpacing - gets the y-spacing for the current value of yRangeProperty
    * @param {Object} [options]
    */
   constructor( yRangeProperty, getYSpacing, options ) {
 
-    assert && AssertUtils.assertPropertyOf( yRangeProperty, Range );
+    assert && AssertUtils.assertAbstractPropertyOf( yRangeProperty, Range );
     assert && assert( typeof getYSpacing === 'function', 'invalid getYSpacing' );
 
     options = merge( {
@@ -322,13 +322,13 @@ class XTickLabels extends Node {
 class YTickLabels extends Node {
 
   /**
-   * @param {Property.<Range>} yRangeProperty - the y-axis range, in model coordinates
+   * @param {AbstractProperty.<Range>} yRangeProperty - the y-axis range, in model coordinates
    * @param {function:number} getYSpacing - gets the y-spacing for the current value of yRangeProperty
    * @param {Object} [options]
    */
   constructor( yRangeProperty, getYSpacing, options ) {
 
-    assert && AssertUtils.assertPropertyOf( yRangeProperty, Range );
+    assert && AssertUtils.assertAbstractPropertyOf( yRangeProperty, Range );
     assert && assert( typeof getYSpacing === 'function', 'invalid getYSpacing' );
 
     options = merge( {

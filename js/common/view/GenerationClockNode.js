@@ -35,14 +35,14 @@ class GenerationClockNode extends Node {
 
   /**
    * @param {GenerationClock} generationClock
-   * @param {Property.<boolean>} foodEnabledProperty
+   * @param {AbstractProperty.<boolean>} foodEnabledProperty
    * @param {Property.<boolean>} wolvesEnabledProperty
    * @param {Object} [options]
    */
   constructor( generationClock, foodEnabledProperty, wolvesEnabledProperty, options ) {
 
     assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
-    assert && AssertUtils.assertPropertyOf( foodEnabledProperty, 'boolean' );
+    assert && AssertUtils.assertAbstractPropertyOf( foodEnabledProperty, 'boolean' );
     assert && AssertUtils.assertPropertyOf( wolvesEnabledProperty, 'boolean' );
 
     options = merge( {

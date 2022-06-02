@@ -41,14 +41,14 @@ class Bunny extends Organism {
   /**
    * @param {GenePool} genePool
    * @param {EnvironmentModelViewTransform} modelViewTransform
-   * @param {Property.<Range>} bunnyRestRangeProperty - range for time spent resting between hops, in seconds
+   * @param {AbstractProperty.<Range>} bunnyRestRangeProperty - range for time spent resting between hops, in seconds
    * @param {Object} [options]
    */
   constructor( genePool, modelViewTransform, bunnyRestRangeProperty, options ) {
 
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
-    assert && AssertUtils.assertPropertyOf( bunnyRestRangeProperty, Range );
+    assert && AssertUtils.assertAbstractPropertyOf( bunnyRestRangeProperty, Range );
 
     options = merge( {
 
