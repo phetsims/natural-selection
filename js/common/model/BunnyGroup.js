@@ -1,4 +1,4 @@
-// Copyright 2020, University of Colorado Boulder
+// Copyright 2020-2022, University of Colorado Boulder
 
 /**
  * BunnyGroup is the PhetioGroup for Bunny.  It manages dynamic instances of Bunny, as required by PhET-iO.
