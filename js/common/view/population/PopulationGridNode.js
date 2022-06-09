@@ -204,7 +204,7 @@ class VerticalLines extends Node {
 class HorizontalLines extends Path {
 
   /**
-   * @param {AbstractProperty.<Range>} yRangeProperty - range of the y-axis range, in model coordinates
+   * @param {ReadOnlyProperty.<Range>} yRangeProperty - range of the y-axis range, in model coordinates
    * @param {function:number} getYSpacing - gets the y-spacing for the current value of yRangeProperty
    * @param {Object} [options]
    */
@@ -322,7 +322,7 @@ class XTickLabels extends Node {
 class YTickLabels extends Node {
 
   /**
-   * @param {AbstractProperty.<Range>} yRangeProperty - the y-axis range, in model coordinates
+   * @param {ReadOnlyProperty.<Range>} yRangeProperty - the y-axis range, in model coordinates
    * @param {function:number} getYSpacing - gets the y-spacing for the current value of yRangeProperty
    * @param {Object} [options]
    */

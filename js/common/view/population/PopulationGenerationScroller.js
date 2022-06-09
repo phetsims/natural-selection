@@ -26,7 +26,7 @@ class PopulationGenerationScroller extends HBox {
 
   /**
    * @param {Property.<Range>} rangeProperty
-   * @param {AbstractProperty.<number>} maxProperty - maximum value for rangeProperty.value.max
+   * @param {ReadOnlyProperty.<number>} maxProperty - maximum value for rangeProperty.value.max
    * @param {Property.<boolean>} isPlayingProperty
    * @param {Object} [options]
    */

@@ -9,7 +9,7 @@
  */
 
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
-import Property, { AbstractProperty } from '../../../../../axon/js/Property.js';
+import Property, { ReadOnlyProperty } from '../../../../../axon/js/Property.js';
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import Range from '../../../../../dot/js/Range.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
@@ -212,14 +212,14 @@ function createDashedNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, c
 
 /**
  * Creates a NumberDisplay for the data probe.
- * @param {AbstractProperty.<BunnyCounts|null>} bunnyCountsProperty
+ * @param {ReadOnlyProperty.<BunnyCounts|null>} bunnyCountsProperty
  * @param {string} bunnyCountsFieldName - name of the desired field in BunnyCounts
  * @param {Object} [options] - NumberDisplay options
  * @returns {NumberDisplay}
  */
 function createNumberDisplay( bunnyCountsProperty, bunnyCountsFieldName, options ) {
 
-  assert && assert( bunnyCountsProperty instanceof AbstractProperty, 'invalid bunnyCountsProperty' );
+  assert && assert( bunnyCountsProperty instanceof ReadOnlyProperty, 'invalid bunnyCountsProperty' );
   assert && assert( typeof bunnyCountsFieldName === 'string', 'invalid bunnyCountsFieldName' );
 
   options = merge( {

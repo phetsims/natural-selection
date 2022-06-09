@@ -27,7 +27,7 @@ class ProportionsModel extends PhetioObject {
 
   /**
    * @param {Property.<BunnyCounts>} liveBunnyCountsProperty - counts of live bunnies, used for dynamic 'Currently' data
-   * @param {AbstractProperty.<number>} clockGenerationProperty - the generation number of the generation clock
+   * @param {ReadOnlyProperty.<number>} clockGenerationProperty - the generation number of the generation clock
    * @param {Property.<boolean>} isPlayingProperty
    * @param {Object} [options]
    */

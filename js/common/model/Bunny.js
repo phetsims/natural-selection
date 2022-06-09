@@ -41,7 +41,7 @@ class Bunny extends Organism {
   /**
    * @param {GenePool} genePool
    * @param {EnvironmentModelViewTransform} modelViewTransform
-   * @param {AbstractProperty.<Range>} bunnyRestRangeProperty - range for time spent resting between hops, in seconds
+   * @param {ReadOnlyProperty.<Range>} bunnyRestRangeProperty - range for time spent resting between hops, in seconds
    * @param {Object} [options]
    */
   constructor( genePool, modelViewTransform, bunnyRestRangeProperty, options ) {

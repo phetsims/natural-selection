@@ -50,7 +50,7 @@ class PopulationModel extends PhetioObject {
 
   /**
    * @param {GenePool} genePool
-   * @param {AbstractProperty.<number>} timeInGenerationsProperty
+   * @param {ReadOnlyProperty.<number>} timeInGenerationsProperty
    * @param {Property.<boolean>} isPlayingProperty
    * @param {Object} [options]
    */

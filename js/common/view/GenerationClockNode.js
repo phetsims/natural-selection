@@ -35,7 +35,7 @@ class GenerationClockNode extends Node {
 
   /**
    * @param {GenerationClock} generationClock
-   * @param {AbstractProperty.<boolean>} foodEnabledProperty
+   * @param {ReadOnlyProperty.<boolean>} foodEnabledProperty
    * @param {Property.<boolean>} wolvesEnabledProperty
    * @param {Object} [options]
    */
