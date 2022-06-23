@@ -353,10 +353,9 @@ class Column extends VBox {
       font: COLUMN_LABEL_FONT,
       maxWidth: 100 // determined empirically
     } );
-    const checkbox = new Checkbox( labelNode, geneVisibleProperty,
-      merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-        tandem: options.tandem.createTandem( 'checkbox' )
-      } ) );
+    const checkbox = new Checkbox( geneVisibleProperty, labelNode, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+      tandem: options.tandem.createTandem( 'checkbox' )
+    } ) );
 
     // Pointer areas for the checkbox
     const xDilation = 8;

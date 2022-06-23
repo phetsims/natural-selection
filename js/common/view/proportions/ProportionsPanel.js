@@ -55,10 +55,9 @@ class ProportionsPanel extends NaturalSelectionPanel {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 100 // determined empirically
     } );
-    const valuesCheckbox = new Checkbox( valuesCheckboxLabelNode, valuesVisibleProperty,
-      merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-        tandem: options.tandem.createTandem( 'valuesCheckbox' )
-      } ) );
+    const valuesCheckbox = new Checkbox( valuesVisibleProperty, valuesCheckboxLabelNode, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+      tandem: options.tandem.createTandem( 'valuesCheckbox' )
+    } ) );
     const xDilation = 8;
     const yDilation = 6;
     valuesCheckbox.touchArea = valuesCheckbox.localBounds.dilatedXY( xDilation, yDilation );

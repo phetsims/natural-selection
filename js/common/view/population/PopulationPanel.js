@@ -136,10 +136,9 @@ class PopulationPanel extends NaturalSelectionPanel {
       group: alignGroup,
       xAlign: 'left'
     } );
-    const dataProbeCheckbox = new Checkbox( dataProbeCheckboxContent, populationModel.dataProbe.visibleProperty,
-      merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-        tandem: options.tandem.createTandem( 'dataProbeCheckbox' )
-      } ) );
+    const dataProbeCheckbox = new Checkbox( populationModel.dataProbe.visibleProperty, dataProbeCheckboxContent, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+      tandem: options.tandem.createTandem( 'dataProbeCheckbox' )
+    } ) );
     dataProbeCheckbox.touchArea = dataProbeCheckbox.localBounds.dilatedXY( xDilation, yDilation );
     dataProbeCheckbox.mouseArea = dataProbeCheckbox.localBounds.dilatedXY( xDilation, yDilation );
 

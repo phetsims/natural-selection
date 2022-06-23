@@ -55,7 +55,7 @@ class EnvironmentalFactorCheckbox extends Checkbox {
       children: [ alignBox, clockSliceNode ]
     } );
 
-    super( content, enabledProperty, options );
+    super( enabledProperty, content, options );
   }
 }
 

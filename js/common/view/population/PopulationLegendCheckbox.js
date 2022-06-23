@@ -66,7 +66,7 @@ class PopulationLegendCheckbox extends Checkbox {
       xAlign: 'left'
     } );
 
-    super( content, plotVisibleProperty, options );
+    super( plotVisibleProperty, content, options );
   }
 
   /**

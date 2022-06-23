@@ -146,10 +146,9 @@ class Row extends VBox {
       maxWidth: 100 // determined empirically
     } );
 
-    const checkbox = new Checkbox( labelNode, visibleProperty,
-      merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-        tandem: options.tandem.createTandem( 'checkbox' )
-      } ) );
+    const checkbox = new Checkbox( visibleProperty, labelNode, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+      tandem: options.tandem.createTandem( 'checkbox' )
+    } ) );
     const xDilation = 8;
     const yDilation = 8;
     checkbox.touchArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
