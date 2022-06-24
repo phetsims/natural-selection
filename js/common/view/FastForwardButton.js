@@ -50,7 +50,7 @@ class FastForwardButton extends RoundMomentaryButton {
       fill: 'black'
     } );
 
-    super( TimeSpeed.NORMAL, TimeSpeed.FAST, timeSpeedProperty, options );
+    super( timeSpeedProperty, TimeSpeed.NORMAL, TimeSpeed.FAST, options );
 
     // Create a Studio link to the model Property
     this.addLinkedElement( timeSpeedProperty, {
