@@ -282,7 +282,7 @@ function parseRange( value ) {
   const tokens = value.split( ',' );
   assert && assert( tokens.length === 2, `range format is min,max: ${value}` );
   assert && assert( _.every( tokens, token => isFinite( token ) ), `range must be 2 numbers: ${value}` );
-  const numbers = _.map( tokens, token => parseFloat( token ) );
+  const numbers = _.map( tokens, token => Number( token ) );
   return new Range( numbers[ 0 ], numbers[ 1 ] );
 }
 
