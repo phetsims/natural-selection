@@ -39,13 +39,15 @@ class EnvironmentRadioButtonGroup extends RectangularRadioButtonGroup {
       // RectangularRadioButtonGroup options
       orientation: 'horizontal',
       spacing: 8,
-      cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
-      selectedStroke: NaturalSelectionColors.RADIO_BUTTON_SELECTED_STROKE,
-      deselectedStroke: NaturalSelectionColors.RADIO_BUTTON_DESELECTED_STROKE,
-      selectedLineWidth: 5,
-      deselectedLineWidth: 1.5,
-      buttonContentXMargin: 0, // Set to 0 because we will create our own backgrounds, see below.
-      buttonContentYMargin: 0,  // Set to 0 because we will create our own backgrounds, see below.
+      radioButtonOptions: {
+        cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
+        selectedStroke: NaturalSelectionColors.RADIO_BUTTON_SELECTED_STROKE,
+        deselectedStroke: NaturalSelectionColors.RADIO_BUTTON_DESELECTED_STROKE,
+        selectedLineWidth: 5,
+        deselectedLineWidth: 1.5,
+        xMargin: 0, // Set to 0 because we will create our own backgrounds, see below.
+        yMargin: 0  // Set to 0 because we will create our own backgrounds, see below.
+      },
 
       // phet-io
       tandem: Tandem.REQUIRED,
@@ -64,12 +66,12 @@ class EnvironmentRadioButtonGroup extends RectangularRadioButtonGroup {
     const buttonWidth = _.maxBy( [ sunIcon, snowflakeIcon ], icon => icon.width ).width + ( 2 * ICON_X_MARGIN );
     const buttonHeight = _.maxBy( [ sunIcon, snowflakeIcon ], icon => icon.height ).height + ( 2 * ICON_Y_MARGIN );
     const equatorButtonBackground = new Rectangle( 0, 0, buttonWidth, buttonHeight, {
-      cornerRadius: options.cornerRadius,
+      cornerRadius: options.radioButtonOptions.cornerRadius,
       fill: NaturalSelectionColors.EQUATOR_BUTTON_FILL,
       center: sunIcon.center
     } );
     const arcticButtonBackground = new Rectangle( 0, 0, buttonWidth, buttonHeight, {
-      cornerRadius: options.cornerRadius,
+      cornerRadius: options.radioButtonOptions.cornerRadius,
       fill: NaturalSelectionColors.ARCTIC_BUTTON_FILL,
       center: snowflakeIcon.center
     } );
