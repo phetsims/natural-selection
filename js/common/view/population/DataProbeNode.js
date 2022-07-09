@@ -9,7 +9,8 @@
  */
 
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
-import Property, { ReadOnlyProperty } from '../../../../../axon/js/Property.js';
+import Property from '../../../../../axon/js/Property.js';
+import ReadOnlyProperty from '../../../../../axon/js/ReadOnlyProperty.js';
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import Range from '../../../../../dot/js/Range.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
