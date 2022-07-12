@@ -181,10 +181,14 @@ class PopulationModel extends PhetioObject {
 
     // Scrolls the x-axis so that 'now' is always the max x value. unlink is not necessary.
     timeInGenerationsProperty.link( timeInGeneration => {
-      const max = Math.max( options.xAxisLength, timeInGeneration );
-      if ( this.xRangeProperty.value.max !== max ) {
-        const min = max - options.xAxisLength;
-        this.xRangeProperty.value = new Range( min, max );
+
+      // Skip when restoring PhET-iO state, see https://github.com/phetsims/natural-selection/issues/315
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+        const max = Math.max( options.xAxisLength, timeInGeneration );
+        if ( this.xRangeProperty.value.max !== max ) {
+          const min = max - options.xAxisLength;
+          this.xRangeProperty.value = new Range( min, max );
+        }
       }
     } );
 
