@@ -200,7 +200,9 @@ class Row extends VBox {
 
         // Automatically make the alleles visible.
         // Corresponding alleles should not be visible when the row is disabled.
-        visibleProperty.value = hasMutation;
+        if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+          visibleProperty.value = hasMutation;
+        }
 
         if ( dominantAllele ) {
 

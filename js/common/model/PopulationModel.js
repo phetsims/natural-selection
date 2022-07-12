@@ -191,16 +191,22 @@ class PopulationModel extends PhetioObject {
     // When a mutation has been applied, show the plots associated with that gene.
     // unlinks are not necessary.
     this.genePool.furGene.dominantAlleleProperty.link( dominantAllele => {
-      this.whiteFurVisibleProperty.value = !!dominantAllele;
-      this.brownFurVisibleProperty.value = !!dominantAllele;
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+        this.whiteFurVisibleProperty.value = !!dominantAllele;
+        this.brownFurVisibleProperty.value = !!dominantAllele;
+      }
     } );
     this.genePool.earsGene.dominantAlleleProperty.link( dominantAllele => {
-      this.straightEarsVisibleProperty.value = !!dominantAllele;
-      this.floppyEarsVisibleProperty.value = !!dominantAllele;
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+        this.straightEarsVisibleProperty.value = !!dominantAllele;
+        this.floppyEarsVisibleProperty.value = !!dominantAllele;
+      }
     } );
     this.genePool.teethGene.dominantAlleleProperty.link( dominantAllele => {
-      this.shortTeethVisibleProperty.value = !!dominantAllele;
-      this.longTeethVisibleProperty.value = !!dominantAllele;
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+        this.shortTeethVisibleProperty.value = !!dominantAllele;
+        this.longTeethVisibleProperty.value = !!dominantAllele;
+      }
     } );
   }
 
