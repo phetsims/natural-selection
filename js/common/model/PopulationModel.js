@@ -190,6 +190,7 @@ class PopulationModel extends PhetioObject {
 
     // When a mutation has been applied, show the plots associated with that gene.
     // unlinks are not necessary.
+    // Do not do this when restoring PhET-iO state, see https://github.com/phetsims/natural-selection/issues/314.
     this.genePool.furGene.dominantAlleleProperty.link( dominantAllele => {
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
         this.whiteFurVisibleProperty.value = !!dominantAllele;

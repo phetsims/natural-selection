@@ -200,6 +200,7 @@ class Row extends VBox {
 
         // Automatically make the alleles visible.
         // Corresponding alleles should not be visible when the row is disabled.
+        // Do not do this when restoring PhET-iO state, see https://github.com/phetsims/natural-selection/issues/314.
         if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
           visibleProperty.value = hasMutation;
         }
