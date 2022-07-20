@@ -10,14 +10,7 @@
 
 import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
-import { AlignBox } from '../../../../scenery/js/imports.js';
-import { AlignGroup } from '../../../../scenery/js/imports.js';
-import { HBox } from '../../../../scenery/js/imports.js';
-import { Image } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import { VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, HBox, Image, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';

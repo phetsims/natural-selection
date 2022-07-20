@@ -9,8 +9,7 @@
 
 import { Shape } from '../../../../kite/js/imports.js';
 import merge from '../../../../phet-core/js/merge.js';
-import { Path } from '../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
+import { Path, Rectangle } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
 
 class HatchingRectangle extends Rectangle {

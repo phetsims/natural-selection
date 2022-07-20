@@ -20,13 +20,7 @@ import ModelViewTransform2 from '../../../../../phetcommon/js/view/ModelViewTran
 import NumberDisplay from '../../../../../scenery-phet/js/NumberDisplay.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import ShadedSphereNode from '../../../../../scenery-phet/js/ShadedSphereNode.js';
-import { DragListener } from '../../../../../scenery/js/imports.js';
-import { HStrut } from '../../../../../scenery/js/imports.js';
-import { Node } from '../../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../../scenery/js/imports.js';
-import { VBox } from '../../../../../scenery/js/imports.js';
-import { VStrut } from '../../../../../scenery/js/imports.js';
-import { Color } from '../../../../../scenery/js/imports.js';
+import { Color, DragListener, HStrut, Node, Rectangle, VBox, VStrut } from '../../../../../scenery/js/imports.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import PopulationModel from '../../model/PopulationModel.js';

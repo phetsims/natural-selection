@@ -9,8 +9,7 @@
 
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import { Sprite } from '../../../../../scenery/js/imports.js';
-import { SpriteImage } from '../../../../../scenery/js/imports.js';
+import { Sprite, SpriteImage } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import BunnySelectionRectangle from '../BunnySelectionRectangle.js';
 

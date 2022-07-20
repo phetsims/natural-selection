@@ -8,9 +8,7 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Path } from '../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
+import { Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import snowflakeSolidShape from '../../../../sherpa/js/fontawesome-5/snowflakeSolidShape.js';
 import sunSolidShape from '../../../../sherpa/js/fontawesome-5/sunSolidShape.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';

@@ -8,8 +8,7 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import { AlignGroup } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
+import { AlignGroup, Text } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';

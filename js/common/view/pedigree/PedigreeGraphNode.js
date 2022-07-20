@@ -9,9 +9,7 @@
 
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
-import { Node } from '../../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../../scenery/js/imports.js';
-import { Text } from '../../../../../scenery/js/imports.js';
+import { Node, Rectangle, Text } from '../../../../../scenery/js/imports.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';

@@ -7,9 +7,9 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import Multilink from '../../../../axon/js/Multilink.js';
 import createObservableArray from '../../../../axon/js/createObservableArray.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';

@@ -16,8 +16,7 @@
 import { Shape } from '../../../../../kite/js/imports.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
-import { Node } from '../../../../../scenery/js/imports.js';
-import { Path } from '../../../../../scenery/js/imports.js';
+import { Node, Path } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';

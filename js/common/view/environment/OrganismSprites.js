@@ -17,10 +17,7 @@
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
-import { PressListener } from '../../../../../scenery/js/imports.js';
-import { SpriteListenable } from '../../../../../scenery/js/imports.js';
-import { Sprites } from '../../../../../scenery/js/imports.js';
-import { Sprite } from '../../../../../scenery/js/imports.js';
+import { PressListener, Sprite, SpriteListenable, Sprites } from '../../../../../scenery/js/imports.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import bunnyWhiteFurStraightEarsShortTeeth_png from '../../../../images/bunnyWhiteFurStraightEarsShortTeeth_png.js';
 import wolf_png from '../../../../images/wolf_png.js';

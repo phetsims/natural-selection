@@ -9,10 +9,7 @@
  */
 
 import { Shape } from '../../../../kite/js/imports.js';
-import { HBox } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Path } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
+import { HBox, Node, Path, Text } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import Gene from '../model/Gene.js';

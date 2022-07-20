@@ -8,8 +8,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { SceneryConstants } from '../../../../scenery/js/imports.js';
+import { Node, SceneryConstants } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';

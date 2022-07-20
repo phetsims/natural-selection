@@ -10,8 +10,7 @@ import Multilink from '../../../../../axon/js/Multilink.js';
 import { Shape } from '../../../../../kite/js/imports.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import required from '../../../../../phet-core/js/required.js';
-import { Node } from '../../../../../scenery/js/imports.js';
-import { Path } from '../../../../../scenery/js/imports.js';
+import { Node, Path } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 

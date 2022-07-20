@@ -9,8 +9,7 @@
 
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import merge from '../../../../../phet-core/js/merge.js';
-import { Node } from '../../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../../scenery/js/imports.js';
+import { Node, Rectangle } from '../../../../../scenery/js/imports.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionModel from '../../model/NaturalSelectionModel.js';

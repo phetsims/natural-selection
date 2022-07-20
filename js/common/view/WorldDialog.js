@@ -8,9 +8,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import { Image } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import { VBox } from '../../../../scenery/js/imports.js';
+import { Image, Text, VBox } from '../../../../scenery/js/imports.js';
 import Dialog from '../../../../sun/js/Dialog.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import world_png from '../../../images/world_png.js';
