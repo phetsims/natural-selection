@@ -39,12 +39,14 @@ class EnvironmentRadioButtonGroup extends RectangularRadioButtonGroup {
       spacing: 8,
       radioButtonOptions: {
         cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
-        selectedStroke: NaturalSelectionColors.RADIO_BUTTON_SELECTED_STROKE,
-        deselectedStroke: NaturalSelectionColors.RADIO_BUTTON_DESELECTED_STROKE,
-        selectedLineWidth: 5,
-        deselectedLineWidth: 1.5,
         xMargin: 0, // Set to 0 because we will create our own backgrounds, see below.
-        yMargin: 0  // Set to 0 because we will create our own backgrounds, see below.
+        yMargin: 0,  // Set to 0 because we will create our own backgrounds, see below.
+        buttonAppearanceStrategyOptions: {
+          selectedStroke: NaturalSelectionColors.RADIO_BUTTON_SELECTED_STROKE,
+          deselectedStroke: NaturalSelectionColors.RADIO_BUTTON_DESELECTED_STROKE,
+          selectedLineWidth: 5,
+          deselectedLineWidth: 1.5
+        }
       },
 
       // phet-io
