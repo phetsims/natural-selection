@@ -62,6 +62,8 @@ class NaturalSelectionTimeControlNode extends HBox {
     super( options );
 
     // Save state of whether the sim is playing, so it can be restored when fast-forward is released.
+    // This value does not need to be captured in the PhET-iO state because it is driven by the buttonModel.downProperty
+    // which is not captured in the PhET-iO state, and hence will be overwritten on next down.
     let isPlayingSaved = isPlayingProperty.value;
 
     // unlink is not necessary.
