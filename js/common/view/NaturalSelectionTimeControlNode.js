@@ -78,7 +78,11 @@ class NaturalSelectionTimeControlNode extends HBox {
 
         // Restore state of playPauseButton when fastForwardButton is released.
         playPauseButton.enabled = true;
-        isPlayingProperty.value = isPlayingSaved;
+
+        // But when playing back states, the ground truth is specified by the state and should not be overwritten by this listener
+        if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+          isPlayingProperty.value = isPlayingSaved;
+        }
       }
     } );
   }
