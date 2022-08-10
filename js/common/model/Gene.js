@@ -108,7 +108,7 @@ class Gene extends PhetioObject {
     this.dominantAlleleProperty = new Property( null, {
       validValues: [ null, this.normalAllele, this.mutantAllele ],
       tandem: config.tandem.createTandem( 'dominantAlleleProperty' ),
-      phetioType: Property.PropertyIO( NullableIO( Allele.AlleleIO ) ),
+      phetioValueType: NullableIO( Allele.AlleleIO ),
       phetioReadOnly: true
     } );
 
@@ -126,7 +126,7 @@ class Gene extends PhetioObject {
       }, {
         validValues: [ null, this.normalAllele, this.mutantAllele ],
         tandem: config.tandem.createTandem( 'recessiveAlleleProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( NullableIO( Allele.AlleleIO ) )
+        phetioValueType: NullableIO( Allele.AlleleIO )
       } );
 
     // @public is a mutation coming in the next generation of bunnies?

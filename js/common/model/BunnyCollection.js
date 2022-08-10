@@ -100,7 +100,7 @@ class BunnyCollection {
         }
       }, {
         tandem: options.tandem.createTandem( 'bunnyRestRangeProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( Range.RangeIO ),
+        phetioValueType: Range.RangeIO,
         phetioDocumentation: 'for internal PhET use only'
       } );
 

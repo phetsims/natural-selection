@@ -32,7 +32,7 @@ class SelectedBunnyProperty extends Property {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      phetioType: Property.PropertyIO( NullableIO( ReferenceIO( Bunny.BunnyIO ) ) ),
+      phetioValueType: NullableIO( ReferenceIO( Bunny.BunnyIO ) ),
       phetioDocumentation: 'the selected bunny, null if no bunny is selected'
     }, options );
 

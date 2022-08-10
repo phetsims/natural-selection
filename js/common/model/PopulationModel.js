@@ -150,7 +150,7 @@ class PopulationModel extends PhetioObject {
     this.xRangeProperty = new Property( new Range( 0, options.xAxisLength ), {
       isValidValue: xRange => ( xRange.min >= 0 ),
       tandem: options.tandem.createTandem( 'xRangeProperty' ),
-      phetioType: Property.PropertyIO( Range.RangeIO ),
+      phetioValueType: Range.RangeIO,
       phetioReadOnly: true, // range is dynamic, and changes on every clock tick
       phetioHighFrequency: true,
       phetioDocumentation: 'range of the x (Generation) axis'
@@ -170,7 +170,7 @@ class PopulationModel extends PhetioObject {
       yZoomLevel => new Range( Y_MINIMUM, Y_MAXIMUMS[ yZoomLevel ] ), {
         isValidValue: yRange => ( yRange.min >= 0 ),
         tandem: options.tandem.createTandem( 'yRangeProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( Range.RangeIO ),
+        phetioValueType: Range.RangeIO,
         phetioDocumentation: 'range of the y (Population) axis'
       } );
 

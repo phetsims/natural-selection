@@ -69,7 +69,7 @@ class GenerationClock extends PhetioObject {
       [ this.timeInSecondsProperty ],
       timeInSeconds => secondsToGenerations( timeInSeconds ), {
         tandem: options.tandem.createTandem( 'timeInGenerationsProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO ),
+        phetioValueType: NumberIO,
         phetioDocumentation: 'time that the generation clock has been running, in generations (decimal)',
         phetioHighFrequency: true
       } );
@@ -82,7 +82,7 @@ class GenerationClock extends PhetioObject {
       timeInGenerations => Math.floor( timeInGenerations ), {
         isValidValue: clockGeneration => Number.isInteger( clockGeneration ),
         tandem: options.tandem.createTandem( 'clockGenerationProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO ),
+        phetioValueType: NumberIO,
         phetioDocumentation: 'generation number of the current cycle of the generation clock (integer)'
       }
     );

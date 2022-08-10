@@ -81,7 +81,7 @@ class WolfCollection {
       [ this.enabledProperty, generationClock.timeInPercentProperty ],
       ( enabled, timeInPercent ) => ( enabled && NaturalSelectionConstants.CLOCK_WOLVES_RANGE.contains( timeInPercent ) ), {
         tandem: options.tandem.createTandem( 'isHuntingProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( BooleanIO ),
+        phetioValueType: BooleanIO,
         phetioDocumentation: 'for internal PhET use only'
       } );
 

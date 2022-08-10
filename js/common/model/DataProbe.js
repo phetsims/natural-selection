@@ -56,7 +56,7 @@ class DataProbe extends PhetioObject {
       [ populationModel.xRangeProperty, this.offsetProperty ],
       ( xRange, offset ) => xRange.min + offset.x, {
         tandem: options.tandem.createTandem( 'dataProbeGenerationProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO ),
+        phetioValueType: NumberIO,
         phetioDocumentation: 'the generation (x-axis) value where the data probe is positioned (decimal)'
       } );
 
@@ -64,7 +64,7 @@ class DataProbe extends PhetioObject {
     this.countsProperty = new DerivedProperty( [ this.dataProbeGenerationProperty, populationModel.timeInGenerationsProperty ],
       ( dataProbeGeneration, timeInGenerations ) => this.getCounts( dataProbeGeneration, timeInGenerations ), {
         tandem: options.tandem.createTandem( 'countsProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( NullableIO( BunnyCounts.BunnyCountsIO ) ),
+        phetioValueType: NullableIO( BunnyCounts.BunnyCountsIO ),
         phetioDocumentation: 'counts displayed by the data probe'
       } );
 

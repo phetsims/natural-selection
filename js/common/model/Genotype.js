@@ -103,7 +103,7 @@ class Genotype extends PhetioObject {
                this.teethGenePair.getGenotypeAbbreviation();
       }, {
         tandem: options.tandem.createTandem( 'abbreviationProperty' ),
-        phetioType: DerivedProperty.DerivedPropertyIO( StringIO ),
+        phetioValueType: StringIO,
         phetioDocumentation: 'the abbreviation that describes the genotype, the empty string if there are no dominant alleles'
       } );
 

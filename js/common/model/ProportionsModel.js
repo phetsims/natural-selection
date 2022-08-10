@@ -90,7 +90,7 @@ class ProportionsModel extends PhetioObject {
     // While in SimulationMode.ACTIVE it will always have a value.
     const currentStartCountsProperty = new Property( null, {
       tandem: options.tandem.createTandem( 'currentStartCountsProperty' ),
-      phetioType: Property.PropertyIO( NullableIO( BunnyCounts.BunnyCountsIO ) ),
+      phetioValueType: NullableIO( BunnyCounts.BunnyCountsIO ),
       phetioDocumentation: 'Counts at the start of the current generation'
     } );
 

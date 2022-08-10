@@ -39,7 +39,7 @@ function createBunnyArray( options ) {
   // @public (read-only) {Property.<BunnyCounts>}
   bunnyArray.countsProperty = new Property( BunnyCounts.withZero(), {
     tandem: options.tandem.createTandem( 'countsProperty' ),
-    phetioType: Property.PropertyIO( BunnyCounts.BunnyCountsIO ),
+    phetioValueType: BunnyCounts.BunnyCountsIO,
     phetioState: false // because counts will be restored as Bunny instances are restored to BunnyGroup
   } );
 
