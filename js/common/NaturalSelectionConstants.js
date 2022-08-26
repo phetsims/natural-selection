@@ -80,11 +80,6 @@ const NaturalSelectionConstants = {
     stroke: NaturalSelectionColors.PANEL_STROKE
   },
 
-  // RectangularPushButton
-  RECTANGULAR_PUSH_BUTTON_OPTIONS: {
-    cornerRadius: CORNER_RADIUS
-  },
-
   // VBox
   VBOX_OPTIONS: {
     spacing: 11,

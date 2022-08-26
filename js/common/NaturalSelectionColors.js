@@ -33,7 +33,7 @@ const NaturalSelectionColors = {
   SEPARATOR_STROKE: 'rgb( 200, 200, 200 )',
 
   // Push Buttons
-  ADD_A_MATE_BUTTON: PhetColorScheme.BUTTON_YELLOW,
+  PLAY_BUTTON: PhetColorScheme.BUTTON_YELLOW,
   ADD_MUTATION_BUTTONS: 'rgb( 203, 203, 203 )',
   ARROW_BUTTONS: 'white',
 
