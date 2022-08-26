@@ -8,6 +8,7 @@
  */
 
 import stepTimer from '../../../../axon/js/stepTimer.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
@@ -57,7 +58,6 @@ class PlayButtonGroup extends Node {
         options.play();
         simulationModeProperty.value = SimulationMode.ACTIVE;
       },
-      center: addAMateButton.center,
       tandem: options.tandem.createTandem( 'playButton' )
     } );
 
@@ -68,7 +68,6 @@ class PlayButtonGroup extends Node {
         options.startOver();
         simulationModeProperty.value = SimulationMode.STAGED;
       },
-      center: addAMateButton.center,
       tandem: options.tandem.createTandem( 'startOverButton' )
     } );
 
@@ -77,15 +76,22 @@ class PlayButtonGroup extends Node {
 
     super( options );
 
+    // Make all buttons have the same center
+    Multilink.multilink( [ addAMateButton.boundsProperty, playButton.boundsProperty, startOverButton.boundsProperty ],
+      () => {
+        playButton.center = addAMateButton.center;
+        startOverButton.center = addAMateButton.center;
+      } );
+
     // Make at most 1 button visible. unlink is not necessary.
     simulationModeProperty.link( simulationMode => {
 
-        // start with all buttons hidden
-        addAMateButton.visible = false;
-        playButton.visible = false;
-        startOverButton.visible = false;
+      // start with all buttons hidden
+      addAMateButton.visible = false;
+      playButton.visible = false;
+      startOverButton.visible = false;
 
-        if ( simulationMode === SimulationMode.STAGED ) {
+      if ( simulationMode === SimulationMode.STAGED ) {
 
           // Show 'Add a Mate' or 'Play' button, depending on the size of the population.
           // Make one of these buttons visible on the next frame, so that a double-click on the 'Start Over' button

@@ -88,10 +88,14 @@ class EnvironmentPanel extends Panel {
 
           timeToStartOverProperty.value = NaturalSelectionUtils.time( () => model.startOver() );
         },
-        centerX: environmentNode.centerX,
-        bottom: environmentNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN,
         tandem: options.tandem.createTandem( 'playButtonGroup' )
       } );
+
+    // Buttons at center-bottom, adjusted if their text labels change dynamically
+    playButtonGroup.boundsProperty.link( () => {
+      playButtonGroup.centerX = environmentNode.centerX;
+      playButtonGroup.bottom = environmentNode.bottom - NaturalSelectionConstants.ENVIRONMENT_DISPLAY_Y_MARGIN;
+    } );
 
     const content = new Node( {
       children: [ environmentNode, generationClockNode, environmentRadioButtonGroup, playButtonGroup ]
