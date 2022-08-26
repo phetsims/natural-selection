@@ -1,7 +1,7 @@
-// Copyright 2019-2021, University of Colorado Boulder
+// Copyright 2019-2022, University of Colorado Boulder
 
 /**
- * StartOverButton is the push button that is shown after all bunnies die, or bunnies take over the world.
+ * TextPushButton is a push button with a text label.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -11,18 +11,22 @@ import { Text } from '../../../../scenery/js/imports.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-class StartOverButton extends RectangularPushButton {
+class TextPushButton extends RectangularPushButton {
 
   /**
+   * @param {string} label
    * @param {Object} [options]
    */
-  constructor( options ) {
+  constructor( label, options ) {
 
     options = merge( {}, NaturalSelectionConstants.RECTANGULAR_PUSH_BUTTON_OPTIONS, {
+      textOptions: {
+        font: NaturalSelectionConstants.PUSH_BUTTON_FONT,
+        maxWidth: 150 // determined empirically
+      },
       baseColor: NaturalSelectionColors.ADD_A_MATE_BUTTON,
       xMargin: 12,
       yMargin: 8,
@@ -32,15 +36,12 @@ class StartOverButton extends RectangularPushButton {
       phetioReadOnly: true // because sim state controls when this button is visible
     }, options );
 
-    assert && assert( !options.content, 'StartOverButton sets content' );
-    options.content = new Text( naturalSelectionStrings.startOver, {
-      font: NaturalSelectionConstants.PUSH_BUTTON_FONT,
-      maxWidth: 150 // determined empirically
-    } );
+    assert && assert( !options.content, 'TextPushButton sets content' );
+    options.content = new Text( label, options.textOptions );
 
     super( options );
   }
 }
 
-naturalSelection.register( 'StartOverButton', StartOverButton );
-export default StartOverButton;
+naturalSelection.register( 'TextPushButton', TextPushButton );
+export default TextPushButton;

@@ -13,10 +13,9 @@ import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import SimulationMode from '../model/SimulationMode.js';
-import AddAMateButton from './AddAMateButton.js';
-import PlayButton from './PlayButton.js';
-import StartOverButton from './StartOverButton.js';
+import TextPushButton from './TextPushButton.js';
 
 class PlayButtonGroup extends Node {
 
@@ -41,8 +40,8 @@ class PlayButtonGroup extends Node {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // 'Add a Mate' push button, for when the initial population consists of a single bunny
-    const addAMateButton = new AddAMateButton( {
+    // 'Add a Mate' push button, for when the initial population consists of a single bunny.
+    const addAMateButton = new TextPushButton( naturalSelectionStrings.addAMate, {
       listener: () => {
         options.addAMate();
         simulationModeProperty.value = SimulationMode.ACTIVE;
@@ -50,8 +49,8 @@ class PlayButtonGroup extends Node {
       tandem: options.tandem.createTandem( 'addAMateButton' )
     } );
 
-    // 'Play' push button, for when the initial population consists of more than one bunny
-    const playButton = new PlayButton( {
+    // 'Play' push button, for when the initial population consists of more than one bunny.
+    const playButton = new TextPushButton( naturalSelectionStrings.play, {
       listener: () => {
         options.play();
         simulationModeProperty.value = SimulationMode.ACTIVE;
@@ -60,8 +59,9 @@ class PlayButtonGroup extends Node {
       tandem: options.tandem.createTandem( 'playButton' )
     } );
 
-    // 'Start Over' push button, displayed after the game ends, while the user is reviewing the final state
-    const startOverButton = new StartOverButton( {
+    // 'Start Over' push button, displayed after the game ends (bunnie take over the world, or all bunnies die),
+    // while the user is reviewing the final state.
+    const startOverButton = new TextPushButton( naturalSelectionStrings.startOver, {
       listener: () => {
         options.startOver();
         simulationModeProperty.value = SimulationMode.STAGED;
