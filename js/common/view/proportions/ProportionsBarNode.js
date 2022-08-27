@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Multilink from '../../../../../axon/js/Multilink.js';
 import Utils from '../../../../../dot/js/Utils.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
@@ -58,7 +59,8 @@ class ProportionsBarNode extends Node {
       stroke: color
     } );
 
-    // Percentages for non-mutant and mutant counts
+    // Percentages for non-mutant and mutant counts.
+    // These Text nodes do not take a string Property argument. They are updated via Multilink below.
     const percentageOptions = {
       font: PERCENTAGE_FONT,
       bottom: -4,
@@ -88,8 +90,15 @@ class ProportionsBarNode extends Node {
     this.mutantCount = mutantCount;
     this.valuesVisibleProperty = valuesVisibleProperty;
 
+    // When values become visible, or any of the related strings change, update the counts.
     // unlink is not necessary.
-    this.valuesVisibleProperty.link( () => this.setCounts( this.normalCount, this.mutantCount ) );
+    Multilink.multilink( [
+        this.valuesVisibleProperty,
+        naturalSelectionStrings.greaterThanValuePercentProperty,
+        naturalSelectionStrings.lessThanValuePercentProperty,
+        naturalSelectionStrings.valuePercentProperty
+      ],
+      () => this.setCounts( this.normalCount, this.mutantCount ) );
   }
 
   /**
@@ -134,9 +143,10 @@ class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.01 * this.barWidth;
 
       // > 99% non-mutant, < 1% mutant
-      //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
-      this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercent, { value: 99 } );
-      this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercent, { value: 1 } );
+      this.normalPercentageNode.text =
+        StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercentProperty.value, { value: 99 } );
+      this.mutantPercentageNode.text =
+        StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercentProperty.value, { value: 1 } );
     }
     else if ( normalPercentage > 0 && normalPercentage < 1 ) {
 
@@ -144,9 +154,10 @@ class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.99 * this.barWidth;
 
       // < 1% non-mutant, > 99% mutant
-      //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
-      this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercent, { value: 1 } );
-      this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercent, { value: 99 } );
+      this.normalPercentageNode.text =
+        StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercentProperty.value, { value: 1 } );
+      this.mutantPercentageNode.text =
+        StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercentProperty.value, { value: 99 } );
     }
     else {
 
@@ -158,11 +169,10 @@ class ProportionsBarNode extends Node {
       }
 
       // round both percentages to the nearest integer
-      //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
-      this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercent, {
+      this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercentProperty.value, {
         value: Utils.roundSymmetric( normalPercentage )
       } );
-      this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercent, {
+      this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercentProperty.value, {
         value: Utils.roundSymmetric( mutantPercentage )
       } );
     }
