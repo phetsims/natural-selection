@@ -96,7 +96,11 @@ class Genotype extends PhetioObject {
     // @public the translated abbreviation of the Genotype. PhET-iO only, not used in brand=phet.
     // dispose is required.
     const abbreviationProperty = new DerivedProperty(
-      [ genePool.furGene.dominantAlleleProperty, genePool.earsGene.dominantAlleleProperty, genePool.teethGene.dominantAlleleProperty ],
+      [
+        genePool.furGene.dominantAlleleProperty,
+        genePool.earsGene.dominantAlleleProperty,
+        genePool.teethGene.dominantAlleleProperty
+      ],
       () => {
         return this.furGenePair.getGenotypeAbbreviation() +
                this.earsGenePair.getGenotypeAbbreviation() +
