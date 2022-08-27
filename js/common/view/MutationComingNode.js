@@ -36,7 +36,7 @@ class MutationComingNode extends Node {
       listener: () => gene.cancelMutation()
     } );
 
-    const textNode = new Text( naturalSelectionStrings.mutationComing, {
+    const textNode = new Text( naturalSelectionStrings.mutationComingProperty, {
       font: NaturalSelectionConstants.MUTATION_COMING_FONT,
       maxWidth: 200 // determined empirically
     } );

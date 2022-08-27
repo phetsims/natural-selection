@@ -38,7 +38,7 @@ class WorldDialog extends Dialog {
       scale: 0.8 // determined empirically
     } );
 
-    const messageText = new Text( naturalSelectionStrings.bunniesHaveTakenOverTheWorld, {
+    const messageText = new Text( naturalSelectionStrings.bunniesHaveTakenOverTheWorldProperty, {
       font: NaturalSelectionConstants.DIALOG_FONT,
       fill: 'white',
       maxWidth: worldNode.width

@@ -31,7 +31,7 @@ class IntroScreen extends Screen {
     const options = {
 
       // Screen options
-      name: naturalSelectionStrings.screen.intro,
+      name: naturalSelectionStrings.screen.introProperty,
       homeScreenIcon: createScreenIcon(),
       backgroundColorProperty: new Property( NaturalSelectionColors.SCREEN_VIEW_BACKGROUND, {
         tandem: Tandem.OPT_OUT

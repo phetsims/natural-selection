@@ -115,9 +115,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.view.addMutationsPanel.teethRow.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.view.environmentalFactorsPanel.titleNode.textProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.introScreen.view.environmentalFactorsPanel.titleNode.visibleProperty": {
       "phetioFeatured": true
     },
@@ -146,9 +143,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.introScreen.view.graphs.pedigreeNode.allelesPanel.teethRow.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.view.graphs.pedigreeNode.allelesPanel.titleNode.textProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.introScreen.view.graphs.pedigreeNode.allelesPanel.titleNode.visibleProperty": {
@@ -367,9 +361,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.labScreen.view.addMutationsPanel.teethRow.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.labScreen.view.environmentalFactorsPanel.titleNode.textProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.labScreen.view.environmentalFactorsPanel.titleNode.visibleProperty": {
       "phetioFeatured": true
     },
@@ -398,9 +389,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.teethRow.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.titleNode.textProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.titleNode.visibleProperty": {

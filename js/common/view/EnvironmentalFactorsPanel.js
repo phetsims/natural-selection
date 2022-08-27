@@ -41,7 +41,7 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       tandem: Tandem.REQUIRED
     }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
-    const titleNode = new Text( naturalSelectionStrings.environmentalFactors, {
+    const titleNode = new Text( naturalSelectionStrings.environmentalFactorsProperty, {
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 175, // determined empirically,
       tandem: options.tandem.createTandem( 'titleNode' )

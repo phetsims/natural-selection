@@ -125,7 +125,7 @@ class PopulationPanel extends NaturalSelectionPanel {
     } );
 
     // Data Probe checkbox
-    const dataProbeCheckboxLabel = new Text( naturalSelectionStrings.dataProbe, {
+    const dataProbeCheckboxLabel = new Text( naturalSelectionStrings.dataProbeProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 135 // determined empirically
     } );

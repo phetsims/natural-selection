@@ -49,7 +49,7 @@ class AllelesPanel extends NaturalSelectionPanel {
     const alleleAlignGroup = new AlignGroup();
 
     // Alleles - title is plural, since we're always showing at least 2 alleles
-    const titleNode = new Text( naturalSelectionStrings.alleles, {
+    const titleNode = new Text( naturalSelectionStrings.allelesProperty, {
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 125, // determined empirically
       tandem: options.tandem.createTandem( 'titleNode' )

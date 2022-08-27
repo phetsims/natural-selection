@@ -57,7 +57,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     const buttonColumnsAlignGroup = new AlignGroup();
 
     // title
-    const titleNode = new Text( naturalSelectionStrings.addMutations, {
+    const titleNode = new Text( naturalSelectionStrings.addMutationsProperty, {
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 180, // determined empirically
       tandem: options.tandem.createTandem( 'titleNode' )
@@ -65,11 +65,11 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
     // Individual column headings
     const mutationIconNode = new MutationIconNode();
-    const dominantColumnLabel = new Text( naturalSelectionStrings.dominant, {
+    const dominantColumnLabel = new Text( naturalSelectionStrings.dominantProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
       maxWidth: 60 // determined empirically
     } );
-    const recessiveColumnLabel = new Text( naturalSelectionStrings.recessive, {
+    const recessiveColumnLabel = new Text( naturalSelectionStrings.recessiveProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
       maxWidth: 60 // determined empirically
     } );

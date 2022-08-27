@@ -58,7 +58,7 @@ class PedigreeGraphNode extends Node {
     } );
 
     // 'Select a Bunny' is displayed when there is no selected bunny.
-    const selectABunnyText = new Text( naturalSelectionStrings.selectABunny, {
+    const selectABunnyText = new Text( naturalSelectionStrings.selectABunnyProperty, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
       centerX: backgroundNode.centerX,
       centerY: backgroundNode.top + ( backgroundNode.height / 6 ),

@@ -50,7 +50,7 @@ class ProportionsPanel extends NaturalSelectionPanel {
     } );
 
     // Values checkbox, shows/hides values on the bars
-    const valuesCheckboxLabelNode = new Text( naturalSelectionStrings.values, {
+    const valuesCheckboxLabelNode = new Text( naturalSelectionStrings.valuesProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 100 // determined empirically
     } );

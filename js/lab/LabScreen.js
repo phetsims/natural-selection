@@ -37,7 +37,7 @@ class LabScreen extends Screen {
     const options = {
 
       // Screen options
-      name: naturalSelectionStrings.screen.lab,
+      name: naturalSelectionStrings.screen.labProperty,
       homeScreenIcon: createScreenIcon(),
       backgroundColorProperty: new Property( NaturalSelectionColors.SCREEN_VIEW_BACKGROUND, {
         tandem: Tandem.OPT_OUT

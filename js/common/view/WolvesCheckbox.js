@@ -35,7 +35,7 @@ class WolvesCheckbox extends EnvironmentalFactorCheckbox {
       clockSliceColor: NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR
     }, options );
 
-    const text = new Text( naturalSelectionStrings.wolves, {
+    const text = new Text( naturalSelectionStrings.wolvesProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 110 // determined empirically
     } );
