@@ -41,7 +41,9 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       tandem: Tandem.REQUIRED
     }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
-    const titleNode = new Text( naturalSelectionStrings.environmentalFactorsProperty, {
+    // title - We cannot pass naturalSelectionStrings.environmentalFactorsProperty to Text here, because the title
+    // is derived from the number of visible rows, which have not been created yet.
+    const titleNode = new Text( naturalSelectionStrings.environmentalFactorsProperty.value, {
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 175, // determined empirically,
       tandem: options.tandem.createTandem( 'titleNode' )
@@ -82,17 +84,15 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
 
     // Set the panel's title to singular or plural, depending on how many checkboxes are visible.
     // unlink is not necessary.
-    Multilink.multilink( _.map( checkboxes, checkbox => checkbox.visibleProperty ), () => {
-
-      // If the title hasn't been changed to something entirely different via PhET-iO...
-      if ( [ naturalSelectionStrings.environmentalFactorProperty.value, naturalSelectionStrings.environmentalFactorsProperty.value ].includes( titleNode.text ) ) {
-        const numberOfVisibleCheckboxes = _.filter( checkboxes, checkbox => checkbox.visible ).length;
-
-        //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
-        titleNode.text = ( numberOfVisibleCheckboxes === 1 ) ?
-                         naturalSelectionStrings.environmentalFactorProperty.value :
-                         naturalSelectionStrings.environmentalFactorsProperty.value;
-      }
+    Multilink.multilink( [
+      ..._.map( checkboxes, checkbox => checkbox.visibleProperty ),
+      naturalSelectionStrings.environmentalFactorProperty,
+      naturalSelectionStrings.environmentalFactorsProperty
+    ], () => {
+      const numberOfVisibleCheckboxes = _.filter( checkboxes, checkbox => checkbox.visible ).length;
+      titleNode.text = ( numberOfVisibleCheckboxes === 1 ) ?
+                       naturalSelectionStrings.environmentalFactorProperty.value :
+                       naturalSelectionStrings.environmentalFactorsProperty.value;
     } );
   }
 

@@ -56,8 +56,9 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     // All elements in the button columns (including column headings) have the same effective width.
     const buttonColumnsAlignGroup = new AlignGroup();
 
-    // title
-    const titleNode = new Text( naturalSelectionStrings.addMutationsProperty, {
+    // title - We cannot pass naturalSelectionStrings.addMutationsProperty to new Text here, because the title
+    // is derived from the number of visible rows, which have not been created yet.
+    const titleNode = new Text( naturalSelectionStrings.addMutationsProperty.value, {
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 180, // determined empirically
       tandem: options.tandem.createTandem( 'titleNode' )
@@ -104,18 +105,17 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
     // Set the panel's title to singular or plural, depending on how many rows are visible.
     // unmultilink is not necessary.
-    Multilink.multilink( _.map( rows, row => row.visibleProperty ), () => {
-
-      // If the title hasn't been changed to something entirely different via PhET-iO...
-      if ( [ naturalSelectionStrings.addMutationProperty.value, naturalSelectionStrings.addMutationsProperty.value ].includes( titleNode.text ) ) {
+    Multilink.multilink( [
+        ..._.map( rows, row => row.visibleProperty ),
+        naturalSelectionStrings.addMutationProperty,
+        naturalSelectionStrings.addMutationsProperty
+      ],
+      () => {
         const numberOfVisibleRows = _.filter( rows, row => row.visible ).length;
-
-        //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
         titleNode.text = ( numberOfVisibleRows === 1 ) ?
                          naturalSelectionStrings.addMutationProperty.value :
                          naturalSelectionStrings.addMutationsProperty.value;
-      }
-    } );
+      } );
 
     // @private {Row[]}
     this.rows = rows;
