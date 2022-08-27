@@ -8,6 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -73,12 +74,24 @@ class GenerationClockNode extends Node {
       lineWidth: LINE_WIDTH
     } );
 
+    const generationDerivedStringProperty = new DerivedProperty(
+      [ generationClock.clockGenerationProperty, naturalSelectionStrings.generationValueProperty ],
+      ( clockGeneration, generationValueString ) =>
+        StringUtils.fillIn( generationValueString, {
+          value: clockGeneration
+        } ) );
+
     // The current generation number, displayed below the circle.
-    const generationNode = new Text( '', {
+    const generationNode = new Text( generationDerivedStringProperty, {
       font: GENERATION_FONT,
       fill: 'black',
       top: circle.bottom + 3,
       maxWidth: 100 // determined empirically
+    } );
+
+    // Keep the generation number centered below the circular part of the clock.
+    generationNode.boundsProperty.link( () => {
+      generationNode.centerX = circle.centerX;
     } );
 
     // Layering order is important here!
@@ -86,16 +99,6 @@ class GenerationClockNode extends Node {
     options.children = [ circle, foodSliceNode, wolvesSliceNode, revealArc, rimNode, generationNode ];
 
     super( options );
-
-    // Update the generation number. unlink is not necessary.
-    generationClock.clockGenerationProperty.link( clockGeneration => {
-
-      //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
-      generationNode.text = StringUtils.fillIn( naturalSelectionStrings.generationValueProperty.value, {
-        value: clockGeneration
-      } );
-      generationNode.centerX = circle.centerX;
-    } );
 
     // Reveal part of the clock. unlink is not necessary.
     generationClock.timeInPercentProperty.link( timeInPercent => {
