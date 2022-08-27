@@ -35,6 +35,7 @@ class PerformanceTimesNode extends VBox {
     } );
 
     // unlink is not necessary.
+    //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
     timeToMateProperty.link( timeToMate => {
       const t = Utils.roundSymmetric( timeToMate );
       timeToMateNode.text = `time to mate = ${t} ms`;
@@ -48,6 +49,7 @@ class PerformanceTimesNode extends VBox {
     } );
 
     // unlink is not necessary.
+    //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
     timeToStartOverProperty.link( timeToStartOver => {
       const t = Utils.roundSymmetric( timeToStartOver );
       timeToStartOverNode.text = `time to Start Over = ${t} ms`;

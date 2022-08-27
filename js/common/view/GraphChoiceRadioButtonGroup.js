@@ -70,7 +70,7 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
       // None
       {
         value: GraphChoice.NONE,
-        node: new Text( naturalSelectionStrings.none, TEXT_OPTIONS ),
+        node: new Text( naturalSelectionStrings.noneProperty, TEXT_OPTIONS ),
         tandemName: 'noneRadioButton'
       }
     ];

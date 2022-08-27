@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import ReadOnlyProperty from '../../../../../axon/js/ReadOnlyProperty.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import { AlignBox, HBox, Line, Text } from '../../../../../scenery/js/imports.js';
@@ -26,14 +27,14 @@ class PopulationLegendCheckbox extends Checkbox {
 
   /**
    * @param {Property.<boolean>} plotVisibleProperty - visibility of the associated plot on the Population graph
-   * @param {string} labelString - the label on the checkbox
+   * @param {TReadOnlyProperty.<string>} labelStringProperty - the label on the checkbox
    * @param {AlignGroup} contentAlignGroup - to make all checkbox content have the same effective size
    * @param {Object} [options]
    */
-  constructor( plotVisibleProperty, labelString, contentAlignGroup, options ) {
+  constructor( plotVisibleProperty, labelStringProperty, contentAlignGroup, options ) {
 
     assert && AssertUtils.assertPropertyOf( plotVisibleProperty, 'boolean' );
-    assert && assert( typeof labelString === 'string', 'invalid labelString' );
+    assert && assert( labelStringProperty instanceof ReadOnlyProperty, 'invalid labelStringProperty' );
 
     options = merge( {
       lineColor: 'black',
@@ -48,7 +49,7 @@ class PopulationLegendCheckbox extends Checkbox {
     } );
 
     // text label
-    const labelNode = new Text( labelString, {
+    const labelNode = new Text( labelStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 100 // determined empirically
     } );

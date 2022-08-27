@@ -19,6 +19,7 @@ import { HBox, Text } from '../../../../../scenery/js/imports.js';
 import ArrowButton from '../../../../../sun/js/buttons/ArrowButton.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
+import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
 class PopulationGenerationScroller extends HBox {
@@ -38,7 +39,6 @@ class PopulationGenerationScroller extends HBox {
     options = merge( {
 
       step: 1, // {number} amount to step the range
-      labelString: '', // {string} label that appears between the arrow buttons
       font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
 
       // HBox options
@@ -52,7 +52,7 @@ class PopulationGenerationScroller extends HBox {
     const rangeLength = rangeProperty.value.getLength();
 
     // label
-    const labelNode = new Text( options.labelString, {
+    const labelNode = new Text( naturalSelectionStrings.generationProperty, {
       font: options.font,
       maxWidth: 250, // determined empirically
       tandem: options.tandem.createTandem( 'labelNode' ),

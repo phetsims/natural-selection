@@ -2,11 +2,12 @@
 
 /**
  * ProportionsLegendNode displays the legend in the control panel for the Proportions graph.
- * It showings the color-coding and fill styles used for each allele.
+ * It shows the color-coding and fill styles used for each allele.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import ReadOnlyProperty from '../../../../../axon/js/ReadOnlyProperty.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import required from '../../../../../phet-core/js/required.js';
 import { Color, HBox, Rectangle, Text, VBox } from '../../../../../scenery/js/imports.js';
@@ -108,10 +109,10 @@ class GeneLegendNode extends VBox {
     assert && assert( !config.children, 'GeneLegendNode sets children' );
     config = merge( {
       children: [
-        new AlleleLegendNode( gene.normalAllele.name, gene.color, {
+        new AlleleLegendNode( gene.normalAllele.nameProperty, gene.color, {
           tandem: config.tandem.createTandem( config.normalTandemName )
         } ),
-        new AlleleLegendNode( gene.mutantAllele.name, gene.color, {
+        new AlleleLegendNode( gene.mutantAllele.nameProperty, gene.color, {
           isMutant: true,
           tandem: config.tandem.createTandem( config.mutantTandemName )
         } )
@@ -141,13 +142,13 @@ class GeneLegendNode extends VBox {
 class AlleleLegendNode extends HBox {
 
   /**
-   * @param {string} name
+   * @param {TReadOnlyProperty<string>} nameProperty
    * @param {Color|string} color
    * @param {Object} [options]
    */
-  constructor( name, color, options ) {
+  constructor( nameProperty, color, options ) {
 
-    assert && assert( typeof name === 'string', 'invalid name' );
+    assert && assert( nameProperty instanceof ReadOnlyProperty, 'invalid nameProperty' );
     assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
 
     options = merge( {
@@ -167,7 +168,7 @@ class AlleleLegendNode extends HBox {
                           new HatchingRectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, rectangleOptions ) :
                           new Rectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, rectangleOptions );
 
-    const textNode = new Text( name, {
+    const textNode = new Text( nameProperty, {
       font: NaturalSelectionConstants.PROPORTIONS_LEGEND_FONT,
       maxWidth: 92 // determined empirically
     } );

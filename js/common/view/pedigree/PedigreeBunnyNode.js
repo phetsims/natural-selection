@@ -113,6 +113,8 @@ class PedigreeBunnyNode extends Node {
       [ furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty ],
       ( furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) => {
         genotypeNode.visible = ( furAllelesVisible || earsAllelesVisible || teethAllelesVisible );
+
+        //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
         genotypeNode.text = getGenotypeAbbreviation( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible );
         genotypeNode.centerX = bunnyNode.centerX;
         genotypeNode.top = bunnyNode.bottom + 5;

@@ -85,11 +85,13 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     Multilink.multilink( _.map( checkboxes, checkbox => checkbox.visibleProperty ), () => {
 
       // If the title hasn't been changed to something entirely different via PhET-iO...
-      if ( [ naturalSelectionStrings.environmentalFactor, naturalSelectionStrings.environmentalFactors ].includes( titleNode.text ) ) {
+      if ( [ naturalSelectionStrings.environmentalFactorProperty.value, naturalSelectionStrings.environmentalFactorsProperty.value ].includes( titleNode.text ) ) {
         const numberOfVisibleCheckboxes = _.filter( checkboxes, checkbox => checkbox.visible ).length;
+
+        //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
         titleNode.text = ( numberOfVisibleCheckboxes === 1 ) ?
-                         naturalSelectionStrings.environmentalFactor :
-                         naturalSelectionStrings.environmentalFactors;
+                         naturalSelectionStrings.environmentalFactorProperty.value :
+                         naturalSelectionStrings.environmentalFactorsProperty.value;
       }
     } );
   }

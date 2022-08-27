@@ -151,12 +151,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.view.graphs.pedigreeNode.allelesPanel.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.view.graphs.populationNode.populationGraphNode.generationScroller.labelNode.textProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.view.graphs.populationNode.populationGraphNode.yAxisLabelNode.textProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.introScreen.view.graphs.populationNode.populationPanel.visibleProperty": {
       "phetioFeatured": true
     },
@@ -395,12 +389,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.graphs.populationNode.populationGraphNode.generationScroller.labelNode.textProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.graphs.populationNode.populationGraphNode.yAxisLabelNode.textProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.graphs.populationNode.populationPanel.visibleProperty": {

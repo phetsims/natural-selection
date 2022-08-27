@@ -48,7 +48,7 @@ class PopulationPanel extends NaturalSelectionPanel {
 
     // Total checkbox
     const totalCheckbox =
-      new PopulationLegendCheckbox( populationModel.totalVisibleProperty, naturalSelectionStrings.total, alignGroup, {
+      new PopulationLegendCheckbox( populationModel.totalVisibleProperty, naturalSelectionStrings.totalProperty, alignGroup, {
         lineColor: NaturalSelectionColors.POPULATION_TOTAL_COUNT,
         tandem: options.tandem.createTandem( 'totalCheckbox' )
       } );
@@ -174,12 +174,12 @@ class PopulationPanel extends NaturalSelectionPanel {
 
     // Checkbox for the normal allele
     const normalCheckbox = _.find( this.alleleCheckboxes, checkbox => ( checkbox.allele === gene.normalAllele ) );
-    assert && assert( normalCheckbox, `normalCheckbox not found for ${gene.normalAllele.name} allele` );
+    assert && assert( normalCheckbox, `normalCheckbox not found for ${gene.normalAllele.nameProperty.value} allele` );
     normalCheckbox.visible = visible;
 
     // Checkbox for the mutant allele
     const mutantCheckbox = _.find( this.alleleCheckboxes, checkbox => ( checkbox.allele === gene.mutantAllele ) );
-    assert && assert( normalCheckbox, `mutantCheckbox not found for ${gene.mutantAllele.name} allele` );
+    assert && assert( normalCheckbox, `mutantCheckbox not found for ${gene.mutantAllele.nameProperty.value} allele` );
     mutantCheckbox.visible = visible;
   }
 }

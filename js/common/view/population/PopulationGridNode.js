@@ -295,6 +295,8 @@ class XTickLabels extends Node {
         const xModel = xOffsetModel + ( i * options.xSpacingModel );
         labelNode.visible = xRange.contains( xModel );
         if ( labelNode.visible ) {
+
+          //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
           labelNode.text = xModel;
           labelNode.centerX = xOffsetView + ( i * xSpacingView );
         }

@@ -47,6 +47,7 @@ class MemoryLimitDialog extends OopsDialog {
       phetioDocumentation: 'This dialog is displayed when the sim has reached its memory limit.'
     }, options );
 
+    //TODO https://github.com/phetsims/natural-selection/issues/319 convert OopsDialog param to TReadOnlyProperty<string>
     super( naturalSelectionStrings.memoryLimitMessage, options );
   }
 }

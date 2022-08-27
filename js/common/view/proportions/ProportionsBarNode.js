@@ -134,6 +134,7 @@ class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.01 * this.barWidth;
 
       // > 99% non-mutant, < 1% mutant
+      //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
       this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercent, { value: 99 } );
       this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercent, { value: 1 } );
     }
@@ -143,6 +144,7 @@ class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.99 * this.barWidth;
 
       // < 1% non-mutant, > 99% mutant
+      //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
       this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercent, { value: 1 } );
       this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercent, { value: 99 } );
     }
@@ -156,6 +158,7 @@ class ProportionsBarNode extends Node {
       }
 
       // round both percentages to the nearest integer
+      //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
       this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercent, {
         value: Utils.roundSymmetric( normalPercentage )
       } );

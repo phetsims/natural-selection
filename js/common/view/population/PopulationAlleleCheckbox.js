@@ -23,7 +23,7 @@ class PopulationAlleleCheckbox extends PopulationLegendCheckbox {
 
     assert && assert( allele instanceof Allele, 'invalid allele' );
 
-    super( plotVisibleProperty, allele.name, alignGroup, options );
+    super( plotVisibleProperty, allele.nameProperty, alignGroup, options );
 
     // @public (read-only)
     this.allele = allele;

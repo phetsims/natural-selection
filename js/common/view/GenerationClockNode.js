@@ -89,7 +89,9 @@ class GenerationClockNode extends Node {
 
     // Update the generation number. unlink is not necessary.
     generationClock.clockGenerationProperty.link( clockGeneration => {
-      generationNode.text = StringUtils.fillIn( naturalSelectionStrings.generationValue, {
+
+      //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
+      generationNode.text = StringUtils.fillIn( naturalSelectionStrings.generationValueProperty.value, {
         value: clockGeneration
       } );
       generationNode.centerX = circle.centerX;

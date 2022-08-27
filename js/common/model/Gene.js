@@ -21,6 +21,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import ReadOnlyProperty from '../../../../axon/js/ReadOnlyProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import { Color } from '../../../../scenery/js/imports.js';
@@ -44,8 +45,8 @@ class Gene extends PhetioObject {
 
     config = merge( {
 
-      // {string} the name of the gene, visible in the UI
-      name: required( config.name ),
+      // {TReadOnlyProperty<string>} the name of the gene, visible in the UI
+      nameProperty: required( config.nameProperty ),
 
       // {string} prefix used for tandem names for the gene, like 'fur' for 'furCheckbox'
       tandemPrefix: required( config.tandemPrefix ),
@@ -59,14 +60,14 @@ class Gene extends PhetioObject {
       // {string} the untranslated (English) abbreviation of the dominant allele, used in query parameters
       dominantAbbreviationEnglish: required( config.dominantAbbreviationEnglish ),
 
-      // {string} the translated abbreviation of the dominant allele, visible in the UI
-      dominantAbbreviationTranslated: required( config.dominantAbbreviationTranslated ),
+      // {TReadOnlyProperty<string>} the translated abbreviation of the dominant allele, visible in the UI
+      dominantAbbreviationTranslatedProperty: required( config.dominantAbbreviationTranslatedProperty ),
 
       // {string} the untranslated (English) abbreviation of the recessive allele, used in query parameters
       recessiveAbbreviationEnglish: required( config.recessiveAbbreviationEnglish ),
 
-      // {string} the translated abbreviation of the recessive allele, visible in the UI
-      recessiveAbbreviationTranslated: required( config.recessiveAbbreviationTranslated ),
+      // {TReadOnlyProperty<string>} the translated abbreviation of the recessive allele, visible in the UI
+      recessiveAbbreviationTranslatedProperty: required( config.recessiveAbbreviationTranslatedProperty ),
 
       // {Color|string} the color used to color-code things associated with this gene in the UI
       color: required( config.color ),
@@ -78,14 +79,14 @@ class Gene extends PhetioObject {
     }, config );
 
     // validate config fields
-    assert && assert( typeof config.name === 'string', 'invalid name' );
+    assert && assert( config.nameProperty instanceof ReadOnlyProperty, 'invalid nameProperty' );
     assert && assert( typeof config.tandemPrefix === 'string', 'invalid tandemPrefix' );
     assert && assert( config.normalAllele instanceof Allele, 'invalid normalAllele' );
     assert && assert( config.mutantAllele instanceof Allele, 'invalid mutantAllele' );
     assert && assert( typeof config.dominantAbbreviationEnglish === 'string', 'invalid dominantAbbreviationEnglish' );
-    assert && assert( typeof config.dominantAbbreviationTranslated === 'string', 'invalid dominantAbbreviationTranslated' );
+    assert && assert( config.dominantAbbreviationTranslatedProperty instanceof ReadOnlyProperty, 'invalid dominantAbbreviationTranslatedProperty' );
     assert && assert( typeof config.recessiveAbbreviationEnglish === 'string', 'invalid recessiveAbbreviationEnglish' );
-    assert && assert( typeof config.recessiveAbbreviationTranslated === 'string', 'invalid recessiveAbbreviationTranslated' );
+    assert && assert( config.recessiveAbbreviationTranslatedProperty instanceof ReadOnlyProperty, 'invalid recessiveAbbreviationTranslatedProperty' );
     assert && assert( config.color instanceof Color || typeof config.color === 'string', 'invalid color' );
     assert && assert( config.tandem.name.startsWith( config.tandemPrefix ),
       `tandem name ${config.tandem.name} must start with ${config.tandemPrefix}` );
@@ -93,17 +94,17 @@ class Gene extends PhetioObject {
     super( config );
 
     // @public (read-only)
-    this.name = config.name;
+    this.nameProperty = config.nameProperty;
     this.tandemPrefix = config.tandemPrefix;
     this.normalAllele = config.normalAllele;
     this.mutantAllele = config.mutantAllele;
     this.dominantAbbreviationEnglish = config.dominantAbbreviationEnglish;
-    this.dominantAbbreviationTranslated = config.dominantAbbreviationTranslated;
+    this.dominantAbbreviationTranslatedProperty = config.dominantAbbreviationTranslatedProperty;
     this.recessiveAbbreviationEnglish = config.recessiveAbbreviationEnglish;
-    this.recessiveAbbreviationTranslated = config.recessiveAbbreviationTranslated;
+    this.recessiveAbbreviationTranslatedProperty = config.recessiveAbbreviationTranslatedProperty;
     this.color = config.color;
 
-    // @public {Allele|null} the dominate allele, null until the gene has mutated.  Until a mutation occurs,
+    // @public {Allele|null} the dominant allele, null until the gene has mutated.  Until a mutation occurs,
     // only the normal allele exists in the population, and the concepts of dominant and recessive are meaningless.
     this.dominantAlleleProperty = new Property( null, {
       validValues: [ null, this.normalAllele, this.mutantAllele ],
@@ -158,7 +159,7 @@ class Gene extends PhetioObject {
    * @public
    */
   cancelMutation() {
-    assert && assert( this.mutationComingProperty.value, `${this.name} mutation is not scheduled` );
+    assert && assert( this.mutationComingProperty.value, `${this.nameProperty.value} mutation is not scheduled` );
     this.reset();
   }
 
@@ -170,14 +171,14 @@ class Gene extends PhetioObject {
    */
   static createFurGene( tandem ) {
     return new Gene( {
-      name: naturalSelectionStrings.fur,
+      nameProperty: naturalSelectionStrings.furProperty,
       tandemPrefix: 'fur',
       normalAllele: Allele.WHITE_FUR,
       mutantAllele: Allele.BROWN_FUR,
       dominantAbbreviationEnglish: 'F',
-      dominantAbbreviationTranslated: naturalSelectionStrings.furDominant,
+      dominantAbbreviationTranslatedProperty: naturalSelectionStrings.furDominantProperty,
       recessiveAbbreviationEnglish: 'f',
-      recessiveAbbreviationTranslated: naturalSelectionStrings.furRecessive,
+      recessiveAbbreviationTranslatedProperty: naturalSelectionStrings.furRecessiveProperty,
       color: NaturalSelectionColors.FUR,
       tandem: tandem
     } );
@@ -191,14 +192,14 @@ class Gene extends PhetioObject {
    */
   static createEarsGene( tandem ) {
     return new Gene( {
-      name: naturalSelectionStrings.ears,
+      nameProperty: naturalSelectionStrings.earsProperty,
       tandemPrefix: 'ears',
       normalAllele: Allele.STRAIGHT_EARS,
       mutantAllele: Allele.FLOPPY_EARS,
       dominantAbbreviationEnglish: 'E',
-      dominantAbbreviationTranslated: naturalSelectionStrings.earsDominant,
+      dominantAbbreviationTranslatedProperty: naturalSelectionStrings.earsDominantProperty,
       recessiveAbbreviationEnglish: 'e',
-      recessiveAbbreviationTranslated: naturalSelectionStrings.earsRecessive,
+      recessiveAbbreviationTranslatedProperty: naturalSelectionStrings.earsRecessiveProperty,
       color: NaturalSelectionColors.EARS,
       tandem: tandem
     } );
@@ -212,14 +213,14 @@ class Gene extends PhetioObject {
    */
   static createTeethGene( tandem ) {
     return new Gene( {
-      name: naturalSelectionStrings.teeth,
+      nameProperty: naturalSelectionStrings.teethProperty,
       tandemPrefix: 'teeth',
       normalAllele: Allele.SHORT_TEETH,
       mutantAllele: Allele.LONG_TEETH,
       dominantAbbreviationEnglish: 'T',
-      dominantAbbreviationTranslated: naturalSelectionStrings.teethDominant,
+      dominantAbbreviationTranslatedProperty: naturalSelectionStrings.teethDominantProperty,
       recessiveAbbreviationEnglish: 't',
-      recessiveAbbreviationTranslated: naturalSelectionStrings.teethRecessive,
+      recessiveAbbreviationTranslatedProperty: naturalSelectionStrings.teethRecessiveProperty,
       color: NaturalSelectionColors.TEETH,
       tandem: tandem
     } );

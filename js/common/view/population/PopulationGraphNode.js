@@ -52,13 +52,12 @@ class PopulationGraphNode extends Node {
     // Generation (x-axis) scroll control
     const generationScroller = new PopulationGenerationScroller(
       populationModel.xRangeProperty, populationModel.timeInGenerationsProperty, populationModel.isPlayingProperty, {
-        labelString: naturalSelectionStrings.generation,
         tandem: options.tandem.createTandem( 'generationScroller' ),
         visiblePropertyOptions: { phetioReadOnly: true }
       } );
 
     // y-axis (Population) label
-    const yAxisLabelNode = new Text( naturalSelectionStrings.population, {
+    const yAxisLabelNode = new Text( naturalSelectionStrings.populationProperty, {
       font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
       rotation: -Math.PI / 2,
       maxWidth: 90, // determined empirically
@@ -108,7 +107,7 @@ class PopulationGraphNode extends Node {
       tandem: options.tandem.createTandem( 'dataProbeNode' )
     } );
 
-    const zoomOutToSeeDataText = new Text( naturalSelectionStrings.zoomOutToSeeData, {
+    const zoomOutToSeeDataText = new Text( naturalSelectionStrings.zoomOutToSeeDataProperty, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
       maxWidth: 0.75 * gridWidth,
       centerX: gridNode.x + gridWidth / 2,

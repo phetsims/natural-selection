@@ -107,11 +107,13 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     Multilink.multilink( _.map( rows, row => row.visibleProperty ), () => {
 
       // If the title hasn't been changed to something entirely different via PhET-iO...
-      if ( [ naturalSelectionStrings.addMutation, naturalSelectionStrings.addMutations ].includes( titleNode.text ) ) {
+      if ( [ naturalSelectionStrings.addMutationProperty.value, naturalSelectionStrings.addMutationsProperty.value ].includes( titleNode.text ) ) {
         const numberOfVisibleRows = _.filter( rows, row => row.visible ).length;
+
+        //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
         titleNode.text = ( numberOfVisibleRows === 1 ) ?
-                         naturalSelectionStrings.addMutation :
-                         naturalSelectionStrings.addMutations;
+                         naturalSelectionStrings.addMutationProperty.value :
+                         naturalSelectionStrings.addMutationsProperty.value;
       }
     } );
 
@@ -188,7 +190,7 @@ class Row extends HBox {
     }, options );
 
     // label that indicates the gene, to the left of the push buttons
-    const labelNode = new Text( gene.name, {
+    const labelNode = new Text( gene.nameProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_GENE_FONT,
       maxWidth: 50 // determined empirically
     } );

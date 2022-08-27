@@ -10,6 +10,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import ReadOnlyProperty from '../../../../../axon/js/ReadOnlyProperty.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import { AlignBox, AlignGroup, HBox, HStrut, Image, Text, VBox } from '../../../../../scenery/js/imports.js';
@@ -135,7 +136,7 @@ class Row extends VBox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const labelNode = new Text( gene.name, {
+    const labelNode = new Text( gene.nameProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 100 // determined empirically
     } );
@@ -149,10 +150,10 @@ class Row extends VBox {
     checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
 
     // Dominant allele
-    const dominantAlleleNode = new AlleleNode( gene.dominantAbbreviationTranslated, gene.normalAllele.image );
+    const dominantAlleleNode = new AlleleNode( gene.dominantAbbreviationTranslatedProperty, gene.normalAllele.image );
 
     // Recessive allele
-    const recessiveAlleleNode = new AlleleNode( gene.recessiveAbbreviationTranslated, gene.mutantAllele.image );
+    const recessiveAlleleNode = new AlleleNode( gene.recessiveAbbreviationTranslatedProperty, gene.mutantAllele.image );
 
     const alignBoxOptions = {
       group: alignGroup,
@@ -229,20 +230,20 @@ class Row extends VBox {
 class AlleleNode extends HBox {
 
   /**
-   * @param {string} abbreviation - the abbreviation used for the allele
+   * @param {TReadOnlyProperty<string>} abbreviationProperty - the abbreviation used for the allele
    * @param {HTMLImageElement} image
    * @param {Object} [options]
    */
-  constructor( abbreviation, image, options ) {
+  constructor( abbreviationProperty, image, options ) {
 
-    assert && assert( typeof abbreviation === 'string', 'invalid abbreviation' );
+    assert && assert( abbreviationProperty instanceof ReadOnlyProperty, 'invalid abbreviationProperty' );
     assert && assert( image instanceof HTMLImageElement, 'invalid image' );
 
     options = merge( {
       spacing: 6
     }, options );
 
-    const textNode = new Text( abbreviation, {
+    const textNode = new Text( abbreviationProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 12 // determined empirically
     } );

@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import ReadOnlyProperty from '../../../../../axon/js/ReadOnlyProperty.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
@@ -67,10 +68,10 @@ class ProportionsGraphNode extends Node {
     } );
 
     // 'Start of Generation...'
-    const startRowLabel = new RowLabel( naturalSelectionStrings.startOfGeneration, startCounts.totalCount );
+    const startRowLabel = new RowLabel( naturalSelectionStrings.startOfGenerationProperty, startCounts.totalCount );
 
     // 'End of Generation...' or 'Currently...'
-    const endRowLabel = new RowLabel( naturalSelectionStrings.endOfGeneration, endCounts.totalCount );
+    const endRowLabel = new RowLabel( naturalSelectionStrings.endOfGenerationProperty, endCounts.totalCount );
 
     // All column labels have the same effective width.
     const columnLabelsAlignGroup = new AlignGroup();
@@ -146,7 +147,7 @@ class ProportionsGraphNode extends Node {
     } );
 
     // 'No Data', visible when we have no data to display.
-    const noDataText = new Text( naturalSelectionStrings.noData, {
+    const noDataText = new Text( naturalSelectionStrings.noDataProperty, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
       centerX: backgroundNode.centerX,
       centerY: backgroundNode.top + ( backgroundNode.height / 6 ),
@@ -163,6 +164,7 @@ class ProportionsGraphNode extends Node {
       content.center = backgroundNode.center;
     } );
 
+    //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
     // Change the label for the bottom row, depending on whether it's displaying the current generation or the
     // end state of a previous generation. unlink is not necessary.
     proportionsModel.isDisplayingCurrentGenerationProperty.link( isDisplayingCurrentGeneration => {
@@ -233,13 +235,13 @@ class RowLabel extends VBox {
 
   /**
    *
-   * @param {string} topString - string for the top line of text
+   * @param {TReadOnlyProperty} topStringProperty - string for the top line of text
    * @param {number} count
    * @param {Object} [options]
    */
-  constructor( topString, count, options ) {
+  constructor( topStringProperty, count, options ) {
 
-    assert && assert( typeof topString === 'string', 'invalid topString' );
+    assert && assert( topStringProperty instanceof ReadOnlyProperty, 'invalid topStringProperty' );
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( count ), 'invalid count' );
 
     options = merge( {
@@ -254,7 +256,7 @@ class RowLabel extends VBox {
 
     // The 2 lines of text are separate Text nodes so that we don't have to deal with 'bunny' (singular) versus
     // 'bunnies' (plural) in multiple translated strings.
-    const topText = new Text( topString, textOptions );
+    const topText = new Text( topStringProperty, textOptions );
     const bottomText = new Text( '', textOptions );
 
     assert && assert( !options.children, 'RowLabel sets children' );
@@ -278,6 +280,7 @@ class RowLabel extends VBox {
     super.dispose();
   }
 
+  //TODO https://github.com/phetsims/natural-selection/issues/319 this looks like trouble
   /**
    * Sets the top line of text.
    * @param {string} topString
@@ -285,7 +288,7 @@ class RowLabel extends VBox {
    */
   setTopText( topString ) {
     assert && assert( typeof topString === 'string', 'invalid topString' );
-    this.topText.text = topString;
+    this.topText.textProperty.value = topString;
   }
 
   /**
@@ -296,6 +299,7 @@ class RowLabel extends VBox {
   setCount( count ) {
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( count ), 'invalid count' );
 
+    //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
     if ( count === 1 ) {
       this.bottomText.text = naturalSelectionStrings.oneBunny;
     }
@@ -343,7 +347,7 @@ class Column extends VBox {
     }, options );
 
     // Checkbox to hide the column
-    const labelNode = new Text( gene.name, {
+    const labelNode = new Text( gene.nameProperty, {
       font: COLUMN_LABEL_FONT,
       maxWidth: 100 // determined empirically
     } );
