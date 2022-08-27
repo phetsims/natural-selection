@@ -57,7 +57,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     const buttonColumnsAlignGroup = new AlignGroup();
 
     // title - We cannot pass naturalSelectionStrings.addMutationsProperty to new Text here, because the title
-    // is derived from the number of visible rows, which have not been created yet.
+    // is derived from the number of visible rows, which have not been created yet. See Multilink below.
     const titleNode = new Text( naturalSelectionStrings.addMutationsProperty.value, {
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 180, // determined empirically

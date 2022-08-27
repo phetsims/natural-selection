@@ -42,7 +42,7 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
     // title - We cannot pass naturalSelectionStrings.environmentalFactorsProperty to Text here, because the title
-    // is derived from the number of visible rows, which have not been created yet.
+    // is derived from the number of visible rows, which have not been created yet. See Multilink below.
     const titleNode = new Text( naturalSelectionStrings.environmentalFactorsProperty.value, {
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 175, // determined empirically,
