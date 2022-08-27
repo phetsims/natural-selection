@@ -302,10 +302,12 @@ class RowLabel extends VBox {
    */
   updateBottomText() {
     if ( this.count === 1 ) {
-      this.bottomText.text = naturalSelectionStrings.oneBunnyProperty.value;
+      //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
+      this.bottomText.text = naturalSelectionStrings.oneBunny;
     }
     else {
-      this.bottomText.text = StringUtils.fillIn( naturalSelectionStrings.countBunniesProperty.value, {
+      //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
+      this.bottomText.text = StringUtils.fillIn( naturalSelectionStrings.countBunnies, {
         count: this.count
       } );
     }

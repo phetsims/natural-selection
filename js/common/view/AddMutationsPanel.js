@@ -58,7 +58,8 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
     // title - We cannot pass naturalSelectionStrings.addMutationsProperty to new Text here, because the title
     // is derived from the number of visible rows, which have not been created yet. See Multilink below.
-    const titleNode = new Text( naturalSelectionStrings.addMutationsProperty.value, {
+    //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
+    const titleNode = new Text( naturalSelectionStrings.addMutations, {
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 180, // determined empirically
       tandem: options.tandem.createTandem( 'titleNode' )
@@ -113,8 +114,10 @@ class AddMutationsPanel extends NaturalSelectionPanel {
       () => {
         const numberOfVisibleRows = _.filter( rows, row => row.visible ).length;
         titleNode.text = ( numberOfVisibleRows === 1 ) ?
-                         naturalSelectionStrings.addMutationProperty.value :
-                         naturalSelectionStrings.addMutationsProperty.value;
+          //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
+                         naturalSelectionStrings.addMutation :
+          //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
+                         naturalSelectionStrings.addMutations;
       } );
 
     // @private {Row[]}

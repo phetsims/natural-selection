@@ -143,10 +143,12 @@ class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.01 * this.barWidth;
 
       // > 99% non-mutant, < 1% mutant
+      //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
       this.normalPercentageNode.text =
-        StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercentProperty.value, { value: 99 } );
+        StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercent, { value: 99 } );
+      //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
       this.mutantPercentageNode.text =
-        StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercentProperty.value, { value: 1 } );
+        StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercent, { value: 1 } );
     }
     else if ( normalPercentage > 0 && normalPercentage < 1 ) {
 
@@ -154,10 +156,12 @@ class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.99 * this.barWidth;
 
       // < 1% non-mutant, > 99% mutant
+      //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
       this.normalPercentageNode.text =
-        StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercentProperty.value, { value: 1 } );
+        StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercent, { value: 1 } );
+      //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
       this.mutantPercentageNode.text =
-        StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercentProperty.value, { value: 99 } );
+        StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercent, { value: 99 } );
     }
     else {
 
@@ -169,10 +173,12 @@ class ProportionsBarNode extends Node {
       }
 
       // round both percentages to the nearest integer
-      this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercentProperty.value, {
+      //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
+      this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercent, {
         value: Utils.roundSymmetric( normalPercentage )
       } );
-      this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercentProperty.value, {
+      //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
+      this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercent, {
         value: Utils.roundSymmetric( mutantPercentage )
       } );
     }

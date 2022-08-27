@@ -43,7 +43,8 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
 
     // title - We cannot pass naturalSelectionStrings.environmentalFactorsProperty to Text here, because the title
     // is derived from the number of visible rows, which have not been created yet. See Multilink below.
-    const titleNode = new Text( naturalSelectionStrings.environmentalFactorsProperty.value, {
+    //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
+    const titleNode = new Text( naturalSelectionStrings.environmentalFactors, {
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 175, // determined empirically,
       tandem: options.tandem.createTandem( 'titleNode' )
@@ -91,8 +92,10 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     ], () => {
       const numberOfVisibleCheckboxes = _.filter( checkboxes, checkbox => checkbox.visible ).length;
       titleNode.text = ( numberOfVisibleCheckboxes === 1 ) ?
-                       naturalSelectionStrings.environmentalFactorProperty.value :
-                       naturalSelectionStrings.environmentalFactorsProperty.value;
+        //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
+                       naturalSelectionStrings.environmentalFactor :
+        //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
+                       naturalSelectionStrings.environmentalFactors;
     } );
   }
 
