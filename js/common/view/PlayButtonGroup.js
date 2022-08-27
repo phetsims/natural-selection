@@ -44,7 +44,7 @@ class PlayButtonGroup extends Node {
     }, options );
 
     // 'Add a Mate' push button, for when the initial population consists of a single bunny.
-    const addAMateButton = new TextPushButton( naturalSelectionStrings.addAMate, {
+    const addAMateButton = new TextPushButton( naturalSelectionStrings.addAMateProperty, {
       listener: () => {
         options.addAMate();
         simulationModeProperty.value = SimulationMode.ACTIVE;
@@ -53,7 +53,7 @@ class PlayButtonGroup extends Node {
     } );
 
     // 'Play' push button, for when the initial population consists of more than one bunny.
-    const playButton = new TextPushButton( naturalSelectionStrings.play, {
+    const playButton = new TextPushButton( naturalSelectionStrings.playProperty, {
       listener: () => {
         options.play();
         simulationModeProperty.value = SimulationMode.ACTIVE;
@@ -63,7 +63,7 @@ class PlayButtonGroup extends Node {
 
     // 'Start Over' push button, displayed after the game ends (bunnie take over the world, or all bunnies die),
     // while the user is reviewing the final state.
-    const startOverButton = new TextPushButton( naturalSelectionStrings.startOver, {
+    const startOverButton = new TextPushButton( naturalSelectionStrings.startOverProperty, {
       listener: () => {
         options.startOver();
         simulationModeProperty.value = SimulationMode.STAGED;
@@ -135,10 +135,10 @@ class PlayButtonGroup extends Node {
 class TextPushButton extends RectangularPushButton {
 
   /**
-   * @param {string} label
+   * @param {TReadOnlyProperty<string>} stringProperty
    * @param {Object} [options]
    */
-  constructor( label, options ) {
+  constructor( stringProperty, options ) {
 
     options = merge( {
       textOptions: {
@@ -158,7 +158,7 @@ class TextPushButton extends RectangularPushButton {
 
     assert && assert( !options.content, 'TextPushButton sets content' );
     assert && assert( !options.textOptions.tandem, 'TextPushButton sets textOptions.tandem' );
-    options.content = new Text( label, merge( {}, options.textOptions, {
+    options.content = new Text( stringProperty, merge( {}, options.textOptions, {
       tandem: options.tandem.createTandem( 'textNode' )
     } ) );
 
