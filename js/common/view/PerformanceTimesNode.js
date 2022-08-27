@@ -8,6 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import { Text, VBox } from '../../../../scenery/js/imports.js';
@@ -28,32 +29,28 @@ class PerformanceTimesNode extends VBox {
       spacing: 5
     }, options );
 
+    // unlink is not necessary.
+    const timeToMateDerivedStringProperty = new DerivedProperty( [ timeToMateProperty ],
+      timeToMate => `time to mate = ${Utils.roundSymmetric( timeToMate )} ms`
+    );
+    timeToMateDerivedStringProperty.link( timeToMateString => console.log( timeToMateString ) );
+
     // Time that it last took to mate.
-    // See See https://github.com/phetsims/natural-selection/issues/60
-    const timeToMateNode = new Text( '', {
+    // See https://github.com/phetsims/natural-selection/issues/60
+    const timeToMateNode = new Text( timeToMateDerivedStringProperty, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT
     } );
 
     // unlink is not necessary.
-    //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
-    timeToMateProperty.link( timeToMate => {
-      const t = Utils.roundSymmetric( timeToMate );
-      timeToMateNode.text = `time to mate = ${t} ms`;
-      console.log( timeToMateNode.text );
-    } );
+    const timeToStartOverPropertyDerivedStringProperty = new DerivedProperty( [ timeToStartOverProperty ],
+      timeToStartOver => `time to Start Over = ${Utils.roundSymmetric( timeToStartOver )} ms`
+    );
+    timeToStartOverPropertyDerivedStringProperty.link( timeToStartOverString => console.log( timeToStartOverString ) );
 
     // Time that it last took to perform the 'Start Over' button callback.
     // See https://github.com/phetsims/natural-selection/issues/140
-    const timeToStartOverNode = new Text( '', {
+    const timeToStartOverNode = new Text( timeToStartOverPropertyDerivedStringProperty, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT
-    } );
-
-    // unlink is not necessary.
-    //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
-    timeToStartOverProperty.link( timeToStartOver => {
-      const t = Utils.roundSymmetric( timeToStartOver );
-      timeToStartOverNode.text = `time to Start Over = ${t} ms`;
-      console.log( timeToStartOverNode.text );
     } );
 
     assert && assert( !options.children, 'PerformanceTimesNode sets children' );
