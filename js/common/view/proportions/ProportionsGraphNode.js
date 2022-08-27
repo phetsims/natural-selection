@@ -7,9 +7,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Multilink from '../../../../../axon/js/Multilink.js';
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import ReadOnlyProperty from '../../../../../axon/js/ReadOnlyProperty.js';
+import NumberProperty from '../../../../../axon/js/NumberProperty.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
@@ -181,7 +181,7 @@ class ProportionsGraphNode extends Node {
 
     // Update the displayed 'Start' counts. unlink is not necessary.
     proportionsModel.startCountsProperty.link( startCounts => {
-      startRowLabel.setCount( startCounts.totalCount );
+      startRowLabel.countProperty.value = startCounts.totalCount;
       furColumn.setStartCounts( startCounts.whiteFurCount, startCounts.brownFurCount );
       earsColumn.setStartCounts( startCounts.straightEarsCount, startCounts.floppyEarsCount );
       teethColumn.setStartCounts( startCounts.shortTeethCount, startCounts.longTeethCount );
@@ -189,7 +189,7 @@ class ProportionsGraphNode extends Node {
 
     // Update the displayed 'End' counts. unlink is not necessary.
     proportionsModel.endCountsProperty.link( endCounts => {
-      endRowLabel.setCount( endCounts.totalCount );
+      endRowLabel.countProperty.value = endCounts.totalCount;
       furColumn.setEndCounts( endCounts.whiteFurCount, endCounts.brownFurCount );
       earsColumn.setEndCounts( endCounts.straightEarsCount, endCounts.floppyEarsCount );
       teethColumn.setEndCounts( endCounts.shortTeethCount, endCounts.longTeethCount );
@@ -246,6 +246,11 @@ class RowLabel extends VBox {
       align: 'left'
     }, options );
 
+    const countProperty = new NumberProperty( count, {
+      numberType: 'Integer'
+      // PhET-iO instrumentation is not necessary.
+    } );
+
     const textOptions = {
       font: ROW_LABEL_FONT,
       maxWidth: 120 // determined empirically
@@ -256,24 +261,23 @@ class RowLabel extends VBox {
     // related to.
     const topText = new Text( topStringProperty, textOptions );
 
-    // The bottom text shows the count, and is not passed a string Property. It is updated by the Multilink below
-    // when an associated string changes, or when setCount is called.
-    const bottomText = new Text( '', textOptions );
+    // The bottom text shows the count of bunnies.
+    const bottomTextDerivedStringProperty = new DerivedProperty( [
+        countProperty,
+        naturalSelectionStrings.oneBunnyProperty,
+        naturalSelectionStrings.countBunniesProperty
+      ], ( count, oneBunnyString, countBunniesString ) =>
+        ( count === 1 ) ? oneBunnyString : StringUtils.fillIn( countBunniesString, { count: count } )
+    );
+    const bottomText = new Text( bottomTextDerivedStringProperty, textOptions );
 
     assert && assert( !options.children, 'RowLabel sets children' );
     options.children = [ topText, bottomText ];
 
     super( options );
 
-    // @private {Text}
-    this.bottomText = bottomText;
-    this.count = count;
-
-    // When related strings change, update the count display.
-    Multilink.multilink(
-      [ naturalSelectionStrings.oneBunnyProperty, naturalSelectionStrings.countBunniesProperty ],
-      () => this.updateBottomText()
-    );
+    // @public
+    this.countProperty = countProperty;
   }
 
   /**
@@ -283,34 +287,6 @@ class RowLabel extends VBox {
   dispose() {
     assert && assert( false, 'RowLabel does not support dispose' );
     super.dispose();
-  }
-
-  /**
-   * Sets the count in the bottom line of text.
-   * @param {number} count
-   * @public
-   */
-  setCount( count ) {
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( count ), 'invalid count' );
-    this.count = count;
-    this.updateBottomText();
-  }
-
-  /**
-   * Updates the bottom text, which shows the count.
-   * @private
-   */
-  updateBottomText() {
-    if ( this.count === 1 ) {
-      //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
-      this.bottomText.text = naturalSelectionStrings.oneBunny;
-    }
-    else {
-      //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
-      this.bottomText.text = StringUtils.fillIn( naturalSelectionStrings.countBunnies, {
-        count: this.count
-      } );
-    }
   }
 }
 
