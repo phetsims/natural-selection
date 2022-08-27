@@ -271,7 +271,7 @@ class XTickLabels extends Node {
     const numberOfLabels = getNumberOfVerticalLines( xRangeProperty.value, options.xSpacingModel );
     const xSpacingView = getXSpacingView( xRangeProperty.value, options.xSpacingModel, options.xAxisWidth );
 
-    // Create a fixed number of labels. Their values and positions will be adjusted by xRangeProperty listener below.
+    // Create a fixed number of labels. Their numeric values and positions will be adjusted by xRangeProperty listener below.
     const labelNodes = []; // {Text[]}
     for ( let i = 0; i < numberOfLabels; i++ ) {
       labelNodes.push( new Text( i, {
@@ -295,8 +295,6 @@ class XTickLabels extends Node {
         const xModel = xOffsetModel + ( i * options.xSpacingModel );
         labelNode.visible = xRange.contains( xModel );
         if ( labelNode.visible ) {
-
-          //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
           labelNode.text = xModel;
           labelNode.centerX = xOffsetView + ( i * xSpacingView );
         }
