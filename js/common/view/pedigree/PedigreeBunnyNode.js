@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Multilink from '../../../../../axon/js/Multilink.js';
+import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
@@ -68,12 +68,33 @@ class PedigreeBunnyNode extends Node {
       } ) );
     }
 
+    // Update the genotype abbreviation, must be disposed
+    const genotypeNodeDerivedStringProperty = new DerivedProperty(
+      [ furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty ],
+      ( furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) =>
+        getGenotypeAbbreviation( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible )
+    );
+
+    // Must be disposed
+    const genotypeNodeVisibleProperty = new DerivedProperty(
+      [ furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty ],
+      ( furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) =>
+        ( furAllelesVisible || earsAllelesVisible || teethAllelesVisible )
+    );
+
     // Genotype abbreviation
-    const genotypeNode = new Text( '', {
+    const genotypeNode = new Text( genotypeNodeDerivedStringProperty, {
+      visibleProperty: genotypeNodeVisibleProperty,
       font: GENOTYPE_FONT,
       maxWidth: bunnyNode.width
     } );
     children.push( genotypeNode );
+
+    // Center the genotype abbreviation above the bunny.
+    genotypeNode.boundsProperty.link( () => {
+      genotypeNode.centerX = bunnyNode.centerX;
+      genotypeNode.top = bunnyNode.bottom + 5;
+    } );
 
     // Optional selection rectangle, prepended to children
     if ( options.bunnyIsSelected ) {
@@ -108,21 +129,10 @@ class PedigreeBunnyNode extends Node {
       addRedCrossMark();
     }
 
-    // Update the genotype abbreviation, must be disposed
-    const multilink = new Multilink(
-      [ furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty ],
-      ( furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) => {
-        genotypeNode.visible = ( furAllelesVisible || earsAllelesVisible || teethAllelesVisible );
-
-        //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
-        genotypeNode.text = getGenotypeAbbreviation( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible );
-        genotypeNode.centerX = bunnyNode.centerX;
-        genotypeNode.top = bunnyNode.bottom + 5;
-      } );
-
     // @private {function}
     this.disposePedigreeBunnyNode = () => {
-      multilink.dispose();
+      genotypeNodeDerivedStringProperty.dispose();
+      genotypeNodeVisibleProperty.dispose();
       if ( bunny.diedEmitter.hasListener( addRedCrossMark ) ) {
         bunny.diedEmitter.removeListener( addRedCrossMark );
       }
