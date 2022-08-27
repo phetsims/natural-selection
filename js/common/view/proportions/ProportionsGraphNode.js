@@ -7,6 +7,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Multilink from '../../../../../axon/js/Multilink.js';
+import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import ReadOnlyProperty from '../../../../../axon/js/ReadOnlyProperty.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
@@ -71,7 +73,14 @@ class ProportionsGraphNode extends Node {
     const startRowLabel = new RowLabel( naturalSelectionStrings.startOfGenerationProperty, startCounts.totalCount );
 
     // 'End of Generation...' or 'Currently...'
-    const endRowLabel = new RowLabel( naturalSelectionStrings.endOfGenerationProperty, endCounts.totalCount );
+    const endRowTopTextDerivedProperty = new DerivedProperty( [
+        proportionsModel.isDisplayingCurrentGenerationProperty,
+        naturalSelectionStrings.currentlyProperty,
+        naturalSelectionStrings.endOfGenerationProperty
+      ], ( isDisplayingCurrentGeneration, currentlyString, endOfGenerationString ) =>
+        isDisplayingCurrentGeneration ? currentlyString : endOfGenerationString
+    );
+    const endRowLabel = new RowLabel( endRowTopTextDerivedProperty, endCounts.totalCount );
 
     // All column labels have the same effective width.
     const columnLabelsAlignGroup = new AlignGroup();
@@ -164,18 +173,6 @@ class ProportionsGraphNode extends Node {
       content.center = backgroundNode.center;
     } );
 
-    //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
-    // Change the label for the bottom row, depending on whether it's displaying the current generation or the
-    // end state of a previous generation. unlink is not necessary.
-    proportionsModel.isDisplayingCurrentGenerationProperty.link( isDisplayingCurrentGeneration => {
-      if ( isDisplayingCurrentGeneration ) {
-        endRowLabel.setTopText( naturalSelectionStrings.currently );
-      }
-      else {
-        endRowLabel.setTopText( naturalSelectionStrings.endOfGeneration );
-      }
-    } );
-
     // If there is no data to display, hide the content and display 'No Data'. unlink is not necessary.
     proportionsModel.hasDataProperty.link( hasData => {
       content.visible = hasData;
@@ -255,8 +252,12 @@ class RowLabel extends VBox {
     };
 
     // The 2 lines of text are separate Text nodes so that we don't have to deal with 'bunny' (singular) versus
-    // 'bunnies' (plural) in multiple translated strings.
+    // 'bunnies' (plural) in multiple translated strings.  The top text indicates which generation the data is
+    // related to.
     const topText = new Text( topStringProperty, textOptions );
+
+    // The bottom text shows the count, and is not passed a string Property. It is updated by the Multilink below
+    // when an associated string changes, or when setCount is called.
     const bottomText = new Text( '', textOptions );
 
     assert && assert( !options.children, 'RowLabel sets children' );
@@ -265,10 +266,14 @@ class RowLabel extends VBox {
     super( options );
 
     // @private {Text}
-    this.topText = topText;
     this.bottomText = bottomText;
+    this.count = count;
 
-    this.setCount( count );
+    // When related strings change, update the count display.
+    Multilink.multilink(
+      [ naturalSelectionStrings.oneBunnyProperty, naturalSelectionStrings.countBunniesProperty ],
+      () => this.updateBottomText()
+    );
   }
 
   /**
@@ -280,17 +285,6 @@ class RowLabel extends VBox {
     super.dispose();
   }
 
-  //TODO https://github.com/phetsims/natural-selection/issues/319 this looks like trouble
-  /**
-   * Sets the top line of text.
-   * @param {string} topString
-   * @public
-   */
-  setTopText( topString ) {
-    assert && assert( typeof topString === 'string', 'invalid topString' );
-    this.topText.textProperty.value = topString;
-  }
-
   /**
    * Sets the count in the bottom line of text.
    * @param {number} count
@@ -298,13 +292,22 @@ class RowLabel extends VBox {
    */
   setCount( count ) {
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( count ), 'invalid count' );
+    this.count = count;
+    this.updateBottomText();
+  }
 
-    //TODO https://github.com/phetsims/natural-selection/issues/319 use DerivedProperty
-    if ( count === 1 ) {
-      this.bottomText.text = naturalSelectionStrings.oneBunny;
+  /**
+   * Updates the bottom text, which shows the count.
+   * @private
+   */
+  updateBottomText() {
+    if ( this.count === 1 ) {
+      this.bottomText.text = naturalSelectionStrings.oneBunnyProperty.value;
     }
     else {
-      this.bottomText.text = StringUtils.fillIn( naturalSelectionStrings.countBunnies, { count: count } );
+      this.bottomText.text = StringUtils.fillIn( naturalSelectionStrings.countBunniesProperty.value, {
+        count: this.count
+      } );
     }
   }
 }
