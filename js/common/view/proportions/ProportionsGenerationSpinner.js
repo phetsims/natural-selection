@@ -35,7 +35,7 @@ class ProportionsGenerationSpinner extends NumberSpinner {
       mouseAreaXDilation: 10,
       mouseAreaYDilation: 5,
       numberDisplayOptions: {
-        valuePattern: naturalSelectionStrings.generationValue,
+        valuePattern: naturalSelectionStrings.generationValueProperty,
         align: 'center',
         xMargin: 0,
         yMargin: 0,
