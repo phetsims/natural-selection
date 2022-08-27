@@ -81,7 +81,7 @@ Allele.AlleleIO = new IOType( 'AlleleIO', {
 
 // Static instances
 
-// tandem for all static instances of Solute, which are used across all screens // TODO: bad doc
+// tandem for all static instances of Allele
 const ALLELES_TANDEM = Tandem.GLOBAL_MODEL.createTandem( 'alleles' );
 
 Allele.WHITE_FUR = new Allele( naturalSelectionStrings.whiteFurProperty, whiteFur_png, 'whiteFur', {
