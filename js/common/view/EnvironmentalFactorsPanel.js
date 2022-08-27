@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Multilink from '../../../../axon/js/Multilink.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { AlignGroup, Text, VBox } from '../../../../scenery/js/imports.js';
@@ -41,15 +41,6 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       tandem: Tandem.REQUIRED
     }, NaturalSelectionConstants.PANEL_OPTIONS, options );
 
-    // title - We cannot pass naturalSelectionStrings.environmentalFactorsProperty to Text here, because the title
-    // is derived from the number of visible rows, which have not been created yet. See Multilink below.
-    //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
-    const titleNode = new Text( naturalSelectionStrings.environmentalFactors, {
-      font: NaturalSelectionConstants.TITLE_FONT,
-      maxWidth: 175, // determined empirically,
-      tandem: options.tandem.createTandem( 'titleNode' )
-    } );
-
     // To make all checkbox labels have the same effective size
     const checkboxLabelAlignGroup = new AlignGroup();
 
@@ -77,26 +68,29 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
     } );
 
+    // Set the panel's title to singular or plural, depending on how many checkboxes are visible.
+    // unlink is not necessary.
+    const titleDerivedStringProperty = new DerivedProperty( [
+      naturalSelectionStrings.environmentalFactorProperty,
+      naturalSelectionStrings.environmentalFactorsProperty,
+      ..._.map( checkboxes, checkbox => checkbox.visibleProperty )
+    ], ( environmentalFactor, environmentalFactors ) => {
+      const numberOfVisibleCheckboxes = _.filter( checkboxes, checkbox => checkbox.visible ).length;
+      return ( numberOfVisibleCheckboxes === 1 ) ? environmentalFactor : environmentalFactors;
+    } );
+
+    // title
+    const titleNode = new Text( titleDerivedStringProperty, {
+      font: NaturalSelectionConstants.TITLE_FONT,
+      maxWidth: 175, // determined empirically,
+      tandem: options.tandem.createTandem( 'titleNode' )
+    } );
+
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: [ titleNode, ...checkboxes ]
     } ) );
 
     super( content, options );
-
-    // Set the panel's title to singular or plural, depending on how many checkboxes are visible.
-    // unlink is not necessary.
-    Multilink.multilink( [
-      ..._.map( checkboxes, checkbox => checkbox.visibleProperty ),
-      naturalSelectionStrings.environmentalFactorProperty,
-      naturalSelectionStrings.environmentalFactorsProperty
-    ], () => {
-      const numberOfVisibleCheckboxes = _.filter( checkboxes, checkbox => checkbox.visible ).length;
-      titleNode.text = ( numberOfVisibleCheckboxes === 1 ) ?
-        //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
-                       naturalSelectionStrings.environmentalFactor :
-        //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
-                       naturalSelectionStrings.environmentalFactors;
-    } );
   }
 
   /**

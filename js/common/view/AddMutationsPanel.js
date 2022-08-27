@@ -8,7 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Multilink from '../../../../axon/js/Multilink.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import { AlignBox, AlignGroup, HBox, Image, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
@@ -29,7 +29,7 @@ const LABEL_COLUMN_X_ALIGN = 'left';
 const BUTTON_COLUMNS_X_ALIGN = 'center';
 const BUTTON_CORNER_RADIUS = 4;
 const NORMAL_ALLELE_LINE_DASH = [];
-const MUTATANT_ALLELE_LINE_DASH = [ 3, 3 ];
+const MUTANT_ALLELE_LINE_DASH = [ 3, 3 ];
 
 class AddMutationsPanel extends NaturalSelectionPanel {
 
@@ -55,15 +55,6 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
     // All elements in the button columns (including column headings) have the same effective width.
     const buttonColumnsAlignGroup = new AlignGroup();
-
-    // title - We cannot pass naturalSelectionStrings.addMutationsProperty to new Text here, because the title
-    // is derived from the number of visible rows, which have not been created yet. See Multilink below.
-    //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
-    const titleNode = new Text( naturalSelectionStrings.addMutations, {
-      font: NaturalSelectionConstants.TITLE_FONT,
-      maxWidth: 180, // determined empirically
-      tandem: options.tandem.createTandem( 'titleNode' )
-    } );
 
     // Individual column headings
     const mutationIconNode = new MutationIconNode();
@@ -97,28 +88,31 @@ class AddMutationsPanel extends NaturalSelectionPanel {
       children: rows
     } ) );
 
+    // Set the panel's title to singular or plural, depending on how many rows are visible.
+    // unmultilink is not necessary.
+    const titleDerivedStringProperty = new DerivedProperty( [
+        naturalSelectionStrings.addMutationProperty,
+        naturalSelectionStrings.addMutationsProperty,
+        ..._.map( rows, row => row.visibleProperty )
+      ],
+      ( addMutationString, addMutationsString ) => {
+        const numberOfVisibleRows = _.filter( rows, row => row.visible ).length;
+        return ( numberOfVisibleRows === 1 ) ? addMutationString : addMutationsString;
+      } );
+
+    // title
+    const titleNode = new Text( titleDerivedStringProperty, {
+      font: NaturalSelectionConstants.TITLE_FONT,
+      maxWidth: 180, // determined empirically
+      tandem: options.tandem.createTandem( 'titleNode' )
+    } );
+
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       spacing: 2,
       children: [ titleNode, columnHeadingsNode, vBox ]
     } ) );
 
     super( content, options );
-
-    // Set the panel's title to singular or plural, depending on how many rows are visible.
-    // unmultilink is not necessary.
-    Multilink.multilink( [
-        ..._.map( rows, row => row.visibleProperty ),
-        naturalSelectionStrings.addMutationProperty,
-        naturalSelectionStrings.addMutationsProperty
-      ],
-      () => {
-        const numberOfVisibleRows = _.filter( rows, row => row.visible ).length;
-        titleNode.text = ( numberOfVisibleRows === 1 ) ?
-          //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
-                         naturalSelectionStrings.addMutation :
-          //TODO https://github.com/phetsims/natural-selection/issues/319 use Property.value, which is not currently supported
-                         naturalSelectionStrings.addMutations;
-      } );
 
     // @private {Row[]}
     this.rows = rows;
@@ -273,11 +267,11 @@ class Row extends HBox {
 
         // Adjust the dominant icon
         dominantAlleleIcon.image = mutationIsDominant ? gene.mutantAllele.image : gene.normalAllele.image;
-        dominantAlleleIcon.lineDash = mutationIsDominant ? MUTATANT_ALLELE_LINE_DASH : NORMAL_ALLELE_LINE_DASH;
+        dominantAlleleIcon.lineDash = mutationIsDominant ? MUTANT_ALLELE_LINE_DASH : NORMAL_ALLELE_LINE_DASH;
 
         // Adjust the recessive icon
         recessiveAlleleIcon.image = mutationIsDominant ? gene.normalAllele.image : gene.mutantAllele.image;
-        recessiveAlleleIcon.lineDash = mutationIsDominant ? NORMAL_ALLELE_LINE_DASH : MUTATANT_ALLELE_LINE_DASH;
+        recessiveAlleleIcon.lineDash = mutationIsDominant ? NORMAL_ALLELE_LINE_DASH : MUTANT_ALLELE_LINE_DASH;
       }
     } );
 
