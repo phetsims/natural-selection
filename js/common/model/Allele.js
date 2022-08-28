@@ -1,4 +1,4 @@
-// Copyright 2020-2021, University of Colorado Boulder
+// Copyright 2020-2022, University of Colorado Boulder
 
 /**
  * Allele is a variant form of a gene.  In this sim, the language used to name an allele (a gene variant) and
