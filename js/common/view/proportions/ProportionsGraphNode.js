@@ -330,12 +330,15 @@ class Column extends VBox {
     }, options );
 
     // Checkbox to hide the column
-    const labelNode = new Text( gene.nameProperty, {
+    const checkboxTandem = options.tandem.createTandem( 'checkbox' );
+    const textNode = new Text( gene.nameProperty, {
       font: COLUMN_LABEL_FONT,
-      maxWidth: 100 // determined empirically
+      maxWidth: 100, // determined empirically
+      tandem: checkboxTandem.createTandem( 'textNode' ),
+      phetioVisiblePropertyInstrumented: false
     } );
-    const checkbox = new Checkbox( geneVisibleProperty, labelNode, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-      tandem: options.tandem.createTandem( 'checkbox' )
+    const checkbox = new Checkbox( geneVisibleProperty, textNode, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+      tandem: checkboxTandem
     } ) );
 
     // Pointer areas for the checkbox
