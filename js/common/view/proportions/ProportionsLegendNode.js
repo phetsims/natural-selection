@@ -102,6 +102,7 @@ class GeneLegendNode extends VBox {
 
       // phet-io
       tandem: Tandem.REQUIRED,
+      visiblePropertyOptions: { phetioReadOnly: true },
       normalTandemName: required( config.normalTandemName ), // tandem name for the normal allele
       mutantTandemName: required( config.mutantTandemName ) // tandem name for the mutant allele
     }, config );
@@ -142,13 +143,13 @@ class GeneLegendNode extends VBox {
 class AlleleLegendNode extends HBox {
 
   /**
-   * @param {TReadOnlyProperty<string>} nameProperty
+   * @param {TReadOnlyProperty<string>} alleleNameProperty
    * @param {Color|string} color
    * @param {Object} [options]
    */
-  constructor( nameProperty, color, options ) {
+  constructor( alleleNameProperty, color, options ) {
 
-    assert && assert( nameProperty instanceof ReadOnlyProperty, 'invalid nameProperty' );
+    assert && assert( alleleNameProperty instanceof ReadOnlyProperty, 'invalid alleleNameProperty' );
     assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
 
     options = merge( {
@@ -157,7 +158,11 @@ class AlleleLegendNode extends HBox {
       isMutant: false,
 
       // HBox options
-      spacing: 5
+      spacing: 5,
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      phetioVisiblePropertyInstrumented: false
     }, options );
 
     const rectangleOptions = {
@@ -168,9 +173,11 @@ class AlleleLegendNode extends HBox {
                           new HatchingRectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, rectangleOptions ) :
                           new Rectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, rectangleOptions );
 
-    const textNode = new Text( nameProperty, {
+    const textNode = new Text( alleleNameProperty, {
       font: NaturalSelectionConstants.PROPORTIONS_LEGEND_FONT,
-      maxWidth: 92 // determined empirically
+      maxWidth: 92, // determined empirically
+      tandem: options.tandem.createTandem( 'textNode' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     assert && assert( !options.children, 'AlleleLegendNode sets children' );
