@@ -117,6 +117,8 @@ class PedigreeBunnyNode extends Node {
 
     // Label a dead bunny with a red cross mark.
     const addRedCrossMark = () => {
+
+      //TODO https://github.com/phetsims/natural-selection/issues/319 cannot instrument Text because we decided not to instrument PedigreeBunnyNode, verify
       this.addChild( new Text( '\u274c', {
         font: DEAD_SYMBOL_FONT,
         right: bunnyNode.centerX,

@@ -36,6 +36,7 @@ class MutationComingNode extends Node {
       listener: () => gene.cancelMutation()
     } );
 
+    //TODO https://github.com/phetsims/natural-selection/issues/319 cannot instrument Text because we decided not to instrument MutationComingNode, verify
     const textNode = new Text( naturalSelectionStrings.mutationComingStringProperty, {
       font: NaturalSelectionConstants.MUTATION_COMING_FONT,
       maxWidth: 200 // determined empirically
