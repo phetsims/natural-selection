@@ -23,7 +23,7 @@ import HatchingRectangle from '../HatchingRectangle.js';
 // constants
 const PERCENTAGE_FONT = new PhetFont( 12 );
 
-//TODO https://github.com/phetsims/natural-selection/issues/319 using these Properties inline causes a build error
+//TODO https://github.com/phetsims/chipper/issues/1314 using these Properties inline causes a build error
 const greaterThanValuePercentProperty = naturalSelectionStrings.greaterThanValuePercentStringProperty;
 const lessThanValuePercentProperty = naturalSelectionStrings.lessThanValuePercentStringProperty;
 const valuePercentProperty = naturalSelectionStrings.valuePercentStringProperty;
