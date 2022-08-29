@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+//TODO https://github.com/phetsims/natural-selection/issues/319 need to instrument Text but can't create the desired tandem hierarchy
 /**
  * GraphsRadioButtonGroup is the radio button group for selecting which of the graphs is visible.
  *
