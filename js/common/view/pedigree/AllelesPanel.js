@@ -136,13 +136,17 @@ class Row extends VBox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const labelNode = new Text( gene.nameProperty, {
+    const checkboxTandem = options.tandem.createTandem( 'checkbox' );
+
+    const textNode = new Text( gene.nameProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 100 // determined empirically
+      maxWidth: 100, // determined empirically
+      tandem: checkboxTandem.createTandem( 'textNode' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
-    const checkbox = new Checkbox( visibleProperty, labelNode, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-      tandem: options.tandem.createTandem( 'checkbox' )
+    const checkbox = new Checkbox( visibleProperty, textNode, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+      tandem: checkboxTandem
     } ) );
     const xDilation = 8;
     const yDilation = 8;
@@ -150,10 +154,14 @@ class Row extends VBox {
     checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
 
     // Dominant allele
-    const dominantAlleleNode = new AlleleNode( gene.dominantAbbreviationTranslatedProperty, gene.normalAllele.image );
+    const dominantAlleleNode = new AlleleNode( gene.dominantAbbreviationTranslatedProperty, gene.normalAllele.image, {
+      tandem: options.tandem.createTandem( 'dominantAlleleNode' )
+    } );
 
     // Recessive allele
-    const recessiveAlleleNode = new AlleleNode( gene.recessiveAbbreviationTranslatedProperty, gene.mutantAllele.image );
+    const recessiveAlleleNode = new AlleleNode( gene.recessiveAbbreviationTranslatedProperty, gene.mutantAllele.image, {
+      tandem: options.tandem.createTandem( 'recessiveAlleleNode' )
+    } );
 
     const alignBoxOptions = {
       group: alignGroup,
@@ -240,12 +248,18 @@ class AlleleNode extends HBox {
     assert && assert( image instanceof HTMLImageElement, 'invalid image' );
 
     options = merge( {
-      spacing: 6
+      spacing: 6,
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      phetioVisiblePropertyInstrumented: false
     }, options );
 
     const textNode = new Text( abbreviationProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 12 // determined empirically
+      maxWidth: 12, // determined empirically
+      tandem: options.tandem.createTandem( 'textNode' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     const imageNode = new Image( image, {
