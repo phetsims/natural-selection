@@ -261,6 +261,7 @@ class RowLabel extends VBox {
     // The 2 lines of text are separate Text nodes so that we don't have to deal with 'bunny' (singular) versus
     // 'bunnies' (plural) in multiple translated strings.  The top text indicates which generation the data is
     // related to.
+    //TODO https://github.com/phetsims/natural-selection/issues/319 instrument Text
     const topText = new Text( topStringProperty, textOptions );
 
     // The bottom text shows the count of bunnies.
@@ -271,6 +272,7 @@ class RowLabel extends VBox {
       ], ( count, oneBunnyString, countBunniesString ) =>
         ( count === 1 ) ? oneBunnyString : StringUtils.fillIn( countBunniesString, { count: count } )
     );
+    //TODO https://github.com/phetsims/natural-selection/issues/319 instrument Text
     const bottomText = new Text( bottomTextDerivedStringProperty, textOptions );
 
     assert && assert( !options.children, 'RowLabel sets children' );
