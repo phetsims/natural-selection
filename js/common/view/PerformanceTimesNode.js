@@ -1,8 +1,8 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
 /**
- * PerformanceTimesNode displays times related to performance critical parts of the simulation.
- * This is added via the ?showTimes query parameter.
+ * PerformanceTimesNode displays times related to performance critical parts of the simulation. This is added via
+ * the ?showTimes query parameter, and is for debugging only. It is not translated or instrumented for PhET-iO.
  * See https://github.com/phetsims/natural-selection/issues/60 and https://github.com/phetsims/natural-selection/issues/140
  *
  * @author Chris Malley (PixelZoom, Inc.)
