@@ -70,13 +70,13 @@ class ProportionsGraphNode extends Node {
     } );
 
     // 'Start of Generation...'
-    const startRowLabel = new RowLabel( naturalSelectionStrings.startOfGenerationProperty, startCounts.totalCount );
+    const startRowLabel = new RowLabel( naturalSelectionStrings.startOfGenerationStringProperty, startCounts.totalCount );
 
     // 'End of Generation...' or 'Currently...'
     const endRowTopTextDerivedProperty = new DerivedProperty( [
         proportionsModel.isDisplayingCurrentGenerationProperty,
-        naturalSelectionStrings.currentlyProperty,
-        naturalSelectionStrings.endOfGenerationProperty
+        naturalSelectionStrings.currentlyStringProperty,
+        naturalSelectionStrings.endOfGenerationStringProperty
       ], ( isDisplayingCurrentGeneration, currentlyString, endOfGenerationString ) =>
         isDisplayingCurrentGeneration ? currentlyString : endOfGenerationString
     );
@@ -156,7 +156,7 @@ class ProportionsGraphNode extends Node {
     } );
 
     // 'No Data', visible when we have no data to display.
-    const noDataText = new Text( naturalSelectionStrings.noDataProperty, {
+    const noDataText = new Text( naturalSelectionStrings.noDataStringProperty, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
       centerX: backgroundNode.centerX,
       centerY: backgroundNode.top + ( backgroundNode.height / 6 ),
@@ -264,8 +264,8 @@ class RowLabel extends VBox {
     // The bottom text shows the count of bunnies.
     const bottomTextDerivedStringProperty = new DerivedProperty( [
         countProperty,
-        naturalSelectionStrings.oneBunnyProperty,
-        naturalSelectionStrings.countBunniesProperty
+        naturalSelectionStrings.oneBunnyStringProperty,
+        naturalSelectionStrings.countBunniesStringProperty
       ], ( count, oneBunnyString, countBunniesString ) =>
         ( count === 1 ) ? oneBunnyString : StringUtils.fillIn( countBunniesString, { count: count } )
     );

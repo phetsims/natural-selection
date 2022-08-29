@@ -57,7 +57,7 @@ class PopulationGraphNode extends Node {
       } );
 
     // y-axis (Population) label
-    const yAxisLabelNode = new Text( naturalSelectionStrings.populationProperty, {
+    const yAxisLabelNode = new Text( naturalSelectionStrings.populationStringProperty, {
       font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
       rotation: -Math.PI / 2,
       maxWidth: 90, // determined empirically
@@ -107,7 +107,7 @@ class PopulationGraphNode extends Node {
       tandem: options.tandem.createTandem( 'dataProbeNode' )
     } );
 
-    const zoomOutToSeeDataText = new Text( naturalSelectionStrings.zoomOutToSeeDataProperty, {
+    const zoomOutToSeeDataText = new Text( naturalSelectionStrings.zoomOutToSeeDataStringProperty, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
       maxWidth: 0.75 * gridWidth,
       centerX: gridNode.x + gridWidth / 2,

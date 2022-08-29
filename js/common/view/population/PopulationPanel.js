@@ -48,7 +48,7 @@ class PopulationPanel extends NaturalSelectionPanel {
 
     // Total checkbox
     const totalCheckbox =
-      new PopulationLegendCheckbox( populationModel.totalVisibleProperty, naturalSelectionStrings.totalProperty, alignGroup, {
+      new PopulationLegendCheckbox( populationModel.totalVisibleProperty, naturalSelectionStrings.totalStringProperty, alignGroup, {
         lineColor: NaturalSelectionColors.POPULATION_TOTAL_COUNT,
         tandem: options.tandem.createTandem( 'totalCheckbox' )
       } );
@@ -125,7 +125,7 @@ class PopulationPanel extends NaturalSelectionPanel {
     } );
 
     // Data Probe checkbox
-    const dataProbeCheckboxLabel = new Text( naturalSelectionStrings.dataProbeProperty, {
+    const dataProbeCheckboxLabel = new Text( naturalSelectionStrings.dataProbeStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 135 // determined empirically
     } );

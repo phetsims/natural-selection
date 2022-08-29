@@ -84,27 +84,27 @@ Allele.AlleleIO = new IOType( 'AlleleIO', {
 // tandem for all static instances of Allele
 const ALLELES_TANDEM = Tandem.GLOBAL_MODEL.createTandem( 'alleles' );
 
-Allele.WHITE_FUR = new Allele( naturalSelectionStrings.whiteFurProperty, whiteFur_png, 'whiteFur', {
+Allele.WHITE_FUR = new Allele( naturalSelectionStrings.whiteFurStringProperty, whiteFur_png, 'whiteFur', {
   tandem: ALLELES_TANDEM.createTandem( 'whiteFurAllele' )
 } );
 
-Allele.BROWN_FUR = new Allele( naturalSelectionStrings.brownFurProperty, brownFur_png, 'brownFur', {
+Allele.BROWN_FUR = new Allele( naturalSelectionStrings.brownFurStringProperty, brownFur_png, 'brownFur', {
   tandem: ALLELES_TANDEM.createTandem( 'brownFurAllele' )
 } );
 
-Allele.FLOPPY_EARS = new Allele( naturalSelectionStrings.floppyEarsProperty, floppyEars_png, 'floppyEars', {
+Allele.FLOPPY_EARS = new Allele( naturalSelectionStrings.floppyEarsStringProperty, floppyEars_png, 'floppyEars', {
   tandem: ALLELES_TANDEM.createTandem( 'floppyEarsAllele' )
 } );
 
-Allele.STRAIGHT_EARS = new Allele( naturalSelectionStrings.straightEarsProperty, straightEars_png, 'straightEars', {
+Allele.STRAIGHT_EARS = new Allele( naturalSelectionStrings.straightEarsStringProperty, straightEars_png, 'straightEars', {
   tandem: ALLELES_TANDEM.createTandem( 'straightEarsAllele' )
 } );
 
-Allele.SHORT_TEETH = new Allele( naturalSelectionStrings.shortTeethProperty, shortTeeth_png, 'shortTeeth', {
+Allele.SHORT_TEETH = new Allele( naturalSelectionStrings.shortTeethStringProperty, shortTeeth_png, 'shortTeeth', {
   tandem: ALLELES_TANDEM.createTandem( 'shortTeethAllele' )
 } );
 
-Allele.LONG_TEETH = new Allele( naturalSelectionStrings.longTeethProperty, longTeeth_png, 'longTeeth', {
+Allele.LONG_TEETH = new Allele( naturalSelectionStrings.longTeethStringProperty, longTeeth_png, 'longTeeth', {
   tandem: ALLELES_TANDEM.createTandem( 'longTeethAllele' )
 } );
 

@@ -24,9 +24,9 @@ import HatchingRectangle from '../HatchingRectangle.js';
 const PERCENTAGE_FONT = new PhetFont( 12 );
 
 //TODO https://github.com/phetsims/natural-selection/issues/319 using these Properties inline causes a build error
-const greaterThanValuePercentProperty = naturalSelectionStrings.greaterThanValuePercentProperty;
-const lessThanValuePercentProperty = naturalSelectionStrings.lessThanValuePercentProperty;
-const valuePercentProperty = naturalSelectionStrings.valuePercentProperty;
+const greaterThanValuePercentProperty = naturalSelectionStrings.greaterThanValuePercentStringProperty;
+const lessThanValuePercentProperty = naturalSelectionStrings.lessThanValuePercentStringProperty;
+const valuePercentProperty = naturalSelectionStrings.valuePercentStringProperty;
 
 class ProportionsBarNode extends Node {
 
@@ -99,9 +99,9 @@ class ProportionsBarNode extends Node {
     // unlink is not necessary.
     Multilink.multilink( [
         this.valuesVisibleProperty,
-        naturalSelectionStrings.greaterThanValuePercentProperty,
-        naturalSelectionStrings.lessThanValuePercentProperty,
-        naturalSelectionStrings.valuePercentProperty
+        naturalSelectionStrings.greaterThanValuePercentStringProperty,
+        naturalSelectionStrings.lessThanValuePercentStringProperty,
+        naturalSelectionStrings.valuePercentStringProperty
       ],
       () => this.updateProportionsBarNode()
     );

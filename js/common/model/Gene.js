@@ -171,14 +171,14 @@ class Gene extends PhetioObject {
    */
   static createFurGene( tandem ) {
     return new Gene( {
-      nameProperty: naturalSelectionStrings.furProperty,
+      nameProperty: naturalSelectionStrings.furStringProperty,
       tandemPrefix: 'fur',
       normalAllele: Allele.WHITE_FUR,
       mutantAllele: Allele.BROWN_FUR,
       dominantAbbreviationEnglish: 'F',
-      dominantAbbreviationTranslatedProperty: naturalSelectionStrings.furDominantProperty,
+      dominantAbbreviationTranslatedProperty: naturalSelectionStrings.furDominantStringProperty,
       recessiveAbbreviationEnglish: 'f',
-      recessiveAbbreviationTranslatedProperty: naturalSelectionStrings.furRecessiveProperty,
+      recessiveAbbreviationTranslatedProperty: naturalSelectionStrings.furRecessiveStringProperty,
       color: NaturalSelectionColors.FUR,
       tandem: tandem
     } );
@@ -192,14 +192,14 @@ class Gene extends PhetioObject {
    */
   static createEarsGene( tandem ) {
     return new Gene( {
-      nameProperty: naturalSelectionStrings.earsProperty,
+      nameProperty: naturalSelectionStrings.earsStringProperty,
       tandemPrefix: 'ears',
       normalAllele: Allele.STRAIGHT_EARS,
       mutantAllele: Allele.FLOPPY_EARS,
       dominantAbbreviationEnglish: 'E',
-      dominantAbbreviationTranslatedProperty: naturalSelectionStrings.earsDominantProperty,
+      dominantAbbreviationTranslatedProperty: naturalSelectionStrings.earsDominantStringProperty,
       recessiveAbbreviationEnglish: 'e',
-      recessiveAbbreviationTranslatedProperty: naturalSelectionStrings.earsRecessiveProperty,
+      recessiveAbbreviationTranslatedProperty: naturalSelectionStrings.earsRecessiveStringProperty,
       color: NaturalSelectionColors.EARS,
       tandem: tandem
     } );
@@ -213,14 +213,14 @@ class Gene extends PhetioObject {
    */
   static createTeethGene( tandem ) {
     return new Gene( {
-      nameProperty: naturalSelectionStrings.teethProperty,
+      nameProperty: naturalSelectionStrings.teethStringProperty,
       tandemPrefix: 'teeth',
       normalAllele: Allele.SHORT_TEETH,
       mutantAllele: Allele.LONG_TEETH,
       dominantAbbreviationEnglish: 'T',
-      dominantAbbreviationTranslatedProperty: naturalSelectionStrings.teethDominantProperty,
+      dominantAbbreviationTranslatedProperty: naturalSelectionStrings.teethDominantStringProperty,
       recessiveAbbreviationEnglish: 't',
-      recessiveAbbreviationTranslatedProperty: naturalSelectionStrings.teethRecessiveProperty,
+      recessiveAbbreviationTranslatedProperty: naturalSelectionStrings.teethRecessiveStringProperty,
       color: NaturalSelectionColors.TEETH,
       tandem: tandem
     } );

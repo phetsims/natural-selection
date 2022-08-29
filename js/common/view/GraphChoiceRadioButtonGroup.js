@@ -49,28 +49,28 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
       // Population
       {
         value: GraphChoice.POPULATION,
-        node: new Text( naturalSelectionStrings.populationProperty, TEXT_OPTIONS ),
+        node: new Text( naturalSelectionStrings.populationStringProperty, TEXT_OPTIONS ),
         tandemName: 'populationRadioButton'
       },
 
       // Proportions
       {
         value: GraphChoice.PROPORTIONS,
-        node: new Text( naturalSelectionStrings.proportionsProperty, TEXT_OPTIONS ),
+        node: new Text( naturalSelectionStrings.proportionsStringProperty, TEXT_OPTIONS ),
         tandemName: 'proportionsRadioButton'
       },
 
       // Pedigree
       {
         value: GraphChoice.PEDIGREE,
-        node: new Text( naturalSelectionStrings.pedigreeProperty, TEXT_OPTIONS ),
+        node: new Text( naturalSelectionStrings.pedigreeStringProperty, TEXT_OPTIONS ),
         tandemName: 'pedigreeRadioButton'
       },
 
       // None
       {
         value: GraphChoice.NONE,
-        node: new Text( naturalSelectionStrings.noneProperty, TEXT_OPTIONS ),
+        node: new Text( naturalSelectionStrings.noneStringProperty, TEXT_OPTIONS ),
         tandemName: 'noneRadioButton'
       }
     ];

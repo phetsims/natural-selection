@@ -34,7 +34,7 @@ class LimitedFoodCheckbox extends EnvironmentalFactorCheckbox {
       clockSliceColor: NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR
     }, options );
 
-    const labelNode = new Text( naturalSelectionStrings.limitedFoodProperty, {
+    const labelNode = new Text( naturalSelectionStrings.limitedFoodStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 150 // determined empirically
     } );

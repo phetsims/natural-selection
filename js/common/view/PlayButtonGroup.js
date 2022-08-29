@@ -44,7 +44,7 @@ class PlayButtonGroup extends Node {
     }, options );
 
     // 'Add a Mate' push button, for when the initial population consists of a single bunny.
-    const addAMateButton = new TextPushButton( naturalSelectionStrings.addAMateProperty, {
+    const addAMateButton = new TextPushButton( naturalSelectionStrings.addAMateStringProperty, {
       listener: () => {
         options.addAMate();
         simulationModeProperty.value = SimulationMode.ACTIVE;
@@ -53,7 +53,7 @@ class PlayButtonGroup extends Node {
     } );
 
     // 'Play' push button, for when the initial population consists of more than one bunny.
-    const playButton = new TextPushButton( naturalSelectionStrings.playProperty, {
+    const playButton = new TextPushButton( naturalSelectionStrings.playStringProperty, {
       listener: () => {
         options.play();
         simulationModeProperty.value = SimulationMode.ACTIVE;
@@ -63,7 +63,7 @@ class PlayButtonGroup extends Node {
 
     // 'Start Over' push button, displayed after the game ends (bunnie take over the world, or all bunnies die),
     // while the user is reviewing the final state.
-    const startOverButton = new TextPushButton( naturalSelectionStrings.startOverProperty, {
+    const startOverButton = new TextPushButton( naturalSelectionStrings.startOverStringProperty, {
       listener: () => {
         options.startOver();
         simulationModeProperty.value = SimulationMode.STAGED;

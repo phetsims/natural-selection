@@ -35,7 +35,7 @@ class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
       clockSliceColor: NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR
     }, options );
 
-    const text = new Text( naturalSelectionStrings.toughFoodProperty, {
+    const text = new Text( naturalSelectionStrings.toughFoodStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 110 // determined empirically
     } );

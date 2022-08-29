@@ -75,7 +75,7 @@ class GenerationClockNode extends Node {
     } );
 
     const generationDerivedStringProperty = new DerivedProperty(
-      [ generationClock.clockGenerationProperty, naturalSelectionStrings.generationValueProperty ],
+      [ generationClock.clockGenerationProperty, naturalSelectionStrings.generationValueStringProperty ],
       ( clockGeneration, generationValueString ) =>
         StringUtils.fillIn( generationValueString, {
           value: clockGeneration

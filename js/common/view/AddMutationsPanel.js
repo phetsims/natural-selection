@@ -58,11 +58,11 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
     // Individual column headings
     const mutationIconNode = new MutationIconNode();
-    const dominantColumnLabel = new Text( naturalSelectionStrings.dominantProperty, {
+    const dominantColumnLabel = new Text( naturalSelectionStrings.dominantStringProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
       maxWidth: 60 // determined empirically
     } );
-    const recessiveColumnLabel = new Text( naturalSelectionStrings.recessiveProperty, {
+    const recessiveColumnLabel = new Text( naturalSelectionStrings.recessiveStringProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
       maxWidth: 60 // determined empirically
     } );
@@ -91,8 +91,8 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     // Set the panel's title to singular or plural, depending on how many rows are visible.
     // unmultilink is not necessary.
     const titleDerivedStringProperty = new DerivedProperty( [
-        naturalSelectionStrings.addMutationProperty,
-        naturalSelectionStrings.addMutationsProperty,
+        naturalSelectionStrings.addMutationStringProperty,
+        naturalSelectionStrings.addMutationsStringProperty,
         ..._.map( rows, row => row.visibleProperty )
       ],
       ( addMutationString, addMutationsString ) => {

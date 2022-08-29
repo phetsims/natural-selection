@@ -47,7 +47,7 @@ class MemoryLimitDialog extends OopsDialog {
       phetioDocumentation: 'This dialog is displayed when the sim has reached its memory limit.'
     }, options );
 
-    super( naturalSelectionStrings.memoryLimitMessageProperty, options );
+    super( naturalSelectionStrings.memoryLimitMessageStringProperty, options );
   }
 }
 
