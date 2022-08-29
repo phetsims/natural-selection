@@ -12,6 +12,8 @@ import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { AlignGroup, Text, VBox } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -68,21 +70,15 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
     } );
 
-    // Set the panel's title to singular or plural, depending on how many checkboxes are visible.
-    // unlink is not necessary.
-    const titleDerivedStringProperty = new DerivedProperty( [
-      naturalSelectionStrings.environmentalFactorStringProperty,
-      naturalSelectionStrings.environmentalFactorsStringProperty,
-      ..._.map( checkboxes, checkbox => checkbox.visibleProperty )
-    ], ( environmentalFactor, environmentalFactors ) => {
-      const numberOfVisibleCheckboxes = _.filter( checkboxes, checkbox => checkbox.visible ).length;
-      return ( numberOfVisibleCheckboxes === 1 ) ? environmentalFactor : environmentalFactors;
-    } );
+    const numberOfCheckboxesVisibleProperty = new DerivedProperty( _.map( checkboxes, checkbox => checkbox.visibleProperty ),
+      () => _.filter( checkboxes, checkbox => checkbox.visible ).length, {
+        tandem: options.tandem.createTandem( 'numberOfCheckboxesVisibleProperty' ),
+        phetioValueType: NumberIO,
+        phetioDocumentation: 'the number of checkboxes that are visible affects whether the panel title is singular or plural'
+      } );
 
     // title
-    const titleNode = new Text( titleDerivedStringProperty, {
-      font: NaturalSelectionConstants.TITLE_FONT,
-      maxWidth: 175, // determined empirically,
+    const titleNode = new TitleNode( numberOfCheckboxesVisibleProperty, {
       tandem: options.tandem.createTandem( 'titleNode' )
     } );
 
@@ -91,6 +87,42 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     } ) );
 
     super( content, options );
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+}
+
+/**
+ * TitleNode supports dynamic locale, and changes between singular/plural based on how many checkboxes are visible.
+ */
+class TitleNode extends Text {
+
+  constructor( numberOfCheckboxesVisibleProperty, options ) {
+
+    options = merge( {
+      font: NaturalSelectionConstants.TITLE_FONT,
+      maxWidth: 175, // determined empirically,
+      tandem: Tandem.REQUIRED
+    }, options );
+
+    const textProperty = new DerivedProperty( [
+      numberOfCheckboxesVisibleProperty,
+      naturalSelectionStrings.environmentalFactorStringProperty,
+      naturalSelectionStrings.environmentalFactorsStringProperty
+    ], ( numberOfCheckboxesVisible, environmentalFactor, environmentalFactors ) =>
+      ( numberOfCheckboxesVisible === 1 ) ? environmentalFactor : environmentalFactors, {
+      tandem: options.tandem.createTandem( 'textProperty' ),
+      phetioValueType: StringIO
+    } );
+
+    super( textProperty, options );
   }
 
   /**

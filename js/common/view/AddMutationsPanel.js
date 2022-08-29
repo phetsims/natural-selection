@@ -13,6 +13,8 @@ import merge from '../../../../phet-core/js/merge.js';
 import { AlignBox, AlignGroup, HBox, Image, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import Gene from '../model/Gene.js';
@@ -88,22 +90,15 @@ class AddMutationsPanel extends NaturalSelectionPanel {
       children: rows
     } ) );
 
-    // Set the panel's title to singular or plural, depending on how many rows are visible.
-    // unmultilink is not necessary.
-    const titleDerivedStringProperty = new DerivedProperty( [
-        naturalSelectionStrings.addMutationStringProperty,
-        naturalSelectionStrings.addMutationsStringProperty,
-        ..._.map( rows, row => row.visibleProperty )
-      ],
-      ( addMutationString, addMutationsString ) => {
-        const numberOfVisibleRows = _.filter( rows, row => row.visible ).length;
-        return ( numberOfVisibleRows === 1 ) ? addMutationString : addMutationsString;
+    const numberOfRowsVisibleProperty = new DerivedProperty( _.map( rows, row => row.visibleProperty ),
+      () => _.filter( rows, row => row.visible ).length, {
+        tandem: options.tandem.createTandem( 'numberOfRowsVisibleProperty' ),
+        phetioValueType: NumberIO,
+        phetioDocumentation: 'the number of rows that are visible affects whether the panel title is singular or plural'
       } );
 
     // title
-    const titleNode = new Text( titleDerivedStringProperty, {
-      font: NaturalSelectionConstants.TITLE_FONT,
-      maxWidth: 180, // determined empirically
+    const titleNode = new TitleNode( numberOfRowsVisibleProperty, {
       tandem: options.tandem.createTandem( 'titleNode' )
     } );
 
@@ -395,6 +390,47 @@ class AlleleIcon extends Node {
   set lineDash( value ) {
     assert && assert( Array.isArray( value ), 'invalid value' );
     this.outlineRectangle.lineDash = value;
+  }
+}
+
+/**
+ * TitleNode supports dynamic locale, and changes between singular/plural based on how many Rows are visible.
+ */
+class TitleNode extends Text {
+
+  /**
+   * @param {Property.<number>} numberOfRowsVisibleProperty
+   * @param {Object} [options]
+   */
+  constructor( numberOfRowsVisibleProperty, options ) {
+
+    options = merge( {
+      font: NaturalSelectionConstants.TITLE_FONT,
+      maxWidth: 180, // determined empirically
+      tandem: Tandem.REQUIRED
+    }, options );
+
+    const textProperty = new DerivedProperty( [
+        numberOfRowsVisibleProperty,
+        naturalSelectionStrings.addMutationStringProperty,
+        naturalSelectionStrings.addMutationsStringProperty
+      ],
+      ( numberOfRowsVisible, addMutationString, addMutationsString ) =>
+        ( numberOfRowsVisible === 1 ) ? addMutationString : addMutationsString, {
+        tandem: options.tandem.createTandem( 'textProperty' ),
+        phetioValueType: StringIO
+      } );
+
+    super( textProperty, options );
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
   }
 }
 
