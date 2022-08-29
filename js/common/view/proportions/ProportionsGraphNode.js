@@ -160,7 +160,9 @@ class ProportionsGraphNode extends Node {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
       centerX: backgroundNode.centerX,
       centerY: backgroundNode.top + ( backgroundNode.height / 6 ),
-      maxWidth: 0.5 * backgroundNode.width
+      maxWidth: 0.5 * backgroundNode.width,
+      tandem: options.tandem.createTandem( 'noDataText' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     assert && assert( !options.children, 'ProportionGraphNode sets children' );
