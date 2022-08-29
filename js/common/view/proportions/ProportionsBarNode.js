@@ -95,7 +95,7 @@ class ProportionsBarNode extends Node {
     this.mutantCount = mutantCount;
     this.valuesVisibleProperty = valuesVisibleProperty;
 
-    // When values become visible, or any of the related strings change, update the display.
+    // When valuesVisibleProperty changes, or any of the related strings change, update the display.
     // unlink is not necessary.
     Multilink.multilink( [
         this.valuesVisibleProperty,
