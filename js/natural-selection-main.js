@@ -21,7 +21,7 @@ simLauncher.launch( () => {
     new LabScreen( Tandem.ROOT.createTandem( 'labScreen' ) )
   ];
 
-  const sim = new Sim( naturalSelectionStrings[ 'natural-selection' ].title, screens, {
+  const sim = new Sim( naturalSelectionStrings[ 'natural-selection' ].titleStringProperty, screens, {
 
     // OrganismSprites uses WebGL, with a fallback of Canvas.
     // See https://github.com/phetsims/natural-selection/issues/128
