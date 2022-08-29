@@ -50,12 +50,15 @@ class ProportionsPanel extends NaturalSelectionPanel {
     } );
 
     // Values checkbox, shows/hides values on the bars
+    const valuesCheckboxTandem = options.tandem.createTandem( 'valuesCheckbox' );
     const valuesCheckboxLabelNode = new Text( naturalSelectionStrings.valuesStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 100 // determined empirically
+      maxWidth: 100, // determined empirically
+      tandem: valuesCheckboxTandem.createTandem( 'textNode' ),
+      phetioVisiblePropertyInstrumented: false
     } );
     const valuesCheckbox = new Checkbox( valuesVisibleProperty, valuesCheckboxLabelNode, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-      tandem: options.tandem.createTandem( 'valuesCheckbox' )
+      tandem: valuesCheckboxTandem
     } ) );
     const xDilation = 8;
     const yDilation = 6;
