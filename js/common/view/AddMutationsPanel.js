@@ -62,11 +62,13 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     const mutationIconNode = new MutationIconNode();
     const dominantColumnLabel = new Text( naturalSelectionStrings.dominantStringProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
-      maxWidth: 60 // determined empirically
+      maxWidth: 60, // determined empirically
+      tandem: options.tandem.createTandem( 'dominantColumnLabel' )
     } );
     const recessiveColumnLabel = new Text( naturalSelectionStrings.recessiveStringProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
-      maxWidth: 60 // determined empirically
+      maxWidth: 60, // determined empirically
+      tandem: options.tandem.createTandem( 'recessiveColumnLabel' )
     } );
 
     // Layout of column headings
@@ -182,11 +184,13 @@ class Row extends HBox {
     }, options );
 
     // label that indicates the gene, to the left of the push buttons
-    const labelNode = new Text( gene.nameProperty, {
+    const geneNameNode = new Text( gene.nameProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_GENE_FONT,
-      maxWidth: 50 // determined empirically
+      maxWidth: 50, // determined empirically
+      tandem: options.tandem.createTandem( 'geneNameNode' ),
+      phetioVisiblePropertyInstrumented: false
     } );
-    const labelNodeWrapper = new AlignBox( labelNode, {
+    const geneNameNodeWrapper = new AlignBox( geneNameNode, {
       group: labelColumnAlignGroup,
       xAlign: LABEL_COLUMN_X_ALIGN
     } );
@@ -230,7 +234,7 @@ class Row extends HBox {
 
     assert && assert( !options.children, 'Row sets children' );
     options.children = [
-      labelNodeWrapper,
+      geneNameNodeWrapper,
       new Node( {
         children: [
           new AlignBox( dominantAlleleIcon, alignBoxOptions ),
