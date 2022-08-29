@@ -58,6 +58,9 @@ class Genotype extends PhetioObject {
     super( options );
 
     // @public (read-only)
+    this.genePool = genePool;
+
+    // @public (read-only)
     this.furGenePair = new GenePair( genePool.furGene, options.fatherFurAllele, options.motherFurAllele, {
       tandem: options.tandem.createTandem( 'furGenePair' ),
       phetioDocumentation: 'gene pair that determines the fur trait'
@@ -99,7 +102,8 @@ class Genotype extends PhetioObject {
       [
         genePool.furGene.dominantAlleleProperty,
         genePool.earsGene.dominantAlleleProperty,
-        genePool.teethGene.dominantAlleleProperty
+        genePool.teethGene.dominantAlleleProperty,
+        ...this.getAbbreviationStringDependencies()
       ],
       () => {
         return this.furGenePair.getGenotypeAbbreviation() +
@@ -165,6 +169,16 @@ class Genotype extends PhetioObject {
     assert && assert( this.earsGenePair instanceof GenePair, 'invalid earsGenePair' );
     assert && assert( this.teethGenePair instanceof GenePair, 'invalid teethGenePair' );
     assert && assert( this.mutation instanceof Allele || this.mutation === null, 'invalid mutation' );
+  }
+
+  /**
+   * Gets the dependencies on dynamic strings that are used to derive the abbreviations for this genotype.
+   * These strings may be changed via PhET-iO, or by changing the global localeProperty.
+   * @returns {Property.<*>[]}
+   * @public
+   */
+  getAbbreviationStringDependencies() {
+    return this.genePool.getGenotypeAbbreviationStringDependencies();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

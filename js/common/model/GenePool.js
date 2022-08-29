@@ -79,6 +79,21 @@ class GenePool {
     }
     return isRecessiveMutation;
   }
+
+  /**
+   * Gets the dependencies on dynamic strings that are used to derive the abbreviations for genes in the pool.
+   * These strings may be changed via PhET-iO, or by changing the global localeProperty.
+   * @returns {Property.<*>[]}
+   * @public
+   */
+  getGenotypeAbbreviationStringDependencies() {
+    const dependencies = [];
+    this.genes.forEach( gene => {
+      dependencies.push( gene.dominantAbbreviationTranslatedProperty );
+      dependencies.push( gene.recessiveAbbreviationTranslatedProperty );
+    } );
+    return dependencies;
+  }
 }
 
 naturalSelection.register( 'GenePool', GenePool );

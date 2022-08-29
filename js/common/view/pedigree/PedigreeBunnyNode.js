@@ -70,7 +70,10 @@ class PedigreeBunnyNode extends Node {
 
     // Update the genotype abbreviation, must be disposed
     const genotypeNodeDerivedStringProperty = new DerivedProperty(
-      [ furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty ],
+      [
+        furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty,
+        ...bunny.genotype.getAbbreviationStringDependencies()
+      ],
       ( furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) =>
         getGenotypeAbbreviation( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible )
     );
