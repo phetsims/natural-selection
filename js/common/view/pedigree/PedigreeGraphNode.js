@@ -62,7 +62,9 @@ class PedigreeGraphNode extends Node {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
       centerX: backgroundNode.centerX,
       centerY: backgroundNode.top + ( backgroundNode.height / 6 ),
-      maxWidth: 0.5 * backgroundNode.width
+      maxWidth: 0.5 * backgroundNode.width,
+      tandem: options.tandem.createTandem( 'selectABunnyText' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     assert && assert( !options.children, 'PedigreeGraphNode sets children' );
