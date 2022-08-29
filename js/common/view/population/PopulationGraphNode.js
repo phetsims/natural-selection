@@ -53,7 +53,7 @@ class PopulationGraphNode extends Node {
     const generationScroller = new PopulationGenerationScroller(
       populationModel.xRangeProperty, populationModel.timeInGenerationsProperty, populationModel.isPlayingProperty, {
         tandem: options.tandem.createTandem( 'generationScroller' ),
-        visiblePropertyOptions: { phetioReadOnly: true }
+        phetioVisiblePropertyInstrumented: false
       } );
 
     // y-axis (Population) label
