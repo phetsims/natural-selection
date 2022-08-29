@@ -271,7 +271,9 @@ class XTickLabels extends Node {
     const numberOfLabels = getNumberOfVerticalLines( xRangeProperty.value, options.xSpacingModel );
     const xSpacingView = getXSpacingView( xRangeProperty.value, options.xSpacingModel, options.xAxisWidth );
 
-    // Create a fixed number of labels. Their numeric values and positions will be adjusted by xRangeProperty listener below.
+    // Create a fixed number of labels.
+    // These instances of Text do not take a string Property because they display a number.
+    // The numbers and positions are adjusted by xRangeProperty listener below.
     const labelNodes = []; // {Text[]}
     for ( let i = 0; i < numberOfLabels; i++ ) {
       labelNodes.push( new Text( i, {
