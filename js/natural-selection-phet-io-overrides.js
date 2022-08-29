@@ -154,13 +154,13 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.view.graphs.populationNode.populationPanel.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsGraphNode.earsColumn.visibleProperty": {
+    "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsGraphNode.columns.earsColumn.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsGraphNode.furColumn.visibleProperty": {
+    "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsGraphNode.columns.furColumn.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsGraphNode.teethColumn.visibleProperty": {
+    "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsGraphNode.columns.teethColumn.visibleProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.furLegendNode.visibleProperty": {
@@ -394,13 +394,13 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.labScreen.view.graphs.populationNode.populationPanel.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsGraphNode.earsColumn.visibleProperty": {
+    "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsGraphNode.columns.earsColumn.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsGraphNode.furColumn.visibleProperty": {
+    "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsGraphNode.columns.furColumn.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsGraphNode.teethColumn.visibleProperty": {
+    "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsGraphNode.columns.teethColumn.visibleProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.earsLegendNode.visibleProperty": {

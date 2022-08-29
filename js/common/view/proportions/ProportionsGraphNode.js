@@ -17,6 +17,7 @@ import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, Node, Rectangle, Text, VBox } from '../../../../../scenery/js/imports.js';
 import Checkbox from '../../../../../sun/js/Checkbox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
+import StringIO from '../../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../../naturalSelection.js';
 import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
@@ -69,18 +70,28 @@ class ProportionsGraphNode extends Node {
       stroke: NaturalSelectionColors.PANEL_STROKE
     } );
 
+    const columnsTandem = options.tandem.createTandem( 'columns' );
+    const labelsColumnTandem = columnsTandem.createTandem( 'labelsColumn' );
+
     // 'Start of Generation...'
-    const startRowLabel = new RowLabel( naturalSelectionStrings.startOfGenerationStringProperty, startCounts.totalCount );
+    const startRowLabel = new RowLabel( naturalSelectionStrings.startOfGenerationStringProperty, startCounts.totalCount, {
+      tandem: labelsColumnTandem.createTandem( 'startRowLabel' )
+    } );
 
     // 'End of Generation...' or 'Currently...'
+    const endRowLabelTandem = labelsColumnTandem.createTandem( 'endRowLabel' );
     const endRowTopTextDerivedProperty = new DerivedProperty( [
-        proportionsModel.isDisplayingCurrentGenerationProperty,
-        naturalSelectionStrings.currentlyStringProperty,
-        naturalSelectionStrings.endOfGenerationStringProperty
-      ], ( isDisplayingCurrentGeneration, currentlyString, endOfGenerationString ) =>
-        isDisplayingCurrentGeneration ? currentlyString : endOfGenerationString
-    );
-    const endRowLabel = new RowLabel( endRowTopTextDerivedProperty, endCounts.totalCount );
+      proportionsModel.isDisplayingCurrentGenerationProperty,
+      naturalSelectionStrings.currentlyStringProperty,
+      naturalSelectionStrings.endOfGenerationStringProperty
+    ], ( isDisplayingCurrentGeneration, currentlyString, endOfGenerationString ) =>
+      isDisplayingCurrentGeneration ? currentlyString : endOfGenerationString, {
+      tandem: endRowLabelTandem.createTandem( 'textProperty' ),
+      phetioValueType: StringIO
+    } );
+    const endRowLabel = new RowLabel( endRowTopTextDerivedProperty, endCounts.totalCount, {
+      tandem: endRowLabelTandem
+    } );
 
     // All column labels have the same effective width.
     const columnLabelsAlignGroup = new AlignGroup();
@@ -119,21 +130,24 @@ class ProportionsGraphNode extends Node {
       endCounts.whiteFurCount, endCounts.brownFurCount,
       valuesVisibleProperty, proportionsModel.furVisibleProperty,
       columnLabelsAlignGroup, cellsAlignGroup, {
-        tandem: options.tandem.createTandem( 'furColumn' )
+        tandem: columnsTandem.createTandem( 'furColumn' ),
+        visiblePropertyOptions: { phetioReadOnly: true }
       } );
     const earsColumn = new Column( genePool.earsGene,
       startCounts.straightEarsCount, startCounts.floppyEarsCount,
       endCounts.straightEarsCount, endCounts.floppyEarsCount,
       valuesVisibleProperty, proportionsModel.earsVisibleProperty,
       columnLabelsAlignGroup, cellsAlignGroup, {
-        tandem: options.tandem.createTandem( 'earsColumn' )
+        tandem: columnsTandem.createTandem( 'earsColumn' ),
+        visiblePropertyOptions: { phetioReadOnly: true }
       } );
     const teethColumn = new Column( genePool.teethGene,
       startCounts.shortTeethCount, startCounts.longTeethCount,
       endCounts.shortTeethCount, endCounts.longTeethCount,
       valuesVisibleProperty, proportionsModel.teethVisibleProperty,
       columnLabelsAlignGroup, cellsAlignGroup, {
-        tandem: options.tandem.createTandem( 'teethColumn' )
+        tandem: columnsTandem.createTandem( 'teethColumn' ),
+        visiblePropertyOptions: { phetioReadOnly: true }
       } );
     const geneColumns = [ furColumn, earsColumn, teethColumn ];
 
@@ -228,24 +242,28 @@ class ProportionsGraphNode extends Node {
 
 /**
  * RowLabel is the label for a row of the Proportions graph.
- * The label consists of 2 lines of text, with a dynamic count on the second line.
+ * The label consists of 2 lines of text, with a dynamic bunny count on the second line.
  */
 class RowLabel extends VBox {
 
   /**
    *
-   * @param {TReadOnlyProperty} topStringProperty - string for the top line of text
+   * @param {TReadOnlyProperty} firstLineStringProperty - string for the first line of text
    * @param {number} count
    * @param {Object} [options]
    */
-  constructor( topStringProperty, count, options ) {
+  constructor( firstLineStringProperty, count, options ) {
 
-    assert && assert( topStringProperty instanceof ReadOnlyProperty, 'invalid topStringProperty' );
+    assert && assert( firstLineStringProperty instanceof ReadOnlyProperty, 'invalid firstLineStringProperty' );
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( count ), 'invalid count' );
 
     options = merge( {
       spacing: 2,
-      align: 'left'
+      align: 'left',
+
+      // phet-io
+      tandem: Tandem.REQUIRED,
+      visiblePropertyOptions: { phetioReadOnly: true }
     }, options );
 
     const countProperty = new NumberProperty( count, {
@@ -259,24 +277,32 @@ class RowLabel extends VBox {
     };
 
     // The 2 lines of text are separate Text nodes so that we don't have to deal with 'bunny' (singular) versus
-    // 'bunnies' (plural) in multiple translated strings.  The top text indicates which generation the data is
-    // related to.
-    //TODO https://github.com/phetsims/natural-selection/issues/319 instrument Text
-    const topText = new Text( topStringProperty, textOptions );
+    // 'bunnies' (plural) in multiple translated strings.
 
-    // The bottom text shows the count of bunnies.
-    const bottomTextDerivedStringProperty = new DerivedProperty( [
-        countProperty,
-        naturalSelectionStrings.oneBunnyStringProperty,
-        naturalSelectionStrings.countBunniesStringProperty
-      ], ( count, oneBunnyString, countBunniesString ) =>
-        ( count === 1 ) ? oneBunnyString : StringUtils.fillIn( countBunniesString, { count: count } )
-    );
-    //TODO https://github.com/phetsims/natural-selection/issues/319 instrument Text
-    const bottomText = new Text( bottomTextDerivedStringProperty, textOptions );
+    // The first line of text indicates which generation the data is related to.
+    const firstLineOfText = new Text( firstLineStringProperty, merge( {
+      tandem: options.tandem.createTandem( 'firstLineOfText' ),
+      phetioVisiblePropertyInstrumented: false
+    }, textOptions ) );
+
+    // The second line of text shows the count of bunnies.
+    const secondLineOfTextTandem = options.tandem.createTandem( 'secondLineOfText' );
+    const secondLineOfTextDerivedStringProperty = new DerivedProperty( [
+      countProperty,
+      naturalSelectionStrings.oneBunnyStringProperty,
+      naturalSelectionStrings.countBunniesStringProperty
+    ], ( count, oneBunnyString, countBunniesString ) =>
+      ( count === 1 ) ? oneBunnyString : StringUtils.fillIn( countBunniesString, { count: count } ), {
+      tandem: secondLineOfTextTandem.createTandem( 'textProperty' ),
+      phetioValueType: StringIO
+    } );
+    const secondLineOfText = new Text( secondLineOfTextDerivedStringProperty, merge( {
+      tandem: secondLineOfTextTandem,
+      phetioVisiblePropertyInstrumented: false
+    }, textOptions ) );
 
     assert && assert( !options.children, 'RowLabel sets children' );
-    options.children = [ topText, bottomText ];
+    options.children = [ firstLineOfText, secondLineOfText ];
 
     super( options );
 
