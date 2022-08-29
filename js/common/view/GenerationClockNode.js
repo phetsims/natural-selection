@@ -17,6 +17,7 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Circle, Node, Path, Text } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import naturalSelectionStrings from '../../naturalSelectionStrings.js';
 import GenerationClock from '../model/GenerationClock.js';
@@ -74,29 +75,33 @@ class GenerationClockNode extends Node {
       lineWidth: LINE_WIDTH
     } );
 
+    // The current generation number, displayed below the circle.
+    const generationNumberNodeTandem = options.tandem.createTandem( 'generationNumberNode' );
     const generationDerivedStringProperty = new DerivedProperty(
       [ generationClock.clockGenerationProperty, naturalSelectionStrings.generationValueStringProperty ],
       ( clockGeneration, generationValueString ) =>
         StringUtils.fillIn( generationValueString, {
           value: clockGeneration
-        } ) );
-
-    // The current generation number, displayed below the circle.
-    const generationNode = new Text( generationDerivedStringProperty, {
+        } ), {
+        tandem: generationNumberNodeTandem.createTandem( 'textProperty' ),
+        phetioValueType: StringIO
+      } );
+    const generationNumberNode = new Text( generationDerivedStringProperty, {
       font: GENERATION_FONT,
       fill: 'black',
       top: circle.bottom + 3,
-      maxWidth: 100 // determined empirically
+      maxWidth: 100, // determined empirically
+      tandem: generationNumberNodeTandem
     } );
 
     // Keep the generation number centered below the circular part of the clock.
-    generationNode.boundsProperty.link( () => {
-      generationNode.centerX = circle.centerX;
+    generationNumberNode.boundsProperty.link( () => {
+      generationNumberNode.centerX = circle.centerX;
     } );
 
     // Layering order is important here!
     assert && assert( !options.children, 'GenerationClockNode sets children' );
-    options.children = [ circle, foodSliceNode, wolvesSliceNode, revealArc, rimNode, generationNode ];
+    options.children = [ circle, foodSliceNode, wolvesSliceNode, revealArc, rimNode, generationNumberNode ];
 
     super( options );
 
