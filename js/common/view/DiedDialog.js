@@ -32,12 +32,14 @@ class DiedDialog extends Dialog {
       phetioDocumentation: 'This dialog is displayed when all of the bunnies have died.'
     }, options );
 
-    const messageText = new Text( naturalSelectionStrings.allOfTheBunniesHaveDiedStringProperty, {
+    const textNode = new Text( naturalSelectionStrings.allOfTheBunniesHaveDiedStringProperty, {
       font: NaturalSelectionConstants.DIALOG_FONT,
-      maxWidth: 450 // determined empirically
+      maxWidth: 450, // determined empirically
+      tandem: options.tandem.createTandem( 'textNode' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
-    super( messageText, options );
+    super( textNode, options );
   }
 }
 
