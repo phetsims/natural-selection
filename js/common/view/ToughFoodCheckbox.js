@@ -7,6 +7,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { AlignGroup, HBox, Image, Text } from '../../../../scenery/js/imports.js';
 import toughShrub3_png from '../../../images/toughShrub3_png.js';
@@ -32,12 +33,17 @@ class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
 
       // EnvironmentalFactorCheckbox options
       clockSliceRange: NaturalSelectionConstants.CLOCK_FOOD_RANGE,
-      clockSliceColor: NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR
+      clockSliceColor: NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR,
+
+      // phet-io
+      tandem: Tandem.REQUIRED
     }, options );
 
-    const text = new Text( naturalSelectionStrings.toughFoodStringProperty, {
+    const textNode = new Text( naturalSelectionStrings.toughFoodStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 110 // determined empirically
+      maxWidth: 110, // determined empirically
+      tandem: options.tandem.createTandem( 'textNode' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     const icon = new Image( toughShrub3_png, {
@@ -45,7 +51,7 @@ class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
     } );
 
     const labelNode = new HBox( {
-      children: [ text, icon ],
+      children: [ textNode, icon ],
       spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING
     } );
 

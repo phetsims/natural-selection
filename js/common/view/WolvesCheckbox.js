@@ -7,6 +7,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { AlignGroup, HBox, Image, Text } from '../../../../scenery/js/imports.js';
 import wolf_png from '../../../images/wolf_png.js';
@@ -32,12 +33,17 @@ class WolvesCheckbox extends EnvironmentalFactorCheckbox {
 
       // EnvironmentalFactorCheckbox options
       clockSliceRange: NaturalSelectionConstants.CLOCK_WOLVES_RANGE,
-      clockSliceColor: NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR
+      clockSliceColor: NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR,
+
+      // phet-io
+      tandem: Tandem.REQUIRED
     }, options );
 
-    const text = new Text( naturalSelectionStrings.wolvesStringProperty, {
+    const textNode = new Text( naturalSelectionStrings.wolvesStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 110 // determined empirically
+      maxWidth: 110, // determined empirically
+      tandem: options.tandem.createTandem( 'textNode' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     const icon = new Image( wolf_png );
@@ -45,7 +51,7 @@ class WolvesCheckbox extends EnvironmentalFactorCheckbox {
     icon.setScaleMagnitude( -scale, scale ); // reflect so the wolf is facing left
 
     const labelNode = new HBox( {
-      children: [ text, icon ],
+      children: [ textNode, icon ],
       spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING
     } );
 

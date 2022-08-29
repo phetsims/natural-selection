@@ -7,6 +7,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { AlignGroup, Text } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -31,15 +32,20 @@ class LimitedFoodCheckbox extends EnvironmentalFactorCheckbox {
 
       // EnvironmentalFactorCheckbox options
       clockSliceRange: NaturalSelectionConstants.CLOCK_FOOD_RANGE,
-      clockSliceColor: NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR
+      clockSliceColor: NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR,
+
+      // phet-io
+      tandem: Tandem.REQUIRED
     }, options );
 
-    const labelNode = new Text( naturalSelectionStrings.limitedFoodStringProperty, {
+    const textNode = new Text( naturalSelectionStrings.limitedFoodStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 150 // determined empirically
+      maxWidth: 150, // determined empirically
+      tandem: options.tandem.createTandem( 'textNode' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
-    super( limitedFoodProperty, labelNode, alignGroup, options );
+    super( limitedFoodProperty, textNode, alignGroup, options );
   }
 }
 
