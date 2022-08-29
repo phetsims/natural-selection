@@ -112,7 +112,6 @@ class GenePair extends PhetioObject {
     return ( this.fatherAllele === allele || this.motherAllele === allele );
   }
 
-  //TODO https://github.com/phetsims/natural-selection/issues/319 does this need to be dynamic?
   /**
    * Gets the genotype abbreviation for the alleles in this gene pair. If there is no dominant gene (and therefore
    * no dominance relationship), then an abbreviation is meaningless, and the empty string is returned.
