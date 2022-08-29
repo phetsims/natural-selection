@@ -63,12 +63,14 @@ class AddMutationsPanel extends NaturalSelectionPanel {
     const dominantColumnLabel = new Text( naturalSelectionStrings.dominantStringProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
       maxWidth: 60, // determined empirically
-      tandem: options.tandem.createTandem( 'dominantColumnLabel' )
+      tandem: options.tandem.createTandem( 'dominantColumnLabel' ),
+      phetioVisiblePropertyInstrumented: false
     } );
     const recessiveColumnLabel = new Text( naturalSelectionStrings.recessiveStringProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
       maxWidth: 60, // determined empirically
-      tandem: options.tandem.createTandem( 'recessiveColumnLabel' )
+      tandem: options.tandem.createTandem( 'recessiveColumnLabel' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     // Layout of column headings
