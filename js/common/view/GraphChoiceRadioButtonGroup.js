@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-//TODO https://github.com/phetsims/natural-selection/issues/319 need to instrument Text but can't create the desired tandem hierarchy
 /**
  * GraphsRadioButtonGroup is the radio button group for selecting which of the graphs is visible.
  *
@@ -20,7 +19,8 @@ import GraphChoice from './GraphChoice.js';
 // constants
 const TEXT_OPTIONS = {
   font: NaturalSelectionConstants.RADIO_BUTTON_FONT,
-  maxWidth: 175 // determined empirically
+  maxWidth: 175, // determined empirically
+  phetioVisiblePropertyInstrumented: false
 };
 
 class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
@@ -44,35 +44,49 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
       tandem: Tandem.REQUIRED
     }, options );
 
+    // Workaround for making the Text nodes appear to be children of the radio buttons
+    const populationRadioButtonTandemName = 'populationRadioButton';
+    const proportionsRadioButtonTandemName = 'proportionsRadioButton';
+    const pedigreeRadioButtonTandemName = 'pedigreeRadioButton';
+    const noneRadioButtonTandemName = 'noneRadioButton';
+
     // Create the description of the buttons
     const items = [
 
       // Population
       {
         value: GraphChoice.POPULATION,
-        node: new Text( naturalSelectionStrings.populationStringProperty, TEXT_OPTIONS ),
-        tandemName: 'populationRadioButton'
+        node: new Text( naturalSelectionStrings.populationStringProperty, merge( {
+          tandem: options.tandem.createTandem( populationRadioButtonTandemName ).createTandem( 'textNode' )
+        }, TEXT_OPTIONS ) ),
+        tandemName: populationRadioButtonTandemName
       },
 
       // Proportions
       {
         value: GraphChoice.PROPORTIONS,
-        node: new Text( naturalSelectionStrings.proportionsStringProperty, TEXT_OPTIONS ),
-        tandemName: 'proportionsRadioButton'
+        node: new Text( naturalSelectionStrings.proportionsStringProperty, merge( {
+          tandem: options.tandem.createTandem( proportionsRadioButtonTandemName ).createTandem( 'textNode' )
+        }, TEXT_OPTIONS ) ),
+        tandemName: proportionsRadioButtonTandemName
       },
 
       // Pedigree
       {
         value: GraphChoice.PEDIGREE,
-        node: new Text( naturalSelectionStrings.pedigreeStringProperty, TEXT_OPTIONS ),
-        tandemName: 'pedigreeRadioButton'
+        node: new Text( naturalSelectionStrings.pedigreeStringProperty, merge( {
+          tandem: options.tandem.createTandem( pedigreeRadioButtonTandemName ).createTandem( 'textNode' )
+        }, TEXT_OPTIONS ) ),
+        tandemName: pedigreeRadioButtonTandemName
       },
 
       // None
       {
         value: GraphChoice.NONE,
-        node: new Text( naturalSelectionStrings.noneStringProperty, TEXT_OPTIONS ),
-        tandemName: 'noneRadioButton'
+        node: new Text( naturalSelectionStrings.noneStringProperty, merge( {
+          tandem: options.tandem.createTandem( noneRadioButtonTandemName ).createTandem( 'textNode' )
+        }, TEXT_OPTIONS ) ),
+        tandemName: noneRadioButtonTandemName
       }
     ];
 
