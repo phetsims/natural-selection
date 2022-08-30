@@ -42,7 +42,7 @@ class EnvironmentPanel extends Panel {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      visiblePropertyOptions: { phetioReadOnly: true }
+      phetioVisiblePropertyInstrumented: false
     }, options );
 
     // Where the bunnies, food, etc. are displayed

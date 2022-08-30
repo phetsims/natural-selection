@@ -48,7 +48,7 @@ class PedigreeGraphNode extends Node {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      visiblePropertyOptions: { phetioReadOnly: true }
+      phetioVisiblePropertyInstrumented: false
     }, options );
 
     const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {

@@ -66,7 +66,7 @@ class OrganismSprites extends Sprites {
       // phet-io
       tandem: Tandem.REQUIRED,
       phetioDocumentation: 'bunnies, wolves, and shrubs that appear in the environment',
-      visiblePropertyOptions: { phetioReadOnly: true },
+      phetioVisiblePropertyInstrumented: false,
       phetioInputEnabledPropertyInstrumented: true
     }, options );
 

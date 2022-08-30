@@ -43,7 +43,7 @@ class PopulationGraphNode extends Node {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      visiblePropertyOptions: { phetioReadOnly: true }
+      phetioVisiblePropertyInstrumented: false
     }, options );
 
     // invisible rectangle that defines the bounds of this Node
@@ -78,7 +78,7 @@ class PopulationGraphNode extends Node {
       left: boundsRectangle.left,
       top: boundsRectangle.top,
       tandem: options.tandem.createTandem( 'yZoomButtonGroup' ),
-      visiblePropertyOptions: { phetioReadOnly: true }
+      phetioVisiblePropertyInstrumented: false
     } );
 
     // Dimensions of the 2D grid (sans tick marks) in view coordinates

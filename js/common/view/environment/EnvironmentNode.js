@@ -37,7 +37,7 @@ class EnvironmentNode extends Node {
       // phet-io
       tandem: Tandem.REQUIRED,
       phetioDocumentation: 'the area of the screen that displays what is happening in the environment',
-      visiblePropertyOptions: { phetioReadOnly: true }
+      phetioVisiblePropertyInstrumented: false
     }, options );
 
     const bounds = new Bounds2( 0, 0, options.size.width, options.size.height );

@@ -56,7 +56,7 @@ class ProportionsGraphNode extends Node {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      visiblePropertyOptions: { phetioReadOnly: true }
+      phetioVisiblePropertyInstrumented: false
     }, options );
 
     // To make this code easier to read
@@ -263,7 +263,7 @@ class RowLabel extends VBox {
 
       // phet-io
       tandem: Tandem.REQUIRED,
-      visiblePropertyOptions: { phetioReadOnly: true }
+      phetioVisiblePropertyInstrumented: false
     }, options );
 
     const countProperty = new NumberProperty( count, {
