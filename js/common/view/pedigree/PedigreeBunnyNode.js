@@ -48,6 +48,7 @@ class PedigreeBunnyNode extends Node {
     options = merge( {
       showMutationIcon: true,
       bunnyIsSelected: false
+      // Not PhET-iO instrumented: PedigreeBunnyNode is created dynamically, and clients generally have no need to inspect them.
     }, options );
 
     const children = [];
@@ -70,7 +71,7 @@ class PedigreeBunnyNode extends Node {
     }
 
     // Update the genotype abbreviation, must be disposed
-    //TODO https://github.com/phetsims/natural-selection/issues/319 string DerivedProperty is not instrumented because we decided not to instrument PedigreeBunnyNode - verify
+    // Not instrumented because we decided not to instrument PedigreeBunnyNode.
     const genotypeNodeDerivedStringProperty = new DerivedProperty(
       [
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty,
@@ -88,7 +89,7 @@ class PedigreeBunnyNode extends Node {
     );
 
     // Genotype abbreviation
-    //TODO https://github.com/phetsims/natural-selection/issues/319 Text is not instrumented because we decided not to instrument PedigreeBunnyNode - verify
+    // Not instrumented because we decided not to instrument PedigreeBunnyNode.
     const genotypeNode = new Text( genotypeNodeDerivedStringProperty, {
       visibleProperty: genotypeNodeVisibleProperty,
       font: GENOTYPE_FONT,
