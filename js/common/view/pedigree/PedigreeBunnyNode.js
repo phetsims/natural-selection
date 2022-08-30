@@ -24,6 +24,7 @@ import OriginNode from '../OriginNode.js';
 // constants
 const GENOTYPE_FONT = new PhetFont( 16 );
 const DEAD_SYMBOL_FONT = new PhetFont( 20 );
+const UNICODE_RED_CROSS_MARK = '\u274c';
 
 class PedigreeBunnyNode extends Node {
 
@@ -69,6 +70,7 @@ class PedigreeBunnyNode extends Node {
     }
 
     // Update the genotype abbreviation, must be disposed
+    //TODO https://github.com/phetsims/natural-selection/issues/319 string DerivedProperty is not instrumented because we decided not to instrument PedigreeBunnyNode - verify
     const genotypeNodeDerivedStringProperty = new DerivedProperty(
       [
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty,
@@ -86,6 +88,7 @@ class PedigreeBunnyNode extends Node {
     );
 
     // Genotype abbreviation
+    //TODO https://github.com/phetsims/natural-selection/issues/319 Text is not instrumented because we decided not to instrument PedigreeBunnyNode - verify
     const genotypeNode = new Text( genotypeNodeDerivedStringProperty, {
       visibleProperty: genotypeNodeVisibleProperty,
       font: GENOTYPE_FONT,
@@ -115,11 +118,10 @@ class PedigreeBunnyNode extends Node {
 
     super( options );
 
-    // Label a dead bunny with a red cross mark.
+    // Label a dead bunny with a red cross mark.  This Text node does not take a string Property because it
+    // displays a static symbol that is not translatable.
     const addRedCrossMark = () => {
-
-      //TODO https://github.com/phetsims/natural-selection/issues/319 cannot instrument Text because we decided not to instrument PedigreeBunnyNode, verify
-      this.addChild( new Text( '\u274c', {
+      this.addChild( new Text( UNICODE_RED_CROSS_MARK, {
         font: DEAD_SYMBOL_FONT,
         right: bunnyNode.centerX,
         bottom: bunnyNode.centerY
