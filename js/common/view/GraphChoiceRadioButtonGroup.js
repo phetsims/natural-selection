@@ -45,13 +45,13 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
     }, options );
 
     // Workaround for making the Text nodes appear to be children of the radio buttons
+    //TODO https://github.com/phetsims/sun/issues/746 replace this with a better API for AquaRadioButtonGroup
     const populationRadioButtonTandemName = 'populationRadioButton';
     const proportionsRadioButtonTandemName = 'proportionsRadioButton';
     const pedigreeRadioButtonTandemName = 'pedigreeRadioButton';
     const noneRadioButtonTandemName = 'noneRadioButton';
 
     // Create the description of the buttons
-    //TOD https://github.com/phetsims/sun/issues/746 replace this with a better API for AquaRadioButtonGroup
     const items = [
 
       // Population
