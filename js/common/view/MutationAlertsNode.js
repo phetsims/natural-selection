@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Tandem from '../../../../tandem/js/Tandem.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import { Node } from '../../../../scenery/js/imports.js';
@@ -29,10 +30,15 @@ class MutationAlertsNode extends Node {
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
     assert && assert( addMutationsPanel instanceof AddMutationsPanel, 'invalid addMutationsPanel' );
 
-    options = merge( {}, options );
+    options = merge( {
+      tandem: Tandem.REQUIRED,
+      phetioVisiblePropertyInstrumented: false
+    }, options );
 
     // Create a MutationComingNode (aka 'alert') for each gene
-    const mutationComingNodes = _.map( genePool.genes, gene => new MutationComingNode( gene ) );
+    const mutationComingNodes = _.map( genePool.genes, gene => new MutationComingNode( gene, {
+      tandem: options.tandem.createTandem( `${gene.tandemPrefix}MutationComingNode` )
+    } ) );
     assert && assert( !options.children, 'MutationAlertsNode sets children' );
     options.children = mutationComingNodes;
 

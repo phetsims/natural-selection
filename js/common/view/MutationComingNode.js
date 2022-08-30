@@ -8,6 +8,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import { HBox, Node, Path, Text } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -30,16 +32,20 @@ class MutationComingNode extends Node {
   constructor( gene, options ) {
     assert && assert( gene instanceof Gene, 'invalid gene' );
 
-    options = options || {};
+    options = merge( {
+      tandem: Tandem.REQUIRED,
+      visiblePropertyOptions: { phetioReadOnly: true }
+    }, options );
 
     const cancelButton = new CancelMutationButton( {
       listener: () => gene.cancelMutation()
     } );
 
-    //TODO https://github.com/phetsims/natural-selection/issues/319 cannot instrument Text because we decided not to instrument MutationComingNode, verify
     const textNode = new Text( naturalSelectionStrings.mutationComingStringProperty, {
       font: NaturalSelectionConstants.MUTATION_COMING_FONT,
-      maxWidth: 200 // determined empirically
+      maxWidth: 128, // determined empirically
+      tandem: options.tandem.createTandem( 'textNode' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     const hBox = new HBox( {

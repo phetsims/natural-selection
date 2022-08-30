@@ -90,7 +90,9 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
 
     // Displays the 'Mutation Coming...' alerts
-    const mutationAlertsNode = new MutationAlertsNode( model.genePool, addMutationsPanel );
+    const mutationAlertsNode = new MutationAlertsNode( model.genePool, addMutationsPanel, {
+      tandem: options.tandem.createTandem( 'mutationAlertsNode' )
+    } );
 
     // The graphs and their related controls fill the space below the viewport.
     const graphAreaSize = new Dimension2(
