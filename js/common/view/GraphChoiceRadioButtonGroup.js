@@ -51,6 +51,7 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
     const noneRadioButtonTandemName = 'noneRadioButton';
 
     // Create the description of the buttons
+    //TOD https://github.com/phetsims/sun/issues/746 replace this with a better API for AquaRadioButtonGroup
     const items = [
 
       // Population
