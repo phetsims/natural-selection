@@ -23,11 +23,6 @@ import HatchingRectangle from '../HatchingRectangle.js';
 // constants
 const PERCENTAGE_FONT = new PhetFont( 12 );
 
-//TODO https://github.com/phetsims/chipper/issues/1314 using these Properties inline causes a build error
-const greaterThanValuePercentProperty = naturalSelectionStrings.greaterThanValuePercentStringProperty;
-const lessThanValuePercentProperty = naturalSelectionStrings.lessThanValuePercentStringProperty;
-const valuePercentProperty = naturalSelectionStrings.valuePercentStringProperty;
-
 class ProportionsBarNode extends Node {
 
   /**
@@ -157,8 +152,8 @@ class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.01 * this.barWidth;
 
       // > 99% non-mutant, < 1% mutant
-      this.normalPercentageNode.text = StringUtils.fillIn( greaterThanValuePercentProperty.value, { value: 99 } );
-      this.mutantPercentageNode.text = StringUtils.fillIn( lessThanValuePercentProperty.value, { value: 1 } );
+      this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
+      this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
     }
     else if ( normalPercentage > 0 && normalPercentage < 1 ) {
 
@@ -166,8 +161,8 @@ class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.99 * this.barWidth;
 
       // < 1% non-mutant, > 99% mutant
-      this.normalPercentageNode.text = StringUtils.fillIn( lessThanValuePercentProperty.value, { value: 1 } );
-      this.mutantPercentageNode.text = StringUtils.fillIn( greaterThanValuePercentProperty.value, { value: 99 } );
+      this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
+      this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
     }
     else {
 
@@ -179,10 +174,10 @@ class ProportionsBarNode extends Node {
       }
 
       // round both percentages to the nearest integer
-      this.normalPercentageNode.text = StringUtils.fillIn( valuePercentProperty.value, {
+      this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercentStringProperty.value, {
         value: Utils.roundSymmetric( normalPercentage )
       } );
-      this.mutantPercentageNode.text = StringUtils.fillIn( valuePercentProperty.value, {
+      this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercentStringProperty.value, {
         value: Utils.roundSymmetric( mutantPercentage )
       } );
     }
