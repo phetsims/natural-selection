@@ -44,50 +44,43 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
       tandem: Tandem.REQUIRED
     }, options );
 
-    // Workaround for making the Text nodes appear to be children of the radio buttons
-    //TODO https://github.com/phetsims/sun/issues/746 replace this with a better API for AquaRadioButtonGroup
-    const populationRadioButtonTandemName = 'populationRadioButton';
-    const proportionsRadioButtonTandemName = 'proportionsRadioButton';
-    const pedigreeRadioButtonTandemName = 'pedigreeRadioButton';
-    const noneRadioButtonTandemName = 'noneRadioButton';
-
     // Create the description of the buttons
     const items = [
 
       // Population
       {
         value: GraphChoice.POPULATION,
-        node: new Text( naturalSelectionStrings.populationStringProperty, merge( {
-          tandem: options.tandem.createTandem( populationRadioButtonTandemName ).createTandem( 'textNode' )
+        createNode: tandem => new Text( naturalSelectionStrings.populationStringProperty, merge( {
+          tandem: tandem.createTandem( 'textNode' )
         }, TEXT_OPTIONS ) ),
-        tandemName: populationRadioButtonTandemName
+        tandemName: 'populationRadioButton'
       },
 
       // Proportions
       {
         value: GraphChoice.PROPORTIONS,
-        node: new Text( naturalSelectionStrings.proportionsStringProperty, merge( {
-          tandem: options.tandem.createTandem( proportionsRadioButtonTandemName ).createTandem( 'textNode' )
+        createNode: tandem => new Text( naturalSelectionStrings.proportionsStringProperty, merge( {
+          tandem: tandem.createTandem( 'textNode' )
         }, TEXT_OPTIONS ) ),
-        tandemName: proportionsRadioButtonTandemName
+        tandemName: 'proportionsRadioButton'
       },
 
       // Pedigree
       {
         value: GraphChoice.PEDIGREE,
-        node: new Text( naturalSelectionStrings.pedigreeStringProperty, merge( {
-          tandem: options.tandem.createTandem( pedigreeRadioButtonTandemName ).createTandem( 'textNode' )
+        createNode: tandem => new Text( naturalSelectionStrings.pedigreeStringProperty, merge( {
+          tandem: tandem.createTandem( 'textNode' )
         }, TEXT_OPTIONS ) ),
-        tandemName: pedigreeRadioButtonTandemName
+        tandemName: 'pedigreeRadioButton'
       },
 
       // None
       {
         value: GraphChoice.NONE,
-        node: new Text( naturalSelectionStrings.noneStringProperty, merge( {
-          tandem: options.tandem.createTandem( noneRadioButtonTandemName ).createTandem( 'textNode' )
+        createNode: tandem => new Text( naturalSelectionStrings.noneStringProperty, merge( {
+          tandem: tandem.createTandem( 'textNode' )
         }, TEXT_OPTIONS ) ),
-        tandemName: noneRadioButtonTandemName
+        tandemName: 'noneRadioButton'
       }
     ];
 
