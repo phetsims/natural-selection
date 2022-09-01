@@ -68,11 +68,11 @@ class ProportionsBarNode extends Node {
     };
     const normalPercentageNode = new Text( '', merge( {}, percentageOptions, {
       tandem: options.tandem.createTandem( 'normalPercentageNode' ),
-      phetioReadOnly: true
+      phetioVisiblePropertyInstrumented: false
     } ) );
     const mutantPercentageNode = new Text( '', merge( {}, percentageOptions, {
       tandem: options.tandem.createTandem( 'mutantPercentageNode' ),
-      phetioReadOnly: true
+      phetioVisiblePropertyInstrumented: false
     } ) );
 
     assert && assert( !options.children, 'ProportionsBarNode sets children' );

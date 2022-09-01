@@ -53,7 +53,8 @@ class AllelesPanel extends NaturalSelectionPanel {
     const titleNode = new Text( naturalSelectionStrings.allelesStringProperty, {
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 125, // determined empirically
-      tandem: options.tandem.createTandem( 'titleNode' )
+      tandem: options.tandem.createTandem( 'titleNode' ),
+      phetioVisiblePropertyInstrumented: false
     } );
 
     // A row for each gene
