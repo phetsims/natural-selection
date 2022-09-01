@@ -8,12 +8,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import PatternStringProperty from '../../../../phetcommon/js/util/PatternStringProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Circle, Node, Path, Text } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -77,15 +76,12 @@ class GenerationClockNode extends Node {
 
     // The current generation number, displayed below the circle.
     const generationNumberNodeTandem = options.tandem.createTandem( 'generationNumberNode' );
-    const generationDerivedStringProperty = new DerivedProperty(
-      [ generationClock.clockGenerationProperty, naturalSelectionStrings.generationValueStringProperty ],
-      ( clockGeneration, generationValueString ) =>
-        StringUtils.fillIn( generationValueString, {
-          value: clockGeneration
-        } ), {
-        tandem: generationNumberNodeTandem.createTandem( 'textProperty' ),
-        phetioValueType: StringIO
-      } );
+    const generationDerivedStringProperty = new PatternStringProperty( naturalSelectionStrings.generationValueStringProperty, {
+      value: generationClock.clockGenerationProperty
+    }, {
+      tandem: generationNumberNodeTandem.createTandem( 'textProperty' ),
+      phetioValueType: StringIO
+    } );
     const generationNumberNode = new Text( generationDerivedStringProperty, {
       font: GENERATION_FONT,
       fill: 'black',
