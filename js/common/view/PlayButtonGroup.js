@@ -159,7 +159,7 @@ class TextPushButton extends RectangularPushButton {
     assert && assert( !options.content, 'TextPushButton sets content' );
     assert && assert( !options.textOptions.tandem, 'TextPushButton sets textOptions.tandem' );
     options.content = new Text( stringProperty, merge( {}, options.textOptions, {
-      tandem: options.tandem.createTandem( 'textNode' )
+      tandem: options.tandem.createTandem( 'labelText' )
     } ) );
 
     super( options );

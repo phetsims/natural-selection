@@ -60,16 +60,16 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
     // Individual column headings
     const mutationIconNode = new MutationIconNode();
-    const dominantColumnLabel = new Text( naturalSelectionStrings.dominantStringProperty, {
+    const dominantColumnText = new Text( naturalSelectionStrings.dominantStringProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
       maxWidth: 60, // determined empirically
-      tandem: options.tandem.createTandem( 'dominantColumnLabel' ),
+      tandem: options.tandem.createTandem( 'dominantColumnText' ),
       phetioVisiblePropertyInstrumented: false
     } );
-    const recessiveColumnLabel = new Text( naturalSelectionStrings.recessiveStringProperty, {
+    const recessiveColumnText = new Text( naturalSelectionStrings.recessiveStringProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
       maxWidth: 60, // determined empirically
-      tandem: options.tandem.createTandem( 'recessiveColumnLabel' ),
+      tandem: options.tandem.createTandem( 'recessiveColumnText' ),
       phetioVisiblePropertyInstrumented: false
     } );
 
@@ -78,8 +78,8 @@ class AddMutationsPanel extends NaturalSelectionPanel {
       spacing: COLUMN_SPACING,
       children: [
         new AlignBox( mutationIconNode, { group: labelColumnAlignGroup, xAlign: LABEL_COLUMN_X_ALIGN } ),
-        new AlignBox( dominantColumnLabel, { group: buttonColumnsAlignGroup, xAlign: BUTTON_COLUMNS_X_ALIGN } ),
-        new AlignBox( recessiveColumnLabel, { group: buttonColumnsAlignGroup, xAlign: BUTTON_COLUMNS_X_ALIGN } )
+        new AlignBox( dominantColumnText, { group: buttonColumnsAlignGroup, xAlign: BUTTON_COLUMNS_X_ALIGN } ),
+        new AlignBox( recessiveColumnText, { group: buttonColumnsAlignGroup, xAlign: BUTTON_COLUMNS_X_ALIGN } )
       ]
     } );
 
@@ -186,13 +186,13 @@ class Row extends HBox {
     }, options );
 
     // label that indicates the gene, to the left of the push buttons
-    const geneNameNode = new Text( gene.nameProperty, {
+    const geneNameText = new Text( gene.nameProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_GENE_FONT,
       maxWidth: 50, // determined empirically
-      tandem: options.tandem.createTandem( 'geneNameNode' ),
+      tandem: options.tandem.createTandem( 'geneNameText' ),
       phetioVisiblePropertyInstrumented: false
     } );
-    const geneNameNodeWrapper = new AlignBox( geneNameNode, {
+    const geneNameTextWrapper = new AlignBox( geneNameText, {
       group: labelColumnAlignGroup,
       xAlign: LABEL_COLUMN_X_ALIGN
     } );
@@ -236,7 +236,7 @@ class Row extends HBox {
 
     assert && assert( !options.children, 'Row sets children' );
     options.children = [
-      geneNameNodeWrapper,
+      geneNameTextWrapper,
       new Node( {
         children: [
           new AlignBox( dominantAlleleIcon, alignBoxOptions ),

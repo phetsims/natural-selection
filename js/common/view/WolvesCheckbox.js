@@ -39,10 +39,10 @@ class WolvesCheckbox extends EnvironmentalFactorCheckbox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const textNode = new Text( naturalSelectionStrings.wolvesStringProperty, {
+    const labelText = new Text( naturalSelectionStrings.wolvesStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 110, // determined empirically
-      tandem: options.tandem.createTandem( 'textNode' ),
+      tandem: options.tandem.createTandem( 'labelText' ),
       phetioVisiblePropertyInstrumented: false
     } );
 
@@ -51,7 +51,7 @@ class WolvesCheckbox extends EnvironmentalFactorCheckbox {
     icon.setScaleMagnitude( -scale, scale ); // reflect so the wolf is facing left
 
     const labelNode = new HBox( {
-      children: [ textNode, icon ],
+      children: [ labelText, icon ],
       spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING
     } );
 

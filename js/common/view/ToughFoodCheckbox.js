@@ -39,10 +39,10 @@ class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const textNode = new Text( naturalSelectionStrings.toughFoodStringProperty, {
+    const labelText = new Text( naturalSelectionStrings.toughFoodStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 110, // determined empirically
-      tandem: options.tandem.createTandem( 'textNode' ),
+      tandem: options.tandem.createTandem( 'labelText' ),
       phetioVisiblePropertyInstrumented: false
     } );
 
@@ -51,7 +51,7 @@ class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
     } );
 
     const labelNode = new HBox( {
-      children: [ textNode, icon ],
+      children: [ labelText, icon ],
       spacing: NaturalSelectionConstants.CHECKBOX_X_SPACING
     } );
 

@@ -72,7 +72,7 @@ class PedigreeBunnyNode extends Node {
 
     // Update the genotype abbreviation, must be disposed
     // Not instrumented because we decided not to instrument PedigreeBunnyNode.
-    const genotypeNodeDerivedStringProperty = new DerivedProperty(
+    const genotypeDerivedStringProperty = new DerivedProperty(
       [
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty,
         ...bunny.genotype.getAbbreviationStringDependencies()
@@ -82,7 +82,7 @@ class PedigreeBunnyNode extends Node {
     );
 
     // Must be disposed
-    const genotypeNodeVisibleProperty = new DerivedProperty(
+    const genotypeTextVisibleProperty = new DerivedProperty(
       [ furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty ],
       ( furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) =>
         ( furAllelesVisible || earsAllelesVisible || teethAllelesVisible )
@@ -90,17 +90,17 @@ class PedigreeBunnyNode extends Node {
 
     // Genotype abbreviation
     // Not instrumented because we decided not to instrument PedigreeBunnyNode.
-    const genotypeNode = new Text( genotypeNodeDerivedStringProperty, {
-      visibleProperty: genotypeNodeVisibleProperty,
+    const genotypeText = new Text( genotypeDerivedStringProperty, {
+      visibleProperty: genotypeTextVisibleProperty,
       font: GENOTYPE_FONT,
       maxWidth: bunnyNode.width
     } );
-    children.push( genotypeNode );
+    children.push( genotypeText );
 
     // Center the genotype abbreviation above the bunny.
-    genotypeNode.boundsProperty.link( () => {
-      genotypeNode.centerX = bunnyNode.centerX;
-      genotypeNode.top = bunnyNode.bottom + 5;
+    genotypeText.boundsProperty.link( () => {
+      genotypeText.centerX = bunnyNode.centerX;
+      genotypeText.top = bunnyNode.bottom + 5;
     } );
 
     // Optional selection rectangle, prepended to children
@@ -139,8 +139,8 @@ class PedigreeBunnyNode extends Node {
 
     // @private {function}
     this.disposePedigreeBunnyNode = () => {
-      genotypeNodeDerivedStringProperty.dispose();
-      genotypeNodeVisibleProperty.dispose();
+      genotypeDerivedStringProperty.dispose();
+      genotypeTextVisibleProperty.dispose();
       if ( bunny.diedEmitter.hasListener( addRedCrossMark ) ) {
         bunny.diedEmitter.removeListener( addRedCrossMark );
       }

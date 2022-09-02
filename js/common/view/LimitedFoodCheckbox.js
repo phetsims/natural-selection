@@ -38,14 +38,14 @@ class LimitedFoodCheckbox extends EnvironmentalFactorCheckbox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const textNode = new Text( naturalSelectionStrings.limitedFoodStringProperty, {
+    const labelText = new Text( naturalSelectionStrings.limitedFoodStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 150, // determined empirically
-      tandem: options.tandem.createTandem( 'textNode' ),
+      tandem: options.tandem.createTandem( 'labelText' ),
       phetioVisiblePropertyInstrumented: false
     } );
 
-    super( limitedFoodProperty, textNode, alignGroup, options );
+    super( limitedFoodProperty, labelText, alignGroup, options );
   }
 }
 

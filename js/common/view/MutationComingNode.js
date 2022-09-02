@@ -41,16 +41,16 @@ class MutationComingNode extends Node {
       listener: () => gene.cancelMutation()
     } );
 
-    const textNode = new Text( naturalSelectionStrings.mutationComingStringProperty, {
+    const labelText = new Text( naturalSelectionStrings.mutationComingStringProperty, {
       font: NaturalSelectionConstants.MUTATION_COMING_FONT,
       maxWidth: 128, // determined empirically
-      tandem: options.tandem.createTandem( 'textNode' ),
+      tandem: options.tandem.createTandem( 'labelText' ),
       phetioVisiblePropertyInstrumented: false
     } );
 
     const hBox = new HBox( {
       spacing: 6,
-      children: [ cancelButton, textNode ]
+      children: [ cancelButton, labelText ]
     } );
 
     const backgroundWidth = hBox.width + 2 * X_MARGIN;

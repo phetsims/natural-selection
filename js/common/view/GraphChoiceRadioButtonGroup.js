@@ -51,7 +51,7 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
       {
         value: GraphChoice.POPULATION,
         createNode: tandem => new Text( naturalSelectionStrings.populationStringProperty, merge( {
-          tandem: tandem.createTandem( 'textNode' )
+          tandem: tandem.createTandem( 'labelText' )
         }, TEXT_OPTIONS ) ),
         tandemName: 'populationRadioButton'
       },
@@ -60,7 +60,7 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
       {
         value: GraphChoice.PROPORTIONS,
         createNode: tandem => new Text( naturalSelectionStrings.proportionsStringProperty, merge( {
-          tandem: tandem.createTandem( 'textNode' )
+          tandem: tandem.createTandem( 'labelText' )
         }, TEXT_OPTIONS ) ),
         tandemName: 'proportionsRadioButton'
       },
@@ -69,7 +69,7 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
       {
         value: GraphChoice.PEDIGREE,
         createNode: tandem => new Text( naturalSelectionStrings.pedigreeStringProperty, merge( {
-          tandem: tandem.createTandem( 'textNode' )
+          tandem: tandem.createTandem( 'labelText' )
         }, TEXT_OPTIONS ) ),
         tandemName: 'pedigreeRadioButton'
       },
@@ -78,7 +78,7 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
       {
         value: GraphChoice.NONE,
         createNode: tandem => new Text( naturalSelectionStrings.noneStringProperty, merge( {
-          tandem: tandem.createTandem( 'textNode' )
+          tandem: tandem.createTandem( 'labelText' )
         }, TEXT_OPTIONS ) ),
         tandemName: 'noneRadioButton'
       }
