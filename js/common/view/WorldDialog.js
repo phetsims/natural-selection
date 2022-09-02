@@ -38,18 +38,18 @@ class WorldDialog extends Dialog {
       scale: 0.8 // determined empirically
     } );
 
-    const textNode = new Text( naturalSelectionStrings.bunniesHaveTakenOverTheWorldStringProperty, {
+    const messageText = new Text( naturalSelectionStrings.bunniesHaveTakenOverTheWorldStringProperty, {
       font: NaturalSelectionConstants.DIALOG_FONT,
       fill: 'white',
       maxWidth: worldNode.width,
-      tandem: options.tandem.createTandem( 'textNode' ),
+      tandem: options.tandem.createTandem( 'messageText' ),
       phetioVisiblePropertyInstrumented: false
     } );
 
     const content = new VBox( {
       spacing: 25,
       align: 'center',
-      children: [ textNode, worldNode ]
+      children: [ messageText, worldNode ]
     } );
 
     super( content, options );
