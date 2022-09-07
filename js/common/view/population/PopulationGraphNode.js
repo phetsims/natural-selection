@@ -14,7 +14,7 @@ import PlusMinusZoomButtonGroup from '../../../../../scenery-phet/js/PlusMinusZo
 import { Node, Rectangle, Text } from '../../../../../scenery/js/imports.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
-import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import DataProbeNode from './DataProbeNode.js';
@@ -57,7 +57,7 @@ class PopulationGraphNode extends Node {
       } );
 
     // y-axis (Population) label
-    const yAxisLabelNode = new Text( naturalSelectionStrings.populationStringProperty, {
+    const yAxisLabelNode = new Text( NaturalSelectionStrings.populationStringProperty, {
       font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
       rotation: -Math.PI / 2,
       maxWidth: 90, // determined empirically
@@ -107,7 +107,7 @@ class PopulationGraphNode extends Node {
       tandem: options.tandem.createTandem( 'dataProbeNode' )
     } );
 
-    const zoomOutToSeeDataText = new Text( naturalSelectionStrings.zoomOutToSeeDataStringProperty, {
+    const zoomOutToSeeDataText = new Text( NaturalSelectionStrings.zoomOutToSeeDataStringProperty, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
       maxWidth: 0.75 * gridWidth,
       centerX: gridNode.x + gridWidth / 2,

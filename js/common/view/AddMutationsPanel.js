@@ -16,7 +16,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import Gene from '../model/Gene.js';
 import GenePool from '../model/GenePool.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
@@ -60,13 +60,13 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
     // Individual column headings
     const mutationIconNode = new MutationIconNode();
-    const dominantColumnText = new Text( naturalSelectionStrings.dominantStringProperty, {
+    const dominantColumnText = new Text( NaturalSelectionStrings.dominantStringProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
       maxWidth: 60, // determined empirically
       tandem: options.tandem.createTandem( 'dominantColumnText' ),
       phetioVisiblePropertyInstrumented: false
     } );
-    const recessiveColumnText = new Text( naturalSelectionStrings.recessiveStringProperty, {
+    const recessiveColumnText = new Text( NaturalSelectionStrings.recessiveStringProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
       maxWidth: 60, // determined empirically
       tandem: options.tandem.createTandem( 'recessiveColumnText' ),
@@ -418,8 +418,8 @@ class TitleNode extends Text {
 
     const textProperty = new DerivedProperty( [
         numberOfRowsVisibleProperty,
-        naturalSelectionStrings.addMutationStringProperty,
-        naturalSelectionStrings.addMutationsStringProperty
+        NaturalSelectionStrings.addMutationStringProperty,
+        NaturalSelectionStrings.addMutationsStringProperty
       ],
       ( numberOfRowsVisible, addMutationString, addMutationsString ) =>
         ( numberOfRowsVisible === 1 ) ? addMutationString : addMutationsString, {

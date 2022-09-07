@@ -12,7 +12,7 @@ import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import { Node, Rectangle, Text } from '../../../../../scenery/js/imports.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
-import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
@@ -58,7 +58,7 @@ class PedigreeGraphNode extends Node {
     } );
 
     // 'Select a Bunny' is displayed when there is no selected bunny.
-    const selectABunnyText = new Text( naturalSelectionStrings.selectABunnyStringProperty, {
+    const selectABunnyText = new Text( NaturalSelectionStrings.selectABunnyStringProperty, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
       centerX: backgroundNode.centerX,
       centerY: backgroundNode.top + ( backgroundNode.height / 6 ),

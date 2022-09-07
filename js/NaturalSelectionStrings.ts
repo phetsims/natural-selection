@@ -70,8 +70,8 @@ type StringsType = {
   'memoryLimitMessageStringProperty': TReadOnlyProperty<string>;
 };
 
-const naturalSelectionStrings = getStringModule( 'NATURAL_SELECTION' ) as StringsType;
+const NaturalSelectionStrings = getStringModule( 'NATURAL_SELECTION' ) as StringsType;
 
-naturalSelection.register( 'naturalSelectionStrings', naturalSelectionStrings );
+naturalSelection.register( 'NaturalSelectionStrings', NaturalSelectionStrings );
 
-export default naturalSelectionStrings;
+export default NaturalSelectionStrings;

@@ -17,7 +17,7 @@ import { Image } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import bunnyBrownFurStraightEarsLongTeeth_png from '../../../images/bunnyBrownFurStraightEarsLongTeeth_png.js';
 import naturalSelection from '../../naturalSelection.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
 // constants
@@ -47,7 +47,7 @@ class MemoryLimitDialog extends OopsDialog {
       phetioDocumentation: 'This dialog is displayed when the sim has reached its memory limit.'
     }, options );
 
-    super( naturalSelectionStrings.memoryLimitMessageStringProperty, options );
+    super( NaturalSelectionStrings.memoryLimitMessageStringProperty, options );
   }
 }
 

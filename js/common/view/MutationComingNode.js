@@ -13,7 +13,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import { HBox, Node, Path, Text } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import Gene from '../model/Gene.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import CancelMutationButton from './CancelMutationButton.js';
@@ -41,7 +41,7 @@ class MutationComingNode extends Node {
       listener: () => gene.cancelMutation()
     } );
 
-    const labelText = new Text( naturalSelectionStrings.mutationComingStringProperty, {
+    const labelText = new Text( NaturalSelectionStrings.mutationComingStringProperty, {
       font: NaturalSelectionConstants.MUTATION_COMING_FONT,
       maxWidth: 128, // determined empirically
       tandem: options.tandem.createTandem( 'labelText' ),

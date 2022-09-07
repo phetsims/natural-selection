@@ -13,7 +13,7 @@ import Dialog from '../../../../sun/js/Dialog.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import world_png from '../../../images/world_png.js';
 import naturalSelection from '../../naturalSelection.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
 class WorldDialog extends Dialog {
@@ -38,7 +38,7 @@ class WorldDialog extends Dialog {
       scale: 0.8 // determined empirically
     } );
 
-    const messageText = new Text( naturalSelectionStrings.bunniesHaveTakenOverTheWorldStringProperty, {
+    const messageText = new Text( NaturalSelectionStrings.bunniesHaveTakenOverTheWorldStringProperty, {
       font: NaturalSelectionConstants.DIALOG_FONT,
       fill: 'white',
       maxWidth: worldNode.width,

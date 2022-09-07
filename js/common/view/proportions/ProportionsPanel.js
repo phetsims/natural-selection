@@ -13,7 +13,7 @@ import Checkbox from '../../../../../sun/js/Checkbox.js';
 import HSeparator from '../../../../../sun/js/HSeparator.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
-import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import GenePool from '../../model/GenePool.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
@@ -51,7 +51,7 @@ class ProportionsPanel extends NaturalSelectionPanel {
 
     // Values checkbox, shows/hides values on the bars
     const valuesCheckboxTandem = options.tandem.createTandem( 'valuesCheckbox' );
-    const valuesCheckboxLabelNode = new Text( naturalSelectionStrings.valuesStringProperty, {
+    const valuesCheckboxLabelNode = new Text( NaturalSelectionStrings.valuesStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 100, // determined empirically
       tandem: valuesCheckboxTandem.createTandem( 'textNode' ),

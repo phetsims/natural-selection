@@ -12,7 +12,7 @@ import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { AlignGroup, HBox, Image, Text } from '../../../../scenery/js/imports.js';
 import wolf_png from '../../../images/wolf_png.js';
 import naturalSelection from '../../naturalSelection.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import EnvironmentalFactorCheckbox from './EnvironmentalFactorCheckbox.js';
@@ -39,7 +39,7 @@ class WolvesCheckbox extends EnvironmentalFactorCheckbox {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const labelText = new Text( naturalSelectionStrings.wolvesStringProperty, {
+    const labelText = new Text( NaturalSelectionStrings.wolvesStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 110, // determined empirically
       tandem: options.tandem.createTandem( 'labelText' ),

@@ -19,7 +19,7 @@ import { HBox, Text } from '../../../../../scenery/js/imports.js';
 import ArrowButton from '../../../../../sun/js/buttons/ArrowButton.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
-import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
 class PopulationGenerationScroller extends HBox {
@@ -52,7 +52,7 @@ class PopulationGenerationScroller extends HBox {
     const rangeLength = rangeProperty.value.getLength();
 
     // label
-    const labelNode = new Text( naturalSelectionStrings.generationStringProperty, {
+    const labelNode = new Text( NaturalSelectionStrings.generationStringProperty, {
       font: options.font,
       maxWidth: 250, // determined empirically
       tandem: options.tandem.createTandem( 'labelNode' ),

@@ -24,7 +24,7 @@ import shortTeeth_png from '../../../images/shortTeeth_png.js';
 import straightEars_png from '../../../images/straightEars_png.js';
 import whiteFur_png from '../../../images/whiteFur_png.js';
 import naturalSelection from '../../naturalSelection.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 
 class Allele extends PhetioObject {
 
@@ -84,27 +84,27 @@ Allele.AlleleIO = new IOType( 'AlleleIO', {
 // tandem for all static instances of Allele
 const ALLELES_TANDEM = Tandem.GLOBAL_MODEL.createTandem( 'alleles' );
 
-Allele.WHITE_FUR = new Allele( naturalSelectionStrings.whiteFurStringProperty, whiteFur_png, 'whiteFur', {
+Allele.WHITE_FUR = new Allele( NaturalSelectionStrings.whiteFurStringProperty, whiteFur_png, 'whiteFur', {
   tandem: ALLELES_TANDEM.createTandem( 'whiteFurAllele' )
 } );
 
-Allele.BROWN_FUR = new Allele( naturalSelectionStrings.brownFurStringProperty, brownFur_png, 'brownFur', {
+Allele.BROWN_FUR = new Allele( NaturalSelectionStrings.brownFurStringProperty, brownFur_png, 'brownFur', {
   tandem: ALLELES_TANDEM.createTandem( 'brownFurAllele' )
 } );
 
-Allele.FLOPPY_EARS = new Allele( naturalSelectionStrings.floppyEarsStringProperty, floppyEars_png, 'floppyEars', {
+Allele.FLOPPY_EARS = new Allele( NaturalSelectionStrings.floppyEarsStringProperty, floppyEars_png, 'floppyEars', {
   tandem: ALLELES_TANDEM.createTandem( 'floppyEarsAllele' )
 } );
 
-Allele.STRAIGHT_EARS = new Allele( naturalSelectionStrings.straightEarsStringProperty, straightEars_png, 'straightEars', {
+Allele.STRAIGHT_EARS = new Allele( NaturalSelectionStrings.straightEarsStringProperty, straightEars_png, 'straightEars', {
   tandem: ALLELES_TANDEM.createTandem( 'straightEarsAllele' )
 } );
 
-Allele.SHORT_TEETH = new Allele( naturalSelectionStrings.shortTeethStringProperty, shortTeeth_png, 'shortTeeth', {
+Allele.SHORT_TEETH = new Allele( NaturalSelectionStrings.shortTeethStringProperty, shortTeeth_png, 'shortTeeth', {
   tandem: ALLELES_TANDEM.createTandem( 'shortTeethAllele' )
 } );
 
-Allele.LONG_TEETH = new Allele( naturalSelectionStrings.longTeethStringProperty, longTeeth_png, 'longTeeth', {
+Allele.LONG_TEETH = new Allele( NaturalSelectionStrings.longTeethStringProperty, longTeeth_png, 'longTeeth', {
   tandem: ALLELES_TANDEM.createTandem( 'longTeethAllele' )
 } );
 

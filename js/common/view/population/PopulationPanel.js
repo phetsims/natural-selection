@@ -12,7 +12,7 @@ import Checkbox from '../../../../../sun/js/Checkbox.js';
 import HSeparator from '../../../../../sun/js/HSeparator.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
-import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
@@ -48,7 +48,7 @@ class PopulationPanel extends NaturalSelectionPanel {
 
     // Total checkbox
     const totalCheckbox =
-      new PopulationLegendCheckbox( populationModel.totalVisibleProperty, naturalSelectionStrings.totalStringProperty, alignGroup, {
+      new PopulationLegendCheckbox( populationModel.totalVisibleProperty, NaturalSelectionStrings.totalStringProperty, alignGroup, {
         lineColor: NaturalSelectionColors.POPULATION_TOTAL_COUNT,
         tandem: options.tandem.createTandem( 'totalCheckbox' )
       } );
@@ -126,7 +126,7 @@ class PopulationPanel extends NaturalSelectionPanel {
 
     // Data Probe checkbox
     const dataProbeCheckboxTandem = options.tandem.createTandem( 'dataProbeCheckbox' );
-    const labelNode = new Text( naturalSelectionStrings.dataProbeStringProperty, {
+    const labelNode = new Text( NaturalSelectionStrings.dataProbeStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 135, // determined empirically
       tandem: dataProbeCheckboxTandem.createTandem( 'labelNode' ),

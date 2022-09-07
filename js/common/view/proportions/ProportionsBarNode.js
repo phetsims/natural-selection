@@ -16,7 +16,7 @@ import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import { Color, Node, Rectangle, Text } from '../../../../../scenery/js/imports.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
-import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import HatchingRectangle from '../HatchingRectangle.js';
 
@@ -94,9 +94,9 @@ class ProportionsBarNode extends Node {
     // unlink is not necessary.
     Multilink.multilink( [
         this.valuesVisibleProperty,
-        naturalSelectionStrings.greaterThanValuePercentStringProperty,
-        naturalSelectionStrings.lessThanValuePercentStringProperty,
-        naturalSelectionStrings.valuePercentStringProperty
+        NaturalSelectionStrings.greaterThanValuePercentStringProperty,
+        NaturalSelectionStrings.lessThanValuePercentStringProperty,
+        NaturalSelectionStrings.valuePercentStringProperty
       ],
       () => this.updateProportionsBarNode()
     );
@@ -152,8 +152,8 @@ class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.01 * this.barWidth;
 
       // > 99% non-mutant, < 1% mutant
-      this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
-      this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
+      this.normalPercentageNode.text = StringUtils.fillIn( NaturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
+      this.mutantPercentageNode.text = StringUtils.fillIn( NaturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
     }
     else if ( normalPercentage > 0 && normalPercentage < 1 ) {
 
@@ -161,8 +161,8 @@ class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.99 * this.barWidth;
 
       // < 1% non-mutant, > 99% mutant
-      this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
-      this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
+      this.normalPercentageNode.text = StringUtils.fillIn( NaturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
+      this.mutantPercentageNode.text = StringUtils.fillIn( NaturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
     }
     else {
 
@@ -174,10 +174,10 @@ class ProportionsBarNode extends Node {
       }
 
       // round both percentages to the nearest integer
-      this.normalPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercentStringProperty.value, {
+      this.normalPercentageNode.text = StringUtils.fillIn( NaturalSelectionStrings.valuePercentStringProperty.value, {
         value: Utils.roundSymmetric( normalPercentage )
       } );
-      this.mutantPercentageNode.text = StringUtils.fillIn( naturalSelectionStrings.valuePercentStringProperty.value, {
+      this.mutantPercentageNode.text = StringUtils.fillIn( NaturalSelectionStrings.valuePercentStringProperty.value, {
         value: Utils.roundSymmetric( mutantPercentage )
       } );
     }

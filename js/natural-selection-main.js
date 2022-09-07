@@ -12,7 +12,7 @@ import { Utils } from '../../scenery/js/imports.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import IntroScreen from './intro/IntroScreen.js';
 import LabScreen from './lab/LabScreen.js';
-import naturalSelectionStrings from './naturalSelectionStrings.js';
+import NaturalSelectionStrings from './NaturalSelectionStrings.js';
 
 simLauncher.launch( () => {
 
@@ -21,7 +21,7 @@ simLauncher.launch( () => {
     new LabScreen( Tandem.ROOT.createTandem( 'labScreen' ) )
   ];
 
-  const sim = new Sim( naturalSelectionStrings[ 'natural-selection' ].titleStringProperty, screens, {
+  const sim = new Sim( NaturalSelectionStrings[ 'natural-selection' ].titleStringProperty, screens, {
 
     // OrganismSprites uses WebGL, with a fallback of Canvas.
     // See https://github.com/phetsims/natural-selection/issues/128

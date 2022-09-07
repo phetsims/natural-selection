@@ -12,7 +12,7 @@ import { Text } from '../../../../scenery/js/imports.js';
 import VerticalAquaRadioButtonGroup from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import GraphChoice from './GraphChoice.js';
 
@@ -50,7 +50,7 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
       // Population
       {
         value: GraphChoice.POPULATION,
-        createNode: tandem => new Text( naturalSelectionStrings.populationStringProperty, merge( {
+        createNode: tandem => new Text( NaturalSelectionStrings.populationStringProperty, merge( {
           tandem: tandem.createTandem( 'labelText' )
         }, TEXT_OPTIONS ) ),
         tandemName: 'populationRadioButton'
@@ -59,7 +59,7 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
       // Proportions
       {
         value: GraphChoice.PROPORTIONS,
-        createNode: tandem => new Text( naturalSelectionStrings.proportionsStringProperty, merge( {
+        createNode: tandem => new Text( NaturalSelectionStrings.proportionsStringProperty, merge( {
           tandem: tandem.createTandem( 'labelText' )
         }, TEXT_OPTIONS ) ),
         tandemName: 'proportionsRadioButton'
@@ -68,7 +68,7 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
       // Pedigree
       {
         value: GraphChoice.PEDIGREE,
-        createNode: tandem => new Text( naturalSelectionStrings.pedigreeStringProperty, merge( {
+        createNode: tandem => new Text( NaturalSelectionStrings.pedigreeStringProperty, merge( {
           tandem: tandem.createTandem( 'labelText' )
         }, TEXT_OPTIONS ) ),
         tandemName: 'pedigreeRadioButton'
@@ -77,7 +77,7 @@ class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {
       // None
       {
         value: GraphChoice.NONE,
-        createNode: tandem => new Text( naturalSelectionStrings.noneStringProperty, merge( {
+        createNode: tandem => new Text( NaturalSelectionStrings.noneStringProperty, merge( {
           tandem: tandem.createTandem( 'labelText' )
         }, TEXT_OPTIONS ) ),
         tandemName: 'noneRadioButton'

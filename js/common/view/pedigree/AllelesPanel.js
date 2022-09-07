@@ -17,7 +17,7 @@ import { AlignBox, AlignGroup, HBox, HStrut, Image, Text, VBox } from '../../../
 import Checkbox from '../../../../../sun/js/Checkbox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
-import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
@@ -50,7 +50,7 @@ class AllelesPanel extends NaturalSelectionPanel {
     const alleleAlignGroup = new AlignGroup();
 
     // Alleles - title is plural, since we're always showing at least 2 alleles
-    const titleNode = new Text( naturalSelectionStrings.allelesStringProperty, {
+    const titleNode = new Text( NaturalSelectionStrings.allelesStringProperty, {
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 125, // determined empirically
       tandem: options.tandem.createTandem( 'titleNode' ),

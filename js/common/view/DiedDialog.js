@@ -12,7 +12,7 @@ import { Text } from '../../../../scenery/js/imports.js';
 import Dialog from '../../../../sun/js/Dialog.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
 class DiedDialog extends Dialog {
@@ -32,7 +32,7 @@ class DiedDialog extends Dialog {
       phetioDocumentation: 'This dialog is displayed when all of the bunnies have died.'
     }, options );
 
-    const messageText = new Text( naturalSelectionStrings.allOfTheBunniesHaveDiedStringProperty, {
+    const messageText = new Text( NaturalSelectionStrings.allOfTheBunniesHaveDiedStringProperty, {
       font: NaturalSelectionConstants.DIALOG_FONT,
       maxWidth: 450, // determined empirically
       tandem: options.tandem.createTandem( 'messageText' ),

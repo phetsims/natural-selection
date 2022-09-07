@@ -11,7 +11,7 @@ import merge from '../../../../../phet-core/js/merge.js';
 import NumberSpinner from '../../../../../sun/js/NumberSpinner.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
-import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
 class ProportionsGenerationSpinner extends NumberSpinner {
@@ -35,7 +35,7 @@ class ProportionsGenerationSpinner extends NumberSpinner {
       mouseAreaXDilation: 10,
       mouseAreaYDilation: 5,
       numberDisplayOptions: {
-        valuePattern: naturalSelectionStrings.generationValueStringProperty,
+        valuePattern: NaturalSelectionStrings.generationValueStringProperty,
         align: 'center',
         xMargin: 0,
         yMargin: 0,

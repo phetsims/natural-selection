@@ -15,7 +15,7 @@ import { Node, Text } from '../../../../scenery/js/imports.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import SimulationMode from '../model/SimulationMode.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -44,7 +44,7 @@ class PlayButtonGroup extends Node {
     }, options );
 
     // 'Add a Mate' push button, for when the initial population consists of a single bunny.
-    const addAMateButton = new TextPushButton( naturalSelectionStrings.addAMateStringProperty, {
+    const addAMateButton = new TextPushButton( NaturalSelectionStrings.addAMateStringProperty, {
       listener: () => {
         options.addAMate();
         simulationModeProperty.value = SimulationMode.ACTIVE;
@@ -53,7 +53,7 @@ class PlayButtonGroup extends Node {
     } );
 
     // 'Play' push button, for when the initial population consists of more than one bunny.
-    const playButton = new TextPushButton( naturalSelectionStrings.playStringProperty, {
+    const playButton = new TextPushButton( NaturalSelectionStrings.playStringProperty, {
       listener: () => {
         options.play();
         simulationModeProperty.value = SimulationMode.ACTIVE;
@@ -63,7 +63,7 @@ class PlayButtonGroup extends Node {
 
     // 'Start Over' push button, displayed after the game ends (bunnie take over the world, or all bunnies die),
     // while the user is reviewing the final state.
-    const startOverButton = new TextPushButton( naturalSelectionStrings.startOverStringProperty, {
+    const startOverButton = new TextPushButton( NaturalSelectionStrings.startOverStringProperty, {
       listener: () => {
         options.startOver();
         simulationModeProperty.value = SimulationMode.STAGED;

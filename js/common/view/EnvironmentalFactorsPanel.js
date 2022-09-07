@@ -15,7 +15,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import LimitedFoodCheckbox from './LimitedFoodCheckbox.js';
 import NaturalSelectionPanel from './NaturalSelectionPanel.js';
@@ -114,8 +114,8 @@ class TitleNode extends Text {
 
     const textProperty = new DerivedProperty( [
       numberOfCheckboxesVisibleProperty,
-      naturalSelectionStrings.environmentalFactorStringProperty,
-      naturalSelectionStrings.environmentalFactorsStringProperty
+      NaturalSelectionStrings.environmentalFactorStringProperty,
+      NaturalSelectionStrings.environmentalFactorsStringProperty
     ], ( numberOfCheckboxesVisible, environmentalFactor, environmentalFactors ) =>
       ( numberOfCheckboxesVisible === 1 ) ? environmentalFactor : environmentalFactors, {
       tandem: options.tandem.createTandem( 'textProperty' ),

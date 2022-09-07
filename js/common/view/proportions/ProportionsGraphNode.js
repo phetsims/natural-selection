@@ -19,7 +19,7 @@ import Checkbox from '../../../../../sun/js/Checkbox.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import StringIO from '../../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../../naturalSelection.js';
-import naturalSelectionStrings from '../../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
 import ProportionsModel from '../../model/ProportionsModel.js';
@@ -74,7 +74,7 @@ class ProportionsGraphNode extends Node {
     const labelsColumnTandem = columnsTandem.createTandem( 'labelsColumn' );
 
     // 'Start of Generation...'
-    const startRowLabel = new RowLabel( naturalSelectionStrings.startOfGenerationStringProperty, startCounts.totalCount, {
+    const startRowLabel = new RowLabel( NaturalSelectionStrings.startOfGenerationStringProperty, startCounts.totalCount, {
       tandem: labelsColumnTandem.createTandem( 'startRowLabel' )
     } );
 
@@ -82,8 +82,8 @@ class ProportionsGraphNode extends Node {
     const endRowLabelTandem = labelsColumnTandem.createTandem( 'endRowLabel' );
     const endRowTopTextDerivedProperty = new DerivedProperty( [
       proportionsModel.isDisplayingCurrentGenerationProperty,
-      naturalSelectionStrings.currentlyStringProperty,
-      naturalSelectionStrings.endOfGenerationStringProperty
+      NaturalSelectionStrings.currentlyStringProperty,
+      NaturalSelectionStrings.endOfGenerationStringProperty
     ], ( isDisplayingCurrentGeneration, currentlyString, endOfGenerationString ) =>
       isDisplayingCurrentGeneration ? currentlyString : endOfGenerationString, {
       tandem: endRowLabelTandem.createTandem( 'textProperty' ),
@@ -170,7 +170,7 @@ class ProportionsGraphNode extends Node {
     } );
 
     // 'No Data', visible when we have no data to display.
-    const noDataText = new Text( naturalSelectionStrings.noDataStringProperty, {
+    const noDataText = new Text( NaturalSelectionStrings.noDataStringProperty, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
       centerX: backgroundNode.centerX,
       centerY: backgroundNode.top + ( backgroundNode.height / 6 ),
@@ -289,8 +289,8 @@ class RowLabel extends VBox {
     const secondLineOfTextTandem = options.tandem.createTandem( 'secondLineOfText' );
     const secondLineOfTextDerivedStringProperty = new DerivedProperty( [
       countProperty,
-      naturalSelectionStrings.oneBunnyStringProperty,
-      naturalSelectionStrings.countBunniesStringProperty
+      NaturalSelectionStrings.oneBunnyStringProperty,
+      NaturalSelectionStrings.countBunniesStringProperty
     ], ( count, oneBunnyString, countBunniesString ) =>
       ( count === 1 ) ? oneBunnyString : StringUtils.fillIn( countBunniesString, { count: count } ), {
       tandem: secondLineOfTextTandem.createTandem( 'textProperty' ),

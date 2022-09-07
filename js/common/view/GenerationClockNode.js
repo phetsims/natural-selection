@@ -18,7 +18,7 @@ import { Circle, Node, Path, Text } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import GenerationClock from '../model/GenerationClock.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -76,7 +76,7 @@ class GenerationClockNode extends Node {
 
     // The current generation number, displayed below the circle.
     const generationNumberNodeTandem = options.tandem.createTandem( 'generationNumberNode' );
-    const generationDerivedStringProperty = new PatternStringProperty( naturalSelectionStrings.generationValueStringProperty, {
+    const generationDerivedStringProperty = new PatternStringProperty( NaturalSelectionStrings.generationValueStringProperty, {
       value: generationClock.clockGenerationProperty
     }, {
       tandem: generationNumberNodeTandem.createTandem( 'textProperty' ),

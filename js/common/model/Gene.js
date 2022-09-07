@@ -31,7 +31,7 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import naturalSelectionStrings from '../../naturalSelectionStrings.js';
+import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import Allele from './Allele.js';
 
@@ -171,14 +171,14 @@ class Gene extends PhetioObject {
    */
   static createFurGene( tandem ) {
     return new Gene( {
-      nameProperty: naturalSelectionStrings.furStringProperty,
+      nameProperty: NaturalSelectionStrings.furStringProperty,
       tandemPrefix: 'fur',
       normalAllele: Allele.WHITE_FUR,
       mutantAllele: Allele.BROWN_FUR,
       dominantAbbreviationEnglish: 'F',
-      dominantAbbreviationTranslatedProperty: naturalSelectionStrings.furDominantStringProperty,
+      dominantAbbreviationTranslatedProperty: NaturalSelectionStrings.furDominantStringProperty,
       recessiveAbbreviationEnglish: 'f',
-      recessiveAbbreviationTranslatedProperty: naturalSelectionStrings.furRecessiveStringProperty,
+      recessiveAbbreviationTranslatedProperty: NaturalSelectionStrings.furRecessiveStringProperty,
       color: NaturalSelectionColors.FUR,
       tandem: tandem
     } );
@@ -192,14 +192,14 @@ class Gene extends PhetioObject {
    */
   static createEarsGene( tandem ) {
     return new Gene( {
-      nameProperty: naturalSelectionStrings.earsStringProperty,
+      nameProperty: NaturalSelectionStrings.earsStringProperty,
       tandemPrefix: 'ears',
       normalAllele: Allele.STRAIGHT_EARS,
       mutantAllele: Allele.FLOPPY_EARS,
       dominantAbbreviationEnglish: 'E',
-      dominantAbbreviationTranslatedProperty: naturalSelectionStrings.earsDominantStringProperty,
+      dominantAbbreviationTranslatedProperty: NaturalSelectionStrings.earsDominantStringProperty,
       recessiveAbbreviationEnglish: 'e',
-      recessiveAbbreviationTranslatedProperty: naturalSelectionStrings.earsRecessiveStringProperty,
+      recessiveAbbreviationTranslatedProperty: NaturalSelectionStrings.earsRecessiveStringProperty,
       color: NaturalSelectionColors.EARS,
       tandem: tandem
     } );
@@ -213,14 +213,14 @@ class Gene extends PhetioObject {
    */
   static createTeethGene( tandem ) {
     return new Gene( {
-      nameProperty: naturalSelectionStrings.teethStringProperty,
+      nameProperty: NaturalSelectionStrings.teethStringProperty,
       tandemPrefix: 'teeth',
       normalAllele: Allele.SHORT_TEETH,
       mutantAllele: Allele.LONG_TEETH,
       dominantAbbreviationEnglish: 'T',
-      dominantAbbreviationTranslatedProperty: naturalSelectionStrings.teethDominantStringProperty,
+      dominantAbbreviationTranslatedProperty: NaturalSelectionStrings.teethDominantStringProperty,
       recessiveAbbreviationEnglish: 't',
-      recessiveAbbreviationTranslatedProperty: naturalSelectionStrings.teethRecessiveStringProperty,
+      recessiveAbbreviationTranslatedProperty: NaturalSelectionStrings.teethRecessiveStringProperty,
       color: NaturalSelectionColors.TEETH,
       tandem: tandem
     } );
