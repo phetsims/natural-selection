@@ -61,8 +61,7 @@ class PopulationGraphNode extends Node {
       font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
       rotation: -Math.PI / 2,
       maxWidth: 90, // determined empirically
-      tandem: options.tandem.createTandem( 'yAxisLabelNode' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'yAxisLabelNode' )
     } );
 
     // Wrap yAxisLabelNode because we'll be observing its boundsProperty.
@@ -112,8 +111,7 @@ class PopulationGraphNode extends Node {
       maxWidth: 0.75 * gridWidth,
       centerX: gridNode.x + gridWidth / 2,
       centerY: gridNode.y + gridHeight / 2,
-      tandem: options.tandem.createTandem( 'zoomOutToSeeDataText' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'zoomOutToSeeDataText' )
     } );
 
     assert && assert( !options.children, 'PopulationGraphNode sets children' );

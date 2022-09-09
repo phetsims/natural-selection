@@ -175,8 +175,7 @@ class ProportionsGraphNode extends Node {
       centerX: backgroundNode.centerX,
       centerY: backgroundNode.top + ( backgroundNode.height / 6 ),
       maxWidth: 0.5 * backgroundNode.width,
-      tandem: options.tandem.createTandem( 'noDataText' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'noDataText' )
     } );
 
     assert && assert( !options.children, 'ProportionGraphNode sets children' );
@@ -281,8 +280,7 @@ class RowLabel extends VBox {
 
     // The first line of text indicates which generation the data is related to.
     const firstLineOfText = new Text( firstLineStringProperty, merge( {
-      tandem: options.tandem.createTandem( 'firstLineOfText' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'firstLineOfText' )
     }, textOptions ) );
 
     // The second line of text shows the count of bunnies.
@@ -297,8 +295,7 @@ class RowLabel extends VBox {
       phetioValueType: StringIO
     } );
     const secondLineOfText = new Text( secondLineOfTextDerivedStringProperty, merge( {
-      tandem: secondLineOfTextTandem,
-      phetioVisiblePropertyInstrumented: false
+      tandem: secondLineOfTextTandem
     }, textOptions ) );
 
     assert && assert( !options.children, 'RowLabel sets children' );
@@ -362,8 +359,7 @@ class Column extends VBox {
     const textNode = new Text( gene.nameProperty, {
       font: COLUMN_LABEL_FONT,
       maxWidth: 100, // determined empirically
-      tandem: checkboxTandem.createTandem( 'textNode' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: checkboxTandem.createTandem( 'textNode' )
     } );
     const checkbox = new Checkbox( geneVisibleProperty, textNode, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
       tandem: checkboxTandem

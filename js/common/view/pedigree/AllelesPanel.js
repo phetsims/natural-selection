@@ -53,8 +53,7 @@ class AllelesPanel extends NaturalSelectionPanel {
     const titleNode = new Text( NaturalSelectionStrings.allelesStringProperty, {
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 125, // determined empirically
-      tandem: options.tandem.createTandem( 'titleNode' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'titleNode' )
     } );
 
     // A row for each gene
@@ -142,8 +141,7 @@ class Row extends VBox {
     const textNode = new Text( gene.nameProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 100, // determined empirically
-      tandem: checkboxTandem.createTandem( 'textNode' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: checkboxTandem.createTandem( 'textNode' )
     } );
 
     const checkbox = new Checkbox( visibleProperty, textNode, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
@@ -259,8 +257,7 @@ class AlleleNode extends HBox {
     const textNode = new Text( abbreviationProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 12, // determined empirically
-      tandem: options.tandem.createTandem( 'textNode' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'textNode' )
     } );
 
     const imageNode = new Image( image, {

@@ -42,8 +42,7 @@ class WorldDialog extends Dialog {
       font: NaturalSelectionConstants.DIALOG_FONT,
       fill: 'white',
       maxWidth: worldNode.width,
-      tandem: options.tandem.createTandem( 'messageText' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'messageText' )
     } );
 
     const content = new VBox( {

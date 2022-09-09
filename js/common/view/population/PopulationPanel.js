@@ -129,8 +129,7 @@ class PopulationPanel extends NaturalSelectionPanel {
     const labelNode = new Text( NaturalSelectionStrings.dataProbeStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 135, // determined empirically
-      tandem: dataProbeCheckboxTandem.createTandem( 'labelNode' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: dataProbeCheckboxTandem.createTandem( 'labelNode' )
     } );
     const dataProbeCheckboxContent = new AlignBox( labelNode, {
       group: alignGroup,

@@ -19,8 +19,7 @@ import GraphChoice from './GraphChoice.js';
 // constants
 const TEXT_OPTIONS = {
   font: NaturalSelectionConstants.RADIO_BUTTON_FONT,
-  maxWidth: 175, // determined empirically
-  phetioVisiblePropertyInstrumented: false
+  maxWidth: 175 // determined empirically
 };
 
 class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButtonGroup {

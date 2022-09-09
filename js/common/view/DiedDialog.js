@@ -35,8 +35,7 @@ class DiedDialog extends Dialog {
     const messageText = new Text( NaturalSelectionStrings.allOfTheBunniesHaveDiedStringProperty, {
       font: NaturalSelectionConstants.DIALOG_FONT,
       maxWidth: 450, // determined empirically
-      tandem: options.tandem.createTandem( 'messageText' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'messageText' )
     } );
 
     super( messageText, options );

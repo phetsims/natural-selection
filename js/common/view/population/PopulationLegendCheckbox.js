@@ -52,8 +52,7 @@ class PopulationLegendCheckbox extends Checkbox {
     const labelNode = new Text( labelStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 100, // determined empirically
-      tandem: options.tandem.createTandem( 'labelNode' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'labelNode' )
     } );
 
     const hBox = new HBox( {

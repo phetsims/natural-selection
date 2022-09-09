@@ -143,8 +143,7 @@ class TextPushButton extends RectangularPushButton {
     options = merge( {
       textOptions: {
         font: NaturalSelectionConstants.PUSH_BUTTON_FONT,
-        maxWidth: 150, // determined empirically
-        phetioVisiblePropertyInstrumented: false // so client can't hide the button label
+        maxWidth: 150 // determined empirically
       },
       baseColor: NaturalSelectionColors.PLAY_BUTTON,
       cornerRadius: 5,

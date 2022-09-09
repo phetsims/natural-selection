@@ -176,8 +176,7 @@ class AlleleLegendNode extends HBox {
     const textNode = new Text( alleleNameProperty, {
       font: NaturalSelectionConstants.PROPORTIONS_LEGEND_FONT,
       maxWidth: 92, // determined empirically
-      tandem: options.tandem.createTandem( 'textNode' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'textNode' )
     } );
 
     assert && assert( !options.children, 'AlleleLegendNode sets children' );

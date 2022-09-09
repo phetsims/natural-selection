@@ -44,8 +44,7 @@ class MutationComingNode extends Node {
     const labelText = new Text( NaturalSelectionStrings.mutationComingStringProperty, {
       font: NaturalSelectionConstants.MUTATION_COMING_FONT,
       maxWidth: 128, // determined empirically
-      tandem: options.tandem.createTandem( 'labelText' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'labelText' )
     } );
 
     const hBox = new HBox( {

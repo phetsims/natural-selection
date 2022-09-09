@@ -54,8 +54,7 @@ class ProportionsPanel extends NaturalSelectionPanel {
     const valuesCheckboxLabelNode = new Text( NaturalSelectionStrings.valuesStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 100, // determined empirically
-      tandem: valuesCheckboxTandem.createTandem( 'textNode' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: valuesCheckboxTandem.createTandem( 'textNode' )
     } );
     const valuesCheckbox = new Checkbox( valuesVisibleProperty, valuesCheckboxLabelNode, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
       tandem: valuesCheckboxTandem
