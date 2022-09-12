@@ -66,23 +66,23 @@ class ProportionsBarNode extends Node {
       bottom: -4,
       maxWidth: 40 // determined empirically
     };
-    const normalPercentageNode = new Text( '', merge( {}, percentageOptions, {
-      tandem: options.tandem.createTandem( 'normalPercentageNode' )
+    const normalPercentageText = new Text( '', merge( {}, percentageOptions, {
+      tandem: options.tandem.createTandem( 'normalPercentageText' )
     } ) );
-    const mutantPercentageNode = new Text( '', merge( {}, percentageOptions, {
-      tandem: options.tandem.createTandem( 'mutantPercentageNode' )
+    const mutantPercentageText = new Text( '', merge( {}, percentageOptions, {
+      tandem: options.tandem.createTandem( 'mutantPercentageText' )
     } ) );
 
     assert && assert( !options.children, 'ProportionsBarNode sets children' );
-    options.children = [ normalRectangle, mutantRectangle, normalPercentageNode, mutantPercentageNode ];
+    options.children = [ normalRectangle, mutantRectangle, normalPercentageText, mutantPercentageText ];
 
     super( options );
 
     // @private
     this.normalRectangle = normalRectangle;
     this.mutantRectangle = mutantRectangle;
-    this.normalPercentageNode = normalPercentageNode;
-    this.mutantPercentageNode = mutantPercentageNode;
+    this.normalPercentageText = normalPercentageText;
+    this.mutantPercentageText = mutantPercentageText;
     this.barWidth = options.barWidth;
     this.normalCount = normalCount;
     this.mutantCount = mutantCount;
@@ -140,8 +140,8 @@ class ProportionsBarNode extends Node {
     this.mutantRectangle.visible = ( mutantPercentage > 0 );
 
     // hide N% values, when values are not visible, or when values are zero
-    this.normalPercentageNode.visible = ( this.valuesVisibleProperty.value && normalPercentage > 0 );
-    this.mutantPercentageNode.visible = ( this.valuesVisibleProperty.value && mutantPercentage > 0 );
+    this.normalPercentageText.visible = ( this.valuesVisibleProperty.value && normalPercentage > 0 );
+    this.mutantPercentageText.visible = ( this.valuesVisibleProperty.value && mutantPercentage > 0 );
 
     // update the mutant portion of the bar and the N% values
     if ( mutantPercentage > 0 && mutantPercentage < 1 ) {
@@ -150,8 +150,8 @@ class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.01 * this.barWidth;
 
       // > 99% non-mutant, < 1% mutant
-      this.normalPercentageNode.text = StringUtils.fillIn( NaturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
-      this.mutantPercentageNode.text = StringUtils.fillIn( NaturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
+      this.normalPercentageText.text = StringUtils.fillIn( NaturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
+      this.mutantPercentageText.text = StringUtils.fillIn( NaturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
     }
     else if ( normalPercentage > 0 && normalPercentage < 1 ) {
 
@@ -159,8 +159,8 @@ class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.99 * this.barWidth;
 
       // < 1% non-mutant, > 99% mutant
-      this.normalPercentageNode.text = StringUtils.fillIn( NaturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
-      this.mutantPercentageNode.text = StringUtils.fillIn( NaturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
+      this.normalPercentageText.text = StringUtils.fillIn( NaturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
+      this.mutantPercentageText.text = StringUtils.fillIn( NaturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
     }
     else {
 
@@ -172,10 +172,10 @@ class ProportionsBarNode extends Node {
       }
 
       // round both percentages to the nearest integer
-      this.normalPercentageNode.text = StringUtils.fillIn( NaturalSelectionStrings.valuePercentStringProperty.value, {
+      this.normalPercentageText.text = StringUtils.fillIn( NaturalSelectionStrings.valuePercentStringProperty.value, {
         value: Utils.roundSymmetric( normalPercentage )
       } );
-      this.mutantPercentageNode.text = StringUtils.fillIn( NaturalSelectionStrings.valuePercentStringProperty.value, {
+      this.mutantPercentageText.text = StringUtils.fillIn( NaturalSelectionStrings.valuePercentStringProperty.value, {
         value: Utils.roundSymmetric( mutantPercentage )
       } );
     }
@@ -183,25 +183,25 @@ class ProportionsBarNode extends Node {
 
     // center N% above its portion of the bar
     if ( normalPercentage > 0 ) {
-      this.normalPercentageNode.centerX = ( normalPercentage / 100 ) * ( this.barWidth / 2 );
+      this.normalPercentageText.centerX = ( normalPercentage / 100 ) * ( this.barWidth / 2 );
     }
     if ( mutantPercentage > 0 ) {
-      this.mutantPercentageNode.centerX = this.barWidth - ( ( mutantPercentage / 100 ) * ( this.barWidth / 2 ) );
+      this.mutantPercentageText.centerX = this.barWidth - ( ( mutantPercentage / 100 ) * ( this.barWidth / 2 ) );
     }
 
     // horizontally constrain N% to left and right edges of bars
-    if ( this.normalPercentageNode.left < this.normalRectangle.left ) {
-      this.normalPercentageNode.left = this.normalRectangle.left;
+    if ( this.normalPercentageText.left < this.normalRectangle.left ) {
+      this.normalPercentageText.left = this.normalRectangle.left;
     }
-    else if ( this.normalPercentageNode.right > this.normalRectangle.right ) {
-      this.normalPercentageNode.right = this.normalRectangle.right;
+    else if ( this.normalPercentageText.right > this.normalRectangle.right ) {
+      this.normalPercentageText.right = this.normalRectangle.right;
     }
 
-    if ( this.mutantPercentageNode.left < this.normalRectangle.left ) {
-      this.mutantPercentageNode.left = this.normalRectangle.left;
+    if ( this.mutantPercentageText.left < this.normalRectangle.left ) {
+      this.mutantPercentageText.left = this.normalRectangle.left;
     }
-    else if ( this.mutantPercentageNode.right > this.normalRectangle.right ) {
-      this.mutantPercentageNode.right = this.normalRectangle.right;
+    else if ( this.mutantPercentageText.right > this.normalRectangle.right ) {
+      this.mutantPercentageText.right = this.normalRectangle.right;
     }
   }
 }

@@ -100,13 +100,13 @@ class AddMutationsPanel extends NaturalSelectionPanel {
       } );
 
     // title
-    const titleNode = new TitleNode( numberOfRowsVisibleProperty, {
-      tandem: options.tandem.createTandem( 'titleNode' )
+    const titleText = new TitleNode( numberOfRowsVisibleProperty, {
+      tandem: options.tandem.createTandem( 'titleText' )
     } );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       spacing: 2,
-      children: [ titleNode, columnHeadingsNode, vBox ]
+      children: [ titleText, columnHeadingsNode, vBox ]
     } ) );
 
     super( content, options );

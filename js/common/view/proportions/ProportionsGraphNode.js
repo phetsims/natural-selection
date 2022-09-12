@@ -356,12 +356,12 @@ class Column extends VBox {
 
     // Checkbox to hide the column
     const checkboxTandem = options.tandem.createTandem( 'checkbox' );
-    const textNode = new Text( gene.nameProperty, {
+    const text = new Text( gene.nameProperty, {
       font: COLUMN_LABEL_FONT,
       maxWidth: 100, // determined empirically
-      tandem: checkboxTandem.createTandem( 'textNode' )
+      tandem: checkboxTandem.createTandem( 'text' )
     } );
-    const checkbox = new Checkbox( geneVisibleProperty, textNode, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+    const checkbox = new Checkbox( geneVisibleProperty, text, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
       tandem: checkboxTandem
     } ) );
 

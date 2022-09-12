@@ -173,14 +173,14 @@ class AlleleLegendNode extends HBox {
                           new HatchingRectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, rectangleOptions ) :
                           new Rectangle( 0, 0, RECTANGLE_WIDTH, RECTANGLE_HEIGHT, rectangleOptions );
 
-    const textNode = new Text( alleleNameProperty, {
+    const text = new Text( alleleNameProperty, {
       font: NaturalSelectionConstants.PROPORTIONS_LEGEND_FONT,
       maxWidth: 92, // determined empirically
-      tandem: options.tandem.createTandem( 'textNode' )
+      tandem: options.tandem.createTandem( 'text' )
     } );
 
     assert && assert( !options.children, 'AlleleLegendNode sets children' );
-    options.children = [ rectangleNode, textNode ];
+    options.children = [ rectangleNode, text ];
 
     super( options );
   }

@@ -75,29 +75,29 @@ class GenerationClockNode extends Node {
     } );
 
     // The current generation number, displayed below the circle.
-    const generationNumberNodeTandem = options.tandem.createTandem( 'generationNumberNode' );
+    const generationNumberTextTandem = options.tandem.createTandem( 'generationNumberText' );
     const generationDerivedStringProperty = new PatternStringProperty( NaturalSelectionStrings.generationValueStringProperty, {
       value: generationClock.clockGenerationProperty
     }, {
-      tandem: generationNumberNodeTandem.createTandem( 'textProperty' ),
+      tandem: generationNumberTextTandem.createTandem( 'textProperty' ),
       phetioValueType: StringIO
     } );
-    const generationNumberNode = new Text( generationDerivedStringProperty, {
+    const generationNumberText = new Text( generationDerivedStringProperty, {
       font: GENERATION_FONT,
       fill: 'black',
       top: circle.bottom + 3,
       maxWidth: 100, // determined empirically
-      tandem: generationNumberNodeTandem
+      tandem: generationNumberTextTandem
     } );
 
     // Keep the generation number centered below the circular part of the clock.
-    generationNumberNode.boundsProperty.link( () => {
-      generationNumberNode.centerX = circle.centerX;
+    generationNumberText.boundsProperty.link( () => {
+      generationNumberText.centerX = circle.centerX;
     } );
 
     // Layering order is important here!
     assert && assert( !options.children, 'GenerationClockNode sets children' );
-    options.children = [ circle, foodSliceNode, wolvesSliceNode, revealArc, rimNode, generationNumberNode ];
+    options.children = [ circle, foodSliceNode, wolvesSliceNode, revealArc, rimNode, generationNumberText ];
 
     super( options );
 

@@ -126,12 +126,12 @@ class PopulationPanel extends NaturalSelectionPanel {
 
     // Data Probe checkbox
     const dataProbeCheckboxTandem = options.tandem.createTandem( 'dataProbeCheckbox' );
-    const labelNode = new Text( NaturalSelectionStrings.dataProbeStringProperty, {
+    const labelText = new Text( NaturalSelectionStrings.dataProbeStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 135, // determined empirically
-      tandem: dataProbeCheckboxTandem.createTandem( 'labelNode' )
+      tandem: dataProbeCheckboxTandem.createTandem( 'labelText' )
     } );
-    const dataProbeCheckboxContent = new AlignBox( labelNode, {
+    const dataProbeCheckboxContent = new AlignBox( labelText, {
       group: alignGroup,
       xAlign: 'left'
     } );

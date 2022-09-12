@@ -49,15 +49,15 @@ class PopulationLegendCheckbox extends Checkbox {
     } );
 
     // text label
-    const labelNode = new Text( labelStringProperty, {
+    const labelText = new Text( labelStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 100, // determined empirically
-      tandem: options.tandem.createTandem( 'labelNode' )
+      tandem: options.tandem.createTandem( 'labelText' )
     } );
 
     const hBox = new HBox( {
       spacing: 5,
-      children: [ lineNode, labelNode ]
+      children: [ lineNode, labelText ]
     } );
 
     const content = new AlignBox( hBox, {

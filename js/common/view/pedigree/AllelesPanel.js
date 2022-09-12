@@ -50,10 +50,10 @@ class AllelesPanel extends NaturalSelectionPanel {
     const alleleAlignGroup = new AlignGroup();
 
     // Alleles - title is plural, since we're always showing at least 2 alleles
-    const titleNode = new Text( NaturalSelectionStrings.allelesStringProperty, {
+    const titleText = new Text( NaturalSelectionStrings.allelesStringProperty, {
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 125, // determined empirically
-      tandem: options.tandem.createTandem( 'titleNode' )
+      tandem: options.tandem.createTandem( 'titleText' )
     } );
 
     // A row for each gene
@@ -70,7 +70,7 @@ class AllelesPanel extends NaturalSelectionPanel {
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       spacing: 28,
-      children: [ titleNode, ...rows ]
+      children: [ titleText, ...rows ]
     } ) );
 
     super( content, options );
@@ -138,13 +138,13 @@ class Row extends VBox {
 
     const checkboxTandem = options.tandem.createTandem( 'checkbox' );
 
-    const textNode = new Text( gene.nameProperty, {
+    const text = new Text( gene.nameProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 100, // determined empirically
-      tandem: checkboxTandem.createTandem( 'textNode' )
+      tandem: checkboxTandem.createTandem( 'text' )
     } );
 
-    const checkbox = new Checkbox( visibleProperty, textNode, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+    const checkbox = new Checkbox( visibleProperty, text, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
       tandem: checkboxTandem
     } ) );
     const xDilation = 8;
@@ -254,10 +254,10 @@ class AlleleNode extends HBox {
       phetioVisiblePropertyInstrumented: false
     }, options );
 
-    const textNode = new Text( abbreviationProperty, {
+    const text = new Text( abbreviationProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 12, // determined empirically
-      tandem: options.tandem.createTandem( 'textNode' )
+      tandem: options.tandem.createTandem( 'text' )
     } );
 
     const imageNode = new Image( image, {
@@ -265,7 +265,7 @@ class AlleleNode extends HBox {
     } );
 
     assert && assert( !options.children, 'AlleleNode sets children' );
-    options.children = [ textNode, imageNode ];
+    options.children = [ text, imageNode ];
 
     super( options );
 

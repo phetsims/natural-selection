@@ -57,16 +57,16 @@ class PopulationGraphNode extends Node {
       } );
 
     // y-axis (Population) label
-    const yAxisLabelNode = new Text( NaturalSelectionStrings.populationStringProperty, {
+    const yAxisLabelText = new Text( NaturalSelectionStrings.populationStringProperty, {
       font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
       rotation: -Math.PI / 2,
       maxWidth: 90, // determined empirically
-      tandem: options.tandem.createTandem( 'yAxisLabelNode' )
+      tandem: options.tandem.createTandem( 'yAxisLabelText' )
     } );
 
-    // Wrap yAxisLabelNode because we'll be observing its boundsProperty.
-    const yAxisLabelNodeWrapper = new Node( {
-      children: [ yAxisLabelNode ]
+    // Wrap yAxisLabelText because we'll be observing its boundsProperty.
+    const yAxisLabelTextWrapper = new Node( {
+      children: [ yAxisLabelText ]
     } );
 
     // Population (y-axis) zoom buttons
@@ -118,7 +118,7 @@ class PopulationGraphNode extends Node {
     options.children = [
       boundsRectangle, gridNode,
       generationScroller,
-      yZoomButtonGroup, yAxisLabelNodeWrapper,
+      yZoomButtonGroup, yAxisLabelTextWrapper,
       plotsNode,
       zoomOutToSeeDataText,
       dataProbeNode
@@ -131,9 +131,9 @@ class PopulationGraphNode extends Node {
     } );
 
     // Center y-axis label to left of graph. unlink is not necessary.
-    yAxisLabelNode.localBoundsProperty.link( () => {
-      yAxisLabelNode.right = yZoomButtonGroup.right;
-      yAxisLabelNode.centerY = gridNode.y + ( gridHeight / 2 );
+    yAxisLabelText.localBoundsProperty.link( () => {
+      yAxisLabelText.right = yZoomButtonGroup.right;
+      yAxisLabelText.centerY = gridNode.y + ( gridHeight / 2 );
     } );
 
     // If the plot has data that is not visible, display 'Zoom out to see data.'
