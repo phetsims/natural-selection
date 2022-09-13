@@ -7,9 +7,8 @@
  */
 
 import merge from '../../../../../phet-core/js/merge.js';
-import { AlignBox, AlignGroup, Text, VBox } from '../../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, HSeparator, Text, VBox } from '../../../../../scenery/js/imports.js';
 import Checkbox from '../../../../../sun/js/Checkbox.js';
-import HSeparatorDeprecated from '../../../../../sun/js/HSeparatorDeprecated.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
@@ -119,7 +118,7 @@ class PopulationPanel extends NaturalSelectionPanel {
       children: checkboxes
     } ) );
 
-    const separator = new HSeparatorDeprecated( options.fixedWidth - 2 * options.xMargin, {
+    const separator = new HSeparator( {
       stroke: NaturalSelectionColors.SEPARATOR_STROKE,
       tandem: options.tandem.createTandem( 'separator' )
     } );
@@ -142,6 +141,7 @@ class PopulationPanel extends NaturalSelectionPanel {
     dataProbeCheckbox.mouseArea = dataProbeCheckbox.localBounds.dilatedXY( xDilation, yDilation );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+      preferredWidth: options.fixedWidth - ( 2 * options.xMargin ),
       children: [
         checkboxesVBox,
         separator,
