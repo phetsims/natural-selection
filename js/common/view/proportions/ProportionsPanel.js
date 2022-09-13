@@ -10,7 +10,7 @@ import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import { Text, VBox } from '../../../../../scenery/js/imports.js';
 import Checkbox from '../../../../../sun/js/Checkbox.js';
-import HSeparator from '../../../../../sun/js/HSeparator.js';
+import HSeparatorDeprecated from '../../../../../sun/js/HSeparatorDeprecated.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
@@ -44,7 +44,7 @@ class ProportionsPanel extends NaturalSelectionPanel {
       tandem: options.tandem.createTandem( 'legendNode' )
     } );
 
-    const separator = new HSeparator( options.fixedWidth - 2 * options.xMargin, {
+    const separator = new HSeparatorDeprecated( options.fixedWidth - 2 * options.xMargin, {
       stroke: NaturalSelectionColors.SEPARATOR_STROKE,
       tandem: options.tandem.createTandem( 'separator' )
     } );
