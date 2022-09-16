@@ -112,17 +112,17 @@ class TitleNode extends Text {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const textProperty = new DerivedProperty( [
+    const stringProperty = new DerivedProperty( [
       numberOfCheckboxesVisibleProperty,
       NaturalSelectionStrings.environmentalFactorStringProperty,
       NaturalSelectionStrings.environmentalFactorsStringProperty
     ], ( numberOfCheckboxesVisible, environmentalFactor, environmentalFactors ) =>
       ( numberOfCheckboxesVisible === 1 ) ? environmentalFactor : environmentalFactors, {
-      tandem: options.tandem.createTandem( 'textProperty' ),
+      tandem: options.tandem.createTandem( 'stringProperty' ),
       phetioValueType: StringIO
     } );
 
-    super( textProperty, options );
+    super( stringProperty, options );
   }
 
   /**

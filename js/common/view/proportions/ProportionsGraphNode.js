@@ -86,7 +86,7 @@ class ProportionsGraphNode extends Node {
       NaturalSelectionStrings.endOfGenerationStringProperty
     ], ( isDisplayingCurrentGeneration, currentlyString, endOfGenerationString ) =>
       isDisplayingCurrentGeneration ? currentlyString : endOfGenerationString, {
-      tandem: endRowLabelTandem.createTandem( 'textProperty' ),
+      tandem: endRowLabelTandem.createTandem( 'stringProperty' ),
       phetioValueType: StringIO
     } );
     const endRowLabel = new RowLabel( endRowTopTextDerivedProperty, endCounts.totalCount, {
@@ -291,7 +291,7 @@ class RowLabel extends VBox {
       NaturalSelectionStrings.countBunniesStringProperty
     ], ( count, oneBunnyString, countBunniesString ) =>
       ( count === 1 ) ? oneBunnyString : StringUtils.fillIn( countBunniesString, { count: count } ), {
-      tandem: secondLineOfTextTandem.createTandem( 'textProperty' ),
+      tandem: secondLineOfTextTandem.createTandem( 'stringProperty' ),
       phetioValueType: StringIO
     } );
     const secondLineOfText = new Text( secondLineOfTextDerivedStringProperty, merge( {

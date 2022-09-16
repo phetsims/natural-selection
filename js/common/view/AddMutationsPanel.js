@@ -413,18 +413,18 @@ class TitleNode extends Text {
       tandem: Tandem.REQUIRED
     }, options );
 
-    const textProperty = new DerivedProperty( [
+    const stringProperty = new DerivedProperty( [
         numberOfRowsVisibleProperty,
         NaturalSelectionStrings.addMutationStringProperty,
         NaturalSelectionStrings.addMutationsStringProperty
       ],
       ( numberOfRowsVisible, addMutationString, addMutationsString ) =>
         ( numberOfRowsVisible === 1 ) ? addMutationString : addMutationsString, {
-        tandem: options.tandem.createTandem( 'textProperty' ),
+        tandem: options.tandem.createTandem( 'stringProperty' ),
         phetioValueType: StringIO
       } );
 
-    super( textProperty, options );
+    super( stringProperty, options );
   }
 
   /**
