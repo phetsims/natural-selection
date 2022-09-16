@@ -115,7 +115,7 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.view.addMutationsPanel.teethRow.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.view.environmentalFactorsPanel.titleNode.visibleProperty": {
+    "naturalSelection.introScreen.view.environmentalFactorsPanel.titleText.visibleProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.introScreen.view.environmentalFactorsPanel.visibleProperty": {
@@ -352,7 +352,7 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.labScreen.view.addMutationsPanel.teethRow.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.labScreen.view.environmentalFactorsPanel.titleNode.visibleProperty": {
+    "naturalSelection.labScreen.view.environmentalFactorsPanel.titleText.visibleProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.environmentalFactorsPanel.visibleProperty": {

@@ -79,7 +79,8 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
 
     // title
     const titleText = new TitleNode( numberOfCheckboxesVisibleProperty, {
-      tandem: options.tandem.createTandem( 'titleText' )
+      tandem: options.tandem.createTandem( 'titleText' ),
+      phetioVisiblePropertyInstrumented: true
     } );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
