@@ -148,7 +148,12 @@ class Phenotype extends PhetioObject {
  * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
  * @public
  */
-Phenotype.PhenotypeIO = IOType.fromCoreType( 'PhenotypeIO', Phenotype );
+Phenotype.PhenotypeIO = new IOType( 'PhenotypeIO', {
+  valueType: Phenotype,
+  toStateObject: t => t.toStateObject(),
+  applyState: ( t, s ) => t.applyState( s ),
+  stateSchema: Phenotype.STATE_SCHEMA
+} );
 
 naturalSelection.register( 'Phenotype', Phenotype );
 export default Phenotype;
