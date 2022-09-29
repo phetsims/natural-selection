@@ -161,7 +161,7 @@ class GenePair extends PhetioObject {
   }
 
   /**
-   * Returns a map of state keys and their associated IOTypes, see IOType.fromCoreType for details.
+   * Returns a map of state keys and their associated IOTypes, see IOType for details.
    * @returns {Object.<string,IOType>}
    * @public
    */

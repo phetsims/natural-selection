@@ -395,7 +395,7 @@ class Bunny extends Organism {
   }
 
   /**
-   * Returns a function that returns a map of state keys and their associated IOTypes, see IOType.fromCoreType for details.
+   * Returns a function that returns a map of state keys and their associated IOTypes, see IOType for details.
    * @param {IOType} BunnyIO
    * @returns {function(IOType): {Object.<string,IOType>}}
    * @public
