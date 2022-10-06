@@ -79,7 +79,7 @@ class GenerationClockNode extends Node {
     const generationDerivedStringProperty = new PatternStringProperty( NaturalSelectionStrings.generationValueStringProperty, {
       value: generationClock.clockGenerationProperty
     }, {
-      tandem: generationNumberTextTandem.createTandem( 'stringProperty' ),
+      tandem: generationNumberTextTandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME ),
       phetioValueType: StringIO
     } );
     const generationNumberText = new Text( generationDerivedStringProperty, {

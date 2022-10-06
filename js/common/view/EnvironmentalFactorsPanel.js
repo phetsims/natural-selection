@@ -119,7 +119,7 @@ class TitleNode extends Text {
       NaturalSelectionStrings.environmentalFactorsStringProperty
     ], ( numberOfCheckboxesVisible, environmentalFactor, environmentalFactors ) =>
       ( numberOfCheckboxesVisible === 1 ) ? environmentalFactor : environmentalFactors, {
-      tandem: options.tandem.createTandem( 'stringProperty' ),
+      tandem: options.tandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME ),
       phetioValueType: StringIO
     } );
 

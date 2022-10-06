@@ -8,8 +8,8 @@
  */
 
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
-import ReadOnlyProperty from '../../../../../axon/js/ReadOnlyProperty.js';
 import NumberProperty from '../../../../../axon/js/NumberProperty.js';
+import ReadOnlyProperty from '../../../../../axon/js/ReadOnlyProperty.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
@@ -86,7 +86,7 @@ class ProportionsGraphNode extends Node {
       NaturalSelectionStrings.endOfGenerationStringProperty
     ], ( isDisplayingCurrentGeneration, currentlyString, endOfGenerationString ) =>
       isDisplayingCurrentGeneration ? currentlyString : endOfGenerationString, {
-      tandem: endRowLabelTandem.createTandem( 'stringProperty' ),
+      tandem: endRowLabelTandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME ),
       phetioValueType: StringIO
     } );
     const endRowLabel = new RowLabel( endRowTopTextDerivedProperty, endCounts.totalCount, {
@@ -291,7 +291,7 @@ class RowLabel extends VBox {
       NaturalSelectionStrings.countBunniesStringProperty
     ], ( count, oneBunnyString, countBunniesString ) =>
       ( count === 1 ) ? oneBunnyString : StringUtils.fillIn( countBunniesString, { count: count } ), {
-      tandem: secondLineOfTextTandem.createTandem( 'stringProperty' ),
+      tandem: secondLineOfTextTandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME ),
       phetioValueType: StringIO
     } );
     const secondLineOfText = new Text( secondLineOfTextDerivedStringProperty, merge( {

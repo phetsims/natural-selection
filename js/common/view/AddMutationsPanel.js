@@ -420,7 +420,7 @@ class TitleNode extends Text {
       ],
       ( numberOfRowsVisible, addMutationString, addMutationsString ) =>
         ( numberOfRowsVisible === 1 ) ? addMutationString : addMutationsString, {
-        tandem: options.tandem.createTandem( 'stringProperty' ),
+        tandem: options.tandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME ),
         phetioValueType: StringIO
       } );
 
