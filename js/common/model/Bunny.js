@@ -463,8 +463,8 @@ function getHopDelta( hopDistance, hopHeight, xDirection ) {
  */
 Bunny.BunnyIO = new IOType( 'BunnyIO', {
   valueType: Bunny,
-  applyState: ( t, s ) => t.applyState( s ),
-  stateToArgsForConstructor: s => Bunny.stateToArgsForConstructor( s ),
+  applyState: ( bunny, stateObject ) => bunny.applyState( stateObject ),
+  stateToArgsForConstructor: stateObject => Bunny.stateToArgsForConstructor( stateObject ),
   stateSchema: Bunny.STATE_SCHEMA
 } );
 

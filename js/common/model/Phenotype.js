@@ -150,8 +150,8 @@ class Phenotype extends PhetioObject {
  */
 Phenotype.PhenotypeIO = new IOType( 'PhenotypeIO', {
   valueType: Phenotype,
-  toStateObject: t => t.toStateObject(),
-  applyState: ( t, s ) => t.applyState( s ),
+  toStateObject: phenotype => phenotype.toStateObject(),
+  applyState: ( phenotype, stateObject ) => phenotype.applyState( stateObject ),
   stateSchema: Phenotype.STATE_SCHEMA
 } );
 

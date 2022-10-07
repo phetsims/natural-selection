@@ -190,8 +190,8 @@ class Wolf extends Organism {
  */
 Wolf.WolfIO = new IOType( 'WolfIO', {
   valueType: Wolf,
-  toStateObject: t => t.toStateObject(),
-  applyState: ( t, s ) => t.applyState( s ),
+  toStateObject: wolf => wolf.toStateObject(),
+  applyState: ( wolf, stateObject ) => wolf.applyState( stateObject ),
   stateSchema: Wolf.STATE_SCHEMA,
   stateToArgsForConstructor: s => Wolf.stateToArgsForConstructor( s )
 } );

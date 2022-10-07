@@ -197,7 +197,7 @@ class GenePair extends PhetioObject {
 GenePair.GenePairIO = new IOType( 'GenePairIO', {
   valueType: GenePair,
   stateSchema: GenePair.STATE_SCHEMA,
-  applyState: ( t, s ) => t.applyState( s )
+  applyState: ( genePair, stateObject ) => genePair.applyState( stateObject )
 } );
 
 naturalSelection.register( 'GenePair', GenePair );
