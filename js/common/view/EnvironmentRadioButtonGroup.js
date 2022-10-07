@@ -82,8 +82,8 @@ class EnvironmentRadioButtonGroup extends RectangularRadioButtonGroup {
 
     // description of the buttons
     const content = [
-      { value: Environment.EQUATOR, node: equatorButtonContent, tandemName: 'equatorRadioButton' },
-      { value: Environment.ARCTIC, node: arcticButtonContent, tandemName: 'arcticRadioButton' }
+      { value: Environment.EQUATOR, createNode: tandem => equatorButtonContent, tandemName: 'equatorRadioButton' },
+      { value: Environment.ARCTIC, createNode: tandem => arcticButtonContent, tandemName: 'arcticRadioButton' }
     ];
 
     super( environmentProperty, content, options );
