@@ -87,9 +87,9 @@ class ProportionsCounts {
  */
 ProportionsCounts.ProportionsCountsIO = new IOType( 'ProportionsCountsIO', {
   valueType: ProportionsCounts,
-  toStateObject: t => t.toStateObject(),
+  toStateObject: proportionCounts => proportionCounts.toStateObject(),
   stateSchema: ProportionsCounts.STATE_SCHEMA,
-  fromStateObject: s => ProportionsCounts.fromStateObject( s )
+  fromStateObject: stateObject => ProportionsCounts.fromStateObject( stateObject )
 } );
 
 naturalSelection.register( 'ProportionsCounts', ProportionsCounts );

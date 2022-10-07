@@ -192,8 +192,8 @@ class BunnyCounts {
  */
 BunnyCounts.BunnyCountsIO = new IOType( 'BunnyCountsIO', {
   valueType: BunnyCounts,
-  toStateObject: t => t.toStateObject(),
-  fromStateObject: s => BunnyCounts.fromStateObject( s ),
+  toStateObject: bunnyCounts => bunnyCounts.toStateObject(),
+  fromStateObject: stateObject => BunnyCounts.fromStateObject( stateObject ),
   stateSchema: BunnyCounts.STATE_SCHEMA
 } );
 
