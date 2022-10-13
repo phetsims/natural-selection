@@ -22,7 +22,9 @@
       "compareDesignedAPIChanges": true
     },
     "supportsOutputJS": true,
-    "supportsDynamicLocale": true
+    "simFeatures": {
+      "supportsDynamicLocale": true
+    }
   },
   "eslintConfig": {
     "extends": "../chipper/eslint/sim_eslintrc.js"
