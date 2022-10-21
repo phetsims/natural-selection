@@ -44,8 +44,7 @@ class ProportionsPanel extends NaturalSelectionPanel {
     } );
 
     const separator = new HSeparator( {
-      stroke: NaturalSelectionColors.SEPARATOR_STROKE,
-      tandem: options.tandem.createTandem( 'separator' )
+      stroke: NaturalSelectionColors.SEPARATOR_STROKE
     } );
 
     // Values checkbox, shows/hides values on the bars

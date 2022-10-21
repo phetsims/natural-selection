@@ -119,8 +119,7 @@ class PopulationPanel extends NaturalSelectionPanel {
     } ) );
 
     const separator = new HSeparator( {
-      stroke: NaturalSelectionColors.SEPARATOR_STROKE,
-      tandem: options.tandem.createTandem( 'separator' )
+      stroke: NaturalSelectionColors.SEPARATOR_STROKE
     } );
 
     // Data Probe checkbox
