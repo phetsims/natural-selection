@@ -41,7 +41,7 @@ class WolvesCheckbox extends EnvironmentalFactorCheckbox {
 
     const labelText = new Text( NaturalSelectionStrings.wolvesStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 110, // determined empirically
+      maxWidth: 105, // determined empirically
       tandem: options.tandem.createTandem( 'labelText' )
     } );
 
