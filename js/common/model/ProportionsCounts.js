@@ -43,7 +43,7 @@ class ProportionsCounts {
    */
   toStateObject() {
     return {
-      generation: NumberIO.toStateObject( this.generation ),
+      generation: this.generation,
       startCounts: BunnyCounts.BunnyCountsIO.toStateObject( this.startCounts ),
       endCounts: BunnyCounts.BunnyCountsIO.toStateObject( this.endCounts )
     };
@@ -71,7 +71,7 @@ class ProportionsCounts {
    */
   static fromStateObject( stateObject ) {
     return new ProportionsCounts(
-      NumberIO.fromStateObject( stateObject.generation ),
+      stateObject.generation,
       BunnyCounts.BunnyCountsIO.fromStateObject( stateObject.startCounts ),
       BunnyCounts.BunnyCountsIO.fromStateObject( stateObject.endCounts )
     );

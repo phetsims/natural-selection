@@ -137,13 +137,13 @@ class BunnyCounts {
    */
   toStateObject() {
     return {
-      totalCount: NumberIO.toStateObject( this.totalCount ),
-      whiteFurCount: NumberIO.toStateObject( this.whiteFurCount ),
-      brownFurCount: NumberIO.toStateObject( this.brownFurCount ),
-      straightEarsCount: NumberIO.toStateObject( this.straightEarsCount ),
-      floppyEarsCount: NumberIO.toStateObject( this.floppyEarsCount ),
-      shortTeethCount: NumberIO.toStateObject( this.shortTeethCount ),
-      longTeethCount: NumberIO.toStateObject( this.longTeethCount )
+      totalCount: this.totalCount,
+      whiteFurCount: this.whiteFurCount,
+      brownFurCount: this.brownFurCount,
+      straightEarsCount: this.straightEarsCount,
+      floppyEarsCount: this.floppyEarsCount,
+      shortTeethCount: this.shortTeethCount,
+      longTeethCount: this.longTeethCount
     };
   }
 
@@ -172,13 +172,13 @@ class BunnyCounts {
    */
   static fromStateObject( stateObject ) {
     return new BunnyCounts( {
-      totalCount: NumberIO.fromStateObject( stateObject.totalCount ),
-      whiteFurCount: NumberIO.fromStateObject( stateObject.whiteFurCount ),
-      brownFurCount: NumberIO.fromStateObject( stateObject.brownFurCount ),
-      straightEarsCount: NumberIO.fromStateObject( stateObject.straightEarsCount ),
-      floppyEarsCount: NumberIO.fromStateObject( stateObject.floppyEarsCount ),
-      shortTeethCount: NumberIO.fromStateObject( stateObject.shortTeethCount ),
-      longTeethCount: NumberIO.fromStateObject( stateObject.longTeethCount )
+      totalCount: stateObject.totalCount,
+      whiteFurCount: stateObject.whiteFurCount,
+      brownFurCount: stateObject.brownFurCount,
+      straightEarsCount: stateObject.straightEarsCount,
+      floppyEarsCount: stateObject.floppyEarsCount,
+      shortTeethCount: stateObject.shortTeethCount,
+      longTeethCount: stateObject.longTeethCount
     } );
   }
 }
