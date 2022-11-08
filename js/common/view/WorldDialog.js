@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * WorldDialog is displayed when bunnies have exceeded their maximum population.
  * It displays the message "Bunnies have taken over the world".
