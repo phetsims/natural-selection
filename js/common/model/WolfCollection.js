@@ -10,10 +10,10 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -49,7 +49,7 @@ class WolfCollection {
 
   /**
    * @param {GenerationClock} generationClock
-   * @param {EnumerationDeprecatedProperty.<Environment>} environmentProperty
+   * @param {EnumerationProperty.<Environment>} environmentProperty
    * @param {BunnyCollection} bunnyCollection
    * @param {EnvironmentModelViewTransform} modelViewTransform
    * @param {Object} [options]
@@ -57,7 +57,7 @@ class WolfCollection {
   constructor( generationClock, environmentProperty, bunnyCollection, modelViewTransform, options ) {
 
     assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
-    assert && AssertUtils.assertEnumerationPropertyOf( environmentProperty, Environment );
+    assert && assert( environmentProperty instanceof EnumerationProperty );
     assert && assert( bunnyCollection instanceof BunnyCollection, 'invalid bunnyCollection' );
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
 

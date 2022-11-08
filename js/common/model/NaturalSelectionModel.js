@@ -9,7 +9,6 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
-import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -104,7 +103,7 @@ class NaturalSelectionModel {
     this.initializeGenerationZero();
 
     // @public
-    this.environmentProperty = new EnumerationDeprecatedProperty( Environment, Environment.EQUATOR, {
+    this.environmentProperty = new EnumerationProperty( Environment.EQUATOR, {
       tandem: options.tandem.createTandem( 'environmentProperty' )
     } );
 

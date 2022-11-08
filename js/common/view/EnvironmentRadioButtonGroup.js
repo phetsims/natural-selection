@@ -6,8 +6,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import snowflakeSolidShape from '../../../../sherpa/js/fontawesome-5/snowflakeSolidShape.js';
 import sunSolidShape from '../../../../sherpa/js/fontawesome-5/sunSolidShape.js';
@@ -25,12 +25,12 @@ const ICON_Y_MARGIN = 6;
 class EnvironmentRadioButtonGroup extends RectangularRadioButtonGroup {
 
   /**
-   * @param {EnumerationDeprecatedProperty.<Environment>} environmentProperty
+   * @param {EnumerationProperty.<Environment>} environmentProperty
    * @param {Object} [options]
    */
   constructor( environmentProperty, options ) {
 
-    assert && AssertUtils.assertEnumerationPropertyOf( environmentProperty, Environment );
+    assert && assert( environmentProperty instanceof EnumerationProperty );
 
     options = merge( {}, {
 

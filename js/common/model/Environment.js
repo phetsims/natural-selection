@@ -6,10 +6,16 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
 import naturalSelection from '../../naturalSelection.js';
 
-const Environment = EnumerationDeprecated.byKeys( [ 'EQUATOR', 'ARCTIC' ] );
+export default class Environment extends EnumerationValue {
+
+  static EQUATOR = new Environment();
+  static ARCTIC = new Environment();
+
+  static enumeration = new Enumeration( Environment );
+}
 
 naturalSelection.register( 'Environment', Environment );
-export default Environment;

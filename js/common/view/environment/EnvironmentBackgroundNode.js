@@ -7,9 +7,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import EnumerationProperty from '../../../../../axon/js/EnumerationProperty.js';
 import Dimension2 from '../../../../../dot/js/Dimension2.js';
 import merge from '../../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
 import { Image, Line, Node } from '../../../../../scenery/js/imports.js';
 import arcticBackground_png from '../../../../images/arcticBackground_png.js';
 import equatorBackground_png from '../../../../images/equatorBackground_png.js';
@@ -20,14 +20,14 @@ import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParamete
 class EnvironmentBackgroundNode extends Node {
 
   /**
-   * @param {EnumerationDeprecatedProperty.<Environment>} environmentProperty
+   * @param {EnumerationProperty.<Environment>} environmentProperty
    * @param {Dimension2} size - dimensions of the backgrounds, in view coordinates
    * @param {number} yHorizon - y coordinate of the horizon, in view coordinates
    * @param {Object} [options]
    */
   constructor( environmentProperty, size, yHorizon, options ) {
 
-    assert && AssertUtils.assertEnumerationPropertyOf( environmentProperty, Environment );
+    assert && assert( environmentProperty instanceof EnumerationProperty );
     assert && assert( size instanceof Dimension2, 'invalid size' );
     assert && assert( typeof yHorizon === 'number', 'invalid yHorizon' );
 
