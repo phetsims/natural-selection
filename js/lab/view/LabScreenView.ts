@@ -1,6 +1,5 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * LabScreenView is the view for the 'Lab' screen. Adds no additional functionality to NaturalSelectionScreenView,
  * but included for completeness of the class hierarchy.
@@ -13,17 +12,9 @@ import NaturalSelectionScreenView from '../../common/view/NaturalSelectionScreen
 import naturalSelection from '../../naturalSelection.js';
 import LabModel from '../model/LabModel.js';
 
-class LabScreenView extends NaturalSelectionScreenView {
+export default class LabScreenView extends NaturalSelectionScreenView {
 
-  /**
-   * @param {LabModel} model
-   * @param {Tandem} tandem
-   */
-  constructor( model, tandem ) {
-
-    assert && assert( model instanceof LabModel, 'invalid model' );
-    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
-
+  public constructor( model: LabModel, tandem: Tandem ) {
     super( model, {
 
       // phet-io
@@ -33,4 +24,3 @@ class LabScreenView extends NaturalSelectionScreenView {
 }
 
 naturalSelection.register( 'LabScreenView', LabScreenView );
-export default LabScreenView;

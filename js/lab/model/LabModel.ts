@@ -1,6 +1,5 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * LabModel is the model for the 'Lab' screen.
  *
@@ -12,16 +11,9 @@ import NaturalSelectionModel from '../../common/model/NaturalSelectionModel.js';
 import NaturalSelectionConstants from '../../common/NaturalSelectionConstants.js';
 import naturalSelection from '../../naturalSelection.js';
 
-/**
- * @constructor
- */
-class LabModel extends NaturalSelectionModel {
+export default class LabModel extends NaturalSelectionModel {
 
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
-    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
+  public constructor( tandem: Tandem ) {
     super( 'labMutations', 'labPopulation', NaturalSelectionConstants.LAB_SHRUBS_SEED, {
       tandem: tandem
     } );
@@ -29,4 +21,3 @@ class LabModel extends NaturalSelectionModel {
 }
 
 naturalSelection.register( 'LabModel', LabModel );
-export default LabModel;

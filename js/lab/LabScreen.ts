@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * LabScreen is the 'Lab' screen.
  *
@@ -26,14 +25,9 @@ import NaturalSelectionStrings from '../NaturalSelectionStrings.js';
 import LabModel from './model/LabModel.js';
 import LabScreenView from './view/LabScreenView.js';
 
-class LabScreen extends Screen {
+export default class LabScreen extends Screen {
 
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
-
-    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
+  public constructor( tandem: Tandem ) {
 
     const options = {
 
@@ -55,11 +49,7 @@ class LabScreen extends Screen {
     );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
@@ -67,9 +57,8 @@ class LabScreen extends Screen {
 
 /**
  * Creates the icon for this screen.
- * @returns {ScreenIcon}
  */
-function createScreenIcon() {
+function createScreenIcon(): ScreenIcon {
 
   const SPACING = 20;
 
@@ -101,4 +90,3 @@ function createScreenIcon() {
 }
 
 naturalSelection.register( 'LabScreen', LabScreen );
-export default LabScreen;

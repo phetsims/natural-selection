@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * IntroScreen is the 'Intro' screen.
  *
@@ -20,14 +19,9 @@ import NaturalSelectionStrings from '../NaturalSelectionStrings.js';
 import IntroModel from './model/IntroModel.js';
 import IntroScreenView from './view/IntroScreenView.js';
 
-class IntroScreen extends Screen {
+export default class IntroScreen extends Screen {
 
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
-
-    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
+  public constructor( tandem: Tandem ) {
 
     const options = {
 
@@ -49,11 +43,7 @@ class IntroScreen extends Screen {
     );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
@@ -61,9 +51,8 @@ class IntroScreen extends Screen {
 
 /**
  * Creates the icon for this screen.
- * @returns {ScreenIcon}
  */
-function createScreenIcon() {
+function createScreenIcon(): ScreenIcon {
   return new ScreenIcon( new HBox( {
     spacing: 20,
     children: [ new Image( bunnyBrownFurStraightEarsShortTeeth_png ), new Image( bunnyWhiteFurStraightEarsShortTeeth_png ) ]
@@ -73,4 +62,3 @@ function createScreenIcon() {
 }
 
 naturalSelection.register( 'IntroScreen', IntroScreen );
-export default IntroScreen;

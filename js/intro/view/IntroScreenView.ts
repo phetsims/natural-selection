@@ -1,6 +1,5 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * IntroScreenView is the view for the 'Intro' screen.
  *
@@ -12,16 +11,9 @@ import NaturalSelectionScreenView from '../../common/view/NaturalSelectionScreen
 import naturalSelection from '../../naturalSelection.js';
 import IntroModel from '../model/IntroModel.js';
 
-class IntroScreenView extends NaturalSelectionScreenView {
+export default class IntroScreenView extends NaturalSelectionScreenView {
 
-  /**
-   * @param {IntroModel} model
-   * @param {Tandem} tandem
-   */
-  constructor( model, tandem ) {
-
-    assert && assert( model instanceof IntroModel, 'invalid model' );
-    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
+  public constructor( model: IntroModel, tandem: Tandem ) {
 
     super( model, {
 
@@ -38,4 +30,3 @@ class IntroScreenView extends NaturalSelectionScreenView {
 }
 
 naturalSelection.register( 'IntroScreenView', IntroScreenView );
-export default IntroScreenView;

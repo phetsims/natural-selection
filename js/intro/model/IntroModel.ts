@@ -1,6 +1,5 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * IntroModel is the model for the 'Intro' screen.
  *
@@ -12,16 +11,9 @@ import NaturalSelectionModel from '../../common/model/NaturalSelectionModel.js';
 import NaturalSelectionConstants from '../../common/NaturalSelectionConstants.js';
 import naturalSelection from '../../naturalSelection.js';
 
-/**
- * @constructor
- */
-class IntroModel extends NaturalSelectionModel {
+export default class IntroModel extends NaturalSelectionModel {
 
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
-    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
+  public constructor( tandem: Tandem ) {
     super( 'introMutations', 'introPopulation', NaturalSelectionConstants.INTRO_SHRUBS_SEED, {
       tandem: tandem
     } );
@@ -29,4 +21,3 @@ class IntroModel extends NaturalSelectionModel {
 }
 
 naturalSelection.register( 'IntroModel', IntroModel );
-export default IntroModel;
