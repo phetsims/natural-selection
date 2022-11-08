@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * WolvesCheckbox is a checkbox for enabling the 'Wolves' environmental factor.
  *

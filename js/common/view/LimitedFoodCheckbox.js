@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * LimitedFoodCheckbox is a checkbox for enabling the 'Limited Food' environmental factor.
  *

@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * EnvironmentalFactorCheckbox is the base class for all checkboxes in the 'Environmental Factors' panel.
  * It makes all checkbox labels have the same effective size. And it adds a generation-clock icon to the right of
