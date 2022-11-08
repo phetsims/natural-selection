@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * GraphChoice is an enumeration of the graph choices that are available.
  * The user selects one of these choices via GraphChoiceRadioButtonGroup.

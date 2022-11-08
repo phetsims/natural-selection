@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * SimulationMode enumerates the simulation modes. The mode determines which UI components are available,
  * whether the clock is running, etc.

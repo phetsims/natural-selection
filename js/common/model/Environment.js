@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Environment is an enumeration of the environments where the bunnies may live.
  *
