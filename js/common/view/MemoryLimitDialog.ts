@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * MemoryLimitDialog is displayed when the sim has hit its memory limit.
  *
@@ -12,10 +11,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import OopsDialog from '../../../../scenery-phet/js/OopsDialog.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import OopsDialog, { OopsDialogOptions } from '../../../../scenery-phet/js/OopsDialog.js';
 import { Image } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import bunnyBrownFurStraightEarsLongTeeth_png from '../../../images/bunnyBrownFurStraightEarsLongTeeth_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
@@ -24,33 +23,33 @@ import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 // constants
 const ICON_SCALE = 0.75;
 
-class MemoryLimitDialog extends OopsDialog {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+type MemoryLimitDialogOptions = SelfOptions & PickRequired<OopsDialogOptions, 'tandem'>;
+
+export default class MemoryLimitDialog extends OopsDialog {
+
+  public constructor( providedOptions: MemoryLimitDialogOptions ) {
 
     const iconNode = new Image( bunnyBrownFurStraightEarsLongTeeth_png );
     iconNode.setScaleMagnitude( -ICON_SCALE, ICON_SCALE );
 
-    options = merge( {}, NaturalSelectionConstants.DIALOG_OPTIONS, {
-      topMargin: 50,
-      bottomMargin: 50,
-      iconNode: iconNode,
-      richTextOptions: {
-        font: NaturalSelectionConstants.DIALOG_FONT
-      },
+    const options = optionize4<MemoryLimitDialogOptions, SelfOptions, OopsDialogOptions>()(
+      {}, NaturalSelectionConstants.DIALOG_OPTIONS, {
 
-      // phet-io
-      tandem: Tandem.REQUIRED, // see https://github.com/phetsims/natural-selection/issues/156
-      phetioReadOnly: true,
-      phetioDocumentation: 'This dialog is displayed when the sim has reached its memory limit.'
-    }, options );
+        // OopsDialogOptions
+        topMargin: 50,
+        bottomMargin: 50,
+        iconNode: iconNode,
+        richTextOptions: {
+          font: NaturalSelectionConstants.DIALOG_FONT
+        },
+        phetioReadOnly: true,
+        phetioDocumentation: 'This dialog is displayed when the sim has reached its memory limit.'
+      }, providedOptions );
 
     super( NaturalSelectionStrings.memoryLimitMessageStringProperty, options );
   }
 }
 
 naturalSelection.register( 'MemoryLimitDialog', MemoryLimitDialog );
-export default MemoryLimitDialog;

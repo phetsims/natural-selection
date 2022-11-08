@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * WorldDialog is displayed when bunnies have exceeded their maximum population.
  * It displays the message "Bunnies have taken over the world".
@@ -8,32 +7,33 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Image, Text, VBox } from '../../../../scenery/js/imports.js';
-import Dialog from '../../../../sun/js/Dialog.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
 import world_png from '../../../images/world_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-class WorldDialog extends Dialog {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+type WorldDialogOptions = SelfOptions & PickRequired<DialogOptions, 'tandem'>;
 
-    options = merge( {}, NaturalSelectionConstants.DIALOG_OPTIONS, {
-      fill: 'black',
-      closeButtonColor: 'white',
-      topMargin: 25,
+export default class WorldDialog extends Dialog {
 
-      // phet-io
-      tandem: Tandem.REQUIRED, // see https://github.com/phetsims/natural-selection/issues/156
-      phetioReadOnly: true,
-      phetioDocumentation: 'This dialog is displayed when bunnies have taken over the world.'
-    }, options );
+  public constructor( providedOptions: WorldDialogOptions ) {
+
+    const options = optionize4<WorldDialogOptions, SelfOptions, DialogOptions>()(
+      {}, NaturalSelectionConstants.DIALOG_OPTIONS, {
+
+        // DialogOptions
+        fill: 'black',
+        closeButtonColor: 'white',
+        topMargin: 25,
+        phetioReadOnly: true,
+        phetioDocumentation: 'This dialog is displayed when bunnies have taken over the world.'
+      }, providedOptions );
 
     const worldNode = new Image( world_png, {
       scale: 0.8 // determined empirically
@@ -57,4 +57,3 @@ class WorldDialog extends Dialog {
 }
 
 naturalSelection.register( 'WorldDialog', WorldDialog );
-export default WorldDialog;
