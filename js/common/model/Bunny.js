@@ -436,7 +436,7 @@ function getHopDelta( hopDistance, hopHeight, xDirection ) {
 
   assert && assert( typeof hopDistance === 'number', 'invalid hopDistance' );
   assert && assert( NaturalSelectionUtils.isNonNegative( hopHeight ), `invalid hopHeight: ${hopHeight}` );
-  assert && assert( XDirection.includes( xDirection ), 'invalid xDirection' );
+  assert && assert( XDirection.enumeration.includes( xDirection ), 'invalid xDirection' );
 
   const angle = dotRandom.nextDoubleBetween( 0, 2 * Math.PI );
 
