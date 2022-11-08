@@ -1,5 +1,6 @@
 // Copyright 2019-2020, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * IntroModel is the model for the 'Intro' screen.
  *
