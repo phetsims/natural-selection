@@ -55,7 +55,7 @@ class NaturalSelectionModel {
     this.modelViewTransform = new EnvironmentModelViewTransform();
 
     // @public see SimulationMode
-    this.simulationModeProperty = new EnumerationDeprecatedProperty( SimulationMode, SimulationMode.STAGED, {
+    this.simulationModeProperty = new EnumerationProperty( SimulationMode.STAGED, {
       tandem: options.tandem.createTandem( 'simulationModeProperty' ),
       phetioDocumentation: 'for internal PhET use only', // see https://github.com/phetsims/phet-io/issues/1660
       phetioReadOnly: true

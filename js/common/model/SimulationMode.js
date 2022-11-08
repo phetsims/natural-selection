@@ -7,14 +7,22 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
 import naturalSelection from '../../naturalSelection.js';
 
-const SimulationMode = EnumerationDeprecated.byKeys( [
-  'STAGED',   // the simulation is staged, but waiting for the user press 'Add a Mate' or 'Play' button
-  'ACTIVE',   // the simulation is active
-  'COMPLETED' // the simulation has completed and the user is reviewing results
-] );
+export default class SimulationMode extends EnumerationValue {
+
+  // the simulation is staged, but waiting for the user press 'Add a Mate' or 'Play' button
+  static STAGED = new SimulationMode();
+
+  // the simulation is active
+  static ACTIVE = new SimulationMode();
+
+  // the simulation has completed and the user is reviewing results
+  static COMPLETED = new SimulationMode();
+
+  static enumeration = new Enumeration( SimulationMode );
+}
 
 naturalSelection.register( 'SimulationMode', SimulationMode );
-export default SimulationMode;

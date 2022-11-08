@@ -7,8 +7,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import stepTimer from '../../../../axon/js/stepTimer.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import stepTimer from '../../../../axon/js/stepTimer.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
@@ -23,13 +24,13 @@ import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 class PlayButtonGroup extends Node {
 
   /**
-   * @param {EnumerationDeprecatedProperty.<SimulationMode>} simulationModeProperty
+   * @param {EnumerationProperty.<SimulationMode>} simulationModeProperty
    * @param {Property.<number>} bunnyCountProperty
    * @param {Object} [options]
    */
   constructor( simulationModeProperty, bunnyCountProperty, options ) {
 
-    assert && AssertUtils.assertEnumerationPropertyOf( simulationModeProperty, SimulationMode );
+    assert && assert( simulationModeProperty instanceof EnumerationProperty );
     assert && AssertUtils.assertPropertyOf( bunnyCountProperty, 'number' );
 
     options = merge( {
