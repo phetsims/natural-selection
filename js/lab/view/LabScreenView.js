@@ -1,5 +1,6 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * LabScreenView is the view for the 'Lab' screen. Adds no additional functionality to NaturalSelectionScreenView,
  * but included for completeness of the class hierarchy.
