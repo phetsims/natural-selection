@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Environment is an enumeration of the environments where the bunnies may live.
  *
@@ -13,10 +12,10 @@ import naturalSelection from '../../naturalSelection.js';
 
 export default class Environment extends EnumerationValue {
 
-  static EQUATOR = new Environment();
-  static ARCTIC = new Environment();
+  public static readonly EQUATOR = new Environment();
+  public static readonly ARCTIC = new Environment();
 
-  static enumeration = new Enumeration( Environment );
+  public static readonly enumeration = new Enumeration( Environment );
 }
 
 naturalSelection.register( 'Environment', Environment );

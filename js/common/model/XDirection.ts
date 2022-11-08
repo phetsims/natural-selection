@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * XDirection is the direction that an Organism (bunny, wolf, shrub) is facing along the x axis.
  *
@@ -14,27 +13,22 @@ import naturalSelection from '../../naturalSelection.js';
 
 export default class XDirection extends EnumerationValue {
 
-  static LEFT = new XDirection();
-  static RIGHT = new XDirection();
+  public static readonly LEFT = new XDirection();
+  public static readonly RIGHT = new XDirection();
 
-  static enumeration = new Enumeration( XDirection );
+  public static readonly enumeration = new Enumeration( XDirection );
 
   /**
    * Gets a random enumeration value.
-   * @returns {XDirection}
-   * @public
    */
-  static getRandom() {
+  public static getRandom(): XDirection {
     return dotRandom.nextBoolean() ? XDirection.RIGHT : XDirection.LEFT;
   }
 
   /**
-   * Provides the opposite direction.
-   * @param {XDirection} xDirection
-   * @returns {XDirection}
-   * @public
+   * Gets the opposite direction.
    */
-  static opposite( xDirection ) {
+  public static opposite( xDirection: XDirection ): XDirection {
     return ( xDirection === XDirection.RIGHT ) ? XDirection.LEFT : XDirection.RIGHT;
   }
 
@@ -43,11 +37,8 @@ export default class XDirection extends EnumerationValue {
    * reflect the organism about the y axis, making it appear to face in the desired direction. This assumes that the
    * default x direction for all organisms is XDirection.RIGHT. For example, this means that all bunny PNG files
    * were drawn with the bunny facing right.
-   * @param {XDirection} xDirection
-   * @returns {number}
-   * @public
    */
-  static toSign( xDirection ) {
+  public static toSign( xDirection: XDirection ): 1 | -1 {
     return ( xDirection === XDirection.RIGHT ) ? 1 : -1;
   }
 }

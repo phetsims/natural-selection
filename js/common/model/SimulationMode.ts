@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * SimulationMode enumerates the simulation modes. The mode determines which UI components are available,
  * whether the clock is running, etc.
@@ -15,15 +14,15 @@ import naturalSelection from '../../naturalSelection.js';
 export default class SimulationMode extends EnumerationValue {
 
   // the simulation is staged, but waiting for the user press 'Add a Mate' or 'Play' button
-  static STAGED = new SimulationMode();
+  public static readonly STAGED = new SimulationMode();
 
   // the simulation is active
-  static ACTIVE = new SimulationMode();
+  public static readonly ACTIVE = new SimulationMode();
 
   // the simulation has completed and the user is reviewing results
-  static COMPLETED = new SimulationMode();
+  public static readonly COMPLETED = new SimulationMode();
 
-  static enumeration = new Enumeration( SimulationMode );
+  public static readonly enumeration = new Enumeration( SimulationMode );
 }
 
 naturalSelection.register( 'SimulationMode', SimulationMode );

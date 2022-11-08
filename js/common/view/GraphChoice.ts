@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * GraphChoice is an enumeration of the graph choices that are available.
  * The user selects one of these choices via GraphChoiceRadioButtonGroup.
@@ -14,12 +13,12 @@ import naturalSelection from '../../naturalSelection.js';
 
 export default class GraphChoice extends EnumerationValue {
 
-  static POPULATION = new GraphChoice();
-  static PROPORTIONS = new GraphChoice();
-  static PEDIGREE = new GraphChoice();
-  static NONE = new GraphChoice();
+  public static readonly POPULATION = new GraphChoice();
+  public static readonly PROPORTIONS = new GraphChoice();
+  public static readonly PEDIGREE = new GraphChoice();
+  public static readonly NONE = new GraphChoice();
 
-  static enumeration = new Enumeration( GraphChoice );
+  public static readonly enumeration = new Enumeration( GraphChoice );
 }
 
 naturalSelection.register( 'GraphChoice', GraphChoice );
