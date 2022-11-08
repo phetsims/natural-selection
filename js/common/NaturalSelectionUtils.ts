@@ -1,6 +1,5 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * NaturalSelectionUtils defines utility functions that are used throughout this simulation.
  *
@@ -8,18 +7,19 @@
  */
 
 import Range from '../../../dot/js/Range.js';
+import PhetioObject from '../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../tandem/js/Tandem.js';
+import IntentionalAny from '../../../phet-core/js/types/IntentionalAny.js';
 import naturalSelection from '../naturalSelection.js';
 
 const NaturalSelectionUtils = {
 
   /**
    * Determines the time that it takes to execute a specified function.
-   * @param {function} f - a function with no parameters and no return value
-   * @returns {number} the time to complete f, in ms
-   * @public
+   * @param f - the function to execute
+   * @returns the time to complete f, in ms
    */
-  time( f ) {
+  time( f: () => void ): number {
     const tBefore = performance.now();
     f();
     return performance.now() - tBefore;
@@ -36,22 +36,19 @@ const NaturalSelectionUtils = {
    * Console output will look like this:
    *   step took 56.68500000001586 ms
    *
-   * @param {string} name - name used to identify the function in the log message
-   * @param {function} f - a function with no parameters and no return value
-   * @public
+   * @param name - name used to identify the function in the log message
+   * @param f - the function to execute
    */
-  logTime( name, f ) {
+  logTime( name: string, f: () => void ): void {
     console.log( `${name} took ${NaturalSelectionUtils.time( f )} ms` );
   },
 
   /**
    * Determines whether an array is sorted. Duplicates are allowed, and an empty array is considered sorted.
-   * @param {*[]} array
-   * @param {function(value:*,nextValue:*):boolean} [compare] - the comparison function, defaults to ascending numbers
-   * @returns {boolean}
-   * @public
+   * @param array - the array to examine
+   * @param [compare] - the comparison function, defaults to ascending numbers
    */
-  isSorted( array, compare ) {
+  isSorted<T>( array: T[], compare?: ( value: T, nextValue: T ) => boolean ): boolean {
     assert && assert( Array.isArray( array ), 'invalid array' );
     assert && assert( !compare || typeof compare === 'function', 'invalid array' );
 
@@ -66,71 +63,50 @@ const NaturalSelectionUtils = {
   /**
    * Determines whether an array is sorted in descending order.
    * Duplicates are allowed, and an empty array is considered sorted.
-   * @param {*[]} array
-   * @returns {boolean}
-   * @public
    */
-  isSortedDescending( array ) {
-    return NaturalSelectionUtils.isSorted( array, ( value, nextValue ) => value >= nextValue );
+  isSortedDescending<T>( array: T[] ): boolean {
+    return NaturalSelectionUtils.isSorted<T>( array, ( value, nextValue ) => value >= nextValue );
   },
 
   /**
    * Determines whether a value is a positive number.
-   * @param {*} value
-   * @returns {boolean}
-   * @public
    */
-  isPositive( value ) {
+  isPositive( value: IntentionalAny ): boolean {
     return ( typeof value === 'number' ) && ( value > 0 );
   },
 
   /**
    * Determines whether a value is a non-negative number.
-   * @param {*} value
-   * @returns {boolean}
-   * @public
    */
-  isNonNegative( value ) {
+  isNonNegative( value: IntentionalAny ): boolean {
     return ( typeof value === 'number' ) && ( value >= 0 );
   },
 
   /**
    * Determines whether a value is a positive integer.
-   * @param {*} value
-   * @returns {boolean}
-   * @public
    */
-  isPositiveInteger( value ) {
+  isPositiveInteger( value: IntentionalAny ): boolean {
     return NaturalSelectionUtils.isPositive( value ) && Number.isInteger( value );
   },
 
   /**
    * Determines whether a value is a non-negative integer.
-   * @param {*} value
-   * @returns {boolean}
-   * @public
    */
-  isNonNegativeInteger( value ) {
+  isNonNegativeInteger( value: IntentionalAny ): boolean {
     return NaturalSelectionUtils.isNonNegative( value ) && Number.isInteger( value );
   },
 
   /**
    * Determines whether a value is a percentage, between 0 and 1.
-   * @param {*} value
-   * @returns {boolean}
-   * @public
    */
-  isPercent( value ) {
+  isPercent( value: IntentionalAny ): boolean {
     return NaturalSelectionUtils.isNonNegative( value ) && ( value >= 0 ) && ( value <= 1 );
   },
 
   /**
    * Determines whether a value is a Range for a percentage, between 0 and 1.
-   * @param {*} value
-   * @returns {boolean}
-   * @public
    */
-  isPercentRange( value ) {
+  isPercentRange( value: IntentionalAny ): boolean {
     return ( value instanceof Range ) && ( value.min >= 0 ) && ( value.max <= 1 );
   },
 
@@ -139,12 +115,8 @@ const NaturalSelectionUtils = {
    * to inspect a PhET-iO element in the console. Do not use this to access elements via code!
    *
    * Example: phet.naturalSelection.NaturalSelectionUtils.getElement( 'naturalSelection.labScreen' )
-   *
-   * @param {string} phetioID
-   * @returns {null|PhetioObject}
-   * @public
    */
-  getElement( phetioID ) {
+  getElement( phetioID: string ): PhetioObject | undefined {
     if ( Tandem.PHET_IO_ENABLED ) {
       return phet.phetio.phetioEngine.phetioObjectMap[ phetioID ];
     }
