@@ -1,44 +1,36 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * WolvesCheckbox is a checkbox for enabling the 'Wolves' environmental factor.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { AlignGroup, HBox, Image, Text } from '../../../../scenery/js/imports.js';
 import wolf_png from '../../../images/wolf_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import EnvironmentalFactorCheckbox from './EnvironmentalFactorCheckbox.js';
+import EnvironmentalFactorCheckbox, { EnvironmentalFactorCheckboxOptions } from './EnvironmentalFactorCheckbox.js';
+import Property from '../../../../axon/js/Property.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
-class WolvesCheckbox extends EnvironmentalFactorCheckbox {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Property.<boolean>} wolvesEnabledProperty
-   * @param {AlignGroup} alignGroup
-   * @param {Object} [options]
-   */
-  constructor( wolvesEnabledProperty, alignGroup, options ) {
+type WolvesCheckboxOptions = SelfOptions & PickRequired<EnvironmentalFactorCheckboxOptions, 'tandem'>;
 
-    assert && AssertUtils.assertPropertyOf( wolvesEnabledProperty, 'boolean' );
-    assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
+export default class WolvesCheckbox extends EnvironmentalFactorCheckbox {
 
-    options = merge( {
+  public constructor( wolvesEnabledProperty: Property<boolean>, alignGroup: AlignGroup, providedOptions: WolvesCheckboxOptions ) {
 
-      // EnvironmentalFactorCheckbox options
+    const options = optionize<WolvesCheckboxOptions, SelfOptions, EnvironmentalFactorCheckboxOptions>()( {
+
+      // EnvironmentalFactorCheckboxOptions
       clockSliceRange: NaturalSelectionConstants.CLOCK_WOLVES_RANGE,
-      clockSliceColor: NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR,
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+      clockSliceColor: NaturalSelectionColors.CLOCK_WOLVES_SLICE_COLOR
+    }, providedOptions );
 
     const labelText = new Text( NaturalSelectionStrings.wolvesStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
@@ -60,4 +52,3 @@ class WolvesCheckbox extends EnvironmentalFactorCheckbox {
 }
 
 naturalSelection.register( 'WolvesCheckbox', WolvesCheckbox );
-export default WolvesCheckbox;

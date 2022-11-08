@@ -9,12 +9,59 @@
 import Range from '../../../dot/js/Range.js';
 import AssertUtils from '../../../phetcommon/js/AssertUtils.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
+import { VBoxOptions } from '../../../scenery/js/imports.js';
+import { ArrowButtonOptions } from '../../../sun/js/buttons/ArrowButton.js';
 import ButtonNode from '../../../sun/js/buttons/ButtonNode.js';
+import { CheckboxOptions } from '../../../sun/js/Checkbox.js';
+import { DialogOptions } from '../../../sun/js/Dialog.js';
+import { PanelOptions } from '../../../sun/js/Panel.js';
 import naturalSelection from '../naturalSelection.js';
 import NaturalSelectionColors from './NaturalSelectionColors.js';
 
 // constants
 const CORNER_RADIUS = 5;
+
+const ARROW_BUTTON_OPTIONS: ArrowButtonOptions = {
+  baseColor: NaturalSelectionColors.ARROW_BUTTONS,
+  stroke: 'black',
+  buttonAppearanceStrategy: ButtonNode.FlatAppearanceStrategy,
+  cornerRadius: 2,
+  lineWidth: 0.5,
+  arrowWidth: 8, // width of base
+  arrowHeight: 10, // from tip to base
+  xMargin: 6,
+  yMargin: 4,
+  touchAreaXDilation: 10,
+  touchAreaYDilation: 6,
+  mouseAreaXDilation: 5,
+  mouseAreaYDilation: 3
+};
+
+const CHECKBOX_OPTIONS: CheckboxOptions = {
+  spacing: 4,
+  boxWidth: 16
+};
+
+const DIALOG_OPTIONS: DialogOptions = {
+  closeButtonTouchAreaXDilation: 20,
+  closeButtonTouchAreaYDilation: 20,
+  closeButtonMouseAreaXDilation: 10,
+  closeButtonMouseAreaYDilation: 10
+};
+
+const PANEL_OPTIONS: PanelOptions = {
+  align: 'left',
+  cornerRadius: CORNER_RADIUS,
+  xMargin: 15,
+  yMargin: 10,
+  fill: NaturalSelectionColors.PANEL_FILL,
+  stroke: NaturalSelectionColors.PANEL_STROKE
+};
+
+const VBOX_OPTIONS: VBoxOptions = {
+  spacing: 11,
+  align: 'left'
+};
 
 const NaturalSelectionConstants = {
 
@@ -47,52 +94,20 @@ const NaturalSelectionConstants = {
   CORNER_RADIUS: CORNER_RADIUS,
 
   // ArrowButton
-  ARROW_BUTTON_OPTIONS: {
-    baseColor: NaturalSelectionColors.ARROW_BUTTONS,
-    stroke: 'black',
-    buttonAppearanceStrategy: ButtonNode.FlatAppearanceStrategy,
-    cornerRadius: 2,
-    lineWidth: 0.5,
-    arrowWidth: 8, // width of base
-    arrowHeight: 10, // from tip to base
-    xMargin: 6,
-    yMargin: 4,
-    touchAreaXDilation: 10,
-    touchAreaYDilation: 6,
-    mouseAreaXDilation: 5,
-    mouseAreaYDilation: 3
-  },
+  ARROW_BUTTON_OPTIONS: ARROW_BUTTON_OPTIONS,
 
   // Checkbox
-  CHECKBOX_OPTIONS: {
-    spacing: 4,
-    boxWidth: 16
-  },
+  CHECKBOX_OPTIONS: CHECKBOX_OPTIONS,
   CHECKBOX_X_SPACING: 6,
 
   // Panel
-  PANEL_OPTIONS: {
-    align: 'left',
-    cornerRadius: CORNER_RADIUS,
-    xMargin: 15,
-    yMargin: 10,
-    fill: NaturalSelectionColors.PANEL_FILL,
-    stroke: NaturalSelectionColors.PANEL_STROKE
-  },
+  PANEL_OPTIONS: PANEL_OPTIONS,
 
   // VBox
-  VBOX_OPTIONS: {
-    spacing: 11,
-    align: 'left'
-  },
+  VBOX_OPTIONS: VBOX_OPTIONS,
 
   // Dialog
-  DIALOG_OPTIONS: {
-    closeButtonTouchAreaXDilation: 20,
-    closeButtonTouchAreaYDilation: 20,
-    closeButtonMouseAreaXDilation: 10,
-    closeButtonMouseAreaYDilation: 10
-  },
+  DIALOG_OPTIONS: DIALOG_OPTIONS,
 
   // Fonts
   CHECKBOX_FONT: new PhetFont( 16 ),

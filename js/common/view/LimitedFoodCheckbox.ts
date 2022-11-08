@@ -1,43 +1,35 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * LimitedFoodCheckbox is a checkbox for enabling the 'Limited Food' environmental factor.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { AlignGroup, Text } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import EnvironmentalFactorCheckbox from './EnvironmentalFactorCheckbox.js';
+import EnvironmentalFactorCheckbox, { EnvironmentalFactorCheckboxOptions } from './EnvironmentalFactorCheckbox.js';
+import Property from '../../../../axon/js/Property.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
-class LimitedFoodCheckbox extends EnvironmentalFactorCheckbox {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Property.<boolean>} limitedFoodProperty
-   * @param {AlignGroup} alignGroup
-   * @param {Object} [options]
-   */
-  constructor( limitedFoodProperty, alignGroup, options ) {
+type LimitedFoodCheckboxOptions = SelfOptions & PickRequired<EnvironmentalFactorCheckboxOptions, 'tandem'>;
 
-    assert && AssertUtils.assertPropertyOf( limitedFoodProperty, 'boolean' );
-    assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
+export default class LimitedFoodCheckbox extends EnvironmentalFactorCheckbox {
 
-    options = merge( {
+  public constructor( limitedFoodProperty: Property<boolean>, alignGroup: AlignGroup, providedOptions: LimitedFoodCheckboxOptions ) {
 
-      // EnvironmentalFactorCheckbox options
+    const options = optionize<LimitedFoodCheckboxOptions, SelfOptions, EnvironmentalFactorCheckboxOptions>()( {
+
+      // EnvironmentalFactorCheckboxOptions
       clockSliceRange: NaturalSelectionConstants.CLOCK_FOOD_RANGE,
-      clockSliceColor: NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR,
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+      clockSliceColor: NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR
+    }, providedOptions );
 
     const labelText = new Text( NaturalSelectionStrings.limitedFoodStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
@@ -50,4 +42,3 @@ class LimitedFoodCheckbox extends EnvironmentalFactorCheckbox {
 }
 
 naturalSelection.register( 'LimitedFoodCheckbox', LimitedFoodCheckbox );
-export default LimitedFoodCheckbox;

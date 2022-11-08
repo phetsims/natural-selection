@@ -1,44 +1,36 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ToughFoodCheckbox is a checkbox for enabling the 'Tough Food' environmental factor.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
 import { AlignGroup, HBox, Image, Text } from '../../../../scenery/js/imports.js';
 import toughShrub3_png from '../../../images/toughShrub3_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import EnvironmentalFactorCheckbox from './EnvironmentalFactorCheckbox.js';
+import EnvironmentalFactorCheckbox, { EnvironmentalFactorCheckboxOptions } from './EnvironmentalFactorCheckbox.js';
+import Property from '../../../../axon/js/Property.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
-class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Property.<boolean>} isToughProperty
-   * @param {AlignGroup} alignGroup
-   * @param {Object} [options]
-   */
-  constructor( isToughProperty, alignGroup, options ) {
+type ToughFoodCheckboxOptions = SelfOptions & PickRequired<EnvironmentalFactorCheckboxOptions, 'tandem'>;
 
-    assert && AssertUtils.assertPropertyOf( isToughProperty, 'boolean' );
-    assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
+export default class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
 
-    options = merge( {
+  public constructor( isToughProperty: Property<boolean>, alignGroup: AlignGroup, providedOptions: ToughFoodCheckboxOptions ) {
 
-      // EnvironmentalFactorCheckbox options
+    const options = optionize<ToughFoodCheckboxOptions, SelfOptions, EnvironmentalFactorCheckboxOptions>()( {
+
+      // EnvironmentalFactorCheckboxOptions
       clockSliceRange: NaturalSelectionConstants.CLOCK_FOOD_RANGE,
-      clockSliceColor: NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR,
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+      clockSliceColor: NaturalSelectionColors.CLOCK_FOOD_SLICE_COLOR
+    }, providedOptions );
 
     const labelText = new Text( NaturalSelectionStrings.toughFoodStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
@@ -60,4 +52,3 @@ class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
 }
 
 naturalSelection.register( 'ToughFoodCheckbox', ToughFoodCheckbox );
-export default ToughFoodCheckbox;
