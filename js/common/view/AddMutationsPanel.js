@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * AddMutationsPanel is the panel that contains controls used to add mutations. For each gene, press a push button
  * to selected whether its mutant allele will be dominant or recessive. The push button then disappears, and is

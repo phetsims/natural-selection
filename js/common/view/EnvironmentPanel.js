@@ -1,5 +1,6 @@
 // Copyright 2021-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * EnvironmentPanel contains everything that's in the panel at the top-center of the screen.
  *

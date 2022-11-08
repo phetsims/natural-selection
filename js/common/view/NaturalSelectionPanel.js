@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * NaturalSelectionPanel is a specialization of Panel that provides a more convenient API for creating a
  * fixed-width Panel, and for disabling the Panel's content.
