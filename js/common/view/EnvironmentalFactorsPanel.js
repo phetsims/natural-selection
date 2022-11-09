@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * EnvironmentalFactorsPanel is the panel that contains controls for environmental factors that affect
  * the mortality of bunnies.
