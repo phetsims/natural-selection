@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * AddMutationsPanel is the panel that contains controls used to add mutations. For each gene, press a push button
  * to selected whether its mutant allele will be dominant or recessive. The push button then disappears, and is
@@ -10,10 +9,12 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import { AlignBox, AlignGroup, HBox, Image, Node, Rectangle, Text, VBox } from '../../../../scenery/js/imports.js';
-import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize, { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HBoxOptions, Image, Node, NodeOptions, Rectangle, TColor, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import RectangularPushButton, { RectangularPushButtonOptions } from '../../../../sun/js/buttons/RectangularPushButton.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -23,7 +24,7 @@ import GenePool from '../model/GenePool.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import MutationIconNode from './MutationIconNode.js';
-import NaturalSelectionPanel from './NaturalSelectionPanel.js';
+import NaturalSelectionPanel, { NaturalSelectionPanelOptions } from './NaturalSelectionPanel.js';
 
 // constants
 const COLUMN_SPACING = 8;
@@ -31,24 +32,21 @@ const BUTTON_ICON_SCALE = 0.5;
 const LABEL_COLUMN_X_ALIGN = 'left';
 const BUTTON_COLUMNS_X_ALIGN = 'center';
 const BUTTON_CORNER_RADIUS = 4;
-const NORMAL_ALLELE_LINE_DASH = [];
+const NORMAL_ALLELE_LINE_DASH: number[] = [];
 const MUTANT_ALLELE_LINE_DASH = [ 3, 3 ];
+
+type SelfOptions = EmptySelfOptions;
+
+type AddMutationsPanelOptions = SelfOptions & NaturalSelectionPanelOptions;
 
 class AddMutationsPanel extends NaturalSelectionPanel {
 
-  /**
-   * @param {GenePool} genePool
-   * @param {Object} [options]
-   */
-  constructor( genePool, options ) {
+  private readonly rows: Row[];
 
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
+  public constructor( genePool: GenePool, providedOptions: AddMutationsPanelOptions ) {
 
-    options = merge( {
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, NaturalSelectionConstants.PANEL_OPTIONS, options );
+    const options = optionize3<AddMutationsPanelOptions, SelfOptions, NaturalSelectionPanelOptions>()(
+      {}, NaturalSelectionConstants.PANEL_OPTIONS, providedOptions );
 
     // All allele icons have the same effective width and height.
     const iconsAlignGroup = new AlignGroup();
@@ -93,7 +91,7 @@ class AddMutationsPanel extends NaturalSelectionPanel {
       children: rows
     } ) );
 
-    const numberOfRowsVisibleProperty = new DerivedProperty( _.map( rows, row => row.visibleProperty ),
+    const numberOfRowsVisibleProperty = DerivedProperty.deriveAny( rows.map( row => row.visibleProperty ),
       () => _.filter( rows, row => row.visible ).length, {
         tandem: options.tandem.createTandem( 'numberOfRowsVisibleProperty' ),
         phetioValueType: NumberIO,
@@ -112,46 +110,33 @@ class AddMutationsPanel extends NaturalSelectionPanel {
 
     super( content, options );
 
-    // @private {Row[]}
     this.rows = rows;
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 
   /**
    * Gets the row that corresponds to a gene.
-   * @param {Gene} gene
-   * @returns {Node}
-   * @public
    */
-  getRow( gene ) {
-    assert && assert( gene instanceof Gene, 'invalid gene' );
-
-    const row = _.find( this.rows, row => ( row.gene === gene ) );
-    assert && assert( row, `row not found for ${gene.name} gene` );
+  public getRow( gene: Gene ): Node {
+    const row = _.find( this.rows, row => ( row.gene === gene ) )!;
+    assert && assert( row, `row not found for ${gene.nameProperty.value} gene` );
     return row;
   }
 
   /**
    * Sets visibility of the UI components related to a specific gene.
-   * @param {Gene} gene
-   * @param {boolean} visible
-   * @public
    */
-  setGeneVisible( gene, visible ) {
-    assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && assert( typeof visible === 'boolean', 'invalid visible' );
-
+  public setGeneVisible( gene: Gene, visible: boolean ): void {
     this.getRow( gene ).visible = visible;
   }
 }
+
+type RowSelfOptions = EmptySelfOptions;
+type RowOptions = RowSelfOptions & PickRequired<HBoxOptions, 'tandem'>;
 
 /**
  * Row is a row in the 'Add Mutations' panel.  It has a dominant and recessive button pair, used to select whether
@@ -161,28 +146,23 @@ class AddMutationsPanel extends NaturalSelectionPanel {
  */
 class Row extends HBox {
 
+  public readonly gene: Gene;
+
   /**
-   * @param {Gene} gene
-   * @param {AlignGroup} iconsAlignGroup - sets uniform width and height for icons
-   * @param {AlignGroup} labelColumnAlignGroup - sets uniform width for column that contains labels
-   * @param {AlignGroup} buttonColumnsAlignGroup - sets uniform width for columns that contain buttons
-   * @param {Object} [options]
+   * @param gene
+   * @param iconsAlignGroup - sets uniform width and height for icons
+   * @param labelColumnAlignGroup - sets uniform width for column that contains labels
+   * @param buttonColumnsAlignGroup - sets uniform width for columns that contain buttons
+   * @param [providedOptions]
    */
-  constructor( gene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, options ) {
+  public constructor( gene: Gene, iconsAlignGroup: AlignGroup, labelColumnAlignGroup: AlignGroup,
+                      buttonColumnsAlignGroup: AlignGroup, providedOptions: RowOptions ) {
 
-    assert && assert( gene instanceof Gene, 'invalid Gene' );
-    assert && assert( iconsAlignGroup instanceof AlignGroup, 'invalid iconsAlignGroup' );
-    assert && assert( labelColumnAlignGroup instanceof AlignGroup, 'invalid labelColumnAlignGroup' );
-    assert && assert( buttonColumnsAlignGroup instanceof AlignGroup, 'invalid buttonColumnsAlignGroup' );
+    const options = optionize<RowOptions, RowSelfOptions, HBoxOptions>()( {
 
-    options = merge( {
-
-      // HBox options
-      spacing: COLUMN_SPACING,
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+      // HBoxOptions
+      spacing: COLUMN_SPACING
+    }, providedOptions );
 
     // label that indicates the gene, to the left of the push buttons
     const geneNameText = new Text( gene.nameProperty, {
@@ -227,12 +207,11 @@ class Row extends HBox {
     // icon for the recessive allele
     const recessiveAlleleIcon = new AlleleIcon( gene.normalAllele.image, iconsAlignGroup, alleleIconOptions );
 
-    const alignBoxOptions = {
+    const alignBoxOptions: AlignBoxOptions = {
       group: buttonColumnsAlignGroup,
       xAlign: BUTTON_COLUMNS_X_ALIGN
     };
 
-    assert && assert( !options.children, 'Row sets children' );
     options.children = [
       geneNameTextWrapper,
       new Node( {
@@ -282,19 +261,17 @@ class Row extends HBox {
       }
     } );
 
-    // @public (read-only)
     this.gene = gene;
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 }
+
+type MutationButtonSelfOptions = EmptySelfOptions;
+type MutationButtonOptions = MutationButtonSelfOptions & PickRequired<RectangularPushButtonOptions, 'listener' | 'tandem'>;
 
 /**
  * MutationButton is a push button used to apply a mutation.
@@ -302,53 +279,59 @@ class Row extends HBox {
 class MutationButton extends RectangularPushButton {
 
   /**
-   * @param {HTMLImageElement} mutantAlleleImage - the image on the button
-   * @param {AlignGroup} iconsAlignGroup - sets uniform width and height for icons
-   * @param {Object} [options]
+   * @param mutantAlleleImage - the image on the button
+   * @param iconsAlignGroup - sets uniform width and height for icons
+   * @param [providedOptions]
    */
-  constructor( mutantAlleleImage, iconsAlignGroup, options ) {
+  public constructor( mutantAlleleImage: HTMLImageElement, iconsAlignGroup: AlignGroup, providedOptions: MutationButtonOptions ) {
 
-    assert && assert( mutantAlleleImage instanceof HTMLImageElement, 'invalid mutantAlleleImage' );
-    assert && assert( iconsAlignGroup instanceof AlignGroup, 'invalid iconsAlignGroup' );
+    const options = optionize<MutationButtonOptions, MutationButtonSelfOptions, RectangularPushButtonOptions>()( {
 
-    options = merge( {
+      // RectangularPushButtonOptions
       baseColor: NaturalSelectionColors.ADD_MUTATION_BUTTONS,
       cornerRadius: BUTTON_CORNER_RADIUS,
-      tandem: Tandem.REQUIRED,
       visiblePropertyOptions: { phetioReadOnly: true }
-    }, options );
+    }, providedOptions );
 
     const imageNode = new Image( mutantAlleleImage, {
       scale: BUTTON_ICON_SCALE
     } );
 
-    assert && assert( !options.content, 'MutationButton sets content' );
     options.content = new AlignBox( imageNode, { group: iconsAlignGroup } );
 
     super( options );
   }
 }
 
+type AlleleIconSelfOptions = {
+  width?: number;
+  height?: number;
+  stroke?: TColor;
+};
+type AlleleIconOptions = AlleleIconSelfOptions;
+
 /**
  * AlleleIcon shows an icon that represents an allele.
  */
 class AlleleIcon extends Node {
 
+  private readonly imageNode: Image;
+  private readonly outlineRectangle: Rectangle;
+
   /**
-   * @param {Image} image - the default image on the icon
-   * @param {AlignGroup} iconsAlignGroup - sets uniform width and height for icons
-   * @param {Object} [options]
+   * @param image - the default image on the icon
+   * @param iconsAlignGroup - sets uniform width and height for icons
+   * @param [providedOptions]
    */
-  constructor( image, iconsAlignGroup, options ) {
+  public constructor( image: HTMLImageElement, iconsAlignGroup: AlignGroup, providedOptions: AlleleIconOptions ) {
 
-    assert && assert( image instanceof HTMLImageElement, 'invalid image' );
-    assert && assert( iconsAlignGroup instanceof AlignGroup, 'invalid iconsAlignGroup' );
+    const options = optionize<AlleleIconOptions, AlleleIconSelfOptions, NodeOptions>()( {
 
-    options = merge( {
+      // AlleleIconSelfOptions
       width: 100,
       height: 100,
       stroke: 'black'
-    }, options );
+    }, providedOptions );
 
     const imageNode = new Image( image, {
       scale: BUTTON_ICON_SCALE
@@ -360,7 +343,6 @@ class AlleleIcon extends Node {
       lineWidth: 2
     } );
 
-    assert && assert( !options.children, 'AlleleIcon sets children' );
     options.children = [
       outlineRectangle,
       new AlignBox( imageNode, {
@@ -371,48 +353,41 @@ class AlleleIcon extends Node {
 
     super( options );
 
-    // @private
-    this.imageNode = imageNode; // {Image}
-    this.outlineRectangle = outlineRectangle; // {Rectangle}
+    this.imageNode = imageNode;
+    this.outlineRectangle = outlineRectangle;
   }
 
   /**
    * Sets the image that appears on this icon.
-   * @param {HTMLImageElement} value
-   * @public
    */
-  set image( value ) {
-    assert && assert( value instanceof HTMLImageElement, 'invalid value' );
+  public set image( value: HTMLImageElement ) {
     this.imageNode.image = value;
   }
 
   /**
    * Sets the lineDash for the icon's outline rectangle.
-   * @param {Array} value
-   * @public
    */
-  set lineDash( value ) {
-    assert && assert( Array.isArray( value ), 'invalid value' );
+  public set lineDash( value: number[] ) {
     this.outlineRectangle.lineDash = value;
   }
 }
+
+type TitleNodeSelfOptions = EmptySelfOptions;
+type TitleNodeOptions = TitleNodeSelfOptions & PickRequired<Text, 'tandem'>;
 
 /**
  * TitleNode supports dynamic locale, and changes between singular/plural based on how many Rows are visible.
  */
 class TitleNode extends Text {
 
-  /**
-   * @param {Property.<number>} numberOfRowsVisibleProperty
-   * @param {Object} [options]
-   */
-  constructor( numberOfRowsVisibleProperty, options ) {
+  public constructor( numberOfRowsVisibleProperty: TReadOnlyProperty<number>, providedOptions: TitleNodeOptions ) {
 
-    options = merge( {
+    const options = optionize<TitleNodeOptions, TitleNodeSelfOptions, TextOptions>()( {
+
+      // TextOptions
       font: NaturalSelectionConstants.TITLE_FONT,
-      maxWidth: 180, // determined empirically
-      tandem: Tandem.REQUIRED
-    }, options );
+      maxWidth: 180 // determined empirically
+    }, providedOptions );
 
     const stringProperty = new DerivedProperty( [
         numberOfRowsVisibleProperty,
@@ -428,11 +403,7 @@ class TitleNode extends Text {
     super( stringProperty, options );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }

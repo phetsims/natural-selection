@@ -1,6 +1,5 @@
 // Copyright 2021-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * EnvironmentPanel contains everything that's in the panel at the top-center of the screen.
  *
@@ -8,43 +7,44 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Node } from '../../../../scenery/js/imports.js';
-import Panel from '../../../../sun/js/Panel.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionModel from '../model/NaturalSelectionModel.js';
 import SimulationMode from '../model/SimulationMode.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import BunnyImageMap from './BunnyImageMap.js';
 import EnvironmentNode from './environment/EnvironmentNode.js';
 import EnvironmentRadioButtonGroup from './EnvironmentRadioButtonGroup.js';
 import GenerationClockNode from './GenerationClockNode.js';
 import PerformanceTimesNode from './PerformanceTimesNode.js';
 import PlayButtonGroup from './PlayButtonGroup.js';
 
-class EnvironmentPanel extends Panel {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {NaturalSelectionModel} model
-   * @param {BunnyImageMap} bunnyImageMap
-   * @param {Object} [options]
-   */
-  constructor( model, bunnyImageMap, options ) {
+type EnvironmentPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
-    options = merge( {
+export default class EnvironmentPanel extends Panel {
 
-      // Panel options
+  private readonly environmentNode: EnvironmentNode;
+
+  public constructor( model: NaturalSelectionModel, bunnyImageMap: BunnyImageMap, providedOptions: EnvironmentPanelOptions ) {
+
+    const options = optionize<EnvironmentPanelOptions, SelfOptions, PanelOptions>()( {
+
+      // PanelOptions
       xMargin: 0,
       yMargin: 0,
       cornerRadius: 0,
       fill: null,
       stroke: null,
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
       phetioVisiblePropertyInstrumented: false
-    }, options );
+    }, providedOptions );
 
     // Where the bunnies, food, etc. are displayed
     const environmentNode = new EnvironmentNode( model, bunnyImageMap, {
@@ -119,18 +119,15 @@ class EnvironmentPanel extends Panel {
       environmentRadioButtonGroup.enabledProperty.value = ( simulationMode !== SimulationMode.COMPLETED );
     } );
 
-    // @private
     this.environmentNode = environmentNode;
   }
 
   /**
    * Updates sprites to match the model.
-   * @public
    */
-  updateSprites() {
+  public updateSprites(): void {
     this.environmentNode.updateSprites();
   }
 }
 
 naturalSelection.register( 'EnvironmentPanel', EnvironmentPanel );
-export default EnvironmentPanel;
