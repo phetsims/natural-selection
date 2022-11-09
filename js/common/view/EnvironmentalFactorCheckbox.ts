@@ -12,6 +12,7 @@
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import { optionize4 } from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { AlignBox, AlignGroup, HBox, Node, TColor } from '../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
@@ -27,7 +28,9 @@ type SelfOptions = {
   clockSliceColor?: TColor;
 };
 
-export type EnvironmentalFactorCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+export type EnvironmentalFactorCheckboxOptions = SelfOptions &
+  PickOptional<CheckboxOptions, 'visible'> &
+  PickRequired<CheckboxOptions, 'tandem'>;
 
 export default class EnvironmentalFactorCheckbox extends Checkbox {
 

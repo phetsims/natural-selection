@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * EnvironmentalFactorsPanel is the panel that contains controls for environmental factors that affect
  * the mortality of bunnies.
@@ -9,40 +8,39 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import { AlignGroup, Text, VBox } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize, { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { AlignGroup, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import LimitedFoodCheckbox from './LimitedFoodCheckbox.js';
-import NaturalSelectionPanel from './NaturalSelectionPanel.js';
+import NaturalSelectionPanel, { NaturalSelectionPanelOptions } from './NaturalSelectionPanel.js';
 import ToughFoodCheckbox from './ToughFoodCheckbox.js';
 import WolvesCheckbox from './WolvesCheckbox.js';
 
-class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
+type SelfOptions = {
+  toughFoodCheckboxVisible?: boolean;
+};
 
-  /**
-   * @param {Property.<boolean>} wolvesEnabledProperty
-   * @param {Property.<boolean>} foodIsToughProperty
-   * @param {Property.<boolean>} foodIsLimitedProperty
-   * @param {Object} [options]
-   */
-  constructor( wolvesEnabledProperty, foodIsToughProperty, foodIsLimitedProperty, options ) {
+type EnvironmentalFactorsPanelOptions = SelfOptions & NaturalSelectionPanelOptions;
 
-    assert && AssertUtils.assertPropertyOf( wolvesEnabledProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyOf( foodIsToughProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyOf( foodIsLimitedProperty, 'boolean' );
+export default class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
 
-    options = merge( {
-      toughFoodCheckboxVisible: true,
+  public constructor( wolvesEnabledProperty: Property<boolean>, foodIsToughProperty: Property<boolean>,
+                      foodIsLimitedProperty: Property<boolean>, providedOptions: EnvironmentalFactorsPanelOptions ) {
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, NaturalSelectionConstants.PANEL_OPTIONS, options );
+    const options = optionize4<EnvironmentalFactorsPanelOptions, SelfOptions, NaturalSelectionPanelOptions>()(
+      {}, NaturalSelectionConstants.PANEL_OPTIONS, {
+
+        // SelfOptions
+        toughFoodCheckboxVisible: true
+      }, providedOptions );
 
     // To make all checkbox labels have the same effective size
     const checkboxLabelAlignGroup = new AlignGroup();
@@ -65,13 +63,16 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     // pointer areas to fill vertical space between the checkboxes.
     // See https://github.com/phetsims/natural-selection/issues/145 and https://github.com/phetsims/natural-selection/issues/173
     const xDilation = 8;
-    const yDilation = NaturalSelectionConstants.VBOX_OPTIONS.spacing / 2;
+    const ySpacing = NaturalSelectionConstants.VBOX_OPTIONS.spacing!;
+    assert && assert( ySpacing !== undefined );
+    const yDilation = ySpacing / 2;
     checkboxes.forEach( checkbox => {
       checkbox.touchArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
       checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
     } );
 
-    const numberOfCheckboxesVisibleProperty = new DerivedProperty( _.map( checkboxes, checkbox => checkbox.visibleProperty ),
+    const numberOfCheckboxesVisibleProperty = DerivedProperty.deriveAny(
+      checkboxes.map( checkbox => checkbox.visibleProperty ),
       () => _.filter( checkboxes, checkbox => checkbox.visible ).length, {
         tandem: options.tandem.createTandem( 'numberOfCheckboxesVisibleProperty' ),
         phetioValueType: NumberIO,
@@ -79,9 +80,8 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       } );
 
     // title
-    const titleText = new TitleNode( numberOfCheckboxesVisibleProperty, {
-      tandem: options.tandem.createTandem( 'titleText' ),
-      phetioVisiblePropertyInstrumented: true
+    const titleText = new TitleText( numberOfCheckboxesVisibleProperty, {
+      tandem: options.tandem.createTandem( 'titleText' )
     } );
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
@@ -91,28 +91,29 @@ class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     super( content, options );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 }
 
+type TitleTextSelfOptions = EmptySelfOptions;
+type TitleTextOptions = TitleTextSelfOptions & PickRequired<Text, 'tandem'>;
+
 /**
- * TitleNode supports dynamic locale, and changes between singular/plural based on how many checkboxes are visible.
+ * TitleText supports dynamic locale, and changes between singular/plural based on how many checkboxes are visible.
  */
-class TitleNode extends Text {
+class TitleText extends Text {
 
-  constructor( numberOfCheckboxesVisibleProperty, options ) {
+  public constructor( numberOfCheckboxesVisibleProperty: TReadOnlyProperty<number>, providedOptions: TitleTextOptions ) {
 
-    options = merge( {
+    const options = optionize<TitleTextOptions, TitleTextSelfOptions, TextOptions>()( {
+
+      // TextOptions
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 175, // determined empirically,
-      tandem: Tandem.REQUIRED
-    }, options );
+      phetioVisiblePropertyInstrumented: true
+    }, providedOptions );
 
     const stringProperty = new DerivedProperty( [
       numberOfCheckboxesVisibleProperty,
@@ -127,15 +128,10 @@ class TitleNode extends Text {
     super( stringProperty, options );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 }
 
 naturalSelection.register( 'EnvironmentalFactorsPanel', EnvironmentalFactorsPanel );
-export default EnvironmentalFactorsPanel;
