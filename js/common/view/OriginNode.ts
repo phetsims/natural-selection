@@ -1,4 +1,4 @@
-// Copyright 2020-2021, University of Colorado Boulder
+// Copyright 2020-2022, University of Colorado Boulder
 
 /**
  * OriginNode is a debugging node used to show an object's origin. Enable via ?showOrigin.
