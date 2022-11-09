@@ -1,5 +1,6 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * OriginNode is a debugging node used to show an object's origin. Enable via ?showOrigin.
  *
