@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * AllelesPanel is the panel that contains controls for showing alleles in the 'Pedigree' graph.
  * Each row in the panel corresponds to one gene.  Until a gene has mutated, its row is disabled,
