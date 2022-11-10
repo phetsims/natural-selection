@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ProportionGraphNode displays the Proportions graph.
  * Note that this graph is not a performance concern, so it is currently updated regardless of whether it's visible.
@@ -10,14 +9,15 @@
 
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../../axon/js/NumberProperty.js';
-import ReadOnlyProperty from '../../../../../axon/js/ReadOnlyProperty.js';
+import Property from '../../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import merge from '../../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
+import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignGroup, HBox, Node, Rectangle, Text, VBox } from '../../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, HBox, Node, NodeOptions, Rectangle, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
 import Checkbox from '../../../../../sun/js/Checkbox.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
 import StringIO from '../../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
@@ -39,26 +39,28 @@ const ROW_LABELS_X_ALIGN = 'left';
 const COLUMN_LABELS_X_ALIGN = 'center';
 const CELLS_Y_ALIGN = 'bottom';
 
+type SelfOptions = {
+  graphWidth?: number;
+  graphHeight?: number;
+};
+
+type ProportionsGraphNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+
 export default class ProportionsGraphNode extends Node {
 
-  /**
-   * @param {ProportionsModel} proportionsModel
-   * @param {GenePool} genePool
-   * @param {Object} [options]
-   */
-  constructor( proportionsModel, genePool, options ) {
+  private readonly geneColumns: Column[];
 
-    assert && assert( proportionsModel instanceof ProportionsModel, 'invalid proportionsModel' );
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
+  public constructor( proportionsModel: ProportionsModel, genePool: GenePool, providedOptions: ProportionsGraphNodeOptions ) {
 
-    options = merge( {
+    const options = optionize<ProportionsGraphNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       graphWidth: 100,
       graphHeight: 100,
 
-      // phet-io
-      tandem: Tandem.REQUIRED,
+      // NodeOptions
       phetioVisiblePropertyInstrumented: false
-    }, options );
+    }, providedOptions );
 
     // To make this code easier to read
     const startCounts = proportionsModel.startCountsProperty.value;
@@ -131,24 +133,21 @@ export default class ProportionsGraphNode extends Node {
       endCounts.whiteFurCount, endCounts.brownFurCount,
       valuesVisibleProperty, proportionsModel.furVisibleProperty,
       columnLabelsAlignGroup, cellsAlignGroup, {
-        tandem: columnsTandem.createTandem( 'furColumn' ),
-        visiblePropertyOptions: { phetioReadOnly: true }
+        tandem: columnsTandem.createTandem( 'furColumn' )
       } );
     const earsColumn = new Column( genePool.earsGene,
       startCounts.straightEarsCount, startCounts.floppyEarsCount,
       endCounts.straightEarsCount, endCounts.floppyEarsCount,
       valuesVisibleProperty, proportionsModel.earsVisibleProperty,
       columnLabelsAlignGroup, cellsAlignGroup, {
-        tandem: columnsTandem.createTandem( 'earsColumn' ),
-        visiblePropertyOptions: { phetioReadOnly: true }
+        tandem: columnsTandem.createTandem( 'earsColumn' )
       } );
     const teethColumn = new Column( genePool.teethGene,
       startCounts.shortTeethCount, startCounts.longTeethCount,
       endCounts.shortTeethCount, endCounts.longTeethCount,
       valuesVisibleProperty, proportionsModel.teethVisibleProperty,
       columnLabelsAlignGroup, cellsAlignGroup, {
-        tandem: columnsTandem.createTandem( 'teethColumn' ),
-        visiblePropertyOptions: { phetioReadOnly: true }
+        tandem: columnsTandem.createTandem( 'teethColumn' )
       } );
     const geneColumns = [ furColumn, earsColumn, teethColumn ];
 
@@ -211,31 +210,21 @@ export default class ProportionsGraphNode extends Node {
       teethColumn.setEndCounts( endCounts.shortTeethCount, endCounts.longTeethCount );
     } );
 
-    // @private {Column[]}
     this.geneColumns = geneColumns;
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 
   /**
    * Sets visibility of the UI components related to a specific gene.
-   * @param {Gene} gene
-   * @param {boolean} visible
-   * @public
    */
-  setGeneVisible( gene, visible ) {
-    assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && assert( typeof visible === 'boolean', 'invalid visible' );
+  public setGeneVisible( gene: Gene, visible: boolean ): void {
 
-    const column = _.find( this.geneColumns, column => ( column.gene === gene ) );
-    assert && assert( column, `column not found for ${gene.name} gene` );
+    const column = _.find( this.geneColumns, column => ( column.gene === gene ) )!;
+    assert && assert( column, `column not found for ${gene.nameProperty.value} gene` );
     column.visible = visible;
   }
 }
@@ -244,27 +233,29 @@ export default class ProportionsGraphNode extends Node {
  * RowLabel is the label for a row of the Proportions graph.
  * The label consists of 2 lines of text, with a dynamic bunny count on the second line.
  */
+
+type RowLabelSelfOptions = EmptySelfOptions;
+
+type RowLabelOptions = RowLabelSelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+
 class RowLabel extends VBox {
 
+  public readonly countProperty: Property<number>;
+
   /**
-   *
-   * @param {TReadOnlyProperty} firstLineStringProperty - string for the first line of text
-   * @param {number} count
-   * @param {Object} [options]
+   * @param firstLineStringProperty - string for the first line of text
+   * @param count
+   * @param [providedOptions]
    */
-  constructor( firstLineStringProperty, count, options ) {
+  public constructor( firstLineStringProperty: TReadOnlyProperty<string>, count: number, providedOptions: RowLabelOptions ) {
 
-    assert && assert( firstLineStringProperty instanceof ReadOnlyProperty, 'invalid firstLineStringProperty' );
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( count ), 'invalid count' );
+    const options = optionize<RowLabelOptions, RowLabelSelfOptions, VBoxOptions>()( {
 
-    options = merge( {
+      // VBoxOptions
       spacing: 2,
       align: 'left',
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
       phetioVisiblePropertyInstrumented: false
-    }, options );
+    }, providedOptions );
 
     const countProperty = new NumberProperty( count, {
       numberType: 'Integer'
@@ -304,15 +295,10 @@ class RowLabel extends VBox {
 
     super( options );
 
-    // @public
     this.countProperty = countProperty;
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'RowLabel does not support dispose' );
     super.dispose();
   }
@@ -321,39 +307,33 @@ class RowLabel extends VBox {
 /**
  * Column is a column in the Proportions graph. It contains a heading and 2 bars.
  */
+
+type ColumnSelfOptions = EmptySelfOptions;
+
+type ColumnOptions = ColumnSelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+
 class Column extends VBox {
 
-  /**
-   * @param {Gene} gene
-   * @param {number} startNormalCount
-   * @param {number} startMutantCount
-   * @param {number} endNormalCount
-   * @param {number} endMutantCount
-   * @param {Property.<boolean>} valuesVisibleProperty
-   * @param {Property.<boolean>} geneVisibleProperty
-   * @param {AlignGroup} columnLabelsAlignGroup
-   * @param {AlignGroup} barsAlignGroup
-   * @param {Object} [options]
-   */
-  constructor( gene, startNormalCount, startMutantCount, endNormalCount, endMutantCount,
-               valuesVisibleProperty, geneVisibleProperty, columnLabelsAlignGroup, barsAlignGroup, options ) {
+  public readonly gene: Gene;
+  private readonly startBarNode: ProportionsBarNode;
+  private readonly endBarNode: ProportionsBarNode;
 
-    assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( startNormalCount ), 'invalid startNormalCount' );
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( startMutantCount ), 'invalid startMutantCount' );
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( endNormalCount ), 'invalid endNormalCount' );
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( endMutantCount ), 'invalid endMutantCount' );
-    assert && AssertUtils.assertPropertyOf( valuesVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyOf( geneVisibleProperty, 'boolean' );
-    assert && assert( barsAlignGroup instanceof AlignGroup, 'invalid barsAlignGroup' );
+  public constructor( gene: Gene,
+                      startNormalCount: number, startMutantCount: number,
+                      endNormalCount: number, endMutantCount: number,
+                      valuesVisibleProperty: TReadOnlyProperty<boolean>,
+                      geneVisibleProperty: Property<boolean>,
+                      columnLabelsAlignGroup: AlignGroup,
+                      barsAlignGroup: AlignGroup,
+                      providedOptions: ColumnOptions ) {
 
-    options = merge( {
+    const options = optionize<ColumnOptions, ColumnSelfOptions, VBoxOptions>()( {
+
+      // VBoxOptions
       spacing: ROW_SPACING,
       align: 'center',
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+      visiblePropertyOptions: { phetioReadOnly: true }
+    }, providedOptions );
 
     // Checkbox to hide the column
     const checkboxTandem = options.tandem.createTandem( 'checkbox' );
@@ -406,28 +386,20 @@ class Column extends VBox {
       startBarNode.visible = endBarNode.visible = geneVisible;
     } );
 
-    // @private
     this.gene = gene;
-    this.startBarNode = startBarNode; // {ProportionsBarNode}
-    this.endBarNode = endBarNode; // {ProportionsBarNode}
+    this.startBarNode = startBarNode;
+    this.endBarNode = endBarNode;
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'Column does not support dispose' );
     super.dispose();
   }
 
   /**
    * Sets the counts for the 'start' bar.
-   * @param {number} normalCount
-   * @param {number} mutantCount
-   * @public
    */
-  setStartCounts( normalCount, mutantCount ) {
+  public setStartCounts( normalCount: number, mutantCount: number ): void {
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( normalCount ), 'invalid normalCount' );
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( mutantCount ), 'invalid mutantCount' );
 
@@ -436,11 +408,8 @@ class Column extends VBox {
 
   /**
    * Sets the counts for the 'end' bar.
-   * @param {number} normalCount
-   * @param {number} mutantCount
-   * @public
    */
-  setEndCounts( normalCount, mutantCount ) {
+  public setEndCounts( normalCount: number, mutantCount: number ): void {
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( normalCount ), 'invalid normalCount' );
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( mutantCount ), 'invalid mutantCount' );
 

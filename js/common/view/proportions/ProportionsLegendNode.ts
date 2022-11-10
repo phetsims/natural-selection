@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ProportionsLegendNode displays the legend in the control panel for the Proportions graph.
  * It shows the color-coding and fill styles used for each allele.
@@ -8,11 +7,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ReadOnlyProperty from '../../../../../axon/js/ReadOnlyProperty.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import required from '../../../../../phet-core/js/required.js';
-import { Color, HBox, Rectangle, Text, VBox } from '../../../../../scenery/js/imports.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
+import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
+import optionize, { EmptySelfOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
+import { HBox, HBoxOptions, Rectangle, TColor, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
@@ -23,25 +21,23 @@ import HatchingRectangle from '../HatchingRectangle.js';
 const RECTANGLE_WIDTH = 25;
 const RECTANGLE_HEIGHT = 15;
 
+type SelfOptions = EmptySelfOptions;
+
+type ProportionsLegendNodeOptions = SelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+
 export default class ProportionsLegendNode extends VBox {
 
-  /**
-   * @param {GenePool} genePool
-   * @param {Object} [options]
-   */
-  constructor( genePool, options ) {
+  private readonly legendNodes: GeneLegendNode[];
 
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
+  public constructor( genePool: GenePool, providedOptions: ProportionsLegendNodeOptions ) {
 
-    options = merge( {
-      align: 'left',
+    const options = optionize4<ProportionsLegendNodeOptions, SelfOptions, VBoxOptions>()(
+      {}, NaturalSelectionConstants.VBOX_OPTIONS, {
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, NaturalSelectionConstants.VBOX_OPTIONS, options );
-
-    assert && assert( options.spacing, 'ProportionsLegendNode sets spacing' );
-    options.spacing = 25;
+        // VBoxOptions
+        align: 'left',
+        spacing: 25
+      }, providedOptions );
 
     // A legend for each gene
     const legendNodes = _.map( genePool.genes, gene =>
@@ -51,36 +47,24 @@ export default class ProportionsLegendNode extends VBox {
         mutantTandemName: `${gene.mutantAllele.tandemPrefix}LegendNode`
       } ) );
 
-    assert && assert( !options.children, 'ProportionsLegendNode sets children' );
     options.children = legendNodes;
 
     super( options );
 
-    // @private {GeneLegendNode[]}
     this.legendNodes = legendNodes;
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 
   /**
    * Sets visibility of the UI components related to a specific gene.
-   * @param {Gene} gene
-   * @param {boolean} visible
-   * @public
    */
-  setGeneVisible( gene, visible ) {
-    assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && assert( typeof visible === 'boolean', 'invalid visible' );
-
-    const legendNode = _.find( this.legendNodes, legendNode => ( legendNode.gene === gene ) );
-    assert && assert( legendNode, `legendNode not found for ${gene.name} gene` );
+  public setGeneVisible( gene: Gene, visible: boolean ): void {
+    const legendNode = _.find( this.legendNodes, legendNode => ( legendNode.gene === gene ) )!;
+    assert && assert( legendNode, `legendNode not found for ${gene.nameProperty.value} gene` );
     legendNode.visible = visible;
   }
 }
@@ -89,49 +73,43 @@ export default class ProportionsLegendNode extends VBox {
  * GeneLegendNode is the legend for one gene. It shows the color and fill-style used for both the normal allele and
  * the mutation allele.
  */
+
+type GeneLegendNodeSelfOptions = {
+  normalTandemName: string; // tandem name for the normal allele
+  mutantTandemName: string; // tandem name for the mutant allele
+};
+
+type GeneLegendNodeOptions = GeneLegendNodeSelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+
 class GeneLegendNode extends VBox {
 
-  /**
-   * @param {Gene} gene
-   * @param {Object} config
-   */
-  constructor( gene, config ) {
+  public readonly gene: Gene;
 
-    assert && assert( gene instanceof Gene, 'invalid gene' );
+  public constructor( gene: Gene, providedOptions: GeneLegendNodeOptions ) {
 
-    config = merge( {
+    const options = optionize4<GeneLegendNodeOptions, GeneLegendNodeSelfOptions, VBoxOptions>()(
+      {}, NaturalSelectionConstants.VBOX_OPTIONS, {
 
-      // phet-io
-      tandem: Tandem.REQUIRED,
-      visiblePropertyOptions: { phetioReadOnly: true },
-      normalTandemName: required( config.normalTandemName ), // tandem name for the normal allele
-      mutantTandemName: required( config.mutantTandemName ) // tandem name for the mutant allele
-    }, config );
+        // VBoxOptions
+        visiblePropertyOptions: { phetioReadOnly: true }
+      }, providedOptions );
 
-    assert && assert( !config.children, 'GeneLegendNode sets children' );
-    config = merge( {
-      children: [
-        new AlleleLegendNode( gene.normalAllele.nameProperty, gene.color, {
-          tandem: config.tandem.createTandem( config.normalTandemName )
-        } ),
-        new AlleleLegendNode( gene.mutantAllele.nameProperty, gene.color, {
-          isMutant: true,
-          tandem: config.tandem.createTandem( config.mutantTandemName )
-        } )
-      ]
-    }, NaturalSelectionConstants.VBOX_OPTIONS, config );
+    options.children = [
+      new AlleleLegendNode( gene.normalAllele.nameProperty, gene.color, {
+        tandem: options.tandem.createTandem( options.normalTandemName )
+      } ),
+      new AlleleLegendNode( gene.mutantAllele.nameProperty, gene.color, {
+        isMutant: true,
+        tandem: options.tandem.createTandem( options.mutantTandemName )
+      } )
+    ];
 
-    super( config );
+    super( options );
 
-    // @public (read-only)
     this.gene = gene;
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'GeneLegendNode does not support dispose' );
     super.dispose();
   }
@@ -141,30 +119,26 @@ class GeneLegendNode extends VBox {
  * AlleleLegendNode is the legend for one allele. It describes the color and fill style used for a specific allele.
  * Mutations are use a hatching fill style, while non-mutations use a solid fill style.
  */
+
+type AlleleLegendNodeSelfOptions = {
+  isMutant?: boolean; // whether the allele is mutant, affects the fill style used
+};
+
+type AlleleLegendNodeOptions = AlleleLegendNodeSelfOptions & PickRequired<HBoxOptions, 'tandem'>;
+
 class AlleleLegendNode extends HBox {
 
-  /**
-   * @param {TReadOnlyProperty<string>} alleleNameProperty
-   * @param {Color|string} color
-   * @param {Object} [options]
-   */
-  constructor( alleleNameProperty, color, options ) {
+  public constructor( alleleNameProperty: TReadOnlyProperty<string>, color: TColor, providedOptions: AlleleLegendNodeOptions ) {
 
-    assert && assert( alleleNameProperty instanceof ReadOnlyProperty, 'invalid alleleNameProperty' );
-    assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
+    const options = optionize<AlleleLegendNodeOptions, AlleleLegendNodeSelfOptions, HBoxOptions>()( {
 
-    options = merge( {
-
-      // whether the allele is mutant, affects the fill style used
+      // AlleleLegendNodeSelfOptions
       isMutant: false,
 
-      // HBox options
+      // HBoxOptions
       spacing: 5,
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
       phetioVisiblePropertyInstrumented: false
-    }, options );
+    }, providedOptions );
 
     const rectangleOptions = {
       fill: color,
@@ -180,17 +154,12 @@ class AlleleLegendNode extends HBox {
       tandem: options.tandem.createTandem( 'text' )
     } );
 
-    assert && assert( !options.children, 'AlleleLegendNode sets children' );
     options.children = [ rectangleNode, text ];
 
     super( options );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'AlleleLegendNode does not support dispose' );
     super.dispose();
   }
