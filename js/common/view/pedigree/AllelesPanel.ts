@@ -11,11 +11,10 @@
  */
 
 import Property from '../../../../../axon/js/Property.js';
-import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import optionize, { EmptySelfOptions, optionize3 } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
-import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HBoxOptions, HStrut, Image, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
+import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HStrut, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
 import Checkbox from '../../../../../sun/js/Checkbox.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
@@ -24,6 +23,7 @@ import GenePool from '../../model/GenePool.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 import NaturalSelectionPanel, { NaturalSelectionPanelOptions } from '../NaturalSelectionPanel.js';
+import { AlleleNode } from './AlleleNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -202,60 +202,6 @@ class Row extends VBox {
   public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
-  }
-}
-
-/**
- * AlleleNode displays the abbreviation and icon for an allele.
- */
-
-type AlleleNodeSelfOptions = EmptySelfOptions;
-
-type AlleleNodeOptions = AlleleNodeSelfOptions & PickRequired<HBoxOptions, 'tandem'>;
-
-class AlleleNode extends HBox {
-
-  private readonly imageNode: Image;
-
-  /**
-   * @param abbreviationProperty - the abbreviation used for the allele
-   * @param image
-   * @param [providedOptions]
-   */
-  public constructor( abbreviationProperty: TReadOnlyProperty<string>,
-                      image: HTMLImageElement,
-                      providedOptions: AlleleNodeOptions ) {
-
-    const options = optionize<AlleleNodeOptions, AlleleNodeSelfOptions, HBoxOptions>()( {
-
-      // HBoxOptions
-      spacing: 6,
-      phetioVisiblePropertyInstrumented: false
-    }, providedOptions );
-
-    const text = new Text( abbreviationProperty, {
-      font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 12, // determined empirically
-      tandem: options.tandem.createTandem( 'text' )
-    } );
-
-    const imageNode = new Image( image, {
-      scale: 0.5 // determined empirically
-    } );
-
-    assert && assert( !options.children, 'AlleleNode sets children' );
-    options.children = [ text, imageNode ];
-
-    super( options );
-
-    this.imageNode = imageNode;
-  }
-
-  /**
-   * Sets the allele image for this node.
-   */
-  public set image( value: HTMLImageElement ) {
-    this.imageNode.image = value;
   }
 }
 
