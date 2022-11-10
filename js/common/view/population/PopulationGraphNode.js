@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PopulationGraphNode displays the population graph. This graph is a performance concern, so plots are updated
  * only when they are visible, see PopulationPlotNode.updatePlot.
