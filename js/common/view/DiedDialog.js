@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * DiedDialog is displayed when all of the bunnies have died.
  * It displays the message "All of the bunnies have died."
