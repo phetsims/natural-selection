@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PopulationGenerationScroller scrolls the x-axis (Generation) of the Population graph.
  *
@@ -13,41 +12,45 @@
  */
 
 import Multilink from '../../../../../axon/js/Multilink.js';
+import Property from '../../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../../dot/js/Range.js';
 import merge from '../../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
-import { HBox, Text } from '../../../../../scenery/js/imports.js';
+import optionize from '../../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
+import { Font, HBox, HBoxOptions, Text } from '../../../../../scenery/js/imports.js';
 import ArrowButton from '../../../../../sun/js/buttons/ArrowButton.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
-class PopulationGenerationScroller extends HBox {
+type SelfOptions = {
+  step?: number; // amount to step the range
+  font?: Font;
+};
+
+type PopulationGenerationScrollerOptions = SelfOptions & PickRequired<HBoxOptions, 'tandem'>;
+
+export default class PopulationGenerationScroller extends HBox {
 
   /**
-   * @param {Property.<Range>} rangeProperty
-   * @param {ReadOnlyProperty.<number>} maxProperty - maximum value for rangeProperty.value.max
-   * @param {Property.<boolean>} isPlayingProperty
-   * @param {Object} [options]
+   * @param rangeProperty
+   * @param maxProperty - maximum value for rangeProperty.value.max
+   * @param isPlayingProperty
+   * @param [providedOptions]
    */
-  constructor( rangeProperty, maxProperty, isPlayingProperty, options ) {
+  public constructor( rangeProperty: Property<Range>, maxProperty: TReadOnlyProperty<number>,
+                      isPlayingProperty: Property<boolean>, providedOptions: PopulationGenerationScrollerOptions ) {
 
-    assert && AssertUtils.assertPropertyOf( rangeProperty, Range );
-    assert && AssertUtils.assertAbstractPropertyOf( maxProperty, 'number' );
-    assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
+    const options = optionize<PopulationGenerationScrollerOptions, SelfOptions, HBoxOptions>()( {
 
-    options = merge( {
-
-      step: 1, // {number} amount to step the range
+      // SelfOptions
+      step: 1,
       font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
 
-      // HBox options
-      spacing: 10,
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+      // HBoxOptions
+      spacing: 10
+    }, providedOptions );
 
     // Maintain the initial range length
     const rangeLength = rangeProperty.value.getLength();
@@ -84,7 +87,6 @@ class PopulationGenerationScroller extends HBox {
       }, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS )
     );
 
-    assert && assert( !options.children, 'PopulationGenerationScroller sets children' );
     options.children = [ backButton, labelNode, forwardButton ];
 
     super( options );
@@ -98,15 +100,10 @@ class PopulationGenerationScroller extends HBox {
       } );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 }
 
 naturalSelection.register( 'PopulationGenerationScroller', PopulationGenerationScroller );
-export default PopulationGenerationScroller;
