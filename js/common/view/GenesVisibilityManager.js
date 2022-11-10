@@ -1,5 +1,6 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * GenesVisibilityManager manages the visibility of UI components that are related to specific genes.
  * This is a PhET-iO only feature, available in Studio. Via a set of Properties, all UI components related to
