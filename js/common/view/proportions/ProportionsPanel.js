@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ProportionsPanel is the panel that contains controls for the 'Proportions' graph.
  *
