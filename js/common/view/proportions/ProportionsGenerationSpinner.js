@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ProportionsGenerationSpinner is the spinner used to select the generation displayed by the Proportions graph.
  *
