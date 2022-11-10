@@ -1,4 +1,4 @@
-// Copyright 2020-2021, University of Colorado Boulder
+// Copyright 2020-2022, University of Colorado Boulder
 
 /**
  * BunnySelectionRectangle is the rectangle that appears around the selected bunny in the environment and
