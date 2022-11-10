@@ -62,7 +62,7 @@ class PopulationModel extends PhetioObject {
 
     options = merge( {
 
-      // {number} length of the x axis, in generations
+      // {number} length of the x-axis, in generations
       xAxisLength: 5,
 
       // phet-io

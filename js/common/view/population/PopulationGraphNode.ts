@@ -25,7 +25,7 @@ import PopulationPlotsNode from './PopulationPlotsNode.js';
 // const
 const X_TICK_MARKS_HEIGHT = 20; // height of x-axis tick marks, determined empirically
 const X_AXIS_LABEL_SPACING = 7; // space between x-axis 'Generation' label/control and x-axis tick marks)
-const Y_AXIS_LABEL_SPACING = 40; // space between y zoom control and y axis (not y tick marks)
+const Y_AXIS_LABEL_SPACING = 40; // space between y zoom control and y-axis (not y tick marks)
 
 type SelfOptions = {
   graphWidth?: number;

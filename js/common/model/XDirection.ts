@@ -1,7 +1,7 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
 /**
- * XDirection is the direction that an Organism (bunny, wolf, shrub) is facing along the x axis.
+ * XDirection is the direction that an Organism (bunny, wolf, shrub) is facing along the x-axis.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -33,8 +33,8 @@ export default class XDirection extends EnumerationValue {
   }
 
   /**
-   * Converts an XDirection to a sign, relative to the x axis. Used to set the sign of the view's x scale, which will
-   * reflect the organism about the y axis, making it appear to face in the desired direction. This assumes that the
+   * Converts an XDirection to a sign, relative to the x-axis. Used to set the sign of the view's x scale, which will
+   * reflect the organism about the y-axis, making it appear to face in the desired direction. This assumes that the
    * default x direction for all organisms is XDirection.RIGHT. For example, this means that all bunny PNG files
    * were drawn with the bunny facing right.
    */

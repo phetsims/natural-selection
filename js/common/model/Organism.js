@@ -31,7 +31,7 @@ class Organism extends PhetioObject {
 
     options = merge( {
       position: DEFAULT_POSITION, // initial position
-      xDirection: XDirection.RIGHT, // initial direction of motion along the x axis
+      xDirection: XDirection.RIGHT, // initial direction of motion along the x-axis
 
       // phet-io
       tandem: Tandem.OPTIONAL

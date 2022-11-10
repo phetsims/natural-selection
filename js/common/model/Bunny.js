@@ -429,7 +429,7 @@ class Bunny extends Organism {
  * Gets the (dx, dy, dz) for a hop cycle.
  * @param {number} hopDistance - maximum straight-line distance that the bunny will hop in the xz plane
  * @param {number} hopHeight - height above the ground that the bunny will hop
- * @param {XDirection} xDirection - direction that the bunny is facing along the x axis
+ * @param {XDirection} xDirection - direction that the bunny is facing along the x-axis
  * @returns {Vector3}
  */
 function getHopDelta( hopDistance, hopHeight, xDirection ) {

@@ -94,7 +94,7 @@ class DataProbe extends PhetioObject {
 
   /**
    * Gets the bunny counts for a specific generation value.
-   * @param {number} dataProbeGeneration - current position of the data probe on the x axis
+   * @param {number} dataProbeGeneration - current position of the data probe on the x-axis
    * @param {number} timeInGenerations - current time on the generation clock, in generations
    * @returns {BunnyCounts|null}
    * @private
@@ -117,7 +117,7 @@ class DataProbe extends PhetioObject {
 
   /**
    * Gets the population count (y value) for a specific generation (x value).
-   * @param {number} dataProbeGeneration - current position of the data probe on the x axis
+   * @param {number} dataProbeGeneration - current position of the data probe on the x-axis
    * @param {Array.<Vector2>} points - data points, x (generation) and y (population)
    * @returns {number}
    * @private

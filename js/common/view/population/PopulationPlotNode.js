@@ -34,7 +34,7 @@ class PopulationPlotNode extends Node {
       // {Property.<boolean>} whether this plot is visible
       plotVisibleProperty: required( config.plotVisibleProperty ),
 
-      // {number} length of the x axis, in generations
+      // {number} length of the x-axis, in generations
       xAxisLength: required( config.xAxisLength ),
 
       // {Property.<Range>} ranges for the axes
@@ -231,7 +231,7 @@ class PopulationPlotNode extends Node {
   }
 
   /**
-   * Model-view transform for x axis.
+   * Model-view transform for x-axis.
    * @param {number} xModel - x model value, in generations
    * @returns {number} x view value
    * @private
@@ -241,7 +241,7 @@ class PopulationPlotNode extends Node {
   }
 
   /**
-   * Model-view transform for y axis. The y axis is inverted (+y up in model, +y down in view).
+   * Model-view transform for y-axis. The y-axis is inverted (+y up in model, +y down in view).
    * @param {number} yModel - y model value, population
    * @returns {number} y view value
    * @private
