@@ -1,34 +1,30 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ProportionsGenerationSpinner is the spinner used to select the generation displayed by the Proportions graph.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import NumberProperty from '../../../../../axon/js/NumberProperty.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import NumberSpinner from '../../../../../sun/js/NumberSpinner.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
+import { RangedProperty } from '../../../../../axon/js/NumberProperty.js';
+import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
+import NumberSpinner, { NumberSpinnerOptions } from '../../../../../sun/js/NumberSpinner.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type ProportionsGenerationSpinnerOptions = SelfOptions & PickRequired<NumberSpinnerOptions, 'tandem'>;
+
 export default class ProportionsGenerationSpinner extends NumberSpinner {
 
-  /**
-   * @param {NumberProperty} proportionsGenerationProperty - the generation displayed by the Proportions graph
-   * @param {Object} [options]
-   */
-  constructor( proportionsGenerationProperty, options ) {
+  public constructor( proportionsGenerationProperty: RangedProperty, providedOptions: ProportionsGenerationSpinnerOptions ) {
 
-    assert && assert( proportionsGenerationProperty instanceof NumberProperty, 'invalid proportionsGenerationProperty' );
-    assert && assert( proportionsGenerationProperty.rangeProperty, 'proportionsGenerationProperty must have rangeProperty' );
+    const options = optionize<ProportionsGenerationSpinnerOptions, SelfOptions, NumberSpinnerOptions>()( {
 
-    options = merge( {
-
-      // NumberSpinner options
+      // NumberSpinnerOptions
       xSpacing: 10,
       arrowsPosition: 'leftRight',
       touchAreaXDilation: 20,
@@ -47,11 +43,8 @@ export default class ProportionsGenerationSpinner extends NumberSpinner {
           font: NaturalSelectionConstants.PROPORTIONS_GENERATION_CONTROL_FONT,
           maxWidth: 250 // determined empirically
         }
-      },
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+      }
+    }, providedOptions );
 
     super( proportionsGenerationProperty, proportionsGenerationProperty.rangeProperty, options );
   }

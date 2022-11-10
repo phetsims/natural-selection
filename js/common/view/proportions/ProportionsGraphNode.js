@@ -159,7 +159,7 @@ export default class ProportionsGraphNode extends Node {
     } );
 
     // Spinner for selecting which generation is displayed
-    const generationSpinner = new ProportionsGenerationSpinner( proportionsModel.proportionsGenerationProperty, {
+    const generationSpinner = new ProportionsGenerationSpinner( proportionsModel.proportionsGenerationProperty.asRanged(), {
       tandem: options.tandem.createTandem( 'generationSpinner' )
     } );
 
