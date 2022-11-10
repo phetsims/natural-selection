@@ -1,40 +1,36 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * MutationAlertsNode manages the position and visibility of 'Mutation Coming' alerts.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Tandem from '../../../../tandem/js/Tandem.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
 import GenePool from '../model/GenePool.js';
 import AddMutationsPanel from './AddMutationsPanel.js';
 import MutationComingNode from './MutationComingNode.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
 // constants
 const X_OFFSET = -5;
 
-class MutationAlertsNode extends Node {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {GenePool} genePool
-   * @param {AddMutationsPanel} addMutationsPanel
-   * @param {Object} [options]
-   */
-  constructor( genePool, addMutationsPanel, options ) {
+type MutationAlertsNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( addMutationsPanel instanceof AddMutationsPanel, 'invalid addMutationsPanel' );
+export default class MutationAlertsNode extends Node {
 
-    options = merge( {
-      tandem: Tandem.REQUIRED,
+  public constructor( genePool: GenePool, addMutationsPanel: AddMutationsPanel, providedOptions: MutationAlertsNodeOptions ) {
+
+    const options = optionize<MutationAlertsNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // NodeOptions
       phetioVisiblePropertyInstrumented: false
-    }, options );
+    }, providedOptions );
 
     // Create a MutationComingNode (aka 'alert') for each gene
     const mutationComingNodes = _.map( genePool.genes, gene => new MutationComingNode( gene, {
@@ -70,15 +66,10 @@ class MutationAlertsNode extends Node {
     } );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 }
 
 naturalSelection.register( 'MutationAlertsNode', MutationAlertsNode );
-export default MutationAlertsNode;

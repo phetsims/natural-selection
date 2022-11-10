@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * MutationComingNode is a popup 'alert' that informs the user that a mutation is about to occur,
  * and gives the user an opportunity to cancel the mutation.  It is not implemented using SUN/Dialog because
@@ -9,34 +8,36 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import { HBox, Node, Path, Text } from '../../../../scenery/js/imports.js';
+import { HBox, Node, NodeOptions, Path, Text } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import Gene from '../model/Gene.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import CancelMutationButton from './CancelMutationButton.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
 // constants
 const X_MARGIN = 8;
 const Y_MARGIN = 4;
 const POINTER_WIDTH = 15;
 
-class MutationComingNode extends Node {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Gene} gene
-   * @param {Object} [options]
-   */
-  constructor( gene, options ) {
-    assert && assert( gene instanceof Gene, 'invalid gene' );
+type MutationComingNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
-    options = merge( {
-      tandem: Tandem.REQUIRED,
+export default class MutationComingNode extends Node {
+
+  public readonly gene: Gene;
+
+  public constructor( gene: Gene, providedOptions: MutationComingNodeOptions ) {
+
+    const options = optionize<MutationComingNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // NodeOptions
       visiblePropertyOptions: { phetioReadOnly: true }
-    }, options );
+    }, providedOptions );
 
     const cancelButton = new CancelMutationButton( {
       listener: () => gene.cancelMutation()
@@ -71,24 +72,17 @@ class MutationComingNode extends Node {
     hBox.left = backgroundPath.left + X_MARGIN;
     hBox.centerY = backgroundPath.centerY;
 
-    assert && assert( !options.children, 'MutationComingNode sets children' );
     options.children = [ backgroundPath, hBox ];
 
     super( options );
 
-    // @public (read-only)
     this.gene = gene;
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 }
 
 naturalSelection.register( 'MutationComingNode', MutationComingNode );
-export default MutationComingNode;

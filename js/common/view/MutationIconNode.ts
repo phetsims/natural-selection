@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * MutationIconNode is the mutation icon that appears in the Pedigree tree and 'Add Mutations' panel.
  * It looks like a DNA helix.
@@ -8,21 +7,27 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import { Circle, Node, Path } from '../../../../scenery/js/imports.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import { Circle, Node, NodeOptions, NodeTranslationOptions, Path } from '../../../../scenery/js/imports.js';
 import dnaSolidShape from '../../../../sherpa/js/fontawesome-5/dnaSolidShape.js';
 import naturalSelection from '../../naturalSelection.js';
 
-class MutationIconNode extends Node {
+type SelfOptions = {
+  radius?: number;
+};
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+type MutationIconNodeOptions = SelfOptions & NodeTranslationOptions & PickOptional<NodeOptions, 'pickable'>;
 
-    options = merge( {
+export default class MutationIconNode extends Node {
+
+  public constructor( providedOptions?: MutationIconNodeOptions ) {
+
+    const options = optionize<MutationIconNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       radius: 12
-    }, options );
+    }, providedOptions );
 
     // Yellow circle
     const circle = new Circle( options.radius, {
@@ -38,7 +43,6 @@ class MutationIconNode extends Node {
     icon.setScaleMagnitude( scale );
     icon.center = circle.center;
 
-    assert && assert( !options.children, 'MutationIconNode sets children' );
     options.children = [ circle, icon ];
 
     super( options );
@@ -46,4 +50,3 @@ class MutationIconNode extends Node {
 }
 
 naturalSelection.register( 'MutationIconNode', MutationIconNode );
-export default MutationIconNode;
