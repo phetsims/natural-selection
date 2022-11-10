@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * GraphsRadioButtonGroup is the radio button group for selecting which of the graphs is visible.
  *
