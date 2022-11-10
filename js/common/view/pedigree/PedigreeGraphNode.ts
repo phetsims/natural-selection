@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PedigreeGraphNode displays the pedigree for an individual. Origin at bottom center.
  * Note that this graph is not a performance concern, so it is currently updated regardless of whether it's visible.
@@ -8,10 +7,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
-import { Node, Rectangle, Text } from '../../../../../scenery/js/imports.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
+import Property from '../../../../../axon/js/Property.js';
+import optionize from '../../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
+import { Node, NodeOptions, Rectangle, Text } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
@@ -24,33 +23,31 @@ import PedigreeBranchNode from './PedigreeBranchNode.js';
 const X_MARGIN = 5;
 const Y_MARGIN = 5;
 
+type SelfOptions = {
+  graphWidth?: number;
+  graphHeight?: number;
+};
+
+type PedigreeGraphNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+
 export default class PedigreeGraphNode extends Node {
 
-  /**
-   * @param {SelectedBunnyProperty} selectedBunnyProperty
-   * @param {BunnyImageMap} bunnyImageMap
-   * @param {Property.<boolean>} furAllelesVisibleProperty
-   * @param {Property.<boolean>} earsAllelesVisibleProperty
-   * @param {Property.<boolean>} teethAllelesVisibleProperty
-   * @param {Object} [options]
-   */
-  constructor( selectedBunnyProperty, bunnyImageMap,
-               furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
+  public constructor( selectedBunnyProperty: SelectedBunnyProperty,
+                      bunnyImageMap: BunnyImageMap,
+                      furAllelesVisibleProperty: Property<boolean>,
+                      earsAllelesVisibleProperty: Property<boolean>,
+                      teethAllelesVisibleProperty: Property<boolean>,
+                      providedOptions: PedigreeGraphNodeOptions ) {
 
-    assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty, 'invalid selectedBunnyProperty' );
-    assert && assert( bunnyImageMap instanceof BunnyImageMap, 'invalid bunnyImageMap' );
-    assert && AssertUtils.assertPropertyOf( furAllelesVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyOf( earsAllelesVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyOf( teethAllelesVisibleProperty, 'boolean' );
+    const options = optionize<PedigreeGraphNodeOptions, SelfOptions, NodeOptions>()( {
 
-    options = merge( {
+      // SelfOptions
       graphWidth: 100,
       graphHeight: 100,
 
-      // phet-io
-      tandem: Tandem.REQUIRED,
+      // NodeOptions
       phetioVisiblePropertyInstrumented: false
-    }, options );
+    }, providedOptions );
 
     const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
       cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
@@ -67,13 +64,12 @@ export default class PedigreeGraphNode extends Node {
       tandem: options.tandem.createTandem( 'selectABunnyText' )
     } );
 
-    assert && assert( !options.children, 'PedigreeGraphNode sets children' );
     options.children = [ backgroundNode, selectABunnyText ];
 
     super( options );
 
-    // {PedigreeBranchNode|null} The branch of the Pedigree tree that is currently displayed.
-    let branchNode = null;
+    // The branch of the Pedigree tree that is currently displayed.
+    let branchNode: PedigreeBranchNode | null = null;
 
     // When a bunny is selected, display its pedigree. unlink is not necessary.
     selectedBunnyProperty.link( bunny => {
@@ -96,7 +92,7 @@ export default class PedigreeGraphNode extends Node {
         this.addChild( branchNode );
 
         // Ensure that the graph fits inside the background
-        const scale = _.min(
+        const scale = Math.min(
           ( backgroundNode.width - 2 * X_MARGIN ) / branchNode.width,
           ( backgroundNode.height - 2 * Y_MARGIN ) / branchNode.height
         );
@@ -112,11 +108,7 @@ export default class PedigreeGraphNode extends Node {
     } );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
