@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * BunnyImageMap maps a bunny to a visual representation that corresponds to its phenotype.
  * The visual representation can be a Sprite (for use in OrganismSprites) or a Node (for use in the Pedigree graph).
