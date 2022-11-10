@@ -13,7 +13,7 @@ import Wolf from '../../model/Wolf.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import OrganismSpriteInstance from './OrganismSpriteInstance.js';
 
-class WolfSpriteInstance extends OrganismSpriteInstance {
+export default class WolfSpriteInstance extends OrganismSpriteInstance {
 
   /**
    * @param {Wolf} wolf
@@ -29,4 +29,3 @@ class WolfSpriteInstance extends OrganismSpriteInstance {
 }
 
 naturalSelection.register( 'WolfSpriteInstance', WolfSpriteInstance );
-export default WolfSpriteInstance;

@@ -20,7 +20,7 @@ import BunnyImageMap from '../BunnyImageMap.js';
 import AllelesPanel from './AllelesPanel.js';
 import PedigreeGraphNode from './PedigreeGraphNode.js';
 
-class PedigreeNode extends HBox {
+export default class PedigreeNode extends HBox {
 
   /**
    * @param {PedigreeModel} pedigreeModel
@@ -112,4 +112,3 @@ class PedigreeNode extends HBox {
 }
 
 naturalSelection.register( 'PedigreeNode', PedigreeNode );
-export default PedigreeNode;

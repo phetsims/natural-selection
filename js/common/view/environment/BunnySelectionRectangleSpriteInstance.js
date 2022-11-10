@@ -16,7 +16,7 @@ import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import BunnySelectionRectangleSprite from './BunnySelectionRectangleSprite.js';
 import OrganismSpriteInstance from './OrganismSpriteInstance.js';
 
-class BunnySelectionRectangleSpriteInstance extends OrganismSpriteInstance {
+export default class BunnySelectionRectangleSpriteInstance extends OrganismSpriteInstance {
 
   /**
    * @param {Bunny} bunny
@@ -32,4 +32,3 @@ class BunnySelectionRectangleSpriteInstance extends OrganismSpriteInstance {
 }
 
 naturalSelection.register( 'BunnySelectionRectangleSpriteInstance', BunnySelectionRectangleSpriteInstance );
-export default BunnySelectionRectangleSpriteInstance;

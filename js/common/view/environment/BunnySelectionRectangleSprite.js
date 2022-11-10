@@ -16,7 +16,7 @@ import BunnySelectionRectangle from '../BunnySelectionRectangle.js';
 // constants
 const SELECTION_RECTANGLE_DILATION = 8;
 
-class BunnySelectionRectangleSprite extends Sprite {
+export default class BunnySelectionRectangleSprite extends Sprite {
 
   /**
    * @param {HTMLImageElement} maxImage - the largest bunny image
@@ -46,4 +46,3 @@ class BunnySelectionRectangleSprite extends Sprite {
 }
 
 naturalSelection.register( 'BunnySelectionRectangleSprite', BunnySelectionRectangleSprite );
-export default BunnySelectionRectangleSprite;

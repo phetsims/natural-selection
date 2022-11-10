@@ -16,7 +16,7 @@ import toughShrub3_png from '../../../../images/toughShrub3_png.js';
 import naturalSelection from '../../../naturalSelection.js';
 import OrganismSpriteImage from './OrganismSpriteImage.js';
 
-class ShrubSpritesMap {
+export default class ShrubSpritesMap {
 
   /**
    * @param {Object} [options]
@@ -81,4 +81,3 @@ class ShrubSpritesMap {
 }
 
 naturalSelection.register( 'ShrubSpritesMap', ShrubSpritesMap );
-export default ShrubSpritesMap;

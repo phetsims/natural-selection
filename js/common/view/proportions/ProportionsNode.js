@@ -17,7 +17,7 @@ import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import ProportionsGraphNode from './ProportionsGraphNode.js';
 import ProportionsPanel from './ProportionsPanel.js';
 
-class ProportionsNode extends HBox {
+export default class ProportionsNode extends HBox {
 
   /**
    * @param {ProportionsModel} proportionsModel
@@ -97,4 +97,3 @@ class ProportionsNode extends HBox {
 }
 
 naturalSelection.register( 'ProportionsNode', ProportionsNode );
-export default ProportionsNode;

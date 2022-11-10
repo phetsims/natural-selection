@@ -37,7 +37,7 @@ import ShrubSpriteInstance from './ShrubSpriteInstance.js';
 import ShrubSpritesMap from './ShrubSpritesMap.js';
 import WolfSpriteInstance from './WolfSpriteInstance.js';
 
-class OrganismSprites extends Sprites {
+export default class OrganismSprites extends Sprites {
 
   /**
    * @param {BunnyCollection} bunnyCollection
@@ -436,4 +436,3 @@ class OrganismSprites extends Sprites {
 }
 
 naturalSelection.register( 'OrganismSprites', OrganismSprites );
-export default OrganismSprites;

@@ -21,7 +21,7 @@ import SimulationMode from '../model/SimulationMode.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-class PlayButtonGroup extends Node {
+export default class PlayButtonGroup extends Node {
 
   /**
    * @param {EnumerationProperty.<SimulationMode>} simulationModeProperty
@@ -167,4 +167,3 @@ class TextPushButton extends RectangularPushButton {
 }
 
 naturalSelection.register( 'PlayButtonGroup', PlayButtonGroup );
-export default PlayButtonGroup;

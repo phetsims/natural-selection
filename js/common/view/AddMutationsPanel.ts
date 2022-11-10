@@ -39,7 +39,7 @@ type SelfOptions = EmptySelfOptions;
 
 type AddMutationsPanelOptions = SelfOptions & NaturalSelectionPanelOptions;
 
-class AddMutationsPanel extends NaturalSelectionPanel {
+export default class AddMutationsPanel extends NaturalSelectionPanel {
 
   private readonly rows: Row[];
 
@@ -410,4 +410,3 @@ class TitleNode extends Text {
 }
 
 naturalSelection.register( 'AddMutationsPanel', AddMutationsPanel );
-export default AddMutationsPanel;

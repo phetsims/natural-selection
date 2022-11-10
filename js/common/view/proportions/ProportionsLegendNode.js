@@ -22,7 +22,7 @@ import HatchingRectangle from '../HatchingRectangle.js';
 const RECTANGLE_WIDTH = 25;
 const RECTANGLE_HEIGHT = 15;
 
-class ProportionsLegendNode extends VBox {
+export default class ProportionsLegendNode extends VBox {
 
   /**
    * @param {GenePool} genePool
@@ -196,4 +196,3 @@ class AlleleLegendNode extends HBox {
 }
 
 naturalSelection.register( 'ProportionsLegendNode', ProportionsLegendNode );
-export default ProportionsLegendNode;

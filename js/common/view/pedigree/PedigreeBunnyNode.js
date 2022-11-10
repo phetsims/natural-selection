@@ -26,7 +26,7 @@ const GENOTYPE_FONT = new PhetFont( 16 );
 const DEAD_SYMBOL_FONT = new PhetFont( 20 );
 const UNICODE_RED_CROSS_MARK = '\u274c';
 
-class PedigreeBunnyNode extends Node {
+export default class PedigreeBunnyNode extends Node {
 
   /**
    * @param {Bunny} bunny
@@ -201,4 +201,3 @@ function getGenotypeAbbreviation( bunny, furAllelesVisible, earsAllelesVisible, 
 }
 
 naturalSelection.register( 'PedigreeBunnyNode', PedigreeBunnyNode );
-export default PedigreeBunnyNode;

@@ -17,7 +17,7 @@ import naturalSelection from '../../../naturalSelection.js';
 import Environment from '../../model/Environment.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 
-class EnvironmentBackgroundNode extends Node {
+export default class EnvironmentBackgroundNode extends Node {
 
   /**
    * @param {EnumerationProperty.<Environment>} environmentProperty
@@ -72,4 +72,3 @@ class EnvironmentBackgroundNode extends Node {
 }
 
 naturalSelection.register( 'EnvironmentBackgroundNode', EnvironmentBackgroundNode );
-export default EnvironmentBackgroundNode;

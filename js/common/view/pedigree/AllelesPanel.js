@@ -24,7 +24,7 @@ import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
 
-class AllelesPanel extends NaturalSelectionPanel {
+export default class AllelesPanel extends NaturalSelectionPanel {
 
   /**
    * @param {GenePool} genePool
@@ -285,4 +285,3 @@ class AlleleNode extends HBox {
 }
 
 naturalSelection.register( 'AllelesPanel', AllelesPanel );
-export default AllelesPanel;

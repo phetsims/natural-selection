@@ -16,7 +16,7 @@ import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import PopulationPlotNode from './PopulationPlotNode.js';
 
-class PopulationPlotsNode extends Node {
+export default class PopulationPlotsNode extends Node {
 
   /**
    * @param {PopulationModel} populationModel
@@ -117,4 +117,3 @@ class PopulationPlotsNode extends Node {
 }
 
 naturalSelection.register( 'PopulationPlotsNode', PopulationPlotsNode );
-export default PopulationPlotsNode;

@@ -14,7 +14,7 @@ import Organism from '../../model/Organism.js';
 import XDirection from '../../model/XDirection.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 
-class OrganismSpriteInstance extends SpriteInstance {
+export default class OrganismSpriteInstance extends SpriteInstance {
 
   /**
    * @param {Organism} organism
@@ -100,4 +100,3 @@ class OrganismSpriteInstance extends SpriteInstance {
 }
 
 naturalSelection.register( 'OrganismSpriteInstance', OrganismSpriteInstance );
-export default OrganismSpriteInstance;

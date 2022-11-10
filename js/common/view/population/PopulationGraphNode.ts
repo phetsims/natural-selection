@@ -34,7 +34,7 @@ type SelfOptions = {
 
 type PopulationGraphNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
 
-class PopulationGraphNode extends Node {
+export default class PopulationGraphNode extends Node {
 
   public constructor( populationModel: PopulationModel, providedOptions: PopulationGraphNodeOptions ) {
 
@@ -156,4 +156,3 @@ class PopulationGraphNode extends Node {
 }
 
 naturalSelection.register( 'PopulationGraphNode', PopulationGraphNode );
-export default PopulationGraphNode;

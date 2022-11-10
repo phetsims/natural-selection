@@ -19,7 +19,7 @@ import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
 import ProportionsLegendNode from './ProportionsLegendNode.js';
 
-class ProportionsPanel extends NaturalSelectionPanel {
+export default class ProportionsPanel extends NaturalSelectionPanel {
 
   /**
    * @param {GenePool} genePool
@@ -98,4 +98,3 @@ class ProportionsPanel extends NaturalSelectionPanel {
 }
 
 naturalSelection.register( 'ProportionsPanel', ProportionsPanel );
-export default ProportionsPanel;

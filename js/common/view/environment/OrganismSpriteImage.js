@@ -12,7 +12,7 @@ import merge from '../../../../../phet-core/js/merge.js';
 import { SpriteImage } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 
-class OrganismSpriteImage extends SpriteImage {
+export default class OrganismSpriteImage extends SpriteImage {
 
   /**
    * @param {HTMLImageElement} image
@@ -36,4 +36,3 @@ class OrganismSpriteImage extends SpriteImage {
 }
 
 naturalSelection.register( 'OrganismSpriteImage', OrganismSpriteImage );
-export default OrganismSpriteImage;

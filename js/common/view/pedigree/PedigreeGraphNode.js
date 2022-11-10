@@ -23,7 +23,7 @@ import PedigreeBranchNode from './PedigreeBranchNode.js';
 const X_MARGIN = 5;
 const Y_MARGIN = 5;
 
-class PedigreeGraphNode extends Node {
+export default class PedigreeGraphNode extends Node {
 
   /**
    * @param {SelectedBunnyProperty} selectedBunnyProperty
@@ -122,4 +122,3 @@ class PedigreeGraphNode extends Node {
 }
 
 naturalSelection.register( 'PedigreeGraphNode', PedigreeGraphNode );
-export default PedigreeGraphNode;

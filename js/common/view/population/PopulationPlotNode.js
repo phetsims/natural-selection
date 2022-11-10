@@ -19,7 +19,7 @@ const NORMAL_LINE_DASH = [];
 const MUTANT_LINE_DASH = NaturalSelectionConstants.POPULATION_MUTANT_LINE_DASH;
 const MUTANT_LINE_DASH_SUM = _.sum( MUTANT_LINE_DASH );
 
-class PopulationPlotNode extends Node {
+export default class PopulationPlotNode extends Node {
 
   /**
    * @param {Object} config - NOT propagated to super
@@ -252,4 +252,3 @@ class PopulationPlotNode extends Node {
 }
 
 naturalSelection.register( 'PopulationPlotNode', PopulationPlotNode );
-export default PopulationPlotNode;

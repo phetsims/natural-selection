@@ -11,7 +11,7 @@
 import naturalSelection from '../../../naturalSelection.js';
 import OrganismSpriteImage from './OrganismSpriteImage.js';
 
-class BunnySpriteImage extends OrganismSpriteImage {
+export default class BunnySpriteImage extends OrganismSpriteImage {
 
   /**
    * @param {HTMLImageElement} image
@@ -25,4 +25,3 @@ class BunnySpriteImage extends OrganismSpriteImage {
 }
 
 naturalSelection.register( 'BunnySpriteImage', BunnySpriteImage );
-export default BunnySpriteImage;

@@ -14,7 +14,7 @@ import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
-class ProportionsGenerationSpinner extends NumberSpinner {
+export default class ProportionsGenerationSpinner extends NumberSpinner {
 
   /**
    * @param {NumberProperty} proportionsGenerationProperty - the generation displayed by the Proportions graph
@@ -57,4 +57,3 @@ class ProportionsGenerationSpinner extends NumberSpinner {
 }
 
 naturalSelection.register( 'ProportionsGenerationSpinner', ProportionsGenerationSpinner );
-export default ProportionsGenerationSpinner;

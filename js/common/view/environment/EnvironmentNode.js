@@ -18,7 +18,7 @@ import BunnyImageMap from '../BunnyImageMap.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
 import OrganismSprites from './OrganismSprites.js';
 
-class EnvironmentNode extends Node {
+export default class EnvironmentNode extends Node {
 
   /**
    * @param {NaturalSelectionModel} model
@@ -93,4 +93,3 @@ class EnvironmentNode extends Node {
 }
 
 naturalSelection.register( 'EnvironmentNode', EnvironmentNode );
-export default EnvironmentNode;

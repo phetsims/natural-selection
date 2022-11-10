@@ -38,7 +38,7 @@ const ROW_LABELS_X_ALIGN = 'left';
 const COLUMN_LABELS_X_ALIGN = 'center';
 const CELLS_Y_ALIGN = 'bottom';
 
-class ProportionsGraphNode extends Node {
+export default class ProportionsGraphNode extends Node {
 
   /**
    * @param {ProportionsModel} proportionsModel
@@ -448,4 +448,3 @@ class Column extends VBox {
 }
 
 naturalSelection.register( 'ProportionsGraphNode', ProportionsGraphNode );
-export default ProportionsGraphNode;

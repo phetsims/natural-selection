@@ -13,7 +13,7 @@ import Shrub from '../../model/Shrub.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import OrganismSpriteInstance from './OrganismSpriteInstance.js';
 
-class ShrubSpriteInstance extends OrganismSpriteInstance {
+export default class ShrubSpriteInstance extends OrganismSpriteInstance {
 
   /**
    * @param {Shrub} shrub
@@ -47,4 +47,3 @@ class ShrubSpriteInstance extends OrganismSpriteInstance {
 }
 
 naturalSelection.register( 'ShrubSpriteInstance', ShrubSpriteInstance );
-export default ShrubSpriteInstance;

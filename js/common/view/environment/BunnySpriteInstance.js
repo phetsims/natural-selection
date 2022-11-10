@@ -13,7 +13,7 @@ import Bunny from '../../model/Bunny.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import OrganismSpriteInstance from './OrganismSpriteInstance.js';
 
-class BunnySpriteInstance extends OrganismSpriteInstance {
+export default class BunnySpriteInstance extends OrganismSpriteInstance {
 
   /**
    * @param {Bunny} bunny
@@ -29,4 +29,3 @@ class BunnySpriteInstance extends OrganismSpriteInstance {
 }
 
 naturalSelection.register( 'BunnySpriteInstance', BunnySpriteInstance );
-export default BunnySpriteInstance;

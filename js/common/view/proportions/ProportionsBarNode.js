@@ -23,7 +23,7 @@ import HatchingRectangle from '../HatchingRectangle.js';
 // constants
 const PERCENTAGE_FONT = new PhetFont( 12 );
 
-class ProportionsBarNode extends Node {
+export default class ProportionsBarNode extends Node {
 
   /**
    * @param {Color|string} color
@@ -207,4 +207,3 @@ class ProportionsBarNode extends Node {
 }
 
 naturalSelection.register( 'ProportionsBarNode', ProportionsBarNode );
-export default ProportionsBarNode;

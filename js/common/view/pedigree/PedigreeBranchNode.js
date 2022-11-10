@@ -32,7 +32,7 @@ const T_HEIGHT = 16; // the height of the T that connects child to parents
 const T_X_OFFSET = 28; // x offset of the T from the parent bunny's origin
 const T_Y_OFFSET = 14; // y offset of the T from the parent bunny's origin
 
-class PedigreeBranchNode extends Node {
+export default class PedigreeBranchNode extends Node {
 
   /**
    * @param {Bunny} bunny
@@ -127,4 +127,3 @@ class PedigreeBranchNode extends Node {
 }
 
 naturalSelection.register( 'PedigreeBranchNode', PedigreeBranchNode );
-export default PedigreeBranchNode;

@@ -23,7 +23,7 @@ type FastForwardButtonOptions = SelfOptions &
   StrictOmit<RoundMomentaryButtonOptions, 'content'> &
   PickRequired<RoundMomentaryButtonOptions, 'tandem'>;
 
-class FastForwardButton extends RoundMomentaryButton<TimeSpeed> {
+export default class FastForwardButton extends RoundMomentaryButton<TimeSpeed> {
 
   public readonly fastForwardButtonModel: ButtonModel;
 
@@ -66,4 +66,3 @@ class FastForwardButton extends RoundMomentaryButton<TimeSpeed> {
 }
 
 naturalSelection.register( 'FastForwardButton', FastForwardButton );
-export default FastForwardButton;
