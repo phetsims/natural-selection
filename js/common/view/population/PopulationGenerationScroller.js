@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PopulationGenerationScroller scrolls the x-axis (Generation) of the Population graph.
  *
