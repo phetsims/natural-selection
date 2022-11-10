@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * GenerationClockNode is the clock that does one complete revolution per generation.
  * It displays a clock slice for each environmental factor, to denote when they will be active.
