@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * EnvironmentRadioButtonGroup is the radio button group for choosing the environment that the bunnies live in.
  *
@@ -8,11 +7,12 @@
  */
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Node, NodeTranslationOptions, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import snowflakeSolidShape from '../../../../sherpa/js/fontawesome-5/snowflakeSolidShape.js';
 import sunSolidShape from '../../../../sherpa/js/fontawesome-5/sunSolidShape.js';
-import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
+import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import Environment from '../model/Environment.js';
@@ -23,19 +23,19 @@ import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 const ICON_X_MARGIN = 8;
 const ICON_Y_MARGIN = 6;
 
-class EnvironmentRadioButtonGroup extends RectangularRadioButtonGroup {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {EnumerationProperty.<Environment>} environmentProperty
-   * @param {Object} [options]
-   */
-  constructor( environmentProperty, options ) {
+type EnvironmentRadioButtonGroupOptions = SelfOptions & NodeTranslationOptions &
+  PickRequired<RectangularRadioButtonGroupOptions, 'tandem'>;
 
-    assert && assert( environmentProperty instanceof EnumerationProperty );
+export default class EnvironmentRadioButtonGroup extends RectangularRadioButtonGroup<Environment> {
 
-    options = merge( {}, {
+  public constructor( environmentProperty: EnumerationProperty<Environment>,
+                      providedOptions: EnvironmentRadioButtonGroupOptions ) {
 
-      // RectangularRadioButtonGroup options
+    const options = optionize<EnvironmentRadioButtonGroupOptions, SelfOptions, RectangularRadioButtonGroupOptions>()( {
+
+      // RectangularRadioButtonGroupOptions
       orientation: 'horizontal',
       spacing: 8,
       radioButtonOptions: {
@@ -49,13 +49,10 @@ class EnvironmentRadioButtonGroup extends RectangularRadioButtonGroup {
           deselectedLineWidth: 1.5
         }
       },
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
       enabledPropertyOptions: {
         phetioReadOnly: true // see https://github.com/phetsims/natural-selection/issues/296
       }
-    }, options );
+    }, providedOptions );
 
     // icons
     const iconOptions = { scale: 0.05, fill: 'white' };
@@ -64,8 +61,8 @@ class EnvironmentRadioButtonGroup extends RectangularRadioButtonGroup {
 
     // RectangularRadioButtonGroup does not support different colors for radio buttons in the same group.
     // So we create our own backgrounds, with a cornerRadius that matches options.cornerRadius.
-    const buttonWidth = _.maxBy( [ sunIcon, snowflakeIcon ], icon => icon.width ).width + ( 2 * ICON_X_MARGIN );
-    const buttonHeight = _.maxBy( [ sunIcon, snowflakeIcon ], icon => icon.height ).height + ( 2 * ICON_Y_MARGIN );
+    const buttonWidth = _.maxBy( [ sunIcon, snowflakeIcon ], icon => icon.width )!.width + ( 2 * ICON_X_MARGIN );
+    const buttonHeight = _.maxBy( [ sunIcon, snowflakeIcon ], icon => icon.height )!.height + ( 2 * ICON_Y_MARGIN );
     const equatorButtonBackground = new Rectangle( 0, 0, buttonWidth, buttonHeight, {
       cornerRadius: options.radioButtonOptions.cornerRadius,
       fill: NaturalSelectionColors.EQUATOR_BUTTON_FILL,
@@ -83,22 +80,25 @@ class EnvironmentRadioButtonGroup extends RectangularRadioButtonGroup {
 
     // description of the buttons
     const content = [
-      { value: Environment.EQUATOR, createNode: tandem => equatorButtonContent, tandemName: 'equatorRadioButton' },
-      { value: Environment.ARCTIC, createNode: tandem => arcticButtonContent, tandemName: 'arcticRadioButton' }
+      {
+        value: Environment.EQUATOR,
+        createNode: ( tandem: Tandem ) => equatorButtonContent,
+        tandemName: 'equatorRadioButton'
+      },
+      {
+        value: Environment.ARCTIC,
+        createNode: ( tandem: Tandem ) => arcticButtonContent,
+        tandemName: 'arcticRadioButton'
+      }
     ];
 
     super( environmentProperty, content, options );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 }
 
 naturalSelection.register( 'EnvironmentRadioButtonGroup', EnvironmentRadioButtonGroup );
-export default EnvironmentRadioButtonGroup;
