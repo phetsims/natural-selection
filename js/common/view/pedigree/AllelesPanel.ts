@@ -1,51 +1,47 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * AllelesPanel is the panel that contains controls for showing alleles in the 'Pedigree' graph.
  * Each row in the panel corresponds to one gene.  Until a gene has mutated, its row is disabled,
  * because a gene pair cannot be abbreviated until a dominance relationship exists, and a dominance
- * relationship does not exists until both the normal and mutant alleles exist in the population.
+ * relationship does not exist until both the normal and mutant alleles exist in the population.
  * When a row is enabled, it shows the icon and abbreviation for the normal allele and the mutant allele.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ReadOnlyProperty from '../../../../../axon/js/ReadOnlyProperty.js';
+import Property from '../../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import merge from '../../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
-import { AlignBox, AlignGroup, HBox, HStrut, Image, Text, VBox } from '../../../../../scenery/js/imports.js';
+import optionize, { EmptySelfOptions, optionize3 } from '../../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
+import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HBoxOptions, HStrut, Image, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
 import Checkbox from '../../../../../sun/js/Checkbox.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
-import NaturalSelectionPanel from '../NaturalSelectionPanel.js';
+import NaturalSelectionPanel, { NaturalSelectionPanelOptions } from '../NaturalSelectionPanel.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type AllelesPanelOptions = SelfOptions & NaturalSelectionPanelOptions &
+  PickRequired<NaturalSelectionPanelOptions, 'tandem'>;
 
 export default class AllelesPanel extends NaturalSelectionPanel {
 
-  /**
-   * @param {GenePool} genePool
-   * @param {Property.<boolean>} furAllelesVisibleProperty
-   * @param {Property.<boolean>} earsAllelesVisibleProperty
-   * @param {Property.<boolean>} teethAllelesVisibleProperty
-   * @param {Object} [options]
-   */
-  constructor( genePool, furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
+  private readonly rows: Row[];
 
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && AssertUtils.assertPropertyOf( furAllelesVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyOf( earsAllelesVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyOf( teethAllelesVisibleProperty, 'boolean' );
+  public constructor( genePool: GenePool,
+                      furAllelesVisibleProperty: Property<boolean>,
+                      earsAllelesVisibleProperty: Property<boolean>,
+                      teethAllelesVisibleProperty: Property<boolean>,
+                      providedOptions: AllelesPanelOptions ) {
 
-    options = merge( {
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, NaturalSelectionConstants.PANEL_OPTIONS, options );
+    const options = optionize3<AllelesPanelOptions, SelfOptions, NaturalSelectionPanelOptions>()(
+      {}, NaturalSelectionConstants.PANEL_OPTIONS, providedOptions );
 
     // To make the abbreviation + icon for all alleles the same effective size
     const alleleAlignGroup = new AlignGroup();
@@ -76,31 +72,20 @@ export default class AllelesPanel extends NaturalSelectionPanel {
 
     super( content, options );
 
-    // @private {Row[]}
     this.rows = rows;
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 
   /**
    * Sets visibility of the UI components related to a specific gene.
-   * @param {Gene} gene
-   * @param {boolean} visible
-   * @public
    */
-  setGeneVisible( gene, visible ) {
-    assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && assert( typeof visible === 'boolean', 'invalid visible' );
-
-    const row = _.find( this.rows, row => ( row.gene === gene ) );
-    assert && assert( row, `row not found for ${gene.name} gene` );
+  public setGeneVisible( gene: Gene, visible: boolean ): void {
+    const row = _.find( this.rows, row => ( row.gene === gene ) )!;
+    assert && assert( row, `row not found for ${gene.nameProperty.value} gene` );
     row.visible = visible;
   }
 }
@@ -112,30 +97,24 @@ export default class AllelesPanel extends NaturalSelectionPanel {
  * phenotype for each abbreviation (e.g. 'F' <white fur icon>  'f' <brown fur icon>).  A row is hidden until
  * its corresponding mutation has been applied.
  */
+
+type RowSelfOptions = EmptySelfOptions;
+
+type RowOptions = RowSelfOptions & PickRequired<VBoxOptions, 'tandem'>;
+
 class Row extends VBox {
 
-  /**
-   * @param {Gene} gene
-   * @param {Property.<boolean>} visibleProperty
-   * @param {AlignGroup} alignGroup
-   * @param {Object} [options]
-   */
-  constructor( gene, visibleProperty, alignGroup, options ) {
+  public readonly gene: Gene;
 
-    assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && AssertUtils.assertPropertyOf( visibleProperty, 'boolean' );
-    assert && assert( alignGroup instanceof AlignGroup, 'invalid alignGroup' );
+  public constructor( gene: Gene, visibleProperty: Property<boolean>, alignGroup: AlignGroup, providedOptions: RowOptions ) {
 
-    options = merge( {
+    const options = optionize<RowOptions, RowSelfOptions, VBoxOptions>()( {
 
-      // VBox options
+      // VBoxOptions
       align: 'left',
       spacing: 8,
-      excludeInvisibleChildrenFromBounds: false,
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+      excludeInvisibleChildrenFromBounds: false
+    }, providedOptions );
 
     const checkboxTandem = options.tandem.createTandem( 'checkbox' );
 
@@ -163,7 +142,7 @@ class Row extends VBox {
       tandem: options.tandem.createTandem( 'recessiveAlleleNode' )
     } );
 
-    const alignBoxOptions = {
+    const alignBoxOptions: AlignBoxOptions = {
       group: alignGroup,
       xAlign: 'left'
     };
@@ -183,7 +162,6 @@ class Row extends VBox {
       ]
     } );
 
-    assert && assert( !options.children, 'Row sets children' );
     options.children = [ checkbox, hBox ];
 
     super( options );
@@ -218,15 +196,10 @@ class Row extends VBox {
       } );
     }
 
-    // @public (read-only)
     this.gene = gene;
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
@@ -235,25 +208,30 @@ class Row extends VBox {
 /**
  * AlleleNode displays the abbreviation and icon for an allele.
  */
+
+type AlleleNodeSelfOptions = EmptySelfOptions;
+
+type AlleleNodeOptions = AlleleNodeSelfOptions & PickRequired<HBoxOptions, 'tandem'>;
+
 class AlleleNode extends HBox {
 
+  private readonly imageNode: Image;
+
   /**
-   * @param {TReadOnlyProperty<string>} abbreviationProperty - the abbreviation used for the allele
-   * @param {HTMLImageElement} image
-   * @param {Object} [options]
+   * @param abbreviationProperty - the abbreviation used for the allele
+   * @param image
+   * @param [providedOptions]
    */
-  constructor( abbreviationProperty, image, options ) {
+  public constructor( abbreviationProperty: TReadOnlyProperty<string>,
+                      image: HTMLImageElement,
+                      providedOptions: AlleleNodeOptions ) {
 
-    assert && assert( abbreviationProperty instanceof ReadOnlyProperty, 'invalid abbreviationProperty' );
-    assert && assert( image instanceof HTMLImageElement, 'invalid image' );
+    const options = optionize<AlleleNodeOptions, AlleleNodeSelfOptions, HBoxOptions>()( {
 
-    options = merge( {
+      // HBoxOptions
       spacing: 6,
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
       phetioVisiblePropertyInstrumented: false
-    }, options );
+    }, providedOptions );
 
     const text = new Text( abbreviationProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
@@ -270,17 +248,13 @@ class AlleleNode extends HBox {
 
     super( options );
 
-    // @private {Image}
     this.imageNode = imageNode;
   }
 
   /**
    * Sets the allele image for this node.
-   * @param {HTMLImageElement} value
-   * @public
    */
-  set image( value ) {
-    assert && assert( value instanceof HTMLImageElement, 'invalid value' );
+  public set image( value: HTMLImageElement ) {
     this.imageNode.image = value;
   }
 }
