@@ -247,8 +247,8 @@ function eatSomeBunnies( bunnies, totalBunnies, environment, environmentMatch, p
 
   assert && assert( Array.isArray( bunnies ), 'invalid bunnies' );
   assert && assert( NaturalSelectionUtils.isNonNegativeInteger( totalBunnies ), `invalid totalBunnies: ${totalBunnies}` );
-  assert && assert( Environment.includes( environment ), 'invalid environment' );
-  assert && assert( Environment.includes( environmentMatch ), 'invalid environmentMatch' );
+  assert && assert( Environment.enumeration.includes( environment ), 'invalid environment' );
+  assert && assert( Environment.enumeration.includes( environmentMatch ), 'invalid environmentMatch' );
   assert && assert( NaturalSelectionUtils.isPercent( percentToEatMatch ), `invalid percentToEatMatch: ${percentToEatMatch}` );
   assert && assert( NaturalSelectionUtils.isPercent( percentToEatNoMatch ), `invalid percentToEatNoMatch: ${percentToEatNoMatch}` );
 

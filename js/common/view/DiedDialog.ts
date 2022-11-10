@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * DiedDialog is displayed when all of the bunnies have died.
  * It displays the message "All of the bunnies have died."
@@ -8,30 +7,31 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Text } from '../../../../scenery/js/imports.js';
-import Dialog from '../../../../sun/js/Dialog.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-class DiedDialog extends Dialog {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+type DiedDialogOptions = SelfOptions & PickRequired<DialogOptions, 'tandem'>;
 
-    options = merge( {}, NaturalSelectionConstants.DIALOG_OPTIONS, {
+export default class DiedDialog extends Dialog {
+
+  public constructor( providedOptions: DiedDialogOptions ) {
+
+    const options = optionize4<DiedDialogOptions, SelfOptions, DialogOptions>()(
+      {}, NaturalSelectionConstants.DIALOG_OPTIONS, {
+
+      // DialogOptions
       topMargin: 50,
       bottomMargin: 50,
-
-      // phet-io
-      tandem: Tandem.REQUIRED, // see https://github.com/phetsims/natural-selection/issues/156
       phetioReadOnly: true,
       phetioDocumentation: 'This dialog is displayed when all of the bunnies have died.'
-    }, options );
+    }, providedOptions );
 
     const messageText = new Text( NaturalSelectionStrings.allOfTheBunniesHaveDiedStringProperty, {
       font: NaturalSelectionConstants.DIALOG_FONT,
@@ -44,4 +44,3 @@ class DiedDialog extends Dialog {
 }
 
 naturalSelection.register( 'DiedDialog', DiedDialog );
-export default DiedDialog;
