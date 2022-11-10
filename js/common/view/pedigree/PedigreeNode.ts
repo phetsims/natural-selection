@@ -1,6 +1,5 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PedigreeNode is the parent for all parts of the 'Pedigree' view.
  *
@@ -8,10 +7,11 @@
  */
 
 import Dimension2 from '../../../../../dot/js/Dimension2.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import { HBox } from '../../../../../scenery/js/imports.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
+import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
+import { HBox, HBoxOptions, NodeTranslationOptions } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
+import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
 import PedigreeModel from '../../model/PedigreeModel.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
@@ -21,36 +21,30 @@ import BunnyImageMap from '../BunnyImageMap.js';
 import AllelesPanel from './AllelesPanel.js';
 import PedigreeGraphNode from './PedigreeGraphNode.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type PedigreeNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<HBoxOptions, 'tandem'>;
+
 export default class PedigreeNode extends HBox {
 
-  /**
-   * @param {PedigreeModel} pedigreeModel
-   * @param {SelectedBunnyProperty} selectedBunnyProperty
-   * @param {GenePool} genePool
-   * @param {BunnyImageMap} bunnyImageMap
-   * @param {Dimension2} size - dimensions of the rectangle available for this Node and its children
-   * @param {Object} [options]
-   */
-  constructor( pedigreeModel, selectedBunnyProperty, genePool, bunnyImageMap, size, options ) {
+  private readonly allelesPanel: AllelesPanel;
+  
+  public constructor( pedigreeModel: PedigreeModel,
+                      selectedBunnyProperty: SelectedBunnyProperty,
+                      genePool: GenePool,
+                      bunnyImageMap: BunnyImageMap,
+                      size: Dimension2,
+                      providedOptions: PedigreeNodeOptions ) {
 
-    assert && assert( pedigreeModel instanceof PedigreeModel, 'invalid pedigreeModel' );
-    assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty, 'invalid selectedBunnyProperty' );
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( bunnyImageMap instanceof BunnyImageMap, 'invalid bunnyImageMap' );
-    assert && assert( size instanceof Dimension2, 'invalid size' );
+    const options = optionize<PedigreeNodeOptions, SelfOptions, HBoxOptions>()( {
 
-    options = merge( {
-
-      // HBox options
+      // HBoxOptions
       spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
       align: 'center',
       excludeInvisibleChildrenFromBounds: false,
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
       phetioDocumentation: 'the Pedigree graph and its control panel',
       visiblePropertyOptions: { phetioReadOnly: true }
-    }, options );
+    }, providedOptions );
 
     // Divy up the width
     // If ?allelesVisible=false, the control panel is omitted, and the graph fills the width.
@@ -81,33 +75,24 @@ export default class PedigreeNode extends HBox {
         tandem: options.tandem.createTandem( 'pedigreeGraphNode' )
       } );
 
-    assert && assert( !options.children, 'PedigreeNode sets children' );
     options.children = NaturalSelectionQueryParameters.allelesVisible ?
       [ allelesPanel, pedigreeGraphNode ] :
       [ pedigreeGraphNode ];
 
     super( options );
 
-    // @private {AllelesPanel}
     this.allelesPanel = allelesPanel;
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 
   /**
    * Sets visibility of the UI components related to a specific gene.
-   * @param {Gene} gene
-   * @param {boolean} visible
-   * @public
    */
-  setGeneVisible( gene, visible ) {
+  public setGeneVisible( gene: Gene, visible: boolean ): void {
     this.allelesPanel.setGeneVisible( gene, visible );
   }
 }
