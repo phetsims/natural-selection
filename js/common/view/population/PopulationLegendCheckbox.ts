@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PopulationLegendCheckbox is a checkbox in the control panel for the Population graph.
  * It serves as a legend (shows the color and line style used for a plot) and controls visibility of a plot.
@@ -8,11 +7,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ReadOnlyProperty from '../../../../../axon/js/ReadOnlyProperty.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
-import { AlignBox, HBox, Line, Text } from '../../../../../scenery/js/imports.js';
-import Checkbox from '../../../../../sun/js/Checkbox.js';
+import Property from '../../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
+import { optionize4 } from '../../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
+import { AlignBox, AlignGroup, HBox, Line, TColor, Text } from '../../../../../scenery/js/imports.js';
+import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
@@ -24,23 +24,31 @@ assert && assert( LINE_DASH.length === 2, 'unsupported LINE_DASH' );
 const NUMBER_OF_DASHES = 5;
 const LINE_LENGTH = NUMBER_OF_DASHES * LINE_DASH[ 0 ] + ( NUMBER_OF_DASHES - 1 ) * LINE_DASH[ 1 ];
 
-class PopulationLegendCheckbox extends Checkbox {
+type SelfOptions = {
+  lineColor?: TColor;
+  isLineDashed?: boolean;
+};
+
+export type PopulationLegendCheckboxOptions = SelfOptions & PickRequired<CheckboxOptions, 'tandem'>;
+
+export default class PopulationLegendCheckbox extends Checkbox {
 
   /**
-   * @param {Property.<boolean>} plotVisibleProperty - visibility of the associated plot on the Population graph
-   * @param {TReadOnlyProperty.<string>} labelStringProperty - the label on the checkbox
-   * @param {AlignGroup} contentAlignGroup - to make all checkbox content have the same effective size
-   * @param {Object} [options]
+   * @param plotVisibleProperty - visibility of the associated plot on the Population graph
+   * @param labelStringProperty - the label on the checkbox
+   * @param contentAlignGroup - to make all checkbox content have the same effective size
+   * @param [providedOptions]
    */
-  constructor( plotVisibleProperty, labelStringProperty, contentAlignGroup, options ) {
+  public constructor( plotVisibleProperty: Property<boolean>,
+                      labelStringProperty: TReadOnlyProperty<string>,
+                      contentAlignGroup: AlignGroup,
+                      providedOptions: PopulationLegendCheckboxOptions ) {
 
-    assert && AssertUtils.assertPropertyOf( plotVisibleProperty, 'boolean' );
-    assert && assert( labelStringProperty instanceof ReadOnlyProperty, 'invalid labelStringProperty' );
-
-    options = merge( {
-      lineColor: 'black',
-      isLineDashed: false
-    }, NaturalSelectionConstants.CHECKBOX_OPTIONS, options );
+    const options = optionize4<PopulationLegendCheckboxOptions, SelfOptions, CheckboxOptions>()(
+      {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+        lineColor: 'black',
+        isLineDashed: false
+      }, providedOptions );
 
     // solid or dashed line
     const lineNode = new Line( 0, 0, LINE_LENGTH, 0, {
@@ -69,15 +77,10 @@ class PopulationLegendCheckbox extends Checkbox {
     super( plotVisibleProperty, content, options );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 }
 
 naturalSelection.register( 'PopulationLegendCheckbox', PopulationLegendCheckbox );
-export default PopulationLegendCheckbox;

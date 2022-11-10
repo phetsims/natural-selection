@@ -1,6 +1,5 @@
 // Copyright 2021-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PopulationAlleleCheckbox is a specialization of PopulationLegendCheckbox for use with alleles.
  * It shows the name of the allele on the checkbox, and keeps a reference to that allele.
@@ -8,28 +7,34 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../../axon/js/Property.js';
+import { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
+import { AlignGroup } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Allele from '../../model/Allele.js';
-import PopulationLegendCheckbox from './PopulationLegendCheckbox.js';
+import PopulationLegendCheckbox, { PopulationLegendCheckboxOptions } from './PopulationLegendCheckbox.js';
 
-class PopulationAlleleCheckbox extends PopulationLegendCheckbox {
+type SelfOptions = EmptySelfOptions;
+
+type PopulationAlleleCheckboxOptions = SelfOptions & PopulationLegendCheckboxOptions;
+
+export default class PopulationAlleleCheckbox extends PopulationLegendCheckbox {
+
+  public readonly allele: Allele;
 
   /**
-   * @param {Property.<boolean>} plotVisibleProperty - visibility of the associated plot on the Population graph
-   * @param {Allele} allele - the allele associated with this checkbox
-   * @param {AlignGroup} alignGroup - to make all checkbox content have the same effective size
-   * @param {Object} [options]
+   * @param plotVisibleProperty - visibility of the associated plot on the Population graph
+   * @param allele - the allele associated with this checkbox
+   * @param alignGroup - to make all checkbox content have the same effective size
+   * @param [providedOptions]
    */
-  constructor( plotVisibleProperty, allele, alignGroup, options ) {
+  public constructor( plotVisibleProperty: Property<boolean>, allele: Allele, alignGroup: AlignGroup,
+                      providedOptions: PopulationAlleleCheckboxOptions ) {
 
-    assert && assert( allele instanceof Allele, 'invalid allele' );
+    super( plotVisibleProperty, allele.nameProperty, alignGroup, providedOptions );
 
-    super( plotVisibleProperty, allele.nameProperty, alignGroup, options );
-
-    // @public (read-only)
     this.allele = allele;
   }
 }
 
 naturalSelection.register( 'PopulationAlleleCheckbox', PopulationAlleleCheckbox );
-export default PopulationAlleleCheckbox;
