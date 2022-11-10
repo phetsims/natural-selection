@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * HatchingRectangle is a Rectangle that appears as if it's filled with a hatching pattern.
  * The hatching pattern is a set of equally-spaced parallel lines, arranged at some angle.
@@ -9,45 +8,47 @@
  */
 
 import { Shape } from '../../../../kite/js/imports.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { Path, Rectangle } from '../../../../scenery/js/imports.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { Path, Rectangle, RectangleOptions, TColor } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
 
-class HatchingRectangle extends Rectangle {
+type SelfOptions = {
+  hatchingOptions?: {
+    stroke: TColor;
+    lineWidth: number;
+    rotation: number;
+  };
+};
 
-  /**
-   * @param {number} x
-   * @param {number} y
-   * @param {number} width
-   * @param {number} height
-   * @param {Object} [options]
-   */
-  constructor( x, y, width, height, options ) {
+type HatchingRectangleOptions = SelfOptions & PickRequired<RectangleOptions, 'fill' | 'stroke'>;
 
-    options = merge( {
+export default class HatchingRectangle extends Rectangle {
 
-      // options for the hatching pattern
+  private readonly linesPath: Path;
+  private readonly hatchingLineWidth: number;
+
+  public constructor( x: number, y: number, width: number, height: number, providedOptions?: HatchingRectangleOptions ) {
+
+    const options = optionize<HatchingRectangleOptions, SelfOptions, RectangleOptions>()( {
+
+      // SelfOptions
       hatchingOptions: {
         stroke: 'white',
         lineWidth: 2,
         rotation: -Math.PI / 4
       },
 
-      // Rectangle options
+      // RectangleOptions
       fill: 'black',
       stroke: null
 
-    }, options );
-
-    assert && assert( !options.children, 'HatchingRectangle sets children' );
-    assert && assert( !options.clipArea, 'HatchingRectangle sets clipArea' );
+    }, providedOptions );
 
     super( 0, 0, width, height, options );
 
-    // @private {number}
     this.hatchingLineWidth = options.hatchingOptions.lineWidth;
 
-    // @private
     this.linesPath = new Path( new Shape(), options.hatchingOptions );
     this.addChild( this.linesPath );
 
@@ -57,10 +58,8 @@ class HatchingRectangle extends Rectangle {
 
   /**
    * Notifies that the rectangle has changed, and invalidates path information and our cached shape.
-   * @protected
-   * @override
    */
-  invalidateRectangle() {
+  protected override invalidateRectangle(): void {
     super.invalidateRectangle();
 
     // this.linesPath did not exist the first time that invalidateRectangle was called by super.
@@ -89,4 +88,3 @@ class HatchingRectangle extends Rectangle {
 }
 
 naturalSelection.register( 'HatchingRectangle', HatchingRectangle );
-export default HatchingRectangle;
