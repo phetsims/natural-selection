@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PopulationGridNode is the 2D grid for the Population graph, including grid lines and tick marks.
  * The grid scrolls horizontally as the x-axis range changes, and zooms in/out vertically as the y-axis range changes.
