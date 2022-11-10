@@ -49,7 +49,8 @@ export default class PopulationGenerationScroller extends HBox {
       font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
 
       // HBoxOptions
-      spacing: 10
+      spacing: 10,
+      phetioVisiblePropertyInstrumented: false
     }, providedOptions );
 
     // Maintain the initial range length

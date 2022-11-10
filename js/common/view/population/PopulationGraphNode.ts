@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PopulationGraphNode displays the population graph. This graph is a performance concern, so plots are updated
  * only when they are visible, see PopulationPlotNode.updatePlot.
@@ -10,10 +9,10 @@
 
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import merge from '../../../../../phet-core/js/merge.js';
+import optionize from '../../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import PlusMinusZoomButtonGroup from '../../../../../scenery-phet/js/PlusMinusZoomButtonGroup.js';
-import { Node, Rectangle, Text } from '../../../../../scenery/js/imports.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
+import { Node, NodeOptions, NodeTranslationOptions, Rectangle, Text } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import PopulationModel from '../../model/PopulationModel.js';
@@ -28,24 +27,26 @@ const X_TICK_MARKS_HEIGHT = 20; // height of x-axis tick marks, determined empir
 const X_AXIS_LABEL_SPACING = 7; // space between x-axis 'Generation' label/control and x-axis tick marks)
 const Y_AXIS_LABEL_SPACING = 40; // space between y zoom control and y axis (not y tick marks)
 
+type SelfOptions = {
+  graphWidth?: number;
+  graphHeight?: number;
+};
+
+type PopulationGraphNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
+
 class PopulationGraphNode extends Node {
 
-  /**
-   * @param {PopulationModel} populationModel
-   * @param {Object} [options]
-   */
-  constructor( populationModel, options ) {
+  public constructor( populationModel: PopulationModel, providedOptions: PopulationGraphNodeOptions ) {
 
-    assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
+    const options = optionize<PopulationGraphNodeOptions, SelfOptions, NodeOptions>()( {
 
-    options = merge( {
+      // SelfOptions
       graphWidth: 100,
       graphHeight: 100,
 
-      // phet-io
-      tandem: Tandem.REQUIRED,
+      // NodeOptions
       phetioVisiblePropertyInstrumented: false
-    }, options );
+    }, providedOptions );
 
     // invisible rectangle that defines the bounds of this Node
     const boundsRectangle = new Rectangle( 0, 0, options.graphWidth, options.graphHeight );
@@ -53,8 +54,7 @@ class PopulationGraphNode extends Node {
     // Generation (x-axis) scroll control
     const generationScroller = new PopulationGenerationScroller(
       populationModel.xRangeProperty, populationModel.timeInGenerationsProperty, populationModel.isPlayingProperty, {
-        tandem: options.tandem.createTandem( 'generationScroller' ),
-        phetioVisiblePropertyInstrumented: false
+        tandem: options.tandem.createTandem( 'generationScroller' )
       } );
 
     // y-axis (Population) label
@@ -71,7 +71,7 @@ class PopulationGraphNode extends Node {
     } );
 
     // Population (y-axis) zoom buttons
-    const yZoomButtonGroup = new PlusMinusZoomButtonGroup( populationModel.yZoomLevelProperty, {
+    const yZoomButtonGroup = new PlusMinusZoomButtonGroup( populationModel.yZoomLevelProperty.asRanged(), {
       orientation: 'vertical',
       touchAreaXDilation: 7,
       touchAreaYDilation: 4,
@@ -139,20 +139,17 @@ class PopulationGraphNode extends Node {
 
     // If the plot has data that is not visible, display 'Zoom out to see data.'
     // unlink is not necessary.
-    assert && assert( plotsNode.clipArea, 'plotsNode.clipArea is required' );
+    const plotsNodeClipArea = plotsNode.clipArea!;
+    assert && assert( plotsNodeClipArea, 'plotsNode.clipArea is required' );
     plotsNode.localBoundsProperty.link( localBounds => {
       zoomOutToSeeDataText.visible = !localBounds.equals( Bounds2.NOTHING ) &&
-                                     !localBounds.intersectsBounds( plotsNode.clipArea.bounds );
+                                     !localBounds.intersectsBounds( plotsNodeClipArea.bounds );
     } );
 
     super( options );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }

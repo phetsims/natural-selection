@@ -1,6 +1,5 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PopulationNode is the parent for all parts of the 'Population' view.
  *
@@ -8,34 +7,37 @@
  */
 
 import Dimension2 from '../../../../../dot/js/Dimension2.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import { Node } from '../../../../../scenery/js/imports.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
+import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
+import { Node, NodeOptions, NodeTranslationOptions } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
+import Gene from '../../model/Gene.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import PopulationGraphNode from './PopulationGraphNode.js';
 import PopulationPanel from './PopulationPanel.js';
 
-class PopulationNode extends Node {
+type SelfOptions = EmptySelfOptions;
+
+type PopulationNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<NodeOptions, 'tandem'>;
+
+export default class PopulationNode extends Node {
+
+  private readonly populationPanel: PopulationPanel;
 
   /**
-   * @param {PopulationModel} populationModel
-   * @param {Dimension2} size - dimensions of the rectangle available for this Node and its children
-   * @param {Object} [options]
+   * @param populationModel
+   * @param size - dimensions of the rectangle available for this Node and its children
+   * @param [providedOptions]
    */
-  constructor( populationModel, size, options ) {
+  public constructor( populationModel: PopulationModel, size: Dimension2, providedOptions: PopulationNodeOptions ) {
 
-    assert && assert( populationModel instanceof PopulationModel, 'invalid populationModel' );
-    assert && assert( size instanceof Dimension2, 'invalid size' );
+    const options = optionize<PopulationNodeOptions, SelfOptions, NodeOptions>()( {
 
-    options = merge( {
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
+      // NodeOptions
       phetioDocumentation: 'the Population graph and its control panel',
       visiblePropertyOptions: { phetioReadOnly: true }
-    }, options );
+    }, providedOptions );
 
     // Divvy up the width
     const panelWidth = 175; // determined empirically
@@ -55,7 +57,6 @@ class PopulationNode extends Node {
       tandem: options.tandem.createTandem( 'populationGraphNode' )
     } );
 
-    assert && assert( !options.children, 'PopulationNode sets children' );
     options.children = [ populationPanel, populationGraphNode ];
 
     super( options );
@@ -65,29 +66,20 @@ class PopulationNode extends Node {
       tandem: options.tandem.createTandem( 'populationModel' )
     } );
 
-    // @private {PopulationPanel}
     this.populationPanel = populationPanel;
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 
   /**
    * Sets visibility of the UI components related to a specific gene.
-   * @param {Gene} gene
-   * @param {boolean} visible
-   * @public
    */
-  setGeneVisible( gene, visible ) {
+  public setGeneVisible( gene: Gene, visible: boolean ): void {
     this.populationPanel.setGeneVisible( gene, visible );
   }
 }
 
 naturalSelection.register( 'PopulationNode', PopulationNode );
-export default PopulationNode;
