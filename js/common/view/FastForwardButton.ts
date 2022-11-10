@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /*
  * FastForwardButton is the fast-forward button. To make the sim run faster, press and hold this button.
  *
@@ -9,51 +8,52 @@
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import { Path } from '../../../../scenery/js/imports.js';
-import RoundMomentaryButton from '../../../../sun/js/buttons/RoundMomentaryButton.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import RoundMomentaryButton, { RoundMomentaryButtonOptions } from '../../../../sun/js/buttons/RoundMomentaryButton.js';
 import naturalSelection from '../../naturalSelection.js';
 
-class FastForwardButton extends RoundMomentaryButton {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {EnumerationProperty.<TimeSpeed>} timeSpeedProperty
-   * @param {Object} [options]
-   */
-  constructor( timeSpeedProperty, options ) {
-    assert && assert( timeSpeedProperty instanceof EnumerationProperty );
+type FastForwardButtonOptions = SelfOptions &
+  StrictOmit<RoundMomentaryButtonOptions, 'content'> &
+  PickRequired<RoundMomentaryButtonOptions, 'tandem'>;
 
-    options = merge( {
+class FastForwardButton extends RoundMomentaryButton<TimeSpeed> {
+
+  public constructor( timeSpeedProperty: EnumerationProperty<TimeSpeed>, providedOptions: FastForwardButtonOptions ) {
+
+    const options = optionize<FastForwardButtonOptions, SelfOptions, RoundMomentaryButtonOptions>()( {
+
+      // RoundMomentaryButtonOptions
       radius: 16,
       xMargin: 8,
-      yMargin: 8,
+      yMargin: 8
+    }, providedOptions );
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+    const radius = options.radius!;
+    assert && assert( radius !== null );
 
     // Two right-pointing arrow heads, drawn clockwise from the top-left corner.
-    const r = options.radius;
     const fastForwardShape = new Shape()
       .moveTo( 0, 0 )
-      .lineTo( r / 2, r / 2 )
-      .lineTo( r / 2, 0 )
-      .lineTo( r, r / 2 )
-      .lineTo( r / 2, r )
-      .lineTo( r / 2, r / 2 )
-      .lineTo( 0, r )
+      .lineTo( radius / 2, radius / 2 )
+      .lineTo( radius / 2, 0 )
+      .lineTo( radius, radius / 2 )
+      .lineTo( radius / 2, radius )
+      .lineTo( radius / 2, radius / 2 )
+      .lineTo( 0, radius )
       .close();
 
-    assert && assert( !options.content, 'FastForwardButton sets content' );
     options.content = new Path( fastForwardShape, {
       fill: 'black'
     } );
 
     super( timeSpeedProperty, TimeSpeed.NORMAL, TimeSpeed.FAST, options );
 
-    // Create a Studio link to the model Property
     this.addLinkedElement( timeSpeedProperty, {
       tandem: options.tandem.createTandem( 'timeSpeedProperty' )
     } );
