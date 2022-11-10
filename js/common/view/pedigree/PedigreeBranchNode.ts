@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PedigreeBranchNode is a branch of the Pedigree graph. It connects a child bunny to 2 parent bunnies via a T shape:
  *
@@ -14,10 +13,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../../axon/js/Property.js';
 import { Shape } from '../../../../../kite/js/imports.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
-import { Node, Path } from '../../../../../scenery/js/imports.js';
+import optionize from '../../../../../phet-core/js/optionize.js';
+import { Node, NodeOptions, NodeTransformOptions, Path } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
@@ -33,36 +32,34 @@ const T_HEIGHT = 16; // the height of the T that connects child to parents
 const T_X_OFFSET = 28; // x offset of the T from the parent bunny's origin
 const T_Y_OFFSET = 14; // y offset of the T from the parent bunny's origin
 
+type SelfOptions = {
+  bunnyIsSelected?: boolean;
+  xSpacing?: number;
+  ySpacing?: number;
+};
+
+type PedigreeBranchNodeOptions = SelfOptions & NodeTransformOptions;
+
 export default class PedigreeBranchNode extends Node {
 
-  /**
-   * @param {Bunny} bunny
-   * @param {BunnyImageMap} bunnyImageMap
-   * @param {number} branchDepth - depth of this branch of the Pedigree tree
-   * @param {SelectedBunnyProperty} selectedBunnyProperty
-   * @param {Property.<boolean>} furAllelesVisibleProperty
-   * @param {Property.<boolean>} earsAllelesVisibleProperty
-   * @param {Property.<boolean>} teethAllelesVisibleProperty
-   * @param {Object} [options]
-   */
-  constructor( bunny, bunnyImageMap, branchDepth, selectedBunnyProperty,
-               furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
+  private readonly disposePedigreeBranchNode: () => void;
 
-    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-    assert && assert( bunnyImageMap instanceof BunnyImageMap, 'invalid bunnyImageMap' );
-    assert && assert( typeof branchDepth === 'number', 'invalid branchDepth' );
-    assert && assert( selectedBunnyProperty instanceof SelectedBunnyProperty, 'invalid selectedBunnyProperty' );
-    assert && AssertUtils.assertPropertyOf( furAllelesVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyOf( earsAllelesVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyOf( teethAllelesVisibleProperty, 'boolean' );
+  public constructor( bunny: Bunny, bunnyImageMap: BunnyImageMap, branchDepth: number,
+                      selectedBunnyProperty: SelectedBunnyProperty,
+                      furAllelesVisibleProperty: Property<boolean>,
+                      earsAllelesVisibleProperty: Property<boolean>,
+                      teethAllelesVisibleProperty: Property<boolean>,
+                      providedOptions?: PedigreeBranchNodeOptions ) {
 
     const children = [];
 
-    options = merge( {
+    const options = optionize<PedigreeBranchNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       bunnyIsSelected: false,
       xSpacing: DEFAULT_X_SPACING,
       ySpacing: DEFAULT_Y_SPACING
-    }, options );
+    }, providedOptions );
 
     const bunnyNode = new PedigreeBunnyNode( bunny, bunnyImageMap,
       furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, {
@@ -70,8 +67,8 @@ export default class PedigreeBranchNode extends Node {
       } );
     children.push( bunnyNode );
 
-    let fatherNode = null;
-    let motherNode = null;
+    let fatherNode: PedigreeBranchNode;
+    let motherNode: PedigreeBranchNode;
     if ( branchDepth > 1 && bunny.father && bunny.mother ) {
 
       fatherNode = new PedigreeBranchNode( bunny.father, bunnyImageMap, branchDepth - 1, selectedBunnyProperty,
@@ -104,12 +101,10 @@ export default class PedigreeBranchNode extends Node {
       children.push( tPath );
     }
 
-    assert && assert( !options.children, 'PedigreeBranchNode sets children' );
     options.children = children;
 
     super( options );
 
-    // @private {function}
     this.disposePedigreeBranchNode = () => {
       bunnyNode.dispose();
       fatherNode && fatherNode.dispose();
@@ -117,11 +112,7 @@ export default class PedigreeBranchNode extends Node {
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposePedigreeBranchNode();
     super.dispose();
   }
