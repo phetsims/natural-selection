@@ -9,7 +9,7 @@
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import { Node, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -27,7 +27,7 @@ import PlayButtonGroup from './PlayButtonGroup.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type EnvironmentPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
+type EnvironmentPanelOptions = SelfOptions & NodeTranslationOptions & PickRequired<PanelOptions, 'tandem'>;
 
 export default class EnvironmentPanel extends Panel {
 

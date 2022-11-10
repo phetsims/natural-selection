@@ -15,7 +15,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PlayPauseButton from '../../../../scenery-phet/js/buttons/PlayPauseButton.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
-import { HBox, HBoxOptions, SceneryConstants } from '../../../../scenery/js/imports.js';
+import { HBox, HBoxOptions, NodeTranslationOptions, SceneryConstants } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
 import FastForwardButton from './FastForwardButton.js';
 
@@ -25,7 +25,7 @@ const FAST_FORWARD_BUTTON_RADIUS = 16;
 
 type SelfOptions = EmptySelfOptions;
 
-type NaturalSelectionTimeControlNodeOptions = SelfOptions & PickRequired<HBoxOptions, 'tandem'>;
+type NaturalSelectionTimeControlNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<HBoxOptions, 'tandem'>;
 
 export default class NaturalSelectionTimeControlNode extends HBox {
 

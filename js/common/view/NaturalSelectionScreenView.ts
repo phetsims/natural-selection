@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * NaturalSelectionScreenView is the base class for all ScreenViews in this sim.
  *
@@ -9,11 +8,11 @@
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import ScreenView from '../../../../joist/js/ScreenView.js';
-import merge from '../../../../phet-core/js/merge.js';
+import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import { VBox } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionModel from '../model/NaturalSelectionModel.js';
 import SimulationMode from '../model/SimulationMode.js';
@@ -34,29 +33,37 @@ import PopulationNode from './population/PopulationNode.js';
 import ProportionsNode from './proportions/ProportionsNode.js';
 import WorldDialog from './WorldDialog.js';
 
-class NaturalSelectionScreenView extends ScreenView {
+type SelfOptions = {
 
-  /**
-   * @param {NaturalSelectionModel} model
-   * @param {Object} [options]
-   */
-  constructor( model, options ) {
+  // whether the user-interface for these features is visible
+  furVisible?: boolean;
+  earsVisible?: boolean;
+  teethVisible?: boolean;
+  toughFoodCheckboxVisible?: boolean;
+};
 
-    assert && assert( model instanceof NaturalSelectionModel, 'invalid model' );
+type NaturalSelectionScreenViewOptions = SelfOptions & ScreenViewOptions & PickRequired<ScreenViewOptions, 'tandem'>;
 
-    options = merge( {
+export default class NaturalSelectionScreenView extends ScreenView {
 
-      // whether the user-interface for these features is visible
+  public readonly graphChoiceProperty: EnumerationProperty<GraphChoice>;
+
+  private readonly model: NaturalSelectionModel;
+  private readonly environmentPanel: EnvironmentPanel;
+  private readonly resetNaturalSelectionScreenView: () => void;
+
+  protected constructor( model: NaturalSelectionModel, providedOptions: NaturalSelectionScreenViewOptions ) {
+
+    const options = optionize<NaturalSelectionScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
+
+      // SelfOptions
       furVisible: true,
       earsVisible: true,
       teethVisible: true,
-      toughFoodCheckboxVisible: true,
+      toughFoodCheckboxVisible: true
+    }, providedOptions );
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
-
-    super( options );
+    super( providedOptions );
 
     const bunnyImageMap = new BunnyImageMap();
 
@@ -130,7 +137,6 @@ class NaturalSelectionScreenView extends ScreenView {
         tandem: graphsTandem.createTandem( 'pedigreeNode' )
       } );
 
-    // @public
     this.graphChoiceProperty = new EnumerationProperty( GraphChoice.POPULATION, {
       tandem: graphsTandem.createTandem( 'graphChoiceProperty' ),
       phetioDocumentation: 'the graph choice made via graphChoiceRadioButtonGroup'
@@ -141,7 +147,7 @@ class NaturalSelectionScreenView extends ScreenView {
       maxWidth: rightOfViewportWidth,
 
       // Add PANEL_OPTIONS.xMargin so that radio buttons left-align with controls in panels above them.
-      left: environmentPanel.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING + NaturalSelectionConstants.PANEL_OPTIONS.xMargin,
+      left: environmentPanel.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING + NaturalSelectionConstants.PANEL_OPTIONS.xMargin!,
       centerY: populationNode.centerY,
       tandem: graphsTandem.createTandem( 'graphChoiceRadioButtonGroup' )
     } );
@@ -185,7 +191,6 @@ class NaturalSelectionScreenView extends ScreenView {
       mutationAlertsNode
     ];
 
-    // @private {function}
     this.resetNaturalSelectionScreenView = () => {
       this.graphChoiceProperty.reset();
     };
@@ -248,9 +253,8 @@ class NaturalSelectionScreenView extends ScreenView {
       memoryLimitDialog.show();
     } );
 
-    // @private
     this.model = model;
-    this.environmentPanel = environmentPanel; // {EnvironmentPanel}
+    this.environmentPanel = environmentPanel;
 
     // eslint-disable-next-line no-new
     new GenesVisibilityManager( model.genePool, addMutationsPanel, populationNode, proportionsNode, pedigreeNode, {
@@ -261,32 +265,25 @@ class NaturalSelectionScreenView extends ScreenView {
     } );
   }
 
-  /**
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.resetNaturalSelectionScreenView();
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 
   /**
    * Steps the view.
-   * @param {number} dt - time step, in seconds. Note that dt is currently not used by the view, and constrained by
+   * @param dt - time step, in seconds. Note that dt is currently not used by the view, and constrained by
    *   the model. If it needs to be used by the view, see NaturalSelectionModel.step and GenerationClock.constrainDt.
-   * @public
    */
-  step( dt ) {
+  public override step( dt: number ): void {
+    super.step( dt );
     if ( this.model.isPlayingProperty.value ) {
 
-      // Sim.js calls model.step before view.step. So after all of the model elements have been updated, this
+      // Sim.js calls model.step before view.step. So after all model elements have been updated, this
       // updates the view of their corresponding sprites.
       this.environmentPanel.updateSprites();
     }
@@ -294,4 +291,3 @@ class NaturalSelectionScreenView extends ScreenView {
 }
 
 naturalSelection.register( 'NaturalSelectionScreenView', NaturalSelectionScreenView );
-export default NaturalSelectionScreenView;
