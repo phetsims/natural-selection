@@ -1,91 +1,108 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PopulationPlotNode plots one set of data on the Population graph, updated only when visible.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import { ObservableArray } from '../../../../../axon/js/createObservableArray.js';
 import Multilink from '../../../../../axon/js/Multilink.js';
+import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
+import Range from '../../../../../dot/js/Range.js';
+import Vector2 from '../../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../../kite/js/imports.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import required from '../../../../../phet-core/js/required.js';
-import { Node, Path } from '../../../../../scenery/js/imports.js';
+import optionize from '../../../../../phet-core/js/optionize.js';
+import { Node, NodeOptions, Path, TColor } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
 // constants
-const NORMAL_LINE_DASH = [];
+const NORMAL_LINE_DASH: number[] = [];
 const MUTANT_LINE_DASH = NaturalSelectionConstants.POPULATION_MUTANT_LINE_DASH;
 const MUTANT_LINE_DASH_SUM = _.sum( MUTANT_LINE_DASH );
 
+type SelfOptions = {
+
+  // data points, in model coordinates (x=Generation, y=Population)
+  points: ObservableArray<Vector2>;
+
+  // whether this plot is visible
+  plotVisibleProperty: TReadOnlyProperty<boolean>;
+
+  // length of the x-axis, in generations
+  xAxisLength: number;
+
+  // ranges for the axes
+  xRangeProperty: TReadOnlyProperty<Range>;
+  yRangeProperty: TReadOnlyProperty<Range>;
+
+  // time on the generation clock, in generations
+  timeInGenerationsProperty: TReadOnlyProperty<number>;
+
+  // dimensions of the grid (sans tick marks) in view coordinates
+  gridWidth: number;
+  gridHeight: number;
+
+  // color used to render the plot
+  color: TColor;
+
+  // is this plot for a mutant allele?
+  isMutant?: boolean;
+};
+
+type PopulationPlotNodeOptions = SelfOptions;
+
 export default class PopulationPlotNode extends Node {
 
-  /**
-   * @param {Object} config - NOT propagated to super
-   */
-  constructor( config ) {
+  private readonly points: ObservableArray<Vector2>;
+  private readonly xAxisLength: number;
+  private readonly xRangeProperty: TReadOnlyProperty<Range>;
+  private readonly yRangeProperty: TReadOnlyProperty<Range>;
+  private readonly timeInGenerationsProperty: TReadOnlyProperty<number>;
+  private readonly gridWidth: number;
+  private readonly gridHeight: number;
+  private readonly pointsPath: Path;
+  private readonly stepPath: Path;
+  private readonly isDashed: boolean;
 
-    config = merge( {
+  public constructor( providedOptions: PopulationPlotNodeOptions ) {
 
-      // {ObservableArrayDef.<Vector2>} data points, in model coordinates (x=Generation, y=Population)
-      points: required( config.points ),
+    const options = optionize<PopulationPlotNodeOptions, SelfOptions, NodeOptions>()( {
 
-      // {Property.<boolean>} whether this plot is visible
-      plotVisibleProperty: required( config.plotVisibleProperty ),
-
-      // {number} length of the x-axis, in generations
-      xAxisLength: required( config.xAxisLength ),
-
-      // {Property.<Range>} ranges for the axes
-      xRangeProperty: required( config.xRangeProperty ),
-      yRangeProperty: required( config.yRangeProperty ),
-
-      // {Property.<number>} time on the generation clock, in generations
-      timeInGenerationsProperty: required( config.timeInGenerationsProperty ),
-
-      // dimensions of the grid (sans tick marks) in view coordinates
-      gridWidth: required( config.gridWidth ),
-      gridHeight: required( config.gridHeight ),
-
-      // {Color|string} color used to render the plot
-      color: required( config.color ),
-
-      // {boolean} is this plot for a mutant allele?
+      // SelfOptions
       isMutant: false
-    }, config );
+    }, providedOptions );
 
     // Points will be drawn as circles
     const pointsPath = new Path( new Shape(), {
-      fill: config.color
+      fill: options.color
     } );
 
     // Points will be connected using line segments that create a step plot
     const stepPath = new Path( new Shape(), {
-      stroke: config.color,
+      stroke: options.color,
       lineWidth: NaturalSelectionConstants.POPULATION_LINE_WIDTH,
-      lineDash: config.isMutant ? MUTANT_LINE_DASH : NORMAL_LINE_DASH
+      lineDash: options.isMutant ? MUTANT_LINE_DASH : NORMAL_LINE_DASH
     } );
 
-    super( {
-      children: [ stepPath, pointsPath ]
-    } );
+    options.children = [ stepPath, pointsPath ];
 
-    // @private
-    this.points = config.points;
-    this.xAxisLength = config.xAxisLength;
-    this.xRangeProperty = config.xRangeProperty;
-    this.yRangeProperty = config.yRangeProperty;
-    this.timeInGenerationsProperty = config.timeInGenerationsProperty; // {Property.<number>}
-    this.gridWidth = config.gridWidth;
-    this.gridHeight = config.gridHeight;
+    super( options );
+
+    this.points = options.points;
+    this.xAxisLength = options.xAxisLength;
+    this.xRangeProperty = options.xRangeProperty;
+    this.yRangeProperty = options.yRangeProperty;
+    this.timeInGenerationsProperty = options.timeInGenerationsProperty;
+    this.gridWidth = options.gridWidth;
+    this.gridHeight = options.gridHeight;
     this.pointsPath = pointsPath; // {Path}
     this.stepPath = stepPath; // {Path}
-    this.isDashed = _.sum( stepPath.lineDash ) > 0; // {number}
+    this.isDashed = _.sum( stepPath.lineDash ) > 0;
 
     // unlink is not necessary.
-    config.plotVisibleProperty.link( plotVisible => {
+    options.plotVisibleProperty.link( plotVisible => {
       this.visible = plotVisible;
     } );
 
@@ -93,7 +110,7 @@ export default class PopulationPlotNode extends Node {
     // work as each individual point is deleted.
     // unlink is not necessary.
     this.points.lengthProperty.link( ( length, previousLength ) => {
-      if ( length > previousLength || length === 0 ) {
+      if ( ( previousLength === null ) || length > previousLength || length === 0 ) {
         this.updatePlot();
       }
     } );
@@ -116,9 +133,8 @@ export default class PopulationPlotNode extends Node {
   /**
    * Plots the points and line segments that are within the x range of the graph.
    * The y range is handled by a clipArea on PopulationPlotsNode (the parent Node).
-   * @private
    */
-  updatePlot() {
+  private updatePlot(): void {
 
     // Draw only if visible
     if ( this.visible ) {
@@ -224,30 +240,27 @@ export default class PopulationPlotNode extends Node {
    * whether the "Zoom out to show data" message should be displayed.  Bounds computation includes invisible Nodes,
    * and if the plot still contains geometry, then it will be incorrectly contributing to bounds.
    * See https://github.com/phetsims/natural-selection/issues/209
-   * @private
    */
-  clearPlot() {
+  private clearPlot(): void {
     this.pointsPath.setShape( null );
     this.stepPath.setShape( null );
   }
 
   /**
    * Model-view transform for x-axis.
-   * @param {number} xModel - x model value, in generations
-   * @returns {number} x view value
-   * @private
+   * @param xModel - x model value, in generations
+   * @returns x view value
    */
-  modelToViewX( xModel ) {
+  private modelToViewX( xModel: number ): number {
     return this.gridWidth * ( xModel - this.xRangeProperty.value.min ) / ( this.xRangeProperty.value.max - this.xRangeProperty.value.min );
   }
 
   /**
    * Model-view transform for y-axis. The y-axis is inverted (+y up in model, +y down in view).
-   * @param {number} yModel - y model value, population
-   * @returns {number} y view value
-   * @private
+   * @param yModel - y model value, population
+   * @returns y view value
    */
-  modelToViewY( yModel ) {
+  private modelToViewY( yModel: number ): number {
     return this.gridHeight - this.gridHeight * ( yModel - this.yRangeProperty.value.min ) / ( this.yRangeProperty.value.max - this.yRangeProperty.value.min );
   }
 }

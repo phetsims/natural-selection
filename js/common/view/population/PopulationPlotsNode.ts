@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PopulationPlotsNode is the complete set of plots for the Population graph, clipped to the graph's grid.
  *
@@ -10,28 +9,33 @@
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import { Shape } from '../../../../../kite/js/imports.js';
 import merge from '../../../../../phet-core/js/merge.js';
-import { Node } from '../../../../../scenery/js/imports.js';
+import optionize from '../../../../../phet-core/js/optionize.js';
+import { Node, NodeOptions, NodeTranslationOptions } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import PopulationPlotNode from './PopulationPlotNode.js';
 
+type SelfOptions = {
+
+  // dimensions of the grid (sans tick marks) in view coordinates
+  gridWidth?: number;
+  gridHeight?: number;
+} ;
+
+type PopulationPlotsNodeOptions = SelfOptions & NodeTranslationOptions;
+
 export default class PopulationPlotsNode extends Node {
 
-  /**
-   * @param {PopulationModel} populationModel
-   * @param {Object} [options]
-   */
-  constructor( populationModel, options ) {
-    assert && assert( populationModel instanceof PopulationModel, 'invalid ' );
+  public constructor( populationModel: PopulationModel, providedOptions?: PopulationPlotsNodeOptions ) {
 
-    options = merge( {
+    const options = optionize<PopulationPlotsNodeOptions, SelfOptions, NodeOptions>()( {
 
-      // dimensions of the grid (sans tick marks) in view coordinates
+      // SelfOptions
       gridWidth: 100,
       gridHeight: 100
-    }, options );
+    }, providedOptions );
 
     // Clipped to the graph, but dilated to mitigate clipping of points and line segments at the edges of the grid.
     // Points (but not line segments) that fall at yMax (in model coordinates) will be slightly clipped as a compromise
