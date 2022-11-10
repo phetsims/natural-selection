@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PerformanceTimesNode displays times related to performance critical parts of the simulation. This is added via
  * the ?showTimes query parameter, and is for debugging only. It is not translated or instrumented for PhET-iO.

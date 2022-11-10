@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * NaturalSelectionTimeControlNode is the time control for this sim. It has a play/pause button and a fast-forward
  * button. To make the sim run faster, press and hold the fast-forward button.  It has nothing in common with PhET's
