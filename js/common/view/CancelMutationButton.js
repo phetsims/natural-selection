@@ -1,5 +1,6 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * CancelMutationButton is the button that appears in the 'Mutation Coming' alert, used to cancel a mutation.
  *

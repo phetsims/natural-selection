@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /*
  * FastForwardButton is the fast-forward button. To make the sim run faster, press and hold this button.
  *
