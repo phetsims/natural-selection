@@ -109,8 +109,7 @@ export default class EnvironmentPanel extends Panel {
     if ( NaturalSelectionQueryParameters.showTimes ) {
       this.addChild( new PerformanceTimesNode( model.timeToMateProperty, timeToStartOverProperty, {
         left: environmentNode.left + 5,
-        top: environmentNode.top + 5,
-        tandem: Tandem.OPT_OUT
+        top: environmentNode.top + 5
       } ) );
     }
 

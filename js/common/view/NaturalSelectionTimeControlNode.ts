@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * NaturalSelectionTimeControlNode is the time control for this sim. It has a play/pause button and a fast-forward
  * button. To make the sim run faster, press and hold the fast-forward button.  It has nothing in common with PhET's
@@ -11,11 +10,12 @@
  */
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
+import Property from '../../../../axon/js/Property.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PlayPauseButton from '../../../../scenery-phet/js/buttons/PlayPauseButton.js';
-import { HBox, SceneryConstants } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
+import { HBox, HBoxOptions, SceneryConstants } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
 import FastForwardButton from './FastForwardButton.js';
 
@@ -23,31 +23,25 @@ import FastForwardButton from './FastForwardButton.js';
 const PLAY_BUTTON_RADIUS = 20;
 const FAST_FORWARD_BUTTON_RADIUS = 16;
 
-class NaturalSelectionTimeControlNode extends HBox {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Property.<boolean>} isPlayingProperty
-   * @param {EnumerationProperty.<TimeSpeed>} timeSpeedProperty
-   * @param {Object} [options]
-   */
-  constructor( isPlayingProperty, timeSpeedProperty, options ) {
+type NaturalSelectionTimeControlNodeOptions = SelfOptions & PickRequired<HBoxOptions, 'tandem'>;
 
-    assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
-    assert && assert( timeSpeedProperty instanceof EnumerationProperty );
+export default class NaturalSelectionTimeControlNode extends HBox {
 
-    options = merge( {
+  public constructor( isPlayingProperty: Property<boolean>, timeSpeedProperty: EnumerationProperty<TimeSpeed>,
+                      providedOptions: NaturalSelectionTimeControlNodeOptions ) {
+
+    const options = optionize<NaturalSelectionTimeControlNodeOptions, SelfOptions, HBoxOptions>()( {
+
+      // HBoxOptions
       spacing: 10,
-
       disabledOpacity: SceneryConstants.DISABLED_OPACITY,
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
       phetioEnabledPropertyInstrumented: true // opt into default PhET-iO instrumented enabledProperty
-    }, options );
+    }, providedOptions );
 
     const playPauseButton = new PlayPauseButton( isPlayingProperty, {
       radius: PLAY_BUTTON_RADIUS,
-      listener: () => fastForwardButton.interruptSubtreeInput(),
       tandem: options.tandem.createTandem( 'playPauseButton' )
     } );
 
@@ -57,7 +51,6 @@ class NaturalSelectionTimeControlNode extends HBox {
       tandem: options.tandem.createTandem( 'fastForwardButton' )
     } );
 
-    assert && assert( !options.children, 'NaturalSelectionTimeControl sets children' );
     options.children = [ playPauseButton, fastForwardButton ];
 
     super( options );
@@ -68,7 +61,7 @@ class NaturalSelectionTimeControlNode extends HBox {
     let isPlayingSaved = isPlayingProperty.value;
 
     // unlink is not necessary.
-    fastForwardButton.buttonModel.downProperty.link( down => {
+    fastForwardButton.fastForwardButtonModel.downProperty.link( down => {
       playPauseButton.enabled = !down;
       if ( down ) {
 
@@ -90,15 +83,10 @@ class NaturalSelectionTimeControlNode extends HBox {
     } );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 }
 
 naturalSelection.register( 'NaturalSelectionTimeControlNode', NaturalSelectionTimeControlNode );
-export default NaturalSelectionTimeControlNode;

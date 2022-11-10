@@ -13,6 +13,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import { Path } from '../../../../scenery/js/imports.js';
+import ButtonModel from '../../../../sun/js/buttons/ButtonModel.js';
 import RoundMomentaryButton, { RoundMomentaryButtonOptions } from '../../../../sun/js/buttons/RoundMomentaryButton.js';
 import naturalSelection from '../../naturalSelection.js';
 
@@ -23,6 +24,8 @@ type FastForwardButtonOptions = SelfOptions &
   PickRequired<RoundMomentaryButtonOptions, 'tandem'>;
 
 class FastForwardButton extends RoundMomentaryButton<TimeSpeed> {
+
+  public readonly fastForwardButtonModel: ButtonModel;
 
   public constructor( timeSpeedProperty: EnumerationProperty<TimeSpeed>, providedOptions: FastForwardButtonOptions ) {
 
@@ -53,6 +56,8 @@ class FastForwardButton extends RoundMomentaryButton<TimeSpeed> {
     } );
 
     super( timeSpeedProperty, TimeSpeed.NORMAL, TimeSpeed.FAST, options );
+
+    this.fastForwardButtonModel = this.buttonModel;
 
     this.addLinkedElement( timeSpeedProperty, {
       tandem: options.tandem.createTandem( 'timeSpeedProperty' )

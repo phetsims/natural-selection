@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PerformanceTimesNode displays times related to performance critical parts of the simulation. This is added via
  * the ?showTimes query parameter, and is for debugging only. It is not translated or instrumented for PhET-iO.
@@ -10,25 +9,29 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { Text, VBox } from '../../../../scenery/js/imports.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import { NodeTranslationOptions, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-class PerformanceTimesNode extends VBox {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Property.<number>} timeToMateProperty
-   * @param {Property.<number>} timeToStartOverProperty
-   * @param {Object} [options]
-   */
-  constructor( timeToMateProperty, timeToStartOverProperty, options ) {
+type PerformanceTimesNodeOptions = SelfOptions & NodeTranslationOptions;
 
-    options = merge( {
+export default class PerformanceTimesNode extends VBox {
+
+  public constructor( timeToMateProperty: TReadOnlyProperty<number>,
+                      timeToStartOverProperty: TReadOnlyProperty<number>,
+                      providedOptions?: PerformanceTimesNodeOptions ) {
+
+    const options = optionize<PerformanceTimesNodeOptions, SelfOptions, VBoxOptions>()( {
+
+      // VBoxOptions
       align: 'left',
       spacing: 5
-    }, options );
+    }, providedOptions );
 
     // unlink is not necessary.
     const timeToMateDerivedStringProperty = new DerivedProperty( [ timeToMateProperty ],
@@ -54,21 +57,15 @@ class PerformanceTimesNode extends VBox {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT
     } );
 
-    assert && assert( !options.children, 'PerformanceTimesNode sets children' );
     options.children = [ timeToMateNode, timeToStartOverNode ];
 
     super( options );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 }
 
 naturalSelection.register( 'PerformanceTimesNode', PerformanceTimesNode );
-export default PerformanceTimesNode;
