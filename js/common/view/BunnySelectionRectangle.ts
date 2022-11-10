@@ -1,6 +1,5 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * BunnySelectionRectangle is the rectangle that appears around the selected bunny in the environment and
  * in the Pedigree graph.
@@ -9,33 +8,33 @@
  */
 
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import { NodeTranslationOptions, Rectangle, RectangleOptions } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-class BunnySelectionRectangle extends Rectangle {
+type SelfOptions = EmptySelfOptions;
 
-  /**
-   * @param {Bounds2} bounds
-   * @param {Object} [options]
-   */
-  constructor( bounds, options ) {
+type BunnySelectionRectangleOptions = SelfOptions & NodeTranslationOptions & PickOptional<RectangleOptions, 'lineWidth'>;
 
-    assert && assert( bounds instanceof Bounds2, 'invalid bounds' );
+export default class BunnySelectionRectangle extends Rectangle {
 
-    options = merge( {
+  public constructor( bounds: Bounds2, providedOptions?: BunnySelectionRectangleOptions ) {
+
+    const options = optionize<BunnySelectionRectangleOptions, SelfOptions, RectangleOptions>()( {
+
+      // RectangleOptions
       fill: NaturalSelectionColors.BUNNY_SELECTION_RECTANGLE_FILL,
       stroke: NaturalSelectionColors.BUNNY_SELECTION_RECTANGLE_STROKE,
       lineWidth: 2,
       cornerRadius: NaturalSelectionConstants.CORNER_RADIUS,
       pickable: false
-    }, options );
+    }, providedOptions );
 
     super( bounds, options );
   }
 }
 
 naturalSelection.register( 'BunnySelectionRectangle', BunnySelectionRectangle );
-export default BunnySelectionRectangle;
