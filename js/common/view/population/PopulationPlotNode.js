@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PopulationPlotNode plots one set of data on the Population graph, updated only when visible.
  *

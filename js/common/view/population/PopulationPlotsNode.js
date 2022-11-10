@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PopulationPlotsNode is the complete set of plots for the Population graph, clipped to the graph's grid.
  *
