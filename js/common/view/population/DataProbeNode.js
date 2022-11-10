@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * DataProbeNode displays population (y-axis) values for a specific generation (x-axis) value.
  * It can be dragged along the x axis. The origin is at the top center of barNode.

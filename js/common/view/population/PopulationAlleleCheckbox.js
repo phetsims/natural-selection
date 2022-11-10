@@ -1,5 +1,6 @@
 // Copyright 2021-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PopulationAlleleCheckbox is a specialization of PopulationLegendCheckbox for use with alleles.
  * It shows the name of the allele on the checkbox, and keeps a reference to that allele.

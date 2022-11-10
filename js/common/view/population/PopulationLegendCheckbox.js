@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PopulationLegendCheckbox is a checkbox in the control panel for the Population graph.
  * It serves as a legend (shows the color and line style used for a plot) and controls visibility of a plot.
