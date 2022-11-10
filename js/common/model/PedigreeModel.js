@@ -12,7 +12,7 @@ import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 
-class PedigreeModel extends PhetioObject {
+export default class PedigreeModel extends PhetioObject {
 
   /**
    * @param {Object} [options]
@@ -61,4 +61,3 @@ class PedigreeModel extends PhetioObject {
 }
 
 naturalSelection.register( 'PedigreeModel', PedigreeModel );
-export default PedigreeModel;

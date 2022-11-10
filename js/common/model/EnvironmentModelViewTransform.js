@@ -85,7 +85,7 @@ assert && assert( NEAR_SCALE > 0 && NEAR_SCALE <= 1, `invalid NEAR_SCALE: ${NEAR
 // and avoids floating-point errors that would have them end up just outside the ground trapezoid.
 const Z_MARGIN_MODEL = 1;
 
-class EnvironmentModelViewTransform {
+export default class EnvironmentModelViewTransform {
 
   constructor() {
 
@@ -348,4 +348,3 @@ class EnvironmentModelViewTransform {
 EnvironmentModelViewTransform.Z_MARGIN_MODEL = Z_MARGIN_MODEL;
 
 naturalSelection.register( 'EnvironmentModelViewTransform', EnvironmentModelViewTransform );
-export default EnvironmentModelViewTransform;

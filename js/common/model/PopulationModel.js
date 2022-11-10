@@ -46,7 +46,7 @@ assert && assert( _.every( value => NaturalSelectionUtils.isPositiveInteger( val
 assert && assert( NaturalSelectionUtils.isSortedDescending( Y_TICK_SPACINGS ),
   'Y_TICK_SPACINGS must be sorted in descending order' );
 
-class PopulationModel extends PhetioObject {
+export default class PopulationModel extends PhetioObject {
 
   /**
    * @param {GenePool} genePool
@@ -299,4 +299,3 @@ function recordCount( array, timeInGenerations, count ) {
 }
 
 naturalSelection.register( 'PopulationModel', PopulationModel );
-export default PopulationModel;

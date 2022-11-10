@@ -21,7 +21,7 @@ import Allele from './Allele.js';
 import GenePair from './GenePair.js';
 import GenePool from './GenePool.js';
 
-class Genotype extends PhetioObject {
+export default class Genotype extends PhetioObject {
 
   /**
    * @param {GenePool} genePool
@@ -236,4 +236,3 @@ Genotype.GenotypeIO = new IOType( 'GenotypeIO', {
 } );
 
 naturalSelection.register( 'Genotype', Genotype );
-export default Genotype;

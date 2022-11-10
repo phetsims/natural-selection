@@ -14,7 +14,7 @@ import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Wolf from './Wolf.js';
 
-class WolfGroup extends PhetioGroup {
+export default class WolfGroup extends PhetioGroup {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
@@ -54,4 +54,3 @@ class WolfGroup extends PhetioGroup {
 }
 
 naturalSelection.register( 'WolfGroup', WolfGroup );
-export default WolfGroup;

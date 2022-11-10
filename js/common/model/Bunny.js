@@ -36,7 +36,7 @@ const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // straight-line distance that a
 const HOP_HEIGHT_RANGE = new Range( 30, 50 ); // how high above the ground a bunny hops
 const X_MARGIN = 28; // determined empirically, to keep bunnies inside bounds of the environment
 
-class Bunny extends Organism {
+export default class Bunny extends Organism {
 
   /**
    * @param {GenePool} genePool
@@ -469,4 +469,3 @@ Bunny.BunnyIO = new IOType( 'BunnyIO', {
 } );
 
 naturalSelection.register( 'Bunny', Bunny );
-export default Bunny;

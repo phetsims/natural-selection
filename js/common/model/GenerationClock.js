@@ -23,7 +23,7 @@ const SECONDS_PER_GENERATION = NaturalSelectionQueryParameters.secondsPerGenerat
 const MIN_STEPS_PER_GENERATION = 10;
 const MAX_DT = SECONDS_PER_GENERATION / MIN_STEPS_PER_GENERATION;
 
-class GenerationClock extends PhetioObject {
+export default class GenerationClock extends PhetioObject {
 
   /**
    * @param {Object} [options]
@@ -187,4 +187,3 @@ function secondsToGenerations( seconds ) {
 }
 
 naturalSelection.register( 'GenerationClock', GenerationClock );
-export default GenerationClock;

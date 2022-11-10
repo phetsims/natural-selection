@@ -29,7 +29,7 @@ const X_MARGIN = 35;
 // Speed of a wolf, in pixels/second. A value is randomly chosen from this range for each wolf.
 const WOLF_SPEED_RANGE = new Range( 125, 200 );
 
-class Wolf extends Organism {
+export default class Wolf extends Organism {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
@@ -197,4 +197,3 @@ Wolf.WolfIO = new IOType( 'WolfIO', {
 } );
 
 naturalSelection.register( 'Wolf', Wolf );
-export default Wolf;

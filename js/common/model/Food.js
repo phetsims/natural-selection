@@ -40,7 +40,7 @@ const TOUGH_FOOD_MIN_LONG_TEETH = 5;
 const SHRUBS_X_MARGIN = 20;
 const SHRUBS_Z_MARGIN = 5;
 
-class Food {
+export default class Food {
 
   /**
    * @param {GenerationClock} generationClock
@@ -286,4 +286,3 @@ function starvePercentage( bunnies, percentToStarve ) {
 }
 
 naturalSelection.register( 'Food', Food );
-export default Food;

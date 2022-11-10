@@ -17,7 +17,7 @@ import Bunny from './Bunny.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 
-class BunnyGroup extends PhetioGroup {
+export default class BunnyGroup extends PhetioGroup {
 
   /**
    * @param {GenePool} genePool
@@ -62,4 +62,3 @@ class BunnyGroup extends PhetioGroup {
 }
 
 naturalSelection.register( 'BunnyGroup', BunnyGroup );
-export default BunnyGroup;

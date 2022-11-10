@@ -13,7 +13,7 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
 
-class ProportionsCounts {
+export default class ProportionsCounts {
 
   /**
    * @param {number} generation
@@ -93,4 +93,3 @@ ProportionsCounts.ProportionsCountsIO = new IOType( 'ProportionsCountsIO', {
 } );
 
 naturalSelection.register( 'ProportionsCounts', ProportionsCounts );
-export default ProportionsCounts;

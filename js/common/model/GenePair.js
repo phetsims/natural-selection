@@ -17,7 +17,7 @@ import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
 import Gene from './Gene.js';
 
-class GenePair extends PhetioObject {
+export default class GenePair extends PhetioObject {
 
   /**
    * @param {Gene} gene - the associated gene
@@ -201,4 +201,3 @@ GenePair.GenePairIO = new IOType( 'GenePairIO', {
 } );
 
 naturalSelection.register( 'GenePair', GenePair );
-export default GenePair;

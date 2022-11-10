@@ -13,7 +13,7 @@ import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
 import Gene from './Gene.js';
 
-class GenePool {
+export default class GenePool {
 
   /**
    * @param {Object} [options]
@@ -97,4 +97,3 @@ class GenePool {
 }
 
 naturalSelection.register( 'GenePool', GenePool );
-export default GenePool;

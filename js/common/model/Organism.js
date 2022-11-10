@@ -19,7 +19,7 @@ import XDirection from './XDirection.js';
 // constants
 const DEFAULT_POSITION = new Vector3( 0, 0, 1 ); // z=0 is illegal, results in divide-by-zero in modelViewTransform
 
-class Organism extends PhetioObject {
+export default class Organism extends PhetioObject {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
@@ -120,4 +120,3 @@ class Organism extends PhetioObject {
 }
 
 naturalSelection.register( 'Organism', Organism );
-export default Organism;

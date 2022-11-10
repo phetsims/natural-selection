@@ -45,7 +45,7 @@ const BUNNY_REST_RANGE_LONG = new Range( 6, 10 );
 const MAX_DEAD_BUNNY_GENERATIONS = NaturalSelectionQueryParameters.maxAge *
                                    ( NaturalSelectionConstants.PEDIGREE_TREE_DEPTH - 1 );
 
-class BunnyCollection {
+export default class BunnyCollection {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
@@ -671,4 +671,3 @@ function getMateForRecessiveMutant( father, bunnies ) {
 }
 
 naturalSelection.register( 'BunnyCollection', BunnyCollection );
-export default BunnyCollection;

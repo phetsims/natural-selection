@@ -9,7 +9,7 @@
 import naturalSelection from '../../naturalSelection.js';
 import Organism from './Organism.js';
 
-class Shrub extends Organism {
+export default class Shrub extends Organism {
 
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
@@ -30,4 +30,3 @@ class Shrub extends Organism {
 }
 
 naturalSelection.register( 'Shrub', Shrub );
-export default Shrub;

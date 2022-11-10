@@ -30,7 +30,7 @@ import ProportionsModel from './ProportionsModel.js';
 import SimulationMode from './SimulationMode.js';
 import WolfCollection from './WolfCollection.js';
 
-class NaturalSelectionModel {
+export default class NaturalSelectionModel {
 
   /**
    * @param {string} mutationsQueryParameterName
@@ -351,4 +351,3 @@ class NaturalSelectionModel {
 }
 
 naturalSelection.register( 'NaturalSelectionModel', NaturalSelectionModel );
-export default NaturalSelectionModel;

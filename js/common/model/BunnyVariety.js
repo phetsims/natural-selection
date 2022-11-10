@@ -10,7 +10,7 @@
 
 import naturalSelection from '../../naturalSelection.js';
 
-class BunnyVariety {
+export default class BunnyVariety {
 
   /**
    * @param {number} count
@@ -44,4 +44,3 @@ class BunnyVariety {
 }
 
 naturalSelection.register( 'BunnyVariety', BunnyVariety );
-export default BunnyVariety;

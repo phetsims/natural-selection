@@ -18,7 +18,7 @@ import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
 
-class SelectedBunnyProperty extends Property {
+export default class SelectedBunnyProperty extends Property {
 
   /**
    * @param {Object} [options]
@@ -41,4 +41,3 @@ class SelectedBunnyProperty extends Property {
 }
 
 naturalSelection.register( 'SelectedBunnyProperty', SelectedBunnyProperty );
-export default SelectedBunnyProperty;

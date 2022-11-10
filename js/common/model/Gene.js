@@ -35,7 +35,7 @@ import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import Allele from './Allele.js';
 
-class Gene extends PhetioObject {
+export default class Gene extends PhetioObject {
 
   /**
    * @param {Object} config
@@ -239,5 +239,4 @@ Gene.GeneIO = new IOType( 'GeneIO', {
 } );
 
 naturalSelection.register( 'Gene', Gene );
-export default Gene;
 

@@ -20,7 +20,7 @@ import naturalSelection from '../../naturalSelection.js';
 import BunnyCounts from './BunnyCounts.js';
 import PopulationModel from './PopulationModel.js';
 
-class DataProbe extends PhetioObject {
+export default class DataProbe extends PhetioObject {
 
   /**
    * @param {PopulationModel} populationModel
@@ -138,4 +138,3 @@ class DataProbe extends PhetioObject {
 }
 
 naturalSelection.register( 'DataProbe', DataProbe );
-export default DataProbe;

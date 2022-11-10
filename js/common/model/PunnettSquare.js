@@ -22,7 +22,7 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
 
-class PunnettSquare {
+export default class PunnettSquare {
 
   /**
    * @param {GenePair} fatherGenePair
@@ -130,4 +130,3 @@ class Cell {
 }
 
 naturalSelection.register( 'PunnettSquare', PunnettSquare );
-export default PunnettSquare;

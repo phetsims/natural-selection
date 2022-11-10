@@ -16,7 +16,7 @@ import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 import Bunny from './Bunny.js';
 
-class BunnyCounts {
+export default class BunnyCounts {
 
   /**
    * @param {Object} config
@@ -198,4 +198,3 @@ BunnyCounts.BunnyCountsIO = new IOType( 'BunnyCountsIO', {
 } );
 
 naturalSelection.register( 'BunnyCounts', BunnyCounts );
-export default BunnyCounts;

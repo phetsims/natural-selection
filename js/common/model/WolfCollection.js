@@ -45,7 +45,7 @@ const MIN_WOLVES = 5;
 // The number of bunnies per wolf. Wolves are created based on the size of the bunny population.
 const BUNNIES_PER_WOLF = 10;
 
-class WolfCollection {
+export default class WolfCollection {
 
   /**
    * @param {GenerationClock} generationClock
@@ -283,4 +283,3 @@ function eatSomeBunnies( bunnies, totalBunnies, environment, environmentMatch, p
 }
 
 naturalSelection.register( 'WolfCollection', WolfCollection );
-export default WolfCollection;

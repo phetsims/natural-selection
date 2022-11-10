@@ -24,7 +24,7 @@ import BunnyCounts from './BunnyCounts.js';
  * @param {Object} [options]
  * @returns {BunnyArrayDef}
  */
-function createBunnyArray( options ) {
+export default function createBunnyArray( options ) {
 
   options = merge( {
 
@@ -67,4 +67,3 @@ function createBunnyArray( options ) {
 }
 
 naturalSelection.register( 'createBunnyArray', createBunnyArray );
-export default createBunnyArray;

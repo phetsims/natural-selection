@@ -26,7 +26,7 @@ import whiteFur_png from '../../../images/whiteFur_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 
-class Allele extends PhetioObject {
+export default class Allele extends PhetioObject {
 
   /**
    * @param {TReadOnlyProperty<string>} nameProperty - name of the allele
@@ -109,4 +109,3 @@ Allele.LONG_TEETH = new Allele( NaturalSelectionStrings.longTeethStringProperty,
 } );
 
 naturalSelection.register( 'Allele', Allele );
-export default Allele;

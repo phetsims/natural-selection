@@ -17,7 +17,7 @@ import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
 import Genotype from './Genotype.js';
 
-class Phenotype extends PhetioObject {
+export default class Phenotype extends PhetioObject {
 
   /**
    * @param {Genotype} genotype
@@ -156,4 +156,3 @@ Phenotype.PhenotypeIO = new IOType( 'PhenotypeIO', {
 } );
 
 naturalSelection.register( 'Phenotype', Phenotype );
-export default Phenotype;

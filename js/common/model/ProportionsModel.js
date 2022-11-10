@@ -23,7 +23,7 @@ import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
 import ProportionsCounts from './ProportionsCounts.js';
 
-class ProportionsModel extends PhetioObject {
+export default class ProportionsModel extends PhetioObject {
 
   /**
    * @param {Property.<BunnyCounts>} liveBunnyCountsProperty - counts of live bunnies, used for dynamic 'Currently' data
@@ -244,4 +244,3 @@ class ProportionsModel extends PhetioObject {
 }
 
 naturalSelection.register( 'ProportionsModel', ProportionsModel );
-export default ProportionsModel;

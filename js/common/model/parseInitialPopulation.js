@@ -35,7 +35,7 @@ import GenePool from './GenePool.js';
  * @returns {BunnyVariety[]}
  * @public
  */
-function parseInitialPopulation( genePool, mutationsName, populationName ) {
+export default function parseInitialPopulation( genePool, mutationsName, populationName ) {
 
   assert && assert( genePool instanceof GenePool, 'invalid genePool' );
   assert && assert( typeof mutationsName === 'string', 'invalid mutationsName' );
@@ -319,4 +319,3 @@ function verify( predicate, message ) {
 }
 
 naturalSelection.register( 'parseInitialPopulation', parseInitialPopulation );
-export default parseInitialPopulation;
