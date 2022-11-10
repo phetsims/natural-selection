@@ -27,8 +27,7 @@ import AlleleNode from './AlleleNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type AllelesPanelOptions = SelfOptions & NaturalSelectionPanelOptions &
-  PickRequired<NaturalSelectionPanelOptions, 'tandem'>;
+type AllelesPanelOptions = SelfOptions & NaturalSelectionPanelOptions;
 
 export default class AllelesPanel extends NaturalSelectionPanel {
 
