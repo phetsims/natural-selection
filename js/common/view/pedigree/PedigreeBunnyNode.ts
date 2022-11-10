@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PedigreeBunnyNode is the view of a bunny in the Pedigree graph. It ignores bunny motion, and displays
  * only the information that is relevant to pedigree.
@@ -9,10 +8,10 @@
  */
 
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
+import Property from '../../../../../axon/js/Property.js';
+import optionize from '../../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
-import { Node, Text } from '../../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Text } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
@@ -27,30 +26,32 @@ const GENOTYPE_FONT = new PhetFont( 16 );
 const DEAD_SYMBOL_FONT = new PhetFont( 20 );
 const UNICODE_RED_CROSS_MARK = '\u274c';
 
+type SelfOptions = {
+  showMutationIcon?: boolean; // true = show the mutation icon on the bunny
+  bunnyIsSelected?: boolean; // true = put a selection icon around the bunny
+};
+
+type PedigreeBunnyNodeOptions = SelfOptions;
+
 export default class PedigreeBunnyNode extends Node {
 
-  /**
-   * @param {Bunny} bunny
-   * @param {BunnyImageMap} bunnyImageMap
-   * @param {Property.<boolean>} furAllelesVisibleProperty
-   * @param {Property.<boolean>} earsAllelesVisibleProperty
-   * @param {Property.<boolean>} teethAllelesVisibleProperty
-   * @param {Object} [options]
-   */
-  constructor( bunny, bunnyImageMap,
-               furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty, options ) {
+  private readonly disposePedigreeBunnyNode: () => void;
 
-    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-    assert && assert( bunnyImageMap instanceof BunnyImageMap, 'invalid bunnyImageMap' );
-    assert && AssertUtils.assertPropertyOf( furAllelesVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyOf( earsAllelesVisibleProperty, 'boolean' );
-    assert && AssertUtils.assertPropertyOf( teethAllelesVisibleProperty, 'boolean' );
+  public constructor( bunny: Bunny,
+                      bunnyImageMap: BunnyImageMap,
+                      furAllelesVisibleProperty: Property<boolean>,
+                      earsAllelesVisibleProperty: Property<boolean>,
+                      teethAllelesVisibleProperty: Property<boolean>,
+                      providedOptions?: PedigreeBunnyNodeOptions ) {
 
-    options = merge( {
+    const options = optionize<PedigreeBunnyNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       showMutationIcon: true,
       bunnyIsSelected: false
+
       // Not PhET-iO instrumented: PedigreeBunnyNode is created dynamically, and clients generally have no need to inspect them.
-    }, options );
+    }, providedOptions );
 
     const children = [];
 
@@ -73,13 +74,13 @@ export default class PedigreeBunnyNode extends Node {
 
     // Update the genotype abbreviation, must be disposed
     // Not instrumented because we decided not to instrument PedigreeBunnyNode.
-    const genotypeDerivedStringProperty = new DerivedProperty(
+    const genotypeDerivedStringProperty = DerivedProperty.deriveAny(
       [
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty,
         ...bunny.genotype.getAbbreviationStringDependencies()
       ],
-      ( furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) =>
-        getGenotypeAbbreviation( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible )
+      () =>
+        getGenotypeAbbreviation( bunny, furAllelesVisibleProperty.value, earsAllelesVisibleProperty.value, teethAllelesVisibleProperty.value )
     );
 
     // Must be disposed
@@ -115,7 +116,6 @@ export default class PedigreeBunnyNode extends Node {
       children.push( new OriginNode() );
     }
 
-    assert && assert( !options.children, 'PedigreeBunnyNode sets children' );
     options.children = children;
 
     super( options );
@@ -138,7 +138,6 @@ export default class PedigreeBunnyNode extends Node {
       addRedCrossMark();
     }
 
-    // @private {function}
     this.disposePedigreeBunnyNode = () => {
       genotypeDerivedStringProperty.dispose();
       genotypeTextVisibleProperty.dispose();
@@ -159,11 +158,7 @@ export default class PedigreeBunnyNode extends Node {
     }
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposePedigreeBunnyNode();
     super.dispose();
   }
@@ -171,18 +166,9 @@ export default class PedigreeBunnyNode extends Node {
 
 /**
  * Gets the abbreviations that describe a Bunny's genotype, e.g. 'FfEEtt'.
- * @param {Bunny} bunny
- * @param {boolean} furAllelesVisible
- * @param {boolean} earsAllelesVisible
- * @param {boolean} teethAllelesVisible
- * @returns {string}
  */
-function getGenotypeAbbreviation( bunny, furAllelesVisible, earsAllelesVisible, teethAllelesVisible ) {
-
-  assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-  assert && assert( typeof furAllelesVisible === 'boolean', 'invalid furAllelesVisible' );
-  assert && assert( typeof earsAllelesVisible === 'boolean', 'invalid earsAllelesVisible' );
-  assert && assert( typeof teethAllelesVisible === 'boolean', 'invalid teethAllelesVisible' );
+function getGenotypeAbbreviation( bunny: Bunny, furAllelesVisible: boolean, earsAllelesVisible: boolean,
+                                  teethAllelesVisible: boolean ): string {
 
   let genotypeString = '';
 
