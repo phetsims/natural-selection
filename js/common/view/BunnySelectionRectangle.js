@@ -1,5 +1,6 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * BunnySelectionRectangle is the rectangle that appears around the selected bunny in the environment and
  * in the Pedigree graph.
