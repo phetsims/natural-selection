@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * MutationIconNode is the mutation icon that appears in the Pedigree tree and 'Add Mutations' panel.
  * It looks like a DNA helix.

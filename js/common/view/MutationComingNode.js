@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * MutationComingNode is a popup 'alert' that informs the user that a mutation is about to occur,
  * and gives the user an opportunity to cancel the mutation.  It is not implemented using SUN/Dialog because
