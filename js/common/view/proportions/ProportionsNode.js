@@ -1,5 +1,6 @@
 // Copyright 2019-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ProportionsNode is the parent for all parts of the Proportions view.
  *
