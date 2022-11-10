@@ -18,7 +18,7 @@ type SelfOptions = EmptySelfOptions;
 
 type AlleleNodeOptions = SelfOptions & PickRequired<HBoxOptions, 'tandem'>;
 
-export class AlleleNode extends HBox {
+export default class AlleleNode extends HBox {
 
   private readonly imageNode: Image;
 

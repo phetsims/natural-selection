@@ -23,7 +23,7 @@ import GenePool from '../../model/GenePool.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 import NaturalSelectionPanel, { NaturalSelectionPanelOptions } from '../NaturalSelectionPanel.js';
-import { AlleleNode } from './AlleleNode.js';
+import AlleleNode from './AlleleNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
