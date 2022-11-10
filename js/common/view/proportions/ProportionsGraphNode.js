@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ProportionGraphNode displays the Proportions graph.
  * Note that this graph is not a performance concern, so it is currently updated regardless of whether it's visible.

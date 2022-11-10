@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ProportionsLegendNode displays the legend in the control panel for the Proportions graph.
  * It shows the color-coding and fill styles used for each allele.
