@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ProportionsBarNode is a bar in the Proportions graph, showing the percentage of mutant vs non-mutant alleles for
  * a gene in the population.
@@ -9,13 +8,14 @@
  */
 
 import Multilink from '../../../../../axon/js/Multilink.js';
+import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../../dot/js/Utils.js';
 import merge from '../../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../../phetcommon/js/AssertUtils.js';
+import optionize from '../../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
-import { Color, Node, Rectangle, Text } from '../../../../../scenery/js/imports.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
+import { Node, NodeOptions, Rectangle, TColor, Text } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
@@ -24,30 +24,37 @@ import HatchingRectangle from '../HatchingRectangle.js';
 // constants
 const PERCENTAGE_FONT = new PhetFont( 12 );
 
+type SelfOptions = {
+  barWidth?: number;
+  barHeight?: number;
+};
+
+type ProportionsBarNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+
 export default class ProportionsBarNode extends Node {
 
-  /**
-   * @param {Color|string} color
-   * @param {number} normalCount
-   * @param {number} mutantCount
-   * @param {Property.<boolean>} valuesVisibleProperty
-   * @param {Object} [options]
-   */
-  constructor( color, normalCount, mutantCount, valuesVisibleProperty, options ) {
+  private readonly valuesVisibleProperty: TReadOnlyProperty<boolean>;
+  private readonly normalRectangle: Rectangle;
+  private readonly mutantRectangle: Rectangle;
+  private readonly normalPercentageText: Text;
+  private readonly mutantPercentageText: Text;
+  private readonly barWidth: number;
+  private normalCount: number;
+  private mutantCount: number;
 
-    assert && assert( color instanceof Color || typeof color === 'string', 'invalid color' );
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( normalCount ), 'invalid normalCount' );
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( mutantCount ), 'invalid mutantCount' );
-    assert && AssertUtils.assertPropertyOf( valuesVisibleProperty, 'boolean' );
+  public constructor( color: TColor, normalCount: number, mutantCount: number,
+                      valuesVisibleProperty: TReadOnlyProperty<boolean>,
+                      providedOptions: ProportionsBarNodeOptions ) {
 
-    options = merge( {
+    const options = optionize<ProportionsBarNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       barWidth: 120,
       barHeight: 30,
 
-      // phet-io
-      tandem: Tandem.REQUIRED,
+      // NodeOptions
       phetioReadOnly: true
-    }, options );
+    }, providedOptions );
 
     // Portions of the bar for normal and mutant counts. normalRectangle remains a fixed size. mutantRectangle
     // will be resized and is on top of normalRectangle.
@@ -74,12 +81,11 @@ export default class ProportionsBarNode extends Node {
       tandem: options.tandem.createTandem( 'mutantPercentageText' )
     } ) );
 
-    assert && assert( !options.children, 'ProportionsBarNode sets children' );
     options.children = [ normalRectangle, mutantRectangle, normalPercentageText, mutantPercentageText ];
 
     super( options );
 
-    // @private
+    this.valuesVisibleProperty = valuesVisibleProperty;
     this.normalRectangle = normalRectangle;
     this.mutantRectangle = mutantRectangle;
     this.normalPercentageText = normalPercentageText;
@@ -87,7 +93,6 @@ export default class ProportionsBarNode extends Node {
     this.barWidth = options.barWidth;
     this.normalCount = normalCount;
     this.mutantCount = mutantCount;
-    this.valuesVisibleProperty = valuesVisibleProperty;
 
     // When valuesVisibleProperty changes, or any of the related strings change, update the display.
     // unlink is not necessary.
@@ -101,22 +106,15 @@ export default class ProportionsBarNode extends Node {
     );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 
   /**
    * Sets the counts and triggers an update of the display.
-   * @param {number} normalCount
-   * @param {number} mutantCount
-   * @public
    */
-  setCounts( normalCount, mutantCount ) {
+  public setCounts( normalCount: number, mutantCount: number ): void {
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( normalCount ), 'invalid normalCount' );
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( mutantCount ), 'invalid mutantCount' );
 
@@ -127,9 +125,8 @@ export default class ProportionsBarNode extends Node {
 
   /**
    * Resizes the bars and displays the counts as percentages.
-   * @private
    */
-  updateProportionsBarNode() {
+  private updateProportionsBarNode(): void {
 
     const total = this.normalCount + this.mutantCount;
 
