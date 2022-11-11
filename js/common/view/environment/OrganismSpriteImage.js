@@ -1,5 +1,6 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * OrganismSpriteImage is a specialization of SpriteImage for Organisms (bunnies, wolves, shrubs).
  * All organism images have their origin at the bottom-center.
