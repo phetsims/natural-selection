@@ -1,6 +1,5 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * A Punnett square predicts the possible genotypes (genetic cross) that result from breeding two bunnies.
  * The square consists of 4 cells, which describe the ways that 2 pairs of alleles may be crossed. For example, here's
@@ -22,16 +21,14 @@
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
+import GenePair from './GenePair.js';
 
 export default class PunnettSquare {
 
-  /**
-   * @param {GenePair} fatherGenePair
-   * @param {GenePair} motherGenePair
-   */
-  constructor( fatherGenePair, motherGenePair ) {
+  private readonly cells: Cell[];
 
-    // @private {Cell[]}
+  public constructor( fatherGenePair: GenePair, motherGenePair: GenePair ) {
+
     this.cells = dotRandom.shuffle( [
       new Cell( fatherGenePair.fatherAllele, motherGenePair.fatherAllele ),
       new Cell( fatherGenePair.fatherAllele, motherGenePair.motherAllele ),
@@ -42,30 +39,23 @@ export default class PunnettSquare {
 
   /**
    * Gets a cell by index. Note that the cells are stored in random order.
-   * @param {number} index
-   * @returns {Cell}
-   * @public
    */
-  getCell( index ) {
+  public getCell( index: number ): Cell {
     assert && assert( index >= 0 && index < this.cells.length, `invalid index: ${index}` );
     return this.cells[ index ];
   }
 
   /**
    * Gets a random cell.
-   * @returns {Cell}
-   * @public
    */
-  getRandomCell() {
+  public getRandomCell(): Cell {
     return this.cells[ dotRandom.nextIntBetween( 0, this.cells.length - 1 ) ];
   }
 
   /**
    * Gets the number of cells.
-   * @returns {number}
-   * @public
    */
-  get length() {
+  public get length(): number {
     return this.cells.length;
   }
 
@@ -73,15 +63,8 @@ export default class PunnettSquare {
    * Gets the cell in the Punnett square to use for an additional offspring. This is used to create a 5th offspring
    * when a recessive mutant mates eagerly. If the Punnett square contains a homozygous mutation, that genotype is
    * returned. Second choice is a dominant genotype, and a random selection is the last resort.
-   * @param {Allele} mutantAllele
-   * @param {Allele|null} dominantAllele
-   * @returns {Cell}
-   * @public
    */
-  getAdditionalCell( mutantAllele, dominantAllele ) {
-
-    assert && assert( mutantAllele instanceof Allele, 'invalid mutantAllele' );
-    assert && assert( dominantAllele instanceof Allele || dominantAllele === null, 'invalid dominantAllele' );
+  public getAdditionalCell( mutantAllele: Allele, dominantAllele: Allele | null ): Cell {
 
     let cell = null;
 
@@ -118,13 +101,10 @@ export default class PunnettSquare {
  */
 class Cell {
 
-  /**
-   * @param {Allele} fatherAllele
-   * @param {Allele} motherAllele
-   */
-  constructor( fatherAllele, motherAllele ) {
+  public readonly fatherAllele: Allele;
+  public readonly motherAllele: Allele;
 
-    // @public (read-only)
+  public constructor( fatherAllele: Allele, motherAllele: Allele ) {
     this.fatherAllele = fatherAllele;
     this.motherAllele = motherAllele;
   }
