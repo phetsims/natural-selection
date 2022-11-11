@@ -1,5 +1,6 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * A Punnett square predicts the possible genotypes (genetic cross) that result from breeding two bunnies.
  * The square consists of 4 cells, which describe the ways that 2 pairs of alleles may be crossed. For example, here's
