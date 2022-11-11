@@ -1,6 +1,5 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ShrubSpriteInstance is a specialization of OrganismSpriteInstance for shrubs.
  * Each instance corresponds to a shrub in the model.
@@ -16,33 +15,21 @@ import OrganismSpriteInstance from './OrganismSpriteInstance.js';
 
 export default class ShrubSpriteInstance extends OrganismSpriteInstance {
 
-  /**
-   * @param {Shrub} shrub
-   * @param {boolean} isTough
-   * @param {Sprite} tenderSprite
-   * @param {Sprite} toughSprite
-   */
-  constructor( shrub, isTough, tenderSprite, toughSprite ) {
+  private readonly tenderSprite: Sprite;
+  private readonly toughSprite: Sprite;
 
-    assert && assert( shrub instanceof Shrub, 'invalid shrub' );
-    assert && assert( typeof isTough === 'boolean', 'invalid isTough' );
-    assert && assert( tenderSprite instanceof Sprite, 'invalid tenderSprite' );
-    assert && assert( toughSprite instanceof Sprite, 'invalid toughSprite' );
+  public constructor( shrub: Shrub, isTough: boolean, tenderSprite: Sprite, toughSprite: Sprite ) {
 
     super( shrub, ( isTough ? toughSprite : tenderSprite ), NaturalSelectionConstants.SHRUB_IMAGE_SCALE );
 
-    // @private
     this.tenderSprite = tenderSprite;
     this.toughSprite = toughSprite;
   }
 
   /**
    * Sets the appearance to correspond to tough or tender food.
-   * @param {boolean} isTough
-   * @public
    */
-  setTough( isTough ) {
-    assert && assert( typeof isTough === 'boolean', 'invalid isTough' );
+  public setTough( isTough: boolean ): void {
     this.sprite = isTough ? this.toughSprite : this.tenderSprite;
   }
 }

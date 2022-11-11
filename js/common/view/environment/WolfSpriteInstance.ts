@@ -1,6 +1,5 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * WolfSpriteInstance is a specialization of OrganismSpriteInstance for wolves.
  * Each instance corresponds to a wolf in the model.
@@ -16,15 +15,7 @@ import OrganismSpriteInstance from './OrganismSpriteInstance.js';
 
 export default class WolfSpriteInstance extends OrganismSpriteInstance {
 
-  /**
-   * @param {Wolf} wolf
-   * @param {Sprite} sprite
-   */
-  constructor( wolf, sprite ) {
-
-    assert && assert( wolf instanceof Wolf, 'invalid wolf' );
-    assert && assert( sprite instanceof Sprite, 'invalid sprite' );
-
+  public constructor( wolf: Wolf, sprite: Sprite ) {
     super( wolf, sprite, NaturalSelectionConstants.WOLF_IMAGE_SCALE );
   }
 }

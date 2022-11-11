@@ -1,6 +1,5 @@
 // Copyright 2020, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * BunnySpriteImage is a specialization of OrganismSpriteImage for bunnies that adds hit testing.
  * Hit testing based on pixels in the associated image, instead of the image bounds, makes it easier
@@ -14,10 +13,7 @@ import OrganismSpriteImage from './OrganismSpriteImage.js';
 
 export default class BunnySpriteImage extends OrganismSpriteImage {
 
-  /**
-   * @param {HTMLImageElement} image
-   */
-  constructor( image ) {
+  public constructor( image: HTMLImageElement ) {
     super( image, {
       pickable: true,
       hitTestPixels: true
