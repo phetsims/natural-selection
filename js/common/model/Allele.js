@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Allele is a variant form of a gene.  In this sim, the language used to name an allele (a gene variant) and
  * a phenotype (expression of that gene) are synonymous. For example, 'White Fur' is used to describe both the
