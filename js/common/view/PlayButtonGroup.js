@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PlayButtonGroup contains the buttons that can be used to make the simulation begin playing. These buttons are
  * mutually exclusive - at most 1 is visible, depending on the state of the simulation.
