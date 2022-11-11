@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * WolfCollection is the collection of Wolf instances, with methods for managing that collection.
  * It encapsulates WolfGroup (the PhetioGroup), hiding it from the rest of the sim.
@@ -14,8 +13,7 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -27,6 +25,11 @@ import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenerationClock from './GenerationClock.js';
 import Wolf from './Wolf.js';
 import WolfGroup from './WolfGroup.js';
+import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Bunny from './Bunny.js';
 
 // constants
 
@@ -46,38 +49,33 @@ const MIN_WOLVES = 5;
 // The number of bunnies per wolf. Wolves are created based on the size of the bunny population.
 const BUNNIES_PER_WOLF = 10;
 
+type SelfOptions = EmptySelfOptions;
+
+type WolfCollectionOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
 export default class WolfCollection {
 
-  /**
-   * @param {GenerationClock} generationClock
-   * @param {EnumerationProperty.<Environment>} environmentProperty
-   * @param {BunnyCollection} bunnyCollection
-   * @param {EnvironmentModelViewTransform} modelViewTransform
-   * @param {Object} [options]
-   */
-  constructor( generationClock, environmentProperty, bunnyCollection, modelViewTransform, options ) {
+  private readonly environmentProperty: EnumerationProperty<Environment>;
+  private readonly bunnyCollection: BunnyCollection;
+  public readonly enabledProperty: Property<boolean>;
+  private readonly isHuntingProperty: TReadOnlyProperty<boolean>; // Wolves hunt during the 'wolves' clock slice.
+  private readonly wolfGroup: WolfGroup; // PhetioGroup that manages Wolf instances as dynamic PhET-iO elements
+  public readonly wolfCreatedEmitter: Emitter<[Wolf]>; // emits when a Wolf has been created
+  public readonly bunniesEatenEmitter: Emitter<[number]>; // emits when bunnies have been eaten, param is the generation number
 
-    assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
-    assert && assert( environmentProperty instanceof EnumerationProperty );
-    assert && assert( bunnyCollection instanceof BunnyCollection, 'invalid bunnyCollection' );
-    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
+  public constructor( generationClock: GenerationClock, environmentProperty: EnumerationProperty<Environment>,
+                      bunnyCollection: BunnyCollection, modelViewTransform: EnvironmentModelViewTransform,
+                      providedOptions: WolfCollectionOptions ) {
 
-    options = merge( {
+    const options = providedOptions;
 
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
-
-    // @private
     this.environmentProperty = environmentProperty;
     this.bunnyCollection = bunnyCollection;
 
-    // @public
     this.enabledProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'enabledProperty' )
     } );
 
-    // @private Wolves hunt during the 'wolves' clock slice. dispose is not necessary.
     this.isHuntingProperty = new DerivedProperty(
       [ this.enabledProperty, generationClock.timeInPercentProperty ],
       ( enabled, timeInPercent ) => ( enabled && NaturalSelectionConstants.CLOCK_WOLVES_RANGE.contains( timeInPercent ) ), {
@@ -86,12 +84,10 @@ export default class WolfCollection {
         phetioDocumentation: 'for internal PhET use only'
       } );
 
-    // @private the PhetioGroup that manages Wolf instances as dynamic PhET-iO elements
     this.wolfGroup = new WolfGroup( modelViewTransform, {
       tandem: options.tandem.createTandem( 'wolfGroup' )
     } );
 
-    // @public notify when a Wolf has been created. dispose is not necessary.
     this.wolfCreatedEmitter = new Emitter( {
       parameters: [ { valueType: Wolf } ]
     } );
@@ -101,9 +97,8 @@ export default class WolfCollection {
       this.wolfCreatedEmitter.emit( wolf );
     } );
 
-    // @public emits when bunnies have been eaten. dispose is not necessary.
     this.bunniesEatenEmitter = new Emitter( {
-      parameters: [ { valueType: 'number' } ] // generation value at which the event should be recorded
+      parameters: [ { valueType: 'number' } ] // generation number
     } );
 
     // The wolf population exists only while it's hunting. unlink is not necessary.
@@ -153,49 +148,38 @@ export default class WolfCollection {
     } );
   }
 
-  /**
-   * Resets the group.
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.wolfGroup.clear(); // calls dispose for all Wolf instances
     this.enabledProperty.reset();
   }
 
-  /**
-   * @public
-   */
-  dispose() {
+  public dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
   }
 
   /**
    * Gets the number of wolves.
-   * @returns {number}
-   * @public
    */
-  get count() {
+  public get count(): number {
     return this.wolfGroup.countProperty.value;
   }
 
   /**
    * Moves all wolves.
-   * @param {number} dt - time step, in seconds
-   * @public
+   * @param dt - time step, in seconds
    */
-  moveWolves( dt ) {
+  public moveWolves( dt: number ): void {
     this.wolfGroup.forEach( wolf => wolf.move( dt ) );
   }
 
   /**
    * Eats some portion of the bunny population. See the 'Wolves' section of model.md at
    * https://github.com/phetsims/natural-selection/blob/master/doc/model.md#wolves
-   * @param {number} timeInGenerations - the time (in generations) at which this event should be recorded
-   * @private
+   * @param timeInGenerations - the time (in generations) at which this event should be recorded
    */
-  eatBunnies( timeInGenerations ) {
+  private eatBunnies( timeInGenerations: number ): void {
     assert && assert( this.enabledProperty.value, 'Wolves are not enabled' );
-    assert && assert( NaturalSelectionUtils.isNonNegative( timeInGenerations ), `invalid timeInGenerations: ${timeInGenerations}` );
+    assert && assert( timeInGenerations >= 0, `invalid timeInGenerations: ${timeInGenerations}` );
 
     // Get the bunnies that are candidates for selection by environmental factors, in random order.
     const bunnies = this.bunnyCollection.getSelectionCandidates();
@@ -236,15 +220,16 @@ export default class WolfCollection {
 
 /**
  * Eats a percentage of some set of bunnies, depending on whether their fur color matches the environment.
- * @param {Bunny[]} bunnies - a set of bunnies, all with the same phenotype
+ * @param bunnies - a set of bunnies, all with the same phenotype
  * @param totalBunnies - the total number of live bunnies
- * @param {Environment} environment - the current environment that is selected
- * @param {Environment} environmentMatch - the environment that matches the set of bunnies' fur color
- * @param {number} percentToEatMatch - the percentage of bunnies to eat if fur color matches the environment
+ * @param environment - the current environment that is selected
+ * @param environmentMatch - the environment that matches the set of bunnies' fur color
+ * @param percentToEatMatch - the percentage of bunnies to eat if fur color matches the environment
  * @param percentToEatNoMatch - the percentage of bunnies to eat if fur color does NOT match the environment
- * @returns {number} - the number of bunnies that were eaten
+ * @returns the number of bunnies that were eaten
  */
-function eatSomeBunnies( bunnies, totalBunnies, environment, environmentMatch, percentToEatMatch, percentToEatNoMatch ) {
+function eatSomeBunnies( bunnies: Bunny[], totalBunnies: number, environment: Environment, environmentMatch: Environment,
+                         percentToEatMatch: number, percentToEatNoMatch: number ): number {
 
   assert && assert( Array.isArray( bunnies ), 'invalid bunnies' );
   assert && assert( NaturalSelectionUtils.isNonNegativeInteger( totalBunnies ), `invalid totalBunnies: ${totalBunnies}` );
