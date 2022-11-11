@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * EnvironmentBackgroundNode shows the background image that corresponds to the environment.
  * The image is scaled to fit the specified dimensions.
@@ -10,7 +9,6 @@
 
 import EnumerationProperty from '../../../../../axon/js/EnumerationProperty.js';
 import Dimension2 from '../../../../../dot/js/Dimension2.js';
-import merge from '../../../../../phet-core/js/merge.js';
 import { Image, Line, Node } from '../../../../../scenery/js/imports.js';
 import arcticBackground_png from '../../../../images/arcticBackground_png.js';
 import equatorBackground_png from '../../../../images/equatorBackground_png.js';
@@ -21,18 +19,11 @@ import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParamete
 export default class EnvironmentBackgroundNode extends Node {
 
   /**
-   * @param {EnumerationProperty.<Environment>} environmentProperty
-   * @param {Dimension2} size - dimensions of the backgrounds, in view coordinates
-   * @param {number} yHorizon - y coordinate of the horizon, in view coordinates
-   * @param {Object} [options]
+   * @param environmentProperty
+   * @param size - dimensions of the backgrounds, in view coordinates
+   * @param yHorizon - y coordinate of the horizon, in view coordinates
    */
-  constructor( environmentProperty, size, yHorizon, options ) {
-
-    assert && assert( environmentProperty instanceof EnumerationProperty );
-    assert && assert( size instanceof Dimension2, 'invalid size' );
-    assert && assert( typeof yHorizon === 'number', 'invalid yHorizon' );
-
-    options = merge( {}, options );
+  public constructor( environmentProperty: EnumerationProperty<Environment>, size: Dimension2, yHorizon: number ) {
 
     // Equator background, scaled to fit
     const equatorBackground = new Image( equatorBackground_png );
@@ -42,18 +33,19 @@ export default class EnvironmentBackgroundNode extends Node {
     const arcticBackground = new Image( arcticBackground_png );
     arcticBackground.setScaleMagnitude( size.width / arcticBackground.width, size.height / arcticBackground.height );
 
-    assert && assert( !options.children, 'EnvironmentBackgroundNode sets children' );
-    options.children = [ equatorBackground, arcticBackground ];
+    const children: Node[] = [ equatorBackground, arcticBackground ];
 
     // Horizon line, for debugging. Bunnies cannot go further from the viewer than this line.
     if ( NaturalSelectionQueryParameters.showHorizon ) {
-      options.children.push( new Line( 0, yHorizon, size.width, yHorizon, {
+      children.push( new Line( 0, yHorizon, size.width, yHorizon, {
         stroke: 'red',
         lineWidth: 1
       } ) );
     }
 
-    super( options );
+    super( {
+      children: children
+    } );
 
     // Show the background that matches the environment. unlink is not necessary.
     environmentProperty.link( environment => {
@@ -62,11 +54,7 @@ export default class EnvironmentBackgroundNode extends Node {
     } );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
