@@ -1,5 +1,6 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ShrubSpritesMap manages the Sprites used for tough and tender food.
  *
