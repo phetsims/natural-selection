@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * GenerationClock is the clock that completes one full cycle per generation.  In the user-interface, time is
  * presented in terms of 'generations'. Various events are described as times relative to the "wall clock" time
