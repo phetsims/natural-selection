@@ -1,5 +1,6 @@
 // Copyright 2020, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * BunnySelectionRectangleSpriteInstance is the sprite instance for the selection rectangle that surrounds the
  * selected bunny. When a bunny is selected, OrganismSprites creates an instance of BunnySelectionRectangleSpriteInstance
