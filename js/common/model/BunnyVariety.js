@@ -1,5 +1,6 @@
 // Copyright 2020, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * BunnyVariety is a data structure that describes one variety (genetic variation) of bunny that makes up
  * the initial population. An array of this data structure is created by parseInitialPopulation.js based
