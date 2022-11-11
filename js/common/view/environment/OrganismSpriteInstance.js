@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * OrganismSpriteInstance is a specialization of SpriteInstance for organisms (bunnies, wolves, shrubs).
  * It keeps a reference to the associated organism, and updates its transformation matrix to match the
