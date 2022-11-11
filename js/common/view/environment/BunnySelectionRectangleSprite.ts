@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * BunnySelectionRectangleSprite is the sprite for the bunny selection rectangle.
  * It looks the same as the selection rectangle in the Pedigree graph.
@@ -20,11 +19,10 @@ const SELECTION_RECTANGLE_DILATION = 8;
 export default class BunnySelectionRectangleSprite extends Sprite {
 
   /**
-   * @param {HTMLImageElement} maxImage - the largest bunny image
+   * @param maxImage - the largest bunny image
    */
-  constructor( maxImage ) {
+  public constructor( maxImage: HTMLImageElement ) {
 
-    assert && assert( maxImage instanceof HTMLImageElement, 'invalid maxImage' );
     assert && assert( maxImage.width > 0 && maxImage.height > 0, 'maxImage does not have valid dimensions' );
 
     // Make the selection rectangle a little larger than the bunny image
@@ -36,13 +34,13 @@ export default class BunnySelectionRectangleSprite extends Sprite {
     } );
 
     // Convert to {HTMLCanvasElement}, as required by Sprite
-    let selectionRectangleSpriteImage = null;
+    let selectionRectangleSpriteImage: SpriteImage;
     selectionRectangle.toCanvas( canvas => {
       const offset = new Vector2( selectionRectangleBounds.width / 2, selectionRectangleBounds.height - SELECTION_RECTANGLE_DILATION );
       selectionRectangleSpriteImage = new SpriteImage( canvas, offset, { pickable: false } );
     } );
 
-    super( selectionRectangleSpriteImage );
+    super( selectionRectangleSpriteImage! );
   }
 }
 
