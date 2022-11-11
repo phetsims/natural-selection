@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * SelectedBunnyProperty is the Property used for the selected bunny in the Pedigree model.
  * A null value indicates that there is no selection.
