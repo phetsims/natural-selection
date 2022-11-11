@@ -35,9 +35,9 @@ import BunnySelectionRectangleSpriteInstance from './BunnySelectionRectangleSpri
 import BunnySpriteInstance from './BunnySpriteInstance.js';
 import OrganismSpriteImage from './OrganismSpriteImage.js';
 import ShrubSpriteInstance from './ShrubSpriteInstance.js';
-import ShrubSpritesMap from './ShrubSpritesMap.js';
 import WolfSpriteInstance from './WolfSpriteInstance.js';
 import OrganismSpriteInstance from './OrganismSpriteInstance.js';
+import ShrubSprites from './ShrubSprites.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -75,7 +75,7 @@ export default class OrganismSprites extends Sprites {
     }, providedOptions );
 
     // Sprites for all categories of shrubs
-    const shrubSpritesMap = new ShrubSpritesMap();
+    const shrubSprites = new ShrubSprites();
 
     // The sprite that is used for all wolves
     const wolfSprite = new Sprite( new OrganismSpriteImage( wolf_png ) );
@@ -86,12 +86,12 @@ export default class OrganismSprites extends Sprites {
     // the complete set of sprites
     options.sprites = [ wolfSprite, selectionRectangleSprite ];
     options.sprites.push( ...bunnyImageMap.getSprites() );
-    options.sprites.push( ...shrubSpritesMap.getSprites() );
+    options.sprites.push( ...shrubSprites.getSprites() );
 
     // {ShrubSpriteInstance[]} sprite instances for shrubs
     const shrubSpriteInstances = _.map( food.shrubs, shrub =>
       new ShrubSpriteInstance( shrub, food.isToughProperty.value,
-        shrubSpritesMap.getNextTenderSprite(), shrubSpritesMap.getNextToughSprite() )
+        shrubSprites.getNextTenderSprite(), shrubSprites.getNextToughSprite() )
     );
 
     const spriteInstances: OrganismSpriteInstance[] = [ ...shrubSpriteInstances ];

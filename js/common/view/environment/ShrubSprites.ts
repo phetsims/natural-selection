@@ -1,7 +1,7 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
 /**
- * ShrubSpritesMap manages the Sprites used for tough and tender food.
+ * ShrubSprites manages the Sprites used for tough and tender food.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -16,7 +16,7 @@ import toughShrub3_png from '../../../../images/toughShrub3_png.js';
 import naturalSelection from '../../../naturalSelection.js';
 import OrganismSpriteImage from './OrganismSpriteImage.js';
 
-export default class ShrubSpritesMap {
+export default class ShrubSprites {
 
   private readonly tenderSprites: Sprite[]; // sprites for tender food
   private tenderSpritesIndex: number; // index of the next sprite to use for tender food
@@ -73,4 +73,4 @@ export default class ShrubSpritesMap {
   }
 }
 
-naturalSelection.register( 'ShrubSpritesMap', ShrubSpritesMap );
+naturalSelection.register( 'ShrubSprites', ShrubSprites );
