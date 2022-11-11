@@ -1,17 +1,17 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * EnvironmentNode displays everything in the environment -- bunnies, wolves, food, terrain, sky, etc.
- * This is the part of the UI where bunnies hop around, wolves hunt, and shrubs hang around waiting to be munched.
+ * This is the part of the UI where bunnies hop around, wolves hunt, and shrubs sit around waiting to be eaten.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import { Node, Rectangle } from '../../../../../scenery/js/imports.js';
-import Tandem from '../../../../../tandem/js/Tandem.js';
+import Dimension2 from '../../../../../dot/js/Dimension2.js';
+import optionize from '../../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
+import { Node, NodeOptions, Rectangle } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionModel from '../../model/NaturalSelectionModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
@@ -19,27 +19,29 @@ import BunnyImageMap from '../BunnyImageMap.js';
 import EnvironmentBackgroundNode from './EnvironmentBackgroundNode.js';
 import OrganismSprites from './OrganismSprites.js';
 
+type SelfOptions = {
+  size?: Dimension2;
+  yHorizon?: number;
+};
+
+type EnvironmentNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+
 export default class EnvironmentNode extends Node {
 
-  /**
-   * @param {NaturalSelectionModel} model
-   * @param {BunnyImageMap} bunnyImageMap
-   * @param {Object} [options]
-   */
-  constructor( model, bunnyImageMap, options ) {
+  private readonly sprites: OrganismSprites;
 
-    assert && assert( model instanceof NaturalSelectionModel, 'invalid model' );
-    assert && assert( bunnyImageMap instanceof BunnyImageMap, 'invalid bunnyImageMap' );
+  public constructor( model: NaturalSelectionModel, bunnyImageMap: BunnyImageMap, providedOptions: EnvironmentNodeOptions ) {
 
-    options = merge( {
+    const options = optionize<EnvironmentNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       size: model.modelViewTransform.viewSize,
       yHorizon: model.modelViewTransform.yHorizonView,
 
-      // phet-io
-      tandem: Tandem.REQUIRED,
+      // NodeOptions
       phetioDocumentation: 'the area of the screen that displays what is happening in the environment',
       phetioVisiblePropertyInstrumented: false
-    }, options );
+    }, providedOptions );
 
     const bounds = new Bounds2( 0, 0, options.size.width, options.size.height );
 
@@ -59,7 +61,6 @@ export default class EnvironmentNode extends Node {
       } );
 
     // layering
-    assert && assert( !options.children, 'EnvironmentNode sets children' );
     options.children = [ backgroundNode, sprites, frameNode ];
 
     super( options );
@@ -71,24 +72,18 @@ export default class EnvironmentNode extends Node {
       }
     } );
 
-    // @private {OrganismSprites}
     this.sprites = sprites;
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 
   /**
    * Updates all sprites.
-   * @public
    */
-  updateSprites() {
+  public updateSprites(): void {
     this.sprites.update();
   }
 }
