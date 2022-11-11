@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PedigreeModel is the sub-model for the Pedigree graph.
  *
@@ -8,54 +7,54 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
-import PhetioObject from '../../../../tandem/js/PhetioObject.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import Property from '../../../../axon/js/Property.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import naturalSelection from '../../naturalSelection.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type PedigreeModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class PedigreeModel extends PhetioObject {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+  // visibility of each gene in the genotype abbreviation that appears in the Pedigree tree
+  public readonly furAllelesVisibleProperty: Property<boolean>;
+  public readonly earsAllelesVisibleProperty: Property<boolean>;
+  public readonly teethAllelesVisibleProperty: Property<boolean>;
 
-    options = merge( {
+  public constructor( providedOptions: PedigreeModelOptions ) {
 
-      // phet-io
-      tandem: Tandem.REQUIRED,
+    const options = optionize<PedigreeModelOptions, SelfOptions, PhetioObjectOptions>()( {
+
+      // PhetioObjectOptions
       phetioState: false, // to prevent serialization, because we don't have an IO Type
       phetioDocumentation: 'model elements that are specific to the Pedigree feature'
-    }, options );
+    }, providedOptions );
 
     super( options );
 
-    // @public visibility of each gene in the genotype abbreviation that appears in the Pedigree tree
     this.furAllelesVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'furAllelesVisibleProperty' )
     } );
+
     this.earsAllelesVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'earsAllelesVisibleProperty' )
     } );
+
     this.teethAllelesVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'teethAllelesVisibleProperty' )
     } );
   }
 
-  /**
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.furAllelesVisibleProperty.reset();
     this.earsAllelesVisibleProperty.reset();
     this.teethAllelesVisibleProperty.reset();
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
