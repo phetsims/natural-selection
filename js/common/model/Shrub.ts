@@ -1,30 +1,27 @@
 // Copyright 2020, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Shrub is the model of a shrub, the food for bunnies.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import naturalSelection from '../../naturalSelection.js';
-import Organism from './Organism.js';
+import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
+import Organism, { OrganismOptions } from './Organism.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type ShrubOptions = SelfOptions & OrganismOptions;
 
 export default class Shrub extends Organism {
 
-  /**
-   * @param {EnvironmentModelViewTransform} modelViewTransform
-   * @param {Object} [options]
-   */
-  constructor( modelViewTransform, options ) {
+  public constructor( modelViewTransform: EnvironmentModelViewTransform, options?: ShrubOptions ) {
     super( modelViewTransform, options );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }

@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Organism is the base class for all living things that appear in the environment.
  *
@@ -10,8 +9,9 @@
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
-import merge from '../../../../phet-core/js/merge.js';
-import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
@@ -20,30 +20,36 @@ import XDirection from './XDirection.js';
 // constants
 const DEFAULT_POSITION = new Vector3( 0, 0, 1 ); // z=0 is illegal, results in divide-by-zero in modelViewTransform
 
+type SelfOptions = {
+  position?: Vector3; // initial position
+  xDirection?: XDirection; // initial direction of motion along the x-axis
+};
+
+export type OrganismOptions = SelfOptions & PickOptional<PhetioObjectOptions, 'tandem'>;
+
 export default class Organism extends PhetioObject {
 
-  /**
-   * @param {EnvironmentModelViewTransform} modelViewTransform
-   * @param {Object} [options]
-   */
-  constructor( modelViewTransform, options ) {
+  public readonly modelViewTransform: EnvironmentModelViewTransform;
+  public readonly positionProperty: Property<Vector3>;
+  public readonly xDirectionProperty: EnumerationProperty<XDirection>;
+  private readonly disposeOrganism: () => void;
 
-    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
+  public constructor( modelViewTransform: EnvironmentModelViewTransform, providedOptions?: OrganismOptions ) {
 
-    options = merge( {
-      position: DEFAULT_POSITION, // initial position
-      xDirection: XDirection.RIGHT, // initial direction of motion along the x-axis
+    const options = optionize<OrganismOptions, SelfOptions, PhetioObjectOptions>()( {
 
-      // phet-io
+      // SelfOptions
+      position: DEFAULT_POSITION,
+      xDirection: XDirection.RIGHT,
+
+      // PhetioObjectOptions
       tandem: Tandem.OPTIONAL
-    }, options );
+    }, providedOptions );
 
     super( options );
 
-    // @public (read-only) {EnvironmentModelViewTransform}
     this.modelViewTransform = modelViewTransform;
 
-    // @public {Property.<Vector3>}
     this.positionProperty = new Property( options.position, {
       tandem: options.tandem.createTandem( 'positionProperty' ),
       phetioValueType: Vector3.Vector3IO,
@@ -52,70 +58,53 @@ export default class Organism extends PhetioObject {
       phetioDocumentation: 'position in the 3D model coordinate frame'
     } );
 
-    // @public {Property.<XDirection>}
     this.xDirectionProperty = new EnumerationProperty( options.xDirection, {
       tandem: options.tandem.createTandem( 'xDirectionProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'direction that the organism is facing along the x axis'
     } );
 
-    // @private {function}
     this.disposeOrganism = () => {
       this.positionProperty.dispose();
       this.xDirectionProperty.dispose();
     };
   }
 
-  /**
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.positionProperty.reset();
     this.xDirectionProperty.reset();
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeOrganism();
     super.dispose();
   }
 
   /**
    * Gets the minimum x coordinate for an organism's position.
-   * @returns {number}
-   * @protected
    */
-  getMinimumX() {
+  protected getMinimumX(): number {
     return this.modelViewTransform.getMinimumX( this.positionProperty.value.z );
   }
 
   /**
    * Gets the maximum x coordinate for an organism's position.
-   * @returns {number}
-   * @protected
    */
-  getMaximumX() {
+  protected getMaximumX(): number {
     return this.modelViewTransform.getMaximumX( this.positionProperty.value.z );
   }
 
   /**
    * Gets the minimum z coordinate for an organism's position.
-   * @returns {number}
-   * @protected
    */
-  getMinimumZ() {
+  protected getMinimumZ(): number {
     return this.modelViewTransform.getMinimumZ() + EnvironmentModelViewTransform.Z_MARGIN_MODEL;
   }
 
   /**
    * Gets the maximum z coordinate for an organism's position.
-   * @returns {number}
-   * @protected
    */
-  getMaximumZ() {
+  protected getMaximumZ(): number {
     return this.modelViewTransform.getMaximumZ() - EnvironmentModelViewTransform.Z_MARGIN_MODEL;
   }
 }
