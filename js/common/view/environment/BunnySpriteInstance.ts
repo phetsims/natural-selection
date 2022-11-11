@@ -1,6 +1,5 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * BunnySpriteInstance is a specialization of OrganismSpriteInstance for bunnies.
  * Each instance corresponds to a bunny in the model.
@@ -16,15 +15,7 @@ import OrganismSpriteInstance from './OrganismSpriteInstance.js';
 
 export default class BunnySpriteInstance extends OrganismSpriteInstance {
 
-  /**
-   * @param {Bunny} bunny
-   * @param {Sprite} sprite
-   */
-  constructor( bunny, sprite ) {
-
-    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-    assert && assert( sprite instanceof Sprite, 'invalid sprite' );
-
+  public constructor( bunny: Bunny, sprite: Sprite ) {
     super( bunny, sprite, NaturalSelectionConstants.BUNNY_IMAGE_SCALE );
   }
 }
