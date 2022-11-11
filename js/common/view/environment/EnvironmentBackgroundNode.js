@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * EnvironmentBackgroundNode shows the background image that corresponds to the environment.
  * The image is scaled to fit the specified dimensions.
