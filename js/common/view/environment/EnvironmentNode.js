@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * EnvironmentNode displays everything in the environment -- bunnies, wolves, food, terrain, sky, etc.
  * This is the part of the UI where bunnies hop around, wolves hunt, and shrubs hang around waiting to be munched.
