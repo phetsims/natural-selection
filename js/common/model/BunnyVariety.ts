@@ -1,6 +1,5 @@
 // Copyright 2020, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * BunnyVariety is a data structure that describes one variety (genetic variation) of bunny that makes up
  * the initial population. An array of this data structure is created by parseInitialPopulation.js based
@@ -10,37 +9,27 @@
  */
 
 import naturalSelection from '../../naturalSelection.js';
+import Allele from './Allele.js';
 
 export default class BunnyVariety {
 
-  /**
-   * @param {number} count
-   * @param {string} genotypeString
-   * @param {Allele} fatherFurAllele
-   * @param {Allele} motherFurAllele
-   * @param {Allele} fatherEarsAllele
-   * @param {Allele} motherEarsAllele
-   * @param {Allele} fatherTeethAllele
-   * @param {Allele} motherTeethAllele
-   */
-  constructor( count, genotypeString,
-               fatherFurAllele, motherFurAllele,
-               fatherEarsAllele, motherEarsAllele,
-               fatherTeethAllele, motherTeethAllele ) {
+  public constructor(
 
-    // @public (read-only) the number of bunnies of this variety to create
-    this.count = count;
+    // the number of bunnies of this variety to create
+    public readonly count: number,
 
-    // @public (read-only) the genotype abbreviation for this variety, for debugging purposes
-    this.genotypeString = genotypeString;
+    // the genotype abbreviation for this variety, for debugging purposes
+    public readonly genotypeString: string,
 
-    // @public (read-only) the alleles that will be used to create this variety's genotype
-    this.fatherFurAllele = fatherFurAllele;
-    this.motherFurAllele = motherFurAllele;
-    this.fatherEarsAllele = fatherEarsAllele;
-    this.motherEarsAllele = motherEarsAllele;
-    this.fatherTeethAllele = fatherTeethAllele;
-    this.motherTeethAllele = motherTeethAllele;
+    // the alleles that will be used to create this variety's genotype
+    public readonly fatherFurAllele: Allele,
+    public readonly motherFurAllele: Allele,
+    public readonly fatherEarsAllele: Allele,
+    public readonly motherEarsAllele: Allele,
+    public readonly fatherTeethAllele: Allele,
+    public readonly motherTeethAllele: Allele
+  ) {
+    // fields are created via constructor assignment
   }
 }
 
