@@ -1,6 +1,5 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * OrganismSpriteImage is a specialization of SpriteImage for Organisms (bunnies, wolves, shrubs).
  * All organism images have their origin at the bottom-center.
@@ -9,25 +8,27 @@
  */
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import { SpriteImage } from '../../../../../scenery/js/imports.js';
+import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../../phet-core/js/types/PickOptional.js';
+import { SpriteImage, SpriteImageOptions } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type OrganismSpriteImageOptions = SelfOptions & PickOptional<SpriteImage, 'pickable' | 'hitTestPixels'>;
 
 export default class OrganismSpriteImage extends SpriteImage {
 
-  /**
-   * @param {HTMLImageElement} image
-   * @param {Object} [options]
-   */
-  constructor( image, options ) {
+  public constructor( image: HTMLImageElement, providedOptions?: OrganismSpriteImageOptions ) {
 
-    assert && assert( image instanceof HTMLImageElement, 'invalid image' );
     assert && assert( image.width > 0 && image.height > 0, 'image does not have valid dimensions' );
 
-    options = merge( {
+    const options = optionize<OrganismSpriteImageOptions, SelfOptions, SpriteImageOptions>()( {
+
+      // OrganismSpriteImageOptions
       pickable: false,
       mipmap: true
-    }, options );
+    }, providedOptions );
 
     // Origin at bottom-center
     const offset = new Vector2( image.width / 2, image.height );
