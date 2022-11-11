@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * NaturalSelectionQueryParameters defines query parameters that are specific to this simulation.
  * Run with ?log to print these query parameters and their values to the browser console at startup.
