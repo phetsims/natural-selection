@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * GenerationClock is the clock that completes one full cycle per generation.  In the user-interface, time is
  * presented in terms of 'generations'. Various events are described as times relative to the "wall clock" time
@@ -12,8 +11,11 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
-import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -24,31 +26,35 @@ const SECONDS_PER_GENERATION = NaturalSelectionQueryParameters.secondsPerGenerat
 const MIN_STEPS_PER_GENERATION = 10;
 const MAX_DT = SECONDS_PER_GENERATION / MIN_STEPS_PER_GENERATION;
 
+type SelfOptions = EmptySelfOptions;
+
+type GenerationClockOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
 export default class GenerationClock extends PhetioObject {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+  public readonly isRunningProperty: Property<boolean>;
+  private readonly timeInSecondsProperty: Property<number>;
+  public readonly timeInPercentProperty: TReadOnlyProperty<number>;
+  public readonly timeInGenerationsProperty: TReadOnlyProperty<number>;
+  public readonly clockGenerationProperty: TReadOnlyProperty<number>;
 
-    options = merge( {
+  public constructor( providedOptions: GenerationClockOptions ) {
 
-      // phet-io
-      tandem: Tandem.REQUIRED,
+    const options = optionize<GenerationClockOptions, SelfOptions, PhetioObjectOptions>()( {
+
+      // PhetioObjectOptions
       phetioState: false, // to prevent serialization, because we don't have an IO Type
       phetioDocumentation: 'the clock that marks the duration of a generation'
-    }, options );
+    }, providedOptions );
 
     super( options );
 
-    // @public
     this.isRunningProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'isRunningProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'whether the generation clock is running'
     } );
 
-    // @private
     this.timeInSecondsProperty = new NumberProperty( 0, {
       isValidValue: time => ( time >= 0 ),
       tandem: options.tandem.createTandem( 'timeInSecondsProperty' ),
@@ -57,7 +63,7 @@ export default class GenerationClock extends PhetioObject {
       phetioHighFrequency: true
     } );
 
-    // @public percent of the current clock cycle that has been completed. dispose is not necessary.
+    // Percent of the current clock cycle that has been completed.
     this.timeInPercentProperty = new DerivedProperty(
       [ this.timeInSecondsProperty ],
       timeInSeconds => ( timeInSeconds % SECONDS_PER_GENERATION ) / SECONDS_PER_GENERATION, {
@@ -65,7 +71,6 @@ export default class GenerationClock extends PhetioObject {
         tandem: Tandem.OPT_OUT
       } );
 
-    // @public dispose is not necessary
     this.timeInGenerationsProperty = new DerivedProperty(
       [ this.timeInSecondsProperty ],
       timeInSeconds => secondsToGenerations( timeInSeconds ), {
@@ -75,7 +80,6 @@ export default class GenerationClock extends PhetioObject {
         phetioHighFrequency: true
       } );
 
-    // @public dispose is not necessary
     // Named clockGenerationProperty to distinguish it from the other 'generation' Properties in this sim.
     // See https://github.com/phetsims/natural-selection/issues/187
     this.clockGenerationProperty = new DerivedProperty(
@@ -99,28 +103,20 @@ export default class GenerationClock extends PhetioObject {
     } );
   }
 
-  /**
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.isRunningProperty.reset();
     this.timeInSecondsProperty.reset();
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 
   /**
-   * @param {number} dt - the time step, in seconds
-   * @public
+   * @param dt - the time step, in seconds
    */
-  step( dt ) {
+  public step( dt: number ): void {
     assert && assert( dt < SECONDS_PER_GENERATION,
       `dt=${dt} exceeded secondsPerGeneration=${SECONDS_PER_GENERATION}` );
     if ( this.isRunningProperty.value ) {
@@ -132,10 +128,9 @@ export default class GenerationClock extends PhetioObject {
    * Sets timeInSecondsProperty, the time (in seconds) that the generation clock has been running, in seconds.
    * As time passes through the 12:00 position, it will always snap to the 12:00 position, which is when bunnies
    * die of old age and mate.
-   * @param {number} dt - the time step, in seconds
-   * @private
+   * @param dt - the time step, in seconds
    */
-  stepTime( dt ) {
+  private stepTime( dt: number ): void {
 
     const nextTime = this.timeInSecondsProperty.value + dt;
     const nextGeneration = Math.floor( secondsToGenerations( nextTime ) ); // integer
@@ -155,21 +150,19 @@ export default class GenerationClock extends PhetioObject {
    * It's possible to run the clock ridiculously fast using ?secondsPerGeneration, especially if combined with the
    * fast-forward button. Running the clock fast became as habit of testers, and this constraint protects us from
    * that type of 'run it fast' abuse. See https://github.com/phetsims/natural-selection/issues/165.
-   * @param {number} dt - time step, in seconds
-   * @static
-   * @public
+   * @param dt - time step, in seconds
    */
-  static constrainDt( dt ) {
+  public static constrainDt( dt: number ): number {
     return Math.min( dt, MAX_DT );
   }
 }
 
 /**
  * Converts time from seconds to generations.
- * @param {number} seconds - time, in seconds
- * @returns {number} time, in decimal number of generations
+ * @param seconds - time, in seconds
+ * @returns time, in decimal number of generations
  */
-function secondsToGenerations( seconds ) {
+function secondsToGenerations( seconds: number ): number {
   let generations = 0;
   if ( seconds > 0 ) {
 
