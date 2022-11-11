@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * SelectedBunnyProperty is the Property used for the selected bunny in the Pedigree model.
  * A null value indicates that there is no selection.
@@ -11,31 +10,35 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import Property, { PropertyOptions } from '../../../../axon/js/Property.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
 
-export default class SelectedBunnyProperty extends Property {
+type SelectBunnyValue = Bunny | null; // null means no selection
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+type SelfOptions = {
+  selectedBunny?: SelectBunnyValue;
+};
 
-    options = merge( {
+type SelectedBunnyPropertyOptions = SelfOptions & PickRequired<PropertyOptions<SelectBunnyValue>, 'tandem'>;
 
-      // {Bunny|null} null means no selection
+export default class SelectedBunnyProperty extends Property<SelectBunnyValue> {
+
+  public constructor( providedOptions: SelectedBunnyPropertyOptions ) {
+
+    const options = optionize<SelectedBunnyPropertyOptions, SelfOptions, PropertyOptions<SelectBunnyValue>>()( {
+
+      // SelfOptions
       selectedBunny: null,
 
-      // phet-io
-      tandem: Tandem.REQUIRED,
+      // PropertyOptions
       phetioValueType: NullableIO( ReferenceIO( Bunny.BunnyIO ) ),
       phetioDocumentation: 'the selected bunny, null if no bunny is selected'
-    }, options );
+    }, providedOptions );
 
     super( options.selectedBunny, options );
   }

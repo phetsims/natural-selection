@@ -412,7 +412,9 @@ class BunnyPressListener extends SpriteListenable( PressListener ) {
       press: ( event: PressListenerEvent, listener: BunnyPressListener ) => {
         assert && assert( listener.spriteInstance, 'expected a sprite instance' );
         if ( listener.spriteInstance instanceof BunnySpriteInstance ) {
-          bunnyCollection.selectedBunnyProperty.value = listener.spriteInstance.organism;
+          const bunny = listener.spriteInstance.organism as Bunny;
+          assert && assert( bunny instanceof Bunny ); // eslint-disable-line no-simple-type-checking-assertions
+          bunnyCollection.selectedBunnyProperty.value = bunny;
         }
       },
       tandem: tandem
