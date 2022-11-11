@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * EnvironmentModelViewTransform is the model-view transform for the 'environment', the place where bunnies, wolves,
  * food, etc. appear. The model is 3D, the view is 2D, so this deals with the 2D projection of a 3D space.
@@ -76,51 +75,62 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import naturalSelection from '../../naturalSelection.js';
 
-// constants
-
 // scale at zNearModel
 const NEAR_SCALE = 1;
 assert && assert( NEAR_SCALE > 0 && NEAR_SCALE <= 1, `invalid NEAR_SCALE: ${NEAR_SCALE}` );
 
-// z margin for getRandomGroundPosition (in model coordinates). This keeps bunnies well within the ground trapezoid,
-// and avoids floating-point errors that would have them end up just outside the ground trapezoid.
-const Z_MARGIN_MODEL = 1;
-
 export default class EnvironmentModelViewTransform {
 
-  constructor() {
+  // size of the 2D view, same size as background PNG files
+  public readonly viewSize: Dimension2;
 
-    // @public (read-only) size of the 2D view, same size as background PNG files
+  // horizon distance from the top of the view, determined empirically from background PNG files
+  public readonly yHorizonView: number;
+
+  // z coordinate of the ground at the bottom-front of the view, nearest ground point to the camera
+  private readonly zNearModel: number;
+
+  // z coordinate of the ground at the horizon, furthest ground point from the camera
+  private readonly zFarModel: number;
+
+  // rise of the ground from zNearModel to zFarModel
+  private readonly riseModel: number;
+
+  // common scaling factor used to convert x and y between model and view
+  // Multiply for model-to-view, divide for view-to-model.
+  private readonly xyScaleFactor: number;
+
+  // z margin for getRandomGroundPosition, in model coordinates. This keeps bunnies well within the ground trapezoid,
+  // and avoids floating-point errors that would have them end up just outside the ground trapezoid.
+  public static readonly Z_MARGIN_MODEL = 1;
+
+  public constructor() {
+
     this.viewSize = new Dimension2( 770, 310 );
-
-    // @public (read-only) horizon distance from the top of the view, determined empirically from background PNG files
     this.yHorizonView = 95;
-
-    // @private z coordinate of the ground at the bottom-front of the view, nearest ground point to the camera
     this.zNearModel = 150;
-
-    // @private z coordinate of the ground at the horizon, furthest ground point from the camera
     this.zFarModel = 300;
-
-    // @private rise of the ground from zNearModel to zFarModel
     this.riseModel = 100;
 
-    // @private {number} - common scaling factor used to convert x and y between model and view
-    // Multiply for model-to-view, divide for view-to-model.
     // Ported from Landscape.getFactor in the Java version.
     this.xyScaleFactor = this.zNearModel * ( this.viewSize.height - this.yHorizonView ) / this.riseModel;
   }
 
+  public dispose(): void {
+    assert && assert( false, 'EnvironmentModelViewTransform does not support dispose' );
+  }
+
   /**
    * Returns a random position on the ground, in model coordinates.
-   * @param {number} xMargin - margin from the left and right edges of the view bounds
-   * @returns {Vector3}
-   * @public
+   * @param xMargin - margin from the left and right edges of the view bounds
    */
-  getRandomGroundPosition( xMargin ) {
+  public getRandomGroundPosition( xMargin: number ): Vector3 {
 
     // Choose a random z coordinate on the ground trapezoid.
-    const zModel = dotRandom.nextDoubleBetween( this.zNearModel + Z_MARGIN_MODEL, this.zFarModel - Z_MARGIN_MODEL );
+    const zModel = dotRandom.nextDoubleBetween(
+      this.zNearModel + EnvironmentModelViewTransform.Z_MARGIN_MODEL,
+      this.zFarModel - EnvironmentModelViewTransform.Z_MARGIN_MODEL
+    );
 
     // Choose a random x coordinate at the z coordinate.
     const xMinModel = this.getMinimumX( zModel ) + xMargin;
@@ -137,25 +147,18 @@ export default class EnvironmentModelViewTransform {
   }
 
   /**
-   * Gets the ground position at specified x and z coordinates.
-   * @param {number} xModel
-   * @param {number} zModel
-   * @returns {Vector3} ground position, in model coordinates
-   * @public
+   * Gets the ground position at specified x and z coordinates, in model coordinates.
    */
-  getGroundPosition( xModel, zModel ) {
+  public getGroundPosition( xModel: number, zModel: number ): Vector3 {
     assert && assert( zModel >= this.zNearModel && zModel <= this.zFarModel, `invalid zModel: ${zModel}` );
     return new Vector3( xModel, this.getGroundY( zModel ), zModel );
   }
 
   /**
-   * Gets the ground y at the specified z coordinate.
+   * Gets the ground y at the specified z coordinate, in model coordinates.
    * Adapted from Landscape.getGroundY in the Java version.
-   * @param {number} zModel
-   * @returns {number} y, in model coordinates
-   * @public
    */
-  getGroundY( zModel ) {
+  public getGroundY( zModel: number ): number {
     assert && assert( zModel >= this.zNearModel && zModel <= this.zFarModel, `invalid zModel: ${zModel}` );
 
     // The slope is constant between near and far planes, so compute the scale accordingly.
@@ -167,52 +170,40 @@ export default class EnvironmentModelViewTransform {
   }
 
   /**
-   * Gets the maximum x value for a particular depth. This varies based on depth, since the ground is a trapezoid.
+   * Gets the maximum x value (in model coordinates) for a particular depth.
+   * This varies based on depth, since the ground is a trapezoid.
    * Ported from Landscape.getMaximumX in the Java version.
-   * @param {number} zModel
-   * @returns {number} maximum x, in model coordinates
-   * @public
    */
-  getMaximumX( zModel ) {
+  public getMaximumX( zModel: number ): number {
     assert && assert( zModel > 0, `invalid zModel: ${zModel}` );
     return zModel * this.viewSize.width * 0.5 / this.xyScaleFactor;
   }
 
   /**
-   * Gets the minimum x value for a particular depth. Since x=0 is in the center, xMin === -xMax.
-   * @param {number} zModel
-   * @returns {number} minimum x, in model coordinates
-   * @public
+   * Gets the minimum x value (in model coordinates) for a particular depth. Since x=0 is in the center, xMin === -xMax.
    */
-  getMinimumX( zModel ) {
+  public getMinimumX( zModel: number ): number {
     return -this.getMaximumX( zModel );
   }
 
   /**
    * Gets the minimum z model coordinate for the ground trapezoid.
-   * @returns {number}
-   * @public
    */
-  getMinimumZ() {
+  public getMinimumZ(): number {
     return this.zNearModel;
   }
 
   /**
    * Gets the maximum z model coordinate for the ground trapezoid.
-   * @returns {number}
-   * @public
    */
-  getMaximumZ() {
+  public getMaximumZ(): number {
     return this.zFarModel;
   }
 
   /**
    * Gets the view scaling factor that corresponds to model z position.
-   * @param {number} zModel
-   * @returns {number}
-   * @public
    */
-  getViewScale( zModel ) {
+  public getViewScale( zModel: number ): number {
     assert && assert( zModel > 0, `invalid zModel: ${zModel}` );
     return NEAR_SCALE * this.zNearModel / zModel;
   }
@@ -220,11 +211,8 @@ export default class EnvironmentModelViewTransform {
   /**
    * Given a 3D model position, project it into 2D view coordinates and return x.
    * Extracted from Landscape.spriteToScreen in the Java version.
-   * @param {Vector3 } position
-   * @returns {number}
-   * @public
    */
-  modelToViewX( position ) {
+  public modelToViewX( position: Vector3 ): number {
     assert && assert( position.z !== 0, 'z cannot be zero' );
     return ( this.viewSize.width / 2 ) + ( position.x / position.z ) * this.xyScaleFactor;
   }
@@ -232,11 +220,8 @@ export default class EnvironmentModelViewTransform {
   /**
    * Given a 3D model position, project it into 2D view coordinates and return y.
    * Extracted from Landscape.spriteToScreen in the Java version.
-   * @param {Vector3 } position
-   * @returns {number}
-   * @public
    */
-  modelToViewY( position ) {
+  public modelToViewY( position: Vector3 ): number {
     assert && assert( position.z !== 0, 'z cannot be zero' );
     return this.yHorizonView - ( position.y / position.z ) * this.xyScaleFactor;
   }
@@ -244,11 +229,8 @@ export default class EnvironmentModelViewTransform {
   /**
    * Given a view y value, return the model z value where the ground has that y height.
    * Ported from Landscape.landscapeYToZ in the Java version.
-   * @param {number} yView
-   * @returns {number} z, in model coordinates
-   * @public
    */
-  viewToModelZ( yView ) {
+  public viewToModelZ( yView: number ): number {
     assert && assert( yView >= this.yHorizonView && yView <= this.viewSize.height, `invalid yView: ${yView}` );
     return ( this.zNearModel * this.zFarModel * ( this.yHorizonView - this.viewSize.height ) ) /
            ( this.zFarModel * ( this.yHorizonView - yView ) + this.zNearModel * ( yView - this.viewSize.height ) );
@@ -257,23 +239,15 @@ export default class EnvironmentModelViewTransform {
   /**
    * Given a view x value and a model z value, return the model x value.
    * Ported from Landscape.landscapeXmodelZToX in the Java version.
-   * @param {number} xView
-   * @param {number} zModel
-   * @returns {number} x, in model coordinates
-   * @public
    */
-  viewToModelX( xView, zModel ) {
+  public viewToModelX( xView: number, zModel: number ): number {
     return zModel * ( xView - this.viewSize.width / 2 ) / this.xyScaleFactor;
   }
 
   /**
    * Given view coordinates (x,y), return the ground position in model coordinates.
-   * @param {number} xView
-   * @param {number} yView
-   * @returns {Vector3} ground position, in model coordinates
-   * @public
    */
-  viewToModelGroundPosition( xView, yView ) {
+  public viewToModelGroundPosition( xView: number, yView: number ): Vector3 {
     assert && assert( xView >= 0 && xView <= this.viewSize.width, `invalid xView: ${xView}` );
     assert && assert( yView >= this.yHorizonView && yView <= this.viewSize.height, `invalid yView: ${yView}` );
 
@@ -286,29 +260,15 @@ export default class EnvironmentModelViewTransform {
   /**
    * Turns a view distance (x or y) into a model distance at a specified model z.
    * Ported from Landscape.landscapeDistanceToModel in the Java version.
-   * @param {number} distanceView
-   * @param {number} zModel
-   * @returns {number} distance, in model coordinates
-   * @public
    */
-  viewToModelDistance( distanceView, zModel ) {
+  public viewToModelDistance( distanceView: number, zModel: number ): number {
     return distanceView * zModel / this.xyScaleFactor;
   }
 
   /**
-   * @public
-   */
-  dispose() {
-    assert && assert( false, 'EnvironmentModelViewTransform does not support dispose' );
-  }
-
-  /**
    * Determines whether the specified position is on the ground trapezoid.
-   * @param {Vector3} position
-   * @returns {boolean}
-   * @public
    */
-  isGroundPosition( position ) {
+  public isGroundPosition( position: Vector3 ): boolean {
 
     // check z first, because the validity of x and y depend on z
     return ( this.isGroundZ( position ) && this.isGroundX( position ) && this.isGroundY( position ) );
@@ -316,36 +276,24 @@ export default class EnvironmentModelViewTransform {
 
   /**
    * Determines whether the specified position has its x coordinate on the ground trapezoid.
-   * @param {Vector3} position
-   * @returns {boolean}
-   * @private
    */
-  isGroundX( position ) {
+  private isGroundX( position: Vector3 ): boolean {
     return ( position.x >= this.getMinimumX( position.z ) && position.x <= this.getMaximumX( position.z ) );
   }
 
   /**
    * Determines whether the specified position has its y coordinate on the ground trapezoid.
-   * @param {Vector3} position
-   * @returns {boolean}
-   * @private
    */
-  isGroundY( position ) {
+  private isGroundY( position: Vector3 ): boolean {
     return ( position.y === this.getGroundY( position.z ) );
   }
 
   /**
    * Determines whether the specified position has its z coordinate on the ground trapezoid.
-   * @param {Vector3} position
-   * @returns {boolean}
-   * @private
    */
-  isGroundZ( position ) {
+  private isGroundZ( position: Vector3 ): boolean {
     return ( position.z >= this.zNearModel && position.z <= this.zFarModel );
   }
 }
-
-// @public {number}
-EnvironmentModelViewTransform.Z_MARGIN_MODEL = Z_MARGIN_MODEL;
 
 naturalSelection.register( 'EnvironmentModelViewTransform', EnvironmentModelViewTransform );
