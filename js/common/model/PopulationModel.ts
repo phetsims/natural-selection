@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PopulationModel is the sub-model for the Population graph.
  *
@@ -8,23 +7,21 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import createObservableArray from '../../../../axon/js/createObservableArray.js';
+import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import PhetioObject from '../../../../tandem/js/PhetioObject.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
 import DataProbe from './DataProbe.js';
 import GenePool from './GenePool.js';
-
-// constants
 
 // The default index into Y_MAXIMUMS, determines the initial y-axis range.
 const Y_MAXIMUMS_INDEX_DEFAULT = 11;
@@ -34,7 +31,7 @@ const Y_MINIMUM = 0;
 
 // Maximum population values for the y-axis range.
 const Y_MAXIMUMS = [ 2500, 2000, 1400, 1000, 700, 500, 350, 240, 200, 140, 100, 70, 50, 30, 14, 5 ];
-assert && assert( _.every( value => NaturalSelectionUtils.isPositiveInteger( value ) ),
+assert && assert( _.every( Y_MAXIMUMS, value => NaturalSelectionUtils.isPositiveInteger( value ) ),
   'Y_MAXIMUMS must contain positive integer values' );
 assert && assert( NaturalSelectionUtils.isSortedDescending( Y_MAXIMUMS ),
   'Y_MAXIMUMS must be sorted in descending order' );
@@ -42,49 +39,80 @@ assert && assert( NaturalSelectionUtils.isSortedDescending( Y_MAXIMUMS ),
 // Spacing of tick marks for each value of Y_MAXIMUMS.
 const Y_TICK_SPACINGS = [ 500, 200, 200, 100, 100, 100, 50, 40, 40, 20, 20, 10, 10, 5, 2, 1 ];
 assert && assert( Y_TICK_SPACINGS.length === Y_MAXIMUMS.length, 'incorrect number of Y_TICK_SPACINGS' );
-assert && assert( _.every( value => NaturalSelectionUtils.isPositiveInteger( value ) ),
+assert && assert( _.every( Y_TICK_SPACINGS, value => NaturalSelectionUtils.isPositiveInteger( value ) ),
   'Y_TICK_SPACINGS must contain positive integer values' );
 assert && assert( NaturalSelectionUtils.isSortedDescending( Y_TICK_SPACINGS ),
   'Y_TICK_SPACINGS must be sorted in descending order' );
 
+type SelfOptions = {
+  xAxisLength?: number; // length of the x-axis, in generations
+};
+
+type PopulationModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
 export default class PopulationModel extends PhetioObject {
 
-  /**
-   * @param {GenePool} genePool
-   * @param {ReadOnlyProperty.<number>} timeInGenerationsProperty
-   * @param {Property.<boolean>} isPlayingProperty
-   * @param {Object} [options]
-   */
-  constructor( genePool, timeInGenerationsProperty, isPlayingProperty, options ) {
+  public readonly genePool: GenePool;
+  public readonly timeInGenerationsProperty: TReadOnlyProperty<number>;
+  public readonly isPlayingProperty: Property<boolean>;
+  public readonly xAxisLength: number; // length of the x-axis, in generations
+  public readonly xAxisTickSpacing: number; // spacing between x-axis tick marks, in generations
 
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && AssertUtils.assertAbstractPropertyOf( timeInGenerationsProperty, 'number' );
-    assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
+  // data points, for total population and the population of each allele.
+  // Vector2.x = generation, Vector2.y = population
+  public readonly totalPoints: ObservableArray<Vector2>;
+  public readonly whiteFurPoints: ObservableArray<Vector2>;
+  public readonly brownFurPoints: ObservableArray<Vector2>;
+  public readonly straightEarsPoints: ObservableArray<Vector2>;
+  public readonly floppyEarsPoints: ObservableArray<Vector2>;
+  public readonly shortTeethPoints: ObservableArray<Vector2>;
+  public readonly longTeethPoints: ObservableArray<Vector2>;
 
-    options = merge( {
+  // visibility of each data set, on the graph and data probe
+  public readonly totalVisibleProperty: Property<boolean>;
+  public readonly whiteFurVisibleProperty: Property<boolean>;
+  public readonly brownFurVisibleProperty: Property<boolean>;
+  public readonly straightEarsVisibleProperty: Property<boolean>;
+  public readonly floppyEarsVisibleProperty: Property<boolean>;
+  public readonly shortTeethVisibleProperty: Property<boolean>;
+  public readonly longTeethVisibleProperty: Property<boolean>;
 
-      // {number} length of the x-axis, in generations
+  // range of the x-axis, as time in generations
+  public readonly xRangeProperty: Property<Range>;
+
+  // index into Y_MAXIMUMS, determines the y-axis range
+  public readonly yZoomLevelProperty: NumberProperty;
+
+  // range of the y-axis, in population. dispose is not necessary.
+  public readonly yRangeProperty: TReadOnlyProperty<Range>;
+
+  public readonly dataProbe: DataProbe;
+
+  public constructor( genePool: GenePool, timeInGenerationsProperty: TReadOnlyProperty<number>,
+                      isPlayingProperty: Property<boolean>, providedOptions: PopulationModelOptions ) {
+
+    const options = optionize<PopulationModelOptions, SelfOptions, PhetioObjectOptions>()( {
+
+      // SelfOptions
       xAxisLength: 5,
 
-      // phet-io
-      tandem: Tandem.REQUIRED,
+      // PhetioObjectOptions
       phetioState: false, // to prevent serialization, because we don't have an IO Type
       phetioDocumentation: 'model elements that are specific to the Population feature'
-    }, options );
+    }, providedOptions );
 
     super( options );
 
-    // @public
     this.genePool = genePool;
     this.timeInGenerationsProperty = timeInGenerationsProperty;
     this.isPlayingProperty = isPlayingProperty;
     this.xAxisLength = options.xAxisLength;
+    this.xAxisTickSpacing = 1;
 
     // For organizing all data points in Studio
     const dataPointsTandem = options.tandem.createTandem( 'dataPoints' );
 
-    // @public {ObservableArrayDef.<Vector2>} - data points, for total population and the population of each allele.
-    // Vector2.x = generation, Vector2.y = population
+    // data points, for total population and the population of each allele.
     this.totalPoints = createObservableArray( {
       tandem: dataPointsTandem.createTandem( 'totalPoints' ),
       phetioType: createObservableArray.ObservableArrayIO( Vector2.Vector2IO ),
@@ -121,7 +149,7 @@ export default class PopulationModel extends PhetioObject {
       phetioDocumentation: 'Population data points for bunnies with long teeth'
     } );
 
-    // @public visibility of each data set, on the graph and data probe
+    // visibility of each data set, on the graph and data probe
     this.totalVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'totalVisibleProperty' )
     } );
@@ -144,10 +172,6 @@ export default class PopulationModel extends PhetioObject {
       tandem: options.tandem.createTandem( 'longTeethVisibleProperty' )
     } );
 
-    // @public (read-only) spacing between x-axis tick marks, in generations
-    this.xAxisTickSpacing = 1;
-
-    // @public range of the x-axis, as time in generations
     this.xRangeProperty = new Property( new Range( 0, options.xAxisLength ), {
       isValidValue: xRange => ( xRange.min >= 0 ),
       tandem: options.tandem.createTandem( 'xRangeProperty' ),
@@ -157,7 +181,6 @@ export default class PopulationModel extends PhetioObject {
       phetioDocumentation: 'range of the x (Generation) axis'
     } );
 
-    // @public index into Y_MAXIMUMS, determines the y-axis range
     this.yZoomLevelProperty = new NumberProperty( Y_MAXIMUMS_INDEX_DEFAULT, {
       numberType: 'Integer',
       range: new Range( 0, Y_MAXIMUMS.length - 1 ),
@@ -165,7 +188,6 @@ export default class PopulationModel extends PhetioObject {
       phetioDocumentation: 'Zooms in and out by selecting a pre-set y-axis range. The smaller the value, the larger the y-axis range.'
     } );
 
-    // @public range of the y-axis, in population. dispose is not necessary.
     this.yRangeProperty = new DerivedProperty(
       [ this.yZoomLevelProperty ],
       yZoomLevel => new Range( Y_MINIMUM, Y_MAXIMUMS[ yZoomLevel ] ), {
@@ -175,7 +197,6 @@ export default class PopulationModel extends PhetioObject {
         phetioDocumentation: 'range of the y (Population) axis'
       } );
 
-    // @public
     this.dataProbe = new DataProbe( this, {
       tandem: options.tandem.createTandem( 'dataProbe' )
     } );
@@ -216,10 +237,12 @@ export default class PopulationModel extends PhetioObject {
     } );
   }
 
-  /**
-   * @public
-   */
-  reset() {
+  public override dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    super.dispose();
+  }
+
+  public reset(): void {
 
     // Clear data points. Use this approach because these are instances of ObservableArrayDef.
     this.totalPoints.length = 0;
@@ -246,32 +269,17 @@ export default class PopulationModel extends PhetioObject {
   }
 
   /**
-   * @public
-   * @override
-   */
-  dispose() {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-    super.dispose();
-  }
-
-  /**
    * Gets the y-axis tick mark spacing for the current y-axis scale.
-   * @returns {number}
-   * @public
    */
-  getYTickSpacing() {
+  public getYTickSpacing(): number {
     return Y_TICK_SPACINGS[ this.yZoomLevelProperty.value ];
   }
 
   /**
    * Converts population counts to Vector2 points on the graph.
-   * @param {number} timeInGenerations - time (in generations) for the counts
-   * @param {BunnyCounts} counts
-   * @public
    */
-  recordCounts( timeInGenerations, counts ) {
-    assert && assert( NaturalSelectionUtils.isNonNegative( timeInGenerations ), `invalid timeInGenerations: ${timeInGenerations}` );
-    assert && assert( counts instanceof BunnyCounts, 'invalid counts' );
+  public recordCounts( timeInGenerations: number, counts: BunnyCounts ): void {
+    assert && assert( timeInGenerations >= 0, `invalid timeInGenerations: ${timeInGenerations}` );
 
     recordCount( this.totalPoints, timeInGenerations, counts.totalCount );
     recordCount( this.whiteFurPoints, timeInGenerations, counts.whiteFurCount );
@@ -285,14 +293,10 @@ export default class PopulationModel extends PhetioObject {
 
 /**
  * Records a count if it differs from the previous data point.
- * @param {Array.<Vector2>} array
- * @param {number} timeInGenerations - time (in generations) for the count
- * @param {number} count
  */
-function recordCount( array, timeInGenerations, count ) {
-  assert && assert( Array.isArray( array ), 'invalid array' );
-  assert && assert( NaturalSelectionUtils.isNonNegative( timeInGenerations ), 'invalid generation' );
-  assert && assert( NaturalSelectionUtils.isNonNegativeInteger( count ), 'invalid count' );
+function recordCount( array: Vector2[], timeInGenerations: number, count: number ): void {
+  assert && assert( timeInGenerations >= 0, 'invalid generation' );
+  assert && assert( Number.isInteger( count ) && count >= 0, 'invalid count' );
 
   if ( array.length === 0 || array[ array.length - 1 ].y !== count ) {
     array.push( new Vector2( timeInGenerations, count ) );
