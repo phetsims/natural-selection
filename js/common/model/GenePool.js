@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * GenePool is the pool of genes for the bunny population.
  * There is one instance of GenePool per screen.
