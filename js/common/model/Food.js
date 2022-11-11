@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Food is the model of the food supply, a collection of Shrubs.
  * It controls the type (tender or tough) and quantity of food that is available.
