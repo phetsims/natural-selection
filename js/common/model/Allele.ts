@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Allele is a variant form of a gene.  In this sim, the language used to name an allele (a gene variant) and
  * a phenotype (expression of that gene) are synonymous. For example, 'White Fur' is used to describe both the
@@ -13,8 +12,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
@@ -27,86 +28,88 @@ import whiteFur_png from '../../../images/whiteFur_png.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 
+// tandem for all static instances of Allele
+const ALLELES_TANDEM = Tandem.GLOBAL_MODEL.createTandem( 'alleles' );
+
+type SelfOptions = EmptySelfOptions;
+
+type AlleleOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
 export default class Allele extends PhetioObject {
 
+  public readonly nameProperty: TReadOnlyProperty<string>;
+  public readonly image: HTMLImageElement;
+  public readonly tandemPrefix: string;
+
   /**
-   * @param {TReadOnlyProperty<string>} nameProperty - name of the allele
-   * @param {HTMLImageElement} image - image used to represent the allele in the UI
-   * @param {string} tandemPrefix - prefix used for tandem names for the allele, like 'whiteFur' for 'whiteFurCheckbox'
-   * @param {Object} [options]
+   * The constructor is private because only the static instances are used.
+   *
+   * @param nameProperty - name of the allele
+   * @param image - image used to represent the allele in the UI
+   * @param tandemPrefix - prefix used for tandem names for the allele, like 'whiteFur' for 'whiteFurCheckbox'
+   * @param [providedOptions]
    */
-  constructor( nameProperty, image, tandemPrefix, options ) {
+  private constructor( nameProperty: TReadOnlyProperty<string>, image: HTMLImageElement,
+                      tandemPrefix: string, providedOptions: AlleleOptions ) {
 
-    assert && assert( typeof name === 'string', 'invalid name' );
-    assert && assert( image instanceof HTMLImageElement, 'invalid image' );
+    const options = optionize<AlleleOptions, SelfOptions, PhetioObjectOptions>()( {
 
-    options = merge( {
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
+      // PhetioObjectOptions
       phetioType: Allele.AlleleIO,
       phetioState: false
-    }, options );
+    }, providedOptions );
 
     assert && assert( options.tandem.name.startsWith( tandemPrefix ),
       `tandem name ${options.tandem.name} must start with ${tandemPrefix}` );
 
     super( options );
 
-    // @public (read-only)
     this.nameProperty = nameProperty;
     this.image = image;
     this.tandemPrefix = tandemPrefix;
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
+
+  /**
+   * AlleleIO handles PhET-iO serialization of Allele.
+   * It implements 'Reference type serialization', as described in the Serialization section of
+   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   * This must be defined before instantiating static instances.
+   */
+  public static readonly AlleleIO = new IOType( 'AlleleIO', {
+    valueType: Allele,
+    supertype: ReferenceIO( IOType.ObjectIO )
+  } );
+
+  // Static instances
+
+  public static readonly WHITE_FUR = new Allele( NaturalSelectionStrings.whiteFurStringProperty, whiteFur_png, 'whiteFur', {
+    tandem: ALLELES_TANDEM.createTandem( 'whiteFurAllele' )
+  } );
+
+  public static readonly BROWN_FUR = new Allele( NaturalSelectionStrings.brownFurStringProperty, brownFur_png, 'brownFur', {
+    tandem: ALLELES_TANDEM.createTandem( 'brownFurAllele' )
+  } );
+
+  public static readonly FLOPPY_EARS = new Allele( NaturalSelectionStrings.floppyEarsStringProperty, floppyEars_png, 'floppyEars', {
+    tandem: ALLELES_TANDEM.createTandem( 'floppyEarsAllele' )
+  } );
+
+  public static readonly STRAIGHT_EARS = new Allele( NaturalSelectionStrings.straightEarsStringProperty, straightEars_png, 'straightEars', {
+    tandem: ALLELES_TANDEM.createTandem( 'straightEarsAllele' )
+  } );
+
+  public static readonly SHORT_TEETH = new Allele( NaturalSelectionStrings.shortTeethStringProperty, shortTeeth_png, 'shortTeeth', {
+    tandem: ALLELES_TANDEM.createTandem( 'shortTeethAllele' )
+  } );
+
+  public static readonly LONG_TEETH = new Allele( NaturalSelectionStrings.longTeethStringProperty, longTeeth_png, 'longTeeth', {
+    tandem: ALLELES_TANDEM.createTandem( 'longTeethAllele' )
+  } );
 }
-
-/**
- * AlleleIO handles PhET-iO serialization of Allele. It implements 'Reference type serialization',
- * as described in the Serialization section of
- * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
- * @public
- */
-Allele.AlleleIO = new IOType( 'AlleleIO', {
-  valueType: Allele,
-  supertype: ReferenceIO( IOType.ObjectIO )
-} );
-
-// Static instances
-
-// tandem for all static instances of Allele
-const ALLELES_TANDEM = Tandem.GLOBAL_MODEL.createTandem( 'alleles' );
-
-Allele.WHITE_FUR = new Allele( NaturalSelectionStrings.whiteFurStringProperty, whiteFur_png, 'whiteFur', {
-  tandem: ALLELES_TANDEM.createTandem( 'whiteFurAllele' )
-} );
-
-Allele.BROWN_FUR = new Allele( NaturalSelectionStrings.brownFurStringProperty, brownFur_png, 'brownFur', {
-  tandem: ALLELES_TANDEM.createTandem( 'brownFurAllele' )
-} );
-
-Allele.FLOPPY_EARS = new Allele( NaturalSelectionStrings.floppyEarsStringProperty, floppyEars_png, 'floppyEars', {
-  tandem: ALLELES_TANDEM.createTandem( 'floppyEarsAllele' )
-} );
-
-Allele.STRAIGHT_EARS = new Allele( NaturalSelectionStrings.straightEarsStringProperty, straightEars_png, 'straightEars', {
-  tandem: ALLELES_TANDEM.createTandem( 'straightEarsAllele' )
-} );
-
-Allele.SHORT_TEETH = new Allele( NaturalSelectionStrings.shortTeethStringProperty, shortTeeth_png, 'shortTeeth', {
-  tandem: ALLELES_TANDEM.createTandem( 'shortTeethAllele' )
-} );
-
-Allele.LONG_TEETH = new Allele( NaturalSelectionStrings.longTeethStringProperty, longTeeth_png, 'longTeeth', {
-  tandem: ALLELES_TANDEM.createTandem( 'longTeethAllele' )
-} );
 
 naturalSelection.register( 'Allele', Allele );
