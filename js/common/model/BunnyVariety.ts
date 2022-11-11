@@ -1,4 +1,4 @@
-// Copyright 2020, University of Colorado Boulder
+// Copyright 2020-2022, University of Colorado Boulder
 
 /**
  * BunnyVariety is a data structure that describes one variety (genetic variation) of bunny that makes up

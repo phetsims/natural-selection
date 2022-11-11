@@ -1,4 +1,4 @@
-// Copyright 2020, University of Colorado Boulder
+// Copyright 2020-2022, University of Colorado Boulder
 
 /**
  * BunnySpriteImage is a specialization of OrganismSpriteImage for bunnies that adds hit testing.

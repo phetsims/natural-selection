@@ -1,4 +1,4 @@
-// Copyright 2020, University of Colorado Boulder
+// Copyright 2020-2022, University of Colorado Boulder
 
 /**
  * BunnySelectionRectangleSpriteInstance is the sprite instance for the selection rectangle that surrounds the
