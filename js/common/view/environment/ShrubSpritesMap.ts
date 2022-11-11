@@ -1,6 +1,5 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ShrubSpritesMap manages the Sprites used for tough and tender food.
  *
@@ -19,47 +18,42 @@ import OrganismSpriteImage from './OrganismSpriteImage.js';
 
 export default class ShrubSpritesMap {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+  private readonly tenderSprites: Sprite[]; // sprites for tender food
+  private tenderSpritesIndex: number; // index of the next sprite to use for tender food
 
-    // @private {Sprite[]} sprites for tender food
+  private readonly toughSprites: Sprite[]; // sprites for tough food
+  private toughSpritesIndex: number; // index of the next sprite to use for tough food
+
+  public constructor() {
+
     this.tenderSprites = [
       new Sprite( new OrganismSpriteImage( tenderShrub1_png ) ),
       new Sprite( new OrganismSpriteImage( tenderShrub2_png ) ),
       new Sprite( new OrganismSpriteImage( tenderShrub3_png ) )
     ];
 
-    // @private {number} index of the next sprite to use for tender food
     this.tenderSpritesIndex = 0;
 
-    // @private {Sprite[]} sprites for tough food
     this.toughSprites = [
       new Sprite( new OrganismSpriteImage( toughShrub1_png ) ),
       new Sprite( new OrganismSpriteImage( toughShrub2_png ) ),
       new Sprite( new OrganismSpriteImage( toughShrub3_png ) )
     ];
 
-    // @private {number} index of the next sprite to use for tough food
     this.toughSpritesIndex = 0;
   }
 
   /**
    * Gets the complete set of Sprites related to shrubs.
-   * @returns {Sprite[]}
-   * @public
    */
-  getSprites() {
+  public getSprites(): Sprite[] {
     return this.tenderSprites.concat( this.toughSprites );
   }
 
   /**
    * Gets the next sprite to use for tender shrubs.
-   * @returns {Sprite}
-   * @public
    */
-  getNextTenderSprite() {
+  public getNextTenderSprite(): Sprite {
     const sprite = this.tenderSprites[ this.tenderSpritesIndex++ ];
     if ( this.tenderSpritesIndex >= this.tenderSprites.length ) {
       this.tenderSpritesIndex = 0;
@@ -69,10 +63,8 @@ export default class ShrubSpritesMap {
 
   /**
    * Gets the next sprite to use for tough shrubs.
-   * @returns {Sprite}
-   * @public
    */
-  getNextToughSprite() {
+  public getNextToughSprite(): Sprite {
     const sprite = this.toughSprites[ this.toughSpritesIndex++ ];
     if ( this.toughSpritesIndex >= this.toughSprites.length ) {
       this.toughSpritesIndex = 0;
