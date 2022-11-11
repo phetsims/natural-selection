@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * NaturalSelectionQueryParameters defines query parameters that are specific to this simulation.
  * Run with ?log to print these query parameters and their values to the browser console at startup.
@@ -135,7 +134,7 @@ const SCHEMA = {
   secondsPerGeneration: {
     type: 'number',
     defaultValue: 10,
-    isValidValue: value => ( value > 0 )
+    isValidValue: ( value: number ) => ( value > 0 )
   },
 
   // Scale time by this much while the fast-forward button is pressed.
@@ -143,7 +142,7 @@ const SCHEMA = {
   fastForwardScale: {
     type: 'number',
     defaultValue: 4,
-    isValidValue: value => ( value >= 1 )
+    isValidValue: ( value: number ) => ( value >= 1 )
   },
 
   // Maximum number of generations before the sim stops and displays MemoryLimitDialog.
@@ -151,7 +150,7 @@ const SCHEMA = {
   maxGenerations: {
     type: 'number',
     defaultValue: 1000,
-    isValidValue: value => ( value > 0 )
+    isValidValue: ( value: number ) => ( value > 0 )
   },
 
   // The number of bunnies required to 'take over the world'. Careful, because all bunnies are allowed to mate before
@@ -160,14 +159,14 @@ const SCHEMA = {
   maxPopulation: {
     type: 'number',
     defaultValue: 750,
-    isValidValue: value => ( value > 0 && Number.isInteger( value ) )
+    isValidValue: ( value: number ) => ( value > 0 && Number.isInteger( value ) )
   },
 
   // Age at which bunnies die of old-age.
   maxAge: {
     type: 'number',
     defaultValue: 5, // Java version value is 5
-    isValidValue: value => NaturalSelectionUtils.isPositiveInteger( value )
+    isValidValue: ( value: number ) => NaturalSelectionUtils.isPositiveInteger( value )
   },
 
   // Percentage of newborn bunnies that will receive a mutation.
@@ -181,7 +180,7 @@ const SCHEMA = {
     // All 3 mutations can be applied simultaneously. Mutation is mutually-exclusive by gene. A bunny can have at
     // most 1 mutation. And we have 3 mutations, for fur, ears, and teeth. So at most 1/3 of the population can get a
     // specific mutation.
-    isValidValue: value => ( value > 0 && value <= 1 / 3 )
+    isValidValue: ( value: number ) => ( value > 0 && value <= 1 / 3 )
   },
 
   // The random percentage of bunnies that will be eaten by wolves. See WolfCollection.eatBunnies.
@@ -190,7 +189,7 @@ const SCHEMA = {
     type: 'custom',
     parse: parseRange,
     defaultValue: new Range( 0.35, 0.4 ),
-    isValidValue: range => NaturalSelectionUtils.isPercentRange( range )
+    isValidValue: ( range: Range ) => NaturalSelectionUtils.isPercentRange( range )
   },
 
   // Multiplier for when the bunny's fur color does not match the environment. See WolfCollection.eatBunnies.
@@ -198,7 +197,7 @@ const SCHEMA = {
   wolvesEnvironmentMultiplier: {
     type: 'number',
     defaultValue: 2.3,
-    isValidValue: value => ( value > 1 )
+    isValidValue: ( value: number ) => ( value > 1 )
   },
 
   // The random percentage of bunnies that will die of starvation when food is tough. See Food.starveBunnies.
@@ -207,7 +206,7 @@ const SCHEMA = {
     type: 'custom',
     parse: parseRange,
     defaultValue: new Range( 0.4, 0.45 ),
-    isValidValue: range => NaturalSelectionUtils.isPercentRange( range )
+    isValidValue: ( range: Range ) => NaturalSelectionUtils.isPercentRange( range )
   },
 
   // Multiplier for bunnies with short teeth when food is tough. See Food.starveBunnies.
@@ -215,7 +214,7 @@ const SCHEMA = {
   shortTeethMultiplier: {
     type: 'number',
     defaultValue: 2,
-    isValidValue: value => ( value > 1 )
+    isValidValue: ( value: number ) => ( value > 1 )
   },
 
   // Range for the number of bunnies that can be sustained on limited food (carrying capacity). See Food.starveBunnies.
@@ -223,7 +222,7 @@ const SCHEMA = {
     type: 'custom',
     parse: parseRange,
     defaultValue: new Range( 90, 110 ),
-    isValidValue: range => ( range.min > 0 ) && ( range.min < range.max )
+    isValidValue: ( range: Range ) => ( range.min > 0 ) && ( range.min < range.max )
   },
 
   // Specifies the number of shrubs to show for limited (min) and abundant (max) food.
@@ -231,7 +230,7 @@ const SCHEMA = {
     type: 'custom',
     parse: parseRange,
     defaultValue: new Range( 10, 75 ),
-    isValidValue: range => ( range.min > 0 ) && ( range.max > range.min )
+    isValidValue: ( range: Range ) => ( range.min > 0 ) && ( range.max > range.min )
   },
 
   // Adds a red dot at the origin of some objects (bunnies, wolves, food)
@@ -252,37 +251,35 @@ const SCHEMA = {
   }
 };
 
+// @ts-ignore TODO https://github.com/phetsims/natural-selection/issues/326
 const NaturalSelectionQueryParameters = QueryStringMachine.getAll( SCHEMA );
 
 /**
  * Gets the value for a query parameter.
- * @param {string} key - the query parameter key
- * @returns {*}
- * @public
  */
-NaturalSelectionQueryParameters.getValue = function( key ) {
+//TODO https://github.com/phetsims/natural-selection/issues/326
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+NaturalSelectionQueryParameters.getValue = function( key: string ): any {
   return NaturalSelectionQueryParameters[ key ];
 };
 
 /**
  * Gets the default value for a query parameter.
- * @param {string} key - the query parameter key
- * @returns {*}
- * @public
  */
-NaturalSelectionQueryParameters.getDefaultValue = function( key ) {
+//TODO https://github.com/phetsims/natural-selection/issues/326
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+NaturalSelectionQueryParameters.getDefaultValue = function( key: string ): any {
+  // @ts-ignore TODO https://github.com/phetsims/natural-selection/issues/326
   return SCHEMA[ key ].defaultValue;
 };
 
 /**
  * Parses a query-parameter value into a Range.
- * @param {string} value
- * @returns {Range}
  */
-function parseRange( value ) {
+function parseRange( value: string ): Range {
   const tokens = value.split( ',' );
   assert && assert( tokens.length === 2, `range format is min,max: ${value}` );
-  assert && assert( _.every( tokens, token => isFinite( token ) ), `range must be 2 numbers: ${value}` );
+  assert && assert( _.every( tokens, token => isFinite( Number( token ) ) ), `range must be 2 numbers: ${value}` );
   const numbers = _.map( tokens, token => Number( token ) );
   return new Range( numbers[ 0 ], numbers[ 1 ] );
 }
