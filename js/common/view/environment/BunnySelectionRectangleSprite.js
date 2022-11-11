@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * BunnySelectionRectangleSprite is the sprite for the bunny selection rectangle.
  * It looks the same as the selection rectangle in the Pedigree graph.
