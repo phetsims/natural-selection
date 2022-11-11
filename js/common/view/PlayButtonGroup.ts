@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PlayButtonGroup contains the buttons that can be used to make the simulation begin playing. These buttons are
  * mutually exclusive - at most 1 is visible, depending on the state of the simulation.
@@ -10,40 +9,43 @@
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import Property from '../../../../axon/js/Property.js';
 import stepTimer from '../../../../axon/js/stepTimer.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import { Node, Text } from '../../../../scenery/js/imports.js';
-import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import { Node, NodeOptions, Text, TextOptions } from '../../../../scenery/js/imports.js';
+import RectangularPushButton, { RectangularPushButtonOptions } from '../../../../sun/js/buttons/RectangularPushButton.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import SimulationMode from '../model/SimulationMode.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
+type SelfOptions = {
+
+  // callbacks for the buttons
+  addAMate?: () => void;
+  play?: () => void;
+  startOver?: () => void;
+};
+
+type PlayButtonGroupOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+
 export default class PlayButtonGroup extends Node {
 
-  /**
-   * @param {EnumerationProperty.<SimulationMode>} simulationModeProperty
-   * @param {Property.<number>} bunnyCountProperty
-   * @param {Object} [options]
-   */
-  constructor( simulationModeProperty, bunnyCountProperty, options ) {
+  public constructor( simulationModeProperty: EnumerationProperty<SimulationMode>,
+                      bunnyCountProperty: Property<number>, providedOptions: PlayButtonGroupOptions ) {
 
-    assert && assert( simulationModeProperty instanceof EnumerationProperty );
-    assert && AssertUtils.assertPropertyOf( bunnyCountProperty, 'number' );
+    const options = optionize<PlayButtonGroupOptions, SelfOptions, NodeOptions>()( {
 
-    options = merge( {
-
-      // {function} callbacks for the buttons, no parameters, no return values
-      addAMate: () => {},
-      play: () => {},
-      startOver: () => {},
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+      // SelfOptions
+      addAMate: _.noop,
+      play: _.noop,
+      startOver: _.noop
+    }, providedOptions );
 
     // 'Add a Mate' push button, for when the initial population consists of a single bunny.
     const addAMateButton = new TextPushButton( NaturalSelectionStrings.addAMateStringProperty, {
@@ -73,7 +75,6 @@ export default class PlayButtonGroup extends Node {
       tandem: options.tandem.createTandem( 'startOverButton' )
     } );
 
-    assert && assert( !options.children, 'PushButtonGroup sets children' );
     options.children = [ addAMateButton, playButton, startOverButton ];
 
     super( options );
@@ -124,41 +125,39 @@ export default class PlayButtonGroup extends Node {
     );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'PlayButtonGroup does not support dispose' );
     super.dispose();
   }
 }
 
+type TextPushButtonSelfOptions = {
+  textOptions?: StrictOmit<TextOptions, 'tandem'>;
+};
+
+type TextPushButtonOptions = TextPushButtonSelfOptions &
+  PickRequired<RectangularPushButtonOptions, 'listener' | 'tandem'>;
+
 class TextPushButton extends RectangularPushButton {
 
-  /**
-   * @param {TReadOnlyProperty<string>} stringProperty
-   * @param {Object} [options]
-   */
-  constructor( stringProperty, options ) {
+  public constructor( stringProperty: TReadOnlyProperty<string>, providedOptions: TextPushButtonOptions ) {
 
-    options = merge( {
+    const options = optionize<TextPushButtonOptions, TextPushButtonSelfOptions, RectangularPushButtonOptions>()( {
+
+      // SelfOptions
       textOptions: {
         font: NaturalSelectionConstants.PUSH_BUTTON_FONT,
         maxWidth: 150 // determined empirically
       },
+
+      // RectangularPushButtonOptions
       baseColor: NaturalSelectionColors.PLAY_BUTTON,
       cornerRadius: 5,
       xMargin: 12,
       yMargin: 8,
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
       phetioReadOnly: true // because sim state controls when this button is visible
-    }, options );
+    }, providedOptions );
 
-    assert && assert( !options.content, 'TextPushButton sets content' );
-    assert && assert( !options.textOptions.tandem, 'TextPushButton sets textOptions.tandem' );
     options.content = new Text( stringProperty, merge( {}, options.textOptions, {
       tandem: options.tandem.createTandem( 'labelText' )
     } ) );
