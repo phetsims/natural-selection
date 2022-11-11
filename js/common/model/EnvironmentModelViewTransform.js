@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * EnvironmentModelViewTransform is the model-view transform for the 'environment', the place where bunnies, wolves,
  * food, etc. appear. The model is 3D, the view is 2D, so this deals with the 2D projection of a 3D space.
