@@ -1,5 +1,6 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * BunnySpriteInstance is a specialization of OrganismSpriteInstance for bunnies.
  * Each instance corresponds to a bunny in the model.
