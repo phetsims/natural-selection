@@ -1,5 +1,6 @@
 // Copyright 2020, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Shrub is the model of a shrub, the food for bunnies.
  *
