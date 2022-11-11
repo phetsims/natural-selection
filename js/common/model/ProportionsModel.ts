@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ProportionsModel is the sub-model of the Proportions graph.
  *
@@ -8,58 +7,83 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import createObservableArray from '../../../../axon/js/createObservableArray.js';
+import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../dot/js/Range.js';
-import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
 import ProportionsCounts from './ProportionsCounts.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type ProportionsModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
 export default class ProportionsModel extends PhetioObject {
 
+  private readonly clockGenerationProperty: TReadOnlyProperty<number>;
+  public readonly valuesVisibleProperty: Property<boolean>;
+
+  // Named proportionsGenerationProperty to distinguish it from the other 'generation' Properties in this sim.
+  // See https://github.com/phetsims/natural-selection/issues/187
+  public readonly proportionsGenerationProperty: NumberProperty;
+
+  // whether the Proportions graph is displaying the current generation. dispose is not necessary.
+  public readonly isDisplayingCurrentGenerationProperty: TReadOnlyProperty<boolean>;
+
+  // counts for 'Start of Generation'
+  public readonly startCountsProperty: Property<BunnyCounts>;
+
+  // counts for 'End of Generation'
+  public readonly endCountsProperty: Property<BunnyCounts>;
+
+  // Whether the model has data to display
+  public readonly hasDataProperty: TReadOnlyProperty<boolean>;
+
+  // visibility of the column for each gene in the graph
+  public readonly furVisibleProperty: Property<boolean>;
+  public readonly earsVisibleProperty: Property<boolean>;
+  public readonly teethVisibleProperty: Property<boolean>;
+
+  private readonly currentStartCountsProperty: Property<BunnyCounts | null>;
+
+  private readonly previousCounts: ObservableArray<ProportionsCounts>;
+
   /**
-   * @param {Property.<BunnyCounts>} liveBunnyCountsProperty - counts of live bunnies, used for dynamic 'Currently' data
-   * @param {ReadOnlyProperty.<number>} clockGenerationProperty - the generation number of the generation clock
-   * @param {Property.<boolean>} isPlayingProperty
-   * @param {Object} [options]
+   * @param liveBunnyCountsProperty - counts of live bunnies, used for dynamic 'Currently' data
+   * @param clockGenerationProperty - the generation number of the generation clock
+   * @param isPlayingProperty
+   * @param providedOptions
    */
-  constructor( liveBunnyCountsProperty, clockGenerationProperty, isPlayingProperty, options ) {
+  public constructor( liveBunnyCountsProperty: Property<BunnyCounts>,
+                      clockGenerationProperty: TReadOnlyProperty<number>,
+                      isPlayingProperty: Property<boolean>,
+                      providedOptions: ProportionsModelOptions ) {
 
-    assert && assert( liveBunnyCountsProperty instanceof Property, 'invalid bunnyCounts' );
-    assert && AssertUtils.assertAbstractPropertyOf( clockGenerationProperty, 'number' );
-    assert && AssertUtils.assertPropertyOf( isPlayingProperty, 'boolean' );
+    const options = optionize<ProportionsModelOptions, SelfOptions, PhetioObjectOptions>()( {
 
-    options = merge( {
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
+      // PhetioObjectOptions
       phetioState: false, // to prevent serialization, because we don't have an IO Type
       phetioDocumentation: 'model elements that are specific to the Proportions feature'
-    }, options );
+    }, providedOptions );
 
     super( options );
 
-    // @private
     this.clockGenerationProperty = clockGenerationProperty;
 
-    // @public
     this.valuesVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'valuesVisibleProperty' ),
       phetioDocumentation: 'determines whether values are visible on the bars in the Proportions graph'
     } );
 
-    // @public
-    // Named proportionsGenerationProperty to distinguish it from the other 'generation' Properties in this sim.
-    // See https://github.com/phetsims/natural-selection/issues/187
     this.proportionsGenerationProperty = new NumberProperty( 0, {
       numberType: 'Integer',
       range: new Range( 0, 0 ), // dynamically adjusted by calling setValueAndRange
@@ -68,20 +92,17 @@ export default class ProportionsModel extends PhetioObject {
       phetioReadOnly: true // range is dynamic
     } );
 
-    // @public whether the Proportions graph is displaying the current generation. dispose is not necessary.
     this.isDisplayingCurrentGenerationProperty = new DerivedProperty(
       [ this.proportionsGenerationProperty, clockGenerationProperty ],
       ( proportionsGeneration, clockGeneration ) => ( proportionsGeneration === clockGeneration ), {
         tandem: Tandem.OPT_OUT
       } );
 
-    // @public {Property.<BunnyCounts>} counts for 'Start of Generation'
     this.startCountsProperty = new Property( BunnyCounts.withZero(), {
       valueType: BunnyCounts,
       tandem: Tandem.OPT_OUT
     } );
 
-    // @public {Property.<BunnyCounts>} counts for 'End of Generation'
     this.endCountsProperty = new Property( BunnyCounts.withZero(), {
       valueType: BunnyCounts,
       tandem: Tandem.OPT_OUT
@@ -89,19 +110,18 @@ export default class ProportionsModel extends PhetioObject {
 
     // 'Start' counts for the current generation. This is null until the sim enters SimulationMode.ACTIVE.
     // While in SimulationMode.ACTIVE it will always have a value.
-    const currentStartCountsProperty = new Property( null, {
+    const currentStartCountsProperty = new Property<BunnyCounts | null>( null, {
       tandem: options.tandem.createTandem( 'currentStartCountsProperty' ),
       phetioValueType: NullableIO( BunnyCounts.BunnyCountsIO ),
       phetioDocumentation: 'Counts at the start of the current generation'
     } );
 
-    const previousCounts = createObservableArray( {
+    const previousCounts = createObservableArray<ProportionsCounts>( {
       tandem: options.tandem.createTandem( 'previousCounts' ),
       phetioType: createObservableArray.ObservableArrayIO( ProportionsCounts.ProportionsCountsIO ),
       phetioDocumentation: 'Start and End counts for previous generations, indexed by generation number'
     } );
 
-    // @public Whether the model has data to display. dispose is not necessary.
     this.hasDataProperty = new DerivedProperty(
       [ currentStartCountsProperty ], currentStartCounts => !!currentStartCounts, {
         tandem: Tandem.OPT_OUT
@@ -114,7 +134,7 @@ export default class ProportionsModel extends PhetioObject {
       }
     } );
 
-    // @public visibility of the column for each gene in the graph
+    // visibility of the column for each gene in the graph
     this.furVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'furVisibleProperty' )
     } );
@@ -181,17 +201,11 @@ export default class ProportionsModel extends PhetioObject {
       tandem: options.tandem.createTandem( 'currentCountsProperty' )
     } );
 
-    // @private {Property.<BunnyCounts|null>}
     this.currentStartCountsProperty = currentStartCountsProperty;
-
-    // @private {ObservableArrayDef.<ProportionsCounts>}
     this.previousCounts = previousCounts;
   }
 
-  /**
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.valuesVisibleProperty.reset();
     this.proportionsGenerationProperty.resetValueAndRange(); // because we're using setValueAndRange
     this.startCountsProperty.reset();
@@ -203,24 +217,16 @@ export default class ProportionsModel extends PhetioObject {
     this.teethVisibleProperty.reset();
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
     super.dispose();
   }
 
   /**
    * Records start counts for the current generation.
-   * @param {number} clockGeneration
-   * @param {BunnyCounts} startCounts
-   * @public
    */
-  recordStartCounts( clockGeneration, startCounts ) {
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( clockGeneration ), 'invalid clockGeneration' );
-    assert && assert( startCounts instanceof BunnyCounts, 'invalid startCounts' );
+  public recordStartCounts( clockGeneration: number, startCounts: BunnyCounts ): void {
+    assert && assert( Number.isInteger( clockGeneration ) && clockGeneration >= 0, 'invalid clockGeneration' );
     assert && assert( clockGeneration === this.clockGenerationProperty.value, `${clockGeneration} is not the current generation` );
 
     this.currentStartCountsProperty.value = startCounts;
@@ -228,18 +234,15 @@ export default class ProportionsModel extends PhetioObject {
 
   /**
    * Records end counts for the previous generation, using what was formerly the current generation start data.
-   * @param {number} generation
-   * @param {BunnyCounts} endCounts
-   * @public
    */
-  recordEndCounts( generation, endCounts ) {
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
-    assert && assert( endCounts instanceof BunnyCounts, 'invalid endCounts' );
+  public recordEndCounts( generation: number, endCounts: BunnyCounts ): void {
+    assert && assert( Number.isInteger( generation ) && generation >= 0, 'invalid generation' );
     assert && assert( generation === this.clockGenerationProperty.value - 1, `${generation} is not the previous generation` );
     assert && assert( this.previousCounts.length === generation,
       `unexpected generation=${generation}, expected ${this.previousCounts.length}` );
 
-    const startCounts = this.currentStartCountsProperty.value;
+    const startCounts = this.currentStartCountsProperty.value!;
+    assert && assert( startCounts !== null );
     this.previousCounts.push( new ProportionsCounts( generation, startCounts, endCounts ) );
   }
 }
