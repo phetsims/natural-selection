@@ -1,5 +1,6 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * WolfSpriteInstance is a specialization of OrganismSpriteInstance for wolves.
  * Each instance corresponds to a wolf in the model.

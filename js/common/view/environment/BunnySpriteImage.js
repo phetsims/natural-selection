@@ -1,5 +1,6 @@
 // Copyright 2020, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * BunnySpriteImage is a specialization of OrganismSpriteImage for bunnies that adds hit testing.
  * Hit testing based on pixels in the associated image, instead of the image bounds, makes it easier
