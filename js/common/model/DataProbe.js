@@ -1,5 +1,6 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * DataProbe is the model for the data probe on the Population graph. It shows population (y-axis) values at a specific
  * generation (x-axis) value on the graph.
