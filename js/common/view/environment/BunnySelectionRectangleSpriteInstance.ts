@@ -1,6 +1,5 @@
 // Copyright 2020, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * BunnySelectionRectangleSpriteInstance is the sprite instance for the selection rectangle that surrounds the
  * selected bunny. When a bunny is selected, OrganismSprites creates an instance of BunnySelectionRectangleSpriteInstance
@@ -19,15 +18,7 @@ import OrganismSpriteInstance from './OrganismSpriteInstance.js';
 
 export default class BunnySelectionRectangleSpriteInstance extends OrganismSpriteInstance {
 
-  /**
-   * @param {Bunny} bunny
-   * @param {BunnySelectionRectangleSprite} sprite
-   */
-  constructor( bunny, sprite ) {
-
-    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
-    assert && assert( sprite instanceof BunnySelectionRectangleSprite, 'invalid sprite' );
-
+  public constructor( bunny: Bunny, sprite: BunnySelectionRectangleSprite ) {
     super( bunny, sprite, NaturalSelectionConstants.BUNNY_IMAGE_SCALE );
   }
 }
