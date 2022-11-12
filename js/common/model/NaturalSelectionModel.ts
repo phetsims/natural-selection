@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * NaturalSelectionModel is the base class model for all screens.
  *
@@ -12,8 +11,12 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
+import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
@@ -30,44 +33,67 @@ import PopulationModel from './PopulationModel.js';
 import ProportionsModel from './ProportionsModel.js';
 import SimulationMode from './SimulationMode.js';
 import WolfCollection from './WolfCollection.js';
+import BunnyVariety from './BunnyVariety.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type NaturalSelectionModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 export default class NaturalSelectionModel {
 
+  // the transform between 3D model coordinates and 2D view coordinates
+  public readonly modelViewTransform: EnvironmentModelViewTransform;
+
+  // see SimulationMode
+  public readonly simulationModeProperty: EnumerationProperty<SimulationMode>;
+
+  public readonly isPlayingProperty: Property<boolean>;
+  public readonly timeSpeedProperty: EnumerationProperty<TimeSpeed>;
+  public readonly generationClock: GenerationClock;
+
+  public readonly genePool: GenePool; // pool of genes for the bunny population
+  public readonly bunnyCollection: BunnyCollection; // the collection of Bunny instances
+  public readonly environmentProperty: EnumerationProperty<Environment>;
+  public readonly wolfCollection: WolfCollection;
+  public readonly food: Food;
+
+  public readonly populationModel: PopulationModel;
+  public readonly proportionsModel: ProportionsModel;
+  public readonly pedigreeModel: PedigreeModel;
+
+  // The time that it took to execute bunnyCollection.mateBunnies, in ms
+  // For performance profiling, see https://github.com/phetsims/natural-selection/issues/60
+  public readonly timeToMateProperty: Property<number>;
+
+  public readonly memoryLimitEmitter: Emitter;
+
+  private readonly timeScaleProperty: TReadOnlyProperty<number>;
+  private readonly initialBunnyVarieties: BunnyVariety[]; // describes the initial population
+
   /**
-   * @param {string} mutationsQueryParameterName
-   * @param {string} populationQueryParameterName
-   * @param {number} shrubsSeed - seed for random number generator used to position shrubs
-   * @param {Object} [options]
+   * @param mutationsQueryParameterName - the screen-specific query parameter used to specify mutations
+   * @param populationQueryParameterName - the screen-specific query parameter used to specify population
+   * @param shrubsSeed - seed for random number generator used to position shrubs
+   * @param providedOptions
    */
-  constructor( mutationsQueryParameterName, populationQueryParameterName, shrubsSeed, options ) {
+  public constructor( mutationsQueryParameterName: string, populationQueryParameterName: string,
+                      shrubsSeed: number, providedOptions: NaturalSelectionModelOptions ) {
 
-    assert && assert( typeof mutationsQueryParameterName === 'string', 'invalid mutationsQueryParameterName' );
-    assert && assert( typeof populationQueryParameterName === 'string', 'invalid populationQueryParameterName' );
-    assert && assert( typeof shrubsSeed === 'number', 'invalid shrubsSeed' );
+    const options = providedOptions;
 
-    options = merge( {
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
-
-    // @public the transform between 3D model coordinates and 2D view coordinates
     this.modelViewTransform = new EnvironmentModelViewTransform();
 
-    // @public see SimulationMode
     this.simulationModeProperty = new EnumerationProperty( SimulationMode.STAGED, {
       tandem: options.tandem.createTandem( 'simulationModeProperty' ),
       phetioDocumentation: 'for internal PhET use only', // see https://github.com/phetsims/phet-io/issues/1660
       phetioReadOnly: true
     } );
 
-    // @public
     this.isPlayingProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'isPlayingProperty' ),
       phetioDocumentation: 'whether time is advancing in the simulation, controlled by the Play/Pause button'
     } );
 
-    // @public
     this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
       validValues: [ TimeSpeed.NORMAL, TimeSpeed.FAST ],
       tandem: options.tandem.createTandem( 'timeSpeedProperty' ),
@@ -75,46 +101,38 @@ export default class NaturalSelectionModel {
       phetioReadOnly: true
     } );
 
-    // @private dispose is not necessary
     this.timeScaleProperty = new DerivedProperty(
       [ this.timeSpeedProperty ],
       timeSpeed => ( timeSpeed === TimeSpeed.NORMAL ) ? 1 : NaturalSelectionQueryParameters.fastForwardScale, {
         tandem: Tandem.OPT_OUT
       } );
 
-    // @public (read-only)
     this.generationClock = new GenerationClock( {
       tandem: options.tandem.createTandem( 'generationClock' )
     } );
     phet.log && phet.log( '====== Generation 0 ======' );
 
-    // @public (read-only) pool of genes for the bunny population
     this.genePool = new GenePool( {
       tandem: options.tandem.createTandem( 'genePool' )
     } );
 
-    // @private {BunnyVariety[]} describes the initial population
     this.initialBunnyVarieties =
       parseInitialPopulation( this.genePool, mutationsQueryParameterName, populationQueryParameterName );
 
-    // @public (read-only) the collection of Bunny instances
     this.bunnyCollection = new BunnyCollection( this.modelViewTransform, this.genePool, {
       tandem: options.tandem.createTandem( 'bunnyCollection' )
     } );
     this.initializeGenerationZero();
 
-    // @public
     this.environmentProperty = new EnumerationProperty( Environment.EQUATOR, {
       tandem: options.tandem.createTandem( 'environmentProperty' )
     } );
 
-    // @public (read-only)
     this.wolfCollection = new WolfCollection( this.generationClock, this.environmentProperty, this.bunnyCollection,
       this.modelViewTransform, {
         tandem: options.tandem.createTandem( 'wolfCollection' )
       } );
 
-    // @public (read-only)
     this.food = new Food( this.generationClock, this.bunnyCollection, this.modelViewTransform, shrubsSeed, {
       tandem: options.tandem.createTandem( 'food' )
     } );
@@ -122,7 +140,6 @@ export default class NaturalSelectionModel {
     // Organize all graphs under this tandem
     const graphsTandem = options.tandem.createTandem( 'graphs' );
 
-    // @public (read-only)
     this.populationModel = new PopulationModel(
       this.genePool,
       this.generationClock.timeInGenerationsProperty,
@@ -130,7 +147,6 @@ export default class NaturalSelectionModel {
         tandem: graphsTandem.createTandem( 'populationModel' )
       } );
 
-    // @public (read-only)
     this.proportionsModel = new ProportionsModel(
       this.bunnyCollection.liveBunnies.countsProperty,
       this.generationClock.clockGenerationProperty,
@@ -138,7 +154,6 @@ export default class NaturalSelectionModel {
         tandem: graphsTandem.createTandem( 'proportionsModel' )
       } );
 
-    // @public (read-only)
     this.pedigreeModel = new PedigreeModel( {
       tandem: graphsTandem.createTandem( 'pedigreeModel' )
     } );
@@ -176,13 +191,10 @@ export default class NaturalSelectionModel {
       }
     } );
 
-    // @public (read-only) The time that it took to execute bunnyCollection.mateBunnies, in ms
-    // For performance profiling, see https://github.com/phetsims/natural-selection/issues/60
     this.timeToMateProperty = new NumberProperty( 0, {
       tandem: Tandem.OPT_OUT
     } );
 
-    // @public
     this.memoryLimitEmitter = new Emitter( {
       tandem: options.tandem.createTandem( 'memoryLimitEmitter' ),
       phetioReadOnly: true,
@@ -196,7 +208,7 @@ export default class NaturalSelectionModel {
       }
     } );
 
-    // All of the stuff that happens at 12:00 on the generation clock.
+    // All the stuff that happens at 12:00 on the generation clock.
     // unlink is not necessary.
     this.generationClock.clockGenerationProperty.lazyLink( clockGeneration => {
 
@@ -232,7 +244,7 @@ export default class NaturalSelectionModel {
     } );
 
     // Record data for the Population graph when the population is changed by environmental factors.
-    const recordCounts = timeInGenerations => {
+    const recordCounts = ( timeInGenerations: number ) => {
       const counts = this.bunnyCollection.getLiveBunnyCounts();
       this.populationModel.recordCounts( timeInGenerations, counts );
     };
@@ -240,11 +252,14 @@ export default class NaturalSelectionModel {
     this.food.bunniesStarvedEmitter.addListener( recordCounts ); // removeListener is not necessary.
   }
 
+  public dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
+
   /**
    * Resets the entire model when the 'Reset All' button is pressed.
-   * @public
    */
-  reset() {
+  public reset(): void {
 
     // These Properties are not reset by startOver
     this.timeSpeedProperty.reset();
@@ -256,9 +271,8 @@ export default class NaturalSelectionModel {
 
   /**
    * Resets part of the model when the 'Start Over' button is pressed.
-   * @public
    */
-  startOver() {
+  public startOver(): void {
 
     phet.log && phet.log( '====== Generation 0 ======' );
 
@@ -283,18 +297,10 @@ export default class NaturalSelectionModel {
   }
 
   /**
-   * @public
-   */
-  dispose() {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-  }
-
-  /**
    * Steps the model.
-   * @param {number} dt - time step, in seconds
-   * @public
+   * @param dt - time step, in seconds
    */
-  step( dt ) {
+  public step( dt: number ): void {
     if ( this.isPlayingProperty.value ) {
 
       // So we can't make the sim run so fast that it skips generations,
@@ -313,9 +319,8 @@ export default class NaturalSelectionModel {
 
   /**
    * Adds a mate for a lone bunny.
-   * @public
    */
-  addAMate() {
+  public addAMate(): void {
     assert && assert( this.bunnyCollection.getNumberOfLiveBunnies() === 1, 'there should only be 1 live bunny' );
     assert && assert( this.generationClock.clockGenerationProperty.value === 0, 'unexpected clockGeneration' );
 
@@ -324,9 +329,8 @@ export default class NaturalSelectionModel {
 
   /**
    * Initializes the generation-zero bunny population.
-   * @private
    */
-  initializeGenerationZero() {
+  private initializeGenerationZero(): void {
 
     phet.log && phet.log( 'NaturalSelectionModel.initializeGenerationZero' );
     assert && assert( this.bunnyCollection.getNumberOfLiveBunnies() === 0, 'bunnies already exist' );
