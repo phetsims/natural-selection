@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Parses and validates the values of query parameters that describe the mutations, genotypes, and distribution
  * of the initial population. See NaturalSelectionQueryParameters (labMutations, labPopulation) for details about
@@ -21,8 +20,15 @@
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import Allele from './Allele.js';
 import BunnyVariety from './BunnyVariety.js';
+import Gene from './Gene.js';
 import GenePool from './GenePool.js';
+
+type AllelesPair = {
+  fatherAllele: Allele | null;
+  motherAllele: Allele | null;
+};
 
 /**
  * Parses query parameters that describe the initial population. Because these query parameters are dependent on
@@ -30,17 +36,12 @@ import GenePool from './GenePool.js';
  * parameters, and they revert to default values. We do not attempt to infer which query parameter is in error,
  * and leave it up to the user to decide.
  *
- * @param {GenePool} genePool
- * @param {string} mutationsName - name of the mutations query parameter
- * @param {string} populationName - name of the population query parameter
- * @returns {BunnyVariety[]}
- * @public
+ * @param genePool
+ * @param mutationsName - name of the mutations query parameter
+ * @param populationName - name of the population query parameter
  */
-export default function parseInitialPopulation( genePool, mutationsName, populationName ) {
-
-  assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-  assert && assert( typeof mutationsName === 'string', 'invalid mutationsName' );
-  assert && assert( typeof populationName === 'string', 'invalid populationName' );
+export default function parseInitialPopulation(
+  genePool: GenePool, mutationsName: string, populationName: string ): BunnyVariety[] {
 
   // Get the query parameter values
   const mutationsValue = NaturalSelectionQueryParameters.getValue( mutationsName );
@@ -51,7 +52,7 @@ export default function parseInitialPopulation( genePool, mutationsName, populat
     const mutationChars = parseMutations( genePool, mutationsName, mutationsValue );
     initialBunnyVarieties = parsePopulation( genePool, mutationChars, populationName, populationValue );
   }
-  catch( error ) {
+  catch( error: IntentionalAny ) {
 
     // Add warnings that QueryStringMachine will display after the sim has fully started.
     QueryStringMachine.addWarning( mutationsName, mutationsValue, error.message );
@@ -83,23 +84,19 @@ export default function parseInitialPopulation( genePool, mutationsName, populat
  * Parses the query-parameter value that describes mutations. Sets the dominantAlleleProperty for any genes that are
  * present. See NaturalSelectionQueryParameters.labMutations for details on the format of this value.
  *
- * @param {GenePool} genePool
- * @param {string} mutationsName - name of the mutations query parameter, used in error messages
- * @param {string} mutationsValue - value of the mutations query parameter
- * @returns {string[]} array of allele abbreviations
+ * @param genePool
+ * @param mutationsName - name of the mutations query parameter, used in error messages
+ * @param mutationsValue - value of the mutations query parameter
+ * @returns array of allele abbreviations
  * @throws {Error}
  */
-function parseMutations( genePool, mutationsName, mutationsValue ) {
-
-  assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-  assert && assert( typeof mutationsName === 'string', 'invalid mutationsName' );
-  assert && assert( typeof mutationsValue === 'string', 'invalid mutationsValue' );
+function parseMutations( genePool: GenePool, mutationsName: string, mutationsValue: string ): string[] {
 
   // Split mutations into individual characters, e.g. 'FeT' -> [ 'F', 'e', 'T' ]
   const mutationChars = mutationsValue.split( '' );
 
   // Compile a list of all allele abbreviations
-  const alleleAbbreviations = [];
+  const alleleAbbreviations: string[] = [];
 
   genePool.genes.forEach( gene => {
 
@@ -137,21 +134,17 @@ function parseMutations( genePool, mutationsName, mutationsValue ) {
  * population. Builds a data structure used to initialize and reset the population.
  * See NaturalSelectionQueryParameters.labPopulation for details on the format of this value.
  *
- * @param {GenePool} genePool
- * @param {string[]} mutationChars - array of allele abbreviations
- * @param {string} populationName - name of the population query parameter, used in error messages
- * @param {string[]} populationValue - value of the population query parameter
- * @returns {BunnyVariety[]}
+ * @param genePool
+ * @param mutationChars - array of allele abbreviations
+ * @param populationName - name of the population query parameter, used in error messages
+ * @param populationValue - value of the population query parameter
+ * @returns a description of the bunnies to create
  * @throws {Error}
  */
-function parsePopulation( genePool, mutationChars, populationName, populationValue ) {
+function parsePopulation( genePool: GenePool, mutationChars: string[], populationName: string,
+                          populationValue: string[] ): BunnyVariety[] {
 
-  assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-  assert && assert( Array.isArray( mutationChars ), 'invalid mutationChars' );
-  assert && assert( typeof populationName === 'string', 'invalid populationName' );
-  assert && assert( Array.isArray( populationValue ), 'invalid populationValue' );
-
-  const initialPopulation = []; // {BunnyVariety[]}
+  const initialPopulation: BunnyVariety[] = [];
 
   if ( mutationChars.length === 0 ) {
 
@@ -159,7 +152,7 @@ function parsePopulation( genePool, mutationChars, populationName, populationVal
     const countErrorMessage = `${populationName} must be a positive integer`;
     verify( populationValue.length === 1, countErrorMessage );
     const countString = populationValue[ 0 ];
-    verify( !isNaN( countString ), countErrorMessage );
+    verify( !isNaN( Number( countString ) ), countErrorMessage );
     const count = parseFloat( countString );
     verify( NaturalSelectionUtils.isPositiveInteger( count ), countErrorMessage );
     const genotypeString = '';
@@ -187,7 +180,7 @@ function parsePopulation( genePool, mutationChars, populationName, populationVal
 
       // Count must be a positive integer
       const countErrorMessage = `${populationName}: ${expression} must start with a positive integer`;
-      verify( !isNaN( countString ), countErrorMessage );
+      verify( !isNaN( Number( countString ) ), countErrorMessage );
       const count = parseFloat( countString );
       verify( NaturalSelectionUtils.isPositiveInteger( count ), countErrorMessage );
 
@@ -237,17 +230,10 @@ function parsePopulation( genePool, mutationChars, populationName, populationVal
 /**
  * Converts a genotype expression to a data structure that describes the count and genotype for a bunny variety.
  * Alleles not present in the string default to the normal allele for their associated gene.
- *
- * @param {GenePool} genePool
- * @param {number} count
- * @param {string} genotypeString
- * @returns {BunnyVariety}
  */
-function createBunnyVariety( genePool, count, genotypeString ) {
+function createBunnyVariety( genePool: GenePool, count: number, genotypeString: string ): BunnyVariety {
 
-  assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-  assert && assert( NaturalSelectionUtils.isPositiveInteger( count ), 'invalid count' );
-  assert && assert( typeof genotypeString === 'string', 'invalid genotypeString' );
+  assert && assert( Number.isInteger( count ) && count > 0, 'invalid count' );
 
   // To make this code easier to read
   const furGene = genePool.furGene;
@@ -255,9 +241,9 @@ function createBunnyVariety( genePool, count, genotypeString ) {
   const teethGene = genePool.teethGene;
 
   // Start with no alleles, populate these data structures in the forEach loop.
-  const furPair = { fatherAllele: null, motherAllele: null };
-  const earsPair = { fatherAllele: null, motherAllele: null };
-  const teethPair = { fatherAllele: null, motherAllele: null };
+  const furPair: AllelesPair = { fatherAllele: null, motherAllele: null };
+  const earsPair: AllelesPair = { fatherAllele: null, motherAllele: null };
+  const teethPair: AllelesPair = { fatherAllele: null, motherAllele: null };
 
   // For each character in the genotype abbreviation...
   const alleleAbbreviations = genotypeString.split( '' );
@@ -281,14 +267,10 @@ function createBunnyVariety( genePool, count, genotypeString ) {
 
 /**
  * Converts an allele abbreviation to an allele, and puts it in allelesPair.
- *
- * @param {string} alleleAbbreviation
- * @param {Gene} gene
- * @param {fatherAllele:Allele, motherAllele:Allele} allelesPair
  */
-function abbreviationToAllele( alleleAbbreviation, gene, allelesPair ) {
+function abbreviationToAllele( alleleAbbreviation: string, gene: Gene, allelesPair: AllelesPair ): void {
   if ( alleleAbbreviation === gene.dominantAbbreviationEnglish || alleleAbbreviation === gene.recessiveAbbreviationEnglish ) {
-    assert && assert( gene.dominantAlleleProperty.value, `expected a value for ${gene.name} dominantAlleleProperty` );
+    assert && assert( gene.dominantAlleleProperty.value, `expected a value for ${gene.nameProperty.value} dominantAlleleProperty` );
 
     const isMutantDominant = ( gene.dominantAlleleProperty.value === gene.mutantAllele );
     const isAbbreviationDominant = ( alleleAbbreviation === gene.dominantAbbreviationEnglish );
@@ -309,11 +291,8 @@ function abbreviationToAllele( alleleAbbreviation, gene, allelesPair ) {
 
 /**
  * Verifies that a predicate is true. If it's not true, throw an Error that includes the specified message.
- * @param {boolean} predicate
- * @param {string} message
- * @throws {Error}
  */
-function verify( predicate, message ) {
+function verify( predicate: boolean, message: string ): void {
   if ( !predicate ) {
     throw new Error( message );
   }
