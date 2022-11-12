@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Parses and validates the values of query parameters that describe the mutations, genotypes, and distribution
  * of the initial population. See NaturalSelectionQueryParameters (labMutations, labPopulation) for details about
