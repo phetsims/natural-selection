@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Food is the model of the food supply, a collection of Shrubs.
  * It controls the type (tender or tough) and quantity of food that is available.
@@ -12,22 +11,25 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Random from '../../../../dot/js/Random.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
-import merge from '../../../../phet-core/js/merge.js';
+import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import Bunny from './Bunny.js';
 import BunnyCollection from './BunnyCollection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenerationClock from './GenerationClock.js';
 import Shrub from './Shrub.js';
-
-// constants
 
 // Food is applied at the midpoint of its clock slice.
 // See https://github.com/phetsims/natural-selection/issues/110
@@ -41,51 +43,56 @@ const TOUGH_FOOD_MIN_LONG_TEETH = 5;
 const SHRUBS_X_MARGIN = 20;
 const SHRUBS_Z_MARGIN = 5;
 
+type SelfOptions = EmptySelfOptions;
+
+type FoodOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
 export default class Food {
 
+  private readonly bunnyCollection: BunnyCollection;
+  public readonly isToughProperty: Property<boolean>;
+  public readonly isLimitedProperty: Property<boolean>;
+
+  // whether either factor related to food is enabled
+  public readonly enabledProperty: TReadOnlyProperty<boolean>;
+
+  // emits when bunnies have died of starvation, param is the time in generations
+  public readonly bunniesStarvedEmitter: Emitter<[number]>;
+
+  // the collection of Shrubs
+  public readonly shrubs: Shrub[];
+
   /**
-   * @param {GenerationClock} generationClock
-   * @param {BunnyCollection} bunnyCollection
-   * @param {EnvironmentModelViewTransform} modelViewTransform
-   * @param {number} shrubsSeed - seed for random number generator used to position shrubs
-   * @param {Object} [options]
+   * @param generationClock
+   * @param bunnyCollection
+   * @param modelViewTransform
+   * @param shrubsSeed - seed for random number generator used to position shrubs
+   * @param providedOptions
    */
-  constructor( generationClock, bunnyCollection, modelViewTransform, shrubsSeed, options ) {
+  public constructor( generationClock: GenerationClock, bunnyCollection: BunnyCollection,
+                      modelViewTransform: EnvironmentModelViewTransform, shrubsSeed: number,
+                      providedOptions: FoodOptions ) {
 
-    assert && assert( generationClock instanceof GenerationClock, 'invalid generationClock' );
-    assert && assert( bunnyCollection instanceof BunnyCollection, 'invalid bunnyCollection' );
-    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
-    assert && assert( typeof shrubsSeed === 'number', 'invalid shrubsSeed' );
+    const options = providedOptions;
 
-    options = merge( {
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
-
-    // @private
     this.bunnyCollection = bunnyCollection;
 
-    // @public
     this.isToughProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'isToughProperty' ),
       phetioDocumentation: 'whether the food supply is tough (true) or tender (false)'
     } );
 
-    // @public
     this.isLimitedProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'isLimitedProperty' ),
       phetioDocumentation: 'whether the food supply is limited'
     } );
 
-    // @public whether either factor related to food is enabled. dispose is not necessary.
     this.enabledProperty = new DerivedProperty(
       [ this.isToughProperty, this.isLimitedProperty ],
       ( isTough, isLimited ) => ( isTough || isLimited ), {
         tandem: Tandem.OPT_OUT
       } );
 
-    // @public emits when bunnies have died of starvation. dispose is not necessary.
     this.bunniesStarvedEmitter = new Emitter( {
       parameters: [ { valueType: 'number' } ] // timeInGenerations at which the event should be recorded
     } );
@@ -94,7 +101,6 @@ export default class Food {
     // See https://github.com/phetsims/natural-selection/issues/176
     const random = new Random( { seed: shrubsSeed } );
 
-    // @public (read-only) {Shrub[]} the collection of Shrubs
     // Shrubs are placed randomly in the environment.
     // Sprites are assigned to shrubs via ShrubSpritesMap.getNextTenderSprite and getNextToughSprite.
     this.shrubs = [];
@@ -130,27 +136,20 @@ export default class Food {
     } );
   }
 
-  /**
-   * @public
-   */
-  reset() {
+  public dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
+
+  public reset(): void {
     this.isToughProperty.reset();
     this.isLimitedProperty.reset();
   }
 
   /**
-   * @public
-   */
-  dispose() {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-  }
-
-  /**
    * Starves some portion of the bunny population.
-   * @param {number} timeInGenerations - the time (in generations) at which this event should be recorded
-   * @private
+   * @param timeInGenerations - the time (in generations) at which this event should be recorded
    */
-  starveBunnies( timeInGenerations ) {
+  private starveBunnies( timeInGenerations: number ): void {
     assert && assert( this.enabledProperty.value, 'Food is not enabled' );
     assert && assert( NaturalSelectionUtils.isNonNegative( timeInGenerations ), `invalid timeInGenerations: ${timeInGenerations}` );
 
@@ -174,10 +173,9 @@ export default class Food {
    * with short teeth will starve. Tough food has no affect on bunnies with long teeth when their population
    * is below a threshold. See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
    * See also the 'Tough Food' section of model.md at https://github.com/phetsims/natural-selection/blob/master/doc/model.md#tough-food
-   * @returns {number} the number of bunnies that died
-   * @private
+   * @returns the number of bunnies that died
    */
-  applyToughFood() {
+  private applyToughFood(): number {
     assert && assert( this.isToughProperty.value, 'tough food is not enabled' );
 
     let totalStarved = 0;
@@ -226,10 +224,9 @@ export default class Food {
    * capacity. If the population exceeds the carrying capacity, then bunnies will die off to reduce the population
    * to the carrying capacity. See https://github.com/phetsims/natural-selection/issues/183
    * See also the 'Limited Food' section of model.md at https://github.com/phetsims/natural-selection/blob/master/doc/model.md#limited-food
-   * @returns {number} the number of bunnies that died
-   * @private
+   * @returns the number of bunnies that died
    */
-  applyLimitedFood() {
+  private applyLimitedFood(): number {
     assert && assert( this.isLimitedProperty.value, 'limited food is not enabled' );
 
     let totalStarved = 0;
@@ -263,11 +260,11 @@ export default class Food {
 
 /**
  * Starves a percentage of some set of bunnies.
- * @param {Bunny[]} bunnies - a set of bunnies, all with the same phenotype
- * @param {number} percentToStarve - the percentage of bunnies to starve
- * @returns {number} the number of bunnies that died
+ * @param bunnies - a set of bunnies, all with the same phenotype
+ * @param percentToStarve - the percentage of bunnies to starve
+ * @returns the number of bunnies that died
  */
-function starvePercentage( bunnies, percentToStarve ) {
+function starvePercentage( bunnies: Bunny[], percentToStarve: number ): number {
 
   assert && assert( Array.isArray( bunnies ), 'invalid bunnies' );
   assert && assert( NaturalSelectionUtils.isPercent( percentToStarve ), `invalid percentToStarve: ${percentToStarve}` );
