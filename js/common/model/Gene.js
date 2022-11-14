@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Gene is the basic physical and functional unit of heredity that is transferred from a parent to its offspring,
  * and controls the expression of a trait. An allele is a variation of a gene. For this sim, we assume that there
