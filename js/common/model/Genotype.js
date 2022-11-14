@@ -198,18 +198,6 @@ export default class Genotype extends PhetioObject {
   }
 
   /**
-   * Returns a map of state keys and their associated IOTypes, see IOType for details.
-   * @returns {Object.<string,IOType>}
-   * @public
-   */
-  static get STATE_SCHEMA() {
-    return {
-      mutation: NullableIO( Allele.AlleleIO )
-    };
-  }
-
-
-  /**
    * Restores Genotype stateObject after instantiation.
    * @param {Object} stateObject
    * @public
@@ -230,9 +218,11 @@ export default class Genotype extends PhetioObject {
  */
 Genotype.GenotypeIO = new IOType( 'GenotypeIO', {
   valueType: Genotype,
+  stateSchema: {
+    mutation: NullableIO( Allele.AlleleIO )
+  },
   toStateObject: genotype => genotype.toStateObject(),
-  applyState: ( genotype, stateObject ) => genotype.applyState( stateObject ),
-  stateSchema: Genotype.STATE_SCHEMA
+  applyState: ( genotype, stateObject ) => genotype.applyState( stateObject )
 } );
 
 naturalSelection.register( 'Genotype', Genotype );

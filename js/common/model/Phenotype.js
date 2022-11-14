@@ -115,19 +115,6 @@ export default class Phenotype extends PhetioObject {
   }
 
   /**
-   * Returns a map of state keys and their associated IOTypes, see IOType for details.
-   * @returns {Object.<string,IOType>}
-   * @public
-   */
-  static get STATE_SCHEMA() {
-    return {
-      furAllele: Allele.AlleleIO,
-      earsAllele: Allele.AlleleIO,
-      teethAllele: Allele.AlleleIO
-    };
-  }
-
-  /**
    * Restores Phenotype state after instantiation.
    * @param {Object} stateObject
    * @public
@@ -150,9 +137,13 @@ export default class Phenotype extends PhetioObject {
  */
 Phenotype.PhenotypeIO = new IOType( 'PhenotypeIO', {
   valueType: Phenotype,
+  stateSchema: {
+    furAllele: Allele.AlleleIO,
+    earsAllele: Allele.AlleleIO,
+    teethAllele: Allele.AlleleIO
+  },
   toStateObject: phenotype => phenotype.toStateObject(),
-  applyState: ( phenotype, stateObject ) => phenotype.applyState( stateObject ),
-  stateSchema: Phenotype.STATE_SCHEMA
+  applyState: ( phenotype, stateObject ) => phenotype.applyState( stateObject )
 } );
 
 naturalSelection.register( 'Phenotype', Phenotype );

@@ -50,20 +50,6 @@ export default class ProportionsCounts {
   }
 
   /**
-   * Returns a map of state keys and their associated IOTypes, see IOType for details.
-   * @returns {Object.<string,IOType>}
-   * @public
-   */
-  static get STATE_SCHEMA() {
-    return {
-      generation: NumberIO,
-      startCounts: BunnyCounts.BunnyCountsIO,
-      endCounts: BunnyCounts.BunnyCountsIO
-    };
-  }
-
-
-  /**
    * Deserializes a ProportionsCounts instance.
    * @param {Object} stateObject - return value from toStateObject
    * @returns {ProportionsCounts}
@@ -87,8 +73,12 @@ export default class ProportionsCounts {
  */
 ProportionsCounts.ProportionsCountsIO = new IOType( 'ProportionsCountsIO', {
   valueType: ProportionsCounts,
+  stateSchema: {
+    generation: NumberIO,
+    startCounts: BunnyCounts.BunnyCountsIO,
+    endCounts: BunnyCounts.BunnyCountsIO
+  },
   toStateObject: proportionCounts => proportionCounts.toStateObject(),
-  stateSchema: ProportionsCounts.STATE_SCHEMA,
   fromStateObject: stateObject => ProportionsCounts.fromStateObject( stateObject )
 } );
 

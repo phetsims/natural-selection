@@ -161,19 +161,6 @@ export default class GenePair extends PhetioObject {
   }
 
   /**
-   * Returns a map of state keys and their associated IOTypes, see IOType for details.
-   * @returns {Object.<string,IOType>}
-   * @public
-   */
-  static get STATE_SCHEMA() {
-    return {
-      gene: Gene.GeneIO,
-      fatherAllele: Allele.AlleleIO,
-      motherAllele: Allele.AlleleIO
-    };
-  }
-
-  /**
    * Restores GenePair state after instantiation.
    * @param {Object} stateObject
    * @public
@@ -196,7 +183,11 @@ export default class GenePair extends PhetioObject {
  */
 GenePair.GenePairIO = new IOType( 'GenePairIO', {
   valueType: GenePair,
-  stateSchema: GenePair.STATE_SCHEMA,
+  stateSchema: {
+    gene: Gene.GeneIO,
+    fatherAllele: Allele.AlleleIO,
+    motherAllele: Allele.AlleleIO
+  },
   applyState: ( genePair, stateObject ) => genePair.applyState( stateObject )
 } );
 

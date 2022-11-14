@@ -142,20 +142,6 @@ export default class Wolf extends Organism {
   }
 
   /**
-   * Returns a map of state keys and their associated IOTypes, see IOType for details.
-   * @returns {Object.<string,IOType>}
-   * @public
-   */
-  static get STATE_SCHEMA() {
-    return {
-      _private: {
-        speed: NumberIO
-      }
-    };
-  }
-
-
-  /**
    * Creates the args that WolfGroup uses to instantiate a Wolf.
    * @param {*} state
    * @returns {Object[]}
@@ -190,9 +176,13 @@ export default class Wolf extends Organism {
  */
 Wolf.WolfIO = new IOType( 'WolfIO', {
   valueType: Wolf,
+  stateSchema: {
+    _private: {
+      speed: NumberIO
+    }
+  },
   toStateObject: wolf => wolf.toStateObject(),
   applyState: ( wolf, stateObject ) => wolf.applyState( stateObject ),
-  stateSchema: Wolf.STATE_SCHEMA,
   stateToArgsForConstructor: s => Wolf.stateToArgsForConstructor( s )
 } );
 
