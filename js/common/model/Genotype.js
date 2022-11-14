@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Genotype is the genetic blueprint for an individual bunny. It consists of a gene pair for each gene, and
  * can be abbreviated as a string of letters.  See the 'Genotype and Phenotype' section of model.md at
