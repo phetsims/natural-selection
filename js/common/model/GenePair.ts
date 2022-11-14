@@ -18,7 +18,8 @@ import Gene from './Gene.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type GenePairOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+type GenePairOptions = SelfOptions &
+  PickRequired<PhetioObjectOptions, 'tandem' | 'phetioDocumentation'>;
 
 type GenePairStateObject = {
 

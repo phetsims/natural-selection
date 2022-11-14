@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Genotype is the genetic blueprint for an individual bunny. It consists of a gene pair for each gene, and
  * can be abbreviated as a string of letters.  See the 'Genotype and Phenotype' section of model.md at
@@ -10,10 +9,10 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import required from '../../../../phet-core/js/required.js';
-import PhetioObject from '../../../../tandem/js/PhetioObject.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
@@ -21,65 +20,87 @@ import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
 import GenePair from './GenePair.js';
 import GenePool from './GenePool.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+
+type SelfOptions = {
+
+  // alleles that make up the genotype, all of which default to the normal allele
+  fatherFurAllele?: Allele;
+  motherFurAllele?: Allele;
+  fatherEarsAllele?: Allele;
+  motherEarsAllele?: Allele;
+  fatherTeethAllele?: Allele;
+  motherTeethAllele?: Allele;
+
+  // which genes to mutate
+  mutateFur?: boolean;
+  mutateEars?: boolean;
+  mutateTeeth?: boolean;
+};
+
+type GenotypeOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
+type GenotypeStateObject = {
+
+  //TODO https://github.com/phetsims/natural-selection/issues/326 there is no AlleleStateObject
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mutation: any;
+};
 
 export default class Genotype extends PhetioObject {
 
-  /**
-   * @param {GenePool} genePool
-   * @param {Object} [options]
-   */
-  constructor( genePool, options ) {
+  public readonly genePool: GenePool;
+  public readonly furGenePair: GenePair;
+  public readonly earsGenePair: GenePair;
+  public readonly teethGenePair: GenePair;
 
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
+  // optional mutation that modified this genotype
+  public mutation: Allele | null;
 
-    options = merge( {
+  private readonly disposeGenotype: () => void;
 
-      // {Allele} alleles that make up the genotype, all of which default to the normal allele
+  public constructor( genePool: GenePool, providedOptions: GenotypeOptions ) {
+
+    const options = optionize<GenotypeOptions, SelfOptions, PhetioObjectOptions>()( {
+
+      // SelfOptions
       fatherFurAllele: genePool.furGene.normalAllele,
       motherFurAllele: genePool.furGene.normalAllele,
       fatherEarsAllele: genePool.earsGene.normalAllele,
       motherEarsAllele: genePool.earsGene.normalAllele,
       fatherTeethAllele: genePool.teethGene.normalAllele,
       motherTeethAllele: genePool.teethGene.normalAllele,
-
-      // {boolean} which genes to mutate
       mutateFur: false,
       mutateEars: false,
       mutateTeeth: false,
 
-      // phet-io
-      tandem: Tandem.REQUIRED,
+      // PhetioObjectOptions
       phetioType: Genotype.GenotypeIO,
       phetioDocumentation: 'the genetic blueprint for a bunny'
-    }, options );
+    }, providedOptions );
 
     assert && assert( _.filter( [ options.mutateFur, options.mutateEars, options.mutateTeeth ] ).length <= 1,
       'mutations are mutually exclusive' );
 
     super( options );
 
-    // @public (read-only)
     this.genePool = genePool;
 
-    // @public (read-only)
     this.furGenePair = new GenePair( genePool.furGene, options.fatherFurAllele, options.motherFurAllele, {
       tandem: options.tandem.createTandem( 'furGenePair' ),
       phetioDocumentation: 'gene pair that determines the fur trait'
     } );
 
-    // @public (read-only)
     this.earsGenePair = new GenePair( genePool.earsGene, options.fatherEarsAllele, options.motherEarsAllele, {
       tandem: options.tandem.createTandem( 'earsGenePair' ),
       phetioDocumentation: 'gene pair that determines the ears trait'
     } );
 
-    // @public (read-only)
     this.teethGenePair = new GenePair( genePool.teethGene, options.fatherTeethAllele, options.motherTeethAllele, {
       tandem: options.tandem.createTandem( 'teethGenePair' ),
       phetioDocumentation: 'gene pair that determines the teeth trait'
     } );
 
-    // @public (read-only) {Allele|null} optional mutation that modified this genotype
     this.mutation = null;
 
     // After gene pairs have been created, apply an optional mutation. This ensures that an allele is inherited and
@@ -97,9 +118,9 @@ export default class Genotype extends PhetioObject {
       this.teethGenePair.mutate( this.mutation );
     }
 
-    // @public the translated abbreviation of the Genotype. PhET-iO only, not used in brand=phet.
+    // The translated abbreviation of the Genotype. PhET-iO only, not used in brand=phet.
     // dispose is required.
-    const abbreviationProperty = new DerivedProperty(
+    const abbreviationProperty = DerivedProperty.deriveAny(
       [
         genePool.furGene.dominantAlleleProperty,
         genePool.earsGene.dominantAlleleProperty,
@@ -116,34 +137,23 @@ export default class Genotype extends PhetioObject {
         phetioDocumentation: 'the abbreviation that describes the genotype, the empty string if there are no dominant alleles'
       } );
 
-    // @private {function}
     this.disposeGenotype = () => {
       this.furGenePair.dispose();
       this.earsGenePair.dispose();
       this.teethGenePair.dispose();
       abbreviationProperty.dispose();
     };
-
-    this.validateInstance();
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeGenotype();
     super.dispose();
   }
 
   /**
    * Does this genotype contain a specific allele?
-   * @param {Allele} allele
-   * @returns {boolean}
-   * @public
    */
-  hasAllele( allele ) {
-    assert && assert( allele instanceof Allele, 'invalid allele' );
+  public hasAllele( allele: Allele ): boolean {
     return ( this.furGenePair.hasAllele( allele ) ||
              this.earsGenePair.hasAllele( allele ) ||
              this.teethGenePair.hasAllele( allele ) );
@@ -152,33 +162,18 @@ export default class Genotype extends PhetioObject {
   /**
    * Converts a Genotype to its untranslated abbreviation, e.g. 'FfEEtt'.
    * This is intended for debugging only. Do not rely on the format!
-   * @returns {string}
-   * @public
    */
-  toAbbreviation() {
+  public toAbbreviation(): string {
     return this.furGenePair.getGenotypeAbbreviation( false ) +
            this.earsGenePair.getGenotypeAbbreviation( false ) +
            this.teethGenePair.getGenotypeAbbreviation( false );
   }
 
   /**
-   * Performs validation of this instance. This should be called at the end of construction and deserialization.
-   * @private
-   */
-  validateInstance() {
-    assert && assert( this.furGenePair instanceof GenePair, 'invalid furGenePair' );
-    assert && assert( this.earsGenePair instanceof GenePair, 'invalid earsGenePair' );
-    assert && assert( this.teethGenePair instanceof GenePair, 'invalid teethGenePair' );
-    assert && assert( this.mutation instanceof Allele || this.mutation === null, 'invalid mutation' );
-  }
-
-  /**
    * Gets the dependencies on dynamic strings that are used to derive the abbreviations for this genotype.
    * These strings may be changed via PhET-iO, or by changing the global localeProperty.
-   * @returns {Property.<*>[]}
-   * @public
    */
-  getAbbreviationStringDependencies() {
+  public getAbbreviationStringDependencies(): TReadOnlyProperty<string>[] {
     return this.genePool.getGenotypeAbbreviationStringDependencies();
   }
 
@@ -188,10 +183,8 @@ export default class Genotype extends PhetioObject {
 
   /**
    * Serializes this Genotype instance.
-   * @returns {Object}
-   * @public
    */
-  toStateObject() {
+  private toStateObject(): GenotypeStateObject {
     return {
       mutation: NullableIO( Allele.AlleleIO ).toStateObject( this.mutation )
       // furGenePair, earsGenePair, and teethGenePair are stateful and will be serialized automatically.
@@ -200,30 +193,26 @@ export default class Genotype extends PhetioObject {
 
   /**
    * Restores Genotype stateObject after instantiation.
-   * @param {Object} stateObject
-   * @public
    */
-  applyState( stateObject ) {
+  private applyState( stateObject: GenotypeStateObject ): void {
     required( stateObject );
     this.mutation = required( NullableIO( Allele.AlleleIO ).fromStateObject( stateObject.mutation ) );
-    this.validateInstance();
   }
-}
 
-/**
- * GenotypeIO handles PhET-iO serialization of Genotype.  It does so by delegating to Genotype.
- * The methods that it implements are typical of 'Dynamic element serialization', as described in
- * the Serialization section of
- * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
- * @public
- */
-Genotype.GenotypeIO = new IOType( 'GenotypeIO', {
-  valueType: Genotype,
-  stateSchema: {
-    mutation: NullableIO( Allele.AlleleIO )
-  },
-  toStateObject: genotype => genotype.toStateObject(),
-  applyState: ( genotype, stateObject ) => genotype.applyState( stateObject )
-} );
+  /**
+   * GenotypeIO handles PhET-iO serialization of Genotype.  It does so by delegating to Genotype.
+   * The methods that it implements are typical of 'Dynamic element serialization', as described in
+   * the Serialization section of
+   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   */
+  public static readonly GenotypeIO = new IOType( 'GenotypeIO', {
+    valueType: Genotype,
+    stateSchema: {
+      mutation: NullableIO( Allele.AlleleIO )
+    },
+    toStateObject: genotype => genotype.toStateObject(),
+    applyState: ( genotype, stateObject ) => genotype.applyState( stateObject )
+  } );
+}
 
 naturalSelection.register( 'Genotype', Genotype );
