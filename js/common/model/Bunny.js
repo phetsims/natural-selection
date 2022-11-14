@@ -348,30 +348,6 @@ export default class Bunny extends Organism {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Creates the args that BunnyGroup uses to instantiate a Bunny.
-   * @param {Object} stateObject
-   * @returns {Object[]}
-   * @public
-   */
-  static stateToArgsForConstructor( stateObject ) {
-
-    // stateToArgsForConstructor is called only for dynamic elements that are part of a group.
-    // So we are not restoring anything through options, because that would not support static elements.
-    // Everything will be restored via applyState.
-    return [ {} ];  // explicit options arg to Bunny constructor
-  }
-
-  /**
-   * Restores Bunny state after instantiation.
-   * @param {Object} stateObject - return value of fromStateObject
-   * @public
-   */
-  applyState( stateObject ) {
-    required( stateObject );
-    Bunny.BunnyIO.stateSchema.defaultApplyState( this, stateObject );
-  }
-
-  /**
    * Returns a function that returns a map of state keys and their associated IOTypes, see IOType for details.
    * We need to use a function because the state schema recursive references BunnyIO.
    * @param {IOType} BunnyIO
@@ -400,6 +376,30 @@ export default class Bunny extends Organism {
         hopStartPosition: Vector3.Vector3IO
       }
     };
+  }
+
+  /**
+   * Creates the args that BunnyGroup uses to instantiate a Bunny.
+   * @param {Object} stateObject
+   * @returns {Object[]}
+   * @public
+   */
+  static stateToArgsForConstructor( stateObject ) {
+
+    // stateToArgsForConstructor is called only for dynamic elements that are part of a group.
+    // So we are not restoring anything through options, because that would not support static elements.
+    // Everything will be restored via applyState.
+    return [ {} ];  // explicit options arg to Bunny constructor
+  }
+
+  /**
+   * Restores Bunny state after instantiation.
+   * @param {Object} stateObject - return value of fromStateObject
+   * @public
+   */
+  applyState( stateObject ) {
+    required( stateObject );
+    Bunny.BunnyIO.stateSchema.defaultApplyState( this, stateObject );
   }
 }
 
@@ -442,8 +442,8 @@ function getHopDelta( hopDistance, hopHeight, xDirection ) {
 Bunny.BunnyIO = new IOType( 'BunnyIO', {
   valueType: Bunny,
   stateSchema: Bunny.getStateSchema,
-  applyState: ( bunny, stateObject ) => bunny.applyState( stateObject ),
-  stateToArgsForConstructor: stateObject => Bunny.stateToArgsForConstructor( stateObject )
+  stateToArgsForConstructor: stateObject => Bunny.stateToArgsForConstructor( stateObject ),
+  applyState: ( bunny, stateObject ) => bunny.applyState( stateObject )
 } );
 
 naturalSelection.register( 'Bunny', Bunny );
