@@ -30,7 +30,7 @@ type PhenotypeStateObject = {
 export default class Phenotype extends PhetioObject {
 
   // The alleles that determine the bunny's appearance.
-  // These properties are not read-only because applyState needs to set them to restore PhET-iO state.
+  // They are private because applyState must restore them, but clients should not be able to set them.
   private _furAllele: Allele;
   private _earsAllele: Allele;
   private _teethAllele: Allele;

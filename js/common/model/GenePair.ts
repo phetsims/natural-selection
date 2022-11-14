@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * GenePair is a pair of alleles for a specific Gene, one inherited from each parent.
  * If an individual's alleles are identical, it is homozygous. If its alleles are different, it is heterozygous.
@@ -9,53 +8,62 @@
  */
 
 import dotRandom from '../../../../dot/js/dotRandom.js';
-import merge from '../../../../phet-core/js/merge.js';
-import required from '../../../../phet-core/js/required.js';
-import PhetioObject from '../../../../tandem/js/PhetioObject.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
 import Gene from './Gene.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type GenePairOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
+type GenePairStateObject = {
+
+  //TODO https://github.com/phetsims/natural-selection/issues/326 there is no GeneStateObject
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  gene: any;
+
+  //TODO https://github.com/phetsims/natural-selection/issues/326 there is no AlleleStateObject
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  fatherAllele: any;
+
+  //TODO https://github.com/phetsims/natural-selection/issues/326 there is no AlleleStateObject
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  motherAllele: any;
+};
+
 export default class GenePair extends PhetioObject {
 
-  /**
-   * @param {Gene} gene - the associated gene
-   * @param {Allele} fatherAllele - the allele that is inherited from the father
-   * @param {Allele} motherAllele - the allele that is inherited from the mother
-   * @param {Object} [options]
-   */
-  constructor( gene, fatherAllele, motherAllele, options ) {
+  // Private because applyState must restore it, but clients should not be able to set it.
+  private _gene: Gene;
 
-    assert && assert( gene instanceof Gene, 'invalid gene' );
-    assert && assert( fatherAllele instanceof Allele, 'invalid fatherAllele' );
-    assert && assert( motherAllele instanceof Allele, 'invalid motherAllele' );
+  public fatherAllele: Allele;
+  public motherAllele: Allele;
 
-    options = merge( {
+  public constructor( gene: Gene, fatherAllele: Allele, motherAllele: Allele, providedOptions: GenePairOptions ) {
 
-      // phet-io
-      tandem: Tandem.REQUIRED,
+    const options = optionize<GenePairOptions, SelfOptions, PhetioObjectOptions>()( {
+
+      // PhetioObjectOptions
       phetioType: GenePair.GenePairIO
-    }, options );
+    }, providedOptions );
 
     super( options );
 
-    // @public (read-only)
-    this.gene = gene;
+    this._gene = gene;
     this.fatherAllele = fatherAllele;
     this.motherAllele = motherAllele;
-
-    this.validateInstance();
   }
+
+  public get gene(): Gene { return this._gene; }
 
   /**
    * Mutates the gene pair.
-   * @param {Allele} mutantAllele
-   * @public
    */
-  mutate( mutantAllele ) {
-    assert && assert( mutantAllele instanceof Allele, 'invalid mutantAllele' );
+  public mutate( mutantAllele: Allele ): void {
 
     // The mutation is randomly applied to either the father or mother allele, but not both. If the mutant allele is
     // recessive, the mutation will not immediately affect appearance. It appears in the phenotype in some later
@@ -70,33 +78,27 @@ export default class GenePair extends PhetioObject {
 
   /**
    * Is this gene pair homozygous (same alleles)?
-   * @returns {boolean}
-   * @public
    */
-  isHomozygous() {
+  public isHomozygous(): boolean {
     return ( this.fatherAllele === this.motherAllele );
   }
 
   /**
    * Is this gene pair heterozygous (different alleles)?
-   * @returns {boolean}
-   * @public
    */
-  isHeterozygous() {
+  public isHeterozygous(): boolean {
     return ( this.fatherAllele !== this.motherAllele );
   }
 
   /**
    * Gets the allele that determines the bunny's appearance. This is how genotype manifests as phenotype.
-   * @returns {Allele}
-   * @public
    */
-  getVisibleAllele() {
+  public getVisibleAllele(): Allele {
     if ( this.isHomozygous() ) {
       return this.fatherAllele;
     }
     else {
-      const dominantAllele = this.gene.dominantAlleleProperty.value;
+      const dominantAllele = this.gene.dominantAlleleProperty.value!;
       assert && assert( dominantAllele !== null, 'dominantAllele should not be null' );
       return dominantAllele;
     }
@@ -104,23 +106,17 @@ export default class GenePair extends PhetioObject {
 
   /**
    * Does this gene pair contain a specific allele?
-   * @param {Allele} allele
-   * @returns {boolean}
-   * @public
    */
-  hasAllele( allele ) {
-    assert && assert( allele instanceof Allele, 'invalid allele' );
+  public hasAllele( allele: Allele ): boolean {
     return ( this.fatherAllele === allele || this.motherAllele === allele );
   }
 
   /**
    * Gets the genotype abbreviation for the alleles in this gene pair. If there is no dominant gene (and therefore
    * no dominance relationship), then an abbreviation is meaningless, and the empty string is returned.
-   * @param {boolean} translated - true = translated (default), false = untranslated
-   * @returns {string}
-   * @public
+   * @param translated - true = translated (default), false = untranslated
    */
-  getGenotypeAbbreviation( translated = true ) {
+  public getGenotypeAbbreviation( translated = true ): string {
 
     const dominantAbbreviation = translated ? this.gene.dominantAbbreviationTranslatedProperty.value : this.gene.dominantAbbreviationEnglish;
     const recessiveAbbreviation = translated ? this.gene.recessiveAbbreviationTranslatedProperty.value : this.gene.recessiveAbbreviationEnglish;
@@ -134,26 +130,14 @@ export default class GenePair extends PhetioObject {
     return s;
   }
 
-  /**
-   * Performs validation of this instance. This should be called at the end of construction and deserialization.
-   * @private
-   */
-  validateInstance() {
-    assert && assert( this.gene instanceof Gene, 'invalid gene' );
-    assert && assert( this.fatherAllele instanceof Allele, 'invalid fatherAllele' );
-    assert && assert( this.motherAllele instanceof Allele, 'invalid motherAllele' );
-  }
-
   //--------------------------------------------------------------------------------------------------------------------
   // Below here are methods used by GenePairIO to serialize PhET-iO state.
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
    * Serializes a GenePair instance.
-   * @returns {Object}
-   * @public
    */
-  toStateObject() {
+  private toStateObject(): GenePairStateObject {
     return {
       gene: Gene.GeneIO.toStateObject( this.gene ),
       fatherAllele: Allele.AlleleIO.toStateObject( this.fatherAllele ),
@@ -163,33 +147,30 @@ export default class GenePair extends PhetioObject {
 
   /**
    * Restores GenePair state after instantiation.
-   * @param {Object} stateObject
-   * @public
    */
-  applyState( stateObject ) {
-    required( stateObject );
-    this.gene = required( Gene.GeneIO.fromStateObject( stateObject.gene ) );
-    this.fatherAllele = required( Allele.AlleleIO.fromStateObject( stateObject.fatherAllele ) );
-    this.motherAllele = required( Allele.AlleleIO.fromStateObject( stateObject.motherAllele ) );
-    this.validateInstance();
+  private applyState( stateObject: GenePairStateObject ): void {
+    this._gene = Gene.GeneIO.fromStateObject( stateObject.gene );
+    this.fatherAllele = Allele.AlleleIO.fromStateObject( stateObject.fatherAllele );
+    this.motherAllele = Allele.AlleleIO.fromStateObject( stateObject.motherAllele );
   }
-}
 
-/**
- * GenePairIO handles PhET-iO serialization of GenePair. It does so by delegating to Genotype.
- * The methods that it implements are typical of 'Dynamic element serialization', as described in
- * the Serialization section of
- * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
- * @public
- */
-GenePair.GenePairIO = new IOType( 'GenePairIO', {
-  valueType: GenePair,
-  stateSchema: {
-    gene: Gene.GeneIO,
-    fatherAllele: Allele.AlleleIO,
-    motherAllele: Allele.AlleleIO
-  },
-  applyState: ( genePair, stateObject ) => genePair.applyState( stateObject )
-} );
+  /**
+   * GenePairIO handles PhET-iO serialization of GenePair. It does so by delegating to Genotype.
+   * The methods that it implements are typical of 'Dynamic element serialization', as described in
+   * the Serialization section of
+   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   */
+  public static readonly GenePairIO = new IOType( 'GenePairIO', {
+    valueType: GenePair,
+    stateSchema: {
+      gene: Gene.GeneIO,
+      fatherAllele: Allele.AlleleIO,
+      motherAllele: Allele.AlleleIO
+    },
+    //TODO https://github.com/phetsims/natural-selection/issues/326 toStateObject was not required until this._gene, why?
+    toStateObject: genePair => genePair.toStateObject(),
+    applyState: ( genePair, stateObject ) => genePair.applyState( stateObject )
+  } );
+}
 
 naturalSelection.register( 'GenePair', GenePair );
