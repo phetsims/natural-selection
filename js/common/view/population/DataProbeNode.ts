@@ -229,7 +229,7 @@ function createNumberDisplay( bunnyCountsProperty: TReadOnlyProperty<BunnyCounts
     bunnyCounts => {
       if ( bunnyCounts ) {
         type BunnyCountKey = keyof typeof bunnyCounts;
-        return bunnyCounts[ bunnyCountsFieldName as BunnyCountKey ];
+        return bunnyCounts[ bunnyCountsFieldName as BunnyCountKey ] as number;
       }
       else {
         return null;

@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * BunnyCounts is a data structure that contains the counts that describe the phenotypes of a collection of bunnies.
  * There is a count for each allele, and a total count. The data structure is immutable, atomic, and describes the
@@ -9,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import required from '../../../../phet-core/js/required.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -17,56 +15,62 @@ import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 import Bunny from './Bunny.js';
 
+type SelfOptions = {
+  totalCount: number;
+  whiteFurCount: number;
+  brownFurCount: number;
+  straightEarsCount: number;
+  floppyEarsCount: number;
+  shortTeethCount: number;
+  longTeethCount: number;
+};
+
+type BunnyCountOptions = SelfOptions;
+
+// State object happens to be identical to SelfOptions
+type BunnyStateObject = SelfOptions;
+
 export default class BunnyCounts {
 
-  /**
-   * @param {Object} config
-   */
-  constructor( config ) {
+  public readonly totalCount: number;
+  public readonly whiteFurCount: number;
+  public readonly brownFurCount: number;
+  public readonly straightEarsCount: number;
+  public readonly floppyEarsCount: number;
+  public readonly shortTeethCount: number;
+  public readonly longTeethCount: number;
 
-    // @public (read-only) {number}
-    this.totalCount = required( config.totalCount );
-    this.whiteFurCount = required( config.whiteFurCount );
-    this.brownFurCount = required( config.brownFurCount );
-    this.straightEarsCount = required( config.straightEarsCount );
-    this.floppyEarsCount = required( config.floppyEarsCount );
-    this.shortTeethCount = required( config.shortTeethCount );
-    this.longTeethCount = required( config.longTeethCount );
+  public constructor( providedOptions: BunnyCountOptions ) {
+
+    this.totalCount = providedOptions.totalCount;
+    this.whiteFurCount = providedOptions.whiteFurCount;
+    this.brownFurCount = providedOptions.brownFurCount;
+    this.straightEarsCount = providedOptions.straightEarsCount;
+    this.floppyEarsCount = providedOptions.floppyEarsCount;
+    this.shortTeethCount = providedOptions.shortTeethCount;
+    this.longTeethCount = providedOptions.longTeethCount;
 
     this.validateInstance();
   }
 
   /**
    * Adds a bunny's contribution to the counts.
-   * @param {Bunny} bunny
-   * @returns {BunnyCounts}
-   * @public
    */
-  plus( bunny ) {
-    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
+  public plus( bunny: Bunny ): BunnyCounts {
     return this.updateCounts( bunny, 1 );
   }
 
   /**
    * Subtracts a bunny's contribution from the counts.
-   * @param {Bunny} bunny
-   * @returns {BunnyCounts}
-   * @public
    */
-  minus( bunny ) {
-    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
+  public minus( bunny: Bunny ): BunnyCounts {
     return this.updateCounts( bunny, -1 );
   }
 
   /**
    * Adjusts the counts based on a bunny's phenotype.
-   * @param {Bunny} bunny
-   * @param {number} delta
-   * @returns {BunnyCounts}
-   * @private
    */
-  updateCounts( bunny, delta ) {
-    assert && assert( bunny instanceof Bunny, 'invalid bunny' );
+  private updateCounts( bunny: Bunny, delta: number ): BunnyCounts {
     assert && assert( delta === 1 || delta === -1, 'invalid delta' );
 
     return new BunnyCounts( {
@@ -82,19 +86,15 @@ export default class BunnyCounts {
 
   /**
    * Gets a string representation of this BunnyCounts. For debugging only. Do not rely on format!
-   * @returns {string}
-   * @public
    */
-  toString() {
+  public toString(): string {
     return JSON.stringify( this, null, 2 );
   }
 
   /**
    * Gets a BunnyCounts instance with all counts initialized to zero.
-   * @returns {BunnyCounts}
-   * @public
    */
-  static withZero() {
+  public static withZero(): BunnyCounts {
     return new BunnyCounts( {
       totalCount: 0,
       whiteFurCount: 0,
@@ -108,9 +108,8 @@ export default class BunnyCounts {
 
   /**
    * Performs validation of this instance.
-   * @private
    */
-  validateInstance() {
+  private validateInstance(): void {
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.totalCount ), 'invalid totalCount' );
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.whiteFurCount ), 'invalid whiteFurCount' );
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.brownFurCount ), 'invalid brownFurCount' );
@@ -133,10 +132,8 @@ export default class BunnyCounts {
 
   /**
    * Serializes this BunnyCounts instance.
-   * @returns {Object}
-   * @public
    */
-  toStateObject() {
+  private toStateObject(): BunnyStateObject {
     return {
       totalCount: this.totalCount,
       whiteFurCount: this.whiteFurCount,
@@ -149,29 +146,9 @@ export default class BunnyCounts {
   }
 
   /**
-   * Returns a map of state keys and their associated IOTypes, see IOType for details.
-   * @returns {Object.<string,IOType>}
-   * @public
-   */
-  static get STATE_SCHEMA() {
-    return {
-      totalCount: NumberIO,
-      whiteFurCount: NumberIO,
-      brownFurCount: NumberIO,
-      straightEarsCount: NumberIO,
-      floppyEarsCount: NumberIO,
-      shortTeethCount: NumberIO,
-      longTeethCount: NumberIO
-    };
-  }
-
-  /**
    * Deserializes a BunnyCounts instance.
-   * @param {Object} stateObject - return value from toStateObject
-   * @returns {BunnyCounts}
-   * @public
    */
-  static fromStateObject( stateObject ) {
+  private static fromStateObject( stateObject: SelfOptions ): BunnyCounts {
     return new BunnyCounts( {
       totalCount: stateObject.totalCount,
       whiteFurCount: stateObject.whiteFurCount,
@@ -182,20 +159,27 @@ export default class BunnyCounts {
       longTeethCount: stateObject.longTeethCount
     } );
   }
-}
 
-/**
- * BunnyCountsIO handles PhET-iO serialization of BunnyCounts. It does so by delegating to BunnyCounts.
- * The methods that BunnyCountsIO implements are typical of 'Data type serialization', as described in
- * the Serialization section of
- * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
- * @public
- */
-BunnyCounts.BunnyCountsIO = new IOType( 'BunnyCountsIO', {
-  valueType: BunnyCounts,
-  toStateObject: bunnyCounts => bunnyCounts.toStateObject(),
-  fromStateObject: stateObject => BunnyCounts.fromStateObject( stateObject ),
-  stateSchema: BunnyCounts.STATE_SCHEMA
-} );
+  /**
+   * BunnyCountsIO handles PhET-iO serialization of BunnyCounts. It does so by delegating to BunnyCounts.
+   * The methods that BunnyCountsIO implements are typical of 'Data type serialization', as described in
+   * the Serialization section of
+   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   */
+  public static readonly BunnyCountsIO = new IOType( 'BunnyCountsIO', {
+    valueType: BunnyCounts,
+    stateSchema: {
+      totalCount: NumberIO,
+      whiteFurCount: NumberIO,
+      brownFurCount: NumberIO,
+      straightEarsCount: NumberIO,
+      floppyEarsCount: NumberIO,
+      shortTeethCount: NumberIO,
+      longTeethCount: NumberIO
+    },
+    toStateObject: bunnyCounts => bunnyCounts.toStateObject(),
+    fromStateObject: stateObject => BunnyCounts.fromStateObject( stateObject )
+  } );
+}
 
 naturalSelection.register( 'BunnyCounts', BunnyCounts );
