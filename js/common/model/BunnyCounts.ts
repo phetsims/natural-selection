@@ -11,7 +11,6 @@
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 import Bunny from './Bunny.js';
 
@@ -50,7 +49,12 @@ export default class BunnyCounts {
     this.shortTeethCount = providedOptions.shortTeethCount;
     this.longTeethCount = providedOptions.longTeethCount;
 
-    this.validateInstance();
+    assert && assert( this.whiteFurCount + this.brownFurCount === this.totalCount,
+      'fur counts are out of sync' );
+    assert && assert( this.straightEarsCount + this.floppyEarsCount === this.totalCount,
+      'ears counts are out of sync' );
+    assert && assert( this.shortTeethCount + this.longTeethCount === this.totalCount,
+      'teeth counts are out of sync' );
   }
 
   /**
@@ -104,26 +108,6 @@ export default class BunnyCounts {
       shortTeethCount: 0,
       longTeethCount: 0
     } );
-  }
-
-  /**
-   * Performs validation of this instance.
-   */
-  private validateInstance(): void {
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.totalCount ), 'invalid totalCount' );
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.whiteFurCount ), 'invalid whiteFurCount' );
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.brownFurCount ), 'invalid brownFurCount' );
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.straightEarsCount ), 'invalid straightEarsCount' );
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.floppyEarsCount ), 'invalid floppyEarsCount' );
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.shortTeethCount ), 'invalid shortTeethCount' );
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.longTeethCount ), 'invalid longTeethCount' );
-
-    assert && assert( this.whiteFurCount + this.brownFurCount === this.totalCount,
-      'fur counts are out of sync' );
-    assert && assert( this.straightEarsCount + this.floppyEarsCount === this.totalCount,
-      'ears counts are out of sync' );
-    assert && assert( this.shortTeethCount + this.longTeethCount === this.totalCount,
-      'teeth counts are out of sync' );
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -16,7 +16,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Organism from './Organism.js';
 import XDirection from './XDirection.js';
@@ -58,8 +57,6 @@ export default class Wolf extends Organism {
 
     // @public fires when the Wolf has been disposed. dispose is required.
     this.disposedEmitter = new Emitter();
-
-    this.validateInstance();
   }
 
   /**
@@ -114,14 +111,6 @@ export default class Wolf extends Organism {
     const y = this.modelViewTransform.getGroundY( z );
 
     this.positionProperty.value = new Vector3( x, y, z );
-  }
-
-  /**
-   * Performs validation of this instance. This should be called at the end of construction and deserialization.
-   * @private
-   */
-  validateInstance() {
-    assert && assert( NaturalSelectionUtils.isPositive( this.speed ), 'invalid speed' );
   }
 
   //--------------------------------------------------------------------------------------------------------------------

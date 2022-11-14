@@ -161,8 +161,6 @@ export default class Bunny extends Organism {
         this.mother.disposedEmitter.removeListener( motherDisposedListener );
       }
     };
-
-    this.validateInstance();
   }
 
   /**
@@ -345,26 +343,6 @@ export default class Bunny extends Organism {
            `isOriginalMutant=${this.isOriginalMutant()}`;
   }
 
-  /**
-   * Performs validation of this instance. This should be called at the end of construction and deserialization.
-   * @private
-   */
-  validateInstance() {
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.generation ), 'invalid generation' );
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( this.age ), 'invalid age' );
-    assert && assert( typeof this.isAlive === 'boolean', 'invalid isAlive' );
-    assert && assert( this.father instanceof Bunny || this.father === null, 'invalid father' );
-    assert && assert( this.mother instanceof Bunny || this.mother === null, 'invalid mother' );
-    assert && assert( this.genotype instanceof Genotype, 'invalid genotype' );
-    assert && assert( this.phenotype instanceof Phenotype, 'invalid phenotype' );
-    assert && assert( typeof this.cumulativeRestTime === 'number', 'invalid cumulativeRestTime' );
-    assert && assert( typeof this.cumulativeHopTime === 'number', 'invalid cumulativeHopTime' );
-    assert && assert( typeof this.restTime === 'number', 'invalid restTime' );
-    assert && assert( typeof this.hopTime === 'number', 'invalid hopTime' );
-    assert && assert( this.hopDelta instanceof Vector3, 'invalid hopDelta' );
-    assert && assert( this.hopStartPosition instanceof Vector3, 'invalid hopStartPosition' );
-  }
-
   //--------------------------------------------------------------------------------------------------------------------
   // Below here are methods used by BunnyIO to serialize PhET-iO state.
   //--------------------------------------------------------------------------------------------------------------------
@@ -391,7 +369,6 @@ export default class Bunny extends Organism {
   applyState( stateObject ) {
     required( stateObject );
     Bunny.BunnyIO.stateSchema.defaultApplyState( this, stateObject );
-    this.validateInstance();
   }
 
   /**
