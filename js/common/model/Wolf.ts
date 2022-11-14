@@ -123,7 +123,6 @@ export default class Wolf extends Organism {
     };
   }
 
-  //TODO https://github.com/phetsims/natural-selection/issues/326 is this needed?
   /**
    * Creates the args that WolfGroup uses to instantiate a Wolf.
    * stateToArgsForConstructor is called only for dynamic elements that are part of a group.
