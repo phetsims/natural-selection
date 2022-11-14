@@ -401,6 +401,20 @@ export default class Bunny extends Organism {
     required( stateObject );
     Bunny.BunnyIO.stateSchema.defaultApplyState( this, stateObject );
   }
+
+  /**
+   * @public
+   * BunnyIO handles PhET-iO serialization of Bunny. Because serialization involves accessing private members,
+   * it delegates to Bunny. The methods that BunnyIO overrides are typical of 'Dynamic element serialization',
+   * as described in the Serialization section of
+   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   */
+  static BunnyIO = new IOType( 'BunnyIO', {
+    valueType: Bunny,
+    stateSchema: Bunny.getStateSchema,
+    stateToArgsForConstructor: stateObject => Bunny.stateToArgsForConstructor( stateObject ),
+    applyState: ( bunny, stateObject ) => bunny.applyState( stateObject )
+  } );
 }
 
 /**
@@ -431,19 +445,5 @@ function getHopDelta( hopDistance, hopHeight, xDirection ) {
   const dz = ( oppositeIsLarger ? adjacent : opposite );
   return new Vector3( dx, dy, dz );
 }
-
-/**
- * @public
- * BunnyIO handles PhET-iO serialization of Bunny. Because serialization involves accessing private members,
- * it delegates to Bunny. The methods that BunnyIO overrides are typical of 'Dynamic element serialization',
- * as described in the Serialization section of
- * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
- */
-Bunny.BunnyIO = new IOType( 'BunnyIO', {
-  valueType: Bunny,
-  stateSchema: Bunny.getStateSchema,
-  stateToArgsForConstructor: stateObject => Bunny.stateToArgsForConstructor( stateObject ),
-  applyState: ( bunny, stateObject ) => bunny.applyState( stateObject )
-} );
 
 naturalSelection.register( 'Bunny', Bunny );
