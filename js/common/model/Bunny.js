@@ -378,7 +378,7 @@ export default class Bunny extends Organism {
    * @returns {function(IOType): {Object.<string,IOType>}}
    * @public
    */
-  static STATE_SCHEMA( BunnyIO ) {
+  static getStateSchema( BunnyIO ) {
     return {
 
       // Even though father and mother are stateful, we need a reference to them.
@@ -441,7 +441,7 @@ function getHopDelta( hopDistance, hopHeight, xDirection ) {
  */
 Bunny.BunnyIO = new IOType( 'BunnyIO', {
   valueType: Bunny,
-  stateSchema: Bunny.STATE_SCHEMA,
+  stateSchema: Bunny.getStateSchema,
   applyState: ( bunny, stateObject ) => bunny.applyState( stateObject ),
   stateToArgsForConstructor: stateObject => Bunny.stateToArgsForConstructor( stateObject )
 } );
