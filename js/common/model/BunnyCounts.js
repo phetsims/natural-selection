@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * BunnyCounts is a data structure that contains the counts that describe the phenotypes of a collection of bunnies.
  * There is a count for each allele, and a total count. The data structure is immutable, atomic, and describes the
