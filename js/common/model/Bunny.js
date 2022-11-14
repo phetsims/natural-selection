@@ -371,11 +371,11 @@ export default class Bunny extends Organism {
 
   /**
    * Creates the args that BunnyGroup uses to instantiate a Bunny.
-   * @param {Object} state
+   * @param {Object} stateObject
    * @returns {Object[]}
    * @public
    */
-  static stateToArgsForConstructor( state ) {
+  static stateToArgsForConstructor( stateObject ) {
 
     // stateToArgsForConstructor is called only for dynamic elements that are part of a group.
     // So we are not restoring anything through options, because that would not support static elements.
