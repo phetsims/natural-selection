@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * ProportionsCounts is a data structure used by the Proportions model. It describes the bunny population at
  * the start and end of a generation. This is static, immutable data.
@@ -11,23 +10,24 @@
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
+
+type ProportionsCountsStateObject = {
+  generation: number;
+  startCounts: BunnyCounts;
+  endCounts: BunnyCounts;
+};
 
 export default class ProportionsCounts {
 
-  /**
-   * @param {number} generation
-   * @param {BunnyCounts} startCounts
-   * @param {BunnyCounts} endCounts
-   */
-  constructor( generation, startCounts, endCounts ) {
+  public readonly generation: number;
+  public readonly startCounts: BunnyCounts;
+  public readonly endCounts: BunnyCounts;
 
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
-    assert && assert( startCounts instanceof BunnyCounts, 'invalid startCounts' );
-    assert && assert( endCounts instanceof BunnyCounts, 'invalid endCounts' );
+  public constructor( generation: number, startCounts: BunnyCounts, endCounts: BunnyCounts ) {
 
-    // @public (read-only)
+    assert && assert( Number.isInteger( generation ) && generation >= 0, 'invalid generation' );
+
     this.generation = generation;
     this.startCounts = startCounts;
     this.endCounts = endCounts;
@@ -39,10 +39,8 @@ export default class ProportionsCounts {
 
   /**
    * Serializes this ProportionsCounts instance.
-   * @returns {Object}
-   * @public
    */
-  toStateObject() {
+  private toStateObject(): ProportionsCountsStateObject {
     return {
       generation: this.generation,
       startCounts: BunnyCounts.BunnyCountsIO.toStateObject( this.startCounts ),
@@ -52,35 +50,31 @@ export default class ProportionsCounts {
 
   /**
    * Deserializes a ProportionsCounts instance.
-   * @param {Object} stateObject - return value from toStateObject
-   * @returns {ProportionsCounts}
-   * @public
    */
-  static fromStateObject( stateObject ) {
+  private static fromStateObject( stateObject: ProportionsCountsStateObject ): ProportionsCounts {
     return new ProportionsCounts(
       stateObject.generation,
       BunnyCounts.BunnyCountsIO.fromStateObject( stateObject.startCounts ),
       BunnyCounts.BunnyCountsIO.fromStateObject( stateObject.endCounts )
     );
   }
-}
 
-/**
- * ProportionsCountsIO handles PhET-iO serialization of ProportionsCounts. It does so by delegating to ProportionsCounts.
- * The methods that ProportionsCountsIO implements are typical of 'Data type serialization', as described in
- * the Serialization section of
- * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
- * @public
- */
-ProportionsCounts.ProportionsCountsIO = new IOType( 'ProportionsCountsIO', {
-  valueType: ProportionsCounts,
-  stateSchema: {
-    generation: NumberIO,
-    startCounts: BunnyCounts.BunnyCountsIO,
-    endCounts: BunnyCounts.BunnyCountsIO
-  },
-  toStateObject: proportionCounts => proportionCounts.toStateObject(),
-  fromStateObject: stateObject => ProportionsCounts.fromStateObject( stateObject )
-} );
+  /**
+   * ProportionsCountsIO handles PhET-iO serialization of ProportionsCounts. It does so by delegating to ProportionsCounts.
+   * The methods that ProportionsCountsIO implements are typical of 'Data type serialization', as described in
+   * the Serialization section of
+   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   */
+  public static readonly ProportionsCountsIO = new IOType( 'ProportionsCountsIO', {
+    valueType: ProportionsCounts,
+    stateSchema: {
+      generation: NumberIO,
+      startCounts: BunnyCounts.BunnyCountsIO,
+      endCounts: BunnyCounts.BunnyCountsIO
+    },
+    toStateObject: proportionCounts => proportionCounts.toStateObject(),
+    fromStateObject: stateObject => ProportionsCounts.fromStateObject( stateObject )
+  } );
+}
 
 naturalSelection.register( 'ProportionsCounts', ProportionsCounts );
