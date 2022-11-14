@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Phenotype describes the appearance of a bunny, the manifestation of its genotype.
  * See the 'Genotype and Phenotype' section of model.md at
@@ -9,93 +8,95 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import required from '../../../../phet-core/js/required.js';
-import PhetioObject from '../../../../tandem/js/PhetioObject.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
 import Genotype from './Genotype.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type PhenotypeOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
+type PhenotypeStateObject = {
+  furAllele: Allele;
+  earsAllele: Allele;
+  teethAllele: Allele;
+};
+
 export default class Phenotype extends PhetioObject {
 
-  /**
-   * @param {Genotype} genotype
-   * @param {Object} [options]
-   */
-  constructor( genotype, options ) {
+  // The alleles that determine the bunny's appearance.
+  // These properties are not read-only because applyState needs to set them to restore PhET-iO state.
+  private _furAllele: Allele;
+  private _earsAllele: Allele;
+  private _teethAllele: Allele;
 
-    assert && assert( genotype instanceof Genotype, 'invalid genotype' );
+  public constructor( genotype: Genotype, providedOptions: PhenotypeOptions ) {
 
-    options = merge( {
+    const options = optionize<PhenotypeOptions, SelfOptions, PhetioObjectOptions>()( {
 
-      // phet-io
-      tandem: Tandem.REQUIRED,
+      // PhetioObjectOptions
       phetioType: Phenotype.PhenotypeIO,
       phetioDocumentation: 'the appearance of the bunny, the manifestation of its genotype'
-    }, options );
+    }, providedOptions );
 
     super( options );
 
-    // @public (read-only) {Allele} the alleles that determine the bunny's appearance
-    this.furAllele = genotype.furGenePair.getVisibleAllele();
-    this.earsAllele = genotype.earsGenePair.getVisibleAllele();
-    this.teethAllele = genotype.teethGenePair.getVisibleAllele();
-
-    this.validateInstance();
+    this._furAllele = genotype.furGenePair.getVisibleAllele();
+    this._earsAllele = genotype.earsGenePair.getVisibleAllele();
+    this._teethAllele = genotype.teethGenePair.getVisibleAllele();
   }
+
+  public get furAllele(): Allele { return this._furAllele; }
+
+  public get earsAllele(): Allele { return this._earsAllele; }
+
+  public get teethAllele(): Allele { return this._teethAllele; }
 
   /**
    * Does the phenotype show white fur?
-   * @returns {boolean}
-   * @public
    */
-  hasWhiteFur() { return this.furAllele === Allele.WHITE_FUR; }
+  public hasWhiteFur(): boolean {
+    return this.furAllele === Allele.WHITE_FUR;
+  }
 
   /**
    * Does the phenotype show brown fur?
-   * @returns {boolean}
-   * @public
    */
-  hasBrownFur() { return this.furAllele === Allele.BROWN_FUR; }
+  public hasBrownFur(): boolean {
+    return this.furAllele === Allele.BROWN_FUR;
+  }
 
   /**
    * Does the phenotype show straight ears?
-   * @returns {boolean}
-   * @public
    */
-  hasStraightEars() { return this.earsAllele === Allele.STRAIGHT_EARS; }
+  public hasStraightEars(): boolean {
+    return this.earsAllele === Allele.STRAIGHT_EARS;
+  }
 
   /**
    * Does the phenotype show floppy ears?
-   * @returns {boolean}
-   * @public
    */
-  hasFloppyEars() { return this.earsAllele === Allele.FLOPPY_EARS; }
+  public hasFloppyEars(): boolean {
+    return this.earsAllele === Allele.FLOPPY_EARS;
+  }
 
   /**
    * Does the phenotype show short teeth?
-   * @returns {boolean}
-   * @public
    */
-  hasShortTeeth() { return this.teethAllele === Allele.SHORT_TEETH; }
+  public hasShortTeeth(): boolean {
+    return this.teethAllele === Allele.SHORT_TEETH;
+  }
 
   /**
    * Does the phenotype show long teeth?
-   * @returns {boolean}
-   * @public
    */
-  hasLongTeeth() { return this.teethAllele === Allele.LONG_TEETH; }
-
-  /**
-   * Performs validation of this instance. This should be called at the end of construction and deserialization.
-   * @private
-   */
-  validateInstance() {
-    assert && assert( this.furAllele instanceof Allele, 'invalid furAllele' );
-    assert && assert( this.earsAllele instanceof Allele, 'invalid earsAllele' );
-    assert && assert( this.teethAllele instanceof Allele, 'invalid teethAllele' );
+  public hasLongTeeth(): boolean {
+    return this.teethAllele === Allele.LONG_TEETH;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -104,10 +105,8 @@ export default class Phenotype extends PhetioObject {
 
   /**
    * Serializes this Phenotype instance.
-   * @returns {Object}
-   * @public
    */
-  toStateObject() {
+  private toStateObject(): PhenotypeStateObject {
     return {
       furAllele: Allele.AlleleIO.toStateObject( this.furAllele ),
       earsAllele: Allele.AlleleIO.toStateObject( this.earsAllele ),
@@ -117,34 +116,29 @@ export default class Phenotype extends PhetioObject {
 
   /**
    * Restores Phenotype state after instantiation.
-   * @param {Object} stateObject
-   * @public
    */
-  applyState( stateObject ) {
-    required( stateObject );
-    this.furAllele = required( Allele.AlleleIO.fromStateObject( stateObject.furAllele ) );
-    this.earsAllele = required( Allele.AlleleIO.fromStateObject( stateObject.earsAllele ) );
-    this.teethAllele = required( Allele.AlleleIO.fromStateObject( stateObject.teethAllele ) );
-    this.validateInstance();
+  private applyState( stateObject: PhenotypeStateObject ): void {
+    this._furAllele = required( Allele.AlleleIO.fromStateObject( stateObject.furAllele ) );
+    this._earsAllele = required( Allele.AlleleIO.fromStateObject( stateObject.earsAllele ) );
+    this._teethAllele = required( Allele.AlleleIO.fromStateObject( stateObject.teethAllele ) );
   }
-}
 
-/**
- * PhenotypeIO handles PhET-iO serialization of Phenotype.  It does so by delegating to Phenotype.
- * The methods that it implements are typical of 'Dynamic element serialization', as described in
- * the Serialization section of
- * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
- * @public
- */
-Phenotype.PhenotypeIO = new IOType( 'PhenotypeIO', {
-  valueType: Phenotype,
-  stateSchema: {
-    furAllele: Allele.AlleleIO,
-    earsAllele: Allele.AlleleIO,
-    teethAllele: Allele.AlleleIO
-  },
-  toStateObject: phenotype => phenotype.toStateObject(),
-  applyState: ( phenotype, stateObject ) => phenotype.applyState( stateObject )
-} );
+  /**
+   * PhenotypeIO handles PhET-iO serialization of Phenotype.  It does so by delegating to Phenotype.
+   * The methods that it implements are typical of 'Dynamic element serialization', as described in
+   * the Serialization section of
+   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   */
+  public static readonly PhenotypeIO = new IOType( 'PhenotypeIO', {
+    valueType: Phenotype,
+    stateSchema: {
+      furAllele: Allele.AlleleIO,
+      earsAllele: Allele.AlleleIO,
+      teethAllele: Allele.AlleleIO
+    },
+    toStateObject: phenotype => phenotype.toStateObject(),
+    applyState: ( phenotype, stateObject ) => phenotype.applyState( stateObject )
+  } );
+}
 
 naturalSelection.register( 'Phenotype', Phenotype );
