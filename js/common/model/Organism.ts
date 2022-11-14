@@ -25,7 +25,8 @@ type SelfOptions = {
   xDirection?: XDirection; // initial direction of motion along the x-axis
 };
 
-export type OrganismOptions = SelfOptions & PickOptional<PhetioObjectOptions, 'tandem'>;
+export type OrganismOptions = SelfOptions &
+  PickOptional<PhetioObjectOptions, 'tandem' | 'phetioType' | 'phetioDynamicElement'>;
 
 export default class Organism extends PhetioObject {
 

@@ -36,18 +36,12 @@ export default class WolfGroup extends PhetioGroup {
      * Called to instantiate a Wolf. Note that modelViewTransform is passed via closure, so we don't
      * have to create it as part of defaultArguments, and don't have to deal with serializing it in WolfIO.
      * @param {Tandem} tandem - PhetioGroup requires tandem to be the first param
-     * @param {Object} wolfOptions - options to Wolf constructor, not actually optional, because createElement
-     *                               must have a fixed number of args
      * @returns {Wolf}
      */
-    const createElement = ( tandem, wolfOptions ) => {
-      return new Wolf( modelViewTransform, merge( {}, wolfOptions, {
-        tandem: tandem
-      } ) );
-    };
+    const createElement = tandem => new Wolf( modelViewTransform, tandem );
 
     // defaultArguments, passed to createElement during API harvest
-    const defaultArguments = [ {} ];
+    const defaultArguments = [];
 
     super( createElement, defaultArguments, options );
   }

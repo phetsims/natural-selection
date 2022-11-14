@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Wolf is the model of an individual wolf.
  *
@@ -11,8 +10,6 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
-import merge from '../../../../phet-core/js/merge.js';
-import required from '../../../../phet-core/js/required.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
@@ -29,42 +26,39 @@ const X_MARGIN = 35;
 // Speed of a wolf, in pixels/second. A value is randomly chosen from this range for each wolf.
 const WOLF_SPEED_RANGE = new Range( 125, 200 );
 
+type WolfStateObject = {
+  _private: {
+    speed: number;
+  };
+};
+
+type WolfConstructorParameter = [];
+
 export default class Wolf extends Organism {
 
-  /**
-   * @param {EnvironmentModelViewTransform} modelViewTransform
-   * @param {Object} [options]
-   */
-  constructor( modelViewTransform, options ) {
+  private _speed: number;
+  public readonly disposedEmitter: Emitter; // fires when the Wolf has been disposed
 
-    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
+  public constructor( modelViewTransform: EnvironmentModelViewTransform, tandem: Tandem ) {
 
-    options = merge( {
+    super( modelViewTransform, {
 
-      // Default to random position and x direction
+      // OrganismOptions
       position: modelViewTransform.getRandomGroundPosition( X_MARGIN ),
       xDirection: XDirection.getRandom(),
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
+      tandem: tandem,
       phetioType: Wolf.WolfIO,
       phetioDynamicElement: true
-    }, options );
+    } );
 
-    super( modelViewTransform, options );
+    this._speed = dotRandom.nextDoubleInRange( WOLF_SPEED_RANGE );
 
-    // @private {number}
-    this.speed = dotRandom.nextDoubleInRange( WOLF_SPEED_RANGE );
-
-    // @public fires when the Wolf has been disposed. dispose is required.
     this.disposedEmitter = new Emitter();
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public get speed(): number { return this._speed; }
+
+  public override dispose(): void {
     assert && assert( !this.isDisposed, 'wolf is already disposed' );
     super.dispose();
     this.disposedEmitter.emit();
@@ -74,10 +68,9 @@ export default class Wolf extends Organism {
   /**
    * Moves the Wolf around. A wolf will continue to move in its current direction until it gets to the edge of
    * the screen. Then it reverses direction.
-   * @param {number} dt - time step, in seconds
-   * @public
+   * @param dt - time step, in seconds
    */
-  move( dt ) {
+  public move( dt: number ): void {
 
     const angle = dotRandom.nextDoubleBetween( 0, 2 * Math.PI );
 
@@ -120,60 +113,52 @@ export default class Wolf extends Organism {
 
   /**
    * Serializes this Wolf instance.
-   * @returns {Object}
-   * @public
    */
-  toStateObject() {
+  private toStateObject(): WolfStateObject {
     return {
+      // position and xDirection are handled by super Organism instrumented Properties
       _private: {
         speed: this.speed
       }
     };
   }
 
+  //TODO https://github.com/phetsims/natural-selection/issues/326 is this needed?
   /**
    * Creates the args that WolfGroup uses to instantiate a Wolf.
-   * @param {*} stateObject
-   * @returns {Object[]}
-   * @public
+   * stateToArgsForConstructor is called only for dynamic elements that are part of a group.
+   * So we are not restoring anything through options, because that would not support static elements.
+   * Everything will be restored via applyState.
    */
-  static stateToArgsForConstructor( stateObject ) {
-
-    // stateToArgsForConstructor is called only for dynamic elements that are part of a group.
-    // So we are not restoring anything through options, because that would not support static elements.
-    // Everything will be restored via applyState.
-    return [ {} ];  // explicit options arg to Wolf constructor
+  private static stateToArgsForConstructor( stateObject: WolfStateObject ): WolfConstructorParameter {
+    return [];
   }
 
   /**
    * Restores Wolf state after instantiation.
-   * @param {Object} stateObject - return value of toStateObject
-   * @public
    */
-  applyState( stateObject ) {
-    required( stateObject );
-    this.speed = required( stateObject._private.speed );
-    this.validateInstance();
+  private applyState( stateObject: WolfStateObject ): void {
+    this._speed = stateObject._private.speed;
   }
-}
 
-/**
- * WolfIO handles PhET-iO serialization of Wolf. Because serialization involves accessing private members,
- * it delegates to Wolf. The methods that WolfIO overrides are typical of 'Dynamic element serialization',
- * as described in the Serialization section of
- * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
- * @public
- */
-Wolf.WolfIO = new IOType( 'WolfIO', {
-  valueType: Wolf,
-  stateSchema: {
-    _private: {
-      speed: NumberIO
-    }
-  },
-  toStateObject: wolf => wolf.toStateObject(),
-  applyState: ( wolf, stateObject ) => wolf.applyState( stateObject ),
-  stateToArgsForConstructor: stateObject => Wolf.stateToArgsForConstructor( stateObject )
-} );
+  /**
+   * WolfIO handles PhET-iO serialization of Wolf. Because serialization involves accessing private members,
+   * it delegates to Wolf. The methods that WolfIO overrides are typical of 'Dynamic element serialization',
+   * as described in the Serialization section of
+   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   */
+  public static readonly WolfIO = new IOType<Wolf, WolfStateObject>( 'WolfIO', {
+    valueType: Wolf,
+    stateSchema: {
+      _private: {
+        // @ts-ignore TODO https://github.com/phetsims/natural-selection/issues/326 open a tandem issue
+        speed: NumberIO
+      }
+    },
+    toStateObject: wolf => wolf.toStateObject(),
+    applyState: ( wolf, stateObject ) => wolf.applyState( stateObject ),
+    stateToArgsForConstructor: stateObject => Wolf.stateToArgsForConstructor( stateObject )
+  } );
+}
 
 naturalSelection.register( 'Wolf', Wolf );

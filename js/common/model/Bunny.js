@@ -373,6 +373,7 @@ export default class Bunny extends Organism {
 
   /**
    * Returns a function that returns a map of state keys and their associated IOTypes, see IOType for details.
+   * STATE_SCHEMA needs to be a function because it references BunnyIO.
    * @param {IOType} BunnyIO
    * @returns {function(IOType): {Object.<string,IOType>}}
    * @public
