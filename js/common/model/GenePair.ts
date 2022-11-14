@@ -159,7 +159,6 @@ export default class GenePair extends PhetioObject {
       fatherAllele: Allele.AlleleIO,
       motherAllele: Allele.AlleleIO
     },
-    //TODO https://github.com/phetsims/natural-selection/issues/326 toStateObject was not required until this._gene, why?
     toStateObject: genePair => genePair.toStateObject(),
     applyState: ( genePair, stateObject ) => genePair.applyState( stateObject )
   } );
