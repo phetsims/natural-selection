@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * GenePair is a pair of alleles for a specific Gene, one inherited from each parent.
  * If an individual's alleles are identical, it is homozygous. If its alleles are different, it is heterozygous.
