@@ -29,7 +29,7 @@ import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioO
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
-import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
+import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
@@ -66,6 +66,8 @@ type SelfOptions = {
 };
 
 type GeneOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
+export type GeneStateObject = ReferenceIOState; // because AlleleIO is defined in terms of ReferenceIO
 
 export default class Gene extends PhetioObject {
 
@@ -224,7 +226,7 @@ export default class Gene extends PhetioObject {
    * as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
-  public static GeneIO = new IOType( 'GeneIO', {
+  public static GeneIO = new IOType<Gene, GeneStateObject>( 'GeneIO', {
     valueType: Gene,
     supertype: ReferenceIO( IOType.ObjectIO )
   } );

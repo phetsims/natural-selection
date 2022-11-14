@@ -10,12 +10,12 @@
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import BunnyCounts from './BunnyCounts.js';
+import BunnyCounts, { BunnyCountsStateObject } from './BunnyCounts.js';
 
 type ProportionsCountsStateObject = {
   generation: number;
-  startCounts: BunnyCounts;
-  endCounts: BunnyCounts;
+  startCounts: BunnyCountsStateObject;
+  endCounts: BunnyCountsStateObject;
 };
 
 export default class ProportionsCounts {
@@ -65,7 +65,7 @@ export default class ProportionsCounts {
    * the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
-  public static readonly ProportionsCountsIO = new IOType( 'ProportionsCountsIO', {
+  public static readonly ProportionsCountsIO = new IOType<ProportionsCounts, ProportionsCountsStateObject>( 'ProportionsCountsIO', {
     valueType: ProportionsCounts,
     stateSchema: {
       generation: NumberIO,

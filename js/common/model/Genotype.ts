@@ -17,7 +17,7 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import Allele from './Allele.js';
+import Allele, { AlleleStateObject } from './Allele.js';
 import GenePair from './GenePair.js';
 import GenePool from './GenePool.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -41,10 +41,7 @@ type SelfOptions = {
 type GenotypeOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 type GenotypeStateObject = {
-
-  //TODO https://github.com/phetsims/natural-selection/issues/326 there is no AlleleStateObject
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  mutation: any;
+  mutation: AlleleStateObject;
 };
 
 export default class Genotype extends PhetioObject {
@@ -205,7 +202,7 @@ export default class Genotype extends PhetioObject {
    * the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
-  public static readonly GenotypeIO = new IOType( 'GenotypeIO', {
+  public static readonly GenotypeIO = new IOType<Genotype, GenotypeStateObject>( 'GenotypeIO', {
     valueType: Genotype,
     stateSchema: {
       mutation: NullableIO( Allele.AlleleIO )

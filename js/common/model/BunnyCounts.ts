@@ -11,7 +11,6 @@
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
-
 import Bunny from './Bunny.js';
 
 type SelfOptions = {
@@ -27,7 +26,7 @@ type SelfOptions = {
 type BunnyCountOptions = SelfOptions;
 
 // State object happens to be identical to SelfOptions
-type BunnyStateObject = SelfOptions;
+export type BunnyCountsStateObject = SelfOptions;
 
 export default class BunnyCounts {
 
@@ -117,7 +116,7 @@ export default class BunnyCounts {
   /**
    * Serializes this BunnyCounts instance.
    */
-  private toStateObject(): BunnyStateObject {
+  private toStateObject(): BunnyCountsStateObject {
     return {
       totalCount: this.totalCount,
       whiteFurCount: this.whiteFurCount,
@@ -150,7 +149,7 @@ export default class BunnyCounts {
    * the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
-  public static readonly BunnyCountsIO = new IOType( 'BunnyCountsIO', {
+  public static readonly BunnyCountsIO = new IOType<BunnyCounts, BunnyCountsStateObject>( 'BunnyCountsIO', {
     valueType: BunnyCounts,
     stateSchema: {
       totalCount: NumberIO,

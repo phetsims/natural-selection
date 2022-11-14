@@ -18,7 +18,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
-import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
+import ReferenceIO, { ReferenceIOState } from '../../../../tandem/js/types/ReferenceIO.js';
 import brownFur_png from '../../../images/brownFur_png.js';
 import floppyEars_png from '../../../images/floppyEars_png.js';
 import longTeeth_png from '../../../images/longTeeth_png.js';
@@ -34,6 +34,8 @@ const ALLELES_TANDEM = Tandem.GLOBAL_MODEL.createTandem( 'alleles' );
 type SelfOptions = EmptySelfOptions;
 
 type AlleleOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+
+export type AlleleStateObject = ReferenceIOState; // because AlleleIO is defined in terms of ReferenceIO
 
 export default class Allele extends PhetioObject {
 
@@ -80,7 +82,7 @@ export default class Allele extends PhetioObject {
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    * This must be defined before instantiating static instances.
    */
-  public static readonly AlleleIO = new IOType( 'AlleleIO', {
+  public static readonly AlleleIO = new IOType<Allele, AlleleStateObject>( 'AlleleIO', {
     valueType: Allele,
     supertype: ReferenceIO( IOType.ObjectIO )
   } );

@@ -14,7 +14,7 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import naturalSelection from '../../naturalSelection.js';
-import Allele from './Allele.js';
+import Allele, { AlleleStateObject } from './Allele.js';
 import Genotype from './Genotype.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -22,9 +22,9 @@ type SelfOptions = EmptySelfOptions;
 type PhenotypeOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 type PhenotypeStateObject = {
-  furAllele: Allele;
-  earsAllele: Allele;
-  teethAllele: Allele;
+  furAllele: AlleleStateObject;
+  earsAllele: AlleleStateObject;
+  teethAllele: AlleleStateObject;
 };
 
 export default class Phenotype extends PhetioObject {
@@ -129,7 +129,7 @@ export default class Phenotype extends PhetioObject {
    * the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
-  public static readonly PhenotypeIO = new IOType( 'PhenotypeIO', {
+  public static readonly PhenotypeIO = new IOType<Phenotype, PhenotypeStateObject>( 'PhenotypeIO', {
     valueType: Phenotype,
     stateSchema: {
       furAllele: Allele.AlleleIO,

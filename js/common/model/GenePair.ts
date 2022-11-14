@@ -13,8 +13,8 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import naturalSelection from '../../naturalSelection.js';
-import Allele from './Allele.js';
-import Gene from './Gene.js';
+import Allele, { AlleleStateObject } from './Allele.js';
+import Gene, { GeneStateObject } from './Gene.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -22,18 +22,9 @@ type GenePairOptions = SelfOptions &
   PickRequired<PhetioObjectOptions, 'tandem' | 'phetioDocumentation'>;
 
 type GenePairStateObject = {
-
-  //TODO https://github.com/phetsims/natural-selection/issues/326 there is no GeneStateObject
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  gene: any;
-
-  //TODO https://github.com/phetsims/natural-selection/issues/326 there is no AlleleStateObject
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  fatherAllele: any;
-
-  //TODO https://github.com/phetsims/natural-selection/issues/326 there is no AlleleStateObject
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  motherAllele: any;
+  gene: GeneStateObject;
+  fatherAllele: AlleleStateObject;
+  motherAllele: AlleleStateObject;
 };
 
 export default class GenePair extends PhetioObject {
@@ -161,7 +152,7 @@ export default class GenePair extends PhetioObject {
    * the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
-  public static readonly GenePairIO = new IOType( 'GenePairIO', {
+  public static readonly GenePairIO = new IOType<GenePair, GenePairStateObject>( 'GenePairIO', {
     valueType: GenePair,
     stateSchema: {
       gene: Gene.GeneIO,
