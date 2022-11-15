@@ -50,27 +50,22 @@ export default class BunnyCollection {
   /**
    * @param {EnvironmentModelViewTransform} modelViewTransform
    * @param {GenePool} genePool
-   * @param {Object} [options]
+   * @param {Tandem} tandem
    */
-  constructor( modelViewTransform, genePool, options ) {
+  constructor( modelViewTransform, genePool, tandem ) {
 
     assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
     assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-
-    options = merge( {
-
-      // phet-io
-      tandem: Tandem.REQUIRED
-    }, options );
+    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
 
     // @public (read-only) {BunnyArrayDef} the live bunnies in bunnyGroup
     this.liveBunnies = createBunnyArray( {
-      tandem: options.tandem.createTandem( 'liveBunnies' )
+      tandem: tandem.createTandem( 'liveBunnies' )
     } );
 
     // @private {BunnyArrayDef} the dead bunnies in bunnyGroup
     this.deadBunnies = createBunnyArray( {
-      tandem: options.tandem.createTandem( 'deadBunnies' )
+      tandem: tandem.createTandem( 'deadBunnies' )
     } );
 
     // @private {BunnyArrayDef} Recessive mutants, to be mated eagerly so that their mutation appears in the phenotype
@@ -78,7 +73,7 @@ export default class BunnyCollection {
     // another bunny that has the same mutant allele. See also the 'Recessive Mutants' section of model.md at
     // https://github.com/phetsims/natural-selection/blob/master/doc/model.md#recessive-mutants.
     this.recessiveMutants = createBunnyArray( {
-      tandem: options.tandem.createTandem( 'recessiveMutants' ),
+      tandem: tandem.createTandem( 'recessiveMutants' ),
       phetioDocumentation: 'for internal PhET use only'
     } );
 
@@ -99,19 +94,19 @@ export default class BunnyCollection {
           return BUNNY_REST_RANGE_LONG;
         }
       }, {
-        tandem: options.tandem.createTandem( 'bunnyRestRangeProperty' ),
+        tandem: tandem.createTandem( 'bunnyRestRangeProperty' ),
         phetioValueType: Range.RangeIO,
         phetioDocumentation: 'for internal PhET use only'
       } );
 
     // the PhetioGroup that manages Bunny instances as dynamic PhET-iO elements
     const bunnyGroup = new BunnyGroup( genePool, modelViewTransform, this.bunnyRestRangeProperty, {
-      tandem: options.tandem.createTandem( 'bunnyGroup' )
+      tandem: tandem.createTandem( 'bunnyGroup' )
     } );
 
     // @public the bunny that is selected in the Pedigree graph
     this.selectedBunnyProperty = new SelectedBunnyProperty( {
-      tandem: options.tandem.createTandem( 'selectedBunnyProperty' )
+      tandem: tandem.createTandem( 'selectedBunnyProperty' )
     } );
 
     // unlink is not necessary.
@@ -121,7 +116,7 @@ export default class BunnyCollection {
 
     // @public notifies listeners when all bunnies have died. dispose is not necessary.
     this.allBunniesHaveDiedEmitter = new Emitter( {
-      tandem: options.tandem.createTandem( 'allBunniesHaveDiedEmitter' ),
+      tandem: tandem.createTandem( 'allBunniesHaveDiedEmitter' ),
       phetioReadOnly: true,
       phetioDocumentation: 'fires when all of the bunnies have died'
     } );
@@ -135,7 +130,7 @@ export default class BunnyCollection {
 
     // @public notifies listeners when bunnies have taken over the world. dispose is not necessary.
     this.bunniesHaveTakenOverTheWorldEmitter = new Emitter( {
-      tandem: options.tandem.createTandem( 'bunniesHaveTakenOverTheWorldEmitter' ),
+      tandem: tandem.createTandem( 'bunniesHaveTakenOverTheWorldEmitter' ),
       phetioReadOnly: true,
       phetioDocumentation: 'fires when bunnies have taken over the world'
     } );

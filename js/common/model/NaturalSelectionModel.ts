@@ -119,9 +119,8 @@ export default class NaturalSelectionModel {
     this.initialBunnyVarieties =
       parseInitialPopulation( this.genePool, mutationsQueryParameterName, populationQueryParameterName );
 
-    this.bunnyCollection = new BunnyCollection( this.modelViewTransform, this.genePool, {
-      tandem: options.tandem.createTandem( 'bunnyCollection' )
-    } );
+    this.bunnyCollection = new BunnyCollection( this.modelViewTransform, this.genePool,
+      options.tandem.createTandem( 'bunnyCollection' ) );
     this.initializeGenerationZero();
 
     this.environmentProperty = new EnumerationProperty( Environment.EQUATOR, {
@@ -129,9 +128,7 @@ export default class NaturalSelectionModel {
     } );
 
     this.wolfCollection = new WolfCollection( this.generationClock, this.environmentProperty, this.bunnyCollection,
-      this.modelViewTransform, {
-        tandem: options.tandem.createTandem( 'wolfCollection' )
-      } );
+      this.modelViewTransform, options.tandem.createTandem( 'wolfCollection' ) );
 
     this.food = new Food( this.generationClock, this.bunnyCollection, this.modelViewTransform, shrubsSeed, {
       tandem: options.tandem.createTandem( 'food' )

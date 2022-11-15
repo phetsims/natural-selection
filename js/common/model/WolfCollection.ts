@@ -13,7 +13,6 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -25,11 +24,10 @@ import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenerationClock from './GenerationClock.js';
 import Wolf from './Wolf.js';
 import WolfGroup from './WolfGroup.js';
-import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bunny from './Bunny.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // constants
 
@@ -49,10 +47,6 @@ const MIN_WOLVES = 5;
 // The number of bunnies per wolf. Wolves are created based on the size of the bunny population.
 const BUNNIES_PER_WOLF = 10;
 
-type SelfOptions = EmptySelfOptions;
-
-type WolfCollectionOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
-
 export default class WolfCollection {
 
   private readonly environmentProperty: EnumerationProperty<Environment>;
@@ -65,27 +59,25 @@ export default class WolfCollection {
 
   public constructor( generationClock: GenerationClock, environmentProperty: EnumerationProperty<Environment>,
                       bunnyCollection: BunnyCollection, modelViewTransform: EnvironmentModelViewTransform,
-                      providedOptions: WolfCollectionOptions ) {
-
-    const options = providedOptions;
+                      tandem: Tandem ) {
 
     this.environmentProperty = environmentProperty;
     this.bunnyCollection = bunnyCollection;
 
     this.enabledProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'enabledProperty' )
+      tandem: tandem.createTandem( 'enabledProperty' )
     } );
 
     this.isHuntingProperty = new DerivedProperty(
       [ this.enabledProperty, generationClock.timeInPercentProperty ],
       ( enabled, timeInPercent ) => ( enabled && NaturalSelectionConstants.CLOCK_WOLVES_RANGE.contains( timeInPercent ) ), {
-        tandem: options.tandem.createTandem( 'isHuntingProperty' ),
+        tandem: tandem.createTandem( 'isHuntingProperty' ),
         phetioValueType: BooleanIO,
         phetioDocumentation: 'for internal PhET use only'
       } );
 
     this.wolfGroup = new WolfGroup( modelViewTransform, {
-      tandem: options.tandem.createTandem( 'wolfGroup' )
+      tandem: tandem.createTandem( 'wolfGroup' )
     } );
 
     this.wolfCreatedEmitter = new Emitter( {
