@@ -57,7 +57,7 @@ export default class GenePool {
   /**
    * Is the specified allele a recessive mutation?
    */
-  public isRecessiveMutation( allele: Allele ): boolean {
+  public isRecessiveMutation( allele: Allele | null ): boolean {
 
     let isRecessiveMutation = false;
     for ( let i = 0; i < this.genes.length && !isRecessiveMutation; i++ ) {

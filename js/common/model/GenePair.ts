@@ -99,7 +99,7 @@ export default class GenePair extends PhetioObject {
   /**
    * Does this gene pair contain a specific allele?
    */
-  public hasAllele( allele: Allele ): boolean {
+  public hasAllele( allele: Allele | null ): boolean {
     return ( this.fatherAllele === allele || this.motherAllele === allele );
   }
 
