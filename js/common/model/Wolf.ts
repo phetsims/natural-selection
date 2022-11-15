@@ -153,7 +153,7 @@ export default class Wolf extends Organism {
 
       // private fields, will not be shown in Studio
       _private: {
-        // @ts-ignore TODO https://github.com/phetsims/natural-selection/issues/326 open a tandem issue
+        // @ts-ignore https://github.com/phetsims/tandem/issues/282 TypeScript support for _private
         speed: NumberIO
       }
     },
