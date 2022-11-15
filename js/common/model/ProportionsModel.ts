@@ -20,6 +20,7 @@ import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioO
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
 import ProportionsCounts from './ProportionsCounts.js';
 
@@ -226,7 +227,7 @@ export default class ProportionsModel extends PhetioObject {
    * Records start counts for the current generation.
    */
   public recordStartCounts( clockGeneration: number, startCounts: BunnyCounts ): void {
-    assert && assert( Number.isInteger( clockGeneration ) && clockGeneration >= 0, 'invalid clockGeneration' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( clockGeneration ), 'invalid clockGeneration' );
     assert && assert( clockGeneration === this.clockGenerationProperty.value, `${clockGeneration} is not the current generation` );
 
     this.currentStartCountsProperty.value = startCounts;
@@ -236,7 +237,7 @@ export default class ProportionsModel extends PhetioObject {
    * Records end counts for the previous generation, using what was formerly the current generation start data.
    */
   public recordEndCounts( generation: number, endCounts: BunnyCounts ): void {
-    assert && assert( Number.isInteger( generation ) && generation >= 0, 'invalid generation' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
     assert && assert( generation === this.clockGenerationProperty.value - 1, `${generation} is not the previous generation` );
     assert && assert( this.previousCounts.length === generation,
       `unexpected generation=${generation}, expected ${this.previousCounts.length}` );

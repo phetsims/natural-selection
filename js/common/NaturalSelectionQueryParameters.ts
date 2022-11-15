@@ -159,7 +159,7 @@ const SCHEMA = {
   maxPopulation: {
     type: 'number',
     defaultValue: 750,
-    isValidValue: ( value: number ) => ( value > 0 && Number.isInteger( value ) )
+    isValidValue: ( value: number ) => NaturalSelectionUtils.isPositiveInteger( value )
   },
 
   // Age at which bunnies die of old-age.

@@ -29,6 +29,7 @@ import Organism, { OrganismOptions } from './Organism.js';
 import Phenotype from './Phenotype.js';
 import XDirection from './XDirection.js';
 import { CompositeSchema } from '../../../../tandem/js/types/StateSchema.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 // constants
 const HOP_TIME_RANGE = new Range( 0.25, 0.5 ); // time to complete a hop cycle, in seconds
@@ -142,7 +143,7 @@ export default class Bunny extends Organism {
     // Validate options
     assert && assert( ( options.father && options.mother ) || ( !options.father && !options.mother ),
       'bunny must have both parents or no parents' );
-    assert && assert( Number.isInteger( options.generation ) && options.generation >= 0, 'invalid generation' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( options.generation ), 'invalid generation' );
 
     super( modelViewTransform, options );
 

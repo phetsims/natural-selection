@@ -20,6 +20,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 // const
 const SECONDS_PER_GENERATION = NaturalSelectionQueryParameters.secondsPerGeneration;
@@ -85,7 +86,7 @@ export default class GenerationClock extends PhetioObject {
     this.clockGenerationProperty = new DerivedProperty(
       [ this.timeInGenerationsProperty ],
       timeInGenerations => Math.floor( timeInGenerations ), {
-        isValidValue: clockGeneration => Number.isInteger( clockGeneration ),
+        isValidValue: clockGeneration => NaturalSelectionUtils.isNonNegativeInteger( clockGeneration ),
         tandem: options.tandem.createTandem( 'clockGenerationProperty' ),
         phetioValueType: NumberIO,
         phetioDocumentation: 'generation number of the current cycle of the generation clock (integer)'

@@ -27,6 +27,7 @@ import GenePool from './GenePool.js';
 import PunnettSquare from './PunnettSquare.js';
 import SelectedBunnyProperty from './SelectedBunnyProperty.js';
 import BunnyCounts from './BunnyCounts.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 // constants
 
@@ -288,7 +289,7 @@ export default class BunnyCollection {
    * https://github.com/phetsims/natural-selection/blob/master/doc/model.md#reproduction.
    */
   public mateBunnies( generation: number ): void {
-    assert && assert( Number.isInteger( generation ) && generation >= 0, 'invalid generation' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
 
     // The number of bunnies born.
     let bornIndex = 0;
@@ -421,7 +422,7 @@ export default class BunnyCollection {
    * @returns the number of bunnies born
    */
   private mateEagerly( generation: number, bunnies: Bunny[] ): number {
-    assert && assert( Number.isInteger( generation ) && generation >= 0, 'invalid generation' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
 
     let numberOfRecessiveMutantsMated = 0;
     let numberBorn = 0;
@@ -576,7 +577,7 @@ export default class BunnyCollection {
    * @param generation - the current generation number
    */
   public pruneDeadBunnies( generation: number ): void {
-    assert && assert( Number.isInteger( generation ) && generation > 0, 'invalid generation' );
+    assert && assert( NaturalSelectionUtils.isPositiveInteger( generation ), 'invalid generation' );
 
     let numberPruned = 0;
 

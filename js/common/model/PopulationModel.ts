@@ -296,7 +296,7 @@ export default class PopulationModel extends PhetioObject {
  */
 function recordCount( array: Vector2[], timeInGenerations: number, count: number ): void {
   assert && assert( timeInGenerations >= 0, 'invalid generation' );
-  assert && assert( Number.isInteger( count ) && count >= 0, 'invalid count' );
+  assert && assert( NaturalSelectionUtils.isNonNegativeInteger( count ), 'invalid count' );
 
   if ( array.length === 0 || array[ array.length - 1 ].y !== count ) {
     array.push( new Vector2( timeInGenerations, count ) );

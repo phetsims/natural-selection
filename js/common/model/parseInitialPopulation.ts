@@ -233,7 +233,7 @@ function parsePopulation( genePool: GenePool, mutationChars: string[], populatio
  */
 function createBunnyVariety( genePool: GenePool, count: number, genotypeString: string ): BunnyVariety {
 
-  assert && assert( Number.isInteger( count ) && count > 0, 'invalid count' );
+  assert && assert( NaturalSelectionUtils.isPositiveInteger( count ), 'invalid count' );
 
   // To make this code easier to read
   const furGene = genePool.furGene;

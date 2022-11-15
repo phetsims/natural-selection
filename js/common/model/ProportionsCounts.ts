@@ -11,6 +11,7 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import BunnyCounts, { BunnyCountsStateObject } from './BunnyCounts.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 type ProportionsCountsStateObject = {
   generation: number;
@@ -26,7 +27,7 @@ export default class ProportionsCounts {
 
   public constructor( generation: number, startCounts: BunnyCounts, endCounts: BunnyCounts ) {
 
-    assert && assert( Number.isInteger( generation ) && generation >= 0, 'invalid generation' );
+    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
 
     this.generation = generation;
     this.startCounts = startCounts;
