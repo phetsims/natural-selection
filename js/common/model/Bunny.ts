@@ -14,7 +14,7 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector3, { Vector3StateObject } from '../../../../dot/js/Vector3.js';
 import merge from '../../../../phet-core/js/merge.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
@@ -44,7 +44,7 @@ type SelfOptions = {
   genotypeOptions?: GenotypeOptions;
 };
 
-type BunnyOptions = SelfOptions & PickRequired<OrganismOptions, 'tandem'>;
+export type BunnyOptions = SelfOptions & PickRequired<OrganismOptions, 'tandem'>;
 
 type BunnyStateObject = {
   father: BunnyStateObject | null;
@@ -62,7 +62,11 @@ type BunnyStateObject = {
   };
 };
 
-type BunnyConstructorArguments = [ EmptySelfOptions ];
+// When creating a Bunny via BunnyGroup.createElement, BunnyGroup provides the tandem.
+export type BunnyCreateElementOptions = StrictOmit<BunnyOptions, 'tandem'>;
+
+// All constructor arguments except providedOptions are provided via closure in BunnyGroup.
+export type BunnyConstructorArguments = [ BunnyCreateElementOptions ];
 
 export default class Bunny extends Organism {
 
@@ -415,7 +419,7 @@ export default class Bunny extends Organism {
    * and restore everything via applyState.
    */
   private static stateToArgsForConstructor( stateObject: BunnyStateObject ): BunnyConstructorArguments {
-    return [ {} ];  // BunnyGroup.createElement needs an empty options object
+    return [ {} ];
   }
 
   /**
