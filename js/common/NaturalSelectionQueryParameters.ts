@@ -12,8 +12,7 @@ import logGlobal from '../../../phet-core/js/logGlobal.js';
 import naturalSelection from '../naturalSelection.js';
 import NaturalSelectionUtils from './NaturalSelectionUtils.js';
 
-// The schema that describes the query parameters for this simulation
-const SCHEMA = {
+const SCHEMA_MAP = {
 
   //------------------------------------------------------------------------------------------------------------------
   // Public facing
@@ -249,29 +248,9 @@ const SCHEMA = {
   showTimes: {
     type: 'flag'
   }
-};
+} as const;
 
-// @ts-ignore TODO https://github.com/phetsims/natural-selection/issues/326
-const NaturalSelectionQueryParameters = QueryStringMachine.getAll( SCHEMA );
-
-/**
- * Gets the value for a query parameter.
- */
-//TODO https://github.com/phetsims/natural-selection/issues/326
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-NaturalSelectionQueryParameters.getValue = function( key: string ): any {
-  return NaturalSelectionQueryParameters[ key ];
-};
-
-/**
- * Gets the default value for a query parameter.
- */
-//TODO https://github.com/phetsims/natural-selection/issues/326
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-NaturalSelectionQueryParameters.getDefaultValue = function( key: string ): any {
-  // @ts-ignore TODO https://github.com/phetsims/natural-selection/issues/326
-  return SCHEMA[ key ].defaultValue;
-};
+const NaturalSelectionQueryParameters = QueryStringMachine.getAll( SCHEMA_MAP );
 
 /**
  * Parses a query-parameter value into a Range.
@@ -304,3 +283,4 @@ logGlobal( 'phet.preloads.phetio.queryParameters' );
 logGlobal( 'phet.naturalSelection.NaturalSelectionQueryParameters' );
 
 export default NaturalSelectionQueryParameters;
+export { SCHEMA_MAP };

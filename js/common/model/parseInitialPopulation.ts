@@ -18,7 +18,7 @@
  */
 
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
+import NaturalSelectionQueryParameters, { SCHEMA_MAP } from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import Allele from './Allele.js';
 import BunnyVariety from './BunnyVariety.js';
@@ -44,8 +44,8 @@ export default function parseInitialPopulation(
   genePool: GenePool, mutationsName: string, populationName: string ): BunnyVariety[] {
 
   // Get the query parameter values
-  const mutationsValue = NaturalSelectionQueryParameters.getValue( mutationsName );
-  const populationValue = NaturalSelectionQueryParameters.getValue( populationName );
+  const mutationsValue = getQueryParameterValue( mutationsName );
+  const populationValue = getQueryParameterValue( populationName );
 
   let initialBunnyVarieties = null; // {BunnyVariety[]}
   try {
@@ -72,10 +72,8 @@ export default function parseInitialPopulation(
     } );
 
     // Built the data structure for the default initial population.
-    const mutationChars = parseMutations( genePool, mutationsName,
-      NaturalSelectionQueryParameters.getDefaultValue( mutationsName ) );
-    initialBunnyVarieties = parsePopulation( genePool, mutationChars, populationName,
-      NaturalSelectionQueryParameters.getDefaultValue( populationName ) );
+    const mutationChars = parseMutations( genePool, mutationsName, getQueryParameterDefaultValue( mutationsName ) );
+    initialBunnyVarieties = parsePopulation( genePool, mutationChars, populationName, getQueryParameterDefaultValue( populationName ) );
   }
   return initialBunnyVarieties;
 }
@@ -296,6 +294,27 @@ function verify( predicate: boolean, message: string ): void {
   if ( !predicate ) {
     throw new Error( message );
   }
+}
+
+/**
+ * Gets the value for a query parameter.
+ */
+//TODO https://github.com/phetsims/natural-selection/issues/326
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getQueryParameterValue( key: string ): any {
+  type Key = keyof typeof NaturalSelectionQueryParameters;
+  return NaturalSelectionQueryParameters[ key as Key ];
+}
+
+/**
+ * Gets the default value for a query parameter.
+ */
+//TODO https://github.com/phetsims/natural-selection/issues/326
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getQueryParameterDefaultValue( key: string ): any {
+  type Key = keyof typeof SCHEMA_MAP;
+  // @ts-ignore TODO https://github.com/phetsims/natural-selection/issues/326
+  return SCHEMA_MAP[ key as Key ].defaultValue;
 }
 
 naturalSelection.register( 'parseInitialPopulation', parseInitialPopulation );
