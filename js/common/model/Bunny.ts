@@ -13,8 +13,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector3, { Vector3StateObject } from '../../../../dot/js/Vector3.js';
-import merge from '../../../../phet-core/js/merge.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
@@ -41,7 +40,7 @@ type SelfOptions = {
   father?: Bunny | null; // the Bunny's father, null if no father
   mother?: Bunny | null; // the Bunny's mother, null if no mother
   generation?: number; // generation that this Bunny belongs to
-  genotypeOptions?: GenotypeOptions;
+  genotypeOptions?: StrictOmit<GenotypeOptions, 'tandem'>;
 };
 
 export type BunnyOptions = SelfOptions & PickRequired<OrganismOptions, 'tandem'>;
@@ -153,11 +152,9 @@ export default class Bunny extends Organism {
     this.isAlive = true;
     this.age = 0;
 
-    const genotypeOptions = merge( {}, options.genotypeOptions, {
+    this.genotype = new Genotype( genePool, combineOptions<GenotypeOptions>( {
       tandem: options.tandem.createTandem( 'genotype' )
-    } );
-
-    this.genotype = new Genotype( genePool, genotypeOptions );
+    }, options.genotypeOptions ) );
 
     this.phenotype = new Phenotype( this.genotype, {
       tandem: options.tandem.createTandem( 'phenotype' )
