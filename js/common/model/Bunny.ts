@@ -66,11 +66,12 @@ type BunnyConstructorArguments = [ EmptySelfOptions ];
 
 export default class Bunny extends Organism {
 
-  public father: Bunny | null; //TODO _father
-  public mother: Bunny | null; //TODO _mother
+  //TODO https://github.com/phetsims/natural-selection/issues/326 father, mother, isAlive, age should be readonly for clients
+  public father: Bunny | null;
+  public mother: Bunny | null;
   public readonly generation: number;
-  public isAlive: boolean; //TODO _isAlive
-  public age: number; //TODO _age;
+  public isAlive: boolean;
+  public age: number;
 
   // the bunny's genetic blueprint
   public readonly genotype: Genotype;
