@@ -1,6 +1,5 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * BunnyCollection is the collection of Bunny instances, with methods for managing that collection.
  * It encapsulates BunnyGroup (the PhetioGroup), hiding it from the rest of the sim.
@@ -10,23 +9,24 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
-import merge from '../../../../phet-core/js/merge.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
-import Bunny from './Bunny.js';
+import Bunny, { BunnyCreateElementOptions } from './Bunny.js';
 import BunnyGroup from './BunnyGroup.js';
-import createBunnyArray from './createBunnyArray.js';
+import createBunnyArray, { BunnyArray } from './createBunnyArray.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 import PunnettSquare from './PunnettSquare.js';
 import SelectedBunnyProperty from './SelectedBunnyProperty.js';
+import BunnyCounts from './BunnyCounts.js';
 
 // constants
 
@@ -48,40 +48,51 @@ const MAX_DEAD_BUNNY_GENERATIONS = NaturalSelectionQueryParameters.maxAge *
 
 export default class BunnyCollection {
 
-  /**
-   * @param {EnvironmentModelViewTransform} modelViewTransform
-   * @param {GenePool} genePool
-   * @param {Tandem} tandem
-   */
-  constructor( modelViewTransform, genePool, tandem ) {
+  private readonly bunnyGroup: BunnyGroup;
+  private readonly genePool: GenePool;
 
-    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( tandem instanceof Tandem, 'invalid tandem' );
+  // the live bunnies in bunnyGroup
+  public readonly liveBunnies: BunnyArray;
 
-    // @public (read-only) {BunnyArrayDef} the live bunnies in bunnyGroup
+  // the dead bunnies in bunnyGroup
+  public readonly deadBunnies: BunnyArray;
+
+  // Recessive mutants, to be mated eagerly so that their mutation appears in the phenotype as soon as possible.
+  // Mutants are added to this array when born, and removed as soon as they have mated with another bunny that
+  // has the same mutant allele. See also the 'Recessive Mutants' section of model.md at
+  // https://github.com/phetsims/natural-selection/blob/master/doc/model.md#recessive-mutants.
+  private readonly recessiveMutants: BunnyArray;
+
+  // The range of time that a bunny will reset between hops, in seconds.
+  // This value is derived from population size, so that bunnies rest longer when the population is larger,
+  // resulting in less motion on screen and fewer updates. dispose is not necessary.
+  // Range values and populations sizes are specified in https://github.com/phetsims/natural-selection/issues/129
+  private readonly bunnyRestRangeProperty: TReadOnlyProperty<Range>;
+
+  // the bunny that is selected in the Pedigree graph
+  public readonly selectedBunnyProperty: SelectedBunnyProperty;
+
+  // Notifies listeners when all bunnies have died. dispose is not necessary.
+  public readonly allBunniesHaveDiedEmitter: Emitter;
+
+  // Notifies listeners when bunnies have taken over the world. dispose is not necessary.
+  public readonly bunniesHaveTakenOverTheWorldEmitter: Emitter;
+
+  public constructor( modelViewTransform: EnvironmentModelViewTransform, genePool: GenePool, tandem: Tandem ) {
+
     this.liveBunnies = createBunnyArray( {
       tandem: tandem.createTandem( 'liveBunnies' )
     } );
 
-    // @private {BunnyArrayDef} the dead bunnies in bunnyGroup
     this.deadBunnies = createBunnyArray( {
       tandem: tandem.createTandem( 'deadBunnies' )
     } );
 
-    // @private {BunnyArrayDef} Recessive mutants, to be mated eagerly so that their mutation appears in the phenotype
-    // as soon as possible. Mutants are added to this array when born, and removed as soon as they have mated with
-    // another bunny that has the same mutant allele. See also the 'Recessive Mutants' section of model.md at
-    // https://github.com/phetsims/natural-selection/blob/master/doc/model.md#recessive-mutants.
     this.recessiveMutants = createBunnyArray( {
       tandem: tandem.createTandem( 'recessiveMutants' ),
       phetioDocumentation: 'for internal PhET use only'
     } );
 
-    // @private {Property.<Range>} the range of time that a bunny will reset between hops, in seconds.
-    // This value is derived from population size, so that bunnies rest longer when the population is larger,
-    // resulting in less motion on screen and fewer updates. dispose is not necessary.
-    // Range values and populations sizes are specified in https://github.com/phetsims/natural-selection/issues/129
     this.bunnyRestRangeProperty = new DerivedProperty(
       [ this.liveBunnies.lengthProperty ],
       length => {
@@ -105,7 +116,6 @@ export default class BunnyCollection {
       tandem: tandem.createTandem( 'bunnyGroup' )
     } );
 
-    // @public the bunny that is selected in the Pedigree graph
     this.selectedBunnyProperty = new SelectedBunnyProperty( {
       tandem: tandem.createTandem( 'selectedBunnyProperty' )
     } );
@@ -115,7 +125,6 @@ export default class BunnyCollection {
       phet.log && phet.log( `selectedBunny=${selectedBunny}` );
     } );
 
-    // @public notifies listeners when all bunnies have died. dispose is not necessary.
     this.allBunniesHaveDiedEmitter = new Emitter( {
       tandem: tandem.createTandem( 'allBunniesHaveDiedEmitter' ),
       phetioReadOnly: true,
@@ -129,7 +138,6 @@ export default class BunnyCollection {
       phet.log && phet.log( `total dead bunnies = ${this.deadBunnies.length}` );
     } );
 
-    // @public notifies listeners when bunnies have taken over the world. dispose is not necessary.
     this.bunniesHaveTakenOverTheWorldEmitter = new Emitter( {
       tandem: tandem.createTandem( 'bunniesHaveTakenOverTheWorldEmitter' ),
       phetioReadOnly: true,
@@ -146,7 +154,6 @@ export default class BunnyCollection {
     // This listener is called when a bunny is created during normal running of the sim, or restored via PhET-iO.
     // removeListener is not necessary.
     bunnyGroup.elementCreatedEmitter.addListener( bunny => {
-      assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
       if ( bunny.isAlive ) {
 
@@ -181,7 +188,6 @@ export default class BunnyCollection {
 
     // When a bunny is disposed, remove it from the appropriate arrays. removeListener is not necessary.
     bunnyGroup.elementDisposedEmitter.addListener( bunny => {
-      assert && assert( bunny instanceof Bunny, 'invalid bunny' );
 
       const liveIndex = this.liveBunnies.indexOf( bunny );
       if ( liveIndex !== -1 ) {
@@ -199,82 +205,57 @@ export default class BunnyCollection {
       }
 
       // Verify that we don't have a logic error that results in retaining a reference to bunny.
-      assert && assert( this.liveBunnies.indexOf( bunny ) === -1, 'bunny is still in liveBunnies' );
-      assert && assert( this.deadBunnies.indexOf( bunny ) === -1, 'bunny is still in deadBunnies' );
-      assert && assert( this.recessiveMutants.indexOf( bunny ) === -1, 'bunny is still in recessiveMutants' );
+      assert && assert( !this.liveBunnies.includes( bunny ), 'bunny is still in liveBunnies' );
+      assert && assert( !this.deadBunnies.includes( bunny ), 'bunny is still in deadBunnies' );
+      assert && assert( !this.recessiveMutants.includes( bunny ), 'bunny is still in recessiveMutants' );
     } );
 
-    // @private fields needed by methods
     this.genePool = genePool;
-    this.bunnyGroup = bunnyGroup; // {BunnyGroup}
+    this.bunnyGroup = bunnyGroup;
   }
 
-  /**
-   * Resets the group.
-   * @public
-   */
-  reset() {
+  public dispose(): void {
+    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+  }
+
+  public reset(): void {
     this.bunnyGroup.clear(); // calls dispose for all Bunny instances
     this.selectedBunnyProperty.reset();
     assert && this.assertValidCounts();
   }
 
   /**
-   * @public
-   */
-  dispose() {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
-  }
-
-  /**
    * Creates a Bunny.
-   * @param {Object} [options] - options to Bunny constructor
-   * @returns {Bunny}
-   * @public
    */
-  createBunny( options ) {
+  public createBunny( options: BunnyCreateElementOptions ): Bunny {
     return this.bunnyGroup.createNextElement( options );
   }
 
   /**
    * Creates a generation-zero Bunny, which has no parents since it's the first generation to exist.
-   * @returns {Bunny}
-   * @param {Object} [options]
-   * @public
    */
-  createBunnyZero( options ) {
-
-    if ( options ) {
-      assert && assert( !options.father, 'createBunnyZero sets father' );
-      assert && assert( !options.mother, 'createBunnyZero sets mother' );
-      assert && assert( options.generation === undefined, 'createBunnyZero sets generation' );
-    }
-
-    options = merge( {
+  public createBunnyZero( providedOptions?: StrictOmit<BunnyCreateElementOptions, 'father' | 'mother' | 'generation'> ): Bunny {
+    return this.createBunny( combineOptions<BunnyCreateElementOptions>( {
       father: null,
       mother: null,
       generation: 0
-    }, options );
-
-    this.createBunny( options );
+    }, providedOptions ) );
   }
 
   /**
    * Moves all live bunnies.
-   * @param {number} dt - time step, in seconds
-   * @public
+   * @param dt - time step, in seconds
    */
-  moveBunnies( dt ) {
-    assert && assert( typeof dt === 'number' && dt >= 0, `invalid dt: ${dt}` );
+  public moveBunnies( dt: number ): void {
+    assert && assert( dt >= 0, `invalid dt: ${dt}` );
     this.liveBunnies.forEach( bunny => bunny.move( dt ) );
   }
 
   /**
    * Ages all live bunnies. Bunnies that reach the maximum age will die. See also the 'Life Expectancy' section of
    * model.md at https://github.com/phetsims/natural-selection/blob/master/doc/model.md#life-expectancy.
-   * @public
    */
-  ageBunnies() {
+  public ageBunnies(): void {
     assert && assert( _.every( this.liveBunnies, bunny => bunny.isAlive ),
       'liveBunnies contains one or more dead bunnies' );
 
@@ -305,11 +286,9 @@ export default class BunnyCollection {
    * age or previous hereditary relationship. If there is an odd number of bunnies, then one of them will not mate.
    * Mutations (if any) are applied as the bunnies are born. See also the 'Reproduction' section of model.md at
    * https://github.com/phetsims/natural-selection/blob/master/doc/model.md#reproduction.
-   * @param {number} generation
-   * @public
    */
-  mateBunnies( generation ) {
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
+  public mateBunnies( generation: number ): void {
+    assert && assert( Number.isInteger( generation ) && generation >= 0, 'invalid generation' );
 
     // The number of bunnies born.
     let bornIndex = 0;
@@ -437,14 +416,12 @@ export default class BunnyCollection {
    * Note that some parts of this method look similar to method mateBunnies. There are in fact significant differences,
    * which made it difficult (and less clear) to factor out commonalities.
    *
-   * @param {number} generation
-   * @param {Bunny[]} bunnies - the bunnies that are candidates for mating, modified as a side-effect
-   * @returns {number} the number of bunnies born
-   * @private
+   * @param generation
+   * @param bunnies - the bunnies that are candidates for mating, modified as a side-effect
+   * @returns the number of bunnies born
    */
-  mateEagerly( generation, bunnies ) {
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
-    assert && assert( Array.isArray( bunnies ), 'invalid bunnies' );
+  private mateEagerly( generation: number, bunnies: Bunny[] ): number {
+    assert && assert( Number.isInteger( generation ) && generation >= 0, 'invalid generation' );
 
     let numberOfRecessiveMutantsMated = 0;
     let numberBorn = 0;
@@ -497,7 +474,8 @@ export default class BunnyCollection {
         // Create 1 additional offspring that is homozygous recessive, in order to make the recessive allele
         // propagate through the phenotype more quickly.
         // See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
-        const mutantAllele = mutantFather.genotype.mutation;
+        const mutantAllele = mutantFather.genotype.mutation!;
+        assert && assert( mutantAllele );
         const furCell = furPunnetSquare.getAdditionalCell( mutantAllele, this.genePool.furGene.dominantAlleleProperty.value );
         const earsCell = earsPunnetSquare.getAdditionalCell( mutantAllele, this.genePool.earsGene.dominantAlleleProperty.value );
         const teethCell = teethPunnetSquare.getAdditionalCell( mutantAllele, this.genePool.teethGene.dominantAlleleProperty.value );
@@ -538,8 +516,8 @@ export default class BunnyCollection {
             recessiveMutantsCopy.splice( mutantMotherCopyIndex, 1 );
           }
         }
-        assert && assert( this.recessiveMutants.indexOf( mutantMother ) === -1, 'mutantMother should not be in recessiveMutants' );
-        assert && assert( recessiveMutantsCopy.indexOf( mutantMother ) === -1, 'mutantMother should not be in recessiveMutantsCopy' );
+        assert && assert( !this.recessiveMutants.includes( mutantMother ), 'mutantMother should not be in recessiveMutants' );
+        assert && assert( !recessiveMutantsCopy.includes( mutantMother ), 'mutantMother should not be in recessiveMutantsCopy' );
       }
     }
 
@@ -552,65 +530,53 @@ export default class BunnyCollection {
 
   /**
    * Moves all live bunnies to the ground, so that we don't have bunnies paused mid-hop.
-   * @public
    */
-  moveBunniesToGround() {
+  public moveBunniesToGround(): void {
     this.liveBunnies.forEach( bunny => bunny.interruptHop() );
   }
 
   /**
    * Gets the bunnies that are candidates for natural selection due to environmental factors, in a random order.
-   * @returns {Bunny[]}
-   * @public
    */
-  getSelectionCandidates() {
+  public getSelectionCandidates(): Bunny[] {
     return dotRandom.shuffle( this.liveBunnies ); // shuffle returns a new array
   }
 
   /**
    * Gets the live bunny counts (total and each phenotype).
-   * @returns {BunnyCounts}
-   * @public
    */
-  getLiveBunnyCounts() {
+  public getLiveBunnyCounts(): BunnyCounts {
     return this.liveBunnies.countsProperty.value;
   }
 
   /**
    * Gets the number of live bunnies.
-   * @returns {number}
-   * @public
    */
-  getNumberOfLiveBunnies() {
+  public getNumberOfLiveBunnies(): number {
     return this.liveBunnies.length;
   }
 
   /**
    * Gets the number of dead bunnies.
-   * @returns {number}
-   * @public
    */
-  getNumberOfDeadBunnies() {
+  public getNumberOfDeadBunnies(): number {
     return this.deadBunnies.length;
   }
 
   /**
    * Gets the number of recessive mutants that are waiting to mate eagerly.
-   * @returns {number}
-   * @public
    */
-  getNumberOfRecessiveMutants() {
+  public getNumberOfRecessiveMutants(): number {
     return this.recessiveMutants.length;
   }
 
   /**
    * Disposes of dead bunnies that are guaranteed not to be needed by the Pedigree graph.
    * See https://github.com/phetsims/natural-selection/issues/112
-   * @param {number} generation - the current generation number
-   * @public
+   * @param generation - the current generation number
    */
-  pruneDeadBunnies( generation ) {
-    assert && AssertUtils.assertPositiveInteger( generation );
+  public pruneDeadBunnies( generation: number ): void {
+    assert && assert( Number.isInteger( generation ) && generation > 0, 'invalid generation' );
 
     let numberPruned = 0;
 
@@ -632,14 +598,13 @@ export default class BunnyCollection {
 
   /**
    * Asserts that collection counts are in-sync with the BunnyGroup.
-   * @private
    */
-  assertValidCounts() {
+  private assertValidCounts(): void {
     const live = this.liveBunnies.length;
     const dead = this.deadBunnies.length;
     const total = live + dead;
     const bunnyGroupLength = this.bunnyGroup.count;
-    assert( live + dead === total && total === bunnyGroupLength,
+    assert && assert( live + dead === total && total === bunnyGroupLength,
       `bunny counts are out of sync, live=${live}, dead=${dead}, total=${total} bunnyGroupLength=${bunnyGroupLength}` );
   }
 }
@@ -647,12 +612,9 @@ export default class BunnyCollection {
 /**
  * Gets a suitable mate for a recessive mutant.
  * The mate must have the same mutant allele that caused the recessive mutant to mutate.
- * @param {Bunny} father
- * @param {Bunny[]} bunnies
- * @returns {Bunny|null} null if no mate is found
+ * @returns null if no mate is found
  */
-function getMateForRecessiveMutant( father, bunnies ) {
-  assert && assert( father instanceof Bunny, 'invalid father' );
+function getMateForRecessiveMutant( father: Bunny, bunnies: Bunny[] ): Bunny | null {
   assert && assert( father.isOriginalMutant(), 'father must be an original mutant' );
   assert && assert( father.genotype.mutation, 'father must have a mutated genotype' );
 
