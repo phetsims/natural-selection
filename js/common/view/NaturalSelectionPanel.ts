@@ -13,7 +13,6 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import { Node, SceneryConstants } from '../../../../scenery/js/imports.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 type SelfOptions = {
   fixedWidth?: number | null; // optional fixed width of the panel
@@ -35,7 +34,7 @@ export default class NaturalSelectionPanel extends Panel {
       fixedWidth: null
     }, providedOptions );
 
-    assert && assert( NaturalSelectionUtils.isPositive( options.fixedWidth ) || options.fixedWidth === null,
+    assert && assert( options.fixedWidth === null || options.fixedWidth > 0,
       `invalid fixedWidth: ${options.fixedWidth}` );
 
     if ( options.fixedWidth ) {

@@ -151,7 +151,7 @@ export default class Food {
    */
   private starveBunnies( timeInGenerations: number ): void {
     assert && assert( this.enabledProperty.value, 'Food is not enabled' );
-    assert && assert( NaturalSelectionUtils.isNonNegative( timeInGenerations ), `invalid timeInGenerations: ${timeInGenerations}` );
+    assert && assert( timeInGenerations >= 0, `invalid timeInGenerations: ${timeInGenerations}` );
 
     let totalStarved = 0;
     if ( this.isToughProperty.value ) {

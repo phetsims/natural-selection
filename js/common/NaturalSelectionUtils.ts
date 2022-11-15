@@ -9,7 +9,6 @@
 import Range from '../../../dot/js/Range.js';
 import PhetioObject from '../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../tandem/js/Tandem.js';
-import IntentionalAny from '../../../phet-core/js/types/IntentionalAny.js';
 import naturalSelection from '../naturalSelection.js';
 
 const NaturalSelectionUtils = {
@@ -49,9 +48,6 @@ const NaturalSelectionUtils = {
    * @param [compare] - the comparison function, defaults to ascending numbers
    */
   isSorted<T>( array: T[], compare?: ( value: T, nextValue: T ) => boolean ): boolean {
-    assert && assert( Array.isArray( array ), 'invalid array' );
-    assert && assert( !compare || typeof compare === 'function', 'invalid array' );
-
     compare = compare || ( ( value, nextValue ) => value <= nextValue );
     let isSorted = true;
     for ( let i = 1; i < array.length - 1 && isSorted; i++ ) {
@@ -69,45 +65,31 @@ const NaturalSelectionUtils = {
   },
 
   /**
-   * Determines whether a value is a positive number.
-   */
-  isPositive( value: IntentionalAny ): boolean {
-    return ( typeof value === 'number' ) && ( value > 0 );
-  },
-
-  /**
-   * Determines whether a value is a non-negative number.
-   */
-  isNonNegative( value: IntentionalAny ): boolean {
-    return ( typeof value === 'number' ) && ( value >= 0 );
-  },
-
-  /**
    * Determines whether a value is a positive integer.
    */
-  isPositiveInteger( value: IntentionalAny ): boolean {
-    return NaturalSelectionUtils.isPositive( value ) && Number.isInteger( value );
+  isPositiveInteger( value: number ): boolean {
+    return Number.isInteger( value ) && value > 0;
   },
 
   /**
    * Determines whether a value is a non-negative integer.
    */
-  isNonNegativeInteger( value: IntentionalAny ): boolean {
-    return NaturalSelectionUtils.isNonNegative( value ) && Number.isInteger( value );
+  isNonNegativeInteger( value: number ): boolean {
+    return Number.isInteger( value ) && value >= 0;
   },
 
   /**
    * Determines whether a value is a percentage, between 0 and 1.
    */
-  isPercent( value: IntentionalAny ): boolean {
-    return NaturalSelectionUtils.isNonNegative( value ) && ( value >= 0 ) && ( value <= 1 );
+  isPercent( value: number ): boolean {
+    return ( value >= 0 ) && ( value <= 1 );
   },
 
   /**
    * Determines whether a value is a Range for a percentage, between 0 and 1.
    */
-  isPercentRange( value: IntentionalAny ): boolean {
-    return ( value instanceof Range ) && ( value.min >= 0 ) && ( value.max <= 1 );
+  isPercentRange( range: Range ): boolean {
+    return ( range.min >= 0 ) && ( range.max <= 1 );
   },
 
   /**
