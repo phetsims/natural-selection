@@ -38,7 +38,7 @@ type SelfOptions = {
   mutateTeeth?: boolean;
 };
 
-type GenotypeOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
+export type GenotypeOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
 type GenotypeStateObject = {
   mutation: AlleleStateObject;

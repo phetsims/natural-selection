@@ -1,6 +1,5 @@
 // Copyright 2019-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Bunny is the model of a bunny. Every bunny has a Genotype (genetic blueprint) and Phenotype (appearance).
  * All bunnies except generation-zero have 2 parents, referred to as 'father' and 'mother', although bunnies
@@ -10,26 +9,27 @@
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
-import Vector3 from '../../../../dot/js/Vector3.js';
+import Vector3, { Vector3StateObject } from '../../../../dot/js/Vector3.js';
 import merge from '../../../../phet-core/js/merge.js';
-import required from '../../../../phet-core/js/required.js';
-import AssertUtils from '../../../../phetcommon/js/AssertUtils.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
-import Genotype from './Genotype.js';
-import Organism from './Organism.js';
+import Genotype, { GenotypeOptions } from './Genotype.js';
+import Organism, { OrganismOptions } from './Organism.js';
 import Phenotype from './Phenotype.js';
 import XDirection from './XDirection.js';
+import { CompositeSchema } from '../../../../tandem/js/types/StateSchema.js';
 
 // constants
 const HOP_TIME_RANGE = new Range( 0.25, 0.5 ); // time to complete a hop cycle, in seconds
@@ -37,115 +37,159 @@ const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // straight-line distance that a
 const HOP_HEIGHT_RANGE = new Range( 30, 50 ); // how high above the ground a bunny hops
 const X_MARGIN = 28; // determined empirically, to keep bunnies inside bounds of the environment
 
+type SelfOptions = {
+  father?: Bunny | null; // the Bunny's father, null if no father
+  mother?: Bunny | null; // the Bunny's mother, null if no mother
+  generation?: number; // generation that this Bunny belongs to
+  genotypeOptions?: GenotypeOptions;
+};
+
+type BunnyOptions = SelfOptions & PickRequired<OrganismOptions, 'tandem'>;
+
+type BunnyStateObject = {
+  father: BunnyStateObject | null;
+  mother: BunnyStateObject | null;
+  generation: number;
+  isAlive: boolean;
+  age: number;
+  _private: {
+    restTime: number;
+    hopTime: number;
+    cumulativeRestTime: number;
+    cumulativeHopTime: number;
+    hopDelta: Vector3StateObject;
+    hopStartPosition: Vector3StateObject;
+  };
+};
+
+type BunnyConstructorArguments = [ EmptySelfOptions ];
+
 export default class Bunny extends Organism {
 
+  public father: Bunny | null; //TODO _father
+  public mother: Bunny | null; //TODO _mother
+  public readonly generation: number;
+  public isAlive: boolean; //TODO _isAlive
+  public age: number; //TODO _age;
+
+  // the bunny's genetic blueprint
+  public readonly genotype: Genotype;
+
+  // the bunny's appearance, the manifestation of its genotype
+  public readonly phenotype: Phenotype;
+
+  // Dynamic range for time spent resting between hops, in seconds. This is set by BunnyCollection based
+  // on the total number of bunnies, so that bunnies rest longer when the population is larger. More details at
+  // BunnyCollection.bunnyRestRangeProperty.
+  private readonly bunnyRestRangeProperty: TReadOnlyProperty<Range>;
+
+  // time to rest before hopping, randomized in initializeMotion
+  private restTime: number;
+
+  // the cumulative time spent resting since the last hop, in seconds
+  // Initialized with a random value so that bunnies born at the same time don't all hop at the same time.
+  private cumulativeRestTime: number;
+
+  // time to complete one full hop, randomized in initializeMotion
+  private hopTime: number;
+
+  // the cumulative time spent hopping since the last reset, in seconds
+  private cumulativeHopTime: number;
+
+  // the change in position when the bunny hops, randomized in initializeMotion
+  private hopDelta: Vector3;
+
+  // position at the start of a hop cycle
+  private hopStartPosition: Vector3;
+
+  // fires when the Bunny has died. dispose is required.
+  public readonly diedEmitter: Emitter;
+
+  // fires when the Bunny has been disposed. dispose is required.
+  public readonly disposedEmitter: Emitter;
+
+  private readonly disposeBunny: () => void;
+
   /**
-   * @param {GenePool} genePool
-   * @param {EnvironmentModelViewTransform} modelViewTransform
-   * @param {ReadOnlyProperty.<Range>} bunnyRestRangeProperty - range for time spent resting between hops, in seconds
-   * @param {Object} [options]
+   * @param genePool
+   * @param modelViewTransform
+   * @param bunnyRestRangeProperty - range for time spent resting between hops, in seconds
+   * @param providedOptions
    */
-  constructor( genePool, modelViewTransform, bunnyRestRangeProperty, options ) {
+  public constructor( genePool: GenePool,
+                      modelViewTransform: EnvironmentModelViewTransform,
+                      bunnyRestRangeProperty: TReadOnlyProperty<Range>,
+                      providedOptions: BunnyOptions ) {
 
-    assert && assert( genePool instanceof GenePool, 'invalid genePool' );
-    assert && assert( modelViewTransform instanceof EnvironmentModelViewTransform, 'invalid modelViewTransform' );
-    assert && AssertUtils.assertAbstractPropertyOf( bunnyRestRangeProperty, Range );
+    const options = optionize<BunnyOptions, StrictOmit<SelfOptions, 'genotypeOptions'>, OrganismOptions>()( {
 
-    options = merge( {
+      // SelfOptions
+      father: null,
+      mother: null,
+      generation: 0,
 
-      father: null, // {Bunny|null} the Bunny's father, null if no father
-      mother: null, // {Bunny|null} the Bunny's mother, null if no mother
-      generation: 0, // {number} generation that this Bunny belongs to
-
-      // {Object|null} options to Genotype constructor
-      genotypeOptions: null,
-
-      // Default to random position and xDirection
+      // OrganismOptions
       position: modelViewTransform.getRandomGroundPosition( X_MARGIN ),
       xDirection: XDirection.getRandom(),
-
-      // phet-io
-      tandem: Tandem.REQUIRED,
       phetioType: Bunny.BunnyIO,
       phetioDynamicElement: true
-    }, options );
+    }, providedOptions );
 
     // Validate options
     assert && assert( ( options.father && options.mother ) || ( !options.father && !options.mother ),
       'bunny must have both parents or no parents' );
-    assert && assert( NaturalSelectionUtils.isNonNegativeInteger( options.generation ), 'invalid generation' );
+    assert && assert( Number.isInteger( options.generation ) && options.generation >= 0, 'invalid generation' );
 
     super( modelViewTransform, options );
 
-    // @public (read-only)
-    this.father = options.father; // {Bunny|null} null if the bunny had no father, or the father was disposed
-    this.mother = options.mother; // {Bunny|null} null if the bunny had no mother, or the mother was disposed
-    this.generation = options.generation; // {number}
-    this.isAlive = true; // dead bunnies are kept for the Pedigree graph
-
-    // @public
+    this.father = options.father;
+    this.mother = options.mother;
+    this.generation = options.generation;
+    this.isAlive = true;
     this.age = 0;
 
     const genotypeOptions = merge( {}, options.genotypeOptions, {
       tandem: options.tandem.createTandem( 'genotype' )
     } );
 
-    // @public (read-only) the bunny's genetic blueprint
     this.genotype = new Genotype( genePool, genotypeOptions );
 
-    // @public (read-only) the bunny's appearance, the manifestation of its genotype
     this.phenotype = new Phenotype( this.genotype, {
       tandem: options.tandem.createTandem( 'phenotype' )
     } );
 
-    // @private dynamic range for time spent resting between hops, in seconds. This is set by BunnyCollection based
-    // on the total number of bunnies, so that bunnies rest longer when the population is larger. More details at
-    // BunnyCollection.bunnyRestRangeProperty.
     this.bunnyRestRangeProperty = bunnyRestRangeProperty;
-
-    // @private {number} time to rest before hopping, randomized in initializeMotion
     this.restTime = this.bunnyRestRangeProperty.value.min;
-
-    // @private {number} the cumulative time spent resting since the last hop, in seconds
-    // Initialized with a random value so that bunnies born at the same time don't all hop at the same time.
     this.cumulativeRestTime = dotRandom.nextDoubleInRange( this.bunnyRestRangeProperty.value );
-
-    // @private {number} time to complete one full hop, randomized in initializeMotion
     this.hopTime = HOP_TIME_RANGE.max;
-
-    // @private {number} the cumulative time spent hopping since the last reset, in seconds
     this.cumulativeHopTime = 0;
-
-    // @private {Vector3} the change in position when the bunny hops, randomized in initializeMotion
     this.hopDelta = new Vector3( 0, 0, 0 );
-
-    // @private {Vector3} position at the start of a hop cycle
     this.hopStartPosition = this.positionProperty.value;
 
     // Initialize the first motion cycle.
     this.initializeMotion();
 
-    // @public fires when the Bunny has died. dispose is required.
     this.diedEmitter = new Emitter();
-
-    // @public fires when the Bunny has been disposed. dispose is required.
     this.disposedEmitter = new Emitter();
 
     // When the father or mother is disposed, set them to null to free memory.
     // See https://github.com/phetsims/natural-selection/issues/112
     const fatherDisposedListener = () => {
-      this.father.disposedEmitter.removeListener( fatherDisposedListener );
-      this.father = null;
+      if ( this.father ) {
+        this.father.disposedEmitter.removeListener( fatherDisposedListener );
+        this.father = null;
+      }
     };
     this.father && this.father.disposedEmitter.addListener( fatherDisposedListener );
 
     const motherDisposedListener = () => {
-      this.mother.disposedEmitter.removeListener( motherDisposedListener );
-      this.mother = null;
+      if ( this.mother ) {
+        this.mother.disposedEmitter.removeListener( motherDisposedListener );
+        this.mother = null;
+      }
     };
     this.mother && this.mother.disposedEmitter.addListener( motherDisposedListener );
 
-    // @private {function}
     this.disposeBunny = () => {
       this.genotype.dispose();
       this.phenotype.dispose();
@@ -164,11 +208,7 @@ export default class Bunny extends Organism {
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     assert && assert( !this.isDisposed, 'bunny is already disposed' );
     this.disposeBunny();
     super.dispose();
@@ -178,9 +218,8 @@ export default class Bunny extends Organism {
 
   /**
    * Kills this bunny, forever and ever. (This sim does not support reincarnation or other forms of 'pooling' :)
-   * @public
    */
-  die() {
+  public die(): void {
     assert && assert( this.isAlive, 'bunny is already dead' );
     this.isAlive = false;
     this.diedEmitter.emit();
@@ -189,10 +228,9 @@ export default class Bunny extends Organism {
 
   /**
    * Moves the Bunny around. This is the motion cycle for a bunny. Each bunny rests, hops, rests, hops, ...
-   * @param {number} dt - time step, in seconds
-   * @public
+   * @param dt - time step, in seconds
    */
-  move( dt ) {
+  public move( dt: number ): void {
     assert && assert( this.isAlive, 'dead bunny cannot move' );
 
     if ( this.cumulativeRestTime < this.restTime ) {
@@ -215,9 +253,8 @@ export default class Bunny extends Organism {
   /**
    * Initializes the next motion cycle. A bunny will continue to hop until it gets to the edge of the screen.
    * Then it reverses direction.
-   * @private
    */
-  initializeMotion() {
+  private initializeMotion(): void {
 
     // Verify that the bunny is in z bounds.
     // See https://github.com/phetsims/natural-selection/issues/131
@@ -280,10 +317,9 @@ export default class Bunny extends Organism {
 
   /**
    * Performs part of a hop cycle.
-   * @param {number} dt - time step, in seconds
-   * @private
+   * @param dt - time step, in seconds
    */
-  hop( dt ) {
+  private hop( dt: number ): void {
     assert && assert( this.cumulativeHopTime < this.hopTime, 'hop should not have been called' );
 
     this.cumulativeHopTime += dt;
@@ -305,9 +341,8 @@ export default class Bunny extends Organism {
   /**
    * Interrupts a bunny's hop, and moves it immediately to the ground. This is used to prevent bunnies from being
    * stuck up in the air mid-hop when the simulation ends.
-   * @public
    */
-  interruptHop() {
+  public interruptHop(): void {
 
     // move bunny to the ground
     const position = this.positionProperty.value;
@@ -321,19 +356,15 @@ export default class Bunny extends Organism {
   /**
    * Is this bunny an 'original mutant'? An original mutant is a bunny in which the mutation first occurred.
    * These bunnies are labeled with a mutation icon in the Pedigree graph.
-   * @returns {boolean}
-   * @public
    */
-  isOriginalMutant() {
+  public isOriginalMutant(): boolean {
     return !!this.genotype.mutation;
   }
 
   /**
    * Converts Bunny to a string. This is intended for debugging only. Do not rely on the format of this string!
-   * @returns {string}
-   * @public
    */
-  toString() {
+  public override toString(): string {
     return `${this.tandem.name}, ` +
            `generation=${this.generation}, ` +
            `age=${this.age}, ` +
@@ -351,11 +382,8 @@ export default class Bunny extends Organism {
   /**
    * Returns a function that returns a map of state keys and their associated IOTypes, see IOType for details.
    * We need to use a function because the state schema recursive references BunnyIO.
-   * @param {IOType} BunnyIO
-   * @returns {function(IOType): {Object.<string,IOType>}}
-   * @public
    */
-  static getStateSchema( BunnyIO ) {
+  private static getStateSchema( BunnyIO: IOType ): CompositeSchema {
     return {
 
       // Even though father and mother are stateful, we need a reference to them.
@@ -369,6 +397,7 @@ export default class Bunny extends Organism {
 
       // private fields, will not be shown in Studio
       _private: {
+        // @ts-ignore https://github.com/phetsims/tandem/issues/282 TypeScript support for _private
         restTime: NumberIO,
         hopTime: NumberIO,
         cumulativeRestTime: NumberIO,
@@ -381,36 +410,28 @@ export default class Bunny extends Organism {
 
   /**
    * Creates the args that BunnyGroup uses to instantiate a Bunny.
-   * @param {Object} stateObject
-   * @returns {Object[]}
-   * @public
+   * While we could restore a few things via the constructor, we're going to instantiate with defaults
+   * and restore everything via applyState.
    */
-  static stateToArgsForConstructor( stateObject ) {
-
-    // stateToArgsForConstructor is called only for dynamic elements that are part of a group.
-    // So we are not restoring anything through options, because that would not support static elements.
-    // Everything will be restored via applyState.
-    return [ {} ];  // explicit options arg to Bunny constructor
+  private static stateToArgsForConstructor( stateObject: BunnyStateObject ): BunnyConstructorArguments {
+    return [ {} ];  // BunnyGroup.createElement needs an empty options object
   }
 
   /**
    * Restores Bunny state after instantiation.
-   * @param {Object} stateObject - return value of fromStateObject
-   * @public
    */
-  applyState( stateObject ) {
-    required( stateObject );
+  private applyState( stateObject: BunnyStateObject ): void {
     Bunny.BunnyIO.stateSchema.defaultApplyState( this, stateObject );
   }
 
   /**
-   * @public
    * BunnyIO handles PhET-iO serialization of Bunny.
    * It implements 'Dynamic element serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
-  static BunnyIO = new IOType( 'BunnyIO', {
+  public static readonly BunnyIO = new IOType( 'BunnyIO', {
     valueType: Bunny,
+    // @ts-ignore TODO https://github.com/phetsims/natural-selection/issues/326
     stateSchema: Bunny.getStateSchema,
     stateToArgsForConstructor: stateObject => Bunny.stateToArgsForConstructor( stateObject ),
     applyState: ( bunny, stateObject ) => bunny.applyState( stateObject )
@@ -419,16 +440,13 @@ export default class Bunny extends Organism {
 
 /**
  * Gets the (dx, dy, dz) for a hop cycle.
- * @param {number} hopDistance - maximum straight-line distance that the bunny will hop in the xz plane
- * @param {number} hopHeight - height above the ground that the bunny will hop
- * @param {XDirection} xDirection - direction that the bunny is facing along the x-axis
- * @returns {Vector3}
+ * @param hopDistance - maximum straight-line distance that the bunny will hop in the xz plane
+ * @param hopHeight - height above the ground that the bunny will hop
+ * @param xDirection - direction that the bunny is facing along the x-axis
  */
-function getHopDelta( hopDistance, hopHeight, xDirection ) {
+function getHopDelta( hopDistance: number, hopHeight: number, xDirection: XDirection ): Vector3 {
 
-  assert && assert( typeof hopDistance === 'number', 'invalid hopDistance' );
-  assert && assert( NaturalSelectionUtils.isNonNegative( hopHeight ), `invalid hopHeight: ${hopHeight}` );
-  assert && assert( XDirection.enumeration.includes( xDirection ), 'invalid xDirection' );
+  assert && assert( hopHeight > 0, `invalid hopHeight: ${hopHeight}` );
 
   const angle = dotRandom.nextDoubleBetween( 0, 2 * Math.PI );
 
