@@ -1,70 +1,69 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * createBunnyArray creates an observable Array that has counts for each phenotype.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import createObservableArray from '../../../../axon/js/createObservableArray.js';
+import createObservableArray, { ObservableArray, ObservableArrayOptions } from '../../../../axon/js/createObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
 import BunnyCounts from './BunnyCounts.js';
 
-/**
- * @typedef {ObservableArrayDef} BunnyArrayDef
- * @property {Property.<BunnyCounts>} countsProperty
- */
+// Additional properties that will be added to ObservableArray<Bunny>
+type AdditionalProperties = {
+  countsProperty: Property<BunnyCounts>;
+};
 
-/**
- * @param {Object} [options]
- * @returns {BunnyArrayDef}
- */
-export default function createBunnyArray( options ) {
+export type BunnyArray = ObservableArray<Bunny> & AdditionalProperties;
 
-  options = merge( {
+type SelfOptions = EmptySelfOptions;
 
-    // phet-io
+type BunnyArrayOptions = SelfOptions & ObservableArrayOptions<Bunny> &
+  PickRequired<ObservableArrayOptions<Bunny>, 'tandem'>;
+
+export default function createBunnyArray( providedOptions: BunnyArrayOptions ): BunnyArray {
+
+  const options = optionize<BunnyArrayOptions, SelfOptions, ObservableArrayOptions<Bunny>>()( {
+
+    // ObservableArrayOptions
     phetioType: createObservableArray.ObservableArrayIO( ReferenceIO( Bunny.BunnyIO ) ),
-    tandem: Tandem.REQUIRED,
     phetioState: false
-  }, options );
+  }, providedOptions );
 
-  const bunnyArray = createObservableArray( options );
+  // We want to add countsProperty later, so do a little TypeScript hackery here to make that possible.
+  const bunnyArray: ObservableArray<Bunny> & Partial<AdditionalProperties> = createObservableArray( options );
 
-  // @public (read-only) {Property.<BunnyCounts>}
-  bunnyArray.countsProperty = new Property( BunnyCounts.withZero(), {
+  const countsProperty = new Property( BunnyCounts.withZero(), {
     tandem: options.tandem.createTandem( 'countsProperty' ),
     phetioValueType: BunnyCounts.BunnyCountsIO,
     phetioState: false // because counts will be restored as Bunny instances are restored to BunnyGroup
   } );
 
+  bunnyArray.countsProperty = countsProperty;
+
   // Update counts when a bunny is added. removeItemAddedListener is not necessary.
   bunnyArray.addItemAddedListener( bunny => {
-    bunnyArray.countsProperty.value = bunnyArray.countsProperty.value.plus( bunny );
-    assert && assert( bunnyArray.countsProperty.value.totalCount === bunnyArray.length, 'counts out of sync' );
+    countsProperty.value = countsProperty.value.plus( bunny );
+    assert && assert( countsProperty.value.totalCount === bunnyArray.length, 'counts out of sync' );
   } );
 
   // Update counts when a bunny is removed. removeItemAddedListener is not necessary.
   bunnyArray.addItemRemovedListener( bunny => {
-    bunnyArray.countsProperty.value = bunnyArray.countsProperty.value.minus( bunny );
-    assert && assert( bunnyArray.countsProperty.value.totalCount === bunnyArray.length, 'counts out of sync' );
+    countsProperty.value = countsProperty.value.minus( bunny );
+    assert && assert( countsProperty.value.totalCount === bunnyArray.length, 'counts out of sync' );
   } );
 
-  /**
-   * @public
-   * @override
-   */
   bunnyArray.dispose = () => {
     assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
   };
 
-  return bunnyArray;
+  return bunnyArray as BunnyArray;
 }
 
 naturalSelection.register( 'createBunnyArray', createBunnyArray );
