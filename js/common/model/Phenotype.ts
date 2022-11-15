@@ -124,9 +124,8 @@ export default class Phenotype extends PhetioObject {
   }
 
   /**
-   * PhenotypeIO handles PhET-iO serialization of Phenotype.  It does so by delegating to Phenotype.
-   * The methods that it implements are typical of 'Dynamic element serialization', as described in
-   * the Serialization section of
+   * PhenotypeIO handles PhET-iO serialization of Phenotype.
+   * It implements 'Dynamic element serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
   public static readonly PhenotypeIO = new IOType<Phenotype, PhenotypeStateObject>( 'PhenotypeIO', {

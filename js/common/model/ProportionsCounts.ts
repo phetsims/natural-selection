@@ -60,9 +60,8 @@ export default class ProportionsCounts {
   }
 
   /**
-   * ProportionsCountsIO handles PhET-iO serialization of ProportionsCounts. It does so by delegating to ProportionsCounts.
-   * The methods that ProportionsCountsIO implements are typical of 'Data type serialization', as described in
-   * the Serialization section of
+   * ProportionsCountsIO handles PhET-iO serialization of ProportionsCounts.
+   * It implements 'Data type serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
   public static readonly ProportionsCountsIO = new IOType<ProportionsCounts, ProportionsCountsStateObject>( 'ProportionsCountsIO', {

@@ -197,9 +197,8 @@ export default class Genotype extends PhetioObject {
   }
 
   /**
-   * GenotypeIO handles PhET-iO serialization of Genotype.  It does so by delegating to Genotype.
-   * The methods that it implements are typical of 'Dynamic element serialization', as described in
-   * the Serialization section of
+   * GenotypeIO handles PhET-iO serialization of Genotype.
+   * It implements 'Dynamic element serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
   public static readonly GenotypeIO = new IOType<Genotype, GenotypeStateObject>( 'GenotypeIO', {

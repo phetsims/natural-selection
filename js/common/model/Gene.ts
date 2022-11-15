@@ -67,7 +67,7 @@ type SelfOptions = {
 
 type GeneOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export type GeneStateObject = ReferenceIOState; // because AlleleIO is defined in terms of ReferenceIO
+export type GeneStateObject = ReferenceIOState; // because GeneIO is a subtype of ReferenceIO
 
 export default class Gene extends PhetioObject {
 
@@ -222,8 +222,8 @@ export default class Gene extends PhetioObject {
   }
 
   /**
-   * GeneIO handles PhET-iO serialization of Gene. It implements 'Reference type serialization',
-   * as described in the Serialization section of
+   * GeneIO handles PhET-iO serialization of Gene.
+   * It implements 'Reference type serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
   public static GeneIO = new IOType<Gene, GeneStateObject>( 'GeneIO', {

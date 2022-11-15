@@ -147,9 +147,8 @@ export default class GenePair extends PhetioObject {
   }
 
   /**
-   * GenePairIO handles PhET-iO serialization of GenePair. It does so by delegating to Genotype.
-   * The methods that it implements are typical of 'Dynamic element serialization', as described in
-   * the Serialization section of
+   * GenePairIO handles PhET-iO serialization of GenePair.
+   * It implements 'Dynamic element serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
   public static readonly GenePairIO = new IOType<GenePair, GenePairStateObject>( 'GenePairIO', {

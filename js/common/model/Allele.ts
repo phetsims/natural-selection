@@ -35,7 +35,7 @@ type SelfOptions = EmptySelfOptions;
 
 type AlleleOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export type AlleleStateObject = ReferenceIOState; // because AlleleIO is defined in terms of ReferenceIO
+export type AlleleStateObject = ReferenceIOState; // because AlleleIO is a subtype of ReferenceIO
 
 export default class Allele extends PhetioObject {
 

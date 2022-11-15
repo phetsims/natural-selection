@@ -404,9 +404,8 @@ export default class Bunny extends Organism {
 
   /**
    * @public
-   * BunnyIO handles PhET-iO serialization of Bunny. Because serialization involves accessing private members,
-   * it delegates to Bunny. The methods that BunnyIO overrides are typical of 'Dynamic element serialization',
-   * as described in the Serialization section of
+   * BunnyIO handles PhET-iO serialization of Bunny.
+   * It implements 'Dynamic element serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
   static BunnyIO = new IOType( 'BunnyIO', {
