@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * BunnyCollection is the collection of Bunny instances, with methods for managing that collection.
  * It encapsulates BunnyGroup (the PhetioGroup), hiding it from the rest of the sim.
