@@ -7,7 +7,6 @@
  */
 
 import Range from '../../../dot/js/Range.js';
-import AssertUtils from '../../../phetcommon/js/AssertUtils.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import { VBoxOptions } from '../../../scenery/js/imports.js';
 import { ArrowButtonOptions } from '../../../sun/js/buttons/ArrowButton.js';
@@ -17,6 +16,7 @@ import { DialogOptions } from '../../../sun/js/Dialog.js';
 import { PanelOptions } from '../../../sun/js/Panel.js';
 import naturalSelection from '../naturalSelection.js';
 import NaturalSelectionColors from './NaturalSelectionColors.js';
+import NaturalSelectionUtils from './NaturalSelectionUtils.js';
 
 // constants
 const CORNER_RADIUS = 5;
@@ -137,8 +137,8 @@ const NaturalSelectionConstants = {
   PEDIGREE_TREE_DEPTH: 4
 };
 
-assert && AssertUtils.assertRangeBetween( NaturalSelectionConstants.CLOCK_FOOD_RANGE, 0, 1 );
-assert && AssertUtils.assertRangeBetween( NaturalSelectionConstants.CLOCK_WOLVES_RANGE, 0, 1 );
+assert && assert( NaturalSelectionUtils.isPercentRange( NaturalSelectionConstants.CLOCK_FOOD_RANGE ) );
+assert && assert( NaturalSelectionUtils.isPercentRange( NaturalSelectionConstants.CLOCK_WOLVES_RANGE ) );
 
 naturalSelection.register( 'NaturalSelectionConstants', NaturalSelectionConstants );
 export default NaturalSelectionConstants;
