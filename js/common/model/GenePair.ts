@@ -128,10 +128,12 @@ export default class GenePair extends PhetioObject {
 
   /**
    * Serializes a GenePair instance.
+   * Because this._gene is private, it does not match the gene field name in stateSchema, and we cannot use
+   * the default implementation of toStateObject.
    */
   private toStateObject(): GenePairStateObject {
     return {
-      gene: Gene.GeneIO.toStateObject( this.gene ),
+      gene: Gene.GeneIO.toStateObject( this._gene ),
       fatherAllele: Allele.AlleleIO.toStateObject( this.fatherAllele ),
       motherAllele: Allele.AlleleIO.toStateObject( this.motherAllele )
     };

@@ -113,12 +113,14 @@ export default class Wolf extends Organism {
 
   /**
    * Serializes this Wolf instance.
+   * Because this._speed is private, it does not match the speed field name in stateSchema, and we cannot use
+   * the default implementation of toStateObject.
    */
   private toStateObject(): WolfStateObject {
     return {
       // position and xDirection are handled by super Organism instrumented Properties
       _private: {
-        speed: this.speed
+        speed: this._speed
       }
     };
   }
@@ -148,6 +150,8 @@ export default class Wolf extends Organism {
   public static readonly WolfIO = new IOType<Wolf, WolfStateObject>( 'WolfIO', {
     valueType: Wolf,
     stateSchema: {
+
+      // private fields, will not be shown in Studio
       _private: {
         // @ts-ignore TODO https://github.com/phetsims/natural-selection/issues/326 open a tandem issue
         speed: NumberIO
