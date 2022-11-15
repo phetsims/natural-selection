@@ -120,7 +120,6 @@ export default class OrganismSprites extends Sprites {
     bunnyCollection.liveBunnies.addItemAddedListener( ( bunny: Bunny ) => this.createBunnySpriteInstance( bunny ) );
 
     // Create a sprite instance for each wolf that is created. removeListener is not necessary.
-    // @ts-ignore TODO https://github.com/phetsims/natural-selection/issues/326 remove after WolfCollect has been converted to TypeScript
     wolfCollection.wolfCreatedEmitter.addListener( wolf => this.createWolfSpriteInstance( wolf, wolfSprite ) );
 
     // Show sprites for tender vs tough food. unlink is not necessary.
