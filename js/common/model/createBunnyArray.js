@@ -1,5 +1,6 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * createBunnyArray creates an observable Array that has counts for each phenotype.
  *
