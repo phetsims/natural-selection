@@ -29,11 +29,11 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "347540deb9077d4a4a51b65399427d081a61a0db",
+    "sha": "aff5bd3ef411f55e50fdc664256d7b29b432a92c",
     "branch": "1.4"
   },
   "phet-core": {
-    "sha": "e5408a37539b6ceef9d753b974816903b7a6fbf5",
+    "sha": "33269ad0192af7fe853eec29cd74b644fe8123fa",
     "branch": "HEAD"
   },
   "phet-io": {
