@@ -8,14 +8,13 @@
 
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import { Shape } from '../../../../../kite/js/imports.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import optionize from '../../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../../phet-core/js/optionize.js';
 import { Node, NodeOptions, NodeTranslationOptions } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
-import PopulationPlotNode from './PopulationPlotNode.js';
+import PopulationPlotNode, { PopulationPlotNodeOptions } from './PopulationPlotNode.js';
 
 type SelfOptions = {
 
@@ -60,45 +59,45 @@ export default class PopulationPlotsNode extends Node {
       timeInGenerationsProperty: populationModel.timeInGenerationsProperty
     };
 
-    const totalPlotNode = new PopulationPlotNode( merge( {}, plotNodeConfig, {
+    const totalPlotNode = new PopulationPlotNode( combineOptions<PopulationPlotNodeOptions>( {}, plotNodeConfig, {
       points: populationModel.totalPoints,
       plotVisibleProperty: populationModel.totalVisibleProperty,
       color: NaturalSelectionColors.POPULATION_TOTAL_COUNT
     } ) );
 
-    const whiteFurPlotNode = new PopulationPlotNode( merge( {}, plotNodeConfig, {
+    const whiteFurPlotNode = new PopulationPlotNode( combineOptions<PopulationPlotNodeOptions>( {}, plotNodeConfig, {
       points: populationModel.whiteFurPoints,
       plotVisibleProperty: populationModel.whiteFurVisibleProperty,
       color: NaturalSelectionColors.FUR
     } ) );
 
-    const brownFurPlotNode = new PopulationPlotNode( merge( {}, plotNodeConfig, {
+    const brownFurPlotNode = new PopulationPlotNode( combineOptions<PopulationPlotNodeOptions>( {}, plotNodeConfig, {
       points: populationModel.brownFurPoints,
       plotVisibleProperty: populationModel.brownFurVisibleProperty,
       color: NaturalSelectionColors.FUR,
       isMutant: true
     } ) );
 
-    const straightEarsPlotNode = new PopulationPlotNode( merge( {}, plotNodeConfig, {
+    const straightEarsPlotNode = new PopulationPlotNode( combineOptions<PopulationPlotNodeOptions>( {}, plotNodeConfig, {
       points: populationModel.straightEarsPoints,
       plotVisibleProperty: populationModel.straightEarsVisibleProperty,
       color: NaturalSelectionColors.EARS
     } ) );
 
-    const floppyEarsPlotNode = new PopulationPlotNode( merge( {}, plotNodeConfig, {
+    const floppyEarsPlotNode = new PopulationPlotNode( combineOptions<PopulationPlotNodeOptions>( {}, plotNodeConfig, {
       points: populationModel.floppyEarsPoints,
       plotVisibleProperty: populationModel.floppyEarsVisibleProperty,
       color: NaturalSelectionColors.EARS,
       isMutant: true
     } ) );
 
-    const shortTeethPlotNode = new PopulationPlotNode( merge( {}, plotNodeConfig, {
+    const shortTeethPlotNode = new PopulationPlotNode( combineOptions<PopulationPlotNodeOptions>( {}, plotNodeConfig, {
       points: populationModel.shortTeethPoints,
       plotVisibleProperty: populationModel.shortTeethVisibleProperty,
       color: NaturalSelectionColors.TEETH
     } ) );
 
-    const longTeethProbeNode = new PopulationPlotNode( merge( {}, plotNodeConfig, {
+    const longTeethProbeNode = new PopulationPlotNode( combineOptions<PopulationPlotNodeOptions>( {}, plotNodeConfig, {
       points: populationModel.longTeethPoints,
       plotVisibleProperty: populationModel.longTeethVisibleProperty,
       color: NaturalSelectionColors.TEETH,

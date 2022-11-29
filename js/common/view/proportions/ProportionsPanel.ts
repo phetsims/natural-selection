@@ -7,10 +7,9 @@
  */
 
 import Property from '../../../../../axon/js/Property.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import { EmptySelfOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
-import { HSeparator, Text, VBox } from '../../../../../scenery/js/imports.js';
-import Checkbox from '../../../../../sun/js/Checkbox.js';
+import { combineOptions, EmptySelfOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
+import { HSeparator, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
+import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import GenePool from '../../model/GenePool.js';
@@ -52,15 +51,16 @@ export default class ProportionsPanel extends NaturalSelectionPanel {
       maxWidth: 100, // determined empirically
       tandem: valuesCheckboxTandem.createTandem( 'labelText' )
     } );
-    const valuesCheckbox = new Checkbox( valuesVisibleProperty, valuesCheckboxLabelText, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-      tandem: valuesCheckboxTandem
-    } ) );
+    const valuesCheckbox = new Checkbox( valuesVisibleProperty, valuesCheckboxLabelText,
+      combineOptions<CheckboxOptions>( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+        tandem: valuesCheckboxTandem
+      } ) );
     const xDilation = 8;
     const yDilation = 6;
     valuesCheckbox.touchArea = valuesCheckbox.localBounds.dilatedXY( xDilation, yDilation );
     valuesCheckbox.mouseArea = valuesCheckbox.localBounds.dilatedXY( xDilation, yDilation );
 
-    const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+    const content = new VBox( combineOptions<VBoxOptions>( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       preferredWidth: options.fixedWidth! - ( 2 * options.xMargin ),
       widthSizable: false,
       children: [

@@ -11,13 +11,12 @@ import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../../axon/js/NumberProperty.js';
 import Property from '../../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignGroup, HBox, Node, NodeOptions, Rectangle, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
-import Checkbox from '../../../../../sun/js/Checkbox.js';
+import { AlignBox, AlignGroup, HBox, Node, NodeOptions, Rectangle, Text, TextOptions, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
+import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
 import StringIO from '../../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
@@ -271,7 +270,7 @@ class RowLabel extends VBox {
     // 'bunnies' (plural) in multiple translated strings.
 
     // The first line of text indicates which generation the data is related to.
-    const firstLineOfText = new Text( firstLineStringProperty, merge( {
+    const firstLineOfText = new Text( firstLineStringProperty, combineOptions<TextOptions>( {
       tandem: options.tandem.createTandem( 'firstLineOfText' )
     }, textOptions ) );
 
@@ -286,7 +285,7 @@ class RowLabel extends VBox {
       tandem: secondLineOfTextTandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME ),
       phetioValueType: StringIO
     } );
-    const secondLineOfText = new Text( secondLineOfTextDerivedStringProperty, merge( {
+    const secondLineOfText = new Text( secondLineOfTextDerivedStringProperty, combineOptions<TextOptions>( {
       tandem: secondLineOfTextTandem
     }, textOptions ) );
 
@@ -342,9 +341,10 @@ class Column extends VBox {
       maxWidth: 100, // determined empirically
       tandem: checkboxTandem.createTandem( 'text' )
     } );
-    const checkbox = new Checkbox( geneVisibleProperty, text, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-      tandem: checkboxTandem
-    } ) );
+    const checkbox = new Checkbox( geneVisibleProperty, text,
+      combineOptions<CheckboxOptions>( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+        tandem: checkboxTandem
+      } ) );
 
     // Pointer areas for the checkbox
     const xDilation = 8;

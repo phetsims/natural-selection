@@ -11,11 +11,10 @@
  */
 
 import Property from '../../../../../axon/js/Property.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import optionize, { EmptySelfOptions, optionize3 } from '../../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions, optionize3 } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HStrut, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
-import Checkbox from '../../../../../sun/js/Checkbox.js';
+import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
@@ -64,7 +63,7 @@ export default class AllelesPanel extends NaturalSelectionPanel {
     } );
     const rows = [ furRow, earsRow, teethRow ];
 
-    const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+    const content = new VBox( combineOptions<VBoxOptions>( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       spacing: 28,
       children: [ titleText, ...rows ]
     } ) );
@@ -123,9 +122,10 @@ class Row extends VBox {
       tandem: checkboxTandem.createTandem( 'text' )
     } );
 
-    const checkbox = new Checkbox( visibleProperty, text, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-      tandem: checkboxTandem
-    } ) );
+    const checkbox = new Checkbox( visibleProperty, text,
+      combineOptions<CheckboxOptions>( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+        tandem: checkboxTandem
+      } ) );
     const xDilation = 8;
     const yDilation = 8;
     checkbox.touchArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );

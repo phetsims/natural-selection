@@ -10,10 +10,9 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
-import optionize, { EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HBoxOptions, Image, Node, NodeOptions, Rectangle, TColor, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HBoxOptions, Image, Node, NodeOptions, Rectangle, TColor, Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import RectangularPushButton, { RectangularPushButtonOptions } from '../../../../sun/js/buttons/RectangularPushButton.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
@@ -87,7 +86,7 @@ export default class AddMutationsPanel extends NaturalSelectionPanel {
       } )
     );
 
-    const vBox = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+    const vBox = new VBox( combineOptions<VBoxOptions>( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: rows
     } ) );
 
@@ -103,7 +102,7 @@ export default class AddMutationsPanel extends NaturalSelectionPanel {
       tandem: options.tandem.createTandem( 'titleText' )
     } );
 
-    const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+    const content = new VBox( combineOptions<VBoxOptions>( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       spacing: 2,
       children: [ titleText, columnHeadingsNode, vBox ]
     } ) );

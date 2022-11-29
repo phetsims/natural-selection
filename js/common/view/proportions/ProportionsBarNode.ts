@@ -10,12 +10,11 @@
 import Multilink from '../../../../../axon/js/Multilink.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../../dot/js/Utils.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import optionize from '../../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
-import { Node, NodeOptions, Rectangle, TColor, Text } from '../../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Rectangle, TColor, Text, TextOptions } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
@@ -74,10 +73,10 @@ export default class ProportionsBarNode extends Node {
       bottom: -4,
       maxWidth: 40 // determined empirically
     };
-    const normalPercentageText = new Text( '', merge( {}, percentageOptions, {
+    const normalPercentageText = new Text( '', combineOptions<TextOptions>( {}, percentageOptions, {
       tandem: options.tandem.createTandem( 'normalPercentageText' )
     } ) );
-    const mutantPercentageText = new Text( '', merge( {}, percentageOptions, {
+    const mutantPercentageText = new Text( '', combineOptions<TextOptions>( {}, percentageOptions, {
       tandem: options.tandem.createTandem( 'mutantPercentageText' )
     } ) );
 

@@ -6,10 +6,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../../phet-core/js/merge.js';
-import { EmptySelfOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
-import { AlignBox, AlignGroup, HSeparator, Text, VBox } from '../../../../../scenery/js/imports.js';
-import Checkbox from '../../../../../sun/js/Checkbox.js';
+import { combineOptions, EmptySelfOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
+import { AlignBox, AlignGroup, HSeparator, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
+import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
@@ -113,7 +112,7 @@ export default class PopulationPanel extends NaturalSelectionPanel {
       checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
     } );
 
-    const checkboxesVBox = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+    const checkboxesVBox = new VBox( combineOptions<VBoxOptions>( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: checkboxes
     } ) );
 
@@ -132,13 +131,14 @@ export default class PopulationPanel extends NaturalSelectionPanel {
       group: alignGroup,
       xAlign: 'left'
     } );
-    const dataProbeCheckbox = new Checkbox( populationModel.dataProbe.visibleProperty, dataProbeCheckboxContent, merge( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-      tandem: dataProbeCheckboxTandem
-    } ) );
+    const dataProbeCheckbox = new Checkbox( populationModel.dataProbe.visibleProperty, dataProbeCheckboxContent,
+      combineOptions<CheckboxOptions>( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+        tandem: dataProbeCheckboxTandem
+      } ) );
     dataProbeCheckbox.touchArea = dataProbeCheckbox.localBounds.dilatedXY( xDilation, yDilation );
     dataProbeCheckbox.mouseArea = dataProbeCheckbox.localBounds.dilatedXY( xDilation, yDilation );
 
-    const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+    const content = new VBox( combineOptions<VBoxOptions>( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       preferredWidth: options.fixedWidth! - ( 2 * options.xMargin ),
       widthSizable: false,
       children: [

@@ -15,11 +15,10 @@ import Multilink from '../../../../../axon/js/Multilink.js';
 import Property from '../../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../../dot/js/Range.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import optionize from '../../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import { Font, HBox, HBoxOptions, Text } from '../../../../../scenery/js/imports.js';
-import ArrowButton from '../../../../../sun/js/buttons/ArrowButton.js';
+import ArrowButton, { ArrowButtonOptions } from '../../../../../sun/js/buttons/ArrowButton.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
@@ -71,7 +70,7 @@ export default class PopulationGenerationScroller extends HBox {
       rangeProperty.value = new Range( min, max );
     };
     const backButton = new ArrowButton( 'left', back,
-      merge( {
+      combineOptions<ArrowButtonOptions>( {
         tandem: options.tandem.createTandem( 'backButton' )
       }, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS )
     );
@@ -83,7 +82,7 @@ export default class PopulationGenerationScroller extends HBox {
       rangeProperty.value = new Range( min, max );
     };
     const forwardButton = new ArrowButton( 'right', forward,
-      merge( {
+      combineOptions<ArrowButtonOptions>( {
         tandem: options.tandem.createTandem( 'forwardButton' )
       }, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS )
     );

@@ -51,7 +51,7 @@ type SelfOptions = {
   isMutant?: boolean;
 };
 
-type PopulationPlotNodeOptions = SelfOptions;
+export type PopulationPlotNodeOptions = SelfOptions;
 
 export default class PopulationPlotNode extends Node {
 
