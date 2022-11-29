@@ -140,6 +140,7 @@ export default class PopulationPanel extends NaturalSelectionPanel {
 
     const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       preferredWidth: options.fixedWidth! - ( 2 * options.xMargin ),
+      widthSizable: false,
       children: [
         checkboxesVBox,
         separator,

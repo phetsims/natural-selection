@@ -10,10 +10,9 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
-import optionize, { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { AlignGroup, Text, TextOptions, VBox } from '../../../../scenery/js/imports.js';
+import { AlignGroup, Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -84,7 +83,7 @@ export default class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       tandem: options.tandem.createTandem( 'titleText' )
     } );
 
-    const content = new VBox( merge( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
+    const content = new VBox( combineOptions<VBoxOptions>( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       children: [ titleText, ...checkboxes ]
     } ) );
 

@@ -33,7 +33,7 @@ export default class LimitedFoodCheckbox extends EnvironmentalFactorCheckbox {
 
     const labelText = new Text( NaturalSelectionStrings.limitedFoodStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 105, // determined empirically
+      maxWidth: 90, // determined empirically
       tandem: options.tandem.createTandem( 'labelText' )
     } );
 
