@@ -70,7 +70,7 @@ export type BunnyConstructorArguments = [ BunnyCreateElementOptions ];
 
 export default class Bunny extends Organism {
 
-  //TODO https://github.com/phetsims/natural-selection/issues/326 father, mother, isAlive, age should be readonly for clients
+  //TODO https://github.com/phetsims/natural-selection/issues/327 father, mother, isAlive, age should be readonly for clients
   public father: Bunny | null;
   public mother: Bunny | null;
   public readonly generation: number;
@@ -153,6 +153,7 @@ export default class Bunny extends Organism {
     this.isAlive = true;
     this.age = 0;
 
+    //TODO https://github.com/phetsims/natural-selection/issues/327 how are this.genotype and this.phenotype getting restored?
     this.genotype = new Genotype( genePool, combineOptions<GenotypeOptions>( {
       tandem: options.tandem.createTandem( 'genotype' )
     }, options.genotypeOptions ) );
@@ -434,8 +435,9 @@ export default class Bunny extends Organism {
    */
   public static readonly BunnyIO = new IOType( 'BunnyIO', {
     valueType: Bunny,
-    // @ts-ignore TODO https://github.com/phetsims/natural-selection/issues/326
+    // @ts-ignore TODO https://github.com/phetsims/natural-selection/issues/327
     stateSchema: Bunny.getStateSchema,
+    //TODO https://github.com/phetsims/natural-selection/issues/327 need to implement bunny.toStateObject()
     stateToArgsForConstructor: stateObject => Bunny.stateToArgsForConstructor( stateObject ),
     applyState: ( bunny, stateObject ) => bunny.applyState( stateObject )
   } );
