@@ -412,6 +412,7 @@ export default class Bunny extends Organism {
     };
   }
 
+  //TODO https://github.com/phetsims/natural-selection/issues/327 need to restore what we can via constructor
   /**
    * Creates the args that BunnyGroup uses to instantiate a Bunny.
    * While we could restore a few things via the constructor, we're going to instantiate with defaults
@@ -421,6 +422,7 @@ export default class Bunny extends Organism {
     return [ {} ];
   }
 
+  //TODO https://github.com/phetsims/natural-selection/issues/327 does defaultApplyState work here? why?
   /**
    * Restores Bunny state after instantiation.
    */
