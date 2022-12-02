@@ -35,6 +35,12 @@ import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import Allele from './Allele.js';
 
+// Untranslated (English) abbreviations of dominant alleles
+type DominantAbbreviationEnglish = 'F' | 'E' | 'T';
+
+// Untranslated (English) abbreviations of recessive alleles
+type RecessiveAbbreviationEnglish = 'f' | 'e' | 't';
+
 type SelfOptions = {
 
   // the name of the gene, visible in the UI
@@ -50,13 +56,13 @@ type SelfOptions = {
   mutantAllele: Allele;
 
   // the untranslated (English) abbreviation of the dominant allele, used in query parameters
-  dominantAbbreviationEnglish: string;
+  dominantAbbreviationEnglish: DominantAbbreviationEnglish;
 
   // the translated abbreviation of the dominant allele, visible in the UI
   dominantAbbreviationTranslatedProperty: TReadOnlyProperty<string>;
 
   // {string} the untranslated (English) abbreviation of the recessive allele, used in query parameters
-  recessiveAbbreviationEnglish: string;
+  recessiveAbbreviationEnglish: RecessiveAbbreviationEnglish;
 
   // {TReadOnlyProperty<string>} the translated abbreviation of the recessive allele, visible in the UI
   recessiveAbbreviationTranslatedProperty: TReadOnlyProperty<string>;
@@ -76,9 +82,9 @@ export default class Gene extends PhetioObject {
   public readonly tandemPrefix: string;
   public readonly normalAllele: Allele;
   public readonly mutantAllele: Allele;
-  public readonly dominantAbbreviationEnglish: string;
+  public readonly dominantAbbreviationEnglish: DominantAbbreviationEnglish;
   public readonly dominantAbbreviationTranslatedProperty: TReadOnlyProperty<string>;
-  public readonly recessiveAbbreviationEnglish: string;
+  public readonly recessiveAbbreviationEnglish: RecessiveAbbreviationEnglish;
   public readonly recessiveAbbreviationTranslatedProperty: TReadOnlyProperty<string>;
   public readonly color: Color | string;
 
