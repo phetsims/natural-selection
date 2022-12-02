@@ -14,7 +14,7 @@ import naturalSelection from '../../naturalSelection.js';
 export default class IntroModel extends NaturalSelectionModel {
 
   public constructor( tandem: Tandem ) {
-    super( 'introMutations', 'introPopulation', NaturalSelectionConstants.INTRO_SHRUBS_SEED, {
+    super( 'intro', NaturalSelectionConstants.INTRO_SHRUBS_SEED, {
       tandem: tandem
     } );
   }

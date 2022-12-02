@@ -14,7 +14,7 @@ import naturalSelection from '../../naturalSelection.js';
 export default class LabModel extends NaturalSelectionModel {
 
   public constructor( tandem: Tandem ) {
-    super( 'labMutations', 'labPopulation', NaturalSelectionConstants.LAB_SHRUBS_SEED, {
+    super( 'lab', NaturalSelectionConstants.LAB_SHRUBS_SEED, {
       tandem: tandem
     } );
   }

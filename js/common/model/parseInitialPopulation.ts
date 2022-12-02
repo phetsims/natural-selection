@@ -2,9 +2,12 @@
 
 /**
  * Parses and validates the values of query parameters that describe the mutations, genotypes, and distribution
- * of the initial population. See NaturalSelectionQueryParameters (labMutations, labPopulation) for details about
- * the values that are being parsed. See https://github.com/phetsims/natural-selection/issues/9 for design history
- * and insight about how this feature evolved.
+ * of the initial population.
+ *
+ * See NaturalSelectionQueryParameters (labMutations, labPopulation) for examples and details about the values that
+ * are being parsed.
+ *
+ * See https://github.com/phetsims/natural-selection/issues/9 for design history.
  *
  * Responsibilities:
  * - Parses and validates the query-parameter values
@@ -30,39 +33,46 @@ type AllelesPair = {
   motherAllele: Allele | null;
 };
 
+// Identifies which screen we're creating the population for.
+export type ScreenKey = 'intro' | 'lab';
+
 /**
  * Parses query parameters that describe the initial population. Because these query parameters are dependent on
  * each other, if an error is encountered in either value, a warning is added to QueryStringMachine for both query
  * parameters, and they revert to default values. We do not attempt to infer which query parameter is in error,
  * and leave it up to the user to decide.
- *
- * @param genePool
- * @param mutationsName - name of the mutations query parameter
- * @param populationName - name of the population query parameter
  */
-export default function parseInitialPopulation(
-  genePool: GenePool, mutationsName: string, populationName: string ): BunnyVariety[] {
+export default function parseInitialPopulation( screenKey: ScreenKey, genePool: GenePool ): BunnyVariety[] {
+
+  const mutationsQueryParameterName = `${screenKey}Mutations`;
+  const populationQueryParameterName = `${screenKey}Population`;
 
   // Get the query parameter values
-  const mutationsValue = getQueryParameterValue( mutationsName );
-  const populationValue = getQueryParameterValue( populationName );
+  const mutationsValue = ( ( screenKey === 'intro' ) ? NaturalSelectionQueryParameters.introMutations : NaturalSelectionQueryParameters.labMutations )!;
+  assert && assert( mutationsValue !== null, `expected ${mutationsQueryParameterName} to have a non-null default value` );
+  const populationValue = ( ( screenKey === 'intro' ) ? NaturalSelectionQueryParameters.introPopulation : NaturalSelectionQueryParameters.labPopulation )!;
+  assert && assert( populationValue !== null, `expected ${populationQueryParameterName} to have a non-null default value` );
 
-  let initialBunnyVarieties = null; // {BunnyVariety[]}
+  let initialBunnyVarieties: BunnyVariety[];
   try {
-    const mutationChars = parseMutations( genePool, mutationsName, mutationsValue );
-    initialBunnyVarieties = parsePopulation( genePool, mutationChars, populationName, populationValue );
+
+    // Attempt to parse what the user provided, or the defaults (we don't know which).
+    const mutationChars = parseMutations( genePool, mutationsQueryParameterName, mutationsValue );
+    initialBunnyVarieties = parsePopulation( genePool, populationQueryParameterName, populationValue, mutationChars );
   }
   catch( error: IntentionalAny ) {
 
+    // Something went wrong, so fallback to default population.
+
     // Add warnings that QueryStringMachine will display after the sim has fully started.
-    QueryStringMachine.addWarning( mutationsName, mutationsValue, error.message );
-    QueryStringMachine.addWarning( populationName, populationValue, error.message );
+    QueryStringMachine.addWarning( mutationsQueryParameterName, mutationsValue, error.message );
+    QueryStringMachine.addWarning( populationQueryParameterName, populationValue, error.message );
 
     // Print an error to the console, since QueryStringMachine doesn't currently show the error message.
     console.error(
       `Query parameter error: ${error.message}\n` +
-      `${mutationsName}=${mutationsValue}\n` +
-      `${populationName}=${populationValue}`
+      `${mutationsQueryParameterName}=${mutationsValue}\n` +
+      `${populationQueryParameterName}=${populationValue}`
     );
 
     // Revert mutations that may have been configured by parseMutations.
@@ -72,8 +82,10 @@ export default function parseInitialPopulation(
     } );
 
     // Built the data structure for the default initial population.
-    const mutationChars = parseMutations( genePool, mutationsName, getQueryParameterDefaultValue( mutationsName ) );
-    initialBunnyVarieties = parsePopulation( genePool, mutationChars, populationName, getQueryParameterDefaultValue( populationName ) );
+    const defaultMutationsValue = ( screenKey === 'intro' ) ? SCHEMA_MAP.introMutations.defaultValue : SCHEMA_MAP.labMutations.defaultValue;
+    const mutationChars = parseMutations( genePool, mutationsQueryParameterName, defaultMutationsValue );
+    const defaultPopulationValue = ( screenKey === 'intro' ) ? SCHEMA_MAP.introPopulation.defaultValue : SCHEMA_MAP.labPopulation.defaultValue;
+    initialBunnyVarieties = parsePopulation( genePool, populationQueryParameterName, defaultPopulationValue, mutationChars );
   }
   return initialBunnyVarieties;
 }
@@ -83,12 +95,12 @@ export default function parseInitialPopulation(
  * present. See NaturalSelectionQueryParameters.labMutations for details on the format of this value.
  *
  * @param genePool
- * @param mutationsName - name of the mutations query parameter, used in error messages
+ * @param queryParameterName - name of the mutations query parameter, used in error messages
  * @param mutationsValue - value of the mutations query parameter
  * @returns array of allele abbreviations
  * @throws {Error}
  */
-function parseMutations( genePool: GenePool, mutationsName: string, mutationsValue: string ): string[] {
+function parseMutations( genePool: GenePool, queryParameterName: string, mutationsValue: string ): string[] {
 
   // Split mutations into individual characters, e.g. 'FeT' -> [ 'F', 'e', 'T' ]
   const mutationChars = mutationsValue.split( '' );
@@ -105,7 +117,7 @@ function parseMutations( genePool: GenePool, mutationsName: string, mutationsVal
 
     // Dominant and recessive abbreviations for the same gene are mutually exclusive
     verify( !( mutationChars.includes( dominantAbbreviation ) && mutationChars.includes( recessiveAbbreviation ) ),
-      `${mutationsName}: ${dominantAbbreviation} and ${recessiveAbbreviation} are mutually exclusive` );
+      `${queryParameterName}: ${dominantAbbreviation} and ${recessiveAbbreviation} are mutually exclusive` );
 
     // If one of the abbreviations is specified, then make the mutant gene dominant or recessive.
     // This changes both the value and initialValue of dominantAlleleProperty, because this is the initial population,
@@ -122,7 +134,7 @@ function parseMutations( genePool: GenePool, mutationsName: string, mutationsVal
 
   // Check for non-allele characters
   verify( _.every( mutationChars, char => alleleAbbreviations.includes( char ) ),
-    `${mutationsName}: ${mutationsValue} contains an invalid character` );
+    `${queryParameterName}: ${mutationsValue} contains an invalid character` );
 
   return mutationChars;
 }
@@ -133,21 +145,21 @@ function parseMutations( genePool: GenePool, mutationsName: string, mutationsVal
  * See NaturalSelectionQueryParameters.labPopulation for details on the format of this value.
  *
  * @param genePool
- * @param mutationChars - array of allele abbreviations
- * @param populationName - name of the population query parameter, used in error messages
+ * @param queryParameterName - name of the population query parameter, used in error messages
  * @param populationValue - value of the population query parameter
+ * @param mutationChars - array of allele abbreviations
  * @returns a description of the bunnies to create
  * @throws {Error}
  */
-function parsePopulation( genePool: GenePool, mutationChars: string[], populationName: string,
-                          populationValue: string[] ): BunnyVariety[] {
+function parsePopulation( genePool: GenePool, queryParameterName: string, populationValue: readonly string[],
+                          mutationChars: readonly string[] ): BunnyVariety[] {
 
   const initialPopulation: BunnyVariety[] = [];
 
   if ( mutationChars.length === 0 ) {
 
     // If there are no mutations, then population must be a positive integer
-    const countErrorMessage = `${populationName} must be a positive integer`;
+    const countErrorMessage = `${queryParameterName} must be a positive integer`;
     verify( populationValue.length === 1, countErrorMessage );
     const countString = populationValue[ 0 ];
     verify( !isNaN( Number( countString ) ), countErrorMessage );
@@ -163,7 +175,7 @@ function parsePopulation( genePool: GenePool, mutationChars: string[], populatio
     let totalCount = 0;
 
     // The population is described as expressions that indicate the number of bunnies per genotype, e.g. '35FeT'.
-    verify( populationValue.length > 0, `${populationName} value is required` );
+    verify( populationValue.length > 0, `${queryParameterName} value is required` );
     for ( let i = 0; i < populationValue.length; i++ ) {
 
       // Get an expression from the array, e.g. '35FFeEtt'
@@ -171,13 +183,13 @@ function parsePopulation( genePool: GenePool, mutationChars: string[], populatio
 
       // Split the expression into 2 tokens (count and genotype) e.g. '35FFeEtt' -> '35' and 'FFeEtt'
       const firstLetterIndex = expression.search( /[a-zA-Z]/ );
-      verify( firstLetterIndex !== -1, `${populationName}: ${expression} is missing a genotype` );
+      verify( firstLetterIndex !== -1, `${queryParameterName}: ${expression} is missing a genotype` );
 
       const countString = expression.substring( 0, firstLetterIndex );
       const genotypeString = expression.substring( firstLetterIndex );
 
       // Count must be a positive integer
-      const countErrorMessage = `${populationName}: ${expression} must start with a positive integer`;
+      const countErrorMessage = `${queryParameterName}: ${expression} must start with a positive integer`;
       verify( !isNaN( Number( countString ) ), countErrorMessage );
       const count = parseFloat( countString );
       verify( NaturalSelectionUtils.isPositiveInteger( count ), countErrorMessage );
@@ -185,10 +197,10 @@ function parsePopulation( genePool: GenePool, mutationChars: string[], populatio
       // Total of all counts must be < maximum population
       totalCount += count;
       verify( totalCount < NaturalSelectionQueryParameters.maxPopulation,
-        `${populationName}: the total population must be < ${NaturalSelectionQueryParameters.maxPopulation}` );
+        `${queryParameterName}: the total population must be < ${NaturalSelectionQueryParameters.maxPopulation}` );
 
       // Genotype must contain 2 alleles for each gene represented in mutations
-      const genotypeErrorMessage = `${populationName}: ${genotypeString} is an invalid genotype`;
+      const genotypeErrorMessage = `${queryParameterName}: ${genotypeString} is an invalid genotype`;
       verify( genotypeString.length === 2 * mutationChars.length, genotypeErrorMessage );
       assert && genePool.genes.forEach( gene => {
 
@@ -219,7 +231,7 @@ function parsePopulation( genePool: GenePool, mutationChars: string[], populatio
 
       initialPopulation.push( createBunnyVariety( genePool, count, genotypeString ) );
     }
-    verify( totalCount > 0, `${populationName}: the total population must be > 0` );
+    verify( totalCount > 0, `${queryParameterName}: the total population must be > 0` );
   }
 
   return initialPopulation;
@@ -294,27 +306,6 @@ function verify( predicate: boolean, message: string ): void {
   if ( !predicate ) {
     throw new Error( message );
   }
-}
-
-/**
- * Gets the value for a query parameter.
- */
-//TODO https://github.com/phetsims/natural-selection/issues/326
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function getQueryParameterValue( key: string ): any {
-  type Key = keyof typeof NaturalSelectionQueryParameters;
-  return NaturalSelectionQueryParameters[ key as Key ];
-}
-
-/**
- * Gets the default value for a query parameter.
- */
-//TODO https://github.com/phetsims/natural-selection/issues/326
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function getQueryParameterDefaultValue( key: string ): any {
-  type Key = keyof typeof SCHEMA_MAP;
-  // @ts-ignore TODO https://github.com/phetsims/natural-selection/issues/326
-  return SCHEMA_MAP[ key as Key ].defaultValue;
 }
 
 naturalSelection.register( 'parseInitialPopulation', parseInitialPopulation );

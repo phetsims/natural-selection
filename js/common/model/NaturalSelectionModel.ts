@@ -27,7 +27,7 @@ import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Food from './Food.js';
 import GenePool from './GenePool.js';
 import GenerationClock from './GenerationClock.js';
-import parseInitialPopulation from './parseInitialPopulation.js';
+import parseInitialPopulation, { ScreenKey } from './parseInitialPopulation.js';
 import PedigreeModel from './PedigreeModel.js';
 import PopulationModel from './PopulationModel.js';
 import ProportionsModel from './ProportionsModel.js';
@@ -70,14 +70,7 @@ export default class NaturalSelectionModel {
   private readonly timeScaleProperty: TReadOnlyProperty<number>;
   private readonly initialBunnyVarieties: BunnyVariety[]; // describes the initial population
 
-  /**
-   * @param mutationsQueryParameterName - the screen-specific query parameter used to specify mutations
-   * @param populationQueryParameterName - the screen-specific query parameter used to specify population
-   * @param shrubsSeed - seed for random number generator used to position shrubs
-   * @param providedOptions
-   */
-  public constructor( mutationsQueryParameterName: string, populationQueryParameterName: string,
-                      shrubsSeed: number, providedOptions: NaturalSelectionModelOptions ) {
+  public constructor( screenKey: ScreenKey, shrubsSeed: number, providedOptions: NaturalSelectionModelOptions ) {
 
     const options = providedOptions;
 
@@ -116,8 +109,7 @@ export default class NaturalSelectionModel {
       tandem: options.tandem.createTandem( 'genePool' )
     } );
 
-    this.initialBunnyVarieties =
-      parseInitialPopulation( this.genePool, mutationsQueryParameterName, populationQueryParameterName );
+    this.initialBunnyVarieties = parseInitialPopulation( screenKey, this.genePool );
 
     this.bunnyCollection = new BunnyCollection( this.modelViewTransform, this.genePool,
       options.tandem.createTandem( 'bunnyCollection' ) );
