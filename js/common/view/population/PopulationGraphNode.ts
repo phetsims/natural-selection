@@ -71,7 +71,7 @@ export default class PopulationGraphNode extends Node {
     } );
 
     // Population (y-axis) zoom buttons
-    const yZoomButtonGroup = new PlusMinusZoomButtonGroup( populationModel.yZoomLevelProperty.asRanged(), {
+    const yZoomButtonGroup = new PlusMinusZoomButtonGroup( populationModel.yZoomLevelProperty, {
       orientation: 'vertical',
       touchAreaXDilation: 7,
       touchAreaYDilation: 4,

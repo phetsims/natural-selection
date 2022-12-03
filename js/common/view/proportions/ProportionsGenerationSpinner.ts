@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { RangedProperty } from '../../../../../axon/js/NumberProperty.js';
+import NumberProperty from '../../../../../axon/js/NumberProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import NumberSpinner, { NumberSpinnerOptions } from '../../../../../sun/js/NumberSpinner.js';
@@ -20,7 +20,7 @@ type ProportionsGenerationSpinnerOptions = SelfOptions & PickRequired<NumberSpin
 
 export default class ProportionsGenerationSpinner extends NumberSpinner {
 
-  public constructor( proportionsGenerationProperty: RangedProperty, providedOptions: ProportionsGenerationSpinnerOptions ) {
+  public constructor( proportionsGenerationProperty: NumberProperty, providedOptions: ProportionsGenerationSpinnerOptions ) {
 
     const options = optionize<ProportionsGenerationSpinnerOptions, SelfOptions, NumberSpinnerOptions>()( {
 

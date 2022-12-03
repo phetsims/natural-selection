@@ -158,7 +158,7 @@ export default class ProportionsGraphNode extends Node {
     } );
 
     // Spinner for selecting which generation is displayed
-    const generationSpinner = new ProportionsGenerationSpinner( proportionsModel.proportionsGenerationProperty.asRanged(), {
+    const generationSpinner = new ProportionsGenerationSpinner( proportionsModel.proportionsGenerationProperty, {
       tandem: options.tandem.createTandem( 'generationSpinner' )
     } );
 
