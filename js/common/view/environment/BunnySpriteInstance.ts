@@ -15,8 +15,11 @@ import OrganismSpriteInstance from './OrganismSpriteInstance.js';
 
 export default class BunnySpriteInstance extends OrganismSpriteInstance {
 
+  public readonly bunny: Bunny;
+
   public constructor( bunny: Bunny, sprite: Sprite ) {
     super( bunny, sprite, NaturalSelectionConstants.BUNNY_IMAGE_SCALE );
+    this.bunny = bunny;
   }
 }
 

@@ -303,7 +303,7 @@ export default class OrganismSprites extends Sprites {
       else {
 
         assert && assert( selectedBunnyIndex !== -1, 'sprite instance not found for selected bunny' );
-        this.selectedBunnySpriteInstance = this.spriteInstances[ selectedBunnyIndex ];
+        this.selectedBunnySpriteInstance = this.spriteInstances[ selectedBunnyIndex ] as BunnySpriteInstance;
         assert && assert( this.selectedBunnySpriteInstance instanceof BunnySpriteInstance, 'invalid selectedBunnySpriteInstance' );
 
         // Create the selection rectangle and put it immediately behind the selected bunny.
@@ -409,9 +409,7 @@ class BunnyPressListener extends SpriteListenable( PressListener ) {
     super( {
       press: () => {
         if ( this.spriteInstance instanceof BunnySpriteInstance ) {
-          const bunny = this.spriteInstance.organism as Bunny;
-          assert && assert( bunny instanceof Bunny ); // eslint-disable-line no-simple-type-checking-assertions
-          bunnyCollection.selectedBunnyProperty.value = bunny;
+          bunnyCollection.selectedBunnyProperty.value = this.spriteInstance.bunny;
         }
       },
       tandem: tandem
