@@ -408,10 +408,12 @@ class BunnyPressListener extends SpriteListenable( PressListener ) {
 
   public constructor( bunnyCollection: BunnyCollection, tandem: Tandem ) {
     super( {
-      press: ( event: PressListenerEvent, listener: BunnyPressListener ) => {
-        assert && assert( listener.spriteInstance, 'expected a sprite instance' );
-        if ( listener.spriteInstance instanceof BunnySpriteInstance ) {
-          const bunny = listener.spriteInstance.organism as Bunny;
+      press: ( event: PressListenerEvent, listener: PressListener ) => {
+        const spriteInstance = ( listener as BunnyPressListener ).spriteInstance;
+        assert && assert( spriteInstance, 'expected a sprite instance' );
+
+        if ( spriteInstance instanceof BunnySpriteInstance ) {
+          const bunny = spriteInstance.organism as Bunny;
           assert && assert( bunny instanceof Bunny ); // eslint-disable-line no-simple-type-checking-assertions
           bunnyCollection.selectedBunnyProperty.value = bunny;
         }
