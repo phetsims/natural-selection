@@ -132,7 +132,6 @@ export default class OrganismSprites extends Sprites {
     bunnyCollection.selectedBunnyProperty.link( bunny => this.setSelectedBunny( bunny ) );
 
     // PressListener for selecting a bunny. removeInputListener is not necessary.
-    // @ts-ignore TODO https://github.com/phetsims/scenery/issues/1508 Type 'BunnyPressListener' has no properties in common with type 'TInputListener'.
     this.addInputListener( new BunnyPressListener( this.bunnyCollection, options.tandem.createTandem( 'bunnyPressListener' ) ) );
 
     // If inputEnabled is disabled, clear any bunny selection. unlink is not needed.
