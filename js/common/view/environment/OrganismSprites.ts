@@ -18,7 +18,7 @@ import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
-import { PressListener, PressListenerEvent, Sprite, SpriteListenable, Sprites, SpritesOptions } from '../../../../../scenery/js/imports.js';
+import { PressListener, Sprite, SpriteListenable, Sprites, SpritesOptions } from '../../../../../scenery/js/imports.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import bunnyWhiteFurStraightEarsShortTeeth_png from '../../../../images/bunnyWhiteFurStraightEarsShortTeeth_png.js';
 import wolf_png from '../../../../images/wolf_png.js';
@@ -407,12 +407,9 @@ class BunnyPressListener extends SpriteListenable( PressListener ) {
 
   public constructor( bunnyCollection: BunnyCollection, tandem: Tandem ) {
     super( {
-      press: ( event: PressListenerEvent, listener: PressListener ) => {
-        const spriteInstance = ( listener as BunnyPressListener ).spriteInstance;
-        assert && assert( spriteInstance, 'expected a sprite instance' );
-
-        if ( spriteInstance instanceof BunnySpriteInstance ) {
-          const bunny = spriteInstance.organism as Bunny;
+      press: () => {
+        if ( this.spriteInstance instanceof BunnySpriteInstance ) {
+          const bunny = this.spriteInstance.organism as Bunny;
           assert && assert( bunny instanceof Bunny ); // eslint-disable-line no-simple-type-checking-assertions
           bunnyCollection.selectedBunnyProperty.value = bunny;
         }
