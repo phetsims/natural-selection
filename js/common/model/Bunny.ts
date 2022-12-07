@@ -401,7 +401,7 @@ export default class Bunny extends Organism {
 
       // private fields, will not be shown in Studio
       _private: {
-        // @ts-ignore https://github.com/phetsims/tandem/issues/282 TypeScript support for _private
+        // @ts-expect-error https://github.com/phetsims/tandem/issues/282 TypeScript support for _private
         restTime: NumberIO,
         hopTime: NumberIO,
         cumulativeRestTime: NumberIO,
@@ -437,7 +437,7 @@ export default class Bunny extends Organism {
    */
   public static readonly BunnyIO = new IOType( 'BunnyIO', {
     valueType: Bunny,
-    // @ts-ignore TODO https://github.com/phetsims/natural-selection/issues/327
+    // @ts-expect-error TODO https://github.com/phetsims/natural-selection/issues/327
     stateSchema: Bunny.getStateSchema,
     //TODO https://github.com/phetsims/natural-selection/issues/327 need to implement bunny.toStateObject()
     stateToArgsForConstructor: stateObject => Bunny.stateToArgsForConstructor( stateObject ),
