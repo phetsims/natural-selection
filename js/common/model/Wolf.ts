@@ -32,8 +32,6 @@ type WolfStateObject = {
   };
 };
 
-type WolfConstructorParameter = [];
-
 export default class Wolf extends Organism {
 
   private _speed: number;
@@ -126,16 +124,6 @@ export default class Wolf extends Organism {
   }
 
   /**
-   * Creates the args that WolfGroup uses to instantiate a Wolf.
-   * stateToArgsForConstructor is called only for dynamic elements that are part of a group.
-   * So we are not restoring anything through options, because that would not support static elements.
-   * Everything will be restored via applyState.
-   */
-  private static stateToArgsForConstructor( stateObject: WolfStateObject ): WolfConstructorParameter {
-    return [];
-  }
-
-  /**
    * Restores Wolf state after instantiation.
    */
   private applyState( stateObject: WolfStateObject ): void {
@@ -159,8 +147,8 @@ export default class Wolf extends Organism {
       }
     },
     toStateObject: wolf => wolf.toStateObject(),
-    applyState: ( wolf, stateObject ) => wolf.applyState( stateObject ),
-    stateToArgsForConstructor: stateObject => Wolf.stateToArgsForConstructor( stateObject )
+    applyState: ( wolf, stateObject ) => wolf.applyState( stateObject )
+    // WolfGroup.createElement takes no arguments, so stateToArgsForConstructor is not needed.
   } );
 }
 

@@ -30,6 +30,7 @@ import Phenotype from './Phenotype.js';
 import XDirection from './XDirection.js';
 import { CompositeSchema } from '../../../../tandem/js/types/StateSchema.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import { BunnyGroupCreateElementArguments } from './BunnyGroup.js';
 
 // constants
 const HOP_TIME_RANGE = new Range( 0.25, 0.5 ); // time to complete a hop cycle, in seconds
@@ -61,12 +62,6 @@ type BunnyStateObject = {
     hopStartPosition: Vector3StateObject;
   };
 };
-
-// When creating a Bunny via BunnyGroup.createElement, BunnyGroup provides the tandem.
-export type BunnyCreateElementOptions = StrictOmit<BunnyOptions, 'tandem'>;
-
-// All constructor arguments except providedOptions are provided via closure in BunnyGroup.
-export type BunnyConstructorArguments = [ BunnyCreateElementOptions ];
 
 export default class Bunny extends Organism {
 
@@ -414,11 +409,11 @@ export default class Bunny extends Organism {
 
   //TODO https://github.com/phetsims/natural-selection/issues/327 need to restore what we can via constructor
   /**
-   * Creates the args that BunnyGroup uses to instantiate a Bunny.
+   * Creates the arguments that BunnyGroup.createElement uses to create a Bunny.
    * While we could restore a few things via the constructor, we're going to instantiate with defaults
    * and restore everything via applyState.
    */
-  private static stateToArgsForConstructor( stateObject: BunnyStateObject ): BunnyConstructorArguments {
+  private static stateToArgsForConstructor( stateObject: BunnyStateObject ): BunnyGroupCreateElementArguments {
     return [ {} ];
   }
 

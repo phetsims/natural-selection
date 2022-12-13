@@ -19,8 +19,8 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
-import Bunny, { BunnyCreateElementOptions } from './Bunny.js';
-import BunnyGroup from './BunnyGroup.js';
+import Bunny from './Bunny.js';
+import BunnyGroup, { BunnyGroupCreateElementOptions } from './BunnyGroup.js';
 import createBunnyArray, { BunnyArray } from './createBunnyArray.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
@@ -228,15 +228,15 @@ export default class BunnyCollection {
   /**
    * Creates a Bunny.
    */
-  public createBunny( options: BunnyCreateElementOptions ): Bunny {
+  public createBunny( options: BunnyGroupCreateElementOptions ): Bunny {
     return this.bunnyGroup.createNextElement( options );
   }
 
   /**
    * Creates a generation-zero Bunny, which has no parents since it's the first generation to exist.
    */
-  public createBunnyZero( providedOptions?: StrictOmit<BunnyCreateElementOptions, 'father' | 'mother' | 'generation'> ): Bunny {
-    return this.createBunny( combineOptions<BunnyCreateElementOptions>( {
+  public createBunnyZero( providedOptions?: StrictOmit<BunnyGroupCreateElementOptions, 'father' | 'mother' | 'generation'> ): Bunny {
+    return this.createBunny( combineOptions<BunnyGroupCreateElementOptions>( {
       father: null,
       mother: null,
       generation: 0

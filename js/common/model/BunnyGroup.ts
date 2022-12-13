@@ -11,10 +11,11 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PhetioGroup, { PhetioGroupOptions } from '../../../../tandem/js/PhetioGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
-import Bunny, { BunnyConstructorArguments, BunnyCreateElementOptions, BunnyOptions } from './Bunny.js';
+import Bunny, { BunnyOptions } from './Bunny.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 
@@ -22,7 +23,13 @@ type SelfOptions = EmptySelfOptions;
 
 type BunnyGroupOptions = SelfOptions & PickRequired<PhetioGroupOptions, 'tandem'>;
 
-export default class BunnyGroup extends PhetioGroup<Bunny, BunnyConstructorArguments> {
+// tandem is omitted because BunnyGroup provides the tandem.
+export type BunnyGroupCreateElementOptions = StrictOmit<BunnyOptions, 'tandem'>;
+
+// Arguments to createElement, other than tandem.
+export type BunnyGroupCreateElementArguments = [ BunnyGroupCreateElementOptions ];
+
+export default class BunnyGroup extends PhetioGroup<Bunny, BunnyGroupCreateElementArguments> {
 
   public constructor( genePool: GenePool,
                       modelViewTransform: EnvironmentModelViewTransform,
@@ -41,17 +48,17 @@ export default class BunnyGroup extends PhetioGroup<Bunny, BunnyConstructorArgum
      * are passed via closure, so we don't have to create them as part of defaultArguments, and don't have to
      * deal with serializing them in BunnyIO.
      * @param tandem - PhetioGroup requires tandem to be the first param
-     * @param bunnyOptions - not actually optional, because createElement must have a fixed number of args
+     * @param providedOptions - not actually optional, because createElement must have a fixed number of args
      */
-    const createElement = ( tandem: Tandem, bunnyOptions: BunnyCreateElementOptions ) => {
+    const createElement = ( tandem: Tandem, providedOptions: BunnyGroupCreateElementOptions ) => {
       return new Bunny( genePool, modelViewTransform, bunnyRestRangeProperty,
         combineOptions<BunnyOptions>( {
           tandem: tandem
-        }, bunnyOptions ) );
+        }, providedOptions ) );
     };
 
     // defaultArguments, passed to createElement during API harvest
-    const defaultArguments: BunnyConstructorArguments = [ {} ];
+    const defaultArguments: BunnyGroupCreateElementArguments = [ {} ];
 
     super( createElement, defaultArguments, options );
   }
