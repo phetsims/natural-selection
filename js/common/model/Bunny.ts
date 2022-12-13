@@ -437,7 +437,6 @@ export default class Bunny extends Organism {
    */
   public static readonly BunnyIO = new IOType( 'BunnyIO', {
     valueType: Bunny,
-    // @ts-expect-error TODO https://github.com/phetsims/natural-selection/issues/327
     stateSchema: Bunny.getStateSchema,
     //TODO https://github.com/phetsims/natural-selection/issues/327 need to implement bunny.toStateObject()
     stateToArgsForConstructor: stateObject => Bunny.stateToArgsForConstructor( stateObject ),

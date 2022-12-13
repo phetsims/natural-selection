@@ -149,11 +149,12 @@ export default class Wolf extends Organism {
    */
   public static readonly WolfIO = new IOType<Wolf, WolfStateObject>( 'WolfIO', {
     valueType: Wolf,
+
+    // @ts-expect-error https://github.com/phetsims/tandem/issues/282 TypeScript support for _private
     stateSchema: {
 
       // private fields, will not be shown in Studio
       _private: {
-        // @ts-expect-error https://github.com/phetsims/tandem/issues/282 TypeScript support for _private
         speed: NumberIO
       }
     },
