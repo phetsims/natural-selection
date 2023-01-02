@@ -413,7 +413,7 @@ export default class Bunny extends Organism {
    * While we could restore a few things via the constructor, we're going to instantiate with defaults
    * and restore everything via applyState.
    */
-  private static stateToArgsForConstructor( stateObject: BunnyStateObject ): BunnyGroupCreateElementArguments {
+  private static stateObjectToCreateElementArguments( stateObject: BunnyStateObject ): BunnyGroupCreateElementArguments {
     return [ {} ];
   }
 
@@ -434,7 +434,7 @@ export default class Bunny extends Organism {
     valueType: Bunny,
     stateSchema: Bunny.getStateSchema,
     //TODO https://github.com/phetsims/natural-selection/issues/327 need to implement bunny.toStateObject()
-    stateToArgsForConstructor: stateObject => Bunny.stateToArgsForConstructor( stateObject ),
+    stateObjectToCreateElementArguments: stateObject => Bunny.stateObjectToCreateElementArguments( stateObject ),
     applyState: ( bunny, stateObject ) => bunny.applyState( stateObject )
   } );
 }

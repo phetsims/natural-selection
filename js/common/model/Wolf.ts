@@ -148,7 +148,7 @@ export default class Wolf extends Organism {
     },
     toStateObject: wolf => wolf.toStateObject(),
     applyState: ( wolf, stateObject ) => wolf.applyState( stateObject )
-    // WolfGroup.createElement takes no arguments, so stateToArgsForConstructor is not needed.
+    // WolfGroup.createElement takes no arguments, so stateObjectToCreateElementArguments is not needed.
   } );
 }
 
