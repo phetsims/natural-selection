@@ -40,7 +40,9 @@ export default class HatchingRectangle extends Rectangle {
       },
 
       // RectangleOptions
+      // @ts-expect-error TODO CM: Can you help me with this one? https://github.com/phetsims/chipper/issues/1360
       fill: 'black',
+      // @ts-expect-error TODO CM: Can you help me with this one? https://github.com/phetsims/chipper/issues/1360
       stroke: null
 
     }, providedOptions );
