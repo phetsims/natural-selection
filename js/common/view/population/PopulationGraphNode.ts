@@ -77,8 +77,7 @@ export default class PopulationGraphNode extends Node {
       touchAreaYDilation: 4,
       left: boundsRectangle.left,
       top: boundsRectangle.top,
-      tandem: options.tandem.createTandem( 'yZoomButtonGroup' ),
-      phetioVisiblePropertyInstrumented: false
+      tandem: options.tandem.createTandem( 'yZoomButtonGroup' )
     } );
 
     // Dimensions of the 2D grid (sans tick marks) in view coordinates
