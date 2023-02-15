@@ -19,7 +19,7 @@ import NaturalSelectionStrings from '../NaturalSelectionStrings.js';
 import IntroModel from './model/IntroModel.js';
 import IntroScreenView from './view/IntroScreenView.js';
 
-export default class IntroScreen extends Screen {
+export default class IntroScreen extends Screen<IntroModel, IntroScreenView> {
 
   public constructor( tandem: Tandem ) {
 

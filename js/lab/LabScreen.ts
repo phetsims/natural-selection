@@ -25,7 +25,7 @@ import NaturalSelectionStrings from '../NaturalSelectionStrings.js';
 import LabModel from './model/LabModel.js';
 import LabScreenView from './view/LabScreenView.js';
 
-export default class LabScreen extends Screen {
+export default class LabScreen extends Screen<LabModel, LabScreenView> {
 
   public constructor( tandem: Tandem ) {
 
