@@ -34,12 +34,13 @@ import ProportionsModel from './ProportionsModel.js';
 import SimulationMode from './SimulationMode.js';
 import WolfCollection from './WolfCollection.js';
 import BunnyVariety from './BunnyVariety.js';
+import TModel from '../../../../joist/js/TModel.js';
 
 type SelfOptions = EmptySelfOptions;
 
 type NaturalSelectionModelOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
 
-export default class NaturalSelectionModel {
+export default class NaturalSelectionModel implements TModel {
 
   // the transform between 3D model coordinates and 2D view coordinates
   public readonly modelViewTransform: EnvironmentModelViewTransform;
