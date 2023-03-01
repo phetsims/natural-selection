@@ -315,7 +315,7 @@ class XTickLabels extends Node {
         const xModel = xOffsetModel + ( i * options.xSpacingModel );
         labelNode.visible = xRange.contains( xModel );
         if ( labelNode.visible ) {
-          labelNode.text = xModel;
+          labelNode.string = xModel;
           labelNode.centerX = xOffsetView + ( i * xSpacingView );
         }
       }

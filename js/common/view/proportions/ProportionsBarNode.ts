@@ -147,8 +147,8 @@ export default class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.01 * this.barWidth;
 
       // > 99% non-mutant, < 1% mutant
-      this.normalPercentageText.text = StringUtils.fillIn( NaturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
-      this.mutantPercentageText.text = StringUtils.fillIn( NaturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
+      this.normalPercentageText.string = StringUtils.fillIn( NaturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
+      this.mutantPercentageText.string = StringUtils.fillIn( NaturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
     }
     else if ( normalPercentage > 0 && normalPercentage < 1 ) {
 
@@ -156,8 +156,8 @@ export default class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.99 * this.barWidth;
 
       // < 1% non-mutant, > 99% mutant
-      this.normalPercentageText.text = StringUtils.fillIn( NaturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
-      this.mutantPercentageText.text = StringUtils.fillIn( NaturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
+      this.normalPercentageText.string = StringUtils.fillIn( NaturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
+      this.mutantPercentageText.string = StringUtils.fillIn( NaturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
     }
     else {
 
@@ -169,10 +169,10 @@ export default class ProportionsBarNode extends Node {
       }
 
       // round both percentages to the nearest integer
-      this.normalPercentageText.text = StringUtils.fillIn( NaturalSelectionStrings.valuePercentStringProperty.value, {
+      this.normalPercentageText.string = StringUtils.fillIn( NaturalSelectionStrings.valuePercentStringProperty.value, {
         value: Utils.roundSymmetric( normalPercentage )
       } );
-      this.mutantPercentageText.text = StringUtils.fillIn( NaturalSelectionStrings.valuePercentStringProperty.value, {
+      this.mutantPercentageText.string = StringUtils.fillIn( NaturalSelectionStrings.valuePercentStringProperty.value, {
         value: Utils.roundSymmetric( mutantPercentage )
       } );
     }
