@@ -53,14 +53,12 @@ type BunnyStateObject = {
   generation: number;
   isAlive: boolean;
   age: number;
-  _private: {
-    restTime: number;
-    hopTime: number;
-    cumulativeRestTime: number;
-    cumulativeHopTime: number;
-    hopDelta: Vector3StateObject;
-    hopStartPosition: Vector3StateObject;
-  };
+  _restTime: number;
+  _hopTime: number;
+  _cumulativeRestTime: number;
+  _cumulativeHopTime: number;
+  _hopDelta: Vector3StateObject;
+  _hopStartPosition: Vector3StateObject;
 };
 
 export default class Bunny extends Organism {
@@ -395,15 +393,12 @@ export default class Bunny extends Organism {
       // genotype and phenotype are stateful and will be serialized automatically.
 
       // private fields, will not be shown in Studio
-      _private: {
-        // @ts-expect-error https://github.com/phetsims/tandem/issues/282 TypeScript support for _private
-        restTime: NumberIO,
-        hopTime: NumberIO,
-        cumulativeRestTime: NumberIO,
-        cumulativeHopTime: NumberIO,
-        hopDelta: Vector3.Vector3IO,
-        hopStartPosition: Vector3.Vector3IO
-      }
+      _restTime: NumberIO,
+      _hopTime: NumberIO,
+      _cumulativeRestTime: NumberIO,
+      _cumulativeHopTime: NumberIO,
+      _hopDelta: Vector3.Vector3IO,
+      _hopStartPosition: Vector3.Vector3IO
     };
   }
 

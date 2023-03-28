@@ -27,9 +27,7 @@ const X_MARGIN = 35;
 const WOLF_SPEED_RANGE = new Range( 125, 200 );
 
 type WolfStateObject = {
-  _private: {
-    speed: number;
-  };
+  _speed: number;
 };
 
 export default class Wolf extends Organism {
@@ -117,9 +115,7 @@ export default class Wolf extends Organism {
   private toStateObject(): WolfStateObject {
     return {
       // position and xDirection are handled by super Organism instrumented Properties
-      _private: {
-        speed: this._speed
-      }
+      _speed: this._speed
     };
   }
 
@@ -127,7 +123,7 @@ export default class Wolf extends Organism {
    * Restores Wolf state after instantiation.
    */
   private applyState( stateObject: WolfStateObject ): void {
-    this._speed = stateObject._private.speed;
+    this._speed = stateObject._speed;
   }
 
   /**
@@ -138,13 +134,10 @@ export default class Wolf extends Organism {
   public static readonly WolfIO = new IOType<Wolf, WolfStateObject>( 'WolfIO', {
     valueType: Wolf,
 
-    // @ts-expect-error https://github.com/phetsims/tandem/issues/282 TypeScript support for _private
     stateSchema: {
 
       // private fields, will not be shown in Studio
-      _private: {
-        speed: NumberIO
-      }
+      _speed: NumberIO
     },
     toStateObject: wolf => wolf.toStateObject(),
     applyState: ( wolf, stateObject ) => wolf.applyState( stateObject )
