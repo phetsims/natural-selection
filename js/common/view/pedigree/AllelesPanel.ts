@@ -39,6 +39,8 @@ export default class AllelesPanel extends NaturalSelectionPanel {
                       providedOptions: AllelesPanelOptions ) {
 
     const options = optionize3<AllelesPanelOptions, SelfOptions, NaturalSelectionPanelOptions>()(
+
+      // @ts-expect-error - chip away for https://github.com/phetsims/center-and-variability/issues/142
       {}, NaturalSelectionConstants.PANEL_OPTIONS, providedOptions );
 
     // To make the abbreviation + icon for all alleles the same effective size

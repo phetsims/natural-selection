@@ -45,6 +45,7 @@ export default class AddMutationsPanel extends NaturalSelectionPanel {
   public constructor( genePool: GenePool, providedOptions: AddMutationsPanelOptions ) {
 
     const options = optionize3<AddMutationsPanelOptions, SelfOptions, NaturalSelectionPanelOptions>()(
+      // @ts-expect-error - chip away for https://github.com/phetsims/center-and-variability/issues/142
       {}, NaturalSelectionConstants.PANEL_OPTIONS, providedOptions );
 
     // All allele icons have the same effective width and height.

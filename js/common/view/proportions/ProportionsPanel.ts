@@ -30,6 +30,8 @@ export default class ProportionsPanel extends NaturalSelectionPanel {
   public constructor( genePool: GenePool, valuesVisibleProperty: Property<boolean>, providedOptions: ProportionsPanelOptions ) {
 
     const options = optionize4<ProportionsPanelOptions, SelfOptions, NaturalSelectionPanelOptions>()(
+
+      // @ts-expect-error - chip away for https://github.com/phetsims/center-and-variability/issues/142
       {}, NaturalSelectionConstants.PANEL_OPTIONS, {
 
         // NaturalSelectionPanelOptions

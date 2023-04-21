@@ -35,6 +35,8 @@ export default class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
                       foodIsLimitedProperty: Property<boolean>, providedOptions: EnvironmentalFactorsPanelOptions ) {
 
     const options = optionize4<EnvironmentalFactorsPanelOptions, SelfOptions, NaturalSelectionPanelOptions>()(
+
+      // @ts-expect-error - chip away for https://github.com/phetsims/center-and-variability/issues/142
       {}, NaturalSelectionConstants.PANEL_OPTIONS, {
 
         // SelfOptions

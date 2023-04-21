@@ -30,6 +30,8 @@ export default class PopulationPanel extends NaturalSelectionPanel {
   public constructor( populationModel: PopulationModel, providedOptions?: PopulationPanelOptions ) {
 
     const options = optionize4<PopulationPanelOptions, SelfOptions, NaturalSelectionPanelOptions>()(
+
+      // @ts-expect-error - chip away for https://github.com/phetsims/center-and-variability/issues/142
       {}, NaturalSelectionConstants.PANEL_OPTIONS, {
 
         // NaturalSelectionPanelOptions
