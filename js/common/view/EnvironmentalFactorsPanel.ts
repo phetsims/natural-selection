@@ -11,6 +11,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { combineOptions, EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { AlignGroup, Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
@@ -34,9 +35,7 @@ export default class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
   public constructor( wolvesEnabledProperty: Property<boolean>, foodIsToughProperty: Property<boolean>,
                       foodIsLimitedProperty: Property<boolean>, providedOptions: EnvironmentalFactorsPanelOptions ) {
 
-    const options = optionize4<EnvironmentalFactorsPanelOptions, SelfOptions, NaturalSelectionPanelOptions>()(
-
-      // @ts-expect-error - chip away for https://github.com/phetsims/center-and-variability/issues/142
+    const options = optionize4<EnvironmentalFactorsPanelOptions, SelfOptions, StrictOmit<NaturalSelectionPanelOptions, 'tandem'>>()(
       {}, NaturalSelectionConstants.PANEL_OPTIONS, {
 
         // SelfOptions

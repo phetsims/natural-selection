@@ -7,6 +7,7 @@
  */
 
 import { combineOptions, EmptySelfOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../../phet-core/js/types/StrictOmit.js';
 import { AlignBox, AlignGroup, HSeparator, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
 import naturalSelection from '../../../naturalSelection.js';
@@ -29,9 +30,7 @@ export default class PopulationPanel extends NaturalSelectionPanel {
 
   public constructor( populationModel: PopulationModel, providedOptions?: PopulationPanelOptions ) {
 
-    const options = optionize4<PopulationPanelOptions, SelfOptions, NaturalSelectionPanelOptions>()(
-
-      // @ts-expect-error - chip away for https://github.com/phetsims/center-and-variability/issues/142
+    const options = optionize4<PopulationPanelOptions, SelfOptions, StrictOmit<NaturalSelectionPanelOptions, 'tandem'>>()(
       {}, NaturalSelectionConstants.PANEL_OPTIONS, {
 
         // NaturalSelectionPanelOptions

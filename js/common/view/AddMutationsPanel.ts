@@ -11,6 +11,7 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { combineOptions, EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HBoxOptions, Image, Node, NodeOptions, Rectangle, TColor, Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import RectangularPushButton, { RectangularPushButtonOptions } from '../../../../sun/js/buttons/RectangularPushButton.js';
@@ -44,8 +45,7 @@ export default class AddMutationsPanel extends NaturalSelectionPanel {
 
   public constructor( genePool: GenePool, providedOptions: AddMutationsPanelOptions ) {
 
-    const options = optionize3<AddMutationsPanelOptions, SelfOptions, NaturalSelectionPanelOptions>()(
-      // @ts-expect-error - chip away for https://github.com/phetsims/center-and-variability/issues/142
+    const options = optionize3<AddMutationsPanelOptions, SelfOptions, StrictOmit<NaturalSelectionPanelOptions, 'tandem'>>()(
       {}, NaturalSelectionConstants.PANEL_OPTIONS, providedOptions );
 
     // All allele icons have the same effective width and height.

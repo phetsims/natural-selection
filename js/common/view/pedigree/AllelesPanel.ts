@@ -12,6 +12,7 @@
 
 import Property from '../../../../../axon/js/Property.js';
 import optionize, { combineOptions, EmptySelfOptions, optionize3 } from '../../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../../phet-core/js/types/StrictOmit.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HStrut, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
@@ -38,9 +39,7 @@ export default class AllelesPanel extends NaturalSelectionPanel {
                       teethAllelesVisibleProperty: Property<boolean>,
                       providedOptions: AllelesPanelOptions ) {
 
-    const options = optionize3<AllelesPanelOptions, SelfOptions, NaturalSelectionPanelOptions>()(
-
-      // @ts-expect-error - chip away for https://github.com/phetsims/center-and-variability/issues/142
+    const options = optionize3<AllelesPanelOptions, SelfOptions, StrictOmit<NaturalSelectionPanelOptions, 'tandem'>>()(
       {}, NaturalSelectionConstants.PANEL_OPTIONS, providedOptions );
 
     // To make the abbreviation + icon for all alleles the same effective size
