@@ -139,6 +139,7 @@ export default class NaturalSelectionScreenView extends ScreenView {
 
     this.graphChoiceProperty = new EnumerationProperty( GraphChoice.POPULATION, {
       tandem: graphsTandem.createTandem( 'graphChoiceProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'the graph choice made via graphChoiceRadioButtonGroup'
     } );
 

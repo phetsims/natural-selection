@@ -117,7 +117,10 @@ class TitleText extends Text {
       // TextOptions
       font: NaturalSelectionConstants.TITLE_FONT,
       maxWidth: 175, // determined empirically,
-      phetioVisiblePropertyInstrumented: true
+      phetioVisiblePropertyInstrumented: true,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     }, providedOptions );
 
     const stringProperty = new DerivedProperty( [
