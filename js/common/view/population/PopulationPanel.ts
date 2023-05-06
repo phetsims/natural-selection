@@ -34,7 +34,10 @@ export default class PopulationPanel extends NaturalSelectionPanel {
       {}, NaturalSelectionConstants.PANEL_OPTIONS, {
 
         // NaturalSelectionPanelOptions
-        fixedWidth: 100
+        fixedWidth: 100,
+        visiblePropertyOptions: {
+          phetioFeatured: true
+        }
       }, providedOptions );
 
     const furGene = populationModel.genePool.furGene;

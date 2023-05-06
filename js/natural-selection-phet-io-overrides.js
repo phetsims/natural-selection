@@ -46,12 +46,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.view.graphs.pedigreeNode.allelesPanel.teethRow.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.view.graphs.pedigreeNode.allelesPanel.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.view.graphs.populationNode.populationPanel.visibleProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsGraphNode.columns.earsColumn.visibleProperty": {
       "phetioFeatured": true
     },
@@ -62,9 +56,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.furLegendNode.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.visibleProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.introScreen.view.environmentPanel.playButtonGroup.visibleProperty": {
@@ -157,12 +148,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.teethRow.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.graphs.populationNode.populationPanel.visibleProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsGraphNode.columns.earsColumn.visibleProperty": {
       "phetioFeatured": true
     },
@@ -179,9 +164,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.teethLegendNode.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.visibleProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.visibleProperty": {

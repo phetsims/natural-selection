@@ -36,7 +36,10 @@ export default class ProportionsLegendNode extends VBox {
 
         // VBoxOptions
         align: 'left',
-        spacing: 25
+        spacing: 25,
+        visiblePropertyOptions: {
+          phetioFeatured: true
+        }
       }, providedOptions );
 
     // A legend for each gene
