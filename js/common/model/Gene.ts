@@ -131,6 +131,7 @@ export default class Gene extends PhetioObject {
     this.dominantAlleleProperty = new Property( null, {
       validValues: [ null, this.normalAllele, this.mutantAllele ],
       tandem: options.tandem.createTandem( 'dominantAlleleProperty' ),
+      phetioFeatured: true,
       phetioValueType: NullableIO( Allele.AlleleIO ),
       phetioReadOnly: true
     } );
@@ -146,6 +147,7 @@ export default class Gene extends PhetioObject {
       }, {
         validValues: [ null, this.normalAllele, this.mutantAllele ],
         tandem: options.tandem.createTandem( 'recessiveAlleleProperty' ),
+        phetioFeatured: true,
         phetioValueType: NullableIO( Allele.AlleleIO )
       } );
 

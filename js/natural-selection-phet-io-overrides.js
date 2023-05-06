@@ -10,24 +10,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.model.bunnyCollection.liveBunnies.countsProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.model.genePool.earsGene.dominantAlleleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.genePool.earsGene.recessiveAlleleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.genePool.furGene.dominantAlleleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.genePool.furGene.recessiveAlleleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.genePool.teethGene.dominantAlleleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.genePool.teethGene.recessiveAlleleProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.introScreen.model.graphs.pedigreeModel.furAllelesVisibleProperty": {
       "phetioFeatured": true
     },
@@ -116,24 +98,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.model.bunnyCollection.liveBunnies.countsProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.genePool.earsGene.dominantAlleleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.genePool.earsGene.recessiveAlleleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.genePool.furGene.dominantAlleleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.genePool.furGene.recessiveAlleleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.genePool.teethGene.dominantAlleleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.genePool.teethGene.recessiveAlleleProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.model.graphs.pedigreeModel.earsAllelesVisibleProperty": {
