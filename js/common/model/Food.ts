@@ -79,11 +79,13 @@ export default class Food {
 
     this.isToughProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'isToughProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'whether the food supply is tough (true) or tender (false)'
     } );
 
     this.isLimitedProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'isLimitedProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'whether the food supply is limited'
     } );
 

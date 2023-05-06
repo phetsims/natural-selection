@@ -1,12 +1,6 @@
 /* eslint-disable */
 window.phet.preloads.phetio.phetioElementsOverrides =
   {
-    "naturalSelection.introScreen.model.bunnyCollection.allBunniesHaveDiedEmitter": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.bunnyCollection.bunniesHaveTakenOverTheWorldEmitter": {
-      "phetioFeatured": true
-    },
     "naturalSelection.introScreen.model.bunnyCollection.bunnyGroup.archetype.genotype.abbreviationProperty": {
       "phetioFeatured": true
     },
@@ -14,18 +8,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.introScreen.model.bunnyCollection.liveBunnies.countsProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.bunnyCollection.selectedBunnyProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.environmentProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.food.isLimitedProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.food.isToughProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.introScreen.model.genePool.earsGene.dominantAlleleProperty": {
@@ -44,12 +26,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.introScreen.model.genePool.teethGene.recessiveAlleleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.generationClock.isRunningProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.generationClock.timeInGenerationsProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.introScreen.model.graphs.pedigreeModel.furAllelesVisibleProperty": {
@@ -196,12 +172,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.view.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.labScreen.model.bunnyCollection.allBunniesHaveDiedEmitter": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.bunnyCollection.bunniesHaveTakenOverTheWorldEmitter": {
-      "phetioFeatured": true
-    },
     "naturalSelection.labScreen.model.bunnyCollection.bunnyGroup.archetype.genotype.abbreviationProperty": {
       "phetioFeatured": true
     },
@@ -209,18 +179,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.model.bunnyCollection.liveBunnies.countsProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.bunnyCollection.selectedBunnyProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.environmentProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.food.isLimitedProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.food.isToughProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.model.genePool.earsGene.dominantAlleleProperty": {
@@ -239,12 +197,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.model.genePool.teethGene.recessiveAlleleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.generationClock.isRunningProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.generationClock.timeInGenerationsProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.model.graphs.pedigreeModel.earsAllelesVisibleProperty": {

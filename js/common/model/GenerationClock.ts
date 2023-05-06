@@ -52,6 +52,7 @@ export default class GenerationClock extends PhetioObject {
 
     this.isRunningProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'isRunningProperty' ),
+      phetioFeatured: true,
       phetioReadOnly: true,
       phetioDocumentation: 'whether the generation clock is running'
     } );
@@ -76,6 +77,7 @@ export default class GenerationClock extends PhetioObject {
       [ this.timeInSecondsProperty ],
       timeInSeconds => secondsToGenerations( timeInSeconds ), {
         tandem: options.tandem.createTandem( 'timeInGenerationsProperty' ),
+        phetioFeatured: true,
         phetioValueType: NumberIO,
         phetioDocumentation: 'time that the generation clock has been running, in generations (decimal)',
         phetioHighFrequency: true

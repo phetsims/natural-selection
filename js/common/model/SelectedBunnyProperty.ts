@@ -36,6 +36,7 @@ export default class SelectedBunnyProperty extends Property<SelectBunnyValue> {
       selectedBunny: null,
 
       // PropertyOptions
+      phetioFeatured: true,
       phetioValueType: NullableIO( ReferenceIO( Bunny.BunnyIO ) ),
       phetioDocumentation: 'the selected bunny, null if no bunny is selected'
     }, providedOptions );

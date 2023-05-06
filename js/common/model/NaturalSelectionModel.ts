@@ -117,7 +117,8 @@ export default class NaturalSelectionModel implements TModel {
     this.initializeGenerationZero();
 
     this.environmentProperty = new EnumerationProperty( Environment.EQUATOR, {
-      tandem: options.tandem.createTandem( 'environmentProperty' )
+      tandem: options.tandem.createTandem( 'environmentProperty' ),
+      phetioFeatured: true
     } );
 
     this.wolfCollection = new WolfCollection( this.generationClock, this.environmentProperty, this.bunnyCollection,

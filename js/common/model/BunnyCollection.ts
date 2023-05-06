@@ -128,6 +128,7 @@ export default class BunnyCollection {
 
     this.allBunniesHaveDiedEmitter = new Emitter( {
       tandem: tandem.createTandem( 'allBunniesHaveDiedEmitter' ),
+      phetioFeatured: true,
       phetioReadOnly: true,
       phetioDocumentation: 'fires when all of the bunnies have died'
     } );
@@ -141,6 +142,7 @@ export default class BunnyCollection {
 
     this.bunniesHaveTakenOverTheWorldEmitter = new Emitter( {
       tandem: tandem.createTandem( 'bunniesHaveTakenOverTheWorldEmitter' ),
+      phetioFeatured: true,
       phetioReadOnly: true,
       phetioDocumentation: 'fires when bunnies have taken over the world'
     } );
