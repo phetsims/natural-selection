@@ -67,15 +67,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.view.environmentalFactorsPanel.titleText.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.view.genes.earsVisibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.view.genes.furVisibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.view.genes.teethVisibleProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.introScreen.view.graphs.graphChoiceProperty": {
       "phetioFeatured": true
     },
@@ -221,15 +212,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.environmentalFactorsPanel.titleText.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.genes.earsVisibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.genes.furVisibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.genes.teethVisibleProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.graphs.graphChoiceProperty": {

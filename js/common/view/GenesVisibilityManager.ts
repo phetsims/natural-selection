@@ -57,7 +57,7 @@ export default class GenesVisibilityManager {
      */
     function createGeneVisibleProperty(
       gene: Gene, visible: boolean,
-      options: PickRequired<BooleanPropertyOptions, 'tandem' | 'phetioDocumentation'> ): Property<boolean> {
+      options: PickRequired<BooleanPropertyOptions, 'tandem' | 'phetioDocumentation' | 'phetioFeatured'> ): Property<boolean> {
 
       const property = new BooleanProperty( visible, options );
 
@@ -76,16 +76,19 @@ export default class GenesVisibilityManager {
 
     this.furVisibleProperty = createGeneVisibleProperty( genePool.furGene, options.furVisible, {
       tandem: options.tandem.createTandem( 'furVisibleProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: StringUtils.fillIn( template, { name: 'Fur' } )
     } );
 
     this.earsVisibleProperty = createGeneVisibleProperty( genePool.earsGene, options.earsVisible, {
       tandem: options.tandem.createTandem( 'earsVisibleProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: StringUtils.fillIn( template, { name: 'Ears' } )
     } );
 
     this.teethVisibleProperty = createGeneVisibleProperty( genePool.teethGene, options.teethVisible, {
       tandem: options.tandem.createTandem( 'teethVisibleProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: StringUtils.fillIn( template, { name: 'Teeth' } )
     } );
   }
