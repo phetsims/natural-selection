@@ -154,7 +154,13 @@ class TextPushButton extends RectangularPushButton {
       cornerRadius: 5,
       xMargin: 12,
       yMargin: 8,
-      phetioReadOnly: true // because sim state controls when this button is visible
+      phetioReadOnly: true, // because sim state controls when this button is visible
+      visiblePropertyOptions: {
+        phetioFeatured: false
+      },
+      enabledPropertyOptions: {
+        phetioFeatured: false
+      }
     }, providedOptions );
 
     options.content = new Text( stringProperty, combineOptions<TextOptions>( {}, options.textOptions, {
