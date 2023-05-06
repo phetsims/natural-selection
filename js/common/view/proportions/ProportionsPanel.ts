@@ -34,7 +34,10 @@ export default class ProportionsPanel extends NaturalSelectionPanel {
       {}, NaturalSelectionConstants.PANEL_OPTIONS, {
 
         // NaturalSelectionPanelOptions
-        fixedWidth: 100
+        fixedWidth: 100,
+        visiblePropertyOptions: {
+          phetioFeatured: true
+        }
       }, providedOptions );
 
     const legendNode = new ProportionsLegendNode( genePool, {

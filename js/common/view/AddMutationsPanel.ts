@@ -161,7 +161,10 @@ class Row extends HBox {
     const options = optionize<RowOptions, RowSelfOptions, HBoxOptions>()( {
 
       // HBoxOptions
-      spacing: COLUMN_SPACING
+      spacing: COLUMN_SPACING,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     }, providedOptions );
 
     // label that indicates the gene, to the left of the push buttons
