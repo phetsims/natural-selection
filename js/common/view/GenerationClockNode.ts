@@ -41,7 +41,11 @@ export default class GenerationClockNode extends Node {
                       providedOptions: GenerationClockNodeOptions ) {
 
     const options = optionize<GenerationClockNodeOptions, SelfOptions, NodeOptions>()( {
-      // empty optionize because we will be setting options.children below
+
+      // NodeOptions
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     }, providedOptions );
 
     // The full center of the clock.

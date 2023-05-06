@@ -82,6 +82,7 @@ export default class ProportionsModel extends PhetioObject {
 
     this.valuesVisibleProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'valuesVisibleProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'determines whether values are visible on the bars in the Proportions graph'
     } );
 
@@ -89,6 +90,7 @@ export default class ProportionsModel extends PhetioObject {
       numberType: 'Integer',
       range: new Range( 0, 0 ), // dynamically adjusted by calling setValueAndRange
       tandem: options.tandem.createTandem( 'proportionsGenerationProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'the generation whose data is displayed by the Proportions graph (integer)',
       phetioReadOnly: true // range is dynamic
     } );

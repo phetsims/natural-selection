@@ -43,15 +43,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.model.graphs.populationModel.dataPoints.whiteFurPoints": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.model.graphs.populationModel.dataProbe.countsProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.graphs.populationModel.dataProbe.dataProbeGenerationProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.graphs.populationModel.dataProbe.visibleProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.introScreen.model.graphs.populationModel.whiteFurVisibleProperty": {
       "phetioFeatured": true
     },
@@ -64,12 +55,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.model.graphs.proportionsModel.previousCounts": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.model.graphs.proportionsModel.proportionsGenerationProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.graphs.proportionsModel.valuesVisibleProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.introScreen.view.addMutationsPanel.earsRow.visibleProperty": {
       "phetioFeatured": true
     },
@@ -80,12 +65,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.introScreen.view.environmentalFactorsPanel.titleText.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.view.environmentalFactorsPanel.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.view.environmentPanel.generationClockNode.visibleProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.introScreen.view.genes.earsVisibleProperty": {
@@ -217,15 +196,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.labScreen.model.graphs.populationModel.dataPoints.whiteFurPoints": {
       "phetioFeatured": true
     },
-    "naturalSelection.labScreen.model.graphs.populationModel.dataProbe.countsProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.graphs.populationModel.dataProbe.dataProbeGenerationProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.graphs.populationModel.dataProbe.visibleProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.labScreen.model.graphs.populationModel.floppyEarsVisibleProperty": {
       "phetioFeatured": true
     },
@@ -256,13 +226,7 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.labScreen.model.graphs.proportionsModel.previousCounts": {
       "phetioFeatured": true
     },
-    "naturalSelection.labScreen.model.graphs.proportionsModel.proportionsGenerationProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.labScreen.model.graphs.proportionsModel.teethVisibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.graphs.proportionsModel.valuesVisibleProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.addMutationsPanel.earsRow.visibleProperty": {
@@ -275,12 +239,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.environmentalFactorsPanel.titleText.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.environmentalFactorsPanel.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.environmentPanel.generationClockNode.visibleProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.genes.earsVisibleProperty": {

@@ -39,7 +39,12 @@ export default class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       {}, NaturalSelectionConstants.PANEL_OPTIONS, {
 
         // SelfOptions
-        toughFoodCheckboxVisible: true
+        toughFoodCheckboxVisible: true,
+
+        // NaturalSelectionPanelOptions
+        visiblePropertyOptions: {
+          phetioFeatured: true
+        }
       }, providedOptions );
 
     // To make all checkbox labels have the same effective size
