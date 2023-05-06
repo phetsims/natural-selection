@@ -118,7 +118,10 @@ class Row extends VBox {
       // VBoxOptions
       align: 'left',
       spacing: 8,
-      excludeInvisibleChildrenFromBounds: false
+      excludeInvisibleChildrenFromBounds: false,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     }, providedOptions );
 
     const checkboxTandem = options.tandem.createTandem( 'checkbox' );

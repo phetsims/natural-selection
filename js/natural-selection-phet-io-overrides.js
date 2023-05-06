@@ -28,22 +28,10 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.model.graphs.populationModel.whiteFurVisibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.model.graphs.proportionsModel.currentStartCountsProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.introScreen.model.graphs.proportionsModel.furVisibleProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.introScreen.model.graphs.proportionsModel.previousCounts": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.view.graphs.pedigreeNode.allelesPanel.earsRow.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.view.graphs.pedigreeNode.allelesPanel.furRow.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.view.graphs.pedigreeNode.allelesPanel.teethRow.visibleProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsGraphNode.columns.earsColumn.visibleProperty": {
@@ -124,9 +112,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.labScreen.model.graphs.populationModel.whiteFurVisibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.labScreen.model.graphs.proportionsModel.currentStartCountsProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.labScreen.model.graphs.proportionsModel.earsVisibleProperty": {
       "phetioFeatured": true
     },
@@ -137,15 +122,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.model.graphs.proportionsModel.teethVisibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.earsRow.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.furRow.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.graphs.pedigreeNode.allelesPanel.teethRow.visibleProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsGraphNode.columns.earsColumn.visibleProperty": {
