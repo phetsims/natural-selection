@@ -70,18 +70,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.model.graphs.proportionsModel.valuesVisibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.model.isPlayingProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.memoryLimitEmitter": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.timeSpeedProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.wolfCollection.enabledProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.introScreen.view.addMutationsPanel.earsRow.visibleProperty": {
       "phetioFeatured": true
     },
@@ -164,9 +152,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": false
     },
     "naturalSelection.introScreen.view.environmentPanel.playButtonGroup.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.view.timeControlNode.visibleProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.introScreen.view.visibleProperty": {
@@ -280,18 +265,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.labScreen.model.graphs.proportionsModel.valuesVisibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.labScreen.model.isPlayingProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.memoryLimitEmitter": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.timeSpeedProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.wolfCollection.enabledProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.labScreen.view.addMutationsPanel.earsRow.visibleProperty": {
       "phetioFeatured": true
     },
@@ -378,9 +351,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     },
     "naturalSelection.labScreen.view.environmentPanel.playButtonGroup.startOverButton.visibleProperty": {
       "phetioFeatured": false
-    },
-    "naturalSelection.labScreen.view.timeControlNode.visibleProperty": {
-      "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.visibleProperty": {
       "phetioFeatured": true

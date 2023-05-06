@@ -37,7 +37,10 @@ export default class NaturalSelectionTimeControlNode extends HBox {
       // HBoxOptions
       spacing: 10,
       disabledOpacity: SceneryConstants.DISABLED_OPACITY,
-      phetioEnabledPropertyInstrumented: true // opt into default PhET-iO instrumented enabledProperty
+      phetioEnabledPropertyInstrumented: true, // opt into default PhET-iO instrumented enabledProperty
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     }, providedOptions );
 
     const playPauseButton = new PlayPauseButton( isPlayingProperty, {

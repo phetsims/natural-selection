@@ -65,7 +65,8 @@ export default class WolfCollection {
     this.bunnyCollection = bunnyCollection;
 
     this.enabledProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'enabledProperty' )
+      tandem: tandem.createTandem( 'enabledProperty' ),
+      phetioFeatured: true
     } );
 
     this.isHuntingProperty = new DerivedProperty(

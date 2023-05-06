@@ -85,12 +85,14 @@ export default class NaturalSelectionModel implements TModel {
 
     this.isPlayingProperty = new BooleanProperty( true, {
       tandem: options.tandem.createTandem( 'isPlayingProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'whether time is advancing in the simulation, controlled by the Play/Pause button'
     } );
 
     this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
       validValues: [ TimeSpeed.NORMAL, TimeSpeed.FAST ],
       tandem: options.tandem.createTandem( 'timeSpeedProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'controls the speed of the generation clock',
       phetioReadOnly: true
     } );
@@ -188,6 +190,7 @@ export default class NaturalSelectionModel implements TModel {
 
     this.memoryLimitEmitter = new Emitter( {
       tandem: options.tandem.createTandem( 'memoryLimitEmitter' ),
+      phetioFeatured: true,
       phetioReadOnly: true,
       phetioDocumentation: 'fires when the memory limit is reached and the simulation must be ended'
     } );
