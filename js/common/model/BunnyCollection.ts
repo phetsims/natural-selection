@@ -82,7 +82,8 @@ export default class BunnyCollection {
   public constructor( modelViewTransform: EnvironmentModelViewTransform, genePool: GenePool, tandem: Tandem ) {
 
     this.liveBunnies = createBunnyArray( {
-      tandem: tandem.createTandem( 'liveBunnies' )
+      tandem: tandem.createTandem( 'liveBunnies' ),
+      countsPropertyFeatured: true
     } );
 
     this.deadBunnies = createBunnyArray( {

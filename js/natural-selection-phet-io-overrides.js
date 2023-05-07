@@ -7,9 +7,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.model.bunnyCollection.bunnyGroup.archetype.phenotype": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.model.bunnyCollection.liveBunnies.countsProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.introScreen.model.graphs.pedigreeModel.furAllelesVisibleProperty": {
       "phetioFeatured": true
     },
@@ -56,9 +53,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.model.bunnyCollection.bunnyGroup.archetype.phenotype": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.bunnyCollection.liveBunnies.countsProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.model.graphs.pedigreeModel.earsAllelesVisibleProperty": {

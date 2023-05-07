@@ -8,7 +8,7 @@
 
 import createObservableArray, { ObservableArray, ObservableArrayOptions } from '../../../../axon/js/createObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -22,7 +22,9 @@ type AdditionalProperties = {
 
 export type BunnyArray = ObservableArray<Bunny> & AdditionalProperties;
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+  countsPropertyFeatured?: boolean; // phetioFeatured value for countsProperty
+};
 
 type BunnyArrayOptions = SelfOptions & ObservableArrayOptions<Bunny> &
   PickRequired<ObservableArrayOptions<Bunny>, 'tandem'>;
@@ -30,6 +32,9 @@ type BunnyArrayOptions = SelfOptions & ObservableArrayOptions<Bunny> &
 export default function createBunnyArray( providedOptions: BunnyArrayOptions ): BunnyArray {
 
   const options = optionize<BunnyArrayOptions, SelfOptions, ObservableArrayOptions<Bunny>>()( {
+
+    // SelfOptions
+    countsPropertyFeatured: false,
 
     // ObservableArrayOptions
     phetioType: createObservableArray.ObservableArrayIO( ReferenceIO( Bunny.BunnyIO ) ),
@@ -42,6 +47,7 @@ export default function createBunnyArray( providedOptions: BunnyArrayOptions ): 
   const countsProperty = new Property( BunnyCounts.withZero(), {
     tandem: options.tandem.createTandem( 'countsProperty' ),
     phetioValueType: BunnyCounts.BunnyCountsIO,
+    phetioFeatured: options.countsPropertyFeatured,
     phetioState: false // because counts will be restored as Bunny instances are restored to BunnyGroup
   } );
 
