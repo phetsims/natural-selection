@@ -1,4 +1,4 @@
-// Copyright 2020-2022, University of Colorado Boulder
+// Copyright 2020-2023, University of Colorado Boulder
 
 /**
  * SelectedBunnyProperty is the Property used for the selected bunny in the Pedigree model.
