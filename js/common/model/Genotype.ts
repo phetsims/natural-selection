@@ -130,6 +130,7 @@ export default class Genotype extends PhetioObject {
                this.teethGenePair.getGenotypeAbbreviation();
       }, {
         tandem: options.tandem.createTandem( 'abbreviationProperty' ),
+        phetioFeatured: true,
         phetioValueType: StringIO,
         phetioDocumentation: 'the abbreviation that describes the genotype, the empty string if there are no dominant alleles'
       } );

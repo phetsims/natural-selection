@@ -1,12 +1,6 @@
 /* eslint-disable */
 window.phet.preloads.phetio.phetioElementsOverrides =
   {
-    "naturalSelection.introScreen.model.bunnyCollection.bunnyGroup.archetype.genotype.abbreviationProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.model.bunnyCollection.bunnyGroup.archetype.phenotype": {
-      "phetioFeatured": true
-    },
     "naturalSelection.introScreen.model.graphs.pedigreeModel.furAllelesVisibleProperty": {
       "phetioFeatured": true
     },
@@ -38,12 +32,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.introScreen.view.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.bunnyCollection.bunnyGroup.archetype.genotype.abbreviationProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.model.bunnyCollection.bunnyGroup.archetype.phenotype": {
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.model.graphs.pedigreeModel.earsAllelesVisibleProperty": {

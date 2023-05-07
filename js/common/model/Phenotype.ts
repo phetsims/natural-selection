@@ -40,6 +40,7 @@ export default class Phenotype extends PhetioObject {
     const options = optionize<PhenotypeOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // PhetioObjectOptions
+      phetioFeatured: true,
       phetioType: Phenotype.PhenotypeIO,
       phetioDocumentation: 'the appearance of the bunny, the manifestation of its genotype'
     }, providedOptions );
