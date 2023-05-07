@@ -31,15 +31,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.model.graphs.proportionsModel.previousCounts": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsGraphNode.columns.earsColumn.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsGraphNode.columns.furColumn.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsGraphNode.columns.teethColumn.visibleProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.furLegendNode.visibleProperty": {
       "phetioFeatured": true
     },
@@ -116,15 +107,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.model.graphs.proportionsModel.teethVisibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsGraphNode.columns.earsColumn.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsGraphNode.columns.furColumn.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsGraphNode.columns.teethColumn.visibleProperty": {
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.earsLegendNode.visibleProperty": {

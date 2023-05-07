@@ -331,7 +331,10 @@ class Column extends VBox {
       // VBoxOptions
       spacing: ROW_SPACING,
       align: 'center',
-      visiblePropertyOptions: { phetioReadOnly: true }
+      visiblePropertyOptions: {
+        phetioFeatured: true,
+        phetioReadOnly: true
+      }
     }, providedOptions );
 
     // Checkbox to hide the column
