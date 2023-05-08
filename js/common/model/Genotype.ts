@@ -1,4 +1,4 @@
-// Copyright 2020-2022, University of Colorado Boulder
+// Copyright 2020-2023, University of Colorado Boulder
 
 /**
  * Genotype is the genetic blueprint for an individual bunny. It consists of a gene pair for each gene, and
