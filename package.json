@@ -20,7 +20,11 @@
     ],
     "phet-io": {
       "compareDesignedAPIChanges": true
-    }
+    },
+    "screenNameKeys": [
+      "NATURAL_SELECTION/screen.intro",
+      "NATURAL_SELECTION/screen.lab"
+    ]
   },
   "eslintConfig": {
     "extends": "../chipper/eslint/sim_eslintrc.js"
