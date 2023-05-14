@@ -79,9 +79,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.labScreen.model.graphs.populationModel.straightEarsVisibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.labScreen.model.graphs.populationModel.totalVisibleProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.labScreen.model.graphs.populationModel.whiteFurVisibleProperty": {
       "phetioFeatured": true
     },

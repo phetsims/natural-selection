@@ -151,7 +151,8 @@ export default class PopulationModel extends PhetioObject {
 
     // visibility of each data set, on the graph and data probe
     this.totalVisibleProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'totalVisibleProperty' )
+      tandem: options.tandem.createTandem( 'totalVisibleProperty' ),
+      phetioFeatured: true
     } );
     this.whiteFurVisibleProperty = new BooleanProperty( false, {
       tandem: options.tandem.createTandem( 'whiteFurVisibleProperty' )
