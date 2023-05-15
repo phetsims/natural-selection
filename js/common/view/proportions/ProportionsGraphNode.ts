@@ -332,7 +332,6 @@ class Column extends VBox {
       spacing: ROW_SPACING,
       align: 'center',
       visiblePropertyOptions: {
-        phetioFeatured: true,
         phetioReadOnly: true
       }
     }, providedOptions );
