@@ -155,22 +155,28 @@ export default class PopulationModel extends PhetioObject {
       phetioFeatured: true
     } );
     this.whiteFurVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'whiteFurVisibleProperty' )
+      tandem: options.tandem.createTandem( 'whiteFurVisibleProperty' ),
+      phetioFeatured: true
     } );
     this.brownFurVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'brownFurVisibleProperty' )
+      tandem: options.tandem.createTandem( 'brownFurVisibleProperty' ),
+      phetioFeatured: true
     } );
     this.straightEarsVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'straightEarsVisibleProperty' )
+      tandem: options.tandem.createTandem( 'straightEarsVisibleProperty' ),
+      phetioFeatured: true
     } );
     this.floppyEarsVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'floppyEarsVisibleProperty' )
+      tandem: options.tandem.createTandem( 'floppyEarsVisibleProperty' ),
+      phetioFeatured: true
     } );
     this.shortTeethVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'shortTeethVisibleProperty' )
+      tandem: options.tandem.createTandem( 'shortTeethVisibleProperty' ),
+      phetioFeatured: true
     } );
     this.longTeethVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'longTeethVisibleProperty' )
+      tandem: options.tandem.createTandem( 'longTeethVisibleProperty' ),
+      phetioFeatured: true
     } );
 
     this.xRangeProperty = new Property( new Range( 0, options.xAxisLength ), {

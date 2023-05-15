@@ -140,13 +140,16 @@ export default class ProportionsModel extends PhetioObject {
 
     // visibility of the column for each gene in the graph
     this.furVisibleProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'furVisibleProperty' )
+      tandem: options.tandem.createTandem( 'furVisibleProperty' ),
+      phetioFeatured: true
     } );
     this.earsVisibleProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'earsVisibleProperty' )
+      tandem: options.tandem.createTandem( 'earsVisibleProperty' ),
+      phetioFeatured: true
     } );
     this.teethVisibleProperty = new BooleanProperty( true, {
-      tandem: options.tandem.createTandem( 'teethVisibleProperty' )
+      tandem: options.tandem.createTandem( 'teethVisibleProperty' ),
+      phetioFeatured: true
     } );
 
     // When the sim starts playing or the current generation changes, show the current generation immediately.

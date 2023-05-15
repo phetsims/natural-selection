@@ -36,15 +36,18 @@ export default class PedigreeModel extends PhetioObject {
     super( options );
 
     this.furAllelesVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'furAllelesVisibleProperty' )
+      tandem: options.tandem.createTandem( 'furAllelesVisibleProperty' ),
+      phetioFeatured: true
     } );
 
     this.earsAllelesVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'earsAllelesVisibleProperty' )
+      tandem: options.tandem.createTandem( 'earsAllelesVisibleProperty' ),
+      phetioFeatured: true
     } );
 
     this.teethAllelesVisibleProperty = new BooleanProperty( false, {
-      tandem: options.tandem.createTandem( 'teethAllelesVisibleProperty' )
+      tandem: options.tandem.createTandem( 'teethAllelesVisibleProperty' ),
+      phetioFeatured: true
     } );
   }
 
