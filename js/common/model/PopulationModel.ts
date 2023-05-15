@@ -115,36 +115,43 @@ export default class PopulationModel extends PhetioObject {
     // data points, for total population and the population of each allele.
     this.totalPoints = createObservableArray( {
       tandem: dataPointsTandem.createTandem( 'totalPoints' ),
+      phetioFeatured: true,
       phetioType: createObservableArray.ObservableArrayIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for all bunnies'
     } );
     this.whiteFurPoints = createObservableArray( {
       tandem: dataPointsTandem.createTandem( 'whiteFurPoints' ),
+      phetioFeatured: true,
       phetioType: createObservableArray.ObservableArrayIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with white fur'
     } );
     this.brownFurPoints = createObservableArray( {
       tandem: dataPointsTandem.createTandem( 'brownFurPoints' ),
+      phetioFeatured: true,
       phetioType: createObservableArray.ObservableArrayIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with brown fur'
     } );
     this.straightEarsPoints = createObservableArray( {
       tandem: dataPointsTandem.createTandem( 'straightEarsPoints' ),
+      phetioFeatured: true,
       phetioType: createObservableArray.ObservableArrayIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with straight ears'
     } );
     this.floppyEarsPoints = createObservableArray( {
       tandem: dataPointsTandem.createTandem( 'floppyEarsPoints' ),
+      phetioFeatured: true,
       phetioType: createObservableArray.ObservableArrayIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with floppy ears'
     } );
     this.shortTeethPoints = createObservableArray( {
       tandem: dataPointsTandem.createTandem( 'shortTeethPoints' ),
+      phetioFeatured: true,
       phetioType: createObservableArray.ObservableArrayIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with short teeth'
     } );
     this.longTeethPoints = createObservableArray( {
       tandem: dataPointsTandem.createTandem( 'longTeethPoints' ),
+      phetioFeatured: true,
       phetioType: createObservableArray.ObservableArrayIO( Vector2.Vector2IO ),
       phetioDocumentation: 'Population data points for bunnies with long teeth'
     } );
