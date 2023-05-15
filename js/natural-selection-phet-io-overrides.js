@@ -28,9 +28,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.furLegendNode.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.view.environmentPanel.playButtonGroup.visibleProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.labScreen.model.graphs.pedigreeModel.earsAllelesVisibleProperty": {
       "phetioFeatured": true
     },
