@@ -31,9 +31,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.view.environmentPanel.playButtonGroup.visibleProperty": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.view.visibleProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.labScreen.model.graphs.pedigreeModel.earsAllelesVisibleProperty": {
       "phetioFeatured": true
     },
@@ -101,9 +98,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.teethLegendNode.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.visibleProperty": {
       "phetioFeatured": true
     }
   };
