@@ -13,9 +13,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
     "naturalSelection.introScreen.model.graphs.proportionsModel.previousCounts": {
       "phetioFeatured": true
     },
-    "naturalSelection.introScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.furLegendNode.visibleProperty": {
-      "phetioFeatured": true
-    },
     "naturalSelection.labScreen.model.graphs.populationModel.dataPoints.brownFurPoints": {
       "phetioFeatured": true
     },
@@ -38,15 +35,6 @@ window.phet.preloads.phetio.phetioElementsOverrides =
       "phetioFeatured": true
     },
     "naturalSelection.labScreen.model.graphs.proportionsModel.previousCounts": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.earsLegendNode.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.furLegendNode.visibleProperty": {
-      "phetioFeatured": true
-    },
-    "naturalSelection.labScreen.view.graphs.proportionsNode.proportionsPanel.legendNode.teethLegendNode.visibleProperty": {
       "phetioFeatured": true
     }
   };
