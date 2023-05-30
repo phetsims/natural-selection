@@ -109,12 +109,10 @@ export default class Wolf extends Organism {
 
   /**
    * Serializes this Wolf instance.
-   * Because this._speed is private, it does not match the speed field name in stateSchema, and we cannot use
-   * the default implementation of toStateObject.
    */
   private toStateObject(): WolfStateObject {
     return {
-      // position and xDirection are handled by super Organism instrumented Properties
+      // position and xDirection are handled by instrumented Properties in superclass Organism
       _speed: this._speed
     };
   }
