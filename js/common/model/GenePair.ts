@@ -127,9 +127,9 @@ export default class GenePair extends PhetioObject {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes a GenePair instance.
-   * Because this._gene is private, it does not match the gene field name in stateSchema, and we cannot use
-   * the default implementation of toStateObject.
+   * Serializes a GenePair instance. Because this._gene is private and requires an ES5 getter, its name
+   * has an underscore prefix. It therefore does not match the field name in stateSchema, and we cannot use the
+   * default implementation of toStateObject.
    */
   private toStateObject(): GenePairStateObject {
     return {
@@ -140,7 +140,9 @@ export default class GenePair extends PhetioObject {
   }
 
   /**
-   * Restores GenePair state after instantiation.
+   * Restores GenePair state after instantiation. Because this._gene is private and requires an ES5 getter, its name
+   * has an underscore prefix. It therefore does not match the field name in stateSchema, and we cannot use the
+   * default implementation of applyState.
    */
   private applyState( stateObject: GenePairStateObject ): void {
     this._gene = Gene.GeneIO.fromStateObject( stateObject.gene );

@@ -105,18 +105,22 @@ export default class Phenotype extends PhetioObject {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes this Phenotype instance.
+   * Serializes this Phenotype instance. Because Phenotype fields are private and have and require an ES5 getter,
+   * they have an underscore prefix. Their names therefore do not match the fields name in stateSchema, and we cannot
+   * use the default implementation of toStateObject.
    */
   private toStateObject(): PhenotypeStateObject {
     return {
-      furAllele: Allele.AlleleIO.toStateObject( this.furAllele ),
-      earsAllele: Allele.AlleleIO.toStateObject( this.earsAllele ),
-      teethAllele: Allele.AlleleIO.toStateObject( this.teethAllele )
+      furAllele: Allele.AlleleIO.toStateObject( this._furAllele ),
+      earsAllele: Allele.AlleleIO.toStateObject( this._earsAllele ),
+      teethAllele: Allele.AlleleIO.toStateObject( this._teethAllele )
     };
   }
 
   /**
-   * Restores Phenotype state after instantiation.
+   * Restores Phenotype state after instantiation. Because Phenotype fields are private and have and require an ES5 getter,
+   * they have an underscore prefix. Their names therefore do not match the fields name in stateSchema, and we cannot
+   * use the default implementation of applyState.
    */
   private applyState( stateObject: PhenotypeStateObject ): void {
     this._furAllele = required( Allele.AlleleIO.fromStateObject( stateObject.furAllele ) );
