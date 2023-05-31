@@ -10,6 +10,7 @@ import Range from '../../../dot/js/Range.js';
 import PhetioObject from '../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import naturalSelection from '../naturalSelection.js';
+import { PhetioID } from '../../../tandem/js/TandemConstants.js';
 
 const NaturalSelectionUtils = {
 
@@ -98,7 +99,7 @@ const NaturalSelectionUtils = {
    *
    * Example: phet.naturalSelection.NaturalSelectionUtils.getElement( 'naturalSelection.labScreen' )
    */
-  getElement( phetioID: string ): PhetioObject | undefined {
+  getElement( phetioID: PhetioID ): PhetioObject | undefined {
     if ( Tandem.PHET_IO_ENABLED ) {
       return phet.phetio.phetioEngine.phetioObjectMap[ phetioID ];
     }
