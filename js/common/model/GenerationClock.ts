@@ -21,6 +21,7 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // const
 const SECONDS_PER_GENERATION = NaturalSelectionQueryParameters.secondsPerGeneration;
@@ -99,7 +100,7 @@ export default class GenerationClock extends PhetioObject {
     assert && this.clockGenerationProperty.lazyLink( ( currentClockGeneration, previousClockGeneration ) => {
 
       // Skip this when restoring PhET-iO state, because the initial state might be restored to any generation.
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+      if ( !isSettingPhetioStateProperty.value ) {
         assert && assert( currentClockGeneration === 0 || currentClockGeneration === previousClockGeneration + 1,
           `skipped a generation, currentClockGeneration=${currentClockGeneration}, previousClockGeneration=${previousClockGeneration}` );
       }

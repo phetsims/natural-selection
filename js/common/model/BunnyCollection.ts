@@ -28,6 +28,7 @@ import PunnettSquare from './PunnettSquare.js';
 import SelectedBunnyProperty from './SelectedBunnyProperty.js';
 import BunnyCounts from './BunnyCounts.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // constants
 
@@ -184,7 +185,7 @@ export default class BunnyCollection {
         this.liveBunnies.push( bunny );
       }
       else {
-        assert && assert( phet.joist.sim.isSettingPhetioStateProperty.value,
+        assert && assert( isSettingPhetioStateProperty.value,
           'a dead bunny should only be created when restoring PhET-iO state' );
         this.deadBunnies.push( bunny );
       }

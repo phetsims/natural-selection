@@ -38,6 +38,7 @@ import ShrubSpriteInstance from './ShrubSpriteInstance.js';
 import WolfSpriteInstance from './WolfSpriteInstance.js';
 import OrganismSpriteInstance from './OrganismSpriteInstance.js';
 import ShrubSprites from './ShrubSprites.js';
+import isSettingPhetioStateProperty from '../../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -198,7 +199,7 @@ export default class OrganismSprites extends Sprites {
     // bunnyCollection.liveBunnies.addItemAddedListener, the callback that creates BunnySpriteInstances.
     // If that happens, then createBunnySpriteInstance is responsible for calling setSelectedBunny.
     // See https://github.com/phetsims/natural-selection/issues/138
-    if ( phet.joist.sim.isSettingPhetioStateProperty.value && this.bunnyCollection.selectedBunnyProperty.value === bunny ) {
+    if ( isSettingPhetioStateProperty.value && this.bunnyCollection.selectedBunnyProperty.value === bunny ) {
       this.setSelectedBunny( bunny );
     }
   }
@@ -293,7 +294,7 @@ export default class OrganismSprites extends Sprites {
       // Get the BunnySpriteInstance that is associated with the selected bunny.
       const selectedBunnyIndex = this.getBunnySpriteInstanceIndex( bunny );
 
-      if ( phet.joist.sim.isSettingPhetioStateProperty.value && selectedBunnyIndex === -1 ) {
+      if ( isSettingPhetioStateProperty.value && selectedBunnyIndex === -1 ) {
 
         // PhET-iO state engine may restore bunnyCollection.selectedBunnyProperty before firing
         // bunnyCollection.liveBunnies.addItemAddedListener, the callback that creates BunnySpriteInstances.

@@ -22,6 +22,7 @@ import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
 import DataProbe from './DataProbe.js';
 import GenePool from './GenePool.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // The default index into Y_MAXIMUMS, determines the initial y-axis range.
 const Y_MAXIMUMS_INDEX_DEFAULT = 11;
@@ -219,7 +220,7 @@ export default class PopulationModel extends PhetioObject {
     timeInGenerationsProperty.link( timeInGeneration => {
 
       // Skip when restoring PhET-iO state, see https://github.com/phetsims/natural-selection/issues/315
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+      if ( !isSettingPhetioStateProperty.value ) {
         const max = Math.max( options.xAxisLength, timeInGeneration );
         if ( this.xRangeProperty.value.max !== max ) {
           const min = max - options.xAxisLength;
@@ -232,19 +233,19 @@ export default class PopulationModel extends PhetioObject {
     // unlinks are not necessary.
     // Do not do this when restoring PhET-iO state, see https://github.com/phetsims/natural-selection/issues/314.
     this.genePool.furGene.dominantAlleleProperty.link( dominantAllele => {
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+      if ( !isSettingPhetioStateProperty.value ) {
         this.whiteFurVisibleProperty.value = !!dominantAllele;
         this.brownFurVisibleProperty.value = !!dominantAllele;
       }
     } );
     this.genePool.earsGene.dominantAlleleProperty.link( dominantAllele => {
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+      if ( !isSettingPhetioStateProperty.value ) {
         this.straightEarsVisibleProperty.value = !!dominantAllele;
         this.floppyEarsVisibleProperty.value = !!dominantAllele;
       }
     } );
     this.genePool.teethGene.dominantAlleleProperty.link( dominantAllele => {
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+      if ( !isSettingPhetioStateProperty.value ) {
         this.shortTeethVisibleProperty.value = !!dominantAllele;
         this.longTeethVisibleProperty.value = !!dominantAllele;
       }

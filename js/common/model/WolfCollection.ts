@@ -28,6 +28,7 @@ import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bunny from './Bunny.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // constants
 
@@ -100,7 +101,7 @@ export default class WolfCollection {
       // When the isHuntingProperty changes during normal simulation use, it creates or disposes Wolf instances.
       // However, when setting PhET-iO state, isHuntingProperty and Wolf instances are restored, so executing
       // this code would result in duplicate wolves. See https://github.com/phetsims/natural-selection/issues/117
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+      if ( !isSettingPhetioStateProperty.value ) {
 
         if ( isHunting ) {
 
@@ -125,7 +126,7 @@ export default class WolfCollection {
     generationClock.timeInPercentProperty.lazyLink( ( currentTimeInPercent, previousTimeInPercent ) => {
 
       // Execute this code only when the sim is running normally, not when setting PhET-iO state.
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+      if ( !isSettingPhetioStateProperty.value ) {
 
         // Eat bunnies at the midpoint of their clock slice.
         // See https://github.com/phetsims/natural-selection/issues/110

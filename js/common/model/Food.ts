@@ -30,6 +30,7 @@ import BunnyCollection from './BunnyCollection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenerationClock from './GenerationClock.js';
 import Shrub from './Shrub.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // Food is applied at the midpoint of its clock slice.
 // See https://github.com/phetsims/natural-selection/issues/110
@@ -122,7 +123,7 @@ export default class Food {
     generationClock.timeInPercentProperty.lazyLink( ( currentTimeInPercent, previousTimeInPercent ) => {
 
       // Execute this code only when the sim is running normally, not when setting PhET-iO state.
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+      if ( !isSettingPhetioStateProperty.value ) {
 
         // Starve some bunnies at the midpoint of their clock slice.
         // See https://github.com/phetsims/natural-selection/issues/110

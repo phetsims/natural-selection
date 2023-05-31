@@ -18,6 +18,7 @@ import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import { HBox, HBoxOptions, NodeTranslationOptions, SceneryConstants } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
 import FastForwardButton from './FastForwardButton.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // constants
 const PLAY_BUTTON_RADIUS = 20;
@@ -79,7 +80,7 @@ export default class NaturalSelectionTimeControlNode extends HBox {
         playPauseButton.enabled = true;
 
         // But when playing back states, the ground truth is specified by the state and should not be overwritten by this listener
-        if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+        if ( !isSettingPhetioStateProperty.value ) {
           isPlayingProperty.value = isPlayingSaved;
         }
       }

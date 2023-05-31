@@ -24,6 +24,7 @@ import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 import NaturalSelectionPanel, { NaturalSelectionPanelOptions } from '../NaturalSelectionPanel.js';
 import AlleleNode from './AlleleNode.js';
+import isSettingPhetioStateProperty from '../../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -191,7 +192,7 @@ class Row extends VBox {
         // Automatically make the alleles visible.
         // Corresponding alleles should not be visible when the row is disabled.
         // Do not do this when restoring PhET-iO state, see https://github.com/phetsims/natural-selection/issues/314.
-        if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+        if ( !isSettingPhetioStateProperty.value ) {
           visibleProperty.value = hasMutation;
         }
 

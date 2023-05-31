@@ -35,6 +35,7 @@ import SimulationMode from './SimulationMode.js';
 import WolfCollection from './WolfCollection.js';
 import BunnyVariety from './BunnyVariety.js';
 import TModel from '../../../../joist/js/TModel.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -156,7 +157,7 @@ export default class NaturalSelectionModel implements TModel {
 
       // SimulationMode indicates which mode the simulation is in. It does not describe a full state of that mode.
       // So do nothing when PhET-iO is restoring state, or saved state will be overwritten.
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+      if ( !isSettingPhetioStateProperty.value ) {
 
         // When the simulation begins, record 'start' data for the graphs.
         if ( simulationMode === SimulationMode.ACTIVE ) {
@@ -207,7 +208,7 @@ export default class NaturalSelectionModel implements TModel {
     this.generationClock.clockGenerationProperty.lazyLink( clockGeneration => {
 
       // When restoring PhET-iO state, skip this code, because downstream elements are already stateful.
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+      if ( !isSettingPhetioStateProperty.value ) {
 
         // Generation 0 is initialized elsewhere, this code is for subsequent generations.
         if ( clockGeneration !== 0 ) {
