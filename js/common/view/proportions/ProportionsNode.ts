@@ -61,7 +61,7 @@ export default class ProportionsNode extends HBox {
 
     // Create a Studio link to the model
     this.addLinkedElement( proportionsModel, {
-      tandem: options.tandem.createTandem( 'proportionsModel' )
+      tandemName: 'proportionsModel'
     } );
 
     this.proportionsPanel = proportionsPanel;

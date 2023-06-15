@@ -106,7 +106,7 @@ export default class PedigreeGraphNode extends Node {
 
     // Create a Studio link to the model Property that controls which bunny's pedigree is displayed
     this.addLinkedElement( selectedBunnyProperty, {
-      tandem: options.tandem.createTandem( 'selectedBunnyProperty' )
+      tandemName: 'selectedBunnyProperty'
     } );
   }
 

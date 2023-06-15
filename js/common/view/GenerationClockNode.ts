@@ -119,7 +119,7 @@ export default class GenerationClockNode extends Node {
 
     // Create a Studio link to the model
     this.addLinkedElement( generationClock, {
-      tandem: options.tandem.createTandem( 'generationClock' )
+      tandemName: 'generationClock'
     } );
   }
 

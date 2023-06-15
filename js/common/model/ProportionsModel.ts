@@ -206,7 +206,7 @@ export default class ProportionsModel extends PhetioObject {
 
     // Create a Studio link
     this.addLinkedElement( liveBunnyCountsProperty, {
-      tandem: options.tandem.createTandem( 'currentCountsProperty' )
+      tandemName: 'currentCountsProperty'
     } );
 
     this.currentStartCountsProperty = currentStartCountsProperty;

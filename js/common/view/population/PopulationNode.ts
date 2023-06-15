@@ -63,7 +63,7 @@ export default class PopulationNode extends Node {
 
     // Create a Studio link to the model
     this.addLinkedElement( populationModel, {
-      tandem: options.tandem.createTandem( 'populationModel' )
+      tandemName: 'populationModel'
     } );
 
     this.populationPanel = populationPanel;

@@ -171,7 +171,7 @@ export default class DataProbeNode extends Node {
 
     // Create a Studio link to the model
     this.addLinkedElement( dataProbe, {
-      tandem: options.tandem.createTandem( 'dataProbe' )
+      tandemName: 'dataProbe'
     } );
   }
 
