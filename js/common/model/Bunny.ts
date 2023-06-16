@@ -424,7 +424,7 @@ export default class Bunny extends Organism {
    * It implements 'Dynamic element serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    */
-  public static readonly BunnyIO = new IOType( 'BunnyIO', {
+  public static readonly BunnyIO = new IOType<Bunny, BunnyStateObject>( 'BunnyIO', {
     valueType: Bunny,
     stateSchema: Bunny.getStateSchema,
     //TODO https://github.com/phetsims/natural-selection/issues/327 need to implement bunny.toStateObject()
