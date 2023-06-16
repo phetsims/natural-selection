@@ -13,7 +13,6 @@ import { Shape } from '../../../../kite/js/imports.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Circle, Node, NodeOptions, NodeTranslationOptions, Path, TColor, Text } from '../../../../scenery/js/imports.js';
-import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import GenerationClock from '../model/GenerationClock.js';
@@ -77,8 +76,7 @@ export default class GenerationClockNode extends Node {
     const generationDerivedStringProperty = new PatternStringProperty( NaturalSelectionStrings.generationValueStringProperty, {
       value: generationClock.clockGenerationProperty
     }, {
-      tandem: generationNumberTextTandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME ),
-      phetioValueType: StringIO
+      tandem: generationNumberTextTandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME )
     } );
     const generationNumberText = new Text( generationDerivedStringProperty, {
       font: GENERATION_FONT,
