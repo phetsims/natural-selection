@@ -26,7 +26,6 @@ import MutationIconNode from './MutationIconNode.js';
 import NaturalSelectionPanel, { NaturalSelectionPanelOptions } from './NaturalSelectionPanel.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
-// constants
 const COLUMN_SPACING = 8;
 const BUTTON_ICON_SCALE = 0.5;
 const LABEL_COLUMN_X_ALIGN = 'left';

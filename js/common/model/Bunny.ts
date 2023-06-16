@@ -32,7 +32,6 @@ import { CompositeSchema } from '../../../../tandem/js/types/StateSchema.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import { BunnyGroupCreateElementArguments } from './BunnyGroup.js';
 
-// constants
 const HOP_TIME_RANGE = new Range( 0.25, 0.5 ); // time to complete a hop cycle, in seconds
 const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // straight-line distance that a bunny hops in the xz plane
 const HOP_HEIGHT_RANGE = new Range( 30, 50 ); // how high above the ground a bunny hops

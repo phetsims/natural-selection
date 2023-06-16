@@ -17,7 +17,6 @@ import GenePool from '../../model/GenePool.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import HatchingRectangle from '../HatchingRectangle.js';
 
-// constants
 const RECTANGLE_WIDTH = 25;
 const RECTANGLE_HEIGHT = 15;
 

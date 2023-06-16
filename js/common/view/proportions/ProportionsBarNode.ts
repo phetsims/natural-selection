@@ -20,7 +20,6 @@ import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import HatchingRectangle from '../HatchingRectangle.js';
 
-// constants
 const PERCENTAGE_FONT = new PhetFont( 12 );
 
 type SelfOptions = {

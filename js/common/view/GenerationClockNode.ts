@@ -23,7 +23,6 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
-// constants
 const START_ANGLE = -Math.PI / 2; // 12:00
 const RADIUS = 18;
 const LINE_WIDTH = 1;

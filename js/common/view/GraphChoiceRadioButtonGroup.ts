@@ -19,7 +19,6 @@ import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import GraphChoice from './GraphChoice.js';
 
-// constants
 const TEXT_OPTIONS: StrictOmit<TextOptions, 'tandem'> = {
   font: NaturalSelectionConstants.RADIO_BUTTON_FONT,
   maxWidth: 175 // determined empirically

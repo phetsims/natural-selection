@@ -23,7 +23,6 @@ import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
 import BunnyImageMap from '../BunnyImageMap.js';
 import PedigreeBunnyNode from './PedigreeBunnyNode.js';
 
-// constants
 const PARENTS_SCALE = 0.9; // how much the parents are scaled relative to the child
 const DEFAULT_X_SPACING = 156; // x spacing between parents
 const DEFAULT_Y_SPACING = 68; // y spacing between child and parents

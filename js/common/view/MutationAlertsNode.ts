@@ -15,7 +15,6 @@ import MutationComingNode from './MutationComingNode.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
-// constants
 const X_OFFSET = -5;
 
 type SelfOptions = EmptySelfOptions;

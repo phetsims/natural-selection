@@ -19,7 +19,6 @@ import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import BunnyImageMap from '../BunnyImageMap.js';
 import PedigreeBranchNode from './PedigreeBranchNode.js';
 
-// constants
 const X_MARGIN = 5;
 const Y_MARGIN = 5;
 

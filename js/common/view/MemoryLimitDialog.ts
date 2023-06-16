@@ -20,7 +20,6 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-// constants
 const ICON_SCALE = 0.75;
 
 type SelfOptions = EmptySelfOptions;

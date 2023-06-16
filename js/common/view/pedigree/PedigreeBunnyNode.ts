@@ -21,7 +21,6 @@ import BunnySelectionRectangle from '../BunnySelectionRectangle.js';
 import MutationIconNode from '../MutationIconNode.js';
 import OriginNode from '../OriginNode.js';
 
-// constants
 const GENOTYPE_FONT = new PhetFont( 16 );
 const DEAD_SYMBOL_FONT = new PhetFont( 20 );
 const UNICODE_RED_CROSS_MARK = '\u274c';

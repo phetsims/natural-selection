@@ -18,8 +18,6 @@ import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Organism from './Organism.js';
 import XDirection from './XDirection.js';
 
-// constants
-
 // determined empirically, to keep wolves inside bounds of the environment
 const X_MARGIN = 35;
 

@@ -30,8 +30,6 @@ import BunnyCounts from './BunnyCounts.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
-// constants
-
 const LITTER_SIZE = 4;
 assert && assert( LITTER_SIZE === 4,
   'LITTER_SIZE must be 4, to correspond to the Punnett square that results from Mendel\'s Law of Segregation' );

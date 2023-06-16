@@ -20,7 +20,6 @@ import Environment from '../model/Environment.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
-// constants
 const ICON_X_MARGIN = 8;
 const ICON_Y_MARGIN = 6;
 

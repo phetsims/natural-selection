@@ -18,7 +18,6 @@ import CancelMutationButton from './CancelMutationButton.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
-// constants
 const X_MARGIN = 8;
 const Y_MARGIN = 4;
 const POINTER_WIDTH = 15;

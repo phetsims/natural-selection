@@ -30,8 +30,6 @@ import Bunny from './Bunny.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
-// constants
-
 // Wolves are applied at the midpoint of their clock slice.
 // See https://github.com/phetsims/natural-selection/issues/110
 const CLOCK_WOLVES_MIDPOINT = NaturalSelectionConstants.CLOCK_WOLVES_RANGE.getCenter();

@@ -16,7 +16,6 @@ import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
-// constants
 const LINE_DASH = NaturalSelectionConstants.POPULATION_MUTANT_LINE_DASH;
 
 // Compute line length so that we have uniform dash length

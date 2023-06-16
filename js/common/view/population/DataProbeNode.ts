@@ -35,7 +35,6 @@ type CreateNumberDisplayOptions = {
   backgroundFill?: Color | string;
 } & StrictOmit<NumberDisplayOptions, 'backgroundFill'>;
 
-// constants
 const MANIPULATOR_RADIUS = 7;
 const NUMBER_DISPLAY_RANGE = new Range( 0, 10 * NaturalSelectionQueryParameters.maxPopulation );
 const NUMBER_DISPLAY_BACKGROUND_FILL_OPACITY = 0.7;

@@ -28,7 +28,6 @@ import ProportionsBarNode from './ProportionsBarNode.js';
 import ProportionsGenerationSpinner from './ProportionsGenerationSpinner.js';
 import DerivedStringProperty from '../../../../../axon/js/DerivedStringProperty.js';
 
-// constants
 const ROW_SPACING = 30;
 const COLUMN_SPACING = 20;
 const ROW_LABEL_FONT = new PhetFont( 14 );

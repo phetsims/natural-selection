@@ -13,7 +13,6 @@ import { Sprite, SpriteImage } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import BunnySelectionRectangle from '../BunnySelectionRectangle.js';
 
-// constants
 const SELECTION_RECTANGLE_DILATION = 8;
 
 export default class BunnySelectionRectangleSprite extends Sprite {

@@ -20,7 +20,6 @@ import naturalSelection from '../../naturalSelection.js';
 import FastForwardButton from './FastForwardButton.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
-// constants
 const PLAY_BUTTON_RADIUS = 20;
 const FAST_FORWARD_BUTTON_RADIUS = 16;
 

@@ -19,7 +19,6 @@ import naturalSelection from '../../../naturalSelection.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 
-// constants
 const GRID_LINES_LINE_WIDTH = 1;
 const TICK_MARKS_LINE_WIDTH = 1;
 const TICK_MARKS_LENGTH = 4;

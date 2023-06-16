@@ -18,7 +18,6 @@ import naturalSelection from '../naturalSelection.js';
 import NaturalSelectionColors from './NaturalSelectionColors.js';
 import NaturalSelectionUtils from './NaturalSelectionUtils.js';
 
-// constants
 const CORNER_RADIUS = 5;
 
 const ARROW_BUTTON_OPTIONS: ArrowButtonOptions = {

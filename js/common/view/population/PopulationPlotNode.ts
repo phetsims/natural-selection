@@ -17,7 +17,6 @@ import { Node, NodeOptions, Path, TColor } from '../../../../../scenery/js/impor
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
-// constants
 const NORMAL_LINE_DASH: number[] = [];
 const MUTANT_LINE_DASH = NaturalSelectionConstants.POPULATION_MUTANT_LINE_DASH;
 const MUTANT_LINE_DASH_SUM = _.sum( MUTANT_LINE_DASH );

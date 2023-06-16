@@ -17,7 +17,6 @@ import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import XDirection from './XDirection.js';
 
-// constants
 const DEFAULT_POSITION = new Vector3( 0, 0, 1 ); // z=0 is illegal, results in divide-by-zero in modelViewTransform
 
 type SelfOptions = {

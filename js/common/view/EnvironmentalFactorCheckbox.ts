@@ -20,7 +20,6 @@ import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import GenerationClockNode from './GenerationClockNode.js';
 
-// constants
 const DEFAULT_CLOCK_SLICE_RANGE = new Range( 0, 1 );
 
 type SelfOptions = {
