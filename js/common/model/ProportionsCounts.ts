@@ -72,6 +72,7 @@ export default class ProportionsCounts {
       startCounts: BunnyCounts.BunnyCountsIO,
       endCounts: BunnyCounts.BunnyCountsIO
     },
+    //TODO https://github.com/phetsims/natural-selection/issues/330 does default toStateObject work here?
     toStateObject: proportionCounts => proportionCounts.toStateObject(),
     fromStateObject: stateObject => ProportionsCounts.fromStateObject( stateObject )
   } );

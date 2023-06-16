@@ -159,6 +159,7 @@ export default class BunnyCounts {
       shortTeethCount: NumberIO,
       longTeethCount: NumberIO
     },
+    //TODO https://github.com/phetsims/natural-selection/issues/330 does default toStateObject work here?
     toStateObject: bunnyCounts => bunnyCounts.toStateObject(),
     fromStateObject: stateObject => BunnyCounts.fromStateObject( stateObject )
   } );
