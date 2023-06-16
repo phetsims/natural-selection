@@ -44,9 +44,9 @@ export default class ProportionsLegendNode extends VBox {
     // A legend for each gene
     const legendNodes = _.map( genePool.genes, gene =>
       new GeneLegendNode( gene, {
-        tandem: options.tandem.createTandem( `${gene.tandemPrefix}LegendNode` ),
-        normalTandemName: `${gene.normalAllele.tandemPrefix}LegendNode`,
-        mutantTandemName: `${gene.mutantAllele.tandemPrefix}LegendNode`
+        tandem: options.tandem.createTandem( `${gene.tandemNamePrefix}LegendNode` ),
+        normalTandemName: `${gene.normalAllele.tandemNamePrefix}LegendNode`,
+        mutantTandemName: `${gene.mutantAllele.tandemNamePrefix}LegendNode`
       } ) );
 
     options.children = legendNodes;

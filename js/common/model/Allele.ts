@@ -34,7 +34,7 @@ const ALLELES_TANDEM = Tandem.GLOBAL_MODEL.createTandem( 'alleles' );
 type SelfOptions = {
   nameProperty: TReadOnlyProperty<string>; // name of the allele
   image: HTMLImageElement; // image used to represent the allele in the UI
-  tandemPrefix: string; // prefix used for tandem names for the allele, like 'whiteFur' for 'whiteFurCheckbox'
+  tandemNamePrefix: string; // prefix used for tandem names for the allele, like 'whiteFur' for 'whiteFurCheckbox'
 };
 
 type AlleleOptions = SelfOptions & PickRequired<PhetioObjectOptions, 'tandem'>;
@@ -45,7 +45,7 @@ export default class Allele extends PhetioObject {
 
   public readonly nameProperty: TReadOnlyProperty<string>;
   public readonly image: HTMLImageElement;
-  public readonly tandemPrefix: string;
+  public readonly tandemNamePrefix: string;
 
   /**
    * The constructor is private because only the static instances are used.
@@ -59,14 +59,14 @@ export default class Allele extends PhetioObject {
       phetioState: false
     }, providedOptions );
 
-    assert && assert( options.tandem.name.startsWith( options.tandemPrefix ),
-      `tandem name ${options.tandem.name} must start with ${options.tandemPrefix}` );
+    assert && assert( options.tandem.name.startsWith( options.tandemNamePrefix ),
+      `tandem name ${options.tandem.name} must start with ${options.tandemNamePrefix}` );
 
     super( options );
 
     this.nameProperty = options.nameProperty;
     this.image = options.image;
-    this.tandemPrefix = options.tandemPrefix;
+    this.tandemNamePrefix = options.tandemNamePrefix;
   }
 
   public override dispose(): void {
@@ -90,42 +90,42 @@ export default class Allele extends PhetioObject {
   public static readonly WHITE_FUR = new Allele( {
     nameProperty: NaturalSelectionStrings.whiteFurStringProperty,
     image: whiteFur_png,
-    tandemPrefix: 'whiteFur',
+    tandemNamePrefix: 'whiteFur',
     tandem: ALLELES_TANDEM.createTandem( 'whiteFurAllele' )
   } );
 
   public static readonly BROWN_FUR = new Allele( {
     nameProperty: NaturalSelectionStrings.brownFurStringProperty,
     image: brownFur_png,
-    tandemPrefix: 'brownFur',
+    tandemNamePrefix: 'brownFur',
     tandem: ALLELES_TANDEM.createTandem( 'brownFurAllele' )
   } );
 
   public static readonly FLOPPY_EARS = new Allele( {
     nameProperty: NaturalSelectionStrings.floppyEarsStringProperty,
     image: floppyEars_png,
-    tandemPrefix: 'floppyEars',
+    tandemNamePrefix: 'floppyEars',
     tandem: ALLELES_TANDEM.createTandem( 'floppyEarsAllele' )
   } );
 
   public static readonly STRAIGHT_EARS = new Allele( {
     nameProperty: NaturalSelectionStrings.straightEarsStringProperty,
     image: straightEars_png,
-    tandemPrefix: 'straightEars',
+    tandemNamePrefix: 'straightEars',
     tandem: ALLELES_TANDEM.createTandem( 'straightEarsAllele' )
   } );
 
   public static readonly SHORT_TEETH = new Allele( {
     nameProperty: NaturalSelectionStrings.shortTeethStringProperty,
     image: shortTeeth_png,
-    tandemPrefix: 'shortTeeth',
+    tandemNamePrefix: 'shortTeeth',
     tandem: ALLELES_TANDEM.createTandem( 'shortTeethAllele' )
   } );
 
   public static readonly LONG_TEETH = new Allele( {
     nameProperty: NaturalSelectionStrings.longTeethStringProperty,
     image: longTeeth_png,
-    tandemPrefix: 'longTeeth',
+    tandemNamePrefix: 'longTeeth',
     tandem: ALLELES_TANDEM.createTandem( 'longTeethAllele' )
   } );
 }

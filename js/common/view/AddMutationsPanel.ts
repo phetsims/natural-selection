@@ -82,7 +82,7 @@ export default class AddMutationsPanel extends NaturalSelectionPanel {
     // A row for each gene
     const rows = _.map( genePool.genes, gene =>
       new Row( gene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
-        tandem: options.tandem.createTandem( `${gene.tandemPrefix}Row` )
+        tandem: options.tandem.createTandem( `${gene.tandemNamePrefix}Row` )
       } )
     );
 

@@ -47,7 +47,7 @@ type SelfOptions = {
   nameProperty: TReadOnlyProperty<string>;
 
   // prefix used for tandem names for the gene, like 'fur' for 'furCheckbox'
-  tandemPrefix: string;
+  tandemNamePrefix: string;
 
   // the standard 'normal' or 'wild type' variant of the gene
   normalAllele: Allele;
@@ -79,7 +79,7 @@ export default class Gene extends PhetioObject {
 
   // properties that are supplied via SelfOptions
   public readonly nameProperty: TReadOnlyProperty<string>;
-  public readonly tandemPrefix: string;
+  public readonly tandemNamePrefix: string;
   public readonly normalAllele: Allele;
   public readonly mutantAllele: Allele;
   public readonly dominantAbbreviationEnglish: DominantAbbreviationEnglish;
@@ -112,14 +112,14 @@ export default class Gene extends PhetioObject {
     }, providedOptions );
 
     // validate config fields
-    assert && assert( options.tandem.name.startsWith( options.tandemPrefix ),
-      `tandem name ${options.tandem.name} must start with ${options.tandemPrefix}` );
+    assert && assert( options.tandem.name.startsWith( options.tandemNamePrefix ),
+      `tandem name ${options.tandem.name} must start with ${options.tandemNamePrefix}` );
 
     super( options );
 
     // save options to properties
     this.nameProperty = options.nameProperty;
-    this.tandemPrefix = options.tandemPrefix;
+    this.tandemNamePrefix = options.tandemNamePrefix;
     this.normalAllele = options.normalAllele;
     this.mutantAllele = options.mutantAllele;
     this.dominantAbbreviationEnglish = options.dominantAbbreviationEnglish;
@@ -181,7 +181,7 @@ export default class Gene extends PhetioObject {
   public static createFurGene( tandem: Tandem ): Gene {
     return new Gene( {
       nameProperty: NaturalSelectionStrings.furStringProperty,
-      tandemPrefix: 'fur',
+      tandemNamePrefix: 'fur',
       normalAllele: Allele.WHITE_FUR,
       mutantAllele: Allele.BROWN_FUR,
       dominantAbbreviationEnglish: 'F',
@@ -199,7 +199,7 @@ export default class Gene extends PhetioObject {
   public static createEarsGene( tandem: Tandem ): Gene {
     return new Gene( {
       nameProperty: NaturalSelectionStrings.earsStringProperty,
-      tandemPrefix: 'ears',
+      tandemNamePrefix: 'ears',
       normalAllele: Allele.STRAIGHT_EARS,
       mutantAllele: Allele.FLOPPY_EARS,
       dominantAbbreviationEnglish: 'E',
@@ -217,7 +217,7 @@ export default class Gene extends PhetioObject {
   public static createTeethGene( tandem: Tandem ): Gene {
     return new Gene( {
       nameProperty: NaturalSelectionStrings.teethStringProperty,
-      tandemPrefix: 'teeth',
+      tandemNamePrefix: 'teeth',
       normalAllele: Allele.SHORT_TEETH,
       mutantAllele: Allele.LONG_TEETH,
       dominantAbbreviationEnglish: 'T',
