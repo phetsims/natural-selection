@@ -129,10 +129,9 @@ export default class Wolf extends Organism {
    */
   public static readonly WolfIO = new IOType<Wolf, WolfStateObject>( 'WolfIO', {
     valueType: Wolf,
-
     stateSchema: {
 
-      // private fields, will not be shown in Studio
+      // Fields that begin with '_' will not be shown in Studio.
       _speed: NumberIO
     },
     //TODO https://github.com/phetsims/natural-selection/issues/330 I suspect default toStateObject would work, but would unintentionally hide _speed in Studio.

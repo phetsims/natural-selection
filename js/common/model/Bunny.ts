@@ -391,7 +391,7 @@ export default class Bunny extends Organism {
 
       // genotype and phenotype are stateful and will be serialized automatically.
 
-      // private fields, will not be shown in Studio
+      // Fields that begin with '_' will not be shown in Studio.
       _restTime: NumberIO,
       _hopTime: NumberIO,
       _cumulativeRestTime: NumberIO,
