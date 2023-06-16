@@ -135,6 +135,7 @@ export default class Wolf extends Organism {
       // private fields, will not be shown in Studio
       _speed: NumberIO
     },
+    //TODO https://github.com/phetsims/natural-selection/issues/330 I suspect default toStateObject would work, but would unintentionally hide _speed in Studio.
     toStateObject: wolf => wolf.toStateObject(),
     applyState: ( wolf, stateObject ) => wolf.applyState( stateObject )
     // WolfGroup.createElement takes no arguments, so stateObjectToCreateElementArguments is not needed.
