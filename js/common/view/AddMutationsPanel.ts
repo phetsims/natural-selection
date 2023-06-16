@@ -16,7 +16,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HBoxOptions, Image, Node, NodeOptions, Rectangle, TColor, Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import RectangularPushButton, { RectangularPushButtonOptions } from '../../../../sun/js/buttons/RectangularPushButton.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import Gene from '../model/Gene.js';
@@ -25,6 +24,7 @@ import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import MutationIconNode from './MutationIconNode.js';
 import NaturalSelectionPanel, { NaturalSelectionPanelOptions } from './NaturalSelectionPanel.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
 // constants
 const COLUMN_SPACING = 8;
@@ -392,15 +392,14 @@ class TitleNode extends Text {
       maxWidth: 180 // determined empirically
     }, providedOptions );
 
-    const stringProperty = new DerivedProperty( [
+    const stringProperty = new DerivedStringProperty( [
         numberOfRowsVisibleProperty,
         NaturalSelectionStrings.addMutationStringProperty,
         NaturalSelectionStrings.addMutationsStringProperty
       ],
       ( numberOfRowsVisible, addMutationString, addMutationsString ) =>
         ( numberOfRowsVisible === 1 ) ? addMutationString : addMutationsString, {
-        tandem: options.tandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME ),
-        phetioValueType: StringIO
+        tandem: options.tandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME )
       } );
 
     super( stringProperty, options );

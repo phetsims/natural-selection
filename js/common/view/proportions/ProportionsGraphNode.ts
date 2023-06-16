@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../../axon/js/NumberProperty.js';
 import Property from '../../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
@@ -17,7 +16,6 @@ import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, HBox, Node, NodeOptions, Rectangle, Text, TextOptions, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
-import StringIO from '../../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
@@ -28,6 +26,7 @@ import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import ProportionsBarNode from './ProportionsBarNode.js';
 import ProportionsGenerationSpinner from './ProportionsGenerationSpinner.js';
+import DerivedStringProperty from '../../../../../axon/js/DerivedStringProperty.js';
 
 // constants
 const ROW_SPACING = 30;
@@ -82,14 +81,13 @@ export default class ProportionsGraphNode extends Node {
 
     // 'End of Generation...' or 'Currently...'
     const endRowLabelTandem = labelsColumnTandem.createTandem( 'endRowLabel' );
-    const endRowTopTextDerivedProperty = new DerivedProperty( [
+    const endRowTopTextDerivedProperty = new DerivedStringProperty( [
       proportionsModel.isDisplayingCurrentGenerationProperty,
       NaturalSelectionStrings.currentlyStringProperty,
       NaturalSelectionStrings.endOfGenerationStringProperty
     ], ( isDisplayingCurrentGeneration, currentlyString, endOfGenerationString ) =>
       isDisplayingCurrentGeneration ? currentlyString : endOfGenerationString, {
-      tandem: endRowLabelTandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME ),
-      phetioValueType: StringIO
+      tandem: endRowLabelTandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME )
     } );
     const endRowLabel = new RowLabel( endRowTopTextDerivedProperty, endCounts.totalCount, {
       tandem: endRowLabelTandem
@@ -276,14 +274,13 @@ class RowLabel extends VBox {
 
     // The second line of text shows the count of bunnies.
     const secondLineOfTextTandem = options.tandem.createTandem( 'secondLineOfText' );
-    const secondLineOfTextDerivedStringProperty = new DerivedProperty( [
+    const secondLineOfTextDerivedStringProperty = new DerivedStringProperty( [
       countProperty,
       NaturalSelectionStrings.oneBunnyStringProperty,
       NaturalSelectionStrings.countBunniesStringProperty
     ], ( count, oneBunnyString, countBunniesString ) =>
       ( count === 1 ) ? oneBunnyString : StringUtils.fillIn( countBunniesString, { count: count } ), {
-      tandem: secondLineOfTextTandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME ),
-      phetioValueType: StringIO
+      tandem: secondLineOfTextTandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME )
     } );
     const secondLineOfText = new Text( secondLineOfTextDerivedStringProperty, combineOptions<TextOptions>( {
       tandem: secondLineOfTextTandem

@@ -15,7 +15,6 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { AlignGroup, Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import StringIO from '../../../../tandem/js/types/StringIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -23,6 +22,7 @@ import LimitedFoodCheckbox from './LimitedFoodCheckbox.js';
 import NaturalSelectionPanel, { NaturalSelectionPanelOptions } from './NaturalSelectionPanel.js';
 import ToughFoodCheckbox from './ToughFoodCheckbox.js';
 import WolvesCheckbox from './WolvesCheckbox.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
 type SelfOptions = {
   toughFoodCheckboxVisible?: boolean;
@@ -123,14 +123,14 @@ class TitleText extends Text {
       }
     }, providedOptions );
 
-    const stringProperty = new DerivedProperty( [
+    const stringProperty = new DerivedStringProperty( [
       numberOfCheckboxesVisibleProperty,
       NaturalSelectionStrings.environmentalFactorStringProperty,
       NaturalSelectionStrings.environmentalFactorsStringProperty
     ], ( numberOfCheckboxesVisible, environmentalFactor, environmentalFactors ) =>
       ( numberOfCheckboxesVisible === 1 ) ? environmentalFactor : environmentalFactors, {
-      tandem: options.tandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME ),
-      phetioValueType: StringIO
+      tandem: options.tandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME )
+
     } );
 
     super( stringProperty, options );
