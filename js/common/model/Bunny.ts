@@ -145,7 +145,7 @@ export default class Bunny extends Organism {
     this.isAlive = true;
     this.age = 0;
 
-    //TODO https://github.com/phetsims/natural-selection/issues/327 how are this.genotype and this.phenotype getting restored?
+    //TODO https://github.com/phetsims/natural-selection/issues/327 How are this.genotype and this.phenotype getting restored? Should they be in BunnyStateSchema?
     this.genotype = new Genotype( genePool, combineOptions<GenotypeOptions>( {
       tandem: options.tandem.createTandem( 'genotype' )
     }, options.genotypeOptions ) );
