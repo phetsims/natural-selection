@@ -1,4 +1,4 @@
-// Copyright 2019-2022, University of Colorado Boulder
+// Copyright 2019-2023, University of Colorado Boulder
 
 /**
  * GraphsRadioButtonGroup is the radio button group for selecting which of the graphs is visible.

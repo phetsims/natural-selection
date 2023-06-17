@@ -1,4 +1,4 @@
-// Copyright 2020-2022, University of Colorado Boulder
+// Copyright 2020-2023, University of Colorado Boulder
 
 /**
  * BunnyCounts is a data structure that contains the counts that describe the phenotypes of a collection of bunnies.

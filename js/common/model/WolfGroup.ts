@@ -1,4 +1,4 @@
-// Copyright 2020-2022, University of Colorado Boulder
+// Copyright 2020-2023, University of Colorado Boulder
 
 /**
  * WolfGroup is the PhetioGroup for Wolf.  It manages dynamic instances of Wolf, as required by PhET-iO.
