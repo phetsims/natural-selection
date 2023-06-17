@@ -24,6 +24,7 @@ export default class WolfGroup extends PhetioGroup<Wolf> {
   public constructor( modelViewTransform: EnvironmentModelViewTransform, providedOptions: WolfGroupOptions ) {
 
     const options = optionize<WolfGroupOptions, SelfOptions, PhetioGroupOptions>()( {
+      groupElementStartingIndex: 0,
 
       // PhetioGroupOptions
       phetioType: PhetioGroup.PhetioGroupIO( Wolf.WolfIO ),

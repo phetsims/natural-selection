@@ -37,6 +37,7 @@ export default class BunnyGroup extends PhetioGroup<Bunny, BunnyGroupCreateEleme
                       providedOptions: BunnyGroupOptions ) {
 
     const options = optionize<BunnyGroupOptions, SelfOptions, PhetioGroupOptions>()( {
+      groupElementStartingIndex: 0,
 
       // PhetioGroupOptions
       phetioType: PhetioGroup.PhetioGroupIO( Bunny.BunnyIO ),
