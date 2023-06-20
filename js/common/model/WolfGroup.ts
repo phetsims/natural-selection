@@ -24,6 +24,9 @@ export default class WolfGroup extends PhetioGroup<Wolf> {
   public constructor( modelViewTransform: EnvironmentModelViewTransform, providedOptions: WolfGroupOptions ) {
 
     const options = optionize<WolfGroupOptions, SelfOptions, PhetioGroupOptions>()( {
+
+      // Since this sim has already been published with PhET-iO + migration support, it isn't worth changing initial indexing
+      // of group elements from 0 -> 1, see https://github.com/phetsims/tandem/issues/226
       groupElementStartingIndex: 0,
 
       // PhetioGroupOptions

@@ -37,6 +37,9 @@ export default class BunnyGroup extends PhetioGroup<Bunny, BunnyGroupCreateEleme
                       providedOptions: BunnyGroupOptions ) {
 
     const options = optionize<BunnyGroupOptions, SelfOptions, PhetioGroupOptions>()( {
+
+      // Since this sim has already been published with PhET-iO + migration support, it isn't worth changing initial indexing
+      // of group elements from 0 -> 1, see https://github.com/phetsims/tandem/issues/226
       groupElementStartingIndex: 0,
 
       // PhetioGroupOptions
