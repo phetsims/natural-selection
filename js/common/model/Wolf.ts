@@ -128,7 +128,7 @@ export default class Wolf extends Organism {
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    *
    * We are using dynamic-element serialization because Wolf instances are created dynamically each time the 'Wolves'
-   * checkbox is checked in the 'Environmental Factors' panel.
+   * checkbox is checked in the 'Environmental Factors' panel. See the listener for isHuntingProperty in WolfCollection.
    */
   public static readonly WolfIO = new IOType<Wolf, WolfStateObject>( 'WolfIO', {
     valueType: Wolf,
