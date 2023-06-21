@@ -80,7 +80,7 @@ export default class Allele extends PhetioObject {
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    * This must be defined before instantiating static instances.
    *
-   * We are using reference-type serialization here because all Allele instances are created at startup.
+   * We use reference-type serialization here because all Allele instances are created at startup.
    * Any occurrence of Allele in state is a reference to one of these static instances.
    */
   public static readonly AlleleIO = new IOType<Allele, AlleleStateObject>( 'AlleleIO', {
