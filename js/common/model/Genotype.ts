@@ -198,10 +198,9 @@ export default class Genotype extends PhetioObject {
   }
 
   /**
-   * GenotypeIO handles PhET-iO serialization of Genotype.
-   * It implements 'Dynamic element serialization', as described in the Serialization section of
+   * GenotypeIO implements 'Dynamic element serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
-   * We use dynamic-element serialization because each Bunny instance creates a Genotype instance,
+   * We use dynamic element serialization because each Bunny instance creates a Genotype instance,
    * and Bunny instances are dynamically created.
    */
   public static readonly GenotypeIO = new IOType<Genotype, GenotypeStateObject>( 'GenotypeIO', {

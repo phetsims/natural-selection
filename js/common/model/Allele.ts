@@ -75,10 +75,9 @@ export default class Allele extends PhetioObject {
   }
 
   /**
-   * AlleleIO handles PhET-iO serialization of Allele.
-   * It implements 'Reference-type serialization', as described in the Serialization section of
+   * AlleleIO implements 'Reference type serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
-   * We use reference-type serialization here because all Allele instances are created at startup.
+   * We use reference type serialization here because all Allele instances are created at startup.
    * Any occurrence of Allele in state is a reference to one of these static instances.
    * Note that this must be defined before instantiating static instances below.
    */
