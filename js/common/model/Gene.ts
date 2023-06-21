@@ -232,7 +232,7 @@ export default class Gene extends PhetioObject {
   /**
    * GeneIO implements 'Reference type serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
-   * We use reference type serialization here because all Gene instances are created at startup by GenePool.
+   * Reference type serialization is appropriate because all Gene instances are created at startup by GenePool.
    * There is one GenePool instance per screen, also created at startup. Any occurrence of Gene in PhET-iO state
    * is a reference to one of the instances created by GenePool.
    */

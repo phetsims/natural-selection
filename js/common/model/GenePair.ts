@@ -153,7 +153,7 @@ export default class GenePair extends PhetioObject {
   /**
    * GenePairIO implements 'Dynamic element serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
-   * We use dynamic element serialization because Genotype creates 3 instances of GenePair (one for each Allele).
+   * Dynamic element serialization is appropriate because Genotype creates 3 instances of GenePair (one for each Allele).
    * Genotype is itself created by Bunny; there is one Genotype instance per Bunny. And Bunny instances
    * are dynamically created.
    */

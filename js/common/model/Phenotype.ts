@@ -131,7 +131,7 @@ export default class Phenotype extends PhetioObject {
   /**
    * PhenotypeIO implements 'Dynamic element serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
-   * We use dynamic element serialization because each Bunny instance creates a Phenotype instance,
+   * Dynamic element serialization is appropriate because each Bunny instance creates a Phenotype instance,
    * and Bunny instances are dynamically created.
    */
   public static readonly PhenotypeIO = new IOType<Phenotype, PhenotypeStateObject>( 'PhenotypeIO', {
