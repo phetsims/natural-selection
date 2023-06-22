@@ -8,6 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Disposable from '../../../../axon/js/Disposable.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import { HBox, Node, NodeOptions, Path, Text } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -79,7 +80,7 @@ export default class MutationComingNode extends Node {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 }

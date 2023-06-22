@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Disposable from '../../../../axon/js/Disposable.js';
 import createObservableArray, { ObservableArray, ObservableArrayOptions } from '../../../../axon/js/createObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
@@ -66,7 +67,7 @@ export default function createBunnyArray( providedOptions: BunnyArrayOptions ): 
   } );
 
   bunnyArray.dispose = () => {
-    assert && assert( false, 'dispose is not supported, exists for the lifetime of the sim' );
+    Disposable.assertNotDisposable();
   };
 
   return bunnyArray as BunnyArray;
