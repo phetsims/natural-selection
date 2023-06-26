@@ -12,7 +12,6 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import XDirection from './XDirection.js';
@@ -40,10 +39,7 @@ export default class Organism extends PhetioObject {
 
       // SelfOptions
       position: DEFAULT_POSITION,
-      xDirection: XDirection.RIGHT,
-
-      // PhetioObjectOptions
-      tandem: Tandem.OPTIONAL
+      xDirection: XDirection.RIGHT
     }, providedOptions );
 
     super( options );
@@ -51,7 +47,7 @@ export default class Organism extends PhetioObject {
     this.modelViewTransform = modelViewTransform;
 
     this.positionProperty = new Property( options.position, {
-      tandem: options.tandem.createTandem( 'positionProperty' ),
+      tandem: options.tandem?.createTandem( 'positionProperty' ),
       phetioValueType: Vector3.Vector3IO,
       phetioHighFrequency: true,
       phetioReadOnly: true,
@@ -59,7 +55,7 @@ export default class Organism extends PhetioObject {
     } );
 
     this.xDirectionProperty = new EnumerationProperty( options.xDirection, {
-      tandem: options.tandem.createTandem( 'xDirectionProperty' ),
+      tandem: options.tandem?.createTandem( 'xDirectionProperty' ),
       phetioReadOnly: true,
       phetioDocumentation: 'direction that the organism is facing along the x axis'
     } );

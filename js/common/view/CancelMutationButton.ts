@@ -39,7 +39,7 @@ export default class CancelMutationButton extends RoundPushButton {
       baseColor: 'transparent', // so we see only the icon
       touchAreaDilation: 8,
       mouseAreaDilation: 4,
-      tandem: Tandem.OPTIONAL // because we don't want to instrument this button
+      tandem: Tandem.OPT_OUT // because we don't want to instrument this button
     }, providedOptions );
 
     super( options );
