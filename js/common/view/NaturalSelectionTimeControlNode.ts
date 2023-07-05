@@ -9,7 +9,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -41,7 +40,8 @@ export default class NaturalSelectionTimeControlNode extends HBox {
       phetioEnabledPropertyInstrumented: true, // opt into default PhET-iO instrumented enabledProperty
       visiblePropertyOptions: {
         phetioFeatured: true
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     const playPauseButton = new PlayPauseButton( isPlayingProperty, {
@@ -85,11 +85,6 @@ export default class NaturalSelectionTimeControlNode extends HBox {
         }
       }
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

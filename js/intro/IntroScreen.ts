@@ -6,9 +6,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../axon/js/Disposable.js';
 import Property from '../../../axon/js/Property.js';
-import Screen from '../../../joist/js/Screen.js';
+import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { HBox, Image } from '../../../scenery/js/imports.js';
 import Tandem from '../../../tandem/js/Tandem.js';
@@ -24,16 +23,13 @@ export default class IntroScreen extends Screen<IntroModel, IntroScreenView> {
 
   public constructor( tandem: Tandem ) {
 
-    const options = {
-
-      // Screen options
+    const options: ScreenOptions = {
       name: NaturalSelectionStrings.screen.introStringProperty,
       homeScreenIcon: createScreenIcon(),
       backgroundColorProperty: new Property( NaturalSelectionColors.SCREEN_VIEW_BACKGROUND, {
         tandem: Tandem.OPT_OUT
       } ),
-
-      // phet-io
+      isDisposable: false,
       tandem: tandem
     };
 
@@ -42,11 +38,6 @@ export default class IntroScreen extends Screen<IntroModel, IntroScreenView> {
       model => new IntroScreenView( model, tandem.createTandem( 'view' ) ),
       options
     );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

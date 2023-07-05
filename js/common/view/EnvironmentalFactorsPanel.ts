@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
@@ -96,11 +95,6 @@ export default class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
 
     super( content, options );
   }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
-  }
 }
 
 type TitleTextSelfOptions = EmptySelfOptions;
@@ -121,7 +115,8 @@ class TitleText extends Text {
       phetioVisiblePropertyInstrumented: true,
       visiblePropertyOptions: {
         phetioFeatured: true
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     const stringProperty = new DerivedStringProperty( [
@@ -135,11 +130,6 @@ class TitleText extends Text {
     } );
 
     super( stringProperty, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

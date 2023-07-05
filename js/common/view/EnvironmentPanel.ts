@@ -43,7 +43,8 @@ export default class EnvironmentPanel extends Panel {
       cornerRadius: 0,
       fill: null,
       stroke: null,
-      phetioVisiblePropertyInstrumented: false
+      phetioVisiblePropertyInstrumented: false,
+      isDisposable: false
     }, providedOptions );
 
     // Where the bunnies, food, etc. are displayed

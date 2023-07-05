@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -40,7 +39,8 @@ export default class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButton
       // VerticalAquaRadioButtonGroupOptions
       spacing: 12,
       touchAreaXDilation: 8,
-      mouseAreaXDilation: 8
+      mouseAreaXDilation: 8,
+      isDisposable: false
     }, providedOptions );
 
     // Create the description of the buttons
@@ -88,11 +88,6 @@ export default class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButton
     ];
 
     super( graphChoiceProperty, items, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

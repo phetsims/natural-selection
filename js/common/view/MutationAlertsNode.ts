@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -29,7 +28,8 @@ export default class MutationAlertsNode extends Node {
     const options = optionize<MutationAlertsNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      phetioVisiblePropertyInstrumented: false
+      phetioVisiblePropertyInstrumented: false,
+      isDisposable: false
     }, providedOptions );
 
     // Create a MutationComingNode (aka 'alert') for each gene
@@ -64,11 +64,6 @@ export default class MutationAlertsNode extends Node {
         }
       } );
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

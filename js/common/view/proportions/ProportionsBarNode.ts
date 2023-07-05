@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../../axon/js/Disposable.js';
 import Multilink from '../../../../../axon/js/Multilink.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../../dot/js/Utils.js';
@@ -52,7 +51,8 @@ export default class ProportionsBarNode extends Node {
       barHeight: 30,
 
       // NodeOptions
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      isDisposable: false
     }, providedOptions );
 
     // Portions of the bar for normal and mutant counts. normalRectangle remains a fixed size. mutantRectangle
@@ -103,11 +103,6 @@ export default class ProportionsBarNode extends Node {
       ],
       () => this.updateProportionsBarNode()
     );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

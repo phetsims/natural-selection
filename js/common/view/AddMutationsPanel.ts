@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { combineOptions, EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
@@ -113,11 +112,6 @@ export default class AddMutationsPanel extends NaturalSelectionPanel {
     this.rows = rows;
   }
 
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
-  }
-
   /**
    * Gets the row that corresponds to a gene.
    */
@@ -164,7 +158,8 @@ class Row extends HBox {
       spacing: COLUMN_SPACING,
       visiblePropertyOptions: {
         phetioFeatured: true
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     // label that indicates the gene, to the left of the push buttons
@@ -265,11 +260,6 @@ class Row extends HBox {
     } );
 
     this.gene = gene;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 
@@ -389,7 +379,8 @@ class TitleNode extends Text {
 
       // TextOptions
       font: NaturalSelectionConstants.TITLE_FONT,
-      maxWidth: 180 // determined empirically
+      maxWidth: 180, // determined empirically
+      isDisposable: false
     }, providedOptions );
 
     const stringProperty = new DerivedStringProperty( [
@@ -403,11 +394,6 @@ class TitleNode extends Text {
       } );
 
     super( stringProperty, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

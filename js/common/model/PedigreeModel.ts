@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -30,6 +29,7 @@ export default class PedigreeModel extends PhetioObject {
     const options = optionize<PedigreeModelOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // PhetioObjectOptions
+      isDisposable: false,
       phetioState: false, // to prevent serialization, because we don't have an IO Type
       phetioDocumentation: 'model elements that are specific to the Pedigree feature'
     }, providedOptions );
@@ -56,11 +56,6 @@ export default class PedigreeModel extends PhetioObject {
     this.furAllelesVisibleProperty.reset();
     this.earsAllelesVisibleProperty.reset();
     this.teethAllelesVisibleProperty.reset();
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

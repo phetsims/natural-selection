@@ -22,7 +22,6 @@ import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import SimulationMode from '../model/SimulationMode.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import Disposable from '../../../../axon/js/Disposable.js';
 
 type SelfOptions = {
 
@@ -44,7 +43,10 @@ export default class PlayButtonGroup extends Node {
       // SelfOptions
       addAMate: _.noop,
       play: _.noop,
-      startOver: _.noop
+      startOver: _.noop,
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     // 'Add a Mate' push button, for when the initial population consists of a single bunny.
@@ -124,11 +126,6 @@ export default class PlayButtonGroup extends Node {
       }
     );
   }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
-  }
 }
 
 type TextPushButtonSelfOptions = {
@@ -161,7 +158,8 @@ class TextPushButton extends RectangularPushButton {
       },
       enabledPropertyOptions: {
         phetioFeatured: false
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     options.content = new Text( stringProperty, combineOptions<TextOptions>( {}, options.textOptions, {

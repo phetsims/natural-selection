@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../../axon/js/Disposable.js';
 import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../../dot/js/Dimension2.js';
 import optionize from '../../../../../phet-core/js/optionize.js';
@@ -41,7 +40,8 @@ export default class EnvironmentNode extends Node {
 
       // NodeOptions
       phetioDocumentation: 'the area of the screen that displays what is happening in the environment',
-      phetioVisiblePropertyInstrumented: false
+      phetioVisiblePropertyInstrumented: false,
+      isDisposable: false
     }, providedOptions );
 
     const bounds = new Bounds2( 0, 0, options.size.width, options.size.height );
@@ -74,11 +74,6 @@ export default class EnvironmentNode extends Node {
     } );
 
     this.sprites = sprites;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

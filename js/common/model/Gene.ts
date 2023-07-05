@@ -18,7 +18,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
@@ -108,6 +107,7 @@ export default class Gene extends PhetioObject {
     const options = optionize<GeneOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // PhetioObjectOptions
+      isDisposable: false,
       phetioType: Gene.GeneIO,
       phetioState: false
     }, providedOptions );
@@ -161,11 +161,6 @@ export default class Gene extends PhetioObject {
   public reset(): void {
     this.dominantAlleleProperty.reset();
     this.mutationComingProperty.reset();
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

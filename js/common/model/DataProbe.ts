@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
@@ -51,6 +50,7 @@ export default class DataProbe extends PhetioObject {
     const options = optionize<DataProbeOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // PhetioObjectOptions
+      isDisposable: false,
       phetioState: false // to prevent serialization, because we don't have an IO Type
     }, providedOptions );
 
@@ -89,11 +89,6 @@ export default class DataProbe extends PhetioObject {
   public reset(): void {
     this.offsetProperty.reset();
     this.visibleProperty.reset();
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

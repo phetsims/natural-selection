@@ -12,7 +12,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -56,6 +55,7 @@ export default class Allele extends PhetioObject {
     const options = optionize<AlleleOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // PhetioObjectOptions
+      isDisposable: false,
       phetioType: Allele.AlleleIO,
       phetioState: false
     }, providedOptions );
@@ -68,11 +68,6 @@ export default class Allele extends PhetioObject {
     this.nameProperty = options.nameProperty;
     this.image = options.image;
     this.tandemNamePrefix = options.tandemNamePrefix;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

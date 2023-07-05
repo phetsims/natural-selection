@@ -6,25 +6,22 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
-import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Organism, { OrganismOptions } from './Organism.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type ShrubOptions = SelfOptions & OrganismOptions;
+type ShrubOptions = SelfOptions & StrictOmit<OrganismOptions, 'isDisposable'>;
 
 export default class Shrub extends Organism {
 
-  public constructor( modelViewTransform: EnvironmentModelViewTransform, options?: ShrubOptions ) {
-    super( modelViewTransform, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
+  public constructor( modelViewTransform: EnvironmentModelViewTransform, providedOptions?: ShrubOptions ) {
+    super( modelViewTransform, optionize<ShrubOptions, SelfOptions, OrganismOptions>()( {
+      isDisposable: false
+    }, providedOptions ) );
   }
 }
 

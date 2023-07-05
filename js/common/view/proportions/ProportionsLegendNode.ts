@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../../axon/js/Disposable.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
@@ -39,7 +38,8 @@ export default class ProportionsLegendNode extends VBox {
         spacing: 25,
         visiblePropertyOptions: {
           phetioFeatured: true
-        }
+        },
+        isDisposable: false
       }, providedOptions );
 
     // A legend for each gene
@@ -55,11 +55,6 @@ export default class ProportionsLegendNode extends VBox {
     super( options );
 
     this.legendNodes = legendNodes;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**
@@ -94,7 +89,8 @@ class GeneLegendNode extends VBox {
       {}, NaturalSelectionConstants.VBOX_OPTIONS, {
 
         // VBoxOptions
-        visiblePropertyOptions: { phetioReadOnly: true }
+        visiblePropertyOptions: { phetioReadOnly: true },
+        isDisposable: false
       }, providedOptions );
 
     options.children = [
@@ -110,11 +106,6 @@ class GeneLegendNode extends VBox {
     super( options );
 
     this.gene = gene;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 
@@ -140,6 +131,7 @@ class AlleleLegendNode extends HBox {
 
       // HBoxOptions
       spacing: 5,
+      isDisposable: false,
       phetioVisiblePropertyInstrumented: false
     }, providedOptions );
 
@@ -160,11 +152,6 @@ class AlleleLegendNode extends HBox {
     options.children = [ rectangleNode, text ];
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

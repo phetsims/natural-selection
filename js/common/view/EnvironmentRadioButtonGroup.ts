@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
@@ -52,7 +51,8 @@ export default class EnvironmentRadioButtonGroup extends RectangularRadioButtonG
       },
       enabledPropertyOptions: {
         phetioReadOnly: true // see https://github.com/phetsims/natural-selection/issues/296
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     // icons
@@ -94,11 +94,6 @@ export default class EnvironmentRadioButtonGroup extends RectangularRadioButtonG
     ];
 
     super( environmentProperty, content, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

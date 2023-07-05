@@ -24,7 +24,7 @@ type SelfOptions = {
 };
 
 export type OrganismOptions = SelfOptions &
-  PickOptional<PhetioObjectOptions, 'tandem' | 'phetioType' | 'phetioDynamicElement'>;
+  PickOptional<PhetioObjectOptions, 'tandem' | 'phetioType' | 'phetioDynamicElement' | 'isDisposable'>;
 
 export default class Organism extends PhetioObject {
 

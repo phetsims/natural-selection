@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../../axon/js/Disposable.js';
 import EnumerationProperty from '../../../../../axon/js/EnumerationProperty.js';
 import Dimension2 from '../../../../../dot/js/Dimension2.js';
 import { Image, Line, Node } from '../../../../../scenery/js/imports.js';
@@ -45,7 +44,8 @@ export default class EnvironmentBackgroundNode extends Node {
     }
 
     super( {
-      children: children
+      children: children,
+      isDisposable: false
     } );
 
     // Show the background that matches the environment. unlink is not necessary.
@@ -53,11 +53,6 @@ export default class EnvironmentBackgroundNode extends Node {
       equatorBackground.visible = ( environment === Environment.EQUATOR );
       arcticBackground.visible = ( environment === Environment.ARCTIC );
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

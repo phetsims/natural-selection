@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../../axon/js/Disposable.js';
 import Dimension2 from '../../../../../dot/js/Dimension2.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
@@ -37,7 +36,8 @@ export default class PopulationNode extends Node {
 
       // NodeOptions
       phetioDocumentation: 'the Population graph and its control panel',
-      visiblePropertyOptions: { phetioReadOnly: true }
+      visiblePropertyOptions: { phetioReadOnly: true },
+      isDisposable: false
     }, providedOptions );
 
     // Divvy up the width
@@ -68,11 +68,6 @@ export default class PopulationNode extends Node {
     } );
 
     this.populationPanel = populationPanel;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

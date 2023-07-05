@@ -10,7 +10,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../../axon/js/Disposable.js';
 import Property from '../../../../../axon/js/Property.js';
 import optionize, { combineOptions, EmptySelfOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../../phet-core/js/types/StrictOmit.js';
@@ -82,11 +81,6 @@ export default class AllelesPanel extends NaturalSelectionPanel {
     this.rows = rows;
   }
 
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
-  }
-
   /**
    * Sets visibility of the UI components related to a specific gene.
    */
@@ -123,7 +117,8 @@ class Row extends VBox {
       excludeInvisibleChildrenFromBounds: false,
       visiblePropertyOptions: {
         phetioFeatured: true
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     const checkboxTandem = options.tandem.createTandem( 'checkbox' );
@@ -208,11 +203,6 @@ class Row extends VBox {
     }
 
     this.gene = gene;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

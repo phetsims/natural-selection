@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
@@ -71,7 +70,8 @@ export default class DataProbeNode extends Node {
       offset: Vector2.ZERO,
 
       // NodeOptions
-      cursor: 'ew-resize' // east-west arrows, <->
+      cursor: 'ew-resize', // east-west arrows, <->
+      isDisposable: false
     }, providedOptions );
 
     const dataProbe = populationModel.dataProbe;
@@ -173,11 +173,6 @@ export default class DataProbeNode extends Node {
     this.addLinkedElement( dataProbe, {
       tandemName: 'dataProbe'
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

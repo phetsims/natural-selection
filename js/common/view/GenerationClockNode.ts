@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import Range from '../../../../dot/js/Range.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
@@ -44,7 +43,8 @@ export default class GenerationClockNode extends Node {
       // NodeOptions
       visiblePropertyOptions: {
         phetioFeatured: true
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     // The full center of the clock.
@@ -119,11 +119,6 @@ export default class GenerationClockNode extends Node {
     this.addLinkedElement( generationClock, {
       tandemName: 'generationClock'
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

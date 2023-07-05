@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../../axon/js/Disposable.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../../dot/js/Range.js';
 import { Shape } from '../../../../../kite/js/imports.js';
@@ -43,7 +42,10 @@ export default class PopulationGridNode extends Node {
 
       // SelfOptions
       gridWidth: 100,
-      gridHeight: 100
+      gridHeight: 100,
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     // Background rectangle
@@ -130,11 +132,6 @@ export default class PopulationGridNode extends Node {
 
     super( options );
   }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
-  }
 }
 
 /**
@@ -166,7 +163,8 @@ class VerticalLines extends Node {
       // VerticalLinesSelfOptions
       xSpacingModel: 1,
       xAxisWidth: 100,
-      lineLength: 100
+      lineLength: 100,
+      isDisposable: false
     }, providedOptions );
 
     // Compute the number of lines and their spacing, in view coordinates
@@ -191,11 +189,6 @@ class VerticalLines extends Node {
     } );
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 
@@ -227,7 +220,10 @@ class HorizontalLines extends Path {
 
       // HorizontalLinesSelfOptions
       yAxisHeight: 100,
-      lineLength: 100
+      lineLength: 100,
+
+      // PathOptions
+      isDisposable: false
     }, providedOptions );
 
     super( new Shape() );
@@ -251,11 +247,6 @@ class HorizontalLines extends Path {
     } );
 
     this.mutate( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 
@@ -283,7 +274,10 @@ class XTickLabels extends Node {
 
       // XTickLabelsSelfOptions
       xSpacingModel: 1,
-      xAxisWidth: 100
+      xAxisWidth: 100,
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     // Compute the number of labels and their spacing, in view coordinates
@@ -321,11 +315,6 @@ class XTickLabels extends Node {
       }
     } );
   }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
-  }
 }
 
 /**
@@ -353,7 +342,10 @@ class YTickLabels extends Node {
     const options = optionize<YTickLabelsOptions, YTickLabelsSelfOptions, NodeOptions>()( {
 
       // YTickLabelsSelfOptions
-      yAxisHeight: 100
+      yAxisHeight: 100,
+
+      // NodeOptions
+      isDisposable: false
     }, providedOptions );
 
     super();
@@ -383,11 +375,6 @@ class YTickLabels extends Node {
     } );
 
     this.mutate( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

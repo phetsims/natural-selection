@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
@@ -99,6 +98,7 @@ export default class PopulationModel extends PhetioObject {
       xAxisLength: 5,
 
       // PhetioObjectOptions
+      isDisposable: false,
       phetioState: false, // to prevent serialization, because we don't have an IO Type
       phetioDocumentation: 'model elements that are specific to the Population feature'
     }, providedOptions );
@@ -251,11 +251,6 @@ export default class PopulationModel extends PhetioObject {
         this.longTeethVisibleProperty.value = !!dominantAllele;
       }
     } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   public reset(): void {

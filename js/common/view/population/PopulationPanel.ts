@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../../axon/js/Disposable.js';
 import { combineOptions, EmptySelfOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../../phet-core/js/types/StrictOmit.js';
 import { AlignBox, AlignGroup, HSeparator, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
@@ -156,11 +155,6 @@ export default class PopulationPanel extends NaturalSelectionPanel {
     super( content, options );
 
     this.alleleCheckboxes = alleleCheckboxes;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

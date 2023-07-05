@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../../axon/js/Disposable.js';
 import NumberProperty from '../../../../../axon/js/NumberProperty.js';
 import Property from '../../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
@@ -57,7 +56,8 @@ export default class ProportionsGraphNode extends Node {
       graphHeight: 100,
 
       // NodeOptions
-      phetioVisiblePropertyInstrumented: false
+      phetioVisiblePropertyInstrumented: false,
+      isDisposable: false
     }, providedOptions );
 
     // To make this code easier to read
@@ -210,11 +210,6 @@ export default class ProportionsGraphNode extends Node {
     this.geneColumns = geneColumns;
   }
 
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
-  }
-
   /**
    * Sets visibility of the UI components related to a specific gene.
    */
@@ -251,7 +246,8 @@ class RowLabel extends VBox {
       // VBoxOptions
       spacing: 2,
       align: 'left',
-      phetioVisiblePropertyInstrumented: false
+      phetioVisiblePropertyInstrumented: false,
+      isDisposable: false
     }, providedOptions );
 
     const countProperty = new NumberProperty( count, {
@@ -293,11 +289,6 @@ class RowLabel extends VBox {
 
     this.countProperty = countProperty;
   }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
-  }
 }
 
 /**
@@ -330,7 +321,8 @@ class Column extends VBox {
       align: 'center',
       visiblePropertyOptions: {
         phetioReadOnly: true
-      }
+      },
+      isDisposable: false
     }, providedOptions );
 
     // Checkbox to hide the column
@@ -388,11 +380,6 @@ class Column extends VBox {
     this.gene = gene;
     this.startBarNode = startBarNode;
     this.endBarNode = endBarNode;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

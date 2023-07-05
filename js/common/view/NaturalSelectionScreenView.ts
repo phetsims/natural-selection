@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
@@ -61,7 +60,10 @@ export default class NaturalSelectionScreenView extends ScreenView {
       furVisible: true,
       earsVisible: true,
       teethVisible: true,
-      toughFoodCheckboxVisible: true
+      toughFoodCheckboxVisible: true,
+
+      // ScreenViewOptions
+      isDisposable: false
     }, providedOptions );
 
     super( providedOptions );
@@ -269,11 +271,6 @@ export default class NaturalSelectionScreenView extends ScreenView {
 
   public reset(): void {
     this.resetNaturalSelectionScreenView();
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

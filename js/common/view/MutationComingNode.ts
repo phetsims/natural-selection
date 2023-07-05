@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import { HBox, Node, NodeOptions, Path, Text } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -36,7 +35,8 @@ export default class MutationComingNode extends Node {
     const options = optionize<MutationComingNodeOptions, SelfOptions, NodeOptions>()( {
 
       // NodeOptions
-      visiblePropertyOptions: { phetioReadOnly: true }
+      visiblePropertyOptions: { phetioReadOnly: true },
+      isDisposable: false
     }, providedOptions );
 
     const cancelButton = new CancelMutationButton( {
@@ -77,11 +77,6 @@ export default class MutationComingNode extends Node {
     super( options );
 
     this.gene = gene;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

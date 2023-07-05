@@ -11,7 +11,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../../axon/js/Disposable.js';
 import Multilink from '../../../../../axon/js/Multilink.js';
 import Property from '../../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
@@ -50,7 +49,8 @@ export default class PopulationGenerationScroller extends HBox {
 
       // HBoxOptions
       spacing: 10,
-      phetioVisiblePropertyInstrumented: false
+      phetioVisiblePropertyInstrumented: false,
+      isDisposable: false
     }, providedOptions );
 
     // Maintain the initial range length
@@ -99,11 +99,6 @@ export default class PopulationGenerationScroller extends HBox {
         backButton.enabled = ( range.min > 0 );
         forwardButton.enabled = ( range.max < max );
       } );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

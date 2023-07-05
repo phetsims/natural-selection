@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../../axon/js/Disposable.js';
 import Property from '../../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import { optionize4 } from '../../../../../phet-core/js/optionize.js';
@@ -47,7 +46,8 @@ export default class PopulationLegendCheckbox extends Checkbox {
     const options = optionize4<PopulationLegendCheckboxOptions, SelfOptions, CheckboxOptions>()(
       {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
         lineColor: 'black',
-        isLineDashed: false
+        isLineDashed: false,
+        isDisposable: false
       }, providedOptions );
 
     // solid or dashed line
@@ -75,11 +75,6 @@ export default class PopulationLegendCheckbox extends Checkbox {
     } );
 
     super( plotVisibleProperty, content, options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

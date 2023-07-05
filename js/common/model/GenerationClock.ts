@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
@@ -46,6 +45,7 @@ export default class GenerationClock extends PhetioObject {
     const options = optionize<GenerationClockOptions, SelfOptions, PhetioObjectOptions>()( {
 
       // PhetioObjectOptions
+      isDisposable: false,
       phetioState: false, // to prevent serialization, because we don't have an IO Type
       phetioDocumentation: 'the clock that marks the duration of a generation'
     }, providedOptions );
@@ -111,11 +111,6 @@ export default class GenerationClock extends PhetioObject {
   public reset(): void {
     this.isRunningProperty.reset();
     this.timeInSecondsProperty.reset();
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**

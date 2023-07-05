@@ -31,7 +31,10 @@ export default class NaturalSelectionPanel extends Panel {
     const options = optionize<NaturalSelectionPanelOptions, SelfOptions, PanelOptions>()( {
 
       // SelfOptions
-      fixedWidth: null
+      fixedWidth: null,
+
+      // PanelOptions
+      isDisposable: false
     }, providedOptions );
 
     assert && assert( options.fixedWidth === null || options.fixedWidth > 0,

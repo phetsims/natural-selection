@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -31,7 +30,8 @@ export default class PerformanceTimesNode extends VBox {
 
       // VBoxOptions
       align: 'left',
-      spacing: 5
+      spacing: 5,
+      isDisposable: false
     }, providedOptions );
 
     // unlink is not necessary.
@@ -61,11 +61,6 @@ export default class PerformanceTimesNode extends VBox {
     options.children = [ timeToMateNode, timeToStartOverNode ];
 
     super( options );
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 }
 

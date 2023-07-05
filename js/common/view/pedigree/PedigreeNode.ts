@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../../axon/js/Disposable.js';
 import Dimension2 from '../../../../../dot/js/Dimension2.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
@@ -44,7 +43,8 @@ export default class PedigreeNode extends HBox {
       align: 'center',
       excludeInvisibleChildrenFromBounds: false,
       phetioDocumentation: 'the Pedigree graph and its control panel',
-      visiblePropertyOptions: { phetioReadOnly: true }
+      visiblePropertyOptions: { phetioReadOnly: true },
+      isDisposable: false
     }, providedOptions );
 
     // Divy up the width
@@ -83,11 +83,6 @@ export default class PedigreeNode extends HBox {
     super( options );
 
     this.allelesPanel = allelesPanel;
-  }
-
-  public override dispose(): void {
-    Disposable.assertNotDisposable();
-    super.dispose();
   }
 
   /**
