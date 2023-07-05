@@ -69,15 +69,11 @@ The sim makes heavy use of logging via `phet.log`. If you are making modificatio
 * **dispose:** All classes have a `dispose` method. Sim-specific classes whose instances exist for the lifetime of the sim are not intended to 
 be disposed, and their `dispose` implementation looks like this:
 
-```js
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
-    Disposable.assertNotDisposable();
-    super.dispose();
-  }
+```ts
+public override dispose(): void {
+  Disposable.assertNotDisposable();
+  super.dispose();
+}
 ```
 
 * **Dead bunnies**: When bunnies die, they cannot be immediately disposed. Their information is needed by the Pedigree graph. If we kept them forever, we'd run out of memory. [BunnyCollection](https://github.com/phetsims/natural-selection/blob/master/js/common/model/BunnyCollection.js)`.pruneDeadBunnies` handles pruning dead bunnies, disposing of them when they are no longer needed by the Pedigree graph.
