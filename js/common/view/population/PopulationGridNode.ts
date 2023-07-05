@@ -194,7 +194,7 @@ class VerticalLines extends Node {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'VerticalLines does not support dispose' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 }
@@ -254,7 +254,7 @@ class HorizontalLines extends Path {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'HorizontalLines does not support dispose' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 }
@@ -323,7 +323,7 @@ class XTickLabels extends Node {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'XTickLabels does not support dispose' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 }
@@ -386,7 +386,7 @@ class YTickLabels extends Node {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'YTickLabels does not support dispose' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 }

@@ -295,7 +295,7 @@ class RowLabel extends VBox {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'RowLabel does not support dispose' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 }
@@ -391,7 +391,7 @@ class Column extends VBox {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'Column does not support dispose' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 

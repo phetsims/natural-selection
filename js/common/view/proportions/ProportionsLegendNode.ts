@@ -113,7 +113,7 @@ class GeneLegendNode extends VBox {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'GeneLegendNode does not support dispose' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 }
@@ -163,7 +163,7 @@ class AlleleLegendNode extends HBox {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'AlleleLegendNode does not support dispose' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 }

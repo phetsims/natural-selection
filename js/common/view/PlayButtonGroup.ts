@@ -22,6 +22,7 @@ import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import SimulationMode from '../model/SimulationMode.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
+import Disposable from '../../../../axon/js/Disposable.js';
 
 type SelfOptions = {
 
@@ -125,7 +126,7 @@ export default class PlayButtonGroup extends Node {
   }
 
   public override dispose(): void {
-    assert && assert( false, 'PlayButtonGroup does not support dispose' );
+    Disposable.assertNotDisposable();
     super.dispose();
   }
 }
