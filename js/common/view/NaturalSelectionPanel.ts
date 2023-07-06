@@ -1,4 +1,4 @@
-// Copyright 2019-2022, University of Colorado Boulder
+// Copyright 2019-2023, University of Colorado Boulder
 
 /**
  * NaturalSelectionPanel is a specialization of Panel that provides a more convenient API for creating a
