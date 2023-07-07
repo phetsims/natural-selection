@@ -150,6 +150,7 @@ export default class GenePair extends PhetioObject {
     this.motherAllele = Allele.AlleleIO.fromStateObject( stateObject.motherAllele );
   }
 
+  //TODO https://github.com/phetsims/natural-selection/issues/330 should this be 'Data type serialization'?
   /**
    * GenePairIO implements 'Dynamic element serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization

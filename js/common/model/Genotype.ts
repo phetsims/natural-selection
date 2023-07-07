@@ -197,6 +197,7 @@ export default class Genotype extends PhetioObject {
     this.mutation = required( NullableIO( Allele.AlleleIO ).fromStateObject( stateObject.mutation ) );
   }
 
+  //TODO https://github.com/phetsims/natural-selection/issues/330 should this be 'Data type serialization'?
   /**
    * GenotypeIO implements 'Dynamic element serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization

@@ -128,6 +128,7 @@ export default class Phenotype extends PhetioObject {
     this._teethAllele = required( Allele.AlleleIO.fromStateObject( stateObject.teethAllele ) );
   }
 
+  //TODO https://github.com/phetsims/natural-selection/issues/330 should this be 'Data type serialization'?
   /**
    * PhenotypeIO implements 'Dynamic element serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
