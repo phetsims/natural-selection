@@ -193,6 +193,7 @@ export default class Genotype extends PhetioObject {
    * Restores Genotype stateObject after instantiation.
    */
   private applyState( stateObject: GenotypeStateObject ): void {
+    //TODO https://github.com/phetsims/natural-selection/issues/330 Is `required` still necessary with TypeScript?
     required( stateObject );
     this.mutation = required( NullableIO( Allele.AlleleIO ).fromStateObject( stateObject.mutation ) );
   }

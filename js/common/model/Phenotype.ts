@@ -123,6 +123,7 @@ export default class Phenotype extends PhetioObject {
    * use the default implementation of applyState.
    */
   private applyState( stateObject: PhenotypeStateObject ): void {
+    //TODO https://github.com/phetsims/natural-selection/issues/330 Is `required` still necessary with TypeScript?
     this._furAllele = required( Allele.AlleleIO.fromStateObject( stateObject.furAllele ) );
     this._earsAllele = required( Allele.AlleleIO.fromStateObject( stateObject.earsAllele ) );
     this._teethAllele = required( Allele.AlleleIO.fromStateObject( stateObject.teethAllele ) );
