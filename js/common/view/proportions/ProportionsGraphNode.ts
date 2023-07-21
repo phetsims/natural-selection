@@ -169,10 +169,12 @@ export default class ProportionsGraphNode extends Node {
     // 'No Data', visible when we have no data to display.
     const noDataText = new Text( NaturalSelectionStrings.noDataStringProperty, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
-      centerX: backgroundNode.centerX,
-      centerY: backgroundNode.top + ( backgroundNode.height / 6 ),
       maxWidth: 0.5 * backgroundNode.width,
       tandem: options.tandem.createTandem( 'noDataText' )
+    } );
+    noDataText.boundsProperty.link( bounds => {
+      noDataText.centerX = backgroundNode.centerX;
+      noDataText.centerY = backgroundNode.top + ( backgroundNode.height / 6 );
     } );
 
     assert && assert( !options.children, 'ProportionGraphNode sets children' );
