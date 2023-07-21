@@ -49,7 +49,6 @@ export default class AlleleNode extends HBox {
       scale: 0.5 // determined empirically
     } );
 
-    assert && assert( !options.children, 'AlleleNode sets children' );
     options.children = [ text, imageNode ];
 
     super( options );

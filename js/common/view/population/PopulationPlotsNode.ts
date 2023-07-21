@@ -39,7 +39,6 @@ export default class PopulationPlotsNode extends Node {
     // Clipped to the graph, but dilated to mitigate clipping of points and line segments at the edges of the grid.
     // Points (but not line segments) that fall at yMax (in model coordinates) will be slightly clipped as a compromise
     // for improved clipping performance. See https://github.com/phetsims/natural-selection/issues/159
-    assert && assert( !options.clipArea, 'PopulationPlotsNode sets clipArea' );
     options.clipArea = Shape.bounds(
       new Bounds2(
         -NaturalSelectionConstants.POPULATION_POINT_RADIUS,
@@ -105,7 +104,6 @@ export default class PopulationPlotsNode extends Node {
     } ) );
 
     // Front-to-back rendering order should match top-to-bottom order of checkboxes in PopulationPanel
-    assert && assert( !options.children, 'PopulationPlotsNode sets children' );
     options.children = [
       longTeethProbeNode,
       shortTeethPlotNode,

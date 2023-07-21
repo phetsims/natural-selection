@@ -115,7 +115,6 @@ export default class PopulationGraphNode extends Node {
       tandem: options.tandem.createTandem( 'zoomOutToSeeDataText' )
     } );
 
-    assert && assert( !options.children, 'PopulationGraphNode sets children' );
     options.children = [
       boundsRectangle, gridNode,
       generationScroller,

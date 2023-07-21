@@ -36,7 +36,6 @@ export default class MutationAlertsNode extends Node {
     const mutationComingNodes = _.map( genePool.genes, gene => new MutationComingNode( gene, {
       tandem: options.tandem.createTandem( `${gene.tandemNamePrefix}MutationComingNode` )
     } ) );
-    assert && assert( !options.children, 'MutationAlertsNode sets children' );
     options.children = mutationComingNodes;
 
     super( options );

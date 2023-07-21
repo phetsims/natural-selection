@@ -177,7 +177,6 @@ export default class ProportionsGraphNode extends Node {
       noDataText.centerY = backgroundNode.top + ( backgroundNode.height / 6 );
     } );
 
-    assert && assert( !options.children, 'ProportionGraphNode sets children' );
     options.children = [ backgroundNode, noDataText, content ];
 
     super( options );
@@ -284,7 +283,6 @@ class RowLabel extends VBox {
       tandem: secondLineOfTextTandem
     }, textOptions ) );
 
-    assert && assert( !options.children, 'RowLabel sets children' );
     options.children = [ firstLineOfText, secondLineOfText ];
 
     super( options );
@@ -353,7 +351,6 @@ class Column extends VBox {
       tandem: options.tandem.createTandem( 'endBarNode' )
     } );
 
-    assert && assert( !options.children, 'Column sets children' );
     options.children = [
       new AlignBox( checkbox, {
         group: columnLabelsAlignGroup,

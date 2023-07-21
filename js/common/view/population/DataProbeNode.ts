@@ -136,7 +136,6 @@ export default class DataProbeNode extends Node {
       top: barNode.top
     } );
 
-    assert && assert( !options.children, 'DataProbeNode sets children' );
     options.children = [ barNode, manipulator, numberDisplaysParent ];
 
     super( options );
