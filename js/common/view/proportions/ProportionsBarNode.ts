@@ -10,17 +10,23 @@
 import Multilink from '../../../../../axon/js/Multilink.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../../dot/js/Utils.js';
-import optionize, { combineOptions } from '../../../../../phet-core/js/optionize.js';
+import optionize from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
-import { Node, NodeOptions, Rectangle, TColor, Text, TextOptions } from '../../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Rectangle, TColor, Text } from '../../../../../scenery/js/imports.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import HatchingRectangle from '../HatchingRectangle.js';
+import StringProperty from '../../../../../axon/js/StringProperty.js';
+import Property from '../../../../../axon/js/Property.js';
 
-const PERCENTAGE_FONT = new PhetFont( 12 );
+const PERCENTAGE_OPTIONS = {
+  font: new PhetFont( 12 ),
+  bottom: -4,
+  maxWidth: 40 // determined empirically
+};
 
 type SelfOptions = {
   barWidth?: number;
@@ -34,6 +40,8 @@ export default class ProportionsBarNode extends Node {
   private readonly valuesVisibleProperty: TReadOnlyProperty<boolean>;
   private readonly normalRectangle: Rectangle;
   private readonly mutantRectangle: Rectangle;
+  private readonly normalPercentageStringProperty: Property<string>;
+  private readonly mutantPercentageStringProperty: Property<string>;
   private readonly normalPercentageText: Text;
   private readonly mutantPercentageText: Text;
   private readonly barWidth: number;
@@ -66,20 +74,19 @@ export default class ProportionsBarNode extends Node {
       stroke: color
     } );
 
-    // Percentages for non-mutant and mutant counts.
-    // These Text nodes do not take a string Property argument, and are updated via Multilink below, so instrument
-    // them. See https://github.com/phetsims/natural-selection/issues/339
-    const percentageOptions = {
-      font: PERCENTAGE_FONT,
-      bottom: -4,
-      maxWidth: 40 // determined empirically
-    };
-    const normalPercentageText = new Text( '', combineOptions<TextOptions>( {}, percentageOptions, {
-      tandem: options.tandem.createTandem( 'normalPercentageText' )
-    } ) );
-    const mutantPercentageText = new Text( '', combineOptions<TextOptions>( {}, percentageOptions, {
-      tandem: options.tandem.createTandem( 'mutantPercentageText' )
-    } ) );
+    // Percentage for non-mutant (normal) count.
+    const normalPercentageStringProperty = new StringProperty( '', {
+      tandem: options.tandem.createTandem( 'normalPercentageStringProperty' ),
+      phetioReadOnly: true // value set by Multilink below
+    } );
+    const normalPercentageText = new Text( normalPercentageStringProperty, PERCENTAGE_OPTIONS );
+
+    // Percentage for mutant count.
+    const mutantPercentageStringProperty = new StringProperty( '', {
+      tandem: options.tandem.createTandem( 'mutantPercentageStringProperty' ),
+      phetioReadOnly: true // value set by Multilink below
+    } );
+    const mutantPercentageText = new Text( mutantPercentageStringProperty, PERCENTAGE_OPTIONS );
 
     options.children = [ normalRectangle, mutantRectangle, normalPercentageText, mutantPercentageText ];
 
@@ -88,6 +95,8 @@ export default class ProportionsBarNode extends Node {
     this.valuesVisibleProperty = valuesVisibleProperty;
     this.normalRectangle = normalRectangle;
     this.mutantRectangle = mutantRectangle;
+    this.normalPercentageStringProperty = normalPercentageStringProperty;
+    this.mutantPercentageStringProperty = mutantPercentageStringProperty;
     this.normalPercentageText = normalPercentageText;
     this.mutantPercentageText = mutantPercentageText;
     this.barWidth = options.barWidth;
@@ -143,8 +152,8 @@ export default class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.01 * this.barWidth;
 
       // > 99% non-mutant, < 1% mutant
-      this.normalPercentageText.string = StringUtils.fillIn( NaturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
-      this.mutantPercentageText.string = StringUtils.fillIn( NaturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
+      this.normalPercentageStringProperty.value = StringUtils.fillIn( NaturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
+      this.mutantPercentageStringProperty.value = StringUtils.fillIn( NaturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
     }
     else if ( normalPercentage > 0 && normalPercentage < 1 ) {
 
@@ -152,8 +161,8 @@ export default class ProportionsBarNode extends Node {
       this.mutantRectangle.rectWidth = 0.99 * this.barWidth;
 
       // < 1% non-mutant, > 99% mutant
-      this.normalPercentageText.string = StringUtils.fillIn( NaturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
-      this.mutantPercentageText.string = StringUtils.fillIn( NaturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
+      this.normalPercentageStringProperty.value = StringUtils.fillIn( NaturalSelectionStrings.lessThanValuePercentStringProperty.value, { value: 1 } );
+      this.mutantPercentageStringProperty.value = StringUtils.fillIn( NaturalSelectionStrings.greaterThanValuePercentStringProperty.value, { value: 99 } );
     }
     else {
 
@@ -165,10 +174,10 @@ export default class ProportionsBarNode extends Node {
       }
 
       // round both percentages to the nearest integer
-      this.normalPercentageText.string = StringUtils.fillIn( NaturalSelectionStrings.valuePercentStringProperty.value, {
+      this.normalPercentageStringProperty.value = StringUtils.fillIn( NaturalSelectionStrings.valuePercentStringProperty.value, {
         value: Utils.roundSymmetric( normalPercentage )
       } );
-      this.mutantPercentageText.string = StringUtils.fillIn( NaturalSelectionStrings.valuePercentStringProperty.value, {
+      this.mutantPercentageStringProperty.value = StringUtils.fillIn( NaturalSelectionStrings.valuePercentStringProperty.value, {
         value: Utils.roundSymmetric( mutantPercentage )
       } );
     }
