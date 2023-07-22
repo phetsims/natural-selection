@@ -59,13 +59,11 @@ export default class AddMutationsPanel extends NaturalSelectionPanel {
     const mutationIconNode = new MutationIconNode();
     const dominantColumnText = new Text( NaturalSelectionStrings.dominantStringProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
-      maxWidth: 60, // determined empirically
-      tandem: options.tandem.createTandem( 'dominantColumnText' )
+      maxWidth: 60 // determined empirically
     } );
     const recessiveColumnText = new Text( NaturalSelectionStrings.recessiveStringProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_COLUMN_HEADING_FONT,
-      maxWidth: 60, // determined empirically
-      tandem: options.tandem.createTandem( 'recessiveColumnText' )
+      maxWidth: 60 // determined empirically
     } );
 
     // Layout of column headings
@@ -174,8 +172,7 @@ class Row extends HBox {
     // label that indicates the gene, to the left of the push buttons
     const geneNameText = new Text( gene.nameProperty, {
       font: NaturalSelectionConstants.ADD_MUTATION_GENE_FONT,
-      maxWidth: 50, // determined empirically
-      tandem: options.tandem.createTandem( 'geneNameText' )
+      maxWidth: 50 // determined empirically
     } );
     const geneNameTextWrapper = new AlignBox( geneNameText, {
       group: labelColumnAlignGroup,

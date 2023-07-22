@@ -14,7 +14,7 @@ import optionize, { combineOptions, EmptySelfOptions } from '../../../../../phet
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignGroup, HBox, Node, NodeOptions, Rectangle, Text, TextOptions, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, HBox, Node, NodeOptions, Rectangle, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
@@ -169,8 +169,7 @@ export default class ProportionsGraphNode extends Node {
     // 'No Data', visible when we have no data to display.
     const noDataText = new Text( NaturalSelectionStrings.noDataStringProperty, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
-      maxWidth: 0.5 * backgroundNode.width,
-      tandem: options.tandem.createTandem( 'noDataText' )
+      maxWidth: 0.5 * backgroundNode.width
     } );
     noDataText.boundsProperty.link( bounds => {
       noDataText.centerX = backgroundNode.centerX;
@@ -265,23 +264,18 @@ class RowLabel extends VBox {
     // 'bunnies' (plural) in multiple translated strings.
 
     // The first line of text indicates which generation the data is related to.
-    const firstLineOfText = new Text( firstLineStringProperty, combineOptions<TextOptions>( {
-      tandem: options.tandem.createTandem( 'firstLineOfText' )
-    }, textOptions ) );
+    const firstLineOfText = new Text( firstLineStringProperty, textOptions );
 
     // The second line of text shows the count of bunnies.
-    const secondLineOfTextTandem = options.tandem.createTandem( 'secondLineOfText' );
-    const secondLineOfTextDerivedStringProperty = new DerivedStringProperty( [
-      countProperty,
-      NaturalSelectionStrings.oneBunnyStringProperty,
-      NaturalSelectionStrings.countBunniesStringProperty
-    ], ( count, oneBunnyString, countBunniesString ) =>
-      ( count === 1 ) ? oneBunnyString : StringUtils.fillIn( countBunniesString, { count: count } ), {
-      tandem: secondLineOfTextTandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME )
-    } );
-    const secondLineOfText = new Text( secondLineOfTextDerivedStringProperty, combineOptions<TextOptions>( {
-      tandem: secondLineOfTextTandem
-    }, textOptions ) );
+    const secondLineOfTextStringProperty = new DerivedStringProperty( [
+        countProperty,
+        NaturalSelectionStrings.oneBunnyStringProperty,
+        NaturalSelectionStrings.countBunniesStringProperty
+      ],
+      ( count, oneBunnyString, countBunniesString ) =>
+        ( count === 1 ) ? oneBunnyString : StringUtils.fillIn( countBunniesString, { count: count } )
+    );
+    const secondLineOfText = new Text( secondLineOfTextStringProperty, textOptions );
 
     options.children = [ firstLineOfText, secondLineOfText ];
 
@@ -329,8 +323,7 @@ class Column extends VBox {
     const checkboxTandem = options.tandem.createTandem( 'checkbox' );
     const text = new Text( gene.nameProperty, {
       font: COLUMN_LABEL_FONT,
-      maxWidth: 100, // determined empirically
-      tandem: checkboxTandem.createTandem( 'text' )
+      maxWidth: 100 // determined empirically
     } );
     const checkbox = new Checkbox( geneVisibleProperty, text,
       combineOptions<CheckboxOptions>( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {

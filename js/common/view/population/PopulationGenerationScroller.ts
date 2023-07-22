@@ -59,8 +59,7 @@ export default class PopulationGenerationScroller extends HBox {
     // label
     const labelNode = new Text( NaturalSelectionStrings.generationStringProperty, {
       font: options.font,
-      maxWidth: 250, // determined empirically
-      tandem: options.tandem.createTandem( 'labelText' )
+      maxWidth: 250 // determined empirically
     } );
 
     // back button

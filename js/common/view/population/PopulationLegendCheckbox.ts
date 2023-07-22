@@ -60,8 +60,7 @@ export default class PopulationLegendCheckbox extends Checkbox {
     // text label
     const labelText = new Text( labelStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 100, // determined empirically
-      tandem: options.tandem.createTandem( 'labelText' )
+      maxWidth: 100 // determined empirically
     } );
 
     const hBox = new HBox( {

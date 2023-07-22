@@ -49,15 +49,13 @@ export default class ProportionsPanel extends NaturalSelectionPanel {
     } );
 
     // Values checkbox, shows/hides values on the bars
-    const valuesCheckboxTandem = options.tandem.createTandem( 'valuesCheckbox' );
     const valuesCheckboxLabelText = new Text( NaturalSelectionStrings.valuesStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 100, // determined empirically
-      tandem: valuesCheckboxTandem.createTandem( 'labelText' )
+      maxWidth: 100 // determined empirically
     } );
     const valuesCheckbox = new Checkbox( valuesVisibleProperty, valuesCheckboxLabelText,
       combineOptions<CheckboxOptions>( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-        tandem: valuesCheckboxTandem
+        tandem: options.tandem.createTandem( 'valuesCheckbox' )
       } ) );
     const xDilation = 8;
     const yDilation = 6;

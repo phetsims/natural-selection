@@ -33,8 +33,7 @@ export default class ToughFoodCheckbox extends EnvironmentalFactorCheckbox {
 
     const labelText = new Text( NaturalSelectionStrings.toughFoodStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 90, // determined empirically
-      tandem: options.tandem.createTandem( 'labelText' )
+      maxWidth: 90 // determined empirically
     } );
 
     const icon = new Image( toughShrub3_png, {

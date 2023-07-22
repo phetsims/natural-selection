@@ -12,7 +12,7 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
 import stepTimer from '../../../../axon/js/stepTimer.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import { Node, NodeOptions, Text, TextOptions } from '../../../../scenery/js/imports.js';
@@ -162,9 +162,7 @@ class TextPushButton extends RectangularPushButton {
       isDisposable: false
     }, providedOptions );
 
-    options.content = new Text( stringProperty, combineOptions<TextOptions>( {}, options.textOptions, {
-      tandem: options.tandem.createTandem( 'labelText' )
-    } ) );
+    options.content = new Text( stringProperty, options.textOptions );
 
     super( options );
   }

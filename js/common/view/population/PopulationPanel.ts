@@ -125,11 +125,9 @@ export default class PopulationPanel extends NaturalSelectionPanel {
     } );
 
     // Data Probe checkbox
-    const dataProbeCheckboxTandem = options.tandem.createTandem( 'dataProbeCheckbox' );
     const labelText = new Text( NaturalSelectionStrings.dataProbeStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 135, // determined empirically
-      tandem: dataProbeCheckboxTandem.createTandem( 'labelText' )
+      maxWidth: 135 // determined empirically
     } );
     const dataProbeCheckboxContent = new AlignBox( labelText, {
       group: alignGroup,
@@ -137,7 +135,7 @@ export default class PopulationPanel extends NaturalSelectionPanel {
     } );
     const dataProbeCheckbox = new Checkbox( populationModel.dataProbe.visibleProperty, dataProbeCheckboxContent,
       combineOptions<CheckboxOptions>( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-        tandem: dataProbeCheckboxTandem
+        tandem: options.tandem.createTandem( 'dataProbeCheckbox' )
       } ) );
     dataProbeCheckbox.touchArea = dataProbeCheckbox.localBounds.dilatedXY( xDilation, yDilation );
     dataProbeCheckbox.mouseArea = dataProbeCheckbox.localBounds.dilatedXY( xDilation, yDilation );

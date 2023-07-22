@@ -34,8 +34,7 @@ export default class WolvesCheckbox extends EnvironmentalFactorCheckbox {
 
     const labelText = new Text( NaturalSelectionStrings.wolvesStringProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 90, // determined empirically
-      tandem: options.tandem.createTandem( 'labelText' )
+      maxWidth: 90 // determined empirically
     } );
 
     const icon = new Image( wolf_png );

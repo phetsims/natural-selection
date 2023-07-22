@@ -42,8 +42,7 @@ export default class WorldDialog extends Dialog {
     const messageText = new Text( NaturalSelectionStrings.bunniesHaveTakenOverTheWorldStringProperty, {
       font: NaturalSelectionConstants.DIALOG_FONT,
       fill: 'white',
-      maxWidth: worldNode.width,
-      tandem: options.tandem.createTandem( 'messageText' )
+      maxWidth: worldNode.width
     } );
 
     const content = new VBox( {

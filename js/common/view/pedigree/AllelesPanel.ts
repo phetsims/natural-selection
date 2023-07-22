@@ -55,8 +55,7 @@ export default class AllelesPanel extends NaturalSelectionPanel {
     // Alleles - title is plural, since we're always showing at least 2 alleles
     const titleText = new Text( NaturalSelectionStrings.allelesStringProperty, {
       font: NaturalSelectionConstants.TITLE_FONT,
-      maxWidth: 125, // determined empirically
-      tandem: options.tandem.createTandem( 'titleText' )
+      maxWidth: 125 // determined empirically
     } );
 
     // A row for each gene
@@ -125,8 +124,7 @@ class Row extends VBox {
 
     const text = new Text( gene.nameProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 100, // determined empirically
-      tandem: checkboxTandem.createTandem( 'text' )
+      maxWidth: 100 // determined empirically
     } );
 
     const checkbox = new Checkbox( visibleProperty, text,

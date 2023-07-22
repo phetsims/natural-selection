@@ -93,11 +93,7 @@ export default class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     } );
     const titleText = new Text( titleStringProperty, {
       font: NaturalSelectionConstants.TITLE_FONT,
-      maxWidth: 175, // determined empirically,
-      phetioVisiblePropertyInstrumented: true,
-      visiblePropertyOptions: {
-        phetioFeatured: true
-      }
+      maxWidth: 175 // determined empirically,
     } );
 
     const content = new VBox( combineOptions<VBoxOptions>( {}, NaturalSelectionConstants.VBOX_OPTIONS, {

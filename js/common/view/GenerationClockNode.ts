@@ -73,18 +73,16 @@ export default class GenerationClockNode extends Node {
     } );
 
     // The current generation number, displayed below the circle.
-    const generationNumberTextTandem = options.tandem.createTandem( 'generationNumberText' );
-    const generationDerivedStringProperty = new PatternStringProperty( NaturalSelectionStrings.generationValueStringProperty, {
+    const generationNumberStringProperty = new PatternStringProperty( NaturalSelectionStrings.generationValueStringProperty, {
       value: generationClock.clockGenerationProperty
     }, {
-      tandem: generationNumberTextTandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME )
+      tandem: options.tandem.createTandem( 'generationNumberStringProperty' )
     } );
-    const generationNumberText = new Text( generationDerivedStringProperty, {
+    const generationNumberText = new Text( generationNumberStringProperty, {
       font: GENERATION_FONT,
       fill: 'black',
       top: circle.bottom + 3,
-      maxWidth: 100, // determined empirically
-      tandem: generationNumberTextTandem
+      maxWidth: 100 // determined empirically
     } );
 
     // Keep the generation number centered below the circular part of the clock.

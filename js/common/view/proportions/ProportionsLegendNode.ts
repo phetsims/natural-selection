@@ -145,8 +145,7 @@ class AlleleLegendNode extends HBox {
 
     const text = new Text( alleleNameProperty, {
       font: NaturalSelectionConstants.PROPORTIONS_LEGEND_FONT,
-      maxWidth: 92, // determined empirically
-      tandem: options.tandem.createTandem( 'text' )
+      maxWidth: 92 // determined empirically
     } );
 
     options.children = [ rectangleNode, text ];

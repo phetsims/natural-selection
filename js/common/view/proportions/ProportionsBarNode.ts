@@ -67,7 +67,8 @@ export default class ProportionsBarNode extends Node {
     } );
 
     // Percentages for non-mutant and mutant counts.
-    // These Text nodes do not take a string Property argument. They are updated via Multilink below.
+    // These Text nodes do not take a string Property argument, and are updated via Multilink below, so instrument
+    // them. See https://github.com/phetsims/natural-selection/issues/339
     const percentageOptions = {
       font: PERCENTAGE_FONT,
       bottom: -4,

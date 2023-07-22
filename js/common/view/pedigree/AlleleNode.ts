@@ -41,8 +41,7 @@ export default class AlleleNode extends HBox {
 
     const text = new Text( abbreviationProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
-      maxWidth: 12, // determined empirically
-      tandem: options.tandem.createTandem( 'text' )
+      maxWidth: 12 // determined empirically
     } );
 
     const imageNode = new Image( image, {

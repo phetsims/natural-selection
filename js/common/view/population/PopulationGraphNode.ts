@@ -62,8 +62,7 @@ export default class PopulationGraphNode extends Node {
     const yAxisLabelText = new Text( NaturalSelectionStrings.populationStringProperty, {
       font: NaturalSelectionConstants.POPULATION_AXIS_FONT,
       rotation: -Math.PI / 2,
-      maxWidth: 90, // determined empirically
-      tandem: options.tandem.createTandem( 'yAxisLabelText' )
+      maxWidth: 90 // determined empirically
     } );
 
     // Wrap yAxisLabelText because we'll be observing its boundsProperty.
@@ -111,8 +110,7 @@ export default class PopulationGraphNode extends Node {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT,
       maxWidth: 0.75 * gridWidth,
       centerX: gridNode.x + gridWidth / 2,
-      centerY: gridNode.y + gridHeight / 2,
-      tandem: options.tandem.createTandem( 'zoomOutToSeeDataText' )
+      centerY: gridNode.y + gridHeight / 2
     } );
 
     options.children = [

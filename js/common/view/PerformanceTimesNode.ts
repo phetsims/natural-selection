@@ -40,8 +40,7 @@ export default class PerformanceTimesNode extends VBox {
     );
     timeToMateDerivedStringProperty.link( timeToMateString => console.log( timeToMateString ) );
 
-    // Time that it last took to mate.
-    // See https://github.com/phetsims/natural-selection/issues/60
+    // Time that it last took to mate. See https://github.com/phetsims/natural-selection/issues/60
     const timeToMateNode = new Text( timeToMateDerivedStringProperty, {
       font: NaturalSelectionConstants.INSTRUCTIONS_FONT
     } );
