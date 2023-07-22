@@ -9,11 +9,9 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import optionize, { combineOptions, EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import { combineOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { AlignGroup, Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { AlignGroup, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
@@ -85,8 +83,21 @@ export default class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
       } );
 
     // title
-    const titleText = new TitleText( numberOfCheckboxesVisibleProperty, {
-      tandem: options.tandem.createTandem( 'titleText' )
+    const titleStringProperty = new DerivedStringProperty( [
+      numberOfCheckboxesVisibleProperty,
+      NaturalSelectionStrings.environmentalFactorStringProperty,
+      NaturalSelectionStrings.environmentalFactorsStringProperty
+    ], ( numberOfCheckboxesVisible, environmentalFactor, environmentalFactors ) =>
+      ( numberOfCheckboxesVisible === 1 ) ? environmentalFactor : environmentalFactors, {
+      tandem: options.tandem.createTandem( 'titleStringProperty' )
+    } );
+    const titleText = new Text( titleStringProperty, {
+      font: NaturalSelectionConstants.TITLE_FONT,
+      maxWidth: 175, // determined empirically,
+      phetioVisiblePropertyInstrumented: true,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
 
     const content = new VBox( combineOptions<VBoxOptions>( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
@@ -94,42 +105,6 @@ export default class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     } ) );
 
     super( content, options );
-  }
-}
-
-type TitleTextSelfOptions = EmptySelfOptions;
-type TitleTextOptions = TitleTextSelfOptions & PickRequired<Text, 'tandem'>;
-
-/**
- * TitleText supports dynamic locale, and changes between singular/plural based on how many checkboxes are visible.
- */
-class TitleText extends Text {
-
-  public constructor( numberOfCheckboxesVisibleProperty: TReadOnlyProperty<number>, providedOptions: TitleTextOptions ) {
-
-    const options = optionize<TitleTextOptions, TitleTextSelfOptions, TextOptions>()( {
-
-      // TextOptions
-      font: NaturalSelectionConstants.TITLE_FONT,
-      maxWidth: 175, // determined empirically,
-      phetioVisiblePropertyInstrumented: true,
-      visiblePropertyOptions: {
-        phetioFeatured: true
-      },
-      isDisposable: false
-    }, providedOptions );
-
-    const stringProperty = new DerivedStringProperty( [
-      numberOfCheckboxesVisibleProperty,
-      NaturalSelectionStrings.environmentalFactorStringProperty,
-      NaturalSelectionStrings.environmentalFactorsStringProperty
-    ], ( numberOfCheckboxesVisible, environmentalFactor, environmentalFactors ) =>
-      ( numberOfCheckboxesVisible === 1 ) ? environmentalFactor : environmentalFactors, {
-      tandem: options.tandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME )
-
-    } );
-
-    super( stringProperty, options );
   }
 }
 

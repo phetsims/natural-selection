@@ -9,11 +9,10 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { combineOptions, EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HBoxOptions, Image, Node, NodeOptions, Rectangle, TColor, Text, TextOptions, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HBoxOptions, Image, Node, NodeOptions, Rectangle, TColor, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import RectangularPushButton, { RectangularPushButtonOptions } from '../../../../sun/js/buttons/RectangularPushButton.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -98,8 +97,18 @@ export default class AddMutationsPanel extends NaturalSelectionPanel {
       } );
 
     // title
-    const titleText = new TitleNode( numberOfRowsVisibleProperty, {
-      tandem: options.tandem.createTandem( 'titleText' )
+    const titleStringProperty = new DerivedStringProperty( [
+        numberOfRowsVisibleProperty,
+        NaturalSelectionStrings.addMutationStringProperty,
+        NaturalSelectionStrings.addMutationsStringProperty
+      ],
+      ( numberOfRowsVisible, addMutationString, addMutationsString ) =>
+        ( numberOfRowsVisible === 1 ) ? addMutationString : addMutationsString, {
+        tandem: options.tandem.createTandem( 'titleStringProperty' )
+      } );
+    const titleText = new Text( titleStringProperty, {
+      font: NaturalSelectionConstants.TITLE_FONT,
+      maxWidth: 180 // determined empirically
     } );
 
     const content = new VBox( combineOptions<VBoxOptions>( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
@@ -362,38 +371,6 @@ class AlleleIcon extends Node {
    */
   public set lineDash( value: number[] ) {
     this.outlineRectangle.lineDash = value;
-  }
-}
-
-type TitleNodeSelfOptions = EmptySelfOptions;
-type TitleNodeOptions = TitleNodeSelfOptions & PickRequired<Text, 'tandem'>;
-
-/**
- * TitleNode supports dynamic locale, and changes between singular/plural based on how many Rows are visible.
- */
-class TitleNode extends Text {
-
-  public constructor( numberOfRowsVisibleProperty: TReadOnlyProperty<number>, providedOptions: TitleNodeOptions ) {
-
-    const options = optionize<TitleNodeOptions, TitleNodeSelfOptions, TextOptions>()( {
-
-      // TextOptions
-      font: NaturalSelectionConstants.TITLE_FONT,
-      maxWidth: 180, // determined empirically
-      isDisposable: false
-    }, providedOptions );
-
-    const stringProperty = new DerivedStringProperty( [
-        numberOfRowsVisibleProperty,
-        NaturalSelectionStrings.addMutationStringProperty,
-        NaturalSelectionStrings.addMutationsStringProperty
-      ],
-      ( numberOfRowsVisible, addMutationString, addMutationsString ) =>
-        ( numberOfRowsVisible === 1 ) ? addMutationString : addMutationsString, {
-        tandem: options.tandem.createTandem( Text.STRING_PROPERTY_TANDEM_NAME )
-      } );
-
-    super( stringProperty, options );
   }
 }
 
