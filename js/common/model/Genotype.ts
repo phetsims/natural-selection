@@ -51,6 +51,7 @@ export default class Genotype extends PhetioObject {
   public readonly teethGenePair: GenePair;
 
   // optional mutation that modified this genotype
+  //TODO https://github.com/phetsims/natural-selection/issues/330 should be readonly!
   public mutation: Allele | null;
 
   private readonly disposeGenotype: () => void;
@@ -185,6 +186,7 @@ export default class Genotype extends PhetioObject {
     return {
       mutation: NullableIO( Allele.AlleleIO ).toStateObject( this.mutation )
       // furGenePair, earsGenePair, and teethGenePair are stateful and will be serialized automatically.
+      //TODO https://github.com/phetsims/natural-selection/issues/330 How are they serialized automatically?
     };
   }
 
