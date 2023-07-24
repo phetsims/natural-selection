@@ -51,7 +51,7 @@ export default class Genotype extends PhetioObject {
   public readonly teethGenePair: GenePair;
 
   // optional mutation that modified this genotype
-  //TODO https://github.com/phetsims/natural-selection/issues/330 should be readonly!
+  //TODO https://github.com/phetsims/natural-selection/issues/330 should be private with an ES4 getter
   public mutation: Allele | null;
 
   private readonly disposeGenotype: () => void;
