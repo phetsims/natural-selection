@@ -137,6 +137,7 @@ export default class Wolf extends Organism {
     },
     //TODO https://github.com/phetsims/natural-selection/issues/330 I suspect default toStateObject would work, but would unintentionally hide _speed in Studio.
     toStateObject: wolf => wolf.toStateObject(),
+    //TODO https://github.com/phetsims/natural-selection/issues/330 Does applyState have a default?
     applyState: ( wolf, stateObject ) => wolf.applyState( stateObject )
     // WolfGroup.createElement takes no arguments, so stateObjectToCreateElementArguments is not needed.
   } );
