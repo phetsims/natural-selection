@@ -20,6 +20,7 @@ const SCHEMA_MAP = {
 
   // Determines whether allele abbreviations are visible in the UI. Setting this to false hides the Pedigree 'Alleles'
   // panel, makes the Pedigree graph wider, and allele abbreviations will not be shown in the Pedigree graph.
+  // This query parameter does not have an associated Property, see https://github.com/phetsims/natural-selection/issues/340.
   allelesVisible: {
     type: 'boolean',
     defaultValue: true,
@@ -28,6 +29,7 @@ const SCHEMA_MAP = {
 
   // Specifies the mutations that appear in the initial population of bunnies for the Intro screen.
   // See documentation for labMutations.
+  // This query parameter does not have an associated Property, see https://github.com/phetsims/natural-selection/issues/340.
   introMutations: {
     type: 'string',
     defaultValue: '',
@@ -36,6 +38,7 @@ const SCHEMA_MAP = {
 
   // Specifies the initial population of bunnies for the Intro screen.
   // See documentation for labPopulation.
+  // This query parameter does not have an associated Property, see https://github.com/phetsims/natural-selection/issues/340.
   introPopulation: {
     type: 'array',
     elementSchema: {
@@ -47,6 +50,7 @@ const SCHEMA_MAP = {
 
   // Specifies the mutations that appear in the initial population of bunnies for the Lab screen.
   // See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
+  // This query parameter does not have an associated Property, see https://github.com/phetsims/natural-selection/issues/340.
   //
   // The value determines which mutant alleles are present, whether they are dominant or recessive,
   // and which allele abbreviations can appear in the labPopulation query-parameter value.
@@ -86,6 +90,7 @@ const SCHEMA_MAP = {
 
   // Specifies the genotypes and their distribution in the initial population for the Lab screen.
   // See https://github.com/phetsims/natural-selection/issues/9 for design history and specification.
+  // This query parameter does not have an associated Property, see https://github.com/phetsims/natural-selection/issues/340.
   //
   // The value of labMutations determines which allele abbreviations can appear in this query parameter's value.
   // If a mutation is present in the labMutations query parameter, then the dominant and/or recessive abbreviations
