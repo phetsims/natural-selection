@@ -10,7 +10,6 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import required from '../../../../phet-core/js/required.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
@@ -193,9 +192,7 @@ export default class Genotype extends PhetioObject {
    * Restores Genotype stateObject after instantiation.
    */
   private applyState( stateObject: GenotypeStateObject ): void {
-    //TODO https://github.com/phetsims/natural-selection/issues/330 Is `required` still necessary with TypeScript?
-    required( stateObject );
-    this.mutation = required( NullableIO( Allele.AlleleIO ).fromStateObject( stateObject.mutation ) );
+    this.mutation = NullableIO( Allele.AlleleIO ).fromStateObject( stateObject.mutation );
   }
 
   //TODO https://github.com/phetsims/natural-selection/issues/330 should this be 'Data type serialization'?
