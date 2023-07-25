@@ -51,8 +51,7 @@ export default class Genotype extends PhetioObject {
   public readonly teethGenePair: GenePair;
 
   // optional mutation that modified this genotype
-  //TODO https://github.com/phetsims/natural-selection/issues/330 should be private with an ES4 getter
-  public mutation: Allele | null;
+  private _mutation: Allele | null;
 
   private readonly disposeGenotype: () => void;
 
@@ -98,21 +97,21 @@ export default class Genotype extends PhetioObject {
       phetioDocumentation: 'gene pair that determines the teeth trait'
     } );
 
-    this.mutation = null;
+    this._mutation = null;
 
     // After gene pairs have been created, apply an optional mutation. This ensures that an allele is inherited and
     // then modified, so that the distribution of alleles in the population is correct.
     if ( options.mutateFur ) {
-      this.mutation = genePool.furGene.mutantAllele;
-      this.furGenePair.mutate( this.mutation );
+      this._mutation = genePool.furGene.mutantAllele;
+      this.furGenePair.mutate( this._mutation );
     }
     if ( options.mutateEars ) {
-      this.mutation = genePool.earsGene.mutantAllele;
-      this.earsGenePair.mutate( this.mutation );
+      this._mutation = genePool.earsGene.mutantAllele;
+      this.earsGenePair.mutate( this._mutation );
     }
     if ( options.mutateTeeth ) {
-      this.mutation = genePool.teethGene.mutantAllele;
-      this.teethGenePair.mutate( this.mutation );
+      this._mutation = genePool.teethGene.mutantAllele;
+      this.teethGenePair.mutate( this._mutation );
     }
 
     // The translated abbreviation of the Genotype. PhET-iO only, not used in brand=phet.
@@ -147,6 +146,8 @@ export default class Genotype extends PhetioObject {
     this.disposeGenotype();
     super.dispose();
   }
+
+  public get mutation(): Allele | null { return this._mutation; }
 
   /**
    * Does this genotype contain a specific allele?
@@ -191,8 +192,8 @@ export default class Genotype extends PhetioObject {
       mutation: NullableIO( Allele.AlleleIO )
       // furGenePair, earsGenePair, and teethGenePair are stateful and will be serialized automatically.
     }
-    // toStateObject default works fine here.
-    // applyStateObject default works fine here.
+    // toStateObject: The default works fine here, and handles serializing this._mutation to stateObject.mutation.
+    // applyStateObject: The default works fine here, and handles deserializing stateObject.mutation to this._mutation.
   } );
 }
 
