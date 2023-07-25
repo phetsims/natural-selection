@@ -30,7 +30,6 @@ import Phenotype from './Phenotype.js';
 import XDirection from './XDirection.js';
 import { CompositeSchema } from '../../../../tandem/js/types/StateSchema.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
-import { BunnyGroupCreateElementArguments } from './BunnyGroup.js';
 
 const HOP_TIME_RANGE = new Range( 0.25, 0.5 ); // time to complete a hop cycle, in seconds
 const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // straight-line distance that a bunny hops in the xz plane
@@ -408,15 +407,6 @@ export default class Bunny extends Organism {
   }
 
   /**
-   * Creates the arguments that BunnyGroup.createElement uses to create a Bunny.
-   * While we could restore a few things via the constructor, we're going to instantiate with defaults
-   * and restore everything via applyState.
-   */
-  private static stateObjectToCreateElementArguments( stateObject: BunnyStateObject ): BunnyGroupCreateElementArguments {
-    return [ {} ];
-  }
-
-  /**
    * BunnyIO implements 'Dynamic element serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    * Dynamic element serialization is appropriate because Bunny instances are created dynamically - either as a
@@ -424,10 +414,10 @@ export default class Bunny extends Organism {
    */
   public static readonly BunnyIO = new IOType<Bunny, BunnyStateObject>( 'BunnyIO', {
     valueType: Bunny,
-    stateSchema: Bunny.getStateSchema,
+    stateSchema: Bunny.getStateSchema
     // toStateObject: The default works fine here, and handles serializing this._father to stateObject.father, etc.
-    //TODO https://github.com/phetsims/natural-selection/issues/327 Will default stateObjectToCreateElementArguments work here?
-    stateObjectToCreateElementArguments: stateObject => Bunny.stateObjectToCreateElementArguments( stateObject )
+    // stateObjectToCreateElementArguments: Not needed because BunnyGroup.createElement has no required arguments,
+    //   and we will be restoring everything via applyState.
     // applyState: The default works fine here, and handles deserializing stateObject.father to this._father, etc.
   } );
 }

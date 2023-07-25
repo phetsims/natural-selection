@@ -52,9 +52,9 @@ export default class BunnyGroup extends PhetioGroup<Bunny, BunnyGroupCreateEleme
      * are passed via closure, so we don't have to create them as part of defaultArguments, and don't have to
      * deal with serializing them in BunnyIO.
      * @param tandem - PhetioGroup requires tandem to be the first param
-     * @param providedOptions - not actually optional, because createElement must have a fixed number of args
+     * @param [providedOptions]
      */
-    const createElement = ( tandem: Tandem, providedOptions: BunnyGroupCreateElementOptions ) => {
+    const createElement = ( tandem: Tandem, providedOptions?: BunnyGroupCreateElementOptions ) => {
       return new Bunny( genePool, modelViewTransform, bunnyRestRangeProperty,
         combineOptions<BunnyOptions>( {
           tandem: tandem
