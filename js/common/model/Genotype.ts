@@ -50,7 +50,7 @@ export default class Genotype extends PhetioObject {
   public readonly earsGenePair: GenePair;
   public readonly teethGenePair: GenePair;
 
-  // optional mutation that modified this genotype
+  // Optional mutation that modified this genotype. Not readonly because GenotypeIO.applyStateObject will write to it.
   private _mutation: Allele | null;
 
   private readonly disposeGenotype: () => void;
