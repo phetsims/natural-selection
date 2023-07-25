@@ -38,10 +38,10 @@ const HOP_HEIGHT_RANGE = new Range( 30, 50 ); // how high above the ground a bun
 const X_MARGIN = 28; // determined empirically, to keep bunnies inside bounds of the environment
 
 type SelfOptions = {
-  father?: Bunny | null; // the Bunny's father, null if no father
-  mother?: Bunny | null; // the Bunny's mother, null if no mother
+  father?: Bunny | null; // the Bunny's father, null if no father, or the father has died
+  mother?: Bunny | null; // the Bunny's mother, null if no mother, or the mother has died
   generation?: number; // generation that this Bunny belongs to
-  genotypeOptions?: StrictOmit<GenotypeOptions, 'tandem'>;
+  genotypeOptions?: StrictOmit<GenotypeOptions, 'tandem'>; // options for creating the Bunny's genetic blueprint
 };
 
 export type BunnyOptions = SelfOptions & PickRequired<OrganismOptions, 'tandem'>;
