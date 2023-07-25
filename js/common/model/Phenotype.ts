@@ -116,8 +116,8 @@ export default class Phenotype extends PhetioObject {
       earsAllele: Allele.AlleleIO,
       teethAllele: Allele.AlleleIO
     }
-    // toStateObject: The default works fine here, and handles mapping this._furAllele to stateObject.furAllele, etc.
-    // applyStateObject: The default works fine here, and handles mapping stateObject.furAllele to this._furAllele, etc
+    // toStateObject: The default works fine here, and handles serializing this._furAllele to stateObject.furAllele, etc.
+    // applyStateObject: The default works fine here, and handles deserializing stateObject.furAllele to this._furAllele, etc
   } );
 }
 

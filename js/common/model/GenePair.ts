@@ -140,8 +140,8 @@ export default class GenePair extends PhetioObject {
       fatherAllele: Allele.AlleleIO,
       motherAllele: Allele.AlleleIO
     }
-    // toStateObject: The default works fine here, and handles mapping this.gene to stateObject.gene.
-    // applyStateObject: The default works fine here, and handles mapping stateObject.gene to this._gene.
+    // toStateObject: The default works fine here, and handles serializing this._gene to stateObject.gene.
+    // applyStateObject: The default works fine here, and handles deserializing stateObject.gene to this._gene.
   } );
 }
 
