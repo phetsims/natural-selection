@@ -119,7 +119,7 @@ export default class Wolf extends Organism {
       _speed: NumberIO
     }
     // toStateObject default works fine here.
-    // stateObjectToCreateElementArguments is not needed because WolfGroup.createElement takes no arguments.
+    // stateObjectToCreateElementArguments: Not needed because WolfGroup.createElement takes no arguments.
     // applyState default works fine here, assigning stateObject._speed to this._speed.
   } );
 }
