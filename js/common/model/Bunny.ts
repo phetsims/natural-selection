@@ -145,7 +145,6 @@ export default class Bunny extends Organism {
     this.isAlive = true;
     this.age = 0;
 
-    //TODO https://github.com/phetsims/natural-selection/issues/327 How are this.genotype and this.phenotype getting restored? Should they be in BunnyStateSchema?
     this.genotype = new Genotype( genePool, combineOptions<GenotypeOptions>( {
       tandem: options.tandem.createTandem( 'genotype' )
     }, options.genotypeOptions ) );
@@ -401,7 +400,6 @@ export default class Bunny extends Organism {
     };
   }
 
-  //TODO https://github.com/phetsims/natural-selection/issues/327 need to restore what we can via constructor
   /**
    * Creates the arguments that BunnyGroup.createElement uses to create a Bunny.
    * While we could restore a few things via the constructor, we're going to instantiate with defaults
@@ -409,16 +407,15 @@ export default class Bunny extends Organism {
    */
   private static stateObjectToCreateElementArguments( stateObject: BunnyStateObject ): BunnyGroupCreateElementArguments {
     return [ {
-      generation: stateObject.generation
+      //TODO https://github.com/phetsims/natural-selection/issues/327 Should we provide generation: stateObject.generation, because this.generation is readonly?
     } ];
   }
 
-  //TODO https://github.com/phetsims/natural-selection/issues/327 does defaultApplyState work here? why?
   /**
    * Restores Bunny state after instantiation.
    */
   private applyState( stateObject: BunnyStateObject ): void {
-    //TODO https://github.com/phetsims/natural-selection/issues/327 if we set options.generation in stateObjectToCreateElementArguments then we should not do this
+    //TODO https://github.com/phetsims/natural-selection/issues/327 If we set options.generation in stateObjectToCreateElementArguments then we should not set it here
     Bunny.BunnyIO.stateSchema.defaultApplyState( this, stateObject );
   }
 
@@ -431,8 +428,10 @@ export default class Bunny extends Organism {
   public static readonly BunnyIO = new IOType<Bunny, BunnyStateObject>( 'BunnyIO', {
     valueType: Bunny,
     stateSchema: Bunny.getStateSchema,
-    //TODO https://github.com/phetsims/natural-selection/issues/327 need to implement bunny.toStateObject()
+    // toStateObject: The default works fine here, and handles serializing this._father to stateObject.father, etc.
+    //TODO https://github.com/phetsims/natural-selection/issues/327 Will default stateObjectToCreateElementArguments work here?
     stateObjectToCreateElementArguments: stateObject => Bunny.stateObjectToCreateElementArguments( stateObject ),
+    //TODO https://github.com/phetsims/natural-selection/issues/327 Will default applyState work here?
     applyState: ( bunny, stateObject ) => bunny.applyState( stateObject )
   } );
 }
