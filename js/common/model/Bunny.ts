@@ -49,8 +49,8 @@ export type BunnyOptions = SelfOptions & PickRequired<OrganismOptions, 'tandem'>
 type BunnyStateObject = {
   father: BunnyStateObject | null;
   mother: BunnyStateObject | null;
-  generation: number;
   isAlive: boolean;
+  generation: number;
   age: number;
   _restTime: number;
   _hopTime: number;
@@ -62,12 +62,11 @@ type BunnyStateObject = {
 
 export default class Bunny extends Organism {
 
-  //TODO https://github.com/phetsims/natural-selection/issues/327 father, mother, isAlive, age should be readonly for clients
-  public father: Bunny | null;
-  public mother: Bunny | null;
-  public readonly generation: number;
-  public isAlive: boolean;
-  public age: number;
+  private _father: Bunny | null;
+  private _mother: Bunny | null;
+  private _isAlive: boolean;
+  private _generation: number; // not readonly so that BunnyIO.applyState can restore it
+  public age: number; // intended to be modified only by BunnyCollection and BunnyIO.applyState
 
   // the bunny's genetic blueprint
   public readonly genotype: Genotype;
@@ -139,10 +138,10 @@ export default class Bunny extends Organism {
 
     super( modelViewTransform, options );
 
-    this.father = options.father;
-    this.mother = options.mother;
-    this.generation = options.generation;
-    this.isAlive = true;
+    this._father = options.father;
+    this._mother = options.mother;
+    this._isAlive = true;
+    this._generation = options.generation;
     this.age = 0;
 
     this.genotype = new Genotype( genePool, combineOptions<GenotypeOptions>( {
@@ -170,20 +169,20 @@ export default class Bunny extends Organism {
     // When the father or mother is disposed, set them to null to free memory.
     // See https://github.com/phetsims/natural-selection/issues/112
     const fatherDisposedListener = () => {
-      if ( this.father ) {
-        this.father.disposedEmitter.removeListener( fatherDisposedListener );
-        this.father = null;
+      if ( this._father ) {
+        this._father.disposedEmitter.removeListener( fatherDisposedListener );
+        this._father = null;
       }
     };
-    this.father && this.father.disposedEmitter.addListener( fatherDisposedListener );
+    this._father && this._father.disposedEmitter.addListener( fatherDisposedListener );
 
     const motherDisposedListener = () => {
-      if ( this.mother ) {
-        this.mother.disposedEmitter.removeListener( motherDisposedListener );
-        this.mother = null;
+      if ( this._mother ) {
+        this._mother.disposedEmitter.removeListener( motherDisposedListener );
+        this._mother = null;
       }
     };
-    this.mother && this.mother.disposedEmitter.addListener( motherDisposedListener );
+    this._mother && this._mother.disposedEmitter.addListener( motherDisposedListener );
 
     this.disposeBunny = () => {
       this.genotype.dispose();
@@ -194,11 +193,11 @@ export default class Bunny extends Organism {
         this.diedEmitter.dispose();
       }
 
-      if ( this.father && this.father.disposedEmitter.hasListener( fatherDisposedListener ) ) {
-        this.father.disposedEmitter.removeListener( fatherDisposedListener );
+      if ( this._father && this._father.disposedEmitter.hasListener( fatherDisposedListener ) ) {
+        this._father.disposedEmitter.removeListener( fatherDisposedListener );
       }
-      if ( this.mother && this.mother.disposedEmitter.hasListener( motherDisposedListener ) ) {
-        this.mother.disposedEmitter.removeListener( motherDisposedListener );
+      if ( this._mother && this._mother.disposedEmitter.hasListener( motherDisposedListener ) ) {
+        this._mother.disposedEmitter.removeListener( motherDisposedListener );
       }
     };
   }
@@ -211,12 +210,20 @@ export default class Bunny extends Organism {
     this.disposedEmitter.dispose();
   }
 
+  public get father(): Bunny | null { return this._father; }
+
+  public get mother(): Bunny | null { return this._mother; }
+
+  public get isAlive(): boolean { return this._isAlive; }
+
+  public get generation(): number { return this._generation; }
+
   /**
    * Kills this bunny, forever and ever. (This sim does not support reincarnation or other forms of 'pooling' :)
    */
   public die(): void {
-    assert && assert( this.isAlive, 'bunny is already dead' );
-    this.isAlive = false;
+    assert && assert( this._isAlive, 'bunny is already dead' );
+    this._isAlive = false;
     this.diedEmitter.emit();
     this.diedEmitter.dispose();
   }
@@ -226,7 +233,7 @@ export default class Bunny extends Organism {
    * @param dt - time step, in seconds
    */
   public move( dt: number ): void {
-    assert && assert( this.isAlive, 'dead bunny cannot move' );
+    assert && assert( this._isAlive, 'dead bunny cannot move' );
 
     if ( this.cumulativeRestTime < this.restTime ) {
 
@@ -361,12 +368,12 @@ export default class Bunny extends Organism {
    */
   public override toString(): string {
     return `${this.tandem.name}, ` +
-           `generation=${this.generation}, ` +
+           `generation=${this._generation}, ` +
            `age=${this.age}, ` +
-           `isAlive=${this.isAlive}, ` +
+           `isAlive=${this._isAlive}, ` +
            `genotype='${this.genotype.toAbbreviation()}', ` +
-           `father=${this.father ? this.father.tandem.name : null}, ` +
-           `mother=${this.mother ? this.mother.tandem.name : null}, ` +
+           `father=${this._father ? this._father.tandem.name : null}, ` +
+           `mother=${this._mother ? this._mother.tandem.name : null}, ` +
            `isOriginalMutant=${this.isOriginalMutant()}`;
   }
 
@@ -406,17 +413,7 @@ export default class Bunny extends Organism {
    * and restore everything via applyState.
    */
   private static stateObjectToCreateElementArguments( stateObject: BunnyStateObject ): BunnyGroupCreateElementArguments {
-    return [ {
-      //TODO https://github.com/phetsims/natural-selection/issues/327 Should we provide generation: stateObject.generation, because this.generation is readonly?
-    } ];
-  }
-
-  /**
-   * Restores Bunny state after instantiation.
-   */
-  private applyState( stateObject: BunnyStateObject ): void {
-    //TODO https://github.com/phetsims/natural-selection/issues/327 If we set options.generation in stateObjectToCreateElementArguments then we should not set it here
-    Bunny.BunnyIO.stateSchema.defaultApplyState( this, stateObject );
+    return [ {} ];
   }
 
   /**
@@ -430,9 +427,8 @@ export default class Bunny extends Organism {
     stateSchema: Bunny.getStateSchema,
     // toStateObject: The default works fine here, and handles serializing this._father to stateObject.father, etc.
     //TODO https://github.com/phetsims/natural-selection/issues/327 Will default stateObjectToCreateElementArguments work here?
-    stateObjectToCreateElementArguments: stateObject => Bunny.stateObjectToCreateElementArguments( stateObject ),
-    //TODO https://github.com/phetsims/natural-selection/issues/327 Will default applyState work here?
-    applyState: ( bunny, stateObject ) => bunny.applyState( stateObject )
+    stateObjectToCreateElementArguments: stateObject => Bunny.stateObjectToCreateElementArguments( stateObject )
+    // applyState: The default works fine here, and handles deserializing stateObject.father to this._father, etc.
   } );
 }
 
