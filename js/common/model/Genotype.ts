@@ -180,37 +180,19 @@ export default class Genotype extends PhetioObject {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes this Genotype instance.
-   */
-  private toStateObject(): GenotypeStateObject {
-    return {
-      mutation: NullableIO( Allele.AlleleIO ).toStateObject( this.mutation )
-      // furGenePair, earsGenePair, and teethGenePair are stateful and will be serialized automatically.
-      //TODO https://github.com/phetsims/natural-selection/issues/330 How are they serialized automatically?
-    };
-  }
-
-  /**
-   * Restores Genotype stateObject after instantiation.
-   */
-  private applyState( stateObject: GenotypeStateObject ): void {
-    this.mutation = NullableIO( Allele.AlleleIO ).fromStateObject( stateObject.mutation );
-  }
-
-  //TODO https://github.com/phetsims/natural-selection/issues/330 should this be 'Data type serialization'?
-  /**
-   * GenotypeIO implements 'Dynamic element serialization', as described in the Serialization section of
+   * GenotypeIO implements 'Reference type serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
-   * Dynamic element serialization is appropriate because each Bunny instance creates a Genotype instance,
-   * and Bunny instances are dynamically created.
+   * Reference type serialization is appropriate because each Bunny instance creates a Genotype instance,
+   * so applyState will be called after this PhET-iO element is created by Bunny.
    */
   public static readonly GenotypeIO = new IOType<Genotype, GenotypeStateObject>( 'GenotypeIO', {
     valueType: Genotype,
     stateSchema: {
       mutation: NullableIO( Allele.AlleleIO )
-    },
-    toStateObject: genotype => genotype.toStateObject(),
-    applyState: ( genotype, stateObject ) => genotype.applyState( stateObject )
+      // furGenePair, earsGenePair, and teethGenePair are stateful and will be serialized automatically.
+    }
+    // toStateObject default works fine here.
+    // applyStateObject default works fine here.
   } );
 }
 

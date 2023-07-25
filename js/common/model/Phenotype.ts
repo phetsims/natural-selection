@@ -104,35 +104,10 @@ export default class Phenotype extends PhetioObject {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes this Phenotype instance. Because Phenotype fields are private and have and require an ES5 getter,
-   * they have an underscore prefix. Their names therefore do not match the fields name in stateSchema, and we cannot
-   * use the default implementation of toStateObject.
-   */
-  private toStateObject(): PhenotypeStateObject {
-    return {
-      furAllele: Allele.AlleleIO.toStateObject( this._furAllele ),
-      earsAllele: Allele.AlleleIO.toStateObject( this._earsAllele ),
-      teethAllele: Allele.AlleleIO.toStateObject( this._teethAllele )
-    };
-  }
-
-  /**
-   * Restores Phenotype state after instantiation. Because Phenotype fields are private and have and require an ES5 getter,
-   * they have an underscore prefix. Their names therefore do not match the fields name in stateSchema, and we cannot
-   * use the default implementation of applyState.
-   */
-  private applyState( stateObject: PhenotypeStateObject ): void {
-    this._furAllele = Allele.AlleleIO.fromStateObject( stateObject.furAllele );
-    this._earsAllele = Allele.AlleleIO.fromStateObject( stateObject.earsAllele );
-    this._teethAllele = Allele.AlleleIO.fromStateObject( stateObject.teethAllele );
-  }
-
-  //TODO https://github.com/phetsims/natural-selection/issues/330 should this be 'Data type serialization'?
-  /**
-   * PhenotypeIO implements 'Dynamic element serialization', as described in the Serialization section of
+   * PhenotypeIO implements 'Reference type serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
-   * Dynamic element serialization is appropriate because each Bunny instance creates a Phenotype instance,
-   * and Bunny instances are dynamically created.
+   * Reference type serialization is appropriate because each Bunny instance creates a Phenotype instance,
+   * so applyState will be called after this PhET-iO element is created by Bunny.
    */
   public static readonly PhenotypeIO = new IOType<Phenotype, PhenotypeStateObject>( 'PhenotypeIO', {
     valueType: Phenotype,
@@ -140,9 +115,9 @@ export default class Phenotype extends PhetioObject {
       furAllele: Allele.AlleleIO,
       earsAllele: Allele.AlleleIO,
       teethAllele: Allele.AlleleIO
-    },
-    toStateObject: phenotype => phenotype.toStateObject(),
-    applyState: ( phenotype, stateObject ) => phenotype.applyState( stateObject )
+    }
+    // toStateObject: The default works fine here, and handles mapping this._furAllele to stateObject.furAllele, etc.
+    // applyStateObject: The default works fine here, and handles mapping stateObject.furAllele to this._furAllele, etc
   } );
 }
 

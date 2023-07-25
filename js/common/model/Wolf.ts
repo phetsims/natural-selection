@@ -106,25 +106,6 @@ export default class Wolf extends Organism {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes this Wolf instance.
-   */
-  private toStateObject(): WolfStateObject {
-    return {
-      // position and xDirection are handled by instrumented Properties in superclass Organism
-      _speed: this._speed
-    };
-  }
-
-  //TODO https://github.com/phetsims/natural-selection/issues/330 Should this be similar to Bunny.applyState, ie:
-  //     Wolf.WolfIO.stateSchema.defaultApplyState( this, stateObject );
-  /**
-   * Restores Wolf state after instantiation.
-   */
-  private applyState( stateObject: WolfStateObject ): void {
-    this._speed = stateObject._speed;
-  }
-
-  /**
    * WolfIO implements 'Dynamic element serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
    * Dynamic element serialization is appropriate because Wolf instances are created dynamically each time the 'Wolves'
@@ -136,11 +117,10 @@ export default class Wolf extends Organism {
 
       // Fields that begin with '_' will not be shown in Studio.
       _speed: NumberIO
-    },
-    //TODO https://github.com/phetsims/natural-selection/issues/330 I suspect default toStateObject would work, but would unintentionally hide _speed in Studio.
-    toStateObject: wolf => wolf.toStateObject(),
-    applyState: ( wolf, stateObject ) => wolf.applyState( stateObject )
-    // WolfGroup.createElement takes no arguments, so stateObjectToCreateElementArguments is not needed.
+    }
+    // toStateObject default works fine here.
+    // stateObjectToCreateElementArguments is not needed because WolfGroup.createElement takes no arguments.
+    // applyState default works fine here, assigning stateObject._speed to this._speed.
   } );
 }
 

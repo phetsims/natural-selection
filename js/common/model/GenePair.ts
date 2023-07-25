@@ -127,36 +127,11 @@ export default class GenePair extends PhetioObject {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes a GenePair instance. Because this._gene is private and requires an ES5 getter, its name
-   * has an underscore prefix. It therefore does not match the field name in stateSchema, and we cannot use the
-   * default implementation of toStateObject.
-   */
-  private toStateObject(): GenePairStateObject {
-    return {
-      gene: Gene.GeneIO.toStateObject( this._gene ),
-      fatherAllele: Allele.AlleleIO.toStateObject( this.fatherAllele ),
-      motherAllele: Allele.AlleleIO.toStateObject( this.motherAllele )
-    };
-  }
-
-  /**
-   * Restores GenePair state after instantiation. Because this._gene is private and requires an ES5 getter, its name
-   * has an underscore prefix. It therefore does not match the field name in stateSchema, and we cannot use the
-   * default implementation of applyState.
-   */
-  private applyState( stateObject: GenePairStateObject ): void {
-    this._gene = Gene.GeneIO.fromStateObject( stateObject.gene );
-    this.fatherAllele = Allele.AlleleIO.fromStateObject( stateObject.fatherAllele );
-    this.motherAllele = Allele.AlleleIO.fromStateObject( stateObject.motherAllele );
-  }
-
-  //TODO https://github.com/phetsims/natural-selection/issues/330 should this be 'Data type serialization'?
-  /**
-   * GenePairIO implements 'Dynamic element serialization', as described in the Serialization section of
+   * GenePairIO implements 'Reference type serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
-   * Dynamic element serialization is appropriate because Genotype creates 3 instances of GenePair (one for each Allele).
-   * Genotype is itself created by Bunny; there is one Genotype instance per Bunny. And Bunny instances
-   * are dynamically created.
+   * Reference type serialization is appropriate because Genotype creates 3 instances of GenePair (one for each Allele).
+   * Genotype is itself created by Bunny; there is one Genotype instance per Bunny. And Bunny instances are dynamically
+   * created.
    */
   public static readonly GenePairIO = new IOType<GenePair, GenePairStateObject>( 'GenePairIO', {
     valueType: GenePair,
@@ -164,9 +139,9 @@ export default class GenePair extends PhetioObject {
       gene: Gene.GeneIO,
       fatherAllele: Allele.AlleleIO,
       motherAllele: Allele.AlleleIO
-    },
-    toStateObject: genePair => genePair.toStateObject(),
-    applyState: ( genePair, stateObject ) => genePair.applyState( stateObject )
+    }
+    // toStateObject: The default works fine here, and handles mapping this.gene to stateObject.gene.
+    // applyStateObject: The default works fine here, and handles mapping stateObject.gene to this._gene.
   } );
 }
 

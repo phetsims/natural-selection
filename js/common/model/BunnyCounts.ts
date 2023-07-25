@@ -114,21 +114,6 @@ export default class BunnyCounts {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes this BunnyCounts instance.
-   */
-  private toStateObject(): BunnyCountsStateObject {
-    return {
-      totalCount: this.totalCount,
-      whiteFurCount: this.whiteFurCount,
-      brownFurCount: this.brownFurCount,
-      straightEarsCount: this.straightEarsCount,
-      floppyEarsCount: this.floppyEarsCount,
-      shortTeethCount: this.shortTeethCount,
-      longTeethCount: this.longTeethCount
-    };
-  }
-
-  /**
    * Deserializes a BunnyCounts instance.
    */
   private static fromStateObject( stateObject: SelfOptions ): BunnyCounts {
@@ -161,8 +146,7 @@ export default class BunnyCounts {
       shortTeethCount: NumberIO,
       longTeethCount: NumberIO
     },
-    //TODO https://github.com/phetsims/natural-selection/issues/330 does default toStateObject work here?
-    toStateObject: bunnyCounts => bunnyCounts.toStateObject(),
+    // toStateObject: The default works fine here.
     fromStateObject: stateObject => BunnyCounts.fromStateObject( stateObject )
   } );
 }

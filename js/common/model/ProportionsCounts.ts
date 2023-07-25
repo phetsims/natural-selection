@@ -39,17 +39,6 @@ export default class ProportionsCounts {
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Serializes this ProportionsCounts instance.
-   */
-  private toStateObject(): ProportionsCountsStateObject {
-    return {
-      generation: this.generation,
-      startCounts: BunnyCounts.BunnyCountsIO.toStateObject( this.startCounts ),
-      endCounts: BunnyCounts.BunnyCountsIO.toStateObject( this.endCounts )
-    };
-  }
-
-  /**
    * Deserializes a ProportionsCounts instance.
    */
   private static fromStateObject( stateObject: ProportionsCountsStateObject ): ProportionsCounts {
@@ -74,8 +63,7 @@ export default class ProportionsCounts {
       startCounts: BunnyCounts.BunnyCountsIO,
       endCounts: BunnyCounts.BunnyCountsIO
     },
-    //TODO https://github.com/phetsims/natural-selection/issues/330 does default toStateObject work here?
-    toStateObject: proportionCounts => proportionCounts.toStateObject(),
+    // toStateObject: The default works fine here.
     fromStateObject: stateObject => ProportionsCounts.fromStateObject( stateObject )
   } );
 }

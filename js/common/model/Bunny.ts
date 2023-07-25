@@ -408,7 +408,9 @@ export default class Bunny extends Organism {
    * and restore everything via applyState.
    */
   private static stateObjectToCreateElementArguments( stateObject: BunnyStateObject ): BunnyGroupCreateElementArguments {
-    return [ {} ];
+    return [ {
+      generation: stateObject.generation
+    } ];
   }
 
   //TODO https://github.com/phetsims/natural-selection/issues/327 does defaultApplyState work here? why?
@@ -416,6 +418,7 @@ export default class Bunny extends Organism {
    * Restores Bunny state after instantiation.
    */
   private applyState( stateObject: BunnyStateObject ): void {
+    //TODO https://github.com/phetsims/natural-selection/issues/327 if we set options.generation in stateObjectToCreateElementArguments then we should not do this
     Bunny.BunnyIO.stateSchema.defaultApplyState( this, stateObject );
   }
 
