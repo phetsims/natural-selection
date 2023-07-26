@@ -11,7 +11,7 @@
  *
  * Responsibilities:
  * - Parses and validates the query-parameter values
- * - Reports problems via QueryStringMachine.addWarning and to console.error
+ * - Reports problems via QueryStringMachine.addWarning and console.error
  * - Sets the dominantAlleleProperty for genes that are represented in the mutations value. See Gene.js.
  * - Builds a data structure that is used to initialize and reset the population. See typedef BunnyVariety
  *   and NaturalSelectionModel.js
