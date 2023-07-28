@@ -13,6 +13,7 @@ import NumberSpinner, { NumberSpinnerOptions } from '../../../../../sun/js/Numbe
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -42,7 +43,8 @@ export default class ProportionsGenerationSpinner extends NumberSpinner {
         textOptions: {
           font: NaturalSelectionConstants.PROPORTIONS_GENERATION_CONTROL_FONT,
           maxWidth: 250 // determined empirically
-        }
+        },
+        tandem: Tandem.OPT_OUT // see https://github.com/phetsims/natural-selection/issues/339
       }
     }, providedOptions );
 
