@@ -9,7 +9,7 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import optionize, { combineOptions, EmptySelfOptions, optionize3 } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HBoxOptions, Image, Node, NodeOptions, Rectangle, TColor, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
@@ -43,8 +43,10 @@ export default class AddMutationsPanel extends NaturalSelectionPanel {
 
   public constructor( genePool: GenePool, providedOptions: AddMutationsPanelOptions ) {
 
-    const options = optionize3<AddMutationsPanelOptions, SelfOptions, StrictOmit<NaturalSelectionPanelOptions, 'tandem'>>()(
-      {}, NaturalSelectionConstants.PANEL_OPTIONS, providedOptions );
+    const options = optionize4<AddMutationsPanelOptions, SelfOptions, StrictOmit<NaturalSelectionPanelOptions, 'tandem'>>()(
+      {}, NaturalSelectionConstants.PANEL_OPTIONS, {
+        visiblePropertyOptions: { phetioFeatured: true }
+      }, providedOptions );
 
     // All allele icons have the same effective width and height.
     const iconsAlignGroup = new AlignGroup();

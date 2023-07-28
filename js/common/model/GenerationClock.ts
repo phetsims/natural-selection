@@ -47,7 +47,8 @@ export default class GenerationClock extends PhetioObject {
       // PhetioObjectOptions
       isDisposable: false,
       phetioState: false, // to prevent serialization, because we don't have an IO Type
-      phetioDocumentation: 'the clock that marks the duration of a generation'
+      phetioDocumentation: 'the clock that marks the duration of a generation',
+      phetioFeatured: true
     }, providedOptions );
 
     super( options );

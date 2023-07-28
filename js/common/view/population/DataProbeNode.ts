@@ -71,7 +71,8 @@ export default class DataProbeNode extends Node {
 
       // NodeOptions
       cursor: 'ew-resize', // east-west arrows, <->
-      isDisposable: false
+      isDisposable: false,
+      phetioFeatured: true
     }, providedOptions );
 
     const dataProbe = populationModel.dataProbe;

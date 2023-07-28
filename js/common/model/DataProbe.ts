@@ -51,7 +51,8 @@ export default class DataProbe extends PhetioObject {
 
       // PhetioObjectOptions
       isDisposable: false,
-      phetioState: false // to prevent serialization, because we don't have an IO Type
+      phetioState: false, // to prevent serialization, because we don't have an IO Type
+      phetioFeatured: true
     }, providedOptions );
 
     super( options );

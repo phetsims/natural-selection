@@ -100,7 +100,8 @@ export default class PopulationModel extends PhetioObject {
       // PhetioObjectOptions
       isDisposable: false,
       phetioState: false, // to prevent serialization, because we don't have an IO Type
-      phetioDocumentation: 'model elements that are specific to the Population feature'
+      phetioDocumentation: 'model elements that are specific to the Population feature',
+      phetioFeatured: true
     }, providedOptions );
 
     super( options );
@@ -201,7 +202,8 @@ export default class PopulationModel extends PhetioObject {
       numberType: 'Integer',
       range: new Range( 0, Y_MAXIMUMS.length - 1 ),
       tandem: options.tandem.createTandem( 'yZoomLevelProperty' ),
-      phetioDocumentation: 'Zooms in and out by selecting a pre-set y-axis range. The smaller the value, the larger the y-axis range.'
+      phetioDocumentation: 'Zooms in and out by selecting a pre-set y-axis range. The smaller the value, the larger the y-axis range.',
+      phetioFeatured: true
     } );
 
     this.yRangeProperty = new DerivedProperty(

@@ -74,7 +74,8 @@ export default class ProportionsModel extends PhetioObject {
       // PhetioObjectOptions
       isDisposable: false,
       phetioState: false, // to prevent serialization, because we don't have an IO Type
-      phetioDocumentation: 'model elements that are specific to the Proportions feature'
+      phetioDocumentation: 'model elements that are specific to the Proportions feature',
+      phetioFeatured: true
     }, providedOptions );
 
     super( options );

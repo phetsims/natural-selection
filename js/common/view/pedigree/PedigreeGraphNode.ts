@@ -46,7 +46,8 @@ export default class PedigreeGraphNode extends Node {
 
       // NodeOptions
       phetioVisiblePropertyInstrumented: false,
-      isDisposable: false
+      isDisposable: false,
+      phetioFeatured: true
     }, providedOptions );
 
     const backgroundNode = new Rectangle( 0, 0, options.graphWidth, options.graphHeight, {
