@@ -117,6 +117,7 @@ export default class ProportionsModel extends PhetioObject {
     const currentStartCountsProperty = new Property<BunnyCounts | null>( null, {
       tandem: options.tandem.createTandem( 'currentStartCountsProperty' ),
       phetioFeatured: true,
+      phetioReadOnly: true,
       phetioValueType: NullableIO( BunnyCounts.BunnyCountsIO ),
       phetioDocumentation: 'Counts at the start of the current generation'
     } );

@@ -49,6 +49,7 @@ export default function createBunnyArray( providedOptions: BunnyArrayOptions ): 
     tandem: options.tandem.createTandem( 'countsProperty' ),
     phetioValueType: BunnyCounts.BunnyCountsIO,
     phetioFeatured: options.countsPropertyFeatured,
+    phetioReadOnly: true,
     phetioState: false // because counts will be restored as Bunny instances are restored to BunnyGroup
   } );
 

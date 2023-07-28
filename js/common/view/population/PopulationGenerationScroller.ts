@@ -71,7 +71,8 @@ export default class PopulationGenerationScroller extends HBox {
     };
     const backButton = new ArrowButton( 'left', back,
       combineOptions<ArrowButtonOptions>( {
-        tandem: options.tandem.createTandem( 'backButton' )
+        tandem: options.tandem.createTandem( 'backButton' ),
+        enabledPropertyOptions: { phetioReadOnly: true }
       }, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS )
     );
 
@@ -83,7 +84,8 @@ export default class PopulationGenerationScroller extends HBox {
     };
     const forwardButton = new ArrowButton( 'right', forward,
       combineOptions<ArrowButtonOptions>( {
-        tandem: options.tandem.createTandem( 'forwardButton' )
+        tandem: options.tandem.createTandem( 'forwardButton' ),
+        enabledPropertyOptions: { phetioReadOnly: true }
       }, NaturalSelectionConstants.ARROW_BUTTON_OPTIONS )
     );
 

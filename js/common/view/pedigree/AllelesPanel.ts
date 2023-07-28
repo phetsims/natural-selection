@@ -120,8 +120,6 @@ class Row extends VBox {
       isDisposable: false
     }, providedOptions );
 
-    const checkboxTandem = options.tandem.createTandem( 'checkbox' );
-
     const text = new Text( gene.nameProperty, {
       font: NaturalSelectionConstants.CHECKBOX_FONT,
       maxWidth: 100 // determined empirically
@@ -129,7 +127,8 @@ class Row extends VBox {
 
     const checkbox = new Checkbox( visibleProperty, text,
       combineOptions<CheckboxOptions>( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
-        tandem: checkboxTandem
+        tandem: options.tandem.createTandem( 'checkbox' ),
+        phetioVisiblePropertyInstrumented: false // see https://github.com/phetsims/natural-selection/issues/344
       } ) );
     const xDilation = 8;
     const yDilation = 8;
