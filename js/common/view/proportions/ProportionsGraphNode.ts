@@ -181,7 +181,7 @@ export default class ProportionsGraphNode extends Node {
     super( options );
 
     // Center content on the background. Columns or generationSpinner may be hidden via PhET-iO. unlink is not necessary.
-    content.localBoundsProperty.link( () => {
+    content.boundsProperty.link( () => {
       content.center = backgroundNode.center;
     } );
 
