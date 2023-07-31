@@ -126,13 +126,13 @@ export default class PopulationGraphNode extends Node {
     ];
 
     // Center x-axis control under the graph. unlink is not necessary.
-    generationScroller.localBoundsProperty.link( () => {
+    generationScroller.boundsProperty.link( () => {
       generationScroller.centerX = gridNode.x + ( gridWidth / 2 );
       generationScroller.top = gridNode.bottom + X_AXIS_LABEL_SPACING;
     } );
 
     // Center y-axis label to left of graph. unlink is not necessary.
-    yAxisLabelText.localBoundsProperty.link( () => {
+    yAxisLabelText.boundsProperty.link( () => {
       yAxisLabelText.right = yZoomButtonGroup.right;
       yAxisLabelText.centerY = gridNode.y + ( gridHeight / 2 );
     } );
@@ -141,7 +141,7 @@ export default class PopulationGraphNode extends Node {
     // unlink is not necessary.
     const plotsNodeClipArea = plotsNode.clipArea!;
     assert && assert( plotsNodeClipArea, 'plotsNode.clipArea is required' );
-    plotsNode.localBoundsProperty.link( localBounds => {
+    plotsNode.boundsProperty.link( localBounds => {
       zoomOutToSeeDataText.visible = !localBounds.equals( Bounds2.NOTHING ) &&
                                      !localBounds.intersectsBounds( plotsNodeClipArea.bounds );
     } );
