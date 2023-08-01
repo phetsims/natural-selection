@@ -59,9 +59,7 @@ export default class FastForwardButton extends RoundMomentaryButton<TimeSpeed> {
 
     this.fastForwardButtonModel = this.buttonModel;
 
-    this.addLinkedElement( timeSpeedProperty, {
-      tandemName: 'timeSpeedProperty'
-    } );
+    this.addLinkedElement( timeSpeedProperty );
   }
 }
 

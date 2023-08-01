@@ -169,10 +169,7 @@ export default class DataProbeNode extends Node {
       }
     } );
 
-    // Create a Studio link to the model
-    this.addLinkedElement( dataProbe, {
-      tandemName: 'dataProbe'
-    } );
+    this.addLinkedElement( dataProbe );
   }
 }
 
