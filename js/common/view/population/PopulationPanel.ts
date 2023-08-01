@@ -112,8 +112,10 @@ export default class PopulationPanel extends NaturalSelectionPanel {
     const xDilation = 8;
     const yDilation = NaturalSelectionConstants.VBOX_OPTIONS.spacing! / 2;
     checkboxes.forEach( checkbox => {
-      checkbox.touchArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
-      checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
+      checkbox.localBoundsProperty.link( localBounds => {
+        checkbox.touchArea = localBounds.dilatedXY( xDilation, yDilation );
+        checkbox.mouseArea = localBounds.dilatedXY( xDilation, yDilation );
+      } );
     } );
 
     const checkboxesVBox = new VBox( combineOptions<VBoxOptions>( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
@@ -137,8 +139,10 @@ export default class PopulationPanel extends NaturalSelectionPanel {
       combineOptions<CheckboxOptions>( {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
         tandem: options.tandem.createTandem( 'dataProbeCheckbox' )
       } ) );
-    dataProbeCheckbox.touchArea = dataProbeCheckbox.localBounds.dilatedXY( xDilation, yDilation );
-    dataProbeCheckbox.mouseArea = dataProbeCheckbox.localBounds.dilatedXY( xDilation, yDilation );
+    dataProbeCheckbox.localBoundsProperty.link( localBounds => {
+      dataProbeCheckbox.touchArea = localBounds.dilatedXY( xDilation, yDilation );
+      dataProbeCheckbox.mouseArea = localBounds.dilatedXY( xDilation, yDilation );
+    } );
 
     const content = new VBox( combineOptions<VBoxOptions>( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       preferredWidth: options.fixedWidth! - ( 2 * options.xMargin ),

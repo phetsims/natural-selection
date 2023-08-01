@@ -59,8 +59,10 @@ export default class ProportionsPanel extends NaturalSelectionPanel {
       } ) );
     const xDilation = 8;
     const yDilation = 6;
-    valuesCheckbox.touchArea = valuesCheckbox.localBounds.dilatedXY( xDilation, yDilation );
-    valuesCheckbox.mouseArea = valuesCheckbox.localBounds.dilatedXY( xDilation, yDilation );
+    valuesCheckbox.localBoundsProperty.link( localBounds => {
+      valuesCheckbox.touchArea = valuesCheckbox.localBounds.dilatedXY( xDilation, yDilation );
+      valuesCheckbox.mouseArea = valuesCheckbox.localBounds.dilatedXY( xDilation, yDilation );
+    } );
 
     const content = new VBox( combineOptions<VBoxOptions>( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       preferredWidth: options.fixedWidth! - ( 2 * options.xMargin ),

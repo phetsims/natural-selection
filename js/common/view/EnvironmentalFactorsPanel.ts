@@ -70,8 +70,10 @@ export default class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     assert && assert( ySpacing !== undefined );
     const yDilation = ySpacing / 2;
     checkboxes.forEach( checkbox => {
-      checkbox.touchArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
-      checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
+      checkbox.localBoundsProperty.link( localBounds => {
+        checkbox.touchArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
+        checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
+      } );
     } );
 
     const numberOfCheckboxesVisibleProperty = DerivedProperty.deriveAny(

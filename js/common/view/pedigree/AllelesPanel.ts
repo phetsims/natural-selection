@@ -132,8 +132,10 @@ class Row extends VBox {
       } ) );
     const xDilation = 8;
     const yDilation = 8;
-    checkbox.touchArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
-    checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
+    checkbox.localBoundsProperty.link( localBounds => {
+      checkbox.touchArea = localBounds.dilatedXY( xDilation, yDilation );
+      checkbox.mouseArea = localBounds.dilatedXY( xDilation, yDilation );
+    } );
 
     // Dominant allele
     const dominantAlleleNode = new AlleleNode( gene.dominantAbbreviationTranslatedProperty, gene.normalAllele.image, {

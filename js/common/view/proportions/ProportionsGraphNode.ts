@@ -333,8 +333,10 @@ class Column extends VBox {
     // Pointer areas for the checkbox
     const xDilation = 8;
     const yDilation = 6;
-    checkbox.mouseArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
-    checkbox.touchArea = checkbox.localBounds.dilatedXY( xDilation, yDilation );
+    checkbox.localBoundsProperty.link( localBounds => {
+      checkbox.mouseArea = localBounds.dilatedXY( xDilation, yDilation );
+      checkbox.touchArea = localBounds.dilatedXY( xDilation, yDilation );
+    } );
 
     const startBarNode = new ProportionsBarNode( gene.color, startNormalCount, startMutantCount, valuesVisibleProperty, {
       tandem: options.tandem.createTandem( 'startBarNode' )
