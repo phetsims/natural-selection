@@ -24,7 +24,7 @@ const POINTER_WIDTH = 15;
 
 type SelfOptions = EmptySelfOptions;
 
-type MutationComingNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+type MutationComingNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem' | 'visibleProperty'>;
 
 export default class MutationComingNode extends Node {
 

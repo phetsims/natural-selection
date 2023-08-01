@@ -34,18 +34,12 @@ export default class MutationAlertsNode extends Node {
 
     // Create a MutationComingNode (aka 'alert') for each gene
     const mutationComingNodes = _.map( genePool.genes, gene => new MutationComingNode( gene, {
+      visibleProperty: gene.mutationComingProperty, // When a mutation is coming, make its associated alert visible.
       tandem: options.tandem.createTandem( `${gene.tandemNamePrefix}MutationComingNode` )
     } ) );
     options.children = mutationComingNodes;
 
     super( options );
-
-    // When a mutation is coming, make its associated alert visible. unlinks are not necessary.
-    mutationComingNodes.forEach( mutationComingNode => {
-      mutationComingNode.gene.mutationComingProperty.link( mutationComing => {
-        mutationComingNode.visible = mutationComing;
-      } );
-    } );
 
     // Alerts point at rows in the Add Mutations panel. Since rows can be dynamically hidden via PhET-iO, manage
     // the logistics of that here. unlink is not necessary.
