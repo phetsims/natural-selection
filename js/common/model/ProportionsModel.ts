@@ -248,7 +248,7 @@ export default class ProportionsModel extends PhetioObject {
       `unexpected generation=${generation}, expected ${this.previousCounts.length}` );
 
     const startCounts = this.currentStartCountsProperty.value!;
-    assert && assert( startCounts !== null );
+    assert && assert( startCounts !== null, `startCounts is null for generation=${generation}` );
     this.previousCounts.push( new ProportionsCounts( generation, startCounts, endCounts ) );
   }
 }
