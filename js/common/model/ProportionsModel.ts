@@ -54,6 +54,8 @@ export default class ProportionsModel extends PhetioObject {
   public readonly earsVisibleProperty: Property<boolean>;
   public readonly teethVisibleProperty: Property<boolean>;
 
+  // 'Start' counts for the current generation. This is null until the sim enters SimulationMode.ACTIVE.
+  // While in SimulationMode.ACTIVE it will always have a value.
   private readonly currentStartCountsProperty: Property<BunnyCounts | null>;
 
   private readonly previousCounts: ObservableArray<ProportionsCounts>;
@@ -113,8 +115,6 @@ export default class ProportionsModel extends PhetioObject {
       tandem: Tandem.OPT_OUT
     } );
 
-    // 'Start' counts for the current generation. This is null until the sim enters SimulationMode.ACTIVE.
-    // While in SimulationMode.ACTIVE it will always have a value.
     const currentStartCountsProperty = new Property<BunnyCounts | null>( null, {
       tandem: options.tandem.createTandem( 'currentStartCountsProperty' ),
       phetioFeatured: true,
