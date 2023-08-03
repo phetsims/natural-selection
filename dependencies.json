@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.5.0-dev.7 Thu Aug 03 2023 16:39:58 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.5.0-rc.0 Thu Aug 03 2023 16:49:34 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "cc59d7f0574270924a886cb3d43a1b7507cd0553",
     "branch": "master"
@@ -29,8 +29,8 @@
     "branch": "master"
   },
   "natural-selection": {
-    "sha": "e0d9b0e10cab6c8ef3dbb92c3f497f8157d51b0f",
-    "branch": "master"
+    "sha": "ea0e97e40c2e17a7d4469492626d82797072da5d",
+    "branch": "1.5"
   },
   "perennial-alias": {
     "sha": "b79d08086e50d0724317188da1648836d543b6e1",
