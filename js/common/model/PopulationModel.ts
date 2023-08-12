@@ -164,27 +164,27 @@ export default class PopulationModel extends PhetioObject {
       tandem: options.tandem.createTandem( 'totalVisibleProperty' ),
       phetioFeatured: true
     } );
-    this.whiteFurVisibleProperty = new BooleanProperty( false, {
+    this.whiteFurVisibleProperty = new BooleanProperty( !!genePool.furGene.dominantAlleleProperty.value, {
       tandem: options.tandem.createTandem( 'whiteFurVisibleProperty' ),
       phetioFeatured: true
     } );
-    this.brownFurVisibleProperty = new BooleanProperty( false, {
+    this.brownFurVisibleProperty = new BooleanProperty( !!genePool.furGene.dominantAlleleProperty.value, {
       tandem: options.tandem.createTandem( 'brownFurVisibleProperty' ),
       phetioFeatured: true
     } );
-    this.straightEarsVisibleProperty = new BooleanProperty( false, {
+    this.straightEarsVisibleProperty = new BooleanProperty( !!genePool.earsGene.dominantAlleleProperty.value, {
       tandem: options.tandem.createTandem( 'straightEarsVisibleProperty' ),
       phetioFeatured: true
     } );
-    this.floppyEarsVisibleProperty = new BooleanProperty( false, {
+    this.floppyEarsVisibleProperty = new BooleanProperty( !!genePool.earsGene.dominantAlleleProperty.value, {
       tandem: options.tandem.createTandem( 'floppyEarsVisibleProperty' ),
       phetioFeatured: true
     } );
-    this.shortTeethVisibleProperty = new BooleanProperty( false, {
+    this.shortTeethVisibleProperty = new BooleanProperty( !!genePool.teethGene.dominantAlleleProperty.value, {
       tandem: options.tandem.createTandem( 'shortTeethVisibleProperty' ),
       phetioFeatured: true
     } );
-    this.longTeethVisibleProperty = new BooleanProperty( false, {
+    this.longTeethVisibleProperty = new BooleanProperty( !!genePool.teethGene.dominantAlleleProperty.value, {
       tandem: options.tandem.createTandem( 'longTeethVisibleProperty' ),
       phetioFeatured: true
     } );
