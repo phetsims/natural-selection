@@ -149,7 +149,7 @@ export default class NaturalSelectionModel implements TModel {
         tandem: graphsTandem.createTandem( 'proportionsModel' )
       } );
 
-    this.pedigreeModel = new PedigreeModel( {
+    this.pedigreeModel = new PedigreeModel( this.genePool, {
       tandem: graphsTandem.createTandem( 'pedigreeModel' )
     } );
 

@@ -12,6 +12,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import naturalSelection from '../../naturalSelection.js';
+import GenePool from './GenePool.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -24,7 +25,7 @@ export default class PedigreeModel extends PhetioObject {
   public readonly earsAllelesVisibleProperty: Property<boolean>;
   public readonly teethAllelesVisibleProperty: Property<boolean>;
 
-  public constructor( providedOptions: PedigreeModelOptions ) {
+  public constructor( genePool: GenePool, providedOptions: PedigreeModelOptions ) {
 
     const options = optionize<PedigreeModelOptions, SelfOptions, PhetioObjectOptions>()( {
 
@@ -36,17 +37,17 @@ export default class PedigreeModel extends PhetioObject {
 
     super( options );
 
-    this.furAllelesVisibleProperty = new BooleanProperty( false, {
+    this.furAllelesVisibleProperty = new BooleanProperty( !!genePool.furGene.dominantAlleleProperty.value, {
       tandem: options.tandem.createTandem( 'furAllelesVisibleProperty' ),
       phetioFeatured: true
     } );
 
-    this.earsAllelesVisibleProperty = new BooleanProperty( false, {
+    this.earsAllelesVisibleProperty = new BooleanProperty( !!genePool.earsGene.dominantAlleleProperty.value, {
       tandem: options.tandem.createTandem( 'earsAllelesVisibleProperty' ),
       phetioFeatured: true
     } );
 
-    this.teethAllelesVisibleProperty = new BooleanProperty( false, {
+    this.teethAllelesVisibleProperty = new BooleanProperty( !!genePool.teethGene.dominantAlleleProperty.value, {
       tandem: options.tandem.createTandem( 'teethAllelesVisibleProperty' ),
       phetioFeatured: true
     } );
