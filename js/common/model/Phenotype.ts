@@ -3,7 +3,7 @@
 /**
  * Phenotype describes the appearance of a bunny, the manifestation of its genotype.
  * See the 'Genotype and Phenotype' section of model.md at
- * https://github.com/phetsims/natural-selection/blob/master/doc/model.md#genotype-and-phenotype
+ * https://github.com/phetsims/natural-selection/blob/main/doc/model.md#genotype-and-phenotype
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -105,7 +105,7 @@ export default class Phenotype extends PhetioObject {
 
   /**
    * PhenotypeIO implements 'Reference type serialization', as described in the Serialization section of
-   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization
    * Reference type serialization is appropriate because each Bunny instance creates a Phenotype instance,
    * so applyState will be called after this PhET-iO element is created by Bunny.
    */

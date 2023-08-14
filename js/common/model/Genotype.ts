@@ -3,7 +3,7 @@
 /**
  * Genotype is the genetic blueprint for an individual bunny. It consists of a gene pair for each gene, and
  * can be abbreviated as a string of letters.  See the 'Genotype and Phenotype' section of model.md at
- * https://github.com/phetsims/natural-selection/blob/master/doc/model.md#genotype-and-phenotype
+ * https://github.com/phetsims/natural-selection/blob/main/doc/model.md#genotype-and-phenotype
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -182,7 +182,7 @@ export default class Genotype extends PhetioObject {
 
   /**
    * GenotypeIO implements 'Reference type serialization', as described in the Serialization section of
-   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization
    * Reference type serialization is appropriate because each Bunny instance creates a Genotype instance,
    * so applyState will be called after this PhET-iO element is created by Bunny.
    */

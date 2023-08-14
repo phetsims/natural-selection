@@ -130,7 +130,7 @@ export default class BunnyCounts {
 
   /**
    * BunnyCountsIO implements 'Data type serialization', as described in the Serialization section of
-   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization
    * Data type serialization is appropriate because BunnyCount itself is not a PhetioObject. Its role is as
    * a data type - similar to number, string, or Vector2. Various fields and Properties have a value of type BunnyCount.
    * Search for BunnyCountsIO to identify them.

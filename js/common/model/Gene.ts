@@ -9,7 +9,7 @@
  * There is one instance of each gene in the GenePool - i.e., 1 fur gene, 1 ears gene, and 1 teeth gene.
  * A Gene identifies the normal and mutant alleles for the gene, and (if the gene has mutated) defines the
  * dominance relationship between the alleles. See also the 'Mutation' section of model.md at
- * https://github.com/phetsims/natural-selection/blob/master/doc/model.md#mutation
+ * https://github.com/phetsims/natural-selection/blob/main/doc/model.md#mutation
  *
  * Dominance is the effect of one allele masking the expression of a different allele. The first allele is referred
  * to as dominant and the second is recessive. Note that since dominance is a relationship between 2 alleles, it
@@ -227,7 +227,7 @@ export default class Gene extends PhetioObject {
 
   /**
    * GeneIO implements 'Reference type serialization', as described in the Serialization section of
-   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization
    * Reference type serialization is appropriate because all Gene instances are created at startup by GenePool.
    * There is one GenePool instance per screen, also created at startup. Any occurrence of Gene in PhET-iO state
    * is a reference to one of the instances created by GenePool.

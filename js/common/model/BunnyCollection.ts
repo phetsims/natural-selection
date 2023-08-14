@@ -61,7 +61,7 @@ export default class BunnyCollection {
   // Recessive mutants, to be mated eagerly so that their mutation appears in the phenotype as soon as possible.
   // Mutants are added to this array when born, and removed as soon as they have mated with another bunny that
   // has the same mutant allele. See also the 'Recessive Mutants' section of model.md at
-  // https://github.com/phetsims/natural-selection/blob/master/doc/model.md#recessive-mutants.
+  // https://github.com/phetsims/natural-selection/blob/main/doc/model.md#recessive-mutants.
   private readonly recessiveMutants: BunnyArray;
 
   // The range of time that a bunny will reset between hops, in seconds.
@@ -257,7 +257,7 @@ export default class BunnyCollection {
 
   /**
    * Ages all live bunnies. Bunnies that reach the maximum age will die. See also the 'Life Expectancy' section of
-   * model.md at https://github.com/phetsims/natural-selection/blob/master/doc/model.md#life-expectancy.
+   * model.md at https://github.com/phetsims/natural-selection/blob/main/doc/model.md#life-expectancy.
    */
   public ageBunnies(): void {
     assert && assert( _.every( this.liveBunnies, bunny => bunny.isAlive ),
@@ -289,7 +289,7 @@ export default class BunnyCollection {
    * Mates all live bunnies by randomly pairing them up. Any bunny can mate with any other bunny, regardless of their
    * age or previous hereditary relationship. If there is an odd number of bunnies, then one of them will not mate.
    * Mutations (if any) are applied as the bunnies are born. See also the 'Reproduction' section of model.md at
-   * https://github.com/phetsims/natural-selection/blob/master/doc/model.md#reproduction.
+   * https://github.com/phetsims/natural-selection/blob/main/doc/model.md#reproduction.
    */
   public mateBunnies( generation: number ): void {
     assert && assert( NaturalSelectionUtils.isNonNegativeInteger( generation ), 'invalid generation' );
@@ -415,7 +415,7 @@ export default class BunnyCollection {
    * the purpose is to make the mutation appear in the phenotype sooner. This must be done separately from other mating
    * because we don't want to apply additional mutations. As a side-effect, bunnies that are successfully mated are
    * removed from the bunnies array. See also the 'Recessive Mutants' section of model.md at
-   * https://github.com/phetsims/natural-selection/blob/master/doc/model.md#recessive-mutants.
+   * https://github.com/phetsims/natural-selection/blob/main/doc/model.md#recessive-mutants.
    *
    * Note that some parts of this method look similar to method mateBunnies. There are in fact significant differences,
    * which made it difficult (and less clear) to factor out commonalities.

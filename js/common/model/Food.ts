@@ -3,7 +3,7 @@
 /**
  * Food is the model of the food supply, a collection of Shrubs.
  * It controls the type (tender or tough) and quantity of food that is available.
- * See also the 'Food' section of model.md at https://github.com/phetsims/natural-selection/blob/master/doc/model.md#food
+ * See also the 'Food' section of model.md at https://github.com/phetsims/natural-selection/blob/main/doc/model.md#food
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -176,7 +176,7 @@ export default class Food {
    * starve. Bunnies with short teeth are less adapted to eating tough food, so a larger percentage of bunnies
    * with short teeth will starve. Tough food has no affect on bunnies with long teeth when their population
    * is below a threshold. See https://github.com/phetsims/natural-selection/issues/98#issuecomment-646275437
-   * See also the 'Tough Food' section of model.md at https://github.com/phetsims/natural-selection/blob/master/doc/model.md#tough-food
+   * See also the 'Tough Food' section of model.md at https://github.com/phetsims/natural-selection/blob/main/doc/model.md#tough-food
    * @returns the number of bunnies that died
    */
   private applyToughFood(): number {
@@ -227,7 +227,7 @@ export default class Food {
    * Applies limited food as a selection factor. Limited food can support the population up to a specific carrying
    * capacity. If the population exceeds the carrying capacity, then bunnies will die off to reduce the population
    * to the carrying capacity. See https://github.com/phetsims/natural-selection/issues/183
-   * See also the 'Limited Food' section of model.md at https://github.com/phetsims/natural-selection/blob/master/doc/model.md#limited-food
+   * See also the 'Limited Food' section of model.md at https://github.com/phetsims/natural-selection/blob/main/doc/model.md#limited-food
    * @returns the number of bunnies that died
    */
   private applyLimitedFood(): number {

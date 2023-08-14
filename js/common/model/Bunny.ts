@@ -408,7 +408,7 @@ export default class Bunny extends Organism {
 
   /**
    * BunnyIO implements 'Dynamic element serialization', as described in the Serialization section of
-   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization
    * Dynamic element serialization is appropriate because Bunny instances are created dynamically - either as a
    * "generation-zero" bunny, or via mating. See BunnyCollection.createBunny.
    */

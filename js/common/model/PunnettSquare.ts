@@ -13,7 +13,7 @@
  *  shuffled to satisfy Mendel's Law of Independence, which states that individual traits are inherited independently.
  *
  *  See also the 'Reproduction' section of model.md at
- *  https://github.com/phetsims/natural-selection/blob/master/doc/model.md#reproduction
+ *  https://github.com/phetsims/natural-selection/blob/main/doc/model.md#reproduction
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

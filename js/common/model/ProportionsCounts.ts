@@ -51,7 +51,7 @@ export default class ProportionsCounts {
 
   /**
    * ProportionsCountsIO implements 'Data type serialization', as described in the Serialization section of
-   * https://github.com/phetsims/phet-io/blob/master/doc/phet-io-instrumentation-technical-guide.md#serialization
+   * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization
    * Data type serialization is appropriate because ProportionsCounts itself is not a PhetioObject. Its role is as
    * a data type - similar to number, string, or Vector2. In ProportionsModel, previousCounts is an ObservableArray
    * whose elements are of type ProportionsCounts.
