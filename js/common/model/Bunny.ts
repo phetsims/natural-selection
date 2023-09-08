@@ -384,7 +384,7 @@ export default class Bunny extends Organism {
    * Returns a function that returns a map of state keys and their associated IOTypes, see IOType for details.
    * We need to use a function because the state schema recursive references BunnyIO.
    */
-  private static getStateSchema( BunnyIO: IOType ): CompositeSchema {
+  private static getStateSchema( BunnyIO: IOType ): CompositeSchema<BunnyStateObject> {
     return {
 
       // Even though father and mother are stateful, we need a reference to them.
