@@ -2,9 +2,8 @@
 
 @author Chris Malley (PixelZoom, Inc.)
 
-This document contains notes related to the implementation of Natural Selection.
-This is not an exhaustive description of the implementation. The intention is
-to provide a high-level overview, and to supplement the internal documentation
+This document contains notes related to the implementation of Natural Selection. This is not an exhaustive description
+of the implementation. The intention is to provide a high-level overview, and to supplement the internal documentation
 (source code comments) and external documentation (design documents).
 
 Before reading this document, please read:
@@ -94,8 +93,8 @@ its behavior, do so with logging enabled via the `log` query parameter.
 ```
 
 * **dispose:** All classes have a `dispose` method. Sim-specific classes whose instances exist for the lifetime of the
-  sim are not intended to
-  be disposed. They are created with `isDisposable: false`, or have a `dispose` method that looks like this:
+  sim are not intended to be disposed. They are created with `isDisposable: false`, or have a `dispose` method that
+  looks like this:
 
 ```ts
 public dispose(): void {
@@ -187,11 +186,11 @@ Here are pointers to some of the major features of the model:
   in [NaturalSelectionModel](https://github.com/phetsims/natural-selection/blob/main/js/common/model/NaturalSelectionModel.js)
 * Death due to old
   age: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/main/js/common/model/BunnyCollection.js)`.ageBunnies`
-*
-Reproduction: [BunnyCollection](https://github.com/phetsims/natural-selection/blob/main/js/common/model/BunnyCollection.js)`.mateBunnies`
-and [PunnettSquare](https://github.com/phetsims/natural-selection/blob/main/js/common/model/PunnettSquare.js)
-*
-Wolves: [WolfCollection](https://github.com/phetsims/natural-selection/blob/main/js/common/model/WolfCollection.js)`.eatBunnies`
+* Reproduction:
+  [BunnyCollection](https://github.com/phetsims/natural-selection/blob/main/js/common/model/BunnyCollection.js)`.mateBunnies`
+  and [PunnettSquare](https://github.com/phetsims/natural-selection/blob/main/js/common/model/PunnettSquare.js)
+* Wolves:
+  [WolfCollection](https://github.com/phetsims/natural-selection/blob/main/js/common/model/WolfCollection.js)`.eatBunnies`
 * Tough Food: [Food](https://github.com/phetsims/natural-selection/blob/main/js/common/model/Food.js)`.applyToughFood`
 * Limited
   Food: [Food](https://github.com/phetsims/natural-selection/blob/main/js/common/model/Food.js)`.applyLimitedFood`
@@ -294,13 +293,10 @@ tandem: options.tandem.createTandem( `${gene.tandemPrefix}Row` )
 ```
 
 This pattern is used in places where things (like UI components) are created by iterating over the GenePool. When
-implementation started on this sim, creating
-tandem names in this way was discouraged, because it's impossible to search the code for such a tandem name. That policy
-loosened
-up late in the implementation, because it forces you to resort to what I call brute-force coding, which results in
-duplicated/boilerplate code. If I had it to do over, I would
-do more iterating over GenePool, and generate more tandem names using string concatenation. I upgraded to this approach
-in a few
+implementation started on this sim, creating tandem names in this way was discouraged, because it's impossible to search
+the code for such a tandem name. That policy loosened up late in the implementation, because it forces you to resort to
+what I call brute-force coding, which results in duplicated/boilerplate code. If I had it to do over, I would do more
+iterating over GenePool, and generate more tandem names using string concatenation. I upgraded to this approach in a few
 low-risk places (very!) late in the game, but there were many places (detailed
 in [natural-selection#224](https://github.com/phetsims/natural-selection/issues/224))
 where it was just too risky.
