@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../axon/js/Property.js';
 import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { HBox, Image } from '../../../scenery/js/imports.js';
@@ -26,9 +25,7 @@ export default class IntroScreen extends Screen<IntroModel, IntroScreenView> {
     const options: ScreenOptions = {
       name: NaturalSelectionStrings.screen.introStringProperty,
       homeScreenIcon: createScreenIcon(),
-      backgroundColorProperty: new Property( NaturalSelectionColors.SCREEN_VIEW_BACKGROUND, {
-        tandem: Tandem.OPT_OUT
-      } ),
+      backgroundColorProperty: NaturalSelectionColors.screenBackgroundColorProperty,
       isDisposable: false,
       tandem: tandem
     };
@@ -49,7 +46,7 @@ function createScreenIcon(): ScreenIcon {
     spacing: 20,
     children: [ new Image( bunnyBrownFurStraightEarsShortTeeth_png ), new Image( bunnyWhiteFurStraightEarsShortTeeth_png ) ]
   } ), {
-    fill: NaturalSelectionColors.SCREEN_VIEW_BACKGROUND
+    fill: NaturalSelectionColors.screenBackgroundColorProperty
   } );
 }
 

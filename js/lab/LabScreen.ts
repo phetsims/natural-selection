@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../axon/js/Property.js';
 import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { HBox, Image, VBox } from '../../../scenery/js/imports.js';
@@ -32,9 +31,7 @@ export default class LabScreen extends Screen<LabModel, LabScreenView> {
     const options: ScreenOptions = {
       name: NaturalSelectionStrings.screen.labStringProperty,
       homeScreenIcon: createScreenIcon(),
-      backgroundColorProperty: new Property( NaturalSelectionColors.SCREEN_VIEW_BACKGROUND, {
-        tandem: Tandem.OPT_OUT
-      } ),
+      backgroundColorProperty: NaturalSelectionColors.screenBackgroundColorProperty,
       isDisposable: false,
       tandem: tandem
     };
@@ -77,7 +74,7 @@ function createScreenIcon(): ScreenIcon {
       } )
     ]
   } ), {
-    fill: NaturalSelectionColors.SCREEN_VIEW_BACKGROUND
+    fill: NaturalSelectionColors.screenBackgroundColorProperty
   } );
 }
 

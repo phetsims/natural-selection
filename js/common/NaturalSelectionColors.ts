@@ -7,7 +7,7 @@
  */
 
 import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
-import { Color } from '../../../scenery/js/imports.js';
+import { Color, ProfileColorProperty } from '../../../scenery/js/imports.js';
 import naturalSelection from '../naturalSelection.js';
 
 const SCREEN_VIEW_BACKGROUND = new Color( 229, 225, 204 );
@@ -19,13 +19,15 @@ const PANEL_STROKE = SCREEN_VIEW_BACKGROUND.darkerColor( 0.7 );
 
 const NaturalSelectionColors = {
 
+  // ScreenViews
+  screenBackgroundColorProperty: new ProfileColorProperty( naturalSelection, 'screenBackgroundColor', {
+    default: SCREEN_VIEW_BACKGROUND
+  } ),
+
   // Genes
   FUR: 'rgb( 27, 158, 119 )',
   EARS: 'rgb( 217, 95, 2 )',
   TEETH: 'rgb( 117, 112, 179 )',
-
-  // ScreenViews
-  SCREEN_VIEW_BACKGROUND: SCREEN_VIEW_BACKGROUND,
 
   // Panels
   PANEL_FILL: 'white',
