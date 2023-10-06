@@ -101,7 +101,7 @@ const NaturalSelectionUtils = {
    */
   getElement( phetioID: PhetioID ): PhetioObject | undefined {
     if ( Tandem.PHET_IO_ENABLED ) {
-      return phet.phetio.phetioEngine.phetioObjectMap[ phetioID ];
+      return phet.phetio.phetioEngine.phetioElementMap[ phetioID ];
     }
     else {
       console.warn( 'PhET-iO is not initialized' );
