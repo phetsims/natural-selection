@@ -80,7 +80,7 @@ export default class PedigreeBunnyNode extends Node {
       ],
       () =>
         getGenotypeAbbreviation( bunny, furAllelesVisibleProperty.value, earsAllelesVisibleProperty.value, teethAllelesVisibleProperty.value ), {
-        accessNonDependencies: true
+        accessNonDependencies: true //TODO https://github.com/phetsims/natural-selection/issues/359
       }
     );
 
