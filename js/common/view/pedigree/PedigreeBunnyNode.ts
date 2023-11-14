@@ -79,7 +79,9 @@ export default class PedigreeBunnyNode extends Node {
         ...bunny.genotype.getAbbreviationStringDependencies()
       ],
       () =>
-        getGenotypeAbbreviation( bunny, furAllelesVisibleProperty.value, earsAllelesVisibleProperty.value, teethAllelesVisibleProperty.value )
+        getGenotypeAbbreviation( bunny, furAllelesVisibleProperty.value, earsAllelesVisibleProperty.value, teethAllelesVisibleProperty.value ), {
+        accessNonDependencies: true
+      }
     );
 
     // Must be disposed
