@@ -53,7 +53,7 @@ export default class WolfCollection {
   private readonly bunnyCollection: BunnyCollection;
   public readonly enabledProperty: Property<boolean>;
   private readonly isHuntingProperty: TReadOnlyProperty<boolean>; // Wolves hunt during the 'wolves' clock slice.
-  private readonly wolfGroup: WolfGroup; // PhetioGroup that manages Wolf instances as dynamic PhET-iO elements
+  private readonly wolfGroup: WolfGroup; // PhetioGroup that manages Wolf instances as dynamic PhET-iO Elements
   public readonly wolfCreatedEmitter: Emitter<[Wolf]>; // emits when a Wolf has been created
   public readonly bunniesEatenEmitter: Emitter<[number]>; // emits when bunnies have been eaten, param is the generation number
 

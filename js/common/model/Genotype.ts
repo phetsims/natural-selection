@@ -184,7 +184,7 @@ export default class Genotype extends PhetioObject {
    * GenotypeIO implements 'Reference type serialization', as described in the Serialization section of
    * https://github.com/phetsims/phet-io/blob/main/doc/phet-io-instrumentation-technical-guide.md#serialization
    * Reference type serialization is appropriate because each Bunny instance creates a Genotype instance,
-   * so applyState will be called after this PhET-iO element is created by Bunny.
+   * so applyState will be called after this PhET-iO Element is created by Bunny.
    */
   public static readonly GenotypeIO = new IOType<Genotype, GenotypeStateObject>( 'GenotypeIO', {
     valueType: Genotype,

@@ -113,7 +113,7 @@ export default class BunnyCollection {
         phetioDocumentation: 'for internal PhET use only'
       } );
 
-    // the PhetioGroup that manages Bunny instances as dynamic PhET-iO elements
+    // the PhetioGroup that manages Bunny instances as dynamic PhET-iO Elements
     const bunnyGroup = new BunnyGroup( genePool, modelViewTransform, this.bunnyRestRangeProperty, {
       tandem: tandem.createTandem( 'bunnyGroup' )
     } );

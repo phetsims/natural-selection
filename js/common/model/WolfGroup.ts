@@ -31,7 +31,7 @@ export default class WolfGroup extends PhetioGroup<Wolf> {
 
       // PhetioGroupOptions
       phetioType: PhetioGroup.PhetioGroupIO( Wolf.WolfIO ),
-      phetioDocumentation: 'manages dynamic PhET-iO elements of type Wolf'
+      phetioDocumentation: 'manages dynamic PhET-iO Elements of type Wolf'
     }, providedOptions );
 
     /**

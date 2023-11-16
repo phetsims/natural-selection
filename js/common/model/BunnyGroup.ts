@@ -44,7 +44,7 @@ export default class BunnyGroup extends PhetioGroup<Bunny, BunnyGroupCreateEleme
 
       // PhetioGroupOptions
       phetioType: PhetioGroup.PhetioGroupIO( Bunny.BunnyIO ),
-      phetioDocumentation: 'manages dynamic PhET-iO elements of type Bunny, including live and dead bunnies'
+      phetioDocumentation: 'manages dynamic PhET-iO Elements of type Bunny, including live and dead bunnies'
     }, providedOptions );
 
     /**

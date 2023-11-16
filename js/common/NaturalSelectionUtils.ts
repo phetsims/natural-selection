@@ -94,8 +94,8 @@ const NaturalSelectionUtils = {
   },
 
   /**
-   * Gets the PhET-iO element for a specified phetioID. This is intended to be used as a debugging tool,
-   * to inspect a PhET-iO element in the console. Do not use this to access elements via code!
+   * Gets the PhET-iO Element for a specified phetioID. This is intended to be used as a debugging tool,
+   * to inspect a PhET-iO Element in the console. Do not use this to access elements via code!
    *
    * Example: phet.naturalSelection.NaturalSelectionUtils.getElement( 'naturalSelection.labScreen' )
    */
