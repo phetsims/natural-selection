@@ -76,12 +76,11 @@ export default class PedigreeBunnyNode extends Node {
     const genotypeDerivedStringProperty = DerivedProperty.deriveAny(
       [
         furAllelesVisibleProperty, earsAllelesVisibleProperty, teethAllelesVisibleProperty,
-        ...bunny.genotype.getAbbreviationStringDependencies()
+        ...bunny.genotype.getAbbreviationStringDependencies(),
+        ...bunny.genotype.getDominantAlleleProperties()
       ],
       () =>
-        getGenotypeAbbreviation( bunny, furAllelesVisibleProperty.value, earsAllelesVisibleProperty.value, teethAllelesVisibleProperty.value ), {
-        accessNonDependencies: true //TODO https://github.com/phetsims/natural-selection/issues/359
-      }
+        getGenotypeAbbreviation( bunny, furAllelesVisibleProperty.value, earsAllelesVisibleProperty.value, teethAllelesVisibleProperty.value )
     );
 
     // Must be disposed

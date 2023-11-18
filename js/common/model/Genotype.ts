@@ -176,6 +176,13 @@ export default class Genotype extends PhetioObject {
     return this.genePool.getGenotypeAbbreviationStringDependencies();
   }
 
+  /**
+   * Gets the dominantAlleleProperty for all genes in the pool, needed for DerivedProperty derivation.
+   */
+  public getDominantAlleleProperties(): TReadOnlyProperty<Allele | null>[] {
+    return this.genePool.genes.map( gene => gene.dominantAlleleProperty );
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   // Below here are methods used by GenotypeIO to serialize PhET-iO state.
   //--------------------------------------------------------------------------------------------------------------------
