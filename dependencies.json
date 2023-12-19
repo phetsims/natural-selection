@@ -13,7 +13,7 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "e6c1d7914e5a7b41244430dd1094e610d013190c",
+    "sha": "4c5cd40b7ad9dbe5cfbc63bd79be8cf82ae6b526",
     "branch": "HEAD"
   },
   "dot": {
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "44d4532cad85fed80c384b0e93638b293ab0e14a",
+    "sha": "e52af4502a09541576e5eef0457f6cca91dabc9e",
     "branch": "1.5"
   },
   "perennial-alias": {
@@ -45,11 +45,11 @@
     "branch": "HEAD"
   },
   "phet-io-sim-specific": {
-    "sha": "4c819f7d78ca36a13cdfc59c46adead33a1af6e9",
+    "sha": "95d0a9bce1ce352f7240806d9c982bad164ecab5",
     "branch": "HEAD"
   },
   "phet-io-wrappers": {
-    "sha": "01ffc45b9b1968df992f10fdba48c71f16d15b23",
+    "sha": "a0391bb161c0205cc4bfb878133e0669ab722bc2",
     "branch": "HEAD"
   },
   "phetcommon": {
