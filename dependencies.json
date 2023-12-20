@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "f473dbec4826029a79861dfdd7b6ef948044ae13",
+    "sha": "05fb44784e8380dff4359b4e259f57e481cc7f5a",
     "branch": "1.5"
   },
   "perennial-alias": {
@@ -41,7 +41,7 @@
     "branch": "HEAD"
   },
   "phet-io": {
-    "sha": "70fefd48b6687323383a957d719ec84a908e3bb8",
+    "sha": "78cc5f2410556d931c4b6761fcabbc712b74d9e2",
     "branch": "HEAD"
   },
   "phet-io-sim-specific": {
