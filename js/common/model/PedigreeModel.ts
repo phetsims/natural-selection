@@ -31,7 +31,7 @@ export default class PedigreeModel extends PhetioObject {
 
       // PhetioObjectOptions
       isDisposable: false,
-      phetioState: false, // to prevent serialization, because we don't have an IO Type
+      phetioState: false, // to prevent serialization, because we don't have an IOType
       phetioDocumentation: 'model elements that are specific to the Pedigree feature'
     }, providedOptions );
 

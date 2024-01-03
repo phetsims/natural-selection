@@ -279,10 +279,10 @@ by [WolfGroup](https://github.com/phetsims/natural-selection/blob/main/js/common
 to [WolfCollection](https://github.com/phetsims/natural-selection/blob/main/js/common/model/WolfCollection.ts). This
 pattern of using a "Collection" wrapper hides the details of PhetioGroup from all other parts of the sim.
 
-**IO Types delegate to Core Types**: IO Types handle serialization of elements that are instances of Core Types. For
-example, BunnyIO is the IO Type that serializes
+**IOTypes delegate to Core Types**: IOTypes handle serialization of elements that are instances of Core Types. For
+example, BunnyIO is the IOType that serializes
 the [Bunny](https://github.com/phetsims/natural-selection/blob/main/js/common/model/Bunny.ts) Core Type. Throughout this
-sim, each IO Type delegates serialization to its associated Core Type. This ensures that serialization does not access
+sim, each IOType delegates serialization to its associated Core Type. This ensures that serialization does not access
 private members of the Core Type.
 
 **Generating tandem names**: In some places you'll see tandem names that are created using string concatenation, for
