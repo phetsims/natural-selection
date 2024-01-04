@@ -1,4 +1,4 @@
-// Copyright 2019-2023, University of Colorado Boulder
+// Copyright 2019-2024, University of Colorado Boulder
 
 /**
  * DataProbe is the model for the data probe on the Population graph. It shows population (y-axis) values at a specific
