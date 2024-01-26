@@ -55,7 +55,7 @@ export default class PedigreeNode extends HBox {
                        size.width;
 
     // Because it's instrumented for PhET-iO, the AllelesPanel must be instantiated regardless of the value
-    // of ?allelesVisible. If ?allelesVisible=false, it will not be added to the scenegraph, but will
+    // of ?allelesVisible. If ?allelesVisible=false, it will not be added to the scene graph, but will
     // still appear in the Studio element tree.
     const allelesPanel = new AllelesPanel( genePool, pedigreeModel.furAllelesVisibleProperty,
       pedigreeModel.earsAllelesVisibleProperty, pedigreeModel.teethAllelesVisibleProperty, {
