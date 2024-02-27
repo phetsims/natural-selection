@@ -11,7 +11,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import { Text, TextOptions } from '../../../../scenery/js/imports.js';
-import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
@@ -49,28 +48,28 @@ export default class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButton
       {
         value: GraphChoice.POPULATION,
         createNode: () => new Text( NaturalSelectionStrings.populationStringProperty, TEXT_OPTIONS ),
-        tandemName: `population${AquaRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'populationRadioButton'
       },
 
       // Proportions
       {
         value: GraphChoice.PROPORTIONS,
         createNode: () => new Text( NaturalSelectionStrings.proportionsStringProperty, TEXT_OPTIONS ),
-        tandemName: `proportions${AquaRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'proportionsRadioButton'
       },
 
       // Pedigree
       {
         value: GraphChoice.PEDIGREE,
         createNode: () => new Text( NaturalSelectionStrings.pedigreeStringProperty, TEXT_OPTIONS ),
-        tandemName: `pedigree${AquaRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'pedigreeRadioButton'
       },
 
       // None
       {
         value: GraphChoice.NONE,
         createNode: () => new Text( NaturalSelectionStrings.noneStringProperty, TEXT_OPTIONS ),
-        tandemName: `none${AquaRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'noneRadioButton'
       }
     ];
 

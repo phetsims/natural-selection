@@ -12,7 +12,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { Node, NodeTranslationOptions, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import snowflakeSolidShape from '../../../../sherpa/js/fontawesome-5/snowflakeSolidShape.js';
 import sunSolidShape from '../../../../sherpa/js/fontawesome-5/sunSolidShape.js';
-import RectangularRadioButton from '../../../../sun/js/buttons/RectangularRadioButton.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -84,12 +83,12 @@ export default class EnvironmentRadioButtonGroup extends RectangularRadioButtonG
       {
         value: Environment.EQUATOR,
         createNode: ( tandem: Tandem ) => equatorButtonContent,
-        tandemName: `equator${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'equatorRadioButton'
       },
       {
         value: Environment.ARCTIC,
         createNode: ( tandem: Tandem ) => arcticButtonContent,
-        tandemName: `arctic${RectangularRadioButton.TANDEM_NAME_SUFFIX}`
+        tandemName: 'arcticRadioButton'
       }
     ];
 
