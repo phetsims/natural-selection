@@ -1,4 +1,4 @@
-// Copyright 2019-2023, University of Colorado Boulder
+// Copyright 2019-2024, University of Colorado Boulder
 
 /**
  * EnvironmentRadioButtonGroup is the radio button group for choosing the environment that the bunnies live in.
