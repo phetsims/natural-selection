@@ -320,9 +320,9 @@ export default class BunnyCollection {
 
     // Indices (values of bornIndex) for the new bunnies that will be mutated.
     // Mutations are mutually exclusive, as are the values in these arrays.
-    let furIndices = [];
-    let earsIndices = [];
-    let teethIndices = [];
+    let furIndices: number[] = [];
+    let earsIndices: number[] = [];
+    let teethIndices: number[] = [];
 
     // If a mutation is to be applied...
     if ( mutateFur || mutateEars || mutateTeeth ) {
