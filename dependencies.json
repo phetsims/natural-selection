@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.2.15 Mon Mar 11 2024 12:13:58 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.2.16-rc.1 Wed Mar 20 2024 15:39:10 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "49aa67d01046326d85dcd8f265db91e8753038a1",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "6c2b39ecdd689eea2bd741e3590d90622948cdf9",
+    "sha": "e952e5576ecc46827189cad65df7123afb4e4a49",
     "branch": "1.2"
   },
   "phet-core": {
