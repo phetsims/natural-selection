@@ -239,4 +239,3 @@ export default class Gene extends PhetioObject {
 }
 
 naturalSelection.register( 'Gene', Gene );
-
