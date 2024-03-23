@@ -1,4 +1,4 @@
-// Copyright 2020-2023, University of Colorado Boulder
+// Copyright 2020-2024, University of Colorado Boulder
 
 /**
  * Gene is the basic physical and functional unit of heredity that is transferred from a parent to its offspring,
