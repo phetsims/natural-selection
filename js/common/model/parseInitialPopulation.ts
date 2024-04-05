@@ -50,7 +50,7 @@ export default function parseInitialPopulation( screenKey: ScreenKey, genePool: 
   // Get the query parameter values
   const mutationsValue = ( ( screenKey === 'intro' ) ? NaturalSelectionQueryParameters.introMutations : NaturalSelectionQueryParameters.labMutations )!;
   assert && assert( mutationsValue !== null, `expected ${mutationsQueryParameterName} to have a non-null default value` );
-  const populationValue = ( ( screenKey === 'intro' ) ? NaturalSelectionQueryParameters.introPopulation : NaturalSelectionQueryParameters.labPopulation )!;
+  const populationValue = ( ( screenKey === 'intro' ) ? NaturalSelectionQueryParameters.introPopulation : NaturalSelectionQueryParameters.labPopulation );
   assert && assert( populationValue !== null, `expected ${populationQueryParameterName} to have a non-null default value` );
 
   let initialBunnyVarieties: BunnyVariety[];
