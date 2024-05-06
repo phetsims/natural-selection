@@ -15,6 +15,7 @@ import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
 import BunnyCounts from './BunnyCounts.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 // Additional properties that will be added to ObservableArray<Bunny>
 type AdditionalProperties = {
@@ -57,14 +58,26 @@ export default function createBunnyArray( providedOptions: BunnyArrayOptions ): 
 
   // Update counts when a bunny is added. removeItemAddedListener is not necessary.
   bunnyArray.addItemAddedListener( bunny => {
-    countsProperty.value = countsProperty.value.plus( bunny );
-    assert && assert( countsProperty.value.totalCount === bunnyArray.length, 'counts out of sync' );
+
+    // The bunnyArray and the countsProperty are PhET-iO Stateful, so this shouldn't occur during state setting.
+    // Also, the bunnyArray's listeners are deferred until all values are set, so bunnyArray.length is the final length
+    // for each call to this listener.
+    if ( !isSettingPhetioStateProperty.value ) {
+      countsProperty.value = countsProperty.value.plus( bunny );
+      assert && assert( countsProperty.value.totalCount === bunnyArray.length, 'counts out of sync' );
+    }
   } );
 
   // Update counts when a bunny is removed. removeItemAddedListener is not necessary.
   bunnyArray.addItemRemovedListener( bunny => {
-    countsProperty.value = countsProperty.value.minus( bunny );
-    assert && assert( countsProperty.value.totalCount === bunnyArray.length, 'counts out of sync' );
+
+    // The bunnyArray and the countsProperty are PhET-iO Stateful, so this shouldn't occur during state setting.
+    // Also, the bunnyArray's listeners are deferred until all values are set, so bunnyArray.length is the final length
+    // for each call to this listener.
+    if ( !isSettingPhetioStateProperty.value ) {
+      countsProperty.value = countsProperty.value.minus( bunny );
+      assert && assert( countsProperty.value.totalCount === bunnyArray.length, 'counts out of sync' );
+    }
   } );
 
   bunnyArray.dispose = () => {
