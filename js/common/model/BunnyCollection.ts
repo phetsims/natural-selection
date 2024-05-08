@@ -30,6 +30,7 @@ import SelectedBunnyProperty from './SelectedBunnyProperty.js';
 import BunnyCounts from './BunnyCounts.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import isClearingPhetioDynamicElementsProperty from '../../../../tandem/js/isClearingPhetioDynamicElementsProperty.js';
 
 const LITTER_SIZE = 4;
 assert && assert( LITTER_SIZE === 4,
@@ -181,17 +182,18 @@ export default class BunnyCollection {
           }
         } );
 
-        this.liveBunnies.push( bunny );
+        // liveBunnies (and all arrays) are stateful, so they will have their own state set separately.
+        !isSettingPhetioStateProperty.value && this.liveBunnies.push( bunny );
       }
       else {
         assert && assert( isSettingPhetioStateProperty.value,
           'a dead bunny should only be created when restoring PhET-iO state' );
-        this.deadBunnies.push( bunny );
       }
     } );
 
     // When a bunny is disposed, remove it from the appropriate arrays. removeListener is not necessary.
     bunnyGroup.elementDisposedEmitter.addListener( bunny => {
+      assert && assert( !( isSettingPhetioStateProperty.value && !isClearingPhetioDynamicElementsProperty.value ), 'should never dispose a bunny while setting state outside of initial clear' );
 
       const liveIndex = this.liveBunnies.indexOf( bunny );
       if ( liveIndex !== -1 ) {
@@ -216,6 +218,12 @@ export default class BunnyCollection {
 
     this.genePool = genePool;
     this.bunnyGroup = bunnyGroup;
+
+    if ( assert && Tandem.PHET_IO_ENABLED ) {
+      phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
+        this.assertValidCounts();
+      } );
+    }
   }
 
   public dispose(): void {

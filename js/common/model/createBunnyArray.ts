@@ -16,6 +16,7 @@ import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
 import BunnyCounts from './BunnyCounts.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 // Additional properties that will be added to ObservableArray<Bunny>
 type AdditionalProperties = {
@@ -39,8 +40,7 @@ export default function createBunnyArray( providedOptions: BunnyArrayOptions ): 
     countsPropertyFeatured: false,
 
     // ObservableArrayOptions
-    phetioType: createObservableArray.ObservableArrayIO( ReferenceIO( Bunny.BunnyIO ) ),
-    phetioState: false
+    phetioType: createObservableArray.ObservableArrayIO( ReferenceIO( Bunny.BunnyIO ) )
   }, providedOptions );
 
   // We want to add countsProperty later, so do a little TypeScript hackery here to make that possible.
@@ -50,8 +50,7 @@ export default function createBunnyArray( providedOptions: BunnyArrayOptions ): 
     tandem: options.tandem.createTandem( 'countsProperty' ),
     phetioValueType: BunnyCounts.BunnyCountsIO,
     phetioFeatured: options.countsPropertyFeatured,
-    phetioReadOnly: true,
-    phetioState: false // because counts will be restored as Bunny instances are restored to BunnyGroup
+    phetioReadOnly: true
   } );
 
   bunnyArray.countsProperty = countsProperty;
@@ -79,6 +78,13 @@ export default function createBunnyArray( providedOptions: BunnyArrayOptions ): 
       assert && assert( countsProperty.value.totalCount === bunnyArray.length, 'counts out of sync' );
     }
   } );
+
+  // State may set in an unexpected order, but by the end, we must have the right counts.
+  if ( assert && Tandem.PHET_IO_ENABLED ) {
+    phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
+      assert && assert( countsProperty.value.totalCount === bunnyArray.length, 'counts out of sync' );
+    } );
+  }
 
   bunnyArray.dispose = () => {
     Disposable.assertNotDisposable();
