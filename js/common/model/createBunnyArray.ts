@@ -17,7 +17,6 @@ import Bunny from './Bunny.js';
 import BunnyCounts from './BunnyCounts.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import { PhetioState } from '../../../../tandem/js/TandemConstants.js';
 
 // Additional properties that will be added to ObservableArray<Bunny>
 type AdditionalProperties = {
@@ -82,10 +81,8 @@ export default function createBunnyArray( providedOptions: BunnyArrayOptions ): 
 
   // State may set in an unexpected order, but by the end, we must have the right counts.
   if ( assert && Tandem.PHET_IO_ENABLED ) {
-    phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( ( state: PhetioState, scopeTandem: Tandem ) => {
-      if ( countsProperty.tandem.hasAncestor( scopeTandem ) ) {
-        assert && assert( countsProperty.value.totalCount === bunnyArray.length, 'counts out of sync' );
-      }
+    phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
+      assert && assert( countsProperty.value.totalCount === bunnyArray.length, 'counts out of sync' );
     } );
   }
 
