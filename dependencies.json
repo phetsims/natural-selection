@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "f7d40cc6b16f09dbb284a39db3e1e70d40c8ad25",
+    "sha": "43e1ab3ffcffbbaccd1b65dcbb2102370c6632c4",
     "branch": "1.4"
   },
   "phet-core": {
@@ -49,7 +49,7 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "82cd1c96494583ff3d98936100580b4ad99b7acc",
+    "sha": "056e9d2e993180408fa3a44841995dfd75e9af84",
     "branch": "HEAD"
   },
   "phetmarks": {
