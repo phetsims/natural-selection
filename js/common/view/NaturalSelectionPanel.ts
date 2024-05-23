@@ -1,7 +1,7 @@
 // Copyright 2019-2023, University of Colorado Boulder
 
 /**
- * NaturalSelectionPanel is a specialization of Panel that provides a more convenient API for creating a
+ * NaturalSelectionPanel is a base class specialization of Panel that provides a more convenient API for creating a
  * fixed-width Panel, and for disabling the Panel's content.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -26,7 +26,7 @@ export default class NaturalSelectionPanel extends Panel {
 
   private readonly content: Node;
 
-  public constructor( content: Node, providedOptions: NaturalSelectionPanelOptions ) {
+  protected constructor( content: Node, providedOptions: NaturalSelectionPanelOptions ) {
 
     const options = optionize<NaturalSelectionPanelOptions, SelfOptions, PanelOptions>()( {
 
