@@ -12,7 +12,6 @@
 
 import Property from '../../../../../axon/js/Property.js';
 import optionize, { combineOptions, EmptySelfOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../../phet-core/js/types/StrictOmit.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HStrut, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
@@ -22,15 +21,17 @@ import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
-import NaturalSelectionPanel, { NaturalSelectionPanelOptions } from '../NaturalSelectionPanel.js';
 import AlleleNode from './AlleleNode.js';
 import isSettingPhetioStateProperty from '../../../../../tandem/js/isSettingPhetioStateProperty.js';
+import Panel, { PanelOptions } from '../../../../../sun/js/Panel.js';
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+  fixedWidth: number; // fixed width of the panel
+};
 
-type AllelesPanelOptions = SelfOptions & NaturalSelectionPanelOptions;
+type AllelesPanelOptions = SelfOptions & PickRequired<PanelOptions, 'maxHeight' | 'tandem'>;
 
-export default class AllelesPanel extends NaturalSelectionPanel {
+export default class AllelesPanel extends Panel {
 
   private readonly rows: Row[];
 
@@ -40,13 +41,16 @@ export default class AllelesPanel extends NaturalSelectionPanel {
                       teethAllelesVisibleProperty: Property<boolean>,
                       providedOptions: AllelesPanelOptions ) {
 
-    const options = optionize4<AllelesPanelOptions, SelfOptions, StrictOmit<NaturalSelectionPanelOptions, 'tandem'>>()(
+    const options = optionize4<AllelesPanelOptions, SelfOptions, PanelOptions>()(
       {}, NaturalSelectionConstants.PANEL_OPTIONS, {
 
         // NaturalSelectionPanelOptions
         visiblePropertyOptions: {
           phetioFeatured: true
-        }
+        },
+        phetioDocumentation: 'Note that if query parameter allelesVisible=false is specified, this panel will be ' +
+                             'created but will not be added to the UI. It will appear in the API and Studio tree, ' +
+                             'but changes to its elements and metadata will have no affect.'
       }, providedOptions );
 
     // To make the abbreviation + icon for all alleles the same effective size
@@ -70,9 +74,13 @@ export default class AllelesPanel extends NaturalSelectionPanel {
     } );
     const rows = [ furRow, earsRow, teethRow ];
 
+    const contentWidth = options.fixedWidth - 2 * options.xMargin;
     const content = new VBox( combineOptions<VBoxOptions>( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
       spacing: 28,
-      children: [ titleText, ...rows ]
+      children: [ titleText, ...rows ],
+      stretch: true,
+      minContentWidth: contentWidth,
+      maxWidth: contentWidth
     } ) );
 
     super( content, options );

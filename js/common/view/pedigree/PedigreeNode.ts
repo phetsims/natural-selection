@@ -28,7 +28,7 @@ type PedigreeNodeOptions = SelfOptions & NodeTranslationOptions & PickRequired<H
 export default class PedigreeNode extends HBox {
 
   private readonly allelesPanel: AllelesPanel;
-  
+
   public constructor( pedigreeModel: PedigreeModel,
                       selectedBunnyProperty: SelectedBunnyProperty,
                       genePool: GenePool,
@@ -61,10 +61,7 @@ export default class PedigreeNode extends HBox {
       pedigreeModel.earsAllelesVisibleProperty, pedigreeModel.teethAllelesVisibleProperty, {
         fixedWidth: controlPanelWidth,
         maxHeight: size.height,
-        tandem: options.tandem.createTandem( 'allelesPanel' ),
-        phetioDocumentation: 'Note that if query parameter allelesVisible=false is specified, this panel will be ' +
-                             'created but will not be added to the UI. It will appear in the API and Studio tree, ' +
-                             'but changes to its elements and metadata will have no affect.'
+        tandem: options.tandem.createTandem( 'allelesPanel' )
       } );
 
     const pedigreeGraphNode = new PedigreeGraphNode( selectedBunnyProperty, bunnyImageMap,

@@ -9,10 +9,9 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import optionize, { combineOptions, EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HBoxOptions, Image, Node, NodeOptions, Rectangle, TColor, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HBoxOptions, Image, Node, NodeOptions, Rectangle, SceneryConstants, TColor, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import RectangularPushButton, { RectangularPushButtonOptions } from '../../../../sun/js/buttons/RectangularPushButton.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -22,8 +21,9 @@ import GenePool from '../model/GenePool.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import MutationIconNode from './MutationIconNode.js';
-import NaturalSelectionPanel, { NaturalSelectionPanelOptions } from './NaturalSelectionPanel.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 const COLUMN_SPACING = 8;
 const BUTTON_ICON_SCALE = 0.5;
@@ -33,20 +33,17 @@ const BUTTON_CORNER_RADIUS = 4;
 const NORMAL_ALLELE_LINE_DASH: number[] = [];
 const MUTANT_ALLELE_LINE_DASH = [ 3, 3 ];
 
-type SelfOptions = EmptySelfOptions;
-
-type AddMutationsPanelOptions = SelfOptions & NaturalSelectionPanelOptions;
-
-export default class AddMutationsPanel extends NaturalSelectionPanel {
+export default class AddMutationsPanel extends Panel {
 
   private readonly rows: Row[];
+  private readonly content: Node;
 
-  public constructor( genePool: GenePool, providedOptions: AddMutationsPanelOptions ) {
+  public constructor( genePool: GenePool, tandem: Tandem ) {
 
-    const options = optionize4<AddMutationsPanelOptions, SelfOptions, StrictOmit<NaturalSelectionPanelOptions, 'tandem'>>()(
-      {}, NaturalSelectionConstants.PANEL_OPTIONS, {
-        visiblePropertyOptions: { phetioFeatured: true }
-      }, providedOptions );
+    const options = combineOptions<PanelOptions>( {}, NaturalSelectionConstants.PANEL_OPTIONS, {
+      visiblePropertyOptions: { phetioFeatured: true },
+      tandem: tandem
+    } );
 
     // All allele icons have the same effective width and height.
     const iconsAlignGroup = new AlignGroup();
@@ -81,7 +78,7 @@ export default class AddMutationsPanel extends NaturalSelectionPanel {
     // A row for each gene
     const rows = _.map( genePool.genes, gene =>
       new Row( gene, iconsAlignGroup, labelColumnAlignGroup, buttonColumnsAlignGroup, {
-        tandem: options.tandem.createTandem( `${gene.tandemNamePrefix}Row` )
+        tandem: tandem.createTandem( `${gene.tandemNamePrefix}Row` )
       } )
     );
 
@@ -91,7 +88,7 @@ export default class AddMutationsPanel extends NaturalSelectionPanel {
 
     const numberOfRowsVisibleProperty = DerivedProperty.deriveAny( rows.map( row => row.visibleProperty ),
       () => _.filter( rows, row => row.visible ).length, {
-        tandem: options.tandem.createTandem( 'numberOfRowsVisibleProperty' ),
+        tandem: tandem.createTandem( 'numberOfRowsVisibleProperty' ),
         phetioValueType: NumberIO,
         phetioDocumentation: 'the number of rows that are visible affects whether the panel title is singular or plural'
       } );
@@ -104,7 +101,7 @@ export default class AddMutationsPanel extends NaturalSelectionPanel {
       ],
       ( numberOfRowsVisible, addMutationString, addMutationsString ) =>
         ( numberOfRowsVisible === 1 ) ? addMutationString : addMutationsString, {
-        tandem: options.tandem.createTandem( 'titleStringProperty' )
+        tandem: tandem.createTandem( 'titleStringProperty' )
       } );
     const titleText = new Text( titleStringProperty, {
       font: NaturalSelectionConstants.TITLE_FONT,
@@ -119,6 +116,7 @@ export default class AddMutationsPanel extends NaturalSelectionPanel {
     super( content, options );
 
     this.rows = rows;
+    this.content = content;
   }
 
   /**
@@ -135,6 +133,14 @@ export default class AddMutationsPanel extends NaturalSelectionPanel {
    */
   public setGeneVisible( gene: Gene, visible: boolean ): void {
     this.getRow( gene ).visible = visible;
+  }
+
+  /**
+   * Enable or disable the entire Panel content.
+   */
+  public setContentEnabled( enabled: boolean ): void {
+    this.content.pickable = enabled;
+    this.content.opacity = enabled ? 1 : SceneryConstants.DISABLED_OPACITY;
   }
 }
 

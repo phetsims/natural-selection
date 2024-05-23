@@ -10,30 +10,32 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import { combineOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import { AlignGroup, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import { AlignGroup, Node, SceneryConstants, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import LimitedFoodCheckbox from './LimitedFoodCheckbox.js';
-import NaturalSelectionPanel, { NaturalSelectionPanelOptions } from './NaturalSelectionPanel.js';
 import ToughFoodCheckbox from './ToughFoodCheckbox.js';
 import WolvesCheckbox from './WolvesCheckbox.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 type SelfOptions = {
   toughFoodCheckboxVisible?: boolean;
 };
 
-type EnvironmentalFactorsPanelOptions = SelfOptions & NaturalSelectionPanelOptions;
+type EnvironmentalFactorsPanelOptions = SelfOptions & PickRequired<PanelOptions, 'tandem'>;
 
-export default class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
+export default class EnvironmentalFactorsPanel extends Panel {
+
+  private readonly content: Node;
 
   public constructor( wolvesEnabledProperty: Property<boolean>, foodIsToughProperty: Property<boolean>,
                       foodIsLimitedProperty: Property<boolean>, providedOptions: EnvironmentalFactorsPanelOptions ) {
 
-    const options = optionize4<EnvironmentalFactorsPanelOptions, SelfOptions, StrictOmit<NaturalSelectionPanelOptions, 'tandem'>>()(
+    const options = optionize4<EnvironmentalFactorsPanelOptions, SelfOptions, PanelOptions>()(
       {}, NaturalSelectionConstants.PANEL_OPTIONS, {
 
         // SelfOptions
@@ -103,6 +105,16 @@ export default class EnvironmentalFactorsPanel extends NaturalSelectionPanel {
     } ) );
 
     super( content, options );
+
+    this.content = content;
+  }
+
+  /**
+   * Enable or disable the entire Panel content.
+   */
+  public setContentEnabled( enabled: boolean ): void {
+    this.content.pickable = enabled;
+    this.content.opacity = enabled ? 1 : SceneryConstants.DISABLED_OPACITY;
   }
 }
 

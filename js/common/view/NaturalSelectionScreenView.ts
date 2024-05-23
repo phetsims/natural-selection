@@ -81,15 +81,11 @@ export default class NaturalSelectionScreenView extends ScreenView {
                                  ( 2 * NaturalSelectionConstants.SCREEN_VIEW_X_MARGIN ) -
                                  NaturalSelectionConstants.SCREEN_VIEW_X_SPACING;
 
-    const addMutationsPanel = new AddMutationsPanel( model.genePool, {
-      fixedWidth: rightOfViewportWidth,
-      tandem: options.tandem.createTandem( 'addMutationsPanel' )
-    } );
+    const addMutationsPanel = new AddMutationsPanel( model.genePool, options.tandem.createTandem( 'addMutationsPanel' ) );
 
     const environmentalFactorsPanel = new EnvironmentalFactorsPanel( model.wolfCollection.enabledProperty,
       model.food.isToughProperty, model.food.isLimitedProperty, {
         toughFoodCheckboxVisible: options.toughFoodCheckboxVisible,
-        fixedWidth: rightOfViewportWidth,
         tandem: options.tandem.createTandem( 'environmentalFactorsPanel' )
       } );
 
@@ -97,7 +93,12 @@ export default class NaturalSelectionScreenView extends ScreenView {
       children: [ addMutationsPanel, environmentalFactorsPanel ],
       spacing: NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
       left: environmentPanel.right + NaturalSelectionConstants.SCREEN_VIEW_X_SPACING,
-      top: environmentPanel.top
+      top: environmentPanel.top,
+
+      // Both child panels have the same fixed width, to fill the space to the right of the viewport.
+      stretch: true,
+      minContentWidth: rightOfViewportWidth,
+      maxWidth: rightOfViewportWidth
     } );
 
     // Displays the 'Mutation Coming...' alerts

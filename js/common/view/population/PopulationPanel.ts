@@ -6,8 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { combineOptions, EmptySelfOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../../phet-core/js/types/StrictOmit.js';
+import { combineOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
 import { AlignBox, AlignGroup, HSeparator, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
 import naturalSelection from '../../../naturalSelection.js';
@@ -16,25 +15,27 @@ import Gene from '../../model/Gene.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
-import NaturalSelectionPanel, { NaturalSelectionPanelOptions } from '../NaturalSelectionPanel.js';
 import PopulationAlleleCheckbox from './PopulationAlleleCheckbox.js';
 import PopulationLegendCheckbox from './PopulationLegendCheckbox.js';
+import Panel, { PanelOptions } from '../../../../../sun/js/Panel.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 
-type SelfOptions = EmptySelfOptions;
+type SelfOptions = {
+  fixedWidth: number; // fixed width of the panel
+};
 
-type PopulationPanelOptions = SelfOptions & NaturalSelectionPanelOptions;
+type PopulationPanelOptions = SelfOptions & PickRequired<PanelOptions, 'maxHeight' | 'tandem'>;
 
-export default class PopulationPanel extends NaturalSelectionPanel {
+export default class PopulationPanel extends Panel {
 
   private readonly alleleCheckboxes: PopulationAlleleCheckbox[];
 
   public constructor( populationModel: PopulationModel, providedOptions?: PopulationPanelOptions ) {
 
-    const options = optionize4<PopulationPanelOptions, SelfOptions, StrictOmit<NaturalSelectionPanelOptions, 'tandem'>>()(
+    const options = optionize4<PopulationPanelOptions, SelfOptions, PanelOptions>()(
       {}, NaturalSelectionConstants.PANEL_OPTIONS, {
 
         // NaturalSelectionPanelOptions
-        fixedWidth: 100,
         visiblePropertyOptions: {
           phetioFeatured: true
         }
@@ -144,9 +145,11 @@ export default class PopulationPanel extends NaturalSelectionPanel {
       dataProbeCheckbox.mouseArea = localBounds.dilatedXY( xDilation, yDilation );
     } );
 
+    const contentWidth = options.fixedWidth - 2 * options.xMargin;
     const content = new VBox( combineOptions<VBoxOptions>( {}, NaturalSelectionConstants.VBOX_OPTIONS, {
-      preferredWidth: options.fixedWidth! - ( 2 * options.xMargin ),
-      widthSizable: false,
+      stretch: true,
+      minContentWidth: contentWidth,
+      maxWidth: contentWidth,
       children: [
         checkboxesVBox,
         separator,
