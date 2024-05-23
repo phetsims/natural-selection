@@ -39,8 +39,8 @@ export default class EnvironmentalFactorCheckbox extends Checkbox {
    * @param alignGroup - sets the effective size of labelNode
    * @param [providedOptions]
    */
-  public constructor( enabledProperty: Property<boolean>, labelNode: Node, alignGroup: AlignGroup,
-                      providedOptions: EnvironmentalFactorCheckboxOptions ) {
+  protected constructor( enabledProperty: Property<boolean>, labelNode: Node, alignGroup: AlignGroup,
+                         providedOptions: EnvironmentalFactorCheckboxOptions ) {
 
     const options = optionize4<EnvironmentalFactorCheckboxOptions, SelfOptions, CheckboxOptions>()(
       {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {

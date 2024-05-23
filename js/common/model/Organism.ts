@@ -33,7 +33,7 @@ export default class Organism extends PhetioObject {
   public readonly xDirectionProperty: EnumerationProperty<XDirection>;
   private readonly disposeOrganism: () => void;
 
-  public constructor( modelViewTransform: EnvironmentModelViewTransform, providedOptions?: OrganismOptions ) {
+  protected constructor( modelViewTransform: EnvironmentModelViewTransform, providedOptions?: OrganismOptions ) {
 
     const options = optionize<OrganismOptions, SelfOptions, PhetioObjectOptions>()( {
 

@@ -73,7 +73,7 @@ export default class NaturalSelectionModel implements TModel {
   private readonly timeScaleProperty: TReadOnlyProperty<number>;
   private readonly initialBunnyVarieties: BunnyVariety[]; // describes the initial population
 
-  public constructor( screenKey: ScreenKey, shrubsSeed: number, providedOptions: NaturalSelectionModelOptions ) {
+  protected constructor( screenKey: ScreenKey, shrubsSeed: number, providedOptions: NaturalSelectionModelOptions ) {
 
     const options = providedOptions;
 

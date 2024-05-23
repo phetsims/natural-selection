@@ -24,7 +24,7 @@ export default class OrganismSpriteInstance extends SpriteInstance {
    * @param sprite
    * @param baseScale - the base amount to scale, tuned based on the PNG file dimensions
    */
-  public constructor( organism: Organism, sprite: Sprite, baseScale: number ) {
+  protected constructor( organism: Organism, sprite: Sprite, baseScale: number ) {
 
     assert && assert( baseScale > 0, `invalid baseScale: ${baseScale}` );
 
