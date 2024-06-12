@@ -5,7 +5,7 @@
     "branch": "HEAD"
   },
   "axon": {
-    "sha": "e5962f3e58a63096e2d52f19b368f91a79d6e984",
+    "sha": "1e387b1d34e7ae3e05c758187ef96e4381cb4e0b",
     "branch": "HEAD"
   },
   "brand": {
@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "cb358eb300ce6c157bf2529c2764c2f7222d5c32",
+    "sha": "b30d394d39cc7a0961c9c47b197e0546abb5bd66",
     "branch": "HEAD"
   },
   "kite": {
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "650f08d242160f31ff27c5891bad05374e77ec0b",
+    "sha": "653cca4d3f69f5e74ab1350c0dc0febb4a959ac3",
     "branch": "1.5"
   },
   "perennial-alias": {
