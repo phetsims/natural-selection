@@ -80,7 +80,7 @@ export default class AllelesPanel extends Panel {
       children: [ titleText, ...rows ],
       stretch: true,
       minContentWidth: contentWidth,
-      maxWidth: contentWidth
+      preferredWidth: contentWidth // use preferred with because maxWidth fails with listenerOrder=random, see https://github.com/phetsims/natural-selection/issues/363
     } ) );
 
     super( content, options );
