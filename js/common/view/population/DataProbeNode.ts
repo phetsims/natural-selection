@@ -149,9 +149,6 @@ export default class DataProbeNode extends Node {
       tandem: options.tandem.createTandem( 'dragListener' )
     } ) );
 
-    // Interrupt interaction when visibility changes.
-    this.visibleProperty.link( visible => this.interruptSubtreeInput() );
-
     // Flip NumberDisplays around the y-axis at edges of the graph, so that they stay inside the bounds of the graph.
     // unlink is not necessary.
     dataProbe.offsetProperty.link( offset => {
