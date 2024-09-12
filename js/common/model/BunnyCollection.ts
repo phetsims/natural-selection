@@ -31,6 +31,7 @@ import BunnyCounts from './BunnyCounts.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import isClearingPhetioDynamicElementsProperty from '../../../../tandem/js/isClearingPhetioDynamicElementsProperty.js';
+import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 
 const LITTER_SIZE = 4;
 assert && assert( LITTER_SIZE === 4,
@@ -220,7 +221,7 @@ export default class BunnyCollection {
     this.bunnyGroup = bunnyGroup;
 
     if ( assert && Tandem.PHET_IO_ENABLED ) {
-      phet.phetio.phetioEngine.phetioStateEngine.stateSetEmitter.addListener( () => {
+      phetioStateSetEmitter.addListener( () => {
         this.assertValidCounts();
       } );
     }
