@@ -51,6 +51,11 @@
               "ts-nocheck": true
             }
           ]
+        },
+        "parserOptions": {
+          "project": [
+            "../natural-selection/tsconfig.json"
+          ]
         }
       }
     ]
