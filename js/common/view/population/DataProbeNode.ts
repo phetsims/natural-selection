@@ -219,7 +219,7 @@ function createNumberDisplay( bunnyCountsProperty: TReadOnlyProperty<BunnyCounts
       if ( bunnyCounts ) {
         type BunnyCountKey = keyof typeof bunnyCounts;
         const count = bunnyCounts[ bunnyCountsFieldName as BunnyCountKey ] as number;
-        assert && assert( typeof count === 'number' ); // eslint-disable-line no-simple-type-checking-assertions
+        assert && assert( typeof count === 'number' ); // eslint-disable-line phet/no-simple-type-checking-assertions
         return count;
       }
       else {
