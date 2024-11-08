@@ -60,17 +60,20 @@ export default function parseInitialPopulation( screenKey: ScreenKey, genePool: 
     const mutationChars = parseMutations( genePool, mutationsQueryParameterName, mutationsValue );
     initialBunnyVarieties = parsePopulation( genePool, populationQueryParameterName, populationValue, mutationChars );
   }
-  catch( error: IntentionalAny ) {
+  catch( error ) {
+
+    // Workaround for https://github.com/phetsims/natural-selection/issues/365
+    const message = ( error as { message: string } ).message;
 
     // Something went wrong, so fallback to default population.
 
     // Add warnings that QueryStringMachine will display after the sim has fully started.
-    QueryStringMachine.addWarning( mutationsQueryParameterName, mutationsValue, error.message );
-    QueryStringMachine.addWarning( populationQueryParameterName, populationValue, error.message );
+    QueryStringMachine.addWarning( mutationsQueryParameterName, mutationsValue, message );
+    QueryStringMachine.addWarning( populationQueryParameterName, populationValue, message );
 
     // Print an error to the console, since QueryStringMachine doesn't currently show the error message.
     console.error(
-      `Query parameter error: ${error.message}\n` +
+      `Query parameter error: ${message}\n` +
       `${mutationsQueryParameterName}=${mutationsValue}\n` +
       `${populationQueryParameterName}=${populationValue}`
     );
