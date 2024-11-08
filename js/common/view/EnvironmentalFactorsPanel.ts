@@ -8,9 +8,12 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import { combineOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { AlignGroup, Node, SceneryConstants, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
@@ -18,9 +21,6 @@ import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import LimitedFoodCheckbox from './LimitedFoodCheckbox.js';
 import ToughFoodCheckbox from './ToughFoodCheckbox.js';
 import WolvesCheckbox from './WolvesCheckbox.js';
-import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
-import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 
 type SelfOptions = {
   toughFoodCheckboxVisible?: boolean;

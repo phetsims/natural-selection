@@ -8,9 +8,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Circle, Node, NodeOptions, NodeTranslationOptions, Path, TColor, Text } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
@@ -18,9 +21,6 @@ import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import GenerationClock from '../model/GenerationClock.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
 const START_ANGLE = -Math.PI / 2; // 12:00
 const RADIUS = 18;

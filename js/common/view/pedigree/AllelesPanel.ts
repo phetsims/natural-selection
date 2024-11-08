@@ -15,6 +15,8 @@ import optionize, { combineOptions, EmptySelfOptions, optionize4 } from '../../.
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HStrut, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
+import Panel, { PanelOptions } from '../../../../../sun/js/Panel.js';
+import isSettingPhetioStateProperty from '../../../../../tandem/js/isSettingPhetioStateProperty.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
@@ -22,8 +24,6 @@ import GenePool from '../../model/GenePool.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 import AlleleNode from './AlleleNode.js';
-import isSettingPhetioStateProperty from '../../../../../tandem/js/isSettingPhetioStateProperty.js';
-import Panel, { PanelOptions } from '../../../../../sun/js/Panel.js';
 
 type SelfOptions = {
   fixedWidth: number; // fixed width of the panel

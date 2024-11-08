@@ -10,8 +10,8 @@
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
-import BunnyCounts, { BunnyCountsStateObject } from './BunnyCounts.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
+import BunnyCounts, { BunnyCountsStateObject } from './BunnyCounts.js';
 
 type ProportionsCountsStateObject = {
   generation: number;

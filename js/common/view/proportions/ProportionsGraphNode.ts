@@ -7,6 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedStringProperty from '../../../../../axon/js/DerivedStringProperty.js';
 import NumberProperty from '../../../../../axon/js/NumberProperty.js';
 import Property from '../../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
@@ -26,7 +27,6 @@ import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import ProportionsBarNode from './ProportionsBarNode.js';
 import ProportionsGenerationSpinner from './ProportionsGenerationSpinner.js';
-import DerivedStringProperty from '../../../../../axon/js/DerivedStringProperty.js';
 
 const ROW_SPACING = 30;
 const COLUMN_SPACING = 20;

@@ -9,8 +9,8 @@
 import Range from '../../../dot/js/Range.js';
 import PhetioObject from '../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../tandem/js/Tandem.js';
-import naturalSelection from '../naturalSelection.js';
 import { PhetioID } from '../../../tandem/js/TandemConstants.js';
+import naturalSelection from '../naturalSelection.js';
 
 const NaturalSelectionUtils = {
 

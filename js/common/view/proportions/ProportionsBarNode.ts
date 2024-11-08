@@ -8,6 +8,8 @@
  */
 
 import Multilink from '../../../../../axon/js/Multilink.js';
+import Property from '../../../../../axon/js/Property.js';
+import StringProperty from '../../../../../axon/js/StringProperty.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../../dot/js/Utils.js';
 import optionize from '../../../../../phet-core/js/optionize.js';
@@ -19,8 +21,6 @@ import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import HatchingRectangle from '../HatchingRectangle.js';
-import StringProperty from '../../../../../axon/js/StringProperty.js';
-import Property from '../../../../../axon/js/Property.js';
 
 const PERCENTAGE_OPTIONS = {
   font: new PhetFont( 12 ),

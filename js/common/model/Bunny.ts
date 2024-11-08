@@ -21,15 +21,15 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
+import { CompositeSchema } from '../../../../tandem/js/types/StateSchema.js';
 import naturalSelection from '../../naturalSelection.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 import Genotype, { GenotypeOptions } from './Genotype.js';
 import Organism, { OrganismOptions } from './Organism.js';
 import Phenotype from './Phenotype.js';
 import XDirection from './XDirection.js';
-import { CompositeSchema } from '../../../../tandem/js/types/StateSchema.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
 const HOP_TIME_RANGE = new Range( 0.25, 0.5 ); // time to complete a hop cycle, in seconds
 const HOP_DISTANCE_RANGE = new Range( 15, 20 ); // straight-line distance that a bunny hops in the xz plane

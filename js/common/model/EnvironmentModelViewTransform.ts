@@ -70,11 +70,11 @@
  * @author Jonathan Olson (Landscape.java, from which parts of this were adapted)
  */
 
+import Disposable from '../../../../axon/js/Disposable.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Vector3 from '../../../../dot/js/Vector3.js';
 import naturalSelection from '../../naturalSelection.js';
-import Disposable from '../../../../axon/js/Disposable.js';
 
 // scale at zNearModel
 const NEAR_SCALE = 1;

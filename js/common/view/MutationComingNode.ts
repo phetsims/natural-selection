@@ -9,14 +9,14 @@
  */
 
 import { Shape } from '../../../../kite/js/imports.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { HBox, Node, NodeOptions, Path, Text } from '../../../../scenery/js/imports.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import Gene from '../model/Gene.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import CancelMutationButton from './CancelMutationButton.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
 const X_MARGIN = 8;
 const Y_MARGIN = 4;

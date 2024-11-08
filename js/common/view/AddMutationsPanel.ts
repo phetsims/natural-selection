@@ -9,10 +9,13 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HBoxOptions, Image, Node, NodeOptions, Rectangle, SceneryConstants, TColor, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
 import RectangularPushButton, { RectangularPushButtonOptions } from '../../../../sun/js/buttons/RectangularPushButton.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
@@ -21,9 +24,6 @@ import GenePool from '../model/GenePool.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import MutationIconNode from './MutationIconNode.js';
-import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
-import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 
 const COLUMN_SPACING = 8;
 const BUTTON_ICON_SCALE = 0.5;

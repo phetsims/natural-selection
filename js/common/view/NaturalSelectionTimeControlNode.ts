@@ -16,9 +16,9 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PlayPauseButton from '../../../../scenery-phet/js/buttons/PlayPauseButton.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import { HBox, HBoxOptions, NodeTranslationOptions, SceneryConstants } from '../../../../scenery/js/imports.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import naturalSelection from '../../naturalSelection.js';
 import FastForwardButton from './FastForwardButton.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 
 const PLAY_BUTTON_RADIUS = 20;
 const FAST_FORWARD_BUTTON_RADIUS = 16;

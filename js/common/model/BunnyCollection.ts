@@ -7,8 +7,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Disposable from '../../../../axon/js/Disposable.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Disposable from '../../../../axon/js/Disposable.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
@@ -16,22 +16,22 @@ import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import isClearingPhetioDynamicElementsProperty from '../../../../tandem/js/isClearingPhetioDynamicElementsProperty.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
+import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
+import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import Bunny from './Bunny.js';
+import BunnyCounts from './BunnyCounts.js';
 import BunnyGroup, { BunnyGroupCreateElementOptions } from './BunnyGroup.js';
 import createBunnyArray, { BunnyArray } from './createBunnyArray.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
 import PunnettSquare from './PunnettSquare.js';
 import SelectedBunnyProperty from './SelectedBunnyProperty.js';
-import BunnyCounts from './BunnyCounts.js';
-import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
-import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
-import isClearingPhetioDynamicElementsProperty from '../../../../tandem/js/isClearingPhetioDynamicElementsProperty.js';
-import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 
 const LITTER_SIZE = 4;
 assert && assert( LITTER_SIZE === 4,

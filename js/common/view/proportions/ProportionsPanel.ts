@@ -8,17 +8,17 @@
 
 import Property from '../../../../../axon/js/Property.js';
 import { combineOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import { HSeparator, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
 import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
+import Panel, { PanelOptions } from '../../../../../sun/js/Panel.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
+import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import ProportionsLegendNode from './ProportionsLegendNode.js';
-import Gene from '../../model/Gene.js';
-import Panel, { PanelOptions } from '../../../../../sun/js/Panel.js';
-import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 
 type SelfOptions = {
   fixedWidth: number; // fixed width of the panel
