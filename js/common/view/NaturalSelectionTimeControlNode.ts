@@ -1,4 +1,4 @@
-// Copyright 2020-2023, University of Colorado Boulder
+// Copyright 2020-2024, University of Colorado Boulder
 
 /**
  * NaturalSelectionTimeControlNode is the time control for this sim. It has a play/pause button and a fast-forward
