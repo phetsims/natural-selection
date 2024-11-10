@@ -63,7 +63,7 @@ export default function parseInitialPopulation( screenKey: ScreenKey, genePool: 
   catch( error ) {
 
     // Workaround for https://github.com/phetsims/natural-selection/issues/365
-    const message = ( error as { message: string } ).message;
+    const message = ( error as Error ).message;
 
     // Something went wrong, so fallback to default population.
 
