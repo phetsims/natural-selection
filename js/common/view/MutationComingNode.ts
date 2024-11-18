@@ -5,6 +5,8 @@
  * and gives the user an opportunity to cancel the mutation.  It is not implemented using SUN/Dialog because
  * (at the time of implementation) non-modal dialogs are not supported.
  *
+ * @deprecated - PhET needs a non-modal dialog, see https://github.com/phetsims/sun/issues/916
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
