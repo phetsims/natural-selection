@@ -19,6 +19,7 @@ import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import { PressListener, Sprite, SpriteListenable, Sprites, SpritesOptions } from '../../../../../scenery/js/imports.js';
+import isSettingPhetioStateProperty from '../../../../../tandem/js/isSettingPhetioStateProperty.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import bunnyWhiteFurStraightEarsShortTeeth_png from '../../../../images/bunnyWhiteFurStraightEarsShortTeeth_png.js';
 import wolf_png from '../../../../images/wolf_png.js';
@@ -34,11 +35,10 @@ import BunnySelectionRectangleSprite from './BunnySelectionRectangleSprite.js';
 import BunnySelectionRectangleSpriteInstance from './BunnySelectionRectangleSpriteInstance.js';
 import BunnySpriteInstance from './BunnySpriteInstance.js';
 import OrganismSpriteImage from './OrganismSpriteImage.js';
-import ShrubSpriteInstance from './ShrubSpriteInstance.js';
-import WolfSpriteInstance from './WolfSpriteInstance.js';
 import OrganismSpriteInstance from './OrganismSpriteInstance.js';
+import ShrubSpriteInstance from './ShrubSpriteInstance.js';
 import ShrubSprites from './ShrubSprites.js';
-import isSettingPhetioStateProperty from '../../../../../tandem/js/isSettingPhetioStateProperty.js';
+import WolfSpriteInstance from './WolfSpriteInstance.js';
 
 type SelfOptions = EmptySelfOptions;
 
