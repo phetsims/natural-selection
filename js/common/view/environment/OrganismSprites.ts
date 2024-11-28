@@ -1,4 +1,4 @@
-// Copyright 2020-2023, University of Colorado Boulder
+// Copyright 2020-2024, University of Colorado Boulder
 
 /**
  * OrganismSprites displays all Organism model elements (bunnies, wolves, shrubs) that appear in the environment.
