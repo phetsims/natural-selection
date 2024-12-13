@@ -44,6 +44,7 @@ export default class EnvironmentalFactorCheckbox extends Checkbox {
 
     const options = optionize4<EnvironmentalFactorCheckboxOptions, SelfOptions, CheckboxOptions>()(
       {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
+        phetioDisplayOnlyPropertyInstrumented: true,
 
         // SelfOptions
         clockSliceRange: DEFAULT_CLOCK_SLICE_RANGE,

@@ -47,7 +47,8 @@ export default class PopulationLegendCheckbox extends Checkbox {
       {}, NaturalSelectionConstants.CHECKBOX_OPTIONS, {
         lineColor: 'black',
         isLineDashed: false,
-        isDisposable: false
+        isDisposable: false,
+        phetioDisplayOnlyPropertyInstrumented: true
       }, providedOptions );
 
     // solid or dashed line
