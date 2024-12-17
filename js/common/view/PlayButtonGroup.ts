@@ -152,9 +152,9 @@ class TextPushButton extends RectangularPushButton {
       cornerRadius: 5,
       xMargin: 12,
       yMargin: 8,
-      phetioReadOnly: true, // because sim state controls when this button is visible
       visiblePropertyOptions: {
-        phetioFeatured: false
+        phetioFeatured: false,
+        phetioReadOnly: true // because sim state controls when this button is visible
       },
       enabledPropertyOptions: {
         phetioFeatured: false
