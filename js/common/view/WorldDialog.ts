@@ -9,7 +9,9 @@
 
 import { EmptySelfOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Image, Text, VBox } from '../../../../scenery/js/imports.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
 import world_png from '../../../images/world_png.js';
 import naturalSelection from '../../naturalSelection.js';

@@ -9,7 +9,8 @@
 import Dimension2 from '../../../../../dot/js/Dimension2.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
-import { HBox, HBoxOptions, NodeTranslationOptions } from '../../../../../scenery/js/imports.js';
+import HBox, { HBoxOptions } from '../../../../../scenery/js/layout/nodes/HBox.js';
+import { NodeTranslationOptions } from '../../../../../scenery/js/nodes/Node.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';

@@ -8,7 +8,9 @@
 
 import Screen, { ScreenOptions } from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import { HBox, Image, VBox } from '../../../scenery/js/imports.js';
+import HBox from '../../../scenery/js/layout/nodes/HBox.js';
+import VBox from '../../../scenery/js/layout/nodes/VBox.js';
+import Image from '../../../scenery/js/nodes/Image.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import bunnyBrownFurFloppyEarsLongTeeth_png from '../../images/bunnyBrownFurFloppyEarsLongTeeth_png.js';
 import bunnyBrownFurFloppyEarsShortTeeth_png from '../../images/bunnyBrownFurFloppyEarsShortTeeth_png.js';

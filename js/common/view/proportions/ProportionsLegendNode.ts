@@ -10,7 +10,11 @@
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
-import { HBox, HBoxOptions, Rectangle, TColor, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
+import HBox, { HBoxOptions } from '../../../../../scenery/js/layout/nodes/HBox.js';
+import VBox, { VBoxOptions } from '../../../../../scenery/js/layout/nodes/VBox.js';
+import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
+import Text from '../../../../../scenery/js/nodes/Text.js';
+import TColor from '../../../../../scenery/js/util/TColor.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';

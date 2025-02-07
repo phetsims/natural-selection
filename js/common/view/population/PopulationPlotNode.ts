@@ -11,9 +11,11 @@ import Multilink from '../../../../../axon/js/Multilink.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../../dot/js/Range.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import { Shape } from '../../../../../kite/js/imports.js';
+import Shape from '../../../../../kite/js/Shape.js';
 import optionize from '../../../../../phet-core/js/optionize.js';
-import { Node, NodeOptions, Path, TColor } from '../../../../../scenery/js/imports.js';
+import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../../scenery/js/nodes/Path.js';
+import TColor from '../../../../../scenery/js/util/TColor.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 

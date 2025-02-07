@@ -10,7 +10,7 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import naturalSelection from '../../naturalSelection.js';
 import GenePool from '../model/GenePool.js';
 import AddMutationsPanel from './AddMutationsPanel.js';

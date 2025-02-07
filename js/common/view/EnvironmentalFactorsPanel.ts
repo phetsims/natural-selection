@@ -12,7 +12,11 @@ import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js'
 import Property from '../../../../axon/js/Property.js';
 import { combineOptions, optionize4 } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { AlignGroup, Node, SceneryConstants, Text, VBox, VBoxOptions } from '../../../../scenery/js/imports.js';
+import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
+import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import SceneryConstants from '../../../../scenery/js/SceneryConstants.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import naturalSelection from '../../naturalSelection.js';

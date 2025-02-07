@@ -9,7 +9,9 @@
 
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
-import { Circle, Node, NodeOptions, NodeTranslationOptions, Path } from '../../../../scenery/js/imports.js';
+import Circle from '../../../../scenery/js/nodes/Circle.js';
+import Node, { NodeOptions, NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
 import dnaSolidShape from '../../../../sherpa/js/fontawesome-5/dnaSolidShape.js';
 import naturalSelection from '../../naturalSelection.js';
 

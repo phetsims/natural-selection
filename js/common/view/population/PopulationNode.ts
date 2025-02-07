@@ -9,7 +9,7 @@
 import Dimension2 from '../../../../../dot/js/Dimension2.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
-import { Node, NodeOptions, NodeTranslationOptions } from '../../../../../scenery/js/imports.js';
+import Node, { NodeOptions, NodeTranslationOptions } from '../../../../../scenery/js/nodes/Node.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Gene from '../../model/Gene.js';
 import PopulationModel from '../../model/PopulationModel.js';

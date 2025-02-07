@@ -9,7 +9,7 @@
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Node, NodeTranslationOptions } from '../../../../scenery/js/imports.js';
+import Node, { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import naturalSelection from '../../naturalSelection.js';

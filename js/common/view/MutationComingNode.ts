@@ -10,10 +10,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Shape } from '../../../../kite/js/imports.js';
+import Shape from '../../../../kite/js/Shape.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { HBox, Node, NodeOptions, Path, Text } from '../../../../scenery/js/imports.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import Gene from '../model/Gene.js';

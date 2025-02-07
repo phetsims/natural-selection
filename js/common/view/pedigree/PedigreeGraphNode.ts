@@ -10,7 +10,9 @@
 import Property from '../../../../../axon/js/Property.js';
 import optionize from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
-import { Node, NodeOptions, Rectangle, Text } from '../../../../../scenery/js/imports.js';
+import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
+import Text from '../../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';

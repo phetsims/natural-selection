@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Sprite } from '../../../../../scenery/js/imports.js';
+import Sprite from '../../../../../scenery/js/util/Sprite.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Wolf from '../../model/Wolf.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';

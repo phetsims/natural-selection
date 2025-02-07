@@ -11,7 +11,9 @@
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
-import { HBox, HBoxOptions, Image, Text } from '../../../../../scenery/js/imports.js';
+import HBox, { HBoxOptions } from '../../../../../scenery/js/layout/nodes/HBox.js';
+import Image from '../../../../../scenery/js/nodes/Image.js';
+import Text from '../../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 

@@ -8,7 +8,11 @@
 
 import { combineOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
-import { AlignBox, AlignGroup, HSeparator, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
+import AlignGroup from '../../../../../scenery/js/layout/constraints/AlignGroup.js';
+import AlignBox from '../../../../../scenery/js/layout/nodes/AlignBox.js';
+import HSeparator from '../../../../../scenery/js/layout/nodes/HSeparator.js';
+import VBox, { VBoxOptions } from '../../../../../scenery/js/layout/nodes/VBox.js';
+import Text from '../../../../../scenery/js/nodes/Text.js';
 import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
 import Panel, { PanelOptions } from '../../../../../sun/js/Panel.js';
 import naturalSelection from '../../../naturalSelection.js';

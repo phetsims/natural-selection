@@ -13,7 +13,12 @@
 import Property from '../../../../../axon/js/Property.js';
 import optionize, { combineOptions, EmptySelfOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
-import { AlignBox, AlignBoxOptions, AlignGroup, HBox, HStrut, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
+import AlignGroup from '../../../../../scenery/js/layout/constraints/AlignGroup.js';
+import AlignBox, { AlignBoxOptions } from '../../../../../scenery/js/layout/nodes/AlignBox.js';
+import HBox from '../../../../../scenery/js/layout/nodes/HBox.js';
+import VBox, { VBoxOptions } from '../../../../../scenery/js/layout/nodes/VBox.js';
+import HStrut from '../../../../../scenery/js/nodes/HStrut.js';
+import Text from '../../../../../scenery/js/nodes/Text.js';
 import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
 import Panel, { PanelOptions } from '../../../../../sun/js/Panel.js';
 import isSettingPhetioStateProperty from '../../../../../tandem/js/isSettingPhetioStateProperty.js';

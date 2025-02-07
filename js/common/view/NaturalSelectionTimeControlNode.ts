@@ -15,7 +15,9 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PlayPauseButton from '../../../../scenery-phet/js/buttons/PlayPauseButton.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
-import { HBox, HBoxOptions, NodeTranslationOptions, SceneryConstants } from '../../../../scenery/js/imports.js';
+import HBox, { HBoxOptions } from '../../../../scenery/js/layout/nodes/HBox.js';
+import { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
+import SceneryConstants from '../../../../scenery/js/SceneryConstants.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import naturalSelection from '../../naturalSelection.js';
 import FastForwardButton from './FastForwardButton.js';

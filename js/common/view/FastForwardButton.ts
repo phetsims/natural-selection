@@ -7,12 +7,12 @@
  */
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import { Shape } from '../../../../kite/js/imports.js';
+import Shape from '../../../../kite/js/Shape.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
-import { Path } from '../../../../scenery/js/imports.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
 import ButtonModel from '../../../../sun/js/buttons/ButtonModel.js';
 import RoundMomentaryButton, { RoundMomentaryButtonOptions } from '../../../../sun/js/buttons/RoundMomentaryButton.js';
 import naturalSelection from '../../naturalSelection.js';

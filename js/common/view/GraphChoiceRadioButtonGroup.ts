@@ -10,7 +10,7 @@ import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import { Text, TextOptions } from '../../../../scenery/js/imports.js';
+import Text, { TextOptions } from '../../../../scenery/js/nodes/Text.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';

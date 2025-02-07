@@ -8,7 +8,11 @@
  */
 
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import { AlignBox, AlignBoxOptions, AlignGroup, Image, Node, NodeOptions, NodeTransformOptions, Sprite } from '../../../../scenery/js/imports.js';
+import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
+import AlignBox, { AlignBoxOptions } from '../../../../scenery/js/layout/nodes/AlignBox.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
+import Node, { NodeOptions, NodeTransformOptions } from '../../../../scenery/js/nodes/Node.js';
+import Sprite from '../../../../scenery/js/util/Sprite.js';
 import bunnyBrownFurFloppyEarsLongTeeth_png from '../../../images/bunnyBrownFurFloppyEarsLongTeeth_png.js';
 import bunnyBrownFurFloppyEarsShortTeeth_png from '../../../images/bunnyBrownFurFloppyEarsShortTeeth_png.js';
 import bunnyBrownFurStraightEarsLongTeeth_png from '../../../images/bunnyBrownFurStraightEarsLongTeeth_png.js';

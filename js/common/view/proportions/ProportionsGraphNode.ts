@@ -15,7 +15,13 @@ import optionize, { combineOptions, EmptySelfOptions } from '../../../../../phet
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignGroup, HBox, Node, NodeOptions, Rectangle, Text, VBox, VBoxOptions } from '../../../../../scenery/js/imports.js';
+import AlignGroup from '../../../../../scenery/js/layout/constraints/AlignGroup.js';
+import AlignBox from '../../../../../scenery/js/layout/nodes/AlignBox.js';
+import HBox from '../../../../../scenery/js/layout/nodes/HBox.js';
+import VBox, { VBoxOptions } from '../../../../../scenery/js/layout/nodes/VBox.js';
+import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
+import Text from '../../../../../scenery/js/nodes/Text.js';
 import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
 import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';

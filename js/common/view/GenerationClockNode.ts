@@ -11,11 +11,15 @@
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../dot/js/Range.js';
-import { Shape } from '../../../../kite/js/imports.js';
+import Shape from '../../../../kite/js/Shape.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Circle, Node, NodeOptions, NodeTranslationOptions, Path, TColor, Text } from '../../../../scenery/js/imports.js';
+import Circle from '../../../../scenery/js/nodes/Circle.js';
+import Node, { NodeOptions, NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import TColor from '../../../../scenery/js/util/TColor.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import GenerationClock from '../model/GenerationClock.js';

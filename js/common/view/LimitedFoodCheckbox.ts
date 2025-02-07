@@ -9,7 +9,8 @@
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { AlignGroup, Text } from '../../../../scenery/js/imports.js';
+import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';

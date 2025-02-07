@@ -9,7 +9,9 @@
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import { Node, NodeTranslationOptions, Path, Rectangle } from '../../../../scenery/js/imports.js';
+import Node, { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import snowflakeSolidShape from '../../../../sherpa/js/fontawesome-5/snowflakeSolidShape.js';
 import sunSolidShape from '../../../../sherpa/js/fontawesome-5/sunSolidShape.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';

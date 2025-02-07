@@ -9,7 +9,9 @@
 
 import EnumerationProperty from '../../../../../axon/js/EnumerationProperty.js';
 import Dimension2 from '../../../../../dot/js/Dimension2.js';
-import { Image, Line, Node } from '../../../../../scenery/js/imports.js';
+import Image from '../../../../../scenery/js/nodes/Image.js';
+import Line from '../../../../../scenery/js/nodes/Line.js';
+import Node from '../../../../../scenery/js/nodes/Node.js';
 import arcticBackground_png from '../../../../images/arcticBackground_png.js';
 import equatorBackground_png from '../../../../images/equatorBackground_png.js';
 import naturalSelection from '../../../naturalSelection.js';

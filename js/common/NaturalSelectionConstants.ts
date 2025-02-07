@@ -8,7 +8,7 @@
 
 import Range from '../../../dot/js/Range.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
-import { VBoxOptions } from '../../../scenery/js/imports.js';
+import { VBoxOptions } from '../../../scenery/js/layout/nodes/VBox.js';
 import { ArrowButtonOptions } from '../../../sun/js/buttons/ArrowButton.js';
 import ButtonNode from '../../../sun/js/buttons/ButtonNode.js';
 import { CheckboxOptions } from '../../../sun/js/Checkbox.js';

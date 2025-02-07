@@ -9,7 +9,7 @@
 
 import Property from '../../../../../axon/js/Property.js';
 import { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
-import { AlignGroup } from '../../../../../scenery/js/imports.js';
+import AlignGroup from '../../../../../scenery/js/layout/constraints/AlignGroup.js';
 import naturalSelection from '../../../naturalSelection.js';
 import Allele from '../../model/Allele.js';
 import PopulationLegendCheckbox, { PopulationLegendCheckboxOptions } from './PopulationLegendCheckbox.js';

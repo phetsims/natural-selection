@@ -8,7 +8,7 @@
 
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
-import { Utils } from '../../scenery/js/imports.js';
+import Utils from '../../scenery/js/util/Utils.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import IntroScreen from './intro/IntroScreen.js';
 import LabScreen from './lab/LabScreen.js';
