@@ -1,4 +1,4 @@
-// Copyright 2021-2023, University of Colorado Boulder
+// Copyright 2021-2025, University of Colorado Boulder
 
 /**
  * EnvironmentPanel contains everything that's in the panel at the top-center of the screen.

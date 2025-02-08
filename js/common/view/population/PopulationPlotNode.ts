@@ -1,4 +1,4 @@
-// Copyright 2020-2023, University of Colorado Boulder
+// Copyright 2020-2025, University of Colorado Boulder
 
 /**
  * PopulationPlotNode plots one set of data on the Population graph, updated only when visible.
