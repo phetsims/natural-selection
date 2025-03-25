@@ -20,6 +20,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import { QueryStringMachine } from '../../../../query-string-machine/js/QueryStringMachineModule.js';
 import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters, { SCHEMA_MAP } from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
