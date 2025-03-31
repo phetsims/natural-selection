@@ -13,7 +13,7 @@ import { QueryStringMachine } from '../../../query-string-machine/js/QueryString
 import naturalSelection from '../naturalSelection.js';
 import NaturalSelectionUtils from './NaturalSelectionUtils.js';
 
-const SCHEMA_MAP = {
+const NaturalSelectionQueryParameters = QueryStringMachine.getAll( {
 
   //------------------------------------------------------------------------------------------------------------------
   // Public facing
@@ -254,9 +254,7 @@ const SCHEMA_MAP = {
   showTimes: {
     type: 'flag'
   }
-} as const;
-
-const NaturalSelectionQueryParameters = QueryStringMachine.getAll( SCHEMA_MAP );
+} );
 
 /**
  * Parses a query-parameter value into a Range.
@@ -289,4 +287,3 @@ logGlobal( 'phet.preloads.phetio.queryParameters' );
 logGlobal( 'phet.naturalSelection.NaturalSelectionQueryParameters' );
 
 export default NaturalSelectionQueryParameters;
-export { SCHEMA_MAP };

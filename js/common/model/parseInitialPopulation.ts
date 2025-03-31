@@ -22,12 +22,14 @@
 
 import { QueryStringMachine } from '../../../../query-string-machine/js/QueryStringMachineModule.js';
 import naturalSelection from '../../naturalSelection.js';
-import NaturalSelectionQueryParameters, { SCHEMA_MAP } from '../NaturalSelectionQueryParameters.js';
+import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import Allele from './Allele.js';
 import BunnyVariety from './BunnyVariety.js';
 import Gene from './Gene.js';
 import GenePool from './GenePool.js';
+
+const SCHEMA_MAP = NaturalSelectionQueryParameters.SCHEMA_MAP;
 
 type AllelesPair = {
   fatherAllele: Allele | null;
