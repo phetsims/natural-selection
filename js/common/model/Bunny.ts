@@ -17,7 +17,7 @@ import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import IOType from '../../../../tandem/js/types/IOType.js';
+import IOType, { AnyIOType } from '../../../../tandem/js/types/IOType.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
@@ -384,7 +384,7 @@ export default class Bunny extends Organism {
    * Returns a function that returns a map of state keys and their associated IOTypes, see IOType for details.
    * We need to use a function because the state schema recursive references BunnyIO.
    */
-  private static getStateSchema( BunnyIO: IOType ): CompositeSchema<BunnyStateObject> {
+  private static getStateSchema( BunnyIO: AnyIOType ): CompositeSchema<BunnyStateObject> {
     return {
 
       // Even though father and mother are stateful, we need a reference to them.
