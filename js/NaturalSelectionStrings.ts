@@ -63,7 +63,7 @@ type StringsType = {
   'startOverStringProperty': LocalizedStringProperty;
   'bunniesHaveTakenOverTheWorldStringProperty': LocalizedStringProperty;
   'allOfTheBunniesHaveDiedStringProperty': LocalizedStringProperty;
-  'valuePercentStringProperty': LocalizedStringProperty;
+  'valuePercentAndCountStringProperty': LocalizedStringProperty;
   'lessThanValuePercentStringProperty': LocalizedStringProperty;
   'greaterThanValuePercentStringProperty': LocalizedStringProperty;
   'selectABunnyStringProperty': LocalizedStringProperty;

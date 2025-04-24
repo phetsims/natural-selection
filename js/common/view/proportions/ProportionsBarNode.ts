@@ -28,7 +28,7 @@ import HatchingRectangle from '../HatchingRectangle.js';
 const PERCENTAGE_OPTIONS = {
   font: new PhetFont( 12 ),
   bottom: -4,
-  maxWidth: 40 // determined empirically
+  maxWidth: 60 // determined empirically
 };
 
 type SelfOptions = {
@@ -112,7 +112,7 @@ export default class ProportionsBarNode extends Node {
         this.valuesVisibleProperty,
         NaturalSelectionStrings.greaterThanValuePercentStringProperty,
         NaturalSelectionStrings.lessThanValuePercentStringProperty,
-        NaturalSelectionStrings.valuePercentStringProperty
+        NaturalSelectionStrings.valuePercentAndCountStringProperty
       ],
       () => this.updateProportionsBarNode()
     );
@@ -177,21 +177,23 @@ export default class ProportionsBarNode extends Node {
       }
 
       // round both percentages to the nearest integer
-      this.normalPercentageStringProperty.value = StringUtils.fillIn( NaturalSelectionStrings.valuePercentStringProperty.value, {
-        value: Utils.roundSymmetric( normalPercentage )
+      this.normalPercentageStringProperty.value = StringUtils.fillIn( NaturalSelectionStrings.valuePercentAndCountStringProperty.value, {
+        percent: Utils.roundSymmetric( normalPercentage ),
+        count: this.normalCount
       } );
-      this.mutantPercentageStringProperty.value = StringUtils.fillIn( NaturalSelectionStrings.valuePercentStringProperty.value, {
-        value: Utils.roundSymmetric( mutantPercentage )
+      this.mutantPercentageStringProperty.value = StringUtils.fillIn( NaturalSelectionStrings.valuePercentAndCountStringProperty.value, {
+        percent: Utils.roundSymmetric( mutantPercentage ),
+        count: this.mutantCount
       } );
     }
     this.mutantRectangle.right = this.normalRectangle.right;
 
-    // center N% above its portion of the bar
+    // center N% above its portion of the bar, but left/right-align it if the opposing bar has any width to avoid overlap
     if ( normalPercentage > 0 ) {
-      this.normalPercentageText.centerX = ( normalPercentage / 100 ) * ( this.barWidth / 2 );
+      this.normalPercentageText.centerX = mutantPercentage > 0 ? 0 : ( normalPercentage / 100 ) * ( this.barWidth / 2 );
     }
     if ( mutantPercentage > 0 ) {
-      this.mutantPercentageText.centerX = this.barWidth - ( ( mutantPercentage / 100 ) * ( this.barWidth / 2 ) );
+      this.mutantPercentageText.centerX = normalPercentage > 0 ? this.barWidth : this.barWidth - ( ( mutantPercentage / 100 ) * ( this.barWidth / 2 ) );
     }
 
     // horizontally constrain N% to left and right edges of bars
