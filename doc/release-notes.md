@@ -36,9 +36,15 @@ For an exemplar, see https://github.com/phetsims/balancing-chemical-equations/bl
 * Dynamic locale: see _Preferences > Localization_
 * TypeScript implementation
 
+## 1.4 (2021-07-23)
+
+## 1.3 (2021-04-28)
+
 ## 1.2 (2020-09-29)
 
 ### New Features
 * PhET-iO
 
-## 1.0 (2020-09-01)
+## 1.1 (2020-09-01)
+
+## 1.0 (skipped, see https://github.com/phetsims/natural-selection/issues/116#issuecomment-672110539)
