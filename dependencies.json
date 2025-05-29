@@ -1,5 +1,5 @@
 {
-  "comment": "# natural-selection 1.5.11 Mon Mar 10 2025 15:11:07 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# natural-selection 1.5.12-rc.1 Thu May 29 2025 02:30:14 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "cc59d7f0574270924a886cb3d43a1b7507cd0553",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "f1ea252b661587c7ca8dda869ab805018f55494c",
+    "sha": "f2dc5b356d3b9e30accfaa888c4b89effbb959f6",
     "branch": "1.5"
   },
   "perennial-alias": {
