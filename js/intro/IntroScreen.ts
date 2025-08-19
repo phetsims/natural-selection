@@ -27,7 +27,6 @@ export default class IntroScreen extends Screen<IntroModel, IntroScreenView> {
       name: NaturalSelectionStrings.screen.introStringProperty,
       homeScreenIcon: createScreenIcon(),
       backgroundColorProperty: NaturalSelectionColors.screenBackgroundColorProperty,
-      isDisposable: false,
       tandem: tandem
     };
 

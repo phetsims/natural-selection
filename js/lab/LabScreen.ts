@@ -34,7 +34,6 @@ export default class LabScreen extends Screen<LabModel, LabScreenView> {
       name: NaturalSelectionStrings.screen.labStringProperty,
       homeScreenIcon: createScreenIcon(),
       backgroundColorProperty: NaturalSelectionColors.screenBackgroundColorProperty,
-      isDisposable: false,
       tandem: tandem
     };
 

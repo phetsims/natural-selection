@@ -60,10 +60,7 @@ export default class NaturalSelectionScreenView extends ScreenView {
       furVisible: true,
       earsVisible: true,
       teethVisible: true,
-      toughFoodCheckboxVisible: true,
-
-      // ScreenViewOptions
-      isDisposable: false
+      toughFoodCheckboxVisible: true
     }, providedOptions );
 
     super( providedOptions );
