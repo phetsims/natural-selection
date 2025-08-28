@@ -13,7 +13,7 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Disposable from '../../../../axon/js/Disposable.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Property from '../../../../axon/js/Property.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Random from '../../../../dot/js/Random.js';
 import Range from '../../../../dot/js/Range.js';

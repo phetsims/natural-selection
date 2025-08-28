@@ -13,7 +13,7 @@
 
 import Multilink from '../../../../../axon/js/Multilink.js';
 import Property from '../../../../../axon/js/Property.js';
-import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../../dot/js/Range.js';
 import optionize, { combineOptions } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';

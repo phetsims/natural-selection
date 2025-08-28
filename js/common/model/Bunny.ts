@@ -9,7 +9,7 @@
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector3, { Vector3StateObject } from '../../../../dot/js/Vector3.js';
