@@ -171,7 +171,6 @@ export default class NaturalSelectionScreenView extends ScreenView {
     // Reset All push button
     const resetAllButton = new ResetAllButton( {
       listener: () => {
-        this.interruptSubtreeInput(); // cancel interactions that are in progress
         model.reset();
         this.reset();
       },
