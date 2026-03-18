@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "brand": {
-    "sha": "c6e3c0c5ded0bfd8f8c9112eebb41332ce18b9d7",
+    "sha": "5d3dbfcec8db1458b5732d66713913172c2e38af",
     "branch": "HEAD"
   },
   "chipper": {
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "a4b043291d57a50a5611cbbe32e85e70e5129cac",
+    "sha": "acf10c2f7beb12c9b70425d5c5da0942d7ffbaee",
     "branch": "1.3"
   },
   "phet-core": {
