@@ -13,7 +13,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle, { RectangleOptions } from '../../../../scenery/js/nodes/Rectangle.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
-import naturalSelection from '../../naturalSelection.js';
 
 type SelfOptions = {
   hatchingOptions?: {
@@ -83,5 +82,3 @@ export default class HatchingRectangle extends Rectangle {
     this.clipArea = this.shape;
   }
 }
-
-naturalSelection.register( 'HatchingRectangle', HatchingRectangle );

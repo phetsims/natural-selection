@@ -15,7 +15,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -64,5 +63,3 @@ export default class PerformanceTimesNode extends VBox {
     super( options );
   }
 }
-
-naturalSelection.register( 'PerformanceTimesNode', PerformanceTimesNode );

@@ -13,7 +13,6 @@ import tenderShrub3_png from '../../../../images/tenderShrub3_png.js';
 import toughShrub1_png from '../../../../images/toughShrub1_png.js';
 import toughShrub2_png from '../../../../images/toughShrub2_png.js';
 import toughShrub3_png from '../../../../images/toughShrub3_png.js';
-import naturalSelection from '../../../naturalSelection.js';
 import OrganismSpriteImage from './OrganismSpriteImage.js';
 
 export default class ShrubSprites {
@@ -72,5 +71,3 @@ export default class ShrubSprites {
     return sprite;
   }
 }
-
-naturalSelection.register( 'ShrubSprites', ShrubSprites );

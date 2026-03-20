@@ -8,7 +8,6 @@
 
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
-import naturalSelection from '../../naturalSelection.js';
 
 export default class Environment extends EnumerationValue {
 
@@ -17,5 +16,3 @@ export default class Environment extends EnumerationValue {
 
   public static readonly enumeration = new Enumeration( Environment );
 }
-
-naturalSelection.register( 'Environment', Environment );

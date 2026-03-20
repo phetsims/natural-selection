@@ -7,7 +7,6 @@
  */
 
 import Circle from '../../../../scenery/js/nodes/Circle.js';
-import naturalSelection from '../../naturalSelection.js';
 
 export default class OriginNode extends Circle {
 
@@ -15,5 +14,3 @@ export default class OriginNode extends Circle {
     super( radius, { fill: 'red' } );
   }
 }
-
-naturalSelection.register( 'OriginNode', OriginNode );

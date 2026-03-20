@@ -26,7 +26,6 @@ import RectangularPushButton, { RectangularPushButtonOptions } from '../../../..
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import Gene from '../model/Gene.js';
 import GenePool from '../model/GenePool.js';
@@ -387,5 +386,3 @@ class AlleleIcon extends Node {
     this.outlineRectangle.lineDash = value;
   }
 }
-
-naturalSelection.register( 'AddMutationsPanel', AddMutationsPanel );

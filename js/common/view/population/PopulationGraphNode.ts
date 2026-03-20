@@ -15,7 +15,6 @@ import PlusMinusZoomButtonGroup from '../../../../../scenery-phet/js/PlusMinusZo
 import Node, { NodeOptions, NodeTranslationOptions } from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
-import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
@@ -151,5 +150,3 @@ export default class PopulationGraphNode extends Node {
     super( options );
   }
 }
-
-naturalSelection.register( 'PopulationGraphNode', PopulationGraphNode );

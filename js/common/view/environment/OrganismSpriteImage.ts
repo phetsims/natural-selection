@@ -11,7 +11,6 @@ import Vector2 from '../../../../../dot/js/Vector2.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../../phet-core/js/types/PickOptional.js';
 import SpriteImage, { SpriteImageOptions } from '../../../../../scenery/js/util/SpriteImage.js';
-import naturalSelection from '../../../naturalSelection.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -36,5 +35,3 @@ export default class OrganismSpriteImage extends SpriteImage {
     super( image, offset, options );
   }
 }
-
-naturalSelection.register( 'OrganismSpriteImage', OrganismSpriteImage );

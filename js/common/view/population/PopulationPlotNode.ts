@@ -16,7 +16,6 @@ import optionize from '../../../../../phet-core/js/optionize.js';
 import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../../scenery/js/nodes/Path.js';
 import TColor from '../../../../../scenery/js/util/TColor.js';
-import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
 const NORMAL_LINE_DASH: number[] = [];
@@ -265,5 +264,3 @@ export default class PopulationPlotNode extends Node {
     return this.gridHeight - this.gridHeight * ( yModel - this.yRangeProperty.value.min ) / ( this.yRangeProperty.value.max - this.yRangeProperty.value.min );
   }
 }
-
-naturalSelection.register( 'PopulationPlotNode', PopulationPlotNode );

@@ -18,7 +18,6 @@ import Shape from '../../../../../kite/js/Shape.js';
 import optionize from '../../../../../phet-core/js/optionize.js';
 import Node, { NodeOptions, NodeTransformOptions } from '../../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../../scenery/js/nodes/Path.js';
-import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
 import BunnyImageMap from '../BunnyImageMap.js';
@@ -117,5 +116,3 @@ export default class PedigreeBranchNode extends Node {
     super.dispose();
   }
 }
-
-naturalSelection.register( 'PedigreeBranchNode', PedigreeBranchNode );

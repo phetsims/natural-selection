@@ -19,7 +19,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
 import ProportionsCounts from './ProportionsCounts.js';
@@ -252,5 +251,3 @@ export default class ProportionsModel extends PhetioObject {
     this.previousCounts.push( new ProportionsCounts( generation, startCounts, endCounts ) );
   }
 }
-
-naturalSelection.register( 'ProportionsModel', ProportionsModel );

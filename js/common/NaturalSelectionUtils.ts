@@ -10,7 +10,6 @@ import Range from '../../../dot/js/Range.js';
 import { PhetioID } from '../../../tandem/js/phet-io-types.js';
 import PhetioObject from '../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../tandem/js/Tandem.js';
-import naturalSelection from '../naturalSelection.js';
 
 const NaturalSelectionUtils = {
 
@@ -110,5 +109,4 @@ const NaturalSelectionUtils = {
   }
 };
 
-naturalSelection.register( 'NaturalSelectionUtils', NaturalSelectionUtils );
 export default NaturalSelectionUtils;

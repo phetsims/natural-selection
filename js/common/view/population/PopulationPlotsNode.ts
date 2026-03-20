@@ -10,7 +10,6 @@ import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import Shape from '../../../../../kite/js/Shape.js';
 import optionize, { combineOptions } from '../../../../../phet-core/js/optionize.js';
 import Node, { NodeOptions, NodeTranslationOptions } from '../../../../../scenery/js/nodes/Node.js';
-import naturalSelection from '../../../naturalSelection.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
@@ -117,5 +116,3 @@ export default class PopulationPlotsNode extends Node {
     super( options );
   }
 }
-
-naturalSelection.register( 'PopulationPlotsNode', PopulationPlotsNode );

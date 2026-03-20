@@ -11,7 +11,6 @@ import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optioni
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import HBox, { HBoxOptions } from '../../../../../scenery/js/layout/nodes/HBox.js';
 import { NodeTranslationOptions } from '../../../../../scenery/js/nodes/Node.js';
-import naturalSelection from '../../../naturalSelection.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
 import PedigreeModel from '../../model/PedigreeModel.js';
@@ -90,5 +89,3 @@ export default class PedigreeNode extends HBox {
     this.allelesPanel.setGeneVisible( gene, visible );
   }
 }
-
-naturalSelection.register( 'PedigreeNode', PedigreeNode );

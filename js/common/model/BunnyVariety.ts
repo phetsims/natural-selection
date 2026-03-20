@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
 
 export default class BunnyVariety {
@@ -32,5 +31,3 @@ export default class BunnyVariety {
     // fields are created via constructor assignment
   }
 }
-
-naturalSelection.register( 'BunnyVariety', BunnyVariety );

@@ -20,7 +20,6 @@ import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
 import Checkbox, { CheckboxOptions } from '../../../../sun/js/Checkbox.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import GenerationClockNode from './GenerationClockNode.js';
 
@@ -70,5 +69,3 @@ export default class EnvironmentalFactorCheckbox extends Checkbox {
     super( enabledProperty, content, options );
   }
 }
-
-naturalSelection.register( 'EnvironmentalFactorCheckbox', EnvironmentalFactorCheckbox );

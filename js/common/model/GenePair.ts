@@ -12,7 +12,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
-import naturalSelection from '../../naturalSelection.js';
 import Allele, { AlleleStateObject } from './Allele.js';
 import Gene, { GeneStateObject } from './Gene.js';
 
@@ -144,5 +143,3 @@ export default class GenePair extends PhetioObject {
     // applyStateObject: The default works fine here, and handles deserializing stateObject.gene to this._gene.
   } );
 }
-
-naturalSelection.register( 'GenePair', GenePair );

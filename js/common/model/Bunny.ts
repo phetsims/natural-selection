@@ -22,7 +22,6 @@ import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import { CompositeSchema } from '../../../../tandem/js/types/StateSchema.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
@@ -447,5 +446,3 @@ function getHopDelta( hopDistance: number, hopHeight: number, xDirection: XDirec
   const dz = ( oppositeIsLarger ? adjacent : opposite );
   return new Vector3( dx, dy, dz );
 }
-
-naturalSelection.register( 'Bunny', Bunny );

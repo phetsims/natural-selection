@@ -18,7 +18,6 @@ import Line from '../../../../../scenery/js/nodes/Line.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import TColor from '../../../../../scenery/js/util/TColor.js';
 import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
-import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
 const LINE_DASH = NaturalSelectionConstants.POPULATION_MUTANT_LINE_DASH;
@@ -82,5 +81,3 @@ export default class PopulationLegendCheckbox extends Checkbox {
     super( plotVisibleProperty, content, options );
   }
 }
-
-naturalSelection.register( 'PopulationLegendCheckbox', PopulationLegendCheckbox );

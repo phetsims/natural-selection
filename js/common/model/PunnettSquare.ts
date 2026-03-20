@@ -19,7 +19,6 @@
  */
 
 import dotRandom from '../../../../dot/js/dotRandom.js';
-import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
 import GenePair from './GenePair.js';
 
@@ -109,5 +108,3 @@ class Cell {
     this.motherAllele = motherAllele;
   }
 }
-
-naturalSelection.register( 'PunnettSquare', PunnettSquare );

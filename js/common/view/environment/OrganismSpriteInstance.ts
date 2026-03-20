@@ -10,7 +10,6 @@
 
 import Sprite from '../../../../../scenery/js/util/Sprite.js';
 import SpriteInstance, { SpriteInstanceTransformType } from '../../../../../scenery/js/util/SpriteInstance.js';
-import naturalSelection from '../../../naturalSelection.js';
 import Organism from '../../model/Organism.js';
 import XDirection from '../../model/XDirection.js';
 
@@ -75,5 +74,3 @@ export default class OrganismSpriteInstance extends SpriteInstance {
     this.organism.xDirectionProperty.unlink( this.organismListener );
   }
 }
-
-naturalSelection.register( 'OrganismSpriteInstance', OrganismSpriteInstance );

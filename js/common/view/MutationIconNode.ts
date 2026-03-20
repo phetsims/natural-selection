@@ -13,7 +13,6 @@ import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Node, { NodeOptions, NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import dnaSolidShape from '../../../../sherpa/js/fontawesome-5/dnaSolidShape.js';
-import naturalSelection from '../../naturalSelection.js';
 
 type SelfOptions = {
   radius?: number;
@@ -50,5 +49,3 @@ export default class MutationIconNode extends Node {
     super( options );
   }
 }
-
-naturalSelection.register( 'MutationIconNode', MutationIconNode );

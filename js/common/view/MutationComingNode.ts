@@ -17,7 +17,6 @@ import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import Gene from '../model/Gene.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -83,5 +82,3 @@ export default class MutationComingNode extends Node {
     this.gene = gene;
   }
 }
-
-naturalSelection.register( 'MutationComingNode', MutationComingNode );

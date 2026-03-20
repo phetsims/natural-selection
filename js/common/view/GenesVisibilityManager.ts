@@ -16,7 +16,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import naturalSelection from '../../naturalSelection.js';
 import Gene from '../model/Gene.js';
 import GenePool from '../model/GenePool.js';
 import AddMutationsPanel from './AddMutationsPanel.js';
@@ -98,5 +97,3 @@ export default class GenesVisibilityManager {
     Disposable.assertNotDisposable();
   }
 }
-
-naturalSelection.register( 'GenesVisibilityManager', GenesVisibilityManager );

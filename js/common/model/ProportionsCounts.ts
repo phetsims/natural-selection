@@ -9,7 +9,6 @@
 
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts, { BunnyCountsStateObject } from './BunnyCounts.js';
 
@@ -67,5 +66,3 @@ export default class ProportionsCounts {
     fromStateObject: stateObject => ProportionsCounts.fromStateObject( stateObject )
   } );
 }
-
-naturalSelection.register( 'ProportionsCounts', ProportionsCounts );

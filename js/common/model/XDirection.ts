@@ -9,7 +9,6 @@
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
-import naturalSelection from '../../naturalSelection.js';
 
 export default class XDirection extends EnumerationValue {
 
@@ -42,5 +41,3 @@ export default class XDirection extends EnumerationValue {
     return ( xDirection === XDirection.RIGHT ) ? 1 : -1;
   }
 }
-
-naturalSelection.register( 'XDirection', XDirection );

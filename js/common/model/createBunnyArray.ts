@@ -15,7 +15,6 @@ import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioS
 import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
-import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
 import BunnyCounts from './BunnyCounts.js';
 
@@ -93,5 +92,3 @@ export default function createBunnyArray( providedOptions: BunnyArrayOptions ): 
 
   return bunnyArray as BunnyArray;
 }
-
-naturalSelection.register( 'createBunnyArray', createBunnyArray );

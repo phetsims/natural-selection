@@ -21,7 +21,6 @@ import bunnyWhiteFurFloppyEarsShortTeeth_png from '../../images/bunnyWhiteFurFlo
 import bunnyWhiteFurStraightEarsLongTeeth_png from '../../images/bunnyWhiteFurStraightEarsLongTeeth_png.js';
 import bunnyWhiteFurStraightEarsShortTeeth_png from '../../images/bunnyWhiteFurStraightEarsShortTeeth_png.js';
 import NaturalSelectionColors from '../common/NaturalSelectionColors.js';
-import naturalSelection from '../naturalSelection.js';
 import NaturalSelectionStrings from '../NaturalSelectionStrings.js';
 import LabModel from './model/LabModel.js';
 import LabScreenView from './view/LabScreenView.js';
@@ -78,5 +77,3 @@ function createScreenIcon(): ScreenIcon {
     fill: NaturalSelectionColors.screenBackgroundColorProperty
   } );
 }
-
-naturalSelection.register( 'LabScreen', LabScreen );

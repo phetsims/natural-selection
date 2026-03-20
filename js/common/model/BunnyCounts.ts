@@ -10,7 +10,6 @@
 
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
 
 type SelfOptions = {
@@ -150,5 +149,3 @@ export default class BunnyCounts {
     fromStateObject: stateObject => BunnyCounts.fromStateObject( stateObject )
   } );
 }
-
-naturalSelection.register( 'BunnyCounts', BunnyCounts );

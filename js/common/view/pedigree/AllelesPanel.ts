@@ -22,7 +22,6 @@ import Text from '../../../../../scenery/js/nodes/Text.js';
 import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
 import Panel, { PanelOptions } from '../../../../../sun/js/Panel.js';
 import isSettingPhetioStateProperty from '../../../../../tandem/js/isSettingPhetioStateProperty.js';
-import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
@@ -217,5 +216,3 @@ class Row extends VBox {
     this.gene = gene;
   }
 }
-
-naturalSelection.register( 'AllelesPanel', AllelesPanel );

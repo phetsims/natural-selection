@@ -11,7 +11,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -40,5 +39,3 @@ export default class LimitedFoodCheckbox extends EnvironmentalFactorCheckbox {
     super( limitedFoodProperty, labelText, alignGroup, options );
   }
 }
-
-naturalSelection.register( 'LimitedFoodCheckbox', LimitedFoodCheckbox );

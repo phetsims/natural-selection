@@ -8,7 +8,6 @@
  */
 
 import Sprite from '../../../../../scenery/js/util/Sprite.js';
-import naturalSelection from '../../../naturalSelection.js';
 import Shrub from '../../model/Shrub.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import OrganismSpriteInstance from './OrganismSpriteInstance.js';
@@ -33,5 +32,3 @@ export default class ShrubSpriteInstance extends OrganismSpriteInstance {
     this.sprite = isTough ? this.toughSprite : this.tenderSprite;
   }
 }
-
-naturalSelection.register( 'ShrubSpriteInstance', ShrubSpriteInstance );

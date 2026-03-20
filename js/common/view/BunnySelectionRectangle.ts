@@ -12,7 +12,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle, { RectangleOptions } from '../../../../scenery/js/nodes/Rectangle.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
@@ -37,5 +36,3 @@ export default class BunnySelectionRectangle extends Rectangle {
     super( bounds, options );
   }
 }
-
-naturalSelection.register( 'BunnySelectionRectangle', BunnySelectionRectangle );

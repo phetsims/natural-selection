@@ -11,7 +11,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioGroup, { PhetioGroupOptions } from '../../../../tandem/js/PhetioGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Wolf from './Wolf.js';
 
@@ -47,5 +46,3 @@ export default class WolfGroup extends PhetioGroup<Wolf> {
     super( createElement, defaultArguments, options );
   }
 }
-
-naturalSelection.register( 'WolfGroup', WolfGroup );

@@ -14,7 +14,6 @@ import Image from '../../../../scenery/js/nodes/Image.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Dialog, { DialogOptions } from '../../../../sun/js/Dialog.js';
 import world_png from '../../../images/world_png.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
@@ -56,5 +55,3 @@ export default class WorldDialog extends Dialog {
     super( content, options );
   }
 }
-
-naturalSelection.register( 'WorldDialog', WorldDialog );

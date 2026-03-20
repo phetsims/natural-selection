@@ -11,7 +11,6 @@ import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optioni
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import NumberSpinner, { NumberSpinnerOptions } from '../../../../../sun/js/NumberSpinner.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
-import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
@@ -51,5 +50,3 @@ export default class ProportionsGenerationSpinner extends NumberSpinner {
     super( proportionsGenerationProperty, proportionsGenerationProperty.rangeProperty, options );
   }
 }
-
-naturalSelection.register( 'ProportionsGenerationSpinner', ProportionsGenerationSpinner );

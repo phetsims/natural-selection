@@ -13,7 +13,6 @@ import optionize from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
-import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionModel from '../../model/NaturalSelectionModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 import BunnyImageMap from '../BunnyImageMap.js';
@@ -84,5 +83,3 @@ export default class EnvironmentNode extends Node {
     this.sprites.update();
   }
 }
-
-naturalSelection.register( 'EnvironmentNode', EnvironmentNode );

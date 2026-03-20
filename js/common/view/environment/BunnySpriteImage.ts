@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import naturalSelection from '../../../naturalSelection.js';
 import OrganismSpriteImage from './OrganismSpriteImage.js';
 
 export default class BunnySpriteImage extends OrganismSpriteImage {
@@ -20,5 +19,3 @@ export default class BunnySpriteImage extends OrganismSpriteImage {
     } );
   }
 }
-
-naturalSelection.register( 'BunnySpriteImage', BunnySpriteImage );

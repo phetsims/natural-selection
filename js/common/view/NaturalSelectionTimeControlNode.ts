@@ -19,7 +19,6 @@ import HBox, { HBoxOptions } from '../../../../scenery/js/layout/nodes/HBox.js';
 import { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
 import SceneryConstants from '../../../../scenery/js/SceneryConstants.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
-import naturalSelection from '../../naturalSelection.js';
 import FastForwardButton from './FastForwardButton.js';
 
 const PLAY_BUTTON_RADIUS = 20;
@@ -89,5 +88,3 @@ export default class NaturalSelectionTimeControlNode extends HBox {
     } );
   }
 }
-
-naturalSelection.register( 'NaturalSelectionTimeControlNode', NaturalSelectionTimeControlNode );

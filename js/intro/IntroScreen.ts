@@ -14,7 +14,6 @@ import Tandem from '../../../tandem/js/Tandem.js';
 import bunnyBrownFurStraightEarsShortTeeth_png from '../../images/bunnyBrownFurStraightEarsShortTeeth_png.js';
 import bunnyWhiteFurStraightEarsShortTeeth_png from '../../images/bunnyWhiteFurStraightEarsShortTeeth_png.js';
 import NaturalSelectionColors from '../common/NaturalSelectionColors.js';
-import naturalSelection from '../naturalSelection.js';
 import NaturalSelectionStrings from '../NaturalSelectionStrings.js';
 import IntroModel from './model/IntroModel.js';
 import IntroScreenView from './view/IntroScreenView.js';
@@ -49,5 +48,3 @@ function createScreenIcon(): ScreenIcon {
     fill: NaturalSelectionColors.screenBackgroundColorProperty
   } );
 }
-
-naturalSelection.register( 'IntroScreen', IntroScreen );

@@ -12,7 +12,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import naturalSelection from '../../naturalSelection.js';
 import Allele from './Allele.js';
 import Gene from './Gene.js';
 
@@ -81,5 +80,3 @@ export default class GenePool {
     return dependencies;
   }
 }
-
-naturalSelection.register( 'GenePool', GenePool );

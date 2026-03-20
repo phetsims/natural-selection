@@ -18,7 +18,6 @@ import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Text, { TextOptions } from '../../../../scenery/js/nodes/Text.js';
 import RectangularPushButton, { RectangularPushButtonOptions } from '../../../../sun/js/buttons/RectangularPushButton.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import SimulationMode from '../model/SimulationMode.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
@@ -168,5 +167,3 @@ class TextPushButton extends RectangularPushButton {
     super( options );
   }
 }
-
-naturalSelection.register( 'PlayButtonGroup', PlayButtonGroup );

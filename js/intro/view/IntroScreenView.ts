@@ -8,7 +8,6 @@
 
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NaturalSelectionScreenView from '../../common/view/NaturalSelectionScreenView.js';
-import naturalSelection from '../../naturalSelection.js';
 import IntroModel from '../model/IntroModel.js';
 
 export default class IntroScreenView extends NaturalSelectionScreenView {
@@ -28,5 +27,3 @@ export default class IntroScreenView extends NaturalSelectionScreenView {
     } );
   }
 }
-
-naturalSelection.register( 'IntroScreenView', IntroScreenView );

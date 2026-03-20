@@ -74,5 +74,4 @@ const NaturalSelectionColors = {
   BUNNY_SELECTION_RECTANGLE_FILL: 'rgba( 0, 0, 0, 0.25 )'
 };
 
-naturalSelection.register( 'NaturalSelectionColors', NaturalSelectionColors );
 export default NaturalSelectionColors;

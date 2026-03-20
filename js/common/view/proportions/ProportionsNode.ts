@@ -11,7 +11,6 @@ import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optioni
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import HBox, { HBoxOptions } from '../../../../../scenery/js/layout/nodes/HBox.js';
 import { NodeTranslationOptions } from '../../../../../scenery/js/nodes/Node.js';
-import naturalSelection from '../../../naturalSelection.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
 import ProportionsModel from '../../model/ProportionsModel.js';
@@ -75,5 +74,3 @@ export default class ProportionsNode extends HBox {
     this.proportionsGraphNode.setGeneVisible( gene, visible );
   }
 }
-
-naturalSelection.register( 'ProportionsNode', ProportionsNode );

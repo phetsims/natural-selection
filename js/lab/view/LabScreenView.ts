@@ -9,7 +9,6 @@
 
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NaturalSelectionScreenView from '../../common/view/NaturalSelectionScreenView.js';
-import naturalSelection from '../../naturalSelection.js';
 import LabModel from '../model/LabModel.js';
 
 export default class LabScreenView extends NaturalSelectionScreenView {
@@ -22,5 +21,3 @@ export default class LabScreenView extends NaturalSelectionScreenView {
     } );
   }
 }
-
-naturalSelection.register( 'LabScreenView', LabScreenView );

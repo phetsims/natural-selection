@@ -19,7 +19,6 @@ import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioS
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 
@@ -180,5 +179,3 @@ function secondsToGenerations( seconds: number ): number {
   }
   return generations;
 }
-
-naturalSelection.register( 'GenerationClock', GenerationClock );

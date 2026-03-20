@@ -20,7 +20,6 @@ import isClearingPhetioDynamicElementsProperty from '../../../../tandem/js/isCle
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
@@ -640,5 +639,3 @@ function getMateForRecessiveMutant( father: Bunny, bunnies: Bunny[] ): Bunny | n
   }
   return mother;
 }
-
-naturalSelection.register( 'BunnyCollection', BunnyCollection );

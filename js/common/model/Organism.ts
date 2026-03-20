@@ -12,7 +12,6 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import XDirection from './XDirection.js';
 
@@ -104,5 +103,3 @@ export default class Organism extends PhetioObject {
     return this.modelViewTransform.getMaximumZ() - EnvironmentModelViewTransform.Z_MARGIN_MODEL;
   }
 }
-
-naturalSelection.register( 'Organism', Organism );

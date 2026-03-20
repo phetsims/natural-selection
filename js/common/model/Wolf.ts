@@ -13,7 +13,6 @@ import Vector3 from '../../../../dot/js/Vector3.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Organism from './Organism.js';
 import XDirection from './XDirection.js';
@@ -123,5 +122,3 @@ export default class Wolf extends Organism {
     // applyState default works fine here, assigning stateObject._speed to this._speed.
   } );
 }
-
-naturalSelection.register( 'Wolf', Wolf );

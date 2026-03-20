@@ -16,7 +16,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import OopsDialog, { OopsDialogOptions } from '../../../../scenery-phet/js/OopsDialog.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import bunnyBrownFurStraightEarsLongTeeth_png from '../../../images/bunnyBrownFurStraightEarsLongTeeth_png.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 
@@ -50,5 +49,3 @@ export default class MemoryLimitDialog extends OopsDialog {
     super( NaturalSelectionStrings.memoryLimitMessageStringProperty, options );
   }
 }
-
-naturalSelection.register( 'MemoryLimitDialog', MemoryLimitDialog );

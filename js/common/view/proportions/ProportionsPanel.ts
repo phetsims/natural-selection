@@ -14,7 +14,6 @@ import VBox, { VBoxOptions } from '../../../../../scenery/js/layout/nodes/VBox.j
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
 import Panel, { PanelOptions } from '../../../../../sun/js/Panel.js';
-import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
@@ -93,5 +92,3 @@ export default class ProportionsPanel extends Panel {
     this.legendNode.setGeneVisible( gene, visible );
   }
 }
-
-naturalSelection.register( 'ProportionsPanel', ProportionsPanel );

@@ -10,7 +10,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import BunnySelectionRectangleSprite from './BunnySelectionRectangleSprite.js';
@@ -22,5 +21,3 @@ export default class BunnySelectionRectangleSpriteInstance extends OrganismSprit
     super( bunny, sprite, NaturalSelectionConstants.BUNNY_IMAGE_SCALE );
   }
 }
-
-naturalSelection.register( 'BunnySelectionRectangleSpriteInstance', BunnySelectionRectangleSpriteInstance );

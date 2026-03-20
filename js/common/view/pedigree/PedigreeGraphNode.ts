@@ -13,7 +13,6 @@ import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
-import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import SelectedBunnyProperty from '../../model/SelectedBunnyProperty.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
@@ -109,5 +108,3 @@ export default class PedigreeGraphNode extends Node {
     this.addLinkedElement( selectedBunnyProperty );
   }
 }
-
-naturalSelection.register( 'PedigreeGraphNode', PedigreeGraphNode );

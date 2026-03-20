@@ -14,7 +14,6 @@ import ButtonNode from '../../../sun/js/buttons/ButtonNode.js';
 import { CheckboxOptions } from '../../../sun/js/Checkbox.js';
 import { DialogOptions } from '../../../sun/js/Dialog.js';
 import { PanelOptions } from '../../../sun/js/Panel.js';
-import naturalSelection from '../naturalSelection.js';
 import NaturalSelectionColors from './NaturalSelectionColors.js';
 import NaturalSelectionUtils from './NaturalSelectionUtils.js';
 
@@ -139,5 +138,4 @@ const NaturalSelectionConstants = {
 assert && assert( NaturalSelectionUtils.isPercentRange( NaturalSelectionConstants.CLOCK_FOOD_RANGE ) );
 assert && assert( NaturalSelectionUtils.isPercentRange( NaturalSelectionConstants.CLOCK_WOLVES_RANGE ) );
 
-naturalSelection.register( 'NaturalSelectionConstants', NaturalSelectionConstants );
 export default NaturalSelectionConstants;

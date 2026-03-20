@@ -26,7 +26,6 @@ import isSettingPhetioStateProperty from '../../../../../tandem/js/isSettingPhet
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import bunnyWhiteFurStraightEarsShortTeeth_png from '../../../../images/bunnyWhiteFurStraightEarsShortTeeth_png.js';
 import wolf_png from '../../../../images/wolf_png.js';
-import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
 import BunnyCollection from '../../model/BunnyCollection.js';
 import Food from '../../model/Food.js';
@@ -420,5 +419,3 @@ class BunnyPressListener extends SpriteListenable( PressListener ) {
     } );
   }
 }
-
-naturalSelection.register( 'OrganismSprites', OrganismSprites );

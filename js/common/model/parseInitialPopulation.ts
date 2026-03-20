@@ -21,7 +21,6 @@
  */
 
 import { QueryStringMachine } from '../../../../query-string-machine/js/QueryStringMachineModule.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import Allele from './Allele.js';
@@ -313,5 +312,3 @@ function verify( predicate: boolean, message: string ): void {
     throw new Error( message );
   }
 }
-
-naturalSelection.register( 'parseInitialPopulation', parseInitialPopulation );

@@ -21,7 +21,6 @@ import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCollection from './BunnyCollection.js';
@@ -350,5 +349,3 @@ export default class NaturalSelectionModel implements TModel {
     } );
   }
 }
-
-naturalSelection.register( 'NaturalSelectionModel', NaturalSelectionModel );

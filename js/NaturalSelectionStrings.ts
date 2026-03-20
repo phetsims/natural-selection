@@ -75,6 +75,4 @@ type StringsType = {
 
 const NaturalSelectionStrings = getStringModule( 'NATURAL_SELECTION' ) as StringsType;
 
-naturalSelection.register( 'NaturalSelectionStrings', NaturalSelectionStrings );
-
 export default NaturalSelectionStrings;

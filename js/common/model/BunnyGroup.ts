@@ -14,7 +14,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import PhetioGroup, { PhetioGroupOptions } from '../../../../tandem/js/PhetioGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import naturalSelection from '../../naturalSelection.js';
 import Bunny, { BunnyOptions } from './Bunny.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import GenePool from './GenePool.js';
@@ -67,5 +66,3 @@ export default class BunnyGroup extends PhetioGroup<Bunny, BunnyGroupCreateEleme
     super( createElement, defaultArguments, options );
   }
 }
-
-naturalSelection.register( 'BunnyGroup', BunnyGroup );

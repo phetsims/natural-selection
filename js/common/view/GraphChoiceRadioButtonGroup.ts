@@ -12,7 +12,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import Text, { TextOptions } from '../../../../scenery/js/nodes/Text.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import GraphChoice from './GraphChoice.js';
@@ -76,5 +75,3 @@ export default class GraphChoiceRadioButtonGroup extends VerticalAquaRadioButton
     super( graphChoiceProperty, items, options );
   }
 }
-
-naturalSelection.register( 'GraphChoiceRadioButtonGroup', GraphChoiceRadioButtonGroup );

@@ -31,7 +31,6 @@ import VStrut from '../../../../../scenery/js/nodes/VStrut.js';
 import Color from '../../../../../scenery/js/util/Color.js';
 import TColor from '../../../../../scenery/js/util/TColor.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
-import naturalSelection from '../../../naturalSelection.js';
 import BunnyCounts from '../../model/BunnyCounts.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
@@ -244,5 +243,3 @@ function createNumberDisplay( bunnyCountsProperty: TReadOnlyProperty<BunnyCounts
 
   return numberDisplay;
 }
-
-naturalSelection.register( 'DataProbeNode', DataProbeNode );

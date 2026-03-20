@@ -11,7 +11,6 @@ import Bounds2 from '../../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import Sprite from '../../../../../scenery/js/util/Sprite.js';
 import SpriteImage from '../../../../../scenery/js/util/SpriteImage.js';
-import naturalSelection from '../../../naturalSelection.js';
 import BunnySelectionRectangle from '../BunnySelectionRectangle.js';
 
 const SELECTION_RECTANGLE_DILATION = 8;
@@ -43,5 +42,3 @@ export default class BunnySelectionRectangleSprite extends Sprite {
     super( selectionRectangleSpriteImage! );
   }
 }
-
-naturalSelection.register( 'BunnySelectionRectangleSprite', BunnySelectionRectangleSprite );

@@ -14,7 +14,6 @@ import Line from '../../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import arcticBackground_png from '../../../../images/arcticBackground_png.js';
 import equatorBackground_png from '../../../../images/equatorBackground_png.js';
-import naturalSelection from '../../../naturalSelection.js';
 import Environment from '../../model/Environment.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
 
@@ -57,5 +56,3 @@ export default class EnvironmentBackgroundNode extends Node {
     } );
   }
 }
-
-naturalSelection.register( 'EnvironmentBackgroundNode', EnvironmentBackgroundNode );

@@ -13,7 +13,6 @@ import Path from '../../../../scenery/js/nodes/Path.js';
 import timesCircleRegularShape from '../../../../sherpa/js/fontawesome-5/timesCircleRegularShape.js';
 import RoundPushButton, { RoundPushButtonOptions } from '../../../../sun/js/buttons/RoundPushButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import naturalSelection from '../../naturalSelection.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -45,5 +44,3 @@ export default class CancelMutationButton extends RoundPushButton {
     super( options );
   }
 }
-
-naturalSelection.register( 'CancelMutationButton', CancelMutationButton );

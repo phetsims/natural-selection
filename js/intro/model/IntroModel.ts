@@ -9,7 +9,6 @@
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NaturalSelectionModel from '../../common/model/NaturalSelectionModel.js';
 import NaturalSelectionConstants from '../../common/NaturalSelectionConstants.js';
-import naturalSelection from '../../naturalSelection.js';
 
 export default class IntroModel extends NaturalSelectionModel {
 
@@ -19,5 +18,3 @@ export default class IntroModel extends NaturalSelectionModel {
     } );
   }
 }
-
-naturalSelection.register( 'IntroModel', IntroModel );

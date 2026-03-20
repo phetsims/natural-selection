@@ -19,7 +19,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import SceneryConstants from '../../../../scenery/js/SceneryConstants.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import LimitedFoodCheckbox from './LimitedFoodCheckbox.js';
@@ -121,5 +120,3 @@ export default class EnvironmentalFactorsPanel extends Panel {
     this.content.opacity = enabled ? 1 : SceneryConstants.DISABLED_OPACITY;
   }
 }
-
-naturalSelection.register( 'EnvironmentalFactorsPanel', EnvironmentalFactorsPanel );

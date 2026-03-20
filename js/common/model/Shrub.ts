@@ -8,7 +8,6 @@
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
-import naturalSelection from '../../naturalSelection.js';
 import EnvironmentModelViewTransform from './EnvironmentModelViewTransform.js';
 import Organism, { OrganismOptions } from './Organism.js';
 
@@ -24,5 +23,3 @@ export default class Shrub extends Organism {
     }, providedOptions ) );
   }
 }
-
-naturalSelection.register( 'Shrub', Shrub );

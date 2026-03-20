@@ -20,7 +20,6 @@ import Node, { NodeOptions, NodeTranslationOptions } from '../../../../scenery/j
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import GenerationClock from '../model/GenerationClock.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
@@ -158,5 +157,3 @@ function createSliceNode( range: Range, color: TColor, radius: number ): Node {
     fill: color
   } );
 }
-
-naturalSelection.register( 'GenerationClockNode', GenerationClockNode );

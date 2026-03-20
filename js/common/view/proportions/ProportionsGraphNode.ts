@@ -23,7 +23,6 @@ import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import Checkbox, { CheckboxOptions } from '../../../../../sun/js/Checkbox.js';
-import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
@@ -402,5 +401,3 @@ class Column extends VBox {
     this.endBarNode.setCounts( normalCount, mutantCount );
   }
 }
-
-naturalSelection.register( 'ProportionsGraphNode', ProportionsGraphNode );

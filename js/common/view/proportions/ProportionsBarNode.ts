@@ -20,7 +20,6 @@ import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import TColor from '../../../../../scenery/js/util/TColor.js';
-import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import NaturalSelectionUtils from '../../NaturalSelectionUtils.js';
 import HatchingRectangle from '../HatchingRectangle.js';
@@ -210,5 +209,3 @@ export default class ProportionsBarNode extends Node {
     }
   }
 }
-
-naturalSelection.register( 'ProportionsBarNode', ProportionsBarNode );

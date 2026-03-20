@@ -8,7 +8,6 @@
  */
 
 import Sprite from '../../../../../scenery/js/util/Sprite.js';
-import naturalSelection from '../../../naturalSelection.js';
 import Wolf from '../../model/Wolf.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import OrganismSpriteInstance from './OrganismSpriteInstance.js';
@@ -19,5 +18,3 @@ export default class WolfSpriteInstance extends OrganismSpriteInstance {
     super( wolf, sprite, NaturalSelectionConstants.WOLF_IMAGE_SCALE );
   }
 }
-
-naturalSelection.register( 'WolfSpriteInstance', WolfSpriteInstance );

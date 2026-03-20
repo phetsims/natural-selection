@@ -12,7 +12,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import Node, { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionModel from '../model/NaturalSelectionModel.js';
 import SimulationMode from '../model/SimulationMode.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -129,5 +128,3 @@ export default class EnvironmentPanel extends Panel {
     this.environmentNode.updateSprites();
   }
 }
-
-naturalSelection.register( 'EnvironmentPanel', EnvironmentPanel );

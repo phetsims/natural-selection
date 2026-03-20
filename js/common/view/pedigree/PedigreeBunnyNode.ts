@@ -13,7 +13,6 @@ import optionize from '../../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../../scenery-phet/js/PhetFont.js';
 import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
-import naturalSelection from '../../../naturalSelection.js';
 import Bunny from '../../model/Bunny.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../../NaturalSelectionQueryParameters.js';
@@ -187,5 +186,3 @@ function getGenotypeAbbreviation( bunny: Bunny, furAllelesVisible: boolean, ears
 
   return genotypeString;
 }
-
-naturalSelection.register( 'PedigreeBunnyNode', PedigreeBunnyNode );

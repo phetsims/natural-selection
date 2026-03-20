@@ -9,7 +9,6 @@
 
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
-import naturalSelection from '../../naturalSelection.js';
 
 export default class SimulationMode extends EnumerationValue {
 
@@ -24,5 +23,3 @@ export default class SimulationMode extends EnumerationValue {
 
   public static readonly enumeration = new Enumeration( SimulationMode );
 }
-
-naturalSelection.register( 'SimulationMode', SimulationMode );

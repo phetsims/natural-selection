@@ -21,7 +21,6 @@ import HBox, { HBoxOptions } from '../../../../../scenery/js/layout/nodes/HBox.j
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import Font from '../../../../../scenery/js/util/Font.js';
 import ArrowButton, { ArrowButtonOptions } from '../../../../../sun/js/buttons/ArrowButton.js';
-import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionStrings from '../../../NaturalSelectionStrings.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
@@ -110,5 +109,3 @@ export default class PopulationGenerationScroller extends HBox {
       } );
   }
 }
-
-naturalSelection.register( 'PopulationGenerationScroller', PopulationGenerationScroller );

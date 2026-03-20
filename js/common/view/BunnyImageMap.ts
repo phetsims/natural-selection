@@ -21,7 +21,6 @@ import bunnyWhiteFurFloppyEarsLongTeeth_png from '../../../images/bunnyWhiteFurF
 import bunnyWhiteFurFloppyEarsShortTeeth_png from '../../../images/bunnyWhiteFurFloppyEarsShortTeeth_png.js';
 import bunnyWhiteFurStraightEarsLongTeeth_png from '../../../images/bunnyWhiteFurStraightEarsLongTeeth_png.js';
 import bunnyWhiteFurStraightEarsShortTeeth_png from '../../../images/bunnyWhiteFurStraightEarsShortTeeth_png.js';
-import naturalSelection from '../../naturalSelection.js';
 import Bunny from '../model/Bunny.js';
 import BunnySpriteImage from './environment/BunnySpriteImage.js';
 
@@ -130,5 +129,3 @@ export default class BunnyImageMap {
 function getKey( bunny: Bunny ): Key {
   return `${bunny.phenotype.hasWhiteFur()}-${bunny.phenotype.hasStraightEars()}-${bunny.phenotype.hasShortTeeth()}`;
 }
-
-naturalSelection.register( 'BunnyImageMap', BunnyImageMap );

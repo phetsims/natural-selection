@@ -14,7 +14,6 @@ import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import wolf_png from '../../../images/wolf_png.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -52,5 +51,3 @@ export default class WolvesCheckbox extends EnvironmentalFactorCheckbox {
     super( wolvesEnabledProperty, labelNode, alignGroup, options );
   }
 }
-
-naturalSelection.register( 'WolvesCheckbox', WolvesCheckbox );

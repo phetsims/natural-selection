@@ -15,7 +15,6 @@ import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import ButtonModel from '../../../../sun/js/buttons/ButtonModel.js';
 import RoundMomentaryButton, { RoundMomentaryButtonOptions } from '../../../../sun/js/buttons/RoundMomentaryButton.js';
-import naturalSelection from '../../naturalSelection.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -62,5 +61,3 @@ export default class FastForwardButton extends RoundMomentaryButton<TimeSpeed> {
     this.addLinkedElement( timeSpeedProperty );
   }
 }
-
-naturalSelection.register( 'FastForwardButton', FastForwardButton );

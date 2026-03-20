@@ -13,7 +13,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionModel from '../model/NaturalSelectionModel.js';
 import SimulationMode from '../model/SimulationMode.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -285,5 +284,3 @@ export default class NaturalSelectionScreenView extends ScreenView {
     }
   }
 }
-
-naturalSelection.register( 'NaturalSelectionScreenView', NaturalSelectionScreenView );

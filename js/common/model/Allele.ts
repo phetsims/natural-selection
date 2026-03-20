@@ -25,7 +25,6 @@ import longTeeth_png from '../../../images/longTeeth_png.js';
 import shortTeeth_png from '../../../images/shortTeeth_png.js';
 import straightEars_png from '../../../images/straightEars_png.js';
 import whiteFur_png from '../../../images/whiteFur_png.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionStrings from '../../NaturalSelectionStrings.js';
 
 // tandem for all static instances of Allele
@@ -126,5 +125,3 @@ export default class Allele extends PhetioObject {
     tandem: ALLELES_TANDEM.createTandem( 'longTeethAllele' )
   } );
 }
-
-naturalSelection.register( 'Allele', Allele );

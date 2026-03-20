@@ -16,7 +16,6 @@ import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioO
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
-import naturalSelection from '../../naturalSelection.js';
 import Allele, { AlleleStateObject } from './Allele.js';
 import GenePair from './GenePair.js';
 import GenePool from './GenePool.js';
@@ -203,5 +202,3 @@ export default class Genotype extends PhetioObject {
     // applyStateObject: The default works fine here, and handles deserializing stateObject.mutation to this._mutation.
   } );
 }
-
-naturalSelection.register( 'Genotype', Genotype );

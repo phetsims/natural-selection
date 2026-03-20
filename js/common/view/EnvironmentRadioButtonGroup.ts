@@ -16,7 +16,6 @@ import snowflakeSolidShape from '../../../../sherpa/js/fontawesome-5/snowflakeSo
 import sunSolidShape from '../../../../sherpa/js/fontawesome-5/sunSolidShape.js';
 import RectangularRadioButtonGroup, { RectangularRadioButtonGroupOptions } from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import naturalSelection from '../../naturalSelection.js';
 import Environment from '../model/Environment.js';
 import NaturalSelectionColors from '../NaturalSelectionColors.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
@@ -97,5 +96,3 @@ export default class EnvironmentRadioButtonGroup extends RectangularRadioButtonG
     super( environmentProperty, content, options );
   }
 }
-
-naturalSelection.register( 'EnvironmentRadioButtonGroup', EnvironmentRadioButtonGroup );

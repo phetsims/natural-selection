@@ -15,7 +15,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
-import naturalSelection from '../../naturalSelection.js';
 import Bunny from './Bunny.js';
 
 type SelectBunnyValue = Bunny | null; // null means no selection
@@ -44,5 +43,3 @@ export default class SelectedBunnyProperty extends Property<SelectBunnyValue> {
     super( options.selectedBunny, options );
   }
 }
-
-naturalSelection.register( 'SelectedBunnyProperty', SelectedBunnyProperty );

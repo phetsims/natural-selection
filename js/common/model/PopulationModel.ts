@@ -18,7 +18,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
 import BunnyCounts from './BunnyCounts.js';
 import DataProbe from './DataProbe.js';
@@ -315,5 +314,3 @@ function recordCount( array: Vector2[], timeInGenerations: number, count: number
     array.push( new Vector2( timeInGenerations, count ) );
   }
 }
-
-naturalSelection.register( 'PopulationModel', PopulationModel );

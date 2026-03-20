@@ -11,7 +11,6 @@ import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
-import naturalSelection from '../../naturalSelection.js';
 import GenePool from './GenePool.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -59,5 +58,3 @@ export default class PedigreeModel extends PhetioObject {
     this.teethAllelesVisibleProperty.reset();
   }
 }
-
-naturalSelection.register( 'PedigreeModel', PedigreeModel );

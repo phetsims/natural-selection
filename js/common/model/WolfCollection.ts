@@ -19,7 +19,6 @@ import Utils from '../../../../dot/js/Utils.js';
 import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
-import naturalSelection from '../../naturalSelection.js';
 import NaturalSelectionConstants from '../NaturalSelectionConstants.js';
 import NaturalSelectionQueryParameters from '../NaturalSelectionQueryParameters.js';
 import NaturalSelectionUtils from '../NaturalSelectionUtils.js';
@@ -260,5 +259,3 @@ function eatSomeBunnies( bunnies: Bunny[], totalBunnies: number, environment: En
 
   return numberToEat;
 }
-
-naturalSelection.register( 'WolfCollection', WolfCollection );

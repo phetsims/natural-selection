@@ -15,7 +15,6 @@ import VBox, { VBoxOptions } from '../../../../../scenery/js/layout/nodes/VBox.j
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
 import TColor from '../../../../../scenery/js/util/TColor.js';
-import naturalSelection from '../../../naturalSelection.js';
 import Gene from '../../model/Gene.js';
 import GenePool from '../../model/GenePool.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
@@ -157,5 +156,3 @@ class AlleleLegendNode extends HBox {
     super( options );
   }
 }
-
-naturalSelection.register( 'ProportionsLegendNode', ProportionsLegendNode );

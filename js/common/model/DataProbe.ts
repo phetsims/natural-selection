@@ -18,7 +18,6 @@ import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
 import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import naturalSelection from '../../naturalSelection.js';
 import BunnyCounts from './BunnyCounts.js';
 import PopulationModel from './PopulationModel.js';
 
@@ -133,5 +132,3 @@ export default class DataProbe extends PhetioObject {
     return count;
   }
 }
-
-naturalSelection.register( 'DataProbe', DataProbe );

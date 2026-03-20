@@ -18,7 +18,6 @@ import Node, { NodeOptions, NodeTranslationOptions } from '../../../../../scener
 import Path, { PathOptions } from '../../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
-import naturalSelection from '../../../naturalSelection.js';
 import PopulationModel from '../../model/PopulationModel.js';
 import NaturalSelectionColors from '../../NaturalSelectionColors.js';
 
@@ -418,5 +417,3 @@ function getNumberOfHorizontalLines( yRange: Range, ySpacing: number ): number {
 function getYSpacingView( yRange: Range, ySpacing: number, yAxisHeight: number ): number {
   return ( ySpacing / yRange.getLength() ) * yAxisHeight;
 }
-
-naturalSelection.register( 'PopulationGridNode', PopulationGridNode );

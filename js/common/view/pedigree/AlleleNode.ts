@@ -14,7 +14,6 @@ import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import HBox, { HBoxOptions } from '../../../../../scenery/js/layout/nodes/HBox.js';
 import Image from '../../../../../scenery/js/nodes/Image.js';
 import Text from '../../../../../scenery/js/nodes/Text.js';
-import naturalSelection from '../../../naturalSelection.js';
 import NaturalSelectionConstants from '../../NaturalSelectionConstants.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -64,5 +63,3 @@ export default class AlleleNode extends HBox {
     this.imageNode.image = value;
   }
 }
-
-naturalSelection.register( 'AlleleNode', AlleleNode );
