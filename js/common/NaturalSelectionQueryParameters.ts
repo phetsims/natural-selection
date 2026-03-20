@@ -281,6 +281,6 @@ if ( NaturalSelectionQueryParameters.shortTeethMultiplier *
 // Log query parameters
 logGlobal( 'phet.chipper.queryParameters' );
 logGlobal( 'phet.preloads.phetio.queryParameters' );
-logGlobal( 'phet.naturalSelection.NaturalSelectionQueryParameters' );
+phet.log && phet.log( `NaturalSelectionQueryParameters: ${JSON.stringify( NaturalSelectionQueryParameters, null, 2 )}` );
 
 export default NaturalSelectionQueryParameters;
