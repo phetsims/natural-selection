@@ -1,4 +1,4 @@
-// Copyright 2019-2025, University of Colorado Boulder
+// Copyright 2019-2026, University of Colorado Boulder
 
 /**
  * PedigreeGraphNode displays the pedigree for an individual. Origin at bottom center.

@@ -1,4 +1,4 @@
-// Copyright 2019-2025, University of Colorado Boulder
+// Copyright 2019-2026, University of Colorado Boulder
 
 /**
  * MutationIconNode is the mutation icon that appears in the Pedigree tree and 'Add Mutations' panel.

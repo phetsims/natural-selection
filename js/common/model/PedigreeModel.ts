@@ -1,4 +1,4 @@
-// Copyright 2020-2024, University of Colorado Boulder
+// Copyright 2020-2026, University of Colorado Boulder
 
 /**
  * PedigreeModel is the sub-model for the Pedigree graph.
