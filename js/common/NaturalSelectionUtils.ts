@@ -96,7 +96,7 @@ const NaturalSelectionUtils = {
    * Gets the PhET-iO Element for a specified phetioID. This is intended to be used as a debugging tool,
    * to inspect a PhET-iO Element in the console. Do not use this to access elements via code!
    *
-   * Example: phet.naturalSelection.NaturalSelectionUtils.getElement( 'naturalSelection.labScreen' )
+   * Example: NaturalSelectionUtils.getElement( 'naturalSelection.labScreen' )
    */
   getElement( phetioID: PhetioID ): PhetioObject | undefined {
     if ( Tandem.PHET_IO_ENABLED ) {
