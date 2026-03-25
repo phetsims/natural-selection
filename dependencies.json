@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "natural-selection": {
-    "sha": "40e8e9c07eaf5b76cfd9e16c6418314bac507083",
+    "sha": "337335c1cb48854f717acce13f787ab8c0c0cc98",
     "branch": "1.3"
   },
   "phet-core": {
@@ -61,7 +61,7 @@
     "branch": "HEAD"
   },
   "scenery": {
-    "sha": "41fafc35b64a15fd1dcd4b8cb29e93ac2b9b162d",
+    "sha": "910e2f2fbc99b3a6080006cb140c765276d5149f",
     "branch": "HEAD"
   },
   "scenery-phet": {
